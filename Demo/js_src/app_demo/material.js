@@ -6,7 +6,7 @@
 
 let {
     JSWidgetState,
-    XSJSStatefulWidget,
+    JSStatefulWidget,
     Scaffold,
     Color,
     AppBar,
@@ -27,7 +27,7 @@ let { JSBottomNavigationDemo } = require("./app_demo/material/bottom_navigation_
 let { JSEasyUIDemo } = require("./app_demo/material/easy_ui_demo.js");
 let { JSTabsDemo } = require("./app_demo/material/tabs_demo.js");
 
-class JSMaterialPage extends XSJSStatefulWidget {
+class JSMaterialPage extends JSStatefulWidget {
     constructor() {
         super('JSMaterialPage');
     }

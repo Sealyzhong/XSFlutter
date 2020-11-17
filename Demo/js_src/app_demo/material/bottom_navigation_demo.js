@@ -3,8 +3,8 @@ let {
   runApp,
   XSFlutterApp,
   JSWidgetState,
-  XSJSStatefulWidget,
-  XSJSStatelessWidget,
+  JSStatefulWidget,
+  JSStatelessWidget,
   Scaffold,
   Container,
   Center,
@@ -93,7 +93,7 @@ class NavigationIconView {
     }
 }
 
-class CustomIcon extends XSJSStatelessWidget {
+class CustomIcon extends JSStatelessWidget {
     build(context) {
         /// TODO:
         let iconThemeData = IconTheme.of(context);
@@ -106,7 +106,7 @@ class CustomIcon extends XSJSStatelessWidget {
     }
 }
 
-class CustomInactiveIcon extends XSJSStatelessWidget {
+class CustomInactiveIcon extends JSStatelessWidget {
     build(context) {
         /// TODO:
         let iconThemeData = IconTheme.of(context);
@@ -124,7 +124,7 @@ class CustomInactiveIcon extends XSJSStatelessWidget {
     }
 }
 
-class JSBottomNavigationDemo extends XSJSStatefulWidget {
+class JSBottomNavigationDemo extends JSStatefulWidget {
     constructor() {
         super('JSBottomNavigationDemo');
     }

@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Scaffold,
   ListTile,
   AppBar,
@@ -15,7 +15,7 @@ let {
 
 
 
-class PageExampleSnakeBar extends XSJSStatelessWidget {
+class PageExampleSnakeBar extends JSStatelessWidget {
   constructor(){
     super("PageExampleSnackbar");
   }
@@ -39,7 +39,7 @@ class PageExampleSnakeBar extends XSJSStatelessWidget {
   }
 }
 
-class MyScaffoldBody extends XSJSStatelessWidget {
+class MyScaffoldBody extends JSStatelessWidget {
   constructor(){
     super("MyScaffoldBody");
   }

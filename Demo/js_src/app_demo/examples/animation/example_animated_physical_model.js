@@ -2,7 +2,7 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   Container,
   Center,
@@ -17,7 +17,7 @@ let {
 } = require("js_flutter.js");
 
 
-class PageExampleAnimatedPhysicalModel extends XSJSStatefulWidget {
+class PageExampleAnimatedPhysicalModel extends JSStatefulWidget {
   constructor() {
     super('PageExampleAnimatedPhysicalModel');
   }

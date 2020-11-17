@@ -5,7 +5,7 @@
 //  found in the LICENSE file.
 
 let {
-    XSJSStatefulWidget,
+    JSStatefulWidget,
     JSWidgetState,
     Scaffold,
     Color,
@@ -24,7 +24,7 @@ let { JSBottomAPPBarDemo } = require("./material/bottom_app_bar_demo.js");
 
 
 
-class JSCupertinoPage extends XSJSStatefulWidget {
+class JSCupertinoPage extends JSStatefulWidget {
     constructor() {
         super("JSCupertinoPage");
 

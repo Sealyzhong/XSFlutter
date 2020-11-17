@@ -2,7 +2,7 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   AppBar,
   Text,
@@ -21,7 +21,7 @@ let {
 } = require("js_flutter.js");
 
 
-class PageExampleDecoratedBoxTransition extends XSJSStatefulWidget {
+class PageExampleDecoratedBoxTransition extends JSStatefulWidget {
   constructor() {
     super('PageExampleDecoratedBoxTransition');
   }

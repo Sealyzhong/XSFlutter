@@ -2,7 +2,7 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   Container,
   Center,
@@ -19,7 +19,7 @@ let {
 } = require("js_flutter.js");
 
 
-class PageExampleAnimatedCrossFade extends XSJSStatefulWidget {
+class PageExampleAnimatedCrossFade extends JSStatefulWidget {
   constructor() {
     super('PageExampleAnimatedCrossFade');
   }

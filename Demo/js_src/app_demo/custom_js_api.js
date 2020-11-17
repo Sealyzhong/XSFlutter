@@ -7,7 +7,7 @@
 
 let {
     JSWidgetState,
-    XSJSStatefulWidget,
+    JSStatefulWidget,
     Scaffold,
     ListTile,
     AppBar,
@@ -84,7 +84,7 @@ let g_jsApi = new CustomJSApi();
 
 const { SectionTitle } = require("./app_demo/component/section_title.js");
 
-class PageExampleJSApi extends XSJSStatefulWidget {
+class PageExampleJSApi extends JSStatefulWidget {
     constructor() {
         super("PageExampleJSApi");
 

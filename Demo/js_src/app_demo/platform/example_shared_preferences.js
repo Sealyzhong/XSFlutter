@@ -3,7 +3,7 @@
 let {
   JSLog,
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   ListTile,
   AppBar,
@@ -25,7 +25,7 @@ let packages__sp = require("packages/shared_preferences/shared_preferences.js");
 
 
 
-class PageExampleSharedPreferences extends XSJSStatefulWidget {
+class PageExampleSharedPreferences extends JSStatefulWidget {
   constructor() {
     super("PageExampleSharedPreferences");
 

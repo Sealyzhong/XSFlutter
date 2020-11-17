@@ -2,7 +2,7 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   Container,
   AppBar,
@@ -16,7 +16,7 @@ let {
 } = require("js_flutter.js");
 
 
-class PageExampleAnimatedSize extends XSJSStatefulWidget {
+class PageExampleAnimatedSize extends JSStatefulWidget {
   constructor() {
     super('PageExampleAnimatedSize');
   }

@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Scaffold,
   ListTile,
   AppBar,
@@ -12,7 +12,7 @@ let {
 } = require("js_flutter.js");
 
 
-class PageExamplePlaceholder extends XSJSStatelessWidget {
+class PageExamplePlaceholder extends JSStatelessWidget {
   constructor(){
     super("PageExamplePlaceholder");
   }

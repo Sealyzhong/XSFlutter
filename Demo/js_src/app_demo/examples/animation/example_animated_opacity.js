@@ -2,7 +2,7 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   AppBar,
   Text,
@@ -19,7 +19,7 @@ let {
 
 const { SectionTitle } = require("./app_demo/component/section_title.js");
 
-class PageExampleAnimatedOpacity extends XSJSStatefulWidget {
+class PageExampleAnimatedOpacity extends JSStatefulWidget {
   constructor() {
     super('PageExampleAnimatedOpacity');
   }

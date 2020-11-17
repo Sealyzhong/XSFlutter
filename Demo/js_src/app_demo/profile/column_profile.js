@@ -9,7 +9,7 @@ const dart_sdk = require("dart_sdk");
 let {
     JSLog,
     JSWidgetState,
-    XSJSStatefulWidget,
+    JSStatefulWidget,
     Scaffold,
     Container,
     BoxDecoration,
@@ -56,7 +56,7 @@ let g_newsOrder = 0;
 //实现一个简单的event_bus
 let g_event_bus_map = {}; //type Map<key:String,function:handelFun>
 
-class PerformanceProfilingWidget extends XSJSStatefulWidget {
+class PerformanceProfilingWidget extends JSStatefulWidget {
     constructor({ title, profileText, rebuildCallback } = {}) {
         super("PerformanceProfilingWidget", { key: new UniqueKey() });
         this.title = title ? title : "性能分析";
@@ -170,7 +170,7 @@ class PerformanceProfilingWidgetState extends JSWidgetState {
 
 
 
-class ListViewProfileDemo1 extends XSJSStatefulWidget {
+class ListViewProfileDemo1 extends JSStatefulWidget {
     constructor() {
         super('ListViewDemo');
         this.enableProfile = true;

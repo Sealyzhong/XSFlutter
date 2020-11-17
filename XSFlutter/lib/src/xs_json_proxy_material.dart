@@ -45,14 +45,19 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxySemantics.registerProxy());
     m.addAll(XSProxyCircleBorder.registerProxy());
     m.addAll(XSProxySafeArea.registerProxy());
+    m.addAll(XSProxySliverSafeArea.registerProxy());
+    m.addAll(XSProxySpacer.registerProxy());
 
     m.addAll(XSProxyBuilder.registerProxy());
     m.addAll(XSProxyDefaultTabController.registerProxy());
+    m.addAll(XSProxyDirectionality.registerProxy());
+    m.addAll(XSProxyDivider.registerProxy());
 
     m.addAll(XSProxyTabBar.registerProxy());
     m.addAll(XSProxyTabBarView.registerProxy());
     m.addAll(XSProxyTabController.registerProxy());
     m.addAll(XSProxyTab.registerProxy());
+    m.addAll(XSProxyTitle.registerProxy());
 
     m.addAll(XSProxyNavigator.registerProxy());
     m.addAll(XSProxyMaterialPageRoute.registerProxy());
@@ -62,7 +67,7 @@ class XSProxyRegisterHelperMaterialSeries {
 
     m.addAll(XSProxySnackBar.registerProxy());
     m.addAll(XSProxyFlutterLogo.registerProxy());
-
+    m.addAll(XSProxyVerticalDivider.registerProxy());
     return m;
   }
 }
@@ -412,11 +417,13 @@ class XSProxyCard extends XSJsonObjProxy {
     return Card(
       key: XSJSParse.getKey(context, bo, map, "key"),
       color: XSJSParse.getColor(context, bo, map, "color"),
+      shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor"),
       elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
       shape: XSJSParse.getObject(context, bo, map, "shape"),
       margin: XSJSParse.getEdgeInsets(context, bo, map, "margin", defaultValue: const EdgeInsets.all(4.0)),
       clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
       child: XSJSParse.getWidget(context, bo, map, "child"),
+      borderOnForeground: XSJSParse.getBool(context, bo, map, "borderOnForeground"),
       semanticContainer: XSJSParse.getBool(context, bo, map, "semanticContainer", defaultValue: true),
     );
   }
@@ -456,6 +463,47 @@ class XSProxyDefaultTabController extends XSJsonObjProxy {
       length: XSJSParse.getInt(context, bo, map, "length"),
       initialIndex: XSJSParse.getInt(context, bo, map, "initialIndex", defaultValue: 0),
       child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
+//****** Directionality ******
+class XSProxyDirectionality extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "Directionality";
+    return {
+      regClassName: () => XSProxyDirectionality()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Directionality constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Directionality(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
+//****** Divider ******
+class XSProxyDivider extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "Divider";
+    return {
+      regClassName: () => XSProxyDivider()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Divider constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Divider(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      height: XSJSParse.getDouble(context, bo, map, "height"),
+      thickness: XSJSParse.getDouble(context, bo, map, "thickness"),
+      indent: XSJSParse.getDouble(context, bo, map, "indent"),
+      endIndent: XSJSParse.getDouble(context, bo, map, "endIndent"),
+      color: XSJSParse.getColor(context, bo, map, "color"),
     );
   }
 }
@@ -767,6 +815,24 @@ class XSProxyRouteSettings extends XSJsonObjProxy {
 }
 
 //-------------- S -----------------
+//****** Spacer ******
+class XSProxySpacer extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "Spacer";
+    return {
+      regClassName1: () => XSProxySpacer()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  Spacer constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Spacer(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      flex: XSJSParse.getInt(context, bo, map, "flex"),
+    );
+  }
+}
+
 //****** Scaffold ******
 class XSProxyScaffold extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -872,6 +938,29 @@ class XSProxySemantics extends XSJsonObjProxy {
   }
 }
 
+//****** SliverSafeArea ******
+class XSProxySliverSafeArea extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "SliverSafeArea";
+    return {
+      regClassName: () => XSProxySliverSafeArea()..init(className: regClassName)
+    };
+  }
+
+  @override
+  SliverSafeArea constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return SliverSafeArea(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      left: XSJSParse.getBool(context, bo, map, "left", defaultValue: true),
+      top: XSJSParse.getBool(context, bo, map, "top", defaultValue: true),
+      right: XSJSParse.getBool(context, bo, map, "right", defaultValue: true),
+      bottom: XSJSParse.getBool(context, bo, map, "bottom", defaultValue: true),
+      minimum: XSJSParse.getEdgeInsets(context, bo, map, "minimum", defaultValue: EdgeInsets.zero),
+      sliver: XSJSParse.getWidget(context, bo, map, "sliver"),
+    );
+  }
+}
+
 //****** SafeArea ******
 class XSProxySafeArea extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -890,6 +979,7 @@ class XSProxySafeArea extends XSJsonObjProxy {
       right: XSJSParse.getBool(context, bo, map, "right", defaultValue: true),
       bottom: XSJSParse.getBool(context, bo, map, "bottom", defaultValue: true),
       minimum: XSJSParse.getEdgeInsets(context, bo, map, "minimum", defaultValue: EdgeInsets.zero),
+      maintainBottomViewPadding: XSJSParse.getBool(context, bo, map, "bottom", defaultValue: false),
       child: XSJSParse.getWidget(context, bo, map, "child"),
     );
   }
@@ -1011,6 +1101,26 @@ class XSProxyTab extends XSJsonObjProxy {
   }
 }
 
+//****** Title ******
+class XSProxyTitle extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "Title";
+    return {
+      regClassName: () => XSProxyTitle()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Title constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Title(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      title: XSJSParse.getString(context, bo, map, "title", defaultValue: ""),
+      color: XSJSParse.getColor(context, bo, map, "color", defaultValue: Colors.black),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
 //****** TabController ******
 class XSProxyTabBarView extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -1028,6 +1138,28 @@ class XSProxyTabBarView extends XSJsonObjProxy {
       controller: XSJSParse.getObject(context, bo, map, "controller"),
       physics: XSJSParse.getScrollPhysics(context, bo, map, "physics"),
       dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.down),
+    );
+  }
+}
+
+//****** VerticalDivider ******
+class XSProxyVerticalDivider extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "VerticalDivider";
+    return {
+      regClassName: () => XSProxyVerticalDivider()..init(className: regClassName)
+    };
+  }
+
+  @override
+  VerticalDivider constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return VerticalDivider(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      width: XSJSParse.getDouble(context, bo, map, "width"),
+      thickness: XSJSParse.getDouble(context, bo, map, "thickness"),
+      indent: XSJSParse.getDouble(context, bo, map, "indent"),
+      endIndent: XSJSParse.getDouble(context, bo, map, "endIndent"),
+      color: XSJSParse.getColor(context, bo, map, "color"),
     );
   }
 }

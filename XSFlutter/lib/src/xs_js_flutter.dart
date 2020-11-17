@@ -341,7 +341,7 @@ class XSFlutterLib implements XSFlutter {
   ///API - 由XSFlutter类提供的API，是XSJS页面的入口API
   ///从Flutter Dart代码 Push一个 JS写的页面
   ///*重要：此API是从Dart侧打开一个JS页面的入口函数，将创建一个RootWidget，XSFlutter 的RootWidget对外只显示一个
-  ///先创建一个空的XSJSStatefulWidget，调用JS，等待JS层widgetData来刷新页面
+  ///先创建一个空的JSStatefulWidget，调用JS，等待JS层widgetData来刷新页面
   dynamic navigatorPushWithName(String widgetName, Key widgetKey, {ThemeData themeData, MediaQueryData mediaQueryData, IconThemeData iconThemeData}) {
     dynamic jsWidget = currentApp?.navigatorPushWithName(widgetName, widgetKey, themeData: themeData, mediaQueryData: mediaQueryData, iconThemeData: iconThemeData);
 

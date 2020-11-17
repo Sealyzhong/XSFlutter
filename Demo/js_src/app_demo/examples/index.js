@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Scaffold,
   ListTile,
   AppBar,
@@ -55,7 +55,7 @@ const { PageExampleScaleTransition } = require("./app_demo/examples/animation/ex
 const { PageExampleSizeTransition } = require("./app_demo/examples/animation/example_size_transition.js");
 const { PageExampleSlideTransition } = require("./app_demo/examples/animation/example_slide_transition.js");
 
-class ExamplesPage extends XSJSStatelessWidget {
+class ExamplesPage extends JSStatelessWidget {
   constructor() {
     super("ExamplesPage");
   }

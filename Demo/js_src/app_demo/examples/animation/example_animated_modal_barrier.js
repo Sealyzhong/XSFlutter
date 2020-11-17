@@ -2,7 +2,7 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   AppBar,
   Text,
@@ -12,7 +12,7 @@ let {
 const { SectionTitle } = require("./app_demo/component/section_title.js");
 
 
-class PageExampleAnimatedModalBarrier extends XSJSStatefulWidget {
+class PageExampleAnimatedModalBarrier extends JSStatefulWidget {
   constructor() {
     super('PageExampleAnimatedModalBarrier');
   }

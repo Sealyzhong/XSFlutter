@@ -2,7 +2,7 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   Container,
   Center,
@@ -19,7 +19,7 @@ let {
 } = require("js_flutter.js");
 
 
-class ExampleWidget extends XSJSStatefulWidget {
+class ExampleWidget extends JSStatefulWidget {
   constructor() {
     super('ExampleWidget');
   }

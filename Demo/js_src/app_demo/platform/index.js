@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Scaffold,
   ListTile,
   AppBar,
@@ -24,7 +24,7 @@ let { PageExampleSharedPreferences } = require("platform/example_shared_preferen
 
 
 
-class PlatformExamplesPage extends XSJSStatelessWidget {
+class PlatformExamplesPage extends JSStatelessWidget {
   constructor() {
     super("PlatformExamplesPage");
   }

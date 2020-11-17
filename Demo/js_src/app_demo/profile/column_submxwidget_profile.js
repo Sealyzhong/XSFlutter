@@ -10,8 +10,8 @@ const dart = dart_sdk.dart;
 let {
     JSLog,
     JSWidgetState,
-    XSJSStatefulWidget,
-    XSJSStatelessWidget,
+    JSStatefulWidget,
+    JSStatelessWidget,
     Scaffold,
     Container,
     BoxDecoration,
@@ -50,7 +50,7 @@ const g_max_count = 100;
 //data
 let g_newsOrder = 0;
 //
-class ListViewProfileDemo1 extends XSJSStatefulWidget {
+class ListViewProfileDemo1 extends JSStatefulWidget {
     constructor() {
         super('ListViewDemo');
     }
@@ -106,7 +106,7 @@ class ListViewProfileDemo1State extends JSWidgetState {
     }
 }
 
-class ListViewItem extends XSJSStatelessWidget {
+class ListViewItem extends JSStatelessWidget {
     constructor(oneNewsMap) {
         super('ListViewItem');
 

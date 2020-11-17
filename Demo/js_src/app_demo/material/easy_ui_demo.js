@@ -4,7 +4,7 @@ let {
   runApp,
   XSFlutterApp,
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   Container,
   Color,
@@ -45,7 +45,7 @@ let {
 } = require("js_flutter.js");
 
 
-class JSEasyUIDemo extends XSJSStatefulWidget {
+class JSEasyUIDemo extends JSStatefulWidget {
     constructor() {
         super('JSEasyUIDemo');
     }

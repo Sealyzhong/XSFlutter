@@ -313,7 +313,7 @@ class XSProxyAnimatedSize extends XSJsonObjProxy {
       duration: XSJSParse.getDuration(context, bo, map, "duration"),
       reverseDuration: XSJSParse.getDuration(context, bo, map, "reverseDuration"),
       vsync: bo.widget.state,
-      //XSJSParse.get(context, bo, map,"vsync"]), //TODO FIXME,bo.widget 不能是XSJSStatelessWidget
+      //XSJSParse.get(context, bo, map,"vsync"]), //TODO FIXME,bo.widget 不能是JSStatelessWidget
     );
   }
 }

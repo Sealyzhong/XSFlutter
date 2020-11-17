@@ -4,39 +4,13 @@
 //  Use of this source code is governed by a MIT-style license that can be
 //  found in the LICENSE file.
 
-let {async} = require("dart_sdk.js");
-let {
-    JSStatelessWidget,
-    JSStatefulWidget,
-    JSWidgetState,
-    Scaffold,
-    Container,
-    Color,
-    Colors,
-    AppBar,
-    Text,
-    ListView,
-    ListTile,
-    Icon,
-    IconData,
-    Duration,
-    EdgeInsets,
-    TextAlign,
-    TextStyle,
-    Row,
-    Padding,
-    //Theme,
-    Navigator,
-    Icons,
-    MaterialPageRoute,
-    XSLoadingApi,
-} = require("js_flutter.js");
-
-const { SectionTitle } = require("./app_demo/component/section_title.js");
-
+import bt = require("./js_basic_types"); 
+import fw = require("./js_framework"); 
+import mw = require("./js_material_widget"); 
+import ic = require("./js_basic_icons"); 
 
 //业务代码
-class MyJSWidgetHomePage extends JSStatefulWidget {
+class MyJSWidgetHomePage extends fw.JSStatefulWidget {
     constructor() {
         super("MyJSWidgetHomePage");
 
@@ -49,7 +23,7 @@ class MyJSWidgetHomePage extends JSStatefulWidget {
     }
 }
 
-class MyJSWidgetHomePageState extends JSWidgetState {
+class MyJSWidgetHomePageState extends fw.JSWidgetState {
 
     build(context) {
 
@@ -264,13 +238,27 @@ class MyJSWidgetHomePageState extends JSWidgetState {
     }
 }
 
-class HomeSectionTitle extends JSStatelessWidget {
-    constructor(title, { key } = {}) {
-        super("HomeSectionTitle", { key: key });
+class HomeSectionTitle extends fw.JSStatelessWidget {
+    title:string;
+    constructor(title:string, key?:bt.BaseKey) {
+        super("HomeSectionTitle", key);
         this.title = title;
     }
 
-    build(context) {
+    build(context:fw.JSBuildContext) {
+        return mw.Container.new({
+            padding:bt.EdgeInsets.all(10.0),
+            color:bt.Colors.red,
+            child:mw.Row.new({
+                children:[
+                    mw.Icon.new({
+                        icon:ic.Icons.ac_unit,
+                        color:bt.Colors.white,
+                    }),
+                ]
+            }),
+        });
+        /*
         return Container.new({
             padding: EdgeInsets.all(10.0),
             color: Colors.red,
@@ -287,8 +275,6 @@ class HomeSectionTitle extends JSStatelessWidget {
                     })
                 ]
             })
-        });
+        });*/
     }
 }
-
-module.exports = { MyJSWidgetHomePage };

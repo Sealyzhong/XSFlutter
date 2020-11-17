@@ -5,8 +5,8 @@
 let {
   runApp,
   XSFlutterApp,
-  XSJSStatefulWidget,
-  XSJSStatelessWidget,
+  JSStatefulWidget,
+  JSStatelessWidget,
   JSWidgetState,
   Scaffold,
   Text,
@@ -130,7 +130,7 @@ _allPages.set(new _Page({label: 'HOME'}) , [
     })
 ]);
 
-class _CardDataItem extends XSJSStatelessWidget {
+class _CardDataItem extends JSStatelessWidget {
     constructor({page, data}) {
         super('_CardDataItem');
         this.page = page;
@@ -179,7 +179,7 @@ class _CardDataItem extends XSJSStatelessWidget {
     }
 }
 
-class JSTabsDemo extends XSJSStatefulWidget {
+class JSTabsDemo extends JSStatefulWidget {
     constructor() {
         super('JSTabsDemo');
     }

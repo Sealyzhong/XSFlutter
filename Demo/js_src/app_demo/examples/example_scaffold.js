@@ -2,8 +2,8 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
-  XSJSStatelessWidget,
+  JSStatefulWidget,
+  JSStatelessWidget,
   Scaffold,
   Center,
   AppBar,
@@ -19,7 +19,7 @@ let {
   Theme,
 } = require("js_flutter.js");
 
-class HomePage extends XSJSStatelessWidget {
+class HomePage extends JSStatelessWidget {
   constructor() {
     super("HomePage");
   }
@@ -31,7 +31,7 @@ class HomePage extends XSJSStatelessWidget {
 }
 
 
-class IdeaPage extends XSJSStatelessWidget {
+class IdeaPage extends JSStatelessWidget {
   constructor() {
     super("IdeaPage");
   }
@@ -43,7 +43,7 @@ class IdeaPage extends XSJSStatelessWidget {
 }
 
 
-class MessagePage extends XSJSStatelessWidget {
+class MessagePage extends JSStatelessWidget {
   constructor() {
     super("MessagePage");
   }
@@ -55,7 +55,7 @@ class MessagePage extends XSJSStatelessWidget {
 }
 
 
-class MyPage extends XSJSStatelessWidget {
+class MyPage extends JSStatelessWidget {
   constructor() {
     super("MyPage");
   }
@@ -82,7 +82,7 @@ class _NavigationIconView {
 
 
 
-class PageExampleScaffold extends XSJSStatefulWidget {
+class PageExampleScaffold extends JSStatefulWidget {
   constructor() {
     super("PageExampleScaffold");
   }

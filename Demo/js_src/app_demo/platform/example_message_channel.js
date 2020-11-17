@@ -3,7 +3,7 @@
 let {
   JSLog,
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   ListTile,
   AppBar,
@@ -22,7 +22,7 @@ const dart_sdk = require("dart_sdk");
 
 const { SectionTitle } = require("./component/section_title.js");
 
-class PageExampleMessageChannel extends XSJSStatefulWidget {
+class PageExampleMessageChannel extends JSStatefulWidget {
   constructor() {
     super("PageExampleMessageChannel");
 

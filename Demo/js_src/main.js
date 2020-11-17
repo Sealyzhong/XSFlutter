@@ -25,8 +25,8 @@ class MyApp extends XSFlutterApp {
 
         switch (widgetName) {
             case "MyJSWidgetHomePage": {
-                let homeWidget = require("home_page.js");
-                let widget = new homeWidget.MyJSWidgetHomePage(widgetName);
+                let homeWidget =  require("./app_demo/component/section_title.js");
+                let widget = new homeWidget.SectionTitle(widgetName);
                 return widget;
             }
             case "XXXYouPage": {

@@ -2,7 +2,7 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   AppBar,
   Text,
@@ -11,7 +11,7 @@ let {
 
 const { SectionTitle } = require("./app_demo/component/section_title.js");
 
-class PageExampleAnimatedListState extends XSJSStatefulWidget {
+class PageExampleAnimatedListState extends JSStatefulWidget {
   constructor() {
     super('PageExampleAnimatedListState');
   }

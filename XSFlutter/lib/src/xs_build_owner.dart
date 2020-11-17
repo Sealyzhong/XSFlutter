@@ -165,8 +165,8 @@ class XSJsonBuildOwner {
     Map widgetData = widgetMap["widgetData"];
     String buildWidgetDataSeq = widgetMap["buildWidgetDataSeq"];
 
-    if (className != "XSJSStatefulWidget" && className != "XSJSStatelessWidget") {
-      XSJSLog.error("jsCallRebuild(jsWidget == null || (jsWidget is! XSJSStatefulWidget && jsWidget is! XSJSStatelessWidget)): name:$name widgetData:$widgetData");
+    if (className != "JSStatefulWidget" && className != "JSStatelessWidget") {
+      XSJSLog.error("jsCallRebuild(jsWidget == null || (jsWidget is! JSStatefulWidget && jsWidget is! JSStatelessWidget)): name:$name widgetData:$widgetData");
       return;
     }
 
@@ -202,7 +202,7 @@ class XSJsonBuildOwner {
     var ownerWidgetID = this.widget.widgetID;
 
     if (ownerWidgetID != null && ownerWidgetID != widgetID) {
-      XSJSLog.log("XSJSStatefulWidget:rebuildJSWidget: error: this.widget.widgetID != jsWidget.widgetID");
+      XSJSLog.log("JSStatefulWidget:rebuildJSWidget: error: this.widget.widgetID != jsWidget.widgetID");
     }
 
     XSJSWidgetHelper helper = this.widget.helper;
@@ -232,8 +232,8 @@ class XSJsonBuildOwner {
     }
     //----性能分析代码 end
 
-    if (jsWidget == null || (jsWidget is! XSJSStatefulWidget && jsWidget is! XSJSStatelessWidget)) {
-      XSJSLog.error("jsCallNavigatorPush(jsWidget == null || (jsWidget is! XSJSStatefulWidget && jsWidget is! XSJSStatelessWidget)): name:${jsWidget.name} widgetData:${jsWidget.widgetData}");
+    if (jsWidget == null || (jsWidget is! JSStatefulWidget && jsWidget is! JSStatelessWidget)) {
+      XSJSLog.error("jsCallNavigatorPush(jsWidget == null || (jsWidget is! JSStatefulWidget && jsWidget is! JSStatelessWidget)): name:${jsWidget.name} widgetData:${jsWidget.widgetData}");
       return;
     }
 
@@ -397,38 +397,38 @@ class XSJsonBuildOwner {
   }
 }
 
-class XSProxyXSJSStatefulWidget extends XSJsonObjProxy {
+class XSProxyJSStatefulWidget extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     ///**@@@  2 替换类名字符串
-    final String regClassName1 = "XSJSStatefulWidget";
+    final String regClassName1 = "JSStatefulWidget";
 
     ///**@@@  3 替换类构造函数
     return {
-      regClassName1: () => XSProxyXSJSStatefulWidget()..init(className: regClassName1)
+      regClassName1: () => XSProxyJSStatefulWidget()..init(className: regClassName1)
     };
   }
 
   @override
-  XSJSStatefulWidget constructor(XSJsonBuildOwner bo, Map<String, dynamic> jsonMap, {BuildContext context}) {
-    var widget = XSJSStatefulWidget(key: mxj2d(bo, jsonMap["key"]), name: mxj2d(bo, jsonMap["name"]), widgetID: mxj2d(bo, jsonMap["widgetID"]), widgetData: jsonMap["widgetData"], buildingWidgetDataSeq: mxj2d(bo, jsonMap["buildWidgetDataSeq"]), navPushingWidgetID: jsonMap["navPushingWidgetID"], parentBuildOwner: bo);
+  JSStatefulWidget constructor(XSJsonBuildOwner bo, Map<String, dynamic> jsonMap, {BuildContext context}) {
+    var widget = JSStatefulWidget(key: mxj2d(bo, jsonMap["key"]), name: mxj2d(bo, jsonMap["name"]), widgetID: mxj2d(bo, jsonMap["widgetID"]), widgetData: jsonMap["widgetData"], buildingWidgetDataSeq: mxj2d(bo, jsonMap["buildWidgetDataSeq"]), navPushingWidgetID: jsonMap["navPushingWidgetID"], parentBuildOwner: bo);
     return widget;
   }
 }
 
-class XSProxyXSJSStatelessWidget extends XSJsonObjProxy {
+class XSProxyJSStatelessWidget extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     ///**@@@  2 替换类名字符串
-    final String regClassName1 = "XSJSStatelessWidget";
+    final String regClassName1 = "JSStatelessWidget";
 
     ///**@@@  3 替换类构造函数
     return {
-      regClassName1: () => XSProxyXSJSStatelessWidget()..init(className: regClassName1)
+      regClassName1: () => XSProxyJSStatelessWidget()..init(className: regClassName1)
     };
   }
 
   @override
-  XSJSStatelessWidget constructor(XSJsonBuildOwner bo, Map<String, dynamic> jsonMap, {BuildContext context}) {
-    var widget = XSJSStatelessWidget(key: mxj2d(bo, jsonMap["key"]), name: mxj2d(bo, jsonMap["name"]), widgetID: mxj2d(bo, jsonMap["widgetID"]), widgetData: jsonMap["widgetData"], buildingWidgetDataSeq: mxj2d(bo, jsonMap["buildWidgetDataSeq"]), navPushingWidgetID: jsonMap["navPushingWidgetID"], parentBuildOwner: bo);
+  JSStatelessWidget constructor(XSJsonBuildOwner bo, Map<String, dynamic> jsonMap, {BuildContext context}) {
+    var widget = JSStatelessWidget(key: mxj2d(bo, jsonMap["key"]), name: mxj2d(bo, jsonMap["name"]), widgetID: mxj2d(bo, jsonMap["widgetID"]), widgetData: jsonMap["widgetData"], buildingWidgetDataSeq: mxj2d(bo, jsonMap["buildWidgetDataSeq"]), navPushingWidgetID: jsonMap["navPushingWidgetID"], parentBuildOwner: bo);
     return widget;
   }
 }

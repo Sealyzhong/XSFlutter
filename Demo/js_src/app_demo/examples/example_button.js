@@ -2,7 +2,7 @@
 
 let {
   JSLog,
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Scaffold,
   AppBar,
   Text,
@@ -19,7 +19,7 @@ let {
 const { SectionTitle } = require("./app_demo/component/section_title.js");
 
 
-class PageExampleButton extends XSJSStatelessWidget {
+class PageExampleButton extends JSStatelessWidget {
   constructor(){
     super("PageExampleButton");
   }

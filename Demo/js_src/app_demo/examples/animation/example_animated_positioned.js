@@ -1,7 +1,7 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   Container,
   AppBar,
@@ -16,7 +16,7 @@ let {
 } = require("js_flutter.js");
 
 
-class PageExampleAnimatedPositioned extends XSJSStatefulWidget {
+class PageExampleAnimatedPositioned extends JSStatefulWidget {
   constructor() {
     super('PageExampleAnimatedPositioned');
   }

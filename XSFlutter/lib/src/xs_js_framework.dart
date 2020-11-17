@@ -46,18 +46,18 @@ class XSFlutterApp {
   ///API
   ///从Flutter Dart代码 Push一个 JS写的页面
   ///*重要：此API是从Dart侧打开一个JS页面的入口函数，将创建一个RootWidget，XSFlutter 的RootWidget对外只显示一个
-  ///先创建一个空的XSJSStatefulWidget，调用JS，等待JS层widgetData来刷新页面
-  XSJSStatefulWidget navigatorPushWithName(String widgetName, Key widgetKey, {ThemeData themeData, MediaQueryData mediaQueryData, IconThemeData iconThemeData}) {
+  ///先创建一个空的JSStatefulWidget，调用JS，等待JS层widgetData来刷新页面
+  JSStatefulWidget navigatorPushWithName(String widgetName, Key widgetKey, {ThemeData themeData, MediaQueryData mediaQueryData, IconThemeData iconThemeData}) {
     XSJSLog.log("XSFlutterApp:navigatorPushWithName: widgetName: $widgetName ");
 
-    XSJSStatefulWidget jsWidget = _rootBuildOwner.findWidget(widgetKey);
+    JSStatefulWidget jsWidget = _rootBuildOwner.findWidget(widgetKey);
 
     if (jsWidget != null) {
       XSJSLog.log("XSFlutterApp:_rootBuildOwner.findWidget(widgetKey) true: widgetName: $widgetName ");
       return jsWidget;
     }
 
-    jsWidget = XSJSStatefulWidget.createEmptyWidget(key: widgetKey, name: widgetName, parentBuildOwner: _rootBuildOwner);
+    jsWidget = JSStatefulWidget.createEmptyWidget(key: widgetKey, name: widgetName, parentBuildOwner: _rootBuildOwner);
 
     callJSNavigatorPushWithName(jsWidget.name, jsWidget.widgetID, themeData: themeData, mediaQueryData: mediaQueryData, iconThemeData: iconThemeData);
 
@@ -72,7 +72,7 @@ class XSFlutterApp {
 
   //flutter -> JS flutter 调用 JS
   //flutter层 主动push页面,call js 创建名字为widgetName的jswidget
-  //先创建一个空的XSJSStatefulWidget，调用JS，等待JS层widgetData来刷新页���
+  //先创建一个空的JSStatefulWidget，调用JS，等待JS层widgetData来刷新页���
   callJSNavigatorPushWithName(String widgetName, String widgetID, {ThemeData themeData, MediaQueryData mediaQueryData, IconThemeData iconThemeData}) async {
     MethodCall jsMethodCall = MethodCall("flutterCallNavigatorPushWithName", {
       "widgetName": widgetName,
@@ -252,7 +252,7 @@ class XSJSWidgetHelper extends Object {
   }
 }
 
-class XSJSBaseWidget extends Object {
+class JSBaseWidget extends Object {
   //Flutter 侧生成的XSWidget widgetID 从1开始，为奇数 +2
   static int widgetIDFeed = 1;
 
@@ -300,10 +300,10 @@ class XSJSBaseWidget extends Object {
 
 ///封装JSWidget
 // ignore: must_be_immutable
-class XSJSStatefulWidget extends StatefulWidget with XSJSBaseWidget {
+class JSStatefulWidget extends StatefulWidget with JSBaseWidget {
   JSWidgetState _state;
 
-  XSJSStatefulWidget({Key key, String name, String widgetID, Map widgetData, String buildingWidgetDataSeq, String navPushingWidgetID, XSJsonBuildOwner parentBuildOwner}) : super(key: key) {
+  JSStatefulWidget({Key key, String name, String widgetID, Map widgetData, String buildingWidgetDataSeq, String navPushingWidgetID, XSJsonBuildOwner parentBuildOwner}) : super(key: key) {
     this.name = name;
     this.widgetID = widgetID;
     this.buildingWidgetDataSeq = buildingWidgetDataSeq;
@@ -314,10 +314,10 @@ class XSJSStatefulWidget extends StatefulWidget with XSJSBaseWidget {
   }
 
   ///由dart侧创建XSWidget壳子
-  static XSJSStatefulWidget createEmptyWidget({Key key, String name, XSJsonBuildOwner parentBuildOwner}) {
+  static JSStatefulWidget createEmptyWidget({Key key, String name, XSJsonBuildOwner parentBuildOwner}) {
     //由dart侧生成 widgetID
-    String widgetID = XSJSBaseWidget.generateWidgetID();
-    XSJSStatefulWidget widget = XSJSStatefulWidget(key: key, name: name, widgetID: widgetID, parentBuildOwner: parentBuildOwner);
+    String widgetID = JSBaseWidget.generateWidgetID();
+    JSStatefulWidget widget = JSStatefulWidget(key: key, name: name, widgetID: widgetID, parentBuildOwner: parentBuildOwner);
 
     return widget;
   }
@@ -339,7 +339,7 @@ class XSJSStatefulWidget extends StatefulWidget with XSJSBaseWidget {
   }
 }
 
-class JSWidgetState extends State<XSJSStatefulWidget> with SingleTickerProviderStateMixin {
+class JSWidgetState extends State<JSStatefulWidget> with SingleTickerProviderStateMixin {
   JSWidgetState();
 
   @override
@@ -360,7 +360,7 @@ class JSWidgetState extends State<XSJSStatefulWidget> with SingleTickerProviderS
 
   @override
   Widget build(BuildContext context) {
-    XSJSLog.log("XSJSStatefulWidget:build begin: widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
+    XSJSLog.log("JSStatefulWidget:build begin: widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
 
     if (this.widget.buildOwner == null) {
       this.widget.buildOwner = XSJsonBuildOwner(this.widget, this.widget.parentBuildOwner);
@@ -376,20 +376,20 @@ class JSWidgetState extends State<XSJSStatefulWidget> with SingleTickerProviderS
     var w = this.widget.buildOwner.build(widget.widgetData, context);
 
     //call JS层，Flutter UI 使用当前JSWidget哪个序列号的数据构建，callbackID,widgetID  与之对应
-    XSJSLog.debug("XSJSStatefulWidget:building: widget:$w callJSOnBuildEnd  widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
+    XSJSLog.debug("JSStatefulWidget:building: widget:$w callJSOnBuildEnd  widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
 
     this.widget.buildWidgetDataSeq = this.widget.buildingWidgetDataSeq;
     this.widget.buildOwner.callJSOnBuildEnd();
 
-    XSJSLog.log("XSJSStatefulWidget:build end: widget:$w callJSOnBuildEnd  widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
+    XSJSLog.log("JSStatefulWidget:build end: widget:$w callJSOnBuildEnd  widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
     return w;
   }
 }
 
 ///静态json生成Widget
 // ignore: must_be_immutable
-class XSJSStatelessWidget extends StatelessWidget with XSJSBaseWidget {
-  XSJSStatelessWidget({Key key, String name, String widgetID, Map widgetData, String buildingWidgetDataSeq, String navPushingWidgetID, XSJsonBuildOwner parentBuildOwner}) : super(key: key) {
+class JSStatelessWidget extends StatelessWidget with JSBaseWidget {
+  JSStatelessWidget({Key key, String name, String widgetID, Map widgetData, String buildingWidgetDataSeq, String navPushingWidgetID, XSJsonBuildOwner parentBuildOwner}) : super(key: key) {
     this.name = name;
     this.widgetID = widgetID;
     this.buildingWidgetDataSeq = buildingWidgetDataSeq;
@@ -405,7 +405,7 @@ class XSJSStatelessWidget extends StatelessWidget with XSJSBaseWidget {
 
   @override
   Widget build(BuildContext context) {
-    // XSJSLog.log("XSJSStatelessWidget:build: ${widget.widgetData} ");
+    // XSJSLog.log("JSStatelessWidget:build: ${widget.widgetData} ");
     if (this.widgetData == null) {
       return this.helper.buildErrorWidget(context);
     }

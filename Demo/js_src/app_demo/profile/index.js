@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Scaffold,
   ListTile,
   AppBar,
@@ -23,7 +23,7 @@ const { SectionTitle } = require("./component/section_title.js");
 
 
 
-class ProfileExamplesPage extends XSJSStatelessWidget {
+class ProfileExamplesPage extends JSStatelessWidget {
   constructor() {
     super("ProfileExamplesPage");
   }

@@ -5,7 +5,7 @@
 //  found in the LICENSE file.
 
 let {
-    XSJSStatefulWidget,
+    JSStatefulWidget,
     JSWidgetState,
     Scaffold,
     Container,
@@ -23,7 +23,7 @@ let {
 } = require("js_flutter.js");
 
 
-class MyHomePage extends XSJSStatefulWidget {
+class MyHomePage extends JSStatefulWidget {
     constructor() {
         super();
         //this.title = title;

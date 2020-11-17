@@ -3,7 +3,7 @@
 let {
   JSLog,
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   ListTile,
   AppBar,
@@ -28,7 +28,7 @@ const packages__dio = require("packages/dio/dio.js");
 let cgiDataUrl = "https://c.m.163.com/nc/article/headline/T1348649580692/0-10.html";
 let cgiJsonUrl = "https://reactnative.dev/movies.json"
 
-class PageExampleDio extends XSJSStatefulWidget {
+class PageExampleDio extends JSStatefulWidget {
   constructor() {
     super("PageExampleDio");
 

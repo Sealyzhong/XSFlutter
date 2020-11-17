@@ -4,8 +4,8 @@
 let {
   JSLog,
   JSWidgetState,
-  XSJSStatefulWidget,
-  XSJSStatelessWidget,
+  JSStatefulWidget,
+  JSStatelessWidget,
   Scaffold,
   Container,
   Center,
@@ -23,7 +23,7 @@ let {
 } = require("js_flutter.js");
 
 
-class PageExampleAnimatedBuilder extends XSJSStatelessWidget {
+class PageExampleAnimatedBuilder extends JSStatelessWidget {
   constructor() {
     super("PageExampleAnimatedBuilder");
     this.count = 0;
@@ -72,7 +72,7 @@ class PageExampleAnimatedBuilder extends XSJSStatelessWidget {
 
 
 
-class ScaleAnimation extends XSJSStatefulWidget {
+class ScaleAnimation extends JSStatefulWidget {
 
   constructor({
     child,

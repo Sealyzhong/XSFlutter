@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Scaffold,
   Container,
   BoxDecoration,
@@ -18,7 +18,7 @@ let {
 } = require("js_flutter.js");
 
 
-class PageExampleContainer extends XSJSStatelessWidget {
+class PageExampleContainer extends JSStatelessWidget {
   constructor(){
     super("PageExampleContainer");
   }

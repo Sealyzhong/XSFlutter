@@ -9,8 +9,8 @@ let {
   runApp,
   XSFlutterApp,
   JSWidgetState,
-  XSJSStatefulWidget,
-  XSJSStatelessWidget,
+  JSStatefulWidget,
+  JSStatelessWidget,
   Scaffold,
   Container,
   Center,
@@ -32,7 +32,7 @@ let {
 
 //业务代码
 
-class JSAnimationPage extends XSJSStatefulWidget {
+class JSAnimationPage extends JSStatefulWidget {
   constructor() {
     super('JSAnimationPage');
   }
@@ -96,7 +96,7 @@ class JSAnimationPageState extends JSWidgetState {
 }
 
 
-class ScaleAnimation extends XSJSStatefulWidget {
+class ScaleAnimation extends JSStatefulWidget {
 
   constructor({
     child,

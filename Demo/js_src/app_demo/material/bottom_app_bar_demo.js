@@ -1,7 +1,7 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   Container,
   Color,
@@ -28,7 +28,7 @@ let {
   RawMaterialButton,
   BoxConstraints,
   HitTestBehavior,
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   CircleBorder,
   BorderSide,
   MainAxisAlignment,
@@ -107,7 +107,7 @@ kFabColors = [
 ];
 
 
-class _JSHeading extends XSJSStatelessWidget {
+class _JSHeading extends JSStatelessWidget {
     constructor ({
         text
     } = {}) {
@@ -134,7 +134,7 @@ class _JSHeading extends XSJSStatelessWidget {
     }
 }
 
-class _JSRadioItem extends XSJSStatelessWidget{
+class _JSRadioItem extends JSStatelessWidget{
     constructor ({
         value,
         groupValue,
@@ -185,7 +185,7 @@ class _JSRadioItem extends XSJSStatelessWidget{
     }
 }
 
-class _JSColorsItem extends XSJSStatelessWidget{
+class _JSColorsItem extends JSStatelessWidget{
     constructor ({
         colors,
         selectedColor,
@@ -231,7 +231,7 @@ class _JSColorsItem extends XSJSStatelessWidget{
     }
 }
 
-class JSBottomAPPBarDemo extends XSJSStatefulWidget {
+class JSBottomAPPBarDemo extends JSStatefulWidget {
     constructor() {
         super('JSBottomAPPBarDemo');
     }

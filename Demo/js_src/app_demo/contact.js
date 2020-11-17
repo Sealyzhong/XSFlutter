@@ -7,7 +7,7 @@
 let {
     JSLog,
     JSWidgetState,
-    XSJSStatefulWidget,
+    JSStatefulWidget,
     Scaffold,
     Container,
     Color,
@@ -44,13 +44,13 @@ let {
     SystemUiOverlayStyle,
     Padding,
     DefaultTextStyle,
-    XSJSStatelessWidget,
+    JSStatelessWidget,
     SafeArea,
     Colors
   } = require("js_flutter.js");
 
 
-class ContactCategory extends XSJSStatelessWidget {
+class ContactCategory extends JSStatelessWidget {
     constructor({icon, children} = {}) {
       super('ContactCategory');
 
@@ -103,7 +103,7 @@ class ContactCategory extends XSJSStatelessWidget {
     }
 }
 
-class ContactItem extends XSJSStatelessWidget {
+class ContactItem extends JSStatelessWidget {
     constructor({icon, lines, tooltip, onPressed} = {}) {
         super('ContactItem');
 
@@ -173,7 +173,7 @@ AppBarBehavior = {
 };
 
 
-class JSContactPage extends XSJSStatefulWidget {
+class JSContactPage extends JSStatefulWidget {
     constructor() {
         super('JSContactPage');
     }

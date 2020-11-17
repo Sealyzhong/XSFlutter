@@ -200,8 +200,8 @@ class XSJsonObjToDartObject {
   Map<String, XSJsonObjProxy> _className2Proxy = {};
 
   void init() {
-    registerProxy(XSProxyXSJSStatefulWidget.registerProxy());
-    registerProxy(XSProxyXSJSStatelessWidget.registerProxy());
+    registerProxy(XSProxyJSStatefulWidget.registerProxy());
+    registerProxy(XSProxyJSStatelessWidget.registerProxy());
 
     registerProxy(XSProxyRegisterHelperMaterialSeries.registerProxys());
     registerProxy(XSProxyRegisterHelperLayoutSeries.registerProxys());

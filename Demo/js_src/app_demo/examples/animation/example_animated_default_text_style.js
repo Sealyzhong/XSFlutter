@@ -2,7 +2,7 @@
 
 let {
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   Container,
   AppBar,
@@ -22,7 +22,7 @@ let {
 
 const { SectionTitle } = require("./app_demo/component/section_title.js");
 
-class PageExampleAnimatedDefaultTextStyle extends XSJSStatefulWidget {
+class PageExampleAnimatedDefaultTextStyle extends JSStatefulWidget {
   constructor() {
     super('PageExampleAnimatedDefaultTextStyle');
   }

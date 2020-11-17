@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Scaffold,
   ListTile,
   Color,
@@ -22,7 +22,7 @@ let {
 
 const { SectionTitle } = require("./app_demo/component/section_title.js");
 
-class ExampleWidget extends XSJSStatelessWidget {
+class ExampleWidget extends JSStatelessWidget {
   constructor(){
     super("ExampleWidget");
   }

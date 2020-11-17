@@ -8,7 +8,7 @@ let {
   runApp,
   XSFlutterApp,
   JSWidgetState,
-  XSJSStatefulWidget,
+  JSStatefulWidget,
   Scaffold,
   Center,
   AppBar,
@@ -34,7 +34,7 @@ let {
   BoxFit,
   Row,
   Padding,
-  XSJSStatelessWidget
+  JSStatelessWidget
   
 } = require("js_flutter.js");
 
@@ -46,7 +46,7 @@ let _kAppBarHeight = 128.0;
 let _kFabHalfSize = 28.0; // TODO(mpcomplete): needs to adapt to screen size
 let _kRecipePageMaxWidth = 500.0;
 
-class JSPestoPage extends XSJSStatefulWidget {
+class JSPestoPage extends JSStatefulWidget {
   constructor() {
       super('JSPestoPage');
   }
@@ -179,7 +179,7 @@ class JSPestoPageState extends JSWidgetState {
 }
 
 // A card with the recipe's image, author, and title.
-class RecipeCard extends XSJSStatelessWidget {
+class RecipeCard extends JSStatelessWidget {
 
   constructor({ recipe, onTap }) {
     super("RecipeCard");

@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Scaffold,
   Container,
   AppBar,
@@ -16,7 +16,7 @@ let {
 } = require("js_flutter.js");
 
 
-class PageExampleIcon extends XSJSStatelessWidget {
+class PageExampleIcon extends JSStatelessWidget {
   constructor(){
     super("PageExampleIcon");
   }

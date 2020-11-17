@@ -304,7 +304,7 @@ packages:
   xsflutter:
     dependency: "direct main"
     description:
-      path: ".."
+      path: "../XSFlutter"
       relative: true
     source: path
     version: "0.2.5"

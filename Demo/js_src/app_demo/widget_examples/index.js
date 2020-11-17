@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Scaffold,
   Container,
   ListTile,
@@ -27,7 +27,7 @@ let {
 
 
 
-class WidgetExamplesPage extends XSJSStatelessWidget {
+class WidgetExamplesPage extends JSStatelessWidget {
   constructor() {
     super("WidgetExamplesPage");
     this.widgetsArray = widgetsName.split(',');
@@ -106,7 +106,7 @@ class WidgetExamplesPage extends XSJSStatelessWidget {
   }
 }
 
-class ListViewItem extends XSJSStatelessWidget {
+class ListViewItem extends JSStatelessWidget {
   constructor(title) {
     super('ListViewItem');
     this.title = title;

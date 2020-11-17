@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Scaffold,
   Container,
   ListTile,
@@ -12,7 +12,7 @@ let {
   Image,
 } = require("js_flutter.js");
 
-class PageExampleImage extends XSJSStatelessWidget {
+class PageExampleImage extends JSStatelessWidget {
   constructor(){
     super("PageExampleImage");
   }

@@ -513,6 +513,7 @@ class XSProxySlider extends XSJsonObjProxy {
       activeColor: XSJSParse.getColor(context, bo, map, "activeColor"),
       inactiveColor: XSJSParse.getColor(context, bo, map, "inactiveColor"),
       semanticFormatterCallback: XSJSParse.getValueChanged<double>(context, bo, map, "semanticFormatterCallback"),
+      autofocus: XSJSParse.getBool(context, bo, map, "key", defaultValue: false),
     );
   }
 }

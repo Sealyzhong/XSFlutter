@@ -1,8 +1,31 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SectionTitle = void 0;
+const js_basic_icons_1 = require("./js_basic_icons");
+const bt = require("./js_basic_types");
+const fw = require("./js_framework");
+const mw = require("./js_material_widget");
+class SectionTitle extends fw.JSStatelessWidget {
+    constructor(title, key) {
+        super("SectionTitle", { key: key });
+        this.title = title;
+    }
+    build(buildContext) {
+        return mw.Container.new({
+            padding: bt.EdgeInsets.all(10.),
+            color: bt.Colors.green,
+            child: mw.Icon.new({
+                icon: js_basic_icons_1.Icons.ac_unit
+            }),
+        });
+    }
+}
+exports.SectionTitle = SectionTitle;
 
-
+/*
 
 let {
-  XSJSStatelessWidget,
+  JSStatelessWidget,
   Container,
   Color,
   Text,
@@ -16,7 +39,7 @@ let {
   TextAlign,
 } = require("js_flutter.js");
 
-class SectionTitle extends XSJSStatelessWidget {
+class SectionTitle extends JSStatelessWidget {
   constructor(title,{key}={}){
     super("SectionTitle",{key:key});
     this.title = title;
@@ -46,5 +69,4 @@ class SectionTitle extends XSJSStatelessWidget {
 
 module.exports = {
   SectionTitle,
-}
-
+}*/
