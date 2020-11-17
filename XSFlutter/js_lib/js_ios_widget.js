@@ -1,16 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IosTabBar = exports.IosSwitch = exports.IosSlider = exports.IosPageScaffold = exports.IosPageTransition = exports.IosNavigationBar = exports.IosFullscreenDialogTransition = exports.IosDialogAction = exports.IosDialog = exports.IosButton = exports.IosAlertDialog = exports.IosActivityIndicator = void 0;
-/*
- * @Author: SealyZhong
- * @CreateDate: 2020/11/10
- * @ModifyDate: 2020/11/11
- * @Description: Ios Class
- */
-const bt = require("./js_basic_types");
+const fw = require("./js_framework");
 //-------------- A -----------------
 //****** IosActivityIndicator ******
-class IosActivityIndicator extends bt.FlutterWidget {
+class IosActivityIndicator extends fw.JSBaseWidget {
     static new(animating, radius, key) {
         var v = new IosActivityIndicator();
         v.key = key;
@@ -21,7 +15,7 @@ class IosActivityIndicator extends bt.FlutterWidget {
 }
 exports.IosActivityIndicator = IosActivityIndicator;
 //****** IosAlertDialog ******
-class IosAlertDialog extends bt.FlutterWidget {
+class IosAlertDialog extends fw.JSBaseWidget {
 }
 exports.IosAlertDialog = IosAlertDialog;
 IosAlertDialog.new = function (title, content, actions, scrollController, actionScrollController, key) {
@@ -36,7 +30,7 @@ IosAlertDialog.new = function (title, content, actions, scrollController, action
 };
 //-------------- B -----------------
 //****** IosButton ******
-class IosButton extends bt.FlutterWidget {
+class IosButton extends fw.JSBaseWidget {
     static new(child, onPressed, padding, color, disabledColor, minSize, pressedOpacity, borderRadius, key) {
         var v = new IosButton();
         v.key = key;
@@ -54,7 +48,7 @@ class IosButton extends bt.FlutterWidget {
 exports.IosButton = IosButton;
 //-------------- D -----------------
 //****** IosDialog ******
-class IosDialog extends bt.FlutterWidget {
+class IosDialog extends fw.JSBaseWidget {
     static new(child, key) {
         var v = new IosDialog();
         v.key = key;
@@ -64,7 +58,7 @@ class IosDialog extends bt.FlutterWidget {
 }
 exports.IosDialog = IosDialog;
 //****** IosDialogAction ******
-class IosDialogAction extends bt.FlutterWidget {
+class IosDialogAction extends fw.JSBaseWidget {
     static new(child, onPressed, isDefaultAction, isDestructiveAction, textStyle, key) {
         var v = new IosDialogAction();
         v.onPressed = onPressed;
@@ -79,7 +73,7 @@ class IosDialogAction extends bt.FlutterWidget {
 exports.IosDialogAction = IosDialogAction;
 //-------------- F -----------------
 //****** IosFullscreenDialogTransition ******
-class IosFullscreenDialogTransition extends bt.FlutterWidget {
+class IosFullscreenDialogTransition extends fw.JSBaseWidget {
     static new(child, linearTransition, primaryRouteAnimation, secondaryRouteAnimation, key) {
         var v = new IosFullscreenDialogTransition();
         v.key = key;
@@ -93,7 +87,7 @@ class IosFullscreenDialogTransition extends bt.FlutterWidget {
 exports.IosFullscreenDialogTransition = IosFullscreenDialogTransition;
 //-------------- N -----------------
 //****** IosNavigationBar ******
-class IosNavigationBar extends bt.FlutterWidget {
+class IosNavigationBar extends fw.JSBaseWidget {
     static new(leading, automaticallyImplyLeading, automaticallyImplyMiddle, previousPageTitle, middle, trailing, border, backgroundColor, padding, actionsForegroundColor, transitionBetweenRoutes, key) {
         var v = new IosNavigationBar();
         v.key = key;
@@ -114,7 +108,7 @@ class IosNavigationBar extends bt.FlutterWidget {
 exports.IosNavigationBar = IosNavigationBar;
 //-------------- P -----------------
 //****** IosPageTransition ******
-class IosPageTransition extends bt.FlutterWidget {
+class IosPageTransition extends fw.JSBaseWidget {
     static new(child, linearTransition, primaryRouteAnimation, secondaryRouteAnimation, key) {
         var v = new IosPageTransition();
         v.key = key;
@@ -127,7 +121,7 @@ class IosPageTransition extends bt.FlutterWidget {
 }
 exports.IosPageTransition = IosPageTransition;
 //****** IosPageScaffold ******
-class IosPageScaffold extends bt.FlutterWidget {
+class IosPageScaffold extends fw.JSBaseWidget {
     static new(child, backgroundColor, navigationBar, resizeToAvoidBottomInset, key) {
         var v = new IosPageScaffold();
         v.key = key;
@@ -141,7 +135,7 @@ class IosPageScaffold extends bt.FlutterWidget {
 exports.IosPageScaffold = IosPageScaffold;
 //-------------- S -----------------
 //****** IosSlider ******
-class IosSlider extends bt.FlutterWidget {
+class IosSlider extends fw.JSBaseWidget {
     static new(value, onChanged, min, max, onChangeStart, onChangeEnd, divisions, activeColor, key) {
         var v = new IosSlider();
         v.key = key;
@@ -158,7 +152,7 @@ class IosSlider extends bt.FlutterWidget {
 }
 exports.IosSlider = IosSlider;
 //****** IosSwitch ******
-class IosSwitch extends bt.FlutterWidget {
+class IosSwitch extends fw.JSBaseWidget {
     static new(value, onChanged, activeColor, dragStartBehavior, key) {
         var v = new IosSwitch();
         v.key = key;
@@ -172,7 +166,7 @@ class IosSwitch extends bt.FlutterWidget {
 exports.IosSwitch = IosSwitch;
 //-------------- T -----------------
 //****** IosTabBar ******
-class IosTabBar extends bt.FlutterWidget {
+class IosTabBar extends fw.JSBaseWidget {
     constructor(items, onTap, currentIndex, backgroundColor, activeColor, inactiveColor, iconSize, border, key) {
         super();
     }

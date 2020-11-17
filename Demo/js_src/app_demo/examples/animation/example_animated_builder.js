@@ -3,7 +3,7 @@
 
 let {
   JSLog,
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   XSJSStatelessWidget,
   Scaffold,
@@ -88,7 +88,7 @@ class ScaleAnimation extends XSJSStatefulWidget {
   }
 }
 
-class ScaleAnimationState extends XSJSWidgetState {
+class ScaleAnimationState extends JSWidgetState {
 
   build() {
     const widget = new Center({

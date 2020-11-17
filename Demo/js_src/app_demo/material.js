@@ -5,7 +5,7 @@
 //  found in the LICENSE file.
 
 let {
-    XSJSWidgetState,
+    JSWidgetState,
     XSJSStatefulWidget,
     Scaffold,
     Color,
@@ -37,7 +37,7 @@ class JSMaterialPage extends XSJSStatefulWidget {
     }
 }
 
-class JSMaterialPageState extends XSJSWidgetState {
+class JSMaterialPageState extends JSWidgetState {
     build(context) {
         let w = new Scaffold({
             appBar: new AppBar({

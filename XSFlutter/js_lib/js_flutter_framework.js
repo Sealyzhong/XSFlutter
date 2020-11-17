@@ -924,43 +924,6 @@ class XSJSStatefulWidget extends XSJSBaseWidget {
 }).prototype = XSJSStatefulWidget.prototype;
 // XSJSStatefulWidget.new = XSJSStatefulWidget.constructor;
 
-class XSJSWidgetState {
-  constructor() {
-    this.widget = null;
-  }
-
-  get context() {
-    return this.widget.buildContext;
-  }
-
-  //subclass override
-  initState() {
-    JSLog.log("XSJSWidgetState initState ::" + this.widget.widgetLogInfoStr());
-  }
-
-  setState(fun) {
-    JSLog.log("XSJSWidgetState setState ::" + this.widget.widgetLogInfoStr());
-    if (fun) {
-      fun();
-    }
-    //call-> Flutter
-    this.widget.helper.callFlutterRebuild();
-  }
-
-  //subclass override
-  build(buildContext) {
-    return null;
-  }
-
-  //subclass overwite
-  onBuildEnd(args) { }
-
-  //subclass override
-  dispose() { }
-}
-
-(XSJSWidgetState.new = function () { }).prototype = XSJSWidgetState.prototype;
-
 //在JS层，要封装控件，如不需要改变UI内容，使用无状态的XSJSStatelessWidget
 class XSJSStatelessWidget extends XSJSBaseWidget {
   constructor(name, { key } = {}) {
@@ -991,7 +954,6 @@ module.exports = {
   //class 定义
   XSFJSBridge,
   XSFlutterApp,
-  XSJSWidgetState,
   XSJSStatelessWidget,
   XSJSStatefulWidget,
 };

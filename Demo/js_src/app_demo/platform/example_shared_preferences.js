@@ -2,7 +2,7 @@
 
 let {
   JSLog,
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   ListTile,
@@ -36,7 +36,7 @@ class PageExampleSharedPreferences extends XSJSStatefulWidget {
   }
 }
 
-class PageExampleSharedPreferencesState extends XSJSWidgetState {
+class PageExampleSharedPreferencesState extends JSWidgetState {
   constructor() {
     super("PageExampleSharedPreferencesState");
     this.response = "点击小人Run上面的代码";

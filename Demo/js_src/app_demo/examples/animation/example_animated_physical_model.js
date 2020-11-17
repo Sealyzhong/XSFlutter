@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   Container,
@@ -27,7 +27,7 @@ class PageExampleAnimatedPhysicalModel extends XSJSStatefulWidget {
   }
 }
 
-class PageExampleAnimatedPhysicalModelState extends XSJSWidgetState {
+class PageExampleAnimatedPhysicalModelState extends JSWidgetState {
   constructor(){
     super();
     this.elevation = 50.0;

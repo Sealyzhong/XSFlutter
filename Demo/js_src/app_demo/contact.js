@@ -6,7 +6,7 @@
 
 let {
     JSLog,
-    XSJSWidgetState,
+    JSWidgetState,
     XSJSStatefulWidget,
     Scaffold,
     Container,
@@ -183,7 +183,7 @@ class JSContactPage extends XSJSStatefulWidget {
     }
 }
 
-class JSContactPageState extends XSJSWidgetState { 
+class JSContactPageState extends JSWidgetState { 
     build(context) {
         let widget = new Theme({
             data: new ThemeData({

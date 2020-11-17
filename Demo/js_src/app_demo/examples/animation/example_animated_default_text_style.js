@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   Container,
@@ -32,7 +32,7 @@ class PageExampleAnimatedDefaultTextStyle extends XSJSStatefulWidget {
   }
 }
 
-class PageExampleAnimatedDefaultTextStyleState extends XSJSWidgetState {
+class PageExampleAnimatedDefaultTextStyleState extends JSWidgetState {
 
   constructor(){
     super();

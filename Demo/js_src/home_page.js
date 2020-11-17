@@ -8,7 +8,7 @@ let {async} = require("dart_sdk.js");
 let {
     XSJSStatelessWidget,
     XSJSStatefulWidget,
-    XSJSWidgetState,
+    JSWidgetState,
     Scaffold,
     Container,
     Color,
@@ -49,7 +49,7 @@ class MyJSWidgetHomePage extends XSJSStatefulWidget {
     }
 }
 
-class MyJSWidgetHomePageState extends XSJSWidgetState {
+class MyJSWidgetHomePageState extends JSWidgetState {
 
     build(context) {
 

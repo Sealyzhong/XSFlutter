@@ -5,16 +5,17 @@
  * @Description: Ios Class
  */
 import bt = require("./js_basic_types"); 
+import fw = require("./js_framework"); 
 import mw = require("./js_material_widget"); 
 
 //-------------- A -----------------
 //****** IosActivityIndicator ******
-export class IosActivityIndicator extends bt.FlutterWidget {
-    key?:bt.BasicKey;
+export class IosActivityIndicator extends fw.JSBaseWidget {
+    key?:bt.BaseKey;
     animating?:boolean;
     radius?:number;
 
-  static new(animating?:boolean,radius?:number,key?:bt.BasicKey) {
+  static new(animating?:boolean,radius?:number,key?:bt.BaseKey) {
     var v = new IosActivityIndicator();
     v.key = key;
     v.animating = animating;
@@ -24,16 +25,16 @@ export class IosActivityIndicator extends bt.FlutterWidget {
 }
 
 //****** IosAlertDialog ******
-export class IosAlertDialog extends bt.FlutterWidget {
-    title?:bt.FlutterWidget;
-    content?:bt.FlutterWidget;
-    actions?:bt.FlutterWidget;
+export class IosAlertDialog extends fw.JSBaseWidget {
+    title?:fw.JSBaseWidget;
+    content?:fw.JSBaseWidget;
+    actions?:fw.JSBaseWidget;
     scrollController?:bt.ScrollController;
     actionScrollController?:bt.ScrollController;
-    key?:bt.BasicKey;
+    key?:bt.BaseKey;
 
 
-  static new = function(title?:bt.FlutterWidget, content?:bt.FlutterWidget,actions?:bt.FlutterWidget,scrollController?:bt.ScrollController,actionScrollController?:bt.ScrollController,key?:bt.BasicKey,) {
+  static new = function(title?:fw.JSBaseWidget, content?:fw.JSBaseWidget,actions?:fw.JSBaseWidget,scrollController?:bt.ScrollController,actionScrollController?:bt.ScrollController,key?:bt.BaseKey,) {
     var v = new IosAlertDialog();
     v.key = key;
     v.title = title;
@@ -47,8 +48,8 @@ export class IosAlertDialog extends bt.FlutterWidget {
 
 //-------------- B -----------------
 //****** IosButton ******
-export class IosButton extends bt.FlutterWidget {
-    child?:bt.FlutterWidget;
+export class IosButton extends fw.JSBaseWidget {
+    child?:fw.JSBaseWidget;
     onPressed?:any;
     padding?:bt.EdgeInsets;
     color?:bt.Color;
@@ -56,10 +57,10 @@ export class IosButton extends bt.FlutterWidget {
     minSize?:number;
     pressedOpacity?:number;
     borderRadius?:bt.BorderRadius;
-    key?:bt.BasicKey;
+    key?:bt.BaseKey;
 
-  static new(child?:bt.FlutterWidget,onPressed?:any, padding?:bt.EdgeInsets, color?:bt.Color, disabledColor?:bt.Color,
-    minSize?:number,pressedOpacity?:number, borderRadius?:bt.BorderRadius, key?:bt.BasicKey,) {
+  static new(child?:fw.JSBaseWidget,onPressed?:any, padding?:bt.EdgeInsets, color?:bt.Color, disabledColor?:bt.Color,
+    minSize?:number,pressedOpacity?:number, borderRadius?:bt.BorderRadius, key?:bt.BaseKey,) {
       var v = new IosButton();
       v.key = key;
       v.child = child;
@@ -76,11 +77,11 @@ export class IosButton extends bt.FlutterWidget {
 
 //-------------- D -----------------
 //****** IosDialog ******
-export class IosDialog extends bt.FlutterWidget {
-    child?:bt.FlutterWidget;
-    key?:bt.BasicKey;
+export class IosDialog extends fw.JSBaseWidget {
+    child?:fw.JSBaseWidget;
+    key?:bt.BaseKey;
  
-  static new(child?:bt.FlutterWidget,key?:bt.BasicKey) {
+  static new(child?:fw.JSBaseWidget,key?:bt.BaseKey) {
     var v = new IosDialog();
     v.key = key;
     v.child = child;
@@ -89,15 +90,15 @@ export class IosDialog extends bt.FlutterWidget {
 }
 
 //****** IosDialogAction ******
-export class IosDialogAction extends bt.FlutterWidget {
-    child?:bt.FlutterWidget;
+export class IosDialogAction extends fw.JSBaseWidget {
+    child?:fw.JSBaseWidget;
     onPressed?:any;
     isDefaultAction?:boolean;
     isDestructiveAction?:boolean;
     textStyle?:bt.TextStyle;
-    key?:bt.BasicKey;
+    key?:bt.BaseKey;
 
-  static new(child?:bt.FlutterWidget,onPressed?:any,isDefaultAction?:boolean, isDestructiveAction?:boolean, textStyle?:bt.TextStyle, key?:bt.BasicKey) {
+  static new(child?:fw.JSBaseWidget,onPressed?:any,isDefaultAction?:boolean, isDestructiveAction?:boolean, textStyle?:bt.TextStyle, key?:bt.BaseKey) {
     var v = new IosDialogAction();
     v.onPressed = onPressed;
     v.isDefaultAction = isDefaultAction;
@@ -111,15 +112,15 @@ export class IosDialogAction extends bt.FlutterWidget {
 
 //-------------- F -----------------
 //****** IosFullscreenDialogTransition ******
-export class IosFullscreenDialogTransition extends bt.FlutterWidget {
-  child?:bt.FlutterWidget;
+export class IosFullscreenDialogTransition extends fw.JSBaseWidget {
+  child?:fw.JSBaseWidget;
   linearTransition?:boolean;
   primaryRouteAnimation?:any;
   secondaryRouteAnimation?:any;
   
-  key?:bt.BasicKey;
+  key?:bt.BaseKey;
   
-  static new(child?:bt.FlutterWidget,linearTransition?:boolean,primaryRouteAnimation?:any, secondaryRouteAnimation?:any,key?:bt.BasicKey) {
+  static new(child?:fw.JSBaseWidget,linearTransition?:boolean,primaryRouteAnimation?:any, secondaryRouteAnimation?:any,key?:bt.BaseKey) {
     var v = new IosFullscreenDialogTransition();
     v.key = key;
     v.primaryRouteAnimation = primaryRouteAnimation;
@@ -132,23 +133,23 @@ export class IosFullscreenDialogTransition extends bt.FlutterWidget {
 
 //-------------- N -----------------
 //****** IosNavigationBar ******
-export class IosNavigationBar extends bt.FlutterWidget {
-  leading?:bt.FlutterWidget;
+export class IosNavigationBar extends fw.JSBaseWidget {
+  leading?:fw.JSBaseWidget;
   automaticallyImplyLeading?:boolean;
   automaticallyImplyMiddle?:boolean;
   previousPageTitle?:string;
-  middle?:bt.FlutterWidget;
-  trailing?:bt.FlutterWidget;
+  middle?:fw.JSBaseWidget;
+  trailing?:fw.JSBaseWidget;
   border?:bt.Border;
   backgroundColor?:bt.Color;
   padding?:bt.EdgeInsets;
   actionsForegroundColor?:bt.Color;
   transitionBetweenRoutes?:boolean;
-  key?:bt.BasicKey;
+  key?:bt.BaseKey;
 
-  static new(leading?:bt.FlutterWidget,automaticallyImplyLeading?:boolean,automaticallyImplyMiddle?:boolean,previousPageTitle?:string,middle?:bt.FlutterWidget,
-    trailing?:bt.FlutterWidget,border?:bt.Border,backgroundColor?:bt.Color,padding?:bt.EdgeInsets,actionsForegroundColor?:bt.Color,
-    transitionBetweenRoutes?:boolean,key?:bt.BasicKey) {
+  static new(leading?:fw.JSBaseWidget,automaticallyImplyLeading?:boolean,automaticallyImplyMiddle?:boolean,previousPageTitle?:string,middle?:fw.JSBaseWidget,
+    trailing?:fw.JSBaseWidget,border?:bt.Border,backgroundColor?:bt.Color,padding?:bt.EdgeInsets,actionsForegroundColor?:bt.Color,
+    transitionBetweenRoutes?:boolean,key?:bt.BaseKey) {
       var v = new IosNavigationBar();
       v.key = key;
     v.leading = leading;
@@ -168,15 +169,15 @@ export class IosNavigationBar extends bt.FlutterWidget {
 
 //-------------- P -----------------
 //****** IosPageTransition ******
-export class IosPageTransition extends bt.FlutterWidget {
-  child?:bt.FlutterWidget;
+export class IosPageTransition extends fw.JSBaseWidget {
+  child?:fw.JSBaseWidget;
   linearTransition?:boolean;
   primaryRouteAnimation?:any;
   secondaryRouteAnimation?:any;
-  key?:bt.BasicKey;
+  key?:bt.BaseKey;
 
 
-  static new(child?:bt.FlutterWidget,linearTransition?:boolean,primaryRouteAnimation?:any,secondaryRouteAnimation?:any,key?:bt.BasicKey,) {
+  static new(child?:fw.JSBaseWidget,linearTransition?:boolean,primaryRouteAnimation?:any,secondaryRouteAnimation?:any,key?:bt.BaseKey,) {
     var v = new IosPageTransition();
     v.key = key;
     v.primaryRouteAnimation = primaryRouteAnimation;
@@ -188,14 +189,14 @@ export class IosPageTransition extends bt.FlutterWidget {
 }
 
 //****** IosPageScaffold ******
-export class IosPageScaffold extends bt.FlutterWidget {
-  child?:bt.FlutterWidget;
+export class IosPageScaffold extends fw.JSBaseWidget {
+  child?:fw.JSBaseWidget;
   backgroundColor?:bt.Color;
-  navigationBar?:bt.FlutterWidget;
+  navigationBar?:fw.JSBaseWidget;
   resizeToAvoidBottomInset?:boolean;
-  key?:bt.BasicKey;
+  key?:bt.BaseKey;
 
-  static new(child?:bt.FlutterWidget,backgroundColor?:bt.Color,navigationBar?:bt.FlutterWidget,resizeToAvoidBottomInset?:boolean,key?:bt.BasicKey) {
+  static new(child?:fw.JSBaseWidget,backgroundColor?:bt.Color,navigationBar?:fw.JSBaseWidget,resizeToAvoidBottomInset?:boolean,key?:bt.BaseKey) {
     var v = new IosPageScaffold();
     v.key = key;
     v.navigationBar = navigationBar;
@@ -209,7 +210,7 @@ export class IosPageScaffold extends bt.FlutterWidget {
 
 //-------------- S -----------------
 //****** IosSlider ******
-export class IosSlider extends bt.FlutterWidget {
+export class IosSlider extends fw.JSBaseWidget {
   value?:number;
   onChanged?:any;
   min?:number; 
@@ -218,10 +219,10 @@ export class IosSlider extends bt.FlutterWidget {
   onChangeEnd?:any;
   divisions?:number;
   activeColor?:bt.Color;
-  key?:bt.BasicKey;
+  key?:bt.BaseKey;
 
   static new(value?:number, onChanged?:any, min?:number, max?:number, onChangeStart?:any,
-    onChangeEnd?:any, divisions?:number, activeColor?:bt.Color, key?:bt.BasicKey,) {
+    onChangeEnd?:any, divisions?:number, activeColor?:bt.Color, key?:bt.BaseKey,) {
       var v = new IosSlider();
       v.key = key;
     v.value = value;
@@ -237,14 +238,14 @@ export class IosSlider extends bt.FlutterWidget {
 }
 
 //****** IosSwitch ******
-export class IosSwitch extends bt.FlutterWidget {
+export class IosSwitch extends fw.JSBaseWidget {
   value?:boolean;
   onChanged?:any;
   activeColor?:bt.Color;
   dragStartBehavior?:bt.DragStartBehavior;
-  key?:bt.BasicKey;
+  key?:bt.BaseKey;
 
-  static new(value?:boolean,onChanged?:any,activeColor?:bt.Color,dragStartBehavior?:bt.DragStartBehavior,key?:bt.BasicKey) {
+  static new(value?:boolean,onChanged?:any,activeColor?:bt.Color,dragStartBehavior?:bt.DragStartBehavior,key?:bt.BaseKey) {
     var v = new IosSwitch();
     v.key = key;
     v.value = value;
@@ -257,7 +258,7 @@ export class IosSwitch extends bt.FlutterWidget {
 
 //-------------- T -----------------
 //****** IosTabBar ******
-export class IosTabBar extends bt.FlutterWidget {
+export class IosTabBar extends fw.JSBaseWidget {
   items?:Array<mw.BottomNavigationBarItem>;
   onTap?:any;
   currentIndex?:number;
@@ -266,16 +267,16 @@ export class IosTabBar extends bt.FlutterWidget {
   inactiveColor?:bt.Color;
   iconSize?:number;
   border?:bt.Border;
-  key?:bt.BasicKey;
+  key?:bt.BaseKey;
   constructor(items?:Array<mw.BottomNavigationBarItem>, onTap?:any, currentIndex?:number, backgroundColor?:bt.Color,    activeColor?:bt.Color,
-    inactiveColor?:bt.Color, iconSize?:number, border?:bt.Border, key?:bt.BasicKey,) {
+    inactiveColor?:bt.Color, iconSize?:number, border?:bt.Border, key?:bt.BaseKey,) {
     super();
 
     
   }
 
   static new(items?:Array<mw.BottomNavigationBarItem>, onTap?:any, currentIndex?:number, backgroundColor?:bt.Color,    activeColor?:bt.Color,
-    inactiveColor?:bt.Color, iconSize?:number, border?:bt.Border, key?:bt.BasicKey,) {
+    inactiveColor?:bt.Color, iconSize?:number, border?:bt.Border, key?:bt.BaseKey,) {
       var v = new IosTabBar();
       v.key = key;
     v.items = items;

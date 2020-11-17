@@ -8,7 +8,7 @@ const dart_sdk = require("dart_sdk");
 
 let {
     JSLog,
-    XSJSWidgetState,
+    JSWidgetState,
     XSJSStatefulWidget,
     Scaffold,
     Container,
@@ -72,7 +72,7 @@ class PerformanceProfilingWidget extends XSJSStatefulWidget {
 PerformanceProfilingWidget.Event_Refresh_ProfileInfo = "demo_pref_info_refresh";
 
 
-class PerformanceProfilingWidgetState extends XSJSWidgetState {
+class PerformanceProfilingWidgetState extends JSWidgetState {
     constructor(widget) {
         super();
         this.profileText = widget.profileText ? widget.profileText : "";
@@ -181,7 +181,7 @@ class ListViewProfileDemo1 extends XSJSStatefulWidget {
     }
 }
 
-class ListViewProfileDemo1State extends XSJSWidgetState {
+class ListViewProfileDemo1State extends JSWidgetState {
     constructor(widget) {
         super();
 

@@ -2,7 +2,7 @@
 
 let {
   JSLog,
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   ListTile,
@@ -33,7 +33,7 @@ class PageExampleMessageChannel extends XSJSStatefulWidget {
   }
 }
 
-class PageExampleMessageChannelState extends XSJSWidgetState {
+class PageExampleMessageChannelState extends JSWidgetState {
   constructor() {
     super("PageExampleMessageChannelState");
     this.response = "点击小人Run上面的代码";

@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   Container,
@@ -29,7 +29,7 @@ class PageExampleAnimatedCrossFade extends XSJSStatefulWidget {
   }
 }
 
-class PageExampleAnimatedCrossFadeState extends XSJSWidgetState {
+class PageExampleAnimatedCrossFadeState extends JSWidgetState {
 
   constructor() {
     super();

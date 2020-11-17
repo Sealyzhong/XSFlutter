@@ -6,7 +6,7 @@
 
 let {
     XSJSStatefulWidget,
-    XSJSWidgetState,
+    JSWidgetState,
     Scaffold,
     Color,
     AppBar,
@@ -35,7 +35,7 @@ class JSCupertinoPage extends XSJSStatefulWidget {
     }
 }
 
-class JSCupertinoPageState extends XSJSWidgetState {
+class JSCupertinoPageState extends JSWidgetState {
 
     build(context) {
         let w = new Scaffold({

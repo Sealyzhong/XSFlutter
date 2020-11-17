@@ -8,7 +8,7 @@ let {
   JSLog,
   runApp,
   XSFlutterApp,
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   XSJSStatelessWidget,
   Scaffold,
@@ -42,7 +42,7 @@ class JSAnimationPage extends XSJSStatefulWidget {
   }
 }
 
-class JSAnimationPageState extends XSJSWidgetState {
+class JSAnimationPageState extends JSWidgetState {
   constructor() {
     super();
 
@@ -112,7 +112,7 @@ class ScaleAnimation extends XSJSStatefulWidget {
   }
 }
 
-class ScaleAnimationState extends XSJSWidgetState {
+class ScaleAnimationState extends JSWidgetState {
 
   build(context) {
     var imageRatio = 1.455;

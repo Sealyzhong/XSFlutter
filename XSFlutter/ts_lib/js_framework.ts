@@ -5,7 +5,11 @@
  * @ModifyDate: 2020/11/11
  * @Description: Material Class
  */
-//import bt = require("./js_basic_types"); 
+
+// @ts-ignore：dart_sdk
+import dart_sdk = require("dart_sdk"); 
+const core = dart_sdk.core;
+
 
 export class JSFramework {
   static currentJSApp:any = null;
@@ -255,4 +259,147 @@ export class JSWidgetMgr {
   findWidget(widgetID:string) {
     return this.widgetID2WidgetMap.get(widgetID);
   }
+}
+
+//****** JSWidget Mirror Mgr ******
+export class JSWidgetMirrorMgr {
+  mirrorIDFeed:number;
+  mirrorObjMap:Map<string,any>;
+  
+  static instance?:JSWidgetMirrorMgr;
+
+  constructor() {
+    this.mirrorIDFeed = 0;
+    this.mirrorObjMap = new Map();
+  }
+
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new JSWidgetMirrorMgr();
+    }
+    return this.instance;
+  }
+
+  generateID(obj:any) {
+    const d = ++ this.mirrorIDFeed;
+    const idstring = String(d);
+    this.mirrorObjMap.set(idstring, obj);
+    return idstring;
+  }
+
+  removeMirrorObjects(mirrorIDList:Array<string>) {
+    for (let mirrorID in mirrorIDList) {
+      this.mirrorObjMap.delete(mirrorID);
+    }
+  }
+
+  getMirrorObj(mirrorID:string) {
+    return this.mirrorObjMap.get(mirrorID);
+  }
+}
+
+//回调参数
+//****** JSCallArgs ******
+interface JSCallArgsConfig {
+  widgetID?:string;
+  mirrorID?:string;
+  className?:string;
+  funcName?:string;
+  args?:Map<string,any>;
+}
+export class JSCallArgs {
+  widgetID?:string;
+  mirrorID?:string;
+  className?:string;
+  funcName?:string;
+  args?:Map<string,any>;
+
+  /**
+   * @param config config: {widgetID?:string,mirrorID?:string,className?:string,funcName?:string,args?:Map<string,any>}
+   */
+  static new(config:JSCallArgsConfig){
+    var v = new JSCallArgs();
+    if(config!=null && config!=undefined){
+      v.widgetID = config.widgetID;
+      v.mirrorID = config.mirrorID;
+      v.className = config.className;
+      v.funcName = config.funcName;
+      v.args = config.args;
+    }
+    return v;
+  }
+}
+
+//flutter 中 非widget继承 JSBaseClass
+export class JSBaseClass extends core.Object {
+  className:string;
+  constructorName?:string;
+  mirrorID?:string;
+  constructor() {
+    super();
+    this.className = this.constructor.name;
+  }
+
+  createMirrorObjectID() {
+    this.mirrorID = JSWidgetMirrorMgr.getInstance().generateID(this);
+    core.print("createMirrorObjectID: mirrorID : " + this.mirrorID);
+  }
+}
+
+//flutter Widget继承Widget
+export class JSBaseWidget extends JSBaseClass {
+  constructor() {
+    super();
+  }
+
+  //在生成json前调用
+  //用于list delegate 等的items build
+  //用于widget有类似onTab等响应函数变量，在此转换成callbackid,
+  //但注意，delegate中确实需要funtion,要转不需ID的，不要调用super.preBuild
+  preBuild(jsWidgetHelper:any, buildContext:JSBuildContext) {
+    //把callback 换成callbackID
+    for (let k in this) {
+      let v = this[k];
+      if (typeof v == "function") {
+        this[k] = jsWidgetHelper.buildingCreateCallbackID(v);
+      }
+    }
+  }
+}
+
+//****** JS Widget State ******
+export class JSWidgetState {
+  widget:any;
+  constructor() {
+    this.widget = null;
+  }
+
+  get context() {
+    return this.widget.buildContext;
+  }
+
+  //subclass override
+  initState() {
+    JSLog.log("JSWidgetState initState ::" + this.widget.widgetLogInfoStr());
+  }
+
+  setState(fun:any) {
+    JSLog.log("JSWidgetState setState ::" + this.widget.widgetLogInfoStr());
+    if (fun) {
+      fun();
+    }
+    //call-> Flutter
+    this.widget.helper.callFlutterRebuild();
+  }
+
+  //subclass override
+  build(buildContext:JSBuildContext) {
+    return null;
+  }
+
+  //subclass overwite
+  onBuildEnd(args:any) { }
+
+  //subclass override
+  dispose() { }
 }

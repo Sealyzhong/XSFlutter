@@ -1,6 +1,6 @@
 
 let {
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   Container,
@@ -241,7 +241,7 @@ class JSBottomAPPBarDemo extends XSJSStatefulWidget {
     }
 }
 
-class JSBottomAPPBarDemoState extends XSJSWidgetState {
+class JSBottomAPPBarDemoState extends JSWidgetState {
     // _scaffoldKey;//new GlobalKey();
     constructor (widget) {
         super(widget);

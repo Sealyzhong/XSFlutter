@@ -3,7 +3,7 @@ let {
   JSLog,
   runApp,
   XSFlutterApp,
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   Container,
@@ -55,7 +55,7 @@ class JSEasyUIDemo extends XSJSStatefulWidget {
     }
 }
 
-class JSEasyUIDemoState extends XSJSWidgetState {
+class JSEasyUIDemoState extends JSWidgetState {
 
     constructor(){
         super();

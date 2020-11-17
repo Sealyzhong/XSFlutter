@@ -16,8 +16,8 @@ import 'xs_js_mirror_obj_mgr.dart';
 
 typedef Future<dynamic> XSJsonWidgetCallbackFun(String callID, {dynamic p});
 
-//buildOwner 除了根节点，于 XSJSWidgetState 一一对应，形成树状结构，持有XSJSWidgetState，
-//并接收JS调用操作XSJSWidgetState
+//buildOwner 除了根节点，于 JSWidgetState 一一对应，形成树状结构，持有JSWidgetState，
+//并接收JS调用操作JSWidgetState
 class XSJsonBuildOwner {
   XSFlutterApp ownerApp;
   XSJsonBuildOwner parentBuildOwner;
@@ -105,7 +105,7 @@ class XSJsonBuildOwner {
   }
 
   callJSOnBuildEnd() {
-    XSJSLog.debug("XSJSWidgetState:callJSOnBuildEnd:  this.widget.widgetID:${this.widget.widgetID} buildSeq:${this.widget.buildWidgetDataSeq}");
+    XSJSLog.debug("JSWidgetState:callJSOnBuildEnd:  this.widget.widgetID:${this.widget.widgetID} buildSeq:${this.widget.buildWidgetDataSeq}");
 
     var ownerWidgetID = this.widget.widgetID;
     String buildSeq = this.widget.buildWidgetDataSeq;

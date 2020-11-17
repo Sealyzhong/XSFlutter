@@ -2,7 +2,7 @@
 let {
   runApp,
   XSFlutterApp,
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   XSJSStatelessWidget,
   Scaffold,
@@ -134,7 +134,7 @@ class JSBottomNavigationDemo extends XSJSStatefulWidget {
     }
 }
 
-class JSBottomNavigationDemoState extends XSJSWidgetState {
+class JSBottomNavigationDemoState extends JSWidgetState {
     constructor (widget) {
         super(widget);
         this._currentIndex = 0;

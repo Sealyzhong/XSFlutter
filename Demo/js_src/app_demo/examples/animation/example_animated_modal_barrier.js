@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   AppBar,
@@ -22,7 +22,7 @@ class PageExampleAnimatedModalBarrier extends XSJSStatefulWidget {
   }
 }
 
-class PageExampleAnimatedModalBarrierState extends XSJSWidgetState {
+class PageExampleAnimatedModalBarrierState extends JSWidgetState {
 
   constructor() {
     super();

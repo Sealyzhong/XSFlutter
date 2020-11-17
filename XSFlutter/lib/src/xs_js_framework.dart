@@ -239,7 +239,7 @@ class XSJSWidgetHelper extends Object {
   }
 
   jsNavigatorPush(dynamic jsWidget, BuildContext context) {
-    XSJSLog.log("XSJSWidgetState:jsNavigatorPush:");
+    XSJSLog.log("JSWidgetState:jsNavigatorPush:");
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => jsWidget),
@@ -247,7 +247,7 @@ class XSJSWidgetHelper extends Object {
   }
 
   jsNavigatorPop(BuildContext context) {
-    XSJSLog.log("XSJSWidgetState:jsNavigatorPop:");
+    XSJSLog.log("JSWidgetState:jsNavigatorPop:");
     Navigator.pop(context);
   }
 }
@@ -301,7 +301,7 @@ class XSJSBaseWidget extends Object {
 ///封装JSWidget
 // ignore: must_be_immutable
 class XSJSStatefulWidget extends StatefulWidget with XSJSBaseWidget {
-  XSJSWidgetState _state;
+  JSWidgetState _state;
 
   XSJSStatefulWidget({Key key, String name, String widgetID, Map widgetData, String buildingWidgetDataSeq, String navPushingWidgetID, XSJsonBuildOwner parentBuildOwner}) : super(key: key) {
     this.name = name;
@@ -326,7 +326,7 @@ class XSJSStatefulWidget extends StatefulWidget with XSJSBaseWidget {
 
   @override
   State<StatefulWidget> createState() {
-    _state = XSJSWidgetState();
+    _state = JSWidgetState();
     return _state;
   }
 
@@ -339,8 +339,8 @@ class XSJSStatefulWidget extends StatefulWidget with XSJSBaseWidget {
   }
 }
 
-class XSJSWidgetState extends State<XSJSStatefulWidget> with SingleTickerProviderStateMixin {
-  XSJSWidgetState();
+class JSWidgetState extends State<XSJSStatefulWidget> with SingleTickerProviderStateMixin {
+  JSWidgetState();
 
   @override
   void initState() {
@@ -367,7 +367,7 @@ class XSJSWidgetState extends State<XSJSStatefulWidget> with SingleTickerProvide
     }
 
     if (widget.widgetData == null) {
-      XSJSLog.error("XSJSWidgetState:build: widget.widgetData == null this.widget.widgetID:${this.widget.widgetID}");
+      XSJSLog.error("JSWidgetState:build: widget.widgetData == null this.widget.widgetID:${this.widget.widgetID}");
       return widget.helper.buildErrorWidget(context);
     }
 

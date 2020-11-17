@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   AppBar,
@@ -29,7 +29,7 @@ class PageExampleAnimatedOpacity extends XSJSStatefulWidget {
   }
 }
 
-class PageExampleAnimatedOpacityState extends XSJSWidgetState {
+class PageExampleAnimatedOpacityState extends JSWidgetState {
 
   constructor() {
     super();

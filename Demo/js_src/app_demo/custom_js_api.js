@@ -6,7 +6,7 @@
 
 
 let {
-    XSJSWidgetState,
+    JSWidgetState,
     XSJSStatefulWidget,
     Scaffold,
     ListTile,
@@ -95,7 +95,7 @@ class PageExampleJSApi extends XSJSStatefulWidget {
     }
 }
 
-class PageExampleJSApiState extends XSJSWidgetState {
+class PageExampleJSApiState extends JSWidgetState {
     constructor() {
         super("PageExampleJSApiState");
         this.response = "点击小人Run上面的代码";

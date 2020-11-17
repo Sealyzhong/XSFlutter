@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   AppBar,
@@ -21,7 +21,7 @@ class PageExampleRotationTransition extends XSJSStatefulWidget {
   }
 }
 
-class PageExampleRotationTransitionState extends XSJSWidgetState {
+class PageExampleRotationTransitionState extends JSWidgetState {
 
   constructor() {
     super();

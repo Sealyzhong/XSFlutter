@@ -7,7 +7,7 @@
 let {
   runApp,
   XSFlutterApp,
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   Center,
@@ -56,7 +56,7 @@ class JSPestoPage extends XSJSStatefulWidget {
   }
 }
 
-class JSPestoPageState extends XSJSWidgetState {
+class JSPestoPageState extends JSWidgetState {
 
   build(context) {
 

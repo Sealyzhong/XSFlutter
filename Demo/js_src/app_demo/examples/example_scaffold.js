@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   XSJSStatelessWidget,
   Scaffold,
@@ -92,7 +92,7 @@ class PageExampleScaffold extends XSJSStatefulWidget {
   }
 }
 
-class PageExampleScaffoldState extends XSJSWidgetState {
+class PageExampleScaffoldState extends JSWidgetState {
   constructor(widget) {
     super(widget);
     this._currentIndex = 0;

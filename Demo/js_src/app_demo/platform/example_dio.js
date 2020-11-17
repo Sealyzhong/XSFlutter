@@ -2,7 +2,7 @@
 
 let {
   JSLog,
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   ListTile,
@@ -41,7 +41,7 @@ class PageExampleDio extends XSJSStatefulWidget {
   }
 }
 
-class PageExampleDioState extends XSJSWidgetState {
+class PageExampleDioState extends JSWidgetState {
   constructor() {
     super("PageExampleNetworkState");
     this.response = "点击小人Run上面的代码";

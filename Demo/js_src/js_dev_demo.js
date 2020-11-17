@@ -6,7 +6,7 @@
 
 let {
     XSJSStatefulWidget,
-    XSJSWidgetState,
+    JSWidgetState,
     Scaffold,
     Container,
     Colors,
@@ -35,7 +35,7 @@ class MyHomePage extends XSJSStatefulWidget {
     }
 }
 
-class _MyHomePageState extends XSJSWidgetState {
+class _MyHomePageState extends JSWidgetState {
 
     constructor() {
         super();

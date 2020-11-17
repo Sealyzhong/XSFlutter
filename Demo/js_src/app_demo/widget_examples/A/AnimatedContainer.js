@@ -1,7 +1,7 @@
 
 
 let {
-  XSJSWidgetState,
+  JSWidgetState,
   XSJSStatefulWidget,
   Scaffold,
   Center,
@@ -30,7 +30,7 @@ class ExampleWidget extends XSJSStatefulWidget {
   }
 }
 
-class PageExampleAnimatedContainerState extends XSJSWidgetState {
+class PageExampleAnimatedContainerState extends JSWidgetState {
 
   constructor(){
     super();

@@ -7,7 +7,7 @@ let {
   XSFlutterApp,
   XSJSStatefulWidget,
   XSJSStatelessWidget,
-  XSJSWidgetState,
+  JSWidgetState,
   Scaffold,
   Text,
   Theme,
@@ -189,7 +189,7 @@ class JSTabsDemo extends XSJSStatefulWidget {
     }
 }
 
-class JSTabsDemoState extends XSJSWidgetState {
+class JSTabsDemoState extends JSWidgetState {
     build(context){
         let widget = new DefaultTabController({
             length: _allPages.size,

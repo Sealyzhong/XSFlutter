@@ -9,7 +9,7 @@ const dart = dart_sdk.dart;
 
 let {
     JSLog,
-    XSJSWidgetState,
+    JSWidgetState,
     XSJSStatefulWidget,
     XSJSStatelessWidget,
     Scaffold,
@@ -61,7 +61,7 @@ class ListViewProfileDemo1 extends XSJSStatefulWidget {
 
 }
 
-class ListViewProfileDemo1State extends XSJSWidgetState {
+class ListViewProfileDemo1State extends JSWidgetState {
     constructor() {
         super();
 

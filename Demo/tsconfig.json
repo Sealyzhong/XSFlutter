@@ -14,7 +14,7 @@
     // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
     // "sourceMap": true,                     /* Generates corresponding '.map' file. */
     // "outFile": "",                          /* Concatenate and emit output to single file. */
-     "outDir": "./js_lib/",                        /* Redirect output structure to the directory. */
+     "outDir": "./js_src/",                        /* Redirect output structure to the directory. */
     // "rootDir": "./",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     // "composite": true,                     /* Enable project compilation */
     // "tsBuildInfoFile": "./",               /* Specify file to store incremental compilation information */
@@ -32,7 +32,7 @@
     // "strictBindCallApply": true,           /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
     // "strictPropertyInitialization": true,  /* Enable strict checking of property initialization in classes. */
     // "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
-    "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
+    // "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
 
     /* Additional Checks */
     // "noUnusedLocals": true,                /* Report errors on unused locals. */
@@ -65,5 +65,13 @@
     /* Advanced Options */
     "skipLibCheck": true,                     /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
-  }
+  },
+  "exclude": [                                 // 指定一个排除列表（include的反向操作）
+     "js_basic_api.ts",
+     "js_basic_icons.ts",
+     "js_basic_types.ts",
+     "js_framework.ts",
+     "js_ios_widget.ts",
+     "js_material_widget.ts"
+  ]
 }

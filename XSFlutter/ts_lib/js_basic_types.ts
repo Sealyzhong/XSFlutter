@@ -5,137 +5,25 @@
  * @Description: Basic Class
  */
 
-// @ts-ignore：dart_sdk
-import dart_sdk = require("dart_sdk"); 
-const core = dart_sdk.core;
-const dart = dart_sdk.dart;
-const dartx = dart_sdk.dartx;
-const $clamp = dartx.clamp;
-
-//-------------- Framework -----------------
-
-export class WidgetMirrorMgr {
-  mirrorIDFeed:number;
-  mirrorObjMap:Map<string,any>;
-  
-  static instance?:WidgetMirrorMgr;
-
-  constructor() {
-    this.mirrorIDFeed = 0;
-    this.mirrorObjMap = new Map();
-  }
-
-  static getInstance() {
-    if (!this.instance) {
-      this.instance = new WidgetMirrorMgr();
-    }
-    return this.instance;
-  }
-
-  generateID(obj:any) {
-    const d = ++ this.mirrorIDFeed;
-    const idstring = String(d);
-    this.mirrorObjMap.set(idstring, obj);
-    return idstring;
-  }
-
-  removeMirrorObjects(mirrorIDList:Array<string>) {
-    for (let mirrorID in mirrorIDList) {
-      this.mirrorObjMap.delete(mirrorID);
-    }
-  }
-
-  getMirrorObj(mirrorID:string) {
-    return this.mirrorObjMap.get(mirrorID);
-  }
-}
-
-//回调参数
-//****** TabBarView ******
-interface FlutterCallArgsConfig {
-  widgetID?:string;
-  mirrorID?:string;
-  className?:string;
-  funcName?:string;
-  args?:Map<string,any>;
-}
-export class FlutterCallArgs {
-  widgetID?:string;
-  mirrorID?:string;
-  className?:string;
-  funcName?:string;
-  args?:Map<string,any>;
-
-  /**
-   * @param config config: {widgetID?:string,mirrorID?:string,className?:string,funcName?:string,args?:Map<string,any>}
-   */
-  static new(config:FlutterCallArgsConfig){
-    var v = new FlutterCallArgs();
-    if(config!=null && config!=undefined){
-      v.widgetID = config.widgetID;
-      v.mirrorID = config.mirrorID;
-      v.className = config.className;
-      v.funcName = config.funcName;
-      v.args = config.args;
-    }
-    return v;
-  }
-}
-
-//flutter 中 非widget继承 DartClass
-export class DartClass extends core.Object {
-  className:string;
-  constructorName?:string;
-  mirrorID?:string;
-  constructor() {
-    super();
-    this.className = this.constructor.name;
-  }
-
-  createMirrorObjectID() {
-    this.mirrorID = WidgetMirrorMgr.getInstance().generateID(this);
-    core.print("createMirrorObjectID: mirrorID : " + this.mirrorID);
-  }
-}
-
-//flutter Widget继承Widget
-export class FlutterWidget extends DartClass {
-  constructor() {
-    super();
-  }
-
-  //在生成json前调用
-  //用于list delegate 等的items build
-  //用于widget有类似onTab等响应函数变量，在此转换成callbackid,
-  //但注意，delegate中确实需要funtion,要转不需ID的，不要调用super.preBuild
-  preBuild(jsWidgetHelper:any, buildContext:any) {
-    //把callback 换成callbackID
-    for (let k in this) {
-      let v = this[k];
-      if (typeof v == "function") {
-        this[k] = jsWidgetHelper.buildingCreateCallbackID(v);
-      }
-    }
-  }
-}
 
 //-------------- Basic Class -----------------
+import fw = require("./js_framework"); 
 
 //****** Key ******
-export class BasicKey extends DartClass {
+export class BaseKey extends fw.JSBaseClass {
 }
 
 //****** Constraints ******
-export class BasicConstraints extends DartClass {
+export class BaseConstraints extends fw.JSBaseClass {
 }
 
 
-//****** BasicGradient ******
-export class BasicGradient extends DartClass {
+//****** BaseGradient ******
+export class BaseGradient extends fw.JSBaseClass {
 }
 
 //****** AssetBundle ******
-export class BasicAssetBundle extends DartClass {
+export class BaseAssetBundle extends fw.JSBaseClass {
   constructor() {
     super();
   }
@@ -164,7 +52,7 @@ export enum AnimationBehavior {
 }
 
 //****** Alignment ******
-export class Alignment extends DartClass {
+export class Alignment extends fw.JSBaseClass {
   x?:number;
   y?:number;
   
@@ -187,7 +75,7 @@ export class Alignment extends DartClass {
 } 
 
 //****** AlignmentDirectional ******
-export class AlignmentDirectional extends DartClass {
+export class AlignmentDirectional extends fw.JSBaseClass {
   start?:number;
   y?:number;
 
@@ -200,7 +88,7 @@ export class AlignmentDirectional extends DartClass {
 }
 
 //****** AlwaysScrollableScrollPhysics ******
-export class AlwaysScrollableScrollPhysics extends DartClass {
+export class AlwaysScrollableScrollPhysics extends fw.JSBaseClass {
   parent?:AlwaysScrollableScrollPhysics;
 
   static new(parent?:AlwaysScrollableScrollPhysics):{} {
@@ -220,7 +108,7 @@ interface AnimationControllerConfig {
   animationBehavior?:AnimationBehavior;
   vsync?:any;
 }
-export class AnimationController extends FlutterWidget {
+export class AnimationController extends fw.JSBaseWidget {
   value?:number;
   duration?:Duration;
   debugLabel?:string; 
@@ -303,7 +191,7 @@ export class AnimationController extends FlutterWidget {
 }
 
 //****** Animation ******
-export class Animation extends FlutterWidget {
+export class Animation extends fw.JSBaseWidget {
   tween?:Tween;
   controller?:AnimationController;
   statusListenerList?:any;
@@ -453,7 +341,7 @@ interface BoxConstraintsConfig {
   minHeight?:number;
   maxHeight?:number;
 }
-export class BoxConstraints extends BasicConstraints {
+export class BoxConstraints extends BaseConstraints {
   minWidth?:number;
   maxWidth?:number;
   minHeight?:number;
@@ -480,7 +368,7 @@ interface BorderSideConfig {
   width?:number;
   style?:BorderStyle;
 }
-export class BorderSide extends DartClass {
+export class BorderSide extends fw.JSBaseClass {
   color?:Color;
   width?:number;
   style?:BorderStyle;
@@ -516,7 +404,7 @@ interface BorderRadiusConfig {
   bottomLeft?:number;
   bottomRight?:number;
 }
-export class BorderRadius  extends DartClass {
+export class BorderRadius  extends fw.JSBaseClass {
   radius?:number;
   top?:number;
   bottom?:number;
@@ -602,7 +490,7 @@ interface BorderConfig {
   width?:number;
   style?:BorderStyle;
 }
-export class Border extends DartClass {
+export class Border extends fw.JSBaseClass {
   top?:BorderSide;
   right?:BorderSide;
   bottom?:BorderSide;
@@ -649,7 +537,7 @@ export class Border extends DartClass {
 }
 
 //****** BorderDirectional ******
-export class BorderDirectional extends DartClass {
+export class BorderDirectional extends fw.JSBaseClass {
   top?:BorderSide;
   start?:BorderSide;
   bottom?:BorderSide;
@@ -681,7 +569,7 @@ interface ButtonThemeDataConfig { //定义了两个可选属性
   splashColor?:Color;
   colorScheme?:ColorScheme;
 }
-export class ButtonThemeData extends DartClass {
+export class ButtonThemeData extends fw.JSBaseClass {
   textTheme?:ButtonTextTheme;
   minWidth?:number;
   height?:number;
@@ -728,21 +616,21 @@ interface BoxDecorationConfig { //定义了两个可选属性
   border?:Border;
   borderRadius?:BorderRadius;
   boxShadow?:BoxShadow;
-  gradient?:BasicGradient;
+  gradient?:BaseGradient;
   backgroundBlendMode?:BlendMode;
   shape?:BoxShape;
 }
-export class BoxDecoration extends DartClass {
+export class BoxDecoration extends fw.JSBaseClass {
   color?:Color;
   border?:Border;
   borderRadius?:BorderRadius;
   boxShadow?:BoxShadow;
-  gradient?:BasicGradient;
+  gradient?:BaseGradient;
   backgroundBlendMode?:BlendMode;
   shape?:BoxShape;
 
   /**
-   * @param config config: {color?:Color, border?:Border, borderRadius?:BorderRadius, boxShadow?:BoxShadow, gradient?:BasicGradient, backgroundBlendMode?:BlendMode,shape?:BoxShape}
+   * @param config config: {color?:Color, border?:Border, borderRadius?:BorderRadius, boxShadow?:BoxShadow, gradient?:BaseGradient, backgroundBlendMode?:BlendMode,shape?:BoxShape}
    */
   static new(config: BoxDecorationConfig){
     var v = new BoxDecoration();
@@ -766,7 +654,7 @@ interface BoxShadowConfig {
   blurRadius?:number;
   spreadRadius?:number;
 }
-export class BoxShadow extends DartClass {
+export class BoxShadow extends fw.JSBaseClass {
   color?:Color;
   offset?:Offset;
   blurRadius?:number;
@@ -836,7 +724,7 @@ export enum CrossFadeState {
 }
 
 //****** Color ******
-export class Color extends DartClass {
+export class Color extends fw.JSBaseClass {
   value?: number;
   a?: number;
   r?: number;
@@ -926,7 +814,7 @@ export class Colors extends Color{
 }
 
 //****** ColorFilter ******
-export class ColorFilter extends DartClass {
+export class ColorFilter extends fw.JSBaseClass {
   color?:Color;
   blendMode?:BlendMode;
 
@@ -967,7 +855,7 @@ interface ColorSchemeConfig {
   backgroundColor?:Color;
   errorColor?:Color;
 }
-export class ColorScheme extends DartClass {
+export class ColorScheme extends fw.JSBaseClass {
   primary?:Color;
   primaryVariant?:Color;
   secondary?:Color;
@@ -1026,14 +914,14 @@ export class ColorScheme extends DartClass {
 }
 
 //****** CircularNotchedRectangle ******
-export class CircularNotchedRectangle extends DartClass {
+export class CircularNotchedRectangle extends fw.JSBaseClass {
   static new() {
     return new CircularNotchedRectangle();
   }
 }
 
 //****** ClampingScrollPhysics ******
-export class ClampingScrollPhysics extends DartClass {
+export class ClampingScrollPhysics extends fw.JSBaseClass {
   parent?:ClampingScrollPhysics;
   static new(parent?:ClampingScrollPhysics) {
     var v = new ClampingScrollPhysics();
@@ -1043,7 +931,7 @@ export class ClampingScrollPhysics extends DartClass {
 }
 
 //****** CircleBorder ******
-export class CircleBorder extends DartClass {
+export class CircleBorder extends fw.JSBaseClass {
   side?:BorderSide;
 
   static new(side?:BorderSide) {
@@ -1054,7 +942,7 @@ export class CircleBorder extends DartClass {
 }
 
 //****** CurveTween ******
-export class CurveTween extends FlutterWidget {
+export class CurveTween extends fw.JSBaseWidget {
   curve?:Curve;
   static new(curve?:Curve) {
     var v = new CurveTween();
@@ -1084,7 +972,7 @@ interface DurationConfig {
   seconds?:number;
   milliseconds?:number;
 }
-export class Duration extends DartClass {
+export class Duration extends fw.JSBaseClass {
   days?:number;
   hours?:number;
   minutes?:number;
@@ -1118,7 +1006,7 @@ interface EdgeInsetsConfig {
   vertical?:number;
   horizontal?:number;
 }
-export class EdgeInsets extends DartClass {
+export class EdgeInsets extends fw.JSBaseClass {
   left?:number;
   top?:number;
   right?:number;
@@ -1200,7 +1088,7 @@ interface EdgeInsetsDirectionalConfig {
   end?:number;
   bottom?:number;
 }
-export class EdgeInsetsDirectional extends DartClass {
+export class EdgeInsetsDirectional extends fw.JSBaseClass {
   start?:number;
   top?:number;
   end?:number;
@@ -1296,7 +1184,7 @@ export enum FloatingActionButtonLocation  {
 }
 
 //****** FlexColumnWidth ******
-export class FlexColumnWidth extends DartClass {
+export class FlexColumnWidth extends fw.JSBaseClass {
   value?:number;
 
   static new(value:number) {
@@ -1307,7 +1195,7 @@ export class FlexColumnWidth extends DartClass {
 }
 
 //****** FixedColumnWidth ******
-export class FixedColumnWidth extends DartClass {
+export class FixedColumnWidth extends fw.JSBaseClass {
   value?:number;
   static new(value:number) {
     var v = new FixedColumnWidth();
@@ -1317,7 +1205,7 @@ export class FixedColumnWidth extends DartClass {
 }
 
 //****** File ******
-export class File extends DartClass {
+export class File extends fw.JSBaseClass {
   path?:string;
   uri?:Uri;
   rawPath?:Uint8List;
@@ -1345,7 +1233,7 @@ export class File extends DartClass {
 
 //-------------- G -----------------
 //****** GlobalKey ******
-export class GlobalKey extends BasicKey {
+export class GlobalKey extends BaseKey {
   debugLabel?:string;
   static new(debugLabel?:string) {
     var v = new GlobalKey();
@@ -1378,7 +1266,7 @@ interface IconDataConfig {
   fontPackage?:string;
   matchTextDirection?:boolean;
 }
-export class IconData extends DartClass {
+export class IconData extends fw.JSBaseClass {
   codePoint?:number;
   fontFamily?:string;
   fontPackage?:string;
@@ -1406,7 +1294,7 @@ interface IconThemeDataConfig {
   opacity?:number;
   size?:number;
 }
-export class IconThemeData extends DartClass {
+export class IconThemeData extends fw.JSBaseClass {
   color?:Color;
   opacity?:number;
   size?:number;
@@ -1426,7 +1314,7 @@ export class IconThemeData extends DartClass {
 }
 
 //****** IconThemeData ******
-export class InputBorder extends DartClass {
+export class InputBorder extends fw.JSBaseClass {
   static new() {
     return new InputBorder();
   }
@@ -1438,7 +1326,7 @@ export class InputBorder extends DartClass {
 }
 
 //****** ImageShader ******
-export class ImageShader extends DartClass {
+export class ImageShader extends fw.JSBaseClass {
   image?:any;
   tmx?:TileMode;
   tmy?:TileMode;
@@ -1476,7 +1364,7 @@ interface InputDecorationThemeConfig {
   enabledBorder?:InputBorder;
   border?:InputBorder;
 }
-export class InputDecorationTheme extends DartClass {
+export class InputDecorationTheme extends fw.JSBaseClass {
   labelStyle?:TextStyle;
   helperStyle?:TextStyle;
   hintStyle?:TextStyle;
@@ -1536,7 +1424,7 @@ export class InputDecorationTheme extends DartClass {
 
 //****** InputDecoration ******
 interface InputDecorationConfig {
-  icon?:FlutterWidget;
+  icon?:fw.JSBaseWidget;
   labelText?:string;
   labelStyle?:TextStyle;
   helperText?:string;
@@ -1550,16 +1438,16 @@ interface InputDecorationConfig {
   hasFloatingPlaceholder?:boolean;
   isDense?:boolean;
   contentPadding?:EdgeInsets;
-  prefixIcon?:FlutterWidget;
-  prefix?:FlutterWidget;
+  prefixIcon?:fw.JSBaseWidget;
+  prefix?:fw.JSBaseWidget;
   prefixText?:string;
   prefixStyle?:TextStyle;
-  suffixIcon?:FlutterWidget;
-  suffix?:FlutterWidget;
+  suffixIcon?:fw.JSBaseWidget;
+  suffix?:fw.JSBaseWidget;
   suffixText?:string;
   suffixStyle?:TextStyle;
 
-  counter?:FlutterWidget;
+  counter?:fw.JSBaseWidget;
   counterText?:string;
   counterStyle?:TextStyle;
   filled?:boolean;
@@ -1576,8 +1464,8 @@ interface InputDecorationConfig {
 
   staticFunctionName?:string;
 }
-export class InputDecoration extends DartClass {
-  icon?:FlutterWidget;
+export class InputDecoration extends fw.JSBaseClass {
+  icon?:fw.JSBaseWidget;
   labelText?:string;
   labelStyle?:TextStyle;
   helperText?:string;
@@ -1591,16 +1479,16 @@ export class InputDecoration extends DartClass {
   hasFloatingPlaceholder?:boolean;
   isDense?:boolean;
   contentPadding?:EdgeInsets;
-  prefixIcon?:FlutterWidget;
-  prefix?:FlutterWidget;
+  prefixIcon?:fw.JSBaseWidget;
+  prefix?:fw.JSBaseWidget;
   prefixText?:string;
   prefixStyle?:TextStyle;
-  suffixIcon?:FlutterWidget;
-  suffix?:FlutterWidget;
+  suffixIcon?:fw.JSBaseWidget;
+  suffix?:fw.JSBaseWidget;
   suffixText?:string;
   suffixStyle?:TextStyle;
 
-  counter?:FlutterWidget;
+  counter?:fw.JSBaseWidget;
   counterText?:string;
   counterStyle?:TextStyle;
   filled?:boolean;
@@ -1618,11 +1506,11 @@ export class InputDecoration extends DartClass {
 
 
   /**
-   * @param config config: {icon?:FlutterWidget, labelText?:string, labelStyle?:TextStyle, helperText?:string, helperStyle?:TextStyle, hintText?:string,
+   * @param config config: {icon?:fw.JSBaseWidget, labelText?:string, labelStyle?:TextStyle, helperText?:string, helperStyle?:TextStyle, hintText?:string,
     hintStyle?:TextStyle, hintMaxLines?:number, errorText?:string, errorStyle?:TextStyle, errorMaxLines?:number, hasFloatingPlaceholder?:boolean,
-    isDense?:boolean, contentPadding?:EdgeInsets, prefixIcon?:FlutterWidget, prefix?:FlutterWidget,
-    prefixText?:string, prefixStyle?:TextStyle, suffixIcon?:FlutterWidget, suffix?:FlutterWidget,
-    suffixText?:string, suffixStyle?:TextStyle, counter?:FlutterWidget, counterText?:string,
+    isDense?:boolean, contentPadding?:EdgeInsets, prefixIcon?:fw.JSBaseWidget, prefix?:fw.JSBaseWidget,
+    prefixText?:string, prefixStyle?:TextStyle, suffixIcon?:fw.JSBaseWidget, suffix?:fw.JSBaseWidget,
+    suffixText?:string, suffixStyle?:TextStyle, counter?:fw.JSBaseWidget, counterText?:string,
     counterStyle?:TextStyle, filled?:boolean, fillColor?:Color, errorBorder?:InputBorder, focusedBorder?:InputBorder,
     focusedErrorBorder?:InputBorder, disabledBorder?:InputBorder, enabledBorder?:InputBorder, border?:InputBorder,
     enabled?:boolean, semanticCounterText?:string, alignLabelWithHint?:boolean}
@@ -1698,7 +1586,7 @@ export class InputDecoration extends DartClass {
 //-------------- J -----------------
 //-------------- K -----------------
 //****** Key ******
-export class Key extends BasicKey {
+export class Key extends BaseKey {
   value?:string;
   static new(value:string) {
     var v = new Key();
@@ -1716,7 +1604,7 @@ interface LinearGradientConfig {
   stops?:Array<number>;
   tileMode?:TileMode;
 }
-export class LinearGradient extends BasicGradient {
+export class LinearGradient extends BaseGradient {
   begin?:Alignment;
   end?:Alignment;
   colors?:Array<Color>;
@@ -1772,7 +1660,7 @@ export enum MaterialType {
 }
 
 //****** MaskFilter ******
-export class MaskFilter extends DartClass {
+export class MaskFilter extends fw.JSBaseClass {
   style?:BlurStyle;
   sigma?:number;
 
@@ -1794,7 +1682,7 @@ export class MaskFilter extends DartClass {
 }
 
 //****** Matrix4 ******
-export class Matrix4 extends DartClass {
+export class Matrix4 extends fw.JSBaseClass {
   arg0?:number;
   arg1?:number;
   arg2?:number;
@@ -2069,12 +1957,12 @@ export class Matrix4 extends DartClass {
 }
 
 //****** MediaQuery ******
-export class MediaQuery extends DartClass {
-  child?:FlutterWidget;
+export class MediaQuery extends fw.JSBaseClass {
+  child?:fw.JSBaseWidget;
   data?:MediaQueryData;
   key?:Key;
 
-  static new(child:FlutterWidget, data:MediaQueryData, key?:Key,) {
+  static new(child:fw.JSBaseWidget, data:MediaQueryData, key?:Key,) {
     var v = new MediaQuery();
     v.key = key;
     v.data = data; //MediaQueryData
@@ -2103,7 +1991,7 @@ interface MediaQueryDataConfig {
   boldText?:boolean;
   navigationMode?:NavigationMode;
 }
-export class MediaQueryData extends DartClass {
+export class MediaQueryData extends fw.JSBaseClass {
   size?:Size;
   devicePixelRatio?:number;
   textScaleFactor?:number;
@@ -2153,7 +2041,7 @@ export enum NavigationMode {
 }
 
 //****** NetworkAssetBundle ******
-export class NetworkAssetBundle extends BasicAssetBundle {
+export class NetworkAssetBundle extends BaseAssetBundle {
   baseUrl?:Uri;
   static new(baseUrl:Uri) {
     var v = new NetworkAssetBundle();
@@ -2163,7 +2051,7 @@ export class NetworkAssetBundle extends BasicAssetBundle {
 }
 
 //****** NeverScrollableScrollPhysics ******
-export class NeverScrollableScrollPhysics extends DartClass {
+export class NeverScrollableScrollPhysics extends fw.JSBaseClass {
   parent?:NeverScrollableScrollPhysics;
   static new(parent?:NeverScrollableScrollPhysics) {
     var v = new NeverScrollableScrollPhysics();
@@ -2173,7 +2061,7 @@ export class NeverScrollableScrollPhysics extends DartClass {
 }
 
 //****** Notification ******
-export class Notification extends DartClass {
+export class Notification extends fw.JSBaseClass {
   static new() {
     return new Notification();
   }
@@ -2187,7 +2075,7 @@ export enum Overflow {
 }
 
 //****** Offset ******
-export class Offset extends DartClass {
+export class Offset extends fw.JSBaseClass {
   dx?:number;
   dy?:number;
 
@@ -2205,7 +2093,7 @@ interface OutlineInputBorderConfig {
   borderRadius?:BorderRadius;
   gapPadding?:number;
 }
-export class OutlineInputBorder extends DartClass {
+export class OutlineInputBorder extends fw.JSBaseClass {
   borderSide?:BorderSide;
   borderRadius?:BorderRadius;
   gapPadding?:number;
@@ -2232,7 +2120,7 @@ export enum PaintingStyle {
 }
 
 //****** PlatformAssetBundle ******
-export class PlatformAssetBundle extends BasicAssetBundle {
+export class PlatformAssetBundle extends BaseAssetBundle {
   static new() {
     return new PlatformAssetBundle();
   }
@@ -2240,7 +2128,7 @@ export class PlatformAssetBundle extends BasicAssetBundle {
 
 //-------------- Q -----------------
 //****** Quaternion ******
-export class Quaternion extends DartClass {
+export class Quaternion extends fw.JSBaseClass {
   x?:number;
   y?:number;
   z?:number;
@@ -2257,7 +2145,7 @@ export class Quaternion extends DartClass {
 
 //-------------- R -----------------
 //****** Radius ******
-export class Radius extends DartClass {
+export class Radius extends fw.JSBaseClass {
   radius?:number;
   x?:number;
   y?:number;
@@ -2297,7 +2185,7 @@ interface RectConfig {
   a?:Offset;
   b?:Offset;
 }
-export class Rect extends DartClass {
+export class Rect extends fw.JSBaseClass {
   center?:Offset;
   width?:number;
   height?:number;
@@ -2388,7 +2276,7 @@ interface RadialGradientConfig {
   focal?:Alignment;
   focalRadius?:number;
 }
-export class RadialGradient extends BasicGradient {
+export class RadialGradient extends BaseGradient {
   center?:Alignment;
   radius?:number;
   colors?:Array<Color>;
@@ -2445,7 +2333,7 @@ export enum StretchMode {
 }
 
 //****** Size ******
-export class Size extends DartClass {
+export class Size extends fw.JSBaseClass {
   width?:number;
   height?:number;
   dimension?:number;
@@ -2501,7 +2389,7 @@ interface SweepGradientConfig {
   stops?:Array<number>;
   tileMode?:TileMode;
 }
-export class SweepGradient extends DartClass {
+export class SweepGradient extends fw.JSBaseClass {
   center?:Alignment;
   startAngle?:number;
   endAngle?:number;
@@ -2535,7 +2423,7 @@ interface SystemUiOverlayStyleConfig {
   statusBarBrightness?:Brightness;
   statusBarIconBrightness?:Brightness;
 }
-export class SystemUiOverlayStyle extends DartClass {
+export class SystemUiOverlayStyle extends fw.JSBaseClass {
   systemNavigationBarColor?:Color;
   systemNavigationBarDividerColor?:Color;
   statusBarColor?:Color;
@@ -2581,7 +2469,7 @@ interface SpringDescriptionConfig {
   stiffness?:number; 
   damping?:number;
 }
-export class SpringDescription extends DartClass {
+export class SpringDescription extends fw.JSBaseClass {
   mass?:number;
   stiffness?:number; 
   damping?:number;
@@ -2601,7 +2489,7 @@ export class SpringDescription extends DartClass {
 }
 
 //****** ScrollPhysics ******
-export class ScrollPhysics extends DartClass {
+export class ScrollPhysics extends fw.JSBaseClass {
   parent?:ScrollPhysics;
   static new(parent?:ScrollPhysics) {
     var v = new ScrollPhysics();
@@ -2620,7 +2508,7 @@ interface ScrollControllerConfig {
 }
 
 // Todo:
-export class ScrollController extends DartClass {
+export class ScrollController extends fw.JSBaseClass {
   initialScrollOffset?:number;
   keepScrollOffset?:boolean;
   debugLabel?:string;
@@ -2641,7 +2529,7 @@ export class ScrollController extends DartClass {
       }
     }
 
-    let argument = FlutterCallArgs.new({mirrorID:this.mirrorID,className:"ScrollController",funcName:"animateTo",args:map});
+    let argument = fw.JSCallArgs.new({mirrorID:this.mirrorID,className:"ScrollController",funcName:"animateTo",args:map});
     /*
     let argument = new FlutterCallArgs({
       mirrorID: v.mirrorID,
@@ -2660,7 +2548,7 @@ export class ScrollController extends DartClass {
     var args=new Map();
     args.set("value",value);
 
-    let argument=FlutterCallArgs.new({mirrorID:this.mirrorID,className:"ScrollController",funcName:"jumpTo",args:args});
+    let argument=fw.JSCallArgs.new({mirrorID:this.mirrorID,className:"ScrollController",funcName:"jumpTo",args:args});
     //invokeFlutterFunction(argument);
   }
 
@@ -2685,7 +2573,7 @@ interface ShadowConfig {
   offset?:Offset;
   blurRadius?:number;
 }
-export class Shadow extends DartClass {
+export class Shadow extends fw.JSBaseClass {
   color?:Color;
   offset?:Offset;
   blurRadius?:number;
@@ -2822,7 +2710,7 @@ interface TextStyleConfig {
   fontFamily?:string;
   packageName?:string;
 }
-export class TextStyle extends DartClass {
+export class TextStyle extends fw.JSBaseClass {
   inherit?:boolean;
   color?:Color;
   fontSize?:number;
@@ -2883,7 +2771,7 @@ interface TableBorderConfig {
   inside?:BorderSide;
   outside?:BorderSide;
 }
-export class TableBorder extends DartClass {
+export class TableBorder extends fw.JSBaseClass {
   top?:BorderSide;
   right?:BorderSide;
   bottom?:BorderSide;
@@ -2943,7 +2831,7 @@ export class TableBorder extends DartClass {
 }
 
 //****** TableRow ******
-export class TableColumnWidth extends DartClass {
+export class TableColumnWidth extends fw.JSBaseClass {
   static new() {
     return new TableColumnWidth();
   }
@@ -2955,7 +2843,7 @@ interface TabControllerConfig {
   length?:number;
   vsync?:any;
 }
-export class TabController extends DartClass {
+export class TabController extends fw.JSBaseClass {
   initialIndex?:number;
   length?:number;
   vsync?:any;
@@ -2975,7 +2863,7 @@ export class TabController extends DartClass {
 }
 
 //****** TextEditingController ******
-export class TextEditingController extends DartClass {
+export class TextEditingController extends fw.JSBaseClass {
   text?:string;
 
   static new(text?:string) {
@@ -2986,7 +2874,7 @@ export class TextEditingController extends DartClass {
 }
 
 //****** TextInputType ******
-export class TextInputType extends DartClass {
+export class TextInputType extends fw.JSBaseClass {
   
   signed?:boolean;
   decimal?:boolean;
@@ -3054,12 +2942,12 @@ export class TextInputType extends DartClass {
 }
 
 //****** Tween ******
-export class Tween extends DartClass {
+export class Tween extends fw.JSBaseClass {
   begin?:number;
   end?:number;
   
   lerp(t:number) {
-    return dart.dsend(this.begin, '+', [dart.dsend(dart.dsend(this.end, '-', [this.begin]), '*', [t])]);
+    //return dart.dsend(this.begin, '+', [dart.dsend(dart.dsend(this.end, '-', [this.begin]), '*', [t])]);
   }
   transform(t:number) {
     if (t == 0.0) return this.begin;
@@ -3078,7 +2966,7 @@ export class Tween extends DartClass {
 
 //-------------- U -----------------
 //****** UniqueKey ******
-export class UniqueKey extends BasicKey {
+export class UniqueKey extends BaseKey {
   static new(){
     return new UniqueKey();
   }
@@ -3094,7 +2982,7 @@ interface UriConfig {
   path?:string;
   query?:string;
 }
-export class Uri extends DartClass {
+export class Uri extends fw.JSBaseClass {
   scheme?:string;
   fragment?:string;
   userInfo?:string;
@@ -3122,7 +3010,7 @@ export class Uri extends DartClass {
 }
 
 //****** VerticalDirection ******
-export class Uint8List extends DartClass {
+export class Uint8List extends fw.JSBaseClass {
   length?:number;
   elements?:Array<number>;
   static new(length?:number) {
@@ -3141,7 +3029,7 @@ export class Uint8List extends DartClass {
 }
 
 //****** UnderlineInputBorder ******
-export class UnderlineInputBorder extends DartClass {
+export class UnderlineInputBorder extends fw.JSBaseClass {
   borderSide?:BorderSide;
   borderRadius?:BorderRadius;
   
@@ -3163,7 +3051,7 @@ export enum VerticalDirection {
 }
 
 //****** Vector3 ******
-export class Vector3 extends DartClass {
+export class Vector3 extends fw.JSBaseClass {
   x?:number;
   y?:number;
   z?:number;
@@ -3191,7 +3079,7 @@ export class Vector3 extends DartClass {
 }
 
 //****** Vector4 ******
-export class Vector4 extends DartClass {
+export class Vector4 extends fw.JSBaseClass {
   x?:number;
   y?:number;
   z?:number;
