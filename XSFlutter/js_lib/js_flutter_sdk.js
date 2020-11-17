@@ -5770,7 +5770,13 @@ class FlexibleSpaceBar extends FluterWidget {
 exports.FlexibleSpaceBar = FlexibleSpaceBar;
 class FlutterLogo extends FluterWidget {
     /**
-     * @param config config: {size?:number, colors?:Color, textColor?:Color, style?:FlutterLogoStyle, duration?:Duration, curve?:Curves, key?:BaseKey}
+     * @param config config: {key?:BaseKey,
+        size?:number,
+        colors?:Color,
+        textColor?:Color,
+        style?:FlutterLogoStyle,
+        duration?:Duration,
+        curve?:Curve, }
      */
     static new(config) {
         var v = new FlutterLogo();

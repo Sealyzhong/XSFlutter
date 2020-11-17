@@ -8791,25 +8791,32 @@ export class FlexibleSpaceBar extends FluterWidget {
 
 //****** FlutterLogo ******
 interface FlutterLogoConfig {
+  key?:BaseKey;
   size?:number;
   colors?:Color;
   textColor?:Color;
   style?:FlutterLogoStyle;
   duration?:Duration;
   curve?:Curve;
-  key?:BaseKey;
+  
 }
 export class FlutterLogo extends FluterWidget {
+  key?:BaseKey;
   size?:number;
   colors?:Color;
   textColor?:Color;
   style?:FlutterLogoStyle;
   duration?:Duration;
   curve?:Curve;
-  key?:BaseKey;
 
   /**
-   * @param config config: {size?:number, colors?:Color, textColor?:Color, style?:FlutterLogoStyle, duration?:Duration, curve?:Curves, key?:BaseKey}
+   * @param config config: {key?:BaseKey, 
+      size?:number, 
+      colors?:Color, 
+      textColor?:Color, 
+      style?:FlutterLogoStyle, 
+      duration?:Duration, 
+      curve?:Curve, }
    */
   static new(config?: FlutterLogoConfig) {
     var v = new FlutterLogo();
