@@ -2186,6 +2186,20 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** TextWidthBasis ******/
+  static TextWidthBasis getTextWidthBasis(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextWidthBasis defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'parent':
+          return TextWidthBasis.parent;
+        case 'longestLine':
+          return TextWidthBasis.longestLine;
+      }
+    }
+    return defaultValue;
+  }
+
   //****** TextAlign ******/
   static TextAlign getTextAlign(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextAlign defaultValue}) {
     var v = _getString(map, key);

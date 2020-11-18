@@ -1,21 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const js = require("./js_flutter_sdk");
-class MyApp extends js.JSFlutterApp {
-    ///子类重写,当Flutter通过
-    ///XSFlutter.getInstance().navigatorPushWithName("JSWidgetHomePage", ...);push页面时，
-    ///在这里根据widgetName 创建你自己的Widget
-    ///@overrite
-    createJSWidgetWithName(widgetName) {
-        js.JSLog.log("Widget Name:" + widgetName);
-    }
-}
-function main(releaseMode) {
-    js.JSLog.log("main() start up ");
-    let app = new MyApp();
-    js.JSFramework.runApp(app);
-}
-/*
+//  XSFlutterFramework
+//  Copyright 2019 The XSFlutter Authors. All rights reserved.
+//
+//  Use of this source code is governed by a MIT-style license that can be
+//  found in the LICENSE file.
+
+
 let {
     JSLog,
     JSFramework,
@@ -54,4 +43,7 @@ function main(releaseMode) {
 
     let app = new MyApp;
     JSFramework.runApp(app);
-}*/
+}
+
+
+

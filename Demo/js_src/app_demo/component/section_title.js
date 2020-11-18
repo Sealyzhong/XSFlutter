@@ -1,21 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SectionTitle = void 0;
-const js_basic_icons_1 = require("./js_basic_icons");
-const bt = require("./js_basic_types");
-const fw = require("./js_framework");
-const mw = require("./js_material_widget");
-class SectionTitle extends fw.JSStatelessWidget {
-    constructor(title, key) {
-        super("SectionTitle", { key: key });
+const js = require("./js_flutter_sdk");
+class SectionTitle extends js.JSStatelessWidget {
+    constructor(title) {
+        super("SectionTitle");
         this.title = title;
     }
     build(buildContext) {
-        return mw.Container.new({
-            padding: bt.EdgeInsets.all(10.),
-            color: bt.Colors.green,
-            child: mw.Icon.new({
-                icon: js_basic_icons_1.Icons.ac_unit
+        return js.Container.new({
+            padding: js.EdgeInsets.all(10.0),
+            color: js.Colors.green,
+            child: js.Row.new({
+                mainAxisAlignment: js.MainAxisAlignment.center,
+                children: [
+                    js.Icon.new(js.Icons.ac_unit),
+                    js.Text.new("兴盛优选"),
+                ]
             }),
         });
     }

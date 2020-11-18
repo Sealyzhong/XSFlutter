@@ -3,8 +3,8 @@ import js = require("./js_flutter_sdk");
 
 export class SectionTitle extends js.JSStatelessWidget{
   title:string;
-  constructor(title:string,key?:js.BaseKey){
-    super("SectionTitle",{key:key});
+  constructor(title:string){
+    super("SectionTitle");
     this.title = title;
   }
 
@@ -13,12 +13,17 @@ export class SectionTitle extends js.JSStatelessWidget{
     return js.Container.new({
       padding:js.EdgeInsets.all(10.0),
       color:js.Colors.green,
-      child:js.Icon.new({
-        icon:js.Icons.ac_unit
+      child:js.Row.new({
+        mainAxisAlignment:js.MainAxisAlignment.center,
+        children:[
+          js.Icon.new(
+            js.Icons.ac_unit
+          ),
+          js.Text.new("兴盛优选"),
+        ]
       }),
     });
   }
-
 }
  /*
   class SectionTitle extends JSStatelessWidget {

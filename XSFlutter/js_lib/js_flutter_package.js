@@ -6,7 +6,7 @@
  */
 
 let { DartClass, FlutterCallArgs, } = require("./js_flutter_basic_types.js");
-let { XSFJSBridge, } = require("./js_flutter_framework.js");
+let { JSBridge, } = require("./js_flutter_framework.js");
 //-------------- L -----------------
 //****** XSLoadingApi ******
 class XSLoadingApi extends DartClass {
@@ -23,7 +23,7 @@ class XSLoadingApi extends DartClass {
             args: {}
         });
 
-        XSFJSBridge.createMirrorObj(argument, this.mirrorID, this);
+        JSBridge.createMirrorObj(argument, this.mirrorID, this);
     }
 
     static getInstance() {
@@ -35,7 +35,7 @@ class XSLoadingApi extends DartClass {
 
     invokeMirrorObjWithCallback(argument){
         let promiseResult = new Promise(function (resolve) {
-            XSFJSBridge.invokeMirrorObjWithCallback(argument, function (value) {
+            JSBridge.invokeMirrorObjWithCallback(argument, function (value) {
                 if (value != null) {
                     resolve(value);
 
@@ -155,7 +155,7 @@ class XSSpApi extends DartClass {
             args: {}
         });
 
-        XSFJSBridge.createMirrorObj(argument, this.mirrorID, this);
+        JSBridge.createMirrorObj(argument, this.mirrorID, this);
     }
 
     static getInstance() {
@@ -167,7 +167,7 @@ class XSSpApi extends DartClass {
 
     invokeMirrorObjWithCallback(argument){
         let promiseResult = new Promise(function (resolve) {
-            XSFJSBridge.invokeMirrorObjWithCallback(argument, function (value) {
+            JSBridge.invokeMirrorObjWithCallback(argument, function (value) {
                 if (value != null) {
                     resolve(value);
 

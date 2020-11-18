@@ -3,16 +3,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SectionTitle = void 0;
 const js = require("./js_flutter_sdk");
 class SectionTitle extends js.JSStatelessWidget {
-    constructor(title, key) {
-        super("SectionTitle", { key: key });
+    constructor(title) {
+        super("SectionTitle");
         this.title = title;
     }
     build(buildContext) {
         return js.Container.new({
             padding: js.EdgeInsets.all(10.0),
             color: js.Colors.green,
-            child: js.Icon.new({
-                icon: js.Icons.ac_unit
+            child: js.Row.new({
+                mainAxisAlignment: js.MainAxisAlignment.center,
+                children: [
+                    js.Icon.new(js.Icons.ac_unit),
+                    js.Text.new("兴盛优选"),
+                ]
             }),
         });
     }

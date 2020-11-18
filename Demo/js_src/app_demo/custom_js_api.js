@@ -21,7 +21,7 @@ let {
     Icons  } = require("js_flutter.js");
 
 let { DartClass, FlutterCallArgs } = require("./js_flutter_basic_types.js");
-let { XSFJSBridge } = require("./js_flutter_framework.js");
+let { JSBridge } = require("./js_flutter_framework.js");
 
 
 
@@ -41,7 +41,7 @@ class CustomJSApi extends DartClass {
             }
         });
 
-        XSFJSBridge.createMirrorObj(argument, this.mirrorID, this);
+        JSBridge.createMirrorObj(argument, this.mirrorID, this);
     }
 
     //封装getMyAppName
@@ -62,7 +62,7 @@ class CustomJSApi extends DartClass {
 
     invokeMirrorObjWithCallback(argument){
         let promiseResult = new Promise(function (resolve) {
-            XSFJSBridge.invokeMirrorObjWithCallback(argument, function (value) {
+            JSBridge.invokeMirrorObjWithCallback(argument, function (value) {
                 if (value != null) {
                     resolve(value);
 

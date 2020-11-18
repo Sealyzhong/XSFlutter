@@ -107,6 +107,7 @@ class XSProxyRegisterHelperLayoutSeries {
     m.addAll(XSProxySingleChildScrollView.registerProxy());
     m.addAll(XSProxySliverToBoxAdapter.registerProxy());
 
+    m.addAll(XSProxyTooltip.registerProxy());
     m.addAll(XSProxyTransform.registerProxy());
     m.addAll(XSProxyTableCell.registerProxy());
 
@@ -1045,6 +1046,7 @@ class XSProxySliverAppBar extends XSJsonObjProxy {
       flexibleSpace: XSJSParse.getWidget(context, bo, map, "flexibleSpace"),
       bottom: XSJSParse.getWidget(context, bo, map, "bottom"),
       elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
+      shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor"),
       forceElevated: XSJSParse.getBool(context, bo, map, "forceElevated", defaultValue: false),
       backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
       brightness: XSJSParse.getBrightness(context, bo, map, "brightness"),
@@ -1052,10 +1054,15 @@ class XSProxySliverAppBar extends XSJsonObjProxy {
       primary: XSJSParse.getBool(context, bo, map, "primary", defaultValue: true),
       centerTitle: XSJSParse.getBool(context, bo, map, "centerTitle"),
       titleSpacing: XSJSParse.getDouble(context, bo, map, "titleSpacing", defaultValue: NavigationToolbar.kMiddleSpacing),
+      excludeHeaderSemantics: XSJSParse.getBool(context, bo, map, "excludeHeaderSemantics"),
+      collapsedHeight: XSJSParse.getDouble(context, bo, map, "collapsedHeight"),
       expandedHeight: XSJSParse.getDouble(context, bo, map, "expandedHeight"),
       floating: XSJSParse.getBool(context, bo, map, "floating", defaultValue: false),
       pinned: XSJSParse.getBool(context, bo, map, "pinned", defaultValue: false),
       snap: XSJSParse.getBool(context, bo, map, "snap", defaultValue: false),
+      stretch: XSJSParse.getBool(context, bo, map, "stretch", defaultValue: false),
+      shape: XSJSParse.getObject(context, bo, map, "shape"),
+      toolbarHeight: XSJSParse.getDouble(context, bo, map, "toolbarHeight"),
     );
   }
 }
@@ -1301,6 +1308,35 @@ class XSProxyTransform extends XSJsonObjProxy {
       origin: XSJSParse.getOffset(context, bo, map, "origin"),
       alignment: XSJSParse.getAlignment(context, bo, map, "alignment"),
       transformHitTests: XSJSParse.getBool(context, bo, map, "transformHitTests", defaultValue: true),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
+//****** Tooltip ******
+class XSProxyTooltip extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "Tooltip";
+    return {
+      regClassName: () => XSProxyTooltip()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Tooltip constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Tooltip(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      message: XSJSParse.getString(context, bo, map, "message"),
+      height: XSJSParse.getDouble(context, bo, map, "height"),
+      padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+      margin: XSJSParse.getEdgeInsets(context, bo, map, "margin"),
+      verticalOffset: XSJSParse.getDouble(context, bo, map, "verticalOffset"),
+      preferBelow: XSJSParse.getBool(context, bo, map, "preferBelow"),
+      excludeFromSemantics: XSJSParse.getBool(context, bo, map, "excludeFromSemantics"),
+      decoration: XSJSParse.getDecoration(context, bo, map, "decoration"),
+      textStyle: XSJSParse.getTextStyle(context, bo, map, "textStyle"),
+      waitDuration: XSJSParse.getDuration(context, bo, map, "waitDuration"),
+      showDuration: XSJSParse.getDuration(context, bo, map, "showDuration"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
     );
   }

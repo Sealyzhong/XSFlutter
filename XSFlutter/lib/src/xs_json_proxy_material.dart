@@ -47,6 +47,7 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxySafeArea.registerProxy());
     m.addAll(XSProxySliverSafeArea.registerProxy());
     m.addAll(XSProxySpacer.registerProxy());
+    m.addAll(XSProxyGridTile.registerProxy());
 
     m.addAll(XSProxyBuilder.registerProxy());
     m.addAll(XSProxyDefaultTabController.registerProxy());
@@ -58,6 +59,8 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyTabController.registerProxy());
     m.addAll(XSProxyTab.registerProxy());
     m.addAll(XSProxyTitle.registerProxy());
+    m.addAll(XSProxyTabPageSelectorIndicator.registerProxy());
+    m.addAll(XSProxyTabPageSelector.registerProxy());
 
     m.addAll(XSProxyNavigator.registerProxy());
     m.addAll(XSProxyMaterialPageRoute.registerProxy());
@@ -68,6 +71,7 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxySnackBar.registerProxy());
     m.addAll(XSProxyFlutterLogo.registerProxy());
     m.addAll(XSProxyVerticalDivider.registerProxy());
+    m.addAll(XSProxyExpansionTile.registerProxy());
     return m;
   }
 }
@@ -92,6 +96,7 @@ class XSProxyAppBar extends XSJsonObjProxy {
         flexibleSpace: XSJSParse.getWidget(context, bo, map, "flexibleSpace"),
         bottom: XSJSParse.getWidget(context, bo, map, "bottom"),
         elevation: XSJSParse.getDouble(context, bo, map, "elevation", defaultValue: 4.0),
+        shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor"),
         backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
         brightness: XSJSParse.getBrightness(context, bo, map, "brightness"),
         primary: XSJSParse.getBool(context, bo, map, "primary", defaultValue: true),
@@ -99,6 +104,7 @@ class XSProxyAppBar extends XSJsonObjProxy {
         titleSpacing: XSJSParse.getDouble(context, bo, map, "titleSpacing", defaultValue: NavigationToolbar.kMiddleSpacing),
         toolbarOpacity: XSJSParse.getDouble(context, bo, map, "toolbarOpacity", defaultValue: 1.0),
         bottomOpacity: XSJSParse.getDouble(context, bo, map, "bottomOpacity", defaultValue: 1.0),
+        toolbarHeight: XSJSParse.getDouble(context, bo, map, "toolbarHeight"),
       );
 }
 
@@ -508,6 +514,36 @@ class XSProxyDivider extends XSJsonObjProxy {
   }
 }
 
+//****** ExpansionTile ******
+class XSProxyExpansionTile extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "ExpansionTile";
+    return {
+      regClassName: () => XSProxyExpansionTile()..init(className: regClassName)
+    };
+  }
+
+  @override
+  ExpansionTile constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return ExpansionTile(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      leading: XSJSParse.getWidget(context, bo, map, "leading"),
+      title: XSJSParse.getWidget(context, bo, map, "title"),
+      subtitle: XSJSParse.getWidget(context, bo, map, "subtitle"),
+      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
+      onExpansionChanged: XSJSParse.getValueChanged(context, bo, map, "onExpansionChanged"),
+      children: XSJSParse.getWidgetList(context, bo, map, "children", defaultValue: <Widget>[]),
+      trailing: XSJSParse.getWidget(context, bo, map, "trailing"),
+      initiallyExpanded: XSJSParse.getBool(context, bo, map, "initiallyExpanded"),
+      maintainState: XSJSParse.getBool(context, bo, map, "maintainState"),
+      tilePadding: XSJSParse.getEdgeInsets(context, bo, map, "tilePadding"),
+      expandedCrossAxisAlignment: XSJSParse.getCrossAxisAlignment(context, bo, map, "expandedCrossAxisAlignment"),
+      expandedAlignment: XSJSParse.getAlignment(context, bo, map, "expandedAlignment"),
+      childrenPadding: XSJSParse.getEdgeInsets(context, bo, map, "childrenPadding"),
+    );
+  }
+}
+
 //-------------- F -----------------
 //****** FlutterLogo ******
 class XSProxyFlutterLogo extends XSJsonObjProxy {
@@ -549,6 +585,27 @@ class XSProxyFlexibleSpaceBar extends XSJsonObjProxy {
       background: XSJSParse.getWidget(context, bo, map, "background"),
       centerTitle: XSJSParse.getBool(context, bo, map, "centerTitle"),
       collapseMode: XSJSParse.getCollapseMode(context, bo, map, "collapseMode", defaultValue: CollapseMode.parallax),
+    );
+  }
+}
+
+//-------------- G -----------------
+//****** GridTile ******
+class XSProxyGridTile extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "GridTile";
+    return {
+      regClassName1: () => XSProxyGridTile()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  GridTile constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return GridTile(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+      header: XSJSParse.getWidget(context, bo, map, "header"),
+      footer: XSJSParse.getWidget(context, bo, map, "footer"),
     );
   }
 }
@@ -1117,6 +1174,47 @@ class XSProxyTitle extends XSJsonObjProxy {
       title: XSJSParse.getString(context, bo, map, "title", defaultValue: ""),
       color: XSJSParse.getColor(context, bo, map, "color", defaultValue: Colors.black),
       child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
+//****** TabPageSelectorIndicator ******
+class XSProxyTabPageSelectorIndicator extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "TabPageSelectorIndicator";
+    return {
+      regClassName: () => XSProxyTabPageSelectorIndicator()..init(className: regClassName)
+    };
+  }
+
+  @override
+  TabPageSelectorIndicator constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return TabPageSelectorIndicator(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
+      borderColor: XSJSParse.getColor(context, bo, map, "borderColor"),
+      size: XSJSParse.getDouble(context, bo, map, "size"),
+    );
+  }
+}
+
+//****** TabPageSelector ******
+class XSProxyTabPageSelector extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "TabPageSelector";
+    return {
+      regClassName: () => XSProxyTabPageSelectorIndicator()..init(className: regClassName)
+    };
+  }
+
+  @override
+  TabPageSelector constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return TabPageSelector(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      color: XSJSParse.getColor(context, bo, map, "color"),
+      selectedColor: XSJSParse.getColor(context, bo, map, "selectedColor"),
+      indicatorSize: XSJSParse.getDouble(context, bo, map, "indicatorSize"),
+      controller: XSJSParse.getObject(context, bo, map, "controller"),
     );
   }
 }
