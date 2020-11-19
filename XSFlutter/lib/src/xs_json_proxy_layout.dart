@@ -65,6 +65,7 @@ class XSProxyRegisterHelperLayoutSeries {
     m.addAll(XSProxyExpanded.registerProxy());
 
     m.addAll(XSProxyFittedBox.registerProxy());
+    m.addAll(XSProxyFlexible.registerProxy());
     m.addAll(XSProxyFlow.registerProxy());
     m.addAll(XSProxyFractionallySizedBox.registerProxy());
 
@@ -383,6 +384,26 @@ class XSProxyExpanded extends XSJsonObjProxy {
 }
 
 //-------------- F -----------------
+//****** Flexible ******
+class XSProxyFlexible extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "Flexible";
+    return {
+      regClassName: () => XSProxyFlexible()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Flexible constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Flexible(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      flex: XSJSParse.getInt(context, bo, map, "flex"),
+      fit: XSJSParse.getFlexFit(context, bo, map, "fit", defaultValue: FlexFit.loose),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
 //****** FittedBox ******
 class XSProxyFittedBox extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {

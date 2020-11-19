@@ -1060,9 +1060,25 @@ class XSJSParse {
   }
 
   //-------------- F -----------------
+
+  //****** FlexFit ******/
+  static FlexFit getFlexFit(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {FlexFit defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'loose':
+          return FlexFit.loose;
+        case 'tight':
+          return FlexFit.tight;
+      }
+    }
+    return defaultValue;
+  }
+
   //****** FilterQuality ******/
   static FilterQuality getFilterQuality(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {FilterQuality defaultValue}) {
     var v = _getString(map, key);
+
     if (v != null && v.isNotEmpty) {
       switch (v) {
         case 'none':
@@ -2546,6 +2562,34 @@ class XSJSParse {
     }
     return defaultValue;
   }
+
+  //****** visualDensity ******/
+  static VisualDensity getVisualDensity(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {VisualDensity defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var className = _getClassName(v);
+      var constructorName = _getConstructorName(v);
+      if (className == "VisualDensity") {
+        if (constructorName == null || constructorName.isEmpty) {
+          return VisualDensity(
+            horizontal: getDouble(context, bo, v, "horizontal", defaultValue: 0.0),
+            vertical: getDouble(context, bo, v, "vertical", defaultValue: 0.0),
+          );
+        }
+        switch (constructorName) {
+          case 'comfortable':
+            return VisualDensity.comfortable;
+          case 'compact':
+            return VisualDensity.compact;
+          case 'standard':
+            return VisualDensity.standard;
+        }
+      }
+    }
+    return defaultValue;
+  }
+
+//
 
   //****** VoidCallback ******/
   static VoidCallback getVoidCallback(BuildContext context, XSJsonBuildOwner bo, Map map, String key) {

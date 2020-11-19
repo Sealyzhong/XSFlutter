@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'xs_json_to_dart.dart';
 import 'dart:convert';
-import 'xs_js_log_util.dart';
 
 import 'xs_js_framework.dart';
 import 'xs_js_flutter_common.dart';

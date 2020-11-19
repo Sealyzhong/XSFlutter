@@ -10,7 +10,7 @@ class SectionTitle extends js.JSStatelessWidget {
     build(buildContext) {
         return js.Container.new({
             padding: js.EdgeInsets.all(10.0),
-            color: js.Colors.green,
+            color: js.Colors.black26,
             child: js.Row.new({
                 mainAxisAlignment: js.MainAxisAlignment.center,
                 children: [

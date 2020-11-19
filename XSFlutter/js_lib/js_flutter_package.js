@@ -14,7 +14,7 @@ class XSLoadingApi extends DartClass {
     constructor() {
         super();
         //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorObjectID();
+        this.createMirrorID();
 
         //创建对应FLutter对象
         var argument = new FlutterCallArgs({
@@ -146,7 +146,7 @@ class XSSpApi extends DartClass {
     constructor() {
         super();
         //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorObjectID();
+        this.createMirrorID();
 
         //创建对应FLutter对象
         var argument = new FlutterCallArgs({

@@ -381,7 +381,6 @@ class XSUtil {
     }
 
     return "solid";
-    ;
   }
 
   static List<Map> cShadowToJson(List<Shadow> data) {

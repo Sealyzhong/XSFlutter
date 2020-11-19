@@ -22,37 +22,55 @@ class XSProxyRegisterHelperMaterialSeries {
   static Map<String, CreateJsonObjProxyFun> registerProxys() {
     Map<String, CreateJsonObjProxyFun> m = {};
 
-    m.addAll(XSProxyMaterial.registerProxy());
-    m.addAll(XSProxyScaffold.registerProxy());
-    m.addAll(XSProxyScaffoldState.registerProxy());
     m.addAll(XSProxyAppBar.registerProxy());
-    m.addAll(XSProxyBottomAppBar.registerProxy());
-    m.addAll(XSProxyBottomNavigationBar.registerProxy());
-
-    /// Button
-    m.addAll(XSProxyCloseButtonSeries.registerProxy());
-    m.addAll(XSProxyRawMaterialButton.registerProxy());
-    m.addAll(XSProxyButtonSeries.registerProxy());
-
-    m.addAll(XSProxyIcon.registerProxy());
-    m.addAll(XSProxyCard.registerProxy());
-
-    m.addAll(XSProxyMergeSemantics.registerProxy());
-    m.addAll(XSProxyPopupMenuItem.registerProxy());
-    m.addAll(XSProxyFlexibleSpaceBar.registerProxy());
-
-    m.addAll(XSProxyRadio.registerProxy());
-    m.addAll(XSProxySemantics.registerProxy());
-    m.addAll(XSProxyCircleBorder.registerProxy());
-    m.addAll(XSProxySafeArea.registerProxy());
-    m.addAll(XSProxySliverSafeArea.registerProxy());
-    m.addAll(XSProxySpacer.registerProxy());
-    m.addAll(XSProxyGridTile.registerProxy());
 
     m.addAll(XSProxyBuilder.registerProxy());
+    m.addAll(XSProxyBottomAppBar.registerProxy());
+    m.addAll(XSProxyBottomNavigationBar.registerProxy());
+    m.addAll(XSProxyButtonSeries.registerProxy());
+    m.addAll(XSProxyButtonBar.registerProxy());
+
+    m.addAll(XSProxyCircleBorder.registerProxy());
+    m.addAll(XSProxyCloseButtonSeries.registerProxy());
+    m.addAll(XSProxyCard.registerProxy());
+
     m.addAll(XSProxyDefaultTabController.registerProxy());
     m.addAll(XSProxyDirectionality.registerProxy());
     m.addAll(XSProxyDivider.registerProxy());
+
+    m.addAll(XSProxyExpansionTile.registerProxy());
+
+    m.addAll(XSProxyFlexibleSpaceBar.registerProxy());
+    m.addAll(XSProxyFlutterLogo.registerProxy());
+    m.addAll(XSProxyFlatButton.registerProxy());
+
+    m.addAll(XSProxyGridTile.registerProxy());
+    m.addAll(XSProxyGridPaper.registerProxy());
+
+    m.addAll(XSProxyIcon.registerProxy());
+    m.addAll(XSProxyIconButton.registerProxy());
+
+    m.addAll(XSProxyMaterial.registerProxy());
+    m.addAll(XSProxyMaterialPageRoute.registerProxy());
+    m.addAll(XSProxyMergeSemantics.registerProxy());
+
+    m.addAll(XSProxyNavigator.registerProxy());
+
+    m.addAll(XSProxyPopupMenuItem.registerProxy());
+
+    m.addAll(XSProxyRadio.registerProxy());
+    m.addAll(XSProxyRouteSettings.registerProxy());
+    m.addAll(XSProxyRawMaterialButton.registerProxy());
+    m.addAll(XSProxyRaisedButton.registerProxy());
+
+    m.addAll(XSProxyScaffold.registerProxy());
+    m.addAll(XSProxyScaffoldState.registerProxy());
+    m.addAll(XSProxySemantics.registerProxy());
+    m.addAll(XSProxySafeArea.registerProxy());
+    m.addAll(XSProxySliverSafeArea.registerProxy());
+    m.addAll(XSProxySpacer.registerProxy());
+    m.addAll(XSProxyScrollbar.registerProxy());
+    m.addAll(XSProxySnackBar.registerProxy());
 
     m.addAll(XSProxyTabBar.registerProxy());
     m.addAll(XSProxyTabBarView.registerProxy());
@@ -62,16 +80,8 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyTabPageSelectorIndicator.registerProxy());
     m.addAll(XSProxyTabPageSelector.registerProxy());
 
-    m.addAll(XSProxyNavigator.registerProxy());
-    m.addAll(XSProxyMaterialPageRoute.registerProxy());
-    m.addAll(XSProxyRouteSettings.registerProxy());
-
-    m.addAll(XSProxyScrollbar.registerProxy());
-
-    m.addAll(XSProxySnackBar.registerProxy());
-    m.addAll(XSProxyFlutterLogo.registerProxy());
     m.addAll(XSProxyVerticalDivider.registerProxy());
-    m.addAll(XSProxyExpansionTile.registerProxy());
+
     return m;
   }
 }
@@ -153,23 +163,17 @@ class XSProxyBottomAppBar extends XSJsonObjProxy {
 
 ///****** 常用Button系列类 ******
 class XSProxyButtonSeries extends XSJsonObjProxy {
-  static final String regClassName1 = "FlatButton";
   static final String regClassName2 = "RaisedButton";
   static final String regClassName3 = "FloatingActionButton";
-  static final String regClassName4 = "IconButton";
   static final String regClassName5 = "DropdownButton";
   static final String regClassName6 = "PopupMenuButton";
-  static final String regClassName7 = "ButtonBar";
 
   ///**@@@  2 替换类构造函数
   static Map<String, CreateJsonObjProxyFun> registerProxy() => {
-        regClassName1: () => XSProxyButtonSeries()..init(className: regClassName1),
         regClassName2: () => XSProxyButtonSeries()..init(className: regClassName2),
         regClassName3: () => XSProxyButtonSeries()..init(className: regClassName3),
-        regClassName4: () => XSProxyButtonSeries()..init(className: regClassName4),
         regClassName5: () => XSProxyButtonSeries()..init(className: regClassName5),
         regClassName6: () => XSProxyButtonSeries()..init(className: regClassName6),
-        regClassName7: () => XSProxyButtonSeries()..init(className: regClassName7),
       };
 
   ///*********************************************************************
@@ -178,57 +182,12 @@ class XSProxyButtonSeries extends XSJsonObjProxy {
   void init({String className}) {
     super.init(className: className);
 
-    registerConstructor(className: regClassName1, constructor: constructorFlatButton);
     registerConstructor(className: regClassName2, constructor: constructorRaisedButton);
     registerConstructor(className: regClassName3, constructor: constructorFloatingActionButton);
-    registerConstructor(className: regClassName4, constructor: constructorIconButton);
     registerConstructor(className: regClassName5, constructor: constructorDropdownButton);
     registerConstructor(className: regClassName6, constructor: constructorPopupMenuButton);
-    registerConstructor(className: regClassName7, constructor: constructorButtonBar);
-
-    registerStaticFunction(className: regClassName1, staticFunctionName: "icon", staticFunction: functionFlatButtonIcon);
-
     registerStaticFunction(className: regClassName2, staticFunctionName: "icon", staticFunction: functionRaisedButtonIcon);
   }
-
-  Widget constructorFlatButton(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => FlatButton(
-        key: XSJSParse.getKey(context, bo, map, "key"),
-        onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
-        onHighlightChanged: XSJSParse.getValueChanged<bool>(context, bo, map, "onHighlightChanged"),
-        textTheme: XSJSParse.getButtonTextTheme(context, bo, map, "textTheme"),
-        textColor: XSJSParse.getColor(context, bo, map, "textColor"),
-        disabledTextColor: XSJSParse.getColor(context, bo, map, "disabledTextColor"),
-        color: XSJSParse.getColor(context, bo, map, "color"),
-        disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
-        highlightColor: XSJSParse.getColor(context, bo, map, "highlightColor"),
-        splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
-        colorBrightness: XSJSParse.getBrightness(context, bo, map, "colorBrightness"),
-        padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
-        shape: XSJSParse.getObject(context, bo, map, "shape"),
-        clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
-        materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
-        child: XSJSParse.getWidget(context, bo, map, "child"),
-      );
-
-  Widget functionFlatButtonIcon(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => FlatButton.icon(
-        key: XSJSParse.getKey(context, bo, map, "key"),
-        onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
-        onHighlightChanged: XSJSParse.getValueChanged<bool>(context, bo, map, "onHighlightChanged"),
-        textTheme: XSJSParse.getButtonTextTheme(context, bo, map, "textTheme"),
-        textColor: XSJSParse.getColor(context, bo, map, "textColor"),
-        disabledTextColor: XSJSParse.getColor(context, bo, map, "disabledTextColor"),
-        color: XSJSParse.getColor(context, bo, map, "color"),
-        disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
-        highlightColor: XSJSParse.getColor(context, bo, map, "highlightColor"),
-        splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
-        colorBrightness: XSJSParse.getBrightness(context, bo, map, "colorBrightness"),
-        padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
-        shape: XSJSParse.getObject(context, bo, map, "shape"),
-        clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
-        materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
-        icon: XSJSParse.getWidget(context, bo, map, "icon"),
-        label: XSJSParse.getWidget(context, bo, map, "label"),
-      );
 
   Widget constructorRaisedButton(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => RaisedButton(
         key: XSJSParse.getKey(context, bo, map, "key"),
@@ -293,20 +252,6 @@ class XSProxyButtonSeries extends XSJsonObjProxy {
         isExtended: XSJSParse.getBool(context, bo, map, "isExtended", defaultValue: false),
       );
 
-  Widget constructorIconButton(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => IconButton(
-        key: XSJSParse.getKey(context, bo, map, "key"),
-        iconSize: XSJSParse.getDouble(context, bo, map, "iconSize", defaultValue: 24.0),
-        padding: XSJSParse.getEdgeInsets(context, bo, map, "padding", defaultValue: const EdgeInsets.all(8.0)),
-        alignment: XSJSParse.getAlignment(context, bo, map, "alignment", defaultValue: Alignment.center),
-        icon: XSJSParse.getWidget(context, bo, map, "icon"),
-        color: XSJSParse.getColor(context, bo, map, "color"),
-        highlightColor: XSJSParse.getColor(context, bo, map, "highlightColor"),
-        splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
-        disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
-        onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
-        tooltip: XSJSParse.getString(context, bo, map, "tooltip"),
-      );
-
   Widget constructorDropdownButton(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => DropdownButton(
         key: XSJSParse.getKey(context, bo, map, "key"),
         items: toListT<DropdownMenuItem>(XSJSParse.getObject(context, bo, map, "items")),
@@ -341,13 +286,6 @@ class XSProxyButtonSeries extends XSJsonObjProxy {
         icon: XSJSParse.getWidget(context, bo, map, "icon"),
         offset: XSJSParse.getOffset(context, bo, map, "offset", defaultValue: Offset.zero),
       );
-
-  Widget constructorButtonBar(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => ButtonBar(
-        key: XSJSParse.getKey(context, bo, map, "key"),
-        alignment: XSJSParse.getMainAxisAlignment(context, bo, map, "alignment"),
-        mainAxisSize: XSJSParse.getMainAxisSize(context, bo, map, "mainAxisSize", defaultValue: MainAxisSize.max),
-        children: XSJSParse.getWidgetList(context, bo, map, "children", defaultValue: const <Widget>[]),
-      );
 }
 
 ///****** Builder ******
@@ -368,6 +306,26 @@ class XSProxyBuilder extends XSJsonObjProxy {
       },
     );
     return widget;
+  }
+}
+
+///****** ButtonBar ******
+class XSProxyButtonBar extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "ButtonBar";
+    return {
+      regClassName: () => XSProxyButtonBar()..init(className: regClassName)
+    };
+  }
+
+  @override
+  ButtonBar constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return ButtonBar(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      alignment: XSJSParse.getMainAxisAlignment(context, bo, map, "alignment"),
+      mainAxisSize: XSJSParse.getMainAxisSize(context, bo, map, "mainAxisSize", defaultValue: MainAxisSize.max),
+      children: XSJSParse.getWidgetList(context, bo, map, "children", defaultValue: const <Widget>[]),
+    );
   }
 }
 
@@ -589,6 +547,74 @@ class XSProxyFlexibleSpaceBar extends XSJsonObjProxy {
   }
 }
 
+///****** FlatButton ******
+class XSProxyFlatButton extends XSJsonObjProxy {
+  static final String regClassName1 = "FlatButton";
+
+  ///**@@@  2 替换类构造函数
+  static Map<String, CreateJsonObjProxyFun> registerProxy() => {
+        regClassName1: () => XSProxyButtonSeries()..init(className: regClassName1),
+      };
+
+  ///*********************************************************************
+
+  @override
+  void init({String className}) {
+    super.init(className: className);
+
+    registerConstructor(className: regClassName1, constructor: constructorFlatButton);
+    registerStaticFunction(className: regClassName1, staticFunctionName: "icon", staticFunction: functionFlatButtonIcon);
+  }
+
+  Widget constructorFlatButton(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => FlatButton(
+        key: XSJSParse.getKey(context, bo, map, "key"),
+        onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
+        onHighlightChanged: XSJSParse.getValueChanged<bool>(context, bo, map, "onHighlightChanged"),
+        textTheme: XSJSParse.getButtonTextTheme(context, bo, map, "textTheme"),
+        textColor: XSJSParse.getColor(context, bo, map, "textColor"),
+        disabledTextColor: XSJSParse.getColor(context, bo, map, "disabledTextColor"),
+        color: XSJSParse.getColor(context, bo, map, "color"),
+        disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
+        highlightColor: XSJSParse.getColor(context, bo, map, "highlightColor"),
+        splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
+        colorBrightness: XSJSParse.getBrightness(context, bo, map, "colorBrightness"),
+        padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+        shape: XSJSParse.getObject(context, bo, map, "shape"),
+        clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+        materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+        child: XSJSParse.getWidget(context, bo, map, "child"),
+        onLongPress: XSJSParse.getVoidCallback(context, bo, map, "onLongPress"),
+        focusColor: XSJSParse.getColor(context, bo, map, "focusColor"),
+        hoverColor: XSJSParse.getColor(context, bo, map, "hoverColor"),
+        visualDensity: XSJSParse.getVisualDensity(context, bo, map, 'visualDensity'),
+        autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      );
+
+  Widget functionFlatButtonIcon(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => FlatButton.icon(
+        key: XSJSParse.getKey(context, bo, map, "key"),
+        onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
+        onHighlightChanged: XSJSParse.getValueChanged<bool>(context, bo, map, "onHighlightChanged"),
+        textTheme: XSJSParse.getButtonTextTheme(context, bo, map, "textTheme"),
+        textColor: XSJSParse.getColor(context, bo, map, "textColor"),
+        disabledTextColor: XSJSParse.getColor(context, bo, map, "disabledTextColor"),
+        color: XSJSParse.getColor(context, bo, map, "color"),
+        disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
+        highlightColor: XSJSParse.getColor(context, bo, map, "highlightColor"),
+        splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
+        colorBrightness: XSJSParse.getBrightness(context, bo, map, "colorBrightness"),
+        padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+        shape: XSJSParse.getObject(context, bo, map, "shape"),
+        clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+        materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+        icon: XSJSParse.getWidget(context, bo, map, "icon"),
+        label: XSJSParse.getWidget(context, bo, map, "label"),
+        onLongPress: XSJSParse.getVoidCallback(context, bo, map, "onLongPress"),
+        focusColor: XSJSParse.getColor(context, bo, map, "focusColor"),
+        hoverColor: XSJSParse.getColor(context, bo, map, "hoverColor"),
+        autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      );
+}
+
 //-------------- G -----------------
 //****** GridTile ******
 class XSProxyGridTile extends XSJsonObjProxy {
@@ -606,6 +632,27 @@ class XSProxyGridTile extends XSJsonObjProxy {
       child: XSJSParse.getWidget(context, bo, map, "child"),
       header: XSJSParse.getWidget(context, bo, map, "header"),
       footer: XSJSParse.getWidget(context, bo, map, "footer"),
+    );
+  }
+}
+
+//****** GridPaper ******
+class XSProxyGridPaper extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "GridPaper";
+    return {
+      regClassName1: () => XSProxyGridPaper()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  GridPaper constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return GridPaper(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+      color: XSJSParse.getColor(context, bo, map, "color"),
+      divisions: XSJSParse.getInt(context, bo, map, "divisions", defaultValue: 2),
+      subdivisions: XSJSParse.getInt(context, bo, map, "divisions", defaultValue: 5),
     );
   }
 }
@@ -629,6 +676,39 @@ class XSProxyIcon extends XSJsonObjProxy {
       color: XSJSParse.getColor(context, bo, map, "color"),
       semanticLabel: XSJSParse.getString(context, bo, map, "semanticLabel"),
       textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
+    );
+  }
+}
+
+//****** IconButton ******
+class XSProxyIconButton extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "IconButton";
+    return {
+      regClassName1: () => XSProxyIconButton()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  IconButton constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return IconButton(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      icon: XSJSParse.getWidget(context, bo, map, "icon"),
+      iconSize: XSJSParse.getDouble(context, bo, map, "iconSize"),
+      onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
+      visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
+      padding: XSJSParse.getEdgeInsets(context, bo, map, "padding", defaultValue: EdgeInsets.all(8.0)),
+      alignment: XSJSParse.getAlignment(context, bo, map, "alignment", defaultValue: Alignment.center),
+      splashRadius: XSJSParse.getDouble(context, bo, map, "splashRadius"),
+      color: XSJSParse.getColor(context, bo, map, "color"),
+      focusColor: XSJSParse.getColor(context, bo, map, "focusColor"),
+      hoverColor: XSJSParse.getColor(context, bo, map, "hoverColor"),
+      highlightColor: XSJSParse.getColor(context, bo, map, "highlightColor"),
+      splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
+      disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      tooltip: XSJSParse.getString(context, bo, map, "tooltip"),
+      enableFeedback: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: true),
     );
   }
 }
@@ -792,6 +872,82 @@ class XSProxyPopupMenuItem extends XSJsonObjProxy {
 }
 
 //-------------- R -----------------
+///****** 常用Button系列类 ******
+class XSProxyRaisedButton extends XSJsonObjProxy {
+  static final String regClassName2 = "RaisedButton";
+
+  ///**@@@  2 替换类构造函数
+  static Map<String, CreateJsonObjProxyFun> registerProxy() => {
+        regClassName2: () => XSProxyButtonSeries()..init(className: regClassName2),
+      };
+
+  ///*********************************************************************
+
+  @override
+  void init({String className}) {
+    super.init(className: className);
+
+    registerConstructor(className: regClassName2, constructor: constructorRaisedButton);
+    registerStaticFunction(className: regClassName2, staticFunctionName: "icon", staticFunction: functionRaisedButtonIcon);
+  }
+
+  Widget constructorRaisedButton(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => RaisedButton(
+        key: XSJSParse.getKey(context, bo, map, "key"),
+        onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
+        onHighlightChanged: XSJSParse.getValueChanged<bool>(context, bo, map, "onHighlightChanged"),
+        textTheme: XSJSParse.getButtonTextTheme(context, bo, map, "textTheme"),
+        textColor: XSJSParse.getColor(context, bo, map, "textColor"),
+        disabledTextColor: XSJSParse.getColor(context, bo, map, "disabledTextColor"),
+        color: XSJSParse.getColor(context, bo, map, "color"),
+        disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
+        highlightColor: XSJSParse.getColor(context, bo, map, "highlightColor"),
+        splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
+        colorBrightness: XSJSParse.getBrightness(context, bo, map, "colorBrightness"),
+        elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
+        highlightElevation: XSJSParse.getDouble(context, bo, map, "highlightElevation"),
+        disabledElevation: XSJSParse.getDouble(context, bo, map, "disabledElevation"),
+        padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+        shape: XSJSParse.getObject(context, bo, map, "shape"),
+        clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+        materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+        animationDuration: XSJSParse.getDuration(context, bo, map, "animationDuration"),
+        child: XSJSParse.getWidget(context, bo, map, "child"),
+        onLongPress: XSJSParse.getVoidCallback(context, bo, map, "onLongPress"),
+        focusColor: XSJSParse.getColor(context, bo, map, "focusColor"),
+        hoverColor: XSJSParse.getColor(context, bo, map, "hoverColor"),
+        focusElevation: XSJSParse.getDouble(context, bo, map, "focusElevation"),
+        hoverElevation: XSJSParse.getDouble(context, bo, map, "hoverElevation"),
+        visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
+        autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      );
+  Widget functionRaisedButtonIcon(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => RaisedButton.icon(
+        key: XSJSParse.getKey(context, bo, map, "key"),
+        onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
+        onHighlightChanged: XSJSParse.getValueChanged<bool>(context, bo, map, "onHighlightChanged"),
+        textTheme: XSJSParse.getButtonTextTheme(context, bo, map, "textTheme"),
+        textColor: XSJSParse.getColor(context, bo, map, "textColor"),
+        disabledTextColor: XSJSParse.getColor(context, bo, map, "disabledTextColor"),
+        color: XSJSParse.getColor(context, bo, map, "color"),
+        disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
+        highlightColor: XSJSParse.getColor(context, bo, map, "highlightColor"),
+        splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
+        colorBrightness: XSJSParse.getBrightness(context, bo, map, "colorBrightness"),
+        elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
+        highlightElevation: XSJSParse.getDouble(context, bo, map, "highlightElevation"),
+        disabledElevation: XSJSParse.getDouble(context, bo, map, "disabledElevation"),
+        shape: XSJSParse.getObject(context, bo, map, "shape"),
+        clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+        materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+        animationDuration: XSJSParse.getDuration(context, bo, map, "animationDuration"),
+        icon: XSJSParse.getWidget(context, bo, map, "icon"),
+        label: XSJSParse.getWidget(context, bo, map, "label"),
+        onLongPress: XSJSParse.getVoidCallback(context, bo, map, "onLongPress"),
+        focusColor: XSJSParse.getColor(context, bo, map, "focusColor"),
+        hoverColor: XSJSParse.getColor(context, bo, map, "hoverColor"),
+        autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      );
+}
+
 //****** RawMaterialButton ******
 class XSProxyRawMaterialButton extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
