@@ -206,6 +206,7 @@ class XSProxyContainer extends XSJsonObjProxy {
       margin: XSJSParse.getEdgeInsets(context, bo, map, "margin"),
       transform: XSJSParse.getMatrix4(context, bo, map, "transform"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
     );
   }
 }
@@ -337,7 +338,9 @@ class XSProxyCustomScrollView extends XSJsonObjProxy {
       cacheExtent: XSJSParse.getDouble(context, bo, map, "cacheExtent"),
       slivers: XSJSParse.getWidgetList(context, bo, map, "slivers", defaultValue: const <Widget>[]),
       semanticChildCount: XSJSParse.getInt(context, bo, map, "semanticChildCount"),
-      dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.down),
+      dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.start),
+      restorationId: XSJSParse.getString(context, bo, map, "restorationId"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
     );
   }
 }
@@ -806,7 +809,7 @@ class XSProxyNestedScrollView extends XSJsonObjProxy {
   @override
   void init({String className}) {
     super.init(className: className);
-    registerStaticFunction(className: regClassName, staticFunctionName: "sliverOverlapAbsorberHandleFor", staticFunction: functionSliverOverlapAbsorberHandleFor);
+    registerConstructor(className: regClassName, constructorName: "sliverOverlapAbsorberHandleFor", constructor: functionSliverOverlapAbsorberHandleFor);
   }
 
   @override
@@ -941,19 +944,52 @@ class XSProxyRow extends XSJsonObjProxy {
 //-------------- S -----------------
 //****** SizedBox ******
 class XSProxySizedBox extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "SizedBox";
-    return {
-      regClassName: () => XSProxySizedBox()..init(className: regClassName)
-    };
-  }
+  static final String regClassName = "SizedBox";
+
+  ///**@@@  2 替换类构造函数
+  static Map<String, CreateJsonObjProxyFun> registerProxy() => {
+        regClassName: () => XSProxySizedBox()..init(className: regClassName),
+      };
+
+  ///*********************************************************************
 
   @override
-  SizedBox constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+  void init({String className}) {
+    super.init(className: className);
+
+    registerConstructor(className: regClassName, constructor: getSizedBox);
+    registerConstructor(className: regClassName, constructorName: "expand", constructor: getSizedBoxExpand);
+    registerConstructor(className: regClassName, constructorName: "fromSize", constructor: getSizedBoxFromSize);
+    registerConstructor(className: regClassName, constructorName: "shrink", constructor: getSizedBoxShrink);
+  }
+
+  SizedBox getSizedBox(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return SizedBox(
       key: XSJSParse.getKey(context, bo, map, "key"),
       width: XSJSParse.getDouble(context, bo, map, "width"),
       height: XSJSParse.getDouble(context, bo, map, "height"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+
+  SizedBox getSizedBoxExpand(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return SizedBox.expand(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+
+  SizedBox getSizedBoxFromSize(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return SizedBox.fromSize(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+      size: XSJSParse.getSize(context, bo, map, "size"),
+    );
+  }
+
+  SizedBox getSizedBoxShrink(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return SizedBox.shrink(
+      key: XSJSParse.getKey(context, bo, map, "key"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
     );
   }
@@ -1288,6 +1324,7 @@ class XSProxySingleChildScrollView extends XSJsonObjProxy {
       physics: XSJSParse.getScrollPhysics(context, bo, map, "physics"),
       controller: XSJSParse.getObject(context, bo, map, "controller"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
       dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.down),
     );
   }
@@ -1438,7 +1475,8 @@ class XSProxyWrap extends XSJsonObjProxy {
       crossAxisAlignment: XSJSParse.getWrapCrossAlignment(context, bo, map, "crossAxisAlignment", defaultValue: WrapCrossAlignment.start),
       textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
       verticalDirection: XSJSParse.getVerticalDirection(context, bo, map, "verticalDirection", defaultValue: VerticalDirection.down),
-      children: XSJSParse.getWidgetList(context, bo, map, "children"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
+      children: XSJSParse.getWidgetList(context, bo, map, "children", defaultValue: const <Widget>[]),
     );
   }
 }

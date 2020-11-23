@@ -294,7 +294,8 @@ class XSJsonObjProxy {
   }
 
   ///注册静态方法
-  void registerStaticFunction({String className, String staticFunctionName = "", StaticFunction staticFunction}) {
+  /*
+  void registerStaticFunction1({String className, String staticFunctionName = "", StaticFunction staticFunction}) {
     if (className == null || className.isEmpty || staticFunction == null) {
       return;
     }
@@ -315,6 +316,7 @@ class XSJsonObjProxy {
 
     _className2StaicFunction[className] = m;
   }
+  */
 
   ///用于多构造函数分发，一般不用重载，只重载constructor即可
   dynamic jsonObjToDartObject(XSJsonBuildOwner buildOwner, Map<String, dynamic> jsonMap, {BuildContext context}) {

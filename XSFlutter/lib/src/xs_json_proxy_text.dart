@@ -83,7 +83,7 @@ class XSProxyInputDecoration extends XSJsonObjProxy {
   void init({String className}) {
     super.init(className: className);
 
-    registerStaticFunction(className: className, staticFunctionName: "collapsed", staticFunction: functionCollapsed);
+    registerConstructor(className: className, constructorName: "collapsed", constructor: getCollapsed);
   }
 
   @override
@@ -129,7 +129,7 @@ class XSProxyInputDecoration extends XSJsonObjProxy {
     );
   }
 
-  InputDecoration functionCollapsed(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+  InputDecoration getCollapsed(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return InputDecoration.collapsed(
       hintText: XSJSParse.getString(context, bo, map, "hintText"),
       // ignore: deprecated_member_use

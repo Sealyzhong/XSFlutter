@@ -121,7 +121,7 @@ class XSProxyBottomNavigationBarItem extends XSJsonObjProxy {
   BottomNavigationBarItem constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return BottomNavigationBarItem(
       icon: XSJSParse.getWidget(context, bo, map, "icon"),
-      title: XSJSParse.getWidget(context, bo, map, "title"),
+      label: XSJSParse.getString(context, bo, map, "label"),
       activeIcon: XSJSParse.getWidget(context, bo, map, "activeIcon"),
       backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
     );
@@ -152,6 +152,15 @@ class XSProxyCircleAvatar extends XSJsonObjProxy {
     );
   }
 }
+/* Key key,
+    this.child,
+    this.backgroundColor,
+    this.backgroundImage,
+    this.onBackgroundImageError,
+    this.foregroundColor,
+    this.radius,
+    this.minRadius,
+    this.maxRadius,*/
 
 //****** Chip ******
 class XSProxyChip extends XSJsonObjProxy {
@@ -180,6 +189,9 @@ class XSProxyChip extends XSJsonObjProxy {
       padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
       materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
       elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
+      shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor"),
     );
   }
 }
@@ -234,6 +246,7 @@ class XSProxyDropdownMenuItem extends XSJsonObjProxy {
   DropdownMenuItem constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return DropdownMenuItem(
       key: XSJSParse.getKey(context, bo, map, "key"),
+      onTap: XSJSParse.getVoidCallback(context, bo, map, "onTap"),
       value: XSJSParse.getObject(context, bo, map, "value"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
     );

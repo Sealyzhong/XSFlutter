@@ -5,6 +5,7 @@
  * @Description: 常用枚举类型
  */
 import 'dart:core';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/cupertino.dart';
@@ -172,6 +173,24 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** AxisDirection ******/
+  static AxisDirection getAxisDirection(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {AxisDirection defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'left':
+          return AxisDirection.left;
+        case 'down':
+          return AxisDirection.down;
+        case 'right':
+          return AxisDirection.right;
+        case 'up':
+          return AxisDirection.up;
+      }
+    }
+    return defaultValue;
+  }
+
   //****** Alignment ******/
   static Alignment getAlignment(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Alignment defaultValue}) {
     var v = _getMap(map, key);
@@ -249,17 +268,6 @@ class XSJSParse {
   //****** Animation<double> ******/
   static Animation<double> getAnimationDouble(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {dynamic defaultValue}) {
     return _getClassObj(map[key], buildOwner: bo, defaultValue: defaultValue, context: context);
-  }
-
-  //****** AlwaysScrollableScrollPhysics ******/
-  static AlwaysScrollableScrollPhysics getAlwaysScrollableScrollPhysics(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {AlwaysScrollableScrollPhysics defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      return AlwaysScrollableScrollPhysics(
-        parent: getBouncingScrollPhysics(context, bo, v, "parent"),
-      );
-    }
-    return defaultValue;
   }
 
   //-------------- B -----------------
@@ -401,6 +409,24 @@ class XSJSParse {
           return BoxFit.scaleDown;
         case 'none':
           return BoxFit.none;
+      }
+    }
+    return defaultValue;
+  }
+
+//****** BannerLocation ******/
+  static BannerLocation getBannerLocation(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BannerLocation defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'topStart':
+          return BannerLocation.topStart;
+        case 'topEnd':
+          return BannerLocation.topEnd;
+        case 'bottomStart':
+          return BannerLocation.bottomStart;
+        case 'bottomEnd':
+          return BannerLocation.bottomEnd;
       }
     }
     return defaultValue;
@@ -578,6 +604,28 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** BoxHeightStyle ******/
+  static BoxHeightStyle getBoxHeightStyle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BoxHeightStyle defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'includeLineSpacingBottom':
+          return BoxHeightStyle.includeLineSpacingBottom;
+        case 'includeLineSpacingMiddle':
+          return BoxHeightStyle.includeLineSpacingMiddle;
+        case 'includeLineSpacingTop':
+          return BoxHeightStyle.includeLineSpacingTop;
+        case 'max':
+          return BoxHeightStyle.max;
+        case 'strut':
+          return BoxHeightStyle.strut;
+        case 'tight':
+          return BoxHeightStyle.tight;
+      }
+    }
+    return defaultValue;
+  }
+
   //****** BorderSide ******/
   static BorderSide getBorderSide(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BorderSide defaultValue}) {
     var v = _getMap(map, key);
@@ -600,28 +648,6 @@ class XSJSParse {
     return defaultValue;
   }
 
-  //****** BouncingScrollPhysics ******/
-  static BouncingScrollPhysics getBouncingScrollPhysics(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BouncingScrollPhysics defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      return BouncingScrollPhysics(
-        parent: getBouncingScrollPhysics(context, bo, v, "parent"),
-      );
-    }
-    return defaultValue;
-  }
-
-  //****** CircleBorder ******/
-  static CircleBorder getCircleBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {CircleBorder defaultValue}) {
-    Map v = _getMap(map, key, defaultValue: map);
-    if (v != null) {
-      return CircleBorder(
-        side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none),
-      );
-    }
-    return defaultValue;
-  }
-
   //****** List<BoxShadow> ******/
   static List<BoxShadow> getBoxShadowList(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {List<BoxShadow> defaultValue}) {
     var v = _getList(map, key);
@@ -639,7 +665,7 @@ class XSJSParse {
   static BoxDecoration getBoxDecoration(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BoxDecoration defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      BoxDecoration b = BoxDecoration(
+      return BoxDecoration(
         color: getColor(context, bo, v, "color"),
         image: getObject(context, bo, v, "image"),
         border: getBorder(context, bo, v, "border"),
@@ -649,13 +675,36 @@ class XSJSParse {
         backgroundBlendMode: getBlendMode(context, bo, v, "backgroundBlendMode"),
         shape: getBoxShape(context, bo, v, "shape", defaultValue: BoxShape.rectangle),
       );
-      return b;
+    }
+    return defaultValue;
+  }
+
+  //****** BannerPainter ******/
+  static BannerPainter getBannerPainter(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BannerPainter defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      const Color _kColor = Color(0xA0B71C1C);
+
+      const TextStyle _kTextStyle = TextStyle(
+        color: Color(0xFFFFFFFF),
+        fontSize: 12.0 * 0.85,
+        fontWeight: FontWeight.w900,
+        height: 1.0,
+      );
+
+      return BannerPainter(
+        message: getString(context, bo, map, "message"),
+        textDirection: getTextDirection(context, bo, map, "textDirection"),
+        location: getBannerLocation(context, bo, map, "location"),
+        layoutDirection: getTextDirection(context, bo, map, "layoutDirection"),
+        color: getColor(context, bo, v, "color", defaultValue: _kColor),
+        textStyle: getTextStyle(context, bo, map, "textStyle", defaultValue: _kTextStyle),
+      );
     }
     return defaultValue;
   }
 
   //****** ButtonThemeData ******/
-  //TODO:
   static ButtonThemeData getButtonThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ButtonThemeData defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
@@ -674,7 +723,7 @@ class XSJSParse {
         highlightColor: getColor(context, bo, v, "highlightColor"),
         splashColor: getColor(context, bo, v, "splashColor"),
         colorScheme: getColorScheme(context, bo, v, "colorScheme"),
-        //materialTapTargetSize: getKey(context, bo, v, "materialTapTargetSize"),
+        materialTapTargetSize: getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
       );
     }
     return defaultValue;
@@ -714,6 +763,17 @@ class XSJSParse {
             );
         }
       }
+    }
+    return defaultValue;
+  }
+
+  //****** CircleBorder ******/
+  static CircleBorder getCircleBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {CircleBorder defaultValue}) {
+    Map v = _getMap(map, key, defaultValue: map);
+    if (v != null) {
+      return CircleBorder(
+        side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none),
+      );
     }
     return defaultValue;
   }
@@ -908,17 +968,6 @@ class XSJSParse {
     return defaultValue;
   }
 
-  //****** ClampingScrollPhysics ******/
-  static ClampingScrollPhysics getClampingScrollPhysics(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ClampingScrollPhysics defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      return ClampingScrollPhysics(
-        parent: getBouncingScrollPhysics(context, bo, v, "parent"),
-      );
-    }
-    return defaultValue;
-  }
-
   //-------------- D -----------------
   //****** Double ******/
   static double getDouble(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {double defaultValue}) {
@@ -1070,6 +1119,22 @@ class XSJSParse {
           return FlexFit.loose;
         case 'tight':
           return FlexFit.tight;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** FloatingLabelBehavior ******/
+  static FloatingLabelBehavior getFloatingLabelBehavior(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {FloatingLabelBehavior defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'always':
+          return FloatingLabelBehavior.always;
+        case 'auto':
+          return FloatingLabelBehavior.auto;
+        case 'never':
+          return FloatingLabelBehavior.never;
       }
     }
     return defaultValue;
@@ -1235,6 +1300,8 @@ class XSJSParse {
             end: getAlignment(context, bo, v, "end", defaultValue: Alignment.centerRight),
             colors: getColorList(context, bo, v, "colors"),
             stops: toListT<double>(getList(context, bo, v, "stops")),
+            tileMode: getTileMode(context, bo, map, "tileMode"),
+            //transform: getGradient(context, bo, map, key)
           );
         }
         if (className == "RadialGradient") {
@@ -1243,9 +1310,9 @@ class XSJSParse {
             radius: getDouble(context, bo, v, "radius", defaultValue: 0.5),
             colors: getColorList(context, bo, v, "colors"),
             stops: toListT<double>(getList(context, bo, v, "stops")),
-            tileMode: getTileMode(context, bo, v, "tileMode", defaultValue: TileMode.clamp),
-            focal: getAlignment(context, bo, v, "focal"),
-            focalRadius: getDouble(context, bo, v, "focalRadius"),
+            tileMode: getTileMode(context, bo, map, "tileMode"),
+            focal: getAlignment(context, bo, map, "focal"),
+            focalRadius: getDouble(context, bo, map, "focalRadius"),
           );
         }
         if (className == "SweepGradient") {
@@ -1255,7 +1322,7 @@ class XSJSParse {
             endAngle: getDouble(context, bo, v, "endAngle", defaultValue: math.pi * 2),
             colors: getColorList(context, bo, v, "colors"),
             stops: toListT<double>(getList(context, bo, v, "stops")),
-            tileMode: getTileMode(context, bo, v, "tileMode", defaultValue: TileMode.clamp),
+            tileMode: getTileMode(context, bo, map, "tileMode"),
           );
         }
       }
@@ -1364,6 +1431,76 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** InputDecoration ******/
+  static InputDecoration getInputDecoration(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {InputDecoration defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var constructorName = _getConstructorName(v);
+      if (constructorName == null || constructorName.isEmpty) {
+        return InputDecoration(
+          icon: getWidget(context, bo, map, "icon"),
+          labelText: getString(context, bo, map, "labelText"),
+          labelStyle: getTextStyle(context, bo, map, "labelStyle"),
+          helperText: getString(context, bo, map, "helperText"),
+          helperStyle: getTextStyle(context, bo, map, "helperStyle"),
+          helperMaxLines: getInt(context, bo, map, "helperMaxLines"),
+          hintText: getString(context, bo, map, "hintText"),
+          hintStyle: getTextStyle(context, bo, map, "hintStyle"),
+          hintMaxLines: getInt(context, bo, map, "hintMaxLines"),
+          errorText: getString(context, bo, map, "errorText"),
+          errorStyle: getTextStyle(context, bo, map, "errorStyle"),
+          errorMaxLines: getInt(context, bo, map, "errorMaxLines"),
+          floatingLabelBehavior: getFloatingLabelBehavior(context, bo, map, "floatingLabelBehavior", defaultValue: FloatingLabelBehavior.auto),
+          isCollapsed: getBool(context, bo, map, "isCollapsed", defaultValue: false),
+          isDense: getBool(context, bo, map, "isDense"),
+          contentPadding: getEdgeInsets(context, bo, map, "contentPadding"),
+          prefix: getWidget(context, bo, map, "prefix"),
+          prefixIcon: getWidget(context, bo, map, "prefixIcon"),
+          prefixIconConstraints: getBoxConstraints(context, bo, map, "prefixIconConstraints"),
+          prefixText: getString(context, bo, map, "prefixText"),
+          prefixStyle: getTextStyle(context, bo, map, "prefixStyle"),
+          suffix: getWidget(context, bo, map, "suffix"),
+          suffixIcon: getWidget(context, bo, map, "suffixIcon"),
+          suffixIconConstraints: getBoxConstraints(context, bo, map, "suffixIconConstraints"),
+          suffixText: getString(context, bo, map, "suffixText"),
+          suffixStyle: getTextStyle(context, bo, map, "suffixStyle"),
+          counter: getWidget(context, bo, map, "counter"),
+          counterText: getString(context, bo, map, "counterText"),
+          counterStyle: getTextStyle(context, bo, map, "counterStyle"),
+          filled: getBool(context, bo, map, "filled"),
+          fillColor: getColor(context, bo, map, "fillColor"),
+          focusColor: getColor(context, bo, map, "focusColor"),
+          hoverColor: getColor(context, bo, map, "hoverColor"),
+          errorBorder: getInputBorder(context, bo, map, "errorBorder"),
+          focusedBorder: getInputBorder(context, bo, map, "focusedBorder"),
+          focusedErrorBorder: getInputBorder(context, bo, map, "focusedErrorBorder"),
+          disabledBorder: getInputBorder(context, bo, map, "disabledBorder"),
+          enabledBorder: getInputBorder(context, bo, map, "enabledBorder"),
+          border: getInputBorder(context, bo, map, "border"),
+          enabled: getBool(context, bo, map, "enabled"),
+          semanticCounterText: getString(context, bo, map, "semanticCounterText"),
+          alignLabelWithHint: getBool(context, bo, map, "alignLabelWithHint"),
+        );
+      }
+
+      switch (constructorName) {
+        case "collapsed":
+          return InputDecoration.collapsed(
+            hintText: getString(context, bo, map, "hintText"),
+            floatingLabelBehavior: getFloatingLabelBehavior(context, bo, map, "floatingLabelBehavior", defaultValue: FloatingLabelBehavior.auto),
+            hintStyle: getTextStyle(context, bo, map, "hintStyle"),
+            filled: getBool(context, bo, map, "filled"),
+            fillColor: getColor(context, bo, map, "fillColor"),
+            focusColor: getColor(context, bo, map, "focusColor"),
+            hoverColor: getColor(context, bo, map, "hoverColor"),
+            border: getInputBorder(context, bo, map, "border"),
+            enabled: getBool(context, bo, map, "enabled"),
+          );
+      }
+    }
+    return defaultValue;
+  }
+
   //****** InputBorder ******/
   static dynamic getInputBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {InputBorder defaultValue}) {
     var v = _getMap(map, key);
@@ -1383,42 +1520,6 @@ class XSJSParse {
             borderSide: getBorderSide(context, bo, v, "borderSide", defaultValue: const BorderSide()),
             borderRadius: getBorderRadius(context, bo, v, "borderRadius", defaultValue: const BorderRadius.only(topLeft: Radius.circular(4.0), topRight: Radius.circular(4.0))),
           );
-      }
-    }
-
-    return defaultValue;
-  }
-
-  //****** TextInputType ******/
-  static TextInputType getTextInputType(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextInputType defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      var constructorName = _getConstructorName(v);
-      if (constructorName == null || constructorName.isEmpty) {
-        return TextInputType.text;
-      }
-
-      switch (constructorName) {
-        case 'numberWithOptions':
-          return TextInputType.numberWithOptions(
-            signed: getBool(context, bo, v, "signed"),
-            decimal: getBool(context, bo, v, "decimal"),
-          );
-
-        case 'text':
-          return TextInputType.text;
-        case 'multiline':
-          return TextInputType.multiline;
-        case 'number':
-          return TextInputType.number;
-        case 'phone':
-          return TextInputType.phone;
-        case 'datetime':
-          return TextInputType.datetime;
-        case 'emailAddress':
-          return TextInputType.emailAddress;
-        case 'url':
-          return TextInputType.url;
       }
     }
 
@@ -1476,6 +1577,20 @@ class XSJSParse {
   //****** List ******/
   static List getList(BuildContext context, XSJsonBuildOwner bo, Map map, String key) {
     return _getList(map, key);
+  }
+
+  //****** ListTileStyle ******/
+  static ListTileStyle getListTileStyle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ListTileStyle defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'list':
+          return ListTileStyle.list;
+        case 'drawer':
+          return ListTileStyle.drawer;
+      }
+    }
+    return defaultValue;
   }
 
   //-------------- M -----------------
@@ -1683,17 +1798,6 @@ class XSJSParse {
     return defaultValue;
   }
 
-  //****** NeverScrollableScrollPhysics ******/
-  static NeverScrollableScrollPhysics getNeverScrollableScrollPhysics(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {NeverScrollableScrollPhysics defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      return NeverScrollableScrollPhysics(
-        parent: getBouncingScrollPhysics(context, bo, v, "parent"),
-      );
-    }
-    return defaultValue;
-  }
-
   //-------------- O -----------------
   //****** Overflow ******/
   static Overflow getOverflow(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Overflow defaultValue}) {
@@ -1713,10 +1817,22 @@ class XSJSParse {
   static Offset getOffset(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Offset defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      return Offset(
-        getDouble(context, bo, v, "dx", defaultValue: 0.0),
-        getDouble(context, bo, v, "dy", defaultValue: 0.0),
-      );
+      var constructorName = _getConstructorName(v);
+      if (constructorName == null || constructorName.isEmpty) {
+        return Offset(
+          getDouble(context, bo, v, "dx", defaultValue: 0.0),
+          getDouble(context, bo, v, "dy", defaultValue: 0.0),
+        );
+      } else {
+        switch (constructorName) {
+          case 'infinite':
+            return Offset.infinite;
+          case 'zero':
+            return Offset.zero;
+          case 'fromDirection':
+            return Offset.fromDirection(getDouble(context, bo, v, "left", defaultValue: 0.0));
+        }
+      }
     }
     return defaultValue;
   }
@@ -1736,6 +1852,28 @@ class XSJSParse {
           return PaintingStyle.fill;
         case 'stroke':
           return PaintingStyle.stroke;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** PlaceholderAlignment ******/
+  static PlaceholderAlignment getPlaceholderAlignment(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {PlaceholderAlignment defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'aboveBaseline':
+          return PlaceholderAlignment.aboveBaseline;
+        case 'baseline':
+          return PlaceholderAlignment.baseline;
+        case 'belowBaseline':
+          return PlaceholderAlignment.belowBaseline;
+        case 'bottom':
+          return PlaceholderAlignment.bottom;
+        case 'top':
+          return PlaceholderAlignment.top;
+        case 'middle':
+          return PlaceholderAlignment.middle;
       }
     }
     return defaultValue;
@@ -1835,6 +1973,71 @@ class XSJSParse {
           );
         case 'zero':
           return Rect.zero;
+        case 'largest':
+          return Rect.largest;
+      }
+    }
+
+    return defaultValue;
+  }
+
+  //****** RRect ******/
+  static RRect getRRect(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {RRect defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var constructorName = _getConstructorName(map);
+      switch (constructorName) {
+        case 'fromLTRBR':
+          return RRect.fromLTRBR(
+            getDouble(context, bo, v, "left", defaultValue: 0.0),
+            getDouble(context, bo, v, "top", defaultValue: 0.0),
+            getDouble(context, bo, v, "right", defaultValue: 0.0),
+            getDouble(context, bo, v, "bottom", defaultValue: 0.0),
+            getRadius(context, bo, v, "radius", defaultValue: Radius.zero),
+          );
+        case 'fromLTRBXY':
+          return RRect.fromLTRBXY(
+            getDouble(context, bo, v, "left", defaultValue: 0.0),
+            getDouble(context, bo, v, "top", defaultValue: 0.0),
+            getDouble(context, bo, v, "right", defaultValue: 0.0),
+            getDouble(context, bo, v, "bottom", defaultValue: 0.0),
+            getDouble(context, bo, v, "radiusX", defaultValue: 0.0),
+            getDouble(context, bo, v, "radiusY", defaultValue: 0.0),
+          );
+        case 'fromRectXY':
+          return RRect.fromRectXY(
+            getRect(context, bo, v, "rect", defaultValue: Rect.zero),
+            getDouble(context, bo, v, "radiusX", defaultValue: 0.0),
+            getDouble(context, bo, v, "radiusY", defaultValue: 0.0),
+          );
+        case 'fromRectAndRadius':
+          return RRect.fromRectAndRadius(
+            getRect(context, bo, v, "rect", defaultValue: Rect.zero),
+            getRadius(context, bo, v, "radius", defaultValue: Radius.zero),
+          );
+        case 'fromLTRBAndCorners':
+          return RRect.fromLTRBAndCorners(
+            getDouble(context, bo, v, "left", defaultValue: 0.0),
+            getDouble(context, bo, v, "top", defaultValue: 0.0),
+            getDouble(context, bo, v, "right", defaultValue: 0.0),
+            getDouble(context, bo, v, "bottom", defaultValue: 0.0),
+            topLeft: getRadius(context, bo, v, "topLeft", defaultValue: Radius.zero),
+            topRight: getRadius(context, bo, v, "topLeft", defaultValue: Radius.zero),
+            bottomRight: getRadius(context, bo, v, "topLeft", defaultValue: Radius.zero),
+            bottomLeft: getRadius(context, bo, v, "topLeft", defaultValue: Radius.zero),
+          );
+
+        case 'fromRectAndCorners':
+          return RRect.fromRectAndCorners(
+            getRect(context, bo, v, "rect", defaultValue: Rect.zero),
+            topLeft: getRadius(context, bo, v, "topLeft", defaultValue: Radius.zero),
+            topRight: getRadius(context, bo, v, "topLeft", defaultValue: Radius.zero),
+            bottomRight: getRadius(context, bo, v, "topLeft", defaultValue: Radius.zero),
+            bottomLeft: getRadius(context, bo, v, "topLeft", defaultValue: Radius.zero),
+          );
+
+        case 'zero':
+          return RRect.zero;
       }
     }
 
@@ -1880,6 +2083,36 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** RSTransform ******/
+  static RSTransform getRSTransform(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {RSTransform defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var constructorName = _getConstructorName(v);
+      if (constructorName == null || constructorName.isEmpty) {
+        return RSTransform(
+          getDouble(context, bo, v, "scos"),
+          getDouble(context, bo, v, "ssin"),
+          getDouble(context, bo, v, "tx"),
+          getDouble(context, bo, v, "ty"),
+        );
+      }
+
+      switch (constructorName) {
+        case 'fromComponents':
+          return RSTransform.fromComponents(
+            rotation: getDouble(context, bo, v, "rotation"),
+            scale: getDouble(context, bo, v, "scale"),
+            anchorX: getDouble(context, bo, v, "anchorX"),
+            anchorY: getDouble(context, bo, v, "anchorY"),
+            translateX: getDouble(context, bo, v, "translateX"),
+            translateY: getDouble(context, bo, v, "translateY"),
+          );
+      }
+    }
+
+    return defaultValue;
+  }
+
   //-------------- S -----------------
   //****** String ******/
   static String getString(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {String defaultValue}) {
@@ -1917,9 +2150,34 @@ class XSJSParse {
           );
         case 'zero':
           return Size.zero;
+
+        case 'infinite':
+          return Size.infinite;
       }
     }
 
+    return defaultValue;
+  }
+
+  //****** SnackBarClosedReason ******/
+  static SnackBarClosedReason getSnackBarClosedReason(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {SnackBarClosedReason defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'action':
+          return SnackBarClosedReason.action;
+        case 'dismiss':
+          return SnackBarClosedReason.dismiss;
+        case 'hide':
+          return SnackBarClosedReason.hide;
+        case 'remove':
+          return SnackBarClosedReason.remove;
+        case 'swipe':
+          return SnackBarClosedReason.swipe;
+        case 'timeout':
+          return SnackBarClosedReason.timeout;
+      }
+    }
     return defaultValue;
   }
 
@@ -1934,6 +2192,20 @@ class XSJSParse {
           return StackFit.expand;
         case 'passthrough':
           return StackFit.passthrough;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** ScrollViewKeyboardDismissBehavior ******/
+  static ScrollViewKeyboardDismissBehavior getScrollViewKeyboardDismissBehavior(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ScrollViewKeyboardDismissBehavior defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'manual':
+          return ScrollViewKeyboardDismissBehavior.manual;
+        case 'onDrag':
+          return ScrollViewKeyboardDismissBehavior.onDrag;
       }
     }
     return defaultValue;
@@ -1987,13 +2259,53 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** ScrollPositionAlignmentPolicy ******/
+  static ScrollPositionAlignmentPolicy getScrollPositionAlignmentPolicy(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ScrollPositionAlignmentPolicy defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'explicit':
+          return ScrollPositionAlignmentPolicy.explicit;
+        case 'keepVisibleAtEnd':
+          return ScrollPositionAlignmentPolicy.keepVisibleAtEnd;
+        case 'keepVisibleAtStart':
+          return ScrollPositionAlignmentPolicy.keepVisibleAtStart;
+      }
+    }
+    return defaultValue;
+  }
+
   //****** ScrollPhysics ******/
   static ScrollPhysics getScrollPhysics(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ScrollPhysics defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      return ScrollPhysics(
-        parent: getScrollPhysics(context, bo, v, "parent"),
-      );
+      var className = _getClassName(v);
+      switch (className) {
+        case 'ScrollPhysics':
+          return ScrollPhysics(
+            parent: getScrollPhysics(context, bo, v, "parent"),
+          );
+        case 'RangeMaintainingScrollPhysics':
+          return RangeMaintainingScrollPhysics(
+            parent: getScrollPhysics(context, bo, v, "parent"),
+          );
+        case 'BouncingScrollPhysics':
+          return BouncingScrollPhysics(
+            parent: getScrollPhysics(context, bo, v, "parent"),
+          );
+        case 'ClampingScrollPhysics':
+          return ClampingScrollPhysics(
+            parent: getScrollPhysics(context, bo, v, "parent"),
+          );
+        case 'AlwaysScrollableScrollPhysics':
+          return AlwaysScrollableScrollPhysics(
+            parent: getScrollPhysics(context, bo, v, "parent"),
+          );
+        case 'NeverScrollableScrollPhysics':
+          return NeverScrollableScrollPhysics(
+            parent: getScrollPhysics(context, bo, v, "parent"),
+          );
+      }
     }
     return defaultValue;
   }
@@ -2055,7 +2367,66 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** ScrollbarPainter ******/
+  static ScrollbarPainter getScrollbarPainter(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ScrollbarPainter defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      const double _kMinThumbExtent = 18.0;
+
+      return ScrollbarPainter(
+        color: getColor(context, bo, map, "color"),
+        textDirection: getTextDirection(context, bo, map, "textDirection"),
+        thickness: getDouble(context, bo, map, "thickness"),
+        fadeoutOpacityAnimation: getAnimationDouble(context, bo, map, "fadeoutOpacityAnimation"),
+        padding: getEdgeInsets(context, bo, map, "padding", defaultValue: EdgeInsets.zero),
+        mainAxisMargin: getDouble(context, bo, map, "mainAxisMargin", defaultValue: 0.0),
+        crossAxisMargin: getDouble(context, bo, map, "crossAxisMargin", defaultValue: 0.0),
+        radius: getRadius(context, bo, map, "radius"),
+        minLength: getDouble(context, bo, map, "minLength", defaultValue: _kMinThumbExtent),
+        minOverscrollLength: getDouble(context, bo, map, "minOverscrollLength"),
+      );
+    }
+    return defaultValue;
+  }
+
   //-------------- T -----------------
+
+  //****** TextInputType ******/
+  static TextInputType getTextInputType(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextInputType defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var constructorName = _getConstructorName(v);
+      if (constructorName == null || constructorName.isEmpty) {
+        return TextInputType.text;
+      }
+
+      switch (constructorName) {
+        case 'numberWithOptions':
+          return TextInputType.numberWithOptions(
+            signed: getBool(context, bo, v, "signed"),
+            decimal: getBool(context, bo, v, "decimal"),
+          );
+
+        case 'text':
+          return TextInputType.text;
+        case 'multiline':
+          return TextInputType.multiline;
+        case 'number':
+          return TextInputType.number;
+        case 'phone':
+          return TextInputType.phone;
+        case 'datetime':
+          return TextInputType.datetime;
+        case 'emailAddress':
+          return TextInputType.emailAddress;
+        case 'url':
+          return TextInputType.url;
+      }
+    }
+
+    return defaultValue;
+  }
+
   //****** TextDirection ******/
   static TextDirection getTextDirection(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextDirection defaultValue}) {
     var v = _getString(map, key);
@@ -2301,6 +2672,7 @@ class XSJSParse {
       return TextStyle(
         inherit: getBool(context, bo, v, "inherit", defaultValue: true),
         color: getColor(context, bo, v, "color"),
+        backgroundColor: getColor(context, bo, v, "backgroundColor"),
         fontSize: getDouble(context, bo, v, "fontSize"),
         fontWeight: getFontWeight(context, bo, v, "fontWeight"),
         fontStyle: getFontStyle(context, bo, v, "fontStyle"),
@@ -2314,6 +2686,7 @@ class XSJSParse {
         decoration: getTextDecoration(context, bo, v, "decoration"),
         decorationColor: getColor(context, bo, v, "decorationColor"),
         decorationStyle: getTextDecorationStyle(context, bo, v, "decorationStyle"),
+        decorationThickness: getDouble(context, bo, v, "decorationThickness"),
         debugLabel: getString(context, bo, v, "debugLabel"),
         fontFamily: getString(context, bo, v, "fontFamily"),
         package: getString(context, bo, v, "packageName"),

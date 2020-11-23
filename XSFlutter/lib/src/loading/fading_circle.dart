@@ -16,8 +16,7 @@ class XSLoadingFadingCircle extends StatefulWidget {
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
-  })  : assert(!(itemBuilder is IndexedWidgetBuilder && color is Color) && !(itemBuilder == null && color == null),
-            'You should specify either a itemBuilder or a color'),
+  })  : assert(!(itemBuilder is IndexedWidgetBuilder && color is Color) && !(itemBuilder == null && color == null), 'You should specify either a itemBuilder or a color'),
         assert(size != null),
         super(key: key);
 
@@ -31,8 +30,21 @@ class XSLoadingFadingCircle extends StatefulWidget {
   _XSLoadingFadingCircleState createState() => _XSLoadingFadingCircleState();
 }
 
-class _XSLoadingFadingCircleState extends State<XSLoadingFadingCircle> with SingleTickerProviderStateMixin {
-  final List<double> delays = [.0, -1.1, -1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1];
+class _XSLoadingFadingCircleState extends State<XSLoadingFadingCircle> with SingleTickerProviderStateMixin, TickerProviderStateMixin {
+  final List<double> delays = [
+    .0,
+    -1.1,
+    -1.0,
+    -0.9,
+    -0.8,
+    -0.7,
+    -0.6,
+    -0.5,
+    -0.4,
+    -0.3,
+    -0.2,
+    -0.1
+  ];
   AnimationController _controller;
 
   @override
@@ -76,7 +88,5 @@ class _XSLoadingFadingCircleState extends State<XSLoadingFadingCircle> with Sing
     );
   }
 
-  Widget _itemBuilder(int index) => widget.itemBuilder != null
-      ? widget.itemBuilder(context, index)
-      : DecoratedBox(decoration: BoxDecoration(color: widget.color, shape: BoxShape.circle));
+  Widget _itemBuilder(int index) => widget.itemBuilder != null ? widget.itemBuilder(context, index) : DecoratedBox(decoration: BoxDecoration(color: widget.color, shape: BoxShape.circle));
 }
