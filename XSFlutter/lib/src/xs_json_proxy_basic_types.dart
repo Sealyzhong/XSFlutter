@@ -39,6 +39,7 @@ class XSProxyRegisterHelperBasicTypesSeries {
 
     m.addAll(XSProxyOpacity.registerProxy());
     m.addAll(XSProxyPositioned.registerProxy());
+    m.addAll(XSProxyPositionedDirectional.registerProxy());
     m.addAll(XSProxyPreferredSize.registerProxy());
 
     m.addAll(XSProxySystemUiOverlayStyle.registerProxy());
@@ -399,13 +400,40 @@ class XSProxyPositioned extends XSJsonObjProxy {
   @override
   void init({String className}) {
     super.init(className: className);
-    registerConstructor(className: regClassName, constructorName: "fromRect", constructor: constructorFromRect);
+    registerConstructor(className: regClassName, constructorName: "fromRect", constructor: fromRect);
+    registerConstructor(className: regClassName, constructorName: "directional", constructor: directional);
+    registerConstructor(className: regClassName, constructorName: "fill", constructor: fill);
   }
 
-  Positioned constructorFromRect(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return Positioned(
+  Positioned fromRect(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Positioned.fromRect(
       key: XSJSParse.getKey(context, bo, map, "key"),
-      left: XSJSParse.getDouble(context, bo, map, "rect"),
+      rect: XSJSParse.getRect(context, bo, map, "rect"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+
+  Positioned directional(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Positioned.directional(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
+      start: XSJSParse.getDouble(context, bo, map, "start"),
+      top: XSJSParse.getDouble(context, bo, map, "top"),
+      end: XSJSParse.getDouble(context, bo, map, "end"),
+      bottom: XSJSParse.getDouble(context, bo, map, "bottom"),
+      width: XSJSParse.getDouble(context, bo, map, "width"),
+      height: XSJSParse.getDouble(context, bo, map, "height"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+
+  Positioned fill(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Positioned.fill(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      left: XSJSParse.getDouble(context, bo, map, "left"),
+      top: XSJSParse.getDouble(context, bo, map, "top"),
+      right: XSJSParse.getDouble(context, bo, map, "right"),
+      bottom: XSJSParse.getDouble(context, bo, map, "bottom"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
     );
   }
@@ -417,6 +445,36 @@ class XSProxyPositioned extends XSJsonObjProxy {
       left: XSJSParse.getDouble(context, bo, map, "left"),
       top: XSJSParse.getDouble(context, bo, map, "top"),
       right: XSJSParse.getDouble(context, bo, map, "right"),
+      bottom: XSJSParse.getDouble(context, bo, map, "bottom"),
+      width: XSJSParse.getDouble(context, bo, map, "width"),
+      height: XSJSParse.getDouble(context, bo, map, "height"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
+//****** PositionedDirectional ******
+class XSProxyPositionedDirectional extends XSJsonObjProxy {
+  static String regClassName = "PositionedDirectional";
+
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    return {
+      regClassName: () => XSProxyPositionedDirectional()..init(className: regClassName)
+    };
+  }
+
+  @override
+  void init({String className}) {
+    super.init(className: className);
+  }
+
+  @override
+  PositionedDirectional constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return PositionedDirectional(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      start: XSJSParse.getDouble(context, bo, map, "start"),
+      top: XSJSParse.getDouble(context, bo, map, "top"),
+      end: XSJSParse.getDouble(context, bo, map, "end"),
       bottom: XSJSParse.getDouble(context, bo, map, "bottom"),
       width: XSJSParse.getDouble(context, bo, map, "width"),
       height: XSJSParse.getDouble(context, bo, map, "height"),
@@ -457,7 +515,6 @@ class XSProxySystemUiOverlayStyle extends XSJsonObjProxy {
   @override
   void init({String className}) {
     super.init(className: className);
-    registerConstructor(className: regClassName, constructorName: "constructor", constructor: constructor);
     registerConstructor(className: regClassName, constructorName: "light", constructor: constructorLight);
     registerConstructor(className: regClassName, constructorName: "dark", constructor: constructorDark);
   }

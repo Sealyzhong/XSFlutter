@@ -49,6 +49,7 @@ class XSProxyRegisterHelperLayoutSeries {
 
     m.addAll(XSProxyAlign.registerProxy());
     m.addAll(XSProxyAspectRatio.registerProxy());
+    m.addAll(XSProxyAbsorbPointer.registerProxy());
 
     m.addAll(XSProxyBaseline.registerProxy());
 
@@ -67,6 +68,7 @@ class XSProxyRegisterHelperLayoutSeries {
     m.addAll(XSProxyFittedBox.registerProxy());
     m.addAll(XSProxyFlexible.registerProxy());
     m.addAll(XSProxyFlow.registerProxy());
+    m.addAll(XSProxyFlex.registerProxy());
     m.addAll(XSProxyFractionallySizedBox.registerProxy());
 
     m.addAll(XSProxyGestureDetector.registerProxy());
@@ -74,6 +76,7 @@ class XSProxyRegisterHelperLayoutSeries {
     m.addAll(XSProxyIndexedStack.registerProxy());
     m.addAll(XSProxyIntrinsicHeight.registerProxy());
     m.addAll(XSProxyIntrinsicWidth.registerProxy());
+    m.addAll(XSProxyIgnorePointer.registerProxy());
 
     m.addAll(XSProxyLimitedBox.registerProxy());
     m.addAll(XSProxyListBody.registerProxy());
@@ -89,8 +92,11 @@ class XSProxyRegisterHelperLayoutSeries {
     m.addAll(XSProxyOverflowBox.registerProxy());
 
     m.addAll(XSProxyPadding.registerProxy());
+    m.addAll(XSProxyPhysicalModel.registerProxy());
 
     m.addAll(XSProxyRow.registerProxy());
+    m.addAll(XSProxyRotatedBox.registerProxy());
+    m.addAll(XSProxyRepaintBoundary.registerProxy());
 
     m.addAll(XSProxySizedBox.registerProxy());
     m.addAll(XSProxySizedOverflowBox.registerProxy());
@@ -114,12 +120,34 @@ class XSProxyRegisterHelperLayoutSeries {
 
     m.addAll(XSProxyStack.registerProxy());
 
+    m.addAll(XSProxyUnconstrainedBox.registerProxy());
+
     m.addAll(XSProxyWrap.registerProxy());
     return m;
   }
 }
 
 //-------------- A -----------------
+//****** AbsorbPointer ******
+class XSProxyAbsorbPointer extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "AbsorbPointer";
+    return {
+      regClassName: () => XSProxyAbsorbPointer()..init(className: regClassName)
+    };
+  }
+
+  @override
+  AbsorbPointer constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return AbsorbPointer(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      absorbing: XSJSParse.getBool(context, bo, map, "absorbing", defaultValue: true),
+      ignoringSemantics: XSJSParse.getBool(context, bo, map, "ignoringSemantics"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
 //****** Align ******
 class XSProxyAlign extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -289,7 +317,7 @@ class XSProxyColumn extends XSJsonObjProxy {
       textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
       verticalDirection: XSJSParse.getVerticalDirection(context, bo, map, "verticalDirection", defaultValue: VerticalDirection.down),
       textBaseline: XSJSParse.getTextBaseline(context, bo, map, "textBaseline"),
-      children: XSJSParse.getWidgetList(context, bo, map, "children"),
+      children: XSJSParse.getWidgetList(context, bo, map, "children", defaultValue: const <Widget>[]),
     );
   }
 }
@@ -407,6 +435,32 @@ class XSProxyFlexible extends XSJsonObjProxy {
   }
 }
 
+//****** Flex ******
+class XSProxyFlex extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "Flex";
+    return {
+      regClassName: () => XSProxyFlex()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Flex constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Flex(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      direction: XSJSParse.getAxis(context, bo, map, "direction"),
+      mainAxisAlignment: XSJSParse.getMainAxisAlignment(context, bo, map, "mainAxisAlignment", defaultValue: MainAxisAlignment.start),
+      mainAxisSize: XSJSParse.getMainAxisSize(context, bo, map, "mainAxisSize", defaultValue: MainAxisSize.max),
+      crossAxisAlignment: XSJSParse.getCrossAxisAlignment(context, bo, map, "crossAxisAlignment", defaultValue: CrossAxisAlignment.center),
+      textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
+      verticalDirection: XSJSParse.getVerticalDirection(context, bo, map, "verticalDirection", defaultValue: VerticalDirection.down),
+      textBaseline: XSJSParse.getTextBaseline(context, bo, map, "textBaseline"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
+      children: XSJSParse.getWidgetList(context, bo, map, "children", defaultValue: const <Widget>[]),
+    );
+  }
+}
+
 //****** FittedBox ******
 class XSProxyFittedBox extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -440,7 +494,7 @@ class XSProxyFractionallySizedBox extends XSJsonObjProxy {
   FractionallySizedBox constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return FractionallySizedBox(
       key: XSJSParse.getKey(context, bo, map, "key"),
-      alignment: XSJSParse.getAlignment(context, bo, map, "alignment"),
+      alignment: XSJSParse.getAlignment(context, bo, map, "alignment", defaultValue: Alignment.center),
       widthFactor: XSJSParse.getDouble(context, bo, map, "widthFactor"),
       heightFactor: XSJSParse.getDouble(context, bo, map, "heightFactor"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
@@ -586,7 +640,27 @@ class XSProxyIndexedStack extends XSJsonObjProxy {
       textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
       sizing: XSJSParse.getStackFit(context, bo, map, "sizing", defaultValue: StackFit.loose),
       index: XSJSParse.getInt(context, bo, map, "index", defaultValue: 0),
-      children: XSJSParse.getWidgetList(context, bo, map, "children"),
+      children: XSJSParse.getWidgetList(context, bo, map, "children", defaultValue: const <Widget>[]),
+    );
+  }
+}
+
+//****** IgnorePointer ******
+class XSProxyIgnorePointer extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "IgnorePointer";
+    return {
+      regClassName: () => XSProxyIgnorePointer()..init(className: regClassName)
+    };
+  }
+
+  @override
+  IgnorePointer constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return IgnorePointer(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      ignoring: XSJSParse.getBool(context, bo, map, "ignoring", defaultValue: true),
+      ignoringSemantics: XSJSParse.getBool(context, bo, map, "ignoringSemantics"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
     );
   }
 }
@@ -915,8 +989,63 @@ class XSProxyPadding extends XSJsonObjProxy {
   }
 }
 
+//****** PhysicalModel ******
+class XSProxyPhysicalModel extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "PhysicalModel";
+    return {
+      regClassName: () => XSProxyPhysicalModel()..init(className: regClassName)
+    };
+  }
+
+  @override
+  PhysicalModel constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return PhysicalModel(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      shape: XSJSParse.getBoxShape(context, bo, map, "shape", defaultValue: BoxShape.rectangle),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+      borderRadius: XSJSParse.getBorderRadius(context, bo, map, "borderRadius"),
+      elevation: XSJSParse.getDouble(context, bo, map, "elevation", defaultValue: 0.0),
+      color: XSJSParse.getColor(context, bo, map, "color"),
+      shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor", defaultValue: const Color(0xFF000000)),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
 //-------------- Q -----------------
 //-------------- R -----------------
+//****** RepaintBoundary ******
+class XSProxyRepaintBoundary extends XSJsonObjProxy {
+  static String _regClassName = "RepaintBoundary";
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    return {
+      _regClassName: () => XSProxyRepaintBoundary()..init(className: _regClassName)
+    };
+  }
+
+  @override
+  void init({String className}) {
+    super.init(className: className);
+    registerConstructor(className: _regClassName, constructorName: "wrap", constructor: wrap);
+  }
+
+  @override
+  RepaintBoundary constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return RepaintBoundary(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+
+  RepaintBoundary wrap(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return RepaintBoundary.wrap(
+      XSJSParse.getWidget(context, bo, map, "child"),
+      XSJSParse.getInt(context, bo, map, "childIndex"),
+    );
+  }
+}
+
 //****** Row ******
 class XSProxyRow extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -936,7 +1065,26 @@ class XSProxyRow extends XSJsonObjProxy {
       textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
       verticalDirection: XSJSParse.getVerticalDirection(context, bo, map, "verticalDirection", defaultValue: VerticalDirection.down),
       textBaseline: XSJSParse.getTextBaseline(context, bo, map, "textBaseline"),
-      children: XSJSParse.getWidgetList(context, bo, map, "children"),
+      children: XSJSParse.getWidgetList(context, bo, map, "children", defaultValue: const <Widget>[]),
+    );
+  }
+}
+
+//****** RotatedBox ******
+class XSProxyRotatedBox extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "RotatedBox";
+    return {
+      regClassName: () => XSProxyRotatedBox()..init(className: regClassName)
+    };
+  }
+
+  @override
+  RotatedBox constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return RotatedBox(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      quarterTurns: XSJSParse.getInt(context, bo, map, "quarterTurns"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
     );
   }
 }
@@ -956,14 +1104,13 @@ class XSProxySizedBox extends XSJsonObjProxy {
   @override
   void init({String className}) {
     super.init(className: className);
-
-    registerConstructor(className: regClassName, constructor: getSizedBox);
     registerConstructor(className: regClassName, constructorName: "expand", constructor: getSizedBoxExpand);
     registerConstructor(className: regClassName, constructorName: "fromSize", constructor: getSizedBoxFromSize);
     registerConstructor(className: regClassName, constructorName: "shrink", constructor: getSizedBoxShrink);
   }
 
-  SizedBox getSizedBox(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+  @override
+  SizedBox constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return SizedBox(
       key: XSJSParse.getKey(context, bo, map, "key"),
       width: XSJSParse.getDouble(context, bo, map, "width"),
@@ -1031,8 +1178,9 @@ class XSProxyStack extends XSJsonObjProxy {
       alignment: XSJSParse.getAlignmentDirectional(context, bo, map, "alignment", defaultValue: AlignmentDirectional.topStart),
       textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
       fit: XSJSParse.getStackFit(context, bo, map, "fit", defaultValue: StackFit.loose),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
       overflow: XSJSParse.getOverflow(context, bo, map, "overflow", defaultValue: Overflow.clip),
-      children: XSJSParse.getWidgetList(context, bo, map, "children"),
+      children: XSJSParse.getWidgetList(context, bo, map, "children", defaultValue: const <Widget>[]),
     );
   }
 }
@@ -1120,6 +1268,7 @@ class XSProxySliverAppBar extends XSJsonObjProxy {
       stretch: XSJSParse.getBool(context, bo, map, "stretch", defaultValue: false),
       shape: XSJSParse.getObject(context, bo, map, "shape"),
       toolbarHeight: XSJSParse.getDouble(context, bo, map, "toolbarHeight"),
+      onStretchTrigger: XSJSParse.getVoidCallback(context, bo, map, "onStretchTrigger"),
     );
   }
 }
@@ -1351,11 +1500,19 @@ class XSProxySliverToBoxAdapter extends XSJsonObjProxy {
 //-------------- T -----------------
 //****** Transform ******
 class XSProxyTransform extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "Transform";
-    return {
-      regClassName: () => XSProxyTransform()..init(className: regClassName)
-    };
+  static final String regClassName = "Transform";
+
+  static Map<String, CreateJsonObjProxyFun> registerProxy() => {
+        regClassName: () => XSProxyTransform()..init(className: regClassName),
+      };
+
+  @override
+  void init({String className}) {
+    super.init(className: className);
+
+    registerConstructor(className: regClassName, constructorName: "rotate", constructor: getTransformRotate);
+    registerConstructor(className: regClassName, constructorName: "translate", constructor: getTransformTranslate);
+    registerConstructor(className: regClassName, constructorName: "scale", constructor: getTransformScale);
   }
 
   @override
@@ -1363,6 +1520,37 @@ class XSProxyTransform extends XSJsonObjProxy {
     return Transform(
       key: XSJSParse.getKey(context, bo, map, "key"),
       transform: XSJSParse.getMatrix4(context, bo, map, "transform"),
+      origin: XSJSParse.getOffset(context, bo, map, "origin"),
+      alignment: XSJSParse.getAlignment(context, bo, map, "alignment"),
+      transformHitTests: XSJSParse.getBool(context, bo, map, "transformHitTests", defaultValue: true),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+
+  Transform getTransformRotate(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Transform.rotate(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      angle: XSJSParse.getDouble(context, bo, map, "angle"),
+      origin: XSJSParse.getOffset(context, bo, map, "origin"),
+      alignment: XSJSParse.getAlignment(context, bo, map, "alignment"),
+      transformHitTests: XSJSParse.getBool(context, bo, map, "transformHitTests", defaultValue: true),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+
+  Transform getTransformTranslate(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Transform.translate(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      offset: XSJSParse.getOffset(context, bo, map, "offset"),
+      transformHitTests: XSJSParse.getBool(context, bo, map, "transformHitTests", defaultValue: true),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+
+  Transform getTransformScale(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Transform.scale(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      scale: XSJSParse.getDouble(context, bo, map, "scale"),
       origin: XSJSParse.getOffset(context, bo, map, "origin"),
       alignment: XSJSParse.getAlignment(context, bo, map, "alignment"),
       transformHitTests: XSJSParse.getBool(context, bo, map, "transformHitTests", defaultValue: true),
@@ -1449,6 +1637,29 @@ class XSProxyTableCell extends XSJsonObjProxy {
       key: XSJSParse.getKey(context, bo, map, "key"),
       verticalAlignment: XSJSParse.getTableCellVerticalAlignment(context, bo, map, "verticalAlignment"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
+//-------------- U -----------------
+//****** UnconstrainedBox ******
+class XSProxyUnconstrainedBox extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "UnconstrainedBox";
+    return {
+      regClassName: () => XSProxyUnconstrainedBox()..init(className: regClassName)
+    };
+  }
+
+  @override
+  UnconstrainedBox constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return UnconstrainedBox(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      alignment: XSJSParse.getAlignment(context, bo, map, "alignment", defaultValue: Alignment.center),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+      textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
+      constrainedAxis: XSJSParse.getAxis(context, bo, map, "constrainedAxis"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
     );
   }
 }

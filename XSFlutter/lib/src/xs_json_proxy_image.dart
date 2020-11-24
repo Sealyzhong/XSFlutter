@@ -21,6 +21,8 @@ class XSProxyRegisterHelperImageSeries {
     m.addAll(XSProxyImage.registerProxy());
     m.addAll(XSProxyDecorationImage.registerProxy());
 
+    m.addAll(XSProxyRawImage.registerProxy());
+
     return m;
   }
 }
@@ -271,6 +273,38 @@ class XSProxyNetworkImage extends XSJsonObjProxy {
       XSJSParse.getString(context, bo, map, "url"),
       scale: XSJSParse.getDouble(context, bo, map, "scale", defaultValue: 1.0),
       headers: toMapStringT(XSJSParse.getObject(context, bo, map, "headers")),
+    );
+  }
+}
+
+//****** RawImage ******
+class XSProxyRawImage extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "RawImage";
+    return {
+      regClassName: () => XSProxyRawImage()..init(className: regClassName)
+    };
+  }
+
+  @override
+  RawImage constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return RawImage(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      image: XSJSParse.getObject(context, bo, map, "image"),
+      debugImageLabel: XSJSParse.getString(context, bo, map, "debugImageLabel"),
+      width: XSJSParse.getDouble(context, bo, map, "width"),
+      height: XSJSParse.getDouble(context, bo, map, "height"),
+      scale: XSJSParse.getDouble(context, bo, map, "scale", defaultValue: 1.0),
+      color: XSJSParse.getColor(context, bo, map, "color"),
+      colorBlendMode: XSJSParse.getBlendMode(context, bo, map, "colorBlendMode"),
+      fit: XSJSParse.getBoxFit(context, bo, map, "fit"),
+      alignment: XSJSParse.getAlignment(context, bo, map, "alignment", defaultValue: Alignment.center),
+      repeat: XSJSParse.getImageRepeat(context, bo, map, "repeat", defaultValue: ImageRepeat.noRepeat),
+      centerSlice: XSJSParse.getRect(context, bo, map, "centerSlice"),
+      matchTextDirection: XSJSParse.getBool(context, bo, map, "matchTextDirection", defaultValue: false),
+      invertColors: XSJSParse.getBool(context, bo, map, "invertColors", defaultValue: false),
+      filterQuality: XSJSParse.getFilterQuality(context, bo, map, "filterQuality", defaultValue: FilterQuality.low),
+      isAntiAlias: XSJSParse.getBool(context, bo, map, "isAntiAlias", defaultValue: false),
     );
   }
 }

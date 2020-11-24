@@ -31,6 +31,7 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyBottomNavigationBar.registerProxy());
     m.addAll(XSProxyButtonSeries.registerProxy());
     m.addAll(XSProxyButtonBar.registerProxy());
+    m.addAll(XSProxyBlockSemantics.registerProxy());
     m.addAll(XSProxyBanner.registerProxy());
 
     m.addAll(XSProxyCircleBorder.registerProxy());
@@ -43,17 +44,22 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyDivider.registerProxy());
 
     m.addAll(XSProxyExpansionTile.registerProxy());
+    m.addAll(XSProxyExcludeSemantics.registerProxy());
 
     m.addAll(XSProxyFlexibleSpaceBar.registerProxy());
     m.addAll(XSProxyFlutterLogo.registerProxy());
+    m.addAll(XSProxyFractionalTranslation.registerProxy());
     m.addAll(XSProxyFlatButton.registerProxy());
 
     m.addAll(XSProxyGridTile.registerProxy());
     m.addAll(XSProxyGridPaper.registerProxy());
 
     m.addAll(XSProxyIcon.registerProxy());
+    m.addAll(XSProxyIndexedSemantics.registerProxy());
     m.addAll(XSProxyImageIcon.registerProxy());
     m.addAll(XSProxyIconButton.registerProxy());
+
+    m.addAll(XSProxyKeyedSubtree.registerProxy());
 
     m.addAll(XSProxyLicensePage.registerProxy());
 
@@ -225,6 +231,23 @@ class XSProxyBottomAppBar extends XSJsonObjProxy {
         shape: XSJSParse.getObject(context, bo, map, "shape"),
         clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
         notchMargin: XSJSParse.getDouble(context, bo, map, "notchMargin", defaultValue: 4.0),
+        child: XSJSParse.getWidget(context, bo, map, "child"),
+      );
+}
+
+//****** BlockSemantics ******
+class XSProxyBlockSemantics extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "BlockSemantics";
+    return {
+      regClassName1: () => XSProxyBlockSemantics()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  BlockSemantics constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => BlockSemantics(
+        key: XSJSParse.getKey(context, bo, map, "key"),
+        blocking: XSJSParse.getBool(context, bo, map, "blocking", defaultValue: true),
         child: XSJSParse.getWidget(context, bo, map, "child"),
       );
 }
@@ -597,6 +620,23 @@ class XSProxyExpansionTile extends XSJsonObjProxy {
 }
 
 //-------------- F -----------------
+//****** ExcludeSemantics ******
+class XSProxyExcludeSemantics extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "ExcludeSemantics";
+    return {
+      regClassName1: () => XSProxyExcludeSemantics()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  ExcludeSemantics constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => ExcludeSemantics(
+        key: XSJSParse.getKey(context, bo, map, "key"),
+        excluding: XSJSParse.getBool(context, bo, map, "excluding", defaultValue: true),
+        child: XSJSParse.getWidget(context, bo, map, "child"),
+      );
+}
+
 //****** FlutterLogo ******
 class XSProxyFlutterLogo extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -615,6 +655,26 @@ class XSProxyFlutterLogo extends XSJsonObjProxy {
       textColor: XSJSParse.getColor(context, bo, map, "textColor", defaultValue: const Color(0xFF616161)),
       duration: XSJSParse.getDuration(context, bo, map, "duration", defaultValue: const Duration(milliseconds: 750)),
       curve: XSJSParse.getCurve(context, bo, map, "curve", defaultValue: Curves.fastOutSlowIn),
+    );
+  }
+}
+
+//****** FractionalTranslation ******
+class XSProxyFractionalTranslation extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "FractionalTranslation";
+    return {
+      regClassName: () => XSProxyFractionalTranslation()..init(className: regClassName)
+    };
+  }
+
+  @override
+  FractionalTranslation constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return FractionalTranslation(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      translation: XSJSParse.getOffset(context, bo, map, "translation"),
+      transformHitTests: XSJSParse.getBool(context, bo, map, "transformHitTests", defaultValue: true),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
     );
   }
 }
@@ -644,22 +704,18 @@ class XSProxyFlexibleSpaceBar extends XSJsonObjProxy {
 class XSProxyFlatButton extends XSJsonObjProxy {
   static final String regClassName = "FlatButton";
 
-  ///**@@@  2 替换类构造函数
   static Map<String, CreateJsonObjProxyFun> registerProxy() => {
         regClassName: () => XSProxyFlatButton()..init(className: regClassName),
       };
 
-  ///*********************************************************************
-
   @override
   void init({String className}) {
     super.init(className: className);
-
-    registerConstructor(className: regClassName, constructor: getFlatButton);
     registerConstructor(className: regClassName, constructorName: "icon", constructor: getFlatButtonIcon);
   }
 
-  Widget getFlatButton(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => FlatButton(
+  @override
+  Widget constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => FlatButton(
         key: XSJSParse.getKey(context, bo, map, "key"),
         onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
         onHighlightChanged: XSJSParse.getValueChanged<bool>(context, bo, map, "onHighlightChanged"),
@@ -751,6 +807,23 @@ class XSProxyGridPaper extends XSJsonObjProxy {
 }
 
 //-------------- I -----------------
+//****** IndexedSemantics ******
+class XSProxyIndexedSemantics extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "IndexedSemantics";
+    return {
+      regClassName1: () => XSProxyIndexedSemantics()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  IndexedSemantics constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => IndexedSemantics(
+        key: XSJSParse.getKey(context, bo, map, "key"),
+        index: XSJSParse.getInt(context, bo, map, "index"),
+        child: XSJSParse.getWidget(context, bo, map, "child"),
+      );
+}
+
 //****** Icon ******
 class XSProxyIcon extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -787,7 +860,7 @@ class XSProxyIconButton extends XSJsonObjProxy {
     return IconButton(
       key: XSJSParse.getKey(context, bo, map, "key"),
       icon: XSJSParse.getWidget(context, bo, map, "icon"),
-      iconSize: XSJSParse.getDouble(context, bo, map, "iconSize"),
+      iconSize: XSJSParse.getDouble(context, bo, map, "iconSize", defaultValue: 24.0),
       onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
       visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
       padding: XSJSParse.getEdgeInsets(context, bo, map, "padding", defaultValue: EdgeInsets.all(8.0)),
@@ -826,6 +899,23 @@ class XSProxyImageIcon extends XSJsonObjProxy {
       semanticLabel: XSJSParse.getString(context, bo, map, "semanticLabel"),
     );
   }
+}
+
+//-------------- K -----------------
+//****** KeyedSubtree ******
+class XSProxyKeyedSubtree extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "KeyedSubtree";
+    return {
+      regClassName1: () => XSProxyKeyedSubtree()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  KeyedSubtree constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => KeyedSubtree(
+        key: XSJSParse.getKey(context, bo, map, "key"),
+        child: XSJSParse.getWidget(context, bo, map, "child"),
+      );
 }
 
 //-------------- L -----------------
@@ -999,12 +1089,11 @@ class XSProxyOutlineButton extends XSJsonObjProxy {
   @override
   void init({String className}) {
     super.init(className: className);
-
-    registerConstructor(className: regClassName, constructor: getOutlineButton);
     registerConstructor(className: regClassName, constructorName: "icon", constructor: getOutlineButtonIcon);
   }
 
-  Widget getOutlineButton(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => OutlineButton(
+  @override
+  Widget constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => OutlineButton(
         key: XSJSParse.getKey(context, bo, map, "key"),
         onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
         onLongPress: XSJSParse.getVoidCallback(context, bo, map, "onLongPress"),
@@ -1093,11 +1182,11 @@ class XSProxyRaisedButton extends XSJsonObjProxy {
   void init({String className}) {
     super.init(className: className);
 
-    registerConstructor(className: regClassName, constructor: getRaisedButton);
     registerConstructor(className: regClassName, constructorName: "icon", constructor: getRaisedButtonIcon);
   }
 
-  Widget getRaisedButton(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => RaisedButton(
+  @override
+  Widget constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => RaisedButton(
         key: XSJSParse.getKey(context, bo, map, "key"),
         onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
         onHighlightChanged: XSJSParse.getValueChanged<bool>(context, bo, map, "onHighlightChanged"),
@@ -1126,6 +1215,7 @@ class XSProxyRaisedButton extends XSJsonObjProxy {
         visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
         autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
       );
+
   Widget getRaisedButtonIcon(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => RaisedButton.icon(
         key: XSJSParse.getKey(context, bo, map, "key"),
         onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
@@ -1349,8 +1439,6 @@ class XSProxySemantics extends XSJsonObjProxy {
       onCut: XSJSParse.getVoidCallback(context, bo, map, "onCut"),
       onPaste: XSJSParse.getVoidCallback(context, bo, map, "onPaste"),
       onDismiss: XSJSParse.getVoidCallback(context, bo, map, "onDismiss"),
-      onMoveCursorForwardByCharacter: XSJSParse.getValueChanged<bool>(context, bo, map, "onMoveCursorForwardByCharacter"),
-      onMoveCursorBackwardByCharacter: XSJSParse.getValueChanged<bool>(context, bo, map, "onMoveCursorBackwardByCharacter"),
       onDidGainAccessibilityFocus: XSJSParse.getVoidCallback(context, bo, map, "onDidGainAccessibilityFocus"),
       onDidLoseAccessibilityFocus: XSJSParse.getVoidCallback(context, bo, map, "onDidLoseAccessibilityFocus"),
     );
@@ -1433,6 +1521,7 @@ class XSProxySnackBar extends XSJsonObjProxy {
 
   @override
   SnackBar constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    const Duration _snackBarDisplayDuration = Duration(milliseconds: 4000);
     return SnackBar(
       key: XSJSParse.getKey(context, bo, map, "key"),
       content: XSJSParse.getWidget(context, bo, map, "content"),
@@ -1441,9 +1530,9 @@ class XSProxySnackBar extends XSJsonObjProxy {
       shape: XSJSParse.getObject(context, bo, map, "shape"),
       behavior: XSJSParse.getObject(context, bo, map, "behavior"),
       action: XSJSParse.getObject(context, bo, map, "action"),
-      duration: XSJSParse.getDuration(context, bo, map, "duration", defaultValue: Duration(milliseconds: 4000)),
+      duration: XSJSParse.getDuration(context, bo, map, "duration", defaultValue: _snackBarDisplayDuration),
       animation: XSJSParse.getAnimationDouble(context, bo, map, "animation"),
-      onVisible: XSJSParse.getObject(context, bo, map, "onVisible"),
+      onVisible: XSJSParse.getVoidCallback(context, bo, map, "onVisible"),
     );
   }
 }
@@ -1562,6 +1651,7 @@ class XSProxyTab extends XSJsonObjProxy {
       text: XSJSParse.getString(context, bo, map, "text"),
       icon: XSJSParse.getWidget(context, bo, map, "icon"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
+      iconMargin: XSJSParse.getEdgeInsets(context, bo, map, "iconMargin", defaultValue: const EdgeInsets.only(bottom: 10.0)),
     );
   }
 }

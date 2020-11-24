@@ -240,8 +240,6 @@ class XSJsonObjToDartObject {
 
 typedef dynamic ConstructorFun(XSJsonBuildOwner buildOwner, Map<String, dynamic> jsonMap, {BuildContext context});
 
-typedef dynamic StaticFunction(XSJsonBuildOwner buildOwner, Map<String, dynamic> jsonMap, {BuildContext context});
-
 class XSJsonObjProxy {
   ///静态接口,子类重写*********************************************
 
@@ -261,9 +259,6 @@ class XSJsonObjProxy {
   String className;
 
   Map<String, Map<String, ConstructorFun>> _className2constructor;
-
-  // 静态方法映射
-  Map<String, Map<String, StaticFunction>> _className2StaicFunction;
 
   ///如需要支持生成多个相似的类，支持一个类支持多个构造函数，重载此函数
   void init({String className}) {
@@ -293,31 +288,6 @@ class XSJsonObjProxy {
     _className2constructor[className] = m;
   }
 
-  ///注册静态方法
-  /*
-  void registerStaticFunction1({String className, String staticFunctionName = "", StaticFunction staticFunction}) {
-    if (className == null || className.isEmpty || staticFunction == null) {
-      return;
-    }
-
-    staticFunctionName ??= "";
-
-    if (_className2StaicFunction == null) {
-      _className2StaicFunction = Map<String, Map<String, StaticFunction>>();
-    }
-
-    Map<String, StaticFunction> m = _className2StaicFunction[className];
-
-    if (m == null) {
-      m = Map<String, StaticFunction>();
-    }
-
-    m[staticFunctionName] = staticFunction;
-
-    _className2StaicFunction[className] = m;
-  }
-  */
-
   ///用于多构造函数分发，一般不用重载，只重载constructor即可
   dynamic jsonObjToDartObject(XSJsonBuildOwner buildOwner, Map<String, dynamic> jsonMap, {BuildContext context}) {
     if (!check(jsonMap)) {
@@ -325,17 +295,17 @@ class XSJsonObjProxy {
     }
 
     ConstructorFun constructorFun = findConstructor(jsonMap);
-    StaticFunction staticFun = findStaticFunction(jsonMap);
+    //StaticFunction staticFun = findStaticFunction(jsonMap);
 
     var obj;
 
     ///是否使用静态方法
-    if (staticFun != null) {
+    /*if (staticFun != null) {
       obj = staticFun(buildOwner, jsonMap, context: context);
-    }
+    }*/
 
     ///是否使用自定义的构造方法
-    else if (constructorFun != null) {
+    if (constructorFun != null) {
       obj = constructorFun(buildOwner, jsonMap, context: context);
     }
 
@@ -356,21 +326,6 @@ class XSJsonObjProxy {
     String className = getClassName(jsonMap);
     String constructorName = getConstructorName(jsonMap) ?? "";
     ConstructorFun fun = _className2constructor[className][constructorName];
-    return fun;
-  }
-
-  ///优化默认查找，只有一个构造函数时，返回null，不用查表，直接使用constructor
-  StaticFunction findStaticFunction(Map<String, dynamic> jsonMap) {
-    if (_className2StaicFunction == null) {
-      return null;
-    }
-
-    String className = getClassName(jsonMap);
-    String staticFunctionName = getStaticFunctionName(jsonMap) ?? "";
-    StaticFunction fun;
-    if (_className2StaicFunction[className] != null) {
-      fun = _className2StaicFunction[className][staticFunctionName];
-    }
     return fun;
   }
 

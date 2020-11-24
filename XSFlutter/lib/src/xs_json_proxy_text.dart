@@ -164,6 +164,7 @@ class XSProxyRichText extends XSJsonObjProxy {
       overflow: XSJSParse.getTextOverflow(context, bo, map, "overflow", defaultValue: TextOverflow.clip),
       textScaleFactor: XSJSParse.getDouble(context, bo, map, "textScaleFactor", defaultValue: 1.0),
       maxLines: XSJSParse.getInt(context, bo, map, "maxLines"),
+      textWidthBasis: XSJSParse.getTextWidthBasis(context, bo, map, "textWidthBasis", defaultValue: TextWidthBasis.parent),
     );
   }
 }
@@ -171,20 +172,17 @@ class XSProxyRichText extends XSJsonObjProxy {
 //-------------- T -----------------
 //****** Text ******/
 class XSProxyText extends XSJsonObjProxy {
+  static String _regClassName = "Text";
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName1 = "Text";
     return {
-      regClassName1: () => XSProxyText()..init(className: regClassName1)
+      _regClassName: () => XSProxyText()..init(className: _regClassName)
     };
   }
 
   @override
   void init({String className}) {
     super.init(className: className);
-
-    final String regClassName1 = "Text";
-    registerConstructor(className: regClassName1, constructor: constructor);
-    registerConstructor(className: regClassName1, constructorName: "rich", constructor: constructorRich);
+    registerConstructor(className: _regClassName, constructorName: "rich", constructor: constructorRich);
   }
 
   ///
@@ -240,6 +238,7 @@ class XSProxyTextSpan extends XSJsonObjProxy {
       text: XSJSParse.getString(context, bo, map, "text"),
       children: toListT<TextSpan>(XSJSParse.getObject(context, bo, map, "children")),
       recognizer: XSJSParse.getObject(context, bo, map, "recognizer"),
+      semanticsLabel: XSJSParse.getString(context, bo, map, "semanticsLabel"),
     );
   }
 }
@@ -270,7 +269,7 @@ class XSProxyTextFormField extends XSJsonObjProxy {
       autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
       obscureText: XSJSParse.getBool(context, bo, map, "obscureText", defaultValue: false),
       autocorrect: XSJSParse.getBool(context, bo, map, "autocorrect", defaultValue: true),
-      autovalidate: XSJSParse.getBool(context, bo, map, "autovalidate", defaultValue: false),
+      //autovalidate: XSJSParse.getBool(context, bo, map, "autovalidate", defaultValue: false),
       maxLengthEnforced: XSJSParse.getBool(context, bo, map, "maxLengthEnforced", defaultValue: true),
       maxLines: XSJSParse.getInt(context, bo, map, "maxLines", defaultValue: 1),
       maxLength: XSJSParse.getInt(context, bo, map, "maxLength"),

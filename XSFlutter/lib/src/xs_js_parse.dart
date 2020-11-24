@@ -1981,6 +1981,37 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** RelativeRect ******/
+  static RelativeRect getRelativeRect(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {RelativeRect defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var constructorName = _getConstructorName(map);
+      switch (constructorName) {
+        case 'fromLTRB':
+          return RelativeRect.fromLTRB(
+            getDouble(context, bo, v, "left", defaultValue: 0.0),
+            getDouble(context, bo, v, "top", defaultValue: 0.0),
+            getDouble(context, bo, v, "right", defaultValue: 0.0),
+            getDouble(context, bo, v, "bottom", defaultValue: 0.0),
+          );
+        case 'fromRect':
+          return RelativeRect.fromRect(
+            getRect(context, bo, v, "rect"),
+            getRect(context, bo, v, "rect1"),
+          );
+        case 'fromSize':
+          return RelativeRect.fromSize(
+            getRect(context, bo, v, "rect"),
+            getSize(context, bo, v, "container"),
+          );
+        case 'largest':
+          return RelativeRect.fill;
+      }
+    }
+
+    return defaultValue;
+  }
+
   //****** RRect ******/
   static RRect getRRect(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {RRect defaultValue}) {
     var v = _getMap(map, key);
