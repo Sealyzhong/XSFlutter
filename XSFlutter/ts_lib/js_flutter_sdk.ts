@@ -135,20 +135,6 @@ export class FlutterWidget extends DartClass {
     }
   }
 }
-
-//****** Key ******
-export class BaseKey extends DartClass {}
-
-//****** Constraints ******
-export class BaseConstraints extends DartClass {}
-
-//****** BaseGradient ******
-export class BaseGradient extends DartClass {}
-
-//****** AssetBundle ******
-export class BaseAssetBundle extends DartClass {}
-
-
 //#endregion
 
 
@@ -1236,7 +1222,7 @@ export function initJSWidgetData(widget:JSBaseWidget) {
 //****** TODO JSBaseWidget ******
 export class JSBaseWidget extends core.Object {
   name:string;        //控件名
-  key?:BaseKey;   
+  key?:Key;   
   widgetName?:string; 
   className?:string;  
   widgetID:string;
@@ -1257,7 +1243,7 @@ export class JSBaseWidget extends core.Object {
   //打开性能分析模式，widget.enableProfile = true
   enableProfile:boolean = false;
   profileInfo:Map<string,any>;
-  constructor(name:string,key?:BaseKey) {
+  constructor(name:string,key?:Key) {
     super();
     this.name = name;
     this.key = key;
@@ -1326,7 +1312,7 @@ export class JSBaseWidget extends core.Object {
 //****** TODO JSStatefulWidget ******
 export class JSStatefulWidget extends JSBaseWidget {
   
-  constructor(name:string,key?:BaseKey) {
+  constructor(name:string,key?:Key) {
     super(name, key);
 
     this.className = "JSStatefulWidget";
@@ -1339,7 +1325,7 @@ export class JSStatefulWidget extends JSBaseWidget {
 
 //在JS层，要封装控件，如不需要改变UI内容，使用无状态的JSStatelessWidget
 export class JSStatelessWidget extends JSBaseWidget {
-  constructor(name:string,key?:BaseKey) {
+  constructor(name:string,key?:Key) {
     super(name, key);
 
     this.className = "JSStatelessWidget";
@@ -1750,6 +1736,18 @@ export enum PlaceholderAlignment {
 
 //#endregion
 
+//#region ------ R ------
+//****** RenderComparison ******
+export enum RenderComparison {
+  identical = "identical",
+  metadata = "metadata",
+  paint = "paint",
+  layout = "layout",
+}
+
+//#endregion
+
+
 //#region ------ S ------
 //****** StackFit ******
 export enum StackFit {
@@ -1988,14 +1986,32 @@ export class AlwaysScrollableScrollPhysics extends DartClass {
   }
 }
 
+//****** AssetBundle ******
+export class AssetBundle extends DartClass {
+  baseUrl?:Uri;
+
+  static network(baseUrl:Uri) {
+    var v = new AssetBundle();
+    v.constructorName = "network";
+    v.baseUrl = baseUrl;
+    return v;
+  }
+
+  static platform() {
+    var v = new AssetBundle();
+    v.constructorName = "platform";
+    return v;
+  }
+}
+
 //****** AssetImage ******
 interface AssetImageConfig {
-  bundle?:BaseAssetBundle;
+  bundle?:AssetBundle;
   packageName?:string;
 }
 export class AssetImage extends DartClass {
   assetName?:string;
-  bundle?:BaseAssetBundle;
+  bundle?:AssetBundle;
   packageName?:string;
 
   /**
@@ -2026,7 +2042,7 @@ interface BoxConstraintsConfig {
   minHeight?:number;
   maxHeight?:number;
 }
-export class BoxConstraints extends BaseConstraints {
+export class BoxConstraints extends DartClass {
   minWidth?:number;
   maxWidth?:number;
   minHeight?:number;
@@ -2091,25 +2107,25 @@ export class BorderSide extends DartClass {
 
 //****** BorderRadius ******
 interface BorderRadiusConfig {
-  top?:number;
-  bottom?:number;
-  left?:number;
-  right?:number;
-  topLeft?:number;
-  topRight?:number;
-  bottomLeft?:number;
-  bottomRight?:number;
+  top?:Radius;
+  bottom?:Radius;
+  left?:Radius;
+  right?:Radius;
+  topLeft?:Radius;
+  topRight?:Radius;
+  bottomLeft?:Radius;
+  bottomRight?:Radius;
 }
 export class BorderRadius  extends DartClass {
-  radius?:number;
-  top?:number;
-  bottom?:number;
-  left?:number;
-  right?:number;
-  topLeft?:number;
-  topRight?:number;
-  bottomLeft?:number;
-  bottomRight?:number;
+  radius?:number|Radius;
+  top?:Radius;
+  bottom?:Radius;
+  left?:Radius;
+  right?:Radius;
+  topLeft?:Radius;
+  topRight?:Radius;
+  bottomLeft?:Radius;
+  bottomRight?:Radius;
 
   static zero(){
     let o = new BorderRadius();
@@ -2117,7 +2133,7 @@ export class BorderRadius  extends DartClass {
     return o;
   }
 
-  static all(radius:number){
+  static all(radius:Radius){
     let v = new BorderRadius();
     v.constructorName = "all";
     v.radius = radius;
@@ -2134,8 +2150,8 @@ export class BorderRadius  extends DartClass {
   /**
    * @param config config: 
       {
-        top?:number, 
-        bottom?:number
+        top?:Radius, 
+        bottom?:Radius
       }
    */
   static vertical(config?: BorderRadiusConfig){
@@ -2151,8 +2167,8 @@ export class BorderRadius  extends DartClass {
   /**
    * @param config config: 
       {
-        left?:number, 
-        right?:number
+        left?:Radius, 
+        right?:Radius
       }
    */
   static horizontal(config?: BorderRadiusConfig){
@@ -2168,10 +2184,10 @@ export class BorderRadius  extends DartClass {
   /**
    * @param config config: 
       {
-        topLeft?:number, 
-        topRight?:number, 
-        bottomLeft?:number, 
-        bottomRight?:number,
+        topLeft?:Radius, 
+        topRight?:Radius, 
+        bottomLeft?:Radius, 
+        bottomRight?:Radius,
       }
    */
   static only(config?: BorderRadiusConfig){
@@ -2186,6 +2202,108 @@ export class BorderRadius  extends DartClass {
     return v;
   }
 }
+
+//****** BorderRadiusDirectional ******
+interface BorderRadiusDirectionalConfig {
+  top?:Radius;
+  bottom?:Radius;
+  start?:Radius;
+  end?:Radius;
+
+  topStart?:Radius;
+  topEnd?:Radius;
+  bottomStart?:Radius;
+  bottomEnd?:Radius;
+}
+export class BorderRadiusDirectional  extends DartClass {
+  radius?:Radius| number;
+  top?:Radius;
+  bottom?:Radius;
+
+  start?:Radius;
+  end?:Radius;
+
+  topStart?:Radius;
+  topEnd?:Radius;
+  bottomStart?:Radius;
+  bottomEnd?:Radius;
+
+  static zero(){
+    let o = new BorderRadiusDirectional();
+    o.constructorName = "zero";
+    return o;
+  }
+
+  static all(radius:Radius){
+    let v = new BorderRadiusDirectional();
+    v.constructorName = "all";
+    v.radius = radius;
+    return v;
+  }
+
+  static circular(radius:number){
+    let v = new BorderRadiusDirectional();
+    v.constructorName = "circular";
+    v.radius = radius;
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        top?:Radius, 
+        bottom?:Radius
+      }
+   */
+  static vertical(config?: BorderRadiusDirectionalConfig){
+    let v = new BorderRadiusDirectional();
+    v.constructorName = "vertical";
+    if(config!=null && config!=undefined){
+      v.top = config.top;
+      v.bottom = config.bottom;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        start?:Radius, 
+        end?:Radius
+      }
+   */
+  static horizontal(config?: BorderRadiusDirectionalConfig){
+    let v = new BorderRadiusDirectional();
+    v.constructorName = "horizontal";
+    if(config!=null && config!=undefined){
+      v.start = config.start;
+      v.end = config.end;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        topStart?:Radius, 
+        topEnd?:Radius, 
+        bottomLeft?:Radius, 
+        bottomRight?:Radius,
+      }
+   */
+  static only(config?: BorderRadiusDirectionalConfig){
+    let v = new BorderRadiusDirectional();
+    v.constructorName = "only";
+    if(config!=null && config!=undefined){
+      v.topStart = config.topStart;
+      v.topEnd = config.topEnd;
+      v.bottomStart = config.bottomStart;
+      v.bottomEnd = config.bottomEnd;
+    }
+    return v;
+  }
+}
+
 
 //****** Border ******
 interface BorderConfig {
@@ -2207,6 +2325,10 @@ export class Border extends DartClass {
   left?:BorderSide;
   vertical?:BorderSide;
   horizontal?:BorderSide;
+
+  color?:Color;
+  width?:number;
+  style?:BorderStyle;
 
   /**
    * @param config config: 
@@ -2237,9 +2359,13 @@ export class Border extends DartClass {
       }
    */
   static all(config: BorderConfig) {
-    var side = BorderSide.new({color:config.color,width:config.width,style:config.style});
-    var v = Border.new({top:side,right:side,bottom:side,left:side});
+    var v = new Border();  
     v.constructorName = "all";
+    if(config!=null && config!=undefined){
+      v.color = config.color;
+      v.width = config.width;
+      v.style = config.style;
+    }
     return v;
   }
 
@@ -2372,18 +2498,20 @@ interface BoxDecorationConfig {
   border?:Border;
   borderRadius?:BorderRadius;
   boxShadow?:BoxShadow;
-  gradient?:BaseGradient;
+  gradient?:Gradient;
   backgroundBlendMode?:BlendMode;
   shape?:BoxShape;
+  image?:DecorationImage;
 }
 export class BoxDecoration extends DartClass {
   color?:Color;
   border?:Border;
   borderRadius?:BorderRadius;
   boxShadow?:BoxShadow;
-  gradient?:BaseGradient;
+  gradient?:Gradient;
   backgroundBlendMode?:BlendMode;
   shape?:BoxShape;
+  image?:DecorationImage;
 
   /**
    * @param config config: 
@@ -2394,7 +2522,8 @@ export class BoxDecoration extends DartClass {
         boxShadow?:BoxShadow, 
         gradient?:BaseGradient 
         backgroundBlendMode?:BlendMode, 
-        shape?:BoxShape
+        shape?:BoxShape,
+        image?:DecorationImage, 
       }
     */
   static new(config?: BoxDecorationConfig){
@@ -2407,6 +2536,7 @@ export class BoxDecoration extends DartClass {
       v.gradient = config.gradient;
       v.backgroundBlendMode = config.backgroundBlendMode;
       v.shape = config.shape;
+      v.image = config.image;
     }
     return v;
   }
@@ -2723,27 +2853,6 @@ export class ClampingScrollPhysics extends DartClass {
   }
 }
 
-//****** CircleBorder ******
-interface CircleBorderConfig {
-  side?:BorderSide;
-}
-export class CircleBorder extends DartClass {
-  side?:BorderSide;
-
-  /**
-   * @param config config: 
-      {
-        side?:BorderSide,
-      }
-   */
-  static new(config: CircleBorderConfig) {
-    var v = new CircleBorder();
-    if(config!=null && config!=undefined){
-      v.side = config.side;
-    }
-    return v;
-  }
-}
 
 //****** CurveTween ******
 export class CurveTween extends FlutterWidget {
@@ -2979,6 +3088,37 @@ export class FlexColumnWidth extends DartClass {
   }
 }
 
+//****** FlutterLogoDecoration ******
+interface FlutterLogoDecorationConfig {
+  textColor?:Color;
+  style?:FlutterLogoStyle;
+  margin?:EdgeInsets;
+}
+export class FlutterLogoDecoration extends DartClass {
+  textColor?:Color;
+  style?:FlutterLogoStyle;
+  margin?:EdgeInsets;
+
+  /**
+   * @param config config: 
+      {
+        textColor?:Color, 
+        style?:FlutterLogoStyle, 
+        margin?:EdgeInsets, 
+      }
+   */
+  static new(config?: FlutterLogoDecorationConfig) {
+    var v = new FlutterLogoDecoration();
+    if(config!=null && config!=undefined){
+      v.textColor = config.textColor;
+      v.style = config.style;
+      v.margin = config.margin;
+    }
+    return v;
+  }
+}
+
+
 //****** FixedColumnWidth ******
 export class FixedColumnWidth extends DartClass {
   value?:number;
@@ -3016,46 +3156,199 @@ export class File extends DartClass {
   }
 }
 
-//****** FileImage ******
-interface FileImageConfig {
-  scale?:number;
+
+
+//#endregion
+
+//#region ------- G -------
+//****** GradientTransform ******
+export class GradientTransform extends DartClass {
+  radians?:number;
+
+  static rotation(radians?:number) {
+    var v = new GradientTransform();
+    v.constructorName = "rotation";
+    v.radians=radians;
+    return v;
+  }
 }
-export class FileImage extends DartClass {
-  file?:File;
-  scale?:number;
+
+//#endregion
+
+//#region ------- I -------
+
+//****** InputBorder ******
+interface InputBorderConfig {
+  borderSide?:BorderSide;
+  borderRadius?:BorderRadius;
+  gapPadding?:number;
+}
+
+export class InputBorder extends DartClass {
+
+  borderSide?:BorderSide;
+  borderRadius?:BorderRadius;
+  gapPadding?:number;
+
+  static none() {
+    var v = new InputBorder();
+    v.constructorName= "none";
+    return v;
+  }
 
   /**
    * @param config config: 
       {
-        file?:File,
+        borderSide?:BorderSide, 
+        borderRadius?:BorderRadius, 
+        gapPadding?:number,
+      }
+   */
+  static outline(config?: InputBorderConfig) {
+    var v = new InputBorder();
+    v.constructorName= "outline";
+    if(config!=null && config!=undefined){
+      v.borderRadius = config.borderRadius;
+      v.borderSide = config.borderSide;
+      v.gapPadding = config.gapPadding;
+    }
+    return v;
+  }
+  
+  /**
+   * @param config config: 
+      {
+        borderSide?:BorderSide, 
+        borderRadius?:BorderRadius,
+      }
+   */
+  static underline(config?: InputBorderConfig) {
+    var v = new InputBorder();
+    v.constructorName= "underline";
+    if(config!=null && config!=undefined){
+      v.borderRadius=config.borderRadius;
+      v.borderSide=config.borderSide;
+    }
+    return v;
+  };
+
+}
+
+//****** ImageProvider ******
+interface ImageProviderConfig {
+  scale?:number;
+
+  width?:number;
+  height?:number;
+  allowUpscaling?:boolean;
+
+  bundle?:AssetBundle;
+  packageName?:string
+
+}
+export class ImageProvider extends DartClass {
+  file?:File;
+  scale?:number;
+  bytes?:Uint8List;
+  url?:string;
+  assetName?:string;
+  bundle?:AssetBundle;
+  packageName?:string;
+
+  width?:number;
+  height?:number;
+  allowUpscaling?:boolean;
+  imageProvider?:ImageProvider
+
+  /**
+   * @param config config: 
+      {
         scale?:number
       }
    */
-  static new(file:File,config?: FileImageConfig) {
-    var v = new FileImage();
+  static file(file:File,config?: ImageProviderConfig) {
+    var v = new ImageProvider();
     v.file = file;
+    v.constructorName = "file";
     if(config!=null && config!=undefined){
       v.scale = config.scale;
     }
     return v;
   }
-}
 
-//#endregion
+  /**
+   * @param config config: 
+      {
+        scale?:number,
+      }
+   */
+  static memory(bytes:Uint8List,config?: ImageProviderConfig) {
+    var v = new ImageProvider();
+    v.bytes = bytes;
+    v.constructorName = "memory";
+    if(config!=null && config!=undefined){
+      v.scale = config.scale;
+    }
+    return v;
+  }
 
-//#region ------- G -------
-//****** GlobalKey ******
-export class GlobalKey extends BaseKey {
-  debugLabel?:string;
-  static new(debugLabel?:string) {
-    var v = new GlobalKey();
-    v.debugLabel=debugLabel;
+   /**
+   * @param config config: 
+      {
+        scale?:number,
+      }
+   */
+  static network(url:string, config: ImageProviderConfig) {
+    var v = new ImageProvider();
+    v.url = url;
+    v.constructorName = "Network";
+    if(config!=null && config!=undefined){
+      v.scale = config.scale;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        width?:number, 
+        height?:number, 
+        allowUpscaling?:boolean, 
+      }
+   */
+  static resize(imageProvider?:ImageProvider,config?: ImageProviderConfig) {
+    var v = new ImageProvider();
+    v.constructorName = "resize";
+    v.imageProvider= imageProvider;
+    if(config!=null && config!=undefined){
+      v.width = config.width;
+      v.allowUpscaling= config.allowUpscaling;
+      v.height = config.height;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        assetName:string, 
+        scale?:number, 
+        bundle?:BaseAssetBundle, 
+        packageName?:string,
+      }
+   */
+  static exactAsset(assetName:string,config?: ImageProviderConfig) {
+    var v = new ImageProvider();
+    v.constructorName = "exactAsset";
+    v.assetName = assetName;
+    if(config!=null && config!=undefined){      
+      v.scale = config.scale;
+      v.bundle = config.bundle;
+      v.packageName = config.packageName;
+    }
     return v;
   }
 }
-//#endregion
-
-//#region ------- I -------
 
 //****** IconData ******
 interface IconDataConfig {
@@ -3120,25 +3413,14 @@ export class IconThemeData extends DartClass {
   }
 }
 
-//****** InputBorder ******
-export class InputBorder extends DartClass {
-  static new() {
-    return new InputBorder();
-  }
-  static none() {
-    let v = new InputBorder();
-    v.constructorName = "none";
-    return v;
-  }
-}
 
 //****** ImageShader ******
 export class ImageShader extends DartClass {
-  image?:Image;
+  image?:ImageProvider;
   tmx?:TileMode;
   tmy?:TileMode;
   matrix4?:Matrix4;
-  static new(image:Image,tmx:TileMode,tmy:TileMode,matrix4:Matrix4) {
+  static new(image:ImageProvider,tmx:TileMode,tmy:TileMode,matrix4:Matrix4) {
     var v = new ImageShader();
     v.image = image;
     v.tmx = tmx;
@@ -3447,54 +3729,33 @@ export class InputDecoration extends DartClass {
 
 //#region ------- K -------
 //****** Key ******
-export class Key extends BaseKey {
+export class Key extends DartClass {
   value?:string;
-  static new(value:string) {
+  debugLabel?:string;
+
+  static value(value:string) {
     var v = new Key();
+    v.constructorName = "value";
     v.value = value;
+    return v;
+  }
+
+  static unique() {
+    var v = new Key();
+    v.constructorName = "unique";
+    return v;
+  }
+
+  static global(debugLabel:string) {
+    var v = new Key();
+    v.constructorName = "global";
+    v.debugLabel = debugLabel;
     return v;
   }
 }
 //#endregion
 
 //#region ------- L -------
-//****** LinearGradient ******
-interface LinearGradientConfig {
-  begin?:Alignment;
-  end?:Alignment;
-  colors:Array<Color>;
-  stops?:Array<number>;
-  tileMode?:TileMode;
-}
-export class LinearGradient extends BaseGradient {
-  begin?:Alignment;
-  end?:Alignment;
-  colors?:Array<Color>;
-  stops?:Array<number>;
-  tileMode?:TileMode;
-
-  /**
-   * @param config config: 
-      {
-        begin?:Alignment, 
-        end?:Alignment, 
-        colors:Array<Color>, 
-        stops?:Array<number>, 
-        tileMode?:TileMode
-      }
-   */
-  static new (config: LinearGradientConfig) {
-    var v = new LinearGradient();
-    if(config!=null && config!=undefined){
-      v.begin = config.begin;
-      v.end = config.end;
-      v.colors = config.colors;
-      v.stops = config.stops;
-      v.tileMode = config.tileMode;
-    }
-    return v;
-  }
-}
 //#endregion
 
 //#region ------- M -------
@@ -3884,19 +4145,10 @@ export class MediaQueryData extends DartClass {
       return v;
   }
 }
+
 //#endregion
 
 //#region ------- N -------
-//****** NetworkAssetBundle ******
-export class NetworkAssetBundle extends BaseAssetBundle {
-  baseUrl?:Uri;
-  static new(baseUrl:Uri) {
-    var v = new NetworkAssetBundle();
-    v.baseUrl = baseUrl;
-    return v;
-  }
-}
-
 //****** NeverScrollableScrollPhysics ******
 export class NeverScrollableScrollPhysics extends DartClass {
   parent?:NeverScrollableScrollPhysics;
@@ -3913,6 +4165,7 @@ export class Notification extends DartClass {
     return new Notification();
   }
 }
+
 //#endregion
 
 //#region ------- O -------
@@ -3949,44 +4202,49 @@ export class Offset extends DartClass {
   }
 }
 
-//****** OutlineInputBorder ******
-interface OutlineInputBorderConfig {
-  borderSide?:BorderSide;
-  borderRadius?:BorderRadius;
-  gapPadding?:number;
+
+//****** OutlinedBorder ******
+interface OutlinedBorderConfig {
+  side?:BorderSide;
 }
-export class OutlineInputBorder extends DartClass {
-  borderSide?:BorderSide;
-  borderRadius?:BorderRadius;
-  gapPadding?:number;
+export class OutlinedBorder extends DartClass {
+  side?:BorderSide;
 
   /**
    * @param config config: 
       {
-        borderSide?:BorderSide, 
-        borderRadius?:BorderRadius, 
-        gapPadding?:number,
+        side?:BorderSide,
       }
    */
-  static new(config?: OutlineInputBorderConfig) {
-    var v = new OutlineInputBorder();
+  static circle(config?: OutlinedBorderConfig) {
+    var v = new OutlinedBorder();
+    v.constructorName = "circle";
     if(config!=null && config!=undefined){
-      v.borderRadius = config.borderRadius;
-      v.borderSide = config.borderSide;
-      v.gapPadding = config.gapPadding;
+      v.side = config.side;
+    }
+    return v;
+  }
+
+   /**
+   * @param config config: 
+      {
+        side?:BorderSide,
+      }
+   */
+  static stadium(config?: OutlinedBorderConfig) {
+    var v = new OutlinedBorder();
+    v.constructorName = "stadium";
+    if(config!=null && config!=undefined){
+      v.side = config.side;
     }
     return v;
   }
 }
+
+
 //#endregion
 
 //#region ------- P -------
-//****** PlatformAssetBundle ******
-export class PlatformAssetBundle extends BaseAssetBundle {
-  static new() {
-    return new PlatformAssetBundle();
-  }
-}
 //#endregion
 
 //#region ------- Q -------
@@ -4364,51 +4622,6 @@ export class RSTransform extends DartClass {
   
 }
 
-//****** RadialGradient ******
-interface RadialGradientConfig {
-  center?:Alignment;
-  radius?:number;
-  colors:Array<Color>;
-  stops?:Array<number>;
-  tileMode?:TileMode;
-  focal?:Alignment;
-  focalRadius?:number;
-}
-export class RadialGradient extends BaseGradient {
-  center?:Alignment;
-  radius?:number;
-  colors?:Array<Color>;
-  stops?:Array<number>;
-  tileMode?:TileMode;
-  focal?:Alignment;
-  focalRadius?:number;
-
-  /**
-   * @param config config: 
-      {
-        center?:Alignment, 
-        radius?:number, 
-        colors:Array<Color>, 
-        stops?:Array<number>, 
-        tileMode?:TileMode, 
-        focal?:Alignment, 
-        focalRadius?:number
-      }
-   */
-  static new (config: RadialGradientConfig) {
-    var v = new RadialGradient();
-    if(config!=null && config!=undefined){
-      v.center = config.center;
-      v.radius = config.radius;
-      v.colors = config.colors;
-      v.stops = config.stops;
-      v.tileMode = config.tileMode;
-      v.focal = config.focal;
-      v.focalRadius = config.focalRadius;
-    }
-    return v;
-  }
-}
 
 //****** RangeMaintainingScrollPhysics ******
 export class RangeMaintainingScrollPhysics extends DartClass {
@@ -4421,6 +4634,7 @@ export class RangeMaintainingScrollPhysics extends DartClass {
     return v;
   }
 }
+
 //#endregion
 
 //#region ------- S -------
@@ -4478,43 +4692,59 @@ export class Size extends DartClass {
   }
 }
 
-//****** SweepGradient ******
-interface SweepGradientConfig {
-  center?:Alignment;
-  startAngle?:number;
-  endAngle?:number;
-  colors:Array<Color>;
-  stops?:Array<number>;
-  tileMode?:TileMode;
+//****** StrutStyle ******
+interface StrutStyleConfig {
+  fontFamily?:string;
+  fontFamilyFallback?:Array<string>;
+  fontSize?:number;
+  height?:number;
+  leading?:number;
+  fontWeight?:FontWeight;
+  fontStyle?:FontStyle;
+  forceStrutHeight?:boolean;
+  debugLabel?:string;
+  packageName?:string;
 }
-export class SweepGradient extends DartClass {
-  center?:Alignment;
-  startAngle?:number;
-  endAngle?:number;
-  colors?:Array<Color>;
-  stops?:Array<number>;
-  tileMode?:TileMode;
+export class StrutStyle extends DartClass {
+  fontFamily?:string;
+  fontFamilyFallback?:Array<string>;
+  fontSize?:number;
+  height?:number;
+  leading?:number;
+  fontWeight?:FontWeight;
+  fontStyle?:FontStyle;
+  forceStrutHeight?:boolean;
+  debugLabel?:string;
+  packageName?:string;
 
   /**
    * @param config config: 
       {
-        center?:Alignment, 
-        startAngle?:number, 
-        endAngle?:number, 
-        colors:Array<Color>, 
-        stops?:Array<number>, 
-        tileMode?:TileMode,
+        fontFamily?:string, 
+        fontFamilyFallback?:Array<string>, 
+        fontSize?:number, 
+        height?:number, 
+        leading?:number, 
+        fontWeight?:FontWeight, 
+        fontStyle?:FontStyle, 
+        forceStrutHeight?:boolean, 
+        debugLabel?:string, 
+        packageName?:string, 
       }
    */
-  static new(config: SweepGradientConfig) {
-    var v = new SweepGradient();
+  static new(config: StrutStyleConfig) {
+    var v = new StrutStyle();
     if(config!=null && config!=undefined){
-      v.center = config.center;
-      v.startAngle = config.startAngle;
-      v.endAngle = config.endAngle;
-      v.colors = config.colors;
-      v.stops = config.stops;
-      v.tileMode = config.tileMode;
+      v.fontFamily = config.fontFamily;
+      v.fontFamilyFallback = config.fontFamilyFallback;
+      v.fontSize = config.fontSize;
+      v.height = config.height;
+      v.leading = config.leading;
+      v.fontWeight = config.fontWeight;
+      v.fontStyle = config.fontStyle;
+      v.forceStrutHeight = config.forceStrutHeight;
+      v.debugLabel = config.debugLabel;
+      v.packageName =config.packageName;
     }
     return v;
   }
@@ -4788,6 +5018,22 @@ export class ScrollbarPainter extends DartClass {
 //#endregion
 
 //#region ------- T -------
+//****** TextAlignVertical ******
+export class TextAlignVertical extends DartClass {
+  y?:number;
+  
+  static new(y:number){
+    var v = new TextAlignVertical();
+    v.y=y;
+    return v;
+  }
+
+  static top = TextAlignVertical.new(-1.0); 
+  static center = TextAlignVertical.new(0.0); 
+  static bottom = TextAlignVertical.new(1.0); 
+} 
+
+
 //****** TextStyle ******
 interface TextStyleConfig {
   inherit?:boolean;
@@ -5113,12 +5359,6 @@ export class Tween extends DartClass {
 //#endregion
 
 //#region ------- U -------
-//****** UniqueKey ******
-export class UniqueKey extends BaseKey {
-  static new(){
-    return new UniqueKey();
-  }
-}
 
 //****** Uri ******
 interface UriConfig {
@@ -5185,19 +5425,6 @@ export class Uint8List extends DartClass {
   }
 }
 
-//****** TODO UnderlineInputBorder ******
-export class UnderlineInputBorder extends DartClass {
-  borderSide?:BorderSide;
-  borderRadius?:BorderRadius;
-  
-  static new(borderSide?:BorderSide,borderRadius?:BorderRadius) {
-    var v = new UnderlineInputBorder();
-    v.borderRadius=borderRadius;
-    v.borderSide=borderSide;
-    return v;
-  };
-
-}
 
 //#endregion
 
@@ -8690,13 +8917,13 @@ export class CupertinoIcons extends IconData{
 
 //****** AbsorbPointer ******
 interface AbsorbPointerConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   absorbing?:boolean;
   ignoringSemantics?:boolean;
 }
 export class AbsorbPointer extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   absorbing?:boolean;
   ignoringSemantics?:boolean;
@@ -8704,7 +8931,7 @@ export class AbsorbPointer extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         absorbing?:boolean, 
         ignoringSemantics?:boolean, 
@@ -8879,7 +9106,7 @@ export class Animation extends FlutterWidget {
 
 //****** TODO AboutListTile ******
 interface AboutListTileConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   icon?:FlutterWidget;
   applicationName?:string;
@@ -8890,7 +9117,7 @@ interface AboutListTileConfig {
   aboutBoxChildren?:Array<FlutterWidget>;
 }
 export class AboutListTile extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   icon?:FlutterWidget;
   applicationName?:string;
@@ -8903,7 +9130,7 @@ export class AboutListTile extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         icon?:FlutterWidget, 
         applicationName?:string, 
@@ -8933,7 +9160,7 @@ export class AboutListTile extends FlutterWidget {
 
 //****** TODO AboutDialog ******
 interface AboutDialogConfig {
-  key?:BaseKey;
+  key?:Key;
   applicationName?:string;
   applicationLegalese?:string;
   applicationVersion?:string;
@@ -8941,7 +9168,7 @@ interface AboutDialogConfig {
   children?:Array<FlutterWidget>;
 }
 export class AboutDialog extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   applicationName?:string;
   applicationLegalese?:string;
   applicationVersion?:string;
@@ -8951,7 +9178,7 @@ export class AboutDialog extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         applicationName?:string, 
         applicationLegalese?:string, 
         applicationVersion?:string, 
@@ -8976,7 +9203,7 @@ export class AboutDialog extends FlutterWidget {
 
 //****** TODO AppBar ******
 interface AppBarConfig {
-  key?:BaseKey;
+  key?:Key;
   leading?:FlutterWidget;
   automaticallyImplyLeading?:boolean;
   title?:FlutterWidget;  
@@ -8997,7 +9224,7 @@ interface AppBarConfig {
   toolbarHeight?:number;
 }
 export class AppBar extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   leading?:FlutterWidget;
   automaticallyImplyLeading?:boolean;
   title?:FlutterWidget;  
@@ -9020,7 +9247,7 @@ export class AppBar extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         leading?:FlutterWidget, 
         automaticallyImplyLeading?:boolean, 
         title?:FlutterWidget, 
@@ -9070,7 +9297,7 @@ export class AppBar extends FlutterWidget {
 
 //****** Align ******
 interface AlignConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   alignment?:Alignment;
   widthFactor?:number;
@@ -9078,7 +9305,7 @@ interface AlignConfig {
   
 }
 export class Align extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   alignment?:Alignment;
   widthFactor?:number;
@@ -9087,7 +9314,7 @@ export class Align extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget,
       alignment?:Alignment, 
       widthFactor?:number, 
@@ -9111,17 +9338,17 @@ export class Align extends FlutterWidget {
 interface AspectRatioConfig {
   child?:FlutterWidget;
   aspectRatio:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class AspectRatio extends FlutterWidget {
   child?:FlutterWidget;
   aspectRatio?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         aspectRatio:number,
       }
@@ -9139,13 +9366,13 @@ export class AspectRatio extends FlutterWidget {
 
 //****** TODO AnnotatedRegion ******
 interface AnnotatedRegionConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   value?:number;
   sized?:boolean;
 }
 export class AnnotatedRegion extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   value?:number;
   sized?:boolean;
@@ -9153,7 +9380,7 @@ export class AnnotatedRegion extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         value?:number, 
         sized?:boolean,
@@ -9173,7 +9400,7 @@ export class AnnotatedRegion extends FlutterWidget {
 
 //****** TODO AnimatedCrossFade ******
 interface AnimatedCrossFadeConfig {
-  key?:BaseKey;
+  key?:Key;
   firstChild?:FlutterWidget;
   secondChild?:FlutterWidget;
   firstCurve?:Curve;
@@ -9186,7 +9413,7 @@ interface AnimatedCrossFadeConfig {
   layoutBuilder?:any;
 }
 export class AnimatedCrossFade extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   firstChild?:FlutterWidget;
   secondChild?:FlutterWidget;
   firstCurve?:Curve;
@@ -9200,7 +9427,7 @@ export class AnimatedCrossFade extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         firstChild?:FlutterWidget, 
         secondChild?:FlutterWidget, 
         firstCurve?:Curve, 
@@ -9234,7 +9461,7 @@ export class AnimatedCrossFade extends FlutterWidget {
 
 //****** TODO AnimatedOpacity ******
 interface AnimatedOpacityConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   opacity?:number;
   curve?:Curve;
@@ -9243,7 +9470,7 @@ interface AnimatedOpacityConfig {
   alwaysIncludeSemantics?:boolean;
 }
 export class AnimatedOpacity extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   opacity?:number;
   curve?:Curve;
@@ -9254,7 +9481,7 @@ export class AnimatedOpacity extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         opacity?:number, 
         curve?:Curve, 
@@ -9280,14 +9507,14 @@ export class AnimatedOpacity extends FlutterWidget {
 
 //****** TODO AnimatedBuilder ******
 interface AnimatedBuilderConfig {
-  key?:BaseKey;
+  key?:Key;
   animation?:Animation;
   builder?:any;
   child?:FlutterWidget;
   widget?:FlutterWidget;
 }
 export class AnimatedBuilder extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   animation?:Animation;
   builder?:any;
   child?:FlutterWidget;
@@ -9296,7 +9523,7 @@ export class AnimatedBuilder extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         animation?:Animation, 
         builder?:any, 
         child?:FlutterWidget, 
@@ -9316,7 +9543,7 @@ export class AnimatedBuilder extends FlutterWidget {
 
 //****** TODO AnimatedContainer ******
 interface AnimatedContainerConfig {
-  key?:BaseKey;
+  key?:Key;
   alignment?:Alignment;
   margin?:EdgeInsets;
   padding?:EdgeInsets;
@@ -9333,7 +9560,7 @@ interface AnimatedContainerConfig {
   onEnd?:VoidCallback;
 }
 export class AnimatedContainer extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   alignment?:Alignment;
   margin?:EdgeInsets;
   padding?:EdgeInsets;
@@ -9352,7 +9579,7 @@ export class AnimatedContainer extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         alignment?:Alignment, 
         margin?:EdgeInsets, 
         padding?:EdgeInsets, 
@@ -9395,7 +9622,7 @@ export class AnimatedContainer extends FlutterWidget {
 
 //****** TODO AnimatedPhysicalModel ******
 interface AnimatedPhysicalModelConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   shape?:any;
   clipBehavior?:Clip;
@@ -9410,7 +9637,7 @@ interface AnimatedPhysicalModelConfig {
   onEnd?:VoidCallback;
 }
 export class AnimatedPhysicalModel extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   shape?:any;
   clipBehavior?:Clip;
@@ -9427,7 +9654,7 @@ export class AnimatedPhysicalModel extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         shape?:any, 
         clipBehavior?:Clip, 
@@ -9465,7 +9692,7 @@ export class AnimatedPhysicalModel extends FlutterWidget {
 
 //****** TODO AnimatedPositioned ******
 interface AnimatedPositionedConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   left?:number;
   top?:number;
@@ -9478,7 +9705,7 @@ interface AnimatedPositionedConfig {
   onEnd?:VoidCallback;
 }
 export class AnimatedPositioned extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   left?:number;
   top?:number;
@@ -9493,7 +9720,7 @@ export class AnimatedPositioned extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         left?:number, 
         top?:number, 
@@ -9526,7 +9753,7 @@ export class AnimatedPositioned extends FlutterWidget {
 
 //****** TODO AnimatedSize ******
 interface AnimatedSizeConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   alignment?:Alignment;
   curve?:Curve;
@@ -9535,7 +9762,7 @@ interface AnimatedSizeConfig {
   vsync?:any;
 }
 export class AnimatedSize extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   alignment?:Alignment;
   curve?:Curve;
@@ -9546,7 +9773,7 @@ export class AnimatedSize extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         alignment?:Alignment, 
         curve?:Curve, 
@@ -9572,7 +9799,7 @@ export class AnimatedSize extends FlutterWidget {
 
 //****** TODO AnimatedDefaultTextStyle ******
 interface AnimatedDefaultTextStyleConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   style?:TextStyle;
   textAlign?:TextAlign;
@@ -9584,7 +9811,7 @@ interface AnimatedDefaultTextStyleConfig {
   onEnd?:VoidCallback;
 }
 export class AnimatedDefaultTextStyle extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   style?:TextStyle;
   textAlign?:TextAlign;
@@ -9597,7 +9824,7 @@ export class AnimatedDefaultTextStyle extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         style?:TextStyle, 
         textAlign?:TextAlign, 
@@ -9666,7 +9893,7 @@ export class BottomNavigationBarItem extends FlutterWidget {
 
 //****** Banner ******
 interface BannerConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   message:string;
   textDirection?:TextDirection;
@@ -9676,7 +9903,7 @@ interface BannerConfig {
   textStyle?:TextStyle;
 }
 export class Banner extends FlutterWidget  {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   message?:string;
   textDirection?:TextDirection;
@@ -9688,7 +9915,7 @@ export class Banner extends FlutterWidget  {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         message:string, 
         textDirection?:TextDirection, 
@@ -9719,18 +9946,18 @@ interface BaselineConfig {
   child?:FlutterWidget;
   baseline:number;
   baselineType:TextBaseline;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Baseline extends FlutterWidget  {
   child?:FlutterWidget;
   baseline?:number;
   baselineType?:TextBaseline;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey,
+        key?:Key,
         child?:FlutterWidget,
         baseline:number,
         baselineType:TextBaseline,
@@ -9750,7 +9977,7 @@ export class Baseline extends FlutterWidget  {
 
 //****** ButtonBar ******
 interface ButtonBarConfig {
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
   alignment?:MainAxisAlignment;
   mainAxisSize?:MainAxisSize;
@@ -9764,7 +9991,7 @@ interface ButtonBarConfig {
   overflowDirection?:VerticalDirection;
 }
 export class ButtonBar extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
   alignment?:MainAxisAlignment;
   mainAxisSize?:MainAxisSize;
@@ -9780,7 +10007,7 @@ export class ButtonBar extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         children?:Array<FlutterWidget>, 
         alignment?:MainAxisAlignment, 
         mainAxisSize?:MainAxisSize, 
@@ -9818,17 +10045,17 @@ export class ButtonBar extends FlutterWidget {
 interface BlockSemanticsConfig {
   child?:FlutterWidget;
   blocking?:boolean;
-  key?:BaseKey;
+  key?:Key;
 }
 export class BlockSemantics extends FlutterWidget {
   child?:FlutterWidget;
   blocking?:boolean;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         blocking?:boolean,
       }
@@ -9852,7 +10079,7 @@ interface BottomAppBarConfig {
   shape?:any;
   clipBehavior?:Clip;
   notchMargin?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class BottomAppBar extends FlutterWidget {
   child?:FlutterWidget;
@@ -9861,12 +10088,12 @@ export class BottomAppBar extends FlutterWidget {
   shape?:any;
   clipBehavior?:Clip;
   notchMargin?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         color?:Color, 
         elevation?:number, 
@@ -9892,7 +10119,7 @@ export class BottomAppBar extends FlutterWidget {
 
 //****** BottomNavigationBar ******
 interface BottomNavigationBarConfig {
-  key?:BaseKey;
+  key?:Key;
   items:Array<BottomNavigationBarItem>;
   onTap?:VoidValueChangedNumber;
   currentIndex?:number;
@@ -9913,7 +10140,7 @@ interface BottomNavigationBarConfig {
 }
 
 export class BottomNavigationBar extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   items?:Array<BottomNavigationBarItem>;
   onTap?:VoidValueChangedNumber;
   currentIndex?:number;
@@ -9935,7 +10162,7 @@ export class BottomNavigationBar extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         items:Array<BottomNavigationBarItem>, 
         onTap?:VoidValueChangedInt, 
         currentIndex?:number, 
@@ -9984,11 +10211,11 @@ export class BottomNavigationBar extends FlutterWidget {
 //****** TODO Builder ******
 interface BuilderConfig {
   builder?:any;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Builder extends FlutterWidget {
   builder?:any;
-  key?:BaseKey;
+  key?:Key;
   child?:Builder;
 
   preBuild(jsWidgetHelper?:any, buildContext?:JSBuildContext) {
@@ -9999,7 +10226,7 @@ export class Builder extends FlutterWidget {
     super.preBuild(jsWidgetHelper, buildContext);
   }
 
-  static new(builder?:any, key?:BaseKey) {
+  static new(builder?:any, key?:Key) {
     var v = new Builder();
     v.key = key;
     v.builder = builder;
@@ -10026,7 +10253,7 @@ interface ContainerConfig {
   foregroundDecoration?:BoxDecoration;
   constraints?:BoxConstraints;
   transform?:Matrix4;
-  key?:BaseKey;
+  key?:Key;
   clipBehavior?:Clip;
 }
 export class Container extends FlutterWidget {
@@ -10041,13 +10268,13 @@ export class Container extends FlutterWidget {
   foregroundDecoration?:BoxDecoration;
   constraints?:BoxConstraints;
   transform?:Matrix4;
-  key?:BaseKey;
+  key?:Key;
   clipBehavior?:Clip;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         alignment?:Alignment, 
         margin?:EdgeInsets, 
@@ -10088,18 +10315,18 @@ interface CenterConfig {
   child?:FlutterWidget;
   widthFactor?:number;
   heightFactor?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Center extends FlutterWidget {
   child?:FlutterWidget;
   widthFactor?:number;
   heightFactor?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         widthFactor?:number, 
         heightFactor?:number, 
@@ -10119,19 +10346,19 @@ export class Center extends FlutterWidget {
 
 //****** ColoredBox ******
 interface ColoredBoxConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   color:Color;
 }
 export class ColoredBox extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   color?:Color;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         color:Color, 
       }
@@ -10150,7 +10377,7 @@ export class ColoredBox extends FlutterWidget {
 
 //****** CircleAvatar ******
 interface CircleAvatarConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   backgroundColor?:Color;
   foregroundColor?:Color
@@ -10160,7 +10387,7 @@ interface CircleAvatarConfig {
   maxRadius?:number;
 }
 export class CircleAvatar extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   backgroundColor?:Color;
   foregroundColor?:Color
@@ -10179,7 +10406,7 @@ export class CircleAvatar extends FlutterWidget {
         backgroundImage?:any,
         minRadius?:number, 
         maxRadius?:number,
-        key?:BaseKey, 
+        key?:Key, 
       }
    */
   static new(config: CircleAvatarConfig) {
@@ -10200,7 +10427,7 @@ export class CircleAvatar extends FlutterWidget {
 
 //****** Chip ******
 interface ChipConfig {
-  key?:BaseKey;
+  key?:Key;
   avatar?:FlutterWidget;
   label:FlutterWidget;
   labelStyle?:TextStyle;
@@ -10219,7 +10446,7 @@ interface ChipConfig {
   autofocus?:boolean;
 }
 export class Chip extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   avatar?:FlutterWidget;
   label?:FlutterWidget;
   labelStyle?:TextStyle;
@@ -10253,7 +10480,7 @@ export class Chip extends FlutterWidget {
         padding?:EdgeInsets, 
         materialTapTargetSize?:MaterialTapTargetSize,
         elevation?:number,
-        key?:BaseKey,
+        key?:Key,
         shadowColor?:Color,
         visualDensity?:VisualDensity,
         autofocus?:boolean,
@@ -10286,17 +10513,17 @@ export class Chip extends FlutterWidget {
 
 //****** CheckedModeBanner ******
 interface CheckedModeBannerConfig {
-  key?:BaseKey;
+  key?:Key;
   child:FlutterWidget;
 }
 export class CheckedModeBanner extends FlutterWidget  {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child:FlutterWidget, 
       }
    */
@@ -10312,13 +10539,13 @@ export class CheckedModeBanner extends FlutterWidget  {
 
 //****** TODO ClipRRect ******
 interface ClipRRectConfig {
-  key?:BaseKey;
+  key?:Key;
   borderRadius?:BorderRadius;
   clipBehavior?:Clip;
   child?:FlutterWidget;
 }
 export class ClipRRect extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   borderRadius?:BorderRadius;
   clipBehavior?:Clip;
   child?:FlutterWidget;
@@ -10329,7 +10556,7 @@ export class ClipRRect extends FlutterWidget {
         child?:FlutterWidget,
         borderRadius?:BorderRadius,
         clipBehavior?:Clip,
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: ClipRRectConfig){
@@ -10346,21 +10573,21 @@ export class ClipRRect extends FlutterWidget {
 
 //****** ConstrainedBox ******
 interface ConstrainedBoxConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   constraints:BoxConstraints;  
 }
 export class ConstrainedBox extends FlutterWidget {
   child?:FlutterWidget;
   constraints?:BoxConstraints;
-  key?:BaseKey;
+  key?:Key;
   
   /**
    * @param config config: 
       {
         child?:FlutterWidget, 
         constraints:BoxConstraints, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: ConstrainedBoxConfig) {
@@ -10376,21 +10603,21 @@ export class ConstrainedBox extends FlutterWidget {
 
 //****** TODO CustomSingleChildLayout ******
 interface CustomSingleChildLayoutConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   delegate?:any;
 }
 export class CustomSingleChildLayout extends FlutterWidget {
   child?:FlutterWidget;
   delegate?:any;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
         child?:FlutterWidget, 
         delegate?:any, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: CustomSingleChildLayoutConfig) {
@@ -10406,7 +10633,7 @@ export class CustomSingleChildLayout extends FlutterWidget {
 
 //****** Column ******
 interface ColumnConfig {
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
   mainAxisAlignment?:MainAxisAlignment;
   crossAxisAlignment?:CrossAxisAlignment;
@@ -10423,7 +10650,7 @@ export class Column extends FlutterWidget {
   textDirection?:TextDirection;
   verticalDirection?:VerticalDirection;
   textBaseline?:TextBaseline;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -10435,7 +10662,7 @@ export class Column extends FlutterWidget {
         textDirection?:TextDirection, 
         verticalDirection?:VerticalDirection,
         textBaseline?:TextBaseline, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: ColumnConfig) {
@@ -10456,21 +10683,21 @@ export class Column extends FlutterWidget {
 
 //****** TODO CustomMultiChildLayout ******
 interface CustomMultiChildLayoutConfig {
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
   delegate?:any;
 }
 export class CustomMultiChildLayout extends FlutterWidget {
   children?:Array<FlutterWidget>;
   delegate?:any;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
         children?:Array<FlutterWidget>, 
         delegate?:any, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: CustomMultiChildLayoutConfig) {
@@ -10486,7 +10713,7 @@ export class CustomMultiChildLayout extends FlutterWidget {
 
 //****** CustomScrollView ******
 interface CustomScrollViewConfig {
-  key?:BaseKey;
+  key?:Key;
   slivers?:Array<FlutterWidget>;
   controller?:ScrollController;
   scrollDirection?:Axis;
@@ -10494,7 +10721,7 @@ interface CustomScrollViewConfig {
   primary?:boolean;
   physics?:ScrollPhysics;
   shrinkWrap?:boolean;
-  center?:BaseKey;
+  center?:Key;
   anchor?:number;
   cacheExtent?:number;
   semanticChildCount?:number;
@@ -10504,7 +10731,7 @@ interface CustomScrollViewConfig {
 
 }
 export class CustomScrollView extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   slivers?:Array<FlutterWidget>;
   controller?:ScrollController;
   scrollDirection?:Axis;
@@ -10512,7 +10739,7 @@ export class CustomScrollView extends FlutterWidget {
   primary?:boolean;
   physics?:ScrollPhysics;
   shrinkWrap?:boolean;
-  center?:BaseKey;
+  center?:Key;
   anchor?:number;
   cacheExtent?:number;
   semanticChildCount?:number;
@@ -10522,7 +10749,7 @@ export class CustomScrollView extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         slivers?:Array<FlutterWidget>, 
         controller?:ScrollController, 
         scrollDirection?:Axis, 
@@ -10530,7 +10757,7 @@ export class CustomScrollView extends FlutterWidget {
         primary?:boolean, 
         physics?:ScrollPhysics, 
         shrinkWrap?:boolean, 
-        center?:BaseKey, 
+        center?:Key, 
         anchor?:number, 
         cacheExtent?:number, 
         semanticChildCount?:number, 
@@ -10564,7 +10791,7 @@ export class CustomScrollView extends FlutterWidget {
 
 //****** Card ******
 interface CardConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   margin?:EdgeInsets;
   color?:Color;
@@ -10576,7 +10803,7 @@ interface CardConfig {
   borderOnForeground?:boolean;
 }
 export class Card extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   margin?:EdgeInsets;
   color?:Color;
@@ -10590,7 +10817,7 @@ export class Card extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey,
+        key?:Key,
         child?:FlutterWidget, 
         margin?:EdgeInsets, 
         color?:Color,
@@ -10624,7 +10851,7 @@ export class Card extends FlutterWidget {
 //#region ------- D -------
 //****** Divider ******
 interface DividerConfig {
-    key?:BaseKey;
+    key?:Key;
     height?:number;
     thickness?:number;
     indent?:number;
@@ -10632,7 +10859,7 @@ interface DividerConfig {
     color?:Color;
 }
 export class Divider extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   height?:number;
   thickness?:number;
   indent?:number;
@@ -10642,7 +10869,7 @@ export class Divider extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       height?:number, 
       thickness?:number, 
       indent?:number, 
@@ -10666,19 +10893,19 @@ export class Divider extends FlutterWidget {
 
 //****** Directionality ******
 interface DirectionalityConfig {
-  key?:BaseKey;
+  key?:Key;
   child:FlutterWidget;
   textDirection:TextDirection;
 }
 export class Directionality extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   textDirection?:TextDirection;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey,
+        key?:Key,
         child:FlutterWidget,
         textDirection:TextDirection,
       }
@@ -10698,13 +10925,13 @@ export class Directionality extends FlutterWidget {
 interface DropdownMenuItemConfig {
   child:FlutterWidget;  
   value?:number;
-  key?:BaseKey;
+  key?:Key;
   onTap?:VoidCallback;
 }
 export class DropdownMenuItem extends FlutterWidget {
   child?:FlutterWidget;  
   value?:number;
-  key?:BaseKey;
+  key?:Key;
   onTap?:VoidCallback;
 
   /**
@@ -10712,7 +10939,7 @@ export class DropdownMenuItem extends FlutterWidget {
       {
         child:FlutterWidget,
         value?:number,
-        key?:BaseKey,
+        key?:Key,
         onTap?:VoidCallback,
       }
    */
@@ -10734,13 +10961,13 @@ interface DecoratedBoxConfig {
   child?:FlutterWidget;
   decoration:BoxDecoration;
   position?:DecorationPosition;
-  key?:BaseKey;
+  key?:Key;
 }
 export class DecoratedBox extends FlutterWidget {
   child?:FlutterWidget;
   decoration?:BoxDecoration;
   position?:DecorationPosition;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -10748,7 +10975,7 @@ export class DecoratedBox extends FlutterWidget {
         child?:FlutterWidget, 
         decoration:BoxDecoration, 
         position?:DecorationPosition, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: DecoratedBoxConfig) {
@@ -10775,7 +11002,7 @@ interface DropdownButtonConfig {
   iconSize?:number;
   isDense?:boolean;
   isExpanded?:boolean;
-  key?:BaseKey;
+  key?:Key;
 }
 export class DropdownButton extends FlutterWidget {
   items?:Array<DropdownMenuItem>;
@@ -10788,7 +11015,7 @@ export class DropdownButton extends FlutterWidget {
   iconSize?:number;
   isDense?:boolean;
   isExpanded?:boolean;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -10802,7 +11029,7 @@ export class DropdownButton extends FlutterWidget {
         iconSize?:number,
         isDense?:boolean, 
         isExpanded?:boolean, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: DropdownButtonConfig) {
@@ -10829,13 +11056,13 @@ interface DefaultTabControllerConfig {
   child?:FlutterWidget;
   length?:number;
   initialIndex?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class DefaultTabController extends FlutterWidget {
   child?:FlutterWidget;
   length?:number;
   initialIndex?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -10843,7 +11070,7 @@ export class DefaultTabController extends FlutterWidget {
         child?:FlutterWidget, 
         length?:number, 
         initialIndex?:number, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: DefaultTabControllerConfig) {
@@ -10916,7 +11143,7 @@ interface DefaultTextStyleConfig {
   softWrap?:boolean;
   overflow?:TextOverflow;
   maxLines?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class DefaultTextStyle extends FlutterWidget {
   child?:FlutterWidget;
@@ -10925,7 +11152,7 @@ export class DefaultTextStyle extends FlutterWidget {
   softWrap?:boolean;
   overflow?:TextOverflow;
   maxLines?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -10936,7 +11163,7 @@ export class DefaultTextStyle extends FlutterWidget {
         softWrap?:boolean, 
         overflow?:TextOverflow, 
         maxLines?:number, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: DefaultTextStyleConfig) {
@@ -10956,20 +11183,20 @@ export class DefaultTextStyle extends FlutterWidget {
 
 //****** TODO DecoratedBoxTransition ******
 interface DecoratedBoxTransitionConfig {
-  key?:BaseKey;
+  key?:Key;
   decoration?:any;
   position?:DecorationPosition;
   child?:FlutterWidget;
 }
 export class DecoratedBoxTransition extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   decoration?:any;
   position?:DecorationPosition;
   child?:FlutterWidget;
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         decoration?:any, 
         position?:DecorationPosition, 
         child?:FlutterWidget
@@ -10993,17 +11220,17 @@ export class DecoratedBoxTransition extends FlutterWidget {
 interface ExcludeSemanticsConfig {
   child?:FlutterWidget;
   excluding?:boolean;
-  key?:BaseKey;
+  key?:Key;
 }
 export class ExcludeSemantics extends FlutterWidget {
   child?:FlutterWidget;
   excluding?:boolean;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         excluding?:boolean,
       }
@@ -11023,19 +11250,19 @@ export class ExcludeSemantics extends FlutterWidget {
 interface ExpandedConfig {
   child:FlutterWidget;
   flex?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Expanded extends FlutterWidget {
   child?:FlutterWidget;
   flex?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
         child:FlutterWidget, 
         flex?:number, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: ExpandedConfig) {
@@ -11051,7 +11278,7 @@ export class Expanded extends FlutterWidget {
 
 //****** TODO ExpansionTile ******
 interface ExpansionTileConfig {
-    key?:BaseKey;
+    key?:Key;
     leading?:FlutterWidget;
     title?:FlutterWidget;
     subtitle?:FlutterWidget;
@@ -11067,7 +11294,7 @@ interface ExpansionTileConfig {
     childrenPadding?:EdgeInsets;
 }
 export class ExpansionTile extends FlutterWidget {
-    key?:BaseKey;
+    key?:Key;
     leading?:FlutterWidget;
     title?:FlutterWidget;
     subtitle?:FlutterWidget;
@@ -11085,7 +11312,7 @@ export class ExpansionTile extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         leading?:FlutterWidget, 
         title?:FlutterWidget, 
         subtitle?:FlutterWidget, 
@@ -11123,52 +11350,45 @@ export class ExpansionTile extends FlutterWidget {
   }
 }
 
-//****** TODO ExactAssetImage ******
-interface ExactAssetImageConfig {
-  assetName?:string;
-  scale?:number;
-  bundle?:BaseAssetBundle;
-  packageName?:string;
-}
-export class ExactAssetImage extends FlutterWidget {
-  assetName?:string;
-  scale?:number;
-  bundle?:BaseAssetBundle;
-  packageName?:string;
-
-  /**
-   * @param config config: 
-      {
-        assetName:string, 
-        scale?:number, 
-        bundle?:BaseAssetBundle, 
-        packageName?:string,
-      }
-   */
-  static new(config: ExactAssetImageConfig) {
-    var v = new ExactAssetImage();
-    if(config!=null && config!=undefined){
-      v.assetName = config.assetName;
-      v.scale = config.scale;
-      v.bundle = config.bundle;
-      v.packageName = config.packageName;
-    }
-    return v;
-  }
-}
 //#endregion
 
 //#region ------- F -------
+//****** FractionalOffset ******
+export class FractionalOffset extends DartClass {
+  dx?:number;
+  dy?:number;
+
+  static new(dx:number, dy:number) {
+    var v = new Offset();
+    v.dx = dx;
+    v.dy = dy;
+    return v;
+  }
+
+  static topLeft = FractionalOffset.new(0.0, 0.0); 
+  static topCenter = FractionalOffset.new(0.5, 0.0); 
+  static topRight = FractionalOffset.new(1.0, 0.0); 
+
+  static centerLeft = FractionalOffset.new(0.0, 0.5); 
+  static center = FractionalOffset.new(0.5, 0.5); 
+  static centerRight = FractionalOffset.new(1.0, 0.5);
+
+  static bottomLeft = FractionalOffset.new(0.0, 1.0);
+  static bottomCenter = FractionalOffset.new(0.5, 1.0);
+  static bottomRight = FractionalOffset.new(1.0, 1.0); 
+
+}
+
 //****** Flexible ******
 interface FlexibleConfig {
-  key?:BaseKey;
+  key?:Key;
   child:FlutterWidget;
   flex?:number;
   fit?:FlexFit;
   
 }
 export class Flexible extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   flex?:number;
   fit?:FlexFit;
@@ -11176,7 +11396,7 @@ export class Flexible extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child:FlutterWidget, 
         flex?:number, 
         fit?:FlexFit,
@@ -11196,7 +11416,7 @@ export class Flexible extends FlutterWidget {
 
 //****** FittedBox ******
 interface FittedBoxConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   alignment?:Alignment;
   fit?:BoxFit;
@@ -11205,12 +11425,12 @@ export class FittedBox extends FlutterWidget {
   child?:FlutterWidget;
   alignment?:Alignment;
   fit?:BoxFit;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       alignment?:Alignment, 
       fit?:BoxFit,
@@ -11234,14 +11454,14 @@ interface FractionallySizedBoxConfig {
   alignment?:Alignment;
   widthFactor?:number;
   heightFactor?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class FractionallySizedBox extends FlutterWidget {
   child?:FlutterWidget;
   alignment?:Alignment;
   widthFactor?:number;
   heightFactor?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -11250,7 +11470,7 @@ export class FractionallySizedBox extends FlutterWidget {
         alignment?:Alignment, 
         widthFactor?:number, 
         heightFactor?:number, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: FractionallySizedBoxConfig) {
@@ -11269,7 +11489,7 @@ export class FractionallySizedBox extends FlutterWidget {
 
 //****** Flex ******
 interface FlexConfig {
-  key?:BaseKey;
+  key?:Key;
   direction:Axis;
   mainAxisAlignment?:MainAxisAlignment;
   mainAxisSize?:MainAxisSize;
@@ -11281,7 +11501,7 @@ interface FlexConfig {
   children?:Array<FlutterWidget>;
 }
 export class Flex extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   direction?:Axis;
   mainAxisAlignment?:MainAxisAlignment;
   mainAxisSize?:MainAxisSize;
@@ -11295,7 +11515,7 @@ export class Flex extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         direction:Axis, 
         mainAxisAlignment?:MainAxisAlignment, 
         mainAxisSize?:MainAxisSize, 
@@ -11328,19 +11548,19 @@ export class Flex extends FlutterWidget {
 interface FlowConfig {
   children?:Array<FlutterWidget>;
   delegate?:any;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Flow extends FlutterWidget {
   children?:Array<FlutterWidget>;
   delegate?:any;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
         children?:Array<FlutterWidget>, 
         delegate?:any, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new (config: FlowConfig) {
@@ -11371,7 +11591,7 @@ interface FlatButtonConfig {
   shape?:any;
   clipBehavior?:Clip;
   materialTapTargetSize?:MaterialTapTargetSize;
-  key?:BaseKey;
+  key?:Key;
 
   onLongPress?: VoidCallback;
   focusColor?: Color;
@@ -11398,7 +11618,7 @@ export class FlatButton extends FlutterWidget {
   shape?:any;
   clipBehavior?:Clip;
   materialTapTargetSize?:MaterialTapTargetSize;
-  key?:BaseKey;
+  key?:Key;
   onLongPress?:VoidCallback;
   focusColor?: Color;
   hoverColor?: Color;
@@ -11425,7 +11645,7 @@ export class FlatButton extends FlutterWidget {
         shape?:any, 
         clipBehavior?:Clip, 
         materialTapTargetSize?:MaterialTapTargetSize, 
-        key?:BaseKey, 
+        key?:Key, 
 
         onLongPress?: VoidCallback, 
         focusColor?: Color, 
@@ -11480,7 +11700,7 @@ export class FlatButton extends FlutterWidget {
         shape?:any, 
         clipBehavior?:Clip, 
         materialTapTargetSize?:MaterialTapTargetSize, 
-        key?:BaseKey, 
+        key?:Key, 
 
         onLongPress?: VoidCallback, 
         focusColor?: Color, 
@@ -11535,7 +11755,7 @@ interface FloatingActionButtonConfig {
   materialTapTargetSize?:MaterialTapTargetSize;
   isExtended?:boolean;
   tooltip?:string;
-  key?:BaseKey;
+  key?:Key;
 }
 export class FloatingActionButton extends FlutterWidget  {
   child?:FlutterWidget;
@@ -11550,7 +11770,7 @@ export class FloatingActionButton extends FlutterWidget  {
   materialTapTargetSize?:MaterialTapTargetSize;
   isExtended?:boolean;
   tooltip?:string;
-  key?:BaseKey;
+  key?:Key;
 
 
   /**
@@ -11568,7 +11788,7 @@ export class FloatingActionButton extends FlutterWidget  {
         materialTapTargetSize?:MaterialTapTargetSize, 
         isExtended?:boolean,  
         tooltip?:string, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: FloatingActionButtonConfig) {
@@ -11598,14 +11818,14 @@ interface FlexibleSpaceBarConfig {
   background?:FlutterWidget;
   centerTitle?:boolean;
   collapseMode?:CollapseMode;
-  key?:BaseKey;
+  key?:Key;
 }
 export class FlexibleSpaceBar extends FlutterWidget {
   title?:FlutterWidget;
   background?:FlutterWidget;
   centerTitle?:boolean;
   collapseMode?:CollapseMode;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -11614,7 +11834,7 @@ export class FlexibleSpaceBar extends FlutterWidget {
         background?:FlutterWidget, 
         centerTitle?:boolean, 
         collapseMode?:CollapseMode, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: FlexibleSpaceBarConfig) {
@@ -11632,7 +11852,7 @@ export class FlexibleSpaceBar extends FlutterWidget {
 
 //****** FlutterLogo ******
 interface FlutterLogoConfig {
-  key?:BaseKey;
+  key?:Key;
   size?:number;
   textColor?:Color;
   style?:FlutterLogoStyle;
@@ -11641,7 +11861,7 @@ interface FlutterLogoConfig {
   
 }
 export class FlutterLogo extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   size?:number;
   textColor?:Color;
   style?:FlutterLogoStyle;
@@ -11651,7 +11871,7 @@ export class FlutterLogo extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         size?:number, 
         textColor?:Color, 
         style?:FlutterLogoStyle, 
@@ -11675,13 +11895,13 @@ export class FlutterLogo extends FlutterWidget {
 
 //****** FractionalTranslation ******
 interface FractionalTranslationConfig {
-  key?:BaseKey;
+  key?:Key;
   translation:Offset;
   transformHitTests?:boolean;
   child?:FlutterWidget;  
 }
 export class FractionalTranslation extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   translation?:Offset;
   transformHitTests?:boolean;
   child?:FlutterWidget;  
@@ -11691,7 +11911,7 @@ export class FractionalTranslation extends FlutterWidget {
       {
         translation:Offset, 
 
-        key?:BaseKey, 
+        key?:Key, 
         transformHitTests?:boolean, 
         child?:FlutterWidget,   
       }
@@ -11740,10 +11960,10 @@ interface GestureDetectorConfig {
   onScaleEnd?:any;
   behavior?:HitTestBehavior;
   excludeFromSemantics?:boolean;
-  key?:BaseKey;
+  key?:Key;
 }
 export class GestureDetector extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   onTap?:VoidCallback;
   onTapDown?:any;
@@ -11777,7 +11997,7 @@ export class GestureDetector extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       onTap?:VoidCallback, 
       onTapDown?:any, 
@@ -11846,15 +12066,134 @@ export class GestureDetector extends FlutterWidget {
   }
 }
 
+//****** Gradient ******
+interface GradientConfig {
+  center?:Alignment;
+  startAngle?:number;
+  endAngle?:number;
+  colors:Array<Color>;
+  stops?:Array<number>;
+  tileMode?:TileMode;
+  transform?:GradientTransform;
+
+
+  radius?:number;
+  focal?:Alignment;
+  focalRadius?:number;
+
+  begin?:Alignment;
+  end?:Alignment;
+}
+export class Gradient extends DartClass {
+  center?:Alignment;
+  startAngle?:number;
+  endAngle?:number;
+  colors?:Array<Color>;
+  stops?:Array<number>;
+  tileMode?:TileMode;
+  transform?:GradientTransform;
+
+  //Radial
+  radius?:number;
+  focal?:Alignment;
+  focalRadius?:number;
+
+  //
+  begin?:Alignment;
+  end?:Alignment;
+
+
+  /**
+   * @param config config: 
+      {
+        center?:Alignment, 
+        startAngle?:number, 
+        endAngle?:number, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode,
+        transform?:GradientRotation,
+      }
+   */
+  static sweep(config: GradientConfig) {
+    var v = new Gradient();
+    v.constructorName = "sweep";
+    if(config!=null && config!=undefined){
+      v.center = config.center;
+      v.startAngle = config.startAngle;
+      v.endAngle = config.endAngle;
+      v.colors = config.colors;
+      v.stops = config.stops;
+      v.tileMode = config.tileMode;
+      v.transform = config.transform;
+    }
+    return v;
+  }
+
+   /**
+   * @param config config: 
+      {
+        center?:Alignment, 
+        radius?:number, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode, 
+        focal?:Alignment, 
+        focalRadius?:number,
+        transform?:GradientRotation,
+      }
+   */
+  static radial(config?: GradientConfig) {
+    var v = new Gradient();
+    v.constructorName = "radial";
+    if(config!=null && config!=undefined){
+      v.center = config.center;
+      v.radius = config.radius;
+      v.colors = config.colors;
+      v.stops = config.stops;
+      v.tileMode = config.tileMode;
+      v.focal = config.focal;
+      v.focalRadius = config.focalRadius;
+      v.transform = config.transform;
+    }
+    return v;
+  }
+
+   /**
+   * @param config config: 
+      {
+        begin?:Alignment, 
+        end?:Alignment, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode,
+        transform?:GradientRotation,
+      }
+   */
+  static linear(config: GradientConfig) {
+    var v = new Gradient();
+    v.constructorName = "linear";
+    if(config!=null && config!=undefined){
+      v.begin = config.begin;
+      v.end = config.end;
+      v.colors = config.colors;
+      v.stops = config.stops;
+      v.tileMode = config.tileMode;
+      v.transform = config.transform;
+    }
+    return v;
+  }
+}
+
 //****** TODO GridTile ******
 interface GridTileConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   header?:FlutterWidget;
   footer?:FlutterWidget;
 }
 export class GridTile extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   header?:FlutterWidget;
   footer?:FlutterWidget;
@@ -11862,7 +12201,7 @@ export class GridTile extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey,
+      key?:Key,
       child?:FlutterWidget,
       header?:FlutterWidget,
       footer?:FlutterWidget, 
@@ -11882,14 +12221,14 @@ export class GridTile extends FlutterWidget {
 
 //****** TODO GridPaper ******
 interface GridPaperConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   color?:Color;
   divisions?:number;
   subdivisions?:number;
 }
 export class GridPaper extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   color?:Color;
   divisions?:number;
@@ -11898,7 +12237,7 @@ export class GridPaper extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         color?:Color, 
         divisions?:number, 
@@ -11928,17 +12267,17 @@ export class GridPaper extends FlutterWidget {
 interface IndexedSemanticsConfig {
   child?:FlutterWidget;
   index:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class IndexedSemantics extends FlutterWidget {
   child?:FlutterWidget;
   index?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         index?:number,
       }
@@ -11957,16 +12296,16 @@ export class IndexedSemantics extends FlutterWidget {
 //****** IntrinsicHeight ******
 interface IntrinsicHeightConfig {
   child?:FlutterWidget;
-  key?:BaseKey;
+  key?:Key;
 }
 export class IntrinsicHeight extends FlutterWidget {
   child?:FlutterWidget;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget,         
       }
    */
@@ -11985,13 +12324,13 @@ interface IntrinsicWidthConfig {
   child?:FlutterWidget;
   stepWidth?:number;
   stepHeight?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class IntrinsicWidth extends FlutterWidget {
   child?:FlutterWidget;
   stepWidth?:number;
   stepHeight?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -11999,7 +12338,7 @@ export class IntrinsicWidth extends FlutterWidget {
         child?:FlutterWidget, 
         stepWidth?:number, 
         stepHeight?:number, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: IntrinsicWidthConfig) {
@@ -12021,7 +12360,7 @@ interface IndexedStackConfig {
   alignment?:AlignmentDirectional;
   textDirection?:TextDirection;
   sizing?:StackFit;
-  key?:BaseKey;
+  key?:Key;
 }
 export class IndexedStack extends FlutterWidget {
   children?:Array<FlutterWidget>;
@@ -12029,7 +12368,7 @@ export class IndexedStack extends FlutterWidget {
   alignment?:AlignmentDirectional;
   textDirection?:TextDirection;
   sizing?:StackFit;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -12039,7 +12378,7 @@ export class IndexedStack extends FlutterWidget {
         alignment?:AlignmentDirectional, 
         textDirection?:TextDirection, 
         sizing?:StackFit, 
-        key?:BaseKey, 
+        key?:Key, 
       }
    */
   static new(config: IndexedStackConfig) {
@@ -12058,13 +12397,13 @@ export class IndexedStack extends FlutterWidget {
 
 //****** IgnorePointer ******
 interface IgnorePointerConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   ignoring?:boolean;
   ignoringSemantics?:boolean;
 }
 export class IgnorePointer extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   ignoring?:boolean;
   ignoringSemantics?:boolean;
@@ -12072,7 +12411,7 @@ export class IgnorePointer extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         ignoring?:boolean, 
         ignoringSemantics?:boolean, 
@@ -12092,7 +12431,7 @@ export class IgnorePointer extends FlutterWidget {
 
 //****** IconButton ******
 interface IconButtonConfig {
-  key?:BaseKey;
+  key?:Key;
   icon:FlutterWidget;
   onPressed:VoidCallback;
   iconSize?:number;
@@ -12112,7 +12451,7 @@ interface IconButtonConfig {
   constraints?:BoxConstraints;
 }
 export class IconButton extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   icon?:FlutterWidget;
   onPressed?:VoidCallback;
   iconSize?:number;
@@ -12133,7 +12472,7 @@ export class IconButton extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         icon:FlutterWidget, 
         onPressed:VoidCallback, 
         iconSize?:number, 
@@ -12181,7 +12520,7 @@ export class IconButton extends FlutterWidget {
 
 //****** Icon ******
 interface IconConfig {
-  key?:BaseKey;
+  key?:Key;
   size?:number;
   color?:Color;
   semanticLabel?:string;
@@ -12194,13 +12533,13 @@ export class Icon extends FlutterWidget {
   color?:Color;
   semanticLabel?:string;
   textDirection?:TextDirection;
-  key?:BaseKey;
+  key?:Key;
   
   /**
    * @param icon icon:IconData
    * @param config config: 
       {
-        key?:BaseKey,
+        key?:Key,
         size?:number, 
         color?:Color, 
         semanticLabel?:string, 
@@ -12223,30 +12562,30 @@ export class Icon extends FlutterWidget {
 
 //****** ImageIcon ******
 interface ImageIconConfig {
-  key?:BaseKey;
+  key?:Key;
   size?:number;
   color?:Color;
   semanticLabel?:string;
 }
 export class ImageIcon extends FlutterWidget {
-  image?:Image;
+  image?:ImageProvider;
   size?:number;
   color?:Color;
   semanticLabel?:string;
-  key?:BaseKey;
+  key?:Key;
   
   /**
-   * @param image image:Image
+   * @param image image:ImageProvider
    * @param config config: 
       {
-        key?:BaseKey,
+        key?:Key,
         size?:number, 
         color?:Color, 
         semanticLabel?:string, 
         textDirection?:TextDirection,
       }
    */
-  static new(image:Image,config?: ImageIconConfig) {
+  static new(image:ImageProvider,config?: ImageIconConfig) {
     var v = new ImageIcon();
     v.image = image;
     if(config!=null && config!=undefined){
@@ -12259,294 +12598,7 @@ export class ImageIcon extends FlutterWidget {
   }
 }
 
-//****** TODO Image ******
-interface ImageConfig {
-  image?:any;
-  fit?:BoxFit;
-  repeat?:ImageRepeat;
-  alignment?:Alignment;
-  width?:number;
-  height?:number;
-  color?:Color;
-  semanticLabel?:string;
-  excludeFromSemantics?:boolean;
-  colorBlendMode?:BlendMode;
-  centerSlice?:Rect;
-  matchTextDirection?:boolean;
-  gaplessPlayback?:boolean;
-  filterQuality?:FilterQuality;
-  key?:BaseKey; 
 
-  src?:string;
-  scale?:number;
-  headers?:Map<string,string>;
-
-  imageFile?:File;
-
-  imageName?:string;
-  packageName?:string;
-  bundle?:BaseAssetBundle;
-
-  bytes?:Uint8List;
-}
-export class Image extends FlutterWidget {
-  image?:any;
-  fit?:BoxFit;
-  repeat?:ImageRepeat;
-  alignment?:Alignment;
-  width?:number;
-  height?:number;
-  color?:Color;
-  semanticLabel?:string;
-  excludeFromSemantics?:boolean;
-  colorBlendMode?:BlendMode;
-  centerSlice?:Rect;
-  matchTextDirection?:boolean;
-  gaplessPlayback?:boolean;
-  filterQuality?:FilterQuality;
-  key?:BaseKey; 
-
-  src?:string;
-  scale?:number;
-  headers?:Map<string,string>;
-
-  imageFile?:File;
-
-  /**
-   * @param config config: 
-      {
-        image:any,
-        fit?:BoxFit,
-        repeat?:ImageRepeat,
-        alignment?:Alignment, 
-        width?:number, 
-        height?:number, 
-        color?:Color,
-        semanticLabel?:string, 
-        excludeFromSemantics?:boolean, 
-        colorBlendMode?:BlendMode, 
-        centerSlice?:Rect, 
-        matchTextDirection?:boolean, 
-        gaplessPlayback?:boolean,
-        filterQuality?:FilterQuality, 
-        key?:BaseKey
-      }
-   */
-  static new(config: ImageConfig) {
-     var v = new Image();
-     if(config!=null && config!=undefined){
-      v.key = config.key;
-      v.image = config.image;
-      v.semanticLabel = config.semanticLabel;
-      v.excludeFromSemantics = config.excludeFromSemantics;
-      v.width = config.width;
-      v.height = config.height;
-      v.color = config.color;
-      v.colorBlendMode = config.colorBlendMode;
-      v.fit = config.fit;
-      v.alignment = config.alignment;
-      v.repeat = config.repeat;
-      v.centerSlice = config.centerSlice;
-      v.matchTextDirection = config.matchTextDirection;
-      v.gaplessPlayback = config.gaplessPlayback;
-      v.filterQuality = config.filterQuality;
-     }
-    return v;
-  }
-
-  /**
-   * @param src src:string
-   * @param config config: 
-      {
-        scale?:number, 
-        fit?:BoxFit, 
-        repeat?:ImageRepeat, 
-        alignment?:Alignment, 
-        width?:number, 
-        height?:number, 
-        color?:Color,
-        headers?:Map<string,string>,
-        semanticLabel?:string, 
-        excludeFromSemantics?:boolean, 
-        colorBlendMode?:BlendMode, 
-        centerSlice?:Rect, 
-        matchTextDirection?:boolean, 
-        gaplessPlayback?:boolean,
-        filterQuality?:FilterQuality, 
-        key?:BaseKey
-      }
-   */
-  static network( src:string, config?: ImageConfig) {
-    let v = new Image();
-    v.constructorName = "network";
-
-    v.src = src;
-    if(config!=null && config!=undefined){
-      v.key = config.key;
-      v.scale = config.scale;
-      v.semanticLabel = config.semanticLabel;
-      v.excludeFromSemantics = config.excludeFromSemantics;
-      v.width = config.width;
-      v.height = config.height;
-      v.color = config.color;
-      v.colorBlendMode = config.colorBlendMode;
-      v.fit = config.fit;
-      v.alignment = config.alignment;
-      v.repeat = config.repeat;
-      v.centerSlice = config.centerSlice;
-      v.matchTextDirection = config.matchTextDirection;
-      v.gaplessPlayback = config.gaplessPlayback;
-      v.filterQuality = config.filterQuality;
-      v.headers = config.headers;
-    }
-    return v;
-  }
-
-  /**
-   * @param imageFile imageFile:File
-   * @param config config: 
-      {
-        scale?:number, 
-        fit?:BoxFit, 
-        repeat?:ImageRepeat, 
-        alignment?:Alignment, 
-        width?:number, 
-        height?:number, 
-        color?:Color,
-        semanticLabel?:string, 
-        excludeFromSemantics?:boolean, 
-        colorBlendMode?:BlendMode, 
-        centerSlice?:Rect, 
-        matchTextDirection?:boolean, 
-        gaplessPlayback?:boolean,
-        filterQuality?:FilterQuality, 
-        key?:BaseKey
-      }
-   */
-  static file ( imageFile:File,  config?: ImageConfig) {
-    let v = new Image();
-    v.constructorName = "file";
-
-    v.imageFile = imageFile;
-    if(config!=null && config!=undefined){
-      v.key = config.key;
-      v.scale = config.scale;
-      v.semanticLabel = config.semanticLabel;
-      v.excludeFromSemantics = config.excludeFromSemantics;
-      v.width = config.width;
-      v.height = config.height;
-      v.color = config.color;
-      v.colorBlendMode = config.colorBlendMode;
-      v.fit = config.fit;
-      v.alignment = config.alignment;
-      v.repeat = config.repeat;
-      v.centerSlice = config.centerSlice;
-      v.matchTextDirection = config.matchTextDirection;
-      v.gaplessPlayback = config.gaplessPlayback;
-      v.filterQuality = config.filterQuality;
-    }
-    return v;
-  }
-
-  imageName?:string;
-  packageName?:string;
-  bundle?:BaseAssetBundle;
-  /**
-   * @param config config: 
-      {
-        imageName?:string, 
-        bundle?:BaseAssetBundle, 
-        packageName?:string, 
-        scale?:number, 
-        fit?:BoxFit, 
-        repeat?:ImageRepeat, 
-        alignment?:Alignment, 
-        width?:number, 
-        height?:number, 
-        color?:Color, 
-        semanticLabel?:string, 
-        excludeFromSemantics?:boolean, 
-        colorBlendMode?:BlendMode, 
-        centerSlice?:Rect, 
-        matchTextDirection?:boolean, 
-        gaplessPlayback?:boolean,
-        filterQuality?:FilterQuality, 
-        key?:BaseKey
-      }
-   */
-  static asset(config: ImageConfig) {
-    let v = new Image();
-    v.constructorName = "asset";
-    if(config!=null && config!=undefined){
-      v.imageName = config.imageName;
-      v.key = config.key;
-      v.bundle = config.bundle;
-      v.semanticLabel = config.semanticLabel;
-      v.excludeFromSemantics = config.excludeFromSemantics;
-      v.scale = config.scale;
-      v.width = config.width;
-      v.height = config.height;
-      v.color = config.color;
-      v.colorBlendMode = config.colorBlendMode;
-      v.fit = config.fit;
-      v.alignment = config.alignment;
-      v.repeat = config.repeat;
-      v.centerSlice = config.centerSlice;
-      v.matchTextDirection = config.matchTextDirection;
-      v.gaplessPlayback = config.gaplessPlayback;
-      v.packageName = config.packageName;
-      v.filterQuality = config.filterQuality;
-    }
-    return v;
-  }
-
-  bytes?:Uint8List;
-  /**
-   * @param bytes bytes:Uint8List
-   * @param config config: 
-      {
-        scale?:number, 
-        fit?:BoxFit, 
-        repeat?:ImageRepeat, 
-        alignment?:Alignment, 
-        width?:number, 
-        height?:number, 
-        color?:Color,
-        semanticLabel?:string, 
-        excludeFromSemantics?:boolean, 
-        colorBlendMode?:BlendMode, 
-        centerSlice?:Rect, 
-        matchTextDirection?:boolean, 
-        gaplessPlayback?:boolean,
-        filterQuality?:FilterQuality, 
-        key?:BaseKey
-      }
-   */
-  static memory ( bytes:Uint8List, config?: ImageConfig) {
-    let v = new Image();
-    v.constructorName = "memory";
-
-    v.bytes = bytes;
-    if(config!=null && config!=undefined){
-      v.key = config.key;
-      v.scale = config.scale;
-      v.semanticLabel = config.semanticLabel;
-      v.excludeFromSemantics = config.excludeFromSemantics;
-      v.width = config.width;
-      v.height = config.height;
-      v.color = config.color;
-      v.colorBlendMode = config.colorBlendMode;
-      v.fit = config.fit;
-      v.alignment = config.alignment;
-      v.repeat = config.repeat;
-      v.centerSlice = config.centerSlice;
-      v.matchTextDirection = config.matchTextDirection;
-      v.gaplessPlayback = config.gaplessPlayback;
-      v.filterQuality = config.filterQuality;
-    }
-    return v;
-  }
-}
 //#endregion
 
 //#region ------- J -------
@@ -12556,17 +12608,17 @@ export class Image extends FlutterWidget {
 //****** KeyedSubtree ******
 interface KeyedSubtreeConfig {
   child:FlutterWidget;
-  key?:BaseKey;
+  key?:Key;
 }
 export class KeyedSubtree extends FlutterWidget {
   child?:FlutterWidget;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
         child:FlutterWidget, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: KeyedSubtreeConfig) {
@@ -12583,14 +12635,14 @@ export class KeyedSubtree extends FlutterWidget {
 //#region ------- L -------
 //****** TODO LicensePage ******
 interface LicensePageConfig {
-  key?:BaseKey;
+  key?:Key;
   applicationName?:string;
   applicationLegalese?:string;
   applicationVersion?:string;
   applicationIcon?:FlutterWidget;
 }
 export class LicensePage extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   applicationName?:string;
   applicationLegalese?:string;
   applicationVersion?:string;
@@ -12599,7 +12651,7 @@ export class LicensePage extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         applicationName?:string, 
         applicationLegalese?:string, 
         applicationVersion?:string, 
@@ -12624,13 +12676,13 @@ interface LimitedBoxConfig {
   child?:FlutterWidget;
   maxWidth?:number;
   maxHeight?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class LimitedBox extends FlutterWidget {
   child?:FlutterWidget;
   maxWidth?:number;
   maxHeight?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -12638,7 +12690,7 @@ export class LimitedBox extends FlutterWidget {
         child?:FlutterWidget, 
         maxWidth?:number, 
         maxHeight?:number, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: LimitedBoxConfig) {
@@ -12658,13 +12710,13 @@ interface ListBodyConfig {
   children?:Array<FlutterWidget>;
   reverse?:boolean;
   mainAxis?:Axis;
-  key?:BaseKey;
+  key?:Key;
 }
 export class ListBody extends FlutterWidget {
   children?:Array<FlutterWidget>;
   reverse?:boolean;
   mainAxis?:Axis;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -12672,7 +12724,7 @@ export class ListBody extends FlutterWidget {
         children?:Array<FlutterWidget>, 
         reverse?:boolean, 
         mainAxis?:Axis, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new (config:ListBodyConfig) {
@@ -12700,7 +12752,7 @@ interface ListTileConfig {
   dense?:boolean;
   contentPadding?:EdgeInsets;
   enabled?:boolean;
-  key?:BaseKey;
+  key?:Key;
 }
 export class ListTile extends FlutterWidget {
   leading?:FlutterWidget;
@@ -12714,7 +12766,7 @@ export class ListTile extends FlutterWidget {
   dense?:boolean;
   contentPadding?:EdgeInsets;
   enabled?:boolean;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -12730,7 +12782,7 @@ export class ListTile extends FlutterWidget {
         dense?:boolean, 
         contentPadding?:EdgeInsets, 
         enabled?:boolean, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: ListTileConfig) {
@@ -12770,7 +12822,7 @@ interface ListViewConfig {
   cacheExtent?:number;
   semanticChildCount?:number;
   dragStartBehavior?:DragStartBehavior;
-  key?:BaseKey;
+  key?:Key;
 
 
   itemBuilder?:any;
@@ -12792,7 +12844,7 @@ export class ListView extends FlutterWidget {
   cacheExtent?:number;
   semanticChildCount?:number;
   dragStartBehavior?:DragStartBehavior;
-  key?:BaseKey;
+  key?:Key;
 
 
   itemBuilder?:any;
@@ -12830,7 +12882,7 @@ export class ListView extends FlutterWidget {
         cacheExtent?:number,
         semanticChildCount?:number,
         dragStartBehavior?:DragStartBehavior, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: ListViewConfig) {
@@ -12874,7 +12926,7 @@ export class ListView extends FlutterWidget {
         cacheExtent?:number,
         semanticChildCount?:number,
         dragStartBehavior?:DragStartBehavior, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static builder(config: ListViewConfig) {
@@ -12906,17 +12958,17 @@ export class ListView extends FlutterWidget {
 //****** TODO LayoutBuilder ******
 interface LayoutBuilderConfig{
   builder?:any;
-  key?:BaseKey;
+  key?:Key;
 }
 export class LayoutBuilder extends FlutterWidget {
   builder?:any;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
         builder?:any, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new (config: LayoutBuilderConfig) {
@@ -12944,7 +12996,7 @@ interface MaterialConfig {
   borderOnForeground?:boolean;
   clipBehavior?:Clip;
   animationDuration?:Duration;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Material extends FlutterWidget {
   child?:FlutterWidget;
@@ -12958,7 +13010,7 @@ export class Material extends FlutterWidget {
   borderOnForeground?:boolean;
   clipBehavior?:Clip;
   animationDuration?:Duration;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -12974,7 +13026,7 @@ export class Material extends FlutterWidget {
         borderOnForeground?:boolean, 
         clipBehavior?:Clip,
         animationDuration?:Duration, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: MaterialConfig) {
@@ -13046,49 +13098,24 @@ export class MaterialPageRoute extends FlutterWidget {
   }
 }
 
-//****** TODO MemoryImage ******
-interface MemoryImageConfig {
-  bytes?:Uint8List;
-  scale?:number;
-}
-export class MemoryImage extends FlutterWidget {
-  bytes?:Uint8List;
-  scale?:number;
 
-  /**
-   * @param config config: 
-      {
-        bytes?:Uint8List,
-        scale?:number,
-      }
-   */
-  static new(config: MemoryImageConfig) {
-    var v = new MemoryImage();
-    if(config!=null && config!=undefined){
-      v.bytes = config.bytes;
-      v.scale = config.scale;
-    }
-
-    return v;
-  }
-}
 //#endregion
 
 //#region ------- N -------
 //****** TODO NotificationListener ******
 interface NotificationListenerConfig {
   child?:FlutterWidget;
-  key?:BaseKey;
+  key?:Key;
 }
 export class NotificationListener extends FlutterWidget {
   child?:FlutterWidget;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
         child?:FlutterWidget,
-        key?:BaseKey
+        key?:Key
       }
    */
   static new (config: NotificationListenerConfig) {
@@ -13110,7 +13137,7 @@ interface NestedScrollViewConfig {
   physics?:ScrollPhysics;
   headerSliverBuilder?:any;
   dragStartBehavior?:DragStartBehavior;
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
 }
 export class NestedScrollView extends FlutterWidget {
@@ -13121,7 +13148,7 @@ export class NestedScrollView extends FlutterWidget {
   physics?:ScrollPhysics;
   headerSliverBuilder?:any;
   dragStartBehavior?:DragStartBehavior;
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
  
   preBuild(jsWidgetHelper?:any, buildContext?:any) {
@@ -13144,7 +13171,7 @@ export class NestedScrollView extends FlutterWidget {
         physics?:ScrollPhysics, 
         headerSliverBuilder?:any, 
         dragStartBehavior?:DragStartBehavior, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: NestedScrollViewConfig) {
@@ -13190,14 +13217,14 @@ interface NavigatorConfig {
   onGenerateRoute?:any;
   onUnknownRoute?:any;
   observers?:any;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Navigator extends DartClass {
   initialRoute?:string;
   onGenerateRoute?:any;
   onUnknownRoute?:any;
   observers?:any;
-  key?:BaseKey;
+  key?:Key;
 
 
   static push(context:any, materialPageRoute:MaterialPageRoute) {
@@ -13235,7 +13262,7 @@ export class Navigator extends DartClass {
         onGenerateRoute?:any, 
         onUnknownRoute?:any, 
         observers?:any, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new (config: NavigatorConfig) {
@@ -13251,39 +13278,13 @@ export class Navigator extends DartClass {
   }
 }
 
-//****** TODO NetworkImage ******
-interface NetworkImageConfig {
-  scale?:number;
-  headers?:Map<string,string>;
-}
-export class NetworkImage extends FlutterWidget {
-  url?:string;
-  scale?:number;
-  headers?:Map<string,string>;
 
-  /**
-   * @param config config: 
-      {
-        scale?:number, 
-        headers?:Map<string,string>
-      }
-   */
-  static new(url:string, config: NetworkImageConfig) {
-    var v = new NetworkImage();
-    v.url = url;
-    if(config!=null && config!=undefined){
-      v.scale = config.scale;
-      v.headers = config.headers;
-    }
-    return v;
-  }
-}
 //#endregion
 
 //#region ------- O -------
 //****** Opacity ******
 interface OpacityConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   opacity:number;
   alwaysIncludeSemantics?:boolean;
@@ -13292,12 +13293,12 @@ export class Opacity extends FlutterWidget {
   child?:FlutterWidget;
   opacity?:number;
   alwaysIncludeSemantics?:boolean;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey,
+        key?:Key,
         child?:FlutterWidget,
         opacity:number,
         alwaysIncludeSemantics?:boolean
@@ -13319,19 +13320,19 @@ export class Opacity extends FlutterWidget {
 interface OffstageConfig {
   child?:FlutterWidget;
   offstage?:boolean;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Offstage extends FlutterWidget {
   child?:FlutterWidget;
   offstage?:boolean;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
         child?:.FlutterWidget, 
         offstage?:boolean, 
-        key?:BaseKey, 
+        key?:Key, 
       }
    */
   static new (config: OffstageConfig) {
@@ -13353,7 +13354,7 @@ interface OverflowBoxConfig {
   maxWidth?:number;
   minHeight?:number;
   maxHeight?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class OverflowBox extends FlutterWidget {
   child?:FlutterWidget;
@@ -13362,7 +13363,7 @@ export class OverflowBox extends FlutterWidget {
   maxWidth?:number;
   minHeight?:number;
   maxHeight?:number;
-  key?:BaseKey;
+  key?:Key;
   
   /**
    * @param config config: 
@@ -13373,7 +13374,7 @@ export class OverflowBox extends FlutterWidget {
         maxWidth?:number, 
         minHeight?:number, 
         maxHeight?:number, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: OverflowBoxConfig) {
@@ -13393,7 +13394,7 @@ export class OverflowBox extends FlutterWidget {
 
 //****** OutlineButton ******
 interface OutlineButtonConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   onPressed:VoidCallback;
   onLongPress?:VoidCallback;
@@ -13422,7 +13423,7 @@ interface OutlineButtonConfig {
   label?:FlutterWidget;
 }
 export class OutlineButton extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   onPressed?:VoidCallback;
   onLongPress?:VoidCallback;
@@ -13452,7 +13453,7 @@ export class OutlineButton extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         onPressed:VoidCallback, 
         onLongPress?:VoidCallback, 
@@ -13512,7 +13513,7 @@ export class OutlineButton extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         onPressed?:VoidCallback, 
         onLongPress?:VoidCallback, 
@@ -13579,19 +13580,19 @@ export class OutlineButton extends FlutterWidget {
 interface PaddingConfig {
   child?:FlutterWidget;
   padding:EdgeInsets;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Padding extends FlutterWidget {
   child?:FlutterWidget;
   padding?:EdgeInsets;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
       {
         child?:FlutterWidget, 
         padding?:EdgeInsets, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: PaddingConfig) {
@@ -13607,7 +13608,7 @@ export class Padding extends FlutterWidget {
 
 //****** PhysicalModel ******
 interface PhysicalModelConfig {
-  key?:BaseKey;
+  key?:Key;
   color:Color;
   shape?:BoxShape;
   child?:FlutterWidget;
@@ -13617,7 +13618,7 @@ interface PhysicalModelConfig {
   shadowColor?:Color;
 }
 export class PhysicalModel extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   color?:Color;
   shape?:BoxShape;
   child?:FlutterWidget;
@@ -13629,7 +13630,7 @@ export class PhysicalModel extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         color:Color, 
         shape?:BoxShape, 
         child?:FlutterWidget, 
@@ -13656,7 +13657,7 @@ export class PhysicalModel extends FlutterWidget {
 
 //****** Positioned ******
 interface PositionedConfig {
-  key?:BaseKey;
+  key?:Key;
   child:FlutterWidget;
   start?:number;
   left?:number;
@@ -13670,7 +13671,7 @@ interface PositionedConfig {
   textDirection?:TextDirection;
 }
 export class Positioned extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   start?:number;
   left?:number;
@@ -13686,7 +13687,7 @@ export class Positioned extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey
+        key?:Key
         child:FlutterWidget,
         left?:number,
         top?:number,
@@ -13716,7 +13717,7 @@ export class Positioned extends FlutterWidget {
       {
         child:FlutterWidget, 
         rect?:Rect, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static fromRect (config: PositionedConfig) {
@@ -13733,7 +13734,7 @@ export class Positioned extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey
+        key?:Key
         child:FlutterWidget,
         left?:number,
         top?:number,
@@ -13758,7 +13759,7 @@ export class Positioned extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey
+        key?:Key
         child:FlutterWidget,
         textDirection:TextDirection;
         start?:number,
@@ -13790,7 +13791,7 @@ export class Positioned extends FlutterWidget {
 
 //****** PositionedDirectional ******
 interface PositionedDirectionalConfig {
-  key?:BaseKey;
+  key?:Key;
   child:FlutterWidget;
   start?:number;
   top?:number;
@@ -13800,7 +13801,7 @@ interface PositionedDirectionalConfig {
   height?:number;  
 }
 export class PositionedDirectional extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   start?:number;
   top?:number;
@@ -13812,7 +13813,7 @@ export class PositionedDirectional extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey
+        key?:Key
         child:FlutterWidget,
         start?:number,
         top?:number,
@@ -13840,12 +13841,12 @@ export class PositionedDirectional extends FlutterWidget {
 
 //****** TODO PreferredSize ******
 interface PreferredSizeConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   preferredSize?:Size;
 }
 export class PreferredSize extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   preferredSize?:Size;
   
@@ -13854,7 +13855,7 @@ export class PreferredSize extends FlutterWidget {
       {
         child?:FlutterWidget, 
         preferredSize?:Size, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new (config:PreferredSizeConfig) {
@@ -13881,14 +13882,14 @@ interface PlaceholderConfig {
   strokeWidth?:number;
   fallbackWidth?:number;
   fallbackHeight?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Placeholder extends FlutterWidget {
   color?:Color;
   strokeWidth?:number;
   fallbackWidth?:number;
   fallbackHeight?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -13897,7 +13898,7 @@ export class Placeholder extends FlutterWidget {
         strokeWidth?:number, 
         fallbackWidth?:number, 
         fallbackHeight?:number, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: PlaceholderConfig) {
@@ -13925,7 +13926,7 @@ interface PopupMenuButtonConfig {
   child?:FlutterWidget;
   icon?:FlutterWidget;
   offset?:Offset;
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
 }
 export class PopupMenuButton extends FlutterWidget {
@@ -13939,7 +13940,7 @@ export class PopupMenuButton extends FlutterWidget {
   child?:FlutterWidget;
   icon?:FlutterWidget;
   offset?:Offset;
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
 
   //在生成json前调用
@@ -13970,7 +13971,7 @@ export class PopupMenuButton extends FlutterWidget {
         child?:FlutterWidget, 
         icon?:FlutterWidget, 
         offset?:Offset, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: PopupMenuButtonConfig) {
@@ -14000,14 +14001,14 @@ interface PopupMenuItemConfig {
   value?:any;
   enabled?:boolean;
   height?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class PopupMenuItem extends FlutterWidget {
   child?:FlutterWidget;
   value?:any;
   enabled?:boolean;
   height?:number;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -14016,7 +14017,7 @@ export class PopupMenuItem extends FlutterWidget {
         value?:any, 
         enabled?:boolean, 
         height?:number, 
-        key?:BaseKey
+        key?:Key
       }
    */
   static new(config: PopupMenuItemConfig) {
@@ -14043,7 +14044,7 @@ interface RowConfig {
   textDirection?:TextDirection;
   verticalDirection?:VerticalDirection;
   textBaseline?:TextBaseline;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Row extends FlutterWidget {
   children?:Array<FlutterWidget>;
@@ -14053,7 +14054,7 @@ export class Row extends FlutterWidget {
   textDirection?:TextDirection;
   verticalDirection?:VerticalDirection;
   textBaseline?:TextBaseline;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
@@ -14065,7 +14066,7 @@ export class Row extends FlutterWidget {
         textDirection?:TextDirection, 
         verticalDirection?:VerticalDirection, 
         textBaseline?:TextBaseline, 
-        key?:BaseKey,
+        key?:Key,
       }
    */
   static new(config: RowConfig) {
@@ -14086,18 +14087,18 @@ export class Row extends FlutterWidget {
 
 //****** RepaintBoundary ******
 interface RepaintBoundaryConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
 }
 export class RepaintBoundary extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   childIndex?:number;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget,
       }
    */
@@ -14121,8 +14122,8 @@ export class RepaintBoundary extends FlutterWidget {
 
 //****** RawImage ******
 interface RawImageConfig {
-  key?:BaseKey;
-  image?:Image;
+  key?:Key;
+  image?:ImageProvider;
   debugImageLabel?:string;
   width?:number;
   height?:number;
@@ -14139,8 +14140,8 @@ interface RawImageConfig {
   isAntiAlias?:boolean;
 }
 export class RawImage extends FlutterWidget {
-  key?:BaseKey;
-  image?:Image;
+  key?:Key;
+  image?:ImageProvider;
   debugImageLabel?:string;
   width?:number;
   height?:number;
@@ -14159,8 +14160,8 @@ export class RawImage extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
-        image?:Image, 
+        key?:Key, 
+        image?:ImageProvider, 
         debugImageLabel?:string, 
         width?:number, 
         height?:number, 
@@ -14203,19 +14204,19 @@ export class RawImage extends FlutterWidget {
 
 //****** RotatedBox ******
 interface RotatedBoxConfig {
-  key?:BaseKey;
+  key?:Key;
   quarterTurns:number;
   child?:FlutterWidget;
 }
 export class RotatedBox extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   quarterTurns?:number;
   child?:FlutterWidget;
 
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         quarterTurns:number, 
         child?:FlutterWidget, 
       }
@@ -14251,7 +14252,7 @@ interface RaisedButtonConfig {
   clipBehavior?:Clip;
   materialTapTargetSize?:MaterialTapTargetSize;
   animationDuration?:Duration;
-  key?:BaseKey;
+  key?:Key;
 
   icon?:FlutterWidget;
   label?:FlutterWidget;
@@ -14282,7 +14283,7 @@ export class RaisedButton extends FlutterWidget {
   clipBehavior?:Clip;
   materialTapTargetSize?:MaterialTapTargetSize;
   animationDuration?:Duration;
-  key?:BaseKey;
+  key?:Key;
 
   icon?:FlutterWidget;
   label?:FlutterWidget;
@@ -14298,7 +14299,7 @@ export class RaisedButton extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey,
+        key?:Key,
         child?:FlutterWidget, 
         onPressed?:VoidCallback, 
         onHighlightChanged?:VoidValueChangedBoolean, 
@@ -14363,7 +14364,7 @@ export class RaisedButton extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey,
+      key?:Key,
       icon?:FlutterWidget, 
       label?:FlutterWidget,
       onPressed?:VoidCallback, 
@@ -14430,7 +14431,7 @@ export class RaisedButton extends FlutterWidget {
 
 //****** TODO RaisedButton ******
 interface RadioConfig {
-  key?:BaseKey;
+  key?:Key;
   value?:any;
   groupValue?:any;
   onChanged?:any;
@@ -14439,7 +14440,7 @@ interface RadioConfig {
   
 }
 export class Radio extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   value?:any;
   groupValue?:any;
   onChanged?:any;
@@ -14449,7 +14450,7 @@ export class Radio extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey,
+      key?:Key,
       value?:any,
       groupValue?:any,
       onChanged?:any,
@@ -14471,65 +14472,89 @@ export class Radio extends FlutterWidget {
   }
 }
 
-//****** TODO RaisedButton ******
+//****** RaisedButton ******
 interface RawMaterialButtonConfig {
-  child?:FlutterWidget;
-  onPressed?:VoidCallback;
+  key?:Key;  
+  onPressed:VoidCallback;
+  onLongPress?:VoidCallback;
   onHighlightChanged?:VoidValueChangedBoolean;
-  padding?:EdgeInsets;
   textStyle?:TextStyle;
+  padding?:EdgeInsets;
   fillColor?:Color;
+  focusColor?:Color;
+  hoverColor?:Color;
   highlightColor?:Color;
   splashColor?:Color;
   constraints?:BoxConstraints;
   elevation?:number;
+  focusElevation?:number;
+  hoverElevation?:number;
   highlightElevation?:number;
   disabledElevation?:number;
+  visualDensity?:VisualDensity;
+  autofocus?:boolean;
   shape?:any;
   clipBehavior?:Clip;
   materialTapTargetSize?:MaterialTapTargetSize;
   animationDuration?:Duration;
-  key?:BaseKey;
+  enableFeedback?:boolean;
+  child?:FlutterWidget;
 }
 export class RawMaterialButton extends FlutterWidget {
-  key?:BaseKey;
-  child?:FlutterWidget;
+  key?:Key;  
   onPressed?:VoidCallback;
+  onLongPress?:VoidCallback;
   onHighlightChanged?:VoidValueChangedBoolean;
-  padding?:EdgeInsets;
   textStyle?:TextStyle;
+  padding?:EdgeInsets;
   fillColor?:Color;
+  focusColor?:Color;
+  hoverColor?:Color;
   highlightColor?:Color;
   splashColor?:Color;
   constraints?:BoxConstraints;
   elevation?:number;
+  focusElevation?:number;
+  hoverElevation?:number;
   highlightElevation?:number;
   disabledElevation?:number;
+  visualDensity?:VisualDensity;
+  autofocus?:boolean;
   shape?:any;
   clipBehavior?:Clip;
   materialTapTargetSize?:MaterialTapTargetSize;
-  animationDuration?:Duration;  
+  animationDuration?:Duration;
+  enableFeedback?:boolean;
+  child?:FlutterWidget;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
-      child?:FlutterWidget,
-      onPressed?:VoidCallback, 
+      key?:Key,   
+      onPressed:VoidCallback, 
+      onLongPress?:VoidCallback, 
       onHighlightChanged?:VoidValueChangedBoolean, 
-      padding?:EdgeInsets, 
       textStyle?:TextStyle, 
+      padding?:EdgeInsets, 
       fillColor?:Color, 
+      focusColor?:Color, 
+      hoverColor?:Color, 
       highlightColor?:Color, 
       splashColor?:Color, 
       constraints?:BoxConstraints, 
       elevation?:number, 
+      focusElevation?:number, 
+      hoverElevation?:number, 
       highlightElevation?:number, 
       disabledElevation?:number, 
+      visualDensity?:VisualDensity, 
+      autofocus?:boolean, 
       shape?:any, 
       clipBehavior?:Clip, 
       materialTapTargetSize?:MaterialTapTargetSize, 
-      animationDuration?:Duration,   
+      animationDuration?:Duration, 
+      enableFeedback?:boolean, 
+      child?:FlutterWidget, 
     }
    */
   static new(config: RawMaterialButtonConfig) {
@@ -14537,7 +14562,12 @@ export class RawMaterialButton extends FlutterWidget {
     if(config!=null && config!=undefined){
       v.key = config.key;
       v.onPressed = config.onPressed;
+      v.onLongPress = config.onLongPress;
       v.onHighlightChanged = config.onHighlightChanged;
+      v.focusColor = config.focusColor;
+      v.focusElevation = config.focusElevation;
+      v.hoverColor = config.hoverColor;
+      v.hoverElevation = config.hoverElevation;
       v.textStyle = config.textStyle;
       v.fillColor = config.fillColor;
       v.highlightColor = config.highlightColor;
@@ -14546,10 +14576,13 @@ export class RawMaterialButton extends FlutterWidget {
       v.highlightElevation = config.highlightElevation;
       v.disabledElevation = config.disabledElevation;
       v.padding = config.padding;
+      v.visualDensity = config.visualDensity;
       v.constraints = config.constraints;
       v.shape = config.shape;
       v.animationDuration = config.animationDuration;
       v.clipBehavior = config.clipBehavior;
+      v.autofocus = config.autofocus;
+      v.enableFeedback = config.enableFeedback;
       v.materialTapTargetSize = config.materialTapTargetSize;
       v.child = config.child;
     }
@@ -14559,7 +14592,7 @@ export class RawMaterialButton extends FlutterWidget {
 
 //****** RichText ******
 interface RichTextConfig {
-  key?:BaseKey;
+  key?:Key;
   text:FlutterWidget;
   textAlign?:TextAlign;
   textDirection?:TextDirection;
@@ -14578,13 +14611,13 @@ export class RichText extends FlutterWidget {
   overflow?:Overflow;
   textScaleFactor?:number;
   maxLines?:number;
-  key?:BaseKey;
+  key?:Key;
   textWidthBasis?:TextWidthBasis;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       text:FlutterWidget, 
       textAlign?:TextAlign, 
       textDirection?:TextDirection, 
@@ -14618,16 +14651,16 @@ export class RichText extends FlutterWidget {
 //****** Spacer ******
 interface SpacerConfig {
   flex?:number;
-  key?:BaseKey;
+  key?:Key;
 }
 export class Spacer extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   flex?:number;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey,
+      key?:Key,
       flex?:number
     }
    */
@@ -14644,7 +14677,7 @@ export class Spacer extends FlutterWidget {
 
 //****** Semantics ******
 interface SemanticsConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   container?:boolean;
   explicitChildNodes?:boolean;
@@ -14696,7 +14729,7 @@ interface SemanticsConfig {
   onDidLoseAccessibilityFocus?:VoidCallback;
 }
 export class Semantics extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   container?:boolean;
   explicitChildNodes?:boolean;
@@ -14750,7 +14783,7 @@ export class Semantics extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       container?:boolean, 
       explicitChildNodes?:boolean, 
@@ -14863,7 +14896,7 @@ export class Semantics extends FlutterWidget {
 
 //****** TODO Slider ******
 interface SliderConfig {
-  key?:BaseKey;
+  key?:Key;
   value?:number;
   onChanged?:VoidValueChangedNumber;
   onChangeStart?:VoidValueChangedNumber;
@@ -14878,7 +14911,7 @@ interface SliderConfig {
   autofocus?:boolean;  
 }
 export class Slider extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   value?:number;
   onChanged?:VoidValueChangedNumber;
   onChangeStart?:VoidValueChangedNumber;
@@ -14895,7 +14928,7 @@ export class Slider extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey,
+      key?:Key,
       value?:number, 
       onChanged?:VoidValueChangedNumber, 
       onChangeStart?:VoidValueChangedNumber, 
@@ -14934,7 +14967,7 @@ export class Slider extends FlutterWidget {
 
 //****** SizedBox ******
 interface SizedBoxConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   width?:number;
   height?:number; 
@@ -14944,13 +14977,13 @@ export class SizedBox extends FlutterWidget {
   child?:FlutterWidget;
   width?:number;
   height?:number;
-  key?:BaseKey;
+  key?:Key;
   size?:Size;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       width?:number, 
       height?:number, 
@@ -14970,7 +15003,7 @@ export class SizedBox extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
     }
    */
@@ -14987,7 +15020,7 @@ export class SizedBox extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       size?:Size,
     }
@@ -15006,7 +15039,7 @@ export class SizedBox extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
     }
    */
@@ -15023,7 +15056,7 @@ export class SizedBox extends FlutterWidget {
 
 //****** SizedOverflowBox ******
 interface SizedOverflowBoxConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   alignment?:Alignment;
   size:Size;
@@ -15032,12 +15065,12 @@ export class SizedOverflowBox extends FlutterWidget {
   child?:FlutterWidget;
   alignment?:Alignment;
   size?:Size;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       alignment?:Alignment, 
       size:Size, 
@@ -15057,7 +15090,7 @@ export class SizedOverflowBox extends FlutterWidget {
 
 //****** Stack ******
 interface StackConfig {
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
   alignment?:AlignmentDirectional;
   textDirection?:TextDirection;
@@ -15066,7 +15099,7 @@ interface StackConfig {
   clipBehavior?:Clip;
 }
 export class Stack extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
   alignment?:AlignmentDirectional;
   textDirection?:TextDirection;
@@ -15077,7 +15110,7 @@ export class Stack extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       children?:Array<FlutterWidget>, 
       alignment?:AlignmentDirectional, 
       textDirection?:TextDirection, 
@@ -15102,7 +15135,7 @@ export class Stack extends FlutterWidget {
 
 //****** TODO SliverAppBar ******
 interface SliverAppBarConfig {
-  key?:BaseKey;
+  key?:Key;
   leading?:FlutterWidget;
   automaticallyImplyLeading?:boolean;
   title?:FlutterWidget;
@@ -15132,7 +15165,7 @@ interface SliverAppBarConfig {
   toolbarHeight?:number;
 }
 export class SliverAppBar extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   leading?:FlutterWidget;
   automaticallyImplyLeading?:boolean;
   title?:FlutterWidget;
@@ -15164,7 +15197,7 @@ export class SliverAppBar extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       leading?:FlutterWidget, 
       automaticallyImplyLeading?:boolean, 
       title?:FlutterWidget, 
@@ -15232,19 +15265,19 @@ export class SliverAppBar extends FlutterWidget {
 
 //****** SliverPadding ******
 interface SliverPaddingConfig {
-  key?:BaseKey;
+  key?:Key;
   sliver?:FlutterWidget;
   padding:EdgeInsets;
 }
 export class SliverPadding extends FlutterWidget {
   sliver?:FlutterWidget;
   padding?:EdgeInsets;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       sliver?:FlutterWidget, 
       padding:EdgeInsets, 
     }
@@ -15264,19 +15297,19 @@ export class SliverPadding extends FlutterWidget {
 interface SliverGridConfig {
   delegate?:any;
   gridDelegate?:any;
-  key?:BaseKey;
+  key?:Key;
 }
 export class SliverGrid extends FlutterWidget {
   delegate?:any;
   gridDelegate?:any;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
       delegate?:any, 
       gridDelegate?:any, 
-      key?:BaseKey,
+      key?:Key,
     }
    */
   static new(config: SliverGridConfig) {
@@ -15428,17 +15461,17 @@ export class SliverChildBuilderDelegate extends FlutterWidget {
 //****** TODO SliverList ******
 interface SliverListConfig {
   delegate?:any;
-  key?:BaseKey;
+  key?:Key;
 }
 export class SliverList extends FlutterWidget {
   delegate?:any;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
       delegate?:any,
-      key?:BaseKey
+      key?:Key
     }
    */
   static new(config: SliverListConfig) {
@@ -15453,19 +15486,19 @@ export class SliverList extends FlutterWidget {
 
 //****** TODO SliverOverlapInjector ******
 interface SliverOverlapInjectorConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   handle?:any;
 }
 export class SliverOverlapInjector extends FlutterWidget {
   child?:FlutterWidget;
   handle?:any;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       handle?:any, 
     }
@@ -15483,19 +15516,19 @@ export class SliverOverlapInjector extends FlutterWidget {
 
 //****** TODO SliverFixedExtentList ******
 interface SliverFixedExtentListConfig {
-  key?:BaseKey;
+  key?:Key;
   delegate?:any;
   itemExtent?:number;
 }
 export class SliverFixedExtentList extends FlutterWidget {
   delegate?:any;
   itemExtent?:number;
-  key?:BaseKey;
+  key?:Key;
  
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       delegate?:any, 
       itemExtent?:number, 
     }
@@ -15514,19 +15547,19 @@ export class SliverFixedExtentList extends FlutterWidget {
 
 //****** TODO SliverOverlapAbsorber ******
 interface SliverOverlapAbsorberConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   handle?:any;
 }
 export class SliverOverlapAbsorber extends FlutterWidget {
   child?:FlutterWidget;
   handle?:any;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       handle?:any, 
     }
@@ -15544,7 +15577,7 @@ export class SliverOverlapAbsorber extends FlutterWidget {
 
 //****** TODO SingleChildScrollView ******
 interface SingleChildScrollViewConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   scrollDirection?:Axis;
   reverse?:boolean;
@@ -15566,13 +15599,13 @@ export class SingleChildScrollView extends FlutterWidget {
   controller?:ScrollController;
   dragStartBehavior?:DragStartBehavior;
   clipBehavior?:Clip;
-  key?:BaseKey;
+  key?:Key;
 
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       scrollDirection?:Axis, 
       reverse?:boolean, 
@@ -15605,17 +15638,17 @@ export class SingleChildScrollView extends FlutterWidget {
 //****** SliverToBoxAdapter ******
 interface SliverToBoxAdapterConfig {
   child?:FlutterWidget;
-  key?:BaseKey;
+  key?:Key;
 }
 export class SliverToBoxAdapter extends FlutterWidget {
   child?:FlutterWidget;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
       child?:FlutterWidget,
-      key?:BaseKey
+      key?:Key
     }
    */
   static new(config: SliverToBoxAdapterConfig) {
@@ -15630,7 +15663,7 @@ export class SliverToBoxAdapter extends FlutterWidget {
 
 //****** TODO Scaffold ******
 interface ScaffoldConfig {
-  key?:BaseKey;
+  key?:Key;
   appBar?:FlutterWidget;
   body?:FlutterWidget;
   floatingActionButton?:FlutterWidget;
@@ -15658,7 +15691,7 @@ export class Scaffold extends FlutterWidget {
   backgroundColor?:Color;
   resizeToAvoidBottomPadding?:boolean;
   primary?:boolean;
-  key?:BaseKey;
+  key?:Key;
 
   //FIXME,github mergegithub merge
   static of(context:any) {
@@ -15690,7 +15723,7 @@ export class Scaffold extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       appBar?:FlutterWidget, 
       body?:FlutterWidget, 
       floatingActionButton?:FlutterWidget, 
@@ -15735,7 +15768,7 @@ export class ScaffoldState extends DartClass {
 
 //****** TODO SafeArea ******
 interface SafeAreaConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   left?:boolean;
   top?:boolean;
@@ -15745,7 +15778,7 @@ interface SafeAreaConfig {
   maintainBottomViewPadding?:boolean;  
 }
 export class SafeArea extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   left?:boolean;
   top?:boolean;
@@ -15757,7 +15790,7 @@ export class SafeArea extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey,
+        key?:Key,
         child?:FlutterWidget,
         left?:boolean,
         top?:boolean,
@@ -15785,7 +15818,7 @@ export class SafeArea extends FlutterWidget {
 
 //****** TODO SliverSafeArea ******
 interface SliverSafeAreaConfig {
-  key?:BaseKey;
+  key?:Key;
   sliver?:FlutterWidget;
   left?:boolean;
   top?:boolean;
@@ -15794,7 +15827,7 @@ interface SliverSafeAreaConfig {
   minimum?:EdgeInsets;
 }
 export class SliverSafeArea extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   sliver?:FlutterWidget;
   left?:boolean;
   top?:boolean;
@@ -15805,7 +15838,7 @@ export class SliverSafeArea extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey,
+      key?:Key,
       child?:FlutterWidget,
       left?:boolean,
       top?:boolean,
@@ -15831,17 +15864,17 @@ export class SliverSafeArea extends FlutterWidget {
 
 //****** TODO Scrollbar ******
 interface ScrollbarConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
 }
 export class Scrollbar extends FlutterWidget {
   child?:FlutterWidget;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
     }
    */
@@ -15953,7 +15986,7 @@ export class SnackBarAction extends FlutterWidget {
 
 //****** SliverVisibility ******
 interface SliverVisibilityConfig {
-  key?:BaseKey;
+  key?:Key;
   sliver:FlutterWidget;
   replacementSliver?:FlutterWidget;
   visible?:boolean;
@@ -15964,7 +15997,7 @@ interface SliverVisibilityConfig {
   maintainInteractivity?:boolean;
 }
 export class SliverVisibility extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   sliver?:FlutterWidget;
   replacementSliver?:FlutterWidget;
   visible?:boolean;
@@ -15977,7 +16010,7 @@ export class SliverVisibility extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       sliver:FlutterWidget, 
       replacement?:FlutterWidget, 
       visible?:boolean, 
@@ -16011,19 +16044,19 @@ export class SliverVisibility extends FlutterWidget {
 //#region ------- T -------
 //****** TODO TableRow ******
 interface TableRowConfig {
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
   decoration?:BoxDecoration;
 }
 export class TableRow extends FlutterWidget {
   children?:Array<FlutterWidget>;
   decoration?:BoxDecoration;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       children?:Array<FlutterWidget>, 
       decoration?:BoxDecoration, 
     }
@@ -16041,19 +16074,19 @@ export class TableRow extends FlutterWidget {
 
 //****** TODO TableCell ******
 interface TableCellConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   verticalAlignment?:TableCellVerticalAlignment;
 }
 export class TableCell extends FlutterWidget {
   child?:FlutterWidget;
   verticalAlignment?:TableCellVerticalAlignment;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       verticalAlignment?:TableCellVerticalAlignment, 
     }
@@ -16071,7 +16104,7 @@ export class TableCell extends FlutterWidget {
 
 //****** Transform ******
 interface TransformNewConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   alignment?:Alignment;
   origin?:Offset;
@@ -16079,7 +16112,7 @@ interface TransformNewConfig {
   transformHitTests?:boolean;
 }
 interface TransformRotateConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   alignment?:Alignment;
   origin?:Offset;
@@ -16087,13 +16120,13 @@ interface TransformRotateConfig {
   angle:number;
 }
 interface TransformTranslateConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   offset:Offset;
   transformHitTests?:boolean;
 }
 interface TransformScaleConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   alignment?:Alignment;
   origin?:Offset;
@@ -16106,7 +16139,7 @@ export class Transform extends FlutterWidget {
   origin?:Offset;
   transform?:Matrix4;
   transformHitTests?:boolean;
-  key?:BaseKey;
+  key?:Key;
   angle?:number;
   offset?:Offset;
   scale?:number;
@@ -16114,7 +16147,7 @@ export class Transform extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       alignment?:Alignment, 
       origin?:Offset, 
@@ -16138,7 +16171,7 @@ export class Transform extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       angle:number, 
       alignment?:Alignment, 
@@ -16164,7 +16197,7 @@ export class Transform extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       offset:Offset, 
       transformHitTests?:boolean, 
@@ -16185,7 +16218,7 @@ export class Transform extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       scale:number, 
       alignment?:Alignment, 
@@ -16210,7 +16243,7 @@ export class Transform extends FlutterWidget {
 
 //****** Tooltip ******
 interface TooltipConfig {
-  key?:BaseKey;
+  key?:Key;
   message:string;
   height?:number;
   padding?:EdgeInsets;
@@ -16225,7 +16258,7 @@ interface TooltipConfig {
   child?:FlutterWidget;
 }
 export class Tooltip extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   message?:string;
   height?:number;
   padding?:EdgeInsets;
@@ -16242,7 +16275,7 @@ export class Tooltip extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       message:string, 
       height?:number, 
       padding?:EdgeInsets, 
@@ -16280,7 +16313,7 @@ export class Tooltip extends FlutterWidget {
 
 //****** TODO Table ******
 interface TableConfig {
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
   defaultColumnWidth?:TableColumnWidth;
   defaultVerticalAlignment?:TableCellVerticalAlignment;
@@ -16298,12 +16331,12 @@ export class Table extends  FlutterWidget {
   border?:TableBorder;
   textBaseline?:TextBaseline;
   columnWidths?:Map<string,TableColumnWidth>;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       children?:Array<FlutterWidget>, 
       defaultColumnWidth?:TableColumnWidth, 
       defaultVerticalAlignment?:TableCellVerticalAlignment, 
@@ -16331,7 +16364,7 @@ export class Table extends  FlutterWidget {
 
 //****** TODO TabBar ******
 interface TabBarConfig {
-  key?:BaseKey;
+  key?:Key;
   tabs?:Array<FlutterWidget>;
   onTap?:VoidValueChangedNumber;
   controller?:TabController;
@@ -16350,7 +16383,7 @@ interface TabBarConfig {
   physics?:ScrollPhysics;
 }
 export class TabBar extends  FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   tabs?:Array<FlutterWidget>;
   onTap?:VoidValueChangedNumber;
   controller?:TabController;
@@ -16371,7 +16404,7 @@ export class TabBar extends  FlutterWidget {
    /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       tabs?:Array<FlutterWidget>,
       onTap?:VoidValueChangedNumber, 
       controller?:TabController, 
@@ -16417,14 +16450,14 @@ export class TabBar extends  FlutterWidget {
 
 //****** Tab ******
 interface TabConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   text?:string;
   icon?:FlutterWidget;
   iconMargin?:EdgeInsets;
 }
 export class Tab extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   text?:string;
   icon?:FlutterWidget;
@@ -16433,7 +16466,7 @@ export class Tab extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       child?:FlutterWidget, 
       text?:string, 
       icon?:FlutterWidget, 
@@ -16454,7 +16487,7 @@ export class Tab extends FlutterWidget {
 
 //****** TODO TabBarView ******
 interface TabBarViewConfig {
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
   controller?:TabController;
   physics?:ScrollPhysics;
@@ -16465,12 +16498,12 @@ export class TabBarView extends FlutterWidget {
   controller?:TabController;
   physics?:ScrollPhysics;
   dragStartBehavior?:DragStartBehavior;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config:
     {
-      key?:BaseKey, 
+      key?:Key, 
       children?:Array<FlutterWidget>, 
       controller?:TabController, 
       physics?:ScrollPhysics, 
@@ -16492,13 +16525,13 @@ export class TabBarView extends FlutterWidget {
 
 //****** TODO TabPageSelectorIndicator ******
 interface TabPageSelectorIndicatorConfig {
-  key?:BaseKey;
+  key?:Key;
   backgroundColor?:Color;
   borderColor?:Color;
   size?:number;
 }
 export class TabPageSelectorIndicator extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   backgroundColor?:Color;
   borderColor?:Color;
   size?:number;
@@ -16507,7 +16540,7 @@ export class TabPageSelectorIndicator extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       backgroundColor?:Color, 
       borderColor?:Color, 
       size?:number,
@@ -16527,14 +16560,14 @@ export class TabPageSelectorIndicator extends FlutterWidget {
 
 //****** TODO TabPageSelector ******
 interface TabPageSelectorConfig {
-  key?:BaseKey;
+  key?:Key;
   color?:Color;
   selectedColor?:Color;
   indicatorSize?:number;
   controller?:TabController;
 }
 export class TabPageSelector extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   color?:Color;
   selectedColor?:Color;
   indicatorSize?:number;
@@ -16542,7 +16575,7 @@ export class TabPageSelector extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey,
+      key?:Key,
       color?:Color,
       selectedColor?:Color,
       indicatorSize?:number,
@@ -16564,13 +16597,13 @@ export class TabPageSelector extends FlutterWidget {
 
 //****** TODO Title ******
 interface TitleConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   title?:string;
   color?:Color;
 }
 export class Title extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   title?:string;
   color?:Color;
@@ -16579,7 +16612,7 @@ export class Title extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey,
+      key?:Key,
       child?:FlutterWidget,
       title?:string,
       color?:Color
@@ -16599,7 +16632,7 @@ export class Title extends FlutterWidget {
 
 //****** TODO Text ******
 interface TextConfig {
-  key?:BaseKey;
+  key?:Key;
   style?:TextStyle;
   textAlign?:TextAlign;
   textDirection?:TextDirection;
@@ -16614,7 +16647,7 @@ export class Text extends FlutterWidget {
   data?:string;
 
   textSpan?:TextSpan;
-  key?:BaseKey;
+  key?:Key;
   style?:TextStyle;
   textAlign?:TextAlign;
   textDirection?:TextDirection;
@@ -16628,7 +16661,7 @@ export class Text extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey,
+      key?:Key,
       style?:TextStyle,
       textAlign?:TextAlign,
       textDirection?:TextDirection,
@@ -16661,7 +16694,7 @@ export class Text extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey,
+      key?:Key,
       style?:TextStyle,
       textAlign?:TextAlign,
       textDirection?:TextDirection,
@@ -16735,12 +16768,12 @@ export class TextSpan extends FlutterWidget {
 
 //****** TODO Texture ******
 interface TextureConfig {
-  key?:BaseKey;
+  key?:Key;
   textureId?:number;
   filterQuality?:FilterQuality;
 }
 export class Texture extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   textureId?:number;
   filterQuality?:FilterQuality;
 
@@ -16748,7 +16781,7 @@ export class Texture extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       textureId?:number, 
       filterQuality?:FilterQuality, 
     }
@@ -16766,7 +16799,7 @@ export class Texture extends FlutterWidget {
 
 //****** TODO TextFormField ******
 interface TextFormFieldConfig {
-  key?:BaseKey;
+  key?:Key;
   controller?:TextEditingController;
   initialValue?:string;
   focusNode?:any;
@@ -16830,12 +16863,12 @@ export class TextFormField extends FlutterWidget {
   scrollPadding?:EdgeInsets;
   enableInteractiveSelection?:boolean;
   buildCounter?:any;
-  key?:BaseKey;
+  key?:Key;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       controller?:TextEditingController, 
       initialValue?:string, 
       focusNode?:any, 
@@ -16911,7 +16944,7 @@ export class TextFormField extends FlutterWidget {
 //#region ------- U -------
 //****** UnconstrainedBox ******
 interface UnconstrainedBoxConfig {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   alignment?:Alignment;
   textDirection?:TextDirection;
@@ -16919,7 +16952,7 @@ interface UnconstrainedBoxConfig {
   clipBehavior?:Clip;
 }
 export class UnconstrainedBox extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   alignment?:Alignment;
   textDirection?:TextDirection;
@@ -16929,7 +16962,7 @@ export class UnconstrainedBox extends FlutterWidget {
   /**
    * @param config config: 
       {
-        key?:BaseKey, 
+        key?:Key, 
         child?:FlutterWidget, 
         alignment?:Alignment;
         textDirection?:TextDirection, 
@@ -16956,7 +16989,7 @@ export class UnconstrainedBox extends FlutterWidget {
 //#region ------- V -------
 //****** VerticalDivider ******
 interface VerticalDividerConfig {
-  key?:BaseKey;
+  key?:Key;
   width?:number;
   thickness?:number;
   indent?:number;
@@ -16964,7 +16997,7 @@ interface VerticalDividerConfig {
   color?:Color;
 }
 export class VerticalDivider extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   width?:number;
   thickness?:number;
   indent?:number;
@@ -16974,7 +17007,7 @@ export class VerticalDivider extends FlutterWidget {
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       width?:number, 
       thickness?:number, 
       indent?:number, 
@@ -17000,7 +17033,7 @@ export class VerticalDivider extends FlutterWidget {
 interface VisibilityConfig {
   child:FlutterWidget;
 
-  key?:BaseKey;
+  key?:Key;
   replacement?:FlutterWidget;
   visible?:boolean;
   maintainState?:boolean;
@@ -17010,7 +17043,7 @@ interface VisibilityConfig {
   maintainInteractivity?:boolean;
 }
 export class Visibility extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   replacement?:FlutterWidget;
   visible?:boolean;
@@ -17025,7 +17058,7 @@ export class Visibility extends FlutterWidget {
     {
       child:FlutterWidget, 
 
-      key?:BaseKey, 
+      key?:Key, 
       replacement?:FlutterWidget, 
       visible?:boolean, 
       maintainState?:boolean, 
@@ -17057,7 +17090,7 @@ export class Visibility extends FlutterWidget {
 //#region ------- W -------
 //****** Wrap ******
 interface WrapConfig {
-  key?:BaseKey;
+  key?:Key;
   children?:Array<FlutterWidget>;
   alignment?:WrapAlignment;
   spacing?:number;
@@ -17079,13 +17112,13 @@ export class Wrap extends FlutterWidget {
   verticalDirection?:VerticalDirection;
   runAlignment?:WrapAlignment;
   runSpacing?:number; 
-  key?:BaseKey;
+  key?:Key;
   clipBehavior?:Clip;
 
   /**
    * @param config config: 
     {
-      key?:BaseKey, 
+      key?:Key, 
       children?:Array<FlutterWidget>, 
       alignment?:WrapAlignment, 
       spacing?:number, 
@@ -17122,10 +17155,10 @@ interface WillPopScopeConfig {
   child:FlutterWidget;
   onWillPop:VoidCallback;
 
-  key?:BaseKey;
+  key?:Key;
 }
 export class WillPopScope extends FlutterWidget {
-  key?:BaseKey;
+  key?:Key;
   child?:FlutterWidget;
   onWillPop?:VoidCallback;
 
@@ -17135,7 +17168,7 @@ export class WillPopScope extends FlutterWidget {
       child:FlutterWidget, 
       onWillPop:VoidCallback, 
 
-      key?:BaseKey, 
+      key?:Key, 
     }
    */
   static new(config: WillPopScopeConfig) {
@@ -17195,11 +17228,11 @@ export class WidgetSpan extends FlutterWidget {
 //-------------- A -----------------
 //****** TODO CupertinoActivityIndicator ******
 export class CupertinoActivityIndicator extends FlutterWidget {
-    key?:BaseKey;
+    key?:Key;
     animating?:boolean;
     radius?:number;
 
-  static new(animating?:boolean,radius?:number,key?:BaseKey) {
+  static new(animating?:boolean,radius?:number,key?:Key) {
     var v = new CupertinoActivityIndicator();
     v.key = key;
     v.animating = animating;
@@ -17215,10 +17248,10 @@ export class CupertinoAlertDialog extends FlutterWidget {
     actions?:FlutterWidget;
     scrollController?:ScrollController;
     actionScrollController?:ScrollController;
-    key?:BaseKey;
+    key?:Key;
 
 
-  static new = function(title?:FlutterWidget, content?:FlutterWidget,actions?:FlutterWidget,scrollController?:ScrollController,actionScrollController?:ScrollController,key?:BaseKey,) {
+  static new = function(title?:FlutterWidget, content?:FlutterWidget,actions?:FlutterWidget,scrollController?:ScrollController,actionScrollController?:ScrollController,key?:Key,) {
     var v = new CupertinoAlertDialog();
     v.key = key;
     v.title = title;
@@ -17241,10 +17274,10 @@ export class CupertinoButton extends FlutterWidget {
     minSize?:number;
     pressedOpacity?:number;
     borderRadius?:BorderRadius;
-    key?:BaseKey;
+    key?:Key;
 
   static new(child?:FlutterWidget,onPressed?:VoidCallback, padding?:EdgeInsets, color?:Color, disabledColor?:Color,
-    minSize?:number,pressedOpacity?:number, borderRadius?:BorderRadius, key?:BaseKey,) {
+    minSize?:number,pressedOpacity?:number, borderRadius?:BorderRadius, key?:Key,) {
       var v = new CupertinoButton();
       v.key = key;
       v.child = child;
@@ -17263,9 +17296,9 @@ export class CupertinoButton extends FlutterWidget {
 //****** TODO CupertinoDialog ******
 export class CupertinoDialog extends FlutterWidget {
     child?:FlutterWidget;
-    key?:BaseKey;
+    key?:Key;
  
-  static new(child?:FlutterWidget,key?:BaseKey) {
+  static new(child?:FlutterWidget,key?:Key) {
     var v = new CupertinoDialog();
     v.key = key;
     v.child = child;
@@ -17280,9 +17313,9 @@ export class CupertinoDialogAction extends FlutterWidget {
     isDefaultAction?:boolean;
     isDestructiveAction?:boolean;
     textStyle?:TextStyle;
-    key?:BaseKey;
+    key?:Key;
 
-  static new(child?:FlutterWidget,onPressed?:VoidCallback,isDefaultAction?:boolean, isDestructiveAction?:boolean, textStyle?:TextStyle, key?:BaseKey) {
+  static new(child?:FlutterWidget,onPressed?:VoidCallback,isDefaultAction?:boolean, isDestructiveAction?:boolean, textStyle?:TextStyle, key?:Key) {
     var v = new CupertinoDialogAction();
     v.onPressed = onPressed;
     v.isDefaultAction = isDefaultAction;
@@ -17302,9 +17335,9 @@ export class CupertinoFullscreenDialogTransition extends FlutterWidget {
   primaryRouteAnimation?:any;
   secondaryRouteAnimation?:any;
   
-  key?:BaseKey;
+  key?:Key;
   
-  static new(child?:FlutterWidget,linearTransition?:boolean,primaryRouteAnimation?:any, secondaryRouteAnimation?:any,key?:BaseKey) {
+  static new(child?:FlutterWidget,linearTransition?:boolean,primaryRouteAnimation?:any, secondaryRouteAnimation?:any,key?:Key) {
     var v = new CupertinoFullscreenDialogTransition();
     v.key = key;
     v.primaryRouteAnimation = primaryRouteAnimation;
@@ -17329,11 +17362,11 @@ export class CupertinoNavigationBar extends FlutterWidget {
   padding?:EdgeInsets;
   actionsForegroundColor?:Color;
   transitionBetweenRoutes?:boolean;
-  key?:BaseKey;
+  key?:Key;
 
   static new(leading?:FlutterWidget,automaticallyImplyLeading?:boolean,automaticallyImplyMiddle?:boolean,previousPageTitle?:string,middle?:FlutterWidget,
     trailing?:FlutterWidget,border?:Border,backgroundColor?:Color,padding?:EdgeInsets,actionsForegroundColor?:Color,
-    transitionBetweenRoutes?:boolean,key?:BaseKey) {
+    transitionBetweenRoutes?:boolean,key?:Key) {
       var v = new CupertinoNavigationBar();
       v.key = key;
     v.leading = leading;
@@ -17358,10 +17391,10 @@ export class CupertinoPageTransition extends FlutterWidget {
   linearTransition?:boolean;
   primaryRouteAnimation?:any;
   secondaryRouteAnimation?:any;
-  key?:BaseKey;
+  key?:Key;
 
 
-  static new(child?:FlutterWidget,linearTransition?:boolean,primaryRouteAnimation?:any,secondaryRouteAnimation?:any,key?:BaseKey,) {
+  static new(child?:FlutterWidget,linearTransition?:boolean,primaryRouteAnimation?:any,secondaryRouteAnimation?:any,key?:Key,) {
     var v = new CupertinoPageTransition();
     v.key = key;
     v.primaryRouteAnimation = primaryRouteAnimation;
@@ -17378,9 +17411,9 @@ export class CupertinoPageScaffold extends FlutterWidget {
   backgroundColor?:Color;
   navigationBar?:FlutterWidget;
   resizeToAvoidBottomInset?:boolean;
-  key?:BaseKey;
+  key?:Key;
 
-  static new(child?:FlutterWidget,backgroundColor?:Color,navigationBar?:FlutterWidget,resizeToAvoidBottomInset?:boolean,key?:BaseKey) {
+  static new(child?:FlutterWidget,backgroundColor?:Color,navigationBar?:FlutterWidget,resizeToAvoidBottomInset?:boolean,key?:Key) {
     var v = new CupertinoPageScaffold();
     v.key = key;
     v.navigationBar = navigationBar;
@@ -17403,10 +17436,10 @@ export class CupertinoSlider extends FlutterWidget {
   onChangeEnd?:VoidValueChangedNumber;
   divisions?:number;
   activeColor?:Color;
-  key?:BaseKey;
+  key?:Key;
 
   static new(value?:number, onChanged?:VoidValueChangedNumber, min?:number, max?:number, onChangeStart?:VoidValueChangedNumber,
-    onChangeEnd?:VoidValueChangedNumber, divisions?:number, activeColor?:Color, key?:BaseKey,) {
+    onChangeEnd?:VoidValueChangedNumber, divisions?:number, activeColor?:Color, key?:Key,) {
       var v = new CupertinoSlider();
       v.key = key;
     v.value = value;
@@ -17427,9 +17460,9 @@ export class CupertinoSwitch extends FlutterWidget {
   onChanged?:VoidValueChangedBoolean;
   activeColor?:Color;
   dragStartBehavior?:DragStartBehavior;
-  key?:BaseKey;
+  key?:Key;
 
-  static new(value?:boolean,onChanged?:VoidValueChangedBoolean,activeColor?:Color,dragStartBehavior?:DragStartBehavior,key?:BaseKey) {
+  static new(value?:boolean,onChanged?:VoidValueChangedBoolean,activeColor?:Color,dragStartBehavior?:DragStartBehavior,key?:Key) {
     var v = new CupertinoSwitch();
     v.key = key;
     v.value = value;
@@ -17451,16 +17484,16 @@ export class CupertinoTabBar extends FlutterWidget {
   inactiveColor?:Color;
   iconSize?:number;
   border?:Border;
-  key?:BaseKey;
+  key?:Key;
   constructor(items?:Array<BottomNavigationBarItem>, onTap?:VoidValueChangedNumber, currentIndex?:number, backgroundColor?:Color,    activeColor?:Color,
-    inactiveColor?:Color, iconSize?:number, border?:Border, key?:BaseKey,) {
+    inactiveColor?:Color, iconSize?:number, border?:Border, key?:Key,) {
     super();
 
     
   }
 
   static new(items?:Array<BottomNavigationBarItem>, onTap?:VoidValueChangedNumber, currentIndex?:number, backgroundColor?:Color,    activeColor?:Color,
-    inactiveColor?:Color, iconSize?:number, border?:Border, key?:BaseKey,) {
+    inactiveColor?:Color, iconSize?:number, border?:Border, key?:Key,) {
       var v = new CupertinoTabBar();
       v.key = key;
     v.items = items;

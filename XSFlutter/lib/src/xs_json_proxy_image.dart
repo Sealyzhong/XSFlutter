@@ -12,97 +12,9 @@ import 'xs_build_owner.dart';
 class XSProxyRegisterHelperImageSeries {
   static Map<String, CreateJsonObjProxyFun> registerProxys() {
     Map<String, CreateJsonObjProxyFun> m = {};
-    m.addAll(XSProxyAssetImage.registerProxy());
-    m.addAll(XSProxyExactAssetImage.registerProxy());
-    m.addAll(XSProxyFileImage.registerProxy());
-    m.addAll(XSProxyMemoryImage.registerProxy());
-    m.addAll(XSProxyNetworkImage.registerProxy());
-
-    m.addAll(XSProxyImage.registerProxy());
-    m.addAll(XSProxyDecorationImage.registerProxy());
-
     m.addAll(XSProxyRawImage.registerProxy());
 
     return m;
-  }
-}
-
-//****** AssetImage ******
-class XSProxyAssetImage extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "AssetImage";
-    return {
-      regClassName: () => XSProxyAssetImage()..init(className: regClassName)
-    };
-  }
-
-  @override
-  AssetImage constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return AssetImage(
-      XSJSParse.getString(context, bo, map, "assetName"),
-      bundle: XSJSParse.getObject(context, bo, map, "bundle"),
-      package: XSJSParse.getString(context, bo, map, "package"),
-    );
-  }
-}
-
-//****** DecorationImage ******
-class XSProxyDecorationImage extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "DecorationImage";
-    return {
-      regClassName: () => XSProxyDecorationImage()..init(className: regClassName)
-    };
-  }
-
-  @override
-  DecorationImage constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return DecorationImage(
-      image: XSJSParse.getObject(context, bo, map, "image"),
-      colorFilter: XSJSParse.getColorFilter(context, bo, map, "colorFilter"),
-      fit: XSJSParse.getBoxFit(context, bo, map, "fit"),
-      alignment: XSJSParse.getAlignment(context, bo, map, "alignment", defaultValue: Alignment.center),
-      centerSlice: XSJSParse.getRect(context, bo, map, "centerSlice"),
-      repeat: XSJSParse.getImageRepeat(context, bo, map, "repeat", defaultValue: ImageRepeat.noRepeat),
-      matchTextDirection: XSJSParse.getBool(context, bo, map, "matchTextDirection", defaultValue: false),
-    );
-  }
-}
-
-//****** ExactAssetImage ******
-class XSProxyExactAssetImage extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "ExactAssetImage";
-    return {
-      regClassName: () => XSProxyAssetImage()..init(className: regClassName)
-    };
-  }
-
-  @override
-  ExactAssetImage constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return ExactAssetImage(
-      XSJSParse.getString(context, bo, map, "assetName"),
-      bundle: XSJSParse.getObject(context, bo, map, "bundle"),
-      package: XSJSParse.getString(context, bo, map, "package"),
-    );
-  }
-}
-
-//****** FileImage ******
-class XSProxyFileImage extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "FileImage";
-    return {
-      regClassName: () => XSProxyAssetImage()..init(className: regClassName)
-    };
-  }
-
-  @override
-  FileImage constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return FileImage(
-      XSJSParse.getFile(context, bo, map, "file"),
-      scale: XSJSParse.getDouble(context, bo, map, "scale", defaultValue: 1.0),
-    );
   }
 }
 
@@ -236,43 +148,6 @@ class XSProxyImage extends XSJsonObjProxy {
       matchTextDirection: XSJSParse.getBool(context, bo, map, "matchTextDirection", defaultValue: false),
       gaplessPlayback: XSJSParse.getBool(context, bo, map, "gaplessPlayback", defaultValue: false),
       filterQuality: XSJSParse.getFilterQuality(context, bo, map, "filterQuality", defaultValue: FilterQuality.low),
-    );
-  }
-}
-
-//****** MemoryImage ******
-class XSProxyMemoryImage extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "MemoryImage";
-    return {
-      regClassName: () => XSProxyAssetImage()..init(className: regClassName)
-    };
-  }
-
-  @override
-  MemoryImage constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return MemoryImage(
-      XSJSParse.getUint8List(context, bo, map, "bytes"),
-      scale: XSJSParse.getDouble(context, bo, map, "scale", defaultValue: 1.0),
-    );
-  }
-}
-
-//****** NetworkImage ******
-class XSProxyNetworkImage extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "NetworkImage";
-    return {
-      regClassName: () => XSProxyAssetImage()..init(className: regClassName)
-    };
-  }
-
-  @override
-  NetworkImage constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return NetworkImage(
-      XSJSParse.getString(context, bo, map, "url"),
-      scale: XSJSParse.getDouble(context, bo, map, "scale", defaultValue: 1.0),
-      headers: toMapStringT(XSJSParse.getObject(context, bo, map, "headers")),
     );
   }
 }

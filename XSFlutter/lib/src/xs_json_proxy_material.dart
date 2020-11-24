@@ -34,7 +34,6 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyBlockSemantics.registerProxy());
     m.addAll(XSProxyBanner.registerProxy());
 
-    m.addAll(XSProxyCircleBorder.registerProxy());
     m.addAll(XSProxyCloseButtonSeries.registerProxy());
     m.addAll(XSProxyCard.registerProxy());
     m.addAll(XSProxyCheckedModeBanner.registerProxy());
@@ -50,6 +49,7 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyFlutterLogo.registerProxy());
     m.addAll(XSProxyFractionalTranslation.registerProxy());
     m.addAll(XSProxyFlatButton.registerProxy());
+    m.addAll(XSProxyFloatingActionButton.registerProxy());
 
     m.addAll(XSProxyGridTile.registerProxy());
     m.addAll(XSProxyGridPaper.registerProxy());
@@ -473,23 +473,6 @@ class XSProxyCard extends XSJsonObjProxy {
   }
 }
 
-//****** CircleBorder ******
-class XSProxyCircleBorder extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "CircleBorder";
-    return {
-      regClassName: () => XSProxyCircleBorder()..init(className: regClassName)
-    };
-  }
-
-  @override
-  CircleBorder constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return CircleBorder(
-      side: XSJSParse.getBorderSide(context, bo, map, "side", defaultValue: BorderSide.none),
-    );
-  }
-}
-
 //****** CheckedModeBanner ******
 class XSProxyCheckedModeBanner extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -620,6 +603,44 @@ class XSProxyExpansionTile extends XSJsonObjProxy {
 }
 
 //-------------- F -----------------
+///****** FloatingActionButton ******
+class XSProxyFloatingActionButton extends XSJsonObjProxy {
+  static final String regClassName = "FloatingActionButton";
+
+  ///**@@@  2 替换类构造函数
+  static Map<String, CreateJsonObjProxyFun> registerProxy() => {
+        regClassName: () => XSProxyFloatingActionButton()..init(className: regClassName),
+      };
+
+  ///*********************************************************************
+
+  @override
+  Widget constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return FloatingActionButton(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+      tooltip: XSJSParse.getString(context, bo, map, "tooltip"),
+      foregroundColor: XSJSParse.getColor(context, bo, map, "foregroundColor"),
+      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
+      focusColor: XSJSParse.getColor(context, bo, map, "focusColor"),
+      hoverColor: XSJSParse.getColor(context, bo, map, "hoverColor"),
+      splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
+      elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
+      disabledElevation: XSJSParse.getDouble(context, bo, map, "disabledElevation"),
+      focusElevation: XSJSParse.getDouble(context, bo, map, "focusElevation"),
+      hoverElevation: XSJSParse.getDouble(context, bo, map, "hoverElevation"),
+      highlightElevation: XSJSParse.getDouble(context, bo, map, "highlightElevation"),
+      onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
+      mini: XSJSParse.getBool(context, bo, map, "mini", defaultValue: false),
+      shape: XSJSParse.getObject(context, bo, map, "shape", defaultValue: const CircleBorder()),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+      materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+      isExtended: XSJSParse.getBool(context, bo, map, "isExtended", defaultValue: false),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+    );
+  }
+}
+
 //****** ExcludeSemantics ******
 class XSProxyExcludeSemantics extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -1258,12 +1279,17 @@ class XSProxyRawMaterialButton extends XSJsonObjProxy {
     return RawMaterialButton(
       key: XSJSParse.getKey(context, bo, map, "key"),
       onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
+      onLongPress: XSJSParse.getVoidCallback(context, bo, map, "onLongPress"),
       onHighlightChanged: XSJSParse.getValueChanged<bool>(context, bo, map, "onHighlightChanged"),
       textStyle: XSJSParse.getTextStyle(context, bo, map, "textStyle"),
       fillColor: XSJSParse.getColor(context, bo, map, "fillColor"),
+      focusColor: XSJSParse.getColor(context, bo, map, "focusColor"),
+      hoverColor: XSJSParse.getColor(context, bo, map, "hoverColor"),
       highlightColor: XSJSParse.getColor(context, bo, map, "highlightColor"),
       splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
       elevation: XSJSParse.getDouble(context, bo, map, "elevation", defaultValue: 2.0),
+      focusElevation: XSJSParse.getDouble(context, bo, map, "focusElevation", defaultValue: 4.0),
+      hoverElevation: XSJSParse.getDouble(context, bo, map, "hoverElevation", defaultValue: 4.0),
       highlightElevation: XSJSParse.getDouble(context, bo, map, "highlightElevation", defaultValue: 8.0),
       disabledElevation: XSJSParse.getDouble(context, bo, map, "disabledElevation", defaultValue: 0.0),
       padding: XSJSParse.getEdgeInsets(context, bo, map, "padding", defaultValue: EdgeInsets.zero),
@@ -1271,8 +1297,11 @@ class XSProxyRawMaterialButton extends XSJsonObjProxy {
       shape: XSJSParse.getObject(context, bo, map, "shape", defaultValue: const RoundedRectangleBorder()),
       animationDuration: XSJSParse.getDuration(context, bo, map, "animationDuration", defaultValue: kThemeChangeDuration),
       clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      enableFeedback: XSJSParse.getBool(context, bo, map, "enableFeedback", defaultValue: true),
       materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
+      visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity", defaultValue: const VisualDensity()),
     );
   }
 }

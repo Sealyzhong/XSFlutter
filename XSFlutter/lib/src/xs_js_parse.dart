@@ -159,6 +159,7 @@ class XSJSParse {
   }
 
   //-------------- A -----------------
+
   //****** Axis ******/
   static Axis getAxis(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Axis defaultValue}) {
     var v = _getString(map, key);
@@ -186,6 +187,23 @@ class XSJSParse {
           return AxisDirection.right;
         case 'up':
           return AxisDirection.up;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** AssetBundle ******/
+  static AssetBundle getAssetBundle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {AssetBundle defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var constructorName = _getConstructorName(v);
+      if (constructorName != null && constructorName.isNotEmpty) {
+        switch (constructorName) {
+          case 'network':
+            return NetworkAssetBundle(getUri(context, bo, v, "baseUrl"));
+          case 'platform':
+            return PlatformAssetBundle();
+        }
       }
     }
     return defaultValue;
@@ -272,7 +290,7 @@ class XSJSParse {
 
   //-------------- B -----------------
   //****** BorderRadius ******/
-  static BorderRadius getBorderRadius(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {dynamic defaultValue}) {
+  static BorderRadius getBorderRadius(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BorderRadius defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
       var constructorName = _getConstructorName(v);
@@ -306,6 +324,41 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** BorderRadiusDirectional ******/
+  static BorderRadiusDirectional getBorderRadiusDirectional(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BorderRadiusDirectional defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var constructorName = _getConstructorName(v);
+      switch (constructorName) {
+        case 'all':
+          return BorderRadiusDirectional.all(getRadius(context, bo, v, "radius"));
+        case 'circular':
+          return BorderRadiusDirectional.circular(getDouble(context, bo, v, "radius"));
+        case 'vertical':
+          return BorderRadiusDirectional.vertical(
+            top: getRadius(context, bo, v, "top", defaultValue: Radius.zero),
+            bottom: getRadius(context, bo, v, "bottom", defaultValue: Radius.zero),
+          );
+        case 'horizontal':
+          return BorderRadiusDirectional.horizontal(
+            start: getRadius(context, bo, v, "start", defaultValue: Radius.zero),
+            end: getRadius(context, bo, v, "end", defaultValue: Radius.zero),
+          );
+        case 'only':
+          return BorderRadiusDirectional.only(
+            topStart: getRadius(context, bo, v, "topStart", defaultValue: Radius.zero),
+            topEnd: getRadius(context, bo, v, "topEnd", defaultValue: Radius.zero),
+            bottomStart: getRadius(context, bo, v, "bottomStart", defaultValue: Radius.zero),
+            bottomEnd: getRadius(context, bo, v, "bottomEnd", defaultValue: Radius.zero),
+          );
+        case 'zero':
+          return BorderRadiusDirectional.zero;
+      }
+    }
+
+    return defaultValue;
+  }
+
   //****** Border ******/
   static Border getBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {dynamic defaultValue}) {
     var v = _getMap(map, key);
@@ -329,8 +382,6 @@ class XSJSParse {
           );
         case 'fromBorderSide':
           return Border.fromBorderSide(getBorderSide(context, bo, v, "size"));
-        case 'merge':
-          return Border.merge(getBorder(context, bo, v, "a"), getBorder(context, bo, v, "b"));
         case 'symmetric':
           return Border.symmetric(
             vertical: getBorderSide(context, bo, v, "vertical", defaultValue: BorderSide.none),
@@ -667,7 +718,7 @@ class XSJSParse {
     if (v != null) {
       return BoxDecoration(
         color: getColor(context, bo, v, "color"),
-        image: getObject(context, bo, v, "image"),
+        image: getDecorationImage(context, bo, v, "image"),
         border: getBorder(context, bo, v, "border"),
         borderRadius: getBorderRadius(context, bo, v, "borderRadius"),
         boxShadow: getBoxShadowList(context, bo, v, "boxShadow"),
@@ -767,13 +818,21 @@ class XSJSParse {
     return defaultValue;
   }
 
-  //****** CircleBorder ******/
-  static CircleBorder getCircleBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {CircleBorder defaultValue}) {
+  //****** OutlinedBorder ******/
+  static OutlinedBorder getOutlinedBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {OutlinedBorder defaultValue}) {
     Map v = _getMap(map, key, defaultValue: map);
     if (v != null) {
-      return CircleBorder(
-        side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none),
-      );
+      var constructorName = _getConstructorName(map);
+      switch (constructorName) {
+        case "circle":
+          return CircleBorder(
+            side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none),
+          );
+        case "stadium":
+          return StadiumBorder(
+            side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none),
+          );
+      }
     }
     return defaultValue;
   }
@@ -1019,6 +1078,24 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** DecorationImage ******/
+  static DecorationImage getDecorationImage(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DecorationImage defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return DecorationImage(
+        image: getObject(context, bo, map, "image"),
+        colorFilter: getColorFilter(context, bo, map, "colorFilter"),
+        fit: getBoxFit(context, bo, map, "fit"),
+        alignment: getAlignment(context, bo, map, "alignment", defaultValue: Alignment.center),
+        centerSlice: getRect(context, bo, map, "centerSlice"),
+        repeat: getImageRepeat(context, bo, map, "repeat", defaultValue: ImageRepeat.noRepeat),
+        matchTextDirection: getBool(context, bo, map, "matchTextDirection", defaultValue: false),
+      );
+    }
+
+    return defaultValue;
+  }
+
   //****** DecorationTween ******/
   static DecorationTween getDecorationTween(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DecorationTween defaultValue}) {
     var v = _getMap(map, key);
@@ -1245,12 +1322,37 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** FractionalOffset ******/
+  static FractionalOffset getFractionalOffset(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {FractionalOffset defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return FractionalOffset(
+        getDouble(context, bo, v, "dx", defaultValue: 0.0),
+        getDouble(context, bo, v, "dy", defaultValue: 0.0),
+      );
+    }
+    return defaultValue;
+  }
+
   //****** FlexColumnWidth ******/
   static FlexColumnWidth getFlexColumnWidth(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {FlexColumnWidth defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
       return FlexColumnWidth(
         getDouble(context, bo, v, "value", defaultValue: 1.0),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** FlutterLogoDecoration ******/
+  static FlutterLogoDecoration getFlutterLogoDecoration(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {FlutterLogoDecoration defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return FlutterLogoDecoration(
+        textColor: getColor(context, bo, map, "textColor", defaultValue: const Color(0xFF42A5F5)),
+        style: getFlutterLogoStyle(context, bo, map, "style", defaultValue: FlutterLogoStyle.markOnly),
+        margin: getEdgeInsets(context, bo, map, "margin", defaultValue: EdgeInsets.zero),
       );
     }
     return defaultValue;
@@ -1289,45 +1391,60 @@ class XSJSParse {
 
   //-------------- G -----------------
   //****** Gradient ******/
-  static dynamic getGradient(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Gradient defaultValue}) {
+  static Gradient getGradient(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Gradient defaultValue}) {
     try {
       var v = _getMap(map, key);
       if (v != null) {
-        var className = _getClassName(v);
-        if (className == "LinearGradient") {
+        var _constructorName = _getConstructorName(v);
+        if (_constructorName == "linear") {
           return LinearGradient(
             begin: getAlignment(context, bo, v, "begin", defaultValue: Alignment.centerLeft),
             end: getAlignment(context, bo, v, "end", defaultValue: Alignment.centerRight),
             colors: getColorList(context, bo, v, "colors"),
             stops: toListT<double>(getList(context, bo, v, "stops")),
-            tileMode: getTileMode(context, bo, map, "tileMode"),
-            //transform: getGradient(context, bo, map, key)
+            tileMode: getTileMode(context, bo, map, "tileMode", defaultValue: TileMode.clamp),
+            transform: getGradientTransform(context, bo, map, "transform"),
           );
         }
-        if (className == "RadialGradient") {
+        if (_constructorName == "radial") {
           return RadialGradient(
             center: getAlignment(context, bo, v, "center", defaultValue: Alignment.center),
             radius: getDouble(context, bo, v, "radius", defaultValue: 0.5),
             colors: getColorList(context, bo, v, "colors"),
             stops: toListT<double>(getList(context, bo, v, "stops")),
-            tileMode: getTileMode(context, bo, map, "tileMode"),
+            tileMode: getTileMode(context, bo, map, "tileMode", defaultValue: TileMode.clamp),
             focal: getAlignment(context, bo, map, "focal"),
-            focalRadius: getDouble(context, bo, map, "focalRadius"),
+            focalRadius: getDouble(context, bo, map, "focalRadius", defaultValue: 0.0),
+            transform: getGradientTransform(context, bo, map, "transform"),
           );
         }
-        if (className == "SweepGradient") {
+        if (_constructorName == "sweep") {
           return SweepGradient(
             center: getAlignment(context, bo, v, "center", defaultValue: Alignment.center),
             startAngle: getDouble(context, bo, v, "startAngle", defaultValue: 0.0),
             endAngle: getDouble(context, bo, v, "endAngle", defaultValue: math.pi * 2),
             colors: getColorList(context, bo, v, "colors"),
             stops: toListT<double>(getList(context, bo, v, "stops")),
-            tileMode: getTileMode(context, bo, map, "tileMode"),
+            tileMode: getTileMode(context, bo, map, "tileMode", defaultValue: TileMode.clamp),
+            transform: getGradientTransform(context, bo, map, "transform"),
           );
         }
       }
     } catch (ex) {
       //XSJSLog.log("map:${map.toString()} error:${ex.toString()}");
+    }
+    return defaultValue;
+  }
+
+  //****** GradientTransform ******/
+  static GradientTransform getGradientTransform(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {GradientTransform defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var constructorName = _getConstructorName(map);
+      switch (constructorName) {
+        case "rotation":
+          return GradientRotation(getDouble(context, bo, v, "radians"));
+      }
     }
     return defaultValue;
   }
@@ -1502,23 +1619,64 @@ class XSJSParse {
   }
 
   //****** InputBorder ******/
-  static dynamic getInputBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {InputBorder defaultValue}) {
+  static InputBorder getInputBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {InputBorder defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      var className = _getClassName(v);
-      switch (className) {
-        case 'className':
+      var constructorName = _getConstructorName(v);
+      switch (constructorName) {
+        case 'none':
           return InputBorder.none;
-        case 'OutlineInputBorder':
+        case 'outline':
           return OutlineInputBorder(
             borderSide: getBorderSide(context, bo, v, "borderSide", defaultValue: const BorderSide()),
             borderRadius: getBorderRadius(context, bo, v, "borderRadius", defaultValue: const BorderRadius.all(Radius.circular(4.0))),
             gapPadding: getDouble(context, bo, v, "gapPadding", defaultValue: 4.0),
           );
-        case 'UnderlineInputBorder':
+        case 'underline':
           return UnderlineInputBorder(
             borderSide: getBorderSide(context, bo, v, "borderSide", defaultValue: const BorderSide()),
             borderRadius: getBorderRadius(context, bo, v, "borderRadius", defaultValue: const BorderRadius.only(topLeft: Radius.circular(4.0), topRight: Radius.circular(4.0))),
+          );
+      }
+    }
+
+    return defaultValue;
+  }
+
+  //****** ImageProvider ******/
+  static ImageProvider getImageProvider(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ImageProvider defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var constructorName = _getConstructorName(v);
+      switch (constructorName) {
+        case 'resize':
+          return ResizeImage(
+            getImageProvider(context, bo, map, "imageProvider"),
+            width: getInt(context, bo, v, "width", defaultValue: 1),
+            height: getInt(context, bo, v, "height", defaultValue: 1),
+            allowUpscaling: getBool(context, bo, v, "allowUpscaling", defaultValue: false),
+          );
+        case 'file':
+          return FileImage(
+            getFile(context, bo, map, "file"),
+            scale: getDouble(context, bo, v, "scale", defaultValue: 1.0),
+          );
+        case 'network':
+          return NetworkImage(
+            getString(context, bo, map, "url"),
+            scale: getDouble(context, bo, v, "scale", defaultValue: 1.0),
+          );
+        case 'memory':
+          return MemoryImage(
+            getUint8List(context, bo, map, "bytes"),
+            scale: getDouble(context, bo, v, "scale", defaultValue: 1.0),
+          );
+        case 'exactAsset':
+          return ExactAssetImage(
+            getString(context, bo, map, "assetName"),
+            scale: getDouble(context, bo, v, "scale", defaultValue: 1.0),
+            bundle: getAssetBundle(context, bo, map, key),
+            package: getString(context, bo, map, "packageName"),
           );
       }
     }
@@ -1560,13 +1718,13 @@ class XSJSParse {
   static Key getKey(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Key defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      var className = _getClassName(v);
-      switch (className) {
-        case 'Key':
+      var constructorName = _getConstructorName(v);
+      switch (constructorName) {
+        case 'value':
           return Key(getString(context, bo, v, "value"));
-        case 'UniqueKey':
+        case 'unique':
           return UniqueKey();
-        case 'GlobalKey':
+        case 'global':
           return GlobalKey(debugLabel: getString(context, bo, v, "debugLabel"));
       }
     }
@@ -1785,19 +1943,6 @@ class XSJSParse {
 
   //-------------- N -----------------
 
-  //****** NetworkAssetBundle ******/
-  static NetworkAssetBundle getNetworkAssetBundle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {NetworkAssetBundle defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      var constructorName = _getConstructorName(v);
-      if (constructorName == null || constructorName.isEmpty) {
-        return NetworkAssetBundle(getUri(context, bo, v, "baseUrl"));
-      }
-    }
-
-    return defaultValue;
-  }
-
   //-------------- O -----------------
   //****** Overflow ******/
   static Overflow getOverflow(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Overflow defaultValue}) {
@@ -1906,15 +2051,6 @@ class XSJSParse {
           ..style = getPaintingStyle(context, bo, v, "style");
         return obj;
       }
-    }
-    return defaultValue;
-  }
-
-  //****** PlatformAssetBundle ******/
-  static PlatformAssetBundle getPlatformAssetBundle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {PlatformAssetBundle defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      return PlatformAssetBundle();
     }
     return defaultValue;
   }
@@ -2144,7 +2280,26 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** RenderComparison ******/
+  static RenderComparison getRenderComparison(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {RenderComparison defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'identical':
+          return RenderComparison.identical;
+        case 'layout':
+          return RenderComparison.layout;
+        case 'metadata':
+          return RenderComparison.metadata;
+        case 'paint':
+          return RenderComparison.paint;
+      }
+    }
+    return defaultValue;
+  }
+
   //-------------- S -----------------
+
   //****** String ******/
   static String getString(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {String defaultValue}) {
     return _getString(map, key) ?? defaultValue;
@@ -2354,6 +2509,26 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** StrutStyle ******/
+  static StrutStyle getStrutStyle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {StrutStyle defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return StrutStyle(
+        fontFamily: getString(context, bo, map, "fontFamily"),
+        fontFamilyFallback: toListT<String>(getList(context, bo, map, "fontFamilyFallback")),
+        fontSize: getDouble(context, bo, map, "fontSize"),
+        height: getDouble(context, bo, map, "height"),
+        leading: getDouble(context, bo, map, "leading"),
+        fontWeight: getFontWeight(context, bo, map, "fontWeight"),
+        fontStyle: getFontStyle(context, bo, map, "fontStyle"),
+        forceStrutHeight: getBool(context, bo, map, "forceStrutHeight"),
+        debugLabel: getString(context, bo, map, "debugLabel"),
+        package: getString(context, bo, map, "packageName"),
+      );
+    }
+    return defaultValue;
+  }
+
   //****** SystemUiOverlayStyle ******/
   static SystemUiOverlayStyle getSystemUiOverlayStyle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {SystemUiOverlayStyle defaultValue}) {
     var v = _getMap(map, key);
@@ -2421,6 +2596,17 @@ class XSJSParse {
   }
 
   //-------------- T -----------------
+
+  //****** TextAlignVertical ******/
+  static TextAlignVertical getTextAlignVertical(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextAlignVertical defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return TextAlignVertical(
+        y: getDouble(context, bo, v, "y", defaultValue: 0.0),
+      );
+    }
+    return defaultValue;
+  }
 
   //****** TextInputType ******/
   static TextInputType getTextInputType(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextInputType defaultValue}) {
