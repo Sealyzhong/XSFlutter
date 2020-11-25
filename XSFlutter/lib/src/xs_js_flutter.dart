@@ -318,7 +318,6 @@ class XSFlutterLib implements XSFlutter {
   }
 
   //js->flutter 显示js页面
-  //TODO：此API功能还不完善，不支持MediaQueryData的传递
   Future<dynamic> reloadApp(args) async {
     String routeName = args["routeName"];
 

@@ -122,7 +122,7 @@ class XSProxyBottomNavigationBarItem extends XSJsonObjProxy {
   BottomNavigationBarItem constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return BottomNavigationBarItem(
       icon: XSJSParse.getWidget(context, bo, map, "icon"),
-      label: XSJSParse.getString(context, bo, map, "label"),
+      title: XSJSParse.getWidget(context, bo, map, "title"),
       activeIcon: XSJSParse.getWidget(context, bo, map, "activeIcon"),
       backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
     );

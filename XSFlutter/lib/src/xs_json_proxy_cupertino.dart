@@ -5,6 +5,7 @@
 //  found in the LICENSE file.
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'xs_json_to_dart.dart';
 import 'xs_build_owner.dart';
 import 'xs_js_parse.dart';
@@ -32,26 +33,20 @@ class XSProxyRegisterHelperCupertinoSeries {
     Map<String, CreateJsonObjProxyFun> m = {};
 
     m.addAll(XSProxyCupertinoActivityIndicator.registerProxy());
-    m.addAll(XSProxyCupertinoAlertDialog.registerProxy());
 
     m.addAll(XSProxyCupertinoButton.registerProxy());
 
-    m.addAll(XSProxyCupertinoDialog.registerProxy());
-    m.addAll(XSProxyCupertinoDialogAction.registerProxy());
-
-    m.addAll(XSProxyCupertinoFullscreenDialogTransition.registerProxy());
-
     m.addAll(XSProxyCupertinoNavigationBar.registerProxy());
-
-    m.addAll(XSProxyCupertinoPageScaffold.registerProxy());
-    m.addAll(XSProxyCupertinoPageRoute.registerProxy());
-    m.addAll(XSProxyCupertinoPageTransition.registerProxy());
+    m.addAll(XSProxyCupertinoNavigationBarBackButton.registerProxy());
 
     m.addAll(XSProxyCupertinoSlider.registerProxy());
     m.addAll(XSProxyCupertinoSwitch.registerProxy());
+    m.addAll(XSProxyCupertinoScrollbar.registerProxy());
+    m.addAll(XSProxyCupertinoSliverNavigationBar.registerProxy());
+
     m.addAll(XSProxyCupertinoTabBar.registerProxy());
+    m.addAll(XSProxyCupertinoTheme.registerProxy());
     m.addAll(XSProxyCupertinoTabScaffold.registerProxy());
-    m.addAll(XSProxyCupertinoTabView.registerProxy());
     return m;
   }
 }
@@ -60,7 +55,7 @@ class XSProxyRegisterHelperCupertinoSeries {
 //****** CupertinoActivityIndicator ******
 class XSProxyCupertinoActivityIndicator extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosActivityIndicator";
+    final String regClassName = "CupertinoActivityIndicator";
     return {
       regClassName: () => XSProxyCupertinoActivityIndicator()..init(className: regClassName)
     };
@@ -71,29 +66,7 @@ class XSProxyCupertinoActivityIndicator extends XSJsonObjProxy {
     return CupertinoActivityIndicator(
       key: XSJSParse.getKey(context, bo, map, "key"),
       animating: XSJSParse.getBool(context, bo, map, "animating"),
-      radius: XSJSParse.getDouble(context, bo, map, "radius"),
-    );
-  }
-}
-
-//****** CupertinoAlertDialog ******
-class XSProxyCupertinoAlertDialog extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosAlertDialog";
-    return {
-      regClassName: () => XSProxyCupertinoAlertDialog()..init(className: regClassName)
-    };
-  }
-
-  @override
-  CupertinoAlertDialog constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return CupertinoAlertDialog(
-      key: XSJSParse.getKey(context, bo, map, "key"),
-      title: XSJSParse.getWidget(context, bo, map, "title"),
-      content: XSJSParse.getWidget(context, bo, map, "content"),
-      actions: XSJSParse.getWidgetList(context, bo, map, "actions", defaultValue: <Widget>[]),
-      scrollController: XSJSParse.getObject(context, bo, map, "scrollController"),
-      actionScrollController: XSJSParse.getObject(context, bo, map, "actionScrollController"),
+      radius: XSJSParse.getDouble(context, bo, map, "radius", defaultValue: 10.0),
     );
   }
 }
@@ -101,7 +74,7 @@ class XSProxyCupertinoAlertDialog extends XSJsonObjProxy {
 //-------------- B -----------------
 //****** CupertinoButton ******
 class XSProxyCupertinoButton extends XSJsonObjProxy {
-  static String regClassName = "IosButton";
+  static String regClassName = "CupertinoButton";
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     return {
       regClassName: () => XSProxyCupertinoButton()..init(className: regClassName)
@@ -121,10 +94,10 @@ class XSProxyCupertinoButton extends XSJsonObjProxy {
       child: XSJSParse.getWidget(context, bo, map, "child"),
       padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
       color: XSJSParse.getColor(context, bo, map, "color"),
-      disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
+      disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor", defaultValue: CupertinoColors.quaternarySystemFill),
       minSize: XSJSParse.getDouble(context, bo, map, "minSize", defaultValue: 44.0),
       pressedOpacity: XSJSParse.getDouble(context, bo, map, "pressedOpacity", defaultValue: 0.1),
-      borderRadius: XSJSParse.getBorderRadius(context, bo, map, "borderRadius"),
+      borderRadius: XSJSParse.getBorderRadius(context, bo, map, "borderRadius", defaultValue: const BorderRadius.all(Radius.circular(8.0))),
       onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
     );
   }
@@ -133,84 +106,24 @@ class XSProxyCupertinoButton extends XSJsonObjProxy {
     return CupertinoButton.filled(
       child: XSJSParse.getWidget(context, bo, map, "child"),
       padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
-      disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
+      disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor", defaultValue: CupertinoColors.quaternarySystemFill),
       minSize: XSJSParse.getDouble(context, bo, map, "minSize", defaultValue: 44.0),
       pressedOpacity: XSJSParse.getDouble(context, bo, map, "pressedOpacity", defaultValue: 0.1),
-      borderRadius: XSJSParse.getBorderRadius(context, bo, map, "borderRadius"),
+      borderRadius: XSJSParse.getBorderRadius(context, bo, map, "borderRadius", defaultValue: const BorderRadius.all(Radius.circular(8.0))),
       onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
     );
   }
 }
 
 //-------------- D -----------------
-//****** CupertinoDialog ******
-class XSProxyCupertinoDialog extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosDialog";
-    return {
-      regClassName: () => XSProxyCupertinoDialog()..init(className: regClassName)
-    };
-  }
-
-  @override
-  // ignore: deprecated_member_use
-  CupertinoDialog constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    // ignore: deprecated_member_use
-    return CupertinoDialog(
-      key: XSJSParse.getKey(context, bo, map, "key"),
-      child: XSJSParse.getWidget(context, bo, map, "child"),
-    );
-  }
-}
-
-//****** CupertinoDialogAction ******
-class XSProxyCupertinoDialogAction extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosDialogAction";
-    return {
-      regClassName: () => XSProxyCupertinoDialogAction()..init(className: regClassName)
-    };
-  }
-
-  @override
-  CupertinoDialogAction constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return CupertinoDialogAction(
-      onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
-      isDefaultAction: XSJSParse.getBool(context, bo, map, "isDefaultAction", defaultValue: false),
-      isDestructiveAction: XSJSParse.getBool(context, bo, map, "isDestructiveAction", defaultValue: false),
-      textStyle: XSJSParse.getTextStyle(context, bo, map, "textStyle"),
-      child: XSJSParse.getWidget(context, bo, map, "child"),
-    );
-  }
-}
 
 //-------------- F -----------------
-//****** CupertinoFullscreenDialogTransition ******
-class XSProxyCupertinoFullscreenDialogTransition extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosFullscreenDialogTransition";
-    return {
-      regClassName: () => XSProxyCupertinoFullscreenDialogTransition()..init(className: regClassName)
-    };
-  }
-
-  @override
-  CupertinoFullscreenDialogTransition constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return CupertinoFullscreenDialogTransition(
-      key: XSJSParse.getKey(context, bo, map, "key"),
-      primaryRouteAnimation: XSJSParse.getAnimationDouble(context, bo, map, "primaryRouteAnimation"),
-      secondaryRouteAnimation: XSJSParse.getAnimationDouble(context, bo, map, "secondaryRouteAnimation"),
-      child: XSJSParse.getWidget(context, bo, map, "child"),
-      linearTransition: XSJSParse.getBool(context, bo, map, "linearTransition"),
-    );
-  }
-}
 
 //-------------- N -----------------
 //****** CupertinoNavigationBar ******
 class XSProxyCupertinoNavigationBar extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosNavigationBar";
+    final String regClassName = "CupertinoNavigationBar";
     return {
       regClassName: () => XSProxyCupertinoNavigationBar()..init(className: regClassName)
     };
@@ -236,84 +149,41 @@ class XSProxyCupertinoNavigationBar extends XSJsonObjProxy {
       trailing: XSJSParse.getWidget(context, bo, map, "trailing"),
       border: XSJSParse.getBorder(context, bo, map, "border", defaultValue: defaultNavBarBorder),
       backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
+      brightness: XSJSParse.getBrightness(context, bo, map, "brightness"),
       padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
       actionsForegroundColor: XSJSParse.getColor(context, bo, map, "actionsForegroundColor"),
       transitionBetweenRoutes: XSJSParse.getBool(context, bo, map, "transitionBetweenRoutes", defaultValue: true),
-      heroTag: XSJSParse.getObject(context, bo, map, "heroTag"),
+    );
+  }
+}
+
+//****** CupertinoNavigationBarBackButton ******
+class XSProxyCupertinoNavigationBarBackButton extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "CupertinoNavigationBarBackButton";
+    return {
+      regClassName: () => XSProxyCupertinoNavigationBar()..init(className: regClassName)
+    };
+  }
+
+  @override
+  CupertinoNavigationBarBackButton constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return CupertinoNavigationBarBackButton(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      color: XSJSParse.getColor(context, bo, map, "color"),
+      previousPageTitle: XSJSParse.getString(context, bo, map, "previousPageTitle"),
+      onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
     );
   }
 }
 
 //-------------- P -----------------
-//****** CupertinoPageTransition ******
-class XSProxyCupertinoPageTransition extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosPageTransition";
-    return {
-      regClassName: () => XSProxyCupertinoPageTransition()..init(className: regClassName)
-    };
-  }
-
-  @override
-  CupertinoPageTransition constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return CupertinoPageTransition(
-      key: XSJSParse.getKey(context, bo, map, "key"),
-      primaryRouteAnimation: XSJSParse.getAnimationDouble(context, bo, map, "primaryRouteAnimation"),
-      secondaryRouteAnimation: XSJSParse.getAnimationDouble(context, bo, map, "secondaryRouteAnimation"),
-      child: XSJSParse.getWidget(context, bo, map, "child"),
-      linearTransition: XSJSParse.getBool(context, bo, map, "linearTransition"),
-    );
-  }
-}
-
-//****** CupertinoPageScaffold ******
-class XSProxyCupertinoPageScaffold extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosPageScaffold";
-    return {
-      regClassName: () => XSProxyCupertinoPageScaffold()..init(className: regClassName)
-    };
-  }
-
-  @override
-  CupertinoPageScaffold constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return CupertinoPageScaffold(
-      key: XSJSParse.getKey(context, bo, map, "key"),
-      navigationBar: XSJSParse.getWidget(context, bo, map, "navigationBar"),
-      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
-      resizeToAvoidBottomInset: XSJSParse.getBool(context, bo, map, "resizeToAvoidBottomInset", defaultValue: true),
-      child: XSJSParse.getWidget(context, bo, map, "child"),
-    );
-  }
-}
-
-//****** CupertinoPageRoute ******
-class XSProxyCupertinoPageRoute extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosPageRoute";
-    return {
-      regClassName: () => XSProxyCupertinoPageRoute()..init(className: regClassName)
-    };
-  }
-
-  @override
-  CupertinoPageRoute constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return CupertinoPageRoute(
-      builder: (BuildContext context) {
-        return XSJSParse.getWidget(context, bo, map, "child");
-      },
-      settings: XSJSParse.getRouteSettings(context, bo, map, "settings"),
-      maintainState: XSJSParse.getBool(context, bo, map, "maintainState", defaultValue: true),
-      fullscreenDialog: XSJSParse.getBool(context, bo, map, "fullscreenDialog", defaultValue: false),
-    );
-  }
-}
 
 //-------------- S -----------------
 //****** CupertinoSlider ******
 class XSProxyCupertinoSlider extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosSlider";
+    final String regClassName = "CupertinoSlider";
     return {
       regClassName: () => XSProxyCupertinoSlider()..init(className: regClassName)
     };
@@ -331,6 +201,7 @@ class XSProxyCupertinoSlider extends XSJsonObjProxy {
       max: XSJSParse.getDouble(context, bo, map, "max", defaultValue: 1.0),
       divisions: XSJSParse.getInt(context, bo, map, "divisions"),
       activeColor: XSJSParse.getColor(context, bo, map, "activeColor"),
+      thumbColor: XSJSParse.getColor(context, bo, map, "thumbColor", defaultValue: CupertinoColors.white),
     );
   }
 }
@@ -338,7 +209,7 @@ class XSProxyCupertinoSlider extends XSJsonObjProxy {
 //****** CupertinoSwitch ******
 class XSProxyCupertinoSwitch extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosSwitch";
+    final String regClassName = "CupertinoSwitch";
     return {
       regClassName: () => XSProxyCupertinoSwitch()..init(className: regClassName)
     };
@@ -351,8 +222,68 @@ class XSProxyCupertinoSwitch extends XSJsonObjProxy {
       value: XSJSParse.getBool(context, bo, map, "value"),
       onChanged: XSJSParse.getValueChanged<bool>(context, bo, map, "onChanged"),
       activeColor: XSJSParse.getColor(context, bo, map, "activeColor"),
+      trackColor: XSJSParse.getColor(context, bo, map, "trackColor"),
+      dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.start),
     );
     return widget;
+  }
+}
+
+//****** CupertinoScrollbar ******
+class XSProxyCupertinoScrollbar extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "CupertinoScrollbar";
+    return {
+      regClassName: () => XSProxyCupertinoScrollbar()..init(className: regClassName)
+    };
+  }
+
+  @override
+  CupertinoScrollbar constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return CupertinoScrollbar(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+      controller: XSJSParse.getObject(context, bo, map, "controller"),
+      isAlwaysShown: XSJSParse.getBool(context, bo, map, "isAlwaysShown", defaultValue: false),
+    );
+  }
+}
+
+//****** CupertinoSliverNavigationBar ******
+class XSProxyCupertinoSliverNavigationBar extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "CupertinoSliverNavigationBar";
+    return {
+      regClassName: () => XSProxyCupertinoSliverNavigationBar()..init(className: regClassName)
+    };
+  }
+
+  @override
+  CupertinoSliverNavigationBar constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    const Border defaultNavBarBorder = Border(
+      bottom: BorderSide(
+        color: Color(0x4C000000),
+        width: 0.0, // One physical pixel.
+        style: BorderStyle.solid,
+      ),
+    );
+
+    return CupertinoSliverNavigationBar(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      leading: XSJSParse.getWidget(context, bo, map, "leading"),
+      largeTitle: XSJSParse.getWidget(context, bo, map, "largeTitle"),
+      automaticallyImplyLeading: XSJSParse.getBool(context, bo, map, "automaticallyImplyLeading", defaultValue: true),
+      automaticallyImplyTitle: XSJSParse.getBool(context, bo, map, "automaticallyImplyTitle", defaultValue: true),
+      previousPageTitle: XSJSParse.getString(context, bo, map, "previousPageTitle"),
+      middle: XSJSParse.getWidget(context, bo, map, "middle"),
+      trailing: XSJSParse.getWidget(context, bo, map, "trailing"),
+      border: XSJSParse.getBorder(context, bo, map, "border", defaultValue: defaultNavBarBorder),
+      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
+      brightness: XSJSParse.getBrightness(context, bo, map, "brightness"),
+      padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+      actionsForegroundColor: XSJSParse.getColor(context, bo, map, "actionsForegroundColor"),
+      transitionBetweenRoutes: XSJSParse.getBool(context, bo, map, "transitionBetweenRoutes", defaultValue: true),
+    );
   }
 }
 
@@ -360,7 +291,7 @@ class XSProxyCupertinoSwitch extends XSJsonObjProxy {
 //****** CupertinoTabBar ******
 class XSProxyCupertinoTabBar extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosTabBar";
+    final String regClassName = "CupertinoTabBar";
     return {
       regClassName: () => XSProxyCupertinoTabBar()..init(className: regClassName)
     };
@@ -368,7 +299,7 @@ class XSProxyCupertinoTabBar extends XSJsonObjProxy {
 
   @override
   CupertinoTabBar constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    const Border defaultNavBarBorder = Border(
+    const Border _kDefaultNavBarBorder = Border(
       bottom: BorderSide(
         color: Color(0x4C000000),
         width: 0.0, // One physical pixel.
@@ -383,9 +314,28 @@ class XSProxyCupertinoTabBar extends XSJsonObjProxy {
       currentIndex: XSJSParse.getInt(context, bo, map, "currentIndex", defaultValue: 0),
       backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
       activeColor: XSJSParse.getColor(context, bo, map, "activeColor"),
-      inactiveColor: XSJSParse.getColor(context, bo, map, "inactiveColor"),
-      border: XSJSParse.getBorder(context, bo, map, "border", defaultValue: defaultNavBarBorder),
+      inactiveColor: XSJSParse.getColor(context, bo, map, "inactiveColor", defaultValue: CupertinoColors.inactiveGray),
+      border: XSJSParse.getBorder(context, bo, map, "border", defaultValue: _kDefaultNavBarBorder),
       iconSize: XSJSParse.getDouble(context, bo, map, "iconSize", defaultValue: 30.0),
+    );
+  }
+}
+
+//****** CupertinoTheme ******
+class XSProxyCupertinoTheme extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "CupertinoTheme";
+    return {
+      regClassName: () => XSProxyCupertinoTheme()..init(className: regClassName)
+    };
+  }
+
+  @override
+  CupertinoTheme constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return CupertinoTheme(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+      data: XSJSParse.getCupertinoThemeData(context, bo, map, "data"),
     );
   }
 }
@@ -393,7 +343,7 @@ class XSProxyCupertinoTabBar extends XSJsonObjProxy {
 //****** CupertinoTabScaffold ******
 class XSProxyCupertinoTabScaffold extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosTabScaffold";
+    final String regClassName = "CupertinoTabScaffold";
     return {
       regClassName: () => XSProxyCupertinoTabScaffold()..init(className: regClassName)
     };
@@ -408,32 +358,6 @@ class XSProxyCupertinoTabScaffold extends XSJsonObjProxy {
         List<Widget> children = XSJSParse.getWidgetList(context, bo, map, "children");
         return children[index];
       },
-    );
-  }
-}
-
-//****** CupertinoTabView ******
-class XSProxyCupertinoTabView extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IosTabView";
-    return {
-      regClassName: () => XSProxyCupertinoTabView()..init(className: regClassName)
-    };
-  }
-
-  @override
-  CupertinoTabView constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return CupertinoTabView(
-      key: XSJSParse.getKey(context, bo, map, "key"),
-      builder: (BuildContext context) {
-        return XSJSParse.getWidget(context, bo, map, "item");
-      },
-      defaultTitle: XSJSParse.getString(context, bo, map, "defaultTitle"),
-      //TODO: routes
-      routes: null,
-      onGenerateRoute: null,
-      onUnknownRoute: null,
-      navigatorObservers: null,
     );
   }
 }

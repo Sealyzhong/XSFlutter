@@ -182,7 +182,7 @@ class XSProxyAspectRatio extends XSJsonObjProxy {
   AspectRatio constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return AspectRatio(
       key: XSJSParse.getKey(context, bo, map, "key"),
-      aspectRatio: XSJSParse.getDouble(context, bo, map, "aspectRatio"),
+      aspectRatio: XSJSParse.getDouble(context, bo, map, "aspectRatio", defaultValue: 1.0),
       child: XSJSParse.getWidget(context, bo, map, "child"),
     );
   }
@@ -367,8 +367,6 @@ class XSProxyCustomScrollView extends XSJsonObjProxy {
       slivers: XSJSParse.getWidgetList(context, bo, map, "slivers", defaultValue: const <Widget>[]),
       semanticChildCount: XSJSParse.getInt(context, bo, map, "semanticChildCount"),
       dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.start),
-      restorationId: XSJSParse.getString(context, bo, map, "restorationId"),
-      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
     );
   }
 }
@@ -701,7 +699,7 @@ class XSProxyListBody extends XSJsonObjProxy {
       key: XSJSParse.getKey(context, bo, map, "key"),
       mainAxis: XSJSParse.getAxis(context, bo, map, "mainAxis", defaultValue: Axis.vertical),
       reverse: XSJSParse.getBool(context, bo, map, "reverse", defaultValue: false),
-      children: XSJSParse.getWidgetList(context, bo, map, "children"),
+      children: XSJSParse.getWidgetList(context, bo, map, "children", defaultValue: const <Widget>[]),
     );
   }
 }
@@ -725,11 +723,16 @@ class XSProxyListTile extends XSJsonObjProxy {
       trailing: XSJSParse.getWidget(context, bo, map, "trailing"),
       isThreeLine: XSJSParse.getBool(context, bo, map, "isThreeLine", defaultValue: false),
       dense: XSJSParse.getBool(context, bo, map, "dense"),
+      visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
       contentPadding: XSJSParse.getEdgeInsets(context, bo, map, "contentPadding"),
       enabled: XSJSParse.getBool(context, bo, map, "enabled", defaultValue: true),
       onTap: XSJSParse.getVoidCallback(context, bo, map, "onTap"),
       onLongPress: XSJSParse.getVoidCallback(context, bo, map, "onLongPress"),
       selected: XSJSParse.getBool(context, bo, map, "selected", defaultValue: false),
+      focusColor: XSJSParse.getColor(context, bo, map, "focusColor"),
+      hoverColor: XSJSParse.getColor(context, bo, map, "hoverColor"),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
     );
   }
 }

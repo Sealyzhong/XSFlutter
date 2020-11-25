@@ -744,12 +744,12 @@ class XSJSParse {
       );
 
       return BannerPainter(
-        message: getString(context, bo, map, "message"),
-        textDirection: getTextDirection(context, bo, map, "textDirection"),
-        location: getBannerLocation(context, bo, map, "location"),
-        layoutDirection: getTextDirection(context, bo, map, "layoutDirection"),
+        message: getString(context, bo, v, "message"),
+        textDirection: getTextDirection(context, bo, v, "textDirection"),
+        location: getBannerLocation(context, bo, v, "location"),
+        layoutDirection: getTextDirection(context, bo, v, "layoutDirection"),
         color: getColor(context, bo, v, "color", defaultValue: _kColor),
-        textStyle: getTextStyle(context, bo, map, "textStyle", defaultValue: _kTextStyle),
+        textStyle: getTextStyle(context, bo, v, "textStyle", defaultValue: _kTextStyle),
       );
     }
     return defaultValue;
@@ -774,7 +774,7 @@ class XSJSParse {
         highlightColor: getColor(context, bo, v, "highlightColor"),
         splashColor: getColor(context, bo, v, "splashColor"),
         colorScheme: getColorScheme(context, bo, v, "colorScheme"),
-        materialTapTargetSize: getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+        materialTapTargetSize: getMaterialTapTargetSize(context, bo, v, "materialTapTargetSize"),
       );
     }
     return defaultValue;
@@ -824,14 +824,25 @@ class XSJSParse {
     if (v != null) {
       var constructorName = _getConstructorName(map);
       switch (constructorName) {
-        case "circle":
-          return CircleBorder(
+        case "circleBorder":
+          return CircleBorder(side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none));
+        case "beveledRectangleBorder":
+          return BeveledRectangleBorder(
             side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none),
+            borderRadius: getBorderRadius(context, bo, v, "borderRadius", defaultValue: BorderRadius.zero),
           );
-        case "stadium":
-          return StadiumBorder(
+        case "continuousRectangleBorder":
+          return ContinuousRectangleBorder(
             side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none),
+            borderRadius: getBorderRadius(context, bo, v, "borderRadius", defaultValue: BorderRadius.zero),
           );
+        case "roundedRectangleBorder":
+          return RoundedRectangleBorder(
+            side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none),
+            borderRadius: getBorderRadius(context, bo, v, "borderRadius", defaultValue: BorderRadius.zero),
+          );
+        case "stadiumBorder":
+          return StadiumBorder(side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none));
       }
     }
     return defaultValue;
@@ -1027,6 +1038,50 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** CupertinoTextThemeData ******/
+  static CupertinoTextThemeData getCupertinoTextThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {CupertinoTextThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return CupertinoTextThemeData(
+        primaryColor: getColor(context, bo, v, "primaryColor", defaultValue: CupertinoColors.systemBlue),
+        textStyle: getTextStyle(context, bo, v, "textStyle"),
+        actionTextStyle: getTextStyle(context, bo, v, "actionTextStyle"),
+        tabLabelTextStyle: getTextStyle(context, bo, v, "tabLabelTextStyle"),
+        navTitleTextStyle: getTextStyle(context, bo, v, "navTitleTextStyle"),
+        navLargeTitleTextStyle: getTextStyle(context, bo, v, "navLargeTitleTextStyle"),
+        navActionTextStyle: getTextStyle(context, bo, v, "navActionTextStyle"),
+        pickerTextStyle: getTextStyle(context, bo, v, "pickerTextStyle"),
+        dateTimePickerTextStyle: getTextStyle(context, bo, v, "dateTimePickerTextStyle"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** CupertinoTabController ******/
+  static CupertinoTabController getCupertinoTabController(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {CupertinoTabController defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return CupertinoTabController(initialIndex: getInt(context, bo, v, "initialIndex", defaultValue: 0));
+    }
+    return defaultValue;
+  }
+
+  //****** CupertinoThemeData ******/
+  static CupertinoThemeData getCupertinoThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {CupertinoThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return CupertinoThemeData(
+        primaryColor: getColor(context, bo, v, "primaryColor"),
+        primaryContrastingColor: getColor(context, bo, v, "primaryContrastingColor"),
+        brightness: getBrightness(context, bo, v, "brightness"),
+        textTheme: getCupertinoTextThemeData(context, bo, v, "textTheme"),
+        barBackgroundColor: getColor(context, bo, v, "barBackgroundColor"),
+        scaffoldBackgroundColor: getColor(context, bo, v, "scaffoldBackgroundColor"),
+      );
+    }
+    return defaultValue;
+  }
+
   //-------------- D -----------------
   //****** Double ******/
   static double getDouble(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {double defaultValue}) {
@@ -1083,13 +1138,13 @@ class XSJSParse {
     var v = _getMap(map, key);
     if (v != null) {
       return DecorationImage(
-        image: getObject(context, bo, map, "image"),
-        colorFilter: getColorFilter(context, bo, map, "colorFilter"),
-        fit: getBoxFit(context, bo, map, "fit"),
-        alignment: getAlignment(context, bo, map, "alignment", defaultValue: Alignment.center),
-        centerSlice: getRect(context, bo, map, "centerSlice"),
-        repeat: getImageRepeat(context, bo, map, "repeat", defaultValue: ImageRepeat.noRepeat),
-        matchTextDirection: getBool(context, bo, map, "matchTextDirection", defaultValue: false),
+        image: getObject(context, bo, v, "image"),
+        colorFilter: getColorFilter(context, bo, v, "colorFilter"),
+        fit: getBoxFit(context, bo, v, "fit"),
+        alignment: getAlignment(context, bo, v, "alignment", defaultValue: Alignment.center),
+        centerSlice: getRect(context, bo, v, "centerSlice"),
+        repeat: getImageRepeat(context, bo, v, "repeat", defaultValue: ImageRepeat.noRepeat),
+        matchTextDirection: getBool(context, bo, v, "matchTextDirection", defaultValue: false),
       );
     }
 
@@ -1110,12 +1165,12 @@ class XSJSParse {
   }
 
   //****** Decoration ******/
-  static dynamic getDecoration(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Decoration defaultValue}) {
+  static Decoration getDecoration(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Decoration defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
       var className = _getClassName(v);
       if (className == "BoxDecoration") {
-        return getBoxDecoration(context, bo, map, key);
+        return getBoxDecoration(context, bo, v, key);
       }
     }
     return defaultValue;
@@ -1350,9 +1405,9 @@ class XSJSParse {
     var v = _getMap(map, key);
     if (v != null) {
       return FlutterLogoDecoration(
-        textColor: getColor(context, bo, map, "textColor", defaultValue: const Color(0xFF42A5F5)),
-        style: getFlutterLogoStyle(context, bo, map, "style", defaultValue: FlutterLogoStyle.markOnly),
-        margin: getEdgeInsets(context, bo, map, "margin", defaultValue: EdgeInsets.zero),
+        textColor: getColor(context, bo, v, "textColor", defaultValue: const Color(0xFF42A5F5)),
+        style: getFlutterLogoStyle(context, bo, v, "style", defaultValue: FlutterLogoStyle.markOnly),
+        margin: getEdgeInsets(context, bo, v, "margin", defaultValue: EdgeInsets.zero),
       );
     }
     return defaultValue;
@@ -1402,8 +1457,8 @@ class XSJSParse {
             end: getAlignment(context, bo, v, "end", defaultValue: Alignment.centerRight),
             colors: getColorList(context, bo, v, "colors"),
             stops: toListT<double>(getList(context, bo, v, "stops")),
-            tileMode: getTileMode(context, bo, map, "tileMode", defaultValue: TileMode.clamp),
-            transform: getGradientTransform(context, bo, map, "transform"),
+            tileMode: getTileMode(context, bo, v, "tileMode", defaultValue: TileMode.clamp),
+            transform: getGradientTransform(context, bo, v, "transform"),
           );
         }
         if (_constructorName == "radial") {
@@ -1412,10 +1467,10 @@ class XSJSParse {
             radius: getDouble(context, bo, v, "radius", defaultValue: 0.5),
             colors: getColorList(context, bo, v, "colors"),
             stops: toListT<double>(getList(context, bo, v, "stops")),
-            tileMode: getTileMode(context, bo, map, "tileMode", defaultValue: TileMode.clamp),
-            focal: getAlignment(context, bo, map, "focal"),
-            focalRadius: getDouble(context, bo, map, "focalRadius", defaultValue: 0.0),
-            transform: getGradientTransform(context, bo, map, "transform"),
+            tileMode: getTileMode(context, bo, v, "tileMode", defaultValue: TileMode.clamp),
+            focal: getAlignment(context, bo, v, "focal"),
+            focalRadius: getDouble(context, bo, v, "focalRadius", defaultValue: 0.0),
+            transform: getGradientTransform(context, bo, v, "transform"),
           );
         }
         if (_constructorName == "sweep") {
@@ -1425,8 +1480,8 @@ class XSJSParse {
             endAngle: getDouble(context, bo, v, "endAngle", defaultValue: math.pi * 2),
             colors: getColorList(context, bo, v, "colors"),
             stops: toListT<double>(getList(context, bo, v, "stops")),
-            tileMode: getTileMode(context, bo, map, "tileMode", defaultValue: TileMode.clamp),
-            transform: getGradientTransform(context, bo, map, "transform"),
+            tileMode: getTileMode(context, bo, v, "tileMode", defaultValue: TileMode.clamp),
+            transform: getGradientTransform(context, bo, v, "transform"),
           );
         }
       }
@@ -1522,28 +1577,32 @@ class XSJSParse {
     var v = _getMap(map, key);
     if (v != null) {
       return InputDecorationTheme(
-        labelStyle: getTextStyle(context, bo, v, "labelStyle"),
-        helperStyle: getTextStyle(context, bo, v, "helperStyle"),
-        hintStyle: getTextStyle(context, bo, v, "hintStyle"),
-        errorStyle: getTextStyle(context, bo, v, "errorStyle"),
-        errorMaxLines: getInt(context, bo, v, "errorMaxLines"),
-        // ignore: deprecated_member_use
-        hasFloatingPlaceholder: getBool(context, bo, v, "hasFloatingPlaceholder", defaultValue: true),
-        isDense: getBool(context, bo, v, "isDense", defaultValue: false),
-        contentPadding: getEdgeInsets(context, bo, v, "contentPadding"),
-        isCollapsed: getBool(context, bo, v, "isCollapsed", defaultValue: false),
-        prefixStyle: getTextStyle(context, bo, v, "prefixStyle"),
-        suffixStyle: getTextStyle(context, bo, v, "suffixStyle"),
-        counterStyle: getTextStyle(context, bo, v, "counterStyle"),
-        filled: getBool(context, bo, v, "filled", defaultValue: false),
-        fillColor: getColor(context, bo, v, "fillColor"),
-        errorBorder: getInputBorder(context, bo, v, "errorBorder"),
-        focusedBorder: getInputBorder(context, bo, v, "focusedBorder"),
-        focusedErrorBorder: getInputBorder(context, bo, v, "focusedErrorBorder"),
-        disabledBorder: getInputBorder(context, bo, v, "disabledBorder"),
-        enabledBorder: getInputBorder(context, bo, v, "enabledBorder"),
-        border: getInputBorder(context, bo, v, "border"),
-      );
+          labelStyle: getTextStyle(context, bo, v, "labelStyle"),
+          helperStyle: getTextStyle(context, bo, v, "helperStyle"),
+          helperMaxLines: getInt(context, bo, v, "helperMaxLines"),
+          hintStyle: getTextStyle(context, bo, v, "hintStyle"),
+          errorStyle: getTextStyle(context, bo, v, "errorStyle"),
+          errorMaxLines: getInt(context, bo, v, "errorMaxLines"),
+          // ignore: deprecated_member_use
+          hasFloatingPlaceholder: getBool(context, bo, v, "hasFloatingPlaceholder", defaultValue: true),
+          floatingLabelBehavior: getFloatingLabelBehavior(context, bo, v, "floatingLabelBehavior", defaultValue: FloatingLabelBehavior.auto),
+          isDense: getBool(context, bo, v, "isDense", defaultValue: false),
+          contentPadding: getEdgeInsets(context, bo, v, "contentPadding"),
+          isCollapsed: getBool(context, bo, v, "isCollapsed", defaultValue: false),
+          prefixStyle: getTextStyle(context, bo, v, "prefixStyle"),
+          suffixStyle: getTextStyle(context, bo, v, "suffixStyle"),
+          counterStyle: getTextStyle(context, bo, v, "counterStyle"),
+          filled: getBool(context, bo, v, "filled", defaultValue: false),
+          fillColor: getColor(context, bo, v, "fillColor"),
+          focusColor: getColor(context, bo, v, "focusColor"),
+          hoverColor: getColor(context, bo, v, "hoverColor"),
+          errorBorder: getInputBorder(context, bo, v, "errorBorder"),
+          focusedBorder: getInputBorder(context, bo, v, "focusedBorder"),
+          focusedErrorBorder: getInputBorder(context, bo, v, "focusedErrorBorder"),
+          disabledBorder: getInputBorder(context, bo, v, "disabledBorder"),
+          enabledBorder: getInputBorder(context, bo, v, "enabledBorder"),
+          border: getInputBorder(context, bo, v, "border"),
+          alignLabelWithHint: getBool(context, bo, v, "alignLabelWithHint", defaultValue: false));
     }
     return defaultValue;
   }
@@ -1555,63 +1614,63 @@ class XSJSParse {
       var constructorName = _getConstructorName(v);
       if (constructorName == null || constructorName.isEmpty) {
         return InputDecoration(
-          icon: getWidget(context, bo, map, "icon"),
-          labelText: getString(context, bo, map, "labelText"),
-          labelStyle: getTextStyle(context, bo, map, "labelStyle"),
-          helperText: getString(context, bo, map, "helperText"),
-          helperStyle: getTextStyle(context, bo, map, "helperStyle"),
-          helperMaxLines: getInt(context, bo, map, "helperMaxLines"),
-          hintText: getString(context, bo, map, "hintText"),
-          hintStyle: getTextStyle(context, bo, map, "hintStyle"),
-          hintMaxLines: getInt(context, bo, map, "hintMaxLines"),
-          errorText: getString(context, bo, map, "errorText"),
-          errorStyle: getTextStyle(context, bo, map, "errorStyle"),
-          errorMaxLines: getInt(context, bo, map, "errorMaxLines"),
-          floatingLabelBehavior: getFloatingLabelBehavior(context, bo, map, "floatingLabelBehavior", defaultValue: FloatingLabelBehavior.auto),
-          isCollapsed: getBool(context, bo, map, "isCollapsed", defaultValue: false),
-          isDense: getBool(context, bo, map, "isDense"),
-          contentPadding: getEdgeInsets(context, bo, map, "contentPadding"),
-          prefix: getWidget(context, bo, map, "prefix"),
-          prefixIcon: getWidget(context, bo, map, "prefixIcon"),
-          prefixIconConstraints: getBoxConstraints(context, bo, map, "prefixIconConstraints"),
-          prefixText: getString(context, bo, map, "prefixText"),
-          prefixStyle: getTextStyle(context, bo, map, "prefixStyle"),
-          suffix: getWidget(context, bo, map, "suffix"),
-          suffixIcon: getWidget(context, bo, map, "suffixIcon"),
-          suffixIconConstraints: getBoxConstraints(context, bo, map, "suffixIconConstraints"),
-          suffixText: getString(context, bo, map, "suffixText"),
-          suffixStyle: getTextStyle(context, bo, map, "suffixStyle"),
-          counter: getWidget(context, bo, map, "counter"),
-          counterText: getString(context, bo, map, "counterText"),
-          counterStyle: getTextStyle(context, bo, map, "counterStyle"),
-          filled: getBool(context, bo, map, "filled"),
-          fillColor: getColor(context, bo, map, "fillColor"),
-          focusColor: getColor(context, bo, map, "focusColor"),
-          hoverColor: getColor(context, bo, map, "hoverColor"),
-          errorBorder: getInputBorder(context, bo, map, "errorBorder"),
-          focusedBorder: getInputBorder(context, bo, map, "focusedBorder"),
-          focusedErrorBorder: getInputBorder(context, bo, map, "focusedErrorBorder"),
-          disabledBorder: getInputBorder(context, bo, map, "disabledBorder"),
-          enabledBorder: getInputBorder(context, bo, map, "enabledBorder"),
-          border: getInputBorder(context, bo, map, "border"),
-          enabled: getBool(context, bo, map, "enabled"),
-          semanticCounterText: getString(context, bo, map, "semanticCounterText"),
-          alignLabelWithHint: getBool(context, bo, map, "alignLabelWithHint"),
+          icon: getWidget(context, bo, v, "icon"),
+          labelText: getString(context, bo, v, "labelText"),
+          labelStyle: getTextStyle(context, bo, v, "labelStyle"),
+          helperText: getString(context, bo, v, "helperText"),
+          helperStyle: getTextStyle(context, bo, v, "helperStyle"),
+          helperMaxLines: getInt(context, bo, v, "helperMaxLines"),
+          hintText: getString(context, bo, v, "hintText"),
+          hintStyle: getTextStyle(context, bo, v, "hintStyle"),
+          hintMaxLines: getInt(context, bo, v, "hintMaxLines"),
+          errorText: getString(context, bo, v, "errorText"),
+          errorStyle: getTextStyle(context, bo, v, "errorStyle"),
+          errorMaxLines: getInt(context, bo, v, "errorMaxLines"),
+          floatingLabelBehavior: getFloatingLabelBehavior(context, bo, v, "floatingLabelBehavior", defaultValue: FloatingLabelBehavior.auto),
+          isCollapsed: getBool(context, bo, v, "isCollapsed", defaultValue: false),
+          isDense: getBool(context, bo, v, "isDense"),
+          contentPadding: getEdgeInsets(context, bo, v, "contentPadding"),
+          prefix: getWidget(context, bo, v, "prefix"),
+          prefixIcon: getWidget(context, bo, v, "prefixIcon"),
+          prefixIconConstraints: getBoxConstraints(context, bo, v, "prefixIconConstraints"),
+          prefixText: getString(context, bo, v, "prefixText"),
+          prefixStyle: getTextStyle(context, bo, v, "prefixStyle"),
+          suffix: getWidget(context, bo, v, "suffix"),
+          suffixIcon: getWidget(context, bo, v, "suffixIcon"),
+          suffixIconConstraints: getBoxConstraints(context, bo, v, "suffixIconConstraints"),
+          suffixText: getString(context, bo, v, "suffixText"),
+          suffixStyle: getTextStyle(context, bo, v, "suffixStyle"),
+          counter: getWidget(context, bo, v, "counter"),
+          counterText: getString(context, bo, v, "counterText"),
+          counterStyle: getTextStyle(context, bo, v, "counterStyle"),
+          filled: getBool(context, bo, v, "filled"),
+          fillColor: getColor(context, bo, v, "fillColor"),
+          focusColor: getColor(context, bo, v, "focusColor"),
+          hoverColor: getColor(context, bo, v, "hoverColor"),
+          errorBorder: getInputBorder(context, bo, v, "errorBorder"),
+          focusedBorder: getInputBorder(context, bo, v, "focusedBorder"),
+          focusedErrorBorder: getInputBorder(context, bo, v, "focusedErrorBorder"),
+          disabledBorder: getInputBorder(context, bo, v, "disabledBorder"),
+          enabledBorder: getInputBorder(context, bo, v, "enabledBorder"),
+          border: getInputBorder(context, bo, v, "border"),
+          enabled: getBool(context, bo, v, "enabled", defaultValue: true),
+          semanticCounterText: getString(context, bo, v, "semanticCounterText"),
+          alignLabelWithHint: getBool(context, bo, v, "alignLabelWithHint"),
         );
       }
 
       switch (constructorName) {
         case "collapsed":
           return InputDecoration.collapsed(
-            hintText: getString(context, bo, map, "hintText"),
-            floatingLabelBehavior: getFloatingLabelBehavior(context, bo, map, "floatingLabelBehavior", defaultValue: FloatingLabelBehavior.auto),
-            hintStyle: getTextStyle(context, bo, map, "hintStyle"),
-            filled: getBool(context, bo, map, "filled"),
-            fillColor: getColor(context, bo, map, "fillColor"),
-            focusColor: getColor(context, bo, map, "focusColor"),
-            hoverColor: getColor(context, bo, map, "hoverColor"),
-            border: getInputBorder(context, bo, map, "border"),
-            enabled: getBool(context, bo, map, "enabled"),
+            hintText: getString(context, bo, v, "hintText"),
+            floatingLabelBehavior: getFloatingLabelBehavior(context, bo, v, "floatingLabelBehavior", defaultValue: FloatingLabelBehavior.auto),
+            hintStyle: getTextStyle(context, bo, v, "hintStyle"),
+            filled: getBool(context, bo, v, "filled", defaultValue: false),
+            fillColor: getColor(context, bo, v, "fillColor"),
+            focusColor: getColor(context, bo, v, "focusColor"),
+            hoverColor: getColor(context, bo, v, "hoverColor"),
+            border: getInputBorder(context, bo, v, "border", defaultValue: InputBorder.none),
+            enabled: getBool(context, bo, v, "enabled", defaultValue: true),
           );
       }
     }
@@ -1651,32 +1710,32 @@ class XSJSParse {
       switch (constructorName) {
         case 'resize':
           return ResizeImage(
-            getImageProvider(context, bo, map, "imageProvider"),
+            getImageProvider(context, bo, v, "imageProvider"),
             width: getInt(context, bo, v, "width", defaultValue: 1),
             height: getInt(context, bo, v, "height", defaultValue: 1),
             allowUpscaling: getBool(context, bo, v, "allowUpscaling", defaultValue: false),
           );
         case 'file':
           return FileImage(
-            getFile(context, bo, map, "file"),
+            getFile(context, bo, v, "file"),
             scale: getDouble(context, bo, v, "scale", defaultValue: 1.0),
           );
         case 'network':
           return NetworkImage(
-            getString(context, bo, map, "url"),
+            getString(context, bo, v, "url"),
             scale: getDouble(context, bo, v, "scale", defaultValue: 1.0),
           );
         case 'memory':
           return MemoryImage(
-            getUint8List(context, bo, map, "bytes"),
+            getUint8List(context, bo, v, "bytes"),
             scale: getDouble(context, bo, v, "scale", defaultValue: 1.0),
           );
         case 'exactAsset':
           return ExactAssetImage(
-            getString(context, bo, map, "assetName"),
+            getString(context, bo, v, "assetName"),
             scale: getDouble(context, bo, v, "scale", defaultValue: 1.0),
-            bundle: getAssetBundle(context, bo, map, key),
-            package: getString(context, bo, map, "packageName"),
+            bundle: getAssetBundle(context, bo, v, key),
+            package: getString(context, bo, v, "packageName"),
           );
       }
     }
@@ -1751,6 +1810,22 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** ListTileControlAffinity ******/
+  static ListTileControlAffinity getListTileControlAffinity(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ListTileControlAffinity defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'leading':
+          return ListTileControlAffinity.leading;
+        case 'platform':
+          return ListTileControlAffinity.platform;
+        case 'trailing':
+          return ListTileControlAffinity.trailing;
+      }
+    }
+    return defaultValue;
+  }
+
   //-------------- M -----------------
   //****** Map ******/
   static Map getMap(BuildContext context, XSJsonBuildOwner bo, Map map, String key) {
@@ -1794,6 +1869,7 @@ class XSJSParse {
   //****** MainAxisAlignment ******/
   static MainAxisAlignment getMainAxisAlignment(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {MainAxisAlignment defaultValue}) {
     var v = _getString(map, key);
+
     if (v != null && v.isNotEmpty) {
       switch (v) {
         case 'start':
@@ -1942,6 +2018,24 @@ class XSJSParse {
   }
 
   //-------------- N -----------------
+
+  //****** NotchedShape ******/
+  static NotchedShape getNotchedShape(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {NotchedShape defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var constructorName = _getConstructorName(v);
+      switch (constructorName) {
+        case 'circular':
+          return CircularNotchedRectangle();
+        case 'automatic':
+          return AutomaticNotchedShape(
+            getShapeBorder(context, bo, v, "host"),
+          );
+      }
+    }
+
+    return defaultValue;
+  }
 
   //-------------- O -----------------
   //****** Overflow ******/
@@ -2300,6 +2394,21 @@ class XSJSParse {
 
   //-------------- S -----------------
 
+  //****** ShapeBorder ******/
+  static ShapeBorder getShapeBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ShapeBorder defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var className = _getClassName(v);
+      if (className == "OutlinedBorder") {
+        return getOutlinedBorder(context, bo, v, key);
+      }
+      if (className == "InputBorder") {
+        return getInputBorder(context, bo, v, key);
+      }
+    }
+    return defaultValue;
+  }
+
   //****** String ******/
   static String getString(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {String defaultValue}) {
     return _getString(map, key) ?? defaultValue;
@@ -2514,16 +2623,16 @@ class XSJSParse {
     var v = _getMap(map, key);
     if (v != null) {
       return StrutStyle(
-        fontFamily: getString(context, bo, map, "fontFamily"),
-        fontFamilyFallback: toListT<String>(getList(context, bo, map, "fontFamilyFallback")),
-        fontSize: getDouble(context, bo, map, "fontSize"),
-        height: getDouble(context, bo, map, "height"),
-        leading: getDouble(context, bo, map, "leading"),
-        fontWeight: getFontWeight(context, bo, map, "fontWeight"),
-        fontStyle: getFontStyle(context, bo, map, "fontStyle"),
-        forceStrutHeight: getBool(context, bo, map, "forceStrutHeight"),
-        debugLabel: getString(context, bo, map, "debugLabel"),
-        package: getString(context, bo, map, "packageName"),
+        fontFamily: getString(context, bo, v, "fontFamily"),
+        fontFamilyFallback: toListT<String>(getList(context, bo, v, "fontFamilyFallback")),
+        fontSize: getDouble(context, bo, v, "fontSize"),
+        height: getDouble(context, bo, v, "height"),
+        leading: getDouble(context, bo, v, "leading"),
+        fontWeight: getFontWeight(context, bo, v, "fontWeight"),
+        fontStyle: getFontStyle(context, bo, v, "fontStyle"),
+        forceStrutHeight: getBool(context, bo, v, "forceStrutHeight"),
+        debugLabel: getString(context, bo, v, "debugLabel"),
+        package: getString(context, bo, v, "packageName"),
       );
     }
     return defaultValue;
@@ -2580,22 +2689,35 @@ class XSJSParse {
       const double _kMinThumbExtent = 18.0;
 
       return ScrollbarPainter(
-        color: getColor(context, bo, map, "color"),
-        textDirection: getTextDirection(context, bo, map, "textDirection"),
-        thickness: getDouble(context, bo, map, "thickness"),
-        fadeoutOpacityAnimation: getAnimationDouble(context, bo, map, "fadeoutOpacityAnimation"),
-        padding: getEdgeInsets(context, bo, map, "padding", defaultValue: EdgeInsets.zero),
-        mainAxisMargin: getDouble(context, bo, map, "mainAxisMargin", defaultValue: 0.0),
-        crossAxisMargin: getDouble(context, bo, map, "crossAxisMargin", defaultValue: 0.0),
-        radius: getRadius(context, bo, map, "radius"),
-        minLength: getDouble(context, bo, map, "minLength", defaultValue: _kMinThumbExtent),
-        minOverscrollLength: getDouble(context, bo, map, "minOverscrollLength"),
+        color: getColor(context, bo, v, "color"),
+        textDirection: getTextDirection(context, bo, v, "textDirection"),
+        thickness: getDouble(context, bo, v, "thickness"),
+        fadeoutOpacityAnimation: getAnimationDouble(context, bo, v, "fadeoutOpacityAnimation"),
+        padding: getEdgeInsets(context, bo, v, "padding", defaultValue: EdgeInsets.zero),
+        mainAxisMargin: getDouble(context, bo, v, "mainAxisMargin", defaultValue: 0.0),
+        crossAxisMargin: getDouble(context, bo, v, "crossAxisMargin", defaultValue: 0.0),
+        radius: getRadius(context, bo, v, "radius"),
+        minLength: getDouble(context, bo, v, "minLength", defaultValue: _kMinThumbExtent),
+        minOverscrollLength: getDouble(context, bo, v, "minOverscrollLength"),
       );
     }
     return defaultValue;
   }
 
   //-------------- T -----------------
+
+  //****** TabController ******/
+  static TabController getTabController(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TabController defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return TabController(
+        initialIndex: XSJSParse.getInt(context, bo, v, "initialIndex", defaultValue: 0),
+        length: XSJSParse.getInt(context, bo, v, "length"),
+        vsync: XSJSParse.getObject(context, bo, v, "vsync"),
+      );
+    }
+    return defaultValue;
+  }
 
   //****** TextAlignVertical ******/
   static TextAlignVertical getTextAlignVertical(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextAlignVertical defaultValue}) {

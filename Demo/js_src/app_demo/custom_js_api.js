@@ -30,7 +30,7 @@ class CustomJSApi extends DartClass {
     constructor() {
         super("CustomJSApi");
         //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
+        this.createMirrorObjectID();
 
         //创建对应FLutter对象
         var argument = new FlutterCallArgs({
