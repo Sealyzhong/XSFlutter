@@ -58,6 +58,7 @@ class XSProxyDefaultTextStyle extends XSJsonObjProxy {
       textAlign: XSJSParse.getTextAlign(context, bo, map, "textAlign"),
       softWrap: XSJSParse.getBool(context, bo, map, "softWrap", defaultValue: true),
       overflow: XSJSParse.getTextOverflow(context, bo, map, "overflow", defaultValue: TextOverflow.clip),
+      textWidthBasis: XSJSParse.getTextWidthBasis(context, bo, map, "textWidthBasis", defaultValue: TextWidthBasis.parent),
       maxLines: XSJSParse.getInt(context, bo, map, "maxLines"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
     );
@@ -208,7 +209,7 @@ class XSProxyText extends XSJsonObjProxy {
 //  const Text.rich(this.textSpan, {
   Text constructorRich(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return Text.rich(
-      XSJSParse.getObject(context, bo, map, "textSpan"),
+      XSJSParse.getObject(context, bo, map, "data"),
       key: XSJSParse.getKey(context, bo, map, "key"),
       style: XSJSParse.getTextStyle(context, bo, map, "style"),
       textAlign: XSJSParse.getTextAlign(context, bo, map, "textAlign"),

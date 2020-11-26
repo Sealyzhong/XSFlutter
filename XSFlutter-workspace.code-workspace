@@ -6,5 +6,8 @@
 		{
 			"path": "Demo"
 		}
-	]
+	],
+	"settings": {
+		"vscode.tsc.compiler.alertTSConfigChanges": "never"
+	}
 }

@@ -1,25 +1,42 @@
 
-import xs = require("./js_flutter_sdk"); 
 
-export class SectionTitle extends xs.JSStatelessWidget{
+import { MyColorUtil } from "demo/utils/color_util";
+import { Color, Colors, Container, Divider, EdgeInsets, FontWeight, Icon, Icons, JSBuildContext, JSStatelessWidget, MainAxisAlignment, Row,Text, TextStyle } from "ts_flutter_sdk";
+
+export class MySectionTitle extends JSStatelessWidget{
   title:string;
   constructor(title:string){
-    super("SectionTitle");
+    super("MySectionTitle");
     this.title = title;
   }
 
+  static new(title:string){
+    return new MySectionTitle(title);
+  }
+
   
-  build(buildContext:xs.JSBuildContext){
-    return xs.Container.new({
-      padding:xs.EdgeInsets.all(10.0),
-      color:xs.Colors.black26,
-      child:xs.Row.new({
-        mainAxisAlignment:xs.MainAxisAlignment.center,
+  build(buildContext?:JSBuildContext){
+    return Container.new({
+
+      padding:EdgeInsets.all(10.0),
+      color:MyColorUtil.primaryColor,
+      child:Row.new({
+        mainAxisAlignment:MainAxisAlignment.start,
         children:[
-          xs.Icon.new(
-            xs.Icons.ac_unit
+          Icon.new(
+            Icons.ac_unit,
+            {
+              color:Colors.white,
+            }
           ),
-          xs.Text.new("兴盛优选"),
+          Container.new({
+            width:10,
+          }),
+          Text.new(this.title, { style:TextStyle.new({
+            color:Colors.white,
+            fontWeight:FontWeight.bold,
+            fontSize:18,
+          })}),
         ]
       }),
     });

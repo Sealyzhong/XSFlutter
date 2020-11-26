@@ -1,7 +1,11 @@
 
 
-import homeWidget = require("./counter_page");
-import { JSFlutterApp, JSFramework, JSLog } from "./js_flutter_sdk";
+
+
+import { MyHomePage } from "demo/home_page";
+import { JSFlutterApp, JSFramework, JSLog } from "ts_flutter_sdk";
+//import * as xs from "./ts_flutter_sdk";
+//import homeWidget = require("demo/home_page");
 
 class MyApp extends JSFlutterApp{
     
@@ -12,8 +16,8 @@ class MyApp extends JSFlutterApp{
     createJSWidgetWithName(widgetName?:string) {
         JSLog.log("Widget Name:"+widgetName);
         switch (widgetName) {
-            case "MyCounterPage": {
-                return new homeWidget.MyCounterPage(widgetName);
+            case "MyHomePage": {
+                return new MyHomePage();
             }
         }
 
@@ -22,6 +26,6 @@ class MyApp extends JSFlutterApp{
 
 function main(releaseMode?:boolean) {
     JSLog.log("main() start up ");
-    let app = new MyApp();
+    let app = new MyApp();    
     JSFramework.runApp(app);
 }

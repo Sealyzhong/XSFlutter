@@ -29,16 +29,10 @@ flutter:
   assets:
     #copy js src ,xsjsflutter app demo 的js代码
     - js_src/
-    - js_src/app_demo/
-    - js_src/app_demo/component/
-    - js_src/app_demo/examples/
-    - js_src/app_demo/examples/animation/
-    - js_src/app_demo/material/
-    - js_src/app_demo/platform/
-    - js_src/app_demo/profile/
-    - js_src/app_demo/widget_examples/
-    - js_src/app_demo/widget_examples/A/
-    - js_src/app_demo/widget_examples/T/
+    - js_src/demo/
+    - js_src/demo/widgets/
+    - js_src/demo/common_demo/
+    - js_src/demo/utils/
 
     #mxflutter app demo 使用到的图片资源
     - packages/flutter_gallery_assets/people/ali_landscape.png

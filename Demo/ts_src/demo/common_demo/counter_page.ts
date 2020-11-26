@@ -5,12 +5,16 @@
  * @Description: Google Counter
  */
 
-import { AppBar, AspectRatio, Center, Colors, Column, FloatingActionButton, FlutterLogo, FontStyle, FontWeight, Icon, Icons, 
-    JSStatefulWidget, JSWidgetState, MainAxisAlignment, Scaffold, Text, TextStyle } from "./js_flutter_sdk"; 
+import { AppBar, JSStatefulWidget, JSWidgetState, Scaffold,Text,Center, Column, MainAxisAlignment, FlutterLogo, TextStyle, FontWeight, FloatingActionButton, Icon, Icons, JSBuildContext } from "ts_flutter_sdk";
+
 
 export class MyCounterPage extends JSStatefulWidget{
     createState() {
         return new _MyCounterPage();
+    }
+
+    static new (){
+        return new MyCounterPage();
     }
 }
 
@@ -24,10 +28,10 @@ class _MyCounterPage extends JSWidgetState{
     }
 
     //重构
-    build() {
+    build(context:JSBuildContext) {
         return Scaffold.new({
             appBar:AppBar.new({
-                title:Text.new("Google Counter"),
+                title:Text.new("Flutter Counter"),
             }),
             body:Center.new({
                 child:Column.new({
@@ -38,9 +42,7 @@ class _MyCounterPage extends JSWidgetState{
                         Text.new(String(this._counter),{
                             style:TextStyle.new({
                                fontWeight:FontWeight.bold,
-                               fontStyle:FontStyle.italic,
-                               fontSize:24,    
-                               color:Colors.red,                            
+                               fontSize:24,                       
                             }),        
                         }),
                     ],

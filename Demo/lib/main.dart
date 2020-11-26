@@ -48,7 +48,7 @@ class MyFlutterExampleHome extends StatelessWidget {
                 //-------2. XSFlutter push 一个使用XSFlutter框架，JS编写的页面
                 //XSJSPageWidget的参数 jsWidgetName: "MyJSWidgetHomePage",在js_src/main.js  MyApp::createJSWidgetWithName 函数中使用，
                 //创建你需要的XS JS Widget
-                Navigator.push(context, MaterialPageRoute(builder: (context) => XSJSPageWidget(jsWidgetName: "MyCounterPage")));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => XSJSPageWidget(jsWidgetName: "MyHomePage")));
               },
             ),
             ListTile(

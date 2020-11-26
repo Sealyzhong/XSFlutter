@@ -133,10 +133,12 @@ class XSProxyAppBar extends XSJsonObjProxy {
         bottom: XSJSParse.getWidget(context, bo, map, "bottom"),
         elevation: XSJSParse.getDouble(context, bo, map, "elevation", defaultValue: 4.0),
         shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor"),
+        shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
         backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
         brightness: XSJSParse.getBrightness(context, bo, map, "brightness"),
         primary: XSJSParse.getBool(context, bo, map, "primary", defaultValue: true),
         centerTitle: XSJSParse.getBool(context, bo, map, "centerTitle", defaultValue: true),
+        excludeHeaderSemantics: XSJSParse.getBool(context, bo, map, "excludeHeaderSemantics", defaultValue: false),
         titleSpacing: XSJSParse.getDouble(context, bo, map, "titleSpacing", defaultValue: NavigationToolbar.kMiddleSpacing),
         toolbarOpacity: XSJSParse.getDouble(context, bo, map, "toolbarOpacity", defaultValue: 1.0),
         bottomOpacity: XSJSParse.getDouble(context, bo, map, "bottomOpacity", defaultValue: 1.0),
@@ -952,7 +954,8 @@ class XSProxyGridPaper extends XSJsonObjProxy {
     return GridPaper(
       key: XSJSParse.getKey(context, bo, map, "key"),
       child: XSJSParse.getWidget(context, bo, map, "child"),
-      color: XSJSParse.getColor(context, bo, map, "color"),
+      color: XSJSParse.getColor(context, bo, map, "color", defaultValue: const Color(0x7FC3E8F3)),
+      interval: XSJSParse.getDouble(context, bo, map, "interval", defaultValue: 2),
       divisions: XSJSParse.getInt(context, bo, map, "divisions", defaultValue: 2),
       subdivisions: XSJSParse.getInt(context, bo, map, "divisions", defaultValue: 5),
     );
@@ -1916,7 +1919,7 @@ class XSProxyTabPageSelector extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     final String regClassName = "TabPageSelector";
     return {
-      regClassName: () => XSProxyTabPageSelectorIndicator()..init(className: regClassName)
+      regClassName: () => XSProxyTabPageSelector()..init(className: regClassName)
     };
   }
 
