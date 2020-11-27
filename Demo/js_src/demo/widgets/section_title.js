@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MySectionTitle = void 0;
 const color_util_1 = require("demo/utils/color_util");
-const ts_flutter_sdk_1 = require("ts_flutter_sdk");
-class MySectionTitle extends ts_flutter_sdk_1.JSStatelessWidget {
+const fs = require("flutter_sdk");
+class MySectionTitle extends fs.StatelessWidget {
     constructor(title) {
         super();
         this.title = title;
@@ -12,21 +12,21 @@ class MySectionTitle extends ts_flutter_sdk_1.JSStatelessWidget {
         return new MySectionTitle(title);
     }
     build(buildContext) {
-        return ts_flutter_sdk_1.Container.new({
-            padding: ts_flutter_sdk_1.EdgeInsets.all(10.0),
+        return fs.Container.new({
+            padding: fs.EdgeInsets.all(10.0),
             color: color_util_1.MyColorUtil.primaryColor,
-            child: ts_flutter_sdk_1.Row.new({
-                mainAxisAlignment: ts_flutter_sdk_1.MainAxisAlignment.start,
+            child: fs.Row.new({
+                mainAxisAlignment: fs.MainAxisAlignment.start,
                 children: [
-                    ts_flutter_sdk_1.Icon.new(ts_flutter_sdk_1.Icons.ac_unit, {
-                        color: ts_flutter_sdk_1.Colors.white,
+                    fs.Icon.new(fs.Icons.ac_unit, {
+                        color: fs.Colors.white,
                     }),
-                    ts_flutter_sdk_1.Container.new({
+                    fs.Container.new({
                         width: 10,
                     }),
-                    ts_flutter_sdk_1.Text.new(this.title, { style: ts_flutter_sdk_1.TextStyle.new({
-                            color: ts_flutter_sdk_1.Colors.white,
-                            fontWeight: ts_flutter_sdk_1.FontWeight.bold,
+                    fs.Text.new(this.title, { style: fs.TextStyle.new({
+                            color: fs.Colors.white,
+                            fontWeight: fs.FontWeight.bold,
                             fontSize: 18,
                         }) }),
                 ]
@@ -35,32 +35,3 @@ class MySectionTitle extends ts_flutter_sdk_1.JSStatelessWidget {
     }
 }
 exports.MySectionTitle = MySectionTitle;
-/*
- class SectionTitle extends JSStatelessWidget {
-   
-   build(context){
-     return new Container({
-       padding: EdgeInsets.all(10.0),
-       color: Colors.red,// Theme.of(context).primaryColor,
-       child: new Row({
-         children: [
-           new Icon(new IconData(0xe80e, { fontFamily: 'MaterialIcons' }), { size: 20, color: new Color(0xFFFFFFFF) }),
-           new Padding({ padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0) }),
-           new Text(this.title, {
-             textAlign: TextAlign.start,
-             style:new TextStyle({
-               fontSize: 16,
-               //fontWeight: Theme.of(context).textTheme.title.fontWeight,
-               color:Colors.white
-             })
-           })
-         ]
-       })
-     });
-   }
- }
- 
- module.exports = {
-   SectionTitle,
- }
- */

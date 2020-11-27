@@ -1,9 +1,10 @@
 
 
 import { MyColorUtil } from "demo/utils/color_util";
-import { Color, Colors, Container, Divider, EdgeInsets, FontWeight, Icon, Icons, JSBuildContext, JSStatelessWidget, MainAxisAlignment, Row,Text, TextStyle } from "ts_flutter_sdk";
+import fs = require("flutter_sdk");
 
-export class MySectionTitle extends JSStatelessWidget{
+
+export class MySectionTitle extends fs.StatelessWidget{
   title:string;
   constructor(title:string){
     super();
@@ -15,26 +16,26 @@ export class MySectionTitle extends JSStatelessWidget{
   }
 
   
-  build(buildContext?:JSBuildContext){
-    return Container.new({
+  build(buildContext?:fs.BuildContext){
+    return fs.Container.new({
 
-      padding:EdgeInsets.all(10.0),
+      padding:fs.EdgeInsets.all(10.0),
       color:MyColorUtil.primaryColor,
-      child:Row.new({
-        mainAxisAlignment:MainAxisAlignment.start,
+      child:fs.Row.new({
+        mainAxisAlignment:fs.MainAxisAlignment.start,
         children:[
-          Icon.new(
-            Icons.ac_unit,
+          fs.Icon.new(
+            fs.Icons.ac_unit,
             {
-              color:Colors.white,
+              color:fs.Colors.white,
             }
           ),
-          Container.new({
+          fs.Container.new({
             width:10,
           }),
-          Text.new(this.title, { style:TextStyle.new({
-            color:Colors.white,
-            fontWeight:FontWeight.bold,
+          fs.Text.new(this.title, { style:fs.TextStyle.new({
+            color:fs.Colors.white,
+            fontWeight:fs.FontWeight.bold,
             fontSize:18,
           })}),
         ]
@@ -42,33 +43,3 @@ export class MySectionTitle extends JSStatelessWidget{
     });
   }
 }
- /*
-  class SectionTitle extends JSStatelessWidget {
-    
-    build(context){
-      return new Container({
-        padding: EdgeInsets.all(10.0),
-        color: Colors.red,// Theme.of(context).primaryColor,
-        child: new Row({
-          children: [
-            new Icon(new IconData(0xe80e, { fontFamily: 'MaterialIcons' }), { size: 20, color: new Color(0xFFFFFFFF) }),
-            new Padding({ padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0) }),
-            new Text(this.title, {
-              textAlign: TextAlign.start,
-              style:new TextStyle({
-                fontSize: 16,
-                //fontWeight: Theme.of(context).textTheme.title.fontWeight,
-                color:Colors.white
-              })
-            })
-          ]
-        })
-      });
-    }
-  }
-  
-  module.exports = {
-    SectionTitle,
-  }
-  */
-  

@@ -13,6 +13,7 @@ import 'xs_js_flutter_common.dart';
 import 'xs_json_to_dart.dart';
 import 'xs_js_mirror_obj_mgr.dart';
 import 'xs_js_framework.dart';
+import 'common/sp_util.dart';
 
 ///*XSFluttr的对外接口类
 ///简单两步接入XSFlutter，打开JS编写的页面。
@@ -156,6 +157,9 @@ class XSFlutterLib implements XSFlutter {
   /// @throws Error if Path error
   @override
   runJSApp({String jsAppPath = "", String jsAppAssetsKey = "js_src", List<String> jsAppSearchPathList, List<String> jsAppSearchPathWithAssetsKeyList}) {
+    //注册缓存
+    XSSpUtil.getInstance();
+
     Map<String, dynamic> args = {
       "jsAppAssetsKey": jsAppAssetsKey,
       "jsAppPath": jsAppPath

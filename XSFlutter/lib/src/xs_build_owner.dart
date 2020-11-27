@@ -164,8 +164,8 @@ class XSJsonBuildOwner {
     Map widgetData = widgetMap["widgetData"];
     String buildWidgetDataSeq = widgetMap["buildWidgetDataSeq"];
 
-    if (className != "JSStatefulWidget" && className != "JSStatelessWidget") {
-      XSJSLog.error("jsCallRebuild(jsWidget == null || (jsWidget is! JSStatefulWidget && jsWidget is! JSStatelessWidget)): name:$name widgetData:$widgetData");
+    if (className != "StatefulWidget" && className != "StatelessWidget") {
+      XSJSLog.error("jsCallRebuild(jsWidget == null || (jsWidget is! StatefulWidget && jsWidget is! StatelessWidget)): name:$name widgetData:$widgetData");
       return;
     }
 
@@ -201,7 +201,7 @@ class XSJsonBuildOwner {
     var ownerWidgetID = this.widget.widgetID;
 
     if (ownerWidgetID != null && ownerWidgetID != widgetID) {
-      XSJSLog.log("JSStatefulWidget:rebuildJSWidget: error: this.widget.widgetID != jsWidget.widgetID");
+      XSJSLog.log("StatefulWidget:rebuildJSWidget: error: this.widget.widgetID != jsWidget.widgetID");
     }
 
     XSJSWidgetHelper helper = this.widget.helper;
@@ -399,7 +399,7 @@ class XSJsonBuildOwner {
 class XSProxyJSStatefulWidget extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     ///**@@@  2 替换类名字符串
-    final String regClassName1 = "JSStatefulWidget";
+    final String regClassName1 = "StatefulWidget";
 
     ///**@@@  3 替换类构造函数
     return {
@@ -417,7 +417,7 @@ class XSProxyJSStatefulWidget extends XSJsonObjProxy {
 class XSProxyJSStatelessWidget extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     ///**@@@  2 替换类名字符串
-    final String regClassName1 = "JSStatelessWidget";
+    final String regClassName1 = "StatelessWidget";
 
     ///**@@@  3 替换类构造函数
     return {

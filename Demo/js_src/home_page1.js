@@ -161,21 +161,6 @@ class MyJSWidgetHomePageState extends JSWidgetState {
                         }))
                     }
                 }),
-                ListTile.new({
-                    leading: Icon.new(Icons.contact_mail, { color: Colors.red }),
-                    trailing: Icon.new(Icons.arrow_right),
-                    title: Text.new('Dev Demo'),
-                    subtitle: Text.new('Dev Demo'),
-
-                    onTap: function () {
-                        let { MyHomePage } = require("./js_dev_demo.js");
-                        Navigator.push(context, new MaterialPageRoute({
-                            builder: function (context) {
-                                return new MyHomePage;
-                            }
-                        }))
-                    }
-                }),
 
                 ListTile.new({
                     leading: Icon.new(Icons.featured_play_list, { color: Colors.red }),

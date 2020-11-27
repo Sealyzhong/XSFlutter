@@ -7,8 +7,8 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyCounterPage = void 0;
-const ts_flutter_sdk_1 = require("ts_flutter_sdk");
-class MyCounterPage extends ts_flutter_sdk_1.JSStatefulWidget {
+const fs = require("flutter_sdk");
+class MyCounterPage extends fs.StatefulWidget {
     createState() {
         return new _MyCounterPage(this);
     }
@@ -17,7 +17,7 @@ class MyCounterPage extends ts_flutter_sdk_1.JSStatefulWidget {
     }
 }
 exports.MyCounterPage = MyCounterPage;
-class _MyCounterPage extends ts_flutter_sdk_1.JSWidgetState {
+class _MyCounterPage extends fs.WidgetState {
     constructor() {
         super(...arguments);
         this._counter = 0;
@@ -29,27 +29,27 @@ class _MyCounterPage extends ts_flutter_sdk_1.JSWidgetState {
     }
     //重构
     build(context) {
-        return ts_flutter_sdk_1.Scaffold.new({
-            appBar: ts_flutter_sdk_1.AppBar.new({
-                title: ts_flutter_sdk_1.Text.new("Flutter Counter"),
+        return fs.Scaffold.new({
+            appBar: fs.AppBar.new({
+                title: fs.Text.new("Counter"),
             }),
-            body: ts_flutter_sdk_1.Center.new({
-                child: ts_flutter_sdk_1.Column.new({
-                    mainAxisAlignment: ts_flutter_sdk_1.MainAxisAlignment.center,
+            body: fs.Center.new({
+                child: fs.Column.new({
+                    mainAxisAlignment: fs.MainAxisAlignment.center,
                     children: [
-                        ts_flutter_sdk_1.Text.new("This example is developed using JS."),
-                        ts_flutter_sdk_1.Text.new(String(this._counter), {
-                            style: ts_flutter_sdk_1.TextStyle.new({
-                                fontWeight: ts_flutter_sdk_1.FontWeight.bold,
+                        fs.Text.new("This example is developed using TS."),
+                        fs.Text.new(String(this._counter), {
+                            style: fs.TextStyle.new({
+                                fontWeight: fs.FontWeight.bold,
                                 fontSize: 24,
                             }),
                         }),
                     ],
                 }),
             }),
-            floatingActionButton: ts_flutter_sdk_1.FloatingActionButton.new({
+            floatingActionButton: fs.FloatingActionButton.new({
                 onPressed: this._incrementCounter.bind(this),
-                child: ts_flutter_sdk_1.Icon.new(ts_flutter_sdk_1.Icons.add),
+                child: fs.Icon.new(fs.Icons.add),
             }),
         });
     }

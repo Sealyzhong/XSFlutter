@@ -5,10 +5,10 @@
  * @Description: Google Counter
  */
 
-import { AppBar, JSStatefulWidget, JSWidgetState, Scaffold,Text,Center, Column, MainAxisAlignment, FlutterLogo, TextStyle, FontWeight, FloatingActionButton, Icon, Icons, JSBuildContext } from "ts_flutter_sdk";
+import fs = require("flutter_sdk");
 
 
-export class MyCounterPage extends JSStatefulWidget{
+export class MyCounterPage extends fs.StatefulWidget{
     createState() {
         return new _MyCounterPage(this);
     }
@@ -18,7 +18,7 @@ export class MyCounterPage extends JSStatefulWidget{
     }
 }
 
-class _MyCounterPage extends JSWidgetState{
+class _MyCounterPage extends fs.WidgetState{
    _counter:number=0;
 
     //计数器
@@ -28,28 +28,28 @@ class _MyCounterPage extends JSWidgetState{
     }
 
     //重构
-    build(context:JSBuildContext) {
-        return Scaffold.new({
-            appBar:AppBar.new({
-                title:Text.new("Flutter Counter"),
+    build(context:fs.BuildContext) {
+        return fs.Scaffold.new({
+            appBar:fs.AppBar.new({
+                title:fs.Text.new("Counter"),
             }),
-            body:Center.new({
-                child:Column.new({
-                    mainAxisAlignment:MainAxisAlignment.center,
+            body:fs.Center.new({
+                child:fs.Column.new({
+                    mainAxisAlignment:fs.MainAxisAlignment.center,
                     children:[
-                        Text.new("This example is developed using JS."),
-                        Text.new(String(this._counter),{
-                            style:TextStyle.new({
-                               fontWeight:FontWeight.bold,
+                        fs.Text.new("This example is developed using TS."),
+                        fs.Text.new(String(this._counter),{
+                            style:fs.TextStyle.new({
+                               fontWeight:fs.FontWeight.bold,
                                fontSize:24,                       
                             }),        
                         }),
                     ],
                 }),
             }),
-            floatingActionButton:FloatingActionButton.new({
+            floatingActionButton:fs.FloatingActionButton.new({
                 onPressed:this._incrementCounter.bind(this),
-                child:Icon.new(Icons.add),
+                child:fs.Icon.new(fs.Icons.add),
             }),
         });
     }

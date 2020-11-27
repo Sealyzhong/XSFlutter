@@ -5,68 +5,96 @@
  * @Description: 入口页
  */
 
-import { AppBar, Icon, Icons, JSBuildContext, JSStatefulWidget, JSWidgetState, ListTile, ListView, Scaffold,Text,Navigator, MaterialPageRoute}  from "ts_flutter_sdk";
-import { MySectionTitle } from "demo/widgets/section_title";
-import { MyColorUtil } from "demo/utils/color_util";
+import fs = require("flutter_sdk");
+import moment = require("moment");
 import { MyCounterPage } from "demo/common_demo/counter_page";
-import { MyMaterialIcons } from "demo/common_demo/material_icons";
-import { MyCupertinoIcons } from "demo/common_demo/cupertino_icons";
+import { MyBaseWidgetsIndex } from "demo/base_widgets/index";
+import { MyLoadingPage } from "demo/common_demo/loading_page";
+import { MySharedPreferncesPage } from "demo/common_demo/shared_preferences_page";
 
-export class MyHomePage extends JSStatefulWidget{
+export class MyHomePage extends fs.StatefulWidget{
     createState() {
         return _MyHomePageState.new(this)
     }
 }
 
-class _MyHomePageState extends JSWidgetState{
+class _MyHomePageState extends fs.WidgetState{
+    
+    
+    _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
 
-    build(context:JSBuildContext){
-        return Scaffold.new({
-            appBar:AppBar.new({
-                title: Text.new("TS Demo"),
+    build(context:fs.BuildContext){
+        return fs.Scaffold.new({
+            appBar:fs.AppBar.new({
+                title: fs.Text.new("TS Demo"),
             }),
-            body:ListView.new({
+            body:fs.ListView.new({
                 children:[
-                    MySectionTitle.new("通用 Demo"),
-                    ListTile.new({
-                        leading:Icon.new(Icons.book,{color:MyColorUtil.primaryColor}),
-                        trailing:Icon.new(Icons.arrow_right),
-                        title:Text.new("Flutter Counter"),
-                        subtitle:Text.new("Flutter 官方 Demo"),
+                    //MySectionTitle.new("通用 Demo"),
+                    
+                    //new 的写法1
+                    fs.ListTile.new({
+                        leading:fs.Text.new("1",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Flutter Counter"),
+                        subtitle:fs.Text.new("Flutter 官方 Demo"),
                         onTap:function(){
-                            Navigator.push(context,MaterialPageRoute.new({
-                                builder:function(context?:JSBuildContext){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
                                     return MyCounterPage.new();
                                 }
                             }));
                         }                        
                     }),
 
-                    ListTile.new({
-                        leading:Icon.new(Icons.book,{color:MyColorUtil.primaryColor}),
-                        trailing:Icon.new(Icons.arrow_right),
-                        title:Text.new("Material Icons"),
-                        subtitle:Text.new("安卓(原生)风格图标"),
+                    fs.ListTile.new({
+                        leading:fs.Text.new("2",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("基础组件"),
+                        subtitle:fs.Text.new("Icons、Cupertino、Widgets、App Bar"),
                         onTap:function(){
-                            Navigator.push(context,MaterialPageRoute.new({
-                                builder:function(context?:JSBuildContext){
-                                    return MyMaterialIcons.new();
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyBaseWidgetsIndex.new();
                                 }
                             }));
                         }                        
                     }),
 
-                    ListTile.new({
-                        leading:Icon.new(Icons.book,{color:MyColorUtil.primaryColor}),
-                        trailing:Icon.new(Icons.arrow_right),
-                        title:Text.new("Cupertino Icons"),
-                        subtitle:Text.new("苹果风格图标"),
+                    fs.ListTile.new({
+                        leading:fs.Text.new("3",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Loading..."),
+                        subtitle:fs.Text.new("showSuccess、showError、showInfo、showToast..."),
                         onTap:function(){
-                            Navigator.push(context,MaterialPageRoute.new({
-                                builder:function(context?:JSBuildContext){
-                                    return MyCupertinoIcons.new();
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyLoadingPage.new();
                                 }
                             }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        leading:fs.Text.new("4",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("本地数据存储(shared_preferences)"),
+                        subtitle:fs.Text.new("get、set"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MySharedPreferncesPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+                    fs.ListTile.new({
+                        leading:fs.Text.new("4",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new(moment().format("yyyy-MM-dd HH:mm")),
+                        subtitle:fs.Text.new("get、set"),
+                        onTap:function(){
+                            
                         }                        
                     }),
 
@@ -75,7 +103,7 @@ class _MyHomePageState extends JSWidgetState{
         });
     }
 
-    static new(widget:JSStatefulWidget){
+    static new(widget:fs.StatefulWidget){
         return new _MyHomePageState(widget);
     }
 }

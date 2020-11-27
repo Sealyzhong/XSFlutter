@@ -1,6 +1,5 @@
-
-import xs = require("ts_flutter_sdk");
+import fs = require("flutter_sdk");
 
 export class MyColorUtil  {
-    static primaryColor = xs.Colors.red;
+    static primaryColor = fs.Colors.red;
 }

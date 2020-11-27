@@ -360,14 +360,14 @@ class JSWidgetState extends State<JSStatefulWidget> with SingleTickerProviderSta
 
   @override
   Widget build(BuildContext context) {
-    XSJSLog.log("JSStatefulWidget:build begin: widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
+    XSJSLog.log("StatefulWidget:build begin: widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
 
     if (this.widget.buildOwner == null) {
       this.widget.buildOwner = XSJsonBuildOwner(this.widget, this.widget.parentBuildOwner);
     }
 
     if (widget.widgetData == null) {
-      XSJSLog.error("JSWidgetState:build: widget.widgetData == null this.widget.widgetID:${this.widget.widgetID}");
+      XSJSLog.error("WidgetState:build: widget.widgetData == null this.widget.widgetID:${this.widget.widgetID}");
       return widget.helper.buildErrorWidget(context);
     }
 
@@ -376,12 +376,12 @@ class JSWidgetState extends State<JSStatefulWidget> with SingleTickerProviderSta
     var w = this.widget.buildOwner.build(widget.widgetData, context);
 
     //call JS层，Flutter UI 使用当前JSWidget哪个序列号的数据构建，callbackID,widgetID  与之对应
-    XSJSLog.debug("JSStatefulWidget:building: widget:$w callJSOnBuildEnd  widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
+    XSJSLog.debug("StatefulWidget:building: widget:$w callJSOnBuildEnd  widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
 
     this.widget.buildWidgetDataSeq = this.widget.buildingWidgetDataSeq;
     this.widget.buildOwner.callJSOnBuildEnd();
 
-    XSJSLog.log("JSStatefulWidget:build end: widget:$w callJSOnBuildEnd  widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
+    XSJSLog.log("StatefulWidget:build end: widget:$w callJSOnBuildEnd  widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
     return w;
   }
 }
@@ -405,7 +405,7 @@ class JSStatelessWidget extends StatelessWidget with JSBaseWidget {
 
   @override
   Widget build(BuildContext context) {
-    // XSJSLog.log("JSStatelessWidget:build: ${widget.widgetData} ");
+    // XSJSLog.log("StatelessWidget:build: ${widget.widgetData} ");
     if (this.widgetData == null) {
       return this.helper.buildErrorWidget(context);
     }
