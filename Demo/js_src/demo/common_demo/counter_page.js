@@ -10,7 +10,7 @@ exports.MyCounterPage = void 0;
 const ts_flutter_sdk_1 = require("ts_flutter_sdk");
 class MyCounterPage extends ts_flutter_sdk_1.JSStatefulWidget {
     createState() {
-        return new _MyCounterPage();
+        return new _MyCounterPage(this);
     }
     static new() {
         return new MyCounterPage();
@@ -37,7 +37,6 @@ class _MyCounterPage extends ts_flutter_sdk_1.JSWidgetState {
                 child: ts_flutter_sdk_1.Column.new({
                     mainAxisAlignment: ts_flutter_sdk_1.MainAxisAlignment.center,
                     children: [
-                        ts_flutter_sdk_1.FlutterLogo.new({ size: 64 }),
                         ts_flutter_sdk_1.Text.new("This example is developed using JS."),
                         ts_flutter_sdk_1.Text.new(String(this._counter), {
                             style: ts_flutter_sdk_1.TextStyle.new({

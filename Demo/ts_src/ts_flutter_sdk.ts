@@ -234,7 +234,7 @@ export class JSFlutterApp {
     this.initialRoute = initialRoute;
 
     //App的rootWidget是个虚拟Widget，负责管理push的Widget或runAPP 的Widget
-    this.rootWidget = new JSStatelessWidget("RootWidget");
+    this.rootWidget = new JSStatelessWidget({name:"RootWidget"});
     this.rootWidget.helper?.setupAsRootWidget();
 
   }
@@ -300,9 +300,13 @@ export class JSFlutterApp {
     bc.setInheritedInfo(args);
     widget.buildContext = bc;
 
-    this.rootWidget?.helper?.addChildWidget(widget);
+    if(widget!=null && widget !=undefined && widget!=""){
+      JSWidgetMgr.getInstance().registerWidget(widget)
+    }
 
-    widget?.helper?.callFlutterRebuild();
+    this.rootWidget?.helper.addChildWidget(widget);
+
+    widget?.helper.callFlutterRebuild();
   }
 
   buildRootWidget(widget:JSBaseWidget) {
@@ -358,11 +362,15 @@ export class JSFlutterApp {
   flutterCallOnDispose(args?:any) {
     let widgetID = args["widgetID"];
 
+    //移除Widget
+    if(widgetID!=null && widgetID !=undefined){
+      JSWidgetMgr.getInstance().remove(widgetID);
+    }
+
     if (this.rootWidget && this.rootWidget.widgetID == widgetID) {
     }
 
-    this.rootWidget?.helper?.onDispose(args);
-
+    this.rootWidget?.helper.onDispose(args);
     let mirrorObjIDList = args["mirrorObjIDList"];
     JSWidgetMirrorMgr.getInstance().removeMirrorObjects(mirrorObjIDList);
   }
@@ -576,10 +584,10 @@ export class JSWidgetHelper {
 
       if (value instanceof JSStatefulWidget || value instanceof JSStatelessWidget) {
         // 解决widget生成时不调用构造方法的问题
-        if (value.helper == null) {
+        /*if (value.helper == null) {
           value.className = value instanceof JSStatefulWidget ? "JSStatefulWidget" : "JSStatelessWidget";
           initJSWidgetData(value);
-        }
+        }*/
 
         if (value != jsWidget) {
           value.buildContext = JSBuildContext.inheritBuildContext(value, jsWidget.buildContext);
@@ -665,7 +673,6 @@ export class JSWidgetHelper {
       buildWidgetDataSeq: this.widget.buildWidgetDataSeq,
       navPushingWidgetID: this.widget.navPushingWidgetID,
       widgetData: tempWidgetTreeObjMap,
-      enableProfile: this.widget.enableProfile
     };
 
     return jsonMap;
@@ -722,10 +729,9 @@ export class JSWidgetHelper {
   }
 
   removeChildWidget(jsWidget:JSBaseWidget) {
-    if (
-      this.widget.currentWidgetTree &&
-      this.widget.currentWidgetTree.childrenWidget
+    if (this.widget.currentWidgetTree &&this.widget.currentWidgetTree.childrenWidget
     ) {
+      JSWidgetMgr.getInstance().remove(jsWidget.widgetID);
       this.widget.currentWidgetTree.childrenWidget.delete(jsWidget.widgetID);
     }
   }
@@ -737,15 +743,6 @@ export class JSWidgetHelper {
     let startEncodeData = (new Date()).valueOf();
     let widgetData = JSWidgetHelper.buildWidgetData(this.widget);
     let startTransferData = (new Date()).valueOf();
-
-    if (this.widget.enableProfile) {
-      let profileInfo = new Map();
-      profileInfo.set("startEncodeData",startEncodeData);      
-      profileInfo.set("startTransferData",startTransferData);
-      profileInfo.set("transferDataLen",widgetData.length);
-      this.widget.profileInfo = profileInfo;
-    }
-
 
     //rebuild and confirm 配对
     this.confirmCurrentWidgetTree();
@@ -786,13 +783,19 @@ export class JSWidgetHelper {
   }
 
   findWidgetWithWidgetID(widgetID:string) :JSBaseWidget | undefined  {
+    //当前Widget
     if (this.widget.widgetID == widgetID) {
       return this.widget;
     }
 
+    //全局中找对象
+    let w = JSWidgetMgr.getInstance().findWidget(widgetID);
+    if(w!=null && w!=undefined){
+      return w;
+    }
+
     //先在currentTree里找，一般这里能找到
     let widgetTree = this.widget.currentWidgetTree;
-
     if (widgetTree != null) {
       let w = widgetTree.childrenWidget.get(widgetID);
       if (w) {
@@ -801,7 +804,7 @@ export class JSWidgetHelper {
 
       for (let k in widgetTree.childrenWidget) {
         let jsWidget = widgetTree.childrenWidget.get(k);
-        w = jsWidget?.helper?.findWidgetWithWidgetID(widgetID);
+        w = jsWidget?.helper.findWidgetWithWidgetID(widgetID);
         if (w) {
           return w;
         }
@@ -824,7 +827,7 @@ export class JSWidgetHelper {
 
         for (let k in widgetTree.childrenWidget) {
           let jsWidget = widgetTree.childrenWidget.get(k);
-          w = jsWidget?.helper?.findWidgetWithWidgetID(widgetID);
+          w = jsWidget?.helper.findWidgetWithWidgetID(widgetID);
           if (w) {
             return w;
           }
@@ -928,7 +931,6 @@ export class JSWidgetHelper {
       JSLog.error("JSWidget onFlutterBuildEnd fail buildSeq2WTreeMap.keys: [" + Object.keys(this.widget.buildSeq2WTreeMap).join("|") + "]::" + this.widget.getWidgetInfo() + " buildWidgetDataSeq: " + buildWidgetDataSeq);
     }
 
-    this.widget.setProfileInfo(profileInfo);
 
     if (this.widget instanceof JSStatelessWidget) {
       this.widget.onBuildEnd();
@@ -957,8 +959,10 @@ export class JSWidgetHelper {
     }
 
     for (let i = 0; i < clearSeqs.length; ++i) {
+      let widgetID= clearSeqs[i];
       //JSLog.debug("JSWidget clearWidgetTree::" + this.widget.getWidgetInfo() + " delSeq: " + delSeq);
-      this.widget.buildSeq2WTreeMap?.delete(clearSeqs[i]);
+      JSWidgetMgr.getInstance().remove(widgetID);
+      this.widget.buildSeq2WTreeMap?.delete(widgetID);
     }
 
   }
@@ -1028,14 +1032,9 @@ export class JSWidgetHelper {
     let widgetData = this.updatePushingWidgetsData(jsWidget);
     let startTransferData = (new Date()).valueOf();
 
-    if (jsWidget.enableProfile) {
-      let profileInfo = new Map();
-      profileInfo.set('startEncodeData', startEncodeData);
-      profileInfo.set('startTransferData', startTransferData);
-      profileInfo.set('transferDataLen', widgetData.length);
-      jsWidget.profileInfo = profileInfo;
+    if(jsWidget!=null && jsWidget !=undefined){
+      JSWidgetMgr.getInstance().registerWidget(jsWidget);
     }
-
     //call flutter navigatorPush
     JSFramework.callFlutterWidgetChannel("navigatorPush", widgetData);
   }
@@ -1049,6 +1048,7 @@ export class JSWidgetHelper {
     JSFramework.callFlutterWidgetChannel("navigatorPop", {widgetID});
 
     if (this.widget.navPushedWidgets && widgetID!=undefined) {
+      JSWidgetMgr.getInstance().remove(widgetID);
       this.widget.navPushedWidgets.delete(widgetID);
     }
   }
@@ -1056,6 +1056,7 @@ export class JSWidgetHelper {
   //留意：这个函数命名是不是应该是removePushedWidget
   removePushingWidget(jsWidget:JSBaseWidget) {
     if (this.widget.navPushedWidgets) {
+      JSWidgetMgr.getInstance().remove(jsWidget.widgetID);
       this.widget.navPushedWidgets.delete(jsWidget.widgetID);
     }
   }
@@ -1063,18 +1064,7 @@ export class JSWidgetHelper {
   updatePushingWidgetsData(jsWidget:JSBaseWidget) {
 
     JSLog.log("updatePushingWidgetsData WidgetName:" + jsWidget.widgetName);
-    //那种根节点不是statewidget的页面 比如Theme
-    var newJSWidget;
-    if (jsWidget.className != "JSStatefulWidget" && jsWidget.className != "JSStatelessWidget") {
-      // 特殊处理，用JSStatelessWidget包裹一层
-      newJSWidget = new JSStatelessWidget("FakeStatelessWidget");
-      newJSWidget.build = function (context) {
-        return jsWidget;
-      };
-    } else {
-      newJSWidget = jsWidget;
-    }
-
+    var newJSWidget=jsWidget;
     //设置push jsWidget的widget
     newJSWidget.navPushingWidget = this.widget;
     newJSWidget.buildContext = JSBuildContext.inheritBuildContext(newJSWidget, this.widget.buildContext);
@@ -1084,6 +1074,7 @@ export class JSWidgetHelper {
 
     return widgetData;
   }
+
 
   findTopRootWidget():JSBaseWidget | undefined {
     let rootWidget = this.widget.parentWidget;
@@ -1139,11 +1130,12 @@ export class JSWidgetTree {
   }
 }
 
-//****** TODO Widget Mgr ******
+//****** Widget Mgr ******
 export class JSWidgetMgr {
   //JS侧现生成的JSWidget， widgetID为偶数，从0开始
   widgetIDFeed:number;
-  widgetID2WidgetMap:Map<string,any>;
+  widgetID2WidgetMap:Map<string,JSBaseWidget>;
+
   //单例
   static instance?: JSWidgetMgr;
   constructor() {
@@ -1163,11 +1155,11 @@ export class JSWidgetMgr {
   generateWidgetID() {
     //JS侧现生成的JSWidget， widgetID为偶数，从0开始 +2
     this.widgetIDFeed = this.widgetIDFeed + 2;
-    let wID = this.widgetIDFeed;
-    return String(wID);
+    return String(this.widgetIDFeed);
   }
 
-  registerWidget(widget:any) {
+  
+  registerWidget(widget:JSBaseWidget) {
     this.widgetID2WidgetMap.set(widget.widgetID,widget);
   }
 
@@ -1176,85 +1168,76 @@ export class JSWidgetMgr {
   }
 
   findWidget(widgetID:string) {
+    JSLog.log("======widgetID2WidgetMap:"+String(this.widgetID2WidgetMap.size));
     return this.widgetID2WidgetMap.get(widgetID);
   }
 }
 
-//****** TODO 初始化JS数据 ******
-export function initJSWidgetData(widget:JSBaseWidget) {
-  //继承自JSBaseWidget 自定义控件。
 
-  if (widget.widgetID == null || widget.widgetID == undefined || widget.widgetID == "") {
-    widget.widgetID = JSWidgetMgr.getInstance().generateWidgetID();
-  }
-
-  widget.helper = new JSWidgetHelper(widget);
-
-  //构建系列号，每build一次加1
-  widget.buildWidgetDataSeq = "";
-
-  // The Widget Pages that pushed this Widget ID
-  // 把当前widget（this） push 出来的widget ID
-  // 序列化到JSON里
-  widget.navPushingWidgetID = "";
-
-  //不添加进json的控制变量
-  //创建自己的widget，为null自己是root
-  widget.parentWidget = undefined;
-
-  // The Widget Pages that pushed this Widget
-  // 把当前widget（this） push 出来的widget
-  widget.navPushingWidget = undefined;
-
-  //The widget that was pushed by this widget
-  //由自己this push的widget page
-  widget.navPushedWidgets = new Map();
-  //
-  widget.buildContext = undefined;
-  widget.buildingWidgetTree = undefined;
-  widget.currentWidgetTree = undefined;
-  widget.preWidgetTree = undefined;
-  widget.buildWidgetDataSeqFeed = 0;
-  widget.buildSeq2WTreeMap = new Map();
-
-  ///性能分析模式 
-  ///打开性能分析模式，widget.enableProfile = true
-  ///可以重载onBuildEnd，使用getProfileText获得各个阶段耗时
-  widget.enableProfile = false;
-  //widget.profileInfo = new Map();
+//****** JSBaseWidget ******
+interface JSBaseWidgetArgs {
+  name?:string;        //控件名
+  key?:Key;
 }
-
-//****** TODO JSBaseWidget ******
 export class JSBaseWidget extends FlutterWidget {
   name?:string;        //控件名
   key?:Key;   
   widgetName?:string; 
   widgetID:string;
-  helper?:JSWidgetHelper;
-  navPushingWidgetID?:string;
-  buildWidgetDataSeq?:string;
+  helper:JSWidgetHelper;
+  navPushingWidgetID:string;
+  buildWidgetDataSeq:string;
   buildWidgetDataSeqFeed:number;
   parentWidget?:JSBaseWidget;
   state?:any;
   navPushingWidget?:JSBaseWidget;
-  navPushedWidgets?:Map<string,JSBaseWidget>;
-  buildSeq2WTreeMap?:Map<string,JSWidgetTree>;
+  navPushedWidgets:Map<string,JSBaseWidget>;
+  buildSeq2WTreeMap:Map<string,JSWidgetTree>;
   currentWidgetTree?:JSWidgetTree;    //当前树
   buildingWidgetTree?:JSWidgetTree;   //UI树
   preWidgetTree?:JSWidgetTree;        //预处理树
   buildContext?:JSBuildContext;       //BuildContext
 
-  //打开性能分析模式，widget.enableProfile = true
-  enableProfile:boolean = false;
-  profileInfo:Map<string,any>;
-  constructor(name?:string,key?:Key) {
+  constructor(args?:JSBaseWidgetArgs) {
     super();
-    this.name = name;
-    this.key = key;
-    this.profileInfo = new Map<string,any>();
-    this.widgetID = "";
-    this.buildWidgetDataSeqFeed=0;
-    initJSWidgetData(this);
+    if(args!=null && args!=undefined){
+      this.name = args.name;
+      this.key = args.key;
+    }
+
+    this.widgetID = JSWidgetMgr.getInstance().generateWidgetID();
+  
+    this.helper = new JSWidgetHelper(this);
+  
+    //构建系列号，每build一次加1
+    this.buildWidgetDataSeq = "";
+  
+    // The Widget Pages that pushed this Widget ID
+    // 把当前widget（this） push 出来的widget ID
+    // 序列化到JSON里
+    this.navPushingWidgetID = "";
+  
+    //不添加进json的控制变量
+    //创建自己的widget，为null自己是root
+    this.parentWidget = undefined;
+  
+    // The Widget Pages that pushed this Widget
+    // 把当前widget（this） push 出来的widget
+    this.navPushingWidget = undefined;
+  
+    //The widget that was pushed by this widget
+    //由自己this push的widget page
+    this.navPushedWidgets = new Map();
+    //
+    this.buildContext = undefined;
+    this.buildingWidgetTree = undefined;
+    this.currentWidgetTree = undefined;
+    this.preWidgetTree = undefined;
+    this.buildWidgetDataSeqFeed = 0;
+    this.buildSeq2WTreeMap = new Map();
+
+    //注册ID
+    //JSWidgetMgr.getInstance().registerWidget(this);
   }
 
   //获取 Widget 关键信息
@@ -1274,53 +1257,14 @@ export class JSBaseWidget extends FlutterWidget {
   }
 
   onBuildEnd(args?:any) { }
-
-  ///性能分析模式 
-  ///打开性能分析模式，widget.enableProfile = true
-  ///可以重载onBuildEnd，使用getProfileText获得各个阶段耗时
-  setProfileInfo(profileInfo?:Map<string,any>) {
-    if (this.enableProfile == true && profileInfo!=null && profileInfo !=undefined) {
-      this.profileInfo.set("startDecodeData",profileInfo.get("startDecodeData"));
-      this.profileInfo.set("endDecodeData",profileInfo.get("endDecodeData"));
-      this.profileInfo.set("buildEnd",profileInfo.get("buildEnd"));
-    }
-  }
-
-  //获取性能文本
-  getProfileText() {
-    let profileInfo = this.profileInfo;
-    let startEncodeData = profileInfo.get('startEncodeData');
-    let startTransferData = profileInfo.get('startTransferData');
-    let startDecodeData = profileInfo.get('startDecodeData');
-    let endDecodeData = profileInfo.get('endDecodeData');
-    let buildEnd = profileInfo.get('buildEnd');
-    let transferDataLen = profileInfo.get('transferDataLen');
-
-    let buildDataCost = startTransferData - startEncodeData;
-    let transferCost = startDecodeData - startTransferData;
-    let decodeDataCost = endDecodeData - startDecodeData;
-    let paintCost = buildEnd - endDecodeData;
-
-    let mxcost = endDecodeData - startEncodeData;
-    let flutterBuild = endDecodeData - startEncodeData;
-
-    let profileText = '总耗时: XSFlutterTotal: ' + mxcost + 'ms FlutterBuild: ' + paintCost + 'ms 详情:\n' +
-      '[JS]buildJSWidgetTree2Json: ' + buildDataCost + "ms \n" +
-      '[JS->Native->Dart]transfer(' + (transferDataLen * 2.0 / 1024.0).toFixed(2) + 'Kb): ' + transferCost + "ms\n" +
-      '[Dart]DecodeJson: ' + decodeDataCost + "ms\n" +
-      '[Dart]flutterBuild: ' + paintCost + "ms";
-    return profileText;
-  }
 }
 
-//****** TODO JSStatefulWidget ******
+//****** JSStatefulWidget ******
 export class JSStatefulWidget extends JSBaseWidget {
   
-  constructor(name?:string,key?:Key) {
-    super(name, key);
-
+  constructor(args?:JSBaseWidgetArgs) {
+    super(args);
     this.className = "JSStatefulWidget";
-    initJSWidgetData(this);
   }
 
   //subclass override
@@ -1329,12 +1273,9 @@ export class JSStatefulWidget extends JSBaseWidget {
 
 //在JS层，要封装控件，如不需要改变UI内容，使用无状态的JSStatelessWidget
 export class JSStatelessWidget extends JSBaseWidget {
-  constructor(name?:string,key?:Key) {
-    super(name, key);
-
+  constructor(args?:JSBaseWidgetArgs) {
+    super(args);
     this.className = "JSStatelessWidget";
-
-    initJSWidgetData(this);
   }
 
   //subclass override
@@ -1342,8 +1283,9 @@ export class JSStatelessWidget extends JSBaseWidget {
 }
 
 export class JSWidgetState {
-  widget?:JSBaseWidget;
-  constructor(widget?:JSBaseWidget) {
+
+  widget:JSStatefulWidget;
+  constructor(widget:JSStatefulWidget) {
     this.widget = widget;
   }
 
@@ -1366,7 +1308,7 @@ export class JSWidgetState {
   }
 
   //subclass override
-  build(buildContext?:JSBuildContext) {}
+  build(context?:JSBuildContext) {}
 
   //subclass overwite
   onBuildEnd(args?:any) { }
@@ -1380,6 +1322,7 @@ export class JSWidgetState {
 //#region ******** Enum ********
 
 //#region ------ A ------
+
 //****** Axis ******
 export enum Axis {
   horizontal = "horizontal",
@@ -15757,105 +15700,17 @@ export class NestedScrollView extends FlutterWidget {
   }
 }
 
-//****** TODO NavigatorState ******
-export class NavigatorState extends DartClass {
-  context:any;
-
-  push(t:any, materialPageRoute:MaterialPageRoute) {
-    this.context.widget.helper.navigatorPush(materialPageRoute.builder(this.context));
-  }
-  pop(t:any,) {
-    this.context.widget.helper.navigatorPop();
-  }
-  
-  constructor(context:any){
-    super();
-    this.context = context;
-  }
-
-  static new(context:any) {
-    return new NavigatorState(context);
-  }
-}
-
-//****** TODO Navigator ******
-interface NavigatorArgs {
-  initialRoute?:string;
-  onGenerateRoute?:any;
-  onUnknownRoute?:any;
-  observers?:any;
-  key?:Key;
-}
+//****** Navigator ******
 export class Navigator extends DartClass {
-  initialRoute?:string;
-  onGenerateRoute?:any;
-  onUnknownRoute?:any;
-  observers?:any;
-  key?:Key;
-
 
   static push(context:JSBuildContext, materialPageRoute:MaterialPageRoute) {
-
-    let t = null;
-    if (arguments.length == 3) {
-      t = arguments[0];
-      context = arguments[1];
-      materialPageRoute = arguments[2];
-    }
-
-    var navigatorState = NavigatorState.new(context);
-    navigatorState.push(t, materialPageRoute);
+    context.widget?.helper.navigatorPush(materialPageRoute.builder(context));
   }
 
-  static pop(context:any) {
-    let t = null;
-    if (arguments.length == 2) {
-      t = arguments[0];
-      context = arguments[1];
-    }
-    var navigatorState = NavigatorState.new(context);
-    navigatorState.pop(t);
+  static pop(context:JSBuildContext) {
+    context.widget?.helper.navigatorPop();
   }
 
-  static of(context:any, opt:any) {
-    var navigatorState =  NavigatorState.new(context);
-    return navigatorState;
-  }
-
-  /**
-   * @param args args: 
-      {
-        initialRoute?:string,
-        onGenerateRoute?:any, 
-        onUnknownRoute?:any, 
-        observers?:any, 
-        key?:Key
-      }
-   */
-  constructor(args: NavigatorArgs){
-    super();
-    if(args!=null && args!=undefined){
-      this.key = args.key;
-      this.initialRoute = args.initialRoute;
-      this.onGenerateRoute = args.onGenerateRoute;
-      this.onUnknownRoute = args.onUnknownRoute;
-      this.observers = args.observers;
-    }
-  }
-
-  /**
-   * @param args args: 
-      {
-        initialRoute?:string,
-        onGenerateRoute?:any, 
-        onUnknownRoute?:any, 
-        observers?:any, 
-        key?:Key
-      }
-   */
-  static new (args: NavigatorArgs) {
-    return new Navigator(args);
-  }
 }
 
 

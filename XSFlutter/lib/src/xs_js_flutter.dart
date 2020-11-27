@@ -69,7 +69,7 @@ abstract class XSFlutter {
   ///
   /// '''
   ///
-  dynamic navigatorPushWithName(String widgetName, Key widgetKey, {ThemeData themeData, MediaQueryData mediaQueryData, IconThemeData iconThemeData});
+  dynamic navigatorPushWithName(String widgetName, Key widgetKey);
 
   ///flutter->js  顶层通用调用通道
   dynamic invokeJSCommonChannel(MethodCall jsMethodCall);

@@ -6,7 +6,7 @@ import { Color, Colors, Container, Divider, EdgeInsets, FontWeight, Icon, Icons,
 export class MySectionTitle extends JSStatelessWidget{
   title:string;
   constructor(title:string){
-    super("MySectionTitle");
+    super();
     this.title = title;
   }
 

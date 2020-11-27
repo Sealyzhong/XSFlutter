@@ -1,4 +1,5 @@
-import { AppBar, Container, EdgeInsets, Expanded, FlutterWidget, FontWeight, Icon, IconData, Icons, JSBuildContext, JSStatelessWidget, ListView, Overflow, Row, Scaffold,SizedBox,Text, TextOverflow, TextStyle } from "ts_flutter_sdk";
+import { AppBar, Container, EdgeInsets, Expanded, FlutterWidget, Icon, IconData, Icons, JSBuildContext, JSStatelessWidget, ListView
+  , Row, Scaffold,SizedBox,Text, TextOverflow, TextStyle } from "ts_flutter_sdk";
 
 
 export class MyMaterialIcons extends JSStatelessWidget{
@@ -1309,7 +1310,7 @@ export class MyMaterialIcons extends JSStatelessWidget{
                     Icon.new(v),
                     SizedBox.new({width:10}),
                     Expanded.new({
-                        child:Text.new(k,{overflow:TextOverflow.ellipsis, style:TextStyle.new({fontWeight:FontWeight.bold,fontSize:16})},),
+                        child:Text.new(k,{overflow:TextOverflow.ellipsis, style:TextStyle.new({fontSize:16})},),
                     }),
                     
                   ]
@@ -1334,41 +1335,3 @@ export class MyMaterialIcons extends JSStatelessWidget{
         return new MyMaterialIcons();
     }
 }
-/*
-class PageExampleIcon extends JSStatelessWidget {
-    constructor(){
-      super("PageExampleIcon");
-    }
-  
-    genIconUI(iconName){
-      const icon = Icons[iconName];
-      return new Container({
-        padding:EdgeInsets.all(10),
-        child:new Row({
-          children: [
-            new Icon(icon),
-            new SizedBox({width:10}),
-            new Text(iconName),
-          ]
-        }),
-      })
-    }
-  
-    build(){
-      let widget = new Scaffold({
-        appBar: new AppBar({
-          title: new Text('Icon',),
-        }),
-        body: new Scrollbar({
-          child:new ListView({
-            children:[
-              ...icons.map( (iconName)=> {
-                return this.genIconUI(iconName);
-              })
-            ],
-          })
-        })
-      });
-      return widget;
-    }
-  }*/

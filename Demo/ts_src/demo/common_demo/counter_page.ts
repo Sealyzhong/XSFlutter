@@ -5,12 +5,13 @@
  * @Description: Google Counter
  */
 
+import { MySectionTitle } from "demo/widgets/section_title";
 import { AppBar, JSStatefulWidget, JSWidgetState, Scaffold,Text,Center, Column, MainAxisAlignment, FlutterLogo, TextStyle, FontWeight, FloatingActionButton, Icon, Icons, JSBuildContext } from "ts_flutter_sdk";
 
 
 export class MyCounterPage extends JSStatefulWidget{
     createState() {
-        return new _MyCounterPage();
+        return new _MyCounterPage(this);
     }
 
     static new (){
@@ -37,7 +38,6 @@ class _MyCounterPage extends JSWidgetState{
                 child:Column.new({
                     mainAxisAlignment:MainAxisAlignment.center,
                     children:[
-                        FlutterLogo.new({size:64}),
                         Text.new("This example is developed using JS."),
                         Text.new(String(this._counter),{
                             style:TextStyle.new({

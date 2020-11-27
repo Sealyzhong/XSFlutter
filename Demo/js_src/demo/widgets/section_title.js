@@ -5,7 +5,7 @@ const color_util_1 = require("demo/utils/color_util");
 const ts_flutter_sdk_1 = require("ts_flutter_sdk");
 class MySectionTitle extends ts_flutter_sdk_1.JSStatelessWidget {
     constructor(title) {
-        super("MySectionTitle");
+        super();
         this.title = title;
     }
     static new(title) {

@@ -1305,7 +1305,7 @@ class MyMaterialIcons extends ts_flutter_sdk_1.JSStatelessWidget {
                         ts_flutter_sdk_1.Icon.new(v),
                         ts_flutter_sdk_1.SizedBox.new({ width: 10 }),
                         ts_flutter_sdk_1.Expanded.new({
-                            child: ts_flutter_sdk_1.Text.new(k, { overflow: ts_flutter_sdk_1.TextOverflow.ellipsis, style: ts_flutter_sdk_1.TextStyle.new({ fontWeight: ts_flutter_sdk_1.FontWeight.bold, fontSize: 16 }) }),
+                            child: ts_flutter_sdk_1.Text.new(k, { overflow: ts_flutter_sdk_1.TextOverflow.ellipsis, style: ts_flutter_sdk_1.TextStyle.new({ fontSize: 16 }) }),
                         }),
                     ]
                 }),
@@ -1329,41 +1329,3 @@ class MyMaterialIcons extends ts_flutter_sdk_1.JSStatelessWidget {
     }
 }
 exports.MyMaterialIcons = MyMaterialIcons;
-/*
-class PageExampleIcon extends JSStatelessWidget {
-    constructor(){
-      super("PageExampleIcon");
-    }
-  
-    genIconUI(iconName){
-      const icon = Icons[iconName];
-      return new Container({
-        padding:EdgeInsets.all(10),
-        child:new Row({
-          children: [
-            new Icon(icon),
-            new SizedBox({width:10}),
-            new Text(iconName),
-          ]
-        }),
-      })
-    }
-  
-    build(){
-      let widget = new Scaffold({
-        appBar: new AppBar({
-          title: new Text('Icon',),
-        }),
-        body: new Scrollbar({
-          child:new ListView({
-            children:[
-              ...icons.map( (iconName)=> {
-                return this.genIconUI(iconName);
-              })
-            ],
-          })
-        })
-      });
-      return widget;
-    }
-  }*/ 

@@ -10,6 +10,7 @@ import { MySectionTitle } from "demo/widgets/section_title";
 import { MyColorUtil } from "demo/utils/color_util";
 import { MyCounterPage } from "demo/common_demo/counter_page";
 import { MyMaterialIcons } from "demo/common_demo/material_icons";
+import { MyCupertinoIcons } from "demo/common_demo/cupertino_icons";
 
 export class MyHomePage extends JSStatefulWidget{
     createState() {
@@ -63,7 +64,7 @@ class _MyHomePageState extends JSWidgetState{
                         onTap:function(){
                             Navigator.push(context,MaterialPageRoute.new({
                                 builder:function(context?:JSBuildContext){
-                                    return MyCounterPage.new();
+                                    return MyCupertinoIcons.new();
                                 }
                             }));
                         }                        

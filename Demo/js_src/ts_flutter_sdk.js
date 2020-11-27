@@ -6,7 +6,7 @@
  * @Description: JS Flutter SDK
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NavigatorState = exports.NestedScrollView = exports.NotificationListener = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.Tween = exports.TextInputType = exports.TextEditingController = exports.TabController = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TextAlignVertical = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.ScrollPhysics = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.RangeMaintainingScrollPhysics = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.Radius = exports.Quaternion = exports.OutlinedBorder = exports.Offset = exports.NotchedShape = exports.Notification = exports.NeverScrollableScrollPhysics = exports.MediaQueryData = exports.MediaQuery = exports.Matrix4 = exports.MaskFilter = exports.Key = exports.InputDecoration = exports.InputDecorationTheme = exports.ImageShader = exports.IconThemeData = exports.IconData = exports.ImageProvider = exports.InputBorder = exports.Gradient = exports.GradientTransform = exports.File = exports.FixedColumnWidth = exports.FractionalOffset = exports.FlutterLogoDecoration = exports.FlexColumnWidth = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.Duration = exports.CurveTween = exports.ClampingScrollPhysics = exports.CircularNotchedRectangle = exports.ColorScheme = exports.ColorFilter = exports.Colors = exports.Color = exports.BouncingScrollPhysics = exports.BoxShadow = exports.BannerPainter = exports.BoxDecoration = exports.ButtonThemeData = exports.BorderDirectional = exports.Border = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderSide = exports.BoxConstraints = exports.AssetImage = exports.AssetBundle = exports.AlwaysScrollableScrollPhysics = exports.AlignmentDirectional = exports.Alignment = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.JSWidgetState = exports.JSStatelessWidget = exports.JSStatefulWidget = exports.JSBaseWidget = exports.initJSWidgetData = exports.JSWidgetMgr = exports.JSWidgetTree = exports.JSWidgetHelper = exports.JSBuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.JSLog = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.ShapeBorder = exports.FlutterWidget = exports.DartClass = exports.JSCallArgs = exports.JSWidgetMirrorMgr = void 0;
+exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.Tween = exports.TextInputType = exports.TextEditingController = exports.TabController = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TextAlignVertical = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.ScrollPhysics = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.RangeMaintainingScrollPhysics = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.Radius = exports.Quaternion = exports.OutlinedBorder = exports.Offset = exports.NotchedShape = exports.Notification = exports.NeverScrollableScrollPhysics = exports.MediaQueryData = exports.MediaQuery = exports.Matrix4 = exports.MaskFilter = exports.Key = exports.InputDecoration = exports.InputDecorationTheme = exports.ImageShader = exports.IconThemeData = exports.IconData = exports.ImageProvider = exports.InputBorder = exports.Gradient = exports.GradientTransform = exports.File = exports.FixedColumnWidth = exports.FractionalOffset = exports.FlutterLogoDecoration = exports.FlexColumnWidth = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.Duration = exports.CurveTween = exports.ClampingScrollPhysics = exports.CircularNotchedRectangle = exports.ColorScheme = exports.ColorFilter = exports.Colors = exports.Color = exports.BouncingScrollPhysics = exports.BoxShadow = exports.BannerPainter = exports.BoxDecoration = exports.ButtonThemeData = exports.BorderDirectional = exports.Border = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderSide = exports.BoxConstraints = exports.AssetImage = exports.AssetBundle = exports.AlwaysScrollableScrollPhysics = exports.AlignmentDirectional = exports.Alignment = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.JSWidgetState = exports.JSStatelessWidget = exports.JSStatefulWidget = exports.JSBaseWidget = exports.JSWidgetMgr = exports.JSWidgetTree = exports.JSWidgetHelper = exports.JSBuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.JSLog = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.ShapeBorder = exports.FlutterWidget = exports.DartClass = exports.JSCallArgs = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -167,7 +167,7 @@ class JSFlutterApp {
         this.name = name;
         this.initialRoute = initialRoute;
         //App的rootWidget是个虚拟Widget，负责管理push的Widget或runAPP 的Widget
-        this.rootWidget = new JSStatelessWidget("RootWidget");
+        this.rootWidget = new JSStatelessWidget({ name: "RootWidget" });
         this.rootWidget.helper?.setupAsRootWidget();
     }
     run() {
@@ -215,8 +215,11 @@ class JSFlutterApp {
         let bc = JSBuildContext.new(widget);
         bc.setInheritedInfo(args);
         widget.buildContext = bc;
-        this.rootWidget?.helper?.addChildWidget(widget);
-        widget?.helper?.callFlutterRebuild();
+        if (widget != null && widget != undefined && widget != "") {
+            JSWidgetMgr.getInstance().registerWidget(widget);
+        }
+        this.rootWidget?.helper.addChildWidget(widget);
+        widget?.helper.callFlutterRebuild();
     }
     buildRootWidget(widget) {
         JSLog.log("buildRootWidget ::" + widget?.getWidgetInfo());
@@ -259,9 +262,13 @@ class JSFlutterApp {
     }
     flutterCallOnDispose(args) {
         let widgetID = args["widgetID"];
+        //移除Widget
+        if (widgetID != null && widgetID != undefined) {
+            JSWidgetMgr.getInstance().remove(widgetID);
+        }
         if (this.rootWidget && this.rootWidget.widgetID == widgetID) {
         }
-        this.rootWidget?.helper?.onDispose(args);
+        this.rootWidget?.helper.onDispose(args);
         let mirrorObjIDList = args["mirrorObjIDList"];
         JSWidgetMirrorMgr.getInstance().removeMirrorObjects(mirrorObjIDList);
     }
@@ -434,10 +441,10 @@ class JSWidgetHelper {
             let newValue = value;
             if (value instanceof JSStatefulWidget || value instanceof JSStatelessWidget) {
                 // 解决widget生成时不调用构造方法的问题
-                if (value.helper == null) {
-                    value.className = value instanceof JSStatefulWidget ? "JSStatefulWidget" : "JSStatelessWidget";
-                    initJSWidgetData(value);
-                }
+                /*if (value.helper == null) {
+                  value.className = value instanceof JSStatefulWidget ? "JSStatefulWidget" : "JSStatelessWidget";
+                  initJSWidgetData(value);
+                }*/
                 if (value != jsWidget) {
                     value.buildContext = JSBuildContext.inheritBuildContext(value, jsWidget.buildContext);
                     //TODO:FIXME addChildWidget逻辑，这里局部刷新，会有两份Widget数据，但功能正常
@@ -503,7 +510,6 @@ class JSWidgetHelper {
             buildWidgetDataSeq: this.widget.buildWidgetDataSeq,
             navPushingWidgetID: this.widget.navPushingWidgetID,
             widgetData: tempWidgetTreeObjMap,
-            enableProfile: this.widget.enableProfile
         };
         return jsonMap;
     }
@@ -545,8 +551,8 @@ class JSWidgetHelper {
         this.widget.buildingWidgetTree?.childrenWidget.set(jsWidget.widgetID, jsWidget);
     }
     removeChildWidget(jsWidget) {
-        if (this.widget.currentWidgetTree &&
-            this.widget.currentWidgetTree.childrenWidget) {
+        if (this.widget.currentWidgetTree && this.widget.currentWidgetTree.childrenWidget) {
+            JSWidgetMgr.getInstance().remove(jsWidget.widgetID);
             this.widget.currentWidgetTree.childrenWidget.delete(jsWidget.widgetID);
         }
     }
@@ -556,13 +562,6 @@ class JSWidgetHelper {
         let startEncodeData = (new Date()).valueOf();
         let widgetData = JSWidgetHelper.buildWidgetData(this.widget);
         let startTransferData = (new Date()).valueOf();
-        if (this.widget.enableProfile) {
-            let profileInfo = new Map();
-            profileInfo.set("startEncodeData", startEncodeData);
-            profileInfo.set("startTransferData", startTransferData);
-            profileInfo.set("transferDataLen", widgetData.length);
-            this.widget.profileInfo = profileInfo;
-        }
         //rebuild and confirm 配对
         this.confirmCurrentWidgetTree();
         //call flutter setState
@@ -593,8 +592,14 @@ class JSWidgetHelper {
         }
     }
     findWidgetWithWidgetID(widgetID) {
+        //当前Widget
         if (this.widget.widgetID == widgetID) {
             return this.widget;
+        }
+        //全局中找对象
+        let w = JSWidgetMgr.getInstance().findWidget(widgetID);
+        if (w != null && w != undefined) {
+            return w;
         }
         //先在currentTree里找，一般这里能找到
         let widgetTree = this.widget.currentWidgetTree;
@@ -605,7 +610,7 @@ class JSWidgetHelper {
             }
             for (let k in widgetTree.childrenWidget) {
                 let jsWidget = widgetTree.childrenWidget.get(k);
-                w = jsWidget?.helper?.findWidgetWithWidgetID(widgetID);
+                w = jsWidget?.helper.findWidgetWithWidgetID(widgetID);
                 if (w) {
                     return w;
                 }
@@ -624,7 +629,7 @@ class JSWidgetHelper {
                 }
                 for (let k in widgetTree.childrenWidget) {
                     let jsWidget = widgetTree.childrenWidget.get(k);
-                    w = jsWidget?.helper?.findWidgetWithWidgetID(widgetID);
+                    w = jsWidget?.helper.findWidgetWithWidgetID(widgetID);
                     if (w) {
                         return w;
                     }
@@ -699,7 +704,6 @@ class JSWidgetHelper {
             // @ts-ignore：this.widget.buildSeq2WTreeMap
             JSLog.error("JSWidget onFlutterBuildEnd fail buildSeq2WTreeMap.keys: [" + Object.keys(this.widget.buildSeq2WTreeMap).join("|") + "]::" + this.widget.getWidgetInfo() + " buildWidgetDataSeq: " + buildWidgetDataSeq);
         }
-        this.widget.setProfileInfo(profileInfo);
         if (this.widget instanceof JSStatelessWidget) {
             this.widget.onBuildEnd();
         }
@@ -722,8 +726,10 @@ class JSWidgetHelper {
             }
         }
         for (let i = 0; i < clearSeqs.length; ++i) {
+            let widgetID = clearSeqs[i];
             //JSLog.debug("JSWidget clearWidgetTree::" + this.widget.getWidgetInfo() + " delSeq: " + delSeq);
-            this.widget.buildSeq2WTreeMap?.delete(clearSeqs[i]);
+            JSWidgetMgr.getInstance().remove(widgetID);
+            this.widget.buildSeq2WTreeMap?.delete(widgetID);
         }
     }
     onDispose(args) {
@@ -777,12 +783,8 @@ class JSWidgetHelper {
         let startEncodeData = (new Date()).valueOf();
         let widgetData = this.updatePushingWidgetsData(jsWidget);
         let startTransferData = (new Date()).valueOf();
-        if (jsWidget.enableProfile) {
-            let profileInfo = new Map();
-            profileInfo.set('startEncodeData', startEncodeData);
-            profileInfo.set('startTransferData', startTransferData);
-            profileInfo.set('transferDataLen', widgetData.length);
-            jsWidget.profileInfo = profileInfo;
+        if (jsWidget != null && jsWidget != undefined) {
+            JSWidgetMgr.getInstance().registerWidget(jsWidget);
         }
         //call flutter navigatorPush
         JSFramework.callFlutterWidgetChannel("navigatorPush", widgetData);
@@ -794,29 +796,20 @@ class JSWidgetHelper {
         // @ts-ignore：widgetID
         JSFramework.callFlutterWidgetChannel("navigatorPop", { widgetID });
         if (this.widget.navPushedWidgets && widgetID != undefined) {
+            JSWidgetMgr.getInstance().remove(widgetID);
             this.widget.navPushedWidgets.delete(widgetID);
         }
     }
     //留意：这个函数命名是不是应该是removePushedWidget
     removePushingWidget(jsWidget) {
         if (this.widget.navPushedWidgets) {
+            JSWidgetMgr.getInstance().remove(jsWidget.widgetID);
             this.widget.navPushedWidgets.delete(jsWidget.widgetID);
         }
     }
     updatePushingWidgetsData(jsWidget) {
         JSLog.log("updatePushingWidgetsData WidgetName:" + jsWidget.widgetName);
-        //那种根节点不是statewidget的页面 比如Theme
-        var newJSWidget;
-        if (jsWidget.className != "JSStatefulWidget" && jsWidget.className != "JSStatelessWidget") {
-            // 特殊处理，用JSStatelessWidget包裹一层
-            newJSWidget = new JSStatelessWidget("FakeStatelessWidget");
-            newJSWidget.build = function (context) {
-                return jsWidget;
-            };
-        }
-        else {
-            newJSWidget = jsWidget;
-        }
+        var newJSWidget = jsWidget;
         //设置push jsWidget的widget
         newJSWidget.navPushingWidget = this.widget;
         newJSWidget.buildContext = JSBuildContext.inheritBuildContext(newJSWidget, this.widget.buildContext);
@@ -868,7 +861,7 @@ class JSWidgetTree {
     }
 }
 exports.JSWidgetTree = JSWidgetTree;
-//****** TODO Widget Mgr ******
+//****** Widget Mgr ******
 class JSWidgetMgr {
     constructor() {
         this.widgetIDFeed = 0;
@@ -883,8 +876,7 @@ class JSWidgetMgr {
     generateWidgetID() {
         //JS侧现生成的JSWidget， widgetID为偶数，从0开始 +2
         this.widgetIDFeed = this.widgetIDFeed + 2;
-        let wID = this.widgetIDFeed;
-        return String(wID);
+        return String(this.widgetIDFeed);
     }
     registerWidget(widget) {
         this.widgetID2WidgetMap.set(widget.widgetID, widget);
@@ -893,58 +885,44 @@ class JSWidgetMgr {
         this.widgetID2WidgetMap.delete(widgetID);
     }
     findWidget(widgetID) {
+        JSLog.log("======widgetID2WidgetMap:" + String(this.widgetID2WidgetMap.size));
         return this.widgetID2WidgetMap.get(widgetID);
     }
 }
 exports.JSWidgetMgr = JSWidgetMgr;
-//****** TODO 初始化JS数据 ******
-function initJSWidgetData(widget) {
-    //继承自JSBaseWidget 自定义控件。
-    if (widget.widgetID == null || widget.widgetID == undefined || widget.widgetID == "") {
-        widget.widgetID = JSWidgetMgr.getInstance().generateWidgetID();
-    }
-    widget.helper = new JSWidgetHelper(widget);
-    //构建系列号，每build一次加1
-    widget.buildWidgetDataSeq = "";
-    // The Widget Pages that pushed this Widget ID
-    // 把当前widget（this） push 出来的widget ID
-    // 序列化到JSON里
-    widget.navPushingWidgetID = "";
-    //不添加进json的控制变量
-    //创建自己的widget，为null自己是root
-    widget.parentWidget = undefined;
-    // The Widget Pages that pushed this Widget
-    // 把当前widget（this） push 出来的widget
-    widget.navPushingWidget = undefined;
-    //The widget that was pushed by this widget
-    //由自己this push的widget page
-    widget.navPushedWidgets = new Map();
-    //
-    widget.buildContext = undefined;
-    widget.buildingWidgetTree = undefined;
-    widget.currentWidgetTree = undefined;
-    widget.preWidgetTree = undefined;
-    widget.buildWidgetDataSeqFeed = 0;
-    widget.buildSeq2WTreeMap = new Map();
-    ///性能分析模式 
-    ///打开性能分析模式，widget.enableProfile = true
-    ///可以重载onBuildEnd，使用getProfileText获得各个阶段耗时
-    widget.enableProfile = false;
-    //widget.profileInfo = new Map();
-}
-exports.initJSWidgetData = initJSWidgetData;
-//****** TODO JSBaseWidget ******
 class JSBaseWidget extends FlutterWidget {
-    constructor(name, key) {
+    constructor(args) {
         super();
-        //打开性能分析模式，widget.enableProfile = true
-        this.enableProfile = false;
-        this.name = name;
-        this.key = key;
-        this.profileInfo = new Map();
-        this.widgetID = "";
+        if (args != null && args != undefined) {
+            this.name = args.name;
+            this.key = args.key;
+        }
+        this.widgetID = JSWidgetMgr.getInstance().generateWidgetID();
+        this.helper = new JSWidgetHelper(this);
+        //构建系列号，每build一次加1
+        this.buildWidgetDataSeq = "";
+        // The Widget Pages that pushed this Widget ID
+        // 把当前widget（this） push 出来的widget ID
+        // 序列化到JSON里
+        this.navPushingWidgetID = "";
+        //不添加进json的控制变量
+        //创建自己的widget，为null自己是root
+        this.parentWidget = undefined;
+        // The Widget Pages that pushed this Widget
+        // 把当前widget（this） push 出来的widget
+        this.navPushingWidget = undefined;
+        //The widget that was pushed by this widget
+        //由自己this push的widget page
+        this.navPushedWidgets = new Map();
+        //
+        this.buildContext = undefined;
+        this.buildingWidgetTree = undefined;
+        this.currentWidgetTree = undefined;
+        this.preWidgetTree = undefined;
         this.buildWidgetDataSeqFeed = 0;
-        initJSWidgetData(this);
+        this.buildSeq2WTreeMap = new Map();
+        //注册ID
+        //JSWidgetMgr.getInstance().registerWidget(this);
     }
     //获取 Widget 关键信息
     getWidgetInfo() {
@@ -961,46 +939,13 @@ class JSBaseWidget extends FlutterWidget {
         return widgetTree.buildWidgetDataSeq;
     }
     onBuildEnd(args) { }
-    ///性能分析模式 
-    ///打开性能分析模式，widget.enableProfile = true
-    ///可以重载onBuildEnd，使用getProfileText获得各个阶段耗时
-    setProfileInfo(profileInfo) {
-        if (this.enableProfile == true && profileInfo != null && profileInfo != undefined) {
-            this.profileInfo.set("startDecodeData", profileInfo.get("startDecodeData"));
-            this.profileInfo.set("endDecodeData", profileInfo.get("endDecodeData"));
-            this.profileInfo.set("buildEnd", profileInfo.get("buildEnd"));
-        }
-    }
-    //获取性能文本
-    getProfileText() {
-        let profileInfo = this.profileInfo;
-        let startEncodeData = profileInfo.get('startEncodeData');
-        let startTransferData = profileInfo.get('startTransferData');
-        let startDecodeData = profileInfo.get('startDecodeData');
-        let endDecodeData = profileInfo.get('endDecodeData');
-        let buildEnd = profileInfo.get('buildEnd');
-        let transferDataLen = profileInfo.get('transferDataLen');
-        let buildDataCost = startTransferData - startEncodeData;
-        let transferCost = startDecodeData - startTransferData;
-        let decodeDataCost = endDecodeData - startDecodeData;
-        let paintCost = buildEnd - endDecodeData;
-        let mxcost = endDecodeData - startEncodeData;
-        let flutterBuild = endDecodeData - startEncodeData;
-        let profileText = '总耗时: XSFlutterTotal: ' + mxcost + 'ms FlutterBuild: ' + paintCost + 'ms 详情:\n' +
-            '[JS]buildJSWidgetTree2Json: ' + buildDataCost + "ms \n" +
-            '[JS->Native->Dart]transfer(' + (transferDataLen * 2.0 / 1024.0).toFixed(2) + 'Kb): ' + transferCost + "ms\n" +
-            '[Dart]DecodeJson: ' + decodeDataCost + "ms\n" +
-            '[Dart]flutterBuild: ' + paintCost + "ms";
-        return profileText;
-    }
 }
 exports.JSBaseWidget = JSBaseWidget;
-//****** TODO JSStatefulWidget ******
+//****** JSStatefulWidget ******
 class JSStatefulWidget extends JSBaseWidget {
-    constructor(name, key) {
-        super(name, key);
+    constructor(args) {
+        super(args);
         this.className = "JSStatefulWidget";
-        initJSWidgetData(this);
     }
     //subclass override
     createState() { }
@@ -1008,10 +953,9 @@ class JSStatefulWidget extends JSBaseWidget {
 exports.JSStatefulWidget = JSStatefulWidget;
 //在JS层，要封装控件，如不需要改变UI内容，使用无状态的JSStatelessWidget
 class JSStatelessWidget extends JSBaseWidget {
-    constructor(name, key) {
-        super(name, key);
+    constructor(args) {
+        super(args);
         this.className = "JSStatelessWidget";
-        initJSWidgetData(this);
     }
     //subclass override
     build(context) { }
@@ -1037,7 +981,7 @@ class JSWidgetState {
         this.widget?.helper?.callFlutterRebuild();
     }
     //subclass override
-    build(buildContext) { }
+    build(context) { }
     //subclass overwite
     onBuildEnd(args) { }
     //subclass override
@@ -11103,79 +11047,13 @@ class NestedScrollView extends FlutterWidget {
     }
 }
 exports.NestedScrollView = NestedScrollView;
-//****** TODO NavigatorState ******
-class NavigatorState extends DartClass {
-    constructor(context) {
-        super();
-        this.context = context;
-    }
-    push(t, materialPageRoute) {
-        this.context.widget.helper.navigatorPush(materialPageRoute.builder(this.context));
-    }
-    pop(t) {
-        this.context.widget.helper.navigatorPop();
-    }
-    static new(context) {
-        return new NavigatorState(context);
-    }
-}
-exports.NavigatorState = NavigatorState;
+//****** Navigator ******
 class Navigator extends DartClass {
-    /**
-     * @param args args:
-        {
-          initialRoute?:string,
-          onGenerateRoute?:any,
-          onUnknownRoute?:any,
-          observers?:any,
-          key?:Key
-        }
-     */
-    constructor(args) {
-        super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.initialRoute = args.initialRoute;
-            this.onGenerateRoute = args.onGenerateRoute;
-            this.onUnknownRoute = args.onUnknownRoute;
-            this.observers = args.observers;
-        }
-    }
     static push(context, materialPageRoute) {
-        let t = null;
-        if (arguments.length == 3) {
-            t = arguments[0];
-            context = arguments[1];
-            materialPageRoute = arguments[2];
-        }
-        var navigatorState = NavigatorState.new(context);
-        navigatorState.push(t, materialPageRoute);
+        context.widget?.helper.navigatorPush(materialPageRoute.builder(context));
     }
     static pop(context) {
-        let t = null;
-        if (arguments.length == 2) {
-            t = arguments[0];
-            context = arguments[1];
-        }
-        var navigatorState = NavigatorState.new(context);
-        navigatorState.pop(t);
-    }
-    static of(context, opt) {
-        var navigatorState = NavigatorState.new(context);
-        return navigatorState;
-    }
-    /**
-     * @param args args:
-        {
-          initialRoute?:string,
-          onGenerateRoute?:any,
-          onUnknownRoute?:any,
-          observers?:any,
-          key?:Key
-        }
-     */
-    static new(args) {
-        return new Navigator(args);
+        context.widget?.helper.navigatorPop();
     }
 }
 exports.Navigator = Navigator;
