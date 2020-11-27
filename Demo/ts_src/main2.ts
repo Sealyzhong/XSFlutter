@@ -1,7 +1,4 @@
 
-
-
-
 import { MyHomePage } from "demo/home_page";
 import { JSFlutterApp, JSFramework, JSLog } from "ts_flutter_sdk";
 //import * as xs from "./ts_flutter_sdk";

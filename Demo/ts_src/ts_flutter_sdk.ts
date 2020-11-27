@@ -3680,48 +3680,15 @@ export class ImageProvider extends DartClass {
 }
 
 //****** IconData ******
-interface IconDataArgs {
-  fontFamily?:string;
-  fontPackage?:string;
-  matchTextDirection?:boolean;
-}
 export class IconData extends DartClass {
-  codePoint?:number;
-  fontFamily?:string;
-  fontPackage?:string;
-  matchTextDirection?:boolean;
+  icon:string;
 
-  /**
-   * @param codePoint codePoint:number
-   * @param args args: 
-      {
-        fontFamily?:string, 
-        fontPackage?:string, 
-        matchTextDirection?:boolean
-      }
-   */
-  constructor(codePoint:number, args?: IconDataArgs){
+  constructor(icon:string){
     super();
-    this.codePoint = codePoint;
-    if(args!=null && args!=undefined){
-      this.fontFamily = args.fontFamily;
-      this.fontPackage = args.fontPackage;
-      this.matchTextDirection = args.matchTextDirection;
-    }
+    this.icon = icon;
   }
-
-  /**
-   * @param codePoint codePoint:number
-   * @param args args: 
-      {
-        fontFamily?:string, 
-        fontPackage?:string, 
-        matchTextDirection?:boolean
-      }
-   */
-  static new(codePoint:number, args?: IconDataArgs) {
-   return new IconData(codePoint,args);
-    
+  static new(icon:string) {
+   return new IconData(icon);
   }
 }
 
@@ -3765,7 +3732,6 @@ export class IconThemeData extends DartClass {
     return new IconThemeData(args);
   }
 }
-
 
 //****** ImageShader ******
 export class ImageShader extends DartClass {
@@ -6349,3381 +6315,1149 @@ export class VisualDensity extends DartClass {
 
 //#region ******* Icons ********
 export class Icons extends IconData{
-  /// <i class="material-icons md-36">360</i> &#x2014; material icon named "360".
-  static threesixty = IconData.new(0xe577, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">3d_rotation</i> &#x2014; material icon named "3d rotation".
-  static threed_rotation = IconData.new(0xe84d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">4k</i> &#x2014; material icon named "4k".
-  static four_k = IconData.new(0xe072, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">ac_unit</i> &#x2014; material icon named "ac unit".
-  static ac_unit = IconData.new(0xeb3b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">access_alarm</i> &#x2014; material icon named "access alarm".
-  static access_alarm = IconData.new(0xe190, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">access_alarms</i> &#x2014; material icon named "access alarms".
-  static access_alarms = IconData.new(0xe191, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">access_time</i> &#x2014; material icon named "access time".
-  static access_time = IconData.new(0xe192, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">accessibility</i> &#x2014; material icon named "accessibility".
-  static accessibility = IconData.new(0xe84e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">accessibility_new</i> &#x2014; material icon named "accessibility new".
-  static accessibility_new = IconData.new(0xe92c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">accessible</i> &#x2014; material icon named "accessible".
-  static accessible = IconData.new(0xe914, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">accessible_forward</i> &#x2014; material icon named "accessible forward".
-  static accessible_forward = IconData.new(0xe934, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">account_balance</i> &#x2014; material icon named "account balance".
-  static account_balance = IconData.new(0xe84f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">account_balance_wallet</i> &#x2014; material icon named "account balance wallet".
-  static account_balance_wallet = IconData.new(0xe850, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">account_box</i> &#x2014; material icon named "account box".
-  static account_box = IconData.new(0xe851, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">account_circle</i> &#x2014; material icon named "account circle".
-  static account_circle = IconData.new(0xe853, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">adb</i> &#x2014; material icon named "adb".
-  static adb = IconData.new(0xe60e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add</i> &#x2014; material icon named "add".
-  static add = IconData.new(0xe145, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_a_photo</i> &#x2014; material icon named "add a photo".
-  static add_a_photo = IconData.new(0xe439, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_alarm</i> &#x2014; material icon named "add alarm".
-  static add_alarm = IconData.new(0xe193, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_alert</i> &#x2014; material icon named "add alert".
-  static add_alert = IconData.new(0xe003, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_box</i> &#x2014; material icon named "add box".
-  static add_box = IconData.new(0xe146, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_call</i> &#x2014; material icon named "add call".
-  static add_call = IconData.new(0xe0e8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_circle</i> &#x2014; material icon named "add circle".
-  static add_circle = IconData.new(0xe147, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_circle_outline</i> &#x2014; material icon named "add circle outline".
-  static add_circle_outline = IconData.new(0xe148, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_comment</i> &#x2014; material icon named "add comment".
-  static add_comment = IconData.new(0xe266, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_location</i> &#x2014; material icon named "add location".
-  static add_location = IconData.new(0xe567, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_photo_alternate</i> &#x2014; material icon named "add photo alternate".
-  static add_photo_alternate = IconData.new(0xe43e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_shopping_cart</i> &#x2014; material icon named "add shopping cart".
-  static add_shopping_cart = IconData.new(0xe854, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_to_home_screen</i> &#x2014; material icon named "add to home screen".
-  static add_to_home_screen = IconData.new(0xe1fe, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_to_photos</i> &#x2014; material icon named "add to photos".
-  static add_to_photos = IconData.new(0xe39d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">add_to_queue</i> &#x2014; material icon named "add to queue".
-  static add_to_queue = IconData.new(0xe05c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">adjust</i> &#x2014; material icon named "adjust".
-  static adjust = IconData.new(0xe39e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airline_seat_flat</i> &#x2014; material icon named "airline seat flat".
-  static airline_seat_flat = IconData.new(0xe630, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airline_seat_flat_angled</i> &#x2014; material icon named "airline seat flat angled".
-  static airline_seat_flat_angled = IconData.new(0xe631, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airline_seat_individual_suite</i> &#x2014; material icon named "airline seat individual suite".
-  static airline_seat_individual_suite = IconData.new(0xe632, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airline_seat_legroom_extra</i> &#x2014; material icon named "airline seat legroom extra".
-  static airline_seat_legroom_extra = IconData.new(0xe633, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airline_seat_legroom_normal</i> &#x2014; material icon named "airline seat legroom normal".
-  static airline_seat_legroom_normal = IconData.new(0xe634, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airline_seat_legroom_reduced</i> &#x2014; material icon named "airline seat legroom reduced".
-  static airline_seat_legroom_reduced = IconData.new(0xe635, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airline_seat_recline_extra</i> &#x2014; material icon named "airline seat recline extra".
-  static airline_seat_recline_extra = IconData.new(0xe636, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airline_seat_recline_normal</i> &#x2014; material icon named "airline seat recline normal".
-  static airline_seat_recline_normal = IconData.new(0xe637, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airplanemode_active</i> &#x2014; material icon named "airplanemode active".
-  static airplanemode_active = IconData.new(0xe195, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airplanemode_inactive</i> &#x2014; material icon named "airplanemode inactive".
-  static airplanemode_inactive = IconData.new(0xe194, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airplay</i> &#x2014; material icon named "airplay".
-  static airplay = IconData.new(0xe055, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">airport_shuttle</i> &#x2014; material icon named "airport shuttle".
-  static airport_shuttle = IconData.new(0xeb3c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">alarm</i> &#x2014; material icon named "alarm".
-  static alarm = IconData.new(0xe855, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">alarm_add</i> &#x2014; material icon named "alarm add".
-  static alarm_add = IconData.new(0xe856, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">alarm_off</i> &#x2014; material icon named "alarm off".
-  static alarm_off = IconData.new(0xe857, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">alarm_on</i> &#x2014; material icon named "alarm on".
-  static alarm_on = IconData.new(0xe858, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">album</i> &#x2014; material icon named "album".
-  static album = IconData.new(0xe019, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">all_inclusive</i> &#x2014; material icon named "all inclusive".
-  static all_inclusive = IconData.new(0xeb3d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">all_out</i> &#x2014; material icon named "all out".
-  static all_out = IconData.new(0xe90b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">alternate_email</i> &#x2014; material icon named "alternate email".
-  static alternate_email = IconData.new(0xe0e6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">android</i> &#x2014; material icon named "android".
-  static android = IconData.new(0xe859, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">announcement</i> &#x2014; material icon named "announcement".
-  static announcement = IconData.new(0xe85a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">apps</i> &#x2014; material icon named "apps".
-  static apps = IconData.new(0xe5c3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">archive</i> &#x2014; material icon named "archive".
-  static archive = IconData.new(0xe149, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">arrow_back</i> &#x2014; material icon named "arrow back".
-  static arrow_back = IconData.new(0xe5c4, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">arrow_back_ios</i> &#x2014; material icon named "arrow back ios".
-  static arrow_back_ios = IconData.new(0xe5e0, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">arrow_downward</i> &#x2014; material icon named "arrow downward".
-  static arrow_downward = IconData.new(0xe5db, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">arrow_drop_down</i> &#x2014; material icon named "arrow drop down".
-  static arrow_drop_down = IconData.new(0xe5c5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">arrow_drop_down_circle</i> &#x2014; material icon named "arrow drop down circle".
-  static arrow_drop_down_circle = IconData.new(0xe5c6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">arrow_drop_up</i> &#x2014; material icon named "arrow drop up".
-  static arrow_drop_up = IconData.new(0xe5c7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">arrow_forward</i> &#x2014; material icon named "arrow forward".
-  static arrow_forward = IconData.new(0xe5c8, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">arrow_forward_ios</i> &#x2014; material icon named "arrow forward ios".
-  static arrow_forward_ios = IconData.new(0xe5e1, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">arrow_left</i> &#x2014; material icon named "arrow left".
-  static arrow_left = IconData.new(0xe5de, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">arrow_right</i> &#x2014; material icon named "arrow right".
-  static arrow_right = IconData.new(0xe5df, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">arrow_upward</i> &#x2014; material icon named "arrow upward".
-  static arrow_upward = IconData.new(0xe5d8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">art_track</i> &#x2014; material icon named "art track".
-  static art_track = IconData.new(0xe060, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">aspect_ratio</i> &#x2014; material icon named "aspect ratio".
-  static aspect_ratio = IconData.new(0xe85b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">assessment</i> &#x2014; material icon named "assessment".
-  static assessment = IconData.new(0xe85c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">assignment</i> &#x2014; material icon named "assignment".
-  static assignment = IconData.new(0xe85d, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">assignment_ind</i> &#x2014; material icon named "assignment ind".
-  static assignment_ind = IconData.new(0xe85e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">assignment_late</i> &#x2014; material icon named "assignment late".
-  static assignment_late = IconData.new(0xe85f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">assignment_return</i> &#x2014; material icon named "assignment return".
-  static assignment_return = IconData.new(0xe860, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">assignment_returned</i> &#x2014; material icon named "assignment returned".
-  static assignment_returned = IconData.new(0xe861, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">assignment_turned_in</i> &#x2014; material icon named "assignment turned in".
-  static assignment_turned_in = IconData.new(0xe862, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">assistant</i> &#x2014; material icon named "assistant".
-  static assistant = IconData.new(0xe39f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">assistant_photo</i> &#x2014; material icon named "assistant photo".
-  static assistant_photo = IconData.new(0xe3a0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">atm</i> &#x2014; material icon named "atm".
-  static atm = IconData.new(0xe573, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">attach_file</i> &#x2014; material icon named "attach file".
-  static attach_file = IconData.new(0xe226, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">attach_money</i> &#x2014; material icon named "attach money".
-  static attach_money = IconData.new(0xe227, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">attachment</i> &#x2014; material icon named "attachment".
-  static attachment = IconData.new(0xe2bc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">audiotrack</i> &#x2014; material icon named "audiotrack".
-  static audiotrack = IconData.new(0xe3a1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">autorenew</i> &#x2014; material icon named "autorenew".
-  static autorenew = IconData.new(0xe863, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">av_timer</i> &#x2014; material icon named "av timer".
-  static av_timer = IconData.new(0xe01b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">backspace</i> &#x2014; material icon named "backspace".
-  static backspace = IconData.new(0xe14a, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">backup</i> &#x2014; material icon named "backup".
-  static backup = IconData.new(0xe864, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">battery_alert</i> &#x2014; material icon named "battery alert".
-  static battery_alert = IconData.new(0xe19c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">battery_charging_full</i> &#x2014; material icon named "battery charging full".
-  static battery_charging_full = IconData.new(0xe1a3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">battery_full</i> &#x2014; material icon named "battery full".
-  static battery_full = IconData.new(0xe1a4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">battery_std</i> &#x2014; material icon named "battery std".
-  static battery_std = IconData.new(0xe1a5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">battery_unknown</i> &#x2014; material icon named "battery unknown".
-  static battery_unknown = IconData.new(0xe1a6, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">beach_access</i> &#x2014; material icon named "beach access".
-  static beach_access = IconData.new(0xeb3e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">beenhere</i> &#x2014; material icon named "beenhere".
-  static beenhere = IconData.new(0xe52d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">block</i> &#x2014; material icon named "block".
-  static block = IconData.new(0xe14b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">bluetooth</i> &#x2014; material icon named "bluetooth".
-  static bluetooth = IconData.new(0xe1a7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">bluetooth_audio</i> &#x2014; material icon named "bluetooth audio".
-  static bluetooth_audio = IconData.new(0xe60f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">bluetooth_connected</i> &#x2014; material icon named "bluetooth connected".
-  static bluetooth_connected = IconData.new(0xe1a8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">bluetooth_disabled</i> &#x2014; material icon named "bluetooth disabled".
-  static bluetooth_disabled = IconData.new(0xe1a9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">bluetooth_searching</i> &#x2014; material icon named "bluetooth searching".
-  static bluetooth_searching = IconData.new(0xe1aa, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">blur_circular</i> &#x2014; material icon named "blur circular".
-  static blur_circular = IconData.new(0xe3a2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">blur_linear</i> &#x2014; material icon named "blur linear".
-  static blur_linear = IconData.new(0xe3a3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">blur_off</i> &#x2014; material icon named "blur off".
-  static blur_off = IconData.new(0xe3a4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">blur_on</i> &#x2014; material icon named "blur on".
-  static blur_on = IconData.new(0xe3a5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">book</i> &#x2014; material icon named "book".
-  static book = IconData.new(0xe865, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">bookmark</i> &#x2014; material icon named "bookmark".
-  static bookmark = IconData.new(0xe866, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">bookmark_border</i> &#x2014; material icon named "bookmark border".
-  static bookmark_border = IconData.new(0xe867, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_all</i> &#x2014; material icon named "border all".
-  static border_all = IconData.new(0xe228, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_bottom</i> &#x2014; material icon named "border bottom".
-  static border_bottom = IconData.new(0xe229, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_clear</i> &#x2014; material icon named "border clear".
-  static border_clear = IconData.new(0xe22a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_color</i> &#x2014; material icon named "border color".
-  static border_color = IconData.new(0xe22b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_horizontal</i> &#x2014; material icon named "border horizontal".
-  static border_horizontal = IconData.new(0xe22c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_inner</i> &#x2014; material icon named "border inner".
-  static border_inner = IconData.new(0xe22d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_left</i> &#x2014; material icon named "border left".
-  static border_left = IconData.new(0xe22e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_outer</i> &#x2014; material icon named "border outer".
-  static border_outer = IconData.new(0xe22f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_right</i> &#x2014; material icon named "border right".
-  static border_right = IconData.new(0xe230, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_style</i> &#x2014; material icon named "border style".
-  static border_style = IconData.new(0xe231, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_top</i> &#x2014; material icon named "border top".
-  static border_top = IconData.new(0xe232, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">border_vertical</i> &#x2014; material icon named "border vertical".
-  static border_vertical = IconData.new(0xe233, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">branding_watermark</i> &#x2014; material icon named "branding watermark".
-  static branding_watermark = IconData.new(0xe06b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brightness_1</i> &#x2014; material icon named "brightness 1".
-  static brightness_1 = IconData.new(0xe3a6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brightness_2</i> &#x2014; material icon named "brightness 2".
-  static brightness_2 = IconData.new(0xe3a7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brightness_3</i> &#x2014; material icon named "brightness 3".
-  static brightness_3 = IconData.new(0xe3a8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brightness_4</i> &#x2014; material icon named "brightness 4".
-  static brightness_4 = IconData.new(0xe3a9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brightness_5</i> &#x2014; material icon named "brightness 5".
-  static brightness_5 = IconData.new(0xe3aa, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brightness_6</i> &#x2014; material icon named "brightness 6".
-  static brightness_6 = IconData.new(0xe3ab, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brightness_7</i> &#x2014; material icon named "brightness 7".
-  static brightness_7 = IconData.new(0xe3ac, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brightness_auto</i> &#x2014; material icon named "brightness auto".
-  static brightness_auto = IconData.new(0xe1ab, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brightness_high</i> &#x2014; material icon named "brightness high".
-  static brightness_high = IconData.new(0xe1ac, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brightness_low</i> &#x2014; material icon named "brightness low".
-  static brightness_low = IconData.new(0xe1ad, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brightness_medium</i> &#x2014; material icon named "brightness medium".
-  static brightness_medium = IconData.new(0xe1ae, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">broken_image</i> &#x2014; material icon named "broken image".
-  static broken_image = IconData.new(0xe3ad, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">brush</i> &#x2014; material icon named "brush".
-  static brush = IconData.new(0xe3ae, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">bubble_chart</i> &#x2014; material icon named "bubble chart".
-  static bubble_chart = IconData.new(0xe6dd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">bug_report</i> &#x2014; material icon named "bug report".
-  static bug_report = IconData.new(0xe868, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">build</i> &#x2014; material icon named "build".
-  static build = IconData.new(0xe869, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">burst_mode</i> &#x2014; material icon named "burst mode".
-  static burst_mode = IconData.new(0xe43c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">business</i> &#x2014; material icon named "business".
-  static business = IconData.new(0xe0af, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">business_center</i> &#x2014; material icon named "business center".
-  static business_center = IconData.new(0xeb3f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cached</i> &#x2014; material icon named "cached".
-  static cached = IconData.new(0xe86a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cake</i> &#x2014; material icon named "cake".
-  static cake = IconData.new(0xe7e9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">calendar_today</i> &#x2014; material icon named "calendar today".
-  static calendar_today = IconData.new(0xe935, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">calendar_view_day</i> &#x2014; material icon named "calendar view day".
-  static calendar_view_day = IconData.new(0xe936, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">call</i> &#x2014; material icon named "call".
-  static call = IconData.new(0xe0b0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">call_end</i> &#x2014; material icon named "call end".
-  static call_end = IconData.new(0xe0b1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">call_made</i> &#x2014; material icon named "call made".
-  static call_made = IconData.new(0xe0b2, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">call_merge</i> &#x2014; material icon named "call merge".
-  static call_merge = IconData.new(0xe0b3, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">call_missed</i> &#x2014; material icon named "call missed".
-  static call_missed = IconData.new(0xe0b4, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">call_missed_outgoing</i> &#x2014; material icon named "call missed outgoing".
-  static call_missed_outgoing = IconData.new(0xe0e4, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">call_received</i> &#x2014; material icon named "call received".
-  static call_received = IconData.new(0xe0b5, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">call_split</i> &#x2014; material icon named "call split".
-  static call_split = IconData.new(0xe0b6, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">call_to_action</i> &#x2014; material icon named "call to action".
-  static call_to_action = IconData.new(0xe06c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">camera</i> &#x2014; material icon named "camera".
-  static camera = IconData.new(0xe3af, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">camera_alt</i> &#x2014; material icon named "camera alt".
-  static camera_alt = IconData.new(0xe3b0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">camera_enhance</i> &#x2014; material icon named "camera enhance".
-  static camera_enhance = IconData.new(0xe8fc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">camera_front</i> &#x2014; material icon named "camera front".
-  static camera_front = IconData.new(0xe3b1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">camera_rear</i> &#x2014; material icon named "camera rear".
-  static camera_rear = IconData.new(0xe3b2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">camera_roll</i> &#x2014; material icon named "camera roll".
-  static camera_roll = IconData.new(0xe3b3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cancel</i> &#x2014; material icon named "cancel".
-  static cancel = IconData.new(0xe5c9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">card_giftcard</i> &#x2014; material icon named "card giftcard".
-  static card_giftcard = IconData.new(0xe8f6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">card_membership</i> &#x2014; material icon named "card membership".
-  static card_membership = IconData.new(0xe8f7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">card_travel</i> &#x2014; material icon named "card travel".
-  static card_travel = IconData.new(0xe8f8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">casino</i> &#x2014; material icon named "casino".
-  static casino = IconData.new(0xeb40, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cast</i> &#x2014; material icon named "cast".
-  static cast = IconData.new(0xe307, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cast_connected</i> &#x2014; material icon named "cast connected".
-  static cast_connected = IconData.new(0xe308, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">category</i> &#x2014; material icon named "category".
-  static category = IconData.new(0xe574, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">center_focus_strong</i> &#x2014; material icon named "center focus strong".
-  static center_focus_strong = IconData.new(0xe3b4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">center_focus_weak</i> &#x2014; material icon named "center focus weak".
-  static center_focus_weak = IconData.new(0xe3b5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">change_history</i> &#x2014; material icon named "change history".
-  static change_history = IconData.new(0xe86b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">chat</i> &#x2014; material icon named "chat".
-  static chat = IconData.new(0xe0b7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">chat_bubble</i> &#x2014; material icon named "chat bubble".
-  static chat_bubble = IconData.new(0xe0ca, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">chat_bubble_outline</i> &#x2014; material icon named "chat bubble outline".
-  static chat_bubble_outline = IconData.new(0xe0cb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">check</i> &#x2014; material icon named "check".
-  static check = IconData.new(0xe5ca, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">check_box</i> &#x2014; material icon named "check box".
-  static check_box = IconData.new(0xe834, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">check_box_outline_blank</i> &#x2014; material icon named "check box outline blank".
-  static check_box_outline_blank = IconData.new(0xe835, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">check_circle</i> &#x2014; material icon named "check circle".
-  static check_circle = IconData.new(0xe86c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">check_circle_outline</i> &#x2014; material icon named "check circle outline".
-  static check_circle_outline = IconData.new(0xe92d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">chevron_left</i> &#x2014; material icon named "chevron left".
-  static chevron_left = IconData.new(0xe5cb, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">chevron_right</i> &#x2014; material icon named "chevron right".
-  static chevron_right = IconData.new(0xe5cc, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">child_care</i> &#x2014; material icon named "child care".
-  static child_care = IconData.new(0xeb41, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">child_friendly</i> &#x2014; material icon named "child friendly".
-  static child_friendly = IconData.new(0xeb42, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">chrome_reader_mode</i> &#x2014; material icon named "chrome reader mode".
-  static chrome_reader_mode = IconData.new(0xe86d, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">class</i> &#x2014; material icon named "class".
-  static class_ = IconData.new(0xe86e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">clear</i> &#x2014; material icon named "clear".
-  static clear = IconData.new(0xe14c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">clear_all</i> &#x2014; material icon named "clear all".
-  static clear_all = IconData.new(0xe0b8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">close</i> &#x2014; material icon named "close".
-  static close = IconData.new(0xe5cd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">closed_caption</i> &#x2014; material icon named "closed caption".
-  static closed_caption = IconData.new(0xe01c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cloud</i> &#x2014; material icon named "cloud".
-  static cloud = IconData.new(0xe2bd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cloud_circle</i> &#x2014; material icon named "cloud circle".
-  static cloud_circle = IconData.new(0xe2be, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cloud_done</i> &#x2014; material icon named "cloud done".
-  static cloud_done = IconData.new(0xe2bf, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cloud_download</i> &#x2014; material icon named "cloud download".
-  static cloud_download = IconData.new(0xe2c0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cloud_off</i> &#x2014; material icon named "cloud off".
-  static cloud_off = IconData.new(0xe2c1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cloud_queue</i> &#x2014; material icon named "cloud queue".
-  static cloud_queue = IconData.new(0xe2c2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">cloud_upload</i> &#x2014; material icon named "cloud upload".
-  static cloud_upload = IconData.new(0xe2c3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">code</i> &#x2014; material icon named "code".
-  static code = IconData.new(0xe86f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">collections</i> &#x2014; material icon named "collections".
-  static collections = IconData.new(0xe3b6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">collections_bookmark</i> &#x2014; material icon named "collections bookmark".
-  static collections_bookmark = IconData.new(0xe431, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">color_lens</i> &#x2014; material icon named "color lens".
-  static color_lens = IconData.new(0xe3b7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">colorize</i> &#x2014; material icon named "colorize".
-  static colorize = IconData.new(0xe3b8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">comment</i> &#x2014; material icon named "comment".
-  static comment = IconData.new(0xe0b9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">compare</i> &#x2014; material icon named "compare".
-  static compare = IconData.new(0xe3b9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">compare_arrows</i> &#x2014; material icon named "compare arrows".
-  static compare_arrows = IconData.new(0xe915, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">computer</i> &#x2014; material icon named "computer".
-  static computer = IconData.new(0xe30a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">confirmation_number</i> &#x2014; material icon named "confirmation number".
-  static confirmation_number = IconData.new(0xe638, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">contact_mail</i> &#x2014; material icon named "contact mail".
-  static contact_mail = IconData.new(0xe0d0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">contact_phone</i> &#x2014; material icon named "contact phone".
-  static contact_phone = IconData.new(0xe0cf, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">contacts</i> &#x2014; material icon named "contacts".
-  static contacts = IconData.new(0xe0ba, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">content_copy</i> &#x2014; material icon named "content copy".
-  static content_copy = IconData.new(0xe14d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">content_cut</i> &#x2014; material icon named "content cut".
-  static content_cut = IconData.new(0xe14e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">content_paste</i> &#x2014; material icon named "content paste".
-  static content_paste = IconData.new(0xe14f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">control_point</i> &#x2014; material icon named "control point".
-  static control_point = IconData.new(0xe3ba, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">control_point_duplicate</i> &#x2014; material icon named "control point duplicate".
-  static control_point_duplicate = IconData.new(0xe3bb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">copyright</i> &#x2014; material icon named "copyright".
-  static copyright = IconData.new(0xe90c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">create</i> &#x2014; material icon named "create".
-  static create = IconData.new(0xe150, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">create_new_folder</i> &#x2014; material icon named "create new folder".
-  static create_new_folder = IconData.new(0xe2cc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">credit_card</i> &#x2014; material icon named "credit card".
-  static credit_card = IconData.new(0xe870, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop</i> &#x2014; material icon named "crop".
-  static crop = IconData.new(0xe3be, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop_16_9</i> &#x2014; material icon named "crop 16 9".
-  static crop_16_9 = IconData.new(0xe3bc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop_3_2</i> &#x2014; material icon named "crop 3 2".
-  static crop_3_2 = IconData.new(0xe3bd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop_5_4</i> &#x2014; material icon named "crop 5 4".
-  static crop_5_4 = IconData.new(0xe3bf, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop_7_5</i> &#x2014; material icon named "crop 7 5".
-  static crop_7_5 = IconData.new(0xe3c0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop_din</i> &#x2014; material icon named "crop din".
-  static crop_din = IconData.new(0xe3c1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop_free</i> &#x2014; material icon named "crop free".
-  static crop_free = IconData.new(0xe3c2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop_landscape</i> &#x2014; material icon named "crop landscape".
-  static crop_landscape = IconData.new(0xe3c3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop_original</i> &#x2014; material icon named "crop original".
-  static crop_original = IconData.new(0xe3c4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop_portrait</i> &#x2014; material icon named "crop portrait".
-  static crop_portrait = IconData.new(0xe3c5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop_rotate</i> &#x2014; material icon named "crop rotate".
-  static crop_rotate = IconData.new(0xe437, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">crop_square</i> &#x2014; material icon named "crop square".
-  static crop_square = IconData.new(0xe3c6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">dashboard</i> &#x2014; material icon named "dashboard".
-  static dashboard = IconData.new(0xe871, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">data_usage</i> &#x2014; material icon named "data usage".
-  static data_usage = IconData.new(0xe1af, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">date_range</i> &#x2014; material icon named "date range".
-  static date_range = IconData.new(0xe916, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">dehaze</i> &#x2014; material icon named "dehaze".
-  static dehaze = IconData.new(0xe3c7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">delete</i> &#x2014; material icon named "delete".
-  static delete = IconData.new(0xe872, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">delete_forever</i> &#x2014; material icon named "delete forever".
-  static delete_forever = IconData.new(0xe92b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">delete_outline</i> &#x2014; material icon named "delete outline".
-  static delete_outline = IconData.new(0xe92e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">delete_sweep</i> &#x2014; material icon named "delete sweep".
-  static delete_sweep = IconData.new(0xe16c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">departure_board</i> &#x2014; material icon named "departure board".
-  static departure_board = IconData.new(0xe576, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">description</i> &#x2014; material icon named "description".
-  static description = IconData.new(0xe873, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">desktop_mac</i> &#x2014; material icon named "desktop mac".
-  static desktop_mac = IconData.new(0xe30b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">desktop_windows</i> &#x2014; material icon named "desktop windows".
-  static desktop_windows = IconData.new(0xe30c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">details</i> &#x2014; material icon named "details".
-  static details = IconData.new(0xe3c8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">developer_board</i> &#x2014; material icon named "developer board".
-  static developer_board = IconData.new(0xe30d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">developer_mode</i> &#x2014; material icon named "developer mode".
-  static developer_mode = IconData.new(0xe1b0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">device_hub</i> &#x2014; material icon named "device hub".
-  static device_hub = IconData.new(0xe335, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">device_unknown</i> &#x2014; material icon named "device unknown".
-  static device_unknown = IconData.new(0xe339, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">devices</i> &#x2014; material icon named "devices".
-  static devices = IconData.new(0xe1b1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">devices_other</i> &#x2014; material icon named "devices other".
-  static devices_other = IconData.new(0xe337, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">dialer_sip</i> &#x2014; material icon named "dialer sip".
-  static dialer_sip = IconData.new(0xe0bb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">dialpad</i> &#x2014; material icon named "dialpad".
-  static dialpad = IconData.new(0xe0bc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">directions</i> &#x2014; material icon named "directions".
-  static directions = IconData.new(0xe52e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">directions_bike</i> &#x2014; material icon named "directions bike".
-  static directions_bike = IconData.new(0xe52f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">directions_boat</i> &#x2014; material icon named "directions boat".
-  static directions_boat = IconData.new(0xe532, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">directions_bus</i> &#x2014; material icon named "directions bus".
-  static directions_bus = IconData.new(0xe530, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">directions_car</i> &#x2014; material icon named "directions car".
-  static directions_car = IconData.new(0xe531, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">directions_railway</i> &#x2014; material icon named "directions railway".
-  static directions_railway = IconData.new(0xe534, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">directions_run</i> &#x2014; material icon named "directions run".
-  static directions_run = IconData.new(0xe566, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">directions_subway</i> &#x2014; material icon named "directions subway".
-  static directions_subway = IconData.new(0xe533, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">directions_transit</i> &#x2014; material icon named "directions transit".
-  static directions_transit = IconData.new(0xe535, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">directions_walk</i> &#x2014; material icon named "directions walk".
-  static directions_walk = IconData.new(0xe536, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">disc_full</i> &#x2014; material icon named "disc full".
-  static disc_full = IconData.new(0xe610, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">dns</i> &#x2014; material icon named "dns".
-  static dns = IconData.new(0xe875, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">do_not_disturb</i> &#x2014; material icon named "do not disturb".
-  static do_not_disturb = IconData.new(0xe612, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">do_not_disturb_alt</i> &#x2014; material icon named "do not disturb alt".
-  static do_not_disturb_alt = IconData.new(0xe611, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">do_not_disturb_off</i> &#x2014; material icon named "do not disturb off".
-  static do_not_disturb_off = IconData.new(0xe643, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">do_not_disturb_on</i> &#x2014; material icon named "do not disturb on".
-  static do_not_disturb_on = IconData.new(0xe644, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">dock</i> &#x2014; material icon named "dock".
-  static dock = IconData.new(0xe30e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">domain</i> &#x2014; material icon named "domain".
-  static domain = IconData.new(0xe7ee, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">done</i> &#x2014; material icon named "done".
-  static done = IconData.new(0xe876, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">done_all</i> &#x2014; material icon named "done all".
-  static done_all = IconData.new(0xe877, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">done_outline</i> &#x2014; material icon named "done outline".
-  static done_outline = IconData.new(0xe92f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">donut_large</i> &#x2014; material icon named "donut large".
-  static donut_large = IconData.new(0xe917, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">donut_small</i> &#x2014; material icon named "donut small".
-  static donut_small = IconData.new(0xe918, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">drafts</i> &#x2014; material icon named "drafts".
-  static drafts = IconData.new(0xe151, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">drag_handle</i> &#x2014; material icon named "drag handle".
-  static drag_handle = IconData.new(0xe25d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">drive_eta</i> &#x2014; material icon named "drive eta".
-  static drive_eta = IconData.new(0xe613, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">dvr</i> &#x2014; material icon named "dvr".
-  static dvr = IconData.new(0xe1b2, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">edit</i> &#x2014; material icon named "edit".
-  static edit = IconData.new(0xe3c9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">edit_attributes</i> &#x2014; material icon named "edit attributes".
-  static edit_attributes = IconData.new(0xe578, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">edit_location</i> &#x2014; material icon named "edit location".
-  static edit_location = IconData.new(0xe568, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">eject</i> &#x2014; material icon named "eject".
-  static eject = IconData.new(0xe8fb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">email</i> &#x2014; material icon named "email".
-  static email = IconData.new(0xe0be, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">enhanced_encryption</i> &#x2014; material icon named "enhanced encryption".
-  static enhanced_encryption = IconData.new(0xe63f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">equalizer</i> &#x2014; material icon named "equalizer".
-  static equalizer = IconData.new(0xe01d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">error</i> &#x2014; material icon named "error".
-  static error = IconData.new(0xe000, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">error_outline</i> &#x2014; material icon named "error outline".
-  static error_outline = IconData.new(0xe001, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">euro_symbol</i> &#x2014; material icon named "euro symbol".
-  static euro_symbol = IconData.new(0xe926, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">ev_station</i> &#x2014; material icon named "ev station".
-  static ev_station = IconData.new(0xe56d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">event</i> &#x2014; material icon named "event".
-  static event = IconData.new(0xe878, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">event_available</i> &#x2014; material icon named "event available".
-  static event_available = IconData.new(0xe614, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">event_busy</i> &#x2014; material icon named "event busy".
-  static event_busy = IconData.new(0xe615, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">event_note</i> &#x2014; material icon named "event note".
-  static event_note = IconData.new(0xe616, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">event_seat</i> &#x2014; material icon named "event seat".
-  static event_seat = IconData.new(0xe903, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">exit_to_app</i> &#x2014; material icon named "exit to app".
-  static exit_to_app = IconData.new(0xe879, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">expand_less</i> &#x2014; material icon named "expand less".
-  static expand_less = IconData.new(0xe5ce, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">expand_more</i> &#x2014; material icon named "expand more".
-  static expand_more = IconData.new(0xe5cf, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">explicit</i> &#x2014; material icon named "explicit".
-  static explicit = IconData.new(0xe01e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">explore</i> &#x2014; material icon named "explore".
-  static explore = IconData.new(0xe87a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">exposure</i> &#x2014; material icon named "exposure".
-  static exposure = IconData.new(0xe3ca, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">exposure_neg_1</i> &#x2014; material icon named "exposure neg 1".
-  static exposure_neg_1 = IconData.new(0xe3cb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">exposure_neg_2</i> &#x2014; material icon named "exposure neg 2".
-  static exposure_neg_2 = IconData.new(0xe3cc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">exposure_plus_1</i> &#x2014; material icon named "exposure plus 1".
-  static exposure_plus_1 = IconData.new(0xe3cd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">exposure_plus_2</i> &#x2014; material icon named "exposure plus 2".
-  static exposure_plus_2 = IconData.new(0xe3ce, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">exposure_zero</i> &#x2014; material icon named "exposure zero".
-  static exposure_zero = IconData.new(0xe3cf, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">extension</i> &#x2014; material icon named "extension".
-  static extension = IconData.new(0xe87b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">face</i> &#x2014; material icon named "face".
-  static face = IconData.new(0xe87c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">fast_forward</i> &#x2014; material icon named "fast forward".
-  static fast_forward = IconData.new(0xe01f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">fast_rewind</i> &#x2014; material icon named "fast rewind".
-  static fast_rewind = IconData.new(0xe020, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">fastfood</i> &#x2014; material icon named "fastfood".
-  static fastfood = IconData.new(0xe57a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">favorite</i> &#x2014; material icon named "favorite".
-  static favorite = IconData.new(0xe87d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">favorite_border</i> &#x2014; material icon named "favorite border".
-  static favorite_border = IconData.new(0xe87e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">featured_play_list</i> &#x2014; material icon named "featured play list".
-  static featured_play_list = IconData.new(0xe06d, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">featured_video</i> &#x2014; material icon named "featured video".
-  static featured_video = IconData.new(0xe06e, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">feedback</i> &#x2014; material icon named "feedback".
-  static feedback = IconData.new(0xe87f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">fiber_dvr</i> &#x2014; material icon named "fiber dvr".
-  static fiber_dvr = IconData.new(0xe05d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">fiber_manual_record</i> &#x2014; material icon named "fiber manual record".
-  static fiber_manual_record = IconData.new(0xe061, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">fiber_new</i> &#x2014; material icon named "fiber new".
-  static fiber_new = IconData.new(0xe05e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">fiber_pin</i> &#x2014; material icon named "fiber pin".
-  static fiber_pin = IconData.new(0xe06a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">fiber_smart_record</i> &#x2014; material icon named "fiber smart record".
-  static fiber_smart_record = IconData.new(0xe062, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">file_download</i> &#x2014; material icon named "file download".
-  static file_download = IconData.new(0xe2c4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">file_upload</i> &#x2014; material icon named "file upload".
-  static file_upload = IconData.new(0xe2c6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter</i> &#x2014; material icon named "filter".
-  static filter = IconData.new(0xe3d3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_1</i> &#x2014; material icon named "filter 1".
-  static filter_1 = IconData.new(0xe3d0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_2</i> &#x2014; material icon named "filter 2".
-  static filter_2 = IconData.new(0xe3d1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_3</i> &#x2014; material icon named "filter 3".
-  static filter_3 = IconData.new(0xe3d2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_4</i> &#x2014; material icon named "filter 4".
-  static filter_4 = IconData.new(0xe3d4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_5</i> &#x2014; material icon named "filter 5".
-  static filter_5 = IconData.new(0xe3d5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_6</i> &#x2014; material icon named "filter 6".
-  static filter_6 = IconData.new(0xe3d6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_7</i> &#x2014; material icon named "filter 7".
-  static filter_7 = IconData.new(0xe3d7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_8</i> &#x2014; material icon named "filter 8".
-  static filter_8 = IconData.new(0xe3d8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_9</i> &#x2014; material icon named "filter 9".
-  static filter_9 = IconData.new(0xe3d9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_9_plus</i> &#x2014; material icon named "filter 9 plus".
-  static filter_9_plus = IconData.new(0xe3da, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_b_and_w</i> &#x2014; material icon named "filter b and w".
-  static filter_b_and_w = IconData.new(0xe3db, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_center_focus</i> &#x2014; material icon named "filter center focus".
-  static filter_center_focus = IconData.new(0xe3dc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_drama</i> &#x2014; material icon named "filter drama".
-  static filter_drama = IconData.new(0xe3dd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_frames</i> &#x2014; material icon named "filter frames".
-  static filter_frames = IconData.new(0xe3de, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_hdr</i> &#x2014; material icon named "filter hdr".
-  static filter_hdr = IconData.new(0xe3df, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_list</i> &#x2014; material icon named "filter list".
-  static filter_list = IconData.new(0xe152, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_none</i> &#x2014; material icon named "filter none".
-  static filter_none = IconData.new(0xe3e0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_tilt_shift</i> &#x2014; material icon named "filter tilt shift".
-  static filter_tilt_shift = IconData.new(0xe3e2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">filter_vintage</i> &#x2014; material icon named "filter vintage".
-  static filter_vintage = IconData.new(0xe3e3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">find_in_page</i> &#x2014; material icon named "find in page".
-  static find_in_page = IconData.new(0xe880, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">find_replace</i> &#x2014; material icon named "find replace".
-  static find_replace = IconData.new(0xe881, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">fingerprint</i> &#x2014; material icon named "fingerprint".
-  static fingerprint = IconData.new(0xe90d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">first_page</i> &#x2014; material icon named "first page".
-  static first_page = IconData.new(0xe5dc, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">fitness_center</i> &#x2014; material icon named "fitness center".
-  static fitness_center = IconData.new(0xeb43, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">flag</i> &#x2014; material icon named "flag".
-  static flag = IconData.new(0xe153, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">flare</i> &#x2014; material icon named "flare".
-  static flare = IconData.new(0xe3e4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">flash_auto</i> &#x2014; material icon named "flash auto".
-  static flash_auto = IconData.new(0xe3e5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">flash_off</i> &#x2014; material icon named "flash off".
-  static flash_off = IconData.new(0xe3e6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">flash_on</i> &#x2014; material icon named "flash on".
-  static flash_on = IconData.new(0xe3e7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">flight</i> &#x2014; material icon named "flight".
-  static flight = IconData.new(0xe539, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">flight_land</i> &#x2014; material icon named "flight land".
-  static flight_land = IconData.new(0xe904, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">flight_takeoff</i> &#x2014; material icon named "flight takeoff".
-  static flight_takeoff = IconData.new(0xe905, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">flip</i> &#x2014; material icon named "flip".
-  static flip = IconData.new(0xe3e8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">flip_to_back</i> &#x2014; material icon named "flip to back".
-  static flip_to_back = IconData.new(0xe882, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">flip_to_front</i> &#x2014; material icon named "flip to front".
-  static flip_to_front = IconData.new(0xe883, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">folder</i> &#x2014; material icon named "folder".
-  static folder = IconData.new(0xe2c7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">folder_open</i> &#x2014; material icon named "folder open".
-  static folder_open = IconData.new(0xe2c8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">folder_shared</i> &#x2014; material icon named "folder shared".
-  static folder_shared = IconData.new(0xe2c9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">folder_special</i> &#x2014; material icon named "folder special".
-  static folder_special = IconData.new(0xe617, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">font_download</i> &#x2014; material icon named "font download".
-  static font_download = IconData.new(0xe167, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_align_center</i> &#x2014; material icon named "format align center".
-  static format_align_center = IconData.new(0xe234, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_align_justify</i> &#x2014; material icon named "format align justify".
-  static format_align_justify = IconData.new(0xe235, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_align_left</i> &#x2014; material icon named "format align left".
-  static format_align_left = IconData.new(0xe236, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_align_right</i> &#x2014; material icon named "format align right".
-  static format_align_right = IconData.new(0xe237, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_bold</i> &#x2014; material icon named "format bold".
-  static format_bold = IconData.new(0xe238, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_clear</i> &#x2014; material icon named "format clear".
-  static format_clear = IconData.new(0xe239, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_color_fill</i> &#x2014; material icon named "format color fill".
-  static format_color_fill = IconData.new(0xe23a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_color_reset</i> &#x2014; material icon named "format color reset".
-  static format_color_reset = IconData.new(0xe23b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_color_text</i> &#x2014; material icon named "format color text".
-  static format_color_text = IconData.new(0xe23c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_indent_decrease</i> &#x2014; material icon named "format indent decrease".
-  static format_indent_decrease = IconData.new(0xe23d, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">format_indent_increase</i> &#x2014; material icon named "format indent increase".
-  static format_indent_increase = IconData.new(0xe23e, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">format_italic</i> &#x2014; material icon named "format italic".
-  static format_italic = IconData.new(0xe23f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_line_spacing</i> &#x2014; material icon named "format line spacing".
-  static format_line_spacing = IconData.new(0xe240, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_list_bulleted</i> &#x2014; material icon named "format list bulleted".
-  static format_list_bulleted = IconData.new(0xe241, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">format_list_numbered</i> &#x2014; material icon named "format list numbered".
-  static format_list_numbered = IconData.new(0xe242, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_list_numbered_rtl</i> &#x2014; material icon named "format list numbered rtl".
-  static format_list_numbered_rtl = IconData.new(0xe267, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_paint</i> &#x2014; material icon named "format paint".
-  static format_paint = IconData.new(0xe243, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_quote</i> &#x2014; material icon named "format quote".
-  static format_quote = IconData.new(0xe244, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_shapes</i> &#x2014; material icon named "format shapes".
-  static format_shapes = IconData.new(0xe25e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_size</i> &#x2014; material icon named "format size".
-  static format_size = IconData.new(0xe245, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_strikethrough</i> &#x2014; material icon named "format strikethrough".
-  static format_strikethrough = IconData.new(0xe246, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_textdirection_l_to_r</i> &#x2014; material icon named "format textdirection l to r".
-  static format_textdirection_l_to_r = IconData.new(0xe247, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_textdirection_r_to_l</i> &#x2014; material icon named "format textdirection r to l".
-  static format_textdirection_r_to_l = IconData.new(0xe248, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">format_underlined</i> &#x2014; material icon named "format underlined".
-  static format_underlined = IconData.new(0xe249, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">forum</i> &#x2014; material icon named "forum".
-  static forum = IconData.new(0xe0bf, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">forward</i> &#x2014; material icon named "forward".
-  static forward = IconData.new(0xe154, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">forward_10</i> &#x2014; material icon named "forward 10".
-  static forward_10 = IconData.new(0xe056, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">forward_30</i> &#x2014; material icon named "forward 30".
-  static forward_30 = IconData.new(0xe057, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">forward_5</i> &#x2014; material icon named "forward 5".
-  static forward_5 = IconData.new(0xe058, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">free_breakfast</i> &#x2014; material icon named "free breakfast".
-  static free_breakfast = IconData.new(0xeb44, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">fullscreen</i> &#x2014; material icon named "fullscreen".
-  static fullscreen = IconData.new(0xe5d0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">fullscreen_exit</i> &#x2014; material icon named "fullscreen exit".
-  static fullscreen_exit = IconData.new(0xe5d1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">functions</i> &#x2014; material icon named "functions".
-  static functions = IconData.new(0xe24a, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">g_translate</i> &#x2014; material icon named "g translate".
-  static g_translate = IconData.new(0xe927, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">gamepad</i> &#x2014; material icon named "gamepad".
-  static gamepad = IconData.new(0xe30f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">games</i> &#x2014; material icon named "games".
-  static games = IconData.new(0xe021, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">gavel</i> &#x2014; material icon named "gavel".
-  static gavel = IconData.new(0xe90e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">gesture</i> &#x2014; material icon named "gesture".
-  static gesture = IconData.new(0xe155, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">get_app</i> &#x2014; material icon named "get app".
-  static get_app = IconData.new(0xe884, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">gif</i> &#x2014; material icon named "gif".
-  static gif = IconData.new(0xe908, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">golf_course</i> &#x2014; material icon named "golf course".
-  static golf_course = IconData.new(0xeb45, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">gps_fixed</i> &#x2014; material icon named "gps fixed".
-  static gps_fixed = IconData.new(0xe1b3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">gps_not_fixed</i> &#x2014; material icon named "gps not fixed".
-  static gps_not_fixed = IconData.new(0xe1b4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">gps_off</i> &#x2014; material icon named "gps off".
-  static gps_off = IconData.new(0xe1b5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">grade</i> &#x2014; material icon named "grade".
-  static grade = IconData.new(0xe885, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">gradient</i> &#x2014; material icon named "gradient".
-  static gradient = IconData.new(0xe3e9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">grain</i> &#x2014; material icon named "grain".
-  static grain = IconData.new(0xe3ea, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">graphic_eq</i> &#x2014; material icon named "graphic eq".
-  static graphic_eq = IconData.new(0xe1b8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">grid_off</i> &#x2014; material icon named "grid off".
-  static grid_off = IconData.new(0xe3eb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">grid_on</i> &#x2014; material icon named "grid on".
-  static grid_on = IconData.new(0xe3ec, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">group</i> &#x2014; material icon named "group".
-  static group = IconData.new(0xe7ef, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">group_add</i> &#x2014; material icon named "group add".
-  static group_add = IconData.new(0xe7f0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">group_work</i> &#x2014; material icon named "group work".
-  static group_work = IconData.new(0xe886, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">hd</i> &#x2014; material icon named "hd".
-  static hd = IconData.new(0xe052, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">hdr_off</i> &#x2014; material icon named "hdr off".
-  static hdr_off = IconData.new(0xe3ed, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">hdr_on</i> &#x2014; material icon named "hdr on".
-  static hdr_on = IconData.new(0xe3ee, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">hdr_strong</i> &#x2014; material icon named "hdr strong".
-  static hdr_strong = IconData.new(0xe3f1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">hdr_weak</i> &#x2014; material icon named "hdr weak".
-  static hdr_weak = IconData.new(0xe3f2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">headset</i> &#x2014; material icon named "headset".
-  static headset = IconData.new(0xe310, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">headset_mic</i> &#x2014; material icon named "headset mic".
-  static headset_mic = IconData.new(0xe311, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">headset_off</i> &#x2014; material icon named "headset off".
-  static headset_off = IconData.new(0xe33a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">healing</i> &#x2014; material icon named "healing".
-  static healing = IconData.new(0xe3f3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">hearing</i> &#x2014; material icon named "hearing".
-  static hearing = IconData.new(0xe023, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">help</i> &#x2014; material icon named "help".
-  static help = IconData.new(0xe887, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">help_outline</i> &#x2014; material icon named "help outline".
-  static help_outline = IconData.new(0xe8fd, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">high_quality</i> &#x2014; material icon named "high quality".
-  static high_quality = IconData.new(0xe024, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">highlight</i> &#x2014; material icon named "highlight".
-  static highlight = IconData.new(0xe25f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">highlight_off</i> &#x2014; material icon named "highlight off".
-  static highlight_off = IconData.new(0xe888, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">history</i> &#x2014; material icon named "history".
-  static history = IconData.new(0xe889, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">home</i> &#x2014; material icon named "home".
-  static home = IconData.new(0xe88a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">hot_tub</i> &#x2014; material icon named "hot tub".
-  static hot_tub = IconData.new(0xeb46, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">hotel</i> &#x2014; material icon named "hotel".
-  static hotel = IconData.new(0xe53a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">hourglass_empty</i> &#x2014; material icon named "hourglass empty".
-  static hourglass_empty = IconData.new(0xe88b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">hourglass_full</i> &#x2014; material icon named "hourglass full".
-  static hourglass_full = IconData.new(0xe88c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">http</i> &#x2014; material icon named "http".
-  static http = IconData.new(0xe902, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">https</i> &#x2014; material icon named "https".
-  static https = IconData.new(0xe88d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">image</i> &#x2014; material icon named "image".
-  static image = IconData.new(0xe3f4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">image_aspect_ratio</i> &#x2014; material icon named "image aspect ratio".
-  static image_aspect_ratio = IconData.new(0xe3f5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">import_contacts</i> &#x2014; material icon named "import contacts".
-  static import_contacts = IconData.new(0xe0e0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">import_export</i> &#x2014; material icon named "import export".
-  static import_export = IconData.new(0xe0c3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">important_devices</i> &#x2014; material icon named "important devices".
-  static important_devices = IconData.new(0xe912, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">inbox</i> &#x2014; material icon named "inbox".
-  static inbox = IconData.new(0xe156, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">indeterminate_check_box</i> &#x2014; material icon named "indeterminate check box".
-  static indeterminate_check_box = IconData.new(0xe909, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">info</i> &#x2014; material icon named "info".
-  static info = IconData.new(0xe88e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">info_outline</i> &#x2014; material icon named "info outline".
-  static info_outline = IconData.new(0xe88f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">input</i> &#x2014; material icon named "input".
-  static input = IconData.new(0xe890, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">insert_chart</i> &#x2014; material icon named "insert chart".
-  static insert_chart = IconData.new(0xe24b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">insert_comment</i> &#x2014; material icon named "insert comment".
-  static insert_comment = IconData.new(0xe24c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">insert_drive_file</i> &#x2014; material icon named "insert drive file".
-  static insert_drive_file = IconData.new(0xe24d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">insert_emoticon</i> &#x2014; material icon named "insert emoticon".
-  static insert_emoticon = IconData.new(0xe24e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">insert_invitation</i> &#x2014; material icon named "insert invitation".
-  static insert_invitation = IconData.new(0xe24f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">insert_link</i> &#x2014; material icon named "insert link".
-  static insert_link = IconData.new(0xe250, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">insert_photo</i> &#x2014; material icon named "insert photo".
-  static insert_photo = IconData.new(0xe251, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">invert_colors</i> &#x2014; material icon named "invert colors".
-  static invert_colors = IconData.new(0xe891, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">invert_colors_off</i> &#x2014; material icon named "invert colors off".
-  static invert_colors_off = IconData.new(0xe0c4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">iso</i> &#x2014; material icon named "iso".
-  static iso = IconData.new(0xe3f6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">keyboard</i> &#x2014; material icon named "keyboard".
-  static keyboard = IconData.new(0xe312, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">keyboard_arrow_down</i> &#x2014; material icon named "keyboard arrow down".
-  static keyboard_arrow_down = IconData.new(0xe313, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">keyboard_arrow_left</i> &#x2014; material icon named "keyboard arrow left".
-  static keyboard_arrow_left = IconData.new(0xe314, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">keyboard_arrow_right</i> &#x2014; material icon named "keyboard arrow right".
-  static keyboard_arrow_right = IconData.new(0xe315, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">keyboard_arrow_up</i> &#x2014; material icon named "keyboard arrow up".
-  static keyboard_arrow_up = IconData.new(0xe316, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">keyboard_backspace</i> &#x2014; material icon named "keyboard backspace".
-  static keyboard_backspace = IconData.new(0xe317, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">keyboard_capslock</i> &#x2014; material icon named "keyboard capslock".
-  static keyboard_capslock = IconData.new(0xe318, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">keyboard_hide</i> &#x2014; material icon named "keyboard hide".
-  static keyboard_hide = IconData.new(0xe31a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">keyboard_return</i> &#x2014; material icon named "keyboard return".
-  static keyboard_return = IconData.new(0xe31b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">keyboard_tab</i> &#x2014; material icon named "keyboard tab".
-  static keyboard_tab = IconData.new(0xe31c, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">keyboard_voice</i> &#x2014; material icon named "keyboard voice".
-  static keyboard_voice = IconData.new(0xe31d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">kitchen</i> &#x2014; material icon named "kitchen".
-  static kitchen = IconData.new(0xeb47, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">label</i> &#x2014; material icon named "label".
-  static label = IconData.new(0xe892, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">label_important</i> &#x2014; material icon named "label important".
-  static label_important = IconData.new(0xe937, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">label_outline</i> &#x2014; material icon named "label outline".
-  static label_outline = IconData.new(0xe893, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">landscape</i> &#x2014; material icon named "landscape".
-  static landscape = IconData.new(0xe3f7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">language</i> &#x2014; material icon named "language".
-  static language = IconData.new(0xe894, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">laptop</i> &#x2014; material icon named "laptop".
-  static laptop = IconData.new(0xe31e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">laptop_chromebook</i> &#x2014; material icon named "laptop chromebook".
-  static laptop_chromebook = IconData.new(0xe31f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">laptop_mac</i> &#x2014; material icon named "laptop mac".
-  static laptop_mac = IconData.new(0xe320, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">laptop_windows</i> &#x2014; material icon named "laptop windows".
-  static laptop_windows = IconData.new(0xe321, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">last_page</i> &#x2014; material icon named "last page".
-  static last_page = IconData.new(0xe5dd, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">launch</i> &#x2014; material icon named "launch".
-  static launch = IconData.new(0xe895, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">layers</i> &#x2014; material icon named "layers".
-  static layers = IconData.new(0xe53b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">layers_clear</i> &#x2014; material icon named "layers clear".
-  static layers_clear = IconData.new(0xe53c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">leak_add</i> &#x2014; material icon named "leak add".
-  static leak_add = IconData.new(0xe3f8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">leak_remove</i> &#x2014; material icon named "leak remove".
-  static leak_remove = IconData.new(0xe3f9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">lens</i> &#x2014; material icon named "lens".
-  static lens = IconData.new(0xe3fa, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">library_add</i> &#x2014; material icon named "library add".
-  static library_add = IconData.new(0xe02e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">library_books</i> &#x2014; material icon named "library books".
-  static library_books = IconData.new(0xe02f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">library_music</i> &#x2014; material icon named "library music".
-  static library_music = IconData.new(0xe030, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">lightbulb_outline</i> &#x2014; material icon named "lightbulb outline".
-  static lightbulb_outline = IconData.new(0xe90f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">line_style</i> &#x2014; material icon named "line style".
-  static line_style = IconData.new(0xe919, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">line_weight</i> &#x2014; material icon named "line weight".
-  static line_weight = IconData.new(0xe91a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">linear_scale</i> &#x2014; material icon named "linear scale".
-  static linear_scale = IconData.new(0xe260, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">link</i> &#x2014; material icon named "link".
-  static link = IconData.new(0xe157, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">link_off</i> &#x2014; material icon named "link off".
-  static link_off = IconData.new(0xe16f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">linked_camera</i> &#x2014; material icon named "linked camera".
-  static linked_camera = IconData.new(0xe438, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">list</i> &#x2014; material icon named "list".
-  static list = IconData.new(0xe896, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">live_help</i> &#x2014; material icon named "live help".
-  static live_help = IconData.new(0xe0c6, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">live_tv</i> &#x2014; material icon named "live tv".
-  static live_tv = IconData.new(0xe639, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_activity</i> &#x2014; material icon named "local activity".
-  static local_activity = IconData.new(0xe53f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_airport</i> &#x2014; material icon named "local airport".
-  static local_airport = IconData.new(0xe53d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_atm</i> &#x2014; material icon named "local atm".
-  static local_atm = IconData.new(0xe53e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_bar</i> &#x2014; material icon named "local bar".
-  static local_bar = IconData.new(0xe540, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_cafe</i> &#x2014; material icon named "local cafe".
-  static local_cafe = IconData.new(0xe541, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_car_wash</i> &#x2014; material icon named "local car wash".
-  static local_car_wash = IconData.new(0xe542, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_convenience_store</i> &#x2014; material icon named "local convenience store".
-  static local_convenience_store = IconData.new(0xe543, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_dining</i> &#x2014; material icon named "local dining".
-  static local_dining = IconData.new(0xe556, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_drink</i> &#x2014; material icon named "local drink".
-  static local_drink = IconData.new(0xe544, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_florist</i> &#x2014; material icon named "local florist".
-  static local_florist = IconData.new(0xe545, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_gas_station</i> &#x2014; material icon named "local gas station".
-  static local_gas_station = IconData.new(0xe546, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_grocery_store</i> &#x2014; material icon named "local grocery store".
-  static local_grocery_store = IconData.new(0xe547, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_hospital</i> &#x2014; material icon named "local hospital".
-  static local_hospital = IconData.new(0xe548, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_hotel</i> &#x2014; material icon named "local hotel".
-  static local_hotel = IconData.new(0xe549, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_laundry_service</i> &#x2014; material icon named "local laundry service".
-  static local_laundry_service = IconData.new(0xe54a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_library</i> &#x2014; material icon named "local library".
-  static local_library = IconData.new(0xe54b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_mall</i> &#x2014; material icon named "local mall".
-  static local_mall = IconData.new(0xe54c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_movies</i> &#x2014; material icon named "local movies".
-  static local_movies = IconData.new(0xe54d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_offer</i> &#x2014; material icon named "local offer".
-  static local_offer = IconData.new(0xe54e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_parking</i> &#x2014; material icon named "local parking".
-  static local_parking = IconData.new(0xe54f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_pharmacy</i> &#x2014; material icon named "local pharmacy".
-  static local_pharmacy = IconData.new(0xe550, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_phone</i> &#x2014; material icon named "local phone".
-  static local_phone = IconData.new(0xe551, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_pizza</i> &#x2014; material icon named "local pizza".
-  static local_pizza = IconData.new(0xe552, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_play</i> &#x2014; material icon named "local play".
-  static local_play = IconData.new(0xe553, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_post_office</i> &#x2014; material icon named "local post office".
-  static local_post_office = IconData.new(0xe554, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_printshop</i> &#x2014; material icon named "local printshop".
-  static local_printshop = IconData.new(0xe555, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_see</i> &#x2014; material icon named "local see".
-  static local_see = IconData.new(0xe557, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_shipping</i> &#x2014; material icon named "local shipping".
-  static local_shipping = IconData.new(0xe558, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">local_taxi</i> &#x2014; material icon named "local taxi".
-  static local_taxi = IconData.new(0xe559, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">location_city</i> &#x2014; material icon named "location city".
-  static location_city = IconData.new(0xe7f1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">location_disabled</i> &#x2014; material icon named "location disabled".
-  static location_disabled = IconData.new(0xe1b6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">location_off</i> &#x2014; material icon named "location off".
-  static location_off = IconData.new(0xe0c7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">location_on</i> &#x2014; material icon named "location on".
-  static location_on = IconData.new(0xe0c8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">location_searching</i> &#x2014; material icon named "location searching".
-  static location_searching = IconData.new(0xe1b7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">lock</i> &#x2014; material icon named "lock".
-  static lock = IconData.new(0xe897, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">lock_open</i> &#x2014; material icon named "lock open".
-  static lock_open = IconData.new(0xe898, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">lock_outline</i> &#x2014; material icon named "lock outline".
-  static lock_outline = IconData.new(0xe899, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">looks</i> &#x2014; material icon named "looks".
-  static looks = IconData.new(0xe3fc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">looks_3</i> &#x2014; material icon named "looks 3".
-  static looks_3 = IconData.new(0xe3fb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">looks_4</i> &#x2014; material icon named "looks 4".
-  static looks_4 = IconData.new(0xe3fd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">looks_5</i> &#x2014; material icon named "looks 5".
-  static looks_5 = IconData.new(0xe3fe, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">looks_6</i> &#x2014; material icon named "looks 6".
-  static looks_6 = IconData.new(0xe3ff, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">looks_one</i> &#x2014; material icon named "looks one".
-  static looks_one = IconData.new(0xe400, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">looks_two</i> &#x2014; material icon named "looks two".
-  static looks_two = IconData.new(0xe401, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">loop</i> &#x2014; material icon named "loop".
-  static loop = IconData.new(0xe028, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">loupe</i> &#x2014; material icon named "loupe".
-  static loupe = IconData.new(0xe402, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">low_priority</i> &#x2014; material icon named "low priority".
-  static low_priority = IconData.new(0xe16d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">loyalty</i> &#x2014; material icon named "loyalty".
-  static loyalty = IconData.new(0xe89a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">mail</i> &#x2014; material icon named "mail".
-  static mail = IconData.new(0xe158, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">mail_outline</i> &#x2014; material icon named "mail outline".
-  static mail_outline = IconData.new(0xe0e1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">map</i> &#x2014; material icon named "map".
-  static map = IconData.new(0xe55b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">markunread</i> &#x2014; material icon named "markunread".
-  static markunread = IconData.new(0xe159, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">markunread_mailbox</i> &#x2014; material icon named "markunread mailbox".
-  static markunread_mailbox = IconData.new(0xe89b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">maximize</i> &#x2014; material icon named "maximize".
-  static maximize = IconData.new(0xe930, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">memory</i> &#x2014; material icon named "memory".
-  static memory = IconData.new(0xe322, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">menu</i> &#x2014; material icon named "menu".
-  static menu = IconData.new(0xe5d2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">merge_type</i> &#x2014; material icon named "merge type".
-  static merge_type = IconData.new(0xe252, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">message</i> &#x2014; material icon named "message".
-  static message = IconData.new(0xe0c9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">mic</i> &#x2014; material icon named "mic".
-  static mic = IconData.new(0xe029, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">mic_none</i> &#x2014; material icon named "mic none".
-  static mic_none = IconData.new(0xe02a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">mic_off</i> &#x2014; material icon named "mic off".
-  static mic_off = IconData.new(0xe02b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">minimize</i> &#x2014; material icon named "minimize".
-  static minimize = IconData.new(0xe931, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">missed_video_call</i> &#x2014; material icon named "missed video call".
-  static missed_video_call = IconData.new(0xe073, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">mms</i> &#x2014; material icon named "mms".
-  static mms = IconData.new(0xe618, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">mobile_screen_share</i> &#x2014; material icon named "mobile screen share".
-  static mobile_screen_share = IconData.new(0xe0e7, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">mode_comment</i> &#x2014; material icon named "mode comment".
-  static mode_comment = IconData.new(0xe253, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">mode_edit</i> &#x2014; material icon named "mode edit".
-  static mode_edit = IconData.new(0xe254, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">monetization_on</i> &#x2014; material icon named "monetization on".
-  static monetization_on = IconData.new(0xe263, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">money_off</i> &#x2014; material icon named "money off".
-  static money_off = IconData.new(0xe25c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">monochrome_photos</i> &#x2014; material icon named "monochrome photos".
-  static monochrome_photos = IconData.new(0xe403, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">mood</i> &#x2014; material icon named "mood".
-  static mood = IconData.new(0xe7f2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">mood_bad</i> &#x2014; material icon named "mood bad".
-  static mood_bad = IconData.new(0xe7f3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">more</i> &#x2014; material icon named "more".
-  static more = IconData.new(0xe619, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">more_horiz</i> &#x2014; material icon named "more horiz".
-  static more_horiz = IconData.new(0xe5d3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">more_vert</i> &#x2014; material icon named "more vert".
-  static more_vert = IconData.new(0xe5d4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">motorcycle</i> &#x2014; material icon named "motorcycle".
-  static motorcycle = IconData.new(0xe91b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">mouse</i> &#x2014; material icon named "mouse".
-  static mouse = IconData.new(0xe323, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">move_to_inbox</i> &#x2014; material icon named "move to inbox".
-  static move_to_inbox = IconData.new(0xe168, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">movie</i> &#x2014; material icon named "movie".
-  static movie = IconData.new(0xe02c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">movie_creation</i> &#x2014; material icon named "movie creation".
-  static movie_creation = IconData.new(0xe404, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">movie_filter</i> &#x2014; material icon named "movie filter".
-  static movie_filter = IconData.new(0xe43a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">multiline_chart</i> &#x2014; material icon named "multiline chart".
-  static multiline_chart = IconData.new(0xe6df, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">music_note</i> &#x2014; material icon named "music note".
-  static music_note = IconData.new(0xe405, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">music_video</i> &#x2014; material icon named "music video".
-  static music_video = IconData.new(0xe063, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">my_location</i> &#x2014; material icon named "my location".
-  static my_location = IconData.new(0xe55c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">nature</i> &#x2014; material icon named "nature".
-  static nature = IconData.new(0xe406, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">nature_people</i> &#x2014; material icon named "nature people".
-  static nature_people = IconData.new(0xe407, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">navigate_before</i> &#x2014; material icon named "navigate before".
-  static navigate_before = IconData.new(0xe408, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">navigate_next</i> &#x2014; material icon named "navigate next".
-  static navigate_next = IconData.new(0xe409, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">navigation</i> &#x2014; material icon named "navigation".
-  static navigation = IconData.new(0xe55d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">near_me</i> &#x2014; material icon named "near me".
-  static near_me = IconData.new(0xe569, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">network_cell</i> &#x2014; material icon named "network cell".
-  static network_cell = IconData.new(0xe1b9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">network_check</i> &#x2014; material icon named "network check".
-  static network_check = IconData.new(0xe640, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">network_locked</i> &#x2014; material icon named "network locked".
-  static network_locked = IconData.new(0xe61a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">network_wifi</i> &#x2014; material icon named "network wifi".
-  static network_wifi = IconData.new(0xe1ba, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">new_releases</i> &#x2014; material icon named "new releases".
-  static new_releases = IconData.new(0xe031, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">next_week</i> &#x2014; material icon named "next week".
-  static next_week = IconData.new(0xe16a, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">nfc</i> &#x2014; material icon named "nfc".
-  static nfc = IconData.new(0xe1bb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">no_encryption</i> &#x2014; material icon named "no encryption".
-  static no_encryption = IconData.new(0xe641, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">no_sim</i> &#x2014; material icon named "no sim".
-  static no_sim = IconData.new(0xe0cc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">not_interested</i> &#x2014; material icon named "not interested".
-  static not_interested = IconData.new(0xe033, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">not_listed_location</i> &#x2014; material icon named "not listed location".
-  static not_listed_location = IconData.new(0xe575, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">note</i> &#x2014; material icon named "note".
-  static note = IconData.new(0xe06f, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">note_add</i> &#x2014; material icon named "note add".
-  static note_add = IconData.new(0xe89c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">notification_important</i> &#x2014; material icon named "notification important".
-  static notification_important = IconData.new(0xe004, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">notifications</i> &#x2014; material icon named "notifications".
-  static notifications = IconData.new(0xe7f4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">notifications_active</i> &#x2014; material icon named "notifications active".
-  static notifications_active = IconData.new(0xe7f7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">notifications_none</i> &#x2014; material icon named "notifications none".
-  static notifications_none = IconData.new(0xe7f5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">notifications_off</i> &#x2014; material icon named "notifications off".
-  static notifications_off = IconData.new(0xe7f6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">notifications_paused</i> &#x2014; material icon named "notifications paused".
-  static notifications_paused = IconData.new(0xe7f8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">offline_bolt</i> &#x2014; material icon named "offline bolt".
-  static offline_bolt = IconData.new(0xe932, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">offline_pin</i> &#x2014; material icon named "offline pin".
-  static offline_pin = IconData.new(0xe90a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">ondemand_video</i> &#x2014; material icon named "ondemand video".
-  static ondemand_video = IconData.new(0xe63a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">opacity</i> &#x2014; material icon named "opacity".
-  static opacity = IconData.new(0xe91c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">open_in_browser</i> &#x2014; material icon named "open in browser".
-  static open_in_browser = IconData.new(0xe89d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">open_in_new</i> &#x2014; material icon named "open in new".
-  static open_in_new = IconData.new(0xe89e, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">open_with</i> &#x2014; material icon named "open with".
-  static open_with = IconData.new(0xe89f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">outlined_flag</i> &#x2014; material icon named "outlined flag".
-  static outlined_flag = IconData.new(0xe16e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pages</i> &#x2014; material icon named "pages".
-  static pages = IconData.new(0xe7f9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pageview</i> &#x2014; material icon named "pageview".
-  static pageview = IconData.new(0xe8a0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">palette</i> &#x2014; material icon named "palette".
-  static palette = IconData.new(0xe40a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pan_tool</i> &#x2014; material icon named "pan tool".
-  static pan_tool = IconData.new(0xe925, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">panorama</i> &#x2014; material icon named "panorama".
-  static panorama = IconData.new(0xe40b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">panorama_fish_eye</i> &#x2014; material icon named "panorama fish eye".
-  static panorama_fish_eye = IconData.new(0xe40c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">panorama_horizontal</i> &#x2014; material icon named "panorama horizontal".
-  static panorama_horizontal = IconData.new(0xe40d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">panorama_vertical</i> &#x2014; material icon named "panorama vertical".
-  static panorama_vertical = IconData.new(0xe40e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">panorama_wide_angle</i> &#x2014; material icon named "panorama wide angle".
-  static panorama_wide_angle = IconData.new(0xe40f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">party_mode</i> &#x2014; material icon named "party mode".
-  static party_mode = IconData.new(0xe7fa, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pause</i> &#x2014; material icon named "pause".
-  static pause = IconData.new(0xe034, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pause_circle_filled</i> &#x2014; material icon named "pause circle filled".
-  static pause_circle_filled = IconData.new(0xe035, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pause_circle_outline</i> &#x2014; material icon named "pause circle outline".
-  static pause_circle_outline = IconData.new(0xe036, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">payment</i> &#x2014; material icon named "payment".
-  static payment = IconData.new(0xe8a1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">people</i> &#x2014; material icon named "people".
-  static people = IconData.new(0xe7fb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">people_outline</i> &#x2014; material icon named "people outline".
-  static people_outline = IconData.new(0xe7fc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">perm_camera_mic</i> &#x2014; material icon named "perm camera mic".
-  static perm_camera_mic = IconData.new(0xe8a2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">perm_contact_calendar</i> &#x2014; material icon named "perm contact calendar".
-  static perm_contact_calendar = IconData.new(0xe8a3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">perm_data_setting</i> &#x2014; material icon named "perm data setting".
-  static perm_data_setting = IconData.new(0xe8a4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">perm_device_information</i> &#x2014; material icon named "perm device information".
-  static perm_device_information = IconData.new(0xe8a5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">perm_identity</i> &#x2014; material icon named "perm identity".
-  static perm_identity = IconData.new(0xe8a6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">perm_media</i> &#x2014; material icon named "perm media".
-  static perm_media = IconData.new(0xe8a7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">perm_phone_msg</i> &#x2014; material icon named "perm phone msg".
-  static perm_phone_msg = IconData.new(0xe8a8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">perm_scan_wifi</i> &#x2014; material icon named "perm scan wifi".
-  static perm_scan_wifi = IconData.new(0xe8a9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">person</i> &#x2014; material icon named "person".
-  static person = IconData.new(0xe7fd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">person_add</i> &#x2014; material icon named "person add".
-  static person_add = IconData.new(0xe7fe, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">person_outline</i> &#x2014; material icon named "person outline".
-  static person_outline = IconData.new(0xe7ff, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">person_pin</i> &#x2014; material icon named "person pin".
-  static person_pin = IconData.new(0xe55a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">person_pin_circle</i> &#x2014; material icon named "person pin circle".
-  static person_pin_circle = IconData.new(0xe56a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">personal_video</i> &#x2014; material icon named "personal video".
-  static personal_video = IconData.new(0xe63b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pets</i> &#x2014; material icon named "pets".
-  static pets = IconData.new(0xe91d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phone</i> &#x2014; material icon named "phone".
-  static phone = IconData.new(0xe0cd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phone_android</i> &#x2014; material icon named "phone android".
-  static phone_android = IconData.new(0xe324, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phone_bluetooth_speaker</i> &#x2014; material icon named "phone bluetooth speaker".
-  static phone_bluetooth_speaker = IconData.new(0xe61b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phone_forwarded</i> &#x2014; material icon named "phone forwarded".
-  static phone_forwarded = IconData.new(0xe61c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phone_in_talk</i> &#x2014; material icon named "phone in talk".
-  static phone_in_talk = IconData.new(0xe61d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phone_iphone</i> &#x2014; material icon named "phone iphone".
-  static phone_iphone = IconData.new(0xe325, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phone_locked</i> &#x2014; material icon named "phone locked".
-  static phone_locked = IconData.new(0xe61e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phone_missed</i> &#x2014; material icon named "phone missed".
-  static phone_missed = IconData.new(0xe61f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phone_paused</i> &#x2014; material icon named "phone paused".
-  static phone_paused = IconData.new(0xe620, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phonelink</i> &#x2014; material icon named "phonelink".
-  static phonelink = IconData.new(0xe326, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phonelink_erase</i> &#x2014; material icon named "phonelink erase".
-  static phonelink_erase = IconData.new(0xe0db, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phonelink_lock</i> &#x2014; material icon named "phonelink lock".
-  static phonelink_lock = IconData.new(0xe0dc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phonelink_off</i> &#x2014; material icon named "phonelink off".
-  static phonelink_off = IconData.new(0xe327, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phonelink_ring</i> &#x2014; material icon named "phonelink ring".
-  static phonelink_ring = IconData.new(0xe0dd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">phonelink_setup</i> &#x2014; material icon named "phonelink setup".
-  static phonelink_setup = IconData.new(0xe0de, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">photo</i> &#x2014; material icon named "photo".
-  static photo = IconData.new(0xe410, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">photo_album</i> &#x2014; material icon named "photo album".
-  static photo_album = IconData.new(0xe411, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">photo_camera</i> &#x2014; material icon named "photo camera".
-  static photo_camera = IconData.new(0xe412, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">photo_filter</i> &#x2014; material icon named "photo filter".
-  static photo_filter = IconData.new(0xe43b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">photo_library</i> &#x2014; material icon named "photo library".
-  static photo_library = IconData.new(0xe413, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">photo_size_select_actual</i> &#x2014; material icon named "photo size select actual".
-  static photo_size_select_actual = IconData.new(0xe432, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">photo_size_select_large</i> &#x2014; material icon named "photo size select large".
-  static photo_size_select_large = IconData.new(0xe433, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">photo_size_select_small</i> &#x2014; material icon named "photo size select small".
-  static photo_size_select_small = IconData.new(0xe434, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">picture_as_pdf</i> &#x2014; material icon named "picture as pdf".
-  static picture_as_pdf = IconData.new(0xe415, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">picture_in_picture</i> &#x2014; material icon named "picture in picture".
-  static picture_in_picture = IconData.new(0xe8aa, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">picture_in_picture_alt</i> &#x2014; material icon named "picture in picture alt".
-  static picture_in_picture_alt = IconData.new(0xe911, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pie_chart</i> &#x2014; material icon named "pie chart".
-  static pie_chart = IconData.new(0xe6c4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pie_chart_outlined</i> &#x2014; material icon named "pie chart outlined".
-  static pie_chart_outlined = IconData.new(0xe6c5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pin_drop</i> &#x2014; material icon named "pin drop".
-  static pin_drop = IconData.new(0xe55e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">place</i> &#x2014; material icon named "place".
-  static place = IconData.new(0xe55f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">play_arrow</i> &#x2014; material icon named "play arrow".
-  static play_arrow = IconData.new(0xe037, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">play_circle_filled</i> &#x2014; material icon named "play circle filled".
-  static play_circle_filled = IconData.new(0xe038, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">play_circle_outline</i> &#x2014; material icon named "play circle outline".
-  static play_circle_outline = IconData.new(0xe039, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">play_for_work</i> &#x2014; material icon named "play for work".
-  static play_for_work = IconData.new(0xe906, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">playlist_add</i> &#x2014; material icon named "playlist add".
-  static playlist_add = IconData.new(0xe03b, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">playlist_add_check</i> &#x2014; material icon named "playlist add check".
-  static playlist_add_check = IconData.new(0xe065, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">playlist_play</i> &#x2014; material icon named "playlist play".
-  static playlist_play = IconData.new(0xe05f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">plus_one</i> &#x2014; material icon named "plus one".
-  static plus_one = IconData.new(0xe800, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">poll</i> &#x2014; material icon named "poll".
-  static poll = IconData.new(0xe801, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">polymer</i> &#x2014; material icon named "polymer".
-  static polymer = IconData.new(0xe8ab, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pool</i> &#x2014; material icon named "pool".
-  static pool = IconData.new(0xeb48, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">portable_wifi_off</i> &#x2014; material icon named "portable wifi off".
-  static portable_wifi_off = IconData.new(0xe0ce, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">portrait</i> &#x2014; material icon named "portrait".
-  static portrait = IconData.new(0xe416, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">power</i> &#x2014; material icon named "power".
-  static power = IconData.new(0xe63c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">power_input</i> &#x2014; material icon named "power input".
-  static power_input = IconData.new(0xe336, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">power_settings_new</i> &#x2014; material icon named "power settings new".
-  static power_settings_new = IconData.new(0xe8ac, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">pregnant_woman</i> &#x2014; material icon named "pregnant woman".
-  static pregnant_woman = IconData.new(0xe91e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">present_to_all</i> &#x2014; material icon named "present to all".
-  static present_to_all = IconData.new(0xe0df, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">print</i> &#x2014; material icon named "print".
-  static print = IconData.new(0xe8ad, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">priority_high</i> &#x2014; material icon named "priority high".
-  static priority_high = IconData.new(0xe645, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">public</i> &#x2014; material icon named "public".
-  static public = IconData.new(0xe80b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">publish</i> &#x2014; material icon named "publish".
-  static publish = IconData.new(0xe255, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">query_builder</i> &#x2014; material icon named "query builder".
-  static query_builder = IconData.new(0xe8ae, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">question_answer</i> &#x2014; material icon named "question answer".
-  static question_answer = IconData.new(0xe8af, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">queue</i> &#x2014; material icon named "queue".
-  static queue = IconData.new(0xe03c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">queue_music</i> &#x2014; material icon named "queue music".
-  static queue_music = IconData.new(0xe03d, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">queue_play_next</i> &#x2014; material icon named "queue play next".
-  static queue_play_next = IconData.new(0xe066, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">radio</i> &#x2014; material icon named "radio".
-  static radio = IconData.new(0xe03e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">radio_button_checked</i> &#x2014; material icon named "radio button checked".
-  static radio_button_checked = IconData.new(0xe837, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">radio_button_unchecked</i> &#x2014; material icon named "radio button unchecked".
-  static radio_button_unchecked = IconData.new(0xe836, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">rate_review</i> &#x2014; material icon named "rate review".
-  static rate_review = IconData.new(0xe560, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">receipt</i> &#x2014; material icon named "receipt".
-  static receipt = IconData.new(0xe8b0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">recent_actors</i> &#x2014; material icon named "recent actors".
-  static recent_actors = IconData.new(0xe03f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">record_voice_over</i> &#x2014; material icon named "record voice over".
-  static record_voice_over = IconData.new(0xe91f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">redeem</i> &#x2014; material icon named "redeem".
-  static redeem = IconData.new(0xe8b1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">redo</i> &#x2014; material icon named "redo".
-  static redo = IconData.new(0xe15a, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">refresh</i> &#x2014; material icon named "refresh".
-  static refresh = IconData.new(0xe5d5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">remove</i> &#x2014; material icon named "remove".
-  static remove = IconData.new(0xe15b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">remove_circle</i> &#x2014; material icon named "remove circle".
-  static remove_circle = IconData.new(0xe15c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">remove_circle_outline</i> &#x2014; material icon named "remove circle outline".
-  static remove_circle_outline = IconData.new(0xe15d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">remove_from_queue</i> &#x2014; material icon named "remove from queue".
-  static remove_from_queue = IconData.new(0xe067, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">remove_red_eye</i> &#x2014; material icon named "remove red eye".
-  static remove_red_eye = IconData.new(0xe417, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">remove_shopping_cart</i> &#x2014; material icon named "remove shopping cart".
-  static remove_shopping_cart = IconData.new(0xe928, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">reorder</i> &#x2014; material icon named "reorder".
-  static reorder = IconData.new(0xe8fe, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">repeat</i> &#x2014; material icon named "repeat".
-  static repeat = IconData.new(0xe040, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">repeat_one</i> &#x2014; material icon named "repeat one".
-  static repeat_one = IconData.new(0xe041, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">replay</i> &#x2014; material icon named "replay".
-  static replay = IconData.new(0xe042, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">replay_10</i> &#x2014; material icon named "replay 10".
-  static replay_10 = IconData.new(0xe059, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">replay_30</i> &#x2014; material icon named "replay 30".
-  static replay_30 = IconData.new(0xe05a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">replay_5</i> &#x2014; material icon named "replay 5".
-  static replay_5 = IconData.new(0xe05b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">reply</i> &#x2014; material icon named "reply".
-  static reply = IconData.new(0xe15e, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">reply_all</i> &#x2014; material icon named "reply all".
-  static reply_all = IconData.new(0xe15f, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">report</i> &#x2014; material icon named "report".
-  static report = IconData.new(0xe160, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">report_off</i> &#x2014; material icon named "report off".
-  static report_off = IconData.new(0xe170, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">report_problem</i> &#x2014; material icon named "report problem".
-  static report_problem = IconData.new(0xe8b2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">restaurant</i> &#x2014; material icon named "restaurant".
-  static restaurant = IconData.new(0xe56c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">restaurant_menu</i> &#x2014; material icon named "restaurant menu".
-  static restaurant_menu = IconData.new(0xe561, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">restore</i> &#x2014; material icon named "restore".
-  static restore = IconData.new(0xe8b3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">restore_from_trash</i> &#x2014; material icon named "restore from trash".
-  static restore_from_trash = IconData.new(0xe938, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">restore_page</i> &#x2014; material icon named "restore page".
-  static restore_page = IconData.new(0xe929, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">ring_volume</i> &#x2014; material icon named "ring volume".
-  static ring_volume = IconData.new(0xe0d1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">room</i> &#x2014; material icon named "room".
-  static room = IconData.new(0xe8b4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">room_service</i> &#x2014; material icon named "room service".
-  static room_service = IconData.new(0xeb49, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">rotate_90_degrees_ccw</i> &#x2014; material icon named "rotate 90 degrees ccw".
-  static rotate_90_degrees_ccw = IconData.new(0xe418, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">rotate_left</i> &#x2014; material icon named "rotate left".
-  static rotate_left = IconData.new(0xe419, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">rotate_right</i> &#x2014; material icon named "rotate right".
-  static rotate_right = IconData.new(0xe41a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">rounded_corner</i> &#x2014; material icon named "rounded corner".
-  static rounded_corner = IconData.new(0xe920, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">router</i> &#x2014; material icon named "router".
-  static router = IconData.new(0xe328, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">rowing</i> &#x2014; material icon named "rowing".
-  static rowing = IconData.new(0xe921, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">rss_feed</i> &#x2014; material icon named "rss feed".
-  static rss_feed = IconData.new(0xe0e5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">rv_hookup</i> &#x2014; material icon named "rv hookup".
-  static rv_hookup = IconData.new(0xe642, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">satellite</i> &#x2014; material icon named "satellite".
-  static satellite = IconData.new(0xe562, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">save</i> &#x2014; material icon named "save".
-  static save = IconData.new(0xe161, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">save_alt</i> &#x2014; material icon named "save alt".
-  static save_alt = IconData.new(0xe171, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">scanner</i> &#x2014; material icon named "scanner".
-  static scanner = IconData.new(0xe329, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">scatter_plot</i> &#x2014; material icon named "scatter plot".
-  static scatter_plot = IconData.new(0xe268, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">schedule</i> &#x2014; material icon named "schedule".
-  static schedule = IconData.new(0xe8b5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">school</i> &#x2014; material icon named "school".
-  static school = IconData.new(0xe80c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">score</i> &#x2014; material icon named "score".
-  static score = IconData.new(0xe269, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">screen_lock_landscape</i> &#x2014; material icon named "screen lock landscape".
-  static screen_lock_landscape = IconData.new(0xe1be, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">screen_lock_portrait</i> &#x2014; material icon named "screen lock portrait".
-  static screen_lock_portrait = IconData.new(0xe1bf, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">screen_lock_rotation</i> &#x2014; material icon named "screen lock rotation".
-  static screen_lock_rotation = IconData.new(0xe1c0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">screen_rotation</i> &#x2014; material icon named "screen rotation".
-  static screen_rotation = IconData.new(0xe1c1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">screen_share</i> &#x2014; material icon named "screen share".
-  static screen_share = IconData.new(0xe0e2, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">sd_card</i> &#x2014; material icon named "sd card".
-  static sd_card = IconData.new(0xe623, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sd_storage</i> &#x2014; material icon named "sd storage".
-  static sd_storage = IconData.new(0xe1c2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">search</i> &#x2014; material icon named "search".
-  static search = IconData.new(0xe8b6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">security</i> &#x2014; material icon named "security".
-  static security = IconData.new(0xe32a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">select_all</i> &#x2014; material icon named "select all".
-  static select_all = IconData.new(0xe162, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">send</i> &#x2014; material icon named "send".
-  static send = IconData.new(0xe163, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">sentiment_dissatisfied</i> &#x2014; material icon named "sentiment dissatisfied".
-  static sentiment_dissatisfied = IconData.new(0xe811, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sentiment_neutral</i> &#x2014; material icon named "sentiment neutral".
-  static sentiment_neutral = IconData.new(0xe812, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sentiment_satisfied</i> &#x2014; material icon named "sentiment satisfied".
-  static sentiment_satisfied = IconData.new(0xe813, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sentiment_very_dissatisfied</i> &#x2014; material icon named "sentiment very dissatisfied".
-  static sentiment_very_dissatisfied = IconData.new(0xe814, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sentiment_very_satisfied</i> &#x2014; material icon named "sentiment very satisfied".
-  static sentiment_very_satisfied = IconData.new(0xe815, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings</i> &#x2014; material icon named "settings".
-  static settings = IconData.new(0xe8b8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_applications</i> &#x2014; material icon named "settings applications".
-  static settings_applications = IconData.new(0xe8b9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_backup_restore</i> &#x2014; material icon named "settings backup restore".
-  static settings_backup_restore = IconData.new(0xe8ba, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_bluetooth</i> &#x2014; material icon named "settings bluetooth".
-  static settings_bluetooth = IconData.new(0xe8bb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_brightness</i> &#x2014; material icon named "settings brightness".
-  static settings_brightness = IconData.new(0xe8bd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_cell</i> &#x2014; material icon named "settings cell".
-  static settings_cell = IconData.new(0xe8bc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_ethernet</i> &#x2014; material icon named "settings ethernet".
-  static settings_ethernet = IconData.new(0xe8be, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_input_antenna</i> &#x2014; material icon named "settings input antenna".
-  static settings_input_antenna = IconData.new(0xe8bf, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_input_component</i> &#x2014; material icon named "settings input component".
-  static settings_input_component = IconData.new(0xe8c0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_input_composite</i> &#x2014; material icon named "settings input composite".
-  static settings_input_composite = IconData.new(0xe8c1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_input_hdmi</i> &#x2014; material icon named "settings input hdmi".
-  static settings_input_hdmi = IconData.new(0xe8c2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_input_svideo</i> &#x2014; material icon named "settings input svideo".
-  static settings_input_svideo = IconData.new(0xe8c3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_overscan</i> &#x2014; material icon named "settings overscan".
-  static settings_overscan = IconData.new(0xe8c4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_phone</i> &#x2014; material icon named "settings phone".
-  static settings_phone = IconData.new(0xe8c5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_power</i> &#x2014; material icon named "settings power".
-  static settings_power = IconData.new(0xe8c6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_remote</i> &#x2014; material icon named "settings remote".
-  static settings_remote = IconData.new(0xe8c7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_system_daydream</i> &#x2014; material icon named "settings system daydream".
-  static settings_system_daydream = IconData.new(0xe1c3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">settings_voice</i> &#x2014; material icon named "settings voice".
-  static settings_voice = IconData.new(0xe8c8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">share</i> &#x2014; material icon named "share".
-  static share = IconData.new(0xe80d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">shop</i> &#x2014; material icon named "shop".
-  static shop = IconData.new(0xe8c9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">shop_two</i> &#x2014; material icon named "shop two".
-  static shop_two = IconData.new(0xe8ca, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">shopping_basket</i> &#x2014; material icon named "shopping basket".
-  static shopping_basket = IconData.new(0xe8cb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">shopping_cart</i> &#x2014; material icon named "shopping cart".
-  static shopping_cart = IconData.new(0xe8cc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">short_text</i> &#x2014; material icon named "short text".
-  static short_text = IconData.new(0xe261, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">show_chart</i> &#x2014; material icon named "show chart".
-  static show_chart = IconData.new(0xe6e1, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">shuffle</i> &#x2014; material icon named "shuffle".
-  static shuffle = IconData.new(0xe043, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">shutter_speed</i> &#x2014; material icon named "shutter speed".
-  static shutter_speed = IconData.new(0xe43d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">signal_cellular_4_bar</i> &#x2014; material icon named "signal cellular 4 bar".
-  static signal_cellular_4_bar = IconData.new(0xe1c8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">signal_cellular_connected_no_internet_4_bar</i> &#x2014; material icon named "signal cellular connected no internet 4 bar".
-  static signal_cellular_connected_no_internet_4_bar = IconData.new(0xe1cd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">signal_cellular_no_sim</i> &#x2014; material icon named "signal cellular no sim".
-  static signal_cellular_no_sim = IconData.new(0xe1ce, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">signal_cellular_null</i> &#x2014; material icon named "signal cellular null".
-  static signal_cellular_null = IconData.new(0xe1cf, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">signal_cellular_off</i> &#x2014; material icon named "signal cellular off".
-  static signal_cellular_off = IconData.new(0xe1d0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">signal_wifi_4_bar</i> &#x2014; material icon named "signal wifi 4 bar".
-  static signal_wifi_4_bar = IconData.new(0xe1d8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">signal_wifi_4_bar_lock</i> &#x2014; material icon named "signal wifi 4 bar lock".
-  static signal_wifi_4_bar_lock = IconData.new(0xe1d9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">signal_wifi_off</i> &#x2014; material icon named "signal wifi off".
-  static signal_wifi_off = IconData.new(0xe1da, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sim_card</i> &#x2014; material icon named "sim card".
-  static sim_card = IconData.new(0xe32b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sim_card_alert</i> &#x2014; material icon named "sim card alert".
-  static sim_card_alert = IconData.new(0xe624, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">skip_next</i> &#x2014; material icon named "skip next".
-  static skip_next = IconData.new(0xe044, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">skip_previous</i> &#x2014; material icon named "skip previous".
-  static skip_previous = IconData.new(0xe045, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">slideshow</i> &#x2014; material icon named "slideshow".
-  static slideshow = IconData.new(0xe41b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">slow_motion_video</i> &#x2014; material icon named "slow motion video".
-  static slow_motion_video = IconData.new(0xe068, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">smartphone</i> &#x2014; material icon named "smartphone".
-  static smartphone = IconData.new(0xe32c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">smoke_free</i> &#x2014; material icon named "smoke free".
-  static smoke_free = IconData.new(0xeb4a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">smoking_rooms</i> &#x2014; material icon named "smoking rooms".
-  static smoking_rooms = IconData.new(0xeb4b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sms</i> &#x2014; material icon named "sms".
-  static sms = IconData.new(0xe625, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sms_failed</i> &#x2014; material icon named "sms failed".
-  static sms_failed = IconData.new(0xe626, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">snooze</i> &#x2014; material icon named "snooze".
-  static snooze = IconData.new(0xe046, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sort</i> &#x2014; material icon named "sort".
-  static sort = IconData.new(0xe164, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">sort_by_alpha</i> &#x2014; material icon named "sort by alpha".
-  static sort_by_alpha = IconData.new(0xe053, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">spa</i> &#x2014; material icon named "spa".
-  static spa = IconData.new(0xeb4c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">space_bar</i> &#x2014; material icon named "space bar".
-  static space_bar = IconData.new(0xe256, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">speaker</i> &#x2014; material icon named "speaker".
-  static speaker = IconData.new(0xe32d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">speaker_group</i> &#x2014; material icon named "speaker group".
-  static speaker_group = IconData.new(0xe32e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">speaker_notes</i> &#x2014; material icon named "speaker notes".
-  static speaker_notes = IconData.new(0xe8cd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">speaker_notes_off</i> &#x2014; material icon named "speaker notes off".
-  static speaker_notes_off = IconData.new(0xe92a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">speaker_phone</i> &#x2014; material icon named "speaker phone".
-  static speaker_phone = IconData.new(0xe0d2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">spellcheck</i> &#x2014; material icon named "spellcheck".
-  static spellcheck = IconData.new(0xe8ce, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">star</i> &#x2014; material icon named "star".
-  static star = IconData.new(0xe838, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">star_border</i> &#x2014; material icon named "star border".
-  static star_border = IconData.new(0xe83a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">star_half</i> &#x2014; material icon named "star half".
-  static star_half = IconData.new(0xe839, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">stars</i> &#x2014; material icon named "stars".
-  static stars = IconData.new(0xe8d0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">stay_current_landscape</i> &#x2014; material icon named "stay current landscape".
-  static stay_current_landscape = IconData.new(0xe0d3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">stay_current_portrait</i> &#x2014; material icon named "stay current portrait".
-  static stay_current_portrait = IconData.new(0xe0d4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">stay_primary_landscape</i> &#x2014; material icon named "stay primary landscape".
-  static stay_primary_landscape = IconData.new(0xe0d5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">stay_primary_portrait</i> &#x2014; material icon named "stay primary portrait".
-  static stay_primary_portrait = IconData.new(0xe0d6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">stop</i> &#x2014; material icon named "stop".
-  static stop = IconData.new(0xe047, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">stop_screen_share</i> &#x2014; material icon named "stop screen share".
-  static stop_screen_share = IconData.new(0xe0e3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">storage</i> &#x2014; material icon named "storage".
-  static storage = IconData.new(0xe1db, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">store</i> &#x2014; material icon named "store".
-  static store = IconData.new(0xe8d1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">store_mall_directory</i> &#x2014; material icon named "store mall directory".
-  static store_mall_directory = IconData.new(0xe563, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">straighten</i> &#x2014; material icon named "straighten".
-  static straighten = IconData.new(0xe41c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">streetview</i> &#x2014; material icon named "streetview".
-  static streetview = IconData.new(0xe56e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">strikethrough_s</i> &#x2014; material icon named "strikethrough s".
-  static strikethrough_s = IconData.new(0xe257, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">style</i> &#x2014; material icon named "style".
-  static style = IconData.new(0xe41d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">subdirectory_arrow_left</i> &#x2014; material icon named "subdirectory arrow left".
-  static subdirectory_arrow_left = IconData.new(0xe5d9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">subdirectory_arrow_right</i> &#x2014; material icon named "subdirectory arrow right".
-  static subdirectory_arrow_right = IconData.new(0xe5da, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">subject</i> &#x2014; material icon named "subject".
-  static subject = IconData.new(0xe8d2, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">subscriptions</i> &#x2014; material icon named "subscriptions".
-  static subscriptions = IconData.new(0xe064, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">subtitles</i> &#x2014; material icon named "subtitles".
-  static subtitles = IconData.new(0xe048, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">subway</i> &#x2014; material icon named "subway".
-  static subway = IconData.new(0xe56f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">supervised_user_circle</i> &#x2014; material icon named "supervised user circle".
-  static supervised_user_circle = IconData.new(0xe939, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">supervisor_account</i> &#x2014; material icon named "supervisor account".
-  static supervisor_account = IconData.new(0xe8d3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">surround_sound</i> &#x2014; material icon named "surround sound".
-  static surround_sound = IconData.new(0xe049, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">swap_calls</i> &#x2014; material icon named "swap calls".
-  static swap_calls = IconData.new(0xe0d7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">swap_horiz</i> &#x2014; material icon named "swap horiz".
-  static swap_horiz = IconData.new(0xe8d4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">swap_horizontal_circle</i> &#x2014; material icon named "swap horizontal circle".
-  static swap_horizontal_circle = IconData.new(0xe933, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">swap_vert</i> &#x2014; material icon named "swap vert".
-  static swap_vert = IconData.new(0xe8d5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">swap_vertical_circle</i> &#x2014; material icon named "swap vertical circle".
-  static swap_vertical_circle = IconData.new(0xe8d6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">switch_camera</i> &#x2014; material icon named "switch camera".
-  static switch_camera = IconData.new(0xe41e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">switch_video</i> &#x2014; material icon named "switch video".
-  static switch_video = IconData.new(0xe41f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sync</i> &#x2014; material icon named "sync".
-  static sync = IconData.new(0xe627, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sync_disabled</i> &#x2014; material icon named "sync disabled".
-  static sync_disabled = IconData.new(0xe628, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">sync_problem</i> &#x2014; material icon named "sync problem".
-  static sync_problem = IconData.new(0xe629, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">system_update</i> &#x2014; material icon named "system update".
-  static system_update = IconData.new(0xe62a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">system_update_alt</i> &#x2014; material icon named "system update alt".
-  static system_update_alt = IconData.new(0xe8d7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">tab</i> &#x2014; material icon named "tab".
-  static tab = IconData.new(0xe8d8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">tab_unselected</i> &#x2014; material icon named "tab unselected".
-  static tab_unselected = IconData.new(0xe8d9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">table_chart</i> &#x2014; material icon named "table chart".
-  static table_chart = IconData.new(0xe265, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">tablet</i> &#x2014; material icon named "tablet".
-  static tablet = IconData.new(0xe32f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">tablet_android</i> &#x2014; material icon named "tablet android".
-  static tablet_android = IconData.new(0xe330, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">tablet_mac</i> &#x2014; material icon named "tablet mac".
-  static tablet_mac = IconData.new(0xe331, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">tag_faces</i> &#x2014; material icon named "tag faces".
-  static tag_faces = IconData.new(0xe420, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">tap_and_play</i> &#x2014; material icon named "tap and play".
-  static tap_and_play = IconData.new(0xe62b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">terrain</i> &#x2014; material icon named "terrain".
-  static terrain = IconData.new(0xe564, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">text_fields</i> &#x2014; material icon named "text fields".
-  static text_fields = IconData.new(0xe262, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">text_format</i> &#x2014; material icon named "text format".
-  static text_format = IconData.new(0xe165, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">text_rotate_up</i> &#x2014; material icon named "text rotate up".
-  static text_rotate_up = IconData.new(0xe93a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">text_rotate_vertical</i> &#x2014; material icon named "text rotate vertical".
-  static text_rotate_vertical = IconData.new(0xe93b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">text_rotation_angledown</i> &#x2014; material icon named "text rotation angledown".
-  static text_rotation_angledown = IconData.new(0xe93c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">text_rotation_angleup</i> &#x2014; material icon named "text rotation angleup".
-  static text_rotation_angleup = IconData.new(0xe93d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">text_rotation_down</i> &#x2014; material icon named "text rotation down".
-  static text_rotation_down = IconData.new(0xe93e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">text_rotation_none</i> &#x2014; material icon named "text rotation none".
-  static text_rotation_none = IconData.new(0xe93f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">textsms</i> &#x2014; material icon named "textsms".
-  static textsms = IconData.new(0xe0d8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">texture</i> &#x2014; material icon named "texture".
-  static texture = IconData.new(0xe421, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">theaters</i> &#x2014; material icon named "theaters".
-  static theaters = IconData.new(0xe8da, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">thumb_down</i> &#x2014; material icon named "thumb down".
-  static thumb_down = IconData.new(0xe8db, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">thumb_up</i> &#x2014; material icon named "thumb up".
-  static thumb_up = IconData.new(0xe8dc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">thumbs_up_down</i> &#x2014; material icon named "thumbs up down".
-  static thumbs_up_down = IconData.new(0xe8dd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">time_to_leave</i> &#x2014; material icon named "time to leave".
-  static time_to_leave = IconData.new(0xe62c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">timelapse</i> &#x2014; material icon named "timelapse".
-  static timelapse = IconData.new(0xe422, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">timeline</i> &#x2014; material icon named "timeline".
-  static timeline = IconData.new(0xe922, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">timer</i> &#x2014; material icon named "timer".
-  static timer = IconData.new(0xe425, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">timer_10</i> &#x2014; material icon named "timer 10".
-  static timer_10 = IconData.new(0xe423, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">timer_3</i> &#x2014; material icon named "timer 3".
-  static timer_3 = IconData.new(0xe424, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">timer_off</i> &#x2014; material icon named "timer off".
-  static timer_off = IconData.new(0xe426, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">title</i> &#x2014; material icon named "title".
-  static title = IconData.new(0xe264, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">toc</i> &#x2014; material icon named "toc".
-  static toc = IconData.new(0xe8de, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">today</i> &#x2014; material icon named "today".
-  static today = IconData.new(0xe8df, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">toll</i> &#x2014; material icon named "toll".
-  static toll = IconData.new(0xe8e0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">tonality</i> &#x2014; material icon named "tonality".
-  static tonality = IconData.new(0xe427, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">touch_app</i> &#x2014; material icon named "touch app".
-  static touch_app = IconData.new(0xe913, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">toys</i> &#x2014; material icon named "toys".
-  static toys = IconData.new(0xe332, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">track_changes</i> &#x2014; material icon named "track changes".
-  static track_changes = IconData.new(0xe8e1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">traffic</i> &#x2014; material icon named "traffic".
-  static traffic = IconData.new(0xe565, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">train</i> &#x2014; material icon named "train".
-  static train = IconData.new(0xe570, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">tram</i> &#x2014; material icon named "tram".
-  static tram = IconData.new(0xe571, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">transfer_within_a_station</i> &#x2014; material icon named "transfer within a station".
-  static transfer_within_a_station = IconData.new(0xe572, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">transform</i> &#x2014; material icon named "transform".
-  static transform = IconData.new(0xe428, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">transit_enterexit</i> &#x2014; material icon named "transit enterexit".
-  static transit_enterexit = IconData.new(0xe579, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">translate</i> &#x2014; material icon named "translate".
-  static translate = IconData.new(0xe8e2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">trending_down</i> &#x2014; material icon named "trending down".
-  static trending_down = IconData.new(0xe8e3, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">trending_flat</i> &#x2014; material icon named "trending flat".
-  static trending_flat = IconData.new(0xe8e4, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">trending_up</i> &#x2014; material icon named "trending up".
-  static trending_up = IconData.new(0xe8e5, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">trip_origin</i> &#x2014; material icon named "trip origin".
-  static trip_origin = IconData.new(0xe57b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">tune</i> &#x2014; material icon named "tune".
-  static tune = IconData.new(0xe429, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">turned_in</i> &#x2014; material icon named "turned in".
-  static turned_in = IconData.new(0xe8e6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">turned_in_not</i> &#x2014; material icon named "turned in not".
-  static turned_in_not = IconData.new(0xe8e7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">tv</i> &#x2014; material icon named "tv".
-  static tv = IconData.new(0xe333, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">unarchive</i> &#x2014; material icon named "unarchive".
-  static unarchive = IconData.new(0xe169, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">undo</i> &#x2014; material icon named "undo".
-  static undo = IconData.new(0xe166, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">unfold_less</i> &#x2014; material icon named "unfold less".
-  static unfold_less = IconData.new(0xe5d6, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">unfold_more</i> &#x2014; material icon named "unfold more".
-  static unfold_more = IconData.new(0xe5d7, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">update</i> &#x2014; material icon named "update".
-  static update = IconData.new(0xe923, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">usb</i> &#x2014; material icon named "usb".
-  static usb = IconData.new(0xe1e0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">verified_user</i> &#x2014; material icon named "verified user".
-  static verified_user = IconData.new(0xe8e8, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">vertical_align_bottom</i> &#x2014; material icon named "vertical align bottom".
-  static vertical_align_bottom = IconData.new(0xe258, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">vertical_align_center</i> &#x2014; material icon named "vertical align center".
-  static vertical_align_center = IconData.new(0xe259, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">vertical_align_top</i> &#x2014; material icon named "vertical align top".
-  static vertical_align_top = IconData.new(0xe25a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">vibration</i> &#x2014; material icon named "vibration".
-  static vibration = IconData.new(0xe62d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">video_call</i> &#x2014; material icon named "video call".
-  static video_call = IconData.new(0xe070, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">video_label</i> &#x2014; material icon named "video label".
-  static video_label = IconData.new(0xe071, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">video_library</i> &#x2014; material icon named "video library".
-  static video_library = IconData.new(0xe04a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">videocam</i> &#x2014; material icon named "videocam".
-  static videocam = IconData.new(0xe04b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">videocam_off</i> &#x2014; material icon named "videocam off".
-  static videocam_off = IconData.new(0xe04c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">videogame_asset</i> &#x2014; material icon named "videogame asset".
-  static videogame_asset = IconData.new(0xe338, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">view_agenda</i> &#x2014; material icon named "view agenda".
-  static view_agenda = IconData.new(0xe8e9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">view_array</i> &#x2014; material icon named "view array".
-  static view_array = IconData.new(0xe8ea, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">view_carousel</i> &#x2014; material icon named "view carousel".
-  static view_carousel = IconData.new(0xe8eb, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">view_column</i> &#x2014; material icon named "view column".
-  static view_column = IconData.new(0xe8ec, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">view_comfy</i> &#x2014; material icon named "view comfy".
-  static view_comfy = IconData.new(0xe42a, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">view_compact</i> &#x2014; material icon named "view compact".
-  static view_compact = IconData.new(0xe42b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">view_day</i> &#x2014; material icon named "view day".
-  static view_day = IconData.new(0xe8ed, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">view_headline</i> &#x2014; material icon named "view headline".
-  static view_headline = IconData.new(0xe8ee, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">view_list</i> &#x2014; material icon named "view list".
-  static view_list = IconData.new(0xe8ef, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">view_module</i> &#x2014; material icon named "view module".
-  static view_module = IconData.new(0xe8f0, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">view_quilt</i> &#x2014; material icon named "view quilt".
-  static view_quilt = IconData.new(0xe8f1, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">view_stream</i> &#x2014; material icon named "view stream".
-  static view_stream = IconData.new(0xe8f2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">view_week</i> &#x2014; material icon named "view week".
-  static view_week = IconData.new(0xe8f3, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">vignette</i> &#x2014; material icon named "vignette".
-  static vignette = IconData.new(0xe435, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">visibility</i> &#x2014; material icon named "visibility".
-  static visibility = IconData.new(0xe8f4, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">visibility_off</i> &#x2014; material icon named "visibility off".
-  static visibility_off = IconData.new(0xe8f5, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">voice_chat</i> &#x2014; material icon named "voice chat".
-  static voice_chat = IconData.new(0xe62e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">voicemail</i> &#x2014; material icon named "voicemail".
-  static voicemail = IconData.new(0xe0d9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">volume_down</i> &#x2014; material icon named "volume down".
-  static volume_down = IconData.new(0xe04d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">volume_mute</i> &#x2014; material icon named "volume mute".
-  static volume_mute = IconData.new(0xe04e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">volume_off</i> &#x2014; material icon named "volume off".
-  static volume_off = IconData.new(0xe04f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">volume_up</i> &#x2014; material icon named "volume up".
-  static volume_up = IconData.new(0xe050, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">vpn_key</i> &#x2014; material icon named "vpn key".
-  static vpn_key = IconData.new(0xe0da, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">vpn_lock</i> &#x2014; material icon named "vpn lock".
-  static vpn_lock = IconData.new(0xe62f, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">wallpaper</i> &#x2014; material icon named "wallpaper".
-  static wallpaper = IconData.new(0xe1bc, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">warning</i> &#x2014; material icon named "warning".
-  static warning = IconData.new(0xe002, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">watch</i> &#x2014; material icon named "watch".
-  static watch = IconData.new(0xe334, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">watch_later</i> &#x2014; material icon named "watch later".
-  static watch_later = IconData.new(0xe924, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">wb_auto</i> &#x2014; material icon named "wb auto".
-  static wb_auto = IconData.new(0xe42c, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">wb_cloudy</i> &#x2014; material icon named "wb cloudy".
-  static wb_cloudy = IconData.new(0xe42d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">wb_incandescent</i> &#x2014; material icon named "wb incandescent".
-  static wb_incandescent = IconData.new(0xe42e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">wb_iridescent</i> &#x2014; material icon named "wb iridescent".
-  static wb_iridescent = IconData.new(0xe436, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">wb_sunny</i> &#x2014; material icon named "wb sunny".
-  static wb_sunny = IconData.new(0xe430, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">wc</i> &#x2014; material icon named "wc".
-  static wc = IconData.new(0xe63d, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">web</i> &#x2014; material icon named "web".
-  static web = IconData.new(0xe051, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">web_asset</i> &#x2014; material icon named "web asset".
-  static web_asset = IconData.new(0xe069, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">weekend</i> &#x2014; material icon named "weekend".
-  static weekend = IconData.new(0xe16b, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">whatshot</i> &#x2014; material icon named "whatshot".
-  static whatshot = IconData.new(0xe80e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">widgets</i> &#x2014; material icon named "widgets".
-  static widgets = IconData.new(0xe1bd, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">wifi</i> &#x2014; material icon named "wifi".
-  static wifi = IconData.new(0xe63e, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">wifi_lock</i> &#x2014; material icon named "wifi lock".
-  static wifi_lock = IconData.new(0xe1e1, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">wifi_tethering</i> &#x2014; material icon named "wifi tethering".
-  static wifi_tethering = IconData.new(0xe1e2, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">work</i> &#x2014; material icon named "work".
-  static work = IconData.new(0xe8f9, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">wrap_text</i> &#x2014; material icon named "wrap text".
-  static wrap_text = IconData.new(0xe25b, {fontFamily:'MaterialIcons',matchTextDirection:true});
-
-  /// <i class="material-icons md-36">youtube_searched_for</i> &#x2014; material icon named "youtube searched for".
-  static youtube_searched_for = IconData.new(0xe8fa, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">zoom_in</i> &#x2014; material icon named "zoom in".
-  static zoom_in = IconData.new(0xe8ff, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">zoom_out</i> &#x2014; material icon named "zoom out".
-  static zoom_out = IconData.new(0xe900, {fontFamily:'MaterialIcons'});
-
-  /// <i class="material-icons md-36">zoom_out_map</i> &#x2014; material icon named "zoom out map".
-  static zoom_out_map = IconData.new(0xe56b, {fontFamily:'MaterialIcons'});
-  // END GENERATED
+  constructor(icon:string){
+    super(icon);
+  }
+  static new(icon:string) {
+   return new Icons(icon);
+  }
+
+  static threesixty = Icons.new("threesixty");
+  static threed_rotation = Icons.new("threed_rotation");
+  static four_k = Icons.new("four_k");
+  static ac_unit = Icons.new("ac_unit");
+  static access_alarm = Icons.new("access_alarm");
+  static access_alarms = Icons.new("access_alarms");
+  static access_time = Icons.new("access_time");
+  static accessibility = Icons.new("accessibility");
+  static accessibility_new = Icons.new("accessibility_new");
+  static accessible = Icons.new("accessible");
+  static accessible_forward = Icons.new("accessible_forward");
+  static account_balance = Icons.new("account_balance");
+  static account_balance_wallet = Icons.new("account_balance_wallet");
+  static account_box = Icons.new("account_box");
+  static account_circle = Icons.new("account_circle");
+  static adb = Icons.new("adb");
+  static add = Icons.new("add");
+  static add_a_photo = Icons.new("add_a_photo");
+  static add_alarm = Icons.new("add_alarm");
+  static add_alert = Icons.new("add_alert");
+  static add_box = Icons.new("add_box");
+  static add_call = Icons.new("add_call");
+  static add_circle = Icons.new("add_circle");
+  static add_circle_outline = Icons.new("add_circle_outline");
+  static add_comment = Icons.new("add_comment");
+  static add_location = Icons.new("add_location");
+  static add_photo_alternate = Icons.new("add_photo_alternate");
+  static add_shopping_cart = Icons.new("add_shopping_cart");
+  static add_to_home_screen = Icons.new("add_to_home_screen");
+  static add_to_photos = Icons.new("add_to_photos");
+  static add_to_queue = Icons.new("add_to_queue");
+  static adjust = Icons.new("adjust");
+  static airline_seat_flat = Icons.new("airline_seat_flat");
+  static airline_seat_flat_angled = Icons.new("airline_seat_flat_angled");
+  static airline_seat_individual_suite = Icons.new("airline_seat_individual_suite");
+  static airline_seat_legroom_extra = Icons.new("airline_seat_legroom_extra");
+  static airline_seat_legroom_normal = Icons.new("airline_seat_legroom_normal");
+  static airline_seat_legroom_reduced = Icons.new("airline_seat_legroom_reduced");
+  static airline_seat_recline_extra = Icons.new("airline_seat_recline_extra");
+  static airline_seat_recline_normal = Icons.new("airline_seat_recline_normal");
+  static airplanemode_active = Icons.new("airplanemode_active");
+  static airplanemode_inactive = Icons.new("airplanemode_inactive");
+  static airplay = Icons.new("airplay");
+  static airport_shuttle = Icons.new("airport_shuttle");
+  static alarm = Icons.new("alarm");
+  static alarm_add = Icons.new("alarm_add");
+  static alarm_off = Icons.new("alarm_off");
+  static alarm_on = Icons.new("alarm_on");
+  static album = Icons.new("album");
+  static all_inclusive = Icons.new("all_inclusive");
+  static all_out = Icons.new("all_out");
+  static alternate_email = Icons.new("alternate_email");
+  static android = Icons.new("android");
+  static announcement = Icons.new("announcement");
+  static apps = Icons.new("apps");
+  static archive = Icons.new("archive");
+  static arrow_back = Icons.new("arrow_back");
+  static arrow_back_ios = Icons.new("arrow_back_ios");
+  static arrow_downward = Icons.new("arrow_downward");
+  static arrow_drop_down = Icons.new("arrow_drop_down");
+  static arrow_drop_down_circle = Icons.new("arrow_drop_down_circle");
+  static arrow_drop_up = Icons.new("arrow_drop_up");
+  static arrow_forward = Icons.new("arrow_forward");
+  static arrow_forward_ios = Icons.new("arrow_forward_ios");
+  static arrow_left = Icons.new("arrow_left");
+  static arrow_right = Icons.new("arrow_right");
+  static arrow_upward = Icons.new("arrow_upward");
+  static art_track = Icons.new("art_track");
+  static aspect_ratio = Icons.new("aspect_ratio");
+  static assessment = Icons.new("assessment");
+  static assignment = Icons.new("assignment");
+  static assignment_ind = Icons.new("assignment_ind");
+  static assignment_late = Icons.new("assignment_late");
+  static assignment_return = Icons.new("assignment_return");
+  static assignment_returned = Icons.new("assignment_returned");
+  static assignment_turned_in = Icons.new("assignment_turned_in");
+  static assistant = Icons.new("assistant");
+  static assistant_photo = Icons.new("assistant_photo");
+  static atm = Icons.new("atm");
+  static attach_file = Icons.new("attach_file");
+  static attach_money = Icons.new("attach_money");
+  static attachment = Icons.new("attachment");
+  static audiotrack = Icons.new("audiotrack");
+  static autorenew = Icons.new("autorenew");
+  static av_timer = Icons.new("av_timer");
+  static backspace = Icons.new("backspace");
+  static backup = Icons.new("backup");
+  static battery_alert = Icons.new("battery_alert");
+  static battery_charging_full = Icons.new("battery_charging_full");
+  static battery_full = Icons.new("battery_full");
+  static battery_std = Icons.new("battery_std");
+  static battery_unknown = Icons.new("battery_unknown");
+  static beach_access = Icons.new("beach_access");
+  static beenhere = Icons.new("beenhere");
+  static block = Icons.new("block");
+  static bluetooth = Icons.new("bluetooth");
+  static bluetooth_audio = Icons.new("bluetooth_audio");
+  static bluetooth_connected = Icons.new("bluetooth_connected");
+  static bluetooth_disabled = Icons.new("bluetooth_disabled");
+  static bluetooth_searching = Icons.new("bluetooth_searching");
+  static blur_circular = Icons.new("blur_circular");
+  static blur_linear = Icons.new("blur_linear");
+  static blur_off = Icons.new("blur_off");
+  static blur_on = Icons.new("blur_on");
+  static book = Icons.new("book");
+  static bookmark = Icons.new("bookmark");
+  static bookmark_border = Icons.new("bookmark_border");
+  static border_all = Icons.new("border_all");
+  static border_bottom = Icons.new("border_bottom");
+  static border_clear = Icons.new("border_clear");
+  static border_color = Icons.new("border_color");
+  static border_horizontal = Icons.new("border_horizontal");
+  static border_inner = Icons.new("border_inner");
+  static border_left = Icons.new("border_left");
+  static border_outer = Icons.new("border_outer");
+  static border_right = Icons.new("border_right");
+  static border_style = Icons.new("border_style");
+  static border_top = Icons.new("border_top");
+  static border_vertical = Icons.new("border_vertical");
+  static branding_watermark = Icons.new("branding_watermark");
+  static brightness_1 = Icons.new("brightness_1");
+  static brightness_2 = Icons.new("brightness_2");
+  static brightness_3 = Icons.new("brightness_3");
+  static brightness_4 = Icons.new("brightness_4");
+  static brightness_5 = Icons.new("brightness_5");
+  static brightness_6 = Icons.new("brightness_6");
+  static brightness_7 = Icons.new("brightness_7");
+  static brightness_auto = Icons.new("brightness_auto");
+  static brightness_high = Icons.new("brightness_high");
+  static brightness_low = Icons.new("brightness_low");
+  static brightness_medium = Icons.new("brightness_medium");
+  static broken_image = Icons.new("broken_image");
+  static brush = Icons.new("brush");
+  static bubble_chart = Icons.new("bubble_chart");
+  static bug_report = Icons.new("bug_report");
+  static build = Icons.new("build");
+  static burst_mode = Icons.new("burst_mode");
+  static business = Icons.new("business");
+  static business_center = Icons.new("business_center");
+  static cached = Icons.new("cached");
+  static cake = Icons.new("cake");
+  static calendar_today = Icons.new("calendar_today");
+  static calendar_view_day = Icons.new("calendar_view_day");
+  static call = Icons.new("call");
+  static call_end = Icons.new("call_end");
+  static call_made = Icons.new("call_made");
+  static call_merge = Icons.new("call_merge");
+  static call_missed = Icons.new("call_missed");
+  static call_missed_outgoing = Icons.new("call_missed_outgoing");
+  static call_received = Icons.new("call_received");
+  static call_split = Icons.new("call_split");
+  static call_to_action = Icons.new("call_to_action");
+  static camera = Icons.new("camera");
+  static camera_alt = Icons.new("camera_alt");
+  static camera_enhance = Icons.new("camera_enhance");
+  static camera_front = Icons.new("camera_front");
+  static camera_rear = Icons.new("camera_rear");
+  static camera_roll = Icons.new("camera_roll");
+  static cancel = Icons.new("cancel");
+  static card_giftcard = Icons.new("card_giftcard");
+  static card_membership = Icons.new("card_membership");
+  static card_travel = Icons.new("card_travel");
+  static casino = Icons.new("casino");
+  static cast = Icons.new("cast");
+  static cast_connected = Icons.new("cast_connected");
+  static category = Icons.new("category");
+  static center_focus_strong = Icons.new("center_focus_strong");
+  static center_focus_weak = Icons.new("center_focus_weak");
+  static change_history = Icons.new("change_history");
+  static chat = Icons.new("chat");
+  static chat_bubble = Icons.new("chat_bubble");
+  static chat_bubble_outline = Icons.new("chat_bubble_outline");
+  static check = Icons.new("check");
+  static check_box = Icons.new("check_box");
+  static check_box_outline_blank = Icons.new("check_box_outline_blank");
+  static check_circle = Icons.new("check_circle");
+  static check_circle_outline = Icons.new("check_circle_outline");
+  static chevron_left = Icons.new("chevron_left");
+  static chevron_right = Icons.new("chevron_right");
+  static child_care = Icons.new("child_care");
+  static child_friendly = Icons.new("child_friendly");
+  static chrome_reader_mode = Icons.new("chrome_reader_mode");
+  static class_ = Icons.new("class_");
+  static clear = Icons.new("clear");
+  static clear_all = Icons.new("clear_all");
+  static close = Icons.new("close");
+  static closed_caption = Icons.new("closed_caption");
+  static cloud = Icons.new("cloud");
+  static cloud_circle = Icons.new("cloud_circle");
+  static cloud_done = Icons.new("cloud_done");
+  static cloud_download = Icons.new("cloud_download");
+  static cloud_off = Icons.new("cloud_off");
+  static cloud_queue = Icons.new("cloud_queue");
+  static cloud_upload = Icons.new("cloud_upload");
+  static code = Icons.new("code");
+  static collections = Icons.new("collections");
+  static collections_bookmark = Icons.new("collections_bookmark");
+  static color_lens = Icons.new("color_lens");
+  static colorize = Icons.new("colorize");
+  static comment = Icons.new("comment");
+  static compare = Icons.new("compare");
+  static compare_arrows = Icons.new("compare_arrows");
+  static computer = Icons.new("computer");
+  static confirmation_number = Icons.new("confirmation_number");
+  static contact_mail = Icons.new("contact_mail");
+  static contact_phone = Icons.new("contact_phone");
+  static contacts = Icons.new("contacts");
+static content_copy = Icons.new("content_copy");
+  static content_cut = Icons.new("content_cut");
+  static content_paste = Icons.new("content_paste");
+  static control_point = Icons.new("control_point");
+  static control_point_duplicate = Icons.new("control_point_duplicate");
+  static copyright = Icons.new("copyright");
+  static create = Icons.new("create");
+  static create_new_folder = Icons.new("create_new_folder");
+  static credit_card = Icons.new("credit_card");
+  static crop = Icons.new("crop");
+  static crop_16_9 = Icons.new("crop_16_9");
+  static crop_3_2 = Icons.new("crop_3_2");
+  static crop_5_4 = Icons.new("crop_5_4");
+  static crop_7_5 = Icons.new("crop_7_5");
+  static crop_din = Icons.new("crop_din");
+  static crop_free = Icons.new("crop_free");
+  static crop_landscape = Icons.new("crop_landscape");
+  static crop_original = Icons.new("crop_original");
+  static crop_portrait = Icons.new("crop_portrait");
+  static crop_rotate = Icons.new("crop_rotate");
+  static crop_square = Icons.new("crop_square");
+  static dashboard = Icons.new("dashboard");
+  static data_usage = Icons.new("data_usage");
+  static date_range = Icons.new("date_range");
+  static dehaze = Icons.new("dehaze");
+  static delete = Icons.new("delete");
+  static delete_forever = Icons.new("delete_forever");
+  static delete_outline = Icons.new("delete_outline");
+  static delete_sweep = Icons.new("delete_sweep");
+  static departure_board = Icons.new("departure_board");
+  static description = Icons.new("description");
+  static desktop_mac = Icons.new("desktop_mac");
+  static desktop_windows = Icons.new("desktop_windows");
+  static details = Icons.new("details");
+  static developer_board = Icons.new("developer_board");
+  static developer_mode = Icons.new("developer_mode");
+  static device_hub = Icons.new("device_hub");
+  static device_unknown = Icons.new("device_unknown");
+  static devices = Icons.new("devices");
+  static devices_other = Icons.new("devices_other");
+  static dialer_sip = Icons.new("dialer_sip");
+  static dialpad = Icons.new("dialpad");
+  static directions = Icons.new("directions");
+  static directions_bike = Icons.new("directions_bike");
+  static directions_boat = Icons.new("directions_boat");
+  static directions_bus = Icons.new("directions_bus");
+  static directions_car = Icons.new("directions_car");
+  static directions_railway = Icons.new("directions_railway");
+  static directions_run = Icons.new("directions_run");
+  static directions_subway = Icons.new("directions_subway");
+  static directions_transit = Icons.new("directions_transit");
+  static directions_walk = Icons.new("directions_walk");
+  static disc_full = Icons.new("disc_full");
+  static dns = Icons.new("dns");
+  static do_not_disturb = Icons.new("do_not_disturb");
+  static do_not_disturb_alt = Icons.new("do_not_disturb_alt");
+  static do_not_disturb_off = Icons.new("do_not_disturb_off");
+  static do_not_disturb_on = Icons.new("do_not_disturb_on");
+  static dock = Icons.new("dock");
+  static domain = Icons.new("domain");
+  static done = Icons.new("done");
+  static done_all = Icons.new("done_all");
+  static done_outline = Icons.new("done_outline");
+  static donut_large = Icons.new("donut_large");
+  static donut_small = Icons.new("donut_small");
+  static drafts = Icons.new("drafts");
+  static drag_handle = Icons.new("drag_handle");
+  static drive_eta = Icons.new("drive_eta");
+  static dvr = Icons.new("dvr");
+  static edit = Icons.new("edit");
+  static edit_attributes = Icons.new("edit_attributes");
+  static edit_location = Icons.new("edit_location");
+  static eject = Icons.new("eject");
+  static email = Icons.new("email");
+  static enhanced_encryption = Icons.new("enhanced_encryption");
+  static equalizer = Icons.new("equalizer");
+  static error = Icons.new("error");
+  static error_outline = Icons.new("error_outline");
+  static euro_symbol = Icons.new("euro_symbol");
+  static ev_station = Icons.new("ev_station");
+  static event = Icons.new("event");
+  static event_available = Icons.new("event_available");
+  static event_busy = Icons.new("event_busy");
+  static event_note = Icons.new("event_note");
+  static event_seat = Icons.new("event_seat");
+  static exit_to_app = Icons.new("exit_to_app");
+  static expand_less = Icons.new("expand_less");
+  static expand_more = Icons.new("expand_more");
+  static explicit = Icons.new("explicit");
+  static explore = Icons.new("explore");
+  static exposure = Icons.new("exposure");
+  static exposure_neg_1 = Icons.new("exposure_neg_1");
+  static exposure_neg_2 = Icons.new("exposure_neg_2");
+  static exposure_plus_1 = Icons.new("exposure_plus_1");
+  static exposure_plus_2 = Icons.new("exposure_plus_2");
+  static exposure_zero = Icons.new("exposure_zero");
+  static extension = Icons.new("extension");
+  static face = Icons.new("face");
+  static fast_forward = Icons.new("fast_forward");
+  static fast_rewind = Icons.new("fast_rewind");
+  static fastfood = Icons.new("fastfood");
+  static favorite = Icons.new("favorite");
+  static favorite_border = Icons.new("favorite_border");
+  static featured_play_list = Icons.new("featured_play_list");
+  static featured_video = Icons.new("featured_video");
+  static feedback = Icons.new("feedback");
+  static fiber_dvr = Icons.new("fiber_dvr");
+  static fiber_manual_record = Icons.new("fiber_manual_record");
+  static fiber_new = Icons.new("fiber_new");
+  static fiber_pin = Icons.new("fiber_pin");
+  static fiber_smart_record = Icons.new("fiber_smart_record");
+  static file_download = Icons.new("file_download");
+  static file_upload = Icons.new("file_upload");
+  static filter = Icons.new("filter");
+  static filter_1 = Icons.new("filter_1");
+  static filter_2 = Icons.new("filter_2");
+  static filter_3 = Icons.new("filter_3");
+  static filter_4 = Icons.new("filter_4");
+  static filter_5 = Icons.new("filter_5");
+  static filter_6 = Icons.new("filter_6");
+  static filter_7 = Icons.new("filter_7");
+  static filter_8 = Icons.new("filter_8");
+  static filter_9 = Icons.new("filter_9");
+  static filter_9_plus = Icons.new("filter_9_plus");
+  static filter_b_and_w = Icons.new("filter_b_and_w");
+  static filter_center_focus = Icons.new("filter_center_focus");
+  static filter_drama = Icons.new("filter_drama");
+  static filter_frames = Icons.new("filter_frames");
+  static filter_hdr = Icons.new("filter_hdr");
+  static filter_list = Icons.new("filter_list");
+  static filter_none = Icons.new("filter_none");
+  static filter_tilt_shift = Icons.new("filter_tilt_shift");
+  static filter_vintage = Icons.new("filter_vintage");
+  static find_in_page = Icons.new("find_in_page");
+  static find_replace = Icons.new("find_replace");
+  static fingerprint = Icons.new("fingerprint");
+  static first_page = Icons.new("first_page");
+  static fitness_center = Icons.new("fitness_center");
+  static flag = Icons.new("flag");
+  static flare = Icons.new("flare");
+  static flash_auto = Icons.new("flash_auto");
+  static flash_off = Icons.new("flash_off");
+  static flash_on = Icons.new("flash_on");
+  static flight = Icons.new("flight");
+  static flight_land = Icons.new("flight_land");
+  static flight_takeoff = Icons.new("flight_takeoff");
+  static flip = Icons.new("flip");
+  static flip_to_back = Icons.new("flip_to_back");
+  static flip_to_front = Icons.new("flip_to_front");
+  static folder = Icons.new("folder");
+  static folder_open = Icons.new("folder_open");
+  static folder_shared = Icons.new("folder_shared");
+  static folder_special = Icons.new("folder_special");
+  static font_download = Icons.new("font_download");
+  static format_align_center = Icons.new("format_align_center");
+  static format_align_justify = Icons.new("format_align_justify");
+  static format_align_left = Icons.new("format_align_left");
+  static format_align_right = Icons.new("format_align_right");
+  static format_bold = Icons.new("format_bold");
+  static format_clear = Icons.new("format_clear");
+  static format_color_fill = Icons.new("format_color_fill");
+  static format_color_reset = Icons.new("format_color_reset");
+  static format_color_text = Icons.new("format_color_text");
+  static format_indent_decrease = Icons.new("format_indent_decrease");
+  static format_indent_increase = Icons.new("format_indent_increase");
+  static format_italic = Icons.new("format_italic");
+  static format_line_spacing = Icons.new("format_line_spacing");
+  static format_list_bulleted = Icons.new("format_list_bulleted");
+  static format_list_numbered = Icons.new("format_list_numbered");
+  static format_list_numbered_rtl = Icons.new("format_list_numbered_rtl");
+  static format_paint = Icons.new("format_paint");
+  static format_quote = Icons.new("format_quote");
+  static format_shapes = Icons.new("format_shapes");
+  static format_size = Icons.new("format_size");
+  static format_strikethrough = Icons.new("format_strikethrough");
+  static format_textdirection_l_to_r = Icons.new("format_textdirection_l_to_r");
+  static format_textdirection_r_to_l = Icons.new("format_textdirection_r_to_l");
+  static format_underlined = Icons.new("format_underlined");
+  static forum = Icons.new("forum");
+  static forward = Icons.new("forward");
+  static forward_10 = Icons.new("forward_10");
+  static forward_30 = Icons.new("forward_30");
+  static forward_5 = Icons.new("forward_5");
+  static free_breakfast = Icons.new("free_breakfast");
+  static fullscreen = Icons.new("fullscreen");
+  static fullscreen_exit = Icons.new("fullscreen_exit");
+  static functions = Icons.new("functions");
+  static g_translate = Icons.new("g_translate");
+  static gamepad = Icons.new("gamepad");
+  static games = Icons.new("games");
+  static gavel = Icons.new("gavel");
+  static gesture = Icons.new("gesture");
+  static get_app = Icons.new("get_app");
+  static gif = Icons.new("gif");
+  static golf_course = Icons.new("golf_course");
+  static gps_fixed = Icons.new("gps_fixed");
+  static gps_not_fixed = Icons.new("gps_not_fixed");
+  static gps_off = Icons.new("gps_off");
+  static grade = Icons.new("grade");
+  static gradient = Icons.new("gradient");
+  static grain = Icons.new("grain");
+  static graphic_eq = Icons.new("graphic_eq");
+  static grid_off = Icons.new("grid_off");
+  static grid_on = Icons.new("grid_on");
+  static group = Icons.new("group");
+  static group_add = Icons.new("group_add");
+  static group_work = Icons.new("group_work");
+  static hd = Icons.new("hd");
+  static hdr_off = Icons.new("hdr_off");
+  static hdr_on = Icons.new("hdr_on");
+  static hdr_strong = Icons.new("hdr_strong");
+  static hdr_weak = Icons.new("hdr_weak");
+  static headset = Icons.new("headset");
+  static headset_mic = Icons.new("headset_mic");
+  static headset_off = Icons.new("headset_off");
+  static healing = Icons.new("healing");
+  static hearing = Icons.new("hearing");
+  static help = Icons.new("help");
+  static help_outline = Icons.new("help_outline");
+  static high_quality = Icons.new("high_quality");
+  static highlight = Icons.new("highlight");
+  static highlight_off = Icons.new("highlight_off");
+  static history = Icons.new("history");
+  static home = Icons.new("home");
+  static hot_tub = Icons.new("hot_tub");
+  static hotel = Icons.new("hotel");
+  static hourglass_empty = Icons.new("hourglass_empty");
+  static hourglass_full = Icons.new("hourglass_full");
+  static http = Icons.new("http");
+  static https = Icons.new("https");
+  static image = Icons.new("image");
+  static image_aspect_ratio = Icons.new("image_aspect_ratio");
+  static import_contacts = Icons.new("import_contacts");
+  static import_export = Icons.new("import_export");
+  static important_devices = Icons.new("important_devices");
+  static inbox = Icons.new("inbox");
+  static indeterminate_check_box = Icons.new("indeterminate_check_box");
+  static info = Icons.new("info");
+  static info_outline = Icons.new("info_outline");
+  static input = Icons.new("input");
+  static insert_chart = Icons.new("insert_chart");
+  static insert_comment = Icons.new("insert_comment");
+  static insert_drive_file = Icons.new("insert_drive_file");
+  static insert_emoticon = Icons.new("insert_emoticon");
+  static insert_invitation = Icons.new("insert_invitation");
+  static insert_link = Icons.new("insert_link");
+  static insert_photo = Icons.new("insert_photo");
+  static invert_colors = Icons.new("invert_colors");
+  static invert_colors_off = Icons.new("invert_colors_off");
+  static iso = Icons.new("iso");
+  static keyboard = Icons.new("keyboard");
+  static keyboard_arrow_down = Icons.new("keyboard_arrow_down");
+  static keyboard_arrow_left = Icons.new("keyboard_arrow_left");
+  static keyboard_arrow_right = Icons.new("keyboard_arrow_right");
+  static keyboard_arrow_up = Icons.new("keyboard_arrow_up");
+  static keyboard_backspace = Icons.new("keyboard_backspace");
+  static keyboard_capslock = Icons.new("keyboard_capslock");
+  static keyboard_hide = Icons.new("keyboard_hide");
+  static keyboard_return = Icons.new("keyboard_return");
+  static keyboard_tab = Icons.new("keyboard_tab");
+  static keyboard_voice = Icons.new("keyboard_voice");
+  static kitchen = Icons.new("kitchen");
+  static label = Icons.new("label");
+  static label_important = Icons.new("label_important");
+  static label_outline = Icons.new("label_outline");
+  static landscape = Icons.new("landscape");
+  static language = Icons.new("language");
+  static laptop = Icons.new("laptop");
+  static laptop_chromebook = Icons.new("laptop_chromebook");
+  static laptop_mac = Icons.new("laptop_mac");
+  static laptop_windows = Icons.new("laptop_windows");
+  static last_page = Icons.new("last_page");
+  static launch = Icons.new("launch");
+  static layers = Icons.new("layers");
+  static layers_clear = Icons.new("layers_clear");
+  static leak_add = Icons.new("leak_add");
+  static leak_remove = Icons.new("leak_remove");
+  static lens = Icons.new("lens");
+  static library_add = Icons.new("library_add");
+  static library_books = Icons.new("library_books");
+  static library_music = Icons.new("library_music");
+  static lightbulb_outline = Icons.new("lightbulb_outline");
+  static line_style = Icons.new("line_style");
+  static line_weight = Icons.new("line_weight");
+  static linear_scale = Icons.new("linear_scale");
+  static link = Icons.new("link");
+  static link_off = Icons.new("link_off");
+  static linked_camera = Icons.new("linked_camera");
+  static list = Icons.new("list");
+  static live_help = Icons.new("live_help");
+  static live_tv = Icons.new("live_tv");
+  static local_activity = Icons.new("local_activity");
+  static local_airport = Icons.new("local_airport");
+  static local_atm = Icons.new("local_atm");
+  static local_bar = Icons.new("local_bar");
+  static local_cafe = Icons.new("local_cafe");
+  static local_car_wash = Icons.new("local_car_wash");
+  static local_convenience_store = Icons.new("local_convenience_store");
+  static local_dining = Icons.new("local_dining");
+  static local_drink = Icons.new("local_drink");
+  static local_florist = Icons.new("local_florist");
+  static local_gas_station = Icons.new("local_gas_station");
+  static local_grocery_store = Icons.new("local_grocery_store");
+  static local_hospital = Icons.new("local_hospital");
+  static local_hotel = Icons.new("local_hotel");
+  static local_laundry_service = Icons.new("local_laundry_service");
+  static local_library = Icons.new("local_library");
+  static local_mall = Icons.new("local_mall");
+  static local_movies = Icons.new("local_movies");
+  static local_offer = Icons.new("local_offer");
+  static local_parking = Icons.new("local_parking");
+  static local_pharmacy = Icons.new("local_pharmacy");
+  static local_phone = Icons.new("local_phone");
+  static local_pizza = Icons.new("local_pizza");
+  static local_play = Icons.new("local_play");
+  static local_post_office = Icons.new("local_post_office");
+  static local_printshop = Icons.new("local_printshop");
+  static local_see = Icons.new("local_see");
+  static local_shipping = Icons.new("local_shipping");
+  static local_taxi = Icons.new("local_taxi");
+  static location_city = Icons.new("location_city");
+  static location_disabled = Icons.new("location_disabled");
+  static location_off = Icons.new("location_off");
+  static location_on = Icons.new("location_on");
+  static location_searching = Icons.new("location_searching");
+  static lock = Icons.new("lock");
+  static lock_open = Icons.new("lock_open");
+  static lock_outline = Icons.new("lock_outline");
+  static looks = Icons.new("looks");
+  static looks_3 = Icons.new("looks_3");
+  static looks_4 = Icons.new("looks_4");
+  static looks_5 = Icons.new("looks_5");
+  static looks_6 = Icons.new("looks_6");
+  static looks_one = Icons.new("looks_one");
+  static looks_two = Icons.new("looks_two");
+  static loop = Icons.new("loop");
+  static loupe = Icons.new("loupe");
+  static low_priority = Icons.new("low_priority");
+  static loyalty = Icons.new("loyalty");
+  static mail = Icons.new("mail");
+  static mail_outline = Icons.new("mail_outline");
+  static map = Icons.new("map");
+  static markunread = Icons.new("markunread");
+  static markunread_mailbox = Icons.new("markunread_mailbox");
+  static maximize = Icons.new("maximize");
+  static memory = Icons.new("memory");
+  static menu = Icons.new("menu");
+  static merge_type = Icons.new("merge_type");
+  static message = Icons.new("message");
+  static mic = Icons.new("mic");
+  static mic_none = Icons.new("mic_none");
+  static mic_off = Icons.new("mic_off");
+  static minimize = Icons.new("minimize");
+  static missed_video_call = Icons.new("missed_video_call");
+  static mms = Icons.new("mms");
+  static mobile_screen_share = Icons.new("mobile_screen_share");
+  static mode_comment = Icons.new("mode_comment");
+  static mode_edit = Icons.new("mode_edit");
+  static monetization_on = Icons.new("monetization_on");
+  static money_off = Icons.new("money_off");
+  static monochrome_photos = Icons.new("monochrome_photos");
+  static mood = Icons.new("mood");
+  static mood_bad = Icons.new("mood_bad");
+  static more = Icons.new("more");
+  static more_horiz = Icons.new("more_horiz");
+  static more_vert = Icons.new("more_vert");
+  static motorcycle = Icons.new("motorcycle");
+  static mouse = Icons.new("mouse");
+  static move_to_inbox = Icons.new("move_to_inbox");
+  static movie = Icons.new("movie");
+  static movie_creation = Icons.new("movie_creation");
+  static movie_filter = Icons.new("movie_filter");
+  static multiline_chart = Icons.new("multiline_chart");
+  static music_note = Icons.new("music_note");
+  static music_video = Icons.new("music_video");
+  static my_location = Icons.new("my_location");
+  static nature = Icons.new("nature");
+  static nature_people = Icons.new("nature_people");
+  static navigate_before = Icons.new("navigate_before");
+  static navigate_next = Icons.new("navigate_next");
+  static navigation = Icons.new("navigation");
+  static near_me = Icons.new("near_me");
+  static network_cell = Icons.new("network_cell");
+  static network_check = Icons.new("network_check");
+  static network_locked = Icons.new("network_locked");
+  static network_wifi = Icons.new("network_wifi");
+  static new_releases = Icons.new("new_releases");
+  static next_week = Icons.new("next_week");
+  static nfc = Icons.new("nfc");
+  static no_encryption = Icons.new("no_encryption");
+  static no_sim = Icons.new("no_sim");
+  static not_interested = Icons.new("not_interested");
+  static not_listed_location = Icons.new("not_listed_location");
+  static note = Icons.new("note");
+  static note_add = Icons.new("note_add");
+  static notification_important = Icons.new("notification_important");
+  static notifications = Icons.new("notifications");
+  static notifications_active = Icons.new("notifications_active");
+  static notifications_none = Icons.new("notifications_none");
+  static notifications_off = Icons.new("notifications_off");
+  static notifications_paused = Icons.new("notifications_paused");
+  static offline_bolt = Icons.new("offline_bolt");
+  static offline_pin = Icons.new("offline_pin");
+  static ondemand_video = Icons.new("ondemand_video");
+  static opacity = Icons.new("opacity");
+  static open_in_browser = Icons.new("open_in_browser");
+  static open_in_new = Icons.new("open_in_new");
+  static open_with = Icons.new("open_with");
+  static outlined_flag = Icons.new("outlined_flag");
+  static pages = Icons.new("pages");
+  static pageview = Icons.new("pageview");
+  static palette = Icons.new("palette");
+  static pan_tool = Icons.new("pan_tool");
+  static panorama = Icons.new("panorama");
+  static panorama_fish_eye = Icons.new("panorama_fish_eye");
+  static panorama_horizontal = Icons.new("panorama_horizontal");
+  static panorama_vertical = Icons.new("panorama_vertical");
+  static panorama_wide_angle = Icons.new("panorama_wide_angle");
+  static party_mode = Icons.new("party_mode");
+  static pause = Icons.new("pause");
+  static pause_circle_filled = Icons.new("pause_circle_filled");
+  static pause_circle_outline = Icons.new("pause_circle_outline");
+  static payment = Icons.new("payment");
+  static people = Icons.new("people");
+  static people_outline = Icons.new("people_outline");
+  static perm_camera_mic = Icons.new("perm_camera_mic");
+  static perm_contact_calendar = Icons.new("perm_contact_calendar");
+  static perm_data_setting = Icons.new("perm_data_setting");
+  static perm_device_information = Icons.new("perm_device_information");
+  static perm_identity = Icons.new("perm_identity");
+  static perm_media = Icons.new("perm_media");
+  static perm_phone_msg = Icons.new("perm_phone_msg");
+  static perm_scan_wifi = Icons.new("perm_scan_wifi");
+  static person = Icons.new("person");
+  static person_add = Icons.new("person_add");
+  static person_outline = Icons.new("person_outline");
+  static person_pin = Icons.new("person_pin");
+  static person_pin_circle = Icons.new("person_pin_circle");
+  static personal_video = Icons.new("personal_video");
+  static pets = Icons.new("pets");
+  static phone = Icons.new("phone");
+  static phone_android = Icons.new("phone_android");
+  static phone_bluetooth_speaker = Icons.new("phone_bluetooth_speaker");
+  static phone_forwarded = Icons.new("phone_forwarded");
+  static phone_in_talk = Icons.new("phone_in_talk");
+  static phone_iphone = Icons.new("phone_iphone");
+  static phone_locked = Icons.new("phone_locked");
+  static phone_missed = Icons.new("phone_missed");
+  static phone_paused = Icons.new("phone_paused");
+  static phonelink = Icons.new("phonelink");
+  static phonelink_erase = Icons.new("phonelink_erase");
+  static phonelink_lock = Icons.new("phonelink_lock");
+  static phonelink_off = Icons.new("phonelink_off");
+  static phonelink_ring = Icons.new("phonelink_ring");
+  static phonelink_setup = Icons.new("phonelink_setup");
+  static photo = Icons.new("photo");
+  static photo_album = Icons.new("photo_album");
+  static photo_camera = Icons.new("photo_camera");
+  static photo_filter = Icons.new("photo_filter");
+  static photo_library = Icons.new("photo_library");
+  static photo_size_select_actual = Icons.new("photo_size_select_actual");
+  static photo_size_select_large = Icons.new("photo_size_select_large");
+  static photo_size_select_small = Icons.new("photo_size_select_small");
+  static picture_as_pdf = Icons.new("picture_as_pdf");
+  static picture_in_picture = Icons.new("picture_in_picture");
+  static picture_in_picture_alt = Icons.new("picture_in_picture_alt");
+  static pie_chart = Icons.new("pie_chart");
+  static pie_chart_outlined = Icons.new("pie_chart_outlined");
+  static pin_drop = Icons.new("pin_drop");
+  static place = Icons.new("place");
+  static play_arrow = Icons.new("play_arrow");
+  static play_circle_filled = Icons.new("play_circle_filled");
+  static play_circle_outline = Icons.new("play_circle_outline");
+  static play_for_work = Icons.new("play_for_work");
+  static playlist_add = Icons.new("playlist_add");
+  static playlist_add_check = Icons.new("playlist_add_check");
+  static playlist_play = Icons.new("playlist_play");
+  static plus_one = Icons.new("plus_one");
+  static poll = Icons.new("poll");
+  static polymer = Icons.new("polymer");
+  static pool = Icons.new("pool");
+  static portable_wifi_off = Icons.new("portable_wifi_off");
+  static portrait = Icons.new("portrait");
+  static power = Icons.new("power");
+  static power_input = Icons.new("power_input");
+  static power_settings_new = Icons.new("power_settings_new");
+  static pregnant_woman = Icons.new("pregnant_woman");
+  static present_to_all = Icons.new("present_to_all");
+  static print = Icons.new("print");
+  static priority_high = Icons.new("priority_high");
+  static public = Icons.new("public");
+  static publish = Icons.new("publish");
+  static query_builder = Icons.new("query_builder");
+  static question_answer = Icons.new("question_answer");
+  static queue = Icons.new("queue");
+  static queue_music = Icons.new("queue_music");
+  static queue_play_next = Icons.new("queue_play_next");
+  static radio = Icons.new("radio");
+  static radio_button_checked = Icons.new("radio_button_checked");
+  static radio_button_unchecked = Icons.new("radio_button_unchecked");
+  static rate_review = Icons.new("rate_review");
+  static receipt = Icons.new("receipt");
+  static recent_actors = Icons.new("recent_actors");
+  static record_voice_over = Icons.new("record_voice_over");
+  static redeem = Icons.new("redeem");
+  static redo = Icons.new("redo");
+  static refresh = Icons.new("refresh");
+  static remove = Icons.new("remove");
+  static remove_circle = Icons.new("remove_circle");
+  static remove_circle_outline = Icons.new("remove_circle_outline");
+  static remove_from_queue = Icons.new("remove_from_queue");
+  static remove_red_eye = Icons.new("remove_red_eye");
+  static remove_shopping_cart = Icons.new("remove_shopping_cart");
+  static reorder = Icons.new("reorder");
+  static repeat = Icons.new("repeat");
+  static repeat_one = Icons.new("repeat_one");
+  static replay = Icons.new("replay");
+  static replay_10 = Icons.new("replay_10");
+  static replay_30 = Icons.new("replay_30");
+  static replay_5 = Icons.new("replay_5");
+  static reply = Icons.new("reply");
+  static reply_all = Icons.new("reply_all");
+  static report = Icons.new("report");
+  static report_off = Icons.new("report_off");
+  static report_problem = Icons.new("report_problem");
+  static restaurant = Icons.new("restaurant");
+  static restaurant_menu = Icons.new("restaurant_menu");
+  static restore = Icons.new("restore");
+  static restore_from_trash = Icons.new("restore_from_trash");
+  static restore_page = Icons.new("restore_page");
+  static ring_volume = Icons.new("ring_volume");
+  static room = Icons.new("room");
+  static room_service = Icons.new("room_service");
+  static rotate_90_degrees_ccw = Icons.new("rotate_90_degrees_ccw");
+  static rotate_left = Icons.new("rotate_left");
+  static rotate_right = Icons.new("rotate_right");
+  static rounded_corner = Icons.new("rounded_corner");
+  static router = Icons.new("router");
+  static rowing = Icons.new("rowing");
+  static rss_feed = Icons.new("rss_feed");
+  static rv_hookup = Icons.new("rv_hookup");
+  static satellite = Icons.new("satellite");
+  static save = Icons.new("save");
+  static save_alt = Icons.new("save_alt");
+  static scanner = Icons.new("scanner");
+  static scatter_plot = Icons.new("scatter_plot");
+  static schedule = Icons.new("schedule");
+  static school = Icons.new("school");
+  static score = Icons.new("score");
+  static screen_lock_landscape = Icons.new("screen_lock_landscape");
+  static screen_lock_portrait = Icons.new("screen_lock_portrait");
+  static screen_lock_rotation = Icons.new("screen_lock_rotation");
+  static screen_rotation = Icons.new("screen_rotation");
+  static screen_share = Icons.new("screen_share");
+  static sd_card = Icons.new("sd_card");
+  static sd_storage = Icons.new("sd_storage");
+  static search = Icons.new("search");
+  static security = Icons.new("security");
+  static select_all = Icons.new("select_all");
+  static send = Icons.new("send");
+  static sentiment_dissatisfied = Icons.new("sentiment_dissatisfied");
+  static sentiment_neutral = Icons.new("sentiment_neutral");
+  static sentiment_satisfied = Icons.new("sentiment_satisfied");
+  static sentiment_very_dissatisfied = Icons.new("sentiment_very_dissatisfied");
+  static sentiment_very_satisfied = Icons.new("sentiment_very_satisfied");
+  static settings = Icons.new("settings");
+  static settings_applications = Icons.new("settings_applications");
+  static settings_backup_restore = Icons.new("settings_backup_restore");
+  static settings_bluetooth = Icons.new("settings_bluetooth");
+  static settings_brightness = Icons.new("settings_brightness");
+  static settings_cell = Icons.new("settings_cell");
+  static settings_ethernet = Icons.new("settings_ethernet");
+  static settings_input_antenna = Icons.new("settings_input_antenna");
+  static settings_input_component = Icons.new("settings_input_component");
+  static settings_input_composite = Icons.new("settings_input_composite");
+  static settings_input_hdmi = Icons.new("settings_input_hdmi");
+  static settings_input_svideo = Icons.new("settings_input_svideo");
+  static settings_overscan = Icons.new("settings_overscan");
+  static settings_phone = Icons.new("settings_phone");
+  static settings_power = Icons.new("settings_power");
+  static settings_remote = Icons.new("settings_remote");
+  static settings_system_daydream = Icons.new("settings_system_daydream");
+  static settings_voice = Icons.new("settings_voice");
+  static share = Icons.new("share");
+  static shop = Icons.new("shop");
+  static shop_two = Icons.new("shop_two");
+  static shopping_basket = Icons.new("shopping_basket");
+  static shopping_cart = Icons.new("shopping_cart");
+  static short_text = Icons.new("short_text");
+  static show_chart = Icons.new("show_chart");
+  static shuffle = Icons.new("shuffle");
+  static shutter_speed = Icons.new("shutter_speed");
+  static signal_cellular_4_bar = Icons.new("signal_cellular_4_bar");
+  static signal_cellular_connected_no_internet_4_bar = Icons.new("signal_cellular_connected_no_internet_4_bar");
+  static signal_cellular_no_sim = Icons.new("signal_cellular_no_sim");
+  static signal_cellular_null = Icons.new("signal_cellular_null");
+  static signal_cellular_off = Icons.new("signal_cellular_off");
+  static signal_wifi_4_bar = Icons.new("signal_wifi_4_bar");
+  static signal_wifi_4_bar_lock = Icons.new("signal_wifi_4_bar_lock");
+  static signal_wifi_off = Icons.new("signal_wifi_off");
+  static sim_card = Icons.new("sim_card");
+  static sim_card_alert = Icons.new("sim_card_alert");
+  static skip_next = Icons.new("skip_next");
+  static skip_previous = Icons.new("skip_previous");
+  static slideshow = Icons.new("slideshow");
+  static slow_motion_video = Icons.new("slow_motion_video");
+  static smartphone = Icons.new("smartphone");
+  static smoke_free = Icons.new("smoke_free");
+  static smoking_rooms = Icons.new("smoking_rooms");
+  static sms = Icons.new("sms");
+  static sms_failed = Icons.new("sms_failed");
+  static snooze = Icons.new("snooze");
+  static sort = Icons.new("sort");
+  static sort_by_alpha = Icons.new("sort_by_alpha");
+  static spa = Icons.new("spa");
+  static space_bar = Icons.new("space_bar");
+  static speaker = Icons.new("speaker");
+  static speaker_group = Icons.new("speaker_group");
+  static speaker_notes = Icons.new("speaker_notes");
+  static speaker_notes_off = Icons.new("speaker_notes_off");
+  static speaker_phone = Icons.new("speaker_phone");
+  static spellcheck = Icons.new("spellcheck");
+  static star = Icons.new("star");
+  static star_border = Icons.new("star_border");
+  static star_half = Icons.new("star_half");
+  static stars = Icons.new("stars");
+  static stay_current_landscape = Icons.new("stay_current_landscape");
+  static stay_current_portrait = Icons.new("stay_current_portrait");
+  static stay_primary_landscape = Icons.new("stay_primary_landscape");
+  static stay_primary_portrait = Icons.new("stay_primary_portrait");
+  static stop = Icons.new("stop");
+  static stop_screen_share = Icons.new("stop_screen_share");
+  static storage = Icons.new("storage");
+  static store = Icons.new("store");
+  static store_mall_directory = Icons.new("store_mall_directory");
+  static straighten = Icons.new("straighten");
+  static streetview = Icons.new("streetview");
+  static strikethrough_s = Icons.new("strikethrough_s");
+  static style = Icons.new("style");
+  static subdirectory_arrow_left = Icons.new("subdirectory_arrow_left");
+  static subdirectory_arrow_right = Icons.new("subdirectory_arrow_right");
+  static subject = Icons.new("subject");
+  static subscriptions = Icons.new("subscriptions");
+  static subtitles = Icons.new("subtitles");
+  static subway = Icons.new("subway");
+  static supervised_user_circle = Icons.new("supervised_user_circle");
+  static supervisor_account = Icons.new("supervisor_account");
+  static surround_sound = Icons.new("surround_sound");
+  static swap_calls = Icons.new("swap_calls");
+  static swap_horiz = Icons.new("swap_horiz");
+  static swap_horizontal_circle = Icons.new("swap_horizontal_circle");
+  static swap_vert = Icons.new("swap_vert");
+  static swap_vertical_circle = Icons.new("swap_vertical_circle");
+  static switch_camera = Icons.new("switch_camera");
+  static switch_video = Icons.new("switch_video");
+  static sync = Icons.new("sync");
+  static sync_disabled = Icons.new("sync_disabled");
+  static sync_problem = Icons.new("sync_problem");
+  static system_update = Icons.new("system_update");
+  static system_update_alt = Icons.new("system_update_alt");
+  static tab = Icons.new("tab");
+  static tab_unselected = Icons.new("tab_unselected");
+  static table_chart = Icons.new("table_chart");
+  static tablet = Icons.new("tablet");
+  static tablet_android = Icons.new("tablet_android");
+  static tablet_mac = Icons.new("tablet_mac");
+  static tag_faces = Icons.new("tag_faces");
+  static tap_and_play = Icons.new("tap_and_play");
+  static terrain = Icons.new("terrain");
+  static text_fields = Icons.new("text_fields");
+  static text_format = Icons.new("text_format");
+  static text_rotate_up = Icons.new("text_rotate_up");
+  static text_rotate_vertical = Icons.new("text_rotate_vertical");
+  static text_rotation_angledown = Icons.new("text_rotation_angledown");
+  static text_rotation_angleup = Icons.new("text_rotation_angleup");
+  static text_rotation_down = Icons.new("text_rotation_down");
+  static text_rotation_none = Icons.new("text_rotation_none");
+  static textsms = Icons.new("textsms");
+  static texture = Icons.new("texture");
+  static theaters = Icons.new("theaters");
+  static thumb_down = Icons.new("thumb_down");
+  static thumb_up = Icons.new("thumb_up");
+  static thumbs_up_down = Icons.new("thumbs_up_down");
+  static time_to_leave = Icons.new("time_to_leave");
+  static timelapse = Icons.new("timelapse");
+  static timeline = Icons.new("timeline");
+  static timer = Icons.new("timer");
+  static timer_10 = Icons.new("timer_10");
+  static timer_3 = Icons.new("timer_3");
+  static timer_off = Icons.new("timer_off");
+  static title = Icons.new("title");
+  static toc = Icons.new("toc");
+  static today = Icons.new("today");
+  static toll = Icons.new("toll");
+  static tonality = Icons.new("tonality");
+  static touch_app = Icons.new("touch_app");
+  static toys = Icons.new("toys");
+  static track_changes = Icons.new("track_changes");
+  static traffic = Icons.new("traffic");
+  static train = Icons.new("train");
+  static tram = Icons.new("tram");
+  static transfer_within_a_station = Icons.new("transfer_within_a_station");
+  static transform = Icons.new("transform");
+  static transit_enterexit = Icons.new("transit_enterexit");
+  static translate = Icons.new("translate");
+  static trending_down = Icons.new("trending_down");
+  static trending_flat = Icons.new("trending_flat");
+  static trending_up = Icons.new("trending_up");
+  static trip_origin = Icons.new("trip_origin");
+  static tune = Icons.new("tune");
+  static turned_in = Icons.new("turned_in");
+  static turned_in_not = Icons.new("turned_in_not");
+  static tv = Icons.new("tv");
+  static unarchive = Icons.new("unarchive");
+  static undo = Icons.new("undo");
+  static unfold_less = Icons.new("unfold_less");
+  static unfold_more = Icons.new("unfold_more");
+  static update = Icons.new("update");
+  static usb = Icons.new("usb");
+  static verified_user = Icons.new("verified_user");
+  static vertical_align_bottom = Icons.new("vertical_align_bottom");
+  static vertical_align_center = Icons.new("vertical_align_center");
+  static vertical_align_top = Icons.new("vertical_align_top");
+  static vibration = Icons.new("vibration");
+  static video_call = Icons.new("video_call");
+  static video_label = Icons.new("video_label");
+  static video_library = Icons.new("video_library");
+  static videocam = Icons.new("videocam");
+  static videocam_off = Icons.new("videocam_off");
+  static videogame_asset = Icons.new("videogame_asset");
+  static view_agenda = Icons.new("view_agenda");
+  static view_array = Icons.new("view_array");
+  static view_carousel = Icons.new("view_carousel");
+  static view_column = Icons.new("view_column");
+  static view_comfy = Icons.new("view_comfy");
+  static view_compact = Icons.new("view_compact");
+  static view_day = Icons.new("view_day");
+  static view_headline = Icons.new("view_headline");
+  static view_list = Icons.new("view_list");
+  static view_module = Icons.new("view_module");
+  static view_quilt = Icons.new("view_quilt");
+  static view_stream = Icons.new("view_stream");
+  static view_week = Icons.new("view_week");
+  static vignette = Icons.new("vignette");
+  static visibility = Icons.new("visibility");
+  static visibility_off = Icons.new("visibility_off");
+  static voice_chat = Icons.new("voice_chat");
+  static voicemail = Icons.new("voicemail");
+  static volume_down = Icons.new("volume_down");
+  static volume_mute = Icons.new("volume_mute");
+  static volume_off = Icons.new("volume_off");
+  static volume_up = Icons.new("volume_up");
+  static vpn_key = Icons.new("vpn_key");
+  static vpn_lock = Icons.new("vpn_lock");
+  static wallpaper = Icons.new("wallpaper");
+  static warning = Icons.new("warning");
+  static watch = Icons.new("watch");
+  static watch_later = Icons.new("watch_later");
+  static wb_auto = Icons.new("wb_auto");
+  static wb_cloudy = Icons.new("wb_cloudy");
+  static wb_incandescent = Icons.new("wb_incandescent");
+  static wb_iridescent = Icons.new("wb_iridescent");
+  static wb_sunny = Icons.new("wb_sunny");
+  static wc = Icons.new("wc");
+  static web = Icons.new("web");
+  static web_asset = Icons.new("web_asset");
+  static weekend = Icons.new("weekend");
+  static whatshot = Icons.new("whatshot");
+  static widgets = Icons.new("widgets");
+  static wifi = Icons.new("wifi");
+  static wifi_lock = Icons.new("wifi_lock");
+  static wifi_tethering = Icons.new("wifi_tethering");
+  static work = Icons.new("work");
+  static wrap_text = Icons.new("wrap_text");
+  static youtube_searched_for = Icons.new("youtube_searched_for");
+  static zoom_in = Icons.new("zoom_in");
+  static zoom_out = Icons.new("zoom_out");
+  static zoom_out_map = Icons.new("zoom_out_map");
 }
 //#endregion
 
 
 //#region ******* CupertinoIcons ********
 export class CupertinoIcons extends IconData{
-
-  /// A thin left chevron.
-  static left_chevron = IconData.new(0xf3d2,  {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons", matchTextDirection:true});
-
-  /// A thin right chevron.
-  static right_chevron = IconData.new(0xf3d3,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons", matchTextDirection:true});
-
-  /// iOS style share icon with an arrow pointing up from a box. This icon is not filled in.
-  static share = IconData.new(0xf4ca,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// iOS style share icon with an arrow pointing up from a box. This icon is filled in.
-  static share_solid = IconData.new(0xf4cb,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A book silhouette spread open. This icon is not filled in.
-  static book = IconData.new(0xf3e7,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A book silhouette spread open. This icon is filled in.
-  static book_solid = IconData.new(0xf3e8,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A book silhouette spread open containing a bookmark in the upper right. This icon is not filled in.
-  static bookmark = IconData.new(0xf3e9,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A book silhouette spread open containing a bookmark in the upper right. This icon is filled in.
-  static bookmark_solid = IconData.new(0xf3ea,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A letter 'i' in a circle.
-  static info = IconData.new(0xf44c,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A curved up and left pointing arrow.
-  static reply = IconData.new(0xf4c6,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A chat bubble.
-  static conversation_bubble = IconData.new(0xf3fb,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A person's silhouette in a circle.
-  static profile_circled = IconData.new(0xf419,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A '+' sign in a circle.
-  static plus_circled = IconData.new(0xf48a,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A '-' sign in a circle.
-  static minus_circled = IconData.new(0xf463,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A right facing flag and pole outline.
-  static flag = IconData.new(0xf42c,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A magnifier loop outline.
-  static search = IconData.new(0xf4a5,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A checkmark.
-  static check_mark = IconData.new(0xf3fd,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A checkmark in a circle. The circle is not filled in.
-  static check_mark_circled = IconData.new(0xf3fe,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A checkmark in a circle. The circle is filled in.
-  static check_mark_circled_solid = IconData.new(0xf3ff,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An empty circle (a ring).  An un-selected radio button.
-  static circle = IconData.new(0xf401,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled circle.  The circle is surrounded by a ring.  A selected radio button.
-  static circle_filled = IconData.new(0xf400,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A thicker left chevron used in iOS for the navigation bar back button.
-  static back = IconData.new(0xf3cf,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons", matchTextDirection:true});
-
-  /// A thicker right chevron that's the reverse of [back].
-  static forward = IconData.new(0xf3d1,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons", matchTextDirection:true});
-
-  /// Outline of a simple front-facing house.
-  static home = IconData.new(0xf447,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A right-facing shopping cart outline.
-  static shopping_cart = IconData.new(0xf3f7,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Three solid dots.
-  static ellipsis = IconData.new(0xf46a,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A phone handset outline.
-  static phone = IconData.new(0xf4b8,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A phone handset.
-  static phone_solid = IconData.new(0xf4b9,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A solid down arrow.
-  static down_arrow = IconData.new(0xf35d,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A solid up arrow.
-  static up_arrow = IconData.new(0xf366,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A charging battery.
-  static battery_charging = IconData.new(0xf111,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An empty battery.
-  static battery_empty = IconData.new(0xf112,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A full battery.
-  static battery_full = IconData.new(0xf113,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A 75% charged battery.
-  static battery_75_percent = IconData.new(0xf114,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A 25% charged battery.
-  static battery_25_percent = IconData.new(0xf115,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// The Bluetooth logo.
-  static bluetooth = IconData.new(0xf116,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A restart arrow, pointing downwards.
-  static restart = IconData.new(0xf21c,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Two curved up and left pointing arrows.
-  static reply_all = IconData.new(0xf21d,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A curved up and left pointing arrow.
-  static reply_thick_solid = IconData.new(0xf21e,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// iOS style share icon with an arrow pointing upwards to the right from a box.
-  static share_up = IconData.new(0xf220,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Two thin right-facing intertwined arrows.
-  static shuffle = IconData.new(0xf4a9,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Two medium thickness right-facing intertwined arrows.
-  static shuffle_medium = IconData.new(0xf4a8,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Two thick right-facing intertwined arrows.
-  static shuffle_thick = IconData.new(0xf221,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A camera for still photographs. This icon is filled in.
-  static photo_camera = IconData.new(0xf3f5,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A camera for still photographs. This icon is not filled in.
-  static photo_camera_solid = IconData.new(0xf3f6,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A camera for moving pictures. This icon is not filled in.
-  static video_camera = IconData.new(0xf4cc,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A camera for moving pictures. This icon is filled in.
-  static video_camera_solid = IconData.new(0xf4cd,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A camera containing two circular arrows pointing at each other, which indicate switching. This icon is not filled in.
-  static switch_camera = IconData.new(0xf49e,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A camera containing two circular arrows pointing at each other, which indicate switching. This icon is filled in.
-  static switch_camera_solid = IconData.new(0xf49f,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A collection of folders, which store collections of files, i.e. an album. This icon is not filled in.
-  static collections = IconData.new(0xf3c9,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A collection of folders, which store collections of files, i.e. an album. This icon is filled in.
-  static collections_solid = IconData.new(0xf3ca,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A single folder, which stores multiple files. This icon is not filled in.
-  static folder = IconData.new(0xf434,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A single folder, which stores multiple files. This icon is filled in.
-  static folder_solid = IconData.new(0xf435,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A single folder that indicates being opened. A folder like this typically stores multiple files.
-  static folder_open = IconData.new(0xf38a,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A trash bin for removing items. This icon is not filled in.
-  static delete = IconData.new(0xf4c4,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A trash bin for removing items. This icon is filled in.
-  static delete_solid = IconData.new(0xf4c5,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A trash bin with minimal detail for removing items.
-  static delete_simple = IconData.new(0xf37f,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A simple pen.
-  static pen = IconData.new(0xf2bf,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A simple pencil.
-  static pencil = IconData.new(0xf37e,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A box for writing and a pen on top (that indicates the writing). This icon is not filled in.
-  static create = IconData.new(0xf417,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A box for writing and a pen on top (that indicates the writing). This icon is filled in.
-  static create_solid = IconData.new(0xf417,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An arrow on a circular path with its end pointing at its start.
-  static refresh = IconData.new(0xf49a,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An arrow on a circular path with its end pointing at its start surrounded by a circle. This is icon is not filled in.
-  static refresh_circled = IconData.new(0xf49b,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An arrow on a circular path with its end pointing at its start surrounded by a circle. This is icon is filled in.
-  static refresh_circled_solid = IconData.new(0xf49c,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An arrow on a circular path with its end pointing at its start.
-  static refresh_thin = IconData.new(0xf49d,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An arrow on a circular path with its end pointing at its start.
-  static refresh_thick = IconData.new(0xf3a8,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An arrow on a circular path with its end pointing at its start.
-  static refresh_bold = IconData.new(0xf21c,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A cross of two diagonal lines from edge to edge crossing in an angle of 90 degrees, which is used for dismissal.
-  static clear_thick = IconData.new(0xf2d7,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A cross of two diagonal lines from edge to edge crossing in an angle of 90 degrees, which is used for dismissal, used as a blank space in a circle.
-  static clear_thick_circled = IconData.new(0xf36e,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A cross of two diagonal lines from edge to edge crossing in an angle of 90 degrees, which is used for dismissal.
-  static clear = IconData.new(0xf404,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A cross of two diagonal lines from edge to edge crossing in an angle of 90 degrees, which is used for dismissal, surrounded by circle. This icon is not filled in.
-  static clear_circled = IconData.new(0xf405,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A cross of two diagonal lines from edge to edge crossing in an angle of 90 degrees, which is used for dismissal, used as a blank space in a circle. This icon is filled in.
-  static clear_circled_solid = IconData.new(0xf406,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Two straight lines, one horizontal and one vertical, meeting in the middle, which is the equivalent of a plus sign.
-  static add = IconData.new(0xf489,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Two straight lines, one horizontal and one vertical, meeting in the middle, which is the equivalent of a plus sign, surrounded by a circle. This icon is not filled in.
-  static add_circled = IconData.new(0xf48a,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Two straight lines, one horizontal and one vertical, meeting in the middle, which is the equivalent of a plus sign, surrounded by a circle. This icon is not filled in.
-  static add_circled_solid = IconData.new(0xf48b,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A gear with eight cogs. This icon is not filled in.
-  static gear = IconData.new(0xf43c,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A gear with eight cogs. This icon is filled in.
-  static gear_solid = IconData.new(0xf43d,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A gear with six cogs.
-  static gear_big = IconData.new(0xf2f7,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A cogwheel with many cogs and decoration in the middle. This icon is not filled in.
-  static settings = IconData.new(0xf411,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A cogwheel with many cogs and decoration in the middle. This icon is filled in.
-  static settings_solid = IconData.new(0xf412,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A symbol representing a solid single musical note.
-  static music_note = IconData.new(0xf46b,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A symbol representing 2 connected musical notes.
-  static double_music_note = IconData.new(0xf46c,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A triangle facing to the right. This icon is not filled in.
-  static play_arrow = IconData.new(0xf487,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A triangle facing to the right. This icon is filled in.
-  static play_arrow_solid = IconData.new(0xf488,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Two vertical rectangles. This icon is not filled in.
-  static pause = IconData.new(0xf477,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Two vertical rectangles. This icon is filled in.
-  static pause_solid = IconData.new(0xf478,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// The infinity symbol.
-  static loop = IconData.new(0xf449,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// The infinity symbol.
-  static loop_thick = IconData.new(0xf44a,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A speaker with a single small sound wave.
-  static volume_down = IconData.new(0xf3b7,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A speaker symbol.
-  static volume_mute = IconData.new(0xf3b8,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A speaker with a small and a large sound wave and a diagonal line crossing the whole icon.
-  static volume_off = IconData.new(0xf3b9,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A speaker with a small and a large sound wave.
-  static volume_up = IconData.new(0xf3ba,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// All four corners of a square facing inwards.
-  static fullscreen = IconData.new(0xf386,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// All four corners of a square facing outwards.
-  static fullscreen_exit = IconData.new(0xf37d,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in microphone with a diagonal line crossing it.
-  static mic_off = IconData.new(0xf45f,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A microphone.
-  static mic = IconData.new(0xf460,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in microphone.
-  static mic_solid = IconData.new(0xf461,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A circle with a dotted clock face inside with hands showing 10:30.
-  static clock = IconData.new(0xf4be,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in circle with a dotted clock face inside with hands showing 10:30.
-  static clock_solid = IconData.new(0xf4bf,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A circle with with a 90 degree angle shape in the center, resembling a clock with hands showing 09:00.
-  static time = IconData.new(0xf402,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in circle with with a 90 degree angle shape in the center, resembling a clock with hands showing 09:00.
-  static time_solid = IconData.new(0xf403,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An unlocked padlock.
-  static padlock = IconData.new(0xf4c8,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An unlocked padlock.
-  static padlock_solid = IconData.new(0xf4c9,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An open eye.
-  static eye = IconData.new(0xf424,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An open eye.
-  static eye_solid = IconData.new(0xf425,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A single person. This icon is not filled in.
-  static person = IconData.new(0xf47d,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A single person. This icon is filled in.
-  static person_solid = IconData.new(0xf47e,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A single person with a plus sign next to it. This icon is not filled in.
-  static person_add = IconData.new(0xf47f,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A single person with a plus sign next to it. This icon is filled in.
-  static person_add_solid = IconData.new(0xf480,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A group of three people. This icon is not filled in.
-  static group = IconData.new(0xf47b,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A group of three people. This icon is filled in.
-  static group_solid = IconData.new(0xf47c,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Outline of a closed mail envelope.
-  static mail = IconData.new(0xf422,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A closed mail envelope. This icon is filled in.
-  static mail_solid = IconData.new(0xf423,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Outline of a location pin.
-  static location = IconData.new(0xf455,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A location pin. This icon is filled in.
-  static location_solid = IconData.new(0xf456,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Outline of a sticker tag.
-  static tag = IconData.new(0xf48c,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A sticker tag. This icon is filled in.
-  static tag_solid = IconData.new(0xf48d,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// Outlines of 2 overlapping sticker tags.
-  static tags = IconData.new(0xf48e,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// 2 overlapping sticker tags. This icon is filled in.
-  static tags_solid = IconData.new(0xf48f,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in bus.
-  static bus = IconData.new(0xf36d,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in car.
-  static car = IconData.new(0xf36f,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in detailed, realistic car.
-  static car_detailed = IconData.new(0xf2c1,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in train with a window divided in half and two headlights.
-  static train_style_one = IconData.new(0xf3af,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in train with a window and a single, centered headlight.
-  static train_style_two = IconData.new(0xf3b4,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An outlined paw.
-  static paw = IconData.new(0xf479,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in paw.
-  static paw_solid = IconData.new(0xf47a,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An outlined game controller.
-  static game_controller = IconData.new(0xf43a,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in game controller.
-  static game_controller_solid = IconData.new(0xf43b,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An outlined lab flask.
-  static lab_flask = IconData.new(0xf430,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in lab flask.
-  static lab_flask_solid = IconData.new(0xf431,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An outlined heart shape. Can be used to indicate like or favorite states.
-  static heart = IconData.new(0xf442,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled heart shape. Can be used to indicate like or favorite states.
-  static heart_solid = IconData.new(0xf443,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An outlined bell. Can be used to represent notifications.
-  static bell = IconData.new(0xf3e1,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled bell. Can be used represent notifications.
-  static bell_solid = IconData.new(0xf3e2,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// An outlined folded newspaper icon.
-  static news = IconData.new(0xf471,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled folded newspaper icon.
-  static news_solid = IconData.new(0xf472,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A outlined brightness icon.
-  static brightness = IconData.new(0xf4B6,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
-
-  /// A filled in brightness icon.
-  static brightness_solid = IconData.new(0xf4B7,   {fontFamily:"CupertinoIcons", fontPackage:"cupertino_icons"});
+  constructor(icon:string){
+    super(icon);
+  }
+  static new(icon:string) {
+   return new CupertinoIcons(icon);
+  }
+
+  static left_chevron = CupertinoIcons.new("left_chevron");
+  static right_chevron = CupertinoIcons.new("right_chevron");
+  static share = CupertinoIcons.new("share");
+  static share_solid = CupertinoIcons.new("share_solid");
+  static book = CupertinoIcons.new("book");
+  static book_solid = CupertinoIcons.new("book_solid");
+  static bookmark = CupertinoIcons.new("bookmark");
+  static bookmark_solid = CupertinoIcons.new("bookmark_solid");
+  static info = CupertinoIcons.new("info");
+  static reply = CupertinoIcons.new("reply");
+  static conversation_bubble = CupertinoIcons.new("conversation_bubble");
+  static profile_circled = CupertinoIcons.new("profile_circled");
+  static plus_circled = CupertinoIcons.new("plus_circled");
+  static minus_circled = CupertinoIcons.new("minus_circled");
+  static flag = CupertinoIcons.new("flag");
+  static search = CupertinoIcons.new("search");
+  static check_mark = CupertinoIcons.new("check_mark");
+  static check_mark_circled = CupertinoIcons.new("check_mark_circled");
+  static check_mark_circled_solid = CupertinoIcons.new("check_mark_circled_solid");
+  static circle = CupertinoIcons.new("circle");
+  static circle_filled = CupertinoIcons.new("circle_filled");
+  static back = CupertinoIcons.new("back");
+  static forward = CupertinoIcons.new("forward");
+  static home = CupertinoIcons.new("home");
+  static shopping_cart = CupertinoIcons.new("shopping_cart");
+  static ellipsis = CupertinoIcons.new("ellipsis");
+  static phone = CupertinoIcons.new("phone");
+  static phone_solid = CupertinoIcons.new("phone_solid");
+  static down_arrow = CupertinoIcons.new("down_arrow");
+  static up_arrow = CupertinoIcons.new("up_arrow");
+  static battery_charging = CupertinoIcons.new("battery_charging");
+  static battery_empty = CupertinoIcons.new("battery_empty");
+  static battery_full = CupertinoIcons.new("battery_full");
+  static battery_75_percent = CupertinoIcons.new("battery_75_percent");
+  static battery_25_percent = CupertinoIcons.new("battery_25_percent");
+  static bluetooth = CupertinoIcons.new("bluetooth");
+  static restart = CupertinoIcons.new("restart");
+  static reply_all = CupertinoIcons.new("reply_all");
+  static reply_thick_solid = CupertinoIcons.new("reply_thick_solid");
+  static share_up = CupertinoIcons.new("share_up");
+  static shuffle = CupertinoIcons.new("shuffle");
+  static shuffle_medium = CupertinoIcons.new("shuffle_medium");
+  static shuffle_thick = CupertinoIcons.new("shuffle_thick");
+  static photo_camera = CupertinoIcons.new("photo_camera");
+  static photo_camera_solid = CupertinoIcons.new("photo_camera_solid");
+  static video_camera = CupertinoIcons.new("video_camera");
+  static video_camera_solid = CupertinoIcons.new("video_camera_solid");
+  static switch_camera = CupertinoIcons.new("switch_camera");
+  static switch_camera_solid = CupertinoIcons.new("switch_camera_solid");
+  static collections = CupertinoIcons.new("collections");
+  static collections_solid = CupertinoIcons.new("collections_solid");
+  static folder = CupertinoIcons.new("folder");
+  static folder_solid = CupertinoIcons.new("folder_solid");
+  static folder_open = CupertinoIcons.new("folder_open");
+  static delete = CupertinoIcons.new("delete");
+  static delete_solid = CupertinoIcons.new("delete_solid");
+  static delete_simple = CupertinoIcons.new("delete_simple");
+  static pen = CupertinoIcons.new("pen");
+  static pencil = CupertinoIcons.new("pencil");
+  static create = CupertinoIcons.new("create");
+  static create_solid = CupertinoIcons.new("create_solid");
+  static refresh = CupertinoIcons.new("refresh");
+  static refresh_circled = CupertinoIcons.new("refresh_circled");
+  static refresh_circled_solid = CupertinoIcons.new("refresh_circled_solid");
+  static refresh_thin = CupertinoIcons.new("refresh_thin");
+  static refresh_thick = CupertinoIcons.new("refresh_thick");
+  static refresh_bold = CupertinoIcons.new("refresh_bold");
+  static clear_thick = CupertinoIcons.new("clear_thick");
+  static clear_thick_circled = CupertinoIcons.new("clear_thick_circled");
+  static clear = CupertinoIcons.new("clear");
+  static clear_circled = CupertinoIcons.new("clear_circled");
+  static clear_circled_solid = CupertinoIcons.new("clear_circled_solid");
+  static add = CupertinoIcons.new("add");
+  static add_circled = CupertinoIcons.new("add_circled");
+  static add_circled_solid = CupertinoIcons.new("add_circled_solid");
+  static gear = CupertinoIcons.new("gear");
+  static gear_solid = CupertinoIcons.new("gear_solid");
+  static gear_big = CupertinoIcons.new("gear_big");
+  static settings = CupertinoIcons.new("settings");
+  static settings_solid = CupertinoIcons.new("settings_solid");
+  static music_note = CupertinoIcons.new("music_note");
+  static double_music_note = CupertinoIcons.new("double_music_note");
+  static play_arrow = CupertinoIcons.new("play_arrow");
+  static play_arrow_solid = CupertinoIcons.new("play_arrow_solid");
+  static pause = CupertinoIcons.new("pause");
+  static pause_solid = CupertinoIcons.new("pause_solid");
+  static loop = CupertinoIcons.new("loop");
+  static loop_thick = CupertinoIcons.new("loop_thick");
+  static volume_down = CupertinoIcons.new("volume_down");
+  static volume_mute = CupertinoIcons.new("volume_mute");
+  static volume_off = CupertinoIcons.new("volume_off");
+  static volume_up = CupertinoIcons.new("volume_up");
+  static fullscreen = CupertinoIcons.new("fullscreen");
+  static fullscreen_exit = CupertinoIcons.new("fullscreen_exit");
+  static mic_off = CupertinoIcons.new("mic_off");
+  static mic = CupertinoIcons.new("mic");
+  static mic_solid = CupertinoIcons.new("mic_solid");
+  static clock = CupertinoIcons.new("clock");
+  static clock_solid = CupertinoIcons.new("clock_solid");
+  static time = CupertinoIcons.new("time");
+  static time_solid = CupertinoIcons.new("time_solid");
+  static padlock = CupertinoIcons.new("padlock");
+  static padlock_solid = CupertinoIcons.new("padlock_solid");
+  static eye = CupertinoIcons.new("eye");
+  static eye_solid = CupertinoIcons.new("eye_solid");
+  static person = CupertinoIcons.new("person");
+  static person_solid = CupertinoIcons.new("person_solid");
+  static person_add = CupertinoIcons.new("person_add");
+  static person_add_solid = CupertinoIcons.new("person_add_solid");
+  static group = CupertinoIcons.new("group");
+  static group_solid = CupertinoIcons.new("group_solid");
+  static mail = CupertinoIcons.new("mail");
+  static mail_solid = CupertinoIcons.new("mail_solid");
+  static location = CupertinoIcons.new("location");
+  static location_solid = CupertinoIcons.new("location_solid");
+  static tag = CupertinoIcons.new("tag");
+  static tag_solid = CupertinoIcons.new("tag_solid");
+  static tags = CupertinoIcons.new("tags");
+  static tags_solid = CupertinoIcons.new("tags_solid");
+  static bus = CupertinoIcons.new("bus");
+  static car = CupertinoIcons.new("car");
+  static car_detailed = CupertinoIcons.new("car_detailed");
+  static train_style_one = CupertinoIcons.new("train_style_one");
+  static train_style_two = CupertinoIcons.new("train_style_two");
+  static paw = CupertinoIcons.new("paw");
+  static paw_solid = CupertinoIcons.new("paw_solid");
+  static game_controller = CupertinoIcons.new("game_controller");
+  static game_controller_solid = CupertinoIcons.new("game_controller_solid");
+  static lab_flask = CupertinoIcons.new("lab_flask");
+  static lab_flask_solid = CupertinoIcons.new("lab_flask_solid");
+  static heart = CupertinoIcons.new("heart");
+  static heart_solid = CupertinoIcons.new("heart_solid");
+  static bell = CupertinoIcons.new("bell");
+  static bell_solid = CupertinoIcons.new("bell_solid");
+  static news = CupertinoIcons.new("news");
+  static news_solid = CupertinoIcons.new("news_solid");
+  static brightness = CupertinoIcons.new("brightness");
+  static brightness_solid = CupertinoIcons.new("brightness_solid");
 }
 //#endregion
 

@@ -5,7 +5,6 @@
  * @Description: Google Counter
  */
 
-import { MySectionTitle } from "demo/widgets/section_title";
 import { AppBar, JSStatefulWidget, JSWidgetState, Scaffold,Text,Center, Column, MainAxisAlignment, FlutterLogo, TextStyle, FontWeight, FloatingActionButton, Icon, Icons, JSBuildContext } from "ts_flutter_sdk";
 
 
