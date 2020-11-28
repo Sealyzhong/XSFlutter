@@ -11,6 +11,7 @@ import { MyCounterPage } from "demo/common_demo/counter_page";
 import { MyBaseWidgetsIndex } from "demo/base_widgets/index";
 import { MyLoadingPage } from "demo/common_demo/loading_page";
 import { MySharedPreferncesPage } from "demo/common_demo/shared_preferences_page";
+import axios from "axios";
 
 export class MyHomePage extends fs.StatefulWidget{
     createState() {
@@ -94,7 +95,20 @@ class _MyHomePageState extends fs.WidgetState{
                         title:fs.Text.new(moment().format("yyyy-MM-dd HH:mm")),
                         subtitle:fs.Text.new("get、set"),
                         onTap:function(){
-                            
+                            axios.get('http://api.nnzhp.cn/api/user/stu_info')
+                                .then(function (response) {
+                                    fs.Log.log(JSON.stringify(response));
+                                    // handle success
+                                    console.log(response);
+                                })
+                                .catch(function (error) {
+                                    fs.Log.log(JSON.stringify(error));
+                                    // handle error
+                                    console.log(error);
+                                })
+                                .then(function () {
+                                    // always executed
+                                });
                         }                        
                     }),
 
