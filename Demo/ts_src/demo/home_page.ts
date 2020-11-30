@@ -10,6 +10,9 @@ import { MyCounterPage } from "demo/common_demo/counter_page";
 import { MyBaseWidgetsIndex } from "demo/base_widgets/index";
 import { MyLoadingPage } from "demo/common_demo/loading_page";
 import { MySharedPreferncesPage } from "demo/common_demo/shared_preferences_page";
+import { MyScreenInfoPage } from "demo/common_demo/screen_info_page";
+import { MyPackageInfoPage } from "demo/common_demo/package_info_page";
+
 
 export class MyHomePage extends fs.StatefulWidget{
     createState() {
@@ -19,6 +22,13 @@ export class MyHomePage extends fs.StatefulWidget{
 
 class _MyHomePageState extends fs.WidgetState{
     
+
+    //subclass override
+    initState() {
+        fs.Log.log("MyHomePage.initState");
+        fs.ScreenInfo.updateInfo();
+        fs.PackageInfo.updateInfo();
+    }
     
     _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
 
@@ -88,10 +98,39 @@ class _MyHomePageState extends fs.WidgetState{
                         }                        
                     }),
 
-                    /*
+                    fs.ListTile.new({
+                        leading:fs.Text.new("5",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("屏幕信息(ScreenInfo)"),
+                        subtitle:fs.Text.new("宽、高、密度、像素"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyScreenInfoPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        leading:fs.Text.new("6",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("包信息(PackageInfo)"),
+                        subtitle:fs.Text.new("版本信息、包信息"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyPackageInfoPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    /*                    
                     fs.ListTile.new({
                         leading:fs.Text.new("4",{style:this._style}),
                         trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        
                         title:fs.Text.new(moment().format("yyyy-MM-dd HH:mm")),
                         subtitle:fs.Text.new("get、set"),
                         onTap:function(){

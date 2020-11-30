@@ -6,7 +6,7 @@
  * @Description: JS Flutter SDK
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SpApi = exports.LoadingApi = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.Tween = exports.TextInputType = exports.TextEditingController = exports.TabController = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TextAlignVertical = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.ScrollPhysics = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.RangeMaintainingScrollPhysics = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.Radius = exports.Quaternion = exports.OutlinedBorder = exports.Offset = exports.NotchedShape = exports.Notification = exports.NeverScrollableScrollPhysics = exports.MediaQueryData = exports.MediaQuery = exports.Matrix4 = exports.MaskFilter = exports.Key = exports.InputDecoration = exports.InputDecorationTheme = exports.ImageShader = exports.IconThemeData = exports.IconData = exports.ImageProvider = exports.InputBorder = exports.Gradient = exports.GradientTransform = exports.File = exports.FixedColumnWidth = exports.FractionalOffset = exports.FlutterLogoDecoration = exports.FlexColumnWidth = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.Duration = exports.CurveTween = exports.ClampingScrollPhysics = exports.CircularNotchedRectangle = exports.ColorScheme = exports.ColorFilter = exports.Colors = exports.Color = exports.BouncingScrollPhysics = exports.BoxShadow = exports.BannerPainter = exports.BoxDecoration = exports.ButtonThemeData = exports.BorderDirectional = exports.Border = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderSide = exports.BoxConstraints = exports.AssetImage = exports.AssetBundle = exports.AlwaysScrollableScrollPhysics = exports.AlignmentDirectional = exports.Alignment = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.ShapeBorder = exports.Widget = exports.DartClass = exports.JSCallArgs = exports.JSWidgetMirrorMgr = void 0;
+exports.PackageInfo = exports.ScreenInfo = exports.SpApi = exports.LoadingApi = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.Tween = exports.TextInputType = exports.TextEditingController = exports.TabController = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TextAlignVertical = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.ScrollPhysics = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.RangeMaintainingScrollPhysics = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.Radius = exports.Quaternion = exports.OutlinedBorder = exports.Offset = exports.NotchedShape = exports.Notification = exports.NeverScrollableScrollPhysics = exports.MediaQueryData = exports.MediaQuery = exports.Matrix4 = exports.MaskFilter = exports.Key = exports.InputDecoration = exports.InputDecorationTheme = exports.ImageShader = exports.IconThemeData = exports.IconData = exports.ImageProvider = exports.InputBorder = exports.Gradient = exports.GradientTransform = exports.File = exports.FixedColumnWidth = exports.FractionalOffset = exports.FlutterLogoDecoration = exports.FlexColumnWidth = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.Duration = exports.CurveTween = exports.ClampingScrollPhysics = exports.CircularNotchedRectangle = exports.ColorScheme = exports.ColorFilter = exports.Colors = exports.Color = exports.BouncingScrollPhysics = exports.BoxShadow = exports.BannerPainter = exports.BoxDecoration = exports.ButtonThemeData = exports.BorderDirectional = exports.Border = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderSide = exports.BoxConstraints = exports.AssetImage = exports.AssetBundle = exports.AlwaysScrollableScrollPhysics = exports.AlignmentDirectional = exports.Alignment = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.ShapeBorder = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -42,9 +42,9 @@ class JSWidgetMirrorMgr {
     }
 }
 exports.JSWidgetMirrorMgr = JSWidgetMirrorMgr;
-class JSCallArgs {
+class JSCallConfig {
     /**
-     * @param args args:
+     * @param config config:
       {
         widgetID?:string,
         mirrorID?:string,
@@ -53,17 +53,17 @@ class JSCallArgs {
         args?:any
       }
      */
-    constructor(args) {
-        if (args != null && args != undefined) {
-            this.widgetID = args.widgetID;
-            this.mirrorID = args.mirrorID;
-            this.className = args.className;
-            this.funcName = args.funcName;
-            this.args = args.args;
+    constructor(config) {
+        if (config != null && config != undefined) {
+            this.widgetID = config.widgetID;
+            this.mirrorID = config.mirrorID;
+            this.className = config.className;
+            this.funcName = config.funcName;
+            this.args = config.args;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         widgetID?:string,
         mirrorID?:string,
@@ -72,11 +72,11 @@ class JSCallArgs {
         args?:any
       }
      */
-    static new(args) {
-        return new JSCallArgs(args);
+    static new(config) {
+        return new JSCallConfig(config);
     }
 }
-exports.JSCallArgs = JSCallArgs;
+exports.JSCallConfig = JSCallConfig;
 //flutter 中 非widget继承 DartClass
 class DartClass extends core.Object {
     constructor() {
@@ -127,8 +127,8 @@ class JSBridge {
     ///mirrorObj sys
     ///调用Logic mirrorObj的函数
     ///*重要区分： JS Logic MirrorObj的生命周期JS侧控制，由Native Weak Ref辅助完成释放
-    static createMirrorObj(flutterCallArgs, mirrorID, needMonitordGCValue) {
-        let basicMethodCall = JSMethodCall.new("JSBridgeCreateMirrorObj", flutterCallArgs);
+    static createMirrorObj(flutterCallConfig, mirrorID, needMonitordGCValue) {
+        let basicMethodCall = JSMethodCall.new("JSBridgeCreateMirrorObj", flutterCallConfig);
         JSBridge.invokeFlutterCommonChannel(basicMethodCall);
         //监控jsvalue 释放，同步释放flutter侧对象
         // @ts-ignore：dart_sdk
@@ -141,11 +141,11 @@ class JSBridge {
         Log.debug("JSBridge.onFlutterInvokeJSCommonChannel: " + messageStr);
         let args = JSON.parse(messageStr);
         let method = args["method"];
-        let callArgs = args["arguments"];
+        let callConfig = args["arguments"];
         // @ts-ignore：dart_sdk
         let fun = this[method];
         if (fun != null) {
-            return fun.call(this, callArgs);
+            return fun.call(this, callConfig);
         }
         else {
             Log.log("JSBridge.onFlutterInvokeJSCommonChannel: error:fun == null" + args);
@@ -157,12 +157,12 @@ class JSBridge {
         let mirrorID = args["mirrorID"];
         let funcName = args["funcName"];
         let callbackID = args["callbackID"];
-        let funArgs = args["args"];
+        let funConfig = args["args"];
         //TODO: call mirroObj Fun
-        JSCallbackMgr.getInstance().invokeCallback(callbackID, funArgs);
+        JSCallbackMgr.getInstance().invokeCallback(callbackID, funConfig);
     }
-    static invokeMirrorObjWithCallback(flutterCallArgs, callback) {
-        let basicMethodCall = JSMethodCall.new("JSBridgeInvokeMirrorObjWithCallback", flutterCallArgs);
+    static invokeMirrorObjWithCallback(flutterCallConfig, callback) {
+        let basicMethodCall = JSMethodCall.new("JSBridgeInvokeMirrorObjWithCallback", flutterCallConfig);
         JSBridge.invokeFlutterCommonChannel(basicMethodCall, callback);
     }
 }
@@ -241,11 +241,11 @@ class JSFlutterApp {
     nativeCall(args) {
         Log.log("XSFlutterApp:nativeCall" + args);
         let method = args["method"];
-        let callArgs = args["arguments"];
+        let callConfig = args["arguments"];
         // @ts-ignore：dart_sdk
         let fun = this[method];
         if (fun != null) {
-            return fun.call(this, callArgs);
+            return fun.call(this, callConfig);
         }
         else {
             Log.log("XSFlutterApp:nativeCall error:fun == null" + args);
@@ -254,9 +254,9 @@ class JSFlutterApp {
     }
     flutterCallFrequencyLimitCallList(args) {
         if (args) {
-            args.map(function (callArgs) {
+            args.map(function (callConfig) {
                 // @ts-ignore：dart_sdk
-                this.nativeCall(callArgs);
+                this.nativeCall(callConfig);
             }.bind(this));
         }
     }
@@ -319,13 +319,13 @@ class JSFramework {
     ///TODO: 优化
     ///调用和UI相关的mirrorObj的函数
     ///*重要区分： UIMirrorObj的生命周期和Flutter Widget控制，由Dart侧Dispose时完成释放
-    static invokeFlutterFunction(callArgs) {
-        JSFramework.callFlutterWidgetChannel("invoke", JSON.stringify(callArgs));
+    static invokeFlutterFunction(callConfig) {
+        JSFramework.callFlutterWidgetChannel("invoke", JSON.stringify(callConfig));
     }
     ///TODO: 优化
     ///github merge
-    static invokeCommonFlutterFunction(callArgs) {
-        JSFramework.callFlutterWidgetChannel("invokeCommon", JSON.stringify(callArgs));
+    static invokeCommonFlutterFunction(callConfig) {
+        JSFramework.callFlutterWidgetChannel("invokeCommon", JSON.stringify(callConfig));
     }
 }
 exports.JSFramework = JSFramework;
@@ -593,7 +593,7 @@ class WidgetHelper {
         let arr = callID.split("/");
         let widgetID = arr[0];
         let buildWidgetDataSeq = args["buildSeq"];
-        let callArgs = args["args"];
+        let callConfig = args["args"];
         let jsWidget = this.findWidgetWithWidgetID(widgetID);
         if (jsWidget != null) {
             return jsWidget?.helper?.invokeCallback(buildWidgetDataSeq, callID, args["args"]);
@@ -902,11 +902,11 @@ class WidgetMgr {
 }
 exports.WidgetMgr = WidgetMgr;
 class BaseWidget extends Widget {
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.name = args.name;
-            this.key = args.key;
+        if (config != null && config != undefined) {
+            this.name = config.name;
+            this.key = config.key;
         }
         this.widgetID = WidgetMgr.getInstance().generateWidgetID();
         this.helper = new WidgetHelper(this);
@@ -954,8 +954,8 @@ class BaseWidget extends Widget {
 exports.BaseWidget = BaseWidget;
 //****** StatefulWidget ******
 class StatefulWidget extends BaseWidget {
-    constructor(args) {
-        super(args);
+    constructor(config) {
+        super(config);
         this.className = "StatefulWidget";
     }
     //subclass override
@@ -964,8 +964,8 @@ class StatefulWidget extends BaseWidget {
 exports.StatefulWidget = StatefulWidget;
 //在JS层，要封装控件，如不需要改变UI内容，使用无状态的StatelessWidget
 class StatelessWidget extends BaseWidget {
-    constructor(args) {
-        super(args);
+    constructor(config) {
+        super(config);
         this.className = "StatelessWidget";
     }
     //subclass override
@@ -1622,37 +1622,37 @@ class AssetBundle extends DartClass {
 exports.AssetBundle = AssetBundle;
 class AssetImage extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
       {
         assetName:string,
         bundle?:BaseAssetBundle,
         packageName?:string
       }
      */
-    constructor(assetName, args) {
+    constructor(assetName, config) {
         super();
         this.assetName = assetName;
-        if (args != null && args != undefined) {
-            this.bundle = args.bundle;
-            this.packageName = args.packageName;
+        if (config != null && config != undefined) {
+            this.bundle = config.bundle;
+            this.packageName = config.packageName;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         assetName:string,
         bundle?:BaseAssetBundle,
         packageName?:string
       }
      */
-    static new(assetName, args) {
-        return new AssetImage(assetName, args);
+    static new(assetName, config) {
+        return new AssetImage(assetName, config);
     }
 }
 exports.AssetImage = AssetImage;
 class BoxConstraints extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
       {
         minWidth?:number,
         maxWidth?:number,
@@ -1660,17 +1660,17 @@ class BoxConstraints extends DartClass {
         maxHeight?:number
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.minWidth = args.minWidth;
-            this.maxWidth = args.maxWidth;
-            this.minHeight = args.minHeight;
-            this.maxHeight = args.maxHeight;
+        if (config != null && config != undefined) {
+            this.minWidth = config.minWidth;
+            this.maxWidth = config.maxWidth;
+            this.minHeight = config.minHeight;
+            this.maxHeight = config.maxHeight;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         minWidth?:number,
         maxWidth?:number,
@@ -1678,38 +1678,38 @@ class BoxConstraints extends DartClass {
         maxHeight?:number
       }
      */
-    static new(args) {
-        return new BoxConstraints(args);
+    static new(config) {
+        return new BoxConstraints(config);
     }
 }
 exports.BoxConstraints = BoxConstraints;
 class BorderSide extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           width?:number,
           style?:BorderStyle
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.color = args.color;
-            this.width = args.width;
-            this.style = args.style;
+        if (config != null && config != undefined) {
+            this.color = config.color;
+            this.width = config.width;
+            this.style = config.style;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           width?:number,
           style?:BorderStyle
         }
      */
-    static new(args) {
-        return new BorderSide(args);
+    static new(config) {
+        return new BorderSide(config);
     }
     static none() {
         let v = new BorderSide();
@@ -1737,39 +1737,39 @@ class BorderRadius extends DartClass {
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           top?:Radius,
           bottom?:Radius
         }
      */
-    static vertical(args) {
+    static vertical(config) {
         let v = new BorderRadius();
         v.constructorName = "vertical";
-        if (args != null && args != undefined) {
-            v.top = args.top;
-            v.bottom = args.bottom;
+        if (config != null && config != undefined) {
+            v.top = config.top;
+            v.bottom = config.bottom;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           left?:Radius,
           right?:Radius
         }
      */
-    static horizontal(args) {
+    static horizontal(config) {
         let v = new BorderRadius();
         v.constructorName = "horizontal";
-        if (args != null && args != undefined) {
-            v.left = args.left;
-            v.right = args.right;
+        if (config != null && config != undefined) {
+            v.left = config.left;
+            v.right = config.right;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           topLeft?:Radius,
           topRight?:Radius,
@@ -1777,14 +1777,14 @@ class BorderRadius extends DartClass {
           bottomRight?:Radius,
         }
      */
-    static only(args) {
+    static only(config) {
         let v = new BorderRadius();
         v.constructorName = "only";
-        if (args != null && args != undefined) {
-            v.topLeft = args.topLeft;
-            v.topRight = args.topRight;
-            v.bottomLeft = args.bottomLeft;
-            v.bottomRight = args.bottomRight;
+        if (config != null && config != undefined) {
+            v.topLeft = config.topLeft;
+            v.topRight = config.topRight;
+            v.bottomLeft = config.bottomLeft;
+            v.bottomRight = config.bottomRight;
         }
         return v;
     }
@@ -1809,39 +1809,39 @@ class BorderRadiusDirectional extends DartClass {
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           top?:Radius,
           bottom?:Radius
         }
      */
-    static vertical(args) {
+    static vertical(config) {
         let v = new BorderRadiusDirectional();
         v.constructorName = "vertical";
-        if (args != null && args != undefined) {
-            v.top = args.top;
-            v.bottom = args.bottom;
+        if (config != null && config != undefined) {
+            v.top = config.top;
+            v.bottom = config.bottom;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           start?:Radius,
           end?:Radius
         }
      */
-    static horizontal(args) {
+    static horizontal(config) {
         let v = new BorderRadiusDirectional();
         v.constructorName = "horizontal";
-        if (args != null && args != undefined) {
-            v.start = args.start;
-            v.end = args.end;
+        if (config != null && config != undefined) {
+            v.start = config.start;
+            v.end = config.end;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           topStart?:Radius,
           topEnd?:Radius,
@@ -1849,14 +1849,14 @@ class BorderRadiusDirectional extends DartClass {
           bottomRight?:Radius,
         }
      */
-    static only(args) {
+    static only(config) {
         let v = new BorderRadiusDirectional();
         v.constructorName = "only";
-        if (args != null && args != undefined) {
-            v.topStart = args.topStart;
-            v.topEnd = args.topEnd;
-            v.bottomStart = args.bottomStart;
-            v.bottomEnd = args.bottomEnd;
+        if (config != null && config != undefined) {
+            v.topStart = config.topStart;
+            v.topEnd = config.topEnd;
+            v.bottomStart = config.bottomStart;
+            v.bottomEnd = config.bottomEnd;
         }
         return v;
     }
@@ -1864,7 +1864,7 @@ class BorderRadiusDirectional extends DartClass {
 exports.BorderRadiusDirectional = BorderRadiusDirectional;
 class Border extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
       {
         top?:BorderSide,
         right?:BorderSide,
@@ -1872,17 +1872,17 @@ class Border extends DartClass {
         left?:BorderSide,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.top = args.top;
-            this.right = args.right;
-            this.bottom = args.bottom;
-            this.left = args.left;
+        if (config != null && config != undefined) {
+            this.top = config.top;
+            this.right = config.right;
+            this.bottom = config.bottom;
+            this.left = config.left;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         top?:BorderSide,
         right?:BorderSide,
@@ -1890,40 +1890,40 @@ class Border extends DartClass {
         left?:BorderSide,
       }
      */
-    static new(args) {
-        return new Border(args);
+    static new(config) {
+        return new Border(config);
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           width?:number,
           style?:BorderStyle,
         }
      */
-    static all(args) {
+    static all(config) {
         var v = new Border();
         v.constructorName = "all";
-        if (args != null && args != undefined) {
-            v.color = args.color;
-            v.width = args.width;
-            v.style = args.style;
+        if (config != null && config != undefined) {
+            v.color = config.color;
+            v.width = config.width;
+            v.style = config.style;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           vertical?:BorderSide,
           horizontal?:BorderSide
         }
      */
-    static symmetric(args) {
+    static symmetric(config) {
         var v = new Border();
         v.constructorName = "symmetric";
-        if (args != null && args != undefined) {
-            v.vertical = args.vertical;
-            v.horizontal = args.horizontal;
+        if (config != null && config != undefined) {
+            v.vertical = config.vertical;
+            v.horizontal = config.horizontal;
         }
         return v;
     }
@@ -1931,7 +1931,7 @@ class Border extends DartClass {
 exports.Border = Border;
 class BorderDirectional extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           top?:BorderSide,
           start?:BorderSide,
@@ -1939,17 +1939,17 @@ class BorderDirectional extends DartClass {
           end?:BorderSide,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.top = args.top;
-            this.start = args.start;
-            this.end = args.end;
-            this.bottom = args.bottom;
+        if (config != null && config != undefined) {
+            this.top = config.top;
+            this.start = config.start;
+            this.end = config.end;
+            this.bottom = config.bottom;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           top?:BorderSide,
           start?:BorderSide,
@@ -1957,14 +1957,14 @@ class BorderDirectional extends DartClass {
           end?:BorderSide,
         }
      */
-    static new(args) {
-        return new BorderDirectional(args);
+    static new(config) {
+        return new BorderDirectional(config);
     }
 }
 exports.BorderDirectional = BorderDirectional;
 class ButtonThemeData extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           textTheme?:ButtonTextTheme,
           minWidth?:number,
@@ -1981,26 +1981,26 @@ class ButtonThemeData extends DartClass {
           colorScheme?:ColorScheme,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.textTheme = args.textTheme;
-            this.minWidth = args.minWidth;
-            this.height = args.height;
-            this.padding = args.padding;
-            this.layoutBehavior = args.layoutBehavior;
-            this.alignedDropdown = args.alignedDropdown;
-            this.buttonColor = args.buttonColor;
-            this.disabledColor = args.disabledColor;
-            this.focusColor = args.focusColor;
-            this.hoverColor = args.hoverColor;
-            this.highlightColor = args.highlightColor;
-            this.splashColor = args.splashColor;
-            this.colorScheme = args.colorScheme;
+        if (config != null && config != undefined) {
+            this.textTheme = config.textTheme;
+            this.minWidth = config.minWidth;
+            this.height = config.height;
+            this.padding = config.padding;
+            this.layoutBehavior = config.layoutBehavior;
+            this.alignedDropdown = config.alignedDropdown;
+            this.buttonColor = config.buttonColor;
+            this.disabledColor = config.disabledColor;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.highlightColor = config.highlightColor;
+            this.splashColor = config.splashColor;
+            this.colorScheme = config.colorScheme;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           textTheme?:ButtonTextTheme,
           minWidth?:number,
@@ -2017,14 +2017,14 @@ class ButtonThemeData extends DartClass {
           colorScheme?:ColorScheme,
         }
      */
-    static new(args) {
-        return new ButtonThemeData(args);
+    static new(config) {
+        return new ButtonThemeData(config);
     }
 }
 exports.ButtonThemeData = ButtonThemeData;
 class BoxDecoration extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           border?:Border;
@@ -2036,21 +2036,21 @@ class BoxDecoration extends DartClass {
           image?:DecorationImage,
         }
       */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.color = args.color;
-            this.border = args.border;
-            this.borderRadius = args.borderRadius;
-            this.boxShadow = args.boxShadow;
-            this.gradient = args.gradient;
-            this.backgroundBlendMode = args.backgroundBlendMode;
-            this.shape = args.shape;
-            this.image = args.image;
+        if (config != null && config != undefined) {
+            this.color = config.color;
+            this.border = config.border;
+            this.borderRadius = config.borderRadius;
+            this.boxShadow = config.boxShadow;
+            this.gradient = config.gradient;
+            this.backgroundBlendMode = config.backgroundBlendMode;
+            this.shape = config.shape;
+            this.image = config.image;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           border?:Border;
@@ -2062,14 +2062,14 @@ class BoxDecoration extends DartClass {
           image?:DecorationImage,
         }
       */
-    static new(args) {
-        return new BoxDecoration(args);
+    static new(config) {
+        return new BoxDecoration(config);
     }
 }
 exports.BoxDecoration = BoxDecoration;
 class BannerPainter extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           message?:string,
           textDirection?:TextDirection,
@@ -2079,19 +2079,19 @@ class BannerPainter extends DartClass {
           textStyle?:TextStyle,
         }
       */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.message = args.message;
-            this.textDirection = args.textDirection;
-            this.location = args.location;
-            this.layoutDirection = args.layoutDirection;
-            this.color = args.color;
-            this.textStyle = args.textStyle;
+        if (config != null && config != undefined) {
+            this.message = config.message;
+            this.textDirection = config.textDirection;
+            this.location = config.location;
+            this.layoutDirection = config.layoutDirection;
+            this.color = config.color;
+            this.textStyle = config.textStyle;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           message?:string,
           textDirection?:TextDirection,
@@ -2101,14 +2101,14 @@ class BannerPainter extends DartClass {
           textStyle?:TextStyle,
         }
       */
-    static new(args) {
-        return new BannerPainter(args);
+    static new(config) {
+        return new BannerPainter(config);
     }
 }
 exports.BannerPainter = BannerPainter;
 class BoxShadow extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
       {
         color?:Color,
         offset?:Offset,
@@ -2116,17 +2116,17 @@ class BoxShadow extends DartClass {
         spreadRadius?:number
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.color = args.color;
-            this.offset = args.offset;
-            this.blurRadius = args.blurRadius;
-            this.spreadRadius = args.spreadRadius;
+        if (config != null && config != undefined) {
+            this.color = config.color;
+            this.offset = config.offset;
+            this.blurRadius = config.blurRadius;
+            this.spreadRadius = config.spreadRadius;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         color?:Color,
         offset?:Offset,
@@ -2134,21 +2134,21 @@ class BoxShadow extends DartClass {
         spreadRadius?:number
       }
      */
-    static new(args) {
-        return new BoxShadow(args);
+    static new(config) {
+        return new BoxShadow(config);
     }
 }
 exports.BoxShadow = BoxShadow;
 //****** BouncingScrollPhysics ******
 class BouncingScrollPhysics extends DartClass {
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.parent = args.parent;
+        if (config != null && config != undefined) {
+            this.parent = config.parent;
         }
     }
-    static new(args) {
-        return new BouncingScrollPhysics(args);
+    static new(config) {
+        return new BouncingScrollPhysics(config);
     }
 }
 exports.BouncingScrollPhysics = BouncingScrollPhysics;
@@ -2256,7 +2256,7 @@ class ColorFilter extends DartClass {
 exports.ColorFilter = ColorFilter;
 class ColorScheme extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           primary?:Color,
           primaryVariant?:Color,
@@ -2273,26 +2273,26 @@ class ColorScheme extends DartClass {
           brightness?:Brightness
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.primary = args.primary;
-            this.primaryVariant = args.primaryVariant;
-            this.secondary = args.secondary;
-            this.secondaryVariant = args.secondaryVariant;
-            this.surface = args.surface;
-            this.background = args.background;
-            this.error = args.error;
-            this.onPrimary = args.onPrimary;
-            this.onSecondary = args.onSecondary;
-            this.onSurface = args.onSurface;
-            this.onBackground = args.onBackground;
-            this.onError = args.onError;
-            this.brightness = args.brightness;
+        if (config != null && config != undefined) {
+            this.primary = config.primary;
+            this.primaryVariant = config.primaryVariant;
+            this.secondary = config.secondary;
+            this.secondaryVariant = config.secondaryVariant;
+            this.surface = config.surface;
+            this.background = config.background;
+            this.error = config.error;
+            this.onPrimary = config.onPrimary;
+            this.onSecondary = config.onSecondary;
+            this.onSurface = config.onSurface;
+            this.onBackground = config.onBackground;
+            this.onError = config.onError;
+            this.brightness = config.brightness;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           primary?:Color,
           primaryVariant?:Color,
@@ -2309,8 +2309,8 @@ class ColorScheme extends DartClass {
           brightness?:Brightness
         }
      */
-    static new(args) {
-        return new ColorScheme(args);
+    static new(config) {
+        return new ColorScheme(config);
     }
     static fromSwatch(primarySwatch, accentColor, cardColor, backgroundColor, errorColor, brightness) {
         let v = new ColorScheme();
@@ -2334,14 +2334,14 @@ class CircularNotchedRectangle extends DartClass {
 exports.CircularNotchedRectangle = CircularNotchedRectangle;
 //****** ClampingScrollPhysics ******
 class ClampingScrollPhysics extends DartClass {
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.parent = args.parent;
+        if (config != null && config != undefined) {
+            this.parent = config.parent;
         }
     }
-    static new(args) {
-        return new ClampingScrollPhysics(args);
+    static new(config) {
+        return new ClampingScrollPhysics(config);
     }
 }
 exports.ClampingScrollPhysics = ClampingScrollPhysics;
@@ -2359,7 +2359,7 @@ class CurveTween extends Widget {
 exports.CurveTween = CurveTween;
 class Duration extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           days?:number,
           hours?:number,
@@ -2368,14 +2368,14 @@ class Duration extends DartClass {
           milliseconds?:number
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.days = args.days;
-            this.hours = args.hours;
-            this.minutes = args.minutes;
-            this.seconds = args.seconds;
-            this.milliseconds = args.milliseconds;
+        if (config != null && config != undefined) {
+            this.days = config.days;
+            this.hours = config.hours;
+            this.minutes = config.minutes;
+            this.seconds = config.seconds;
+            this.milliseconds = config.milliseconds;
         }
         this.inMilliseconds = 0;
         if (this.milliseconds != null && this.milliseconds != undefined) {
@@ -2395,7 +2395,7 @@ class Duration extends DartClass {
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           days?:number,
           hours?:number,
@@ -2404,14 +2404,14 @@ class Duration extends DartClass {
           milliseconds?:number
         }
      */
-    static new(args) {
-        return new Duration(args);
+    static new(config) {
+        return new Duration(config);
     }
 }
 exports.Duration = Duration;
 class EdgeInsets extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           left?:number,
           top?:number,
@@ -2419,17 +2419,17 @@ class EdgeInsets extends DartClass {
           bottom?:number
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.left = args.left;
-            this.top = args.top;
-            this.right = args.right;
-            this.bottom = args.bottom;
+        if (config != null && config != undefined) {
+            this.left = config.left;
+            this.top = config.top;
+            this.right = config.right;
+            this.bottom = config.bottom;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           left?:number,
           top?:number,
@@ -2437,8 +2437,8 @@ class EdgeInsets extends DartClass {
           bottom?:number
         }
      */
-    static new(args) {
-        return new EdgeInsets(args);
+    static new(config) {
+        return new EdgeInsets(config);
     }
     static zero() {
         let v = new EdgeInsets();
@@ -2455,7 +2455,7 @@ class EdgeInsets extends DartClass {
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           left?:number,
           top?:number,
@@ -2463,14 +2463,14 @@ class EdgeInsets extends DartClass {
           bottom?:number
         }
      */
-    static only(args) {
+    static only(config) {
         let v = new EdgeInsets();
         v.constructorName = "only";
-        if (args != null && args != undefined) {
-            v.left = args.left;
-            v.top = args.top;
-            v.right = args.right;
-            v.bottom = args.bottom;
+        if (config != null && config != undefined) {
+            v.left = config.left;
+            v.top = config.top;
+            v.right = config.right;
+            v.bottom = config.bottom;
         }
         return v;
     }
@@ -2481,18 +2481,18 @@ class EdgeInsets extends DartClass {
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           vertical?:number,
           horizontal?:number
         }
      */
-    static symmetric(args) {
+    static symmetric(config) {
         let v = new EdgeInsets();
         v.constructorName = "symmetric";
-        if (args != null && args != undefined) {
-            v.vertical = args.vertical;
-            v.horizontal = args.horizontal;
+        if (config != null && config != undefined) {
+            v.vertical = config.vertical;
+            v.horizontal = config.horizontal;
         }
         return v;
     }
@@ -2500,7 +2500,7 @@ class EdgeInsets extends DartClass {
 exports.EdgeInsets = EdgeInsets;
 class EdgeInsetsDirectional extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           start?:number,
           top?:number,
@@ -2508,17 +2508,17 @@ class EdgeInsetsDirectional extends DartClass {
           bottom?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.start = args.start;
-            this.top = args.top;
-            this.end = args.end;
-            this.bottom = args.bottom;
+        if (config != null && config != undefined) {
+            this.start = config.start;
+            this.top = config.top;
+            this.end = config.end;
+            this.bottom = config.bottom;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           start?:number,
           top?:number,
@@ -2526,8 +2526,8 @@ class EdgeInsetsDirectional extends DartClass {
           bottom?:number,
         }
      */
-    static new(args) {
-        return new EdgeInsetsDirectional(args);
+    static new(config) {
+        return new EdgeInsetsDirectional(config);
     }
     static fromSTEB(start, top, end, bottom) {
         let v = new EdgeInsetsDirectional();
@@ -2539,7 +2539,7 @@ class EdgeInsetsDirectional extends DartClass {
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           start?:number,
           top?:number,
@@ -2547,14 +2547,14 @@ class EdgeInsetsDirectional extends DartClass {
           bottom?:number
         }
      */
-    static only(args) {
+    static only(config) {
         let v = new EdgeInsetsDirectional();
         v.constructorName = "only";
-        if (args != null && args != undefined) {
-            v.start = args.start;
-            v.top = args.top;
-            v.end = args.end;
-            v.bottom = args.bottom;
+        if (config != null && config != undefined) {
+            v.start = config.start;
+            v.top = config.top;
+            v.end = config.end;
+            v.bottom = config.bottom;
         }
         return v;
     }
@@ -2581,31 +2581,31 @@ class FlexColumnWidth extends DartClass {
 exports.FlexColumnWidth = FlexColumnWidth;
 class FlutterLogoDecoration extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           textColor?:Color,
           style?:FlutterLogoStyle,
           margin?:EdgeInsets,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.textColor = args.textColor;
-            this.style = args.style;
-            this.margin = args.margin;
+        if (config != null && config != undefined) {
+            this.textColor = config.textColor;
+            this.style = config.style;
+            this.margin = config.margin;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           textColor?:Color,
           style?:FlutterLogoStyle,
           margin?:EdgeInsets,
         }
      */
-    static new(args) {
-        return new FlutterLogoDecoration(args);
+    static new(config) {
+        return new FlutterLogoDecoration(config);
     }
 }
 exports.FlutterLogoDecoration = FlutterLogoDecoration;
@@ -2678,7 +2678,7 @@ class GradientTransform extends DartClass {
 exports.GradientTransform = GradientTransform;
 class Gradient extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           center?:Alignment,
           startAngle?:number,
@@ -2689,22 +2689,22 @@ class Gradient extends DartClass {
           transform?:GradientRotation,
         }
      */
-    static sweep(args) {
+    static sweep(config) {
         var v = new Gradient();
         v.constructorName = "sweep";
-        if (args != null && args != undefined) {
-            v.center = args.center;
-            v.startAngle = args.startAngle;
-            v.endAngle = args.endAngle;
-            v.colors = args.colors;
-            v.stops = args.stops;
-            v.tileMode = args.tileMode;
-            v.transform = args.transform;
+        if (config != null && config != undefined) {
+            v.center = config.center;
+            v.startAngle = config.startAngle;
+            v.endAngle = config.endAngle;
+            v.colors = config.colors;
+            v.stops = config.stops;
+            v.tileMode = config.tileMode;
+            v.transform = config.transform;
         }
         return v;
     }
     /**
-    * @param args args:
+    * @param config config:
        {
          center?:Alignment,
          radius?:number,
@@ -2716,23 +2716,23 @@ class Gradient extends DartClass {
          transform?:GradientRotation,
        }
     */
-    static radial(args) {
+    static radial(config) {
         var v = new Gradient();
         v.constructorName = "radial";
-        if (args != null && args != undefined) {
-            v.center = args.center;
-            v.radius = args.radius;
-            v.colors = args.colors;
-            v.stops = args.stops;
-            v.tileMode = args.tileMode;
-            v.focal = args.focal;
-            v.focalRadius = args.focalRadius;
-            v.transform = args.transform;
+        if (config != null && config != undefined) {
+            v.center = config.center;
+            v.radius = config.radius;
+            v.colors = config.colors;
+            v.stops = config.stops;
+            v.tileMode = config.tileMode;
+            v.focal = config.focal;
+            v.focalRadius = config.focalRadius;
+            v.transform = config.transform;
         }
         return v;
     }
     /**
-    * @param args args:
+    * @param config config:
        {
          begin?:Alignment,
          end?:Alignment,
@@ -2742,16 +2742,16 @@ class Gradient extends DartClass {
          transform?:GradientRotation,
        }
     */
-    static linear(args) {
+    static linear(config) {
         var v = new Gradient();
         v.constructorName = "linear";
-        if (args != null && args != undefined) {
-            v.begin = args.begin;
-            v.end = args.end;
-            v.colors = args.colors;
-            v.stops = args.stops;
-            v.tileMode = args.tileMode;
-            v.transform = args.transform;
+        if (config != null && config != undefined) {
+            v.begin = config.begin;
+            v.end = config.end;
+            v.colors = config.colors;
+            v.stops = config.stops;
+            v.tileMode = config.tileMode;
+            v.transform = config.transform;
         }
         return v;
     }
@@ -2764,36 +2764,36 @@ class InputBorder extends ShapeBorder {
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           borderSide?:BorderSide,
           borderRadius?:BorderRadius,
           gapPadding?:number,
         }
      */
-    static outline(args) {
+    static outline(config) {
         var v = new InputBorder();
         v.constructorName = "outline";
-        if (args != null && args != undefined) {
-            v.borderRadius = args.borderRadius;
-            v.borderSide = args.borderSide;
-            v.gapPadding = args.gapPadding;
+        if (config != null && config != undefined) {
+            v.borderRadius = config.borderRadius;
+            v.borderSide = config.borderSide;
+            v.gapPadding = config.gapPadding;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           borderSide?:BorderSide,
           borderRadius?:BorderRadius,
         }
      */
-    static underline(args) {
+    static underline(config) {
         var v = new InputBorder();
         v.constructorName = "underline";
-        if (args != null && args != undefined) {
-            v.borderRadius = args.borderRadius;
-            v.borderSide = args.borderSide;
+        if (config != null && config != undefined) {
+            v.borderRadius = config.borderRadius;
+            v.borderSide = config.borderSide;
         }
         return v;
     }
@@ -2802,71 +2802,71 @@ class InputBorder extends ShapeBorder {
 exports.InputBorder = InputBorder;
 class ImageProvider extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           scale?:number
         }
      */
-    static file(file, args) {
+    static file(file, config) {
         var v = new ImageProvider();
         v.file = file;
         v.constructorName = "file";
-        if (args != null && args != undefined) {
-            v.scale = args.scale;
+        if (config != null && config != undefined) {
+            v.scale = config.scale;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           scale?:number,
         }
      */
-    static memory(bytes, args) {
+    static memory(bytes, config) {
         var v = new ImageProvider();
         v.bytes = bytes;
         v.constructorName = "memory";
-        if (args != null && args != undefined) {
-            v.scale = args.scale;
+        if (config != null && config != undefined) {
+            v.scale = config.scale;
         }
         return v;
     }
     /**
-    * @param args args:
+    * @param config config:
        {
          scale?:number,
        }
     */
-    static network(url, args) {
+    static network(url, config) {
         var v = new ImageProvider();
         v.url = url;
         v.constructorName = "Network";
-        if (args != null && args != undefined) {
-            v.scale = args.scale;
+        if (config != null && config != undefined) {
+            v.scale = config.scale;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           width?:number,
           height?:number,
           allowUpscaling?:boolean,
         }
      */
-    static resize(imageProvider, args) {
+    static resize(imageProvider, config) {
         var v = new ImageProvider();
         v.constructorName = "resize";
         v.imageProvider = imageProvider;
-        if (args != null && args != undefined) {
-            v.width = args.width;
-            v.allowUpscaling = args.allowUpscaling;
-            v.height = args.height;
+        if (config != null && config != undefined) {
+            v.width = config.width;
+            v.allowUpscaling = config.allowUpscaling;
+            v.height = config.height;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           assetName:string,
           scale?:number,
@@ -2874,14 +2874,14 @@ class ImageProvider extends DartClass {
           packageName?:string,
         }
      */
-    static exactAsset(assetName, args) {
+    static exactAsset(assetName, config) {
         var v = new ImageProvider();
         v.constructorName = "exactAsset";
         v.assetName = assetName;
-        if (args != null && args != undefined) {
-            v.scale = args.scale;
-            v.bundle = args.bundle;
-            v.packageName = args.packageName;
+        if (config != null && config != undefined) {
+            v.scale = config.scale;
+            v.bundle = config.bundle;
+            v.packageName = config.packageName;
         }
         return v;
     }
@@ -2900,31 +2900,31 @@ class IconData extends DartClass {
 exports.IconData = IconData;
 class IconThemeData extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           opacity?:number,
           size?:number
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.color = args.color;
-            this.opacity = args.opacity;
-            this.size = args.size;
+        if (config != null && config != undefined) {
+            this.color = config.color;
+            this.opacity = config.opacity;
+            this.size = config.size;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           opacity?:number,
           size?:number
         }
      */
-    static new(args) {
-        return new IconThemeData(args);
+    static new(config) {
+        return new IconThemeData(config);
     }
 }
 exports.IconThemeData = IconThemeData;
@@ -2944,7 +2944,7 @@ class ImageShader extends DartClass {
 exports.ImageShader = ImageShader;
 class InputDecorationTheme extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           labelStyle?:TextStyle,
           helperStyle?:TextStyle,
@@ -2973,38 +2973,38 @@ class InputDecorationTheme extends DartClass {
           alignLabelWithHint?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.labelStyle = args.labelStyle;
-            this.helperStyle = args.helperStyle;
-            this.helperMaxLines = args.helperMaxLines;
-            this.hintStyle = args.hintStyle;
-            this.errorStyle = args.errorStyle;
-            this.errorMaxLines = args.errorMaxLines;
-            this.hasFloatingPlaceholder = args.hasFloatingPlaceholder;
-            this.floatingLabelBehavior = args.floatingLabelBehavior;
-            this.isDense = args.isDense;
-            this.contentPadding = args.contentPadding;
-            this.isCollapsed = args.isCollapsed;
-            this.prefixStyle = args.prefixStyle;
-            this.suffixStyle = args.suffixStyle;
-            this.counterStyle = args.counterStyle;
-            this.filled = args.filled;
-            this.fillColor = args.fillColor;
-            this.focusColor = args.focusColor;
-            this.hoverColor = args.hoverColor;
-            this.errorBorder = args.errorBorder;
-            this.focusedBorder = args.focusedBorder;
-            this.focusedErrorBorder = args.focusedErrorBorder;
-            this.disabledBorder = args.disabledBorder;
-            this.enabledBorder = args.enabledBorder;
-            this.border = args.border;
-            this.alignLabelWithHint = args.alignLabelWithHint;
+        if (config != null && config != undefined) {
+            this.labelStyle = config.labelStyle;
+            this.helperStyle = config.helperStyle;
+            this.helperMaxLines = config.helperMaxLines;
+            this.hintStyle = config.hintStyle;
+            this.errorStyle = config.errorStyle;
+            this.errorMaxLines = config.errorMaxLines;
+            this.hasFloatingPlaceholder = config.hasFloatingPlaceholder;
+            this.floatingLabelBehavior = config.floatingLabelBehavior;
+            this.isDense = config.isDense;
+            this.contentPadding = config.contentPadding;
+            this.isCollapsed = config.isCollapsed;
+            this.prefixStyle = config.prefixStyle;
+            this.suffixStyle = config.suffixStyle;
+            this.counterStyle = config.counterStyle;
+            this.filled = config.filled;
+            this.fillColor = config.fillColor;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.errorBorder = config.errorBorder;
+            this.focusedBorder = config.focusedBorder;
+            this.focusedErrorBorder = config.focusedErrorBorder;
+            this.disabledBorder = config.disabledBorder;
+            this.enabledBorder = config.enabledBorder;
+            this.border = config.border;
+            this.alignLabelWithHint = config.alignLabelWithHint;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           labelStyle?:TextStyle,
           helperStyle?:TextStyle,
@@ -3033,14 +3033,14 @@ class InputDecorationTheme extends DartClass {
           alignLabelWithHint?:boolean,
         }
      */
-    static new(args) {
-        return new InputDecorationTheme(args);
+    static new(config) {
+        return new InputDecorationTheme(config);
     }
 }
 exports.InputDecorationTheme = InputDecorationTheme;
 class InputDecoration extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           icon?:Widget,
           labelText?:string,
@@ -3087,56 +3087,56 @@ class InputDecoration extends DartClass {
           alignLabelWithHint?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.icon = args.icon;
-            this.labelText = args.labelText;
-            this.labelStyle = args.labelStyle;
-            this.helperText = args.helperText;
-            this.helperStyle = args.helperStyle;
-            this.helperMaxLines = args.helperMaxLines;
-            this.hintText = args.hintText;
-            this.hintStyle = args.hintStyle;
-            this.hintMaxLines = args.hintMaxLines;
-            this.errorText = args.errorText;
-            this.errorStyle = args.errorStyle;
-            this.errorMaxLines = args.errorMaxLines;
-            this.hasFloatingPlaceholder = args.hasFloatingPlaceholder;
-            this.floatingLabelBehavior = args.floatingLabelBehavior;
-            this.isCollapsed = args.isCollapsed;
-            this.isDense = args.isDense;
-            this.contentPadding = args.contentPadding;
-            this.prefixIcon = args.prefixIcon;
-            this.prefixIconConstraints = args.prefixIconConstraints;
-            this.prefix = args.prefix;
-            this.prefixText = args.prefixText;
-            this.prefixStyle = args.prefixStyle;
-            this.suffixIcon = args.suffixIcon;
-            this.suffix = args.suffix;
-            this.suffixText = args.suffixText;
-            this.suffixStyle = args.suffixStyle;
-            this.suffixIconConstraints = args.suffixIconConstraints;
-            this.counter = args.counter;
-            this.counterText = args.counterText;
-            this.counterStyle = args.counterStyle;
-            this.filled = args.filled;
-            this.fillColor = args.fillColor;
-            this.focusColor = args.focusColor;
-            this.hoverColor = args.hoverColor;
-            this.errorBorder = args.errorBorder;
-            this.focusedBorder = args.focusedBorder;
-            this.focusedErrorBorder = args.focusedErrorBorder;
-            this.disabledBorder = args.disabledBorder;
-            this.enabledBorder = args.enabledBorder;
-            this.border = args.border;
-            this.enabled = args.enabled;
-            this.semanticCounterText = args.semanticCounterText;
-            this.alignLabelWithHint = args.alignLabelWithHint;
+        if (config != null && config != undefined) {
+            this.icon = config.icon;
+            this.labelText = config.labelText;
+            this.labelStyle = config.labelStyle;
+            this.helperText = config.helperText;
+            this.helperStyle = config.helperStyle;
+            this.helperMaxLines = config.helperMaxLines;
+            this.hintText = config.hintText;
+            this.hintStyle = config.hintStyle;
+            this.hintMaxLines = config.hintMaxLines;
+            this.errorText = config.errorText;
+            this.errorStyle = config.errorStyle;
+            this.errorMaxLines = config.errorMaxLines;
+            this.hasFloatingPlaceholder = config.hasFloatingPlaceholder;
+            this.floatingLabelBehavior = config.floatingLabelBehavior;
+            this.isCollapsed = config.isCollapsed;
+            this.isDense = config.isDense;
+            this.contentPadding = config.contentPadding;
+            this.prefixIcon = config.prefixIcon;
+            this.prefixIconConstraints = config.prefixIconConstraints;
+            this.prefix = config.prefix;
+            this.prefixText = config.prefixText;
+            this.prefixStyle = config.prefixStyle;
+            this.suffixIcon = config.suffixIcon;
+            this.suffix = config.suffix;
+            this.suffixText = config.suffixText;
+            this.suffixStyle = config.suffixStyle;
+            this.suffixIconConstraints = config.suffixIconConstraints;
+            this.counter = config.counter;
+            this.counterText = config.counterText;
+            this.counterStyle = config.counterStyle;
+            this.filled = config.filled;
+            this.fillColor = config.fillColor;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.errorBorder = config.errorBorder;
+            this.focusedBorder = config.focusedBorder;
+            this.focusedErrorBorder = config.focusedErrorBorder;
+            this.disabledBorder = config.disabledBorder;
+            this.enabledBorder = config.enabledBorder;
+            this.border = config.border;
+            this.enabled = config.enabled;
+            this.semanticCounterText = config.semanticCounterText;
+            this.alignLabelWithHint = config.alignLabelWithHint;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           icon?:Widget,
           labelText?:string,
@@ -3183,11 +3183,11 @@ class InputDecoration extends DartClass {
           alignLabelWithHint?:boolean,
         }
      */
-    static new(args) {
-        return new InputDecoration(args);
+    static new(config) {
+        return new InputDecoration(config);
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           hintText?:string,
           hasFloatingPlaceholder?:boolean,
@@ -3198,17 +3198,17 @@ class InputDecoration extends DartClass {
           enabled?:boolean
         }
      */
-    static collapsed(args) {
+    static collapsed(config) {
         let v = new InputDecoration();
         v.constructorName = "collapsed";
-        if (args != null && args != undefined) {
-            v.hintText = args.hintText;
-            v.hasFloatingPlaceholder = args.hasFloatingPlaceholder;
-            v.hintStyle = args.hintStyle;
-            v.filled = args.filled;
-            v.fillColor = args.fillColor;
-            v.border = args.border;
-            v.enabled = args.enabled;
+        if (config != null && config != undefined) {
+            v.hintText = config.hintText;
+            v.hasFloatingPlaceholder = config.hasFloatingPlaceholder;
+            v.hintStyle = config.hintStyle;
+            v.filled = config.filled;
+            v.fillColor = config.fillColor;
+            v.border = config.border;
+            v.enabled = config.enabled;
         }
         return v;
     }
@@ -3458,31 +3458,31 @@ class Matrix4 extends DartClass {
 exports.Matrix4 = Matrix4;
 class MediaQuery extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           data?:MediaQueryData,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.data = args.data;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.data = config.data;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           data?:MediaQueryData,
         }
      */
-    static new(args) {
-        return new MediaQuery(args);
+    static new(config) {
+        return new MediaQuery(config);
     }
     ;
     static of(context) {
@@ -3492,7 +3492,7 @@ class MediaQuery extends DartClass {
 exports.MediaQuery = MediaQuery;
 class MediaQueryData extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           size?:Size,
           devicePixelRatio?:number,
@@ -3509,26 +3509,26 @@ class MediaQueryData extends DartClass {
           navigationMode?:NavigationMode
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.size = args.size;
-            this.devicePixelRatio = args.devicePixelRatio;
-            this.textScaleFactor = args.textScaleFactor;
-            this.padding = args.padding;
-            this.viewInsets = args.viewInsets;
-            this.alwaysUse24HourFormat = args.alwaysUse24HourFormat;
-            this.accessibleNavigation = args.accessibleNavigation;
-            this.invertColors = args.invertColors;
-            this.disableAnimations = args.disableAnimations;
-            this.boldText = args.boldText;
-            this.platformBrightness = args.platformBrightness;
-            this.highContrast = args.highContrast;
-            this.navigationMode = args.navigationMode;
+        if (config != null && config != undefined) {
+            this.size = config.size;
+            this.devicePixelRatio = config.devicePixelRatio;
+            this.textScaleFactor = config.textScaleFactor;
+            this.padding = config.padding;
+            this.viewInsets = config.viewInsets;
+            this.alwaysUse24HourFormat = config.alwaysUse24HourFormat;
+            this.accessibleNavigation = config.accessibleNavigation;
+            this.invertColors = config.invertColors;
+            this.disableAnimations = config.disableAnimations;
+            this.boldText = config.boldText;
+            this.platformBrightness = config.platformBrightness;
+            this.highContrast = config.highContrast;
+            this.navigationMode = config.navigationMode;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           size?:Size,
           devicePixelRatio?:number,
@@ -3545,8 +3545,8 @@ class MediaQueryData extends DartClass {
           navigationMode?:NavigationMode
         }
      */
-    static new(args) {
-        return new MediaQueryData(args);
+    static new(config) {
+        return new MediaQueryData(config);
     }
 }
 exports.MediaQueryData = MediaQueryData;
@@ -3554,14 +3554,14 @@ exports.MediaQueryData = MediaQueryData;
 //#region ------- N -------
 //****** NeverScrollableScrollPhysics ******
 class NeverScrollableScrollPhysics extends DartClass {
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.parent = args.parent;
+        if (config != null && config != undefined) {
+            this.parent = config.parent;
         }
     }
-    static new(args) {
-        return new NeverScrollableScrollPhysics(args);
+    static new(config) {
+        return new NeverScrollableScrollPhysics(config);
     }
 }
 exports.NeverScrollableScrollPhysics = NeverScrollableScrollPhysics;
@@ -3617,78 +3617,78 @@ class Offset extends DartClass {
 exports.Offset = Offset;
 class OutlinedBorder extends ShapeBorder {
     /**
-     * @param args args:
+     * @param config config:
         {
           side?:BorderSide,
         }
      */
-    static circleBorder(args) {
+    static circleBorder(config) {
         var v = new OutlinedBorder();
         v.constructorName = "circleBorder";
-        if (args != null && args != undefined) {
-            v.side = args.side;
+        if (config != null && config != undefined) {
+            v.side = config.side;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           side?:BorderSide,
           borderRadius?:BorderRadius,
         }
      */
-    static beveledRectangleBorder(args) {
+    static beveledRectangleBorder(config) {
         var v = new OutlinedBorder();
         v.constructorName = "beveledRectangleBorder";
-        if (args != null && args != undefined) {
-            v.side = args.side;
-            v.borderRadius = args.borderRadius;
+        if (config != null && config != undefined) {
+            v.side = config.side;
+            v.borderRadius = config.borderRadius;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           side?:BorderSide,
           borderRadius?:BorderRadius,
         }
      */
-    static continuousRectangleBorder(args) {
+    static continuousRectangleBorder(config) {
         var v = new OutlinedBorder();
         v.constructorName = "continuousRectangleBorder";
-        if (args != null && args != undefined) {
-            v.side = args.side;
-            v.borderRadius = args.borderRadius;
+        if (config != null && config != undefined) {
+            v.side = config.side;
+            v.borderRadius = config.borderRadius;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           side?:BorderSide,
           borderRadius?:BorderRadius,
         }
      */
-    static roundedRectangleBorder(args) {
+    static roundedRectangleBorder(config) {
         var v = new OutlinedBorder();
         v.constructorName = "roundedRectangleBorder";
-        if (args != null && args != undefined) {
-            v.side = args.side;
-            v.borderRadius = args.borderRadius;
+        if (config != null && config != undefined) {
+            v.side = config.side;
+            v.borderRadius = config.borderRadius;
         }
         return v;
     }
     /**
-    * @param args args:
+    * @param config config:
        {
          side?:BorderSide,
        }
     */
-    static stadiumBorder(args) {
+    static stadiumBorder(config) {
         var v = new OutlinedBorder();
         v.constructorName = "stadiumBorder";
-        if (args != null && args != undefined) {
-            v.side = args.side;
+        if (config != null && config != undefined) {
+            v.side = config.side;
         }
         return v;
     }
@@ -3738,20 +3738,20 @@ class Radius extends DartClass {
 exports.Radius = Radius;
 class Rect extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           center?:Offset,
           width?:number,
           height?:number
         }
      */
-    static fromCenter(args) {
+    static fromCenter(config) {
         let v = new Rect();
         v.constructorName = "fromCenter";
-        if (args != null && args != undefined) {
-            v.center = args.center;
-            v.width = args.width;
-            v.height = args.height;
+        if (config != null && config != undefined) {
+            v.center = config.center;
+            v.width = config.width;
+            v.height = config.height;
         }
         return v;
     }
@@ -3774,18 +3774,18 @@ class Rect extends DartClass {
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         center?:Offset,
         radius?:number
       }
      */
-    static fromCircle(args) {
+    static fromCircle(config) {
         let v = new Rect();
         v.constructorName = "fromCircle";
-        if (args != null && args != undefined) {
-            v.center = args.center;
-            v.radius = args.radius;
+        if (config != null && config != undefined) {
+            v.center = config.center;
+            v.radius = config.radius;
         }
         return v;
     }
@@ -3878,7 +3878,7 @@ class RRect extends DartClass {
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         topLeft?:Radius,
         topRight?:Radius,
@@ -3886,23 +3886,23 @@ class RRect extends DartClass {
         bottomLeft?:Radius,
       }
      */
-    static fromLTRBAndCorners(left, top, right, bottom, args) {
+    static fromLTRBAndCorners(left, top, right, bottom, config) {
         let v = new RRect();
         v.constructorName = "fromLTRBAndCorners";
         v.left = left;
         v.top = top;
         v.right = right;
         v.bottom = bottom;
-        if (args != null && args != undefined) {
-            v.topLeft = args.topLeft;
-            v.topRight = args.topRight;
-            v.bottomLeft = args.bottomLeft;
-            v.bottomRight = args.bottomRight;
+        if (config != null && config != undefined) {
+            v.topLeft = config.topLeft;
+            v.topRight = config.topRight;
+            v.bottomLeft = config.bottomLeft;
+            v.bottomRight = config.bottomRight;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         topLeft?:Radius,
         topRight?:Radius,
@@ -3910,15 +3910,15 @@ class RRect extends DartClass {
         bottomLeft?:Radius,
       }
      */
-    static fromRectAndCorners(rect, args) {
+    static fromRectAndCorners(rect, config) {
         let v = new RRect();
         v.constructorName = "fromRectAndCorners";
         v.rect = rect;
-        if (args != null && args != undefined) {
-            v.topLeft = args.topLeft;
-            v.topRight = args.topRight;
-            v.bottomLeft = args.bottomLeft;
-            v.bottomRight = args.bottomRight;
+        if (config != null && config != undefined) {
+            v.topLeft = config.topLeft;
+            v.topRight = config.topRight;
+            v.bottomLeft = config.bottomLeft;
+            v.bottomRight = config.bottomRight;
         }
         return v;
     }
@@ -3938,7 +3938,7 @@ class RSTransform extends DartClass {
         this.ty = ty;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           rotation?:number,
           scale?:number,
@@ -3948,16 +3948,16 @@ class RSTransform extends DartClass {
           translateY?:number,
         }
      */
-    static fromComponents(args) {
+    static fromComponents(config) {
         let v = new RSTransform();
         v.constructorName = "fromComponents";
-        if (args != null && args != undefined) {
-            v.rotation = args.rotation;
-            v.scale = args.scale;
-            v.anchorX = args.anchorX;
-            v.anchorY = args.anchorY;
-            v.translateX = args.translateX;
-            v.translateY = args.translateY;
+        if (config != null && config != undefined) {
+            v.rotation = config.rotation;
+            v.scale = config.scale;
+            v.anchorX = config.anchorX;
+            v.anchorY = config.anchorY;
+            v.translateX = config.translateX;
+            v.translateY = config.translateY;
         }
         return v;
     }
@@ -3968,14 +3968,14 @@ class RSTransform extends DartClass {
 exports.RSTransform = RSTransform;
 //****** RangeMaintainingScrollPhysics ******
 class RangeMaintainingScrollPhysics extends DartClass {
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.parent = args.parent;
+        if (config != null && config != undefined) {
+            this.parent = config.parent;
         }
     }
-    static new(args) {
-        return new RangeMaintainingScrollPhysics(args);
+    static new(config) {
+        return new RangeMaintainingScrollPhysics(config);
     }
 }
 exports.RangeMaintainingScrollPhysics = RangeMaintainingScrollPhysics;
@@ -4029,7 +4029,7 @@ class Size extends DartClass {
 exports.Size = Size;
 class StrutStyle extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           fontFamily?:string,
           fontFamilyFallback?:Array<string>,
@@ -4043,23 +4043,23 @@ class StrutStyle extends DartClass {
           packageName?:string,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.fontFamily = args.fontFamily;
-            this.fontFamilyFallback = args.fontFamilyFallback;
-            this.fontSize = args.fontSize;
-            this.height = args.height;
-            this.leading = args.leading;
-            this.fontWeight = args.fontWeight;
-            this.fontStyle = args.fontStyle;
-            this.forceStrutHeight = args.forceStrutHeight;
-            this.debugLabel = args.debugLabel;
-            this.packageName = args.packageName;
+        if (config != null && config != undefined) {
+            this.fontFamily = config.fontFamily;
+            this.fontFamilyFallback = config.fontFamilyFallback;
+            this.fontSize = config.fontSize;
+            this.height = config.height;
+            this.leading = config.leading;
+            this.fontWeight = config.fontWeight;
+            this.fontStyle = config.fontStyle;
+            this.forceStrutHeight = config.forceStrutHeight;
+            this.debugLabel = config.debugLabel;
+            this.packageName = config.packageName;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           fontFamily?:string,
           fontFamilyFallback?:Array<string>,
@@ -4073,14 +4073,14 @@ class StrutStyle extends DartClass {
           packageName?:string,
         }
      */
-    static new(args) {
-        return new StrutStyle(args);
+    static new(config) {
+        return new StrutStyle(config);
     }
 }
 exports.StrutStyle = StrutStyle;
 class SystemUiOverlayStyle extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           systemNavigationBarColor?:Color,
           systemNavigationBarDividerColor?:Color,
@@ -4090,19 +4090,19 @@ class SystemUiOverlayStyle extends DartClass {
           statusBarIconBrightness?:Brightness
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.systemNavigationBarColor = args.systemNavigationBarColor;
-            this.systemNavigationBarDividerColor = args.systemNavigationBarDividerColor;
-            this.systemNavigationBarIconBrightness = args.systemNavigationBarIconBrightness;
-            this.statusBarColor = args.statusBarColor;
-            this.statusBarBrightness = args.statusBarBrightness;
-            this.statusBarIconBrightness = args.statusBarIconBrightness;
+        if (config != null && config != undefined) {
+            this.systemNavigationBarColor = config.systemNavigationBarColor;
+            this.systemNavigationBarDividerColor = config.systemNavigationBarDividerColor;
+            this.systemNavigationBarIconBrightness = config.systemNavigationBarIconBrightness;
+            this.statusBarColor = config.statusBarColor;
+            this.statusBarBrightness = config.statusBarBrightness;
+            this.statusBarIconBrightness = config.statusBarIconBrightness;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           systemNavigationBarColor?:Color,
           systemNavigationBarDividerColor?:Color,
@@ -4112,8 +4112,8 @@ class SystemUiOverlayStyle extends DartClass {
           statusBarIconBrightness?:Brightness
         }
      */
-    static new(args) {
-        return new SystemUiOverlayStyle(args);
+    static new(config) {
+        return new SystemUiOverlayStyle(config);
     }
 }
 exports.SystemUiOverlayStyle = SystemUiOverlayStyle;
@@ -4131,86 +4131,86 @@ SystemUiOverlayStyle.dark = SystemUiOverlayStyle.new({
 });
 class SpringDescription extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           mass?:number,
           stiffness?:number,
           damping?:number
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.mass = args.mass;
-            this.stiffness = args.stiffness;
-            this.damping = args.damping;
+        if (config != null && config != undefined) {
+            this.mass = config.mass;
+            this.stiffness = config.stiffness;
+            this.damping = config.damping;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           mass?:number,
           stiffness?:number,
           damping?:number
         }
      */
-    static new(args) {
-        return new SpringDescription(args);
+    static new(config) {
+        return new SpringDescription(config);
     }
 }
 exports.SpringDescription = SpringDescription;
 class ScrollPhysics extends DartClass {
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.parent = args.parent;
+        if (config != null && config != undefined) {
+            this.parent = config.parent;
         }
     }
-    static new(args) {
-        return new ScrollPhysics(args);
+    static new(config) {
+        return new ScrollPhysics(config);
     }
 }
 exports.ScrollPhysics = ScrollPhysics;
 // Todo:
 class ScrollController extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           initialScrollOffset?:number,
           keepScrollOffset?:boolean,
           debugLabel?:string
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
         this.createMirrorID();
-        if (args != null && args != undefined) {
-            this.initialScrollOffset = args.initialScrollOffset;
-            this.keepScrollOffset = args.keepScrollOffset;
-            this.debugLabel = args.debugLabel;
+        if (config != null && config != undefined) {
+            this.initialScrollOffset = config.initialScrollOffset;
+            this.keepScrollOffset = config.keepScrollOffset;
+            this.debugLabel = config.debugLabel;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           duration?:Duration,
           curve?:Curves
         }
      */
-    animateTo(offset, args) {
+    animateTo(offset, config) {
         var map = new Map();
         map.set("offset", offset);
-        if (args != null && args != undefined) {
-            if (args.duration != null && args.duration != undefined) {
-                map.set("duration", args.duration);
+        if (config != null && config != undefined) {
+            if (config.duration != null && config.duration != undefined) {
+                map.set("duration", config.duration);
             }
-            if (args.curve != null && args.curve != undefined) {
-                map.set("curve", args.curve);
+            if (config.curve != null && config.curve != undefined) {
+                map.set("curve", config.curve);
             }
         }
-        let argument = JSCallArgs.new({ mirrorID: this.mirrorID, className: "ScrollController", funcName: "animateTo", args: map });
+        let argument = JSCallConfig.new({ mirrorID: this.mirrorID, className: "ScrollController", funcName: "animateTo", args: map });
         /*
-        let argument = new FlutterCallArgs({
+        let argument = new FlutterCallConfig({
           mirrorID: v.mirrorID,
           className: "ScrollController",
           funcName: "animateTo",
@@ -4225,55 +4225,55 @@ class ScrollController extends DartClass {
     jumpTo(value) {
         var args = new Map();
         args.set("value", value);
-        let argument = JSCallArgs.new({ mirrorID: this.mirrorID, className: "ScrollController", funcName: "jumpTo", args: args });
+        let argument = JSCallConfig.new({ mirrorID: this.mirrorID, className: "ScrollController", funcName: "jumpTo", args: args });
         JSFramework.invokeFlutterFunction(argument);
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           initialScrollOffset?:number,
           keepScrollOffset?:boolean,
           debugLabel?:string
         }
      */
-    static new(args) {
-        return new ScrollController(args);
+    static new(config) {
+        return new ScrollController(config);
     }
 }
 exports.ScrollController = ScrollController;
 class Shadow extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           offset?:Offset,
           blurRadius?:number
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.color = args.color;
-            this.blurRadius = args.blurRadius;
-            this.offset = args.offset;
+        if (config != null && config != undefined) {
+            this.color = config.color;
+            this.blurRadius = config.blurRadius;
+            this.offset = config.offset;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           offset?:Offset,
           blurRadius?:number
         }
      */
-    static new(args) {
-        return new Shadow(args);
+    static new(config) {
+        return new Shadow(config);
     }
 }
 exports.Shadow = Shadow;
 class ScrollbarPainter extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           textDirection?:TextDirection,
@@ -4287,23 +4287,23 @@ class ScrollbarPainter extends DartClass {
           minOverscrollLength?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.color = args.color;
-            this.textDirection = args.textDirection;
-            this.thickness = args.thickness;
-            this.fadeoutOpacityAnimation = args.fadeoutOpacityAnimation;
-            this.padding = args.padding;
-            this.mainAxisMargin = args.mainAxisMargin;
-            this.crossAxisMargin = args.crossAxisMargin;
-            this.radius = args.radius;
-            this.minLength = args.minLength;
-            this.minOverscrollLength = args.minOverscrollLength;
+        if (config != null && config != undefined) {
+            this.color = config.color;
+            this.textDirection = config.textDirection;
+            this.thickness = config.thickness;
+            this.fadeoutOpacityAnimation = config.fadeoutOpacityAnimation;
+            this.padding = config.padding;
+            this.mainAxisMargin = config.mainAxisMargin;
+            this.crossAxisMargin = config.crossAxisMargin;
+            this.radius = config.radius;
+            this.minLength = config.minLength;
+            this.minOverscrollLength = config.minOverscrollLength;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           textDirection?:TextDirection,
@@ -4317,8 +4317,8 @@ class ScrollbarPainter extends DartClass {
           minOverscrollLength?:number,
         }
      */
-    static new(args) {
-        return new ScrollbarPainter(args);
+    static new(config) {
+        return new ScrollbarPainter(config);
     }
 }
 exports.ScrollbarPainter = ScrollbarPainter;
@@ -4340,7 +4340,7 @@ TextAlignVertical.center = TextAlignVertical.new(0.0);
 TextAlignVertical.bottom = TextAlignVertical.new(1.0);
 class TextStyle extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           inherit?:boolean,
           color?:Color,
@@ -4361,30 +4361,30 @@ class TextStyle extends DartClass {
           packageName?:string,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.inherit = args.inherit;
-            this.color = args.color;
-            this.backgroundColor = args.backgroundColor;
-            this.fontSize = args.fontSize;
-            this.fontWeight = args.fontWeight;
-            this.fontStyle = args.fontStyle;
-            this.letterSpacing = args.letterSpacing;
-            this.wordSpacing = args.wordSpacing;
-            this.textBaseline = args.textBaseline;
-            this.height = args.height;
-            this.decoration = args.decoration;
-            this.decorationColor = args.decorationColor;
-            this.decorationStyle = args.decorationStyle;
-            this.decorationThickness = args.decorationThickness;
-            this.debugLabel = args.debugLabel;
-            this.fontFamily = args.fontFamily;
-            this.packageName = args.packageName;
+        if (config != null && config != undefined) {
+            this.inherit = config.inherit;
+            this.color = config.color;
+            this.backgroundColor = config.backgroundColor;
+            this.fontSize = config.fontSize;
+            this.fontWeight = config.fontWeight;
+            this.fontStyle = config.fontStyle;
+            this.letterSpacing = config.letterSpacing;
+            this.wordSpacing = config.wordSpacing;
+            this.textBaseline = config.textBaseline;
+            this.height = config.height;
+            this.decoration = config.decoration;
+            this.decorationColor = config.decorationColor;
+            this.decorationStyle = config.decorationStyle;
+            this.decorationThickness = config.decorationThickness;
+            this.debugLabel = config.debugLabel;
+            this.fontFamily = config.fontFamily;
+            this.packageName = config.packageName;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           inherit?:boolean,
           color?:Color,
@@ -4405,14 +4405,14 @@ class TextStyle extends DartClass {
           packageName?:string,
         }
      */
-    static new(args) {
-        return new TextStyle(args);
+    static new(config) {
+        return new TextStyle(config);
     }
 }
 exports.TextStyle = TextStyle;
 class TableBorder extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
       {
         top?:BorderSide,
         right?:BorderSide,
@@ -4422,19 +4422,19 @@ class TableBorder extends DartClass {
         verticalInside?:BorderSide
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.top = args.top;
-            this.right = args.right;
-            this.bottom = args.bottom;
-            this.left = args.left;
-            this.horizontalInside = args.horizontalInside;
-            this.verticalInside = args.verticalInside;
+        if (config != null && config != undefined) {
+            this.top = config.top;
+            this.right = config.right;
+            this.bottom = config.bottom;
+            this.left = config.left;
+            this.horizontalInside = config.horizontalInside;
+            this.verticalInside = config.verticalInside;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         top?:BorderSide,
         right?:BorderSide,
@@ -4444,40 +4444,40 @@ class TableBorder extends DartClass {
         verticalInside?:BorderSide
       }
      */
-    static new(args) {
-        return new TableBorder(args);
+    static new(config) {
+        return new TableBorder(config);
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         color?:Color,
         width?:number,
         style?:BorderStyle,
       }
      */
-    static all(args) {
+    static all(config) {
         let v = new TableBorder();
         v.constructorName = "all";
-        if (args != null && args != undefined) {
-            v.color = args.color;
-            v.width = args.width;
-            v.style = args.style;
+        if (config != null && config != undefined) {
+            v.color = config.color;
+            v.width = config.width;
+            v.style = config.style;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         inside?:BorderSide,
         outside?:BorderSide
       }
      */
-    static symmetric(args) {
+    static symmetric(config) {
         let v = new TableBorder();
         v.constructorName = "symmetric";
-        if (args != null && args != undefined) {
-            v.inside = args.inside;
-            v.outside = args.outside;
+        if (config != null && config != undefined) {
+            v.inside = config.inside;
+            v.outside = config.outside;
         }
         return v;
     }
@@ -4492,31 +4492,31 @@ class TableColumnWidth extends DartClass {
 exports.TableColumnWidth = TableColumnWidth;
 class TabController extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
       {
         initialIndex?:number,
         length?:number,
         vsync?:any
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.initialIndex = args.initialIndex;
-            this.length = args.length;
-            this.vsync = args.vsync;
+        if (config != null && config != undefined) {
+            this.initialIndex = config.initialIndex;
+            this.length = config.length;
+            this.vsync = config.vsync;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         initialIndex?:number,
         length?:number,
         vsync?:any
       }
      */
-    static new(args) {
-        return new TabController(args);
+    static new(config) {
+        return new TabController(config);
     }
 }
 exports.TabController = TabController;
@@ -4536,12 +4536,12 @@ class TextInputType extends DartClass {
         return new TextInputType();
     }
     ;
-    static numberWithOptions(args) {
+    static numberWithOptions(config) {
         let v = new TextInputType();
         v.constructorName = "numberWithOptions";
-        if (args != null && args != undefined) {
-            v.signed = args.signed;
-            v.decimal = args.decimal;
+        if (config != null && config != undefined) {
+            v.signed = config.signed;
+            v.decimal = config.decimal;
         }
         return v;
     }
@@ -4607,7 +4607,7 @@ class Tween extends DartClass {
 exports.Tween = Tween;
 class Uri extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
       {
         scheme?:string,
         fragment?:string,
@@ -4618,20 +4618,20 @@ class Uri extends DartClass {
         query?:string
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.scheme = args.scheme;
-            this.fragment = args.fragment;
-            this.userInfo = args.userInfo;
-            this.host = args.host;
-            this.port = args.port;
-            this.path = args.path;
-            this.query = args.query;
+        if (config != null && config != undefined) {
+            this.scheme = config.scheme;
+            this.fragment = config.fragment;
+            this.userInfo = config.userInfo;
+            this.host = config.host;
+            this.port = config.port;
+            this.path = config.path;
+            this.query = config.query;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         scheme?:string,
         fragment?:string,
@@ -4642,8 +4642,8 @@ class Uri extends DartClass {
         query?:string
       }
      */
-    static new(args) {
-        return new Uri(args);
+    static new(config) {
+        return new Uri(config);
     }
 }
 exports.Uri = Uri;
@@ -4723,28 +4723,28 @@ class Vector4 extends DartClass {
 exports.Vector4 = Vector4;
 class VisualDensity extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
       {
         horizontal?:number,
         vertical?:number,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.horizontal = args.horizontal;
-            this.vertical = args.vertical;
+        if (config != null && config != undefined) {
+            this.horizontal = config.horizontal;
+            this.vertical = config.vertical;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         horizontal?:number,
         vertical?:number,
       }
      */
-    static new(args) {
-        return new VisualDensity(args);
+    static new(config) {
+        return new VisualDensity(config);
     }
 }
 exports.VisualDensity = VisualDensity;
@@ -5899,7 +5899,7 @@ CupertinoIcons.brightness = CupertinoIcons.new("brightness");
 CupertinoIcons.brightness_solid = CupertinoIcons.new("brightness_solid");
 class AbsorbPointer extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -5907,17 +5907,17 @@ class AbsorbPointer extends Widget {
           ignoringSemantics?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.absorbing = args.absorbing;
-            this.ignoringSemantics = args.ignoringSemantics;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.absorbing = config.absorbing;
+            this.ignoringSemantics = config.ignoringSemantics;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -5925,14 +5925,14 @@ class AbsorbPointer extends Widget {
           ignoringSemantics?:boolean,
         }
      */
-    static new(args) {
-        return new AbsorbPointer(args);
+    static new(config) {
+        return new AbsorbPointer(config);
     }
 }
 exports.AbsorbPointer = AbsorbPointer;
 class AnimationController extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           value?:number,
           duration?:Duration,
@@ -5943,17 +5943,17 @@ class AnimationController extends Widget {
           vsync?:any,
         }
      */
-    static new(args) {
+    static new(config) {
         var v = new AnimationController();
         v.createMirrorID();
-        if (args != null && args != undefined) {
-            v.value = args.value;
-            v.duration = args.duration;
-            v.debugLabel = args.debugLabel;
-            v.lowerBound = args.lowerBound;
-            v.upperBound = args.upperBound;
-            v.animationBehavior = args.animationBehavior;
-            v.vsync = args.vsync;
+        if (config != null && config != undefined) {
+            v.value = config.value;
+            v.duration = config.duration;
+            v.debugLabel = config.debugLabel;
+            v.lowerBound = config.lowerBound;
+            v.upperBound = config.upperBound;
+            v.animationBehavior = config.animationBehavior;
+            v.vsync = config.vsync;
         }
         return v;
     }
@@ -6003,7 +6003,7 @@ class Animation extends Widget {
 exports.Animation = Animation;
 class AboutListTile extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6016,22 +6016,22 @@ class AboutListTile extends Widget {
           aboutBoxChildren?:Array<Widget>,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.icon = args.icon;
-            this.applicationIcon = args.applicationIcon;
-            this.applicationName = args.applicationName;
-            this.applicationLegalese = args.applicationLegalese;
-            this.applicationVersion = args.applicationVersion;
-            this.dense = args.dense;
-            this.aboutBoxChildren = args.aboutBoxChildren;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.icon = config.icon;
+            this.applicationIcon = config.applicationIcon;
+            this.applicationName = config.applicationName;
+            this.applicationLegalese = config.applicationLegalese;
+            this.applicationVersion = config.applicationVersion;
+            this.dense = config.dense;
+            this.aboutBoxChildren = config.aboutBoxChildren;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6044,14 +6044,14 @@ class AboutListTile extends Widget {
           aboutBoxChildren?:Array<Widget>,
         }
      */
-    static new(args) {
-        return new AboutListTile(args);
+    static new(config) {
+        return new AboutListTile(config);
     }
 }
 exports.AboutListTile = AboutListTile;
 class AboutDialog extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           applicationName?:string,
@@ -6061,19 +6061,19 @@ class AboutDialog extends Widget {
           children?:Array<Widget>,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.applicationIcon = args.applicationIcon;
-            this.applicationName = args.applicationName;
-            this.applicationLegalese = args.applicationLegalese;
-            this.applicationVersion = args.applicationVersion;
-            this.children = args.children;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.applicationIcon = config.applicationIcon;
+            this.applicationName = config.applicationName;
+            this.applicationLegalese = config.applicationLegalese;
+            this.applicationVersion = config.applicationVersion;
+            this.children = config.children;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           applicationName?:string,
@@ -6083,14 +6083,14 @@ class AboutDialog extends Widget {
           children?:Array<Widget>,
         }
      */
-    static new(args) {
-        return new AboutDialog(args);
+    static new(config) {
+        return new AboutDialog(config);
     }
 }
 exports.AboutDialog = AboutDialog;
 class AppBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           leading?:Widget,
@@ -6113,32 +6113,32 @@ class AppBar extends Widget {
           toolbarHeight?:number
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.leading = args.leading;
-            this.automaticallyImplyLeading = args.automaticallyImplyLeading;
-            this.title = args.title;
-            this.actions = args.actions;
-            this.flexibleSpace = args.flexibleSpace;
-            this.bottom = args.bottom;
-            this.elevation = args.elevation;
-            this.shadowColor = args.shadowColor;
-            this.shape = args.shape;
-            this.backgroundColor = args.backgroundColor;
-            this.brightness = args.brightness;
-            this.primary = args.primary;
-            this.centerTitle = args.centerTitle;
-            this.excludeHeaderSemantics = args.excludeHeaderSemantics;
-            this.titleSpacing = args.titleSpacing;
-            this.toolbarOpacity = args.toolbarOpacity;
-            this.bottomOpacity = args.bottomOpacity;
-            this.toolbarHeight = args.toolbarHeight;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.leading = config.leading;
+            this.automaticallyImplyLeading = config.automaticallyImplyLeading;
+            this.title = config.title;
+            this.actions = config.actions;
+            this.flexibleSpace = config.flexibleSpace;
+            this.bottom = config.bottom;
+            this.elevation = config.elevation;
+            this.shadowColor = config.shadowColor;
+            this.shape = config.shape;
+            this.backgroundColor = config.backgroundColor;
+            this.brightness = config.brightness;
+            this.primary = config.primary;
+            this.centerTitle = config.centerTitle;
+            this.excludeHeaderSemantics = config.excludeHeaderSemantics;
+            this.titleSpacing = config.titleSpacing;
+            this.toolbarOpacity = config.toolbarOpacity;
+            this.bottomOpacity = config.bottomOpacity;
+            this.toolbarHeight = config.toolbarHeight;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           leading?:Widget,
@@ -6161,14 +6161,14 @@ class AppBar extends Widget {
           toolbarHeight?:number
         }
      */
-    static new(args) {
-        return new AppBar(args);
+    static new(config) {
+        return new AppBar(config);
     }
 }
 exports.AppBar = AppBar;
 class Align extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -6177,18 +6177,18 @@ class Align extends Widget {
         heightFactor?:number,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.alignment = args.alignment;
-            this.widthFactor = args.widthFactor;
-            this.heightFactor = args.heightFactor;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.alignment = config.alignment;
+            this.widthFactor = config.widthFactor;
+            this.heightFactor = config.heightFactor;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -6197,44 +6197,44 @@ class Align extends Widget {
         heightFactor?:number,
       }
      */
-    static new(args) {
-        return new Align(args);
+    static new(config) {
+        return new Align(config);
     }
 }
 exports.Align = Align;
 class AspectRatio extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           aspectRatio?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.aspectRatio = args.aspectRatio;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.aspectRatio = config.aspectRatio;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           aspectRatio?:number,
         }
      */
-    static new(args) {
-        return new AspectRatio(args);
+    static new(config) {
+        return new AspectRatio(config);
     }
 }
 exports.AspectRatio = AspectRatio;
 class AnnotatedRegion extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6242,17 +6242,17 @@ class AnnotatedRegion extends Widget {
           sized?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.value = args.value;
-            this.sized = args.sized;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.value = config.value;
+            this.sized = config.sized;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6260,14 +6260,14 @@ class AnnotatedRegion extends Widget {
           sized?:boolean,
         }
      */
-    static new(args) {
-        return new AnnotatedRegion(args);
+    static new(config) {
+        return new AnnotatedRegion(config);
     }
 }
 exports.AnnotatedRegion = AnnotatedRegion;
 class AnimatedCrossFade extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           firstChild?:Widget,
@@ -6282,24 +6282,24 @@ class AnimatedCrossFade extends Widget {
           layoutBuilder?:any
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.firstChild = args.firstChild;
-            this.secondChild = args.secondChild;
-            this.firstCurve = args.firstCurve;
-            this.secondCurve = args.secondCurve;
-            this.sizeCurve = args.sizeCurve;
-            this.alignment = args.alignment;
-            this.crossFadeState = args.crossFadeState;
-            this.duration = args.duration;
-            this.reverseDuration = args.reverseDuration;
-            this.layoutBuilder = args.layoutBuilder;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.firstChild = config.firstChild;
+            this.secondChild = config.secondChild;
+            this.firstCurve = config.firstCurve;
+            this.secondCurve = config.secondCurve;
+            this.sizeCurve = config.sizeCurve;
+            this.alignment = config.alignment;
+            this.crossFadeState = config.crossFadeState;
+            this.duration = config.duration;
+            this.reverseDuration = config.reverseDuration;
+            this.layoutBuilder = config.layoutBuilder;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           firstChild?:Widget,
@@ -6314,15 +6314,15 @@ class AnimatedCrossFade extends Widget {
           layoutBuilder?:any
         }
      */
-    static new(args) {
-        return new AnimatedCrossFade(args);
+    static new(config) {
+        return new AnimatedCrossFade(config);
     }
     ;
 }
 exports.AnimatedCrossFade = AnimatedCrossFade;
 class AnimatedOpacity extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6333,20 +6333,20 @@ class AnimatedOpacity extends Widget {
           alwaysIncludeSemantics?:boolean
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.opacity = args.opacity;
-            this.curve = args.curve;
-            this.duration = args.duration;
-            this.onEnd = args.onEnd;
-            this.alwaysIncludeSemantics = args.alwaysIncludeSemantics;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.opacity = config.opacity;
+            this.curve = config.curve;
+            this.duration = config.duration;
+            this.onEnd = config.onEnd;
+            this.alwaysIncludeSemantics = config.alwaysIncludeSemantics;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6357,15 +6357,15 @@ class AnimatedOpacity extends Widget {
           alwaysIncludeSemantics?:boolean
         }
      */
-    static new(args) {
-        return new AnimatedOpacity(args);
+    static new(config) {
+        return new AnimatedOpacity(config);
     }
     ;
 }
 exports.AnimatedOpacity = AnimatedOpacity;
 class AnimatedBuilder extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           animation?:Animation,
@@ -6374,16 +6374,16 @@ class AnimatedBuilder extends Widget {
           widget?:Widget
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        this.key = args.key;
-        this.animation = args.animation;
-        this.builder = args.builder;
-        this.child = args.child;
-        this.widget = args.widget;
+        this.key = config.key;
+        this.animation = config.animation;
+        this.builder = config.builder;
+        this.child = config.child;
+        this.widget = config.widget;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           animation?:Animation,
@@ -6392,14 +6392,14 @@ class AnimatedBuilder extends Widget {
           widget?:Widget
         }
      */
-    static new(args) {
-        return new AnimatedBuilder(args);
+    static new(config) {
+        return new AnimatedBuilder(config);
     }
 }
 exports.AnimatedBuilder = AnimatedBuilder;
 class AnimatedContainer extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           alignment?:Alignment,
@@ -6418,28 +6418,28 @@ class AnimatedContainer extends Widget {
           onEnd?:VoidCallback,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.alignment = args.alignment;
-            this.margin = args.margin;
-            this.padding = args.padding;
-            this.child = args.child;
-            this.color = args.color;
-            this.decoration = args.decoration;
-            this.foregroundDecoration = args.foregroundDecoration;
-            this.width = args.width;
-            this.height = args.height;
-            this.constraints = args.constraints;
-            this.transform = args.transform;
-            this.curve = args.curve;
-            this.duration = args.duration;
-            this.onEnd = args.onEnd;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.alignment = config.alignment;
+            this.margin = config.margin;
+            this.padding = config.padding;
+            this.child = config.child;
+            this.color = config.color;
+            this.decoration = config.decoration;
+            this.foregroundDecoration = config.foregroundDecoration;
+            this.width = config.width;
+            this.height = config.height;
+            this.constraints = config.constraints;
+            this.transform = config.transform;
+            this.curve = config.curve;
+            this.duration = config.duration;
+            this.onEnd = config.onEnd;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           alignment?:Alignment,
@@ -6458,14 +6458,14 @@ class AnimatedContainer extends Widget {
           onEnd?:VoidCallback,
         }
      */
-    static new(args) {
-        return new AnimatedContainer(args);
+    static new(config) {
+        return new AnimatedContainer(config);
     }
 }
 exports.AnimatedContainer = AnimatedContainer;
 class AnimatedPhysicalModel extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6482,26 +6482,26 @@ class AnimatedPhysicalModel extends Widget {
           onEnd?:VoidCallback
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.shape = args.shape;
-            this.clipBehavior = args.clipBehavior;
-            this.borderRadius = args.borderRadius;
-            this.elevation = args.elevation;
-            this.color = args.color;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.borderRadius = config.borderRadius;
+            this.elevation = config.elevation;
+            this.color = config.color;
             this.animateColor = this.animateColor;
-            this.animateShadowColor = args.animateShadowColor;
-            this.shadowColor = args.shadowColor;
-            this.curve = args.curve;
-            this.duration = args.duration;
-            this.onEnd = args.onEnd;
+            this.animateShadowColor = config.animateShadowColor;
+            this.shadowColor = config.shadowColor;
+            this.curve = config.curve;
+            this.duration = config.duration;
+            this.onEnd = config.onEnd;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6518,14 +6518,14 @@ class AnimatedPhysicalModel extends Widget {
           onEnd?:VoidCallback
         }
      */
-    static new(args) {
-        return new AnimatedPhysicalModel(args);
+    static new(config) {
+        return new AnimatedPhysicalModel(config);
     }
 }
 exports.AnimatedPhysicalModel = AnimatedPhysicalModel;
 class AnimatedPositioned extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6540,23 +6540,23 @@ class AnimatedPositioned extends Widget {
           onEnd?:VoidCallback,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.left = args.left;
-            this.top = args.top;
-            this.right = args.right;
-            this.bottom = args.bottom;
-            this.width = args.width;
-            this.curve = args.curve;
-            this.duration = args.duration;
-            this.onEnd = args.onEnd;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.left = config.left;
+            this.top = config.top;
+            this.right = config.right;
+            this.bottom = config.bottom;
+            this.width = config.width;
+            this.curve = config.curve;
+            this.duration = config.duration;
+            this.onEnd = config.onEnd;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6571,14 +6571,14 @@ class AnimatedPositioned extends Widget {
           onEnd?:VoidCallback,
         }
      */
-    static new(args) {
-        return new AnimatedPositioned(args);
+    static new(config) {
+        return new AnimatedPositioned(config);
     }
 }
 exports.AnimatedPositioned = AnimatedPositioned;
 class AnimatedSize extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6589,20 +6589,20 @@ class AnimatedSize extends Widget {
           vsync?:any
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.alignment = args.alignment;
-            this.curve = args.curve;
-            this.duration = args.duration;
-            this.reverseDuration = args.reverseDuration;
-            this.vsync = args.vsync;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.alignment = config.alignment;
+            this.curve = config.curve;
+            this.duration = config.duration;
+            this.reverseDuration = config.reverseDuration;
+            this.vsync = config.vsync;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6613,14 +6613,14 @@ class AnimatedSize extends Widget {
           vsync?:any
         }
      */
-    static new(args) {
-        return new AnimatedSize(args);
+    static new(config) {
+        return new AnimatedSize(config);
     }
 }
 exports.AnimatedSize = AnimatedSize;
 class AnimatedDefaultTextStyle extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6634,23 +6634,23 @@ class AnimatedDefaultTextStyle extends Widget {
           onEnd?:VoidCallback
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.style = args.style;
-            this.softWrap = args.softWrap;
-            this.textAlign = args.textAlign;
-            this.softWrap = args.softWrap;
-            this.maxLines = args.maxLines;
-            this.curve = args.curve;
-            this.duration = args.duration;
-            this.onEnd = args.onEnd;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.style = config.style;
+            this.softWrap = config.softWrap;
+            this.textAlign = config.textAlign;
+            this.softWrap = config.softWrap;
+            this.maxLines = config.maxLines;
+            this.curve = config.curve;
+            this.duration = config.duration;
+            this.onEnd = config.onEnd;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6664,14 +6664,14 @@ class AnimatedDefaultTextStyle extends Widget {
           onEnd?:VoidCallback
         }
      */
-    static new(args) {
-        return new AnimatedDefaultTextStyle(args);
+    static new(config) {
+        return new AnimatedDefaultTextStyle(config);
     }
 }
 exports.AnimatedDefaultTextStyle = AnimatedDefaultTextStyle;
 class BottomNavigationBarItem extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           icon:Widget,
           title?:Widget,
@@ -6679,17 +6679,17 @@ class BottomNavigationBarItem extends Widget {
           backgroundColor?:Color
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.icon = args.icon;
-            this.title = args.title;
-            this.activeIcon = args.activeIcon;
-            this.backgroundColor = args.backgroundColor;
+        if (config != null && config != undefined) {
+            this.icon = config.icon;
+            this.title = config.title;
+            this.activeIcon = config.activeIcon;
+            this.backgroundColor = config.backgroundColor;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           icon:Widget,
           title?:Widget,
@@ -6697,14 +6697,14 @@ class BottomNavigationBarItem extends Widget {
           backgroundColor?:Color
         }
      */
-    static new(args) {
-        return new BottomNavigationBarItem(args);
+    static new(config) {
+        return new BottomNavigationBarItem(config);
     }
 }
 exports.BottomNavigationBarItem = BottomNavigationBarItem;
 class Banner extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6716,21 +6716,21 @@ class Banner extends Widget {
           textStyle?:TextStyle,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.message = args.message;
-            this.textDirection = args.textDirection;
-            this.location = args.location;
-            this.layoutDirection = args.layoutDirection;
-            this.color = args.color;
-            this.textStyle = args.textStyle;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.message = config.message;
+            this.textDirection = config.textDirection;
+            this.location = config.location;
+            this.layoutDirection = config.layoutDirection;
+            this.color = config.color;
+            this.textStyle = config.textStyle;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6742,14 +6742,14 @@ class Banner extends Widget {
           textStyle?:TextStyle,
         }
      */
-    static new(args) {
-        return new Banner(args);
+    static new(config) {
+        return new Banner(config);
     }
 }
 exports.Banner = Banner;
 class Baseline extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6757,17 +6757,17 @@ class Baseline extends Widget {
           baselineType:TextBaseline,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.baseline = args.baseline;
-            this.baselineType = args.baselineType;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.baseline = config.baseline;
+            this.baselineType = config.baselineType;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6775,14 +6775,14 @@ class Baseline extends Widget {
           baselineType:TextBaseline,
         }
      */
-    static new(args) {
-        return new Baseline(args);
+    static new(config) {
+        return new Baseline(config);
     }
 }
 exports.Baseline = Baseline;
 class ButtonBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           children?:Array<Widget>,
@@ -6798,25 +6798,25 @@ class ButtonBar extends Widget {
           overflowDirection?:VerticalDirection,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.alignment = args.alignment;
-            this.mainAxisSize = args.mainAxisSize;
-            this.buttonAlignedDropdown = args.buttonAlignedDropdown;
-            this.buttonTextTheme = args.buttonTextTheme;
-            this.buttonHeight = args.buttonHeight;
-            this.buttonMinWidth = args.buttonMinWidth;
-            this.buttonPadding = args.buttonPadding;
-            this.layoutBehavior = args.layoutBehavior;
-            this.overflowButtonSpacing = args.overflowButtonSpacing;
-            this.overflowDirection = args.overflowDirection;
-            this.children = args.children;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.alignment = config.alignment;
+            this.mainAxisSize = config.mainAxisSize;
+            this.buttonAlignedDropdown = config.buttonAlignedDropdown;
+            this.buttonTextTheme = config.buttonTextTheme;
+            this.buttonHeight = config.buttonHeight;
+            this.buttonMinWidth = config.buttonMinWidth;
+            this.buttonPadding = config.buttonPadding;
+            this.layoutBehavior = config.layoutBehavior;
+            this.overflowButtonSpacing = config.overflowButtonSpacing;
+            this.overflowDirection = config.overflowDirection;
+            this.children = config.children;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           children?:Array<Widget>,
@@ -6832,44 +6832,44 @@ class ButtonBar extends Widget {
           overflowDirection?:VerticalDirection,
         }
      */
-    static new(args) {
-        return new ButtonBar(args);
+    static new(config) {
+        return new ButtonBar(config);
     }
 }
 exports.ButtonBar = ButtonBar;
 class BlockSemantics extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           blocking?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.blocking = args.blocking;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.blocking = config.blocking;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           blocking?:boolean,
         }
      */
-    static new(args) {
-        return new BlockSemantics(args);
+    static new(config) {
+        return new BlockSemantics(config);
     }
 }
 exports.BlockSemantics = BlockSemantics;
 class BottomAppBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6880,20 +6880,20 @@ class BottomAppBar extends Widget {
           notchMargin?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.color = args.color;
-            this.elevation = args.elevation;
-            this.shape = args.shape;
-            this.clipBehavior = args.clipBehavior;
-            this.notchMargin = args.notchMargin;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.color = config.color;
+            this.elevation = config.elevation;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.notchMargin = config.notchMargin;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -6904,14 +6904,14 @@ class BottomAppBar extends Widget {
           notchMargin?:number,
         }
      */
-    static new(args) {
-        return new BottomAppBar(args);
+    static new(config) {
+        return new BottomAppBar(config);
     }
 }
 exports.BottomAppBar = BottomAppBar;
 class BottomNavigationBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           items:Array<BottomNavigationBarItem>,
@@ -6934,32 +6934,32 @@ class BottomNavigationBar extends Widget {
           showUnselectedLabels?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.items = args.items;
-            this.onTap = args.onTap;
-            this.currentIndex = args.currentIndex;
-            this.elevation = args.elevation;
-            this.type = args.type;
-            this.fixedColor = args.fixedColor;
-            this.backgroundColor = args.backgroundColor;
-            this.iconSize = args.iconSize;
-            this.selectedItemColor = args.selectedItemColor;
-            this.unselectedItemColor = args.unselectedItemColor;
-            this.selectedIconTheme = args.selectedIconTheme;
-            this.unselectedIconTheme = args.unselectedIconTheme;
-            this.selectedFontSize = args.selectedFontSize;
-            this.unselectedFontSize = args.unselectedFontSize;
-            this.selectedLabelStyle = args.selectedLabelStyle;
-            this.unselectedLabelStyle = args.unselectedLabelStyle;
-            this.showSelectedLabels = args.showSelectedLabels;
-            this.showUnselectedLabels = args.showUnselectedLabels;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.items = config.items;
+            this.onTap = config.onTap;
+            this.currentIndex = config.currentIndex;
+            this.elevation = config.elevation;
+            this.type = config.type;
+            this.fixedColor = config.fixedColor;
+            this.backgroundColor = config.backgroundColor;
+            this.iconSize = config.iconSize;
+            this.selectedItemColor = config.selectedItemColor;
+            this.unselectedItemColor = config.unselectedItemColor;
+            this.selectedIconTheme = config.selectedIconTheme;
+            this.unselectedIconTheme = config.unselectedIconTheme;
+            this.selectedFontSize = config.selectedFontSize;
+            this.unselectedFontSize = config.unselectedFontSize;
+            this.selectedLabelStyle = config.selectedLabelStyle;
+            this.unselectedLabelStyle = config.unselectedLabelStyle;
+            this.showSelectedLabels = config.showSelectedLabels;
+            this.showUnselectedLabels = config.showUnselectedLabels;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           items:Array<BottomNavigationBarItem>,
@@ -6982,59 +6982,59 @@ class BottomNavigationBar extends Widget {
           showUnselectedLabels?:boolean,
         }
      */
-    static new(args) {
-        return new BottomNavigationBar(args);
+    static new(config) {
+        return new BottomNavigationBar(config);
     }
 }
 exports.BottomNavigationBar = BottomNavigationBar;
 class BackButtonIcon extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
+        if (config != null && config != undefined) {
+            this.key = config.key;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
         }
      */
-    static new(args) {
-        return new BackButtonIcon(args);
+    static new(config) {
+        return new BackButtonIcon(config);
     }
 }
 exports.BackButtonIcon = BackButtonIcon;
 class BackButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           onPressed?:VoidCallback,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.onPressed = args.onPressed;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.onPressed = config.onPressed;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           onPressed?:VoidCallback,
         }
      */
-    static new(args) {
-        return new BackButton(args);
+    static new(config) {
+        return new BackButton(config);
     }
 }
 exports.BackButton = BackButton;
@@ -7060,37 +7060,37 @@ class Builder extends Widget {
 exports.Builder = Builder;
 class CloseButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           onPressed?:VoidCallback,
           color?:Color,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.onPressed = args.onPressed;
-            this.color = args.color;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.onPressed = config.onPressed;
+            this.color = config.color;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           onPressed?:VoidCallback,
           color?:Color,
         }
      */
-    static new(args) {
-        return new CloseButton(args);
+    static new(config) {
+        return new CloseButton(config);
     }
 }
 exports.CloseButton = CloseButton;
 class Container extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -7107,26 +7107,26 @@ class Container extends Widget {
           clipBehavior?:Clip,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.alignment = args.alignment;
-            this.padding = args.padding;
-            this.color = args.color;
-            this.decoration = args.decoration;
-            this.foregroundDecoration = args.foregroundDecoration;
-            this.width = args.width;
-            this.height = args.height;
-            this.constraints = args.constraints;
-            this.margin = args.margin;
-            this.transform = args.transform;
-            this.child = args.child;
-            this.clipBehavior = args.clipBehavior;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.alignment = config.alignment;
+            this.padding = config.padding;
+            this.color = config.color;
+            this.decoration = config.decoration;
+            this.foregroundDecoration = config.foregroundDecoration;
+            this.width = config.width;
+            this.height = config.height;
+            this.constraints = config.constraints;
+            this.margin = config.margin;
+            this.transform = config.transform;
+            this.child = config.child;
+            this.clipBehavior = config.clipBehavior;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -7143,14 +7143,14 @@ class Container extends Widget {
           clipBehavior?:Clip,
         }
      */
-    static new(args) {
-        return new Container(args);
+    static new(config) {
+        return new Container(config);
     }
 }
 exports.Container = Container;
 class Center extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -7158,17 +7158,17 @@ class Center extends Widget {
           heightFactor?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.widthFactor = args.widthFactor;
-            this.heightFactor = args.heightFactor;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.widthFactor = config.widthFactor;
+            this.heightFactor = config.heightFactor;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -7176,44 +7176,44 @@ class Center extends Widget {
           heightFactor?:number,
         }
      */
-    static new(args) {
-        return new Center(args);
+    static new(config) {
+        return new Center(config);
     }
 }
 exports.Center = Center;
 class ColoredBox extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           color:Color,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.color = args.color;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.color = config.color;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           color:Color,
         }
      */
-    static new(args) {
-        return new ColoredBox(args);
+    static new(config) {
+        return new ColoredBox(config);
     }
 }
 exports.ColoredBox = ColoredBox;
 class CircleAvatar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           backgroundColor?:Color,
@@ -7225,21 +7225,21 @@ class CircleAvatar extends Widget {
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.backgroundColor = args.backgroundColor;
-            this.backgroundImage = args.backgroundImage;
-            this.foregroundColor = args.foregroundColor;
-            this.radius = args.radius;
-            this.minRadius = args.minRadius;
-            this.maxRadius = args.maxRadius;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.backgroundColor = config.backgroundColor;
+            this.backgroundImage = config.backgroundImage;
+            this.foregroundColor = config.foregroundColor;
+            this.radius = config.radius;
+            this.minRadius = config.minRadius;
+            this.maxRadius = config.maxRadius;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           backgroundColor?:Color,
@@ -7251,14 +7251,14 @@ class CircleAvatar extends Widget {
           key?:Key,
         }
      */
-    static new(args) {
-        return new CircleAvatar(args);
+    static new(config) {
+        return new CircleAvatar(config);
     }
 }
 exports.CircleAvatar = CircleAvatar;
 class Chip extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           avatar?:Widget,
           label:Widget,
@@ -7279,30 +7279,30 @@ class Chip extends Widget {
           autofocus?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.avatar = args.avatar;
-            this.label = args.label;
-            this.labelStyle = args.labelStyle;
-            this.labelPadding = args.labelPadding;
-            this.deleteIcon = args.deleteIcon;
-            this.onDeleted = args.onDeleted;
-            this.deleteIconColor = args.deleteIconColor;
-            this.deleteButtonTooltipMessage = args.deleteButtonTooltipMessage;
-            this.clipBehavior = args.clipBehavior;
-            this.backgroundColor = args.backgroundColor;
-            this.padding = args.padding;
-            this.materialTapTargetSize = args.materialTapTargetSize;
-            this.elevation = args.elevation;
-            this.autofocus = args.autofocus;
-            this.shadowColor = args.shadowColor;
-            this.visualDensity = args.visualDensity;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.avatar = config.avatar;
+            this.label = config.label;
+            this.labelStyle = config.labelStyle;
+            this.labelPadding = config.labelPadding;
+            this.deleteIcon = config.deleteIcon;
+            this.onDeleted = config.onDeleted;
+            this.deleteIconColor = config.deleteIconColor;
+            this.deleteButtonTooltipMessage = config.deleteButtonTooltipMessage;
+            this.clipBehavior = config.clipBehavior;
+            this.backgroundColor = config.backgroundColor;
+            this.padding = config.padding;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.elevation = config.elevation;
+            this.autofocus = config.autofocus;
+            this.shadowColor = config.shadowColor;
+            this.visualDensity = config.visualDensity;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           avatar?:Widget,
           label:Widget,
@@ -7323,41 +7323,41 @@ class Chip extends Widget {
           autofocus?:boolean,
         }
      */
-    static new(args) {
-        return new Chip(args);
+    static new(config) {
+        return new Chip(config);
     }
 }
 exports.Chip = Chip;
 class CheckedModeBanner extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
         }
      */
-    static new(args) {
-        return new CheckedModeBanner(args);
+    static new(config) {
+        return new CheckedModeBanner(config);
     }
 }
 exports.CheckedModeBanner = CheckedModeBanner;
 class CheckboxListTile extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           value:boolean,
@@ -7376,28 +7376,28 @@ class CheckboxListTile extends Widget {
           tristate?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.value = args.value;
-            this.onChanged = args.onChanged;
-            this.activeColor = args.activeColor;
-            this.checkColor = args.checkColor;
-            this.title = args.title;
-            this.subtitle = args.subtitle;
-            this.isThreeLine = args.isThreeLine;
-            this.dense = args.dense;
-            this.contentPadding = args.contentPadding;
-            this.secondary = args.secondary;
-            this.selected = args.selected;
-            this.autofocus = args.autofocus;
-            this.controlAffinity = args.controlAffinity;
-            this.tristate = args.tristate;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.onChanged = config.onChanged;
+            this.activeColor = config.activeColor;
+            this.checkColor = config.checkColor;
+            this.title = config.title;
+            this.subtitle = config.subtitle;
+            this.isThreeLine = config.isThreeLine;
+            this.dense = config.dense;
+            this.contentPadding = config.contentPadding;
+            this.secondary = config.secondary;
+            this.selected = config.selected;
+            this.autofocus = config.autofocus;
+            this.controlAffinity = config.controlAffinity;
+            this.tristate = config.tristate;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           value:boolean,
@@ -7416,14 +7416,14 @@ class CheckboxListTile extends Widget {
           tristate?:boolean,
         }
      */
-    static new(args) {
-        return new CheckboxListTile(args);
+    static new(config) {
+        return new CheckboxListTile(config);
     }
 }
 exports.CheckboxListTile = CheckboxListTile;
 class Checkbox extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           value:boolean,
@@ -7438,24 +7438,24 @@ class Checkbox extends Widget {
           tristate?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.value = args.value;
-            this.onChanged = args.onChanged;
-            this.activeColor = args.activeColor;
-            this.checkColor = args.checkColor;
-            this.focusColor = args.focusColor;
-            this.hoverColor = args.hoverColor;
-            this.autofocus = args.autofocus;
-            this.visualDensity = args.visualDensity;
-            this.materialTapTargetSize = args.materialTapTargetSize;
-            this.tristate = args.tristate;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.onChanged = config.onChanged;
+            this.activeColor = config.activeColor;
+            this.checkColor = config.checkColor;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.autofocus = config.autofocus;
+            this.visualDensity = config.visualDensity;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.tristate = config.tristate;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           value:boolean,
@@ -7470,14 +7470,14 @@ class Checkbox extends Widget {
           tristate?:boolean,
         }
      */
-    static new(args) {
-        return new Checkbox(args);
+    static new(config) {
+        return new Checkbox(config);
     }
 }
 exports.Checkbox = Checkbox;
 class ClipRRect extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           borderRadius?:BorderRadius,
@@ -7485,17 +7485,17 @@ class ClipRRect extends Widget {
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.borderRadius = args.borderRadius;
-            this.clipBehavior = args.clipBehavior;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.borderRadius = config.borderRadius;
+            this.clipBehavior = config.clipBehavior;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           borderRadius?:BorderRadius,
@@ -7503,74 +7503,74 @@ class ClipRRect extends Widget {
           key?:Key
         }
      */
-    static new(args) {
-        return new ClipRRect(args);
+    static new(config) {
+        return new ClipRRect(config);
     }
 }
 exports.ClipRRect = ClipRRect;
 class ConstrainedBox extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           constraints:BoxConstraints,
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.constraints = args.constraints;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.constraints = config.constraints;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           constraints:BoxConstraints,
           key?:Key,
         }
      */
-    static new(args) {
-        return new ConstrainedBox(args);
+    static new(config) {
+        return new ConstrainedBox(config);
     }
 }
 exports.ConstrainedBox = ConstrainedBox;
 class CustomSingleChildLayout extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           delegate?:any,
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.delegate = args.delegate;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.delegate = config.delegate;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           delegate?:any,
           key?:Key,
         }
      */
-    static new(args) {
-        return new CustomSingleChildLayout(args);
+    static new(config) {
+        return new CustomSingleChildLayout(config);
     }
 }
 exports.CustomSingleChildLayout = CustomSingleChildLayout;
 class Column extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           mainAxisAlignment?:MainAxisAlignment,
@@ -7582,21 +7582,21 @@ class Column extends Widget {
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.mainAxisAlignment = args.mainAxisAlignment;
-            this.mainAxisSize = args.mainAxisSize;
-            this.crossAxisAlignment = args.crossAxisAlignment;
-            this.textDirection = args.textDirection;
-            this.verticalDirection = args.verticalDirection;
-            this.textBaseline = args.textBaseline;
-            this.children = args.children;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.mainAxisAlignment = config.mainAxisAlignment;
+            this.mainAxisSize = config.mainAxisSize;
+            this.crossAxisAlignment = config.crossAxisAlignment;
+            this.textDirection = config.textDirection;
+            this.verticalDirection = config.verticalDirection;
+            this.textBaseline = config.textBaseline;
+            this.children = config.children;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           mainAxisAlignment?:MainAxisAlignment,
@@ -7608,44 +7608,44 @@ class Column extends Widget {
           key?:Key,
         }
      */
-    static new(args) {
-        return new Column(args);
+    static new(config) {
+        return new Column(config);
     }
 }
 exports.Column = Column;
 class CustomMultiChildLayout extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           delegate?:any,
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.delegate = args.delegate;
-            this.children = args.children;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.delegate = config.delegate;
+            this.children = config.children;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           delegate?:any,
           key?:Key
         }
      */
-    static new(args) {
-        return new CustomMultiChildLayout(args);
+    static new(config) {
+        return new CustomMultiChildLayout(config);
     }
 }
 exports.CustomMultiChildLayout = CustomMultiChildLayout;
 class CustomScrollView extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           slivers?:Array<Widget>,
@@ -7664,28 +7664,28 @@ class CustomScrollView extends Widget {
           clipBehavior?:Clip,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.scrollDirection = args.scrollDirection;
-            this.reverse = args.reverse;
-            this.controller = args.controller;
-            this.primary = args.primary;
-            this.physics = args.physics;
-            this.shrinkWrap = args.shrinkWrap;
-            this.center = args.center;
-            this.anchor = args.anchor;
-            this.cacheExtent = args.cacheExtent;
-            this.slivers = args.slivers;
-            this.semanticChildCount = args.semanticChildCount;
-            this.dragStartBehavior = args.dragStartBehavior;
-            this.restorationId = args.restorationId;
-            this.clipBehavior = args.clipBehavior;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.scrollDirection = config.scrollDirection;
+            this.reverse = config.reverse;
+            this.controller = config.controller;
+            this.primary = config.primary;
+            this.physics = config.physics;
+            this.shrinkWrap = config.shrinkWrap;
+            this.center = config.center;
+            this.anchor = config.anchor;
+            this.cacheExtent = config.cacheExtent;
+            this.slivers = config.slivers;
+            this.semanticChildCount = config.semanticChildCount;
+            this.dragStartBehavior = config.dragStartBehavior;
+            this.restorationId = config.restorationId;
+            this.clipBehavior = config.clipBehavior;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           slivers?:Array<Widget>,
@@ -7704,14 +7704,14 @@ class CustomScrollView extends Widget {
           clipBehavior?:Clip,
         }
      */
-    static new(args) {
-        return new CustomScrollView(args);
+    static new(config) {
+        return new CustomScrollView(config);
     }
 }
 exports.CustomScrollView = CustomScrollView;
 class Card extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -7725,23 +7725,23 @@ class Card extends Widget {
           borderOnForeground?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.color = args.color;
-            this.elevation = args.elevation;
-            this.shape = args.shape;
-            this.margin = args.margin;
-            this.clipBehavior = args.clipBehavior;
-            this.child = args.child;
-            this.semanticContainer = args.semanticContainer;
-            this.borderOnForeground = args.borderOnForeground;
-            this.shadowColor = args.shadowColor;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.color = config.color;
+            this.elevation = config.elevation;
+            this.shape = config.shape;
+            this.margin = config.margin;
+            this.clipBehavior = config.clipBehavior;
+            this.child = config.child;
+            this.semanticContainer = config.semanticContainer;
+            this.borderOnForeground = config.borderOnForeground;
+            this.shadowColor = config.shadowColor;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -7755,14 +7755,14 @@ class Card extends Widget {
           borderOnForeground?:boolean,
         }
      */
-    static new(args) {
-        return new Card(args);
+    static new(config) {
+        return new Card(config);
     }
 }
 exports.Card = Card;
 class Divider extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         height?:number,
@@ -7772,19 +7772,19 @@ class Divider extends Widget {
         color?:Color
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.height = args.height;
-            this.thickness = args.thickness;
-            this.indent = args.indent;
-            this.endIndent = args.endIndent;
-            this.color = args.color;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.height = config.height;
+            this.thickness = config.thickness;
+            this.indent = config.indent;
+            this.endIndent = config.endIndent;
+            this.color = config.color;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         height?:number,
@@ -7794,44 +7794,44 @@ class Divider extends Widget {
         color?:Color
       }
      */
-    static new(args) {
-        return new Divider(args);
+    static new(config) {
+        return new Divider(config);
     }
 }
 exports.Divider = Divider;
 class Directionality extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
           textDirection:TextDirection,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.textDirection = args.textDirection;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.textDirection = config.textDirection;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
           textDirection:TextDirection,
         }
      */
-    static new(args) {
-        return new Directionality(args);
+    static new(config) {
+        return new Directionality(config);
     }
 }
 exports.Directionality = Directionality;
 class DropdownMenuItem extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child:Widget,
           value?:number,
@@ -7839,17 +7839,17 @@ class DropdownMenuItem extends Widget {
           onTap?:VoidCallback,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.value = args.value;
-            this.child = args.child;
-            this.onTap = args.onTap;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.child = config.child;
+            this.onTap = config.onTap;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child:Widget,
           value?:number,
@@ -7857,14 +7857,14 @@ class DropdownMenuItem extends Widget {
           onTap?:VoidCallback,
         }
      */
-    static new(args) {
-        return new DropdownMenuItem(args);
+    static new(config) {
+        return new DropdownMenuItem(config);
     }
 }
 exports.DropdownMenuItem = DropdownMenuItem;
 class DecoratedBox extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           decoration:BoxDecoration,
@@ -7872,17 +7872,17 @@ class DecoratedBox extends Widget {
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.decoration = args.decoration;
-            this.position = args.position;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.decoration = config.decoration;
+            this.position = config.position;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           decoration:BoxDecoration,
@@ -7890,14 +7890,14 @@ class DecoratedBox extends Widget {
           key?:Key,
         }
      */
-    static new(args) {
-        return new DecoratedBox(args);
+    static new(config) {
+        return new DecoratedBox(config);
     }
 }
 exports.DecoratedBox = DecoratedBox;
 class DropdownButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           items?:Array<DropdownMenuItem>,
           onChanged?:any,
@@ -7911,24 +7911,24 @@ class DropdownButton extends Widget {
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.items = args.items;
-            this.value = args.value;
-            this.hint = args.hint;
-            this.disabledHint = args.disabledHint;
-            this.onChanged = args.onChanged;
-            this.elevation = args.elevation;
-            this.style = args.style;
-            this.iconSize = args.iconSize;
-            this.isDense = args.isDense;
-            this.isExpanded = args.isExpanded;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.items = config.items;
+            this.value = config.value;
+            this.hint = config.hint;
+            this.disabledHint = config.disabledHint;
+            this.onChanged = config.onChanged;
+            this.elevation = config.elevation;
+            this.style = config.style;
+            this.iconSize = config.iconSize;
+            this.isDense = config.isDense;
+            this.isExpanded = config.isExpanded;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           items?:Array<DropdownMenuItem>,
           onChanged?:any,
@@ -7942,14 +7942,14 @@ class DropdownButton extends Widget {
           key?:Key,
         }
      */
-    static new(args) {
-        return new DropdownButton(args);
+    static new(config) {
+        return new DropdownButton(config);
     }
 }
 exports.DropdownButton = DropdownButton;
 class DefaultTabController extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -7957,17 +7957,17 @@ class DefaultTabController extends Widget {
           initialIndex?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.length = args.length;
-            this.initialIndex = args.initialIndex;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.length = config.length;
+            this.initialIndex = config.initialIndex;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -7975,14 +7975,14 @@ class DefaultTabController extends Widget {
           initialIndex?:number,
         }
      */
-    static new(args) {
-        return new DefaultTabController(args);
+    static new(config) {
+        return new DefaultTabController(config);
     }
 }
 exports.DefaultTabController = DefaultTabController;
 class DecorationImage extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           image?:any,
           alignment?:Alignment,
@@ -7994,21 +7994,21 @@ class DecorationImage extends Widget {
           scale?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.image = args.image;
-            this.colorFilter = args.colorFilter;
-            this.fit = args.fit;
-            this.alignment = args.alignment;
-            this.centerSlice = args.centerSlice;
-            this.repeat = args.repeat;
-            this.matchTextDirection = args.matchTextDirection;
-            this.scale = args.scale;
+        if (config != null && config != undefined) {
+            this.image = config.image;
+            this.colorFilter = config.colorFilter;
+            this.fit = config.fit;
+            this.alignment = config.alignment;
+            this.centerSlice = config.centerSlice;
+            this.repeat = config.repeat;
+            this.matchTextDirection = config.matchTextDirection;
+            this.scale = config.scale;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           image?:any,
           alignment?:Alignment,
@@ -8020,14 +8020,14 @@ class DecorationImage extends Widget {
           scale?:number,
         }
      */
-    static new(args) {
-        return new DecorationImage(args);
+    static new(config) {
+        return new DecorationImage(config);
     }
 }
 exports.DecorationImage = DecorationImage;
 class DefaultTextStyle extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           style?:TextStyle,
@@ -8039,21 +8039,21 @@ class DefaultTextStyle extends Widget {
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.style = args.style;
-            this.textAlign = args.textAlign;
-            this.softWrap = args.softWrap;
-            this.overflow = args.overflow;
-            this.maxLines = args.maxLines;
-            this.textWidthBasis = args.textWidthBasis;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.style = config.style;
+            this.textAlign = config.textAlign;
+            this.softWrap = config.softWrap;
+            this.overflow = config.overflow;
+            this.maxLines = config.maxLines;
+            this.textWidthBasis = config.textWidthBasis;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           style?:TextStyle,
@@ -8065,14 +8065,14 @@ class DefaultTextStyle extends Widget {
           key?:Key
         }
      */
-    static new(args) {
-        return new DefaultTextStyle(args);
+    static new(config) {
+        return new DefaultTextStyle(config);
     }
 }
 exports.DefaultTextStyle = DefaultTextStyle;
 class DecoratedBoxTransition extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           decoration?:any,
@@ -8080,17 +8080,17 @@ class DecoratedBoxTransition extends Widget {
           child?:Widget
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.decoration = args.decoration;
-            this.position = args.position;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.decoration = config.decoration;
+            this.position = config.position;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           decoration?:any,
@@ -8098,74 +8098,74 @@ class DecoratedBoxTransition extends Widget {
           child?:Widget
         }
      */
-    static new(args) {
-        return new DecoratedBoxTransition(args);
+    static new(config) {
+        return new DecoratedBoxTransition(config);
     }
 }
 exports.DecoratedBoxTransition = DecoratedBoxTransition;
 class ExcludeSemantics extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           excluding?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.excluding = args.excluding;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.excluding = config.excluding;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           excluding?:boolean,
         }
      */
-    static new(args) {
+    static new(config) {
         return new ExcludeSemantics();
     }
 }
 exports.ExcludeSemantics = ExcludeSemantics;
 class Expanded extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child:Widget,
           flex?:number,
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.flex = args.flex;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.flex = config.flex;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child:Widget,
           flex?:number,
           key?:Key,
         }
      */
-    static new(args) {
-        return new Expanded(args);
+    static new(config) {
+        return new Expanded(config);
     }
 }
 exports.Expanded = Expanded;
 class ExpandIcon extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           isExpanded?:boolean,
@@ -8177,21 +8177,21 @@ class ExpandIcon extends Widget {
           expandedColor?:Color,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.isExpanded = args.isExpanded;
-            this.size = args.size;
-            this.onPressed = args.onPressed;
-            this.padding = args.padding;
-            this.color = args.color;
-            this.disabledColor = args.disabledColor;
-            this.expandedColor = args.expandedColor;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.isExpanded = config.isExpanded;
+            this.size = config.size;
+            this.onPressed = config.onPressed;
+            this.padding = config.padding;
+            this.color = config.color;
+            this.disabledColor = config.disabledColor;
+            this.expandedColor = config.expandedColor;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           isExpanded?:boolean,
@@ -8203,14 +8203,14 @@ class ExpandIcon extends Widget {
           expandedColor?:Color,
         }
      */
-    static new(args) {
-        return new ExpandIcon(args);
+    static new(config) {
+        return new ExpandIcon(config);
     }
 }
 exports.ExpandIcon = ExpandIcon;
 class ExpansionTile extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           leading?:Widget,
@@ -8228,27 +8228,27 @@ class ExpansionTile extends Widget {
           childrenPadding?:EdgeInsets,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.leading = args.leading;
-            this.title = args.title;
-            this.subtitle = args.subtitle;
-            this.backgroundColor = args.backgroundColor;
-            this.onExpansionChanged = args.onExpansionChanged;
-            this.children = args.children;
-            this.trailing = args.trailing;
-            this.initiallyExpanded = args.initiallyExpanded;
-            this.maintainState = args.maintainState;
-            this.tilePadding = args.tilePadding;
-            this.expandedCrossAxisAlignment = args.expandedCrossAxisAlignment;
-            this.expandedAlignment = args.expandedAlignment;
-            this.childrenPadding = args.childrenPadding;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.leading = config.leading;
+            this.title = config.title;
+            this.subtitle = config.subtitle;
+            this.backgroundColor = config.backgroundColor;
+            this.onExpansionChanged = config.onExpansionChanged;
+            this.children = config.children;
+            this.trailing = config.trailing;
+            this.initiallyExpanded = config.initiallyExpanded;
+            this.maintainState = config.maintainState;
+            this.tilePadding = config.tilePadding;
+            this.expandedCrossAxisAlignment = config.expandedCrossAxisAlignment;
+            this.expandedAlignment = config.expandedAlignment;
+            this.childrenPadding = config.childrenPadding;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           leading?:Widget,
@@ -8266,14 +8266,14 @@ class ExpansionTile extends Widget {
           childrenPadding?:EdgeInsets,
         }
      */
-    static new(args) {
-        return new ExpansionTile(args);
+    static new(config) {
+        return new ExpansionTile(config);
     }
 }
 exports.ExpansionTile = ExpansionTile;
 class Flexible extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -8281,17 +8281,17 @@ class Flexible extends Widget {
           fit?:FlexFit,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.fit = args.fit;
-            this.flex = args.flex;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.fit = config.fit;
+            this.flex = config.flex;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -8299,14 +8299,14 @@ class Flexible extends Widget {
           fit?:FlexFit,
         }
      */
-    static new(args) {
-        return new Flexible(args);
+    static new(config) {
+        return new Flexible(config);
     }
 }
 exports.Flexible = Flexible;
 class FittedBox extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -8314,17 +8314,17 @@ class FittedBox extends Widget {
         fit?:BoxFit,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.fit = args.fit;
-            this.alignment = args.alignment;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.fit = config.fit;
+            this.alignment = config.alignment;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -8332,14 +8332,14 @@ class FittedBox extends Widget {
         fit?:BoxFit,
       }
      */
-    static new(args) {
-        return new FittedBox(args);
+    static new(config) {
+        return new FittedBox(config);
     }
 }
 exports.FittedBox = FittedBox;
 class FractionallySizedBox extends Widget {
     /**
-      * @param args args:
+      * @param config config:
          {
            child?:Widget,
            alignment?:Alignment,
@@ -8348,18 +8348,18 @@ class FractionallySizedBox extends Widget {
            key?:Key
          }
       */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.alignment = args.alignment;
-            this.widthFactor = args.widthFactor;
-            this.heightFactor = args.heightFactor;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.alignment = config.alignment;
+            this.widthFactor = config.widthFactor;
+            this.heightFactor = config.heightFactor;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           alignment?:Alignment,
@@ -8368,14 +8368,14 @@ class FractionallySizedBox extends Widget {
           key?:Key
         }
      */
-    static new(args) {
-        return new FractionallySizedBox(args);
+    static new(config) {
+        return new FractionallySizedBox(config);
     }
 }
 exports.FractionallySizedBox = FractionallySizedBox;
 class Flex extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           direction:Axis,
@@ -8389,22 +8389,22 @@ class Flex extends Widget {
           children?:Array<Widget>,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.direction = args.direction;
-            this.mainAxisAlignment = args.mainAxisAlignment;
-            this.mainAxisSize = args.mainAxisSize;
-            this.crossAxisAlignment = args.crossAxisAlignment;
-            this.textDirection = args.textDirection;
-            this.textBaseline = args.textBaseline;
-            this.clipBehavior = args.clipBehavior;
-            this.children = args.children;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.direction = config.direction;
+            this.mainAxisAlignment = config.mainAxisAlignment;
+            this.mainAxisSize = config.mainAxisSize;
+            this.crossAxisAlignment = config.crossAxisAlignment;
+            this.textDirection = config.textDirection;
+            this.textBaseline = config.textBaseline;
+            this.clipBehavior = config.clipBehavior;
+            this.children = config.children;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           direction:Axis,
@@ -8418,44 +8418,44 @@ class Flex extends Widget {
           children?:Array<Widget>,
         }
      */
-    static new(args) {
-        return new Flex(args);
+    static new(config) {
+        return new Flex(config);
     }
 }
 exports.Flex = Flex;
 class Flow extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           delegate?:any,
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.delegate = args.delegate;
-            this.children = args.children;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.delegate = config.delegate;
+            this.children = config.children;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           delegate?:any,
           key?:Key,
         }
      */
-    static new(args) {
-        return new Flow(args);
+    static new(config) {
+        return new Flow(config);
     }
 }
 exports.Flow = Flow;
 class FlatButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child:Widget,
           onPressed:VoidCallback,
@@ -8481,34 +8481,34 @@ class FlatButton extends Widget {
           autofocus?: boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.onPressed = args.onPressed;
-            this.onHighlightChanged = args.onHighlightChanged;
-            this.textTheme = args.textTheme;
-            this.textColor = args.textColor;
-            this.disabledTextColor = args.disabledTextColor;
-            this.color = args.color;
-            this.disabledColor = args.disabledColor;
-            this.highlightColor = args.highlightColor;
-            this.splashColor = args.splashColor;
-            this.colorBrightness = args.colorBrightness;
-            this.padding = args.padding;
-            this.shape = args.shape;
-            this.clipBehavior = args.clipBehavior;
-            this.materialTapTargetSize = args.materialTapTargetSize;
-            this.onLongPress = args.onLongPress;
-            this.focusColor = args.focusColor;
-            this.hoverColor = args.hoverColor;
-            this.visualDensity = args.visualDensity;
-            this.autofocus = args.autofocus;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.onPressed = config.onPressed;
+            this.onHighlightChanged = config.onHighlightChanged;
+            this.textTheme = config.textTheme;
+            this.textColor = config.textColor;
+            this.disabledTextColor = config.disabledTextColor;
+            this.color = config.color;
+            this.disabledColor = config.disabledColor;
+            this.highlightColor = config.highlightColor;
+            this.splashColor = config.splashColor;
+            this.colorBrightness = config.colorBrightness;
+            this.padding = config.padding;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.onLongPress = config.onLongPress;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.visualDensity = config.visualDensity;
+            this.autofocus = config.autofocus;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child:Widget,
           onPressed:VoidCallback,
@@ -8534,11 +8534,11 @@ class FlatButton extends Widget {
           autofocus?: boolean,
         }
      */
-    static new(args) {
-        return new FlatButton(args);
+    static new(config) {
+        return new FlatButton(config);
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child:Widget,
           onPressed:VoidCallback,
@@ -8566,31 +8566,31 @@ class FlatButton extends Widget {
           label?:Widget,
         }
      */
-    static icon(args) {
+    static icon(config) {
         let v = new FlatButton();
         v.constructorName = "icon";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.onPressed = args.onPressed;
-            v.onHighlightChanged = args.onHighlightChanged;
-            v.textTheme = args.textTheme;
-            v.textColor = args.textColor;
-            v.disabledTextColor = args.disabledTextColor;
-            v.color = args.color;
-            v.disabledColor = args.disabledColor;
-            v.highlightColor = args.highlightColor;
-            v.splashColor = args.splashColor;
-            v.colorBrightness = args.colorBrightness;
-            v.padding = args.padding;
-            v.shape = args.shape;
-            v.clipBehavior = args.clipBehavior;
-            v.materialTapTargetSize = args.materialTapTargetSize;
-            v.onLongPress = args.onLongPress;
-            v.focusColor = args.focusColor;
-            v.hoverColor = args.hoverColor;
-            v.autofocus = args.autofocus;
-            v.icon = args.icon;
-            v.label = args.label;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.onPressed = config.onPressed;
+            v.onHighlightChanged = config.onHighlightChanged;
+            v.textTheme = config.textTheme;
+            v.textColor = config.textColor;
+            v.disabledTextColor = config.disabledTextColor;
+            v.color = config.color;
+            v.disabledColor = config.disabledColor;
+            v.highlightColor = config.highlightColor;
+            v.splashColor = config.splashColor;
+            v.colorBrightness = config.colorBrightness;
+            v.padding = config.padding;
+            v.shape = config.shape;
+            v.clipBehavior = config.clipBehavior;
+            v.materialTapTargetSize = config.materialTapTargetSize;
+            v.onLongPress = config.onLongPress;
+            v.focusColor = config.focusColor;
+            v.hoverColor = config.hoverColor;
+            v.autofocus = config.autofocus;
+            v.icon = config.icon;
+            v.label = config.label;
         }
         return v;
     }
@@ -8598,7 +8598,7 @@ class FlatButton extends Widget {
 exports.FlatButton = FlatButton;
 class FloatingActionButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -8622,33 +8622,33 @@ class FloatingActionButton extends Widget {
           isExtended?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.tooltip = args.tooltip;
-            this.foregroundColor = args.foregroundColor;
-            this.backgroundColor = args.backgroundColor;
-            this.focusColor = args.focusColor;
-            this.hoverColor = args.hoverColor;
-            this.splashColor = args.splashColor;
-            this.elevation = args.elevation;
-            this.focusElevation = args.focusElevation;
-            this.hoverElevation = args.hoverElevation;
-            this.highlightElevation = args.highlightElevation;
-            this.disabledElevation = args.disabledElevation;
-            this.onPressed = args.onPressed;
-            this.mini = args.mini;
-            this.shape = args.shape;
-            this.clipBehavior = args.clipBehavior;
-            this.materialTapTargetSize = args.materialTapTargetSize;
-            this.isExtended = args.isExtended;
-            this.autofocus = args.autofocus;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.tooltip = config.tooltip;
+            this.foregroundColor = config.foregroundColor;
+            this.backgroundColor = config.backgroundColor;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.splashColor = config.splashColor;
+            this.elevation = config.elevation;
+            this.focusElevation = config.focusElevation;
+            this.hoverElevation = config.hoverElevation;
+            this.highlightElevation = config.highlightElevation;
+            this.disabledElevation = config.disabledElevation;
+            this.onPressed = config.onPressed;
+            this.mini = config.mini;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.isExtended = config.isExtended;
+            this.autofocus = config.autofocus;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -8672,14 +8672,14 @@ class FloatingActionButton extends Widget {
           isExtended?:boolean,
         }
      */
-    static new(args) {
-        return new FloatingActionButton(args);
+    static new(config) {
+        return new FloatingActionButton(config);
     }
 }
 exports.FloatingActionButton = FloatingActionButton;
 class FlexibleSpaceBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           title?:Widget,
@@ -8689,19 +8689,19 @@ class FlexibleSpaceBar extends Widget {
           collapseMode?:CollapseMode,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.title = args.title;
-            this.background = args.background;
-            this.centerTitle = args.centerTitle;
-            this.titlePadding = args.titlePadding;
-            this.collapseMode = args.collapseMode;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.title = config.title;
+            this.background = config.background;
+            this.centerTitle = config.centerTitle;
+            this.titlePadding = config.titlePadding;
+            this.collapseMode = config.collapseMode;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           title?:Widget,
@@ -8711,14 +8711,14 @@ class FlexibleSpaceBar extends Widget {
           collapseMode?:CollapseMode,
         }
      */
-    static new(args) {
-        return new FlexibleSpaceBar(args);
+    static new(config) {
+        return new FlexibleSpaceBar(config);
     }
 }
 exports.FlexibleSpaceBar = FlexibleSpaceBar;
 class FlexibleSpaceBarSettings extends Widget {
     /**
-    * @param args args:
+    * @param config config:
        {
          key?:Key,
          child:Widget,
@@ -8728,19 +8728,19 @@ class FlexibleSpaceBarSettings extends Widget {
          currentExtent:number,
        }
     */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.toolbarOpacity = args.toolbarOpacity;
-            this.minExtent = args.minExtent;
-            this.maxExtent = args.maxExtent;
-            this.currentExtent = args.currentExtent;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.toolbarOpacity = config.toolbarOpacity;
+            this.minExtent = config.minExtent;
+            this.maxExtent = config.maxExtent;
+            this.currentExtent = config.currentExtent;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -8750,14 +8750,14 @@ class FlexibleSpaceBarSettings extends Widget {
           currentExtent:number,
         }
      */
-    static new(args) {
-        return new FlexibleSpaceBarSettings(args);
+    static new(config) {
+        return new FlexibleSpaceBarSettings(config);
     }
 }
 exports.FlexibleSpaceBarSettings = FlexibleSpaceBarSettings;
 class FlutterLogo extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           size?:number,
@@ -8767,19 +8767,19 @@ class FlutterLogo extends Widget {
           curve?:Curve,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.size = args.size;
-            this.textColor = args.textColor;
-            this.duration = args.duration;
-            this.style = args.style;
-            this.curve = args.curve;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.size = config.size;
+            this.textColor = config.textColor;
+            this.duration = config.duration;
+            this.style = config.style;
+            this.curve = config.curve;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           size?:number,
@@ -8789,14 +8789,14 @@ class FlutterLogo extends Widget {
           curve?:Curve,
         }
      */
-    static new(args) {
-        return new FlutterLogo(args);
+    static new(config) {
+        return new FlutterLogo(config);
     }
 }
 exports.FlutterLogo = FlutterLogo;
 class FractionalTranslation extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           translation:Offset,
   
@@ -8805,16 +8805,16 @@ class FractionalTranslation extends Widget {
           child?:Widget,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.transformHitTests = args.transformHitTests;
-            this.translation = args.translation;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.transformHitTests = config.transformHitTests;
+            this.translation = config.translation;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           translation:Offset,
   
@@ -8823,14 +8823,14 @@ class FractionalTranslation extends Widget {
           child?:Widget,
         }
      */
-    static new(args) {
-        return new FractionalTranslation(args);
+    static new(config) {
+        return new FractionalTranslation(config);
     }
 }
 exports.FractionalTranslation = FractionalTranslation;
 class GestureDetector extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -8863,42 +8863,42 @@ class GestureDetector extends Widget {
         excludeFromSemantics?:boolean,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.onTapDown = args.onTapDown;
-            this.onTapUp = args.onTapUp;
-            this.onTap = args.onTap;
-            this.onTapCancel = args.onTapCancel;
-            this.onDoubleTap = args.onDoubleTap;
-            this.onLongPress = args.onLongPress;
-            this.onLongPressUp = args.onLongPressUp;
-            this.onVerticalDragDown = args.onVerticalDragDown;
-            this.onVerticalDragStart = args.onVerticalDragStart;
-            this.onVerticalDragUpdate = args.onVerticalDragUpdate;
-            this.onVerticalDragEnd = args.onVerticalDragEnd;
-            this.onVerticalDragCancel = args.onVerticalDragCancel;
-            this.onHorizontalDragDown = args.onHorizontalDragDown;
-            this.onHorizontalDragStart = args.onHorizontalDragStart;
-            this.onHorizontalDragUpdate = args.onHorizontalDragUpdate;
-            this.onHorizontalDragEnd = args.onHorizontalDragEnd;
-            this.onHorizontalDragCancel = args.onHorizontalDragCancel;
-            this.onPanDown = args.onPanDown;
-            this.onPanStart = args.onPanStart;
-            this.onPanUpdate = args.onPanUpdate;
-            this.onPanEnd = args.onPanEnd;
-            this.onPanCancel = args.onPanCancel;
-            this.onScaleStart = args.onScaleStart;
-            this.onScaleUpdate = args.onScaleUpdate;
-            this.onScaleEnd = args.onScaleEnd;
-            this.behavior = args.behavior;
-            this.excludeFromSemantics = args.excludeFromSemantics;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.onTapDown = config.onTapDown;
+            this.onTapUp = config.onTapUp;
+            this.onTap = config.onTap;
+            this.onTapCancel = config.onTapCancel;
+            this.onDoubleTap = config.onDoubleTap;
+            this.onLongPress = config.onLongPress;
+            this.onLongPressUp = config.onLongPressUp;
+            this.onVerticalDragDown = config.onVerticalDragDown;
+            this.onVerticalDragStart = config.onVerticalDragStart;
+            this.onVerticalDragUpdate = config.onVerticalDragUpdate;
+            this.onVerticalDragEnd = config.onVerticalDragEnd;
+            this.onVerticalDragCancel = config.onVerticalDragCancel;
+            this.onHorizontalDragDown = config.onHorizontalDragDown;
+            this.onHorizontalDragStart = config.onHorizontalDragStart;
+            this.onHorizontalDragUpdate = config.onHorizontalDragUpdate;
+            this.onHorizontalDragEnd = config.onHorizontalDragEnd;
+            this.onHorizontalDragCancel = config.onHorizontalDragCancel;
+            this.onPanDown = config.onPanDown;
+            this.onPanStart = config.onPanStart;
+            this.onPanUpdate = config.onPanUpdate;
+            this.onPanEnd = config.onPanEnd;
+            this.onPanCancel = config.onPanCancel;
+            this.onScaleStart = config.onScaleStart;
+            this.onScaleUpdate = config.onScaleUpdate;
+            this.onScaleEnd = config.onScaleEnd;
+            this.behavior = config.behavior;
+            this.excludeFromSemantics = config.excludeFromSemantics;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -8931,14 +8931,14 @@ class GestureDetector extends Widget {
         excludeFromSemantics?:boolean,
       }
      */
-    static new(args) {
-        return new GestureDetector(args);
+    static new(config) {
+        return new GestureDetector(config);
     }
 }
 exports.GestureDetector = GestureDetector;
 class GridTileBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         backgroundColor?:Color,
@@ -8948,19 +8948,19 @@ class GridTileBar extends Widget {
         trailing?:Widget,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.backgroundColor = args.backgroundColor;
-            this.leading = args.leading;
-            this.title = args.title;
-            this.subtitle = args.subtitle;
-            this.trailing = args.trailing;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.backgroundColor = config.backgroundColor;
+            this.leading = config.leading;
+            this.title = config.title;
+            this.subtitle = config.subtitle;
+            this.trailing = config.trailing;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         backgroundColor?:Color,
@@ -8970,14 +8970,14 @@ class GridTileBar extends Widget {
         trailing?:Widget,
       }
      */
-    static new(args) {
-        return new GridTileBar(args);
+    static new(config) {
+        return new GridTileBar(config);
     }
 }
 exports.GridTileBar = GridTileBar;
 class GridTile extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -8985,17 +8985,17 @@ class GridTile extends Widget {
         footer?:Widget,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.header = args.header;
-            this.footer = args.footer;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.header = config.header;
+            this.footer = config.footer;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -9003,14 +9003,14 @@ class GridTile extends Widget {
         footer?:Widget,
       }
      */
-    static new(args) {
-        return new GridTile(args);
+    static new(config) {
+        return new GridTile(config);
     }
 }
 exports.GridTile = GridTile;
 class GridPaper extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -9020,19 +9020,19 @@ class GridPaper extends Widget {
           subdivisions?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.color = args.color;
-            this.divisions = args.divisions;
-            this.subdivisions = args.subdivisions;
-            this.interval = args.interval;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.color = config.color;
+            this.divisions = config.divisions;
+            this.subdivisions = config.subdivisions;
+            this.interval = config.interval;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -9042,14 +9042,14 @@ class GridPaper extends Widget {
           subdivisions?:number,
         }
      */
-    static new(args) {
-        return new GridPaper(args);
+    static new(config) {
+        return new GridPaper(config);
     }
 }
 exports.GridPaper = GridPaper;
 class InputDecorator extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -9063,23 +9063,23 @@ class InputDecorator extends Widget {
           isEmpty?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.decoration = args.decoration;
-            this.baseStyle = args.baseStyle;
-            this.textAlign = args.textAlign;
-            this.textAlignVertical = args.textAlignVertical;
-            this.isFocused = args.isFocused;
-            this.isEmpty = args.isEmpty;
-            this.isHovering = args.isHovering;
-            this.expands = args.expands;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.decoration = config.decoration;
+            this.baseStyle = config.baseStyle;
+            this.textAlign = config.textAlign;
+            this.textAlignVertical = config.textAlignVertical;
+            this.isFocused = config.isFocused;
+            this.isEmpty = config.isEmpty;
+            this.isHovering = config.isHovering;
+            this.expands = config.expands;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -9093,71 +9093,71 @@ class InputDecorator extends Widget {
           isEmpty?:boolean,
         }
      */
-    static new(args) {
-        return new InputDecorator(args);
+    static new(config) {
+        return new InputDecorator(config);
     }
 }
 exports.InputDecorator = InputDecorator;
 class IndexedSemantics extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           index?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.index = args.index;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.index = config.index;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
           index?:number,
         }
      */
-    static new(args) {
-        return new IndexedSemantics(args);
+    static new(config) {
+        return new IndexedSemantics(config);
     }
 }
 exports.IndexedSemantics = IndexedSemantics;
 class IntrinsicHeight extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
         }
      */
-    static new(args) {
-        return new IntrinsicHeight(args);
+    static new(config) {
+        return new IntrinsicHeight(config);
     }
 }
 exports.IntrinsicHeight = IntrinsicHeight;
 class IntrinsicWidth extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           stepWidth?:number,
@@ -9165,17 +9165,17 @@ class IntrinsicWidth extends Widget {
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.stepWidth = args.stepWidth;
-            this.stepHeight = args.stepHeight;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.stepWidth = config.stepWidth;
+            this.stepHeight = config.stepHeight;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           stepWidth?:number,
@@ -9183,14 +9183,14 @@ class IntrinsicWidth extends Widget {
           key?:Key
         }
      */
-    static new(args) {
-        return new IntrinsicWidth(args);
+    static new(config) {
+        return new IntrinsicWidth(config);
     }
 }
 exports.IntrinsicWidth = IntrinsicWidth;
 class IndexedStack extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           index?:number,
@@ -9200,19 +9200,19 @@ class IndexedStack extends Widget {
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.alignment = args.alignment;
-            this.textDirection = args.textDirection;
-            this.sizing = args.sizing;
-            this.index = args.index;
-            this.children = args.children;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.alignment = config.alignment;
+            this.textDirection = config.textDirection;
+            this.sizing = config.sizing;
+            this.index = config.index;
+            this.children = config.children;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           index?:number,
@@ -9222,14 +9222,14 @@ class IndexedStack extends Widget {
           key?:Key,
         }
      */
-    static new(args) {
-        return new IndexedStack(args);
+    static new(config) {
+        return new IndexedStack(config);
     }
 }
 exports.IndexedStack = IndexedStack;
 class IgnorePointer extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -9237,17 +9237,17 @@ class IgnorePointer extends Widget {
           ignoringSemantics?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.ignoring = args.ignoring;
-            this.ignoringSemantics = args.ignoringSemantics;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.ignoring = config.ignoring;
+            this.ignoringSemantics = config.ignoringSemantics;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -9255,14 +9255,14 @@ class IgnorePointer extends Widget {
           ignoringSemantics?:boolean,
         }
      */
-    static new(args) {
-        return new IgnorePointer(args);
+    static new(config) {
+        return new IgnorePointer(config);
     }
 }
 exports.IgnorePointer = IgnorePointer;
 class IconButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           icon:Widget,
@@ -9284,31 +9284,31 @@ class IconButton extends Widget {
           constraints?:BoxConstraints,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.icon = args.icon;
-            this.iconSize = args.iconSize;
-            this.padding = args.padding;
-            this.alignment = args.alignment;
-            this.visualDensity = args.visualDensity;
-            this.color = args.color;
-            this.focusColor = args.focusColor;
-            this.hoverColor = args.hoverColor;
-            this.highlightColor = args.highlightColor;
-            this.splashColor = args.splashColor;
-            this.disabledColor = args.disabledColor;
-            this.autofocus = args.autofocus;
-            this.onPressed = args.onPressed;
-            this.tooltip = args.tooltip;
-            this.enableFeedback = args.enableFeedback;
-            this.visualDensity = args.visualDensity;
-            this.constraints = args.constraints;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.icon = config.icon;
+            this.iconSize = config.iconSize;
+            this.padding = config.padding;
+            this.alignment = config.alignment;
+            this.visualDensity = config.visualDensity;
+            this.color = config.color;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.highlightColor = config.highlightColor;
+            this.splashColor = config.splashColor;
+            this.disabledColor = config.disabledColor;
+            this.autofocus = config.autofocus;
+            this.onPressed = config.onPressed;
+            this.tooltip = config.tooltip;
+            this.enableFeedback = config.enableFeedback;
+            this.visualDensity = config.visualDensity;
+            this.constraints = config.constraints;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           icon:Widget,
@@ -9330,15 +9330,15 @@ class IconButton extends Widget {
           constraints?:BoxConstraints,
         }
      */
-    static new(args) {
-        return new IconButton(args);
+    static new(config) {
+        return new IconButton(config);
     }
 }
 exports.IconButton = IconButton;
 class Icon extends Widget {
     /**
      * @param icon icon:IconData
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           size?:number,
@@ -9347,20 +9347,20 @@ class Icon extends Widget {
           textDirection?:TextDirection,
         }
      */
-    constructor(icon, args) {
+    constructor(icon, config) {
         super();
         this.icon = icon;
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.size = args.size;
-            this.color = args.color;
-            this.semanticLabel = args.semanticLabel;
-            this.textDirection = args.textDirection;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.size = config.size;
+            this.color = config.color;
+            this.semanticLabel = config.semanticLabel;
+            this.textDirection = config.textDirection;
         }
     }
     /**
      * @param icon icon:IconData
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           size?:number,
@@ -9369,15 +9369,15 @@ class Icon extends Widget {
           textDirection?:TextDirection,
         }
      */
-    static new(icon, args) {
-        return new Icon(icon, args);
+    static new(icon, config) {
+        return new Icon(icon, config);
     }
 }
 exports.Icon = Icon;
 class ImageIcon extends Widget {
     /**
      * @param image image:ImageProvider
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           size?:number,
@@ -9386,19 +9386,19 @@ class ImageIcon extends Widget {
           textDirection?:TextDirection,
         }
      */
-    constructor(image, args) {
+    constructor(image, config) {
         super();
         this.image = image;
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.size = args.size;
-            this.color = args.color;
-            this.semanticLabel = args.semanticLabel;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.size = config.size;
+            this.color = config.color;
+            this.semanticLabel = config.semanticLabel;
         }
     }
     /**
      * @param image image:ImageProvider
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           size?:number,
@@ -9407,41 +9407,41 @@ class ImageIcon extends Widget {
           textDirection?:TextDirection,
         }
      */
-    static new(image, args) {
-        return new ImageIcon(image, args);
+    static new(image, config) {
+        return new ImageIcon(image, config);
     }
 }
 exports.ImageIcon = ImageIcon;
 class KeyedSubtree extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child:Widget,
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child:Widget,
           key?:Key,
         }
      */
-    static new(args) {
-        return new KeyedSubtree(args);
+    static new(config) {
+        return new KeyedSubtree(config);
     }
 }
 exports.KeyedSubtree = KeyedSubtree;
 class LicensePage extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           applicationName?:string,
@@ -9450,18 +9450,18 @@ class LicensePage extends Widget {
           applicationIcon?:Widget,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.applicationIcon = args.applicationIcon;
-            this.applicationName = args.applicationName;
-            this.applicationLegalese = args.applicationLegalese;
-            this.applicationVersion = args.applicationVersion;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.applicationIcon = config.applicationIcon;
+            this.applicationName = config.applicationName;
+            this.applicationLegalese = config.applicationLegalese;
+            this.applicationVersion = config.applicationVersion;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           applicationName?:string,
@@ -9470,14 +9470,14 @@ class LicensePage extends Widget {
           applicationIcon?:Widget,
         }
      */
-    static new(args) {
-        return new LicensePage(args);
+    static new(config) {
+        return new LicensePage(config);
     }
 }
 exports.LicensePage = LicensePage;
 class LimitedBox extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           maxWidth?:number,
@@ -9485,17 +9485,17 @@ class LimitedBox extends Widget {
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.maxWidth = args.maxWidth;
-            this.maxHeight = args.maxHeight;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.maxWidth = config.maxWidth;
+            this.maxHeight = config.maxHeight;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           maxWidth?:number,
@@ -9503,14 +9503,14 @@ class LimitedBox extends Widget {
           key?:Key,
         }
      */
-    static new(args) {
-        return new LimitedBox(args);
+    static new(config) {
+        return new LimitedBox(config);
     }
 }
 exports.LimitedBox = LimitedBox;
 class ListBody extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           reverse?:boolean,
@@ -9518,17 +9518,17 @@ class ListBody extends Widget {
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.mainAxis = args.mainAxis;
-            this.reverse = args.reverse;
-            this.children = args.children;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.mainAxis = config.mainAxis;
+            this.reverse = config.reverse;
+            this.children = config.children;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           reverse?:boolean,
@@ -9536,14 +9536,14 @@ class ListBody extends Widget {
           key?:Key
         }
      */
-    static new(args) {
-        return new ListBody(args);
+    static new(config) {
+        return new ListBody(config);
     }
 }
 exports.ListBody = ListBody;
 class ListTile extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           leading?:Widget,
@@ -9564,30 +9564,30 @@ class ListTile extends Widget {
           autofocus?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.leading = args.leading;
-            this.title = args.title;
-            this.subtitle = args.subtitle;
-            this.trailing = args.trailing;
-            this.onTap = args.onTap;
-            this.onLongPress = args.onLongPress;
-            this.isThreeLine = args.isThreeLine;
-            this.dense = args.dense;
-            this.visualDensity = args.visualDensity;
-            this.shape = args.shape;
-            this.contentPadding = args.contentPadding;
-            this.enabled = args.enabled;
-            this.selected = args.selected;
-            this.focusColor = args.focusColor;
-            this.hoverColor = args.hoverColor;
-            this.autofocus = args.autofocus;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.leading = config.leading;
+            this.title = config.title;
+            this.subtitle = config.subtitle;
+            this.trailing = config.trailing;
+            this.onTap = config.onTap;
+            this.onLongPress = config.onLongPress;
+            this.isThreeLine = config.isThreeLine;
+            this.dense = config.dense;
+            this.visualDensity = config.visualDensity;
+            this.shape = config.shape;
+            this.contentPadding = config.contentPadding;
+            this.enabled = config.enabled;
+            this.selected = config.selected;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.autofocus = config.autofocus;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           leading?:Widget,
@@ -9608,14 +9608,14 @@ class ListTile extends Widget {
           autofocus?:boolean,
         }
      */
-    static new(args) {
-        return new ListTile(args);
+    static new(config) {
+        return new ListTile(config);
     }
 }
 exports.ListTile = ListTile;
 class ListView extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           padding?:EdgeInsets,
@@ -9635,25 +9635,25 @@ class ListView extends Widget {
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.scrollDirection = args.scrollDirection;
-            this.reverse = args.reverse;
-            this.controller = args.controller;
-            this.primary = args.primary;
-            this.physics = args.physics;
-            this.shrinkWrap = args.shrinkWrap;
-            this.padding = args.padding;
-            this.itemExtent = args.itemExtent;
-            this.addAutomaticKeepAlives = args.addAutomaticKeepAlives;
-            this.addRepaintBoundaries = args.addRepaintBoundaries;
-            this.addSemanticIndexes = args.addSemanticIndexes;
-            this.cacheExtent = args.cacheExtent;
-            this.children = args.children;
-            this.semanticChildCount = args.semanticChildCount;
-            this.dragStartBehavior = args.dragStartBehavior;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.scrollDirection = config.scrollDirection;
+            this.reverse = config.reverse;
+            this.controller = config.controller;
+            this.primary = config.primary;
+            this.physics = config.physics;
+            this.shrinkWrap = config.shrinkWrap;
+            this.padding = config.padding;
+            this.itemExtent = config.itemExtent;
+            this.addAutomaticKeepAlives = config.addAutomaticKeepAlives;
+            this.addRepaintBoundaries = config.addRepaintBoundaries;
+            this.addSemanticIndexes = config.addSemanticIndexes;
+            this.cacheExtent = config.cacheExtent;
+            this.children = config.children;
+            this.semanticChildCount = config.semanticChildCount;
+            this.dragStartBehavior = config.dragStartBehavior;
         }
     }
     preBuild(jsWidgetHelper, buildContext) {
@@ -9670,7 +9670,7 @@ class ListView extends Widget {
         super.preBuild(jsWidgetHelper, buildContext);
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           padding?:EdgeInsets,
@@ -9690,11 +9690,11 @@ class ListView extends Widget {
           key?:Key
         }
      */
-    static new(args) {
-        return new ListView(args);
+    static new(config) {
+        return new ListView(config);
     }
     /**
-     * @param args args:
+     * @param config config:
         { itemBuilder?:any,
           itemCount?:number,
           padding?:EdgeInsets,
@@ -9714,27 +9714,27 @@ class ListView extends Widget {
           key?:Key
         }
      */
-    static builder(args) {
+    static builder(config) {
         let v = new ListView();
         v.constructorName = "builder";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.scrollDirection = args.scrollDirection;
-            v.reverse = args.reverse;
-            v.controller = args.controller;
-            v.primary = args.primary;
-            v.physics = args.physics;
-            v.shrinkWrap = args.shrinkWrap;
-            v.padding = args.padding;
-            v.itemExtent = args.itemExtent;
-            v.itemBuilder = args.itemBuilder;
-            v.itemCount = args.itemCount;
-            v.addAutomaticKeepAlives = args.addAutomaticKeepAlives;
-            v.addRepaintBoundaries = args.addRepaintBoundaries;
-            v.addSemanticIndexes = args.addSemanticIndexes;
-            v.cacheExtent = args.cacheExtent;
-            v.semanticChildCount = args.semanticChildCount;
-            v.dragStartBehavior = args.dragStartBehavior;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.scrollDirection = config.scrollDirection;
+            v.reverse = config.reverse;
+            v.controller = config.controller;
+            v.primary = config.primary;
+            v.physics = config.physics;
+            v.shrinkWrap = config.shrinkWrap;
+            v.padding = config.padding;
+            v.itemExtent = config.itemExtent;
+            v.itemBuilder = config.itemBuilder;
+            v.itemCount = config.itemCount;
+            v.addAutomaticKeepAlives = config.addAutomaticKeepAlives;
+            v.addRepaintBoundaries = config.addRepaintBoundaries;
+            v.addSemanticIndexes = config.addSemanticIndexes;
+            v.cacheExtent = config.cacheExtent;
+            v.semanticChildCount = config.semanticChildCount;
+            v.dragStartBehavior = config.dragStartBehavior;
         }
         return v;
     }
@@ -9742,34 +9742,34 @@ class ListView extends Widget {
 exports.ListView = ListView;
 class LayoutBuilder extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           builder?:any,
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.builder = args.builder;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.builder = config.builder;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           builder?:any,
           key?:Key
         }
      */
-    static new(args) {
-        return new LayoutBuilder(args);
+    static new(config) {
+        return new LayoutBuilder(config);
     }
 }
 exports.LayoutBuilder = LayoutBuilder;
 class Material extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           elevation?:number,
@@ -9785,25 +9785,25 @@ class Material extends Widget {
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.type = args.type;
-            this.elevation = args.elevation;
-            this.color = args.color;
-            this.shadowColor = args.shadowColor;
-            this.textStyle = args.textStyle;
-            this.borderRadius = args.borderRadius;
-            this.shape = args.shape;
-            this.borderOnForeground = args.borderOnForeground;
-            this.clipBehavior = args.clipBehavior;
-            this.animationDuration = args.animationDuration;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.type = config.type;
+            this.elevation = config.elevation;
+            this.color = config.color;
+            this.shadowColor = config.shadowColor;
+            this.textStyle = config.textStyle;
+            this.borderRadius = config.borderRadius;
+            this.shape = config.shape;
+            this.borderOnForeground = config.borderOnForeground;
+            this.clipBehavior = config.clipBehavior;
+            this.animationDuration = config.animationDuration;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           elevation?:number,
@@ -9819,14 +9819,14 @@ class Material extends Widget {
           key?:Key,
         }
      */
-    static new(args) {
-        return new Material(args);
+    static new(config) {
+        return new Material(config);
     }
 }
 exports.Material = Material;
 class MaterialPageRoute extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           builder?:any,
           settings?:any,
@@ -9834,13 +9834,13 @@ class MaterialPageRoute extends Widget {
           fullscreenDialog?:boolean
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.builder = args.builder;
-            this.settings = args.settings;
-            this.maintainState = args.maintainState;
-            this.fullscreenDialog = args.fullscreenDialog;
+        if (config != null && config != undefined) {
+            this.builder = config.builder;
+            this.settings = config.settings;
+            this.maintainState = config.maintainState;
+            this.fullscreenDialog = config.fullscreenDialog;
         }
         this.child = undefined;
     }
@@ -9852,7 +9852,7 @@ class MaterialPageRoute extends Widget {
         super.preBuild(jsWidgetHelper, buildContext);
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           builder?:any,
           settings?:any,
@@ -9860,41 +9860,41 @@ class MaterialPageRoute extends Widget {
           fullscreenDialog?:boolean
         }
      */
-    static new(args) {
-        return new MaterialPageRoute(args);
+    static new(config) {
+        return new MaterialPageRoute(config);
     }
 }
 exports.MaterialPageRoute = MaterialPageRoute;
 class NotificationListener extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           key?:Key
         }
      */
-    static new(args) {
-        return new NotificationListener(args);
+    static new(config) {
+        return new NotificationListener(config);
     }
 }
 exports.NotificationListener = NotificationListener;
 class NestedScrollView extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           body?:Widget,
           controller?:ScrollController,
@@ -9906,17 +9906,17 @@ class NestedScrollView extends Widget {
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.controller = args.controller;
-            this.scrollDirection = args.scrollDirection;
-            this.reverse = args.reverse;
-            this.physics = args.physics;
-            this.headerSliverBuilder = args.headerSliverBuilder;
-            this.body = args.body;
-            this.dragStartBehavior = args.dragStartBehavior;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.controller = config.controller;
+            this.scrollDirection = config.scrollDirection;
+            this.reverse = config.reverse;
+            this.physics = config.physics;
+            this.headerSliverBuilder = config.headerSliverBuilder;
+            this.body = config.body;
+            this.dragStartBehavior = config.dragStartBehavior;
         }
         // 本地创建的，供flutter使用
         this.children = [];
@@ -9930,7 +9930,7 @@ class NestedScrollView extends Widget {
         super.preBuild(jsWidgetHelper, buildContext);
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           body?:Widget,
           controller?:ScrollController,
@@ -9942,8 +9942,8 @@ class NestedScrollView extends Widget {
           key?:Key
         }
      */
-    static new(args) {
-        return new NestedScrollView(args);
+    static new(config) {
+        return new NestedScrollView(config);
     }
 }
 exports.NestedScrollView = NestedScrollView;
@@ -9959,7 +9959,7 @@ class Navigator extends DartClass {
 exports.Navigator = Navigator;
 class Opacity extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -9967,17 +9967,17 @@ class Opacity extends Widget {
           alwaysIncludeSemantics?:boolean
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.opacity = args.opacity;
-            this.alwaysIncludeSemantics = args.alwaysIncludeSemantics;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.opacity = config.opacity;
+            this.alwaysIncludeSemantics = config.alwaysIncludeSemantics;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -9985,44 +9985,44 @@ class Opacity extends Widget {
           alwaysIncludeSemantics?:boolean
         }
      */
-    static new(args) {
-        return new Opacity(args);
+    static new(config) {
+        return new Opacity(config);
     }
 }
 exports.Opacity = Opacity;
 class Offstage extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:.Widget,
           offstage?:boolean,
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.offstage = args.offstage;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.offstage = config.offstage;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:.Widget,
           offstage?:boolean,
           key?:Key,
         }
      */
-    static new(args) {
-        return new Offstage(args);
+    static new(config) {
+        return new Offstage(config);
     }
 }
 exports.Offstage = Offstage;
 class OverflowBox extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           alignment?:Alignment,
@@ -10033,20 +10033,20 @@ class OverflowBox extends Widget {
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.alignment = args.alignment;
-            this.minWidth = args.minWidth;
-            this.maxWidth = args.maxWidth;
-            this.minHeight = args.minHeight;
-            this.maxHeight = args.maxHeight;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.alignment = config.alignment;
+            this.minWidth = config.minWidth;
+            this.maxWidth = config.maxWidth;
+            this.minHeight = config.minHeight;
+            this.maxHeight = config.maxHeight;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           alignment?:Alignment,
@@ -10057,14 +10057,14 @@ class OverflowBox extends Widget {
           key?:Key,
         }
      */
-    static new(args) {
-        return new OverflowBox(args);
+    static new(config) {
+        return new OverflowBox(config);
     }
 }
 exports.OverflowBox = OverflowBox;
 class OutlineButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -10092,37 +10092,37 @@ class OutlineButton extends Widget {
           highlightedBorderColor?:Color,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.onPressed = args.onPressed;
-            this.textTheme = args.textTheme;
-            this.textColor = args.textColor;
-            this.disabledTextColor = args.disabledTextColor;
-            this.color = args.color;
-            this.disabledColor = args.disabledColor;
-            this.highlightColor = args.highlightColor;
-            this.splashColor = args.splashColor;
-            this.colorBrightness = args.colorBrightness;
-            this.highlightElevation = args.highlightElevation;
-            this.padding = args.padding;
-            this.shape = args.shape;
-            this.clipBehavior = args.clipBehavior;
-            this.materialTapTargetSize = args.materialTapTargetSize;
-            this.onLongPress = args.onLongPress;
-            this.focusColor = args.focusColor;
-            this.hoverColor = args.hoverColor;
-            this.visualDensity = args.visualDensity;
-            this.autofocus = args.autofocus;
-            this.child = args.child;
-            this.borderSide = args.borderSide;
-            this.disabledBorderColor = args.disabledBorderColor;
-            this.highlightedBorderColor = args.highlightedBorderColor;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.onPressed = config.onPressed;
+            this.textTheme = config.textTheme;
+            this.textColor = config.textColor;
+            this.disabledTextColor = config.disabledTextColor;
+            this.color = config.color;
+            this.disabledColor = config.disabledColor;
+            this.highlightColor = config.highlightColor;
+            this.splashColor = config.splashColor;
+            this.colorBrightness = config.colorBrightness;
+            this.highlightElevation = config.highlightElevation;
+            this.padding = config.padding;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.onLongPress = config.onLongPress;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.visualDensity = config.visualDensity;
+            this.autofocus = config.autofocus;
+            this.child = config.child;
+            this.borderSide = config.borderSide;
+            this.disabledBorderColor = config.disabledBorderColor;
+            this.highlightedBorderColor = config.highlightedBorderColor;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -10150,11 +10150,11 @@ class OutlineButton extends Widget {
           highlightedBorderColor?:Color,
         }
      */
-    static new(args) {
-        return new OutlineButton(args);
+    static new(config) {
+        return new OutlineButton(config);
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -10185,33 +10185,33 @@ class OutlineButton extends Widget {
           label?:Widget,
         }
      */
-    static icon(args) {
+    static icon(config) {
         let v = new OutlineButton();
         v.constructorName = "icon";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.onPressed = args.onPressed;
-            v.textTheme = args.textTheme;
-            v.textColor = args.textColor;
-            v.disabledTextColor = args.disabledTextColor;
-            v.color = args.color;
-            v.disabledColor = args.disabledColor;
-            v.highlightColor = args.highlightColor;
-            v.splashColor = args.splashColor;
-            v.colorBrightness = args.colorBrightness;
-            v.padding = args.padding;
-            v.shape = args.shape;
-            v.clipBehavior = args.clipBehavior;
-            v.materialTapTargetSize = args.materialTapTargetSize;
-            v.onLongPress = args.onLongPress;
-            v.focusColor = args.focusColor;
-            v.hoverColor = args.hoverColor;
-            v.autofocus = args.autofocus;
-            v.borderSide = args.borderSide;
-            v.disabledBorderColor = args.disabledBorderColor;
-            v.highlightedBorderColor = args.highlightedBorderColor;
-            v.icon = args.icon;
-            v.label = args.label;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.onPressed = config.onPressed;
+            v.textTheme = config.textTheme;
+            v.textColor = config.textColor;
+            v.disabledTextColor = config.disabledTextColor;
+            v.color = config.color;
+            v.disabledColor = config.disabledColor;
+            v.highlightColor = config.highlightColor;
+            v.splashColor = config.splashColor;
+            v.colorBrightness = config.colorBrightness;
+            v.padding = config.padding;
+            v.shape = config.shape;
+            v.clipBehavior = config.clipBehavior;
+            v.materialTapTargetSize = config.materialTapTargetSize;
+            v.onLongPress = config.onLongPress;
+            v.focusColor = config.focusColor;
+            v.hoverColor = config.hoverColor;
+            v.autofocus = config.autofocus;
+            v.borderSide = config.borderSide;
+            v.disabledBorderColor = config.disabledBorderColor;
+            v.highlightedBorderColor = config.highlightedBorderColor;
+            v.icon = config.icon;
+            v.label = config.label;
         }
         return v;
     }
@@ -10219,37 +10219,37 @@ class OutlineButton extends Widget {
 exports.OutlineButton = OutlineButton;
 class Padding extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           padding?:EdgeInsets,
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.padding = args.padding;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.padding = config.padding;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           padding?:EdgeInsets,
           key?:Key
         }
      */
-    static new(args) {
-        return new Padding(args);
+    static new(config) {
+        return new Padding(config);
     }
 }
 exports.Padding = Padding;
 class PhysicalModel extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           color:Color,
@@ -10261,20 +10261,20 @@ class PhysicalModel extends Widget {
           shadowColor?:Color,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.color = args.color;
-            this.shape = args.shape;
-            this.shadowColor = args.shadowColor;
-            this.clipBehavior = args.clipBehavior;
-            this.elevation = args.elevation;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.color = config.color;
+            this.shape = config.shape;
+            this.shadowColor = config.shadowColor;
+            this.clipBehavior = config.clipBehavior;
+            this.elevation = config.elevation;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           color:Color,
@@ -10286,14 +10286,14 @@ class PhysicalModel extends Widget {
           shadowColor?:Color,
         }
      */
-    static new(args) {
-        return new PhysicalModel(args);
+    static new(config) {
+        return new PhysicalModel(config);
     }
 }
 exports.PhysicalModel = PhysicalModel;
 class Positioned extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key
           child:Widget,
@@ -10305,21 +10305,21 @@ class Positioned extends Widget {
           height?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.left = args.left;
-            this.top = args.top;
-            this.right = args.right;
-            this.bottom = args.bottom;
-            this.width = args.width;
-            this.height = args.height;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.left = config.left;
+            this.top = config.top;
+            this.right = config.right;
+            this.bottom = config.bottom;
+            this.width = config.width;
+            this.height = config.height;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key
           child:Widget,
@@ -10331,29 +10331,29 @@ class Positioned extends Widget {
           height?:number,
         }
      */
-    static new(args) {
-        return new Positioned(args);
+    static new(config) {
+        return new Positioned(config);
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child:Widget,
           rect?:Rect,
           key?:Key
         }
      */
-    static fromRect(args) {
+    static fromRect(config) {
         let v = new Positioned();
         v.constructorName = "fromRect";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.rect = args.rect;
-            v.child = args.child;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.rect = config.rect;
+            v.child = config.child;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key
           child:Widget,
@@ -10363,21 +10363,21 @@ class Positioned extends Widget {
           bottom?:number,
         }
      */
-    static fill(args) {
+    static fill(config) {
         var v = new Positioned();
         v.constructorName = "fill";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.left = args.left;
-            v.top = args.top;
-            v.right = args.right;
-            v.bottom = args.bottom;
-            v.child = args.child;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.left = config.left;
+            v.top = config.top;
+            v.right = config.right;
+            v.bottom = config.bottom;
+            v.child = config.child;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key
           child:Widget,
@@ -10390,19 +10390,19 @@ class Positioned extends Widget {
           height?:number,
         }
      */
-    static directional(args) {
+    static directional(config) {
         var v = new Positioned();
         v.constructorName = "directional";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.textDirection = args.textDirection;
-            v.start = args.start;
-            v.top = args.top;
-            v.end = args.end;
-            v.bottom = args.bottom;
-            v.width = args.width;
-            v.height = args.height;
-            v.child = args.child;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.textDirection = config.textDirection;
+            v.start = config.start;
+            v.top = config.top;
+            v.end = config.end;
+            v.bottom = config.bottom;
+            v.width = config.width;
+            v.height = config.height;
+            v.child = config.child;
         }
         return v;
     }
@@ -10410,7 +10410,7 @@ class Positioned extends Widget {
 exports.Positioned = Positioned;
 class PositionedDirectional extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key
           child:Widget,
@@ -10422,21 +10422,21 @@ class PositionedDirectional extends Widget {
           height?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.start = args.start;
-            this.top = args.top;
-            this.end = args.end;
-            this.bottom = args.bottom;
-            this.width = args.width;
-            this.height = args.height;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.start = config.start;
+            this.top = config.top;
+            this.end = config.end;
+            this.bottom = config.bottom;
+            this.width = config.width;
+            this.height = config.height;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key
           child:Widget,
@@ -10448,38 +10448,38 @@ class PositionedDirectional extends Widget {
           height?:number,
         }
      */
-    static new(args) {
-        return new PositionedDirectional(args);
+    static new(config) {
+        return new PositionedDirectional(config);
     }
 }
 exports.PositionedDirectional = PositionedDirectional;
 class PreferredSize extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           preferredSize?:Size,
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.preferredSize = args.preferredSize;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.preferredSize = config.preferredSize;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           preferredSize?:Size,
           key?:Key
         }
      */
-    static new(args) {
-        return new PreferredSize(args);
+    static new(config) {
+        return new PreferredSize(config);
     }
 }
 exports.PreferredSize = PreferredSize;
@@ -10492,7 +10492,7 @@ class PreferredSizeWidget extends Widget {
 exports.PreferredSizeWidget = PreferredSizeWidget;
 class Placeholder extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           strokeWidth?:number,
@@ -10501,18 +10501,18 @@ class Placeholder extends Widget {
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.color = args.color;
-            this.strokeWidth = args.strokeWidth;
-            this.fallbackWidth = args.fallbackWidth;
-            this.fallbackHeight = args.fallbackHeight;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.color = config.color;
+            this.strokeWidth = config.strokeWidth;
+            this.fallbackWidth = config.fallbackWidth;
+            this.fallbackHeight = config.fallbackHeight;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           color?:Color,
           strokeWidth?:number,
@@ -10521,14 +10521,14 @@ class Placeholder extends Widget {
           key?:Key,
         }
      */
-    static new(args) {
-        return new Placeholder(args);
+    static new(config) {
+        return new Placeholder(config);
     }
 }
 exports.Placeholder = Placeholder;
 class PopupMenuButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           itemBuilder?:any,
           initialValue?:any,
@@ -10543,20 +10543,20 @@ class PopupMenuButton extends Widget {
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.itemBuilder = args.itemBuilder;
-            this.initialValue = args.initialValue;
-            this.onSelected = args.onSelected;
-            this.onCanceled = args.onCanceled;
-            this.tooltip = args.tooltip;
-            this.elevation = args.elevation;
-            this.padding = args.padding;
-            this.child = args.child;
-            this.icon = args.icon;
-            this.offset = args.offset;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.itemBuilder = config.itemBuilder;
+            this.initialValue = config.initialValue;
+            this.onSelected = config.onSelected;
+            this.onCanceled = config.onCanceled;
+            this.tooltip = config.tooltip;
+            this.elevation = config.elevation;
+            this.padding = config.padding;
+            this.child = config.child;
+            this.icon = config.icon;
+            this.offset = config.offset;
         }
         // 本地创建的，供flutter使用
         this.children = [];
@@ -10575,7 +10575,7 @@ class PopupMenuButton extends Widget {
         super.preBuild(jsWidgetHelper, buildContext);
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           itemBuilder?:any,
           initialValue?:any,
@@ -10590,14 +10590,14 @@ class PopupMenuButton extends Widget {
           key?:Key
         }
      */
-    static new(args) {
-        return new PopupMenuButton(args);
+    static new(config) {
+        return new PopupMenuButton(config);
     }
 }
 exports.PopupMenuButton = PopupMenuButton;
 class PopupMenuItem extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           value?:any,
@@ -10606,18 +10606,18 @@ class PopupMenuItem extends Widget {
           key?:Key
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.value = args.value;
-            this.enabled = args.enabled;
-            this.height = args.height;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.enabled = config.enabled;
+            this.height = config.height;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           child?:Widget,
           value?:any,
@@ -10626,14 +10626,14 @@ class PopupMenuItem extends Widget {
           key?:Key
         }
      */
-    static new(args) {
-        return new PopupMenuItem(args);
+    static new(config) {
+        return new PopupMenuItem(config);
     }
 }
 exports.PopupMenuItem = PopupMenuItem;
 class Row extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           mainAxisAlignment?:MainAxisAlignment,
@@ -10645,21 +10645,21 @@ class Row extends Widget {
           key?:Key,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.mainAxisAlignment = args.mainAxisAlignment;
-            this.mainAxisSize = args.mainAxisSize;
-            this.crossAxisAlignment = args.crossAxisAlignment;
-            this.textDirection = args.textDirection;
-            this.verticalDirection = args.verticalDirection;
-            this.textBaseline = args.textBaseline;
-            this.children = args.children;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.mainAxisAlignment = config.mainAxisAlignment;
+            this.mainAxisSize = config.mainAxisSize;
+            this.crossAxisAlignment = config.crossAxisAlignment;
+            this.textDirection = config.textDirection;
+            this.verticalDirection = config.verticalDirection;
+            this.textBaseline = config.textBaseline;
+            this.children = config.children;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           children?:Array<Widget>,
           mainAxisAlignment?:MainAxisAlignment,
@@ -10671,35 +10671,35 @@ class Row extends Widget {
           key?:Key,
         }
      */
-    static new(args) {
-        return new Row(args);
+    static new(config) {
+        return new Row(config);
     }
 }
 exports.Row = Row;
 class RepaintBoundary extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
         }
      */
-    static new(args) {
-        return new RepaintBoundary(args);
+    static new(config) {
+        return new RepaintBoundary(config);
     }
     static wrap(child, childIndex) {
         var v = new RepaintBoundary();
@@ -10712,7 +10712,7 @@ class RepaintBoundary extends Widget {
 exports.RepaintBoundary = RepaintBoundary;
 class RawImage extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           image?:ImageProvider,
@@ -10732,29 +10732,29 @@ class RawImage extends Widget {
           isAntiAlias?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.image = args.image;
-            this.debugImageLabel = args.debugImageLabel;
-            this.width = args.width;
-            this.height = args.height;
-            this.scale = args.scale;
-            this.color = args.color;
-            this.colorBlendMode = args.colorBlendMode;
-            this.fit = args.fit;
-            this.alignment = args.alignment;
-            this.repeat = args.repeat;
-            this.centerSlice = args.centerSlice;
-            this.matchTextDirection = args.matchTextDirection;
-            this.invertColors = args.invertColors;
-            this.filterQuality = args.filterQuality;
-            this.isAntiAlias = args.isAntiAlias;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.image = config.image;
+            this.debugImageLabel = config.debugImageLabel;
+            this.width = config.width;
+            this.height = config.height;
+            this.scale = config.scale;
+            this.color = config.color;
+            this.colorBlendMode = config.colorBlendMode;
+            this.fit = config.fit;
+            this.alignment = config.alignment;
+            this.repeat = config.repeat;
+            this.centerSlice = config.centerSlice;
+            this.matchTextDirection = config.matchTextDirection;
+            this.invertColors = config.invertColors;
+            this.filterQuality = config.filterQuality;
+            this.isAntiAlias = config.isAntiAlias;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           image?:ImageProvider,
@@ -10774,44 +10774,44 @@ class RawImage extends Widget {
           isAntiAlias?:boolean,
         }
      */
-    static new(args) {
-        return new RawImage(args);
+    static new(config) {
+        return new RawImage(config);
     }
 }
 exports.RawImage = RawImage;
 class RotatedBox extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           quarterTurns:number,
           child?:Widget,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.quarterTurns = args.quarterTurns;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.quarterTurns = config.quarterTurns;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           quarterTurns:number,
           child?:Widget,
         }
      */
-    static new(args) {
-        return new RotatedBox(args);
+    static new(config) {
+        return new RotatedBox(config);
     }
 }
 exports.RotatedBox = RotatedBox;
 class RaisedButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -10842,39 +10842,39 @@ class RaisedButton extends Widget {
           autofocus?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.onPressed = args.onPressed;
-            this.onHighlightChanged = args.onHighlightChanged;
-            this.textColor = args.textColor;
-            this.disabledTextColor = args.disabledTextColor;
-            this.color = args.color;
-            this.disabledColor = args.disabledColor;
-            this.highlightColor = args.highlightColor;
-            this.splashColor = args.splashColor;
-            this.colorBrightness = args.colorBrightness;
-            this.elevation = args.elevation;
-            this.highlightElevation = args.highlightElevation;
-            this.disabledElevation = args.disabledElevation;
-            this.padding = args.padding;
-            this.shape = args.shape;
-            this.clipBehavior = args.clipBehavior;
-            this.materialTapTargetSize = args.materialTapTargetSize;
-            this.animationDuration = args.animationDuration;
-            this.child = args.child;
-            this.onLongPress = args.onLongPress;
-            this.focusColor = args.focusColor;
-            this.hoverColor = args.hoverColor;
-            this.focusElevation = args.focusElevation;
-            this.hoverElevation = args.hoverElevation;
-            this.visualDensity = args.visualDensity;
-            this.autofocus = args.autofocus;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.onPressed = config.onPressed;
+            this.onHighlightChanged = config.onHighlightChanged;
+            this.textColor = config.textColor;
+            this.disabledTextColor = config.disabledTextColor;
+            this.color = config.color;
+            this.disabledColor = config.disabledColor;
+            this.highlightColor = config.highlightColor;
+            this.splashColor = config.splashColor;
+            this.colorBrightness = config.colorBrightness;
+            this.elevation = config.elevation;
+            this.highlightElevation = config.highlightElevation;
+            this.disabledElevation = config.disabledElevation;
+            this.padding = config.padding;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.animationDuration = config.animationDuration;
+            this.child = config.child;
+            this.onLongPress = config.onLongPress;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.focusElevation = config.focusElevation;
+            this.hoverElevation = config.hoverElevation;
+            this.visualDensity = config.visualDensity;
+            this.autofocus = config.autofocus;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -10905,11 +10905,11 @@ class RaisedButton extends Widget {
           autofocus?:boolean,
         }
      */
-    static new(args) {
-        return new RaisedButton(args);
+    static new(config) {
+        return new RaisedButton(config);
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         icon?:Widget,
@@ -10940,35 +10940,35 @@ class RaisedButton extends Widget {
         autofocus?:boolean,
       }
      */
-    static icon(args) {
+    static icon(config) {
         let v = new RaisedButton();
         v.constructorName = "icon";
-        if (args != null && args != undefined) {
+        if (config != null && config != undefined) {
             {
-                v.key = args.key;
-                v.onPressed = args.onPressed;
-                v.padding = args.padding;
-                v.onHighlightChanged = args.onHighlightChanged;
-                v.textColor = args.textColor;
-                v.disabledTextColor = args.disabledTextColor;
-                v.color = args.color;
-                v.disabledColor = args.disabledColor;
-                v.highlightColor = args.highlightColor;
-                v.splashColor = args.splashColor;
-                v.colorBrightness = args.colorBrightness;
-                v.elevation = args.elevation;
-                v.highlightElevation = args.highlightElevation;
-                v.disabledElevation = args.disabledElevation;
-                v.shape = args.shape;
-                v.clipBehavior = args.clipBehavior;
-                v.materialTapTargetSize = args.materialTapTargetSize;
-                v.animationDuration = args.animationDuration;
-                v.icon = args.icon;
-                v.label = args.label;
-                v.onLongPress = args.onLongPress;
-                v.focusColor = args.focusColor;
-                v.hoverColor = args.hoverColor;
-                v.autofocus = args.autofocus;
+                v.key = config.key;
+                v.onPressed = config.onPressed;
+                v.padding = config.padding;
+                v.onHighlightChanged = config.onHighlightChanged;
+                v.textColor = config.textColor;
+                v.disabledTextColor = config.disabledTextColor;
+                v.color = config.color;
+                v.disabledColor = config.disabledColor;
+                v.highlightColor = config.highlightColor;
+                v.splashColor = config.splashColor;
+                v.colorBrightness = config.colorBrightness;
+                v.elevation = config.elevation;
+                v.highlightElevation = config.highlightElevation;
+                v.disabledElevation = config.disabledElevation;
+                v.shape = config.shape;
+                v.clipBehavior = config.clipBehavior;
+                v.materialTapTargetSize = config.materialTapTargetSize;
+                v.animationDuration = config.animationDuration;
+                v.icon = config.icon;
+                v.label = config.label;
+                v.onLongPress = config.onLongPress;
+                v.focusColor = config.focusColor;
+                v.hoverColor = config.hoverColor;
+                v.autofocus = config.autofocus;
             }
             return v;
         }
@@ -10977,7 +10977,7 @@ class RaisedButton extends Widget {
 exports.RaisedButton = RaisedButton;
 class Radio extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         value?:any,
@@ -10987,19 +10987,19 @@ class Radio extends Widget {
         materialTapTargetSize?:MaterialTapTargetSize
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.value = args.value;
-            this.groupValue = args.groupValue;
-            this.onChanged = args.onChanged;
-            this.activeColor = args.activeColor;
-            this.materialTapTargetSize = args.materialTapTargetSize;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.groupValue = config.groupValue;
+            this.onChanged = config.onChanged;
+            this.activeColor = config.activeColor;
+            this.materialTapTargetSize = config.materialTapTargetSize;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         value?:any,
@@ -11009,14 +11009,14 @@ class Radio extends Widget {
         materialTapTargetSize?:MaterialTapTargetSize
       }
      */
-    static new(args) {
-        return new Radio(args);
+    static new(config) {
+        return new Radio(config);
     }
 }
 exports.Radio = Radio;
 class RawMaterialButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         onPressed:VoidCallback,
@@ -11045,38 +11045,38 @@ class RawMaterialButton extends Widget {
         child?:Widget,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.onPressed = args.onPressed;
-            this.onLongPress = args.onLongPress;
-            this.onHighlightChanged = args.onHighlightChanged;
-            this.focusColor = args.focusColor;
-            this.focusElevation = args.focusElevation;
-            this.hoverColor = args.hoverColor;
-            this.hoverElevation = args.hoverElevation;
-            this.textStyle = args.textStyle;
-            this.fillColor = args.fillColor;
-            this.highlightColor = args.highlightColor;
-            this.splashColor = args.splashColor;
-            this.elevation = args.elevation;
-            this.highlightElevation = args.highlightElevation;
-            this.disabledElevation = args.disabledElevation;
-            this.padding = args.padding;
-            this.visualDensity = args.visualDensity;
-            this.constraints = args.constraints;
-            this.shape = args.shape;
-            this.animationDuration = args.animationDuration;
-            this.clipBehavior = args.clipBehavior;
-            this.autofocus = args.autofocus;
-            this.enableFeedback = args.enableFeedback;
-            this.materialTapTargetSize = args.materialTapTargetSize;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.onPressed = config.onPressed;
+            this.onLongPress = config.onLongPress;
+            this.onHighlightChanged = config.onHighlightChanged;
+            this.focusColor = config.focusColor;
+            this.focusElevation = config.focusElevation;
+            this.hoverColor = config.hoverColor;
+            this.hoverElevation = config.hoverElevation;
+            this.textStyle = config.textStyle;
+            this.fillColor = config.fillColor;
+            this.highlightColor = config.highlightColor;
+            this.splashColor = config.splashColor;
+            this.elevation = config.elevation;
+            this.highlightElevation = config.highlightElevation;
+            this.disabledElevation = config.disabledElevation;
+            this.padding = config.padding;
+            this.visualDensity = config.visualDensity;
+            this.constraints = config.constraints;
+            this.shape = config.shape;
+            this.animationDuration = config.animationDuration;
+            this.clipBehavior = config.clipBehavior;
+            this.autofocus = config.autofocus;
+            this.enableFeedback = config.enableFeedback;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         onPressed:VoidCallback,
@@ -11105,14 +11105,14 @@ class RawMaterialButton extends Widget {
         child?:Widget,
       }
      */
-    static new(args) {
-        return new RawMaterialButton(args);
+    static new(config) {
+        return new RawMaterialButton(config);
     }
 }
 exports.RawMaterialButton = RawMaterialButton;
 class RichText extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         text:Widget,
@@ -11125,22 +11125,22 @@ class RichText extends Widget {
         textWidthBasis?:TextWidthBasis,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.text = args.text;
-            this.textAlign = args.textAlign;
-            this.textDirection = args.textDirection;
-            this.softWrap = args.softWrap;
-            this.overflow = args.overflow;
-            this.textScaleFactor = args.textScaleFactor;
-            this.maxLines = args.maxLines;
-            this.textWidthBasis = args.textWidthBasis;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.text = config.text;
+            this.textAlign = config.textAlign;
+            this.textDirection = config.textDirection;
+            this.softWrap = config.softWrap;
+            this.overflow = config.overflow;
+            this.textScaleFactor = config.textScaleFactor;
+            this.maxLines = config.maxLines;
+            this.textWidthBasis = config.textWidthBasis;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         text:Widget,
@@ -11153,41 +11153,41 @@ class RichText extends Widget {
         textWidthBasis?:TextWidthBasis,
       }
      */
-    static new(args) {
-        return new RichText(args);
+    static new(config) {
+        return new RichText(config);
     }
 }
 exports.RichText = RichText;
 class Spacer extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         flex?:number
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.flex = args.flex;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.flex = config.flex;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         flex?:number
       }
      */
-    static new(args) {
-        return new Spacer(args);
+    static new(config) {
+        return new Spacer(config);
     }
 }
 exports.Spacer = Spacer;
 class Semantics extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -11241,61 +11241,61 @@ class Semantics extends Widget {
         onDidLoseAccessibilityFocus?:VoidCallback,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.container = args.container;
-            this.excludeSemantics = args.excludeSemantics;
-            this.explicitChildNodes = args.explicitChildNodes;
-            this.enabled = args.enabled;
-            this.checked = args.checked;
-            this.selected = args.selected;
-            this.toggled = args.toggled;
-            this.button = args.button;
-            this.link = args.link;
-            this.header = args.header;
-            this.textField = args.textField;
-            this.readOnly = args.readOnly;
-            this.focusable = args.focusable;
-            this.focused = args.focused;
-            this.inMutuallyExclusiveGroup = args.inMutuallyExclusiveGroup;
-            this.obscured = args.obscured;
-            this.multiline = args.multiline;
-            this.scopesRoute = args.scopesRoute;
-            this.namesRoute = args.namesRoute;
-            this.hidden = args.hidden;
-            this.image = args.image;
-            this.liveRegion = args.liveRegion;
-            this.maxValueLength = args.maxValueLength;
-            this.currentValueLength = args.currentValueLength;
-            this.label = args.label;
-            this.value = args.value;
-            this.increasedValue = args.increasedValue;
-            this.decreasedValue = args.decreasedValue;
-            this.hint = args.hint;
-            this.onTapHint = args.onTapHint;
-            this.onLongPressHint = args.onLongPressHint;
-            this.textDirection = args.textDirection;
-            this.onTap = args.onTap;
-            this.onLongPress = args.onLongPress;
-            this.onScrollLeft = args.onScrollLeft;
-            this.onScrollRight = args.onScrollRight;
-            this.onScrollDown = args.onScrollDown;
-            this.onScrollUp = args.onScrollUp;
-            this.onIncrease = args.onIncrease;
-            this.onDecrease = args.onDecrease;
-            this.onCopy = args.onCopy;
-            this.onCut = args.onCut;
-            this.onPaste = args.onPaste;
-            this.onDismiss = args.onDismiss;
-            this.onDidGainAccessibilityFocus = args.onDidGainAccessibilityFocus;
-            this.onDidLoseAccessibilityFocus = args.onDidLoseAccessibilityFocus;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.container = config.container;
+            this.excludeSemantics = config.excludeSemantics;
+            this.explicitChildNodes = config.explicitChildNodes;
+            this.enabled = config.enabled;
+            this.checked = config.checked;
+            this.selected = config.selected;
+            this.toggled = config.toggled;
+            this.button = config.button;
+            this.link = config.link;
+            this.header = config.header;
+            this.textField = config.textField;
+            this.readOnly = config.readOnly;
+            this.focusable = config.focusable;
+            this.focused = config.focused;
+            this.inMutuallyExclusiveGroup = config.inMutuallyExclusiveGroup;
+            this.obscured = config.obscured;
+            this.multiline = config.multiline;
+            this.scopesRoute = config.scopesRoute;
+            this.namesRoute = config.namesRoute;
+            this.hidden = config.hidden;
+            this.image = config.image;
+            this.liveRegion = config.liveRegion;
+            this.maxValueLength = config.maxValueLength;
+            this.currentValueLength = config.currentValueLength;
+            this.label = config.label;
+            this.value = config.value;
+            this.increasedValue = config.increasedValue;
+            this.decreasedValue = config.decreasedValue;
+            this.hint = config.hint;
+            this.onTapHint = config.onTapHint;
+            this.onLongPressHint = config.onLongPressHint;
+            this.textDirection = config.textDirection;
+            this.onTap = config.onTap;
+            this.onLongPress = config.onLongPress;
+            this.onScrollLeft = config.onScrollLeft;
+            this.onScrollRight = config.onScrollRight;
+            this.onScrollDown = config.onScrollDown;
+            this.onScrollUp = config.onScrollUp;
+            this.onIncrease = config.onIncrease;
+            this.onDecrease = config.onDecrease;
+            this.onCopy = config.onCopy;
+            this.onCut = config.onCut;
+            this.onPaste = config.onPaste;
+            this.onDismiss = config.onDismiss;
+            this.onDidGainAccessibilityFocus = config.onDidGainAccessibilityFocus;
+            this.onDidLoseAccessibilityFocus = config.onDidLoseAccessibilityFocus;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -11349,14 +11349,14 @@ class Semantics extends Widget {
         onDidLoseAccessibilityFocus?:VoidCallback,
       }
      */
-    static new(args) {
-        return new Semantics(args);
+    static new(config) {
+        return new Semantics(config);
     }
 }
 exports.Semantics = Semantics;
 class SwitchListTile extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           value:boolean,
@@ -11376,29 +11376,29 @@ class SwitchListTile extends Widget {
           controlAffinity?:ListTileControlAffinity,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.value = args.value;
-            this.onChanged = args.onChanged;
-            this.activeColor = args.activeColor;
-            this.activeTrackColor = args.activeTrackColor;
-            this.inactiveThumbColor = args.inactiveThumbColor;
-            this.inactiveTrackColor = args.inactiveTrackColor;
-            this.title = args.title;
-            this.subtitle = args.subtitle;
-            this.isThreeLine = args.isThreeLine;
-            this.dense = args.dense;
-            this.contentPadding = args.contentPadding;
-            this.secondary = args.secondary;
-            this.selected = args.selected;
-            this.autofocus = args.autofocus;
-            this.controlAffinity = args.controlAffinity;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.onChanged = config.onChanged;
+            this.activeColor = config.activeColor;
+            this.activeTrackColor = config.activeTrackColor;
+            this.inactiveThumbColor = config.inactiveThumbColor;
+            this.inactiveTrackColor = config.inactiveTrackColor;
+            this.title = config.title;
+            this.subtitle = config.subtitle;
+            this.isThreeLine = config.isThreeLine;
+            this.dense = config.dense;
+            this.contentPadding = config.contentPadding;
+            this.secondary = config.secondary;
+            this.selected = config.selected;
+            this.autofocus = config.autofocus;
+            this.controlAffinity = config.controlAffinity;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           value:boolean,
@@ -11418,14 +11418,14 @@ class SwitchListTile extends Widget {
           controlAffinity?:ListTileControlAffinity,
         }
      */
-    static new(args) {
-        return new SwitchListTile(args);
+    static new(config) {
+        return new SwitchListTile(config);
     }
 }
 exports.SwitchListTile = SwitchListTile;
 class Slider extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         value?:number,
@@ -11442,26 +11442,26 @@ class Slider extends Widget {
         autofocus?:boolean,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.value = args.value;
-            this.onChanged = args.onChanged;
-            this.onChangeStart = args.onChangeStart;
-            this.onChangeEnd = args.onChangeEnd;
-            this.min = args.min;
-            this.max = args.max;
-            this.divisions = args.divisions;
-            this.label = args.label;
-            this.activeColor = args.activeColor;
-            this.inactiveColor = args.inactiveColor;
-            this.semanticFormatterCallback = args.semanticFormatterCallback;
-            this.autofocus = args.autofocus;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.onChanged = config.onChanged;
+            this.onChangeStart = config.onChangeStart;
+            this.onChangeEnd = config.onChangeEnd;
+            this.min = config.min;
+            this.max = config.max;
+            this.divisions = config.divisions;
+            this.label = config.label;
+            this.activeColor = config.activeColor;
+            this.inactiveColor = config.inactiveColor;
+            this.semanticFormatterCallback = config.semanticFormatterCallback;
+            this.autofocus = config.autofocus;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         value?:number,
@@ -11478,14 +11478,14 @@ class Slider extends Widget {
         autofocus?:boolean,
       }
      */
-    static new(args) {
-        return new Slider(args);
+    static new(config) {
+        return new Slider(config);
     }
 }
 exports.Slider = Slider;
 class SizedBox extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -11493,17 +11493,17 @@ class SizedBox extends Widget {
         height?:number,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.width = args.width;
-            this.height = args.height;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.width = config.width;
+            this.height = config.height;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -11511,56 +11511,56 @@ class SizedBox extends Widget {
         height?:number,
       }
      */
-    static new(args) {
-        return new SizedBox(args);
+    static new(config) {
+        return new SizedBox(config);
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
       }
      */
-    static expand(args) {
+    static expand(config) {
         var v = new SizedBox();
         v.constructorName = "expand";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.child = args.child;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.child = config.child;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
         size?:Size,
       }
      */
-    static fromSize(args) {
+    static fromSize(config) {
         var v = new SizedBox();
         v.constructorName = "fromSize";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.child = args.child;
-            v.size = args.size;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.child = config.child;
+            v.size = config.size;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
       }
      */
-    static shrink(args) {
+    static shrink(config) {
         var v = new SizedBox();
         v.constructorName = "shrink";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.child = args.child;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.child = config.child;
         }
         return v;
     }
@@ -11568,7 +11568,7 @@ class SizedBox extends Widget {
 exports.SizedBox = SizedBox;
 class SizedOverflowBox extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -11576,17 +11576,17 @@ class SizedOverflowBox extends Widget {
         size:Size,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.size = args.size;
-            this.alignment = args.alignment;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.size = config.size;
+            this.alignment = config.alignment;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -11594,14 +11594,14 @@ class SizedOverflowBox extends Widget {
         size:Size,
       }
      */
-    static new(args) {
-        return new SizedOverflowBox(args);
+    static new(config) {
+        return new SizedOverflowBox(config);
     }
 }
 exports.SizedOverflowBox = SizedOverflowBox;
 class Stack extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         children?:Array<Widget>,
@@ -11612,19 +11612,19 @@ class Stack extends Widget {
         clipBehavior?:Clip,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.alignment = args.alignment;
-            this.textDirection = args.textDirection;
-            this.fit = args.fit;
-            this.overflow = args.overflow;
-            this.children = args.children;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.alignment = config.alignment;
+            this.textDirection = config.textDirection;
+            this.fit = config.fit;
+            this.overflow = config.overflow;
+            this.children = config.children;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         children?:Array<Widget>,
@@ -11635,14 +11635,14 @@ class Stack extends Widget {
         clipBehavior?:Clip,
       }
      */
-    static new(args) {
-        return new Stack(args);
+    static new(config) {
+        return new Stack(config);
     }
 }
 exports.Stack = Stack;
 class SliverAppBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         leading?:Widget,
@@ -11674,41 +11674,41 @@ class SliverAppBar extends Widget {
         toolbarHeight?:number,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.leading = args.leading;
-            this.automaticallyImplyLeading = args.automaticallyImplyLeading;
-            this.title = args.title;
-            this.actions = args.actions;
-            this.flexibleSpace = args.flexibleSpace;
-            this.bottom = args.bottom;
-            this.elevation = args.elevation;
-            this.shadowColor = args.shadowColor;
-            this.forceElevated = args.forceElevated;
-            this.backgroundColor = args.backgroundColor;
-            this.brightness = args.brightness;
-            this.iconTheme = args.iconTheme;
-            this.actionsIconTheme = args.actionsIconTheme;
-            this.primary = args.primary;
-            this.centerTitle = args.centerTitle;
-            this.titleSpacing = args.titleSpacing;
-            this.excludeHeaderSemantics = args.excludeHeaderSemantics;
-            this.collapsedHeight = args.collapsedHeight;
-            this.expandedHeight = args.expandedHeight;
-            this.floating = args.floating;
-            this.pinned = args.pinned;
-            this.snap = args.snap;
-            this.stretch = args.stretch;
-            this.stretchTriggerOffset = args.stretchTriggerOffset;
-            this.onStretchTrigger = args.onStretchTrigger;
-            this.shape = args.shape;
-            this.toolbarHeight = args.toolbarHeight;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.leading = config.leading;
+            this.automaticallyImplyLeading = config.automaticallyImplyLeading;
+            this.title = config.title;
+            this.actions = config.actions;
+            this.flexibleSpace = config.flexibleSpace;
+            this.bottom = config.bottom;
+            this.elevation = config.elevation;
+            this.shadowColor = config.shadowColor;
+            this.forceElevated = config.forceElevated;
+            this.backgroundColor = config.backgroundColor;
+            this.brightness = config.brightness;
+            this.iconTheme = config.iconTheme;
+            this.actionsIconTheme = config.actionsIconTheme;
+            this.primary = config.primary;
+            this.centerTitle = config.centerTitle;
+            this.titleSpacing = config.titleSpacing;
+            this.excludeHeaderSemantics = config.excludeHeaderSemantics;
+            this.collapsedHeight = config.collapsedHeight;
+            this.expandedHeight = config.expandedHeight;
+            this.floating = config.floating;
+            this.pinned = config.pinned;
+            this.snap = config.snap;
+            this.stretch = config.stretch;
+            this.stretchTriggerOffset = config.stretchTriggerOffset;
+            this.onStretchTrigger = config.onStretchTrigger;
+            this.shape = config.shape;
+            this.toolbarHeight = config.toolbarHeight;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         leading?:Widget,
@@ -11740,74 +11740,74 @@ class SliverAppBar extends Widget {
         toolbarHeight?:number,
       }
      */
-    static new(args) {
-        return new SliverAppBar(args);
+    static new(config) {
+        return new SliverAppBar(config);
     }
 }
 exports.SliverAppBar = SliverAppBar;
 class SliverPadding extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         sliver?:Widget,
         padding:EdgeInsets,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.padding = args.padding;
-            this.sliver = args.sliver;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.padding = config.padding;
+            this.sliver = config.sliver;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         sliver?:Widget,
         padding:EdgeInsets,
       }
      */
-    static new(args) {
-        return new SliverPadding(args);
+    static new(config) {
+        return new SliverPadding(config);
     }
 }
 exports.SliverPadding = SliverPadding;
 class SliverGrid extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         delegate?:any,
         gridDelegate?:any,
         key?:Key,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.delegate = args.delegate;
-            this.gridDelegate = args.gridDelegate;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.delegate = config.delegate;
+            this.gridDelegate = config.gridDelegate;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         delegate?:any,
         gridDelegate?:any,
         key?:Key,
       }
      */
-    static new(args) {
-        return new SliverGrid(args);
+    static new(config) {
+        return new SliverGrid(config);
     }
 }
 exports.SliverGrid = SliverGrid;
 class SliverGridDelegateWithMaxCrossAxisExtent extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         maxCrossAxisExtent?:number,
         mainAxisSpacing?:number,
@@ -11815,17 +11815,17 @@ class SliverGridDelegateWithMaxCrossAxisExtent extends Widget {
         childAspectRatio?:number,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.maxCrossAxisExtent = args.maxCrossAxisExtent;
-            this.mainAxisSpacing = args.mainAxisSpacing;
-            this.crossAxisSpacing = args.crossAxisSpacing;
-            this.childAspectRatio = args.childAspectRatio;
+        if (config != null && config != undefined) {
+            this.maxCrossAxisExtent = config.maxCrossAxisExtent;
+            this.mainAxisSpacing = config.mainAxisSpacing;
+            this.crossAxisSpacing = config.crossAxisSpacing;
+            this.childAspectRatio = config.childAspectRatio;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         maxCrossAxisExtent?:number,
         mainAxisSpacing?:number,
@@ -11833,14 +11833,14 @@ class SliverGridDelegateWithMaxCrossAxisExtent extends Widget {
         childAspectRatio?:number,
       }
      */
-    static new(args) {
-        return new SliverGridDelegateWithMaxCrossAxisExtent(args);
+    static new(config) {
+        return new SliverGridDelegateWithMaxCrossAxisExtent(config);
     }
 }
 exports.SliverGridDelegateWithMaxCrossAxisExtent = SliverGridDelegateWithMaxCrossAxisExtent;
 class SliverChildListDelegate extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
       {
         children?:Array<Widget>,
         addAutomaticKeepAlives?:boolean,
@@ -11849,18 +11849,18 @@ class SliverChildListDelegate extends DartClass {
         semanticIndexOffset?:number,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.children = args.children;
-            this.addAutomaticKeepAlives = args.addAutomaticKeepAlives;
-            this.addRepaintBoundaries = args.addRepaintBoundaries;
-            this.addSemanticIndexes = args.addSemanticIndexes;
-            this.semanticIndexOffset = args.semanticIndexOffset;
+        if (config != null && config != undefined) {
+            this.children = config.children;
+            this.addAutomaticKeepAlives = config.addAutomaticKeepAlives;
+            this.addRepaintBoundaries = config.addRepaintBoundaries;
+            this.addSemanticIndexes = config.addSemanticIndexes;
+            this.semanticIndexOffset = config.semanticIndexOffset;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         children?:Array<Widget>,
         addAutomaticKeepAlives?:boolean,
@@ -11869,14 +11869,14 @@ class SliverChildListDelegate extends DartClass {
         semanticIndexOffset?:number,
       }
      */
-    static new(args) {
-        return new SliverChildListDelegate(args);
+    static new(config) {
+        return new SliverChildListDelegate(config);
     }
 }
 exports.SliverChildListDelegate = SliverChildListDelegate;
 class SliverChildBuilderDelegate extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         builder:any,
         childCount?:number,
@@ -11887,15 +11887,15 @@ class SliverChildBuilderDelegate extends Widget {
         children?:Array<Widget>,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.builder = args.builder;
-            this.childCount = args.childCount;
-            this.addAutomaticKeepAlives = args.addAutomaticKeepAlives;
-            this.addRepaintBoundaries = args.addRepaintBoundaries;
-            this.addSemanticIndexes = args.addSemanticIndexes;
-            this.semanticIndexOffset = args.semanticIndexOffset;
+        if (config != null && config != undefined) {
+            this.builder = config.builder;
+            this.childCount = config.childCount;
+            this.addAutomaticKeepAlives = config.addAutomaticKeepAlives;
+            this.addRepaintBoundaries = config.addRepaintBoundaries;
+            this.addSemanticIndexes = config.addSemanticIndexes;
+            this.semanticIndexOffset = config.semanticIndexOffset;
         }
         // 本地创建的，供flutter使用
         this.children = [];
@@ -11915,7 +11915,7 @@ class SliverChildBuilderDelegate extends Widget {
         super.preBuild(jsWidgetHelper, buildContext);
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         builder:any,
         childCount?:number,
@@ -11926,131 +11926,131 @@ class SliverChildBuilderDelegate extends Widget {
         children?:Array<Widget>,
       }
      */
-    static new(args) {
-        return new SliverChildBuilderDelegate(args);
+    static new(config) {
+        return new SliverChildBuilderDelegate(config);
     }
 }
 exports.SliverChildBuilderDelegate = SliverChildBuilderDelegate;
 class SliverList extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         delegate?:any,
         key?:Key
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.delegate = args.delegate;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.delegate = config.delegate;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         delegate?:any,
         key?:Key
       }
      */
-    static new(args) {
-        return new SliverList(args);
+    static new(config) {
+        return new SliverList(config);
     }
 }
 exports.SliverList = SliverList;
 class SliverOverlapInjector extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
         handle?:any,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.handle = args.handle;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.handle = config.handle;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
         handle?:any,
       }
      */
-    static new(args) {
-        return new SliverOverlapInjector(args);
+    static new(config) {
+        return new SliverOverlapInjector(config);
     }
 }
 exports.SliverOverlapInjector = SliverOverlapInjector;
 class SliverFixedExtentList extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         delegate?:any,
         itemExtent?:number,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.delegate = args.delegate;
-            this.itemExtent = args.itemExtent;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.delegate = config.delegate;
+            this.itemExtent = config.itemExtent;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         delegate?:any,
         itemExtent?:number,
       }
      */
-    static new(args) {
-        return new SliverFixedExtentList(args);
+    static new(config) {
+        return new SliverFixedExtentList(config);
     }
 }
 exports.SliverFixedExtentList = SliverFixedExtentList;
 class SliverOverlapAbsorber extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
         handle?:any,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.handle = args.handle;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.handle = config.handle;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
         handle?:any,
       }
      */
-    static new(args) {
-        return new SliverOverlapAbsorber(args);
+    static new(config) {
+        return new SliverOverlapAbsorber(config);
     }
 }
 exports.SliverOverlapAbsorber = SliverOverlapAbsorber;
 class SingleChildScrollView extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -12064,23 +12064,23 @@ class SingleChildScrollView extends Widget {
         clipBehavior?:Clip,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.scrollDirection = args.scrollDirection;
-            this.reverse = args.reverse;
-            this.padding = args.padding;
-            this.primary = args.primary;
-            this.physics = args.physics;
-            this.controller = args.controller;
-            this.child = args.child;
-            this.dragStartBehavior = args.dragStartBehavior;
-            this.clipBehavior = args.clipBehavior;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.scrollDirection = config.scrollDirection;
+            this.reverse = config.reverse;
+            this.padding = config.padding;
+            this.primary = config.primary;
+            this.physics = config.physics;
+            this.controller = config.controller;
+            this.child = config.child;
+            this.dragStartBehavior = config.dragStartBehavior;
+            this.clipBehavior = config.clipBehavior;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -12094,41 +12094,41 @@ class SingleChildScrollView extends Widget {
         clipBehavior?:Clip,
       }
      */
-    static new(args) {
-        return new SingleChildScrollView(args);
+    static new(config) {
+        return new SingleChildScrollView(config);
     }
 }
 exports.SingleChildScrollView = SingleChildScrollView;
 class SliverToBoxAdapter extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         child?:Widget,
         key?:Key
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         child?:Widget,
         key?:Key
       }
      */
-    static new(args) {
-        return new SliverToBoxAdapter(args);
+    static new(config) {
+        return new SliverToBoxAdapter(config);
     }
 }
 exports.SliverToBoxAdapter = SliverToBoxAdapter;
 class Scaffold extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         appBar?:Widget,
@@ -12145,22 +12145,22 @@ class Scaffold extends Widget {
         primary?:boolean,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.appBar = args.appBar;
-            this.body = args.body;
-            this.floatingActionButton = args.floatingActionButton;
-            this.floatingActionButtonLocation = args.floatingActionButtonLocation;
-            this.persistentFooterButtons = args.persistentFooterButtons;
-            this.drawer = args.drawer;
-            this.endDrawer = args.endDrawer;
-            this.bottomNavigationBar = args.bottomNavigationBar;
-            this.bottomSheet = args.bottomSheet;
-            this.backgroundColor = args.backgroundColor;
-            this.resizeToAvoidBottomPadding = args.resizeToAvoidBottomPadding;
-            this.primary = args.primary;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.appBar = config.appBar;
+            this.body = config.body;
+            this.floatingActionButton = config.floatingActionButton;
+            this.floatingActionButtonLocation = config.floatingActionButtonLocation;
+            this.persistentFooterButtons = config.persistentFooterButtons;
+            this.drawer = config.drawer;
+            this.endDrawer = config.endDrawer;
+            this.bottomNavigationBar = config.bottomNavigationBar;
+            this.bottomSheet = config.bottomSheet;
+            this.backgroundColor = config.backgroundColor;
+            this.resizeToAvoidBottomPadding = config.resizeToAvoidBottomPadding;
+            this.primary = config.primary;
         }
     }
     //FIXME,github mergegithub merge
@@ -12173,7 +12173,7 @@ class Scaffold extends Widget {
                 //3.解析snackBar为真snackBar对象 ✔️
                 //4.执行调用
                 //console.log("showSnackBar in js call native-->")
-                /*let argument = new FlutterCallArgs({
+                /*let argument = new FlutterCallConfig({
                   widgetID: context.widgetID,
                   className: 'Scaffold',
                   funcName: 'of',
@@ -12189,7 +12189,7 @@ class Scaffold extends Widget {
         };
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         appBar?:Widget,
@@ -12206,8 +12206,8 @@ class Scaffold extends Widget {
         primary?:boolean,
       }
      */
-    static new(args) {
-        return new Scaffold(args);
+    static new(config) {
+        return new Scaffold(config);
     }
 }
 exports.Scaffold = Scaffold;
@@ -12220,7 +12220,7 @@ class ScaffoldState extends DartClass {
 exports.ScaffoldState = ScaffoldState;
 class SafeArea extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -12232,21 +12232,21 @@ class SafeArea extends Widget {
           maintainBottomViewPadding?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.left = args.left;
-            this.top = args.top;
-            this.right = args.right;
-            this.bottom = args.bottom;
-            this.minimum = args.minimum;
-            this.maintainBottomViewPadding = args.maintainBottomViewPadding;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.left = config.left;
+            this.top = config.top;
+            this.right = config.right;
+            this.bottom = config.bottom;
+            this.minimum = config.minimum;
+            this.maintainBottomViewPadding = config.maintainBottomViewPadding;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -12258,14 +12258,14 @@ class SafeArea extends Widget {
           maintainBottomViewPadding?:boolean,
         }
      */
-    static new(args) {
-        return new SafeArea(args);
+    static new(config) {
+        return new SafeArea(config);
     }
 }
 exports.SafeArea = SafeArea;
 class SliverSafeArea extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         sliver:Widget,
@@ -12276,20 +12276,20 @@ class SliverSafeArea extends Widget {
         minimum?:EdgeInsets,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.left = args.left;
-            this.top = args.top;
-            this.right = args.right;
-            this.bottom = args.bottom;
-            this.minimum = args.minimum;
-            this.sliver = args.sliver;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.left = config.left;
+            this.top = config.top;
+            this.right = config.right;
+            this.bottom = config.bottom;
+            this.minimum = config.minimum;
+            this.sliver = config.sliver;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         sliver:Widget,
@@ -12300,14 +12300,14 @@ class SliverSafeArea extends Widget {
         minimum?:EdgeInsets,
       }
      */
-    static new(args) {
-        return new SliverSafeArea(args);
+    static new(config) {
+        return new SliverSafeArea(config);
     }
 }
 exports.SliverSafeArea = SliverSafeArea;
 class Scrollbar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child:Widget,
@@ -12315,17 +12315,17 @@ class Scrollbar extends Widget {
         isAlwaysShown?:boolean,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.controller = args.controller;
-            this.isAlwaysShown = args.isAlwaysShown;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.controller = config.controller;
+            this.isAlwaysShown = config.isAlwaysShown;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child:Widget,
@@ -12333,14 +12333,14 @@ class Scrollbar extends Widget {
         isAlwaysShown?:boolean,
       }
      */
-    static new(args) {
-        return new Scrollbar(args);
+    static new(config) {
+        return new Scrollbar(config);
     }
 }
 exports.Scrollbar = Scrollbar;
 class SnackBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Widget,
         content:Widget,
@@ -12354,23 +12354,23 @@ class SnackBar extends Widget {
         onVisible?:VoidCallback,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.content = args.content;
-            this.backgroundColor = args.backgroundColor;
-            this.elevation = args.elevation;
-            this.shape = args.shape;
-            this.behavior = args.behavior;
-            this.action = args.action;
-            this.duration = args.duration;
-            this.animation = args.animation;
-            this.onVisible = args.onVisible;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.content = config.content;
+            this.backgroundColor = config.backgroundColor;
+            this.elevation = config.elevation;
+            this.shape = config.shape;
+            this.behavior = config.behavior;
+            this.action = config.action;
+            this.duration = config.duration;
+            this.animation = config.animation;
+            this.onVisible = config.onVisible;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Widget,
         content:Widget,
@@ -12384,14 +12384,14 @@ class SnackBar extends Widget {
         onVisible?:VoidCallback,
       }
      */
-    static new(args) {
-        return new SnackBar(args);
+    static new(config) {
+        return new SnackBar(config);
     }
 }
 exports.SnackBar = SnackBar;
 class SnackBarAction extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Widget,
         lable?:string,
@@ -12400,18 +12400,18 @@ class SnackBarAction extends Widget {
         textColor?:Color,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.lable = args.lable;
-            this.textColor = args.textColor;
-            this.disabledTextColor = args.disabledTextColor;
-            this.onPressed = args.onPressed;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.lable = config.lable;
+            this.textColor = config.textColor;
+            this.disabledTextColor = config.disabledTextColor;
+            this.onPressed = config.onPressed;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Widget,
         lable?:string,
@@ -12420,14 +12420,14 @@ class SnackBarAction extends Widget {
         textColor?:Color,
       }
      */
-    static new(args) {
-        return new SnackBarAction(args);
+    static new(config) {
+        return new SnackBarAction(config);
     }
 }
 exports.SnackBarAction = SnackBarAction;
 class SliverVisibility extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         sliver:Widget,
@@ -12440,22 +12440,22 @@ class SliverVisibility extends Widget {
         maintainInteractivity?:boolean,
       }
     */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.sliver = args.sliver;
-            this.replacementSliver = args.replacementSliver;
-            this.visible = args.visible;
-            this.maintainAnimation = args.maintainAnimation;
-            this.maintainState = args.maintainState;
-            this.maintainSize = args.maintainSize;
-            this.maintainSemantics = args.maintainSemantics;
-            this.maintainInteractivity = args.maintainInteractivity;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.sliver = config.sliver;
+            this.replacementSliver = config.replacementSliver;
+            this.visible = config.visible;
+            this.maintainAnimation = config.maintainAnimation;
+            this.maintainState = config.maintainState;
+            this.maintainSize = config.maintainSize;
+            this.maintainSemantics = config.maintainSemantics;
+            this.maintainInteractivity = config.maintainInteractivity;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         sliver:Widget,
@@ -12468,74 +12468,74 @@ class SliverVisibility extends Widget {
         maintainInteractivity?:boolean,
       }
     */
-    static new(args) {
-        return new SliverVisibility(args);
+    static new(config) {
+        return new SliverVisibility(config);
     }
 }
 exports.SliverVisibility = SliverVisibility;
 class TableRow extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         children?:Array<Widget>,
         decoration?:BoxDecoration,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.decoration = args.decoration;
-            this.children = args.children;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.decoration = config.decoration;
+            this.children = config.children;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         children?:Array<Widget>,
         decoration?:BoxDecoration,
       }
      */
-    static new(args) {
-        return new TableRow(args);
+    static new(config) {
+        return new TableRow(config);
     }
 }
 exports.TableRow = TableRow;
 class TableCell extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
         verticalAlignment?:TableCellVerticalAlignment,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.verticalAlignment = args.verticalAlignment;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.verticalAlignment = config.verticalAlignment;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
         verticalAlignment?:TableCellVerticalAlignment,
       }
      */
-    static new(args) {
-        return new TableCell(args);
+    static new(config) {
+        return new TableCell(config);
     }
 }
 exports.TableCell = TableCell;
 class Transform extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -12545,19 +12545,19 @@ class Transform extends Widget {
         transformHitTests?:boolean,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.transform = args.transform;
-            this.origin = args.origin;
-            this.alignment = args.alignment;
-            this.transformHitTests = args.transformHitTests;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.transform = config.transform;
+            this.origin = config.origin;
+            this.alignment = config.alignment;
+            this.transformHitTests = config.transformHitTests;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -12567,11 +12567,11 @@ class Transform extends Widget {
         transformHitTests?:boolean,
       }
      */
-    static new(args) {
-        return new Transform(args);
+    static new(config) {
+        return new Transform(config);
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -12581,21 +12581,21 @@ class Transform extends Widget {
         transformHitTests?:boolean,
       }
      */
-    static rotate(args) {
+    static rotate(config) {
         var v = new Transform();
         v.constructorName = "rotate";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.angle = args.angle;
-            v.origin = args.origin;
-            v.alignment = args.alignment;
-            v.transformHitTests = args.transformHitTests;
-            v.child = args.child;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.angle = config.angle;
+            v.origin = config.origin;
+            v.alignment = config.alignment;
+            v.transformHitTests = config.transformHitTests;
+            v.child = config.child;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -12603,19 +12603,19 @@ class Transform extends Widget {
         transformHitTests?:boolean,
       }
      */
-    static translate(args) {
+    static translate(config) {
         var v = new Transform();
         v.constructorName = "translate";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.offset = args.offset;
-            v.transformHitTests = args.transformHitTests;
-            v.child = args.child;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.offset = config.offset;
+            v.transformHitTests = config.transformHitTests;
+            v.child = config.child;
         }
         return v;
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -12625,16 +12625,16 @@ class Transform extends Widget {
         transformHitTests?:boolean,
       }
      */
-    static scale(args) {
+    static scale(config) {
         var v = new Transform();
         v.constructorName = "scale";
-        if (args != null && args != undefined) {
-            v.key = args.key;
-            v.scale = args.scale;
-            v.origin = args.origin;
-            v.alignment = args.alignment;
-            v.transformHitTests = args.transformHitTests;
-            v.child = args.child;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.scale = config.scale;
+            v.origin = config.origin;
+            v.alignment = config.alignment;
+            v.transformHitTests = config.transformHitTests;
+            v.child = config.child;
         }
         return v;
     }
@@ -12642,7 +12642,7 @@ class Transform extends Widget {
 exports.Transform = Transform;
 class Tooltip extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         message:string,
@@ -12659,26 +12659,26 @@ class Tooltip extends Widget {
         child?:Widget
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.message = args.message;
-            this.height = args.height;
-            this.padding = args.padding;
-            this.margin = args.margin;
-            this.verticalOffset = args.verticalOffset;
-            this.preferBelow = args.preferBelow;
-            this.excludeFromSemantics = args.excludeFromSemantics;
-            this.decoration = args.decoration;
-            this.textStyle = args.textStyle;
-            this.waitDuration = args.waitDuration;
-            this.showDuration = args.showDuration;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.message = config.message;
+            this.height = config.height;
+            this.padding = config.padding;
+            this.margin = config.margin;
+            this.verticalOffset = config.verticalOffset;
+            this.preferBelow = config.preferBelow;
+            this.excludeFromSemantics = config.excludeFromSemantics;
+            this.decoration = config.decoration;
+            this.textStyle = config.textStyle;
+            this.waitDuration = config.waitDuration;
+            this.showDuration = config.showDuration;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         message:string,
@@ -12695,14 +12695,14 @@ class Tooltip extends Widget {
         child?:Widget
       }
      */
-    static new(args) {
-        return new Tooltip(args);
+    static new(config) {
+        return new Tooltip(config);
     }
 }
 exports.Tooltip = Tooltip;
 class Table extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         children?:Array<Widget>,
@@ -12714,21 +12714,21 @@ class Table extends Widget {
         columnWidths?:Map<string,TableColumnWidth>,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.children = args.children;
-            this.columnWidths = args.columnWidths;
-            this.defaultColumnWidth = args.defaultColumnWidth;
-            this.textDirection = args.textDirection;
-            this.border = args.border;
-            this.defaultVerticalAlignment = args.defaultVerticalAlignment;
-            this.textBaseline = args.textBaseline;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.children = config.children;
+            this.columnWidths = config.columnWidths;
+            this.defaultColumnWidth = config.defaultColumnWidth;
+            this.textDirection = config.textDirection;
+            this.border = config.border;
+            this.defaultVerticalAlignment = config.defaultVerticalAlignment;
+            this.textBaseline = config.textBaseline;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         children?:Array<Widget>,
@@ -12740,14 +12740,14 @@ class Table extends Widget {
         columnWidths?:Map<string,TableColumnWidth>,
       }
      */
-    static new(args) {
-        return new Table(args);
+    static new(config) {
+        return new Table(config);
     }
 }
 exports.Table = Table;
 class TabBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         tabs?:Array<Widget>,
@@ -12768,30 +12768,30 @@ class TabBar extends Widget {
         physics?:ScrollPhysics,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.tabs = args.tabs;
-            this.controller = args.controller;
-            this.isScrollable = args.isScrollable;
-            this.indicatorColor = args.indicatorColor;
-            this.indicatorWeight = args.indicatorWeight;
-            this.indicatorPadding = args.indicatorPadding;
-            this.indicator = args.indicator;
-            this.indicatorSize = args.indicatorSize;
-            this.labelColor = args.labelColor;
-            this.labelStyle = args.labelStyle;
-            this.labelPadding = args.labelPadding;
-            this.unselectedLabelColor = args.unselectedLabelColor;
-            this.unselectedLabelStyle = args.unselectedLabelStyle;
-            this.dragStartBehavior = args.dragStartBehavior;
-            this.onTap = args.onTap;
-            this.physics = args.physics;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.tabs = config.tabs;
+            this.controller = config.controller;
+            this.isScrollable = config.isScrollable;
+            this.indicatorColor = config.indicatorColor;
+            this.indicatorWeight = config.indicatorWeight;
+            this.indicatorPadding = config.indicatorPadding;
+            this.indicator = config.indicator;
+            this.indicatorSize = config.indicatorSize;
+            this.labelColor = config.labelColor;
+            this.labelStyle = config.labelStyle;
+            this.labelPadding = config.labelPadding;
+            this.unselectedLabelColor = config.unselectedLabelColor;
+            this.unselectedLabelStyle = config.unselectedLabelStyle;
+            this.dragStartBehavior = config.dragStartBehavior;
+            this.onTap = config.onTap;
+            this.physics = config.physics;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         tabs?:Array<Widget>,
@@ -12812,14 +12812,14 @@ class TabBar extends Widget {
         physics?:ScrollPhysics,
       }
      */
-    static new(args) {
-        return new TabBar(args);
+    static new(config) {
+        return new TabBar(config);
     }
 }
 exports.TabBar = TabBar;
 class Tab extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -12828,17 +12828,17 @@ class Tab extends Widget {
         iconMargin?:EdgeInsets,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.text = args.text;
-            this.icon = args.icon;
-            this.child = args.child;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.text = config.text;
+            this.icon = config.icon;
+            this.child = config.child;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -12847,14 +12847,14 @@ class Tab extends Widget {
         iconMargin?:EdgeInsets,
       }
      */
-    static new(args) {
-        return new Tab(args);
+    static new(config) {
+        return new Tab(config);
     }
 }
 exports.Tab = Tab;
 class TabBarView extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         children?:Array<Widget>,
@@ -12863,18 +12863,18 @@ class TabBarView extends Widget {
         dragStartBehavior?:DragStartBehavior,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.children = args.children;
-            this.controller = args.controller;
-            this.physics = args.physics;
-            this.dragStartBehavior = args.dragStartBehavior;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.children = config.children;
+            this.controller = config.controller;
+            this.physics = config.physics;
+            this.dragStartBehavior = config.dragStartBehavior;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         children?:Array<Widget>,
@@ -12883,14 +12883,14 @@ class TabBarView extends Widget {
         dragStartBehavior?:DragStartBehavior,
       }
      */
-    static new(args) {
-        return new TabBarView(args);
+    static new(config) {
+        return new TabBarView(config);
     }
 }
 exports.TabBarView = TabBarView;
 class TabPageSelectorIndicator extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         backgroundColor?:Color,
@@ -12898,17 +12898,17 @@ class TabPageSelectorIndicator extends Widget {
         size?:number,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.backgroundColor = args.backgroundColor;
-            this.borderColor = args.borderColor;
-            this.size = args.size;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.backgroundColor = config.backgroundColor;
+            this.borderColor = config.borderColor;
+            this.size = config.size;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         backgroundColor?:Color,
@@ -12916,14 +12916,14 @@ class TabPageSelectorIndicator extends Widget {
         size?:number,
       }
      */
-    static new(args) {
-        return new TabPageSelectorIndicator(args);
+    static new(config) {
+        return new TabPageSelectorIndicator(config);
     }
 }
 exports.TabPageSelectorIndicator = TabPageSelectorIndicator;
 class TabPageSelector extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         color?:Color,
@@ -12932,18 +12932,18 @@ class TabPageSelector extends Widget {
         controller?:TabController,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.color = args.color;
-            this.selectedColor = args.selectedColor;
-            this.indicatorSize = args.indicatorSize;
-            this.controller = args.controller;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.color = config.color;
+            this.selectedColor = config.selectedColor;
+            this.indicatorSize = config.indicatorSize;
+            this.controller = config.controller;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         color?:Color,
@@ -12952,14 +12952,14 @@ class TabPageSelector extends Widget {
         controller?:TabController,
       }
      */
-    static new(args) {
-        return new TabPageSelector(args);
+    static new(config) {
+        return new TabPageSelector(config);
     }
 }
 exports.TabPageSelector = TabPageSelector;
 class Title extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -12967,17 +12967,17 @@ class Title extends Widget {
         color?:Color
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.title = args.title;
-            this.color = args.color;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.title = config.title;
+            this.color = config.color;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         child?:Widget,
@@ -12985,14 +12985,14 @@ class Title extends Widget {
         color?:Color
       }
      */
-    static new(args) {
-        return new Title(args);
+    static new(config) {
+        return new Title(config);
     }
 }
 exports.Title = Title;
 class Text extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         style?:TextStyle,
@@ -13006,24 +13006,24 @@ class Text extends Widget {
         textWidthBasis?:TextWidthBasis,
       }
      */
-    constructor(data, args) {
+    constructor(data, config) {
         super();
         this.data = data;
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.style = args.style;
-            this.textAlign = args.textAlign;
-            this.textDirection = args.textDirection;
-            this.softWrap = args.softWrap;
-            this.overflow = args.overflow;
-            this.textScaleFactor = args.textScaleFactor;
-            this.maxLines = args.maxLines;
-            this.semanticsLabel = args.semanticsLabel;
-            this.textWidthBasis = args.textWidthBasis;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.style = config.style;
+            this.textAlign = config.textAlign;
+            this.textDirection = config.textDirection;
+            this.softWrap = config.softWrap;
+            this.overflow = config.overflow;
+            this.textScaleFactor = config.textScaleFactor;
+            this.maxLines = config.maxLines;
+            this.semanticsLabel = config.semanticsLabel;
+            this.textWidthBasis = config.textWidthBasis;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         style?:TextStyle,
@@ -13037,11 +13037,11 @@ class Text extends Widget {
         textWidthBasis?:TextWidthBasis,
       }
      */
-    static new(data, args) {
-        return new Text(data, args);
+    static new(data, config) {
+        return new Text(data, config);
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         style?:TextStyle,
@@ -13055,8 +13055,8 @@ class Text extends Widget {
         textWidthBasis?:TextWidthBasis,
       }
      */
-    static rich(data, args) {
-        var v = new Text(data, args);
+    static rich(data, config) {
+        var v = new Text(data, config);
         v.constructorName = "rich";
         v.data = data;
         return v;
@@ -13065,7 +13065,7 @@ class Text extends Widget {
 exports.Text = Text;
 class TextSpan extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         children?:Array<Widget>,
         style?:TextStyle,
@@ -13074,18 +13074,18 @@ class TextSpan extends Widget {
         semanticsLabel?:string,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.children = args.children;
-            this.style = args.style;
-            this.text = args.text;
-            this.recognizer = args.recognizer;
-            this.semanticsLabel = args.semanticsLabel;
+        if (config != null && config != undefined) {
+            this.children = config.children;
+            this.style = config.style;
+            this.text = config.text;
+            this.recognizer = config.recognizer;
+            this.semanticsLabel = config.semanticsLabel;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         children?:Array<Widget>,
         style?:TextStyle,
@@ -13094,44 +13094,44 @@ class TextSpan extends Widget {
         semanticsLabel?:string,
       }
      */
-    static new(args) {
-        return new TextSpan(args);
+    static new(config) {
+        return new TextSpan(config);
     }
 }
 exports.TextSpan = TextSpan;
 class Texture extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         textureId?:number,
         filterQuality?:FilterQuality,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.textureId = args.textureId;
-            this.filterQuality = args.filterQuality;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.textureId = config.textureId;
+            this.filterQuality = config.filterQuality;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         textureId?:number,
         filterQuality?:FilterQuality,
       }
      */
-    static new(args) {
-        return new Texture(args);
+    static new(config) {
+        return new Texture(config);
     }
 }
 exports.Texture = Texture;
 class TextFormField extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         controller?:TextEditingController,
@@ -13166,44 +13166,44 @@ class TextFormField extends Widget {
         buildCounter?:any,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.controller = args.controller;
-            this.initialValue = args.initialValue;
-            this.focusNode = args.focusNode;
-            this.decoration = args.decoration;
-            this.keyboardType = args.keyboardType;
-            this.textCapitalization = args.textCapitalization;
-            this.textInputAction = args.textInputAction;
-            this.style = args.style;
-            this.textDirection = args.textDirection;
-            this.textAlign = args.textAlign;
-            this.autofocus = args.autofocus;
-            this.obscureText = args.obscureText;
-            this.autocorrect = args.autocorrect;
-            this.autovalidate = args.autovalidate;
-            this.maxLengthEnforced = args.maxLengthEnforced;
-            this.maxLines = args.maxLines;
-            this.maxLength = args.maxLength;
-            this.onEditingComplete = args.onEditingComplete;
-            this.onFieldSubmitted = args.onFieldSubmitted;
-            this.onSaved = args.onSaved;
-            this.validator = args.validator;
-            this.inputFormatters = args.inputFormatters;
-            this.enabled = args.enabled;
-            this.cursorWidth = args.cursorWidth;
-            this.cursorRadius = args.cursorRadius;
-            this.cursorColor = args.cursorColor;
-            this.keyboardAppearance = args.keyboardAppearance;
-            this.scrollPadding = args.scrollPadding;
-            this.enableInteractiveSelection = args.enableInteractiveSelection;
-            this.buildCounter = args.buildCounter;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.controller = config.controller;
+            this.initialValue = config.initialValue;
+            this.focusNode = config.focusNode;
+            this.decoration = config.decoration;
+            this.keyboardType = config.keyboardType;
+            this.textCapitalization = config.textCapitalization;
+            this.textInputAction = config.textInputAction;
+            this.style = config.style;
+            this.textDirection = config.textDirection;
+            this.textAlign = config.textAlign;
+            this.autofocus = config.autofocus;
+            this.obscureText = config.obscureText;
+            this.autocorrect = config.autocorrect;
+            this.autovalidate = config.autovalidate;
+            this.maxLengthEnforced = config.maxLengthEnforced;
+            this.maxLines = config.maxLines;
+            this.maxLength = config.maxLength;
+            this.onEditingComplete = config.onEditingComplete;
+            this.onFieldSubmitted = config.onFieldSubmitted;
+            this.onSaved = config.onSaved;
+            this.validator = config.validator;
+            this.inputFormatters = config.inputFormatters;
+            this.enabled = config.enabled;
+            this.cursorWidth = config.cursorWidth;
+            this.cursorRadius = config.cursorRadius;
+            this.cursorColor = config.cursorColor;
+            this.keyboardAppearance = config.keyboardAppearance;
+            this.scrollPadding = config.scrollPadding;
+            this.enableInteractiveSelection = config.enableInteractiveSelection;
+            this.buildCounter = config.buildCounter;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         controller?:TextEditingController,
@@ -13238,14 +13238,14 @@ class TextFormField extends Widget {
         buildCounter?:any,
       }
      */
-    static new(args) {
-        return new TextFormField(args);
+    static new(config) {
+        return new TextFormField(config);
     }
 }
 exports.TextFormField = TextFormField;
 class UnconstrainedBox extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -13255,19 +13255,19 @@ class UnconstrainedBox extends Widget {
           clipBehavior?:Clip,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.alignment = args.alignment;
-            this.textDirection = args.textDirection;
-            this.constrainedAxis = args.constrainedAxis;
-            this.clipBehavior = args.clipBehavior;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.alignment = config.alignment;
+            this.textDirection = config.textDirection;
+            this.constrainedAxis = config.constrainedAxis;
+            this.clipBehavior = config.clipBehavior;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child?:Widget,
@@ -13277,14 +13277,14 @@ class UnconstrainedBox extends Widget {
           clipBehavior?:Clip,
         }
      */
-    static new(args) {
-        return new UnconstrainedBox(args);
+    static new(config) {
+        return new UnconstrainedBox(config);
     }
 }
 exports.UnconstrainedBox = UnconstrainedBox;
 class VerticalDivider extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         width?:number,
@@ -13294,19 +13294,19 @@ class VerticalDivider extends Widget {
         color?:Color
       }
     */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.width = args.width;
-            this.thickness = args.thickness;
-            this.indent = args.indent;
-            this.endIndent = args.endIndent;
-            this.color = args.color;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.width = config.width;
+            this.thickness = config.thickness;
+            this.indent = config.indent;
+            this.endIndent = config.endIndent;
+            this.color = config.color;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         width?:number,
@@ -13316,14 +13316,14 @@ class VerticalDivider extends Widget {
         color?:Color
       }
     */
-    static new(args) {
-        return new VerticalDivider(args);
+    static new(config) {
+        return new VerticalDivider(config);
     }
 }
 exports.VerticalDivider = VerticalDivider;
 class Visibility extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         child:Widget,
   
@@ -13337,22 +13337,22 @@ class Visibility extends Widget {
         maintainInteractivity?:boolean,
       }
     */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.replacement = args.replacement;
-            this.visible = args.visible;
-            this.maintainAnimation = args.maintainAnimation;
-            this.maintainState = args.maintainState;
-            this.maintainSize = args.maintainSize;
-            this.maintainSemantics = args.maintainSemantics;
-            this.maintainInteractivity = args.maintainInteractivity;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.replacement = config.replacement;
+            this.visible = config.visible;
+            this.maintainAnimation = config.maintainAnimation;
+            this.maintainState = config.maintainState;
+            this.maintainSize = config.maintainSize;
+            this.maintainSemantics = config.maintainSemantics;
+            this.maintainInteractivity = config.maintainInteractivity;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         child:Widget,
   
@@ -13366,14 +13366,14 @@ class Visibility extends Widget {
         maintainInteractivity?:boolean,
       }
     */
-    static new(args) {
-        return new Visibility(args);
+    static new(config) {
+        return new Visibility(config);
     }
 }
 exports.Visibility = Visibility;
 class Wrap extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         children?:Array<Widget>,
@@ -13388,24 +13388,24 @@ class Wrap extends Widget {
         clipBehavior?:Clip,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.direction = args.direction;
-            this.alignment = args.alignment;
-            this.spacing = args.spacing;
-            this.runAlignment = args.runAlignment;
-            this.runSpacing = args.runSpacing;
-            this.crossAxisAlignment = args.crossAxisAlignment;
-            this.textDirection = args.textDirection;
-            this.verticalDirection = args.verticalDirection;
-            this.children = args.children;
-            this.clipBehavior = args.clipBehavior;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.direction = config.direction;
+            this.alignment = config.alignment;
+            this.spacing = config.spacing;
+            this.runAlignment = config.runAlignment;
+            this.runSpacing = config.runSpacing;
+            this.crossAxisAlignment = config.crossAxisAlignment;
+            this.textDirection = config.textDirection;
+            this.verticalDirection = config.verticalDirection;
+            this.children = config.children;
+            this.clipBehavior = config.clipBehavior;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key?:Key,
         children?:Array<Widget>,
@@ -13420,14 +13420,14 @@ class Wrap extends Widget {
         clipBehavior?:Clip,
       }
      */
-    static new(args) {
-        return new Wrap(args);
+    static new(config) {
+        return new Wrap(config);
     }
 }
 exports.Wrap = Wrap;
 class WillPopScope extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         child:Widget,
         onWillPop:VoidCallback,
@@ -13435,16 +13435,16 @@ class WillPopScope extends Widget {
         key?:Key,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.onWillPop = args.onWillPop;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.onWillPop = config.onWillPop;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         child:Widget,
         onWillPop:VoidCallback,
@@ -13452,14 +13452,14 @@ class WillPopScope extends Widget {
         key?:Key,
       }
      */
-    static new(args) {
-        return new WillPopScope(args);
+    static new(config) {
+        return new WillPopScope(config);
     }
 }
 exports.WillPopScope = WillPopScope;
 class WidgetSpan extends Widget {
     /**
-     * @param args args:
+     * @param config config:
       {
         child:Widget,
   
@@ -13468,17 +13468,17 @@ class WidgetSpan extends Widget {
         style?:TextStyle,
       }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.child = args.child;
-            this.alignment = args.alignment;
-            this.baseline = args.baseline;
-            this.style = args.style;
+        if (config != null && config != undefined) {
+            this.child = config.child;
+            this.alignment = config.alignment;
+            this.baseline = config.baseline;
+            this.style = config.style;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         child:Widget,
   
@@ -13487,44 +13487,44 @@ class WidgetSpan extends Widget {
         style?:TextStyle,
       }
      */
-    static new(args) {
-        return new WidgetSpan(args);
+    static new(config) {
+        return new WidgetSpan(config);
     }
 }
 exports.WidgetSpan = WidgetSpan;
 class CupertinoActivityIndicator extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           animating?:boolean,
           radius?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.animating = args.animating;
-            this.radius = args.radius;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.animating = config.animating;
+            this.radius = config.radius;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           animating?:boolean,
           radius?:number,
         }
      */
-    static new(args) {
-        return new CupertinoActivityIndicator(args);
+    static new(config) {
+        return new CupertinoActivityIndicator(config);
     }
 }
 exports.CupertinoActivityIndicator = CupertinoActivityIndicator;
 class CupertinoButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -13537,22 +13537,22 @@ class CupertinoButton extends Widget {
           borderRadius?:BorderRadius,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.padding = args.padding;
-            this.color = args.color;
-            this.disabledColor = args.disabledColor;
-            this.minSize = args.minSize;
-            this.pressedOpacity = args.pressedOpacity;
-            this.borderRadius = args.borderRadius;
-            this.onPressed = args.onPressed;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.padding = config.padding;
+            this.color = config.color;
+            this.disabledColor = config.disabledColor;
+            this.minSize = config.minSize;
+            this.pressedOpacity = config.pressedOpacity;
+            this.borderRadius = config.borderRadius;
+            this.onPressed = config.onPressed;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -13565,11 +13565,11 @@ class CupertinoButton extends Widget {
           borderRadius?:BorderRadius,
         }
      */
-    static new(args) {
-        return new CupertinoButton(args);
+    static new(config) {
+        return new CupertinoButton(config);
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -13581,8 +13581,8 @@ class CupertinoButton extends Widget {
           borderRadius?:BorderRadius,
         }
      */
-    static filled(args) {
-        var v = new CupertinoButton(args);
+    static filled(config) {
+        var v = new CupertinoButton(config);
         v.constructorName = "filled";
         return v;
     }
@@ -13590,7 +13590,7 @@ class CupertinoButton extends Widget {
 exports.CupertinoButton = CupertinoButton;
 class CupertinoNavigationBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           leading?:Widget,
@@ -13607,26 +13607,26 @@ class CupertinoNavigationBar extends Widget {
           transitionBetweenRoutes?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.leading = args.leading;
-            this.automaticallyImplyLeading = args.automaticallyImplyLeading;
-            this.automaticallyImplyMiddle = args.automaticallyImplyMiddle;
-            this.previousPageTitle = args.previousPageTitle;
-            this.middle = args.middle;
-            this.trailing = args.trailing;
-            this.border = args.border;
-            this.backgroundColor = args.backgroundColor;
-            this.brightness = args.brightness;
-            this.padding = args.padding;
-            this.actionsForegroundColor = args.actionsForegroundColor;
-            this.transitionBetweenRoutes = args.transitionBetweenRoutes;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.leading = config.leading;
+            this.automaticallyImplyLeading = config.automaticallyImplyLeading;
+            this.automaticallyImplyMiddle = config.automaticallyImplyMiddle;
+            this.previousPageTitle = config.previousPageTitle;
+            this.middle = config.middle;
+            this.trailing = config.trailing;
+            this.border = config.border;
+            this.backgroundColor = config.backgroundColor;
+            this.brightness = config.brightness;
+            this.padding = config.padding;
+            this.actionsForegroundColor = config.actionsForegroundColor;
+            this.transitionBetweenRoutes = config.transitionBetweenRoutes;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           leading?:Widget,
@@ -13643,14 +13643,14 @@ class CupertinoNavigationBar extends Widget {
           transitionBetweenRoutes?:boolean,
         }
      */
-    static new(args) {
-        return new CupertinoNavigationBar(args);
+    static new(config) {
+        return new CupertinoNavigationBar(config);
     }
 }
 exports.CupertinoNavigationBar = CupertinoNavigationBar;
 class CupertinoNavigationBarBackButton extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           color?:Color,
@@ -13658,17 +13658,17 @@ class CupertinoNavigationBarBackButton extends Widget {
           onPressed?:VoidCallback,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.color = args.color;
-            this.previousPageTitle = args.previousPageTitle;
-            this.onPressed = args.onPressed;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.color = config.color;
+            this.previousPageTitle = config.previousPageTitle;
+            this.onPressed = config.onPressed;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           color?:Color,
@@ -13676,14 +13676,14 @@ class CupertinoNavigationBarBackButton extends Widget {
           onPressed?:VoidCallback,
         }
      */
-    static new(args) {
-        return new CupertinoNavigationBarBackButton(args);
+    static new(config) {
+        return new CupertinoNavigationBarBackButton(config);
     }
 }
 exports.CupertinoNavigationBarBackButton = CupertinoNavigationBarBackButton;
 class CupertinoSlider extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           value:number,
@@ -13697,23 +13697,23 @@ class CupertinoSlider extends Widget {
           thumbColor?:Color,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.value = args.value;
-            this.onChanged = args.onChanged;
-            this.onChangeStart = args.onChangeStart;
-            this.onChangeEnd = args.onChangeEnd;
-            this.min = args.min;
-            this.max = args.max;
-            this.divisions = args.divisions;
-            this.activeColor = args.activeColor;
-            this.thumbColor = args.thumbColor;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.onChanged = config.onChanged;
+            this.onChangeStart = config.onChangeStart;
+            this.onChangeEnd = config.onChangeEnd;
+            this.min = config.min;
+            this.max = config.max;
+            this.divisions = config.divisions;
+            this.activeColor = config.activeColor;
+            this.thumbColor = config.thumbColor;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           value:number,
@@ -13727,14 +13727,14 @@ class CupertinoSlider extends Widget {
           thumbColor?:Color,
         }
      */
-    static new(args) {
-        return new CupertinoSlider(args);
+    static new(config) {
+        return new CupertinoSlider(config);
     }
 }
 exports.CupertinoSlider = CupertinoSlider;
 class CupertinoSwitch extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           value:boolean,
@@ -13744,19 +13744,19 @@ class CupertinoSwitch extends Widget {
           dragStartBehavior?:DragStartBehavior,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.value = args.value;
-            this.onChanged = args.onChanged;
-            this.activeColor = args.activeColor;
-            this.trackColor = args.trackColor;
-            this.dragStartBehavior = args.dragStartBehavior;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.onChanged = config.onChanged;
+            this.activeColor = config.activeColor;
+            this.trackColor = config.trackColor;
+            this.dragStartBehavior = config.dragStartBehavior;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           value:boolean,
@@ -13766,14 +13766,14 @@ class CupertinoSwitch extends Widget {
           dragStartBehavior?:DragStartBehavior,
         }
      */
-    static new(args) {
-        return new CupertinoSwitch(args);
+    static new(config) {
+        return new CupertinoSwitch(config);
     }
 }
 exports.CupertinoSwitch = CupertinoSwitch;
 class CupertinoScrollbar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -13781,17 +13781,17 @@ class CupertinoScrollbar extends Widget {
           isAlwaysShown?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.controller = args.controller;
-            this.isAlwaysShown = args.isAlwaysShown;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.controller = config.controller;
+            this.isAlwaysShown = config.isAlwaysShown;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
@@ -13799,14 +13799,14 @@ class CupertinoScrollbar extends Widget {
           isAlwaysShown?:boolean,
         }
      */
-    static new(args) {
-        return new CupertinoScrollbar(args);
+    static new(config) {
+        return new CupertinoScrollbar(config);
     }
 }
 exports.CupertinoScrollbar = CupertinoScrollbar;
 class CupertinoSliverNavigationBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           leading?:Widget,
@@ -13824,27 +13824,27 @@ class CupertinoSliverNavigationBar extends Widget {
           transitionBetweenRoutes?:boolean,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.leading = args.leading;
-            this.largeTitle = args.largeTitle;
-            this.automaticallyImplyLeading = args.automaticallyImplyLeading;
-            this.automaticallyImplyTitle = args.automaticallyImplyTitle;
-            this.previousPageTitle = args.previousPageTitle;
-            this.middle = args.middle;
-            this.trailing = args.trailing;
-            this.border = args.border;
-            this.backgroundColor = args.backgroundColor;
-            this.brightness = args.brightness;
-            this.padding = args.padding;
-            this.actionsForegroundColor = args.actionsForegroundColor;
-            this.transitionBetweenRoutes = args.transitionBetweenRoutes;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.leading = config.leading;
+            this.largeTitle = config.largeTitle;
+            this.automaticallyImplyLeading = config.automaticallyImplyLeading;
+            this.automaticallyImplyTitle = config.automaticallyImplyTitle;
+            this.previousPageTitle = config.previousPageTitle;
+            this.middle = config.middle;
+            this.trailing = config.trailing;
+            this.border = config.border;
+            this.backgroundColor = config.backgroundColor;
+            this.brightness = config.brightness;
+            this.padding = config.padding;
+            this.actionsForegroundColor = config.actionsForegroundColor;
+            this.transitionBetweenRoutes = config.transitionBetweenRoutes;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           leading?:Widget,
@@ -13862,14 +13862,14 @@ class CupertinoSliverNavigationBar extends Widget {
           transitionBetweenRoutes?:boolean,
         }
      */
-    static new(args) {
-        return new CupertinoSliverNavigationBar(args);
+    static new(config) {
+        return new CupertinoSliverNavigationBar(config);
     }
 }
 exports.CupertinoSliverNavigationBar = CupertinoSliverNavigationBar;
 class CupertinoTabBar extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           items:Array<BottomNavigationBarItem>,
@@ -13882,22 +13882,22 @@ class CupertinoTabBar extends Widget {
           border?:Border,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.items = args.items;
-            this.onTap = args.onTap;
-            this.currentIndex = args.currentIndex;
-            this.backgroundColor = args.backgroundColor;
-            this.activeColor = args.activeColor;
-            this.inactiveColor = args.inactiveColor;
-            this.iconSize = args.iconSize;
-            this.border = args.border;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.items = config.items;
+            this.onTap = config.onTap;
+            this.currentIndex = config.currentIndex;
+            this.backgroundColor = config.backgroundColor;
+            this.activeColor = config.activeColor;
+            this.inactiveColor = config.inactiveColor;
+            this.iconSize = config.iconSize;
+            this.border = config.border;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           items:Array<BottomNavigationBarItem>,
@@ -13910,68 +13910,68 @@ class CupertinoTabBar extends Widget {
           border?:Border,
         }
      */
-    static new(args) {
-        return new CupertinoTabBar(args);
+    static new(config) {
+        return new CupertinoTabBar(config);
     }
 }
 exports.CupertinoTabBar = CupertinoTabBar;
 class CupertinoTabController extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           initialIndex?:number,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.initialIndex = args.initialIndex;
+        if (config != null && config != undefined) {
+            this.initialIndex = config.initialIndex;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           initialIndex?:number,
         }
      */
-    static new(args) {
-        return new CupertinoTabController(args);
+    static new(config) {
+        return new CupertinoTabController(config);
     }
 }
 exports.CupertinoTabController = CupertinoTabController;
 class CupertinoTheme extends Widget {
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
           data:CupertinoThemeData,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.key = args.key;
-            this.child = args.child;
-            this.data = args.data;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.data = config.data;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           key?:Key,
           child:Widget,
           data:CupertinoThemeData,
         }
      */
-    static new(args) {
-        return new CupertinoTheme(args);
+    static new(config) {
+        return new CupertinoTheme(config);
     }
 }
 exports.CupertinoTheme = CupertinoTheme;
 class CupertinoTextThemeData extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           primaryColor?:Color,
           textStyle?:TextStyle,
@@ -13984,22 +13984,22 @@ class CupertinoTextThemeData extends DartClass {
           dateTimePickerTextStyle?:TextStyle,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.primaryColor = args.primaryColor;
-            this.textStyle = args.textStyle;
-            this.actionTextStyle = args.actionTextStyle;
-            this.tabLabelTextStyle = args.tabLabelTextStyle;
-            this.navActionTextStyle = args.navActionTextStyle;
-            this.navLargeTitleTextStyle = args.navLargeTitleTextStyle;
-            this.navTitleTextStyle = args.navTitleTextStyle;
-            this.pickerTextStyle = args.pickerTextStyle;
-            this.dateTimePickerTextStyle = args.dateTimePickerTextStyle;
+        if (config != null && config != undefined) {
+            this.primaryColor = config.primaryColor;
+            this.textStyle = config.textStyle;
+            this.actionTextStyle = config.actionTextStyle;
+            this.tabLabelTextStyle = config.tabLabelTextStyle;
+            this.navActionTextStyle = config.navActionTextStyle;
+            this.navLargeTitleTextStyle = config.navLargeTitleTextStyle;
+            this.navTitleTextStyle = config.navTitleTextStyle;
+            this.pickerTextStyle = config.pickerTextStyle;
+            this.dateTimePickerTextStyle = config.dateTimePickerTextStyle;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           primaryColor?:Color,
           textStyle?:TextStyle,
@@ -14012,14 +14012,14 @@ class CupertinoTextThemeData extends DartClass {
           dateTimePickerTextStyle?:TextStyle,
         }
      */
-    static new(args) {
-        return new CupertinoTextThemeData(args);
+    static new(config) {
+        return new CupertinoTextThemeData(config);
     }
 }
 exports.CupertinoTextThemeData = CupertinoTextThemeData;
 class CupertinoThemeData extends DartClass {
     /**
-     * @param args args:
+     * @param config config:
         {
           primaryColor?:Color,
           brightness?:Brightness,
@@ -14029,19 +14029,19 @@ class CupertinoThemeData extends DartClass {
           scaffoldBackgroundColor?:Color,
         }
      */
-    constructor(args) {
+    constructor(config) {
         super();
-        if (args != null && args != undefined) {
-            this.primaryColor = args.primaryColor;
-            this.brightness = args.brightness;
-            this.primaryContrastingColor = args.primaryContrastingColor;
-            this.textTheme = args.textTheme;
-            this.barBackgroundColor = args.barBackgroundColor;
-            this.scaffoldBackgroundColor = args.scaffoldBackgroundColor;
+        if (config != null && config != undefined) {
+            this.primaryColor = config.primaryColor;
+            this.brightness = config.brightness;
+            this.primaryContrastingColor = config.primaryContrastingColor;
+            this.textTheme = config.textTheme;
+            this.barBackgroundColor = config.barBackgroundColor;
+            this.scaffoldBackgroundColor = config.scaffoldBackgroundColor;
         }
     }
     /**
-     * @param args args:
+     * @param config config:
         {
           primaryColor?:Color,
           brightness?:Brightness,
@@ -14051,8 +14051,8 @@ class CupertinoThemeData extends DartClass {
           scaffoldBackgroundColor?:Color,
         }
      */
-    static new(args) {
-        return new CupertinoThemeData(args);
+    static new(config) {
+        return new CupertinoThemeData(config);
     }
 }
 exports.CupertinoThemeData = CupertinoThemeData;
@@ -14062,7 +14062,7 @@ class LoadingApi extends DartClass {
         //Mirror对象在构造函数创建 MirrorID
         this.createMirrorID();
         //创建对应FLutter对象
-        var argument = new JSCallArgs({
+        var argument = new JSCallConfig({
             mirrorID: this.mirrorID,
             className: "LoadingApi",
         });
@@ -14075,9 +14075,9 @@ class LoadingApi extends DartClass {
         return this.instance;
     }
     invokeMirrorObjWithCallback(argument) {
-        let promiseResult = new Promise(function (resolve) {
+        return new Promise(function (resolve) {
             JSBridge.invokeMirrorObjWithCallback(argument, function (value) {
-                if (value != null) {
+                if (value != null && value != undefined) {
                     resolve(value);
                 }
                 else {
@@ -14085,114 +14085,113 @@ class LoadingApi extends DartClass {
                 }
             });
         }.bind(this));
-        return promiseResult;
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         info:string,
         duration?:Duration,
         alignment?:Alignment,
       }
      */
-    static showSuccess(args) {
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static showSuccess(config) {
+        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
             className: "LoadingApi",
             funcName: "showSuccess",
-            args: args,
+            args: config,
         }));
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         info:string,
         duration?:Duration,
         alignment?:Alignment,
       }
      */
-    static showError(args) {
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static showError(config) {
+        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
             className: "LoadingApi",
             funcName: "showError",
-            args: args,
+            args: config,
         }));
     }
     /**
-      * @param args args:
+      * @param config config:
        {
          info:string,
          duration?:Duration,
          alignment?:Alignment,
        }
       */
-    static showInfo(args) {
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static showInfo(config) {
+        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
             className: "LoadingApi",
             funcName: "showInfo",
-            args: args,
+            args: config,
         }));
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         info:string,
         duration?:Duration,
         alignment?:Alignment,
       }
      */
-    static showToast(args) {
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static showToast(config) {
+        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
             className: "LoadingApi",
             funcName: "showToast",
-            args: args,
+            args: config,
         }));
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         info:string,
         alignment?:Alignment,
       }
      */
-    static show(args) {
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static show(config) {
+        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
             className: "LoadingApi",
             funcName: "show",
-            args: args,
+            args: config,
         }));
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         value:number(0~100),
         alignment?:Alignment,
       }
      */
-    static showProgress(args) {
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static showProgress(config) {
+        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
             className: "LoadingApi",
             funcName: "showProgress",
-            args: args,
+            args: config,
         }));
     }
     /**
-    * @param args args:
+    * @param config config:
      {
        animation?:animation,
      }
     */
-    static dismiss(args) {
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static dismiss(config) {
+        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
             className: "LoadingApi",
             funcName: "dismiss",
-            args: args,
+            args: config,
         }));
     }
 }
@@ -14203,7 +14202,7 @@ class SpApi extends DartClass {
         //Mirror对象在构造函数创建 MirrorID
         this.createMirrorID();
         //创建对应FLutter对象
-        var argument = new JSCallArgs({
+        var argument = new JSCallConfig({
             mirrorID: this.mirrorID,
             className: "SpApi",
         });
@@ -14216,9 +14215,9 @@ class SpApi extends DartClass {
         return this.instance;
     }
     invokeMirrorObjWithCallback(argument) {
-        let promiseResult = new Promise(function (resolve) {
+        return new Promise(function (resolve) {
             JSBridge.invokeMirrorObjWithCallback(argument, function (value) {
-                if (value != null) {
+                if (value != null && value != undefined) {
                     resolve(value);
                 }
                 else {
@@ -14226,159 +14225,328 @@ class SpApi extends DartClass {
                 }
             });
         }.bind(this));
-        return promiseResult;
     }
     /**
-     * @param args args:
+     * @param config config:
       {
         key:string;
         defaultValue?:boolean;
       }
      */
-    static getBool(args) {
-        return SpApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static async getBool(config) {
+        var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
             className: "SpApi",
             funcName: "getBool",
-            args: args,
+            args: config,
         }));
+        return Boolean(v);
     }
     ;
     /**
-     * @param args args:
+     * @param config config:
       {
         key:string;
         defaultValue?:number;
       }
      */
-    static getInt(args) {
-        return SpApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static async getInt(config) {
+        var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
             className: "SpApi",
             funcName: "getInt",
-            args: args,
+            args: config,
         }));
+        return Number(v);
     }
     ;
     /**
-     * @param args args:
+     * @param config config:
       {
         key:string;
         defaultValue?:double;
       }
      */
-    static getDouble(args) {
-        return SpApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static async getDouble(config) {
+        var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
             className: "SpApi",
             funcName: "getDouble",
-            args: args,
+            args: config,
         }));
+        return Number(v);
     }
     ;
     /**
-     * @param args args:
+     * @param config config:
       {
         key:string;
         defaultValue?:string;
       }
      */
-    static getString(args) {
-        return SpApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static async getString(config) {
+        var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
             className: "SpApi",
             funcName: "getString",
-            args: args,
+            args: config,
         }));
+        return String(v);
     }
     ;
-    static clear() {
-        SpApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static async clear() {
+        var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
             className: "SpApi",
             funcName: "clear",
         }));
+        return Boolean(v);
     }
     ;
     /**
-     * @param args args:
+     * @param config config:
       {
         key:string;
       }
      */
-    static remove(args) {
-        SpApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static async remove(config) {
+        var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
             className: "SpApi",
-            funcName: "getBool",
-            args: args,
+            funcName: "remove",
         }));
+        return Boolean(v);
     }
     ;
     /**
-     * @param args args:
+     * @param config config:
       {
         key:string;
         value:boolean;
       }
      */
-    static setBool(args) {
-        SpApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static async setBool(config) {
+        var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
             className: "SpApi",
             funcName: "setBool",
-            args: args,
+            args: config,
         }));
+        return Boolean(v);
     }
     ;
     /**
-     * @param args args:
+     * @param config config:
       {
         key:string;
         value:number;
       }
      */
-    static setDouble(args) {
-        SpApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static async setDouble(config) {
+        var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
             className: "SpApi",
             funcName: "setDouble",
-            args: args,
+            args: config,
         }));
+        return Boolean(v);
     }
     ;
     /**
-     * @param args args:
+     * @param config config:
       {
         key:string;
         value:number;
       }
      */
-    static setInt(args) {
-        SpApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static async setInt(config) {
+        var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
             className: "SpApi",
             funcName: "setInt",
-            args: args,
+            args: config,
         }));
+        return Boolean(v);
     }
     ;
     /**
-     * @param args args:
+     * @param config config:
       {
         key:string;
         value:string;
       }
      */
-    static setString(args) {
-        SpApi.getInstance().invokeMirrorObjWithCallback(JSCallArgs.new({
+    static async setString(config) {
+        var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
             className: "SpApi",
             funcName: "setString",
-            args: args,
+            args: config,
         }));
     }
     ;
 }
 exports.SpApi = SpApi;
+//****** ScreenInfo ******
+class ScreenInfo extends DartClass {
+    constructor() {
+        super();
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
+        //创建对应FLutter对象
+        var argument = new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: "ScreenInfo",
+        });
+        JSBridge.createMirrorObj(argument, this.mirrorID, this);
+    }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new ScreenInfo();
+        }
+        return this.instance;
+    }
+    invokeMirrorObjWithCallback(argument) {
+        return new Promise(function (resolve) {
+            JSBridge.invokeMirrorObjWithCallback(argument, function (value) {
+                if (value != null && value != undefined) {
+                    resolve(value);
+                }
+                else {
+                    resolve(null);
+                }
+            });
+        }.bind(this));
+    }
+    /*
+    * 将Dp按比例转换成Dp
+    * */
+    static getValueWithDp(dp, isRatio = true) {
+        return isRatio ? (ScreenInfo.dpRatio * dp) : dp;
+    }
+    /*
+    * 将px按比例转换成Dp
+    * */
+    static getValueWithPx(px, isRatio = true) {
+        return isRatio ? (ScreenInfo.pxRatio * px) : px;
+    }
+    //
+    static async updateInfo() {
+        var v = await ScreenInfo.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: ScreenInfo.getInstance().mirrorID,
+            className: "ScreenInfo",
+            funcName: "updateInfo",
+        }));
+        if (v != null && v != undefined) {
+            var result = JSON.parse(String(v));
+            if (result != null && result != undefined) {
+                ScreenInfo.appBarHeight = result["appBarHeight"];
+                ScreenInfo.bottomBarHeight = result["bottomBarHeight"];
+                ScreenInfo.dpRatio = result["dpRatio"];
+                ScreenInfo.pxRatio = result["pxRatio"];
+                ScreenInfo.screenDensity = result["screenDensity"];
+                ScreenInfo.screenHeight = result["screenHeight"];
+                ScreenInfo.screenHeightPx = result["screenHeightPx"];
+                ScreenInfo.screenWidth = result["screenWidth"];
+                ScreenInfo.screenWidthPx = result["screenWidthPx"];
+                ScreenInfo.statusBarHeight = result["statusBarHeight"];
+                ScreenInfo.uiDensity = result["uiDensity"];
+                ScreenInfo.uiHeight = result["uiHeight"];
+                ScreenInfo.uiWidth = result["uiWidth"];
+                ScreenInfo.uiWidthPx = result["uiWidthPx"];
+                ScreenInfo.uiHeightPx = result["uiHeightPx"];
+            }
+        }
+        //Log.log("ScreenInfo.updateInfo:"+String(v));
+    }
+    ;
+}
+exports.ScreenInfo = ScreenInfo;
+// 设计稿屏幕宽度(PX)
+ScreenInfo.uiWidthPx = 750;
+//设计稿屏幕宽度(PX)
+ScreenInfo.uiHeightPx = 1334;
+//设计稿屏幕密度
+ScreenInfo.uiDensity = 2.0;
+//设计稿屏幕宽度(DP)
+ScreenInfo.uiWidth = 375.0;
+//设计稿屏幕宽度(DP)
+ScreenInfo.uiHeight = 667.0;
+//当前设备宽度 dp
+ScreenInfo.screenWidth = 375.0;
+// 当前设备高度 dp
+ScreenInfo.screenHeight = 667.0;
+// 当前设备宽度 px
+ScreenInfo.screenWidthPx = 750;
+// 当前设备高度 px
+ScreenInfo.screenHeightPx = 1334.0;
+// 设备的像素密度
+ScreenInfo.screenDensity = 2.0;
+// 状态栏高度 dp 刘海屏会更高
+ScreenInfo.statusBarHeight = 20.0;
+//底部工具栏高度
+ScreenInfo.bottomBarHeight = 0.0;
+//App栏高
+ScreenInfo.appBarHeight = 0.0;
+//缩放比例(Dp)
+ScreenInfo.dpRatio = 1.0;
+//缩放比例(PX)
+ScreenInfo.pxRatio = 1.0;
+//字体缩放放比例
+ScreenInfo.textScaleFactor = 1.0;
+//****** PackageInfo ******
+class PackageInfo extends DartClass {
+    constructor() {
+        super();
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
+        //创建对应FLutter对象
+        var argument = new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: "PackageInfo",
+        });
+        JSBridge.createMirrorObj(argument, this.mirrorID, this);
+    }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new PackageInfo();
+        }
+        return this.instance;
+    }
+    invokeMirrorObjWithCallback(argument) {
+        return new Promise(function (resolve) {
+            JSBridge.invokeMirrorObjWithCallback(argument, function (value) {
+                if (value != null && value != undefined) {
+                    resolve(value);
+                }
+                else {
+                    resolve(null);
+                }
+            });
+        }.bind(this));
+    }
+    //
+    static async updateInfo() {
+        var v = await PackageInfo.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: PackageInfo.getInstance().mirrorID,
+            className: "PackageInfo",
+            funcName: "updateInfo",
+        }));
+        if (v != null && v != undefined) {
+            var result = JSON.parse(String(v));
+            if (result != null && result != undefined) {
+                PackageInfo.appName = result["appName"];
+                PackageInfo.buildNumber = result["buildNumber"];
+                PackageInfo.packageName = result["packageName"];
+                PackageInfo.version = result["version"];
+            }
+        }
+    }
+    ;
+}
+exports.PackageInfo = PackageInfo;
+PackageInfo.appName = ""; //应用名称
+PackageInfo.packageName = ""; //包名称
+PackageInfo.version = ""; //版本号
+PackageInfo.buildNumber = ""; //小版本号
 //#endregion

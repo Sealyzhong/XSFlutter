@@ -12,6 +12,8 @@ const counter_page_1 = require("demo/common_demo/counter_page");
 const index_1 = require("demo/base_widgets/index");
 const loading_page_1 = require("demo/common_demo/loading_page");
 const shared_preferences_page_1 = require("demo/common_demo/shared_preferences_page");
+const screen_info_page_1 = require("demo/common_demo/screen_info_page");
+const package_info_page_1 = require("demo/common_demo/package_info_page");
 class MyHomePage extends fs.StatefulWidget {
     createState() {
         return _MyHomePageState.new(this);
@@ -22,6 +24,12 @@ class _MyHomePageState extends fs.WidgetState {
     constructor() {
         super(...arguments);
         this._style = fs.TextStyle.new({ fontSize: 24, fontWeight: fs.FontWeight.bold });
+    }
+    //subclass override
+    initState() {
+        fs.Log.log("MyHomePage.initState");
+        fs.ScreenInfo.updateInfo();
+        fs.PackageInfo.updateInfo();
     }
     build(context) {
         return fs.Scaffold.new({
@@ -80,6 +88,32 @@ class _MyHomePageState extends fs.WidgetState {
                             fs.Navigator.push(context, fs.MaterialPageRoute.new({
                                 builder: function (context) {
                                     return shared_preferences_page_1.MySharedPreferncesPage.new();
+                                }
+                            }));
+                        }
+                    }),
+                    fs.ListTile.new({
+                        leading: fs.Text.new("5", { style: this._style }),
+                        trailing: fs.Icon.new(fs.Icons.chevron_right),
+                        title: fs.Text.new("屏幕信息(ScreenInfo)"),
+                        subtitle: fs.Text.new("宽、高、密度、像素"),
+                        onTap: function () {
+                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                                builder: function (context) {
+                                    return screen_info_page_1.MyScreenInfoPage.new();
+                                }
+                            }));
+                        }
+                    }),
+                    fs.ListTile.new({
+                        leading: fs.Text.new("6", { style: this._style }),
+                        trailing: fs.Icon.new(fs.Icons.chevron_right),
+                        title: fs.Text.new("包信息(PackageInfo)"),
+                        subtitle: fs.Text.new("版本信息、包信息"),
+                        onTap: function () {
+                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                                builder: function (context) {
+                                    return package_info_page_1.MyPackageInfoPage.new();
                                 }
                             }));
                         }

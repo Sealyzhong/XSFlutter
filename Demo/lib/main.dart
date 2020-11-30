@@ -32,6 +32,10 @@ class MyFlutterExampleHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //初始化界面
+    XSScreenInfo.init(context);
+    XSPackageInfo.init();
+
     return Scaffold(
         appBar: AppBar(
           leading: FlutterLogo(colors: Colors.blue),

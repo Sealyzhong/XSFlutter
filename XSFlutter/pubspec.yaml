@@ -21,6 +21,10 @@ dependencies:
   # https://github.com/flutter/plugins/tree/master/packages/shared_preferences
   shared_preferences: '>=0.3.0 <3.0.0'
 
+  # 包管理
+  # https://github.com/flutter/plugins
+  package_info: ^0.4.3
+  
   
 dev_dependencies:
   flutter_test:

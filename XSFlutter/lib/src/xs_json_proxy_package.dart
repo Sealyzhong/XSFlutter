@@ -5,10 +5,12 @@
 //  found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:xsflutter/xsflutter.dart';
 import 'xs_js_parse.dart';
 import 'xs_json_to_dart.dart';
 import 'loading/loading.dart';
 import 'common/sp_util.dart';
+import 'common/package_info.dart';
 
 ///把Widget初始化用到的基础类型如 List, ，
 class XSProxyRegisterHelperPackageSeries {
@@ -17,6 +19,8 @@ class XSProxyRegisterHelperPackageSeries {
 
     m.addAll(XSProxyLoading.registerProxy());
     m.addAll(XSProxySp.registerProxy());
+    m.addAll(XSProxyScreenInfo.registerProxy());
+    m.addAll(XSProxyPackageInfo.registerProxy());
     return m;
   }
 }
@@ -83,7 +87,7 @@ class XSProxyLoading extends XSJsonObjProxy {
 }
 
 //-------------- S -----------------
-//****** XSSp ******
+//****** SpApi ******
 class XSProxySp extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     final String regClassName = "SpApi";
@@ -135,29 +139,111 @@ class XSProxySp extends XSJsonObjProxy {
         break;
 
       case 'setBool':
-        XSSpUtil.putBool(
+        result = XSSpUtil.putBool(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getBool(null, null, map, "value"),
         );
         break;
 
       case 'setDouble':
-        XSSpUtil.putDouble(
+        result = XSSpUtil.putDouble(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getDouble(null, null, map, "value"),
         );
         break;
       case 'setInt':
-        XSSpUtil.putInt(
+        result = XSSpUtil.putInt(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getInt(null, null, map, "value"),
         );
         break;
       case 'setString':
-        XSSpUtil.putString(
+        result = XSSpUtil.putString(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getString(null, null, map, "value"),
         );
+        break;
+    }
+
+    if (callback != null && result != null) {
+      callback(result);
+    }
+  }
+}
+
+//****** ScreenInfo ******
+class XSProxyScreenInfo extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "ScreenInfo";
+    return {
+      regClassName: () => XSProxyScreenInfo()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Object constructor(dynamic bo, Map<String, dynamic> jsonMap, {dynamic context}) {
+    return Object();
+  }
+
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) {
+    if (mirrorObj == null) return;
+    var result;
+    switch (funcName) {
+      case 'updateInfo':
+        result = {
+          "appBarHeight": XSScreenInfo.appBarHeight,
+          "bottomBarHeight": XSScreenInfo.bottomBarHeight,
+          "dpRatio": XSScreenInfo.dpRatio,
+          "pxRatio": XSScreenInfo.pxRatio,
+          "screenDensity": XSScreenInfo.screenDensity,
+          "screenHeight": XSScreenInfo.screenHeight,
+          "screenHeightPx": XSScreenInfo.screenHeightPx,
+          "screenWidth": XSScreenInfo.screenWidth,
+          "screenWidthPx": XSScreenInfo.screenWidthPx,
+          "statusBarHeight": XSScreenInfo.statusBarHeight,
+          "textScaleFactor": XSScreenInfo.textScaleFactor,
+          "uiDensity": XSScreenInfo.uiDensity,
+          "uiHeight": XSScreenInfo.uiHeight,
+          "uiHeightPx": XSScreenInfo.uiHeightPx,
+          "uiWidth": XSScreenInfo.uiWidth,
+          "uiWidthPx": XSScreenInfo.uiWidthPx,
+        };
+        break;
+    }
+
+    if (callback != null && result != null) {
+      callback(result);
+    }
+  }
+}
+
+//****** PackageInfo ******
+class XSProxyPackageInfo extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "PackageInfo";
+    return {
+      regClassName: () => XSProxyPackageInfo()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Object constructor(dynamic bo, Map<String, dynamic> jsonMap, {dynamic context}) {
+    return Object();
+  }
+
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) {
+    if (mirrorObj == null) return;
+    var result;
+    switch (funcName) {
+      case 'updateInfo':
+        result = {
+          "appName": XSPackageInfo.appName,
+          "buildNumber": XSPackageInfo.buildNumber,
+          "packageName": XSPackageInfo.packageName,
+          "version": XSPackageInfo.version
+        };
         break;
     }
 

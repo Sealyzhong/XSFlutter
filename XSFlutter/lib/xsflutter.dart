@@ -27,3 +27,5 @@ export 'src/xs_js_flutter_common.dart';
 export 'src/xs_json_to_dart.dart';
 export 'src/xs_js_parse.dart';
 export 'src/loading/loading.dart';
+export 'src/common/screen_info.dart';
+export 'src/common/package_info.dart';

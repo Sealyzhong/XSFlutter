@@ -30,13 +30,12 @@ class _MySharedPreferncesPage extends fs.WidgetState{
     }
 
     _saveValue(){
-        fs.SpApi.setInt({key:this._userNumber,value:this._count});
-        fs.LoadingApi.showSuccess({info:"保存成功！"});
+       var isSuccess= fs.SpApi.setInt({key:this._userNumber,value:this._count});
+        fs.LoadingApi.showSuccess({info:isSuccess?"保存成功！":"保存失败"});
     }
 
     async _getValue(){
-        let result = await fs.SpApi.getInt({key:this._userNumber,defaultValue:0});
-        this._getCount = Number(result);
+        this._getCount = await fs.SpApi.getInt({key:this._userNumber,defaultValue:0});
         this.setState();
     }
     
@@ -70,9 +69,5 @@ class _MySharedPreferncesPage extends fs.WidgetState{
                 }),
             }),
         });
-    }
-
-    static new(){
-        return new MySharedPreferncesPage();
     }
 }
