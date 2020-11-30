@@ -13,14 +13,20 @@ const core = dart_sdk.core;
 //****** VoidCallback ******
 export type VoidCallback = () => void;
 
-//****** VoidValueChangedString ******
-export type VoidValueChangedString = (value:string) => void;
+//****** VoidCallbackString ******
+export type VoidCallbackString = (value:string) => void;
 
-//****** VoidValueChangedBoolean ******
-export type VoidValueChangedBoolean = (value:boolean) => void;
+//****** VoidCallbackBoolean ******
+export type VoidCallbackBoolean = (value:boolean) => void;
 
-//****** VoidValueChangedNumber ******
-export type VoidValueChangedNumber = (value:number) => void;
+//****** VoidCallbackNumber ******
+export type VoidCallbackNumber = (value:number) => void;
+
+//****** VoidTapDownDetails ******
+export type VoidTapDown = (value:TapDownDetails) => void;
+
+//****** VoidTapUpDetails ******
+export type VoidTapUp = (value:TapUpDetails) => void;
 
 //****** TODO JSWidget Mirror Mgr ******
 export class JSWidgetMirrorMgr {
@@ -1333,7 +1339,7 @@ export class JSBridge {
 
 //#region ******** Base Enum ********
 
-//#region ------ A ------
+  //#region ------ A ------
 
 //****** Axis ******
 export enum Axis {
@@ -1536,6 +1542,12 @@ export enum Axis {
     background = "background",
     foreground = "foreground",
   }
+
+  //****** DrawerAlignment ******
+  export enum DrawerAlignment  {
+    start = "start",
+    end = "end",
+  }
   //#endregion
   
   //#region ------ F ------
@@ -1701,6 +1713,32 @@ export enum Axis {
     middle = "middle",
   }
   
+   //****** PointerChange ******
+   export enum PointerChange {
+    cancel = "cancel",
+    add = "add",
+    remove = "remove",
+    hover = "hover",
+    down = "down",
+    move = "move",
+    up = "up",
+  }
+
+   //****** PointerDeviceKind ******
+   export enum PointerDeviceKind {
+    touch = "touch",
+    mouse = "mouse",
+    invertedStylus = "invertedStylus",
+    unknown = "unknown",
+  }
+
+   //****** PointerSignalKind ******
+   export enum PointerSignalKind {
+    none = "none",
+    scroll = "scroll",
+    unknown = "unknown",
+  }
+
   //#endregion
   
   //#region ------ R ------
@@ -1794,7 +1832,7 @@ export enum Axis {
   
   //****** TextDecorationStyle ******
   export enum TextDecorationStyle {
-    ashed = "ashed",
+    dashed = "dashed",
     dotted = "dotted",
     double = "double",
     solid = "solid",
@@ -1905,7 +1943,7 @@ export enum Axis {
 
 //#region ******** Class ********
 
-//#region ------- A -------
+  //#region ------- A -------
 //****** Alignment ******
 export class Alignment extends DartClass {
     x?:number;
@@ -3329,7 +3367,8 @@ export class Alignment extends DartClass {
     static new(config?: FlutterLogoDecorationConfig) {
       return new FlutterLogoDecoration(config);
     }
-  }
+  } 
+
   
   //****** FractionalOffset ******
   export class FractionalOffset extends DartClass {
@@ -5767,7 +5806,83 @@ export class Alignment extends DartClass {
     static bottom = TextAlignVertical.new(1.0); 
   } 
   
+  //****** TapDownDetails ******
+  interface TapDownDetailsConfig {
+    globalPosition?:Offset;
+    localPosition?:Offset;
+    kind?:PointerDeviceKind;
+  }
+  export class TapDownDetails extends DartClass {
+    globalPosition?:Offset;
+    localPosition?:Offset;
+    kind?:PointerDeviceKind;
   
+    /**
+     * @param config config: 
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+          kind?:PointerDeviceKind,
+        }
+     */
+    constructor(config?: TapDownDetailsConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.globalPosition = config.globalPosition;
+        this.localPosition = config.localPosition;
+        this.kind = config.kind;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+          kind?:PointerDeviceKind,
+        }
+     */
+    static new (config?: TapDownDetailsConfig) {
+      return new TapDownDetails(config);
+    }
+  }
+
+  //****** TapUpDetails ******
+  interface TapUpDetailsConfig {
+    globalPosition?:Offset;
+    localPosition?:Offset;
+  }
+  export class TapUpDetails extends DartClass {
+    globalPosition?:Offset;
+    localPosition?:Offset;
+  
+    /**
+     * @param config config: 
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+        }
+     */
+    constructor(config?: TapUpDetailsConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.globalPosition = config.globalPosition;
+        this.localPosition = config.localPosition;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+        }
+     */
+    static new (config?: TapUpDetailsConfig) {
+      return new TapUpDetails(config);
+    }
+  }
+
   //****** TextStyle ******
   interface TextStyleConfig {
     inherit?:boolean;
@@ -6143,6 +6258,8 @@ export class Alignment extends DartClass {
       return new Tween(begin,end);
     };
   }
+  
+  
   //#endregion
   
   //#region ------- U -------
@@ -7350,6 +7467,7 @@ export class Icons extends IconData{
   }
 //#endregion
 
+
 //#region ******** Cupertino Icons ********
 export class CupertinoIcons extends IconData{
     constructor(icon:string){
@@ -7503,7 +7621,7 @@ export class CupertinoIcons extends IconData{
 
 //#region ******** Material Widgets ********
 
-//#region ------- A -------
+  //#region ------- A -------
 
 //****** AbsorbPointer ******
 interface AbsorbPointerConfig {
@@ -9045,7 +9163,7 @@ interface AbsorbPointerConfig {
   interface BottomNavigationBarConfig {
     key?:Key;
     items:Array<BottomNavigationBarItem>;
-    onTap?:VoidValueChangedNumber;
+    onTap?:VoidCallbackNumber;
     currentIndex?:number;
     elevation?:number;
     type?:BottomNavigationBarType;
@@ -9066,7 +9184,7 @@ interface AbsorbPointerConfig {
   export class BottomNavigationBar extends Widget {
     key?:Key;
     items?:Array<BottomNavigationBarItem>;
-    onTap?:VoidValueChangedNumber;
+    onTap?:VoidCallbackNumber;
     currentIndex?:number;
     elevation?:number;
     type?:BottomNavigationBarType;
@@ -9700,7 +9818,7 @@ interface AbsorbPointerConfig {
   interface CheckboxListTileConfig {
     key?:Key;
     value:boolean;
-    onChanged:VoidValueChangedBoolean;
+    onChanged:VoidCallbackBoolean;
     activeColor?:Color;
     checkColor?:Color;
     title?:Widget;
@@ -9717,7 +9835,7 @@ interface AbsorbPointerConfig {
   export class CheckboxListTile extends Widget {
     key?:Key;
     value?:boolean;
-    onChanged?:VoidValueChangedBoolean;
+    onChanged?:VoidCallbackBoolean;
     activeColor?:Color;
     checkColor?:Color;
     title?:Widget;
@@ -9736,7 +9854,7 @@ interface AbsorbPointerConfig {
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidValueChangedBoolean, 
+          onChanged:VoidCallbackBoolean, 
           activeColor?:Color, 
           checkColor?:Color, 
           title?:Widget, 
@@ -9777,7 +9895,7 @@ interface AbsorbPointerConfig {
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidValueChangedBoolean, 
+          onChanged:VoidCallbackBoolean, 
           activeColor?:Color, 
           checkColor?:Color, 
           title?:Widget, 
@@ -9801,7 +9919,7 @@ interface AbsorbPointerConfig {
   interface CheckboxConfig {
     key?:Key;
     value:boolean;
-    onChanged:VoidValueChangedBoolean;
+    onChanged:VoidCallbackBoolean;
     activeColor?:Color;
     checkColor?:Color;
     focusColor?:Color;
@@ -9814,7 +9932,7 @@ interface AbsorbPointerConfig {
   export class Checkbox extends Widget {
     key?:Key;
     value?:boolean;
-    onChanged?:VoidValueChangedBoolean;
+    onChanged?:VoidCallbackBoolean;
     activeColor?:Color;
     checkColor?:Color;
     focusColor?:Color;
@@ -9829,7 +9947,7 @@ interface AbsorbPointerConfig {
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidValueChangedBoolean, 
+          onChanged:VoidCallbackBoolean, 
           activeColor?:Color, 
           checkColor?:Color, 
           focusColor?:Color, 
@@ -9862,7 +9980,7 @@ interface AbsorbPointerConfig {
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidValueChangedBoolean, 
+          onChanged:VoidCallbackBoolean, 
           activeColor?:Color, 
           checkColor?:Color, 
           focusColor?:Color, 
@@ -10347,7 +10465,114 @@ interface AbsorbPointerConfig {
       return new Divider(config);
     }
   }
+
+  //****** DrawerHeader ******
+  interface DrawerHeaderConfig {
+    key?:Key;
+    child:Widget;
+    decoration?:BoxDecoration;
+    margin?:EdgeInsets;
+    padding?:EdgeInsets;
+    duration?:Duration;
+    curve?:Curve;
+  }
+  export class DrawerHeader extends Widget {
+    key?:Key;
+    child?:Widget;
+    decoration?:BoxDecoration;
+    margin?:EdgeInsets;
+    padding?:EdgeInsets;
+    duration?:Duration;
+    curve?:Curve;
+
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        child:Widget, 
+        decoration?:BoxDecoration, 
+        margin?:EdgeInsets, 
+        padding?:EdgeInsets, 
+        duration?:Duration, 
+        curve?:Curve,
+      }
+    */
+    constructor(config: DrawerHeaderConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.child = config.child;
+        this.duration = config.duration;
+        this.decoration = config.decoration;
+        this.curve = config.curve;
+        this.margin = config.margin;
+        this.padding = config.padding;
+      }
+    }
+
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        child:Widget, 
+        decoration?:BoxDecoration, 
+        margin?:EdgeInsets, 
+        padding?:EdgeInsets, 
+        duration?:Duration, 
+        curve?:Curve,
+      }
+    */
+    static new(config: DrawerHeaderConfig) {
+      return new DrawerHeader(config);
+    }
+  }
   
+  //****** Drawer ******
+  interface DrawerConfig {
+    key?:Key;
+    child?:Widget;
+    elevation?:number;
+    semanticLabel?:string;
+  }
+  export class Drawer extends Widget {
+    key?:Key;
+    child?:Widget;
+    elevation?:number;
+    semanticLabel?:string;
+
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        child?:Widget, 
+        elevation?:number, 
+        semanticLabel?:string, 
+      }
+    */
+    constructor(config: DrawerConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.child = config.child;
+        this.elevation = config.elevation;
+        this.semanticLabel = config.semanticLabel;
+      }
+    }
+
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        child?:Widget, 
+        elevation?:number, 
+        semanticLabel?:string, 
+      }
+    */
+    static new(config: DrawerConfig) {
+      return new Drawer(config);
+    }
+  }
+
   //****** Directionality ******
   interface DirectionalityConfig {
     key?:Key;
@@ -10872,7 +11097,7 @@ interface AbsorbPointerConfig {
     key?:Key;
     isExpanded?:boolean;
     size?:number;
-    onPressed:VoidValueChangedBoolean;
+    onPressed:VoidCallbackBoolean;
     padding?:EdgeInsets;
     color?:Color;
     disabledColor?:Color;
@@ -10882,7 +11107,7 @@ interface AbsorbPointerConfig {
     key?:Key;
     isExpanded?:boolean;
     size?:number;
-    onPressed?:VoidValueChangedBoolean;
+    onPressed?:VoidCallbackBoolean;
     padding?:EdgeInsets;
     color?:Color;
     disabledColor?:Color;
@@ -10893,7 +11118,7 @@ interface AbsorbPointerConfig {
           key?:Key, 
           isExpanded?:boolean, 
           size?:number, 
-          onPressed:VoidValueChangedBoolean, 
+          onPressed:VoidCallbackBoolean, 
           padding?:EdgeInsets, 
           color?:Color, 
           disabledColor?:Color, 
@@ -10919,7 +11144,7 @@ interface AbsorbPointerConfig {
           key?:Key, 
           isExpanded?:boolean, 
           size?:number, 
-          onPressed:VoidValueChangedBoolean, 
+          onPressed:VoidCallbackBoolean, 
           padding?:EdgeInsets, 
           color?:Color, 
           disabledColor?:Color, 
@@ -10939,7 +11164,7 @@ interface AbsorbPointerConfig {
       title?:Widget;
       subtitle?:Widget;
       backgroundColor?:Color;
-      onExpansionChanged?:VoidValueChangedBoolean;
+      onExpansionChanged?:VoidCallbackBoolean;
       children?:Array<Widget>;
       trailing?:Widget;
       initiallyExpanded?:boolean;
@@ -10955,7 +11180,7 @@ interface AbsorbPointerConfig {
       title?:Widget;
       subtitle?:Widget;
       backgroundColor?:Color;
-      onExpansionChanged?:VoidValueChangedBoolean;
+      onExpansionChanged?:VoidCallbackBoolean;
       children?:Array<Widget>;
       trailing?:Widget;
       initiallyExpanded?:boolean;
@@ -10973,7 +11198,7 @@ interface AbsorbPointerConfig {
           title?:Widget, 
           subtitle?:Widget, 
           backgroundColor?:Color, 
-          onExpansionChanged?:VoidValueChangedBoolean, 
+          onExpansionChanged?:VoidCallbackBoolean, 
           children?:Array<Widget>,
           trailing?:Widget, 
           initiallyExpanded?:boolean, 
@@ -11012,7 +11237,7 @@ interface AbsorbPointerConfig {
           title?:Widget, 
           subtitle?:Widget, 
           backgroundColor?:Color, 
-          onExpansionChanged?:VoidValueChangedBoolean, 
+          onExpansionChanged?:VoidCallbackBoolean, 
           children?:Array<Widget>,
           trailing?:Widget, 
           initiallyExpanded?:boolean, 
@@ -11297,7 +11522,7 @@ interface AbsorbPointerConfig {
     child:Widget;
     onPressed:VoidCallback;
     padding?:EdgeInsets;
-    onHighlightChanged?:VoidValueChangedBoolean;
+    onHighlightChanged?:VoidCallbackBoolean;
     textTheme?:ButtonTextTheme;
     textColor?:Color;
     disabledTextColor?:Color;
@@ -11324,7 +11549,7 @@ interface AbsorbPointerConfig {
     child?:Widget;
     onPressed?:VoidCallback;
     padding?:EdgeInsets;
-    onHighlightChanged?:VoidValueChangedBoolean;
+    onHighlightChanged?:VoidCallbackBoolean;
     textTheme?:ButtonTextTheme;
     textColor?:Color;
     disabledTextColor?:Color;
@@ -11351,7 +11576,7 @@ interface AbsorbPointerConfig {
           child:Widget, 
           onPressed:VoidCallback, 
           padding?:EdgeInsets;, 
-          onHighlightChanged?:VoidValueChangedBoolean, 
+          onHighlightChanged?:VoidCallbackBoolean, 
           textTheme?:ButtonTextTheme, 
           textColor?:Color, 
           disabledTextColor?:Color, 
@@ -11405,7 +11630,7 @@ interface AbsorbPointerConfig {
           child:Widget, 
           onPressed:VoidCallback, 
           padding?:EdgeInsets;, 
-          onHighlightChanged?:VoidValueChangedBoolean, 
+          onHighlightChanged?:VoidCallbackBoolean, 
           textTheme?:ButtonTextTheme, 
           textColor?:Color, 
           disabledTextColor?:Color, 
@@ -11436,7 +11661,7 @@ interface AbsorbPointerConfig {
           child:Widget, 
           onPressed:VoidCallback, 
           padding?:EdgeInsets, 
-          onHighlightChanged?:VoidValueChangedBoolean, 
+          onHighlightChanged?:VoidCallbackBoolean, 
           textTheme?:ButtonTextTheme, 
           textColor?:Color, 
           disabledTextColor?:Color, 
@@ -12697,6 +12922,287 @@ interface AbsorbPointerConfig {
     }
   }
   
+  //****** InkResponse ******
+  interface InkResponseConfig {
+    key?:Key;
+    child?:Widget;
+    onTap?:VoidCallback;
+    onTapDown?:VoidTapDown;
+    onTapCancel?:VoidCallback;
+    onDoubleTap?:VoidCallback;
+    onLongPress?:VoidCallback;
+    onHighlightChanged?:VoidCallbackBoolean;
+    onHover?:VoidCallbackBoolean;
+    containedInkWell?:boolean;
+    highlightShape?:BoxShape;
+    radius?:number;
+    borderRadius?:BorderRadius;
+    customBorder?:ShapeBorder;
+    focusColor?:Color;
+    hoverColor?:Color;
+    highlightColor?:Color;
+    overlayColor?:Color;
+    splashColor?:Color;
+    enableFeedback?:boolean;
+    excludeFromSemantics?:boolean;
+    canRequestFocus ?:boolean;
+    onFocusChange?:VoidCallbackBoolean;
+    autofocus?:boolean;
+  }
+  export class InkResponse extends Widget {
+    key?:Key;
+    child?:Widget;
+    onTap?:VoidCallback;
+    onTapDown?:VoidTapDown;
+    onTapCancel?:VoidCallback;
+    onDoubleTap?:VoidCallback;
+    onLongPress?:VoidCallback;
+    onHighlightChanged?:VoidCallbackBoolean;
+    onHover?:VoidCallbackBoolean;
+    containedInkWell?:boolean;
+    highlightShape?:BoxShape;
+    radius?:number;
+    borderRadius?:BorderRadius;
+    customBorder?:ShapeBorder;
+    focusColor?:Color;
+    hoverColor?:Color;
+    highlightColor?:Color;
+    overlayColor?:Color;
+    splashColor?:Color;
+    enableFeedback?:boolean;
+    excludeFromSemantics?:boolean;
+    canRequestFocus ?:boolean;
+    onFocusChange?:VoidCallbackBoolean;
+    autofocus?:boolean;
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          child?:Widget, 
+          onTap?:VoidCallback, 
+          onTapDown?:VoidTapDown, 
+          onTapCancel?:VoidCallback, 
+          onDoubleTap?:VoidCallback, 
+          onLongPress?:VoidCallback, 
+          onHighlightChanged?:VoidCallbackBoolean, 
+          onHover?:VoidCallbackBoolean, 
+          containedInkWell?:boolean, 
+          highlightShape?:BoxShape, 
+          radius?:number, 
+          borderRadius?:BorderRadius, 
+          customBorder?:ShapeBorder, 
+          focusColor?:Color, 
+          hoverColor?:Color, 
+          highlightColor?:Color, 
+          overlayColor?:Color, 
+          splashColor?:Color, 
+          enableFeedback?:boolean, 
+          excludeFromSemantics?:boolean, 
+          canRequestFocus ?:boolean, 
+          onFocusChange?:VoidCallbackBoolean, 
+          autofocus?:boolean, 
+        }
+     */
+    constructor(config: InkResponseConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.child= config.child;
+        this.onTap = config.onTap;
+        this.onTapDown = config.onTapDown;
+        this.onTapCancel = config.onTapCancel;
+        this.onDoubleTap = config.onDoubleTap;
+        this.onLongPress = config.onLongPress;
+        this.onHighlightChanged = config.onHighlightChanged;
+        this.onHover = config.onHover;
+        this.containedInkWell = config.containedInkWell;
+        this.highlightShape = config.highlightShape;
+        this.radius= config.radius;
+        this.borderRadius = config.borderRadius;
+        this.customBorder = config.customBorder;
+        this.focusColor = config.focusColor;
+        this.hoverColor = config.hoverColor;
+        this.highlightColor = config.highlightColor;
+        this.overlayColor = config.overlayColor;
+        this.splashColor = config.splashColor;
+        this.enableFeedback = config.enableFeedback;
+        this.excludeFromSemantics = config.excludeFromSemantics;
+        this.canRequestFocus = config.canRequestFocus;
+        this.onFocusChange = config.onFocusChange;
+        this.autofocus = config.autofocus;
+
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          child?:Widget, 
+          onTap?:VoidCallback, 
+          onTapDown?:VoidTapDown, 
+          onTapCancel?:VoidCallback, 
+          onDoubleTap?:VoidCallback, 
+          onLongPress?:VoidCallback, 
+          onHighlightChanged?:VoidCallbackBoolean, 
+          onHover?:VoidCallbackBoolean, 
+          containedInkWell?:boolean, 
+          highlightShape?:BoxShape, 
+          radius?:number, 
+          borderRadius?:BorderRadius, 
+          customBorder?:ShapeBorder, 
+          focusColor?:Color, 
+          hoverColor?:Color, 
+          highlightColor?:Color, 
+          overlayColor?:Color, 
+          splashColor?:Color, 
+          enableFeedback?:boolean, 
+          excludeFromSemantics?:boolean, 
+          canRequestFocus ?:boolean, 
+          onFocusChange?:VoidCallbackBoolean, 
+          autofocus?:boolean, 
+        }
+     */
+    static new(config: InkResponseConfig) {
+      return new InkResponse(config);
+    }
+  }
+
+  //****** InkWell ******
+  interface InkWellConfig {
+    key?:Key;
+    child?:Widget;
+    onTap?:VoidCallback;
+    onTapDown?:VoidTapDown;
+    onTapCancel?:VoidCallback;
+    onDoubleTap?:VoidCallback;
+    onLongPress?:VoidCallback;
+    onHighlightChanged?:VoidCallbackBoolean;
+    onHover?:VoidCallbackBoolean;
+    radius?:number;
+    borderRadius?:BorderRadius;
+    customBorder?:ShapeBorder;
+    focusColor?:Color;
+    hoverColor?:Color;
+    highlightColor?:Color;
+    overlayColor?:Color;
+    splashColor?:Color;
+    enableFeedback?:boolean;
+    excludeFromSemantics?:boolean;
+    canRequestFocus ?:boolean;
+    onFocusChange?:VoidCallbackBoolean;
+    autofocus?:boolean;
+  }
+  export class InkWell extends Widget {
+    key?:Key;
+    child?:Widget;
+    onTap?:VoidCallback;
+    onTapDown?:VoidTapDown;
+    onTapCancel?:VoidCallback;
+    onDoubleTap?:VoidCallback;
+    onLongPress?:VoidCallback;
+    onHighlightChanged?:VoidCallbackBoolean;
+    onHover?:VoidCallbackBoolean;
+    radius?:number;
+    borderRadius?:BorderRadius;
+    customBorder?:ShapeBorder;
+    focusColor?:Color;
+    hoverColor?:Color;
+    highlightColor?:Color;
+    overlayColor?:Color;
+    splashColor?:Color;
+    enableFeedback?:boolean;
+    excludeFromSemantics?:boolean;
+    canRequestFocus ?:boolean;
+    onFocusChange?:VoidCallbackBoolean;
+    autofocus?:boolean;
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          child?:Widget, 
+          onTap?:VoidCallback, 
+          onTapDown?:VoidTapDown, 
+          onTapCancel?:VoidCallback, 
+          onDoubleTap?:VoidCallback, 
+          onLongPress?:VoidCallback, 
+          onHighlightChanged?:VoidCallbackBoolean, 
+          onHover?:VoidCallbackBoolean, 
+          radius?:number, 
+          borderRadius?:BorderRadius, 
+          customBorder?:ShapeBorder, 
+          focusColor?:Color, 
+          hoverColor?:Color, 
+          highlightColor?:Color, 
+          overlayColor?:Color, 
+          splashColor?:Color, 
+          enableFeedback?:boolean, 
+          excludeFromSemantics?:boolean, 
+          canRequestFocus ?:boolean, 
+          onFocusChange?:VoidCallbackBoolean, 
+          autofocus?:boolean, 
+        }
+     */
+    constructor(config: InkWellConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.child= config.child;
+        this.onTap = config.onTap;
+        this.onTapDown = config.onTapDown;
+        this.onTapCancel = config.onTapCancel;
+        this.onDoubleTap = config.onDoubleTap;
+        this.onLongPress = config.onLongPress;
+        this.onHighlightChanged = config.onHighlightChanged;
+        this.onHover = config.onHover;
+        this.radius= config.radius;
+        this.borderRadius = config.borderRadius;
+        this.customBorder = config.customBorder;
+        this.focusColor = config.focusColor;
+        this.hoverColor = config.hoverColor;
+        this.highlightColor = config.highlightColor;
+        this.overlayColor = config.overlayColor;
+        this.splashColor = config.splashColor;
+        this.enableFeedback = config.enableFeedback;
+        this.excludeFromSemantics = config.excludeFromSemantics;
+        this.canRequestFocus = config.canRequestFocus;
+        this.onFocusChange = config.onFocusChange;
+        this.autofocus = config.autofocus;
+
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          child?:Widget, 
+          onTap?:VoidCallback, 
+          onTapDown?:VoidTapDown, 
+          onTapCancel?:VoidCallback, 
+          onDoubleTap?:VoidCallback, 
+          onLongPress?:VoidCallback, 
+          onHighlightChanged?:VoidCallbackBoolean, 
+          onHover?:VoidCallbackBoolean, 
+          radius?:number, 
+          borderRadius?:BorderRadius, 
+          customBorder?:ShapeBorder, 
+          focusColor?:Color, 
+          hoverColor?:Color, 
+          highlightColor?:Color, 
+          overlayColor?:Color, 
+          splashColor?:Color, 
+          enableFeedback?:boolean, 
+          excludeFromSemantics?:boolean, 
+          canRequestFocus ?:boolean, 
+          onFocusChange?:VoidCallbackBoolean, 
+          autofocus?:boolean, 
+        }
+     */
+    static new(config: InkWellConfig) {
+      return new InkWell(config);
+    }
+  }
   
   //#endregion
   
@@ -13355,6 +13861,76 @@ interface AbsorbPointerConfig {
     }
   }
   
+  //****** MaterialBanner ******
+  interface MaterialBannerConfig {
+    key?:Key;
+    content:Widget;
+    contentTextStyle?:TextStyle;
+    actions:Array<Widget>;
+    leading?:Widget;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    leadingPadding?:EdgeInsets;
+    forceActionsBelow?:boolean;
+  }
+  export class MaterialBanner extends Widget {
+    key?:Key;
+    content?:Widget;
+    contentTextStyle?:TextStyle;
+    actions?:Array<Widget>;
+    leading?:Widget;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    leadingPadding?:EdgeInsets;
+    forceActionsBelow?:boolean;
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          content:Widget, 
+          contentTextStyle?:TextStyle, 
+          actions:Array<Widget>, 
+          leading?:Widget, 
+          backgroundColor?:Color, 
+          padding?:EdgeInsets, 
+          leadingPadding?:EdgeInsets, 
+          forceActionsBelow?:boolean, 
+        }
+     */
+    constructor(config: MaterialBannerConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.content = config.content;
+        this.contentTextStyle = config.contentTextStyle;
+        this.actions = config.actions;
+        this.leading = config.leading;
+        this.backgroundColor = config.backgroundColor;
+        this.padding = config.padding;
+        this.leadingPadding = config.leadingPadding;
+        this.forceActionsBelow = config.forceActionsBelow;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          content:Widget, 
+          contentTextStyle?:TextStyle, 
+          actions:Array<Widget>, 
+          leading?:Widget, 
+          backgroundColor?:Color, 
+          padding?:EdgeInsets, 
+          leadingPadding?:EdgeInsets, 
+          forceActionsBelow?:boolean, 
+        }
+     */
+    static new(config: MaterialBannerConfig) {
+      return new MaterialBanner(config);
+    }
+  }
   
   //#endregion
   
@@ -14689,7 +15265,7 @@ interface AbsorbPointerConfig {
   interface RaisedButtonConfig {
     child?:Widget;
     onPressed?:VoidCallback;
-    onHighlightChanged?:VoidValueChangedBoolean;
+    onHighlightChanged?:VoidCallbackBoolean;
     padding?:EdgeInsets;
     textColor?:Color;
     disabledTextColor?:Color;
@@ -14720,7 +15296,7 @@ interface AbsorbPointerConfig {
   export class RaisedButton extends Widget {
     child?:Widget;
     onPressed?:VoidCallback;
-    onHighlightChanged?:VoidValueChangedBoolean;
+    onHighlightChanged?:VoidCallbackBoolean;
     padding?:EdgeInsets;
     textColor?:Color;
     disabledTextColor?:Color;
@@ -14755,7 +15331,7 @@ interface AbsorbPointerConfig {
           key?:Key,
           child?:Widget, 
           onPressed?:VoidCallback, 
-          onHighlightChanged?:VoidValueChangedBoolean, 
+          onHighlightChanged?:VoidCallbackBoolean, 
           padding?:EdgeInsets,
           textColor?:Color, 
           disabledTextColor?:Color, 
@@ -14819,7 +15395,7 @@ interface AbsorbPointerConfig {
           key?:Key,
           child?:Widget, 
           onPressed?:VoidCallback, 
-          onHighlightChanged?:VoidValueChangedBoolean, 
+          onHighlightChanged?:VoidCallbackBoolean, 
           padding?:EdgeInsets,
           textColor?:Color, 
           disabledTextColor?:Color, 
@@ -14856,7 +15432,7 @@ interface AbsorbPointerConfig {
         icon?:Widget, 
         label?:Widget,
         onPressed?:VoidCallback, 
-        onHighlightChanged?:VoidValueChangedBoolean, 
+        onHighlightChanged?:VoidCallbackBoolean, 
         padding?:EdgeInsets,
         textColor?:Color, 
         disabledTextColor?:Color, 
@@ -14978,7 +15554,7 @@ interface AbsorbPointerConfig {
     key?:Key;  
     onPressed:VoidCallback;
     onLongPress?:VoidCallback;
-    onHighlightChanged?:VoidValueChangedBoolean;
+    onHighlightChanged?:VoidCallbackBoolean;
     textStyle?:TextStyle;
     padding?:EdgeInsets;
     fillColor?:Color;
@@ -15005,7 +15581,7 @@ interface AbsorbPointerConfig {
     key?:Key;  
     onPressed?:VoidCallback;
     onLongPress?:VoidCallback;
-    onHighlightChanged?:VoidValueChangedBoolean;
+    onHighlightChanged?:VoidCallbackBoolean;
     textStyle?:TextStyle;
     padding?:EdgeInsets;
     fillColor?:Color;
@@ -15034,7 +15610,7 @@ interface AbsorbPointerConfig {
         key?:Key,   
         onPressed:VoidCallback, 
         onLongPress?:VoidCallback, 
-        onHighlightChanged?:VoidValueChangedBoolean, 
+        onHighlightChanged?:VoidCallbackBoolean, 
         textStyle?:TextStyle, 
         padding?:EdgeInsets, 
         fillColor?:Color, 
@@ -15095,7 +15671,7 @@ interface AbsorbPointerConfig {
         key?:Key,   
         onPressed:VoidCallback, 
         onLongPress?:VoidCallback, 
-        onHighlightChanged?:VoidValueChangedBoolean, 
+        onHighlightChanged?:VoidCallbackBoolean, 
         textStyle?:TextStyle, 
         padding?:EdgeInsets, 
         fillColor?:Color, 
@@ -15131,7 +15707,7 @@ interface AbsorbPointerConfig {
     textAlign?:TextAlign;
     textDirection?:TextDirection;
     softWrap?:boolean;
-    overflow?:Overflow;
+    overflow?:TextOverflow;
     textScaleFactor?:number;
     maxLines?:number;
     textWidthBasis?:TextWidthBasis;
@@ -15142,7 +15718,7 @@ interface AbsorbPointerConfig {
     textAlign?:TextAlign;
     textDirection?:TextDirection;
     softWrap?:boolean;
-    overflow?:Overflow;
+    overflow?:TextOverflow;
     textScaleFactor?:number;
     maxLines?:number;
     key?:Key;
@@ -15515,7 +16091,7 @@ interface AbsorbPointerConfig {
   interface SwitchListTileConfig {
     key?:Key;
     value:boolean;
-    onChanged:VoidValueChangedBoolean;
+    onChanged:VoidCallbackBoolean;
     activeColor?:Color;
     activeTrackColor?:Color;
     inactiveThumbColor?:Color;
@@ -15533,7 +16109,7 @@ interface AbsorbPointerConfig {
   export class SwitchListTile extends Widget {
     key?:Key;
     value?:boolean;
-    onChanged?:VoidValueChangedBoolean;
+    onChanged?:VoidCallbackBoolean;
     activeColor?:Color;
     activeTrackColor?:Color;
     inactiveThumbColor?:Color;
@@ -15553,7 +16129,7 @@ interface AbsorbPointerConfig {
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidValueChangedBoolean, 
+          onChanged:VoidCallbackBoolean, 
           activeColor?:Color, 
           activeTrackColor?:Color, 
           inactiveThumbColor?:Color, 
@@ -15596,7 +16172,7 @@ interface AbsorbPointerConfig {
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidValueChangedBoolean, 
+          onChanged:VoidCallbackBoolean, 
           activeColor?:Color, 
           activeTrackColor?:Color, 
           inactiveThumbColor?:Color, 
@@ -15617,36 +16193,123 @@ interface AbsorbPointerConfig {
     }
   
   }
+
+  //****** Switch ******
+  interface SwitchConfig {
+    key?:Key;
+    value:boolean;
+    onChanged:VoidCallbackBoolean;
+    activeColor?:Color;
+    activeTrackColor?:Color;
+    inactiveThumbColor?:Color;
+    inactiveTrackColor?:Color;
+    focusColor?:Color;
+    hoverColor?:Color;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    dragStartBehavior?:DragStartBehavior;
+    autofocus?:boolean;
+  }
+  export class Switch extends Widget {
+    key?:Key;
+    value?:boolean;
+    onChanged?:VoidCallbackBoolean;
+    activeColor?:Color;
+    activeTrackColor?:Color;
+    inactiveThumbColor?:Color;
+    inactiveTrackColor?:Color;
+    focusColor?:Color;
+    hoverColor?:Color;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    dragStartBehavior?:DragStartBehavior;
+    autofocus?:boolean;
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          value:boolean, 
+          onChanged:VoidCallbackBoolean, 
+          activeColor?:Color, 
+          activeTrackColor?:Color, 
+          inactiveThumbColor?:Color, 
+          inactiveTrackColor?:Color, 
+          focusColor?:Color, 
+          hoverColor?:Color, 
+          materialTapTargetSize?:MaterialTapTargetSize, 
+          dragStartBehavior?:DragStartBehavior, 
+          autofocus?:boolean, 
+        }
+     */
+    constructor(config: SwitchConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.value = config.value;
+        this.onChanged = config.onChanged;
+        this.activeColor = config.activeColor;
+        this.activeTrackColor = config.activeTrackColor;
+        this.inactiveThumbColor = config.inactiveThumbColor;
+        this.inactiveTrackColor = config.inactiveTrackColor;
+        this.focusColor = config.focusColor;
+        this.hoverColor = config.hoverColor;
+        this.materialTapTargetSize = config.materialTapTargetSize;
+        this.dragStartBehavior = config.dragStartBehavior;
+        this.autofocus = config.autofocus;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          value:boolean, 
+          onChanged:VoidCallbackBoolean, 
+          activeColor?:Color, 
+          activeTrackColor?:Color, 
+          inactiveThumbColor?:Color, 
+          inactiveTrackColor?:Color, 
+          focusColor?:Color, 
+          hoverColor?:Color, 
+          materialTapTargetSize?:MaterialTapTargetSize, 
+          dragStartBehavior?:DragStartBehavior, 
+          autofocus?:boolean, 
+        }
+     */
+    static new(config: SwitchConfig) {
+      return new Switch(config);
+    }
+  
+  }
   
   //****** Slider ******
   interface SliderConfig {
     key?:Key;
     value?:number;
-    onChanged?:VoidValueChangedNumber;
-    onChangeStart?:VoidValueChangedNumber;
-    onChangeEnd?:VoidValueChangedNumber;
+    onChanged?:VoidCallbackNumber;
+    onChangeStart?:VoidCallbackNumber;
+    onChangeEnd?:VoidCallbackNumber;
     min?:number;
     max?:number;
     divisions?:number;
     label?:string;
     activeColor?:Color;
     inactiveColor?:Color;
-    semanticFormatterCallback?:VoidValueChangedNumber;
+    semanticFormatterCallback?:VoidCallbackNumber;
     autofocus?:boolean;  
   }
   export class Slider extends Widget {
     key?:Key;
     value?:number;
-    onChanged?:VoidValueChangedNumber;
-    onChangeStart?:VoidValueChangedNumber;
-    onChangeEnd?:VoidValueChangedNumber;
+    onChanged?:VoidCallbackNumber;
+    onChangeStart?:VoidCallbackNumber;
+    onChangeEnd?:VoidCallbackNumber;
     min?:number;
     max?:number;
     divisions?:number;
     label?:string;
     activeColor?:Color;
     inactiveColor?:Color;
-    semanticFormatterCallback?:VoidValueChangedNumber;
+    semanticFormatterCallback?:VoidCallbackNumber;
     autofocus?:boolean;  
   
     /**
@@ -15654,16 +16317,16 @@ interface AbsorbPointerConfig {
       {
         key?:Key,
         value?:number, 
-        onChanged?:VoidValueChangedNumber, 
-        onChangeStart?:VoidValueChangedNumber, 
-        onChangeEnd?:VoidValueChangedNumber, 
+        onChanged?:VoidCallbackNumber, 
+        onChangeStart?:VoidCallbackNumber, 
+        onChangeEnd?:VoidCallbackNumber, 
         min?:number, 
         max?:number, 
         divisions?:number, 
         label?:string, 
         activeColor?:Color,
         inactiveColor?:Color, 
-        semanticFormatterCallback?:VoidValueChangedNumber, 
+        semanticFormatterCallback?:VoidCallbackNumber, 
         autofocus?:boolean,
       }
      */
@@ -15691,16 +16354,16 @@ interface AbsorbPointerConfig {
       {
         key?:Key,
         value?:number, 
-        onChanged?:VoidValueChangedNumber, 
-        onChangeStart?:VoidValueChangedNumber, 
-        onChangeEnd?:VoidValueChangedNumber, 
+        onChanged?:VoidCallbackNumber, 
+        onChangeStart?:VoidCallbackNumber, 
+        onChangeEnd?:VoidCallbackNumber, 
         min?:number, 
         max?:number, 
         divisions?:number, 
         label?:string, 
         activeColor?:Color,
         inactiveColor?:Color, 
-        semanticFormatterCallback?:VoidValueChangedNumber, 
+        semanticFormatterCallback?:VoidCallbackNumber, 
         autofocus?:boolean,
       }
      */
@@ -16614,7 +17277,7 @@ interface AbsorbPointerConfig {
     }
   }
   
-  //****** TODO Scaffold ******
+  //****** Scaffold ******
   interface ScaffoldConfig {
     key?:Key;
     appBar?:Widget;
@@ -16628,10 +17291,18 @@ interface AbsorbPointerConfig {
     bottomSheet?:Widget;
     backgroundColor?:Color;
     resizeToAvoidBottomPadding?:boolean;
+    resizeToAvoidBottomInset?:boolean;
     primary?:boolean;
-    
+    drawerDragStartBehavior?:DragStartBehavior;
+    extendBody?:boolean;
+    extendBodyBehindAppBar?:boolean;
+    drawerScrimColor?:Color;
+    drawerEdgeDragWidth?:number;
+    drawerEnableOpenDragGesture?:boolean;
+    endDrawerEnableOpenDragGesture?:boolean;
   }
   export class Scaffold extends Widget {
+    key?:Key;
     appBar?:Widget;
     body?:Widget;
     floatingActionButton?:Widget;
@@ -16643,52 +17314,40 @@ interface AbsorbPointerConfig {
     bottomSheet?:Widget;
     backgroundColor?:Color;
     resizeToAvoidBottomPadding?:boolean;
+    resizeToAvoidBottomInset?:boolean;
     primary?:boolean;
-    key?:Key;
-  
-    //FIXME,github mergegithub merge
-    static of(context:any) {
-      return {
-        showSnackBar: function (snackBar:any) {
-          //准备调用Native方法执行真正的 showSnackBar动作
-          //1.把这里的context和snackBar数据传递到native层 ✔️
-          //2.通过context找到Native里的 Scaffold.of(context) ？
-          //3.解析snackBar为真snackBar对象 ✔️
-          //4.执行调用
-          //console.log("showSnackBar in js call native-->")
-          /*let argument = new FlutterCallConfig({
-            widgetID: context.widgetID,
-            className: 'Scaffold',
-            funcName: 'of',
-            args: {
-              snackBar: snackBar,
-            },
-          });*/
-          
-          //invokeCommonFlutterFunction(argument);
-        },
-        openDrawer: function () {
-          //console.log("showSnackBar in js call native-->")
-        },
-      };
-    }
+    drawerDragStartBehavior?:DragStartBehavior;
+    extendBody?:boolean;
+    extendBodyBehindAppBar?:boolean;
+    drawerScrimColor?:Color;
+    drawerEdgeDragWidth?:number;
+    drawerEnableOpenDragGesture?:boolean;
+    endDrawerEnableOpenDragGesture?:boolean;
   
     /**
      * @param config config: 
       {
-        key?:Key, 
-        appBar?:Widget, 
-        body?:Widget, 
-        floatingActionButton?:Widget, 
-        floatingActionButtonLocation?:FloatingActionButtonLocation, 
-        persistentFooterButtons?:Array<Widget>, 
-        drawer?:Widget, 
-        endDrawer?:Widget, 
-        bottomNavigationBar?:Widget, 
-        bottomSheet?:Widget, 
-        backgroundColor?:Color, 
-        resizeToAvoidBottomPadding?:boolean, 
-        primary?:boolean, 
+        key?:Key;
+        appBar?:Widget;
+        body?:Widget;
+        floatingActionButton?:Widget;
+        floatingActionButtonLocation?:FloatingActionButtonLocation;
+        persistentFooterButtons?:Array<Widget>;
+        drawer?:Widget;
+        endDrawer?:Widget;
+        bottomNavigationBar?:Widget;
+        bottomSheet?:Widget;
+        backgroundColor?:Color;
+        resizeToAvoidBottomPadding?:boolean;
+        resizeToAvoidBottomInset?:boolean;
+        primary?:boolean;
+        drawerDragStartBehavior?:DragStartBehavior;
+        extendBody?:boolean;
+        extendBodyBehindAppBar?:boolean;
+        drawerScrimColor?:Color;
+        drawerEdgeDragWidth?:number;
+        drawerEnableOpenDragGesture?:boolean;
+        endDrawerEnableOpenDragGesture?:boolean;
       }
      */
     constructor(config: ScaffoldConfig){
@@ -16706,26 +17365,43 @@ interface AbsorbPointerConfig {
         this.bottomSheet = config.bottomSheet;
         this.backgroundColor = config.backgroundColor;
         this.resizeToAvoidBottomPadding = config.resizeToAvoidBottomPadding;
+        this.resizeToAvoidBottomInset = config.resizeToAvoidBottomInset;
         this.primary = config.primary;
+        this.drawerDragStartBehavior = config.drawerDragStartBehavior;
+        this.extendBody = config.extendBody;
+        this.extendBodyBehindAppBar = config.extendBodyBehindAppBar;
+        this.drawerScrimColor = config.drawerScrimColor;
+        this.drawerEdgeDragWidth = config.drawerEdgeDragWidth;
+        this.drawerEnableOpenDragGesture = config.drawerEnableOpenDragGesture;
+        this.endDrawerEnableOpenDragGesture = config.endDrawerEnableOpenDragGesture;
+
       }
     }
   
     /**
      * @param config config: 
       {
-        key?:Key, 
-        appBar?:Widget, 
-        body?:Widget, 
-        floatingActionButton?:Widget, 
-        floatingActionButtonLocation?:FloatingActionButtonLocation, 
-        persistentFooterButtons?:Array<Widget>, 
-        drawer?:Widget, 
-        endDrawer?:Widget, 
-        bottomNavigationBar?:Widget, 
-        bottomSheet?:Widget, 
-        backgroundColor?:Color, 
-        resizeToAvoidBottomPadding?:boolean, 
-        primary?:boolean, 
+        key?:Key;
+        appBar?:Widget;
+        body?:Widget;
+        floatingActionButton?:Widget;
+        floatingActionButtonLocation?:FloatingActionButtonLocation;
+        persistentFooterButtons?:Array<Widget>;
+        drawer?:Widget;
+        endDrawer?:Widget;
+        bottomNavigationBar?:Widget;
+        bottomSheet?:Widget;
+        backgroundColor?:Color;
+        resizeToAvoidBottomPadding?:boolean;
+        resizeToAvoidBottomInset?:boolean;
+        primary?:boolean;
+        drawerDragStartBehavior?:DragStartBehavior;
+        extendBody?:boolean;
+        extendBodyBehindAppBar?:boolean;
+        drawerScrimColor?:Color;
+        drawerEdgeDragWidth?:number;
+        drawerEnableOpenDragGesture?:boolean;
+        endDrawerEnableOpenDragGesture?:boolean;
       }
      */
     static new(config: ScaffoldConfig){
@@ -17514,7 +18190,7 @@ interface AbsorbPointerConfig {
   interface TabBarConfig {
     key?:Key;
     tabs?:Array<Widget>;
-    onTap?:VoidValueChangedNumber;
+    onTap?:VoidCallbackNumber;
     controller?:TabController;
     isScrollable?:boolean;
     indicatorColor?:Color;
@@ -17533,7 +18209,7 @@ interface AbsorbPointerConfig {
   export class TabBar extends  Widget {
     key?:Key;
     tabs?:Array<Widget>;
-    onTap?:VoidValueChangedNumber;
+    onTap?:VoidCallbackNumber;
     controller?:TabController;
     isScrollable?:boolean;
     indicatorColor?:Color;
@@ -17554,7 +18230,7 @@ interface AbsorbPointerConfig {
       {
         key?:Key, 
         tabs?:Array<Widget>,
-        onTap?:VoidValueChangedNumber, 
+        onTap?:VoidCallbackNumber, 
         controller?:TabController, 
         isScrollable?:boolean, 
         indicatorColor?:Color, 
@@ -17599,7 +18275,7 @@ interface AbsorbPointerConfig {
       {
         key?:Key, 
         tabs?:Array<Widget>,
-        onTap?:VoidValueChangedNumber, 
+        onTap?:VoidCallbackNumber, 
         controller?:TabController, 
         isScrollable?:boolean, 
         indicatorColor?:Color, 
@@ -18083,9 +18759,9 @@ interface AbsorbPointerConfig {
     maxLines?:number;
     maxLength?:number;
     onEditingComplete?:VoidCallback;
-    onFieldSubmitted?:VoidValueChangedString;
-    onSaved?:VoidValueChangedString;
-    validator?:VoidValueChangedString;
+    onFieldSubmitted?:VoidCallbackString;
+    onSaved?:VoidCallbackString;
+    validator?:VoidCallbackString;
     inputFormatters?:any;
     enabled?:boolean;
     cursorWidth?:number;
@@ -18116,9 +18792,9 @@ interface AbsorbPointerConfig {
     maxLines?:number;
     maxLength?:number;
     onEditingComplete?:VoidCallback;
-    onFieldSubmitted?:VoidValueChangedString;
-    onSaved?:VoidValueChangedString;
-    validator?:VoidValueChangedString;
+    onFieldSubmitted?:VoidCallbackString;
+    onSaved?:VoidCallbackString;
+    validator?:VoidCallbackString;
     inputFormatters?:any;
     enabled?:boolean;
     cursorWidth?:number;
@@ -18152,9 +18828,9 @@ interface AbsorbPointerConfig {
         maxLines?:number, 
         maxLength?:number, 
         onEditingComplete?:VoidCallback, 
-        onFieldSubmitted?:VoidValueChangedString, 
-        onSaved?:VoidValueChangedString, 
-        validator?:VoidValueChangedString, 
+        onFieldSubmitted?:VoidCallbackString, 
+        onSaved?:VoidCallbackString, 
+        validator?:VoidCallbackString, 
         inputFormatters?:any, 
         enabled?:boolean, 
         cursorWidth?:number, 
@@ -18226,9 +18902,9 @@ interface AbsorbPointerConfig {
         maxLines?:number, 
         maxLength?:number, 
         onEditingComplete?:VoidCallback, 
-        onFieldSubmitted?:VoidValueChangedString, 
-        onSaved?:VoidValueChangedString, 
-        validator?:VoidValueChangedString, 
+        onFieldSubmitted?:VoidCallbackString, 
+        onSaved?:VoidCallbackString, 
+        validator?:VoidCallbackString, 
         inputFormatters?:any, 
         enabled?:boolean, 
         cursorWidth?:number, 
@@ -18909,9 +19585,9 @@ interface CupertinoActivityIndicatorConfig {
   interface CupertinoSliderConfig {
     key?:Key;
     value:number;
-    onChanged:VoidValueChangedNumber;
-    onChangeStart?:VoidValueChangedNumber;
-    onChangeEnd?:VoidValueChangedNumber;
+    onChanged:VoidCallbackNumber;
+    onChangeStart?:VoidCallbackNumber;
+    onChangeEnd?:VoidCallbackNumber;
     min?:number;
     max?:number;
     divisions?:number;
@@ -18921,9 +19597,9 @@ interface CupertinoActivityIndicatorConfig {
   export class CupertinoSlider extends Widget {
     key?:Key;
     value?:number;
-    onChanged?:VoidValueChangedNumber;
-    onChangeStart?:VoidValueChangedNumber;
-    onChangeEnd?:VoidValueChangedNumber;
+    onChanged?:VoidCallbackNumber;
+    onChangeStart?:VoidCallbackNumber;
+    onChangeEnd?:VoidCallbackNumber;
     min?:number;
     max?:number;
     divisions?:number;
@@ -18935,9 +19611,9 @@ interface CupertinoActivityIndicatorConfig {
         {
           key?:Key, 
           value:number, 
-          onChanged:VoidValueChangedNumber, 
-          onChangeStart?:VoidValueChangedNumber, 
-          onChangeEnd?:VoidValueChangedNumber, 
+          onChanged:VoidCallbackNumber, 
+          onChangeStart?:VoidCallbackNumber, 
+          onChangeEnd?:VoidCallbackNumber, 
           min?:number, 
           max?:number, 
           divisions?:number, 
@@ -18966,9 +19642,9 @@ interface CupertinoActivityIndicatorConfig {
         {
           key?:Key, 
           value:number, 
-          onChanged:VoidValueChangedNumber, 
-          onChangeStart?:VoidValueChangedNumber, 
-          onChangeEnd?:VoidValueChangedNumber, 
+          onChanged:VoidCallbackNumber, 
+          onChangeStart?:VoidCallbackNumber, 
+          onChangeEnd?:VoidCallbackNumber, 
           min?:number, 
           max?:number, 
           divisions?:number, 
@@ -18985,7 +19661,7 @@ interface CupertinoActivityIndicatorConfig {
   interface CupertinoSwitchConfig {
     key?:Key;
     value:boolean;
-    onChanged:VoidValueChangedBoolean;
+    onChanged:VoidCallbackBoolean;
     activeColor?:Color;
     trackColor?:Color;
     dragStartBehavior?:DragStartBehavior;
@@ -18993,7 +19669,7 @@ interface CupertinoActivityIndicatorConfig {
   export class CupertinoSwitch extends Widget {
     key?:Key;
     value?:boolean;
-    onChanged?:VoidValueChangedBoolean;
+    onChanged?:VoidCallbackBoolean;
     activeColor?:Color;
     trackColor?:Color;
     dragStartBehavior?:DragStartBehavior;
@@ -19003,7 +19679,7 @@ interface CupertinoActivityIndicatorConfig {
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidValueChangedBoolean, 
+          onChanged:VoidCallbackBoolean, 
           activeColor?:Color, 
           trackColor?:Color, 
           dragStartBehavior?:DragStartBehavior, 
@@ -19026,7 +19702,7 @@ interface CupertinoActivityIndicatorConfig {
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidValueChangedBoolean, 
+          onChanged:VoidCallbackBoolean, 
           activeColor?:Color, 
           trackColor?:Color, 
           dragStartBehavior?:DragStartBehavior, 
@@ -19184,7 +19860,7 @@ interface CupertinoActivityIndicatorConfig {
   interface CupertinoTabBarConfig {
     key?:Key;
     items:Array<BottomNavigationBarItem>;
-    onTap?:VoidValueChangedNumber;
+    onTap?:VoidCallbackNumber;
     currentIndex?:number;
     backgroundColor?:Color;
     activeColor?:Color;
@@ -19195,7 +19871,7 @@ interface CupertinoActivityIndicatorConfig {
   export class CupertinoTabBar extends Widget {
     key?:Key;
     items?:Array<BottomNavigationBarItem>;
-    onTap?:VoidValueChangedNumber;
+    onTap?:VoidCallbackNumber;
     currentIndex?:number;
     backgroundColor?:Color;
     activeColor?:Color;
@@ -19208,7 +19884,7 @@ interface CupertinoActivityIndicatorConfig {
         {
           key?:Key, 
           items:Array<BottomNavigationBarItem>, 
-          onTap?:VoidValueChangedNumber, 
+          onTap?:VoidCallbackNumber, 
           currentIndex?:number, 
           backgroundColor?:Color, 
           activeColor?:Color, 
@@ -19237,7 +19913,7 @@ interface CupertinoActivityIndicatorConfig {
         {
           key?:Key, 
           items:Array<BottomNavigationBarItem>, 
-          onTap?:VoidValueChangedNumber, 
+          onTap?:VoidCallbackNumber, 
           currentIndex?:number, 
           backgroundColor?:Color, 
           activeColor?:Color, 
@@ -19450,6 +20126,7 @@ interface CupertinoActivityIndicatorConfig {
   }
   
   //#endregion
+
 
 //#region ******** Base Api ********
 

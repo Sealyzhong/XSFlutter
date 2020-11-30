@@ -6,7 +6,7 @@
  * @Description: JS Flutter SDK
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PackageInfo = exports.ScreenInfo = exports.SpApi = exports.LoadingApi = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.Tween = exports.TextInputType = exports.TextEditingController = exports.TabController = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TextAlignVertical = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.ScrollPhysics = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.RangeMaintainingScrollPhysics = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.Radius = exports.Quaternion = exports.OutlinedBorder = exports.Offset = exports.NotchedShape = exports.Notification = exports.NeverScrollableScrollPhysics = exports.MediaQueryData = exports.MediaQuery = exports.Matrix4 = exports.MaskFilter = exports.Key = exports.InputDecoration = exports.InputDecorationTheme = exports.ImageShader = exports.IconThemeData = exports.IconData = exports.ImageProvider = exports.InputBorder = exports.Gradient = exports.GradientTransform = exports.File = exports.FixedColumnWidth = exports.FractionalOffset = exports.FlutterLogoDecoration = exports.FlexColumnWidth = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.Duration = exports.CurveTween = exports.ClampingScrollPhysics = exports.CircularNotchedRectangle = exports.ColorScheme = exports.ColorFilter = exports.Colors = exports.Color = exports.BouncingScrollPhysics = exports.BoxShadow = exports.BannerPainter = exports.BoxDecoration = exports.ButtonThemeData = exports.BorderDirectional = exports.Border = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderSide = exports.BoxConstraints = exports.AssetImage = exports.AssetBundle = exports.AlwaysScrollableScrollPhysics = exports.AlignmentDirectional = exports.Alignment = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.ShapeBorder = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
+exports.PackageInfo = exports.ScreenInfo = exports.SpApi = exports.LoadingApi = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.Tween = exports.TextInputType = exports.TextEditingController = exports.TabController = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.ScrollPhysics = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.RangeMaintainingScrollPhysics = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.Radius = exports.Quaternion = exports.OutlinedBorder = exports.Offset = exports.NotchedShape = exports.Notification = exports.NeverScrollableScrollPhysics = exports.MediaQueryData = exports.MediaQuery = exports.Matrix4 = exports.MaskFilter = exports.Key = exports.InputDecoration = exports.InputDecorationTheme = exports.ImageShader = exports.IconThemeData = exports.IconData = exports.ImageProvider = exports.InputBorder = exports.Gradient = exports.GradientTransform = exports.File = exports.FixedColumnWidth = exports.FractionalOffset = exports.FlutterLogoDecoration = exports.FlexColumnWidth = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.Duration = exports.CurveTween = exports.ClampingScrollPhysics = exports.CircularNotchedRectangle = exports.ColorScheme = exports.ColorFilter = exports.Colors = exports.Color = exports.BouncingScrollPhysics = exports.BoxShadow = exports.BannerPainter = exports.BoxDecoration = exports.ButtonThemeData = exports.BorderDirectional = exports.Border = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderSide = exports.BoxConstraints = exports.AssetImage = exports.AssetBundle = exports.AlwaysScrollableScrollPhysics = exports.AlignmentDirectional = exports.Alignment = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.ShapeBorder = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -1202,6 +1202,12 @@ var DecorationPosition;
     DecorationPosition["background"] = "background";
     DecorationPosition["foreground"] = "foreground";
 })(DecorationPosition = exports.DecorationPosition || (exports.DecorationPosition = {}));
+//****** DrawerAlignment ******
+var DrawerAlignment;
+(function (DrawerAlignment) {
+    DrawerAlignment["start"] = "start";
+    DrawerAlignment["end"] = "end";
+})(DrawerAlignment = exports.DrawerAlignment || (exports.DrawerAlignment = {}));
 //#endregion
 //#region ------ F ------
 //****** FlutterLogoStyle ******
@@ -1365,6 +1371,32 @@ var PlaceholderAlignment;
     PlaceholderAlignment["bottom"] = "bottom";
     PlaceholderAlignment["middle"] = "middle";
 })(PlaceholderAlignment = exports.PlaceholderAlignment || (exports.PlaceholderAlignment = {}));
+//****** PointerChange ******
+var PointerChange;
+(function (PointerChange) {
+    PointerChange["cancel"] = "cancel";
+    PointerChange["add"] = "add";
+    PointerChange["remove"] = "remove";
+    PointerChange["hover"] = "hover";
+    PointerChange["down"] = "down";
+    PointerChange["move"] = "move";
+    PointerChange["up"] = "up";
+})(PointerChange = exports.PointerChange || (exports.PointerChange = {}));
+//****** PointerDeviceKind ******
+var PointerDeviceKind;
+(function (PointerDeviceKind) {
+    PointerDeviceKind["touch"] = "touch";
+    PointerDeviceKind["mouse"] = "mouse";
+    PointerDeviceKind["invertedStylus"] = "invertedStylus";
+    PointerDeviceKind["unknown"] = "unknown";
+})(PointerDeviceKind = exports.PointerDeviceKind || (exports.PointerDeviceKind = {}));
+//****** PointerSignalKind ******
+var PointerSignalKind;
+(function (PointerSignalKind) {
+    PointerSignalKind["none"] = "none";
+    PointerSignalKind["scroll"] = "scroll";
+    PointerSignalKind["unknown"] = "unknown";
+})(PointerSignalKind = exports.PointerSignalKind || (exports.PointerSignalKind = {}));
 //#endregion
 //#region ------ R ------
 //****** RenderComparison ******
@@ -1456,7 +1488,7 @@ var TextDirection;
 //****** TextDecorationStyle ******
 var TextDecorationStyle;
 (function (TextDecorationStyle) {
-    TextDecorationStyle["ashed"] = "ashed";
+    TextDecorationStyle["dashed"] = "dashed";
     TextDecorationStyle["dotted"] = "dotted";
     TextDecorationStyle["double"] = "double";
     TextDecorationStyle["solid"] = "solid";
@@ -4338,6 +4370,63 @@ exports.TextAlignVertical = TextAlignVertical;
 TextAlignVertical.top = TextAlignVertical.new(-1.0);
 TextAlignVertical.center = TextAlignVertical.new(0.0);
 TextAlignVertical.bottom = TextAlignVertical.new(1.0);
+class TapDownDetails extends DartClass {
+    /**
+     * @param config config:
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+          kind?:PointerDeviceKind,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.globalPosition = config.globalPosition;
+            this.localPosition = config.localPosition;
+            this.kind = config.kind;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+          kind?:PointerDeviceKind,
+        }
+     */
+    static new(config) {
+        return new TapDownDetails(config);
+    }
+}
+exports.TapDownDetails = TapDownDetails;
+class TapUpDetails extends DartClass {
+    /**
+     * @param config config:
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.globalPosition = config.globalPosition;
+            this.localPosition = config.localPosition;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+        }
+     */
+    static new(config) {
+        return new TapUpDetails(config);
+    }
+}
+exports.TapUpDetails = TapUpDetails;
 class TextStyle extends DartClass {
     /**
      * @param config config:
@@ -7361,7 +7450,7 @@ class CheckboxListTile extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidValueChangedBoolean,
+          onChanged:VoidCallbackBoolean,
           activeColor?:Color,
           checkColor?:Color,
           title?:Widget,
@@ -7401,7 +7490,7 @@ class CheckboxListTile extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidValueChangedBoolean,
+          onChanged:VoidCallbackBoolean,
           activeColor?:Color,
           checkColor?:Color,
           title?:Widget,
@@ -7427,7 +7516,7 @@ class Checkbox extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidValueChangedBoolean,
+          onChanged:VoidCallbackBoolean,
           activeColor?:Color,
           checkColor?:Color,
           focusColor?:Color,
@@ -7459,7 +7548,7 @@ class Checkbox extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidValueChangedBoolean,
+          onChanged:VoidCallbackBoolean,
           activeColor?:Color,
           checkColor?:Color,
           focusColor?:Color,
@@ -7799,6 +7888,81 @@ class Divider extends Widget {
     }
 }
 exports.Divider = Divider;
+class DrawerHeader extends Widget {
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        child:Widget,
+        decoration?:BoxDecoration,
+        margin?:EdgeInsets,
+        padding?:EdgeInsets,
+        duration?:Duration,
+        curve?:Curve,
+      }
+    */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.duration = config.duration;
+            this.decoration = config.decoration;
+            this.curve = config.curve;
+            this.margin = config.margin;
+            this.padding = config.padding;
+        }
+    }
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        child:Widget,
+        decoration?:BoxDecoration,
+        margin?:EdgeInsets,
+        padding?:EdgeInsets,
+        duration?:Duration,
+        curve?:Curve,
+      }
+    */
+    static new(config) {
+        return new DrawerHeader(config);
+    }
+}
+exports.DrawerHeader = DrawerHeader;
+class Drawer extends Widget {
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        child?:Widget,
+        elevation?:number,
+        semanticLabel?:string,
+      }
+    */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.elevation = config.elevation;
+            this.semanticLabel = config.semanticLabel;
+        }
+    }
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        child?:Widget,
+        elevation?:number,
+        semanticLabel?:string,
+      }
+    */
+    static new(config) {
+        return new Drawer(config);
+    }
+}
+exports.Drawer = Drawer;
 class Directionality extends Widget {
     /**
      * @param config config:
@@ -8170,7 +8334,7 @@ class ExpandIcon extends Widget {
           key?:Key,
           isExpanded?:boolean,
           size?:number,
-          onPressed:VoidValueChangedBoolean,
+          onPressed:VoidCallbackBoolean,
           padding?:EdgeInsets,
           color?:Color,
           disabledColor?:Color,
@@ -8196,7 +8360,7 @@ class ExpandIcon extends Widget {
           key?:Key,
           isExpanded?:boolean,
           size?:number,
-          onPressed:VoidValueChangedBoolean,
+          onPressed:VoidCallbackBoolean,
           padding?:EdgeInsets,
           color?:Color,
           disabledColor?:Color,
@@ -8217,7 +8381,7 @@ class ExpansionTile extends Widget {
           title?:Widget,
           subtitle?:Widget,
           backgroundColor?:Color,
-          onExpansionChanged?:VoidValueChangedBoolean,
+          onExpansionChanged?:VoidCallbackBoolean,
           children?:Array<Widget>,
           trailing?:Widget,
           initiallyExpanded?:boolean,
@@ -8255,7 +8419,7 @@ class ExpansionTile extends Widget {
           title?:Widget,
           subtitle?:Widget,
           backgroundColor?:Color,
-          onExpansionChanged?:VoidValueChangedBoolean,
+          onExpansionChanged?:VoidCallbackBoolean,
           children?:Array<Widget>,
           trailing?:Widget,
           initiallyExpanded?:boolean,
@@ -8460,7 +8624,7 @@ class FlatButton extends Widget {
           child:Widget,
           onPressed:VoidCallback,
           padding?:EdgeInsets;,
-          onHighlightChanged?:VoidValueChangedBoolean,
+          onHighlightChanged?:VoidCallbackBoolean,
           textTheme?:ButtonTextTheme,
           textColor?:Color,
           disabledTextColor?:Color,
@@ -8513,7 +8677,7 @@ class FlatButton extends Widget {
           child:Widget,
           onPressed:VoidCallback,
           padding?:EdgeInsets;,
-          onHighlightChanged?:VoidValueChangedBoolean,
+          onHighlightChanged?:VoidCallbackBoolean,
           textTheme?:ButtonTextTheme,
           textColor?:Color,
           disabledTextColor?:Color,
@@ -8543,7 +8707,7 @@ class FlatButton extends Widget {
           child:Widget,
           onPressed:VoidCallback,
           padding?:EdgeInsets,
-          onHighlightChanged?:VoidValueChangedBoolean,
+          onHighlightChanged?:VoidCallbackBoolean,
           textTheme?:ButtonTextTheme,
           textColor?:Color,
           disabledTextColor?:Color,
@@ -9412,6 +9576,186 @@ class ImageIcon extends Widget {
     }
 }
 exports.ImageIcon = ImageIcon;
+class InkResponse extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          child?:Widget,
+          onTap?:VoidCallback,
+          onTapDown?:VoidTapDown,
+          onTapCancel?:VoidCallback,
+          onDoubleTap?:VoidCallback,
+          onLongPress?:VoidCallback,
+          onHighlightChanged?:VoidCallbackBoolean,
+          onHover?:VoidCallbackBoolean,
+          containedInkWell?:boolean,
+          highlightShape?:BoxShape,
+          radius?:number,
+          borderRadius?:BorderRadius,
+          customBorder?:ShapeBorder,
+          focusColor?:Color,
+          hoverColor?:Color,
+          highlightColor?:Color,
+          overlayColor?:Color,
+          splashColor?:Color,
+          enableFeedback?:boolean,
+          excludeFromSemantics?:boolean,
+          canRequestFocus ?:boolean,
+          onFocusChange?:VoidCallbackBoolean,
+          autofocus?:boolean,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.onTap = config.onTap;
+            this.onTapDown = config.onTapDown;
+            this.onTapCancel = config.onTapCancel;
+            this.onDoubleTap = config.onDoubleTap;
+            this.onLongPress = config.onLongPress;
+            this.onHighlightChanged = config.onHighlightChanged;
+            this.onHover = config.onHover;
+            this.containedInkWell = config.containedInkWell;
+            this.highlightShape = config.highlightShape;
+            this.radius = config.radius;
+            this.borderRadius = config.borderRadius;
+            this.customBorder = config.customBorder;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.highlightColor = config.highlightColor;
+            this.overlayColor = config.overlayColor;
+            this.splashColor = config.splashColor;
+            this.enableFeedback = config.enableFeedback;
+            this.excludeFromSemantics = config.excludeFromSemantics;
+            this.canRequestFocus = config.canRequestFocus;
+            this.onFocusChange = config.onFocusChange;
+            this.autofocus = config.autofocus;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          child?:Widget,
+          onTap?:VoidCallback,
+          onTapDown?:VoidTapDown,
+          onTapCancel?:VoidCallback,
+          onDoubleTap?:VoidCallback,
+          onLongPress?:VoidCallback,
+          onHighlightChanged?:VoidCallbackBoolean,
+          onHover?:VoidCallbackBoolean,
+          containedInkWell?:boolean,
+          highlightShape?:BoxShape,
+          radius?:number,
+          borderRadius?:BorderRadius,
+          customBorder?:ShapeBorder,
+          focusColor?:Color,
+          hoverColor?:Color,
+          highlightColor?:Color,
+          overlayColor?:Color,
+          splashColor?:Color,
+          enableFeedback?:boolean,
+          excludeFromSemantics?:boolean,
+          canRequestFocus ?:boolean,
+          onFocusChange?:VoidCallbackBoolean,
+          autofocus?:boolean,
+        }
+     */
+    static new(config) {
+        return new InkResponse(config);
+    }
+}
+exports.InkResponse = InkResponse;
+class InkWell extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          child?:Widget,
+          onTap?:VoidCallback,
+          onTapDown?:VoidTapDown,
+          onTapCancel?:VoidCallback,
+          onDoubleTap?:VoidCallback,
+          onLongPress?:VoidCallback,
+          onHighlightChanged?:VoidCallbackBoolean,
+          onHover?:VoidCallbackBoolean,
+          radius?:number,
+          borderRadius?:BorderRadius,
+          customBorder?:ShapeBorder,
+          focusColor?:Color,
+          hoverColor?:Color,
+          highlightColor?:Color,
+          overlayColor?:Color,
+          splashColor?:Color,
+          enableFeedback?:boolean,
+          excludeFromSemantics?:boolean,
+          canRequestFocus ?:boolean,
+          onFocusChange?:VoidCallbackBoolean,
+          autofocus?:boolean,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.onTap = config.onTap;
+            this.onTapDown = config.onTapDown;
+            this.onTapCancel = config.onTapCancel;
+            this.onDoubleTap = config.onDoubleTap;
+            this.onLongPress = config.onLongPress;
+            this.onHighlightChanged = config.onHighlightChanged;
+            this.onHover = config.onHover;
+            this.radius = config.radius;
+            this.borderRadius = config.borderRadius;
+            this.customBorder = config.customBorder;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.highlightColor = config.highlightColor;
+            this.overlayColor = config.overlayColor;
+            this.splashColor = config.splashColor;
+            this.enableFeedback = config.enableFeedback;
+            this.excludeFromSemantics = config.excludeFromSemantics;
+            this.canRequestFocus = config.canRequestFocus;
+            this.onFocusChange = config.onFocusChange;
+            this.autofocus = config.autofocus;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          child?:Widget,
+          onTap?:VoidCallback,
+          onTapDown?:VoidTapDown,
+          onTapCancel?:VoidCallback,
+          onDoubleTap?:VoidCallback,
+          onLongPress?:VoidCallback,
+          onHighlightChanged?:VoidCallbackBoolean,
+          onHover?:VoidCallbackBoolean,
+          radius?:number,
+          borderRadius?:BorderRadius,
+          customBorder?:ShapeBorder,
+          focusColor?:Color,
+          hoverColor?:Color,
+          highlightColor?:Color,
+          overlayColor?:Color,
+          splashColor?:Color,
+          enableFeedback?:boolean,
+          excludeFromSemantics?:boolean,
+          canRequestFocus ?:boolean,
+          onFocusChange?:VoidCallbackBoolean,
+          autofocus?:boolean,
+        }
+     */
+    static new(config) {
+        return new InkWell(config);
+    }
+}
+exports.InkWell = InkWell;
 class KeyedSubtree extends Widget {
     /**
      * @param config config:
@@ -9865,6 +10209,54 @@ class MaterialPageRoute extends Widget {
     }
 }
 exports.MaterialPageRoute = MaterialPageRoute;
+class MaterialBanner extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          content:Widget,
+          contentTextStyle?:TextStyle,
+          actions:Array<Widget>,
+          leading?:Widget,
+          backgroundColor?:Color,
+          padding?:EdgeInsets,
+          leadingPadding?:EdgeInsets,
+          forceActionsBelow?:boolean,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.content = config.content;
+            this.contentTextStyle = config.contentTextStyle;
+            this.actions = config.actions;
+            this.leading = config.leading;
+            this.backgroundColor = config.backgroundColor;
+            this.padding = config.padding;
+            this.leadingPadding = config.leadingPadding;
+            this.forceActionsBelow = config.forceActionsBelow;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          content:Widget,
+          contentTextStyle?:TextStyle,
+          actions:Array<Widget>,
+          leading?:Widget,
+          backgroundColor?:Color,
+          padding?:EdgeInsets,
+          leadingPadding?:EdgeInsets,
+          forceActionsBelow?:boolean,
+        }
+     */
+    static new(config) {
+        return new MaterialBanner(config);
+    }
+}
+exports.MaterialBanner = MaterialBanner;
 class NotificationListener extends Widget {
     /**
      * @param config config:
@@ -10816,7 +11208,7 @@ class RaisedButton extends Widget {
           key?:Key,
           child?:Widget,
           onPressed?:VoidCallback,
-          onHighlightChanged?:VoidValueChangedBoolean,
+          onHighlightChanged?:VoidCallbackBoolean,
           padding?:EdgeInsets,
           textColor?:Color,
           disabledTextColor?:Color,
@@ -10879,7 +11271,7 @@ class RaisedButton extends Widget {
           key?:Key,
           child?:Widget,
           onPressed?:VoidCallback,
-          onHighlightChanged?:VoidValueChangedBoolean,
+          onHighlightChanged?:VoidCallbackBoolean,
           padding?:EdgeInsets,
           textColor?:Color,
           disabledTextColor?:Color,
@@ -10915,7 +11307,7 @@ class RaisedButton extends Widget {
         icon?:Widget,
         label?:Widget,
         onPressed?:VoidCallback,
-        onHighlightChanged?:VoidValueChangedBoolean,
+        onHighlightChanged?:VoidCallbackBoolean,
         padding?:EdgeInsets,
         textColor?:Color,
         disabledTextColor?:Color,
@@ -11021,7 +11413,7 @@ class RawMaterialButton extends Widget {
         key?:Key,
         onPressed:VoidCallback,
         onLongPress?:VoidCallback,
-        onHighlightChanged?:VoidValueChangedBoolean,
+        onHighlightChanged?:VoidCallbackBoolean,
         textStyle?:TextStyle,
         padding?:EdgeInsets,
         fillColor?:Color,
@@ -11081,7 +11473,7 @@ class RawMaterialButton extends Widget {
         key?:Key,
         onPressed:VoidCallback,
         onLongPress?:VoidCallback,
-        onHighlightChanged?:VoidValueChangedBoolean,
+        onHighlightChanged?:VoidCallbackBoolean,
         textStyle?:TextStyle,
         padding?:EdgeInsets,
         fillColor?:Color,
@@ -11360,7 +11752,7 @@ class SwitchListTile extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidValueChangedBoolean,
+          onChanged:VoidCallbackBoolean,
           activeColor?:Color,
           activeTrackColor?:Color,
           inactiveThumbColor?:Color,
@@ -11402,7 +11794,7 @@ class SwitchListTile extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidValueChangedBoolean,
+          onChanged:VoidCallbackBoolean,
           activeColor?:Color,
           activeTrackColor?:Color,
           inactiveThumbColor?:Color,
@@ -11423,22 +11815,79 @@ class SwitchListTile extends Widget {
     }
 }
 exports.SwitchListTile = SwitchListTile;
+class Switch extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          value:boolean,
+          onChanged:VoidCallbackBoolean,
+          activeColor?:Color,
+          activeTrackColor?:Color,
+          inactiveThumbColor?:Color,
+          inactiveTrackColor?:Color,
+          focusColor?:Color,
+          hoverColor?:Color,
+          materialTapTargetSize?:MaterialTapTargetSize,
+          dragStartBehavior?:DragStartBehavior,
+          autofocus?:boolean,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.onChanged = config.onChanged;
+            this.activeColor = config.activeColor;
+            this.activeTrackColor = config.activeTrackColor;
+            this.inactiveThumbColor = config.inactiveThumbColor;
+            this.inactiveTrackColor = config.inactiveTrackColor;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.dragStartBehavior = config.dragStartBehavior;
+            this.autofocus = config.autofocus;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          value:boolean,
+          onChanged:VoidCallbackBoolean,
+          activeColor?:Color,
+          activeTrackColor?:Color,
+          inactiveThumbColor?:Color,
+          inactiveTrackColor?:Color,
+          focusColor?:Color,
+          hoverColor?:Color,
+          materialTapTargetSize?:MaterialTapTargetSize,
+          dragStartBehavior?:DragStartBehavior,
+          autofocus?:boolean,
+        }
+     */
+    static new(config) {
+        return new Switch(config);
+    }
+}
+exports.Switch = Switch;
 class Slider extends Widget {
     /**
      * @param config config:
       {
         key?:Key,
         value?:number,
-        onChanged?:VoidValueChangedNumber,
-        onChangeStart?:VoidValueChangedNumber,
-        onChangeEnd?:VoidValueChangedNumber,
+        onChanged?:VoidCallbackNumber,
+        onChangeStart?:VoidCallbackNumber,
+        onChangeEnd?:VoidCallbackNumber,
         min?:number,
         max?:number,
         divisions?:number,
         label?:string,
         activeColor?:Color,
         inactiveColor?:Color,
-        semanticFormatterCallback?:VoidValueChangedNumber,
+        semanticFormatterCallback?:VoidCallbackNumber,
         autofocus?:boolean,
       }
      */
@@ -11465,16 +11914,16 @@ class Slider extends Widget {
       {
         key?:Key,
         value?:number,
-        onChanged?:VoidValueChangedNumber,
-        onChangeStart?:VoidValueChangedNumber,
-        onChangeEnd?:VoidValueChangedNumber,
+        onChanged?:VoidCallbackNumber,
+        onChangeStart?:VoidCallbackNumber,
+        onChangeEnd?:VoidCallbackNumber,
         min?:number,
         max?:number,
         divisions?:number,
         label?:string,
         activeColor?:Color,
         inactiveColor?:Color,
-        semanticFormatterCallback?:VoidValueChangedNumber,
+        semanticFormatterCallback?:VoidCallbackNumber,
         autofocus?:boolean,
       }
      */
@@ -12130,19 +12579,27 @@ class Scaffold extends Widget {
     /**
      * @param config config:
       {
-        key?:Key,
-        appBar?:Widget,
-        body?:Widget,
-        floatingActionButton?:Widget,
-        floatingActionButtonLocation?:FloatingActionButtonLocation,
-        persistentFooterButtons?:Array<Widget>,
-        drawer?:Widget,
-        endDrawer?:Widget,
-        bottomNavigationBar?:Widget,
-        bottomSheet?:Widget,
-        backgroundColor?:Color,
-        resizeToAvoidBottomPadding?:boolean,
-        primary?:boolean,
+        key?:Key;
+        appBar?:Widget;
+        body?:Widget;
+        floatingActionButton?:Widget;
+        floatingActionButtonLocation?:FloatingActionButtonLocation;
+        persistentFooterButtons?:Array<Widget>;
+        drawer?:Widget;
+        endDrawer?:Widget;
+        bottomNavigationBar?:Widget;
+        bottomSheet?:Widget;
+        backgroundColor?:Color;
+        resizeToAvoidBottomPadding?:boolean;
+        resizeToAvoidBottomInset?:boolean;
+        primary?:boolean;
+        drawerDragStartBehavior?:DragStartBehavior;
+        extendBody?:boolean;
+        extendBodyBehindAppBar?:boolean;
+        drawerScrimColor?:Color;
+        drawerEdgeDragWidth?:number;
+        drawerEnableOpenDragGesture?:boolean;
+        endDrawerEnableOpenDragGesture?:boolean;
       }
      */
     constructor(config) {
@@ -12160,50 +12617,41 @@ class Scaffold extends Widget {
             this.bottomSheet = config.bottomSheet;
             this.backgroundColor = config.backgroundColor;
             this.resizeToAvoidBottomPadding = config.resizeToAvoidBottomPadding;
+            this.resizeToAvoidBottomInset = config.resizeToAvoidBottomInset;
             this.primary = config.primary;
+            this.drawerDragStartBehavior = config.drawerDragStartBehavior;
+            this.extendBody = config.extendBody;
+            this.extendBodyBehindAppBar = config.extendBodyBehindAppBar;
+            this.drawerScrimColor = config.drawerScrimColor;
+            this.drawerEdgeDragWidth = config.drawerEdgeDragWidth;
+            this.drawerEnableOpenDragGesture = config.drawerEnableOpenDragGesture;
+            this.endDrawerEnableOpenDragGesture = config.endDrawerEnableOpenDragGesture;
         }
-    }
-    //FIXME,github mergegithub merge
-    static of(context) {
-        return {
-            showSnackBar: function (snackBar) {
-                //准备调用Native方法执行真正的 showSnackBar动作
-                //1.把这里的context和snackBar数据传递到native层 ✔️
-                //2.通过context找到Native里的 Scaffold.of(context) ？
-                //3.解析snackBar为真snackBar对象 ✔️
-                //4.执行调用
-                //console.log("showSnackBar in js call native-->")
-                /*let argument = new FlutterCallConfig({
-                  widgetID: context.widgetID,
-                  className: 'Scaffold',
-                  funcName: 'of',
-                  args: {
-                    snackBar: snackBar,
-                  },
-                });*/
-                //invokeCommonFlutterFunction(argument);
-            },
-            openDrawer: function () {
-                //console.log("showSnackBar in js call native-->")
-            },
-        };
     }
     /**
      * @param config config:
       {
-        key?:Key,
-        appBar?:Widget,
-        body?:Widget,
-        floatingActionButton?:Widget,
-        floatingActionButtonLocation?:FloatingActionButtonLocation,
-        persistentFooterButtons?:Array<Widget>,
-        drawer?:Widget,
-        endDrawer?:Widget,
-        bottomNavigationBar?:Widget,
-        bottomSheet?:Widget,
-        backgroundColor?:Color,
-        resizeToAvoidBottomPadding?:boolean,
-        primary?:boolean,
+        key?:Key;
+        appBar?:Widget;
+        body?:Widget;
+        floatingActionButton?:Widget;
+        floatingActionButtonLocation?:FloatingActionButtonLocation;
+        persistentFooterButtons?:Array<Widget>;
+        drawer?:Widget;
+        endDrawer?:Widget;
+        bottomNavigationBar?:Widget;
+        bottomSheet?:Widget;
+        backgroundColor?:Color;
+        resizeToAvoidBottomPadding?:boolean;
+        resizeToAvoidBottomInset?:boolean;
+        primary?:boolean;
+        drawerDragStartBehavior?:DragStartBehavior;
+        extendBody?:boolean;
+        extendBodyBehindAppBar?:boolean;
+        drawerScrimColor?:Color;
+        drawerEdgeDragWidth?:number;
+        drawerEnableOpenDragGesture?:boolean;
+        endDrawerEnableOpenDragGesture?:boolean;
       }
      */
     static new(config) {
@@ -12751,7 +13199,7 @@ class TabBar extends Widget {
       {
         key?:Key,
         tabs?:Array<Widget>,
-        onTap?:VoidValueChangedNumber,
+        onTap?:VoidCallbackNumber,
         controller?:TabController,
         isScrollable?:boolean,
         indicatorColor?:Color,
@@ -12795,7 +13243,7 @@ class TabBar extends Widget {
       {
         key?:Key,
         tabs?:Array<Widget>,
-        onTap?:VoidValueChangedNumber,
+        onTap?:VoidCallbackNumber,
         controller?:TabController,
         isScrollable?:boolean,
         indicatorColor?:Color,
@@ -13152,9 +13600,9 @@ class TextFormField extends Widget {
         maxLines?:number,
         maxLength?:number,
         onEditingComplete?:VoidCallback,
-        onFieldSubmitted?:VoidValueChangedString,
-        onSaved?:VoidValueChangedString,
-        validator?:VoidValueChangedString,
+        onFieldSubmitted?:VoidCallbackString,
+        onSaved?:VoidCallbackString,
+        validator?:VoidCallbackString,
         inputFormatters?:any,
         enabled?:boolean,
         cursorWidth?:number,
@@ -13224,9 +13672,9 @@ class TextFormField extends Widget {
         maxLines?:number,
         maxLength?:number,
         onEditingComplete?:VoidCallback,
-        onFieldSubmitted?:VoidValueChangedString,
-        onSaved?:VoidValueChangedString,
-        validator?:VoidValueChangedString,
+        onFieldSubmitted?:VoidCallbackString,
+        onSaved?:VoidCallbackString,
+        validator?:VoidCallbackString,
         inputFormatters?:any,
         enabled?:boolean,
         cursorWidth?:number,
@@ -13687,9 +14135,9 @@ class CupertinoSlider extends Widget {
         {
           key?:Key,
           value:number,
-          onChanged:VoidValueChangedNumber,
-          onChangeStart?:VoidValueChangedNumber,
-          onChangeEnd?:VoidValueChangedNumber,
+          onChanged:VoidCallbackNumber,
+          onChangeStart?:VoidCallbackNumber,
+          onChangeEnd?:VoidCallbackNumber,
           min?:number,
           max?:number,
           divisions?:number,
@@ -13717,9 +14165,9 @@ class CupertinoSlider extends Widget {
         {
           key?:Key,
           value:number,
-          onChanged:VoidValueChangedNumber,
-          onChangeStart?:VoidValueChangedNumber,
-          onChangeEnd?:VoidValueChangedNumber,
+          onChanged:VoidCallbackNumber,
+          onChangeStart?:VoidCallbackNumber,
+          onChangeEnd?:VoidCallbackNumber,
           min?:number,
           max?:number,
           divisions?:number,
@@ -13738,7 +14186,7 @@ class CupertinoSwitch extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidValueChangedBoolean,
+          onChanged:VoidCallbackBoolean,
           activeColor?:Color,
           trackColor?:Color,
           dragStartBehavior?:DragStartBehavior,
@@ -13760,7 +14208,7 @@ class CupertinoSwitch extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidValueChangedBoolean,
+          onChanged:VoidCallbackBoolean,
           activeColor?:Color,
           trackColor?:Color,
           dragStartBehavior?:DragStartBehavior,
@@ -13873,7 +14321,7 @@ class CupertinoTabBar extends Widget {
         {
           key?:Key,
           items:Array<BottomNavigationBarItem>,
-          onTap?:VoidValueChangedNumber,
+          onTap?:VoidCallbackNumber,
           currentIndex?:number,
           backgroundColor?:Color,
           activeColor?:Color,
@@ -13901,7 +14349,7 @@ class CupertinoTabBar extends Widget {
         {
           key?:Key,
           items:Array<BottomNavigationBarItem>,
-          onTap?:VoidValueChangedNumber,
+          onTap?:VoidCallbackNumber,
           currentIndex?:number,
           backgroundColor?:Color,
           activeColor?:Color,

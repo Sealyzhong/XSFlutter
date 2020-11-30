@@ -1102,6 +1102,20 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** DrawerAlignment ******/
+  static DrawerAlignment getDrawerAlignment(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DrawerAlignment defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'start':
+          return DrawerAlignment.start;
+        case 'end':
+          return DrawerAlignment.end;
+      }
+    }
+    return defaultValue;
+  }
+
   //****** DecorationPosition ******/
   static DecorationPosition getDecorationPosition(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DecorationPosition defaultValue}) {
     var v = _getString(map, key);
@@ -1170,7 +1184,7 @@ class XSJSParse {
     if (v != null) {
       var className = _getClassName(v);
       if (className == "BoxDecoration") {
-        return getBoxDecoration(context, bo, v, key);
+        return getBoxDecoration(context, bo, map, key);
       }
     }
     return defaultValue;
@@ -1218,7 +1232,6 @@ class XSJSParse {
   static EdgeInsetsDirectional getEdgeInsetsDirectional(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {EdgeInsetsDirectional defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      //var className = _getClassName(v);
       var constructorName = _getConstructorName(v);
       switch (constructorName) {
         case 'only':
@@ -4332,6 +4345,66 @@ class XSJSParse {
   }
 
   //-------------- P -----------------
+  //****** PointerChange ******/
+  static PointerChange getPointerChange(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {PointerChange defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'cancel':
+          return PointerChange.cancel;
+        case 'add':
+          return PointerChange.add;
+        case 'remove':
+          return PointerChange.remove;
+        case 'hover':
+          return PointerChange.hover;
+        case 'down':
+          return PointerChange.down;
+        case 'move':
+          return PointerChange.move;
+        case 'up':
+          return PointerChange.up;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** PointerDeviceKind ******/
+  static PointerDeviceKind getPointerDeviceKind(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {PointerDeviceKind defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'touch':
+          return PointerDeviceKind.touch;
+        case 'mouse':
+          return PointerDeviceKind.mouse;
+        case 'stylus':
+          return PointerDeviceKind.stylus;
+        case 'invertedStylus':
+          return PointerDeviceKind.invertedStylus;
+        case 'unknown':
+          return PointerDeviceKind.unknown;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** PointerSignalKind ******/
+  static PointerSignalKind getPointerSignalKind(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {PointerSignalKind defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'none':
+          return PointerSignalKind.none;
+        case 'scroll':
+          return PointerSignalKind.scroll;
+        case 'unknown':
+          return PointerSignalKind.unknown;
+      }
+    }
+    return defaultValue;
+  }
+
   //****** PaintingStyle ******/
   static PaintingStyle getPaintingStyle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {PaintingStyle defaultValue}) {
     var v = _getString(map, key);
@@ -4650,10 +4723,10 @@ class XSJSParse {
     if (v != null) {
       var className = _getClassName(v);
       if (className == "OutlinedBorder") {
-        return getOutlinedBorder(context, bo, v, key);
+        return getOutlinedBorder(context, bo, map, key);
       }
       if (className == "InputBorder") {
-        return getInputBorder(context, bo, v, key);
+        return getInputBorder(context, bo, map, key);
       }
     }
     return defaultValue;

@@ -25,7 +25,6 @@ dependencies:
   # https://github.com/flutter/plugins
   package_info: ^0.4.3
   
-  
 dev_dependencies:
   flutter_test:
     sdk: flutter

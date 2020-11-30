@@ -25,7 +25,7 @@ export class MySectionTitle extends fs.StatelessWidget{
         mainAxisAlignment:fs.MainAxisAlignment.start,
         children:[
           fs.Icon.new(
-            fs.Icons.ac_unit,
+            fs.Icons.list,
             {
               color:fs.Colors.white,
             }

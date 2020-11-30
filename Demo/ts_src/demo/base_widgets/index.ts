@@ -6,9 +6,17 @@
  */
 
 import fs = require("flutter_sdk");
-import { MyAppBar } from "demo/base_widgets/app_bar";
-import { MyCupertinoIcons } from "demo/base_widgets/cupertino_icons";
-import { MyMaterialIcons } from "demo/base_widgets/material_icons";
+import { MyAppBarPage } from "demo/base_widgets/app_bar_page";
+import { MyCupertinoIconsPage } from "demo/base_widgets/cupertino_icons_page";
+import { MyMaterialIconsPage } from "demo/base_widgets/material_icons_page";
+import { MySectionTitle } from "demo/widgets/section_title";
+import { MyPlaceholderPage } from "demo/base_widgets/placeholder_page";
+import { MyContainerPage } from "demo/base_widgets/container_page";
+import { MyColumnPage } from "demo/base_widgets/column_page";
+import { MyRowPage } from "demo/base_widgets/row_page";
+import { MyTextPage } from "demo/base_widgets/text_page";
+import { MyButtonPage } from "demo/base_widgets/button_page";
+import { MyFlutterLogoPage } from "demo/base_widgets/flutter_logo_page";
 
 export class MyBaseWidgetsIndex extends fs.StatelessWidget{
 
@@ -17,35 +25,31 @@ export class MyBaseWidgetsIndex extends fs.StatelessWidget{
     build(context:fs.BuildContext){
         return fs.Scaffold.new({
             appBar:fs.AppBar.new({
-                title: fs.Text.new("基础组件"),
+                title: fs.Text.new("通用组件"),
             }),
             body:fs.ListView.new({
                 children:[
-                    //MySectionTitle.new("通用 Demo"),
+                    MySectionTitle.new("基础组件"),
                 
                     fs.ListTile.new({
-                        leading:fs.Text.new("1",{style:this._style}),
                         trailing:fs.Icon.new(fs.Icons.chevron_right),
                         title:fs.Text.new("Material Icons"),
-                        subtitle:fs.Text.new("安卓(原生)风格图标"),
                         onTap:function(){
                             fs.Navigator.push(context,fs.MaterialPageRoute.new({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyMaterialIcons.new();
+                                    return MyMaterialIconsPage.new();
                                 }
                             }));
                         }                        
                     }),
 
                     fs.ListTile.new({
-                        leading:fs.Text.new("2",{style:this._style}),
                         trailing:fs.Icon.new(fs.Icons.chevron_right),
                         title:fs.Text.new("Cupertino Icons"),
-                        subtitle:fs.Text.new("苹果风格图标"),
                         onTap:function(){
                             fs.Navigator.push(context,fs.MaterialPageRoute.new({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyCupertinoIcons.new();
+                                    return MyCupertinoIconsPage.new();
                                 }
                             }));
                         }                        
@@ -53,14 +57,100 @@ export class MyBaseWidgetsIndex extends fs.StatelessWidget{
 
                     //new 的写法2
                     new fs.ListTile({
-                        leading:fs.Text.new("3",{style:this._style}),
                         trailing:new fs.Icon(fs.Icons.chevron_right),
                         title:new fs.Text("AppBar"),
-                        subtitle:new fs.Text("基础组件 - AppBar"),
                         onTap:function(){
                             fs.Navigator.push(context,fs.MaterialPageRoute.new({
                                 builder:function(context?:fs.BuildContext){
-                                    return new MyAppBar();
+                                    return new MyAppBarPage();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("PlaceHolder"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyPlaceholderPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Text"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyTextPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Button"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyButtonPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+
+
+                    MySectionTitle.new("布局组件"),
+                    fs.ListTile.new({
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Container"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyContainerPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Column"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyColumnPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Row"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyRowPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    MySectionTitle.new("其它组件"),
+                    fs.ListTile.new({
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Flutter Logo"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyFlutterLogoPage.new();
                                 }
                             }));
                         }                        
