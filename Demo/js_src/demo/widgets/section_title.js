@@ -11,7 +11,7 @@ class MySectionTitle extends fs.StatelessWidget {
     static new(title) {
         return new MySectionTitle(title);
     }
-    build(buildContext) {
+    build(context) {
         return fs.Container.new({
             padding: fs.EdgeInsets.all(10.0),
             color: color_util_1.MyColorUtil.primaryColor,

@@ -20,8 +20,8 @@ dependencies:
 
   # https://github.com/flutter/plugins/tree/master/packages/shared_preferences
   shared_preferences: '>=0.3.0 <3.0.0'
-  
 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

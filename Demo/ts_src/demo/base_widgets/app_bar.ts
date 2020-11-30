@@ -1,94 +1,96 @@
 
-import fs = require("flutter_sdk");
+//import fs = require("flutter_sdk");
 
-export class MyAppBar extends fs.StatelessWidget{
-    build(context:fs.BuildContext) {
-        return new fs.Scaffold({
-            appBar:new fs.AppBar({
-                title:new fs.Text("基础组件 - AppBar"),
+import { AppBar, BuildContext, Colors, Icon, IconButton, Icons, ListTile, ListView, Log, Scaffold, StatelessWidget,Text, TextStyle } from "flutter_sdk";
+
+export class MyAppBar extends StatelessWidget{
+    build(context:BuildContext) {
+        return new Scaffold({
+            appBar:new AppBar({
+                title:new Text("基础组件 - AppBar"),
             }),
-            body:new fs.ListView({
+            body:new ListView({
                 children:[
-                   new fs.ListTile({
-                        title:new fs.Text("最简单的AppBar"),
+                   new ListTile({
+                        title:new Text("最简单的AppBar"),
                     }),
-                    new fs.AppBar({
-                        title:new fs.Text("NormalAppBar"),
-                    }),
-
-                    new fs.ListTile({
-                        title:new fs.Text("标题换色"),
+                    new AppBar({
+                        title:new Text("NormalAppBar"),
                     }),
 
-                    new fs.AppBar({
-                        title: new fs.Text('NormalAppBar',{
-                          style:new fs.TextStyle({
-                            color:fs.Colors.white,
+                    new ListTile({
+                        title:new Text("标题换色"),
+                    }),
+
+                    new AppBar({
+                        title: new Text('NormalAppBar',{
+                          style:new TextStyle({
+                            color:Colors.white,
                           }),
                         }),
                       }),
 
-                    new fs.ListTile({
-                        title: new fs.Text('背景换色',),
+                    new ListTile({
+                        title: new Text('背景换色',),
                     }),
-                    new fs.AppBar({
-                        backgroundColor: fs.Colors.blue,
-                        title: new fs.Text('NormalAppBar',{
-                          style:new fs.TextStyle({
-                            color:fs.Colors.white,
+                    new AppBar({
+                        backgroundColor: Colors.blue,
+                        title: new Text('NormalAppBar',{
+                          style:new TextStyle({
+                            color:Colors.white,
                           }),
                         }),
                     }),
 
-                    new fs.ListTile({
-                        title: new fs.Text('设置 leading',),
+                    new ListTile({
+                        title: new Text('设置 leading',),
                     }),
                     
-                    new fs.AppBar({
-                        leading: new fs.IconButton({
-                            icon:new fs.Icon(fs.Icons.add),
+                    new AppBar({
+                        leading: new IconButton({
+                            icon:new Icon(Icons.add),
                             onPressed:function(){
-                                fs.Log.log("点击: 设置 leading");
+                                Log.log("点击: 设置 leading");
                             },
                         }),
-                        title: new fs.Text('AppBar',),
+                        title: new Text('AppBar',),
                     }),
                     
-                    new fs.ListTile({
-                        title: new fs.Text('设置 action',),
+                    new ListTile({
+                        title: new Text('设置 action',),
                     }),
-                    new fs.AppBar({
+                    new AppBar({
                         actions:[
-                            new fs.IconButton({
-                                icon:new fs.Icon(fs.Icons.camera),
+                            new IconButton({
+                                icon:new Icon(Icons.camera),
                                 onPressed:function(){
-                                    fs.Log.log("点击: 设置 action");
+                                    Log.log("点击: 设置 action");
                                 },
                             })
                         ],
-                        title: new fs.Text('AppBar',),
+                        title: new Text('AppBar',),
                     }),
 
                     
-                    new fs.ListTile({
-                        title: new fs.Text('设置多个action',),
+                    new ListTile({
+                        title: new Text('设置多个action',),
                     }),
-                    new fs.AppBar({
+                    new AppBar({
                         actions:[
-                            new fs.IconButton({
-                                icon:new fs.Icon(fs.Icons.camera),
+                            new IconButton({
+                                icon:new Icon(Icons.camera),
                                 onPressed:function(){
-                                    fs.Log.log("点击: camera");
+                                    Log.log("点击: camera");
                                 },
                             }),
-                            new fs.IconButton({
-                                icon:new fs.Icon(fs.Icons.print),
+                            new IconButton({
+                                icon:new Icon(Icons.print),
                                 onPressed:function(){
-                                    fs.Log.log("点击: print");
+                                    Log.log("点击: print");
                                 },
                             }),
                         ],
-                        title: new fs.Text('AppBar',),
+                        title: new Text('AppBar',),
                     }),
                 ],
             }),

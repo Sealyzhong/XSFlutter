@@ -16,7 +16,7 @@ export class MySectionTitle extends fs.StatelessWidget{
   }
 
   
-  build(buildContext?:fs.BuildContext){
+  build(context?:fs.BuildContext){
     return fs.Container.new({
 
       padding:fs.EdgeInsets.all(10.0),
@@ -38,6 +38,7 @@ export class MySectionTitle extends fs.StatelessWidget{
             fontWeight:fs.FontWeight.bold,
             fontSize:18,
           })}),
+
         ]
       }),
     });

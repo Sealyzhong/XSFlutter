@@ -6,12 +6,10 @@
  */
 
 import fs = require("flutter_sdk");
-import moment = require("moment");
 import { MyCounterPage } from "demo/common_demo/counter_page";
 import { MyBaseWidgetsIndex } from "demo/base_widgets/index";
 import { MyLoadingPage } from "demo/common_demo/loading_page";
 import { MySharedPreferncesPage } from "demo/common_demo/shared_preferences_page";
-import axios from "axios";
 
 export class MyHomePage extends fs.StatefulWidget{
     createState() {
@@ -89,29 +87,30 @@ class _MyHomePageState extends fs.WidgetState{
                             }));
                         }                        
                     }),
+
+                    /*
                     fs.ListTile.new({
                         leading:fs.Text.new("4",{style:this._style}),
                         trailing:fs.Icon.new(fs.Icons.chevron_right),
                         title:fs.Text.new(moment().format("yyyy-MM-dd HH:mm")),
                         subtitle:fs.Text.new("get、set"),
                         onTap:function(){
-                            axios.get('http://api.nnzhp.cn/api/user/stu_info')
+                                ax.axios.get('http://api.nnzhp.cn/api/user/stu_info')
                                 .then(function (response) {
-                                    fs.Log.log(JSON.stringify(response));
+                                    fs.Log.log("success:"+JSON.stringify(response));
                                     // handle success
                                     console.log(response);
                                 })
                                 .catch(function (error) {
-                                    fs.Log.log(JSON.stringify(error));
+                                    fs.Log.log("error:"+JSON.stringify(error));
                                     // handle error
                                     console.log(error);
                                 })
                                 .then(function () {
                                     // always executed
-                                });
+                                });                                                        
                         }                        
-                    }),
-
+                    }),*/
                 ],
             }),
         });

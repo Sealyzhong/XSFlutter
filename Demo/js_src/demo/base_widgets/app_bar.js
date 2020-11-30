@@ -1,87 +1,88 @@
 "use strict";
+//import fs = require("flutter_sdk");
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyAppBar = void 0;
-const fs = require("flutter_sdk");
-class MyAppBar extends fs.StatelessWidget {
+const flutter_sdk_1 = require("flutter_sdk");
+class MyAppBar extends flutter_sdk_1.StatelessWidget {
     build(context) {
-        return new fs.Scaffold({
-            appBar: new fs.AppBar({
-                title: new fs.Text("基础组件 - AppBar"),
+        return new flutter_sdk_1.Scaffold({
+            appBar: new flutter_sdk_1.AppBar({
+                title: new flutter_sdk_1.Text("基础组件 - AppBar"),
             }),
-            body: new fs.ListView({
+            body: new flutter_sdk_1.ListView({
                 children: [
-                    new fs.ListTile({
-                        title: new fs.Text("最简单的AppBar"),
+                    new flutter_sdk_1.ListTile({
+                        title: new flutter_sdk_1.Text("最简单的AppBar"),
                     }),
-                    new fs.AppBar({
-                        title: new fs.Text("NormalAppBar"),
+                    new flutter_sdk_1.AppBar({
+                        title: new flutter_sdk_1.Text("NormalAppBar"),
                     }),
-                    new fs.ListTile({
-                        title: new fs.Text("标题换色"),
+                    new flutter_sdk_1.ListTile({
+                        title: new flutter_sdk_1.Text("标题换色"),
                     }),
-                    new fs.AppBar({
-                        title: new fs.Text('NormalAppBar', {
-                            style: new fs.TextStyle({
-                                color: fs.Colors.white,
+                    new flutter_sdk_1.AppBar({
+                        title: new flutter_sdk_1.Text('NormalAppBar', {
+                            style: new flutter_sdk_1.TextStyle({
+                                color: flutter_sdk_1.Colors.white,
                             }),
                         }),
                     }),
-                    new fs.ListTile({
-                        title: new fs.Text('背景换色'),
+                    new flutter_sdk_1.ListTile({
+                        title: new flutter_sdk_1.Text('背景换色'),
                     }),
-                    new fs.AppBar({
-                        backgroundColor: fs.Colors.blue,
-                        title: new fs.Text('NormalAppBar', {
-                            style: new fs.TextStyle({
-                                color: fs.Colors.white,
+                    new flutter_sdk_1.AppBar({
+                        backgroundColor: flutter_sdk_1.Colors.blue,
+                        title: new flutter_sdk_1.Text('NormalAppBar', {
+                            style: new flutter_sdk_1.TextStyle({
+                                color: flutter_sdk_1.Colors.white,
                             }),
                         }),
                     }),
-                    new fs.ListTile({
-                        title: new fs.Text('设置 leading'),
+                    new flutter_sdk_1.ListTile({
+                        title: new flutter_sdk_1.Text('设置 leading'),
                     }),
-                    new fs.AppBar({
-                        leading: new fs.IconButton({
-                            icon: new fs.Icon(fs.Icons.add),
+                    new flutter_sdk_1.AppBar({
+                        leading: new flutter_sdk_1.IconButton({
+                            icon: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.add),
                             onPressed: function () {
-                                fs.Log.log("点击: 设置 leading");
+                                flutter_sdk_1.Log.log("点击: 设置 leading");
                             },
                         }),
-                        title: new fs.Text('AppBar'),
+                        title: new flutter_sdk_1.Text('AppBar'),
                     }),
-                    new fs.ListTile({
-                        title: new fs.Text('设置 action'),
+                    new flutter_sdk_1.ListTile({
+                        title: new flutter_sdk_1.Text('设置 action'),
                     }),
-                    new fs.AppBar({
+                    new flutter_sdk_1.AppBar({
                         actions: [
-                            new fs.IconButton({
-                                icon: new fs.Icon(fs.Icons.camera),
+                            new flutter_sdk_1.IconButton({
+                                icon: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.camera),
                                 onPressed: function () {
-                                    fs.Log.log("点击: 设置 action");
+                                    flutter_sdk_1.Log.log("点击: 设置 action");
                                 },
                             })
                         ],
-                        title: new fs.Text('AppBar'),
+                        title: new flutter_sdk_1.Text('AppBar'),
                     }),
-                    new fs.ListTile({
-                        title: new fs.Text('设置多个action'),
+                    new flutter_sdk_1.ListTile({
+                        title: new flutter_sdk_1.Text('设置多个action'),
                     }),
-                    new fs.AppBar({
+                    new flutter_sdk_1.AppBar({
                         actions: [
-                            new fs.IconButton({
-                                icon: new fs.Icon(fs.Icons.camera),
+                            new flutter_sdk_1.IconButton({
+                                icon: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.camera),
                                 onPressed: function () {
-                                    fs.Log.log("点击: camera");
+                                    flutter_sdk_1.Log.log("点击: camera");
                                 },
                             }),
-                            new fs.IconButton({
-                                icon: new fs.Icon(fs.Icons.print),
+                            new flutter_sdk_1.IconButton({
+                                icon: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.print),
                                 onPressed: function () {
-                                    fs.Log.log("点击: print");
+                                    flutter_sdk_1.Log.log("点击: print");
                                 },
                             }),
                         ],
-                        title: new fs.Text('AppBar'),
+                        title: new flutter_sdk_1.Text('AppBar'),
                     }),
                 ],
             }),

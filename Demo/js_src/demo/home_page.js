@@ -5,18 +5,13 @@
  * @ModifyDate: 2020/11/11
  * @Description: 入口页
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyHomePage = void 0;
 const fs = require("flutter_sdk");
-const moment = require("moment");
 const counter_page_1 = require("demo/common_demo/counter_page");
 const index_1 = require("demo/base_widgets/index");
 const loading_page_1 = require("demo/common_demo/loading_page");
 const shared_preferences_page_1 = require("demo/common_demo/shared_preferences_page");
-const axios_1 = __importDefault(require("axios"));
 class MyHomePage extends fs.StatefulWidget {
     createState() {
         return _MyHomePageState.new(this);
@@ -87,28 +82,6 @@ class _MyHomePageState extends fs.WidgetState {
                                     return shared_preferences_page_1.MySharedPreferncesPage.new();
                                 }
                             }));
-                        }
-                    }),
-                    fs.ListTile.new({
-                        leading: fs.Text.new("4", { style: this._style }),
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new(moment().format("yyyy-MM-dd HH:mm")),
-                        subtitle: fs.Text.new("get、set"),
-                        onTap: function () {
-                            axios_1.default.get('http://api.nnzhp.cn/api/user/stu_info')
-                                .then(function (response) {
-                                fs.Log.log(JSON.stringify(response));
-                                // handle success
-                                console.log(response);
-                            })
-                                .catch(function (error) {
-                                fs.Log.log(JSON.stringify(error));
-                                // handle error
-                                console.log(error);
-                            })
-                                .then(function () {
-                                // always executed
-                            });
                         }
                     }),
                 ],

@@ -19,6 +19,7 @@ class MyApp extends fs.JSFlutterApp{
     }
 }
 
+
 function main(releaseMode?:boolean) {
     fs.Log.log("main() start up ");
     let app = new MyApp();    
