@@ -5,6 +5,7 @@
 //  found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:xsflutter/xsflutter.dart';
 import 'xs_js_parse.dart';
 import 'xs_json_to_dart.dart';
@@ -23,6 +24,7 @@ class XSProxyRegisterHelperPackageSeries {
     m.addAll(XSProxyScreenInfo.registerProxy());
     m.addAll(XSProxyPackageInfo.registerProxy());
     m.addAll(XSProxyWakelock.registerProxy());
+    m.addAll(XSProxyUrlLauncher.registerProxy());
     return m;
   }
 }
@@ -104,7 +106,7 @@ class XSProxySp extends XSJsonObjProxy {
   }
 
   @override
-  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) {
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
     if (mirrorObj == null) return;
     var result;
     switch (funcName) {
@@ -134,33 +136,33 @@ class XSProxySp extends XSJsonObjProxy {
         break;
 
       case 'clear':
-        result = XSSpUtil.clear();
+        result = await XSSpUtil.clear();
         break;
       case 'remove':
-        result = XSSpUtil.remove(XSJSParse.getString(null, null, map, "key"));
+        result = await XSSpUtil.remove(XSJSParse.getString(null, null, map, "key"));
         break;
 
       case 'setBool':
-        result = XSSpUtil.putBool(
+        result = await XSSpUtil.putBool(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getBool(null, null, map, "value"),
         );
         break;
 
       case 'setDouble':
-        result = XSSpUtil.putDouble(
+        result = await XSSpUtil.putDouble(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getDouble(null, null, map, "value"),
         );
         break;
       case 'setInt':
-        result = XSSpUtil.putInt(
+        result = await XSSpUtil.putInt(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getInt(null, null, map, "value"),
         );
         break;
       case 'setString':
-        result = XSSpUtil.putString(
+        result = await XSSpUtil.putString(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getString(null, null, map, "value"),
         );
@@ -270,21 +272,70 @@ class XSProxyWakelock extends XSJsonObjProxy {
   }
 
   @override
-  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) {
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
     if (mirrorObj == null) return;
+    var result = false;
     switch (funcName) {
       case 'disable':
-        Wakelock.disable();
+        await Wakelock.disable();
+        result = false;
         break;
       case 'enable':
-        Wakelock.enable();
+        await Wakelock.enable();
+        result = true;
         break;
       case 'isEnabled':
-        Wakelock.isEnabled.then((value) {
-          callback(value);
-        });
-
+        result = await Wakelock.isEnabled;
         break;
+    }
+
+    if (callback != null) {
+      callback(result);
+    }
+  }
+}
+
+//****** UrlLauncher ******
+class XSProxyUrlLauncher extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "UrlLauncher";
+    return {
+      regClassName: () => XSProxyUrlLauncher()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Object constructor(dynamic bo, Map<String, dynamic> jsonMap, {dynamic context}) {
+    return Object();
+  }
+
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
+    if (mirrorObj == null) return;
+    var result = false;
+    switch (funcName) {
+      case 'openUrl':
+        var urlString = XSJSParse.getString(null, null, map, "urlString");
+        if (await canLaunch(urlString)) {
+          result = await launch(
+            urlString,
+            forceSafariVC: XSJSParse.getBool(null, null, map, "forceSafariVC"),
+            forceWebView: XSJSParse.getBool(null, null, map, "forceWebView"),
+            enableJavaScript: XSJSParse.getBool(null, null, map, "enableJavaScript"),
+            enableDomStorage: XSJSParse.getBool(null, null, map, "enableDomStorage"),
+            universalLinksOnly: XSJSParse.getBool(null, null, map, "universalLinksOnly"),
+            statusBarBrightness: XSJSParse.getBrightness(null, null, map, "statusBarBrightness"),
+            webOnlyWindowName: XSJSParse.getString(null, null, map, "webOnlyWindowName"),
+            headers: toMapStringT(XSJSParse.getObject(null, null, map, "headers")),
+          );
+        } else {
+          result = false;
+        }
+        break;
+    }
+
+    if (callback != null) {
+      callback(result);
     }
   }
 }

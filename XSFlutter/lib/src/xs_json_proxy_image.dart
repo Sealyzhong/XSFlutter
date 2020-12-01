@@ -14,6 +14,8 @@ class XSProxyRegisterHelperImageSeries {
     Map<String, CreateJsonObjProxyFun> m = {};
     m.addAll(XSProxyRawImage.registerProxy());
 
+    m.addAll(XSProxyImage.registerProxy());
+
     return m;
   }
 }
@@ -111,7 +113,7 @@ class XSProxyImage extends XSJsonObjProxy {
 
   Image constructorAsset(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return Image.asset(
-      XSJSParse.getString(context, bo, map, "name"),
+      XSJSParse.getString(context, bo, map, "imageName"),
       key: XSJSParse.getKey(context, bo, map, "key"),
       bundle: XSJSParse.getObject(context, bo, map, "bundle"),
       semanticLabel: XSJSParse.getString(context, bo, map, "semanticLabel"),

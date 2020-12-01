@@ -10,6 +10,8 @@ import { MyLoadingPage } from "demo/packages/loading_page";
 import { MySharedPreferncesPage } from "demo/packages/shared_preferences_page";
 import { MyScreenInfoPage } from "demo/packages/screen_info_page";
 import { MyPackageInfoPage } from "demo/packages/package_info_page";
+import { MyWakelockPage } from "demo/packages/wakelock_page";
+import { MyUrlLaucherPage } from "demo/packages/url_laucher_page";
 
 export class MyPackageIndex extends fs.StatelessWidget{
     _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
@@ -73,6 +75,34 @@ export class MyPackageIndex extends fs.StatelessWidget{
                             fs.Navigator.push(context,fs.MaterialPageRoute.new({
                                 builder:function(context?:fs.BuildContext){
                                     return MyPackageInfoPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+                
+                    fs.ListTile.new({
+                        leading:fs.Text.new("5",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("wakelock"),
+                        subtitle:fs.Text.new("enable、disable、isEnabled"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyWakelockPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        leading:fs.Text.new("6",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Url Launcher"),
+                        subtitle:fs.Text.new("enable、disable、isEnabled"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyUrlLaucherPage.new();
                                 }
                             }));
                         }                        

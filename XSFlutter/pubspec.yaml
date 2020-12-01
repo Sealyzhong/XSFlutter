@@ -27,6 +27,15 @@ dependencies:
 
   #屏幕常亮
   wakelock: ^0.1.4+1
+
+  # 页面跳转
+  # https://github.com/smrutiranjanrana/Flutter-URL-Launcher
+  # 5.2.7
+  url_launcher: ^5.2.7
+
+  # 网络图片加载
+  # https://github.com/renefloor/flutter_cached_network_image
+  cached_network_image: ^2.3.0
   
 dev_dependencies:
   flutter_test:

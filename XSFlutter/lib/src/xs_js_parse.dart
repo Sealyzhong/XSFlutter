@@ -4024,7 +4024,7 @@ class XSJSParse {
           );
         case 'exactAsset':
           return ExactAssetImage(
-            getString(context, bo, v, "assetName"),
+            getString(context, bo, v, "imageName"),
             scale: getDouble(context, bo, v, "scale", defaultValue: 1.0),
             bundle: getAssetBundle(context, bo, v, key),
             package: getString(context, bo, v, "packageName"),

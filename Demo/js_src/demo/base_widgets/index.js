@@ -20,6 +20,7 @@ const text_page_1 = require("demo/base_widgets/text_page");
 const button_page_1 = require("demo/base_widgets/button_page");
 const flutter_logo_page_1 = require("demo/base_widgets/flutter_logo_page");
 const text_field_page_1 = require("demo/base_widgets/text_field_page");
+const image_page_1 = require("demo/base_widgets/image_page");
 class MyBaseWidgetsIndex extends fs.StatelessWidget {
     constructor() {
         super(...arguments);
@@ -74,6 +75,17 @@ class MyBaseWidgetsIndex extends fs.StatelessWidget {
                             fs.Navigator.push(context, fs.MaterialPageRoute.new({
                                 builder: function (context) {
                                     return placeholder_page_1.MyPlaceholderPage.new();
+                                }
+                            }));
+                        }
+                    }),
+                    fs.ListTile.new({
+                        trailing: fs.Icon.new(fs.Icons.chevron_right),
+                        title: fs.Text.new("Image"),
+                        onTap: function () {
+                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                                builder: function (context) {
+                                    return image_page_1.MyImagePage.new();
                                 }
                             }));
                         }

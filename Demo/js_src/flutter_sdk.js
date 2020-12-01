@@ -6,7 +6,7 @@
  * @Description: JS Flutter SDK
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FocusScope = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.SpApi = exports.LoadingApi = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.ScrollPhysics = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.RangeMaintainingScrollPhysics = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.Radius = exports.Quaternion = exports.OutlinedBorder = exports.Offset = exports.NotchedShape = exports.Notification = exports.NeverScrollableScrollPhysics = exports.MediaQueryData = exports.MediaQuery = exports.Matrix4 = exports.MaskFilter = exports.Key = exports.InputDecoration = exports.InputDecorationTheme = exports.ImageShader = exports.IconThemeData = exports.IconData = exports.ImageProvider = exports.InputBorder = exports.Gradient = exports.GradientTransform = exports.File = exports.FixedColumnWidth = exports.FractionalOffset = exports.FocusNode = exports.FlutterLogoDecoration = exports.FlexColumnWidth = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.Duration = exports.CurveTween = exports.ClampingScrollPhysics = exports.CircularNotchedRectangle = exports.ColorScheme = exports.ColorFilter = exports.Colors = exports.Color = exports.BouncingScrollPhysics = exports.BoxShadow = exports.BannerPainter = exports.BoxDecoration = exports.ButtonThemeData = exports.BorderDirectional = exports.Border = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderSide = exports.BoxConstraints = exports.AssetImage = exports.AssetBundle = exports.AlwaysScrollableScrollPhysics = exports.AlignmentDirectional = exports.Alignment = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.ShapeBorder = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
+exports.UrlLauncher = exports.FocusScope = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.SpApi = exports.LoadingApi = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.ScrollPhysics = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.RangeMaintainingScrollPhysics = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.Radius = exports.Quaternion = exports.OutlinedBorder = exports.Offset = exports.NotchedShape = exports.Notification = exports.NeverScrollableScrollPhysics = exports.MediaQueryData = exports.MediaQuery = exports.Matrix4 = exports.MaskFilter = exports.Key = exports.InputDecoration = exports.InputDecorationTheme = exports.ImageShader = exports.IconThemeData = exports.IconData = exports.ImageProvider = exports.InputBorder = exports.Gradient = exports.GradientTransform = exports.File = exports.FixedColumnWidth = exports.FractionalOffset = exports.FocusNode = exports.FlutterLogoDecoration = exports.FlexColumnWidth = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.Duration = exports.CurveTween = exports.ClampingScrollPhysics = exports.CircularNotchedRectangle = exports.ColorScheme = exports.ColorFilter = exports.Colors = exports.Color = exports.BouncingScrollPhysics = exports.BoxShadow = exports.BannerPainter = exports.BoxDecoration = exports.ButtonThemeData = exports.BorderDirectional = exports.Border = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderSide = exports.BoxConstraints = exports.AssetImage = exports.AssetBundle = exports.AlwaysScrollableScrollPhysics = exports.AlignmentDirectional = exports.Alignment = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.ShapeBorder = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -111,6 +111,29 @@ exports.Widget = Widget;
 class ShapeBorder extends DartClass {
 }
 exports.ShapeBorder = ShapeBorder;
+//格式转换
+class Convert extends core.Object {
+    static toBoolean(v) {
+        if (typeof v == "string") {
+            if (v == "true" || v == "1") {
+                return true;
+            }
+        }
+        return false;
+    }
+    static toNumber(v) {
+        return Number(v);
+    }
+    static toString(v) {
+        if (typeof v == "string") {
+            if (v == "true" || v == "1") {
+                return v;
+            }
+        }
+        return String(v);
+    }
+}
+exports.Convert = Convert;
 //#endregion
 //#region ******** Framework ********
 class JSBridge {
@@ -2950,16 +2973,16 @@ class ImageProvider extends DartClass {
     /**
      * @param config config:
         {
-          assetName:string,
+          imageName:string,
           scale?:number,
           bundle?:BaseAssetBundle,
           packageName?:string,
         }
      */
-    static exactAsset(assetName, config) {
+    static exactAsset(imageName, config) {
         var v = new ImageProvider();
         v.constructorName = "exactAsset";
-        v.assetName = assetName;
+        v.imageName = imageName;
         if (config != null && config != undefined) {
             v.scale = config.scale;
             v.bundle = config.bundle;
@@ -10078,10 +10101,10 @@ class Image extends Widget {
           cacheHeight?:number,
         }
      */
-    static asset(assetName, config) {
+    static asset(imageName, config) {
         var v = new Image();
         v.constructorName = "asset";
-        v.assetName = assetName;
+        v.imageName = imageName;
         if (config != null && config != undefined) {
             v.key = config.key;
             v.bundle = config.bundle;
@@ -12225,7 +12248,7 @@ class Switch extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidCallbackBoolean,
+          onChanged?:VoidCallbackBoolean,
           activeColor?:Color,
           activeTrackColor?:Color,
           inactiveThumbColor?:Color,
@@ -12259,7 +12282,7 @@ class Switch extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidCallbackBoolean,
+          onChanged?:VoidCallbackBoolean,
           activeColor?:Color,
           activeTrackColor?:Color,
           inactiveThumbColor?:Color,
@@ -15270,7 +15293,7 @@ class SpApi extends DartClass {
             funcName: "getBool",
             args: config,
         }));
-        return Boolean(v);
+        return Convert.toBoolean(v);
     }
     /**
      * @param config config:
@@ -15286,7 +15309,7 @@ class SpApi extends DartClass {
             funcName: "getInt",
             args: config,
         }));
-        return Number(v);
+        return Convert.toNumber(v);
     }
     /**
      * @param config config:
@@ -15302,7 +15325,7 @@ class SpApi extends DartClass {
             funcName: "getDouble",
             args: config,
         }));
-        return Number(v);
+        return Convert.toNumber(v);
     }
     /**
      * @param config config:
@@ -15318,7 +15341,7 @@ class SpApi extends DartClass {
             funcName: "getString",
             args: config,
         }));
-        return String(v);
+        return Convert.toString(v);
     }
     static async clear() {
         var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
@@ -15326,7 +15349,7 @@ class SpApi extends DartClass {
             className: SpApi.getInstance().className,
             funcName: "clear",
         }));
-        return Boolean(v);
+        return Convert.toBoolean(v);
     }
     /**
      * @param config config:
@@ -15340,7 +15363,7 @@ class SpApi extends DartClass {
             className: SpApi.getInstance().className,
             funcName: "remove",
         }));
-        return Boolean(v);
+        return Convert.toBoolean(v);
     }
     /**
      * @param config config:
@@ -15356,7 +15379,7 @@ class SpApi extends DartClass {
             funcName: "setBool",
             args: config,
         }));
-        return Boolean(v);
+        return Convert.toBoolean(v);
     }
     /**
      * @param config config:
@@ -15372,7 +15395,7 @@ class SpApi extends DartClass {
             funcName: "setDouble",
             args: config,
         }));
-        return Boolean(v);
+        return Convert.toBoolean(v);
     }
     /**
      * @param config config:
@@ -15388,7 +15411,7 @@ class SpApi extends DartClass {
             funcName: "setInt",
             args: config,
         }));
-        return Boolean(v);
+        return Convert.toBoolean(v);
     }
     /**
      * @param config config:
@@ -15455,31 +15478,30 @@ class ScreenInfo extends DartClass {
         if (v != null && v != undefined) {
             var result = JSON.parse(String(v));
             if (result != null && result != undefined) {
-                ScreenInfo.appBarHeight = result["appBarHeight"];
-                ScreenInfo.bottomBarHeight = result["bottomBarHeight"];
-                ScreenInfo.dpRatio = result["dpRatio"];
-                ScreenInfo.pxRatio = result["pxRatio"];
-                ScreenInfo.screenDensity = result["screenDensity"];
-                ScreenInfo.screenHeight = result["screenHeight"];
-                ScreenInfo.screenHeightPx = result["screenHeightPx"];
-                ScreenInfo.screenWidth = result["screenWidth"];
-                ScreenInfo.screenWidthPx = result["screenWidthPx"];
-                ScreenInfo.statusBarHeight = result["statusBarHeight"];
-                ScreenInfo.uiDensity = result["uiDensity"];
-                ScreenInfo.uiHeight = result["uiHeight"];
-                ScreenInfo.uiWidth = result["uiWidth"];
-                ScreenInfo.uiWidthPx = result["uiWidthPx"];
-                ScreenInfo.uiHeightPx = result["uiHeightPx"];
+                ScreenInfo.appBarHeight = Convert.toNumber(result["appBarHeight"]);
+                ScreenInfo.bottomBarHeight = Convert.toNumber(result["bottomBarHeight"]);
+                ScreenInfo.dpRatio = Convert.toNumber(result["dpRatio"]);
+                ScreenInfo.pxRatio = Convert.toNumber(result["pxRatio"]);
+                ScreenInfo.screenDensity = Convert.toNumber(result["screenDensity"]);
+                ScreenInfo.screenHeight = Convert.toNumber(result["screenHeight"]);
+                ScreenInfo.screenHeightPx = Convert.toNumber(result["screenHeightPx"]);
+                ScreenInfo.screenWidth = Convert.toNumber(result["screenWidth"]);
+                ScreenInfo.screenWidthPx = Convert.toNumber(result["screenWidthPx"]);
+                ScreenInfo.statusBarHeight = Convert.toNumber(result["statusBarHeight"]);
+                ScreenInfo.uiDensity = Convert.toNumber(result["uiDensity"]);
+                ScreenInfo.uiHeight = Convert.toNumber(result["uiHeight"]);
+                ScreenInfo.uiWidth = Convert.toNumber(result["uiWidth"]);
+                ScreenInfo.uiWidthPx = Convert.toNumber(result["uiWidthPx"]);
+                ScreenInfo.uiHeightPx = Convert.toNumber(result["uiHeightPx"]);
             }
         }
-        //Log.log("ScreenInfo.updateInfo:"+String(v));
     }
 }
 exports.ScreenInfo = ScreenInfo;
 // 设计稿屏幕宽度(PX)
-ScreenInfo.uiWidthPx = 750;
+ScreenInfo.uiWidthPx = 750.0;
 //设计稿屏幕宽度(PX)
-ScreenInfo.uiHeightPx = 1334;
+ScreenInfo.uiHeightPx = 1334.0;
 //设计稿屏幕密度
 ScreenInfo.uiDensity = 2.0;
 //设计稿屏幕宽度(DP)
@@ -15491,7 +15513,7 @@ ScreenInfo.screenWidth = 375.0;
 // 当前设备高度 dp
 ScreenInfo.screenHeight = 667.0;
 // 当前设备宽度 px
-ScreenInfo.screenWidthPx = 750;
+ScreenInfo.screenWidthPx = 750.0;
 // 当前设备高度 px
 ScreenInfo.screenHeightPx = 1334.0;
 // 设备的像素密度
@@ -15544,10 +15566,10 @@ class PackageInfo extends DartClass {
         if (v != null && v != undefined) {
             var result = JSON.parse(String(v));
             if (result != null && result != undefined) {
-                PackageInfo.appName = result["appName"];
-                PackageInfo.buildNumber = result["buildNumber"];
-                PackageInfo.packageName = result["packageName"];
-                PackageInfo.version = result["version"];
+                PackageInfo.appName = Convert.toString(result["appName"]);
+                PackageInfo.buildNumber = Convert.toString(result["buildNumber"]);
+                PackageInfo.packageName = Convert.toString(result["packageName"]);
+                PackageInfo.version = Convert.toString(result["version"]);
             }
         }
     }
@@ -15585,20 +15607,22 @@ class Wakelock extends DartClass {
     //
     static async disable() {
         var info = new Wakelock();
-        await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "disable",
         }));
+        return Convert.toBoolean(v);
     }
     //
     static async enable() {
         var info = new Wakelock();
-        await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "enable",
         }));
+        return Convert.toBoolean(v);
     }
     //
     static async isEnabled() {
@@ -15608,7 +15632,7 @@ class Wakelock extends DartClass {
             className: info.className,
             funcName: "isEnabled",
         }));
-        return Boolean(v);
+        return Convert.toBoolean(v);
     }
 }
 exports.Wakelock = Wakelock;
@@ -15657,4 +15681,41 @@ class FocusScope extends DartClass {
     }
 }
 exports.FocusScope = FocusScope;
+class UrlLauncher extends DartClass {
+    constructor() {
+        super();
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
+        //创建对应FLutter对象
+        var argument = new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+        });
+        JSBridge.createMirrorObj(argument, this.mirrorID, this);
+    }
+    invokeMirrorObjWithCallback(argument) {
+        return new Promise(function (resolve) {
+            JSBridge.invokeMirrorObjWithCallback(argument, function (value) {
+                if (value != null && value != undefined) {
+                    resolve(value);
+                }
+                else {
+                    resolve(null);
+                }
+            });
+        }.bind(this));
+    }
+    //
+    static async openUrl(config) {
+        var info = new UrlLauncher();
+        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
+            funcName: "openUrl",
+            args: config,
+        }));
+        return Convert.toBoolean(v);
+    }
+}
+exports.UrlLauncher = UrlLauncher;
 //#endregion

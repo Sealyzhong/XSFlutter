@@ -68,7 +68,6 @@ export class JSWidgetMirrorMgr {
   }
 }
 
-
 //****** TODO JSCallArgs ******
 interface JSCallArgsConfig {
   widgetID?:string;
@@ -158,6 +157,29 @@ export class Widget extends DartClass {
 //****** ShapeBorder ******
 export class ShapeBorder extends DartClass {}
 
+//格式转换
+export class Convert extends core.Object{
+  static toBoolean(v:any){
+    if(typeof v == "string"){
+      if(v=="true" || v=="1"){
+        return true;
+      }
+    }
+    return false;
+  }
+  static toNumber(v:any){
+    return Number(v);
+  }
+
+  static toString(v:any){
+    if(typeof v == "string"){
+      if(v=="true" || v=="1"){
+        return v;
+      }
+    }
+    return String(v);
+  }
+}
 //#endregion
 
 
@@ -1961,6 +1983,7 @@ export enum Axis {
 
 //#region ******** Class ********
 
+
   //#region ------- A -------
 //****** Alignment ******
 export class Alignment extends DartClass {
@@ -3722,7 +3745,7 @@ export class Alignment extends DartClass {
     scale?:number;
     bytes?:Uint8List;
     url?:string;
-    assetName?:string;
+    imageName?:string;
     bundle?:AssetBundle;
     packageName?:string;
   
@@ -3802,16 +3825,16 @@ export class Alignment extends DartClass {
     /**
      * @param config config: 
         {
-          assetName:string, 
+          imageName:string, 
           scale?:number, 
           bundle?:BaseAssetBundle, 
           packageName?:string,
         }
      */
-    static exactAsset(assetName:string,config?: ImageProviderConfig) {
+    static exactAsset(imageName:string,config?: ImageProviderConfig) {
       var v = new ImageProvider();
       v.constructorName = "exactAsset";
-      v.assetName = assetName;
+      v.imageName = imageName;
       if(config!=null && config!=undefined){      
         v.scale = config.scale;
         v.bundle = config.bundle;
@@ -13373,7 +13396,7 @@ export class CupertinoIcons extends IconData{
   //TODO:frameBuilder、loadingBuilder、errorBuilder
   interface ImageConfig {
     key?:Key;
-    image:ImageProvider;
+    image?:ImageProvider;
     semanticLabel?:string;
     excludeFromSemantics?:boolean;
     width?:number;
@@ -13424,7 +13447,7 @@ export class CupertinoIcons extends IconData{
     bundle?:AssetBundle;
     package?:string;
     file?:File;
-    assetName?:string;
+    imageName?:string;
 
     bytes?:Uint8List;
 
@@ -13624,10 +13647,10 @@ export class CupertinoIcons extends IconData{
           cacheHeight?:number,
         }
      */
-    static asset(assetName:string, config?: ImageConfig) {
+    static asset(imageName:string, config?: ImageConfig) {
       var v = new Image();
       v.constructorName = "asset";
-      v.assetName = assetName;
+      v.imageName = imageName;
       if(config!=null && config!=undefined){
         v.key = config.key;
         v.bundle = config.bundle;
@@ -16702,7 +16725,7 @@ export class CupertinoIcons extends IconData{
   interface SwitchConfig {
     key?:Key;
     value:boolean;
-    onChanged:VoidCallbackBoolean;
+    onChanged?:VoidCallbackBoolean;
     activeColor?:Color;
     activeTrackColor?:Color;
     inactiveThumbColor?:Color;
@@ -16732,7 +16755,7 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidCallbackBoolean, 
+          onChanged?:VoidCallbackBoolean, 
           activeColor?:Color, 
           activeTrackColor?:Color, 
           inactiveThumbColor?:Color, 
@@ -16767,7 +16790,7 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidCallbackBoolean, 
+          onChanged?:VoidCallbackBoolean, 
           activeColor?:Color, 
           activeTrackColor?:Color, 
           inactiveThumbColor?:Color, 
@@ -21162,7 +21185,7 @@ export class SpApi extends DartClass {
           args: config,
         })
       );
-      return Boolean(v);
+      return Convert.toBoolean(v);
     }
 
     /**
@@ -21181,7 +21204,7 @@ export class SpApi extends DartClass {
           args: config,
         })
       );
-      return Number(v);
+      return Convert.toNumber(v);
     }
 
     /**
@@ -21200,7 +21223,7 @@ export class SpApi extends DartClass {
           args: config,
         })
       );
-      return Number(v);
+      return Convert.toNumber(v);
     }
 
     /**
@@ -21219,7 +21242,7 @@ export class SpApi extends DartClass {
           args: config,
         })
       );
-      return String(v);
+      return Convert.toString(v);
     }
 
     static async clear() {
@@ -21230,7 +21253,7 @@ export class SpApi extends DartClass {
           funcName: "clear",
         })
       );
-      return Boolean(v);
+      return Convert.toBoolean(v);
     }
 
     /**
@@ -21247,7 +21270,7 @@ export class SpApi extends DartClass {
           funcName: "remove",
         })
       );
-      return Boolean(v);
+      return Convert.toBoolean(v);
     }
 
     /**
@@ -21266,7 +21289,7 @@ export class SpApi extends DartClass {
             args: config,
         })
       );
-      return Boolean(v);
+      return Convert.toBoolean(v);
     }
 
     /**
@@ -21285,7 +21308,7 @@ export class SpApi extends DartClass {
             args: config,
         })
       );
-      return Boolean(v);
+      return Convert.toBoolean(v);
     }
 
     /**
@@ -21304,7 +21327,7 @@ export class SpApi extends DartClass {
             args: config,
         })
       );
-      return Boolean(v);
+      return Convert.toBoolean(v);
     }
 
     /**
@@ -21331,9 +21354,9 @@ export class SpApi extends DartClass {
 export class ScreenInfo extends DartClass {
 
   // 设计稿屏幕宽度(PX)
-  static uiWidthPx:number = 750;
+  static uiWidthPx:number = 750.0;
   //设计稿屏幕宽度(PX)
-  static uiHeightPx:number = 1334;
+  static uiHeightPx:number = 1334.0;
   //设计稿屏幕密度
   static uiDensity:number = 2.0;
   //设计稿屏幕宽度(DP)
@@ -21345,7 +21368,7 @@ export class ScreenInfo extends DartClass {
   // 当前设备高度 dp
   static screenHeight:number = 667.0;
   // 当前设备宽度 px
-  static screenWidthPx:number = 750;
+  static screenWidthPx:number = 750.0;
   // 当前设备高度 px
   static screenHeightPx:number = 1334.0;
   // 设备的像素密度
@@ -21416,30 +21439,28 @@ export class ScreenInfo extends DartClass {
       if(v!=null && v!=undefined){
         var result= JSON.parse(String(v));
         if(result!=null && result!=undefined){
-          ScreenInfo.appBarHeight = result["appBarHeight"] as number;
-          ScreenInfo.bottomBarHeight = result["bottomBarHeight"] as number;
-          ScreenInfo.dpRatio = result["dpRatio"] as number;
-          ScreenInfo.pxRatio = result["pxRatio"] as number;
-          ScreenInfo.screenDensity = result["screenDensity"] as number;
-          ScreenInfo.screenHeight = result["screenHeight"] as number;
-          ScreenInfo.screenHeightPx = result["screenHeightPx"] as number;
-          ScreenInfo.screenWidth = result["screenWidth"] as number;
-          ScreenInfo.screenWidthPx = result["screenWidthPx"] as number;
-          ScreenInfo.statusBarHeight = result["statusBarHeight"] as number;
-          ScreenInfo.uiDensity = result["uiDensity"] as number;
-          ScreenInfo.uiHeight = result["uiHeight"] as number;
-          ScreenInfo.uiWidth = result["uiWidth"] as number;
-          ScreenInfo.uiWidthPx = result["uiWidthPx"] as number;
-          ScreenInfo.uiHeightPx = result["uiHeightPx"] as number;
+          ScreenInfo.appBarHeight = Convert.toNumber(result["appBarHeight"]);
+          ScreenInfo.bottomBarHeight = Convert.toNumber(result["bottomBarHeight"]);
+          ScreenInfo.dpRatio = Convert.toNumber(result["dpRatio"]);
+          ScreenInfo.pxRatio = Convert.toNumber(result["pxRatio"]);
+          ScreenInfo.screenDensity = Convert.toNumber(result["screenDensity"]);
+          ScreenInfo.screenHeight = Convert.toNumber(result["screenHeight"]);
+          ScreenInfo.screenHeightPx = Convert.toNumber(result["screenHeightPx"]);
+          ScreenInfo.screenWidth = Convert.toNumber(result["screenWidth"]);
+          ScreenInfo.screenWidthPx = Convert.toNumber(result["screenWidthPx"]);
+          ScreenInfo.statusBarHeight = Convert.toNumber(result["statusBarHeight"]);
+          ScreenInfo.uiDensity = Convert.toNumber(result["uiDensity"]);
+          ScreenInfo.uiHeight = Convert.toNumber(result["uiHeight"]);
+          ScreenInfo.uiWidth = Convert.toNumber(result["uiWidth"]);
+          ScreenInfo.uiWidthPx = Convert.toNumber(result["uiWidthPx"]);
+          ScreenInfo.uiHeightPx = Convert.toNumber(result["uiHeightPx"]);
         }
       }
-      //Log.log("ScreenInfo.updateInfo:"+String(v));
   }
 }
 
 //****** PackageInfo ******
 export class PackageInfo extends DartClass {
-
   static appName:string = ""; //应用名称
   static packageName:string = ""; //包名称
   static version:string = ""; //版本号
@@ -21483,19 +21504,17 @@ export class PackageInfo extends DartClass {
       if(v!=null && v!=undefined){
         var result= JSON.parse(String(v));
         if(result!=null && result!=undefined){
-          PackageInfo.appName = result["appName"] as string;
-          PackageInfo.buildNumber = result["buildNumber"] as string;
-          PackageInfo.packageName = result["packageName"] as string;
-          PackageInfo.version = result["version"] as string;
+          PackageInfo.appName = Convert.toString(result["appName"]);
+          PackageInfo.buildNumber = Convert.toString(result["buildNumber"]);
+          PackageInfo.packageName = Convert.toString(result["packageName"]);
+          PackageInfo.version = Convert.toString(result["version"]);
         }
       }
   }
 }
 
 //****** Wakelock ******
-export class Wakelock extends DartClass {
-  static instance:Wakelock;
-  
+export class Wakelock extends DartClass {  
   constructor() {
     super();
     //Mirror对象在构造函数创建 MirrorID
@@ -21527,21 +21546,24 @@ export class Wakelock extends DartClass {
     //
     static async disable() {
       var info = new Wakelock();
-      await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+      var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "disable",
         }));
+
+      return Convert.toBoolean(v);
     }
 
     //
     static async enable() {
       var info = new Wakelock();
-      await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+      var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "enable",
         }));
+      return Convert.toBoolean(v);
     }
 
     //
@@ -21552,7 +21574,7 @@ export class Wakelock extends DartClass {
             className: info.className,
             funcName: "isEnabled",
         }));
-      return Boolean(v);
+      return Convert.toBoolean(v);
     }
 }
 
@@ -21606,5 +21628,61 @@ export class FocusScope extends DartClass {
       }));
   }
 }
+
+//****** UrlLauncher ******
+interface UrlLauncherConfig {
+  urlString:string;
+  forceSafariVC?:boolean;
+  forceWebView?:boolean;
+  enableJavaScript?:boolean;
+  enableDomStorage?:boolean;
+  universalLinksOnly?:boolean;
+  headers?:Map<string,string>;
+  statusBarBrightness?:Brightness;
+  webOnlyWindowName?:string;
+}
+
+export class UrlLauncher extends DartClass {
+  constructor() {
+    super();
+    //Mirror对象在构造函数创建 MirrorID
+    this.createMirrorID();
+
+    //创建对应FLutter对象
+    var argument = new JSCallConfig({
+        mirrorID:this.mirrorID,
+        className:this.className,
+    });
+    JSBridge.createMirrorObj(argument, this.mirrorID, this);
+  }
+
   
+  invokeMirrorObjWithCallback(argument:JSCallConfig){
+    return new Promise(function (resolve:any) {
+      JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
+          if (value != null && value !=undefined) {
+              resolve(value);
+
+          } else {
+              resolve(null);
+          }
+
+      });
+    }.bind(this));
+  }
+  
+    //
+    static async openUrl(config:UrlLauncherConfig) {
+      var info = new UrlLauncher();
+      var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
+            funcName: "openUrl",
+            args:config,
+        }));
+
+      return Convert.toBoolean(v);
+    }
+}
+
 //#endregion
