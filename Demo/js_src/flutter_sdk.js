@@ -6,7 +6,7 @@
  * @Description: JS Flutter SDK
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PackageInfo = exports.ScreenInfo = exports.SpApi = exports.LoadingApi = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.Tween = exports.TextInputType = exports.TextEditingController = exports.TabController = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.ScrollPhysics = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.RangeMaintainingScrollPhysics = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.Radius = exports.Quaternion = exports.OutlinedBorder = exports.Offset = exports.NotchedShape = exports.Notification = exports.NeverScrollableScrollPhysics = exports.MediaQueryData = exports.MediaQuery = exports.Matrix4 = exports.MaskFilter = exports.Key = exports.InputDecoration = exports.InputDecorationTheme = exports.ImageShader = exports.IconThemeData = exports.IconData = exports.ImageProvider = exports.InputBorder = exports.Gradient = exports.GradientTransform = exports.File = exports.FixedColumnWidth = exports.FractionalOffset = exports.FlutterLogoDecoration = exports.FlexColumnWidth = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.Duration = exports.CurveTween = exports.ClampingScrollPhysics = exports.CircularNotchedRectangle = exports.ColorScheme = exports.ColorFilter = exports.Colors = exports.Color = exports.BouncingScrollPhysics = exports.BoxShadow = exports.BannerPainter = exports.BoxDecoration = exports.ButtonThemeData = exports.BorderDirectional = exports.Border = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderSide = exports.BoxConstraints = exports.AssetImage = exports.AssetBundle = exports.AlwaysScrollableScrollPhysics = exports.AlignmentDirectional = exports.Alignment = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.ShapeBorder = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
+exports.FocusScope = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.SpApi = exports.LoadingApi = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.ScrollPhysics = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.RangeMaintainingScrollPhysics = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.Radius = exports.Quaternion = exports.OutlinedBorder = exports.Offset = exports.NotchedShape = exports.Notification = exports.NeverScrollableScrollPhysics = exports.MediaQueryData = exports.MediaQuery = exports.Matrix4 = exports.MaskFilter = exports.Key = exports.InputDecoration = exports.InputDecorationTheme = exports.ImageShader = exports.IconThemeData = exports.IconData = exports.ImageProvider = exports.InputBorder = exports.Gradient = exports.GradientTransform = exports.File = exports.FixedColumnWidth = exports.FractionalOffset = exports.FocusNode = exports.FlutterLogoDecoration = exports.FlexColumnWidth = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.Duration = exports.CurveTween = exports.ClampingScrollPhysics = exports.CircularNotchedRectangle = exports.ColorScheme = exports.ColorFilter = exports.Colors = exports.Color = exports.BouncingScrollPhysics = exports.BoxShadow = exports.BannerPainter = exports.BoxDecoration = exports.ButtonThemeData = exports.BorderDirectional = exports.Border = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderSide = exports.BoxConstraints = exports.AssetImage = exports.AssetBundle = exports.AlwaysScrollableScrollPhysics = exports.AlignmentDirectional = exports.Alignment = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.ShapeBorder = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -1139,6 +1139,12 @@ var BoxHeightStyle;
     BoxHeightStyle["includeLineSpacingBottom"] = "includeLineSpacingBottom";
     BoxHeightStyle["strut"] = "strut";
 })(BoxHeightStyle = exports.BoxHeightStyle || (exports.BoxHeightStyle = {}));
+//****** BoxWidthStyle ******
+var BoxWidthStyle;
+(function (BoxWidthStyle) {
+    BoxWidthStyle["tight"] = "tight";
+    BoxWidthStyle["max"] = "max";
+})(BoxWidthStyle = exports.BoxWidthStyle || (exports.BoxWidthStyle = {}));
 //#endregion
 //#region ------ C ------
 //****** CrossAxisAlignment ******
@@ -1463,6 +1469,18 @@ var TileMode;
     TileMode["repeated"] = "repeated";
     TileMode["mirror"] = "mirror";
 })(TileMode = exports.TileMode || (exports.TileMode = {}));
+//****** SmartDashesType ******
+var SmartDashesType;
+(function (SmartDashesType) {
+    SmartDashesType["disabled"] = "disabled";
+    SmartDashesType["enabled"] = "enabled";
+})(SmartDashesType = exports.SmartDashesType || (exports.SmartDashesType = {}));
+//****** SmartQuotesType ******
+var SmartQuotesType;
+(function (SmartQuotesType) {
+    SmartQuotesType["disabled"] = "disabled";
+    SmartQuotesType["enabled"] = "enabled";
+})(SmartQuotesType = exports.SmartQuotesType || (exports.SmartQuotesType = {}));
 //****** TextWidthBasis ******
 var TextWidthBasis;
 (function (TextWidthBasis) {
@@ -2641,6 +2659,38 @@ class FlutterLogoDecoration extends DartClass {
     }
 }
 exports.FlutterLogoDecoration = FlutterLogoDecoration;
+class FocusNode extends DartClass {
+    /**
+     * @param config config:
+        {
+          debugLabel?:string,
+          skipTraversal?:boolean,
+          canRequestFocus?:boolean,
+          descendantsAreFocusable?:boolean,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.debugLabel = config.debugLabel;
+            this.skipTraversal = config.skipTraversal;
+            this.canRequestFocus = config.canRequestFocus;
+            this.descendantsAreFocusable = config.descendantsAreFocusable;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          textColor?:Color,
+          style?:FlutterLogoStyle,
+          margin?:EdgeInsets,
+        }
+     */
+    static new(config) {
+        return new FocusNode(config);
+    }
+}
+exports.FocusNode = FocusNode;
 //****** FractionalOffset ******
 class FractionalOffset extends DartClass {
     constructor(dx, dy) {
@@ -4609,17 +4659,96 @@ class TabController extends DartClass {
     }
 }
 exports.TabController = TabController;
-//****** TODO TextEditingController ******
+//****** TextEditingController ******
 class TextEditingController extends DartClass {
     constructor(text) {
         super();
         this.text = text;
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
+        //创建对应FLutter对象
+        var argument = new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+        });
+        JSBridge.createMirrorObj(argument, this.mirrorID, this);
     }
     static new(text) {
         return new TextEditingController(text);
     }
+    invokeMirrorObjWithCallback(argument) {
+        return new Promise(function (resolve) {
+            JSBridge.invokeMirrorObjWithCallback(argument, function (value) {
+                if (value != null && value != undefined) {
+                    resolve(value);
+                }
+                else {
+                    resolve(null);
+                }
+            });
+        }.bind(this));
+    }
+    //清理值
+    clear() {
+        this.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "clear",
+        }));
+    }
+    //获取文本值
+    async getText() {
+        var v = await this.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "getText",
+        }));
+        return String(v);
+    }
+    //设置文本值
+    async setText(text) {
+        this.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "setText",
+            args: text,
+        }));
+    }
 }
 exports.TextEditingController = TextEditingController;
+class ToolbarOptions extends DartClass {
+    /**
+     * @param config config:
+      {
+        copy?:boolean,
+        cut?:boolean,
+        paste?:boolean,
+        selectAll?:boolean,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.copy = config.copy;
+            this.cut = config.cut;
+            this.paste = config.paste;
+            this.selectAll = config.selectAll;
+        }
+    }
+    /**
+     * @param config config:
+      {
+        copy?:boolean,
+        cut?:boolean,
+        paste?:boolean,
+        selectAll?:boolean,
+      }
+     */
+    static new(config) {
+        return new ToolbarOptions(config);
+    }
+}
+exports.ToolbarOptions = ToolbarOptions;
 class TextInputType extends DartClass {
     static new() {
         return new TextInputType();
@@ -9756,6 +9885,281 @@ class InkWell extends Widget {
     }
 }
 exports.InkWell = InkWell;
+class Image extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          image:ImageProvider,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.image = config.image;
+            this.semanticLabel = config.semanticLabel;
+            this.excludeFromSemantics = config.excludeFromSemantics;
+            this.width = config.width;
+            this.height = config.height;
+            this.color = config.color;
+            this.colorBlendMode = config.colorBlendMode;
+            this.fit = config.fit;
+            this.alignment = config.alignment;
+            this.repeat = config.repeat;
+            this.centerSlice = config.centerSlice;
+            this.matchTextDirection = config.matchTextDirection;
+            this.gaplessPlayback = config.gaplessPlayback;
+            this.isAntiAlias = config.isAntiAlias;
+            this.filterQuality = config.filterQuality;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          image:ImageProvider,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+        }
+     */
+    static new(config) {
+        return new Image(config);
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          scale?:number,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+          headers?:Map<string,string>,
+          cacheWidth?:number,
+          cacheHeight?:number,
+        }
+     */
+    static network(src, config) {
+        var v = new Image();
+        v.constructorName = "network";
+        v.src = src;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.scale = config.scale;
+            v.semanticLabel = config.semanticLabel;
+            v.excludeFromSemantics = config.excludeFromSemantics;
+            v.width = config.width;
+            v.height = config.height;
+            v.color = config.color;
+            v.colorBlendMode = config.colorBlendMode;
+            v.fit = config.fit;
+            v.alignment = config.alignment;
+            v.repeat = config.repeat;
+            v.centerSlice = config.centerSlice;
+            v.matchTextDirection = config.matchTextDirection;
+            v.gaplessPlayback = config.gaplessPlayback;
+            v.isAntiAlias = config.isAntiAlias;
+            v.filterQuality = config.filterQuality;
+            v.headers = config.headers;
+            v.cacheHeight = config.cacheHeight;
+            v.cacheWidth = config.cacheWidth;
+        }
+        return v;
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          scale?:number,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+          cacheWidth?:number,
+          cacheHeight?:number,
+        }
+     */
+    static file(file, config) {
+        var v = new Image();
+        v.constructorName = "file";
+        v.file = file;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.scale = config.scale;
+            v.semanticLabel = config.semanticLabel;
+            v.excludeFromSemantics = config.excludeFromSemantics;
+            v.width = config.width;
+            v.height = config.height;
+            v.color = config.color;
+            v.colorBlendMode = config.colorBlendMode;
+            v.fit = config.fit;
+            v.alignment = config.alignment;
+            v.repeat = config.repeat;
+            v.centerSlice = config.centerSlice;
+            v.matchTextDirection = config.matchTextDirection;
+            v.gaplessPlayback = config.gaplessPlayback;
+            v.isAntiAlias = config.isAntiAlias;
+            v.filterQuality = config.filterQuality;
+            v.cacheHeight = config.cacheHeight;
+            v.cacheWidth = config.cacheWidth;
+        }
+        return v;
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          bundle?:AssetBundle,
+          package?:string,
+          scale?:number,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+          headers?:Map<string,string>,
+          cacheWidth?:number,
+          cacheHeight?:number,
+        }
+     */
+    static asset(assetName, config) {
+        var v = new Image();
+        v.constructorName = "asset";
+        v.assetName = assetName;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.bundle = config.bundle;
+            v.package = config.package;
+            v.scale = config.scale;
+            v.semanticLabel = config.semanticLabel;
+            v.excludeFromSemantics = config.excludeFromSemantics;
+            v.width = config.width;
+            v.height = config.height;
+            v.color = config.color;
+            v.colorBlendMode = config.colorBlendMode;
+            v.fit = config.fit;
+            v.alignment = config.alignment;
+            v.repeat = config.repeat;
+            v.centerSlice = config.centerSlice;
+            v.matchTextDirection = config.matchTextDirection;
+            v.gaplessPlayback = config.gaplessPlayback;
+            v.isAntiAlias = config.isAntiAlias;
+            v.filterQuality = config.filterQuality;
+            v.headers = config.headers;
+            v.cacheHeight = config.cacheHeight;
+            v.cacheWidth = config.cacheWidth;
+        }
+        return v;
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          scale?:number,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+          headers?:Map<string,string>,
+          cacheWidth?:number,
+          cacheHeight?:number,
+        }
+     */
+    static memory(bytes, config) {
+        var v = new Image();
+        v.constructorName = "memory";
+        v.bytes = bytes;
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.scale = config.scale;
+            v.semanticLabel = config.semanticLabel;
+            v.excludeFromSemantics = config.excludeFromSemantics;
+            v.width = config.width;
+            v.height = config.height;
+            v.color = config.color;
+            v.colorBlendMode = config.colorBlendMode;
+            v.fit = config.fit;
+            v.alignment = config.alignment;
+            v.repeat = config.repeat;
+            v.centerSlice = config.centerSlice;
+            v.matchTextDirection = config.matchTextDirection;
+            v.gaplessPlayback = config.gaplessPlayback;
+            v.isAntiAlias = config.isAntiAlias;
+            v.filterQuality = config.filterQuality;
+            v.headers = config.headers;
+            v.cacheHeight = config.cacheHeight;
+            v.cacheWidth = config.cacheWidth;
+        }
+        return v;
+    }
+}
+exports.Image = Image;
 class KeyedSubtree extends Widget {
     /**
      * @param config config:
@@ -13584,34 +13988,46 @@ class TextFormField extends Widget {
         key?:Key,
         controller?:TextEditingController,
         initialValue?:string,
-        focusNode?:any,
+        focusNode?:FocusNode,
         decoration?:InputDecoration,
         keyboardType?:TextInputType,
-        textCapitalization?:TextCapitalization,
         textInputAction?:TextInputAction,
+        textCapitalization?:TextCapitalization,
         style?:TextStyle,
-        textDirection?:TextDirection,
         textAlign?:TextAlign,
+        textAlignVertical?:TextAlignVertical,
+        textDirection?:TextDirection,
+        readOnly?:boolean,
+        toolbarOptions?:ToolbarOptions,
+        showCursor?:boolean,
         autofocus?:boolean,
+        obscuringCharacter?:string,
         obscureText?:boolean,
         autocorrect?:boolean,
+        smartDashesType?:SmartDashesType,
+        smartQuotesType?:SmartQuotesType,
+        enableSuggestions?:boolean,
         autovalidate?:boolean,
-        maxLengthEnforced?:boolean,
         maxLines?:number,
+        minLines?:number,
+        expands?:boolean,
         maxLength?:number,
+        maxLengthEnforced?:boolean,
+        onChanged?:VoidCallbackString,
+        onTap?:VoidCallback,
         onEditingComplete?:VoidCallback,
         onFieldSubmitted?:VoidCallbackString,
         onSaved?:VoidCallbackString,
         validator?:VoidCallbackString,
-        inputFormatters?:any,
         enabled?:boolean,
         cursorWidth?:number,
         cursorRadius?:Radius,
         cursorColor?:Color,
         keyboardAppearance?:Brightness,
         scrollPadding?:EdgeInsets,
+        dragStartBehavior?:DragStartBehavior,
         enableInteractiveSelection?:boolean,
-        buildCounter?:any,
+        scrollPhysics?:ScrollPhysics,
       }
      */
     constructor(config) {
@@ -13628,18 +14044,27 @@ class TextFormField extends Widget {
             this.style = config.style;
             this.textDirection = config.textDirection;
             this.textAlign = config.textAlign;
+            this.textAlignVertical = config.textAlignVertical;
             this.autofocus = config.autofocus;
+            this.readOnly = config.readOnly;
+            this.toolbarOptions = config.toolbarOptions;
+            this.showCursor = config.showCursor;
             this.obscureText = config.obscureText;
             this.autocorrect = config.autocorrect;
+            this.smartDashesType = config.smartDashesType;
+            this.smartQuotesType = config.smartQuotesType;
             this.autovalidate = config.autovalidate;
             this.maxLengthEnforced = config.maxLengthEnforced;
             this.maxLines = config.maxLines;
+            this.minLines = config.minLines;
+            this.expands = config.expands;
             this.maxLength = config.maxLength;
+            this.onChanged = config.onChanged;
+            this.onTap = config.onTap;
             this.onEditingComplete = config.onEditingComplete;
             this.onFieldSubmitted = config.onFieldSubmitted;
             this.onSaved = config.onSaved;
             this.validator = config.validator;
-            this.inputFormatters = config.inputFormatters;
             this.enabled = config.enabled;
             this.cursorWidth = config.cursorWidth;
             this.cursorRadius = config.cursorRadius;
@@ -13647,7 +14072,7 @@ class TextFormField extends Widget {
             this.keyboardAppearance = config.keyboardAppearance;
             this.scrollPadding = config.scrollPadding;
             this.enableInteractiveSelection = config.enableInteractiveSelection;
-            this.buildCounter = config.buildCounter;
+            this.scrollPhysics = config.scrollPhysics;
         }
     }
     /**
@@ -13656,34 +14081,46 @@ class TextFormField extends Widget {
         key?:Key,
         controller?:TextEditingController,
         initialValue?:string,
-        focusNode?:any,
+        focusNode?:FocusNode,
         decoration?:InputDecoration,
         keyboardType?:TextInputType,
-        textCapitalization?:TextCapitalization,
         textInputAction?:TextInputAction,
+        textCapitalization?:TextCapitalization,
         style?:TextStyle,
-        textDirection?:TextDirection,
         textAlign?:TextAlign,
+        textAlignVertical?:TextAlignVertical,
+        textDirection?:TextDirection,
+        readOnly?:boolean,
+        toolbarOptions?:ToolbarOptions,
+        showCursor?:boolean,
         autofocus?:boolean,
+        obscuringCharacter?:string,
         obscureText?:boolean,
         autocorrect?:boolean,
+        smartDashesType?:SmartDashesType,
+        smartQuotesType?:SmartQuotesType,
+        enableSuggestions?:boolean,
         autovalidate?:boolean,
-        maxLengthEnforced?:boolean,
         maxLines?:number,
+        minLines?:number,
+        expands?:boolean,
         maxLength?:number,
+        maxLengthEnforced?:boolean,
+        onChanged?:VoidCallbackString,
+        onTap?:VoidCallback,
         onEditingComplete?:VoidCallback,
         onFieldSubmitted?:VoidCallbackString,
         onSaved?:VoidCallbackString,
         validator?:VoidCallbackString,
-        inputFormatters?:any,
         enabled?:boolean,
         cursorWidth?:number,
         cursorRadius?:Radius,
         cursorColor?:Color,
         keyboardAppearance?:Brightness,
         scrollPadding?:EdgeInsets,
+        dragStartBehavior?:DragStartBehavior,
         enableInteractiveSelection?:boolean,
-        buildCounter?:any,
+        scrollPhysics?:ScrollPhysics,
       }
      */
     static new(config) {
@@ -13691,6 +14128,151 @@ class TextFormField extends Widget {
     }
 }
 exports.TextFormField = TextFormField;
+class TextField extends Widget {
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        controller?:TextEditingController,
+        focusNode?:FocusNode,
+        decoration?:InputDecoration,
+        keyboardType?:TextInputType,
+        textInputAction?:TextInputAction,
+        textCapitalization?:TextCapitalization,
+        style?:TextStyle,
+        textAlign?:TextAlign,
+        textAlignVertical?:TextAlignVertical,
+        textDirection?:TextDirection,
+        readOnly?:boolean,
+        toolbarOptions?:ToolbarOptions,
+        showCursor?:boolean,
+        autofocus?:boolean,
+        obscuringCharacter?:string,
+        obscureText?:boolean,
+        autocorrect?:boolean,
+        smartDashesType?:SmartDashesType,
+        smartQuotesType?:SmartQuotesType,
+        enableSuggestions?:boolean,
+        maxLines?:number,
+        minLines?:number,
+        expands?:boolean,
+        maxLength?:number,
+        maxLengthEnforced?:boolean,
+        onChanged?:VoidCallbackString,
+        onEditingComplete?:VoidCallback,
+        onSubmitted?:VoidCallbackString,
+        enabled?:boolean,
+        cursorWidth?:number,
+        cursorRadius?:Radius,
+        cursorColor?:Color,
+        selectionHeightStyle?:BoxHeightStyle,
+        selectionWidthStyle?:BoxWidthStyle,
+        keyboardAppearance?:Brightness,
+        scrollPadding?:EdgeInsets,
+        dragStartBehavior?:DragStartBehavior,
+        enableInteractiveSelection?:boolean,
+        onTap?:VoidCallback,
+        scrollController?:ScrollController,
+        scrollPhysics?:ScrollPhysics,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.controller = config.controller;
+            this.decoration = config.decoration;
+            this.keyboardType = config.keyboardType;
+            this.textInputAction = config.textInputAction;
+            this.textCapitalization = config.textCapitalization;
+            this.style = config.style;
+            this.textAlign = config.textAlign;
+            this.textAlignVertical = config.textAlignVertical;
+            this.textDirection = config.textDirection;
+            this.readOnly = config.readOnly;
+            this.toolbarOptions = config.toolbarOptions;
+            this.showCursor = config.showCursor;
+            this.obscuringCharacter = config.obscuringCharacter;
+            this.obscureText = config.obscureText;
+            this.autocorrect = config.autocorrect;
+            this.smartDashesType = config.smartDashesType;
+            this.smartQuotesType = config.smartQuotesType;
+            this.enableSuggestions = config.enableSuggestions;
+            this.maxLines = config.maxLines;
+            this.minLines = config.minLines;
+            this.expands = config.expands;
+            this.maxLength = config.maxLength;
+            this.maxLengthEnforced = config.maxLengthEnforced;
+            this.onChanged = config.onChanged;
+            this.onEditingComplete = config.onEditingComplete;
+            this.onSubmitted = config.onSubmitted;
+            this.enabled = config.enabled;
+            this.cursorWidth = config.cursorWidth;
+            this.cursorColor = config.cursorColor;
+            this.cursorRadius = config.cursorRadius;
+            this.selectionHeightStyle = config.selectionHeightStyle;
+            this.selectionWidthStyle = config.selectionWidthStyle;
+            this.keyboardAppearance = config.keyboardAppearance;
+            this.scrollPadding = config.scrollPadding;
+            this.dragStartBehavior = config.dragStartBehavior;
+            this.enableInteractiveSelection = config.enableInteractiveSelection;
+            this.onTap = config.onTap;
+            this.scrollController = config.scrollController;
+            this.scrollPhysics = config.scrollPhysics;
+        }
+    }
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        controller?:TextEditingController,
+        focusNode?:FocusNode,
+        decoration?:InputDecoration,
+        keyboardType?:TextInputType,
+        textInputAction?:TextInputAction,
+        textCapitalization?:TextCapitalization,
+        style?:TextStyle,
+        textAlign?:TextAlign,
+        textAlignVertical?:TextAlignVertical,
+        textDirection?:TextDirection,
+        readOnly?:boolean,
+        toolbarOptions?:ToolbarOptions,
+        showCursor?:boolean,
+        autofocus?:boolean,
+        obscuringCharacter?:string,
+        obscureText?:boolean,
+        autocorrect?:boolean,
+        smartDashesType?:SmartDashesType,
+        smartQuotesType?:SmartQuotesType,
+        enableSuggestions?:boolean,
+        maxLines?:number,
+        minLines?:number,
+        expands?:boolean,
+        maxLength?:number,
+        maxLengthEnforced?:boolean,
+        onChanged?:VoidCallbackString,
+        onEditingComplete?:VoidCallback,
+        onSubmitted?:VoidCallbackString,
+        enabled?:boolean,
+        cursorWidth?:number,
+        cursorRadius?:Radius,
+        cursorColor?:Color,
+        selectionHeightStyle?:BoxHeightStyle,
+        selectionWidthStyle?:BoxWidthStyle,
+        keyboardAppearance?:Brightness,
+        scrollPadding?:EdgeInsets,
+        dragStartBehavior?:DragStartBehavior,
+        enableInteractiveSelection?:boolean,
+        onTap?:VoidCallback,
+        scrollController?:ScrollController,
+        scrollPhysics?:ScrollPhysics,
+      }
+     */
+    static new(config) {
+        return new TextField(config);
+    }
+}
+exports.TextField = TextField;
 class UnconstrainedBox extends Widget {
     /**
      * @param config config:
@@ -14512,7 +15094,7 @@ class LoadingApi extends DartClass {
         //创建对应FLutter对象
         var argument = new JSCallConfig({
             mirrorID: this.mirrorID,
-            className: "LoadingApi",
+            className: this.className,
         });
         JSBridge.createMirrorObj(argument, this.mirrorID, this);
     }
@@ -14545,7 +15127,7 @@ class LoadingApi extends DartClass {
     static showSuccess(config) {
         LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+            className: LoadingApi.getInstance().className,
             funcName: "showSuccess",
             args: config,
         }));
@@ -14561,7 +15143,7 @@ class LoadingApi extends DartClass {
     static showError(config) {
         LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+            className: LoadingApi.getInstance().className,
             funcName: "showError",
             args: config,
         }));
@@ -14577,7 +15159,7 @@ class LoadingApi extends DartClass {
     static showInfo(config) {
         LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+            className: LoadingApi.getInstance().className,
             funcName: "showInfo",
             args: config,
         }));
@@ -14593,7 +15175,7 @@ class LoadingApi extends DartClass {
     static showToast(config) {
         LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+            className: LoadingApi.getInstance().className,
             funcName: "showToast",
             args: config,
         }));
@@ -14608,7 +15190,7 @@ class LoadingApi extends DartClass {
     static show(config) {
         LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+            className: LoadingApi.getInstance().className,
             funcName: "show",
             args: config,
         }));
@@ -14652,7 +15234,7 @@ class SpApi extends DartClass {
         //创建对应FLutter对象
         var argument = new JSCallConfig({
             mirrorID: this.mirrorID,
-            className: "SpApi",
+            className: this.className,
         });
         JSBridge.createMirrorObj(argument, this.mirrorID, this);
     }
@@ -14684,13 +15266,12 @@ class SpApi extends DartClass {
     static async getBool(config) {
         var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "getBool",
             args: config,
         }));
         return Boolean(v);
     }
-    ;
     /**
      * @param config config:
       {
@@ -14701,13 +15282,12 @@ class SpApi extends DartClass {
     static async getInt(config) {
         var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "getInt",
             args: config,
         }));
         return Number(v);
     }
-    ;
     /**
      * @param config config:
       {
@@ -14718,13 +15298,12 @@ class SpApi extends DartClass {
     static async getDouble(config) {
         var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "getDouble",
             args: config,
         }));
         return Number(v);
     }
-    ;
     /**
      * @param config config:
       {
@@ -14735,22 +15314,20 @@ class SpApi extends DartClass {
     static async getString(config) {
         var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "getString",
             args: config,
         }));
         return String(v);
     }
-    ;
     static async clear() {
         var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "clear",
         }));
         return Boolean(v);
     }
-    ;
     /**
      * @param config config:
       {
@@ -14760,12 +15337,11 @@ class SpApi extends DartClass {
     static async remove(config) {
         var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "remove",
         }));
         return Boolean(v);
     }
-    ;
     /**
      * @param config config:
       {
@@ -14776,13 +15352,12 @@ class SpApi extends DartClass {
     static async setBool(config) {
         var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "setBool",
             args: config,
         }));
         return Boolean(v);
     }
-    ;
     /**
      * @param config config:
       {
@@ -14793,13 +15368,12 @@ class SpApi extends DartClass {
     static async setDouble(config) {
         var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "setDouble",
             args: config,
         }));
         return Boolean(v);
     }
-    ;
     /**
      * @param config config:
       {
@@ -14810,13 +15384,12 @@ class SpApi extends DartClass {
     static async setInt(config) {
         var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "setInt",
             args: config,
         }));
         return Boolean(v);
     }
-    ;
     /**
      * @param config config:
       {
@@ -14827,12 +15400,11 @@ class SpApi extends DartClass {
     static async setString(config) {
         var v = await SpApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "setString",
             args: config,
         }));
     }
-    ;
 }
 exports.SpApi = SpApi;
 //****** ScreenInfo ******
@@ -14847,12 +15419,6 @@ class ScreenInfo extends DartClass {
             className: "ScreenInfo",
         });
         JSBridge.createMirrorObj(argument, this.mirrorID, this);
-    }
-    static getInstance() {
-        if (!this.instance) {
-            this.instance = new ScreenInfo();
-        }
-        return this.instance;
     }
     invokeMirrorObjWithCallback(argument) {
         return new Promise(function (resolve) {
@@ -14880,9 +15446,10 @@ class ScreenInfo extends DartClass {
     }
     //
     static async updateInfo() {
-        var v = await ScreenInfo.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: ScreenInfo.getInstance().mirrorID,
-            className: "ScreenInfo",
+        var info = new ScreenInfo();
+        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
             funcName: "updateInfo",
         }));
         if (v != null && v != undefined) {
@@ -14907,7 +15474,6 @@ class ScreenInfo extends DartClass {
         }
         //Log.log("ScreenInfo.updateInfo:"+String(v));
     }
-    ;
 }
 exports.ScreenInfo = ScreenInfo;
 // 设计稿屏幕宽度(PX)
@@ -14951,15 +15517,9 @@ class PackageInfo extends DartClass {
         //创建对应FLutter对象
         var argument = new JSCallConfig({
             mirrorID: this.mirrorID,
-            className: "PackageInfo",
+            className: this.className,
         });
         JSBridge.createMirrorObj(argument, this.mirrorID, this);
-    }
-    static getInstance() {
-        if (!this.instance) {
-            this.instance = new PackageInfo();
-        }
-        return this.instance;
     }
     invokeMirrorObjWithCallback(argument) {
         return new Promise(function (resolve) {
@@ -14975,9 +15535,10 @@ class PackageInfo extends DartClass {
     }
     //
     static async updateInfo() {
-        var v = await PackageInfo.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: PackageInfo.getInstance().mirrorID,
-            className: "PackageInfo",
+        var info = new PackageInfo();
+        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
             funcName: "updateInfo",
         }));
         if (v != null && v != undefined) {
@@ -14990,11 +15551,110 @@ class PackageInfo extends DartClass {
             }
         }
     }
-    ;
 }
 exports.PackageInfo = PackageInfo;
 PackageInfo.appName = ""; //应用名称
 PackageInfo.packageName = ""; //包名称
 PackageInfo.version = ""; //版本号
 PackageInfo.buildNumber = ""; //小版本号
+//****** Wakelock ******
+class Wakelock extends DartClass {
+    constructor() {
+        super();
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
+        //创建对应FLutter对象
+        var argument = new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+        });
+        JSBridge.createMirrorObj(argument, this.mirrorID, this);
+    }
+    invokeMirrorObjWithCallback(argument) {
+        return new Promise(function (resolve) {
+            JSBridge.invokeMirrorObjWithCallback(argument, function (value) {
+                if (value != null && value != undefined) {
+                    resolve(value);
+                }
+                else {
+                    resolve(null);
+                }
+            });
+        }.bind(this));
+    }
+    //
+    static async disable() {
+        var info = new Wakelock();
+        await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
+            funcName: "disable",
+        }));
+    }
+    //
+    static async enable() {
+        var info = new Wakelock();
+        await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
+            funcName: "enable",
+        }));
+    }
+    //
+    static async isEnabled() {
+        var info = new Wakelock();
+        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
+            funcName: "isEnabled",
+        }));
+        return Boolean(v);
+    }
+}
+exports.Wakelock = Wakelock;
+//****** FocusScope ******
+class FocusScope extends DartClass {
+    constructor() {
+        super();
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
+        //创建对应FLutter对象
+        var argument = new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+        });
+        JSBridge.createMirrorObj(argument, this.mirrorID, this);
+    }
+    invokeMirrorObjWithCallback(argument) {
+        return new Promise(function (resolve) {
+            JSBridge.invokeMirrorObjWithCallback(argument, function (value) {
+                if (value != null && value != undefined) {
+                    resolve(value);
+                }
+                else {
+                    resolve(null);
+                }
+            });
+        }.bind(this));
+    }
+    //
+    static requestFocus() {
+        var info = new FocusScope();
+        info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
+            funcName: "requestFocus",
+        }));
+    }
+    //
+    static unfocus() {
+        var info = new FocusScope();
+        info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
+            funcName: "unfocus",
+        }));
+    }
+}
+exports.FocusScope = FocusScope;
 //#endregion

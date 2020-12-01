@@ -47,7 +47,7 @@ class XSProxyImage extends XSJsonObjProxy {
   Image constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return Image(
       key: XSJSParse.getKey(context, bo, map, "key"),
-      image: XSJSParse.getObject(context, bo, map, "image"),
+      image: XSJSParse.getImageProvider(context, bo, map, "image"),
       semanticLabel: XSJSParse.getString(context, bo, map, "semanticLabel"),
       excludeFromSemantics: XSJSParse.getBool(context, bo, map, "excludeFromSemantics", defaultValue: false),
       width: XSJSParse.getDouble(context, bo, map, "width"),
@@ -83,6 +83,8 @@ class XSProxyImage extends XSJsonObjProxy {
       gaplessPlayback: XSJSParse.getBool(context, bo, map, "gaplessPlayback", defaultValue: false),
       filterQuality: XSJSParse.getFilterQuality(context, bo, map, "filterQuality", defaultValue: FilterQuality.low),
       headers: toMapStringT(XSJSParse.getObject(context, bo, map, "headers")),
+      cacheHeight: XSJSParse.getInt(context, bo, map, "cacheHeight"),
+      cacheWidth: XSJSParse.getInt(context, bo, map, "cacheWidth"),
     );
   }
 
@@ -127,6 +129,8 @@ class XSProxyImage extends XSJsonObjProxy {
       gaplessPlayback: XSJSParse.getBool(context, bo, map, "gaplessPlayback", defaultValue: false),
       package: XSJSParse.getString(context, bo, map, "package"),
       filterQuality: XSJSParse.getFilterQuality(context, bo, map, "filterQuality", defaultValue: FilterQuality.low),
+      cacheHeight: XSJSParse.getInt(context, bo, map, "cacheHeight"),
+      cacheWidth: XSJSParse.getInt(context, bo, map, "cacheWidth"),
     );
   }
 
@@ -148,6 +152,8 @@ class XSProxyImage extends XSJsonObjProxy {
       matchTextDirection: XSJSParse.getBool(context, bo, map, "matchTextDirection", defaultValue: false),
       gaplessPlayback: XSJSParse.getBool(context, bo, map, "gaplessPlayback", defaultValue: false),
       filterQuality: XSJSParse.getFilterQuality(context, bo, map, "filterQuality", defaultValue: FilterQuality.low),
+      cacheHeight: XSJSParse.getInt(context, bo, map, "cacheHeight"),
+      cacheWidth: XSJSParse.getInt(context, bo, map, "cacheWidth"),
     );
   }
 }

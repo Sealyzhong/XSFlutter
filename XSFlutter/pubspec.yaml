@@ -24,6 +24,9 @@ dependencies:
   # 包管理
   # https://github.com/flutter/plugins
   package_info: ^0.4.3
+
+  #屏幕常亮
+  wakelock: ^0.1.4+1
   
 dev_dependencies:
   flutter_test:

@@ -1478,6 +1478,12 @@ export enum Axis {
     includeLineSpacingBottom = "includeLineSpacingBottom",
     strut = "strut",
   }
+
+  //****** BoxWidthStyle ******
+  export enum BoxWidthStyle {
+    tight = "tight",
+    max = "max",
+  }
   
   //#endregion
   
@@ -1806,6 +1812,18 @@ export enum Axis {
     clamp = "clamp",
     repeated = "repeated",
     mirror = "mirror",
+  }
+
+  //****** SmartDashesType ******
+  export enum SmartDashesType {
+    disabled = "disabled",
+    enabled = "enabled",
+  }
+
+  //****** SmartQuotesType ******
+  export enum SmartQuotesType {
+    disabled = "disabled",
+    enabled = "enabled",
   }
   
   //****** TextWidthBasis ******
@@ -3366,6 +3384,52 @@ export class Alignment extends DartClass {
      */
     static new(config?: FlutterLogoDecorationConfig) {
       return new FlutterLogoDecoration(config);
+    }
+  } 
+
+   //****** FocusNode ******
+  interface FocusNodeConfig {
+    debugLabel?:string;
+    skipTraversal?:boolean;
+    canRequestFocus?:boolean;
+    descendantsAreFocusable?:boolean;
+  }
+  export class FocusNode extends DartClass {
+    debugLabel?:string;
+    skipTraversal?:boolean;
+    canRequestFocus?:boolean;
+    descendantsAreFocusable?:boolean;
+  
+    /**
+     * @param config config: 
+        {
+          debugLabel?:string,
+          skipTraversal?:boolean,
+          canRequestFocus?:boolean,
+          descendantsAreFocusable?:boolean,
+        }
+     */
+    constructor(config?: FocusNodeConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.debugLabel = config.debugLabel;
+        this.skipTraversal = config.skipTraversal;
+        this.canRequestFocus = config.canRequestFocus;
+        this.descendantsAreFocusable = config.descendantsAreFocusable;
+      }
+  
+    }
+  
+    /**
+     * @param config config: 
+        {
+          textColor?:Color, 
+          style?:FlutterLogoStyle, 
+          margin?:EdgeInsets, 
+        }
+     */
+    static new(config?: FocusNodeConfig) {
+      return new FocusNode(config);
     }
   } 
 
@@ -6148,19 +6212,119 @@ export class Alignment extends DartClass {
     }
   }
   
-  //****** TODO TextEditingController ******
+  //****** TextEditingController ******
   export class TextEditingController extends DartClass {
     text?:string;
   
     constructor(text?:string){
       super();
       this.text=text;
+
+      //Mirror对象在构造函数创建 MirrorID
+      this.createMirrorID();
+
+      //创建对应FLutter对象
+      var argument = new JSCallConfig({
+          mirrorID:this.mirrorID,
+          className:this.className,
+      });
+      JSBridge.createMirrorObj(argument, this.mirrorID, this);
     }
   
     static new(text?:string) {
       return new TextEditingController(text);
     }
+
+    invokeMirrorObjWithCallback(argument:JSCallConfig){
+      return new Promise(function (resolve:any) {
+        JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
+            if (value != null && value !=undefined) {
+                resolve(value);
+  
+            } else {
+                resolve(null);
+            }
+  
+        });
+      }.bind(this));
+    }
+
+    //清理值
+    clear() {
+      this.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "clear",
+        }));
+    }
+
+    //获取文本值
+    async getText() {
+      var v= await this.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "getText",
+        }));
+      return String(v);
+    }
+
+    //设置文本值
+    async setText(text:string) {
+      this.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "setText",
+            args:text,
+        }));
+    }
   }
+  
+  //****** ToolbarOptions ******
+  interface ToolbarOptionsConfig {
+    copy?:boolean;
+    cut?:boolean;
+    paste?:boolean;
+    selectAll?:boolean;
+  }
+  export class ToolbarOptions extends DartClass {
+    copy?:boolean;
+    cut?:boolean;
+    paste?:boolean;
+    selectAll?:boolean;
+  
+    /**
+     * @param config config: 
+      {
+        copy?:boolean,
+        cut?:boolean,
+        paste?:boolean,
+        selectAll?:boolean,
+      }
+     */
+    constructor(config?: ToolbarOptionsConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.copy = config.copy;
+        this.cut = config.cut;
+        this.paste = config.paste;
+        this.selectAll = config.selectAll;
+      }
+    }
+  
+    /**
+     * @param config config: 
+      {
+        copy?:boolean,
+        cut?:boolean,
+        paste?:boolean,
+        selectAll?:boolean,
+      }
+     */
+    static new (config?: ToolbarOptionsConfig) {
+      return new ToolbarOptions(config);
+    }
+  }
+  
   
   //****** TextInputType ******
   interface TextInputTypeConfig {
@@ -7623,8 +7787,8 @@ export class CupertinoIcons extends IconData{
 
   //#region ------- A -------
 
-//****** AbsorbPointer ******
-interface AbsorbPointerConfig {
+  //****** AbsorbPointer ******
+  interface AbsorbPointerConfig {
     key?:Key;
     child?:Widget;
     absorbing?:boolean;
@@ -11400,6 +11564,7 @@ interface AbsorbPointerConfig {
     }
   
   }
+
   
   //****** Flex ******
   interface FlexConfig {
@@ -13203,6 +13368,345 @@ interface AbsorbPointerConfig {
       return new InkWell(config);
     }
   }
+
+  //****** Image ******
+  //TODO:frameBuilder、loadingBuilder、errorBuilder
+  interface ImageConfig {
+    key?:Key;
+    image:ImageProvider;
+    semanticLabel?:string;
+    excludeFromSemantics?:boolean;
+    width?:number;
+    height?:number;
+    color?:Color;
+    colorBlendMode?:BlendMode;
+    fit?:BoxFit;
+    alignment?:Alignment;
+    repeat?:ImageRepeat;
+    centerSlice?:Rect;
+    matchTextDirection?:boolean;
+    gaplessPlayback?:boolean;
+    isAntiAlias?:boolean;
+    filterQuality?:FilterQuality;
+
+    scale?:number;
+    headers?:Map<string,string>;
+    cacheWidth?:number;
+    cacheHeight?:number;
+
+    bundle?:AssetBundle;
+    package?:string;
+  }
+  export class Image extends Widget {
+    key?:Key;
+    image?:ImageProvider;
+    semanticLabel?:string;
+    excludeFromSemantics?:boolean;
+    width?:number;
+    height?:number;
+    color?:Color;
+    colorBlendMode?:BlendMode;
+    fit?:BoxFit;
+    alignment?:Alignment;
+    repeat?:ImageRepeat;
+    centerSlice?:Rect;
+    matchTextDirection?:boolean;
+    gaplessPlayback?:boolean;
+    isAntiAlias?:boolean;
+    filterQuality?:FilterQuality;
+
+
+    src?:string;
+    scale?:number;
+    headers?:Map<string,string>;
+    cacheWidth?:number;
+    cacheHeight?:number;
+    bundle?:AssetBundle;
+    package?:string;
+    file?:File;
+    assetName?:string;
+
+    bytes?:Uint8List;
+
+    /**
+     * @param config config: 
+        {
+          key?:Key,
+          image:ImageProvider,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+        }
+     */
+    constructor(config?: ImageConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.image = config.image;
+        this.semanticLabel = config.semanticLabel;
+        this.excludeFromSemantics = config.excludeFromSemantics;
+        this.width = config.width;
+        this.height = config.height;
+        this.color = config.color;
+        this.colorBlendMode = config.colorBlendMode;
+        this.fit = config.fit;
+        this.alignment = config.alignment;
+        this.repeat = config.repeat;
+        this.centerSlice = config.centerSlice;
+        this.matchTextDirection = config.matchTextDirection;
+        this.gaplessPlayback = config.gaplessPlayback;
+        this.isAntiAlias = config.isAntiAlias;
+        this.filterQuality = config.filterQuality;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key,
+          image:ImageProvider,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+        }
+     */
+    static new(config: ImageConfig) {
+      return new Image(config);
+    }
+
+    /**
+     * @param config config: 
+        {
+          key?:Key,
+          scale?:number,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+          headers?:Map<string,string>,
+          cacheWidth?:number,
+          cacheHeight?:number,
+        }
+     */
+    static network(src:string, config?: ImageConfig) {
+      var v = new Image();
+      v.constructorName = "network";
+      v.src = src;
+      if(config!=null && config!=undefined){
+        v.key = config.key;
+        v.scale = config.scale;
+        v.semanticLabel = config.semanticLabel;
+        v.excludeFromSemantics = config.excludeFromSemantics;
+        v.width = config.width;
+        v.height = config.height;
+        v.color = config.color;
+        v.colorBlendMode = config.colorBlendMode;
+        v.fit = config.fit;
+        v.alignment = config.alignment;
+        v.repeat = config.repeat;
+        v.centerSlice = config.centerSlice;
+        v.matchTextDirection = config.matchTextDirection;
+        v.gaplessPlayback = config.gaplessPlayback;
+        v.isAntiAlias = config.isAntiAlias;
+        v.filterQuality = config.filterQuality;
+        v.headers = config.headers;
+        v.cacheHeight = config.cacheHeight;
+        v.cacheWidth = config.cacheWidth;
+      }
+      return v;
+    }
+
+    /**
+     * @param config config: 
+        {
+          key?:Key,
+          scale?:number,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+          cacheWidth?:number,
+          cacheHeight?:number,
+        }
+     */
+    static file(file:File, config?: ImageConfig) {
+      var v = new Image();
+      v.constructorName = "file";
+      v.file = file;
+      if(config!=null && config!=undefined){
+        v.key = config.key;
+        v.scale = config.scale;
+        v.semanticLabel = config.semanticLabel;
+        v.excludeFromSemantics = config.excludeFromSemantics;
+        v.width = config.width;
+        v.height = config.height;
+        v.color = config.color;
+        v.colorBlendMode = config.colorBlendMode;
+        v.fit = config.fit;
+        v.alignment = config.alignment;
+        v.repeat = config.repeat;
+        v.centerSlice = config.centerSlice;
+        v.matchTextDirection = config.matchTextDirection;
+        v.gaplessPlayback = config.gaplessPlayback;
+        v.isAntiAlias = config.isAntiAlias;
+        v.filterQuality = config.filterQuality;
+        v.cacheHeight = config.cacheHeight;
+        v.cacheWidth = config.cacheWidth;
+      }
+      return v;
+    }
+
+    /**
+     * @param config config: 
+        {
+          key?:Key,
+          bundle?:AssetBundle,
+          package?:string,
+          scale?:number,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+          headers?:Map<string,string>,
+          cacheWidth?:number,
+          cacheHeight?:number,
+        }
+     */
+    static asset(assetName:string, config?: ImageConfig) {
+      var v = new Image();
+      v.constructorName = "asset";
+      v.assetName = assetName;
+      if(config!=null && config!=undefined){
+        v.key = config.key;
+        v.bundle = config.bundle;
+        v.package = config.package;
+        v.scale = config.scale;
+        v.semanticLabel = config.semanticLabel;
+        v.excludeFromSemantics = config.excludeFromSemantics;
+        v.width = config.width;
+        v.height = config.height;
+        v.color = config.color;
+        v.colorBlendMode = config.colorBlendMode;
+        v.fit = config.fit;
+        v.alignment = config.alignment;
+        v.repeat = config.repeat;
+        v.centerSlice = config.centerSlice;
+        v.matchTextDirection = config.matchTextDirection;
+        v.gaplessPlayback = config.gaplessPlayback;
+        v.isAntiAlias = config.isAntiAlias;
+        v.filterQuality = config.filterQuality;
+        v.headers = config.headers;
+        v.cacheHeight = config.cacheHeight;
+        v.cacheWidth = config.cacheWidth;
+      }
+      return v;
+    }
+
+    /**
+     * @param config config: 
+        {
+          key?:Key,
+          scale?:number,
+          semanticLabel?:string,
+          excludeFromSemantics?:boolean,
+          width?:number,
+          height?:number,
+          color?:Color,
+          colorBlendMode?:BlendMode,
+          fit?:BoxFit,
+          alignment?:Alignment,
+          repeat?:ImageRepeat,
+          centerSlice?:Rect,
+          matchTextDirection?:boolean,
+          gaplessPlayback?:boolean,
+          isAntiAlias?:boolean,
+          filterQuality?:FilterQuality,
+          headers?:Map<string,string>,
+          cacheWidth?:number,
+          cacheHeight?:number,
+        }
+     */
+    static memory(bytes:Uint8List, config?: ImageConfig) {
+      var v = new Image();
+      v.constructorName = "memory";
+      v.bytes = bytes;
+      if(config!=null && config!=undefined){
+        v.key = config.key;
+        v.scale = config.scale;
+        v.semanticLabel = config.semanticLabel;
+        v.excludeFromSemantics = config.excludeFromSemantics;
+        v.width = config.width;
+        v.height = config.height;
+        v.color = config.color;
+        v.colorBlendMode = config.colorBlendMode;
+        v.fit = config.fit;
+        v.alignment = config.alignment;
+        v.repeat = config.repeat;
+        v.centerSlice = config.centerSlice;
+        v.matchTextDirection = config.matchTextDirection;
+        v.gaplessPlayback = config.gaplessPlayback;
+        v.isAntiAlias = config.isAntiAlias;
+        v.filterQuality = config.filterQuality;
+        v.headers = config.headers;
+        v.cacheHeight = config.cacheHeight;
+        v.cacheWidth = config.cacheWidth;
+      }
+      return v;
+    }
+  }
+
   
   //#endregion
   
@@ -18738,108 +19242,145 @@ interface AbsorbPointerConfig {
     }
   }
   
-  //****** TODO TextFormField ******
+  //****** TextFormField ******
+  //TODO:strutStyle、autofillHints、inputFormatters、autofillHints
   interface TextFormFieldConfig {
     key?:Key;
     controller?:TextEditingController;
     initialValue?:string;
-    focusNode?:any;
+    focusNode?:FocusNode;
     decoration?:InputDecoration;
     keyboardType?:TextInputType;
-    textCapitalization?:TextCapitalization;
     textInputAction?:TextInputAction;
+    textCapitalization?:TextCapitalization;
     style?:TextStyle;
-    textDirection?:TextDirection;
     textAlign?:TextAlign;
+    textAlignVertical?:TextAlignVertical;
+    textDirection?:TextDirection;
+    readOnly?:boolean;
+    toolbarOptions?:ToolbarOptions;
+    showCursor?:boolean;
     autofocus?:boolean;
+    obscuringCharacter?:string;
     obscureText?:boolean;
     autocorrect?:boolean;
+    smartDashesType?:SmartDashesType;
+    smartQuotesType?:SmartQuotesType;
+    enableSuggestions?:boolean;
     autovalidate?:boolean;
-    maxLengthEnforced?:boolean;
     maxLines?:number;
+    minLines?:number;
+    expands?:boolean;
     maxLength?:number;
+    maxLengthEnforced?:boolean;
+    onChanged?:VoidCallbackString;
+    onTap?:VoidCallback;
     onEditingComplete?:VoidCallback;
     onFieldSubmitted?:VoidCallbackString;
     onSaved?:VoidCallbackString;
     validator?:VoidCallbackString;
-    inputFormatters?:any;
     enabled?:boolean;
     cursorWidth?:number;
     cursorRadius?:Radius;
     cursorColor?:Color;
     keyboardAppearance?:Brightness;
     scrollPadding?:EdgeInsets;
-    enableInteractiveSelection?:boolean;
-    buildCounter?:any;
+    dragStartBehavior?:DragStartBehavior;
+    enableInteractiveSelection?:boolean; 
+    scrollPhysics?:ScrollPhysics;   
     
   }
   export class TextFormField extends Widget {
+    key?:Key;
     controller?:TextEditingController;
     initialValue?:string;
-    focusNode?:any;
+    focusNode?:FocusNode;
     decoration?:InputDecoration;
     keyboardType?:TextInputType;
-    textCapitalization?:TextCapitalization;
     textInputAction?:TextInputAction;
+    textCapitalization?:TextCapitalization;
     style?:TextStyle;
-    textDirection?:TextDirection;
     textAlign?:TextAlign;
+    textAlignVertical?:TextAlignVertical;
+    textDirection?:TextDirection;
+    readOnly?:boolean;
+    toolbarOptions?:ToolbarOptions;
+    showCursor?:boolean;
     autofocus?:boolean;
+    obscuringCharacter?:string;
     obscureText?:boolean;
     autocorrect?:boolean;
+    smartDashesType?:SmartDashesType;
+    smartQuotesType?:SmartQuotesType;
+    enableSuggestions?:boolean;
     autovalidate?:boolean;
-    maxLengthEnforced?:boolean;
     maxLines?:number;
+    minLines?:number;
+    expands?:boolean;
     maxLength?:number;
+    maxLengthEnforced?:boolean;
+    onChanged?:VoidCallbackString;
+    onTap?:VoidCallback;
     onEditingComplete?:VoidCallback;
     onFieldSubmitted?:VoidCallbackString;
     onSaved?:VoidCallbackString;
     validator?:VoidCallbackString;
-    inputFormatters?:any;
     enabled?:boolean;
     cursorWidth?:number;
     cursorRadius?:Radius;
     cursorColor?:Color;
     keyboardAppearance?:Brightness;
     scrollPadding?:EdgeInsets;
-    enableInteractiveSelection?:boolean;
-    buildCounter?:any;
-    key?:Key;
+    dragStartBehavior?:DragStartBehavior;
+    enableInteractiveSelection?:boolean; 
+    scrollPhysics?:ScrollPhysics; 
   
     /**
      * @param config config: 
       {
-        key?:Key, 
-        controller?:TextEditingController, 
-        initialValue?:string, 
-        focusNode?:any, 
-        decoration?:InputDecoration, 
-        keyboardType?:TextInputType, 
-        textCapitalization?:TextCapitalization, 
-        textInputAction?:TextInputAction, 
-        style?:TextStyle, 
-        textDirection?:TextDirection, 
-        textAlign?:TextAlign, 
-        autofocus?:boolean, 
-        obscureText?:boolean, 
-        autocorrect?:boolean, 
-        autovalidate?:boolean, 
-        maxLengthEnforced?:boolean, 
-        maxLines?:number, 
-        maxLength?:number, 
-        onEditingComplete?:VoidCallback, 
-        onFieldSubmitted?:VoidCallbackString, 
-        onSaved?:VoidCallbackString, 
-        validator?:VoidCallbackString, 
-        inputFormatters?:any, 
-        enabled?:boolean, 
-        cursorWidth?:number, 
-        cursorRadius?:Radius, 
-        cursorColor?:Color, 
-        keyboardAppearance?:Brightness, 
-        scrollPadding?:EdgeInsets, 
+        key?:Key,
+        controller?:TextEditingController,
+        initialValue?:string,
+        focusNode?:FocusNode,
+        decoration?:InputDecoration,
+        keyboardType?:TextInputType,
+        textInputAction?:TextInputAction,
+        textCapitalization?:TextCapitalization,
+        style?:TextStyle,
+        textAlign?:TextAlign,
+        textAlignVertical?:TextAlignVertical,
+        textDirection?:TextDirection,
+        readOnly?:boolean,
+        toolbarOptions?:ToolbarOptions,
+        showCursor?:boolean,
+        autofocus?:boolean,
+        obscuringCharacter?:string,
+        obscureText?:boolean,
+        autocorrect?:boolean,
+        smartDashesType?:SmartDashesType,
+        smartQuotesType?:SmartQuotesType,
+        enableSuggestions?:boolean,
+        autovalidate?:boolean,
+        maxLines?:number,
+        minLines?:number,
+        expands?:boolean,
+        maxLength?:number,
+        maxLengthEnforced?:boolean,
+        onChanged?:VoidCallbackString,
+        onTap?:VoidCallback,
+        onEditingComplete?:VoidCallback,
+        onFieldSubmitted?:VoidCallbackString,
+        onSaved?:VoidCallbackString,
+        validator?:VoidCallbackString,
+        enabled?:boolean,
+        cursorWidth?:number,
+        cursorRadius?:Radius,
+        cursorColor?:Color,
+        keyboardAppearance?:Brightness,
+        scrollPadding?:EdgeInsets,
+        dragStartBehavior?:DragStartBehavior,
         enableInteractiveSelection?:boolean, 
-        buildCounter?:any,       
+        scrollPhysics?:ScrollPhysics,      
       }
      */
     constructor(config: TextFormFieldConfig){
@@ -18856,18 +19397,29 @@ interface AbsorbPointerConfig {
         this.style = config.style;
         this.textDirection = config.textDirection;
         this.textAlign = config.textAlign;
+        this.textAlignVertical = config.textAlignVertical;
+
         this.autofocus = config.autofocus;
+        this.readOnly = config.readOnly;
+        this.toolbarOptions = config.toolbarOptions;
+        this.showCursor = config.showCursor;
         this.obscureText = config.obscureText;
         this.autocorrect = config.autocorrect;
+        this.smartDashesType = config.smartDashesType;
+        this.smartQuotesType = config.smartQuotesType;
         this.autovalidate = config.autovalidate;
         this.maxLengthEnforced = config.maxLengthEnforced;
         this.maxLines = config.maxLines;
+        this.minLines = config.minLines;
+        this.expands = config.expands;
         this.maxLength = config.maxLength;
+
+        this.onChanged = config.onChanged;
+        this.onTap = config.onTap;
         this.onEditingComplete = config.onEditingComplete;
         this.onFieldSubmitted = config.onFieldSubmitted;
         this.onSaved = config.onSaved;
         this.validator = config.validator;
-        this.inputFormatters = config.inputFormatters;
         this.enabled = config.enabled;
         this.cursorWidth = config.cursorWidth;
         this.cursorRadius = config.cursorRadius;
@@ -18875,7 +19427,7 @@ interface AbsorbPointerConfig {
         this.keyboardAppearance = config.keyboardAppearance;
         this.scrollPadding = config.scrollPadding;
         this.enableInteractiveSelection = config.enableInteractiveSelection;
-        this.buildCounter = config.buildCounter;
+        this.scrollPhysics = config.scrollPhysics;
       }
     }
   
@@ -18883,43 +19435,293 @@ interface AbsorbPointerConfig {
     /**
      * @param config config: 
       {
-        key?:Key, 
-        controller?:TextEditingController, 
-        initialValue?:string, 
-        focusNode?:any, 
-        decoration?:InputDecoration, 
-        keyboardType?:TextInputType, 
-        textCapitalization?:TextCapitalization, 
-        textInputAction?:TextInputAction, 
-        style?:TextStyle, 
-        textDirection?:TextDirection, 
-        textAlign?:TextAlign, 
-        autofocus?:boolean, 
-        obscureText?:boolean, 
-        autocorrect?:boolean, 
-        autovalidate?:boolean, 
-        maxLengthEnforced?:boolean, 
-        maxLines?:number, 
-        maxLength?:number, 
-        onEditingComplete?:VoidCallback, 
-        onFieldSubmitted?:VoidCallbackString, 
-        onSaved?:VoidCallbackString, 
-        validator?:VoidCallbackString, 
-        inputFormatters?:any, 
-        enabled?:boolean, 
-        cursorWidth?:number, 
-        cursorRadius?:Radius, 
-        cursorColor?:Color, 
-        keyboardAppearance?:Brightness, 
-        scrollPadding?:EdgeInsets, 
+        key?:Key,
+        controller?:TextEditingController,
+        initialValue?:string,
+        focusNode?:FocusNode,
+        decoration?:InputDecoration,
+        keyboardType?:TextInputType,
+        textInputAction?:TextInputAction,
+        textCapitalization?:TextCapitalization,
+        style?:TextStyle,
+        textAlign?:TextAlign,
+        textAlignVertical?:TextAlignVertical,
+        textDirection?:TextDirection,
+        readOnly?:boolean,
+        toolbarOptions?:ToolbarOptions,
+        showCursor?:boolean,
+        autofocus?:boolean,
+        obscuringCharacter?:string,
+        obscureText?:boolean,
+        autocorrect?:boolean,
+        smartDashesType?:SmartDashesType,
+        smartQuotesType?:SmartQuotesType,
+        enableSuggestions?:boolean,
+        autovalidate?:boolean,
+        maxLines?:number,
+        minLines?:number,
+        expands?:boolean,
+        maxLength?:number,
+        maxLengthEnforced?:boolean,
+        onChanged?:VoidCallbackString,
+        onTap?:VoidCallback,
+        onEditingComplete?:VoidCallback,
+        onFieldSubmitted?:VoidCallbackString,
+        onSaved?:VoidCallbackString,
+        validator?:VoidCallbackString,
+        enabled?:boolean,
+        cursorWidth?:number,
+        cursorRadius?:Radius,
+        cursorColor?:Color,
+        keyboardAppearance?:Brightness,
+        scrollPadding?:EdgeInsets,
+        dragStartBehavior?:DragStartBehavior,
         enableInteractiveSelection?:boolean, 
-        buildCounter?:any,       
+        scrollPhysics?:ScrollPhysics,    
       }
      */
     static new(config: TextFormFieldConfig) {
       return new TextFormField(config);
     }
   }
+
+  //****** TextField ******
+  //TODO: inputFormatters、autofillHints、buildCounter、strutStyle
+  interface TextFieldConfig {
+    key?:Key;
+    controller?:TextEditingController;
+    focusNode?:FocusNode;
+    decoration?:InputDecoration;
+    keyboardType?:TextInputType;
+    textInputAction?:TextInputAction;
+    textCapitalization?:TextCapitalization;
+    style?:TextStyle;
+    textAlign?:TextAlign;
+    textAlignVertical?:TextAlignVertical;
+    textDirection?:TextDirection;
+    readOnly?:boolean;
+    toolbarOptions?:ToolbarOptions;
+    showCursor?:boolean;
+    autofocus?:boolean;
+    obscuringCharacter?:string;
+    obscureText?:boolean;
+    autocorrect?:boolean;
+    smartDashesType?:SmartDashesType;
+    smartQuotesType?:SmartQuotesType;
+    enableSuggestions?:boolean;
+    maxLines?:number;
+    minLines?:number;
+    expands?:boolean;
+    maxLength?:number;
+    maxLengthEnforced?:boolean;
+    onChanged?:VoidCallbackString;
+    onEditingComplete?:VoidCallback;
+    onSubmitted?:VoidCallbackString;
+    enabled?:boolean;
+    cursorWidth?:number;
+    cursorRadius?:Radius;
+    cursorColor?:Color;
+    selectionHeightStyle?:BoxHeightStyle;
+    selectionWidthStyle?:BoxWidthStyle;
+    keyboardAppearance?:Brightness;
+    scrollPadding?:EdgeInsets;
+    dragStartBehavior?:DragStartBehavior;
+    enableInteractiveSelection?:boolean;
+    onTap?:VoidCallback;
+    scrollController?:ScrollController;
+    scrollPhysics?:ScrollPhysics;    
+  }
+  export class TextField extends Widget {
+    key?:Key;
+    controller?:TextEditingController;
+    focusNode?:FocusNode;
+    decoration?:InputDecoration;
+    keyboardType?:TextInputType;
+    textInputAction?:TextInputAction;
+    textCapitalization?:TextCapitalization;
+    style?:TextStyle;
+    textAlign?:TextAlign;
+    textAlignVertical?:TextAlignVertical;
+    textDirection?:TextDirection;
+    readOnly?:boolean;
+    toolbarOptions?:ToolbarOptions;
+    showCursor?:boolean;
+    autofocus?:boolean;
+    obscuringCharacter?:string;
+    obscureText?:boolean;
+    autocorrect?:boolean;
+    smartDashesType?:SmartDashesType;
+    smartQuotesType?:SmartQuotesType;
+    enableSuggestions?:boolean;
+    maxLines?:number;
+    minLines?:number;
+    expands?:boolean;
+    maxLength?:number;
+    maxLengthEnforced?:boolean;
+    onChanged?:VoidCallbackString;
+    onEditingComplete?:VoidCallback;
+    onSubmitted?:VoidCallbackString;
+    enabled?:boolean;
+    cursorWidth?:number;
+    cursorRadius?:Radius;
+    cursorColor?:Color;
+    selectionHeightStyle?:BoxHeightStyle;
+    selectionWidthStyle?:BoxWidthStyle;
+    keyboardAppearance?:Brightness;
+    scrollPadding?:EdgeInsets;
+    dragStartBehavior?:DragStartBehavior;
+    enableInteractiveSelection?:boolean;
+    onTap?:VoidCallback;
+    scrollController?:ScrollController;
+    scrollPhysics?:ScrollPhysics;
+    
+  
+    /**
+     * @param config config: 
+      {
+        key?:Key,
+        controller?:TextEditingController,
+        focusNode?:FocusNode,
+        decoration?:InputDecoration,
+        keyboardType?:TextInputType,
+        textInputAction?:TextInputAction,
+        textCapitalization?:TextCapitalization,
+        style?:TextStyle,
+        textAlign?:TextAlign,
+        textAlignVertical?:TextAlignVertical,
+        textDirection?:TextDirection,
+        readOnly?:boolean,
+        toolbarOptions?:ToolbarOptions,
+        showCursor?:boolean,
+        autofocus?:boolean,
+        obscuringCharacter?:string,
+        obscureText?:boolean,
+        autocorrect?:boolean,
+        smartDashesType?:SmartDashesType,
+        smartQuotesType?:SmartQuotesType,
+        enableSuggestions?:boolean,
+        maxLines?:number,
+        minLines?:number,
+        expands?:boolean,
+        maxLength?:number,
+        maxLengthEnforced?:boolean,
+        onChanged?:VoidCallbackString,
+        onEditingComplete?:VoidCallback,
+        onSubmitted?:VoidCallbackString,
+        enabled?:boolean,
+        cursorWidth?:number,
+        cursorRadius?:Radius,
+        cursorColor?:Color,
+        selectionHeightStyle?:BoxHeightStyle,
+        selectionWidthStyle?:BoxWidthStyle,
+        keyboardAppearance?:Brightness,
+        scrollPadding?:EdgeInsets,
+        dragStartBehavior?:DragStartBehavior,
+        enableInteractiveSelection?:boolean,
+        onTap?:VoidCallback,
+        scrollController?:ScrollController,
+        scrollPhysics?:ScrollPhysics,     
+      }
+     */
+    constructor(config: TextFieldConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.controller = config.controller;
+        this.decoration = config.decoration;
+        this.keyboardType = config.keyboardType;
+        this.textInputAction = config.textInputAction;
+        this.textCapitalization = config.textCapitalization;
+        this.style = config.style;
+        this.textAlign = config.textAlign;
+        this.textAlignVertical = config.textAlignVertical;
+        this.textDirection = config.textDirection;
+        this.readOnly = config.readOnly;
+        this.toolbarOptions = config.toolbarOptions;
+        this.showCursor = config.showCursor;
+        this.obscuringCharacter = config.obscuringCharacter;
+        this.obscureText = config.obscureText;
+        this.autocorrect = config.autocorrect;
+        this.smartDashesType = config.smartDashesType;
+        this.smartQuotesType = config.smartQuotesType;
+        this.enableSuggestions = config.enableSuggestions;
+        this.maxLines = config.maxLines;
+        this.minLines = config.minLines;
+        this.expands = config.expands;
+        this.maxLength = config.maxLength;
+        this.maxLengthEnforced = config.maxLengthEnforced;
+        this.onChanged = config.onChanged;
+        this.onEditingComplete = config.onEditingComplete;
+        this.onSubmitted = config.onSubmitted;
+        this.enabled = config.enabled;
+        this.cursorWidth = config.cursorWidth;
+        this.cursorColor = config.cursorColor;
+        this.cursorRadius = config.cursorRadius;
+        this.selectionHeightStyle = config.selectionHeightStyle;
+        this.selectionWidthStyle = config.selectionWidthStyle;
+        this.keyboardAppearance = config.keyboardAppearance;
+        this.scrollPadding = config.scrollPadding;
+        this.dragStartBehavior = config.dragStartBehavior;
+        this.enableInteractiveSelection = config.enableInteractiveSelection;
+        this.onTap = config.onTap;
+        this.scrollController = config.scrollController;
+        this.scrollPhysics = config.scrollPhysics;
+      }
+    }
+  
+  
+    /**
+     * @param config config: 
+      {
+        key?:Key,
+        controller?:TextEditingController,
+        focusNode?:FocusNode,
+        decoration?:InputDecoration,
+        keyboardType?:TextInputType,
+        textInputAction?:TextInputAction,
+        textCapitalization?:TextCapitalization,
+        style?:TextStyle,
+        textAlign?:TextAlign,
+        textAlignVertical?:TextAlignVertical,
+        textDirection?:TextDirection,
+        readOnly?:boolean,
+        toolbarOptions?:ToolbarOptions,
+        showCursor?:boolean,
+        autofocus?:boolean,
+        obscuringCharacter?:string,
+        obscureText?:boolean,
+        autocorrect?:boolean,
+        smartDashesType?:SmartDashesType,
+        smartQuotesType?:SmartQuotesType,
+        enableSuggestions?:boolean,
+        maxLines?:number,
+        minLines?:number,
+        expands?:boolean,
+        maxLength?:number,
+        maxLengthEnforced?:boolean,
+        onChanged?:VoidCallbackString,
+        onEditingComplete?:VoidCallback,
+        onSubmitted?:VoidCallbackString,
+        enabled?:boolean,
+        cursorWidth?:number,
+        cursorRadius?:Radius,
+        cursorColor?:Color,
+        selectionHeightStyle?:BoxHeightStyle,
+        selectionWidthStyle?:BoxWidthStyle,
+        keyboardAppearance?:Brightness,
+        scrollPadding?:EdgeInsets,
+        dragStartBehavior?:DragStartBehavior,
+        enableInteractiveSelection?:boolean,
+        onTap?:VoidCallback,
+        scrollController?:ScrollController,
+        scrollPhysics?:ScrollPhysics,   
+      }
+     */
+    static new(config: TextFieldConfig) {
+      return new TextField(config);
+    }
+  }
+
   //#endregion
   
   //#region ------- U -------
@@ -20153,7 +20955,7 @@ export class LoadingApi extends DartClass {
         //创建对应FLutter对象
         var argument = new JSCallConfig({
             mirrorID:this.mirrorID,
-            className:"LoadingApi",
+            className:this.className,
         });
         JSBridge.createMirrorObj(argument, this.mirrorID, this);
     }
@@ -20191,7 +20993,7 @@ export class LoadingApi extends DartClass {
     static showSuccess(config:LoadingApiInfoConfig){
         LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+            className: LoadingApi.getInstance().className,
             funcName: "showSuccess",
             args: config,
         }));
@@ -20208,7 +21010,7 @@ export class LoadingApi extends DartClass {
     static showError(config:LoadingApiInfoConfig){
         LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+            className: LoadingApi.getInstance().className,
             funcName: "showError",
             args: config,
         }));
@@ -20225,7 +21027,7 @@ export class LoadingApi extends DartClass {
     static showInfo(config:LoadingApiInfoConfig){
         LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+            className: LoadingApi.getInstance().className,
             funcName: "showInfo",
             args: config,
         }));
@@ -20242,7 +21044,7 @@ export class LoadingApi extends DartClass {
     static showToast(config:LoadingApiInfoConfig){
         LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+            className: LoadingApi.getInstance().className,
             funcName: "showToast",
             args: config,
         }));
@@ -20258,7 +21060,7 @@ export class LoadingApi extends DartClass {
     static show(config:LoadingApiInfoConfig){
         LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+            className: LoadingApi.getInstance().className,
             funcName: "show",
             args: config,
         }));
@@ -20317,7 +21119,7 @@ export class SpApi extends DartClass {
         //创建对应FLutter对象
         var argument = new JSCallConfig({
             mirrorID:this.mirrorID,
-            className:"SpApi",
+            className:this.className,
         });
         JSBridge.createMirrorObj(argument, this.mirrorID, this);
     }
@@ -20329,7 +21131,7 @@ export class SpApi extends DartClass {
         return this.instance;
       }
 
-      invokeMirrorObjWithCallback(argument:JSCallConfig){
+    invokeMirrorObjWithCallback(argument:JSCallConfig){
         return new Promise(function (resolve:any) {
           JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
               if (value != null && value !=undefined) {
@@ -20355,13 +21157,13 @@ export class SpApi extends DartClass {
       var v= await SpApi.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
           mirrorID: SpApi.getInstance().mirrorID,
-          className: "SpApi",
+          className: SpApi.getInstance().className,
           funcName: "getBool",
           args: config,
         })
       );
       return Boolean(v);
-    };
+    }
 
     /**
      * @param config config: 
@@ -20374,13 +21176,13 @@ export class SpApi extends DartClass {
       var v= await SpApi.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
           mirrorID: SpApi.getInstance().mirrorID,
-          className: "SpApi",
+          className: SpApi.getInstance().className,
           funcName: "getInt",
           args: config,
         })
       );
       return Number(v);
-    };
+    }
 
     /**
      * @param config config: 
@@ -20393,13 +21195,13 @@ export class SpApi extends DartClass {
       var v= await SpApi.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
           mirrorID: SpApi.getInstance().mirrorID,
-          className: "SpApi",
+          className: SpApi.getInstance().className,
           funcName: "getDouble",
           args: config,
         })
       );
       return Number(v);
-    };
+    }
 
     /**
      * @param config config: 
@@ -20412,24 +21214,24 @@ export class SpApi extends DartClass {
       var v= await SpApi.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
           mirrorID: SpApi.getInstance().mirrorID,
-          className: "SpApi",
+          className: SpApi.getInstance().className,
           funcName: "getString",
           args: config,
         })
       );
       return String(v);
-    };
+    }
 
     static async clear() {
       var v = await SpApi.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
           mirrorID: SpApi.getInstance().mirrorID,
-          className: "SpApi",
+          className: SpApi.getInstance().className,
           funcName: "clear",
         })
       );
       return Boolean(v);
-    };
+    }
 
     /**
      * @param config config: 
@@ -20441,12 +21243,12 @@ export class SpApi extends DartClass {
       var v = await SpApi.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
           mirrorID: SpApi.getInstance().mirrorID,
-          className: "SpApi",
+          className: SpApi.getInstance().className,
           funcName: "remove",
         })
       );
       return Boolean(v);
-    };
+    }
 
     /**
      * @param config config: 
@@ -20459,13 +21261,13 @@ export class SpApi extends DartClass {
       var v = await  SpApi.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "setBool",
             args: config,
         })
       );
       return Boolean(v);
-    };
+    }
 
     /**
      * @param config config: 
@@ -20478,13 +21280,13 @@ export class SpApi extends DartClass {
       var v = await  SpApi.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "setDouble",
             args: config,
         })
       );
       return Boolean(v);
-    };
+    }
 
     /**
      * @param config config: 
@@ -20497,13 +21299,13 @@ export class SpApi extends DartClass {
       var v = await SpApi.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "setInt",
             args: config,
         })
       );
       return Boolean(v);
-    };
+    }
 
     /**
      * @param config config: 
@@ -20516,19 +21318,17 @@ export class SpApi extends DartClass {
       var v = await  SpApi.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
             mirrorID: SpApi.getInstance().mirrorID,
-            className: "SpApi",
+            className: SpApi.getInstance().className,
             funcName: "setString",
             args: config,
         })
       );
-    };
+    }
 }
 
 
 //****** ScreenInfo ******
 export class ScreenInfo extends DartClass {
-
-  static instance:ScreenInfo;
 
   // 设计稿屏幕宽度(PX)
   static uiWidthPx:number = 750;
@@ -20577,13 +21377,6 @@ export class ScreenInfo extends DartClass {
       JSBridge.createMirrorObj(argument, this.mirrorID, this);
   }
 
-  static getInstance() {
-      if (!this.instance) {
-        this.instance = new ScreenInfo();
-      }
-      return this.instance;
-    }
-
   invokeMirrorObjWithCallback(argument:JSCallConfig){
       return new Promise(function (resolve:any) {
         JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
@@ -20614,10 +21407,10 @@ export class ScreenInfo extends DartClass {
 
   //
   static async updateInfo() {
-    
-    var v= await ScreenInfo.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-          mirrorID: ScreenInfo.getInstance().mirrorID,
-          className: "ScreenInfo",
+    var info = new ScreenInfo();
+    var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+          mirrorID: info.mirrorID,
+          className: info.className,
           funcName: "updateInfo",
       }));
       if(v!=null && v!=undefined){
@@ -20641,13 +21434,11 @@ export class ScreenInfo extends DartClass {
         }
       }
       //Log.log("ScreenInfo.updateInfo:"+String(v));
-  };
+  }
 }
 
 //****** PackageInfo ******
 export class PackageInfo extends DartClass {
-
-static instance:PackageInfo;
 
   static appName:string = ""; //应用名称
   static packageName:string = ""; //包名称
@@ -20662,17 +21453,10 @@ static instance:PackageInfo;
       //创建对应FLutter对象
       var argument = new JSCallConfig({
           mirrorID:this.mirrorID,
-          className:"PackageInfo",
+          className:this.className,
       });
       JSBridge.createMirrorObj(argument, this.mirrorID, this);
   }
-
-  static getInstance() {
-      if (!this.instance) {
-        this.instance = new PackageInfo();
-      }
-      return this.instance;
-    }
 
   invokeMirrorObjWithCallback(argument:JSCallConfig){
       return new Promise(function (resolve:any) {
@@ -20690,10 +21474,10 @@ static instance:PackageInfo;
 
   //
   static async updateInfo() {
-    
-    var v= await PackageInfo.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-          mirrorID: PackageInfo.getInstance().mirrorID,
-          className: "PackageInfo",
+    var info = new PackageInfo();
+    var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+          mirrorID: info.mirrorID,
+          className: info.className,
           funcName: "updateInfo",
       }));
       if(v!=null && v!=undefined){
@@ -20705,7 +21489,122 @@ static instance:PackageInfo;
           PackageInfo.version = result["version"] as string;
         }
       }
-  };
+  }
 }
 
+//****** Wakelock ******
+export class Wakelock extends DartClass {
+  static instance:Wakelock;
+  
+  constructor() {
+    super();
+    //Mirror对象在构造函数创建 MirrorID
+    this.createMirrorID();
+
+    //创建对应FLutter对象
+    var argument = new JSCallConfig({
+        mirrorID:this.mirrorID,
+        className:this.className,
+    });
+    JSBridge.createMirrorObj(argument, this.mirrorID, this);
+  }
+
+  
+  invokeMirrorObjWithCallback(argument:JSCallConfig){
+    return new Promise(function (resolve:any) {
+      JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
+          if (value != null && value !=undefined) {
+              resolve(value);
+
+          } else {
+              resolve(null);
+          }
+
+      });
+    }.bind(this));
+  }
+  
+    //
+    static async disable() {
+      var info = new Wakelock();
+      await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
+            funcName: "disable",
+        }));
+    }
+
+    //
+    static async enable() {
+      var info = new Wakelock();
+      await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
+            funcName: "enable",
+        }));
+    }
+
+    //
+    static async isEnabled() {
+      var info = new Wakelock();
+      var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: info.mirrorID,
+            className: info.className,
+            funcName: "isEnabled",
+        }));
+      return Boolean(v);
+    }
+}
+
+//****** FocusScope ******
+export class FocusScope extends DartClass {  
+  constructor() {
+    super();
+    //Mirror对象在构造函数创建 MirrorID
+    this.createMirrorID();
+
+    //创建对应FLutter对象
+    var argument = new JSCallConfig({
+        mirrorID:this.mirrorID,
+        className:this.className,
+    });
+    JSBridge.createMirrorObj(argument, this.mirrorID, this);
+  }
+
+  
+  invokeMirrorObjWithCallback(argument:JSCallConfig){
+    return new Promise(function (resolve:any) {
+      JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
+          if (value != null && value !=undefined) {
+              resolve(value);
+
+          } else {
+              resolve(null);
+          }
+
+      });
+    }.bind(this));
+  }
+  
+  //
+  static requestFocus() {
+    var info = new FocusScope();
+    info.invokeMirrorObjWithCallback(JSCallConfig.new({
+          mirrorID: info.mirrorID,
+          className: info.className,
+          funcName: "requestFocus",
+      }));
+  }
+
+  //
+  static unfocus() {
+    var info = new FocusScope();
+    info.invokeMirrorObjWithCallback(JSCallConfig.new({
+          mirrorID: info.mirrorID,
+          className: info.className,
+          funcName: "unfocus",
+      }));
+  }
+}
+  
 //#endregion

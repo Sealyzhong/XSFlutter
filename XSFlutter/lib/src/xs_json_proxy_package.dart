@@ -11,6 +11,7 @@ import 'xs_json_to_dart.dart';
 import 'loading/loading.dart';
 import 'common/sp_util.dart';
 import 'common/package_info.dart';
+import 'package:wakelock/wakelock.dart';
 
 ///把Widget初始化用到的基础类型如 List, ，
 class XSProxyRegisterHelperPackageSeries {
@@ -21,6 +22,7 @@ class XSProxyRegisterHelperPackageSeries {
     m.addAll(XSProxySp.registerProxy());
     m.addAll(XSProxyScreenInfo.registerProxy());
     m.addAll(XSProxyPackageInfo.registerProxy());
+    m.addAll(XSProxyWakelock.registerProxy());
     return m;
   }
 }
@@ -249,6 +251,40 @@ class XSProxyPackageInfo extends XSJsonObjProxy {
 
     if (callback != null && result != null) {
       callback(result);
+    }
+  }
+}
+
+//****** Wakelock ******
+class XSProxyWakelock extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "Wakelock";
+    return {
+      regClassName: () => XSProxyWakelock()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Object constructor(dynamic bo, Map<String, dynamic> jsonMap, {dynamic context}) {
+    return Object();
+  }
+
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) {
+    if (mirrorObj == null) return;
+    switch (funcName) {
+      case 'disable':
+        Wakelock.disable();
+        break;
+      case 'enable':
+        Wakelock.enable();
+        break;
+      case 'isEnabled':
+        Wakelock.isEnabled.then((value) {
+          callback(value);
+        });
+
+        break;
     }
   }
 }

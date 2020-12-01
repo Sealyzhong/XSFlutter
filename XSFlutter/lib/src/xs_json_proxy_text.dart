@@ -4,6 +4,8 @@
 //  Use of this source code is governed by a MIT-style license that can be
 //  found in the LICENSE file.
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'xs_json_to_dart.dart';
 import 'xs_build_owner.dart';
@@ -257,28 +259,44 @@ class XSProxyTextFormField extends XSJsonObjProxy {
   TextFormField constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return TextFormField(
       key: XSJSParse.getKey(context, bo, map, "key"),
-      controller: XSJSParse.getTextEditingController(context, bo, map, "controller"),
+      controller: XSJSParse.getObject(context, bo, map, "controller"),
       initialValue: XSJSParse.getString(context, bo, map, "initialValue"),
-      focusNode: XSJSParse.getObject(context, bo, map, "focusNode"), //TODO:focusNode
-      decoration: XSJSParse.getObject(context, bo, map, "decoration", defaultValue: const InputDecoration()),
+      focusNode: XSJSParse.getFocusNode(context, bo, map, "focusNode"),
+      decoration: XSJSParse.getInputDecoration(context, bo, map, "decoration", defaultValue: const InputDecoration()),
       keyboardType: XSJSParse.getTextInputType(context, bo, map, "keyboardType"),
       textCapitalization: XSJSParse.getTextCapitalization(context, bo, map, "textCapitalization", defaultValue: TextCapitalization.none),
       textInputAction: XSJSParse.getTextInputAction(context, bo, map, "textInputAction"),
       style: XSJSParse.getTextStyle(context, bo, map, "style"),
       textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
+      textAlignVertical: XSJSParse.getTextAlignVertical(context, bo, map, "textAlignVertical"),
       textAlign: XSJSParse.getTextAlign(context, bo, map, "textAlign", defaultValue: TextAlign.start),
+
       autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      readOnly: XSJSParse.getBool(context, bo, map, "readOnly", defaultValue: false),
+      toolbarOptions: XSJSParse.getToolbarOptions(context, bo, map, "toolbarOptions"),
+      showCursor: XSJSParse.getBool(context, bo, map, "showCursor"),
+      obscuringCharacter: XSJSParse.getString(context, bo, map, "obscuringCharacter", defaultValue: "•"),
+
       obscureText: XSJSParse.getBool(context, bo, map, "obscureText", defaultValue: false),
       autocorrect: XSJSParse.getBool(context, bo, map, "autocorrect", defaultValue: true),
-      //autovalidate: XSJSParse.getBool(context, bo, map, "autovalidate", defaultValue: false),
+      smartDashesType: XSJSParse.getSmartDashesType(context, bo, map, "smartDashesType"),
+      smartQuotesType: XSJSParse.getSmartQuotesType(context, bo, map, "smartQuotesType"),
+      autovalidate: XSJSParse.getBool(context, bo, map, "autovalidate", defaultValue: false),
       maxLengthEnforced: XSJSParse.getBool(context, bo, map, "maxLengthEnforced", defaultValue: true),
+      enableSuggestions: XSJSParse.getBool(context, bo, map, "enableSuggestions", defaultValue: true),
+
       maxLines: XSJSParse.getInt(context, bo, map, "maxLines", defaultValue: 1),
+      minLines: XSJSParse.getInt(context, bo, map, "minLines"),
       maxLength: XSJSParse.getInt(context, bo, map, "maxLength"),
+      expands: XSJSParse.getBool(context, bo, map, "expands", defaultValue: false),
+      onChanged: XSJSParse.getValueChanged<String>(context, bo, map, "onChanged"),
+      onTap: XSJSParse.getVoidCallback(context, bo, map, "onTap"),
       onEditingComplete: XSJSParse.getVoidCallback(context, bo, map, "onEditingComplete"),
       onFieldSubmitted: XSJSParse.getValueChanged<String>(context, bo, map, "onFieldSubmitted"),
       onSaved: XSJSParse.getValueChanged<String>(context, bo, map, "onSaved"),
       validator: XSJSParse.getValueChanged<String>(context, bo, map, "validator"),
-      inputFormatters: XSJSParse.getObject(context, bo, map, "inputFormatters"), //TODO:inputFormatters
+
+      //inputFormatters: XSJSParse.getObject(context, bo, map, "inputFormatters"), //TODO:inputFormatters
       enabled: XSJSParse.getBool(context, bo, map, "enabled", defaultValue: true),
       cursorWidth: XSJSParse.getDouble(context, bo, map, "cursorWidth", defaultValue: 2.0),
       cursorRadius: XSJSParse.getRadius(context, bo, map, "cursorRadius"),
@@ -286,7 +304,9 @@ class XSProxyTextFormField extends XSJsonObjProxy {
       keyboardAppearance: XSJSParse.getBrightness(context, bo, map, "keyboardAppearance"),
       scrollPadding: XSJSParse.getEdgeInsets(context, bo, map, "scrollPadding", defaultValue: const EdgeInsets.all(20.0)),
       enableInteractiveSelection: XSJSParse.getBool(context, bo, map, "enableInteractiveSelection", defaultValue: true),
-      buildCounter: createBuildCounterHandle(bo, map["buildCounter"]),
+      scrollPhysics: XSJSParse.getScrollPhysics(context, bo, map, "scrollPhysics"),
+
+      //buildCounter: createBuildCounterHandle(bo, map["buildCounter"]),
     );
   }
 
@@ -323,35 +343,94 @@ class XSProxyTextField extends XSJsonObjProxy {
   TextField constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return TextField(
       key: XSJSParse.getKey(context, bo, map, "key"),
-      controller: XSJSParse.getTextEditingController(context, bo, map, "controller"),
-      focusNode: XSJSParse.getObject(context, bo, map, "focusNode"), //TODO: focusNode
+      controller: XSJSParse.getObject(context, bo, map, "controller"),
+      focusNode: XSJSParse.getFocusNode(context, bo, map, "focusNode"),
       decoration: XSJSParse.getObject(context, bo, map, "decoration", defaultValue: const InputDecoration()),
       keyboardType: XSJSParse.getTextInputType(context, bo, map, "keyboardType"),
       textInputAction: XSJSParse.getTextInputAction(context, bo, map, "textInputAction"),
       textCapitalization: XSJSParse.getTextCapitalization(context, bo, map, "textCapitalization", defaultValue: TextCapitalization.none),
       style: XSJSParse.getTextStyle(context, bo, map, "style"),
       textAlign: XSJSParse.getTextAlign(context, bo, map, "textAlign", defaultValue: TextAlign.start),
+      textAlignVertical: XSJSParse.getTextAlignVertical(context, bo, map, "textAlignVertical"),
       textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
+      readOnly: XSJSParse.getBool(context, bo, map, "readOnly", defaultValue: false),
+      toolbarOptions: XSJSParse.getToolbarOptions(context, bo, map, "toolbarOptions"),
+      showCursor: XSJSParse.getBool(context, bo, map, "showCursor"),
       autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      obscuringCharacter: XSJSParse.getString(context, bo, map, "obscuringCharacter", defaultValue: "•"),
       obscureText: XSJSParse.getBool(context, bo, map, "obscureText", defaultValue: false),
       autocorrect: XSJSParse.getBool(context, bo, map, "autocorrect", defaultValue: true),
+      smartDashesType: XSJSParse.getSmartDashesType(context, bo, map, "smartDashesType"),
+      smartQuotesType: XSJSParse.getSmartQuotesType(context, bo, map, "smartQuotesType"),
+      enableSuggestions: XSJSParse.getBool(context, bo, map, "autocorrect", defaultValue: true),
       maxLines: XSJSParse.getInt(context, bo, map, "maxLines", defaultValue: 1),
+      minLines: XSJSParse.getInt(context, bo, map, "minLines"),
+
+      expands: XSJSParse.getBool(context, bo, map, "expands", defaultValue: false),
       maxLength: XSJSParse.getInt(context, bo, map, "maxLength"),
       maxLengthEnforced: XSJSParse.getBool(context, bo, map, "maxLengthEnforced", defaultValue: true),
+
       onChanged: XSJSParse.getValueChanged<String>(context, bo, map, "onChanged"),
       onEditingComplete: XSJSParse.getVoidCallback(context, bo, map, "onEditingComplete"),
       onSubmitted: XSJSParse.getValueChanged<String>(context, bo, map, "onSubmitted"),
-      inputFormatters: XSJSParse.getObject(context, bo, map, "inputFormatters"), //TODO:inputFormatters
+
+      //inputFormatters: XSJSParse.getObject(context, bo, map, "inputFormatters"), //TODO:inputFormatters
       enabled: XSJSParse.getBool(context, bo, map, "enabled"),
       cursorWidth: XSJSParse.getDouble(context, bo, map, "cursorWidth", defaultValue: 2.0),
       cursorRadius: XSJSParse.getRadius(context, bo, map, "cursorRadius"),
       cursorColor: XSJSParse.getColor(context, bo, map, "cursorColor"),
+      selectionHeightStyle: XSJSParse.getBoxHeightStyle(context, bo, map, "selectionHeightStyle", defaultValue: BoxHeightStyle.tight),
+      selectionWidthStyle: XSJSParse.getBoxWidthStyle(context, bo, map, "selectionWidthStyle", defaultValue: BoxWidthStyle.tight),
       keyboardAppearance: XSJSParse.getBrightness(context, bo, map, "keyboardAppearance"),
-      scrollPadding: XSJSParse.getEdgeInsets(context, bo, map, "scrollPadding", defaultValue: const EdgeInsets.all(20.0)),
-      dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.down),
       enableInteractiveSelection: XSJSParse.getBool(context, bo, map, "enableInteractiveSelection", defaultValue: true),
       onTap: XSJSParse.getVoidCallback(context, bo, map, "onTap"),
-      buildCounter: XSJSParse.getObject(context, bo, map, "buildCounter"),
+      scrollPadding: XSJSParse.getEdgeInsets(context, bo, map, "scrollPadding", defaultValue: const EdgeInsets.all(20.0)),
+      dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.start),
+      scrollController: XSJSParse.getObject(context, bo, map, "scrollController"),
+      scrollPhysics: XSJSParse.getScrollPhysics(context, bo, map, "scrollPhysics"),
+
+      //buildCounter: XSJSParse.getObject(context, bo, map, "buildCounter"),
     );
+  }
+}
+
+//****** TextEditingController ******
+class XSProxyTextEditingController extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "TextEditingController";
+    return {
+      regClassName: () => XSProxyTextEditingController()..init(className: regClassName)
+    };
+  }
+
+  @override
+  TextEditingController constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return TextEditingController(
+      text: XSJSParse.getString(context, bo, map, "text"),
+    );
+  }
+
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map args, {InvokeCallback callback}) {
+    if (mirrorObj == null || !(mirrorObj is TextEditingController)) {
+      return;
+    }
+    var tc = mirrorObj as TextEditingController;
+    if (funcName == "clear") {
+      tc.clear();
+      return;
+    }
+
+    if (funcName == "getText") {
+      if (callback != null) {
+        callback(tc.text);
+      }
+      return;
+    }
+
+    if (funcName == "setText") {
+      tc.text = XSJSParse.getString(null, null, args, "test");
+      return;
+    }
   }
 }

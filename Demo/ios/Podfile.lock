@@ -4,6 +4,8 @@ PODS:
     - Flutter
   - shared_preferences (0.0.1):
     - Flutter
+  - wakelock (0.0.1):
+    - Flutter
   - xsflutter (0.0.1):
     - Flutter
 
@@ -11,6 +13,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - wakelock (from `.symlinks/plugins/wakelock/ios`)
   - xsflutter (from `.symlinks/plugins/xsflutter/ios`)
 
 EXTERNAL SOURCES:
@@ -20,6 +23,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
+  wakelock:
+    :path: ".symlinks/plugins/wakelock/ios"
   xsflutter:
     :path: ".symlinks/plugins/xsflutter/ios"
 
@@ -27,6 +32,7 @@ SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
+  wakelock: 0d4a70faf8950410735e3f61fb15d517c8a6efc4
   xsflutter: 7776b27367b09d0dfb1951e79cf0bd04518e6691
 
 PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d

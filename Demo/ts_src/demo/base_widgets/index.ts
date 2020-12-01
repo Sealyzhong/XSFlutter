@@ -17,6 +17,7 @@ import { MyRowPage } from "demo/base_widgets/row_page";
 import { MyTextPage } from "demo/base_widgets/text_page";
 import { MyButtonPage } from "demo/base_widgets/button_page";
 import { MyFlutterLogoPage } from "demo/base_widgets/flutter_logo_page";
+import { MyTextFieldPage } from "demo/base_widgets/text_field_page";
 
 export class MyBaseWidgetsIndex extends fs.StatelessWidget{
 
@@ -87,6 +88,18 @@ export class MyBaseWidgetsIndex extends fs.StatelessWidget{
                             fs.Navigator.push(context,fs.MaterialPageRoute.new({
                                 builder:function(context?:fs.BuildContext){
                                     return MyTextPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("TextField"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyTextFieldPage.new();
                                 }
                             }));
                         }                        

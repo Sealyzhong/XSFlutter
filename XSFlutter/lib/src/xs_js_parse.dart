@@ -677,6 +677,21 @@ class XSJSParse {
     return defaultValue;
   }
 
+
+  //****** BoxWidthStyle ******/
+  static BoxWidthStyle getBoxWidthStyle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BoxWidthStyle defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'max':
+          return BoxWidthStyle.max;
+        case 'tight':
+          return BoxWidthStyle.tight;
+      }
+    }
+    return defaultValue;
+  }
+
   //****** BorderSide ******/
   static BorderSide getBorderSide(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BorderSide defaultValue}) {
     var v = _getMap(map, key);
@@ -1421,6 +1436,20 @@ class XSJSParse {
         textColor: getColor(context, bo, v, "textColor", defaultValue: const Color(0xFF42A5F5)),
         style: getFlutterLogoStyle(context, bo, v, "style", defaultValue: FlutterLogoStyle.markOnly),
         margin: getEdgeInsets(context, bo, v, "margin", defaultValue: EdgeInsets.zero),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** FocusNode ******/
+  static FocusNode getFocusNode(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {FocusNode defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return FocusNode(
+        debugLabel: getString(context, bo, v, "debugLabel"),
+        skipTraversal: getBool(context, bo, map, "skipTraversal", defaultValue: false),
+        canRequestFocus: getBool(context, bo, map, "canRequestFocus", defaultValue: true),
+        descendantsAreFocusable: getBool(context, bo, map, "descendantsAreFocusable", defaultValue: true),
       );
     }
     return defaultValue;
@@ -4799,6 +4828,34 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** SmartDashesType ******/
+  static SmartDashesType getSmartDashesType(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {SmartDashesType defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'disabled':
+          return SmartDashesType.disabled;
+        case 'enabled':
+          return SmartDashesType.enabled;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** SmartQuotesType ******/
+  static SmartQuotesType getSmartQuotesType(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {SmartQuotesType defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'disabled':
+          return SmartQuotesType.disabled;
+        case 'enabled':
+          return SmartQuotesType.enabled;
+      }
+    }
+    return defaultValue;
+  }
+
   //****** StackFit ******/
   static StackFit getStackFit(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {StackFit defaultValue}) {
     var v = _getString(map, key);
@@ -5037,6 +5094,20 @@ class XSJSParse {
         initialIndex: XSJSParse.getInt(context, bo, v, "initialIndex", defaultValue: 0),
         length: XSJSParse.getInt(context, bo, v, "length"),
         vsync: XSJSParse.getObject(context, bo, v, "vsync"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** ToolbarOptions ******/
+  static ToolbarOptions getToolbarOptions(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ToolbarOptions defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return ToolbarOptions(
+        copy: XSJSParse.getBool(context, bo, v, "copy", defaultValue: false),
+        cut: XSJSParse.getBool(context, bo, v, "cut", defaultValue: false),
+        paste: XSJSParse.getBool(context, bo, v, "paste", defaultValue: false),
+        selectAll: XSJSParse.getBool(context, bo, v, "selectAll", defaultValue: false),
       );
     }
     return defaultValue;
@@ -5358,7 +5429,7 @@ class XSJSParse {
   }
 
   //****** TextEditingController ******/
-  static TextEditingController getTextEditingController(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextEditingController defaultValue}) {
+  /*static TextEditingController getTextEditingController(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextEditingController defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
       return TextEditingController(
@@ -5366,7 +5437,7 @@ class XSJSParse {
       );
     }
     return defaultValue;
-  }
+  }*/
 
   //****** TableBorder ******/
   static TableBorder getTableBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {dynamic defaultValue}) {
