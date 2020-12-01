@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
-
 class XSJSLogUtil {
   static var _separator = "=";
   static var _split = "$_separator$_separator$_separator$_separator$_separator$_separator$_separator$_separator$_separator";
@@ -11,7 +9,7 @@ class XSJSLogUtil {
   static String _startLine = "$_split$_title$_split";
   static String _endLine = "$_split$_separator$_separator$_separator$_split";
 
-  static void init({String title, @required bool isDebug, int limitLength}) {
+  static void init({String title, bool isDebug, int limitLength}) {
     _title = title;
     _isDebug = isDebug;
     _limitLength = limitLength ??= _limitLength;

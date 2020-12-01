@@ -11,8 +11,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/services.dart';
+import 'package:vector_math/vector_math_64.dart';
 import 'dart:typed_data';
-import 'package:vector_math/vector_math_64.dart' hide Colors;
 import 'dart:math' as math;
 import 'dart:io';
 import 'xs_build_owner.dart';
@@ -939,7 +939,6 @@ class XSJSParse {
       switch (constructorName) {
         case 'fromSwatch':
           return ColorScheme.fromSwatch(
-            primarySwatch: getColor(context, bo, v, "primarySwatch", defaultValue: Colors.blue),
             primaryColorDark: getColor(context, bo, v, "primaryColorDark"),
             accentColor: getColor(context, bo, v, "accentColor"),
             cardColor: getColor(context, bo, v, "cardColor"),

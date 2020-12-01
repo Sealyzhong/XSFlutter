@@ -317,9 +317,9 @@ class XSProxyTextFormField extends XSJsonObjProxy {
 
     InputCounterWidgetBuilder cb = (
       BuildContext context, {
-      @required int currentLength,
-      @required int maxLength,
-      @required bool isFocused,
+      int currentLength,
+      int maxLength,
+      bool isFocused,
     }) {
       bo.eventCallback(eventCallbackID);
       //TODO:return widget

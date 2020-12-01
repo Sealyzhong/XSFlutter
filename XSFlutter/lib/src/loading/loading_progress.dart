@@ -8,7 +8,7 @@ class Progress extends StatefulWidget {
 
   const Progress({
     Key key,
-    @required this.value,
+    this.value,
   }) : super(key: key);
 
   @override
@@ -55,9 +55,9 @@ class _CircleProgress extends ProgressIndicator {
   final Color color;
 
   _CircleProgress({
-    @required this.value,
-    @required this.width,
-    @required this.color,
+    this.value,
+    this.width,
+    this.color,
   });
 
   @override
@@ -93,9 +93,9 @@ class _CirclePainter extends CustomPainter {
   final double width;
 
   _CirclePainter({
-    @required this.color,
-    @required this.value,
-    @required this.width,
+    this.color,
+    this.value,
+    this.width,
   });
 
   @override

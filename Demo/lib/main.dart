@@ -38,7 +38,7 @@ class MyFlutterExampleHome extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          leading: FlutterLogo(colors: Colors.blue),
+          leading: FlutterLogo(textColor: Colors.blue),
           title: Text('XSFlutter Demo'),
         ),
         body: ListView(

@@ -8,20 +8,20 @@ class XSLoadingApp extends StatelessWidget {
 
   const XSLoadingApp({
     Key key,
-    @required this.child,
+    this.child,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Overlay(
-        initialEntries: [
-          OverlayEntry(
-            builder: (BuildContext _context) {
-              XSLoading.instance.updateContext(_context);
-              return this.child;
-            },
-          ),
-        ],
-      );
+      initialEntries: [
+        OverlayEntry(
+          builder: (BuildContext _context) {
+            XSLoading.instance.updateContext(_context);
+            return this.child;
+          },
+        ),
+      ],
+    );
   }
 }

@@ -12,6 +12,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:synchronized/synchronized.dart';
 
+
 /// SharedPreferences Util.
 class XSSpUtil {
   static XSSpUtil _instance;
