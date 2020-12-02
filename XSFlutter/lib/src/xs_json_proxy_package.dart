@@ -33,7 +33,7 @@ class XSProxyRegisterHelperPackageSeries {
 //****** XSLoading ******
 class XSProxyLoading extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "LoadingApi";
+    final String regClassName = "Loading";
     return {
       regClassName: () => XSProxyLoading()..init(className: regClassName)
     };
@@ -91,10 +91,10 @@ class XSProxyLoading extends XSJsonObjProxy {
 }
 
 //-------------- S -----------------
-//****** SpApi ******
+//****** Sp ******
 class XSProxySp extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "SpApi";
+    final String regClassName = "Sp";
     return {
       regClassName: () => XSProxySp()..init(className: regClassName)
     };

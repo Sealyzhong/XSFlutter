@@ -12,6 +12,7 @@ import { MyScreenInfoPage } from "demo/packages/screen_info_page";
 import { MyPackageInfoPage } from "demo/packages/package_info_page";
 import { MyWakelockPage } from "demo/packages/wakelock_page";
 import { MyUrlLaucherPage } from "demo/packages/url_laucher_page";
+import { MyDioPage } from "demo/packages/dio_page";
 
 export class MyPackageIndex extends fs.StatelessWidget{
     _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
@@ -103,6 +104,20 @@ export class MyPackageIndex extends fs.StatelessWidget{
                             fs.Navigator.push(context,fs.MaterialPageRoute.new({
                                 builder:function(context?:fs.BuildContext){
                                     return MyUrlLaucherPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        leading:fs.Text.new("7",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Dio Demo"),
+                        subtitle:fs.Text.new("Get、Post、Request"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyDioPage.new();
                                 }
                             }));
                         }                        

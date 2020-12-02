@@ -30,12 +30,12 @@ class _MySharedPreferncesPage extends fs.WidgetState{
     }
 
     _saveValue(){
-       var isSuccess= fs.SpApi.setInt({key:this._userNumber,value:this._count});
-        fs.LoadingApi.showSuccess({info:isSuccess?"保存成功！":"保存失败"});
+       var isSuccess= fs.Sp.setInt({key:this._userNumber,value:this._count});
+        fs.Loading.showSuccess({info:isSuccess?"保存成功！":"保存失败"});
     }
 
     async _getValue(){
-        this._getCount = await fs.SpApi.getInt({key:this._userNumber,defaultValue:0});
+        this._getCount = await fs.Sp.getInt({key:this._userNumber,defaultValue:0});
         this.setState();
     }
     

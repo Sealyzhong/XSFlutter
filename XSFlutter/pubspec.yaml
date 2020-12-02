@@ -30,8 +30,12 @@ dependencies:
 
   # 页面跳转
   # https://github.com/smrutiranjanrana/Flutter-URL-Launcher
-  # 5.2.7
+  # 5.7.0
   url_launcher: ^5.7.0
+
+  # 网络请求处理
+  # https://github.com/flutterchina/dio
+  dio: ^3.0.10  #latest version
   
 dev_dependencies:
   flutter_test:

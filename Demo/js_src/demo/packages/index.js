@@ -14,6 +14,7 @@ const screen_info_page_1 = require("demo/packages/screen_info_page");
 const package_info_page_1 = require("demo/packages/package_info_page");
 const wakelock_page_1 = require("demo/packages/wakelock_page");
 const url_laucher_page_1 = require("demo/packages/url_laucher_page");
+const dio_page_1 = require("demo/packages/dio_page");
 class MyPackageIndex extends fs.StatelessWidget {
     constructor() {
         super(...arguments);
@@ -100,6 +101,19 @@ class MyPackageIndex extends fs.StatelessWidget {
                             fs.Navigator.push(context, fs.MaterialPageRoute.new({
                                 builder: function (context) {
                                     return url_laucher_page_1.MyUrlLaucherPage.new();
+                                }
+                            }));
+                        }
+                    }),
+                    fs.ListTile.new({
+                        leading: fs.Text.new("7", { style: this._style }),
+                        trailing: fs.Icon.new(fs.Icons.chevron_right),
+                        title: fs.Text.new("Dio Demo"),
+                        subtitle: fs.Text.new("Get、Post、Request"),
+                        onTap: function () {
+                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                                builder: function (context) {
+                                    return dio_page_1.MyDioPage.new();
                                 }
                             }));
                         }

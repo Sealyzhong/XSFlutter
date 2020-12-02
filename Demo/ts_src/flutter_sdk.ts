@@ -1411,8 +1411,8 @@ export class JSBridge {
 
   //#region ------ A ------
 
-//****** Axis ******
-export enum Axis {
+  //****** Axis ******
+  export enum Axis {
     horizontal = "horizontal",
     vertical = "vertical",
   }
@@ -21532,20 +21532,20 @@ interface CupertinoActivityIndicatorConfig {
 
 //#region ******** Base Api ********
 
-//****** LoadingApi ******
-interface LoadingApiInfoConfig {
+//****** Loading ******
+interface LoadingInfoConfig {
     info:string;
     duration?:Duration;
     alignment?:Alignment;
     animation?:boolean;
 }
-interface LoadingApiProgressConfig {
+interface LoadingProgressConfig {
     value:number;
     alignment?:Alignment;
 }
-export class LoadingApi extends DartClass {
+export class Loading extends DartClass {
 
-    static instance:LoadingApi;
+    static instance:Loading;
 
     constructor() {
         super();
@@ -21558,7 +21558,7 @@ export class LoadingApi extends DartClass {
 
     static getInstance() {
         if (!this.instance) {
-          this.instance = new LoadingApi();
+          this.instance = new Loading();
         }
         return this.instance;
       }
@@ -21571,10 +21571,10 @@ export class LoadingApi extends DartClass {
         alignment?:Alignment, 
       }
      */
-    static showSuccess(config:LoadingApiInfoConfig){
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: LoadingApi.getInstance().mirrorID,
-            className: LoadingApi.getInstance().className,
+    static showSuccess(config:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: Loading.getInstance().className,
             funcName: "showSuccess",
             args: config,
         }));
@@ -21588,10 +21588,10 @@ export class LoadingApi extends DartClass {
         alignment?:Alignment, 
       }
      */
-    static showError(config:LoadingApiInfoConfig){
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: LoadingApi.getInstance().mirrorID,
-            className: LoadingApi.getInstance().className,
+    static showError(config:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: Loading.getInstance().className,
             funcName: "showError",
             args: config,
         }));
@@ -21605,10 +21605,10 @@ export class LoadingApi extends DartClass {
         alignment?:Alignment, 
       }
      */
-    static showInfo(config:LoadingApiInfoConfig){
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: LoadingApi.getInstance().mirrorID,
-            className: LoadingApi.getInstance().className,
+    static showInfo(config:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: Loading.getInstance().className,
             funcName: "showInfo",
             args: config,
         }));
@@ -21622,10 +21622,10 @@ export class LoadingApi extends DartClass {
         alignment?:Alignment, 
       }
      */
-    static showToast(config:LoadingApiInfoConfig){
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: LoadingApi.getInstance().mirrorID,
-            className: LoadingApi.getInstance().className,
+    static showToast(config:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: Loading.getInstance().className,
             funcName: "showToast",
             args: config,
         }));
@@ -21638,10 +21638,10 @@ export class LoadingApi extends DartClass {
         alignment?:Alignment, 
       }
      */
-    static show(config:LoadingApiInfoConfig){
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: LoadingApi.getInstance().mirrorID,
-            className: LoadingApi.getInstance().className,
+    static show(config:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: Loading.getInstance().className,
             funcName: "show",
             args: config,
         }));
@@ -21654,10 +21654,10 @@ export class LoadingApi extends DartClass {
         alignment?:Alignment, 
       }
      */
-    static showProgress(config:LoadingApiProgressConfig){
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+    static showProgress(config:LoadingProgressConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: "Loading",
             funcName: "showProgress",
             args: config,
         }));
@@ -21669,28 +21669,28 @@ export class LoadingApi extends DartClass {
         animation?:animation,
       }
      */
-    static dismiss(config?:LoadingApiInfoConfig){
-        LoadingApi.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: LoadingApi.getInstance().mirrorID,
-            className: "LoadingApi",
+    static dismiss(config?:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: "Loading",
             funcName: "dismiss",
             args: config,
         }));
     }
 }
 
-//****** SpApi ******
-interface SpApiGetConfig {
+//****** Sp ******
+interface SpGetConfig {
     key:string;
     defaultValue?:string|boolean|number;
 }
-interface SpApiSetConfig {
+interface SpSetConfig {
     key:string;
     value:string|boolean|number;
 }
-export class SpApi extends DartClass {
+export class Sp extends DartClass {
 
-    static instance:SpApi;
+    static instance:Sp;
 
     constructor() {
         super();
@@ -21704,7 +21704,7 @@ export class SpApi extends DartClass {
 
     static getInstance() {
         if (!this.instance) {
-          this.instance = new SpApi();
+          this.instance = new Sp();
         }
         return this.instance;
       }
@@ -21716,11 +21716,11 @@ export class SpApi extends DartClass {
         defaultValue?:boolean;
       }
      */
-    static async getBool(config:SpApiGetConfig) {
-      var v= await SpApi.getInstance().invokeMirrorObjWithCallback(
+    static async getBool(config:SpGetConfig) {
+      var v= await Sp.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
-          mirrorID: SpApi.getInstance().mirrorID,
-          className: SpApi.getInstance().className,
+          mirrorID: Sp.getInstance().mirrorID,
+          className: Sp.getInstance().className,
           funcName: "getBool",
           args: config,
         })
@@ -21735,11 +21735,11 @@ export class SpApi extends DartClass {
         defaultValue?:number;
       }
      */
-    static async getInt(config:SpApiGetConfig) {
-      var v= await SpApi.getInstance().invokeMirrorObjWithCallback(
+    static async getInt(config:SpGetConfig) {
+      var v= await Sp.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
-          mirrorID: SpApi.getInstance().mirrorID,
-          className: SpApi.getInstance().className,
+          mirrorID: Sp.getInstance().mirrorID,
+          className: Sp.getInstance().className,
           funcName: "getInt",
           args: config,
         })
@@ -21754,11 +21754,11 @@ export class SpApi extends DartClass {
         defaultValue?:double;
       }
      */
-    static async getDouble(config:SpApiGetConfig) {
-      var v= await SpApi.getInstance().invokeMirrorObjWithCallback(
+    static async getDouble(config:SpGetConfig) {
+      var v= await Sp.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
-          mirrorID: SpApi.getInstance().mirrorID,
-          className: SpApi.getInstance().className,
+          mirrorID: Sp.getInstance().mirrorID,
+          className: Sp.getInstance().className,
           funcName: "getDouble",
           args: config,
         })
@@ -21773,11 +21773,11 @@ export class SpApi extends DartClass {
         defaultValue?:string;
       }
      */
-    static async getString(config:SpApiGetConfig) {
-      var v= await SpApi.getInstance().invokeMirrorObjWithCallback(
+    static async getString(config:SpGetConfig) {
+      var v= await Sp.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
-          mirrorID: SpApi.getInstance().mirrorID,
-          className: SpApi.getInstance().className,
+          mirrorID: Sp.getInstance().mirrorID,
+          className: Sp.getInstance().className,
           funcName: "getString",
           args: config,
         })
@@ -21786,10 +21786,10 @@ export class SpApi extends DartClass {
     }
 
     static async clear() {
-      var v = await SpApi.getInstance().invokeMirrorObjWithCallback(
+      var v = await Sp.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
-          mirrorID: SpApi.getInstance().mirrorID,
-          className: SpApi.getInstance().className,
+          mirrorID: Sp.getInstance().mirrorID,
+          className: Sp.getInstance().className,
           funcName: "clear",
         })
       );
@@ -21802,11 +21802,11 @@ export class SpApi extends DartClass {
         key:string;
       }
      */
-    static async remove(config:SpApiGetConfig) {
-      var v = await SpApi.getInstance().invokeMirrorObjWithCallback(
+    static async remove(config:SpGetConfig) {
+      var v = await Sp.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
-          mirrorID: SpApi.getInstance().mirrorID,
-          className: SpApi.getInstance().className,
+          mirrorID: Sp.getInstance().mirrorID,
+          className: Sp.getInstance().className,
           funcName: "remove",
         })
       );
@@ -21820,11 +21820,11 @@ export class SpApi extends DartClass {
         value:boolean;
       }
      */
-    static async setBool(config:SpApiSetConfig) {
-      var v = await  SpApi.getInstance().invokeMirrorObjWithCallback(
+    static async setBool(config:SpSetConfig) {
+      var v = await  Sp.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
-            mirrorID: SpApi.getInstance().mirrorID,
-            className: SpApi.getInstance().className,
+            mirrorID: Sp.getInstance().mirrorID,
+            className: Sp.getInstance().className,
             funcName: "setBool",
             args: config,
         })
@@ -21839,11 +21839,11 @@ export class SpApi extends DartClass {
         value:number;
       }
      */
-    static async setDouble(config:SpApiSetConfig) {
-      var v = await  SpApi.getInstance().invokeMirrorObjWithCallback(
+    static async setDouble(config:SpSetConfig) {
+      var v = await  Sp.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
-            mirrorID: SpApi.getInstance().mirrorID,
-            className: SpApi.getInstance().className,
+            mirrorID: Sp.getInstance().mirrorID,
+            className: Sp.getInstance().className,
             funcName: "setDouble",
             args: config,
         })
@@ -21858,11 +21858,11 @@ export class SpApi extends DartClass {
         value:number;
       }
      */
-    static async setInt(config:SpApiSetConfig) {
-      var v = await SpApi.getInstance().invokeMirrorObjWithCallback(
+    static async setInt(config:SpSetConfig) {
+      var v = await Sp.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
-            mirrorID: SpApi.getInstance().mirrorID,
-            className: SpApi.getInstance().className,
+            mirrorID: Sp.getInstance().mirrorID,
+            className: Sp.getInstance().className,
             funcName: "setInt",
             args: config,
         })
@@ -21877,11 +21877,11 @@ export class SpApi extends DartClass {
         value:string;
       }
      */
-    static async setString(config:SpApiSetConfig) {
-      var v = await  SpApi.getInstance().invokeMirrorObjWithCallback(
+    static async setString(config:SpSetConfig) {
+      var v = await  Sp.getInstance().invokeMirrorObjWithCallback(
         JSCallConfig.new({
-            mirrorID: SpApi.getInstance().mirrorID,
-            className: SpApi.getInstance().className,
+            mirrorID: Sp.getInstance().mirrorID,
+            className: Sp.getInstance().className,
             funcName: "setString",
             args: config,
         })
@@ -22112,7 +22112,6 @@ interface UrlLauncherConfig {
   statusBarBrightness?:Brightness;
   webOnlyWindowName?:string;
 }
-
 export class UrlLauncher extends DartClass {
   constructor() {
     super();
@@ -22123,7 +22122,20 @@ export class UrlLauncher extends DartClass {
     this.createMirrorObj();
   }
 
-    //
+    /**
+     * @param config config: 
+      {
+        urlString:string, 
+        forceSafariVC?:boolean, 
+        forceWebView?:boolean, 
+        enableJavaScript?:boolean, 
+        enableDomStorage?:boolean, 
+        universalLinksOnly?:boolean, 
+        headers?:Map<string,string>, 
+        statusBarBrightness?:Brightness, 
+        webOnlyWindowName?:string, 
+      }
+     */
     static async openUrl(config:UrlLauncherConfig) {
       var info = new UrlLauncher();
       var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
@@ -22136,5 +22148,358 @@ export class UrlLauncher extends DartClass {
       return Convert.toBoolean(v);
     }
 }
+
+//#region ****** Dio ******
+
+//****** VoidCallbackDioProgress ******
+export type VoidCallbackDioProgress = (progress:number,total:number) => void;
+
+//****** DioResponseType ******
+export enum DioResponseType {
+  json = "json",
+  stream = "stream",
+  plain = "plain",
+  bytes = "bytes",
+}
+
+//****** DioBaseOptions ******
+interface DioBaseOptionsConfig {
+  method?:string;
+  connectTimeout?:number;
+  receiveTimeout?:number;
+  sendTimeout?:number;
+  baseUrl?:string;
+  queryParameters?:Map<string,any>;
+  extra?:Map<string,any>;
+  headers?:Map<string,any>;
+  responseType?:DioResponseType;
+  receiveDataWhenStatusError?:boolean;
+  followRedirects?:boolean;
+  maxRedirects?:number;
+}
+export class DioBaseOptions extends DartClass {
+  method?:string;
+  connectTimeout?:number;
+  receiveTimeout?:number;
+  sendTimeout?:number;
+  baseUrl?:string;
+  queryParameters?:Map<string,any>;
+  extra?:Map<string,any>;
+  headers?:Map<string,any>;
+  responseType?:DioResponseType;
+  receiveDataWhenStatusError?:boolean;
+  followRedirects?:boolean;
+  maxRedirects?:number;
+
+  /**
+     * @param config config: 
+      {
+        method?:string, 
+        connectTimeout?:number, 
+        receiveTimeout?:number, 
+        sendTimeout?:number, 
+        baseUrl?:string, 
+        queryParameters?:Map<string,any>, 
+        extra?:Map<string,any>, 
+        headers?:Map<string,any>, 
+        responseType?:DioResponseType, 
+        receiveDataWhenStatusError?:boolean, 
+        followRedirects?:boolean, 
+        maxRedirects?:number, 
+      }
+     */
+  constructor(config?:DioBaseOptionsConfig) {
+    super();
+    if(config!=null && config!=undefined){
+      this.method = config.method;
+      this.connectTimeout = config.connectTimeout;
+      this.receiveTimeout = config.receiveTimeout;
+      this.sendTimeout = config.sendTimeout;
+      this.baseUrl = config.baseUrl;
+      this.queryParameters = config.queryParameters;
+      this.extra = config.extra;
+      this.headers = config.headers;
+      this.responseType = config.responseType;
+      this.followRedirects = config.followRedirects;
+      this.maxRedirects = config.maxRedirects;
+    }
+  }
+
+  /**
+     * @param config config: 
+      {
+        method?:string, 
+        connectTimeout?:number, 
+        receiveTimeout?:number, 
+        sendTimeout?:number, 
+        baseUrl?:string, 
+        queryParameters?:Map<string,any>, 
+        extra?:Map<string,any>, 
+        headers?:Map<string,any>, 
+        responseType?:DioResponseType, 
+        receiveDataWhenStatusError?:boolean, 
+        followRedirects?:boolean, 
+        maxRedirects?:number, 
+      }
+     */
+  static new(config?:DioBaseOptionsConfig){
+    return new DioBaseOptions(config);
+  }
+}
+
+//****** DioOptions ******
+interface DioOptionsConfig {
+  method?:string;
+  receiveTimeout?:number;
+  sendTimeout?:number;
+  baseUrl?:string;
+  extra?:Map<string,any>;
+  headers?:Map<string,any>;
+  responseType?:DioResponseType;
+  receiveDataWhenStatusError?:boolean;
+  followRedirects?:boolean;
+  maxRedirects?:number;
+}
+export class DioOptions extends DartClass {
+  method?:string;
+  receiveTimeout?:number;
+  sendTimeout?:number;
+  baseUrl?:string;
+  extra?:Map<string,any>;
+  headers?:Map<string,any>;
+  responseType?:DioResponseType;
+  receiveDataWhenStatusError?:boolean;
+  followRedirects?:boolean;
+  maxRedirects?:number;
+
+  /**
+     * @param config config: 
+      {
+        method?:string, 
+        connectTimeout?:number, 
+        receiveTimeout?:number, 
+        sendTimeout?:number, 
+        baseUrl?:string, 
+        extra?:Map<string,any>, 
+        headers?:Map<string,any>, 
+        responseType?:DioResponseType, 
+        receiveDataWhenStatusError?:boolean, 
+        followRedirects?:boolean, 
+        maxRedirects?:number, 
+      }
+     */
+  constructor(config?:DioOptionsConfig) {
+    super();
+    if(config!=null && config!=undefined){
+      this.method = config.method;
+      this.receiveTimeout = config.receiveTimeout;
+      this.sendTimeout = config.sendTimeout;
+      this.baseUrl = config.baseUrl;
+      this.extra = config.extra;
+      this.headers = config.headers;
+      this.responseType = config.responseType;
+      this.followRedirects = config.followRedirects;
+      this.maxRedirects = config.maxRedirects;
+    }
+  }
+
+  /**
+     * @param config config: 
+      {
+        method?:string, 
+        receiveTimeout?:number, 
+        sendTimeout?:number, 
+        baseUrl?:string, 
+        extra?:Map<string,any>, 
+        headers?:Map<string,any>, 
+        responseType?:DioResponseType, 
+        receiveDataWhenStatusError?:boolean, 
+        followRedirects?:boolean, 
+        maxRedirects?:number, 
+      }
+     */
+  static new(config?:DioOptionsConfig){
+    return new DioOptions(config);
+  }
+}
+
+
+interface DioGetConfig {
+  path?:string;
+  queryParameters?:Map<string,any>;
+  options?:DioOptions;
+  onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+interface DioGetUriConfig {
+  uri?:Uri;
+  options?:DioOptions;
+  onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+interface DioPostConfig {
+  path?:string;
+  data?:any;
+  queryParameters?:Map<string,any>;
+  options?:DioOptions;
+  onSendProgress?:VoidCallbackDioProgress;
+  onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+interface DioPostUriConfig {
+  uri?:Uri;
+  data?:any;
+  options?:DioOptions;
+  onSendProgress?:VoidCallbackDioProgress;
+  onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+interface DioRequestConfig {
+  path?:string;
+  data?:any;
+  queryParameters?:Map<string,any>;
+  options?:DioOptions;
+  onSendProgress?:VoidCallbackDioProgress;
+  onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+interface DioRequestUriConfig {
+  uri?:Uri;
+  data?:any;
+  options?:DioOptions;
+  onSendProgress?:VoidCallbackDioProgress;
+  onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+
+export class Dio extends DartClass {
+
+  options?:DioBaseOptions;
+
+  constructor(options?:DioBaseOptions) {
+    super();
+    this.options = options;
+    //Mirror对象在构造函数创建 MirrorID
+    this.createMirrorID();
+
+    //创建对应FLutter对象
+    this.createMirrorObj();
+  }
+
+  static new(options?:DioBaseOptions){
+    return new Dio(options);
+  }
+
+  /**
+    * @param config config: 
+      {
+        path?:string, 
+        queryParameters?:Map<string,any>, 
+        options?:DioOptions, 
+      }
+  */
+  async get(config:DioGetConfig ) {
+    return await this.invokeMirrorObjWithCallback(
+      JSCallConfig.new({
+          mirrorID: this.mirrorID,
+          className: this.className,
+          funcName: "get",
+          args:config,
+      }));
+  }
+
+  /**
+    * @param config config: 
+      {
+        uri?:Uri,
+        options?:DioOptions, 
+      }
+    */
+  async getUri(config:DioGetUriConfig ) {
+    return await this.invokeMirrorObjWithCallback(
+      JSCallConfig.new({
+          mirrorID: this.mirrorID,
+          className: this.className,
+          funcName: "getUri",
+          args:config,
+      }));
+  }
+
+  /**
+    * @param config config: 
+      {
+        path?:string, 
+        data?:any;
+        queryParameters?:Map<string,any>, 
+        options?:DioOptions, 
+      }
+  */
+  async post(config:DioPostConfig ) {
+    return await this.invokeMirrorObjWithCallback(
+      JSCallConfig.new({
+          mirrorID: this.mirrorID,
+          className: this.className,
+          funcName: "post",
+          args:config,
+      }));
+  }
+
+  /**
+    * @param config config: 
+      {
+        uri?:Uri,
+        data?:any;
+        options?:DioOptions, 
+      }
+    */
+  async postUri(config:DioPostUriConfig ) {
+    return await this.invokeMirrorObjWithCallback(
+      JSCallConfig.new({
+          mirrorID: this.mirrorID,
+          className: this.className,
+          funcName: "postUri",
+          args:config,
+      }));
+  }
+
+  /**
+    * @param config config: 
+      {
+        path?:string, 
+        data?:any;
+        queryParameters?:Map<string,any>, 
+        options?:DioOptions, 
+      }
+  */
+  async request(config:DioRequestConfig ) {
+    return await this.invokeMirrorObjWithCallback(
+      JSCallConfig.new({
+          mirrorID: this.mirrorID,
+          className: this.className,
+          funcName: "request",
+          args:config,
+      }));
+  }
+
+  /**
+    * @param config config: 
+      {
+        uri?:Uri,
+        data?:any;
+        options?:DioOptions, 
+      }
+    */
+  async requestUri(config:DioRequestUriConfig ) {
+    return await this.invokeMirrorObjWithCallback(
+      JSCallConfig.new({
+          mirrorID: this.mirrorID,
+          className: this.className,
+          funcName: "requestUri",
+          args:config,
+      }));
+  }
+}
+
+//#endregion
 
 //#endregion
