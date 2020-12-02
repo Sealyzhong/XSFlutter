@@ -441,6 +441,15 @@ class XSJSParse {
     return _getBool(map, key) ?? defaultValue;
   }
 
+  //****** bool List ******/
+  static List<bool> getBoolList(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {List<bool> defaultValue}) {
+    var li = _getList(map, key);
+    if (li != null) {
+      return toListT<bool>(li);
+    }
+    return defaultValue;
+  }
+
   //****** BoxFit ******/
   static BoxFit getBoxFit(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BoxFit defaultValue}) {
     var v = _getString(map, key);
@@ -677,7 +686,6 @@ class XSJSParse {
     return defaultValue;
   }
 
-
   //****** BoxWidthStyle ******/
   static BoxWidthStyle getBoxWidthStyle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BoxWidthStyle defaultValue}) {
     var v = _getString(map, key);
@@ -797,40 +805,38 @@ class XSJSParse {
 
   //-------------- C -----------------
   //****** Color ******/
-  static Color getColor(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Color defaultValue}) {
-    Map v;
-    if (key.isEmpty) {
-      v = map;
-    } else {
-      v = _getMap(map, key);
-    }
-
-    if (v != null) {
-      var className = _getClassName(v);
-      var constructorName = _getConstructorName(v);
+  static Color getColorNoKey(BuildContext context, XSJsonBuildOwner bo, Map map, {Color defaultValue}) {
+    if (map != null) {
+      var className = _getClassName(map);
+      var constructorName = _getConstructorName(map);
       if (className == "Color") {
         if (constructorName == null || constructorName.isEmpty) {
-          return Color(getInt(context, bo, v, "value", defaultValue: 0));
+          return Color(getInt(context, bo, map, "value", defaultValue: 0));
         }
         switch (constructorName) {
           case 'fromRGBO':
             return Color.fromRGBO(
-              getInt(context, bo, v, "r", defaultValue: 0),
-              getInt(context, bo, v, "g", defaultValue: 0),
-              getInt(context, bo, v, "b", defaultValue: 0),
-              getDouble(context, bo, v, "opacity", defaultValue: 0.0),
+              getInt(context, bo, map, "r", defaultValue: 0),
+              getInt(context, bo, map, "g", defaultValue: 0),
+              getInt(context, bo, map, "b", defaultValue: 0),
+              getDouble(context, bo, map, "opacity", defaultValue: 0.0),
             );
           case 'fromARGB':
             return Color.fromARGB(
-              getInt(context, bo, v, "a", defaultValue: 0),
-              getInt(context, bo, v, "r", defaultValue: 0),
-              getInt(context, bo, v, "g", defaultValue: 0),
-              getInt(context, bo, v, "b", defaultValue: 0),
+              getInt(context, bo, map, "a", defaultValue: 0),
+              getInt(context, bo, map, "r", defaultValue: 0),
+              getInt(context, bo, map, "g", defaultValue: 0),
+              getInt(context, bo, map, "b", defaultValue: 0),
             );
         }
       }
     }
     return defaultValue;
+  }
+
+  static Color getColor(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Color defaultValue}) {
+    Map v = _getMap(map, key);
+    return getColorNoKey(context, bo, v, defaultValue: defaultValue);
   }
 
   //****** OutlinedBorder ******/
@@ -902,11 +908,11 @@ class XSJSParse {
 
   //****** List<Color> ******/
   static List<Color> getColorList(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {List<Color> defaultValue}) {
-    var v = _getList(map, key);
-    if (v != null) {
+    var li = _getList(map, key);
+    if (li != null && li.length > 0) {
       List<Color> list = List<Color>();
-      for (var a in v) {
-        list.add(getColor(context, bo, a, ""));
+      for (var a in li) {
+        list.add(getColorNoKey(context, bo, a));
       }
       return list;
     }
@@ -1102,6 +1108,15 @@ class XSJSParse {
     return _getDouble(map, key) ?? defaultValue;
   }
 
+  //****** Double List ******/
+  static List<double> getDoubleList(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {List<double> defaultValue}) {
+    var li = _getList(map, key);
+    if (li != null) {
+      return toListT<double>(li);
+    }
+    return defaultValue;
+  }
+
   //****** DragStartBehavior ******/
   static DragStartBehavior getDragStartBehavior(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DragStartBehavior defaultValue}) {
     var v = _getString(map, key);
@@ -1166,7 +1181,7 @@ class XSJSParse {
     var v = _getMap(map, key);
     if (v != null) {
       return DecorationImage(
-        image: getObject(context, bo, v, "image"),
+        image: getImageProvider(context, bo, v, "image"),
         colorFilter: getColorFilter(context, bo, v, "colorFilter"),
         fit: getBoxFit(context, bo, v, "fit"),
         alignment: getAlignment(context, bo, v, "alignment", defaultValue: Alignment.center),
@@ -1497,7 +1512,7 @@ class XSJSParse {
             begin: getAlignment(context, bo, v, "begin", defaultValue: Alignment.centerLeft),
             end: getAlignment(context, bo, v, "end", defaultValue: Alignment.centerRight),
             colors: getColorList(context, bo, v, "colors"),
-            stops: toListT<double>(getList(context, bo, v, "stops")),
+            stops: getDoubleList(context, bo, map, "stops"),
             tileMode: getTileMode(context, bo, v, "tileMode", defaultValue: TileMode.clamp),
             transform: getGradientTransform(context, bo, v, "transform"),
           );
@@ -1507,7 +1522,7 @@ class XSJSParse {
             center: getAlignment(context, bo, v, "center", defaultValue: Alignment.center),
             radius: getDouble(context, bo, v, "radius", defaultValue: 0.5),
             colors: getColorList(context, bo, v, "colors"),
-            stops: toListT<double>(getList(context, bo, v, "stops")),
+            stops: getDoubleList(context, bo, map, "stops"),
             tileMode: getTileMode(context, bo, v, "tileMode", defaultValue: TileMode.clamp),
             focal: getAlignment(context, bo, v, "focal"),
             focalRadius: getDouble(context, bo, v, "focalRadius", defaultValue: 0.0),
@@ -1520,7 +1535,7 @@ class XSJSParse {
             startAngle: getDouble(context, bo, v, "startAngle", defaultValue: 0.0),
             endAngle: getDouble(context, bo, v, "endAngle", defaultValue: math.pi * 2),
             colors: getColorList(context, bo, v, "colors"),
-            stops: toListT<double>(getList(context, bo, v, "stops")),
+            stops: getDoubleList(context, bo, map, "stops"),
             tileMode: getTileMode(context, bo, v, "tileMode", defaultValue: TileMode.clamp),
             transform: getGradientTransform(context, bo, v, "transform"),
           );
@@ -1566,6 +1581,15 @@ class XSJSParse {
   //****** int ******/
   static int getInt(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {int defaultValue}) {
     return _getInt(map, key) ?? defaultValue;
+  }
+
+  //****** int List ******/
+  static List<int> getIntList(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {List<int> defaultValue}) {
+    var li = _getList(map, key);
+    if (li != null) {
+      return toListT<int>(li);
+    }
+    return defaultValue;
   }
 
   //****** ImageRepeat ******/
@@ -4222,7 +4246,7 @@ class XSJSParse {
 
       switch (constructorName) {
         case 'fromList':
-          return Matrix4.fromList(toListT<double>(getList(context, bo, v, "values")));
+          return Matrix4.fromList(getDoubleList(context, bo, map, "values"));
         case 'outer':
           return Matrix4.outer(
             getObject(context, bo, v, "u"),
@@ -4695,6 +4719,22 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** RegExp ******/
+  static RegExp getRegExp(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {RegExp defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return RegExp(
+        getString(context, bo, map, "source"),
+        multiLine: getBool(context, bo, map, "multiLine", defaultValue: false),
+        caseSensitive: getBool(context, bo, map, "caseSensitive", defaultValue: true),
+        unicode: getBool(context, bo, map, "unicode", defaultValue: false),
+        dotAll: getBool(context, bo, map, "dotAll", defaultValue: false),
+      );
+    }
+
+    return defaultValue;
+  }
+
   //****** RSTransform ******/
   static RSTransform getRSTransform(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {RSTransform defaultValue}) {
     var v = _getMap(map, key);
@@ -4763,6 +4803,15 @@ class XSJSParse {
   //****** String ******/
   static String getString(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {String defaultValue}) {
     return _getString(map, key) ?? defaultValue;
+  }
+
+  //****** String List ******/
+  static List<String> getStringList(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {List<String> defaultValue}) {
+    var li = _getList(map, key);
+    if (li != null) {
+      return toListT<String>(li);
+    }
+    return defaultValue;
   }
 
   //****** Size ******/
@@ -5003,7 +5052,7 @@ class XSJSParse {
     if (v != null) {
       return StrutStyle(
         fontFamily: getString(context, bo, v, "fontFamily"),
-        fontFamilyFallback: toListT<String>(getList(context, bo, v, "fontFamilyFallback")),
+        fontFamilyFallback: getStringList(context, bo, map, "fontFamilyFallback"),
         fontSize: getDouble(context, bo, v, "fontSize"),
         height: getDouble(context, bo, v, "height"),
         leading: getDouble(context, bo, v, "leading"),
@@ -5084,19 +5133,6 @@ class XSJSParse {
   }
 
   //-------------- T -----------------
-
-  //****** TabController ******/
-  static TabController getTabController(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TabController defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      return TabController(
-        initialIndex: XSJSParse.getInt(context, bo, v, "initialIndex", defaultValue: 0),
-        length: XSJSParse.getInt(context, bo, v, "length"),
-        vsync: XSJSParse.getObject(context, bo, v, "vsync"),
-      );
-    }
-    return defaultValue;
-  }
 
   //****** ToolbarOptions ******/
   static ToolbarOptions getToolbarOptions(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ToolbarOptions defaultValue}) {
@@ -5535,7 +5571,52 @@ class XSJSParse {
         end: getDouble(context, bo, v, "end"),
       );
     }
+    return defaultValue;
+  }
 
+  //****** TextInputFormatter ******/
+  static List<TextInputFormatter> getTextInputFormatterList(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {List<TextInputFormatter> defaultValue}) {
+    var list = _getList(map, key);
+    if (list != null && list.length > 0) {
+      List<TextInputFormatter> result = List<TextInputFormatter>();
+      for (var m in list) {
+        if (m != null) {
+          var constructorName = _getConstructorName(m);
+          switch (constructorName) {
+            case 'lengthLimiting':
+              result.add(LengthLimitingTextInputFormatter(XSJSParse.getInt(context, bo, m, "maxLength")));
+              break;
+            case 'filtering':
+              result.add(FilteringTextInputFormatter(
+                XSJSParse.getRegExp(context, bo, m, "filterPattern"),
+                allow: XSJSParse.getBool(context, bo, m, "allow"),
+                replacementString: XSJSParse.getString(context, bo, m, "replacementString"),
+              ));
+              break;
+            case 'filtering.allow':
+              result.add(FilteringTextInputFormatter.allow(
+                XSJSParse.getRegExp(context, bo, m, "filterPattern"),
+                replacementString: XSJSParse.getString(context, bo, m, "replacementString"),
+              ));
+              break;
+            case 'filtering.deny':
+              result.add(FilteringTextInputFormatter.deny(
+                XSJSParse.getRegExp(context, bo, m, "filterPattern"),
+                replacementString: XSJSParse.getString(context, bo, m, "replacementString"),
+              ));
+              break;
+            case 'singleLineFormatter':
+              result.add(FilteringTextInputFormatter.singleLineFormatter);
+              break;
+            case 'digitsOnly':
+              result.add(FilteringTextInputFormatter.digitsOnly);
+              break;
+          }
+        }
+      }
+
+      return result;
+    }
     return defaultValue;
   }
 
@@ -5573,7 +5654,7 @@ class XSJSParse {
 
       switch (constructorName) {
         case 'fromList':
-          return Uint8List.fromList(toListT<int>(getList(context, bo, v, "elements")));
+          return Uint8List.fromList(getIntList(context, bo, map, "elements"));
         case 'view':
           return Uint8List.view(
             getObject(context, bo, v, "buffer"),
@@ -5619,7 +5700,7 @@ class XSJSParse {
         switch (constructorName) {
           case 'array':
             return Vector4.array(
-              getList(context, bo, v, "array"),
+              getDoubleList(context, bo, map, "array"),
               getInt(context, bo, v, "offset", defaultValue: 0),
             );
           case 'zero':
@@ -5694,7 +5775,22 @@ class XSJSParse {
     return defaultValue;
   }
 
-//
+  //****** Velocity ******/
+  static Velocity getVelocity(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Velocity defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var constructorName = _getConstructorName(v);
+      if (constructorName == null || constructorName.isEmpty) {
+        return Velocity(pixelsPerSecond: getOffset(context, bo, v, "pixelsPerSecond"));
+      }
+      switch (constructorName) {
+        case 'zero':
+          return Velocity.zero;
+      }
+    }
+
+    return defaultValue;
+  }
 
   //****** VoidCallback ******/
   static VoidCallback getVoidCallback(BuildContext context, XSJsonBuildOwner bo, Map map, String key) {

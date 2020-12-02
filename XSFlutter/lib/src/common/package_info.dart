@@ -5,7 +5,6 @@
  * @Description: 获取包信息
  */
 
-
 import 'package:package_info/package_info.dart';
 
 class XSPackageInfo {

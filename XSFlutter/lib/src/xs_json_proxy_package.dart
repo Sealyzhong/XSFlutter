@@ -285,7 +285,7 @@ class XSProxyWakelock extends XSJsonObjProxy {
         result = true;
         break;
       case 'isEnabled':
-        result = await Wakelock.isEnabled;
+        result = await Wakelock.enabled;
         break;
     }
 

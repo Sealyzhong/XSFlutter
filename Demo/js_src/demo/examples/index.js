@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyExamplesIndex = void 0;
 const fs = require("flutter_sdk");
 const counter_page_1 = require("demo/examples/counter_page");
+const test_widget_page_1 = require("demo/examples/test_widget_page");
 class MyExamplesIndex extends fs.StatelessWidget {
     constructor() {
         super(...arguments);
@@ -30,6 +31,19 @@ class MyExamplesIndex extends fs.StatelessWidget {
                             fs.Navigator.push(context, fs.MaterialPageRoute.new({
                                 builder: function (context) {
                                     return counter_page_1.MyCounterPage.new();
+                                }
+                            }));
+                        }
+                    }),
+                    fs.ListTile.new({
+                        leading: fs.Text.new("2", { style: this._style }),
+                        trailing: fs.Icon.new(fs.Icons.chevron_right),
+                        title: fs.Text.new("Test Widget"),
+                        subtitle: fs.Text.new("测试常用属于DSL JSON字符,方便映射开发"),
+                        onTap: function () {
+                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                                builder: function (context) {
+                                    return test_widget_page_1.MyTestWidgetPage.new();
                                 }
                             }));
                         }

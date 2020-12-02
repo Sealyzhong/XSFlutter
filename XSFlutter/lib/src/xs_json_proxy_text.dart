@@ -240,7 +240,7 @@ class XSProxyTextSpan extends XSJsonObjProxy {
       style: XSJSParse.getTextStyle(context, bo, map, "style"),
       text: XSJSParse.getString(context, bo, map, "text"),
       children: toListT<TextSpan>(XSJSParse.getObject(context, bo, map, "children")),
-      recognizer: XSJSParse.getObject(context, bo, map, "recognizer"),
+      //recognizer: XSJSParse.getObject(context, bo, map, "recognizer"),
       semanticsLabel: XSJSParse.getString(context, bo, map, "semanticsLabel"),
     );
   }
@@ -281,7 +281,6 @@ class XSProxyTextFormField extends XSJsonObjProxy {
       autocorrect: XSJSParse.getBool(context, bo, map, "autocorrect", defaultValue: true),
       smartDashesType: XSJSParse.getSmartDashesType(context, bo, map, "smartDashesType"),
       smartQuotesType: XSJSParse.getSmartQuotesType(context, bo, map, "smartQuotesType"),
-      autovalidate: XSJSParse.getBool(context, bo, map, "autovalidate", defaultValue: false),
       maxLengthEnforced: XSJSParse.getBool(context, bo, map, "maxLengthEnforced", defaultValue: true),
       enableSuggestions: XSJSParse.getBool(context, bo, map, "enableSuggestions", defaultValue: true),
 
@@ -295,17 +294,16 @@ class XSProxyTextFormField extends XSJsonObjProxy {
       onFieldSubmitted: XSJSParse.getValueChanged<String>(context, bo, map, "onFieldSubmitted"),
       onSaved: XSJSParse.getValueChanged<String>(context, bo, map, "onSaved"),
       validator: XSJSParse.getValueChanged<String>(context, bo, map, "validator"),
-
-      //inputFormatters: XSJSParse.getObject(context, bo, map, "inputFormatters"), //TODO:inputFormatters
+      inputFormatters: XSJSParse.getTextInputFormatterList(context, bo, map, "inputFormatters"),
       enabled: XSJSParse.getBool(context, bo, map, "enabled", defaultValue: true),
       cursorWidth: XSJSParse.getDouble(context, bo, map, "cursorWidth", defaultValue: 2.0),
       cursorRadius: XSJSParse.getRadius(context, bo, map, "cursorRadius"),
       cursorColor: XSJSParse.getColor(context, bo, map, "cursorColor"),
+      strutStyle: XSJSParse.getStrutStyle(context, bo, map, "strutStyle"),
       keyboardAppearance: XSJSParse.getBrightness(context, bo, map, "keyboardAppearance"),
       scrollPadding: XSJSParse.getEdgeInsets(context, bo, map, "scrollPadding", defaultValue: const EdgeInsets.all(20.0)),
       enableInteractiveSelection: XSJSParse.getBool(context, bo, map, "enableInteractiveSelection", defaultValue: true),
       scrollPhysics: XSJSParse.getScrollPhysics(context, bo, map, "scrollPhysics"),
-
       //buildCounter: createBuildCounterHandle(bo, map["buildCounter"]),
     );
   }
@@ -373,8 +371,9 @@ class XSProxyTextField extends XSJsonObjProxy {
       onChanged: XSJSParse.getValueChanged<String>(context, bo, map, "onChanged"),
       onEditingComplete: XSJSParse.getVoidCallback(context, bo, map, "onEditingComplete"),
       onSubmitted: XSJSParse.getValueChanged<String>(context, bo, map, "onSubmitted"),
+      strutStyle: XSJSParse.getStrutStyle(context, bo, map, "strutStyle"),
 
-      //inputFormatters: XSJSParse.getObject(context, bo, map, "inputFormatters"), //TODO:inputFormatters
+      inputFormatters: XSJSParse.getTextInputFormatterList(context, bo, map, "inputFormatters"),
       enabled: XSJSParse.getBool(context, bo, map, "enabled"),
       cursorWidth: XSJSParse.getDouble(context, bo, map, "cursorWidth", defaultValue: 2.0),
       cursorRadius: XSJSParse.getRadius(context, bo, map, "cursorRadius"),

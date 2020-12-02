@@ -4,7 +4,6 @@
 //  Use of this source code is governed by a MIT-style license that can be
 //  found in the LICENSE file.
 
-import 'dart:io';
 import 'xs_js_parse.dart';
 import 'package:flutter/material.dart';
 
@@ -30,8 +29,6 @@ class XSProxyRegisterHelperBasicTypesSeries {
 
     m.addAll(XSProxyDropdownMenuItem.registerProxy());
 
-    m.addAll(XSProxyFile.registerProxy());
-
     m.addAll(XSProxyInputDecorationTheme.registerProxy());
     m.addAll(XSProxyIconTheme.registerProxy());
 
@@ -48,6 +45,7 @@ class XSProxyRegisterHelperBasicTypesSeries {
 
     m.addAll(XSProxyTableRow.registerProxy());
     m.addAll(XSProxyTheme.registerProxy());
+    m.addAll(XSProxyTestWidget.registerProxy());
     return m;
   }
 }
@@ -255,39 +253,6 @@ class XSProxyDropdownMenuItem extends XSJsonObjProxy {
 }
 
 //-------------- F -----------------
-//****** File ******
-class XSProxyFile extends XSJsonObjProxy {
-  static String regClassName = "File";
-
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    return {
-      regClassName: () => XSProxyFile()..init(className: regClassName),
-    };
-  }
-
-  @override
-  void init({String className}) {
-    super.init(className: className);
-    registerConstructor(className: regClassName, constructorName: "fromRawPath", constructor: constructorFromRawPath);
-
-    registerConstructor(className: regClassName, constructorName: "fromUri", constructor: constructorFromUri);
-  }
-
-  @override
-  File constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return File(XSJSParse.getString(context, bo, map, "path"));
-  }
-
-  ///
-  File constructorFromRawPath(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return File.fromRawPath(XSJSParse.getUint8List(context, bo, map, "rawPath"));
-  }
-
-  File constructorFromUri(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return File.fromUri(XSJSParse.getUri(context, bo, map, "uri"));
-  }
-}
-
 //-------------- I -----------------
 //****** InputDecorationTheme ******
 class XSProxyInputDecorationTheme extends XSJsonObjProxy {
@@ -589,6 +554,21 @@ class XSProxySlider extends XSJsonObjProxy {
 }
 
 //-------------- T -----------------
+//****** TestWidget ******
+class XSProxyTestWidget extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "TestWidget";
+    return {
+      regClassName: () => XSProxyTestWidget()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Text constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Text("TestWidget");
+  }
+}
+
 //****** TableRow ******
 class XSProxyTableRow extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {

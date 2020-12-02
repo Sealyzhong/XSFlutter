@@ -28,6 +28,27 @@ export type VoidTapDown = (value:TapDownDetails) => void;
 //****** VoidTapUpDetails ******
 export type VoidTapUp = (value:TapUpDetails) => void;
 
+//****** VoidDragDownDetails ******
+export type VoidDragDown = (value:DragDownDetails) => void;
+
+//****** VoidDragStartDetails ******
+export type VoidDragStart = (value:DragStartDetails) => void;
+
+//****** VoidDragUpdateDetails ******
+export type VoidDragUpdate = (value:DragUpdateDetails) => void;
+
+//****** VoidDragEnd ******
+export type VoidDragEnd = (value:DragEndDetails) => void;
+
+//****** VoidScaleStartDetails ******
+export type VoidScaleStart = (value:ScaleStartDetails) => void;
+
+//****** VoidScaleUpdateDetails ******
+export type VoidScaleUpdate = (value:ScaleUpdateDetails) => void;
+
+//****** VoidScaleEnd ******
+export type VoidScaleEnd = (value:ScaleEndDetails) => void;
+
 //****** TODO JSWidget Mirror Mgr ******
 export class JSWidgetMirrorMgr {
   mirrorIDFeed:number;
@@ -130,9 +151,34 @@ export class DartClass extends core.Object {
   }
 
   //创建绑定事件ID
-  createMirrorID():void {
+  createMirrorID() {
     this.mirrorID = JSWidgetMirrorMgr.getInstance().generateID(this);
     core.print("createMirrorID: mirrorID : " + this.mirrorID);
+  }
+
+  //返回值
+  invokeMirrorObjWithCallback(args:JSCallConfig){
+    return new Promise(function (resolve:any) {
+      JSBridge.invokeMirrorObjWithCallback(args, function (value:any) {
+          if (value != null && value !=undefined) {
+              resolve(value);
+
+          } else {
+              resolve(null);
+          }
+
+      });
+    }.bind(this));
+  }
+
+  //创建绑定关系
+  createMirrorObj(){
+    //创建对应FLutter对象
+    var argument = new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+    });
+    JSBridge.createMirrorObj(argument, this.mirrorID, this);
   }
 }
 
@@ -180,6 +226,8 @@ export class Convert extends core.Object{
     return String(v);
   }
 }
+
+
 //#endregion
 
 
@@ -3081,6 +3129,172 @@ export class Alignment extends DartClass {
   //#endregion
   
   //#region ------- D -------
+  
+  //****** DragDownDetails ******
+  interface DragDownDetailsConfig {
+    globalPosition?:Offset;
+    localPosition?:Offset;
+  }
+  export class DragDownDetails extends DartClass {
+    globalPosition?:Offset;
+    localPosition?:Offset;
+  
+    /**
+     * @param config config: 
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+        }
+     */
+    constructor(config?: DragDownDetailsConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.globalPosition = config.globalPosition;
+        this.localPosition = config.localPosition;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+        }
+     */
+    static new (config?: DragDownDetailsConfig) {
+      return new DragDownDetails(config);
+    }
+  }
+
+  //****** DragStartDetails ******
+  interface DragStartDetailsConfig {
+    globalPosition?:Offset;
+    localPosition?:Offset;
+    sourceTimeStamp?:Duration;
+  }
+  export class DragStartDetails extends DartClass {
+    globalPosition?:Offset;
+    localPosition?:Offset;
+    sourceTimeStamp?:Duration;
+  
+    /**
+     * @param config config: 
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+          sourceTimeStamp?:Duration,
+        }
+     */
+    constructor(config?: DragStartDetailsConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.globalPosition = config.globalPosition;
+        this.localPosition = config.localPosition;
+        this.sourceTimeStamp = config.sourceTimeStamp;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+          sourceTimeStamp?:Duration,
+        }
+     */
+    static new (config?: DragStartDetailsConfig) {
+      return new DragStartDetails(config);
+    }
+  }
+
+  //****** DragUpdateDetails ******
+  interface DragUpdateDetailsConfig {
+    globalPosition?:Offset;
+    localPosition?:Offset;
+    sourceTimeStamp?:Duration;
+    delta?:Offset;
+    primaryDelta?:number;
+  }
+  export class DragUpdateDetails extends DartClass {
+    globalPosition?:Offset;
+    localPosition?:Offset;
+    sourceTimeStamp?:Duration;
+    delta?:Offset;
+    primaryDelta?:number;
+  
+    /**
+     * @param config config: 
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+          sourceTimeStamp?:Duration,
+          delta?:Offset,
+          primaryDelta?:number,
+        }
+     */
+    constructor(config?: DragUpdateDetailsConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.globalPosition = config.globalPosition;
+        this.localPosition = config.localPosition;
+        this.sourceTimeStamp = config.sourceTimeStamp;
+        this.delta = config.delta;
+        this.primaryDelta = config.primaryDelta;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          globalPosition?:Offset,
+          localPosition?:Offset,
+          sourceTimeStamp?:Duration,
+          delta?:Offset,
+          primaryDelta?:number,
+        }
+     */
+    static new (config?: DragUpdateDetailsConfig) {
+      return new DragUpdateDetails(config);
+    }
+  }
+
+  //****** DragEndDetails ******
+  interface DragEndDetailsConfig {
+    velocity?:Velocity;
+    primaryVelocity?:number;
+  }
+  export class DragEndDetails extends DartClass {
+    velocity?:Velocity;
+    primaryVelocity?:number;
+  
+    /**
+     * @param config config: 
+        {
+          velocity?:Velocity, 
+          primaryVelocity?:number, 
+        }
+     */
+    constructor(config?: DragEndDetailsConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.velocity = config.velocity;
+        this.primaryVelocity = config.primaryVelocity;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          velocity?:Velocity, 
+          primaryVelocity?:number, 
+        }
+     */
+    static new (config?: DragEndDetailsConfig) {
+      return new DragEndDetails(config);
+    }
+  }
+
+
   //****** Duration ******
   interface DurationConfig {
     days?:number;
@@ -4374,6 +4588,9 @@ export class Alignment extends DartClass {
   //#endregion
   
   //#region ------- L -------
+  
+  
+  
   //#endregion
   
   //#region ------- M -------
@@ -5025,6 +5242,7 @@ export class Alignment extends DartClass {
   //#endregion
   
   //#region ------- R -------
+  
   //****** Radius ******
   export class Radius extends DartClass {
     radius?:number;
@@ -5053,6 +5271,55 @@ export class Alignment extends DartClass {
     }
   }
   
+  //****** RegExp ******
+  interface RegExpConfig {
+    multiLine?:boolean; 
+    caseSensitive?:boolean;
+    unicode?:boolean; 
+    dotAll?:boolean;
+  }
+  export class RegExp extends DartClass {
+    source:string;
+    multiLine?:boolean; 
+    caseSensitive?:boolean;
+    unicode?:boolean; 
+    dotAll?:boolean;
+  
+    /**
+     * @param config config: 
+        {
+          multiLine?:boolean, 
+          caseSensitive?:boolean, 
+          unicode?:boolean, 
+          dotAll?:boolean, 
+        }
+     */
+    constructor(source:string,config?: RegExpConfig){
+      super();
+      this.source = source;
+      if(config!=null && config!=undefined){
+        this.multiLine = config.multiLine;
+        this.caseSensitive = config.caseSensitive;
+        this.unicode = config.unicode;
+        this.dotAll = config.dotAll;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          multiLine?:boolean, 
+          caseSensitive?:boolean, 
+          unicode?:boolean, 
+          dotAll?:boolean, 
+        }
+     */
+    static new(source:string,config?: RegExpConfig) {
+      return new RegExp(source,config);
+    }
+  }
+
+
   //****** Rect ******
   interface RectConfig {
     center?:Offset;
@@ -5404,6 +5671,130 @@ export class Alignment extends DartClass {
   //#endregion
   
   //#region ------- S -------
+
+  //****** ScaleStartDetails ******
+  interface ScaleStartDetailsConfig {
+    focalPoint?:Offset;
+    localFocalPoint?:Offset;
+  }
+  export class ScaleStartDetails extends DartClass {
+    focalPoint?:Offset;
+    localFocalPoint?:Offset;
+  
+    /**
+     * @param config config: 
+        {
+          focalPoint?:Offset,
+          localFocalPoint?:Offset,
+        }
+     */
+    constructor(config?: ScaleStartDetailsConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.focalPoint = config.focalPoint;
+        this.localFocalPoint = config.localFocalPoint;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          focalPoint?:Offset,
+          localFocalPoint?:Offset,
+        }
+     */
+    static new (config?: ScaleStartDetailsConfig) {
+      return new ScaleStartDetails(config);
+    }
+  }
+
+  //****** ScaleUpdateDetails ******
+  interface ScaleUpdateDetailsConfig {
+    focalPoint?:Offset;
+    localFocalPoint?:Offset;
+    scale?:number;
+    horizontalScale?:number;
+    verticalScale?:number;
+    rotation?:number;
+  }
+  export class ScaleUpdateDetails extends DartClass {
+    focalPoint?:Offset;
+    localFocalPoint?:Offset;
+    scale?:number;
+    horizontalScale?:number;
+    verticalScale?:number;
+    rotation?:number;
+  
+    /**
+     * @param config config: 
+        {
+          focalPoint?:Offset, 
+          localFocalPoint?:Offset, 
+          scale?:number, 
+          horizontalScale?:number, 
+          verticalScale?:number, 
+          rotation?:number, 
+        }
+     */
+    constructor(config?: ScaleUpdateDetailsConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.focalPoint = config.focalPoint;
+        this.localFocalPoint = config.localFocalPoint;
+        this.scale = config.scale;
+        this.horizontalScale = config.horizontalScale;
+        this.verticalScale = config.verticalScale;
+        this.rotation = config.rotation;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          focalPoint?:Offset, 
+          localFocalPoint?:Offset, 
+          scale?:number, 
+          horizontalScale?:number, 
+          verticalScale?:number, 
+          rotation?:number, 
+        }
+     */
+    static new (config?: ScaleUpdateDetailsConfig) {
+      return new ScaleUpdateDetails(config);
+    }
+  }
+
+  //****** ScaleEndDetails ******
+  interface ScaleEndDetailsConfig {
+    velocity?:Velocity;
+  }
+  export class ScaleEndDetails extends DartClass {
+    velocity?:Velocity;
+  
+    /**
+     * @param config config: 
+        {
+          velocity?:Velocity, 
+        }
+     */
+    constructor(config?: ScaleEndDetailsConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.velocity = config.velocity;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          velocity?:Velocity, 
+        }
+     */
+    static new (config?: ScaleEndDetailsConfig) {
+      return new ScaleEndDetails(config);
+    }
+  }
+  
   //****** Size ******
   export class Size extends DartClass {
     width?:number;
@@ -5668,15 +6059,23 @@ export class Alignment extends DartClass {
     }
   }
   
-  //****** TODO ScrollController ******
+  //****** ScrollController ******
   interface ScrollControllerConfig {
-    duration?:Duration;
-    curve?:Curve;
     initialScrollOffset?:number;
     keepScrollOffset?:boolean;
     debugLabel?:string;
   }
-  // Todo:
+
+  interface ScrollControllerJumpToConfig {
+    value:number;
+  }
+
+  interface ScrollControllerAnimateToConfig {
+    offset:number;
+    duration:Duration;
+    curve:Curve;
+  }
+
   export class ScrollController extends DartClass {
     initialScrollOffset?:number;
     keepScrollOffset?:boolean;
@@ -5685,45 +6084,39 @@ export class Alignment extends DartClass {
     /**
      * @param config config: 
         {
-          duration?:Duration, 
-          curve?:Curves
+          offset:number,
+          duration:Duration,
+          curve:Curve,
         }
      */
-    animateTo(offset:Offset,config?: ScrollControllerConfig) {
-      var map = new Map();
-      map.set("offset",offset);
-      if(config!=null && config!=undefined){
-        if(config.duration!=null && config.duration!=undefined){
-          map.set("duration",config.duration);
-        }
-  
-        if(config.curve!=null && config.curve!=undefined){
-          map.set("curve",config.curve);
-        }
-      }
-  
-      let argument = JSCallConfig.new({mirrorID:this.mirrorID,className:"ScrollController",funcName:"animateTo",args:map});
-      /*
-      let argument = new FlutterCallConfig({
-        mirrorID: v.mirrorID,
-        className: "ScrollController",
-        funcName: "animateTo",
-        args: {
-          offset: offset,
-          duration: duration,
-          curve:curve
-        }
-      });*/
-      //invokeFlutterFunction(argument);
+    animateTo(config: ScrollControllerAnimateToConfig) {
+      JSFramework.invokeFlutterFunction(
+        JSCallConfig.new({
+          mirrorID:this.mirrorID,
+          className:this.className,
+          funcName:"animateTo",
+          args:config
+        })
+      );
     }
   
-    jumpTo(value:number) {
-      var args=new Map();
-      args.set("value",value);
-  
-      let argument=JSCallConfig.new({mirrorID:this.mirrorID,className:"ScrollController",funcName:"jumpTo",args:args});
-      JSFramework.invokeFlutterFunction(argument);
-    }
+    /**
+     * @param config config: 
+        {
+          value:number,
+        }
+     */
+    jumpTo(config:ScrollControllerJumpToConfig) {  
+      JSFramework.invokeFlutterFunction(
+        JSCallConfig.new({
+          mirrorID:this.mirrorID,
+          className:this.className,
+          funcName:"jumpTo",
+          args:config
+        })
+      );
+    }  
+
   
     /**
      * @param config config: 
@@ -5741,6 +6134,19 @@ export class Alignment extends DartClass {
         this.keepScrollOffset = config.keepScrollOffset;
         this.debugLabel = config.debugLabel;
       }
+    }
+
+    
+
+    //偏移量
+    async offset() {
+        var v= await this.invokeMirrorObjWithCallback(JSCallConfig.new({
+              mirrorID: this.mirrorID,
+              className: this.className,
+              funcName: "offset",
+          }));
+
+        return Convert.toNumber(v);
     }
   
     /**
@@ -6246,31 +6652,21 @@ export class Alignment extends DartClass {
       //Mirror对象在构造函数创建 MirrorID
       this.createMirrorID();
 
+      //this.createMirrorObj();
+
+      /*
       //创建对应FLutter对象
       var argument = new JSCallConfig({
           mirrorID:this.mirrorID,
           className:this.className,
       });
-      JSBridge.createMirrorObj(argument, this.mirrorID, this);
+      JSBridge.createMirrorObj(argument, this.mirrorID, this);*/
     }
   
     static new(text?:string) {
       return new TextEditingController(text);
     }
 
-    invokeMirrorObjWithCallback(argument:JSCallConfig){
-      return new Promise(function (resolve:any) {
-        JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
-            if (value != null && value !=undefined) {
-                resolve(value);
-  
-            } else {
-                resolve(null);
-            }
-  
-        });
-      }.bind(this));
-    }
 
     //清理值
     clear() {
@@ -6446,6 +6842,90 @@ export class Alignment extends DartClass {
     };
   }
   
+
+  export class TextInputFormatter extends ShapeBorder {
+    maxLength?:number
+    filterPattern?:RegExp;
+    allow?:boolean;
+    replacementString?:string;
+    mask?:string;
+    initialText?:string;
+    filter?:Map<string,RegExp>;
+  
+    static lengthLimiting(maxLength?:number) {
+      var v = new TextInputFormatter();
+      v.constructorName= "lengthLimiting";
+      v.maxLength = maxLength;
+      return v;
+    }
+
+    /**
+     * @param allow true=白名单,false=黑名单
+     * @param filterPattern 正则表示式
+     * @param replacementString 替换字符串
+     */
+
+    static filtering(allow:boolean,filterPattern:RegExp,replacementString?:string) {
+      var v = new TextInputFormatter();
+      v.constructorName= "filtering";
+      v.allow=allow;
+      v.filterPattern = filterPattern;
+      v.replacementString = replacementString;
+      return v;
+    }
+
+    /**
+     * @param filterPattern 正则表示式
+     * @param replacementString 替换字符串
+     */
+
+    static filtering_allow(filterPattern:RegExp,replacementString?:string) {
+      var v = new TextInputFormatter();
+      v.constructorName= "filtering.allow";
+      v.filterPattern = filterPattern;
+      v.replacementString = replacementString;
+      return v;
+    }
+
+    /**
+     * @param filterPattern 正则表示式
+     * @param replacementString 替换字符串
+     */
+    static filtering_deny(filterPattern:RegExp,replacementString?:string) {
+      var v = new TextInputFormatter();
+      v.constructorName= "filtering.deny";
+      v.filterPattern = filterPattern;
+      v.replacementString = replacementString;
+      return v;
+    }
+
+    /**
+     * 单行
+     */
+    static singleLineFormatter() {
+      var v = new TextInputFormatter();
+      v.constructorName= "singleLineFormatter";
+      return v;
+    }
+
+    /**
+     * 数字
+     */
+    static digitsOnly() {
+      var v = new TextInputFormatter();
+      v.constructorName= "digitsOnly";
+      return v;
+    }
+
+    static maskFormat(mask:string,initialText?:string,filter?:Map<string,RegExp>) {
+      var v = new TextInputFormatter();
+      v.constructorName= "mask";
+      v.mask= mask;
+      v.initialText  =initialText;
+      v.filter =filter;
+      return v;
+    }
+  }
   
   //#endregion
   
@@ -6652,6 +7132,46 @@ export class Alignment extends DartClass {
     static compact = VisualDensity.new({horizontal: -2.0, vertical: -2.0});
     static standard = VisualDensity.new();
   } 
+
+  //****** Velocity ******
+  interface VelocityConfig {
+    pixelsPerSecond?:Offset;
+  }
+  export class Velocity extends DartClass {
+    pixelsPerSecond?:Offset;
+  
+    /**
+     * @param config config: 
+      {
+        pixelsPerSecond?:Offset,
+      }
+     */
+    constructor(config?: VelocityConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.pixelsPerSecond=config.pixelsPerSecond;
+      }
+    }
+    
+    /**
+     * @param config config: 
+      {
+        pixelsPerSecond?:Offset, 
+      }
+     */
+    static new(config?: VelocityConfig) {
+      return new Velocity(config);
+    }
+  
+    static zero() {
+      var v = new Velocity();
+      v.constructorName = "zero";
+      return v;
+    }
+  
+    
+  } 
+
   //#endregion
   
   //#endregion
@@ -11018,9 +11538,9 @@ export class CupertinoIcons extends IconData{
     }
   }
   
-  //****** TODO DecorationImage ******
+  //****** DecorationImage ******
   interface DecorationImageConfig {
-    image?:any;
+    image?:ImageProvider;
     alignment?:Alignment;
     colorFilter?:ColorFilter;
     fit?:BoxFit;
@@ -11030,7 +11550,7 @@ export class CupertinoIcons extends IconData{
     scale?:number;
   }
   export class DecorationImage extends Widget {
-    image?:any;
+    image?:ImageProvider;
     alignment?:Alignment;
     colorFilter?:ColorFilter;
     fit?:BoxFit;
@@ -11042,7 +11562,7 @@ export class CupertinoIcons extends IconData{
     /**
      * @param config config: 
         {
-          image?:any, 
+          image?:ImageProvider, 
           alignment?:Alignment, 
           colorFilter?:ColorFilter, 
           fit?:BoxFit, 
@@ -11069,7 +11589,7 @@ export class CupertinoIcons extends IconData{
     /**
      * @param config config: 
         {
-          image?:any, 
+          image?:ImageProvider, 
           alignment?:Alignment, 
           colorFilter?:ColorFilter, 
           fit?:BoxFit, 
@@ -12248,68 +12768,68 @@ export class CupertinoIcons extends IconData{
   //#endregion
   
   //#region ------- G -------
-  //****** TODO GestureDetector ******
+  //****** GestureDetector ******
   interface GestureDetectorConfig {
+    key?:Key;
     child?:Widget;
     onTap?:VoidCallback;
-    onTapDown?:any;
-    onTapUp?:any;
+    onTapDown?:VoidTapDown;
+    onTapUp?:VoidTapUp;
     onTapCancel?:VoidCallback;
     onDoubleTap?:VoidCallback;
     onLongPress?:VoidCallback;
     onLongPressUp?:VoidCallback;
-    onVerticalDragDown?:any;
-    onVerticalDragStart?:any;
-    onVerticalDragUpdate?:any;
-    onVerticalDragEnd?:any;
+    onVerticalDragDown?:VoidDragDown;
+    onVerticalDragStart?:VoidDragStart;
+    onVerticalDragUpdate?:VoidDragUpdate;
+    onVerticalDragEnd?:VoidDragEnd;
     onVerticalDragCancel?:VoidCallback;
-    onHorizontalDragDown?:any;
-    onHorizontalDragStart?:any;
-    onHorizontalDragUpdate?:any;
-    onHorizontalDragEnd?:any;
+    onHorizontalDragDown?:VoidDragDown;
+    onHorizontalDragStart?:VoidDragStart;
+    onHorizontalDragUpdate?:VoidDragUpdate;
+    onHorizontalDragEnd?:VoidDragEnd;
     onHorizontalDragCancel?:VoidCallback;
-    onPanDown?:any;
-    onPanStart?:any;
-    onPanUpdate?:any;
-    onPanEnd?:any;
+    onPanDown?:VoidDragDown;
+    onPanStart?:VoidDragStart;
+    onPanUpdate?:VoidDragUpdate;
+    onPanEnd?:VoidDragEnd;
     onPanCancel?:VoidCallback;
-    onScaleStart?:any;
-    onScaleUpdate?:any;
-    onScaleEnd?:any;
+    onScaleStart?:VoidScaleStart;
+    onScaleUpdate?:VoidScaleUpdate;
+    onScaleEnd?:VoidScaleEnd;
     behavior?:HitTestBehavior;
-    excludeFromSemantics?:boolean;
-    key?:Key;
+    excludeFromSemantics?:boolean;    
   }
   export class GestureDetector extends Widget {
     key?:Key;
     child?:Widget;
     onTap?:VoidCallback;
-    onTapDown?:any;
-    onTapUp?:any;
+    onTapDown?:VoidTapDown;
+    onTapUp?:VoidTapUp;
     onTapCancel?:VoidCallback;
     onDoubleTap?:VoidCallback;
     onLongPress?:VoidCallback;
     onLongPressUp?:VoidCallback;
-    onVerticalDragDown?:any;
-    onVerticalDragStart?:any;
-    onVerticalDragUpdate?:any;
-    onVerticalDragEnd?:any;
+    onVerticalDragDown?:VoidDragDown;
+    onVerticalDragStart?:VoidDragStart;
+    onVerticalDragUpdate?:VoidDragUpdate;
+    onVerticalDragEnd?:VoidDragEnd;
     onVerticalDragCancel?:VoidCallback;
-    onHorizontalDragDown?:any;
-    onHorizontalDragStart?:any;
-    onHorizontalDragUpdate?:any;
-    onHorizontalDragEnd?:any;
+    onHorizontalDragDown?:VoidDragDown;
+    onHorizontalDragStart?:VoidDragStart;
+    onHorizontalDragUpdate?:VoidDragUpdate;
+    onHorizontalDragEnd?:VoidDragEnd;
     onHorizontalDragCancel?:VoidCallback;
-    onPanDown?:any;
-    onPanStart?:any;
-    onPanUpdate?:any;
-    onPanEnd?:any;
+    onPanDown?:VoidDragDown;
+    onPanStart?:VoidDragStart;
+    onPanUpdate?:VoidDragUpdate;
+    onPanEnd?:VoidDragEnd;
     onPanCancel?:VoidCallback;
-    onScaleStart?:any;
-    onScaleUpdate?:any;
-    onScaleEnd?:any;
+    onScaleStart?:VoidScaleStart;
+    onScaleUpdate?:VoidScaleUpdate;
+    onScaleEnd?:VoidScaleEnd;
     behavior?:HitTestBehavior;
-    excludeFromSemantics?:boolean;
+    excludeFromSemantics?:boolean;  
     
     /**
      * @param config config: 
@@ -12317,32 +12837,32 @@ export class CupertinoIcons extends IconData{
         key?:Key, 
         child?:Widget, 
         onTap?:VoidCallback, 
-        onTapDown?:any, 
-        onTapUp?:any, 
+        onTapDown?:VoidTapDown, 
+        onTapUp?:VoidTapUp, 
         onTapCancel?:VoidCallback, 
         onDoubleTap?:VoidCallback, 
         onLongPress?:VoidCallback, 
         onLongPressUp?:VoidCallback, 
-        onVerticalDragDown?:any, 
-        onVerticalDragStart?:any, 
-        onVerticalDragUpdate?:any, 
-        onVerticalDragEnd?:any, 
+        onVerticalDragDown?:VoidDragDown, 
+        onVerticalDragStart?:VoidDragStart, 
+        onVerticalDragUpdate?:VoidDragUpdate, 
+        onVerticalDragEnd?:VoidDragEnd, 
         onVerticalDragCancel?:VoidCallback, 
-        onHorizontalDragDown?:any, 
-        onHorizontalDragStart?:any, 
-        onHorizontalDragUpdate?:any, 
-        onHorizontalDragEnd?:any, 
+        onHorizontalDragDown?:VoidDragDown, 
+        onHorizontalDragStart?:VoidDragStart, 
+        onHorizontalDragUpdate?:VoidDragUpdate, 
+        onHorizontalDragEnd?:VoidDragEnd, 
         onHorizontalDragCancel?:VoidCallback, 
-        onPanDown?:any, 
-        onPanStart?:any, 
-        onPanUpdate?:any, 
-        onPanEnd?:any, 
+        onPanDown?:VoidDragDown, 
+        onPanStart?:VoidDragStart, 
+        onPanUpdate?:VoidDragUpdate, 
+        onPanEnd?:VoidDragEnd, 
         onPanCancel?:VoidCallback, 
-        onScaleStart?:any, 
-        onScaleUpdate?:any, 
-        onScaleEnd?:any, 
+        onScaleStart?:VoidScaleStart, 
+        onScaleUpdate?:VoidScaleUpdate, 
+        onScaleEnd?:VoidScaleEnd, 
         behavior?:HitTestBehavior, 
-        excludeFromSemantics?:boolean, 
+        excludeFromSemantics?:boolean,   
       }
      */
     constructor(config: GestureDetectorConfig){
@@ -12387,32 +12907,32 @@ export class CupertinoIcons extends IconData{
         key?:Key, 
         child?:Widget, 
         onTap?:VoidCallback, 
-        onTapDown?:any, 
-        onTapUp?:any, 
+        onTapDown?:VoidTapDown, 
+        onTapUp?:VoidTapUp, 
         onTapCancel?:VoidCallback, 
         onDoubleTap?:VoidCallback, 
         onLongPress?:VoidCallback, 
         onLongPressUp?:VoidCallback, 
-        onVerticalDragDown?:any, 
-        onVerticalDragStart?:any, 
-        onVerticalDragUpdate?:any, 
-        onVerticalDragEnd?:any, 
+        onVerticalDragDown?:VoidDragDown, 
+        onVerticalDragStart?:VoidDragStart, 
+        onVerticalDragUpdate?:VoidDragUpdate, 
+        onVerticalDragEnd?:VoidDragEnd, 
         onVerticalDragCancel?:VoidCallback, 
-        onHorizontalDragDown?:any, 
-        onHorizontalDragStart?:any, 
-        onHorizontalDragUpdate?:any, 
-        onHorizontalDragEnd?:any, 
+        onHorizontalDragDown?:VoidDragDown, 
+        onHorizontalDragStart?:VoidDragStart, 
+        onHorizontalDragUpdate?:VoidDragUpdate, 
+        onHorizontalDragEnd?:VoidDragEnd, 
         onHorizontalDragCancel?:VoidCallback, 
-        onPanDown?:any, 
-        onPanStart?:any, 
-        onPanUpdate?:any, 
-        onPanEnd?:any, 
+        onPanDown?:VoidDragDown, 
+        onPanStart?:VoidDragStart, 
+        onPanUpdate?:VoidDragUpdate, 
+        onPanEnd?:VoidDragEnd, 
         onPanCancel?:VoidCallback, 
-        onScaleStart?:any, 
-        onScaleUpdate?:any, 
-        onScaleEnd?:any, 
+        onScaleStart?:VoidScaleStart, 
+        onScaleUpdate?:VoidScaleUpdate, 
+        onScaleEnd?:VoidScaleEnd, 
         behavior?:HitTestBehavior, 
-        excludeFromSemantics?:boolean, 
+        excludeFromSemantics?:boolean,   
       }
      */
     static new(config: GestureDetectorConfig) {
@@ -18191,10 +18711,10 @@ export class CupertinoIcons extends IconData{
     }
   }
   
-  //****** TODO SnackBarAction ******
+  //****** SnackBarAction ******
   interface SnackBarActionConfig {
     key?:Widget;
-    lable?:string;
+    lable:string;
     onPressed?:VoidCallback;
     disabledTextColor?:Color;
     textColor?:Color;
@@ -18210,7 +18730,7 @@ export class CupertinoIcons extends IconData{
      * @param config config: 
       {
         key?:Widget, 
-        lable?:string, 
+        lable:string, 
         onPressed?:VoidCallback, 
         disabledTextColor?:Color, 
         textColor?:Color, 
@@ -18231,7 +18751,7 @@ export class CupertinoIcons extends IconData{
      * @param config config: 
       {
         key?:Widget, 
-        lable?:string, 
+        lable:string, 
         onPressed?:VoidCallback, 
         disabledTextColor?:Color, 
         textColor?:Color, 
@@ -18713,7 +19233,7 @@ export class CupertinoIcons extends IconData{
     }
   }
   
-  //****** TODO TabBar ******
+  //****** TabBar ******
   interface TabBarConfig {
     key?:Key;
     tabs?:Array<Widget>;
@@ -18971,7 +19491,7 @@ export class CupertinoIcons extends IconData{
     }
   }
   
-  //****** TODO TabPageSelector ******
+  //****** TabPageSelector ******
   interface TabPageSelectorConfig {
     key?:Key;
     color?:Color;
@@ -19176,14 +19696,12 @@ export class CupertinoIcons extends IconData{
     children?:Array<Widget>;
     style?:TextStyle;
     text?:string;
-    recognizer?:any;
     semanticsLabel?:string;
   }
   export class TextSpan extends Widget {
     children?:Array<Widget>;
     style?:TextStyle;
     text?:string;
-    recognizer?:any;
     semanticsLabel?:string;
   
   
@@ -19193,7 +19711,6 @@ export class CupertinoIcons extends IconData{
         children?:Array<Widget>, 
         style?:TextStyle, 
         text?:string, 
-        recognizer?:any, 
         semanticsLabel?:string,
       }
      */
@@ -19203,7 +19720,6 @@ export class CupertinoIcons extends IconData{
         this.children = config.children;
         this.style = config.style;
         this.text = config.text;
-        this.recognizer = config.recognizer;
         this.semanticsLabel = config.semanticsLabel;
       }
     }
@@ -19214,7 +19730,6 @@ export class CupertinoIcons extends IconData{
         children?:Array<Widget>, 
         style?:TextStyle, 
         text?:string, 
-        recognizer?:any, 
         semanticsLabel?:string,
       }
      */
@@ -19266,7 +19781,7 @@ export class CupertinoIcons extends IconData{
   }
   
   //****** TextFormField ******
-  //TODO:strutStyle、autofillHints、inputFormatters、autofillHints
+  //TODO:autofillHints、autofillHints
   interface TextFormFieldConfig {
     key?:Key;
     controller?:TextEditingController;
@@ -19311,6 +19826,9 @@ export class CupertinoIcons extends IconData{
     dragStartBehavior?:DragStartBehavior;
     enableInteractiveSelection?:boolean; 
     scrollPhysics?:ScrollPhysics;   
+
+    inputFormatters?:Array<TextInputFormatter>; 
+    strutStyle?:StrutStyle;
     
   }
   export class TextFormField extends Widget {
@@ -19357,6 +19875,8 @@ export class CupertinoIcons extends IconData{
     dragStartBehavior?:DragStartBehavior;
     enableInteractiveSelection?:boolean; 
     scrollPhysics?:ScrollPhysics; 
+    inputFormatters?:Array<TextInputFormatter>; 
+    strutStyle?:StrutStyle;
   
     /**
      * @param config config: 
@@ -19404,6 +19924,9 @@ export class CupertinoIcons extends IconData{
         dragStartBehavior?:DragStartBehavior,
         enableInteractiveSelection?:boolean, 
         scrollPhysics?:ScrollPhysics,      
+
+        inputFormatters?:Array<TextInputFormatter>,
+        strutStyle?:StrutStyle,
       }
      */
     constructor(config: TextFormFieldConfig){
@@ -19451,6 +19974,8 @@ export class CupertinoIcons extends IconData{
         this.scrollPadding = config.scrollPadding;
         this.enableInteractiveSelection = config.enableInteractiveSelection;
         this.scrollPhysics = config.scrollPhysics;
+        this.inputFormatters = config.inputFormatters;
+        this.strutStyle = config.strutStyle;
       }
     }
   
@@ -19501,6 +20026,8 @@ export class CupertinoIcons extends IconData{
         dragStartBehavior?:DragStartBehavior,
         enableInteractiveSelection?:boolean, 
         scrollPhysics?:ScrollPhysics,    
+        inputFormatters?:Array<TextInputFormatter>,
+        strutStyle?:StrutStyle,
       }
      */
     static new(config: TextFormFieldConfig) {
@@ -19509,7 +20036,7 @@ export class CupertinoIcons extends IconData{
   }
 
   //****** TextField ******
-  //TODO: inputFormatters、autofillHints、buildCounter、strutStyle
+  //TODO: iautofillHints、buildCounter
   interface TextFieldConfig {
     key?:Key;
     controller?:TextEditingController;
@@ -19552,7 +20079,10 @@ export class CupertinoIcons extends IconData{
     enableInteractiveSelection?:boolean;
     onTap?:VoidCallback;
     scrollController?:ScrollController;
-    scrollPhysics?:ScrollPhysics;    
+    scrollPhysics?:ScrollPhysics; 
+    inputFormatters?:Array<TextInputFormatter>; 
+    strutStyle?:StrutStyle;
+
   }
   export class TextField extends Widget {
     key?:Key;
@@ -19597,6 +20127,8 @@ export class CupertinoIcons extends IconData{
     onTap?:VoidCallback;
     scrollController?:ScrollController;
     scrollPhysics?:ScrollPhysics;
+    inputFormatters?:Array<TextInputFormatter>; 
+    strutStyle?:StrutStyle;
     
   
     /**
@@ -19644,6 +20176,9 @@ export class CupertinoIcons extends IconData{
         onTap?:VoidCallback,
         scrollController?:ScrollController,
         scrollPhysics?:ScrollPhysics,     
+
+        inputFormatters?:Array<TextInputFormatter>, 
+        strutStyle?:StrutStyle, 
       }
      */
     constructor(config: TextFieldConfig){
@@ -19689,6 +20224,8 @@ export class CupertinoIcons extends IconData{
         this.onTap = config.onTap;
         this.scrollController = config.scrollController;
         this.scrollPhysics = config.scrollPhysics;
+        this.inputFormatters = config.inputFormatters;
+        this.strutStyle = config.strutStyle;
       }
     }
   
@@ -19738,6 +20275,8 @@ export class CupertinoIcons extends IconData{
         onTap?:VoidCallback,
         scrollController?:ScrollController,
         scrollPhysics?:ScrollPhysics,   
+        inputFormatters?:Array<TextInputFormatter>, 
+        strutStyle?:StrutStyle, 
       }
      */
     static new(config: TextFieldConfig) {
@@ -20681,6 +21220,44 @@ interface CupertinoActivityIndicatorConfig {
   }
   
   //-------------- T -----------------
+
+  //****** TestWidget ******
+  interface TestWidgetConfig {
+    colors:Array<Color>;
+    stops?:Array<number>;
+  }
+  export class TestWidget extends Widget {
+    colors?:Array<Color>;
+    stops?:Array<number>;
+    
+    /**
+     * @param config config: 
+        {
+          colors:Array<Color>,
+          stops?:Array<number>,
+        }
+     */
+    constructor(config: TestWidgetConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.colors = config.colors;
+        this.stops = config.stops;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          colors:Array<Color>,
+          stops?:Array<number>,
+        }
+     */
+    static new(config: TestWidgetConfig) {
+      return new TestWidget(config);
+    }
+  }
+
+
   //****** CupertinoTabBar ******
   interface CupertinoTabBarConfig {
     key?:Key;
@@ -20976,11 +21553,7 @@ export class LoadingApi extends DartClass {
         this.createMirrorID();
 
         //创建对应FLutter对象
-        var argument = new JSCallConfig({
-            mirrorID:this.mirrorID,
-            className:this.className,
-        });
-        JSBridge.createMirrorObj(argument, this.mirrorID, this);
+        this.createMirrorObj();
     }
 
     static getInstance() {
@@ -20989,21 +21562,6 @@ export class LoadingApi extends DartClass {
         }
         return this.instance;
       }
-
-    invokeMirrorObjWithCallback(argument:JSCallConfig){
-        return new Promise(function (resolve:any) {
-            JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
-                if (value != null && value !=undefined) {
-                    resolve(value);
-
-                } else {
-                    resolve(null);
-                }
-
-            });
-        }.bind(this));
-    }
-
    
     /**
      * @param config config: 
@@ -21139,12 +21697,9 @@ export class SpApi extends DartClass {
         //Mirror对象在构造函数创建 MirrorID
         this.createMirrorID();
 
+        
         //创建对应FLutter对象
-        var argument = new JSCallConfig({
-            mirrorID:this.mirrorID,
-            className:this.className,
-        });
-        JSBridge.createMirrorObj(argument, this.mirrorID, this);
+        this.createMirrorObj();
     }
 
     static getInstance() {
@@ -21153,21 +21708,6 @@ export class SpApi extends DartClass {
         }
         return this.instance;
       }
-
-    invokeMirrorObjWithCallback(argument:JSCallConfig){
-        return new Promise(function (resolve:any) {
-          JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
-              if (value != null && value !=undefined) {
-                  resolve(value);
-
-              } else {
-                  resolve(null);
-              }
-
-          });
-      }.bind(this));
-    }
-
     
     /**
      * @param config config: 
@@ -21393,26 +21933,9 @@ export class ScreenInfo extends DartClass {
       this.createMirrorID();
 
       //创建对应FLutter对象
-      var argument = new JSCallConfig({
-          mirrorID:this.mirrorID,
-          className:"ScreenInfo",
-      });
-      JSBridge.createMirrorObj(argument, this.mirrorID, this);
+      this.createMirrorObj();
   }
 
-  invokeMirrorObjWithCallback(argument:JSCallConfig){
-      return new Promise(function (resolve:any) {
-        JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
-            if (value != null && value !=undefined) {
-                resolve(value);
-
-            } else {
-                resolve(null);
-            }
-
-        });
-    }.bind(this));
-  }
 
   /*
   * 将Dp按比例转换成Dp
@@ -21472,25 +21995,7 @@ export class PackageInfo extends DartClass {
       this.createMirrorID();
 
       //创建对应FLutter对象
-      var argument = new JSCallConfig({
-          mirrorID:this.mirrorID,
-          className:this.className,
-      });
-      JSBridge.createMirrorObj(argument, this.mirrorID, this);
-  }
-
-  invokeMirrorObjWithCallback(argument:JSCallConfig){
-      return new Promise(function (resolve:any) {
-        JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
-            if (value != null && value !=undefined) {
-                resolve(value);
-
-            } else {
-                resolve(null);
-            }
-
-        });
-    }.bind(this));
+      this.createMirrorObj();
   }
 
   //
@@ -21521,27 +22026,10 @@ export class Wakelock extends DartClass {
     this.createMirrorID();
 
     //创建对应FLutter对象
-    var argument = new JSCallConfig({
-        mirrorID:this.mirrorID,
-        className:this.className,
-    });
-    JSBridge.createMirrorObj(argument, this.mirrorID, this);
+    this.createMirrorObj();
   }
 
   
-  invokeMirrorObjWithCallback(argument:JSCallConfig){
-    return new Promise(function (resolve:any) {
-      JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
-          if (value != null && value !=undefined) {
-              resolve(value);
-
-          } else {
-              resolve(null);
-          }
-
-      });
-    }.bind(this));
-  }
   
     //
     static async disable() {
@@ -21586,27 +22074,10 @@ export class FocusScope extends DartClass {
     this.createMirrorID();
 
     //创建对应FLutter对象
-    var argument = new JSCallConfig({
-        mirrorID:this.mirrorID,
-        className:this.className,
-    });
-    JSBridge.createMirrorObj(argument, this.mirrorID, this);
+    this.createMirrorObj();
   }
 
-  
-  invokeMirrorObjWithCallback(argument:JSCallConfig){
-    return new Promise(function (resolve:any) {
-      JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
-          if (value != null && value !=undefined) {
-              resolve(value);
 
-          } else {
-              resolve(null);
-          }
-
-      });
-    }.bind(this));
-  }
   
   //
   static requestFocus() {
@@ -21649,28 +22120,9 @@ export class UrlLauncher extends DartClass {
     this.createMirrorID();
 
     //创建对应FLutter对象
-    var argument = new JSCallConfig({
-        mirrorID:this.mirrorID,
-        className:this.className,
-    });
-    JSBridge.createMirrorObj(argument, this.mirrorID, this);
+    this.createMirrorObj();
   }
 
-  
-  invokeMirrorObjWithCallback(argument:JSCallConfig){
-    return new Promise(function (resolve:any) {
-      JSBridge.invokeMirrorObjWithCallback(argument, function (value:any) {
-          if (value != null && value !=undefined) {
-              resolve(value);
-
-          } else {
-              resolve(null);
-          }
-
-      });
-    }.bind(this));
-  }
-  
     //
     static async openUrl(config:UrlLauncherConfig) {
       var info = new UrlLauncher();

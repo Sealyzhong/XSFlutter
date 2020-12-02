@@ -10719,6 +10719,11 @@ dart.defineLazy(_debugger, {
   },
   set _frameMappingCache(_) {}
 }, false);
+
+
+
+
+//_foreign_helper --------------
 var name$4 = dart.privateName(_foreign_helper, "JSExportName.name");
 _foreign_helper.JSExportName = class JSExportName extends core.Object {
   get name() {

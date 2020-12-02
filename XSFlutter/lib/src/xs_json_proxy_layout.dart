@@ -1188,7 +1188,7 @@ class XSProxyStack extends XSJsonObjProxy {
   }
 }
 
-//****** Stack ******
+//****** ScrollController ******
 class XSProxyScrollController extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     final String regClassName = "ScrollController";
@@ -1213,22 +1213,28 @@ class XSProxyScrollController extends XSJsonObjProxy {
       return;
     }
 
-    invokeFunction(mirrorObj, funcName, args);
-  }
-
-  //TODO:优化分发
-  void invokeFunction(ScrollController mirrorObj, String funcName, Map args) {
+    var sc = mirrorObj as ScrollController;
     if (funcName == 'jumpTo') {
-      mirrorObj.jumpTo(
+      sc.jumpTo(
         XSJSParse.getDouble(null, null, args, "value"),
       );
       return;
-    } else if (funcName == 'animateTo') {
-      mirrorObj.animateTo(
-        args["value"]?.toDouble(),
+    }
+
+    if (funcName == 'animateTo') {
+      sc.animateTo(
+        XSJSParse.getDouble(null, null, args, "offset"),
         duration: XSJSParse.getDuration(null, null, args, "duration"),
         curve: XSJSParse.getCurve(null, null, args, "curve"),
       );
+      return;
+    }
+
+    //获取当前位置
+    if (funcName == 'offset') {
+      if (callback != null) {
+        callback(sc.offset);
+      }
       return;
     }
   }

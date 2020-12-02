@@ -34,6 +34,10 @@ class _MyTextFieldPage extends fs.WidgetState {
                             decoration: fs.InputDecoration.new({
                                 icon: fs.Icon.new(fs.Icons.person),
                             }),
+                            inputFormatters: [
+                                fs.TextInputFormatter.lengthLimiting(10),
+                                fs.TextInputFormatter.digitsOnly(),
+                            ]
                         }),
                     }),
                 ],

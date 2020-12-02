@@ -1986,6 +1986,52 @@ class XSProxySliverVisibility extends XSJsonObjProxy {
 }
 
 //-------------- T -----------------
+
+//****** TabController ******
+//TODO:未完成
+class XSProxyTabController extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "TabController";
+    return {
+      regClassName: () => XSProxyTabController()..init(className: regClassName)
+    };
+  }
+
+  @override
+  TabController constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return TabController(
+      initialIndex: XSJSParse.getInt(context, bo, map, "initialIndex", defaultValue: 0),
+      length: XSJSParse.getInt(context, bo, map, "length"),
+      vsync: XSJSParse.getObject(context, bo, map, "vsync"),
+    );
+  }
+
+  //mirrorObj 为一个AnimationController类的实例对象，把调用对象方法，路由到代理类
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map args, {InvokeCallback callback}) {
+    if (mirrorObj == null || !(mirrorObj is TabController)) {
+      return;
+    }
+
+    var sc = mirrorObj as TabController;
+    if (funcName == 'jumpTo') {
+      return;
+    }
+
+    if (funcName == 'animateTo') {
+      return;
+    }
+
+    //获取当前位置
+    if (funcName == 'offset') {
+      if (callback != null) {
+        callback(sc.offset);
+      }
+      return;
+    }
+  }
+}
+
 //****** TabBar ******
 class XSProxyTabBar extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -2000,7 +2046,7 @@ class XSProxyTabBar extends XSJsonObjProxy {
     return TabBar(
       key: XSJSParse.getKey(context, bo, map, "key"),
       tabs: XSJSParse.getWidgetList(context, bo, map, "tabs"),
-      controller: XSJSParse.getTabController(context, bo, map, "controller"),
+      controller: XSJSParse.getObject(context, bo, map, "controller"),
       isScrollable: XSJSParse.getBool(context, bo, map, "isScrollable", defaultValue: false),
       indicatorColor: XSJSParse.getColor(context, bo, map, "indicatorColor"),
       indicatorWeight: XSJSParse.getDouble(context, bo, map, "indicatorWeight", defaultValue: 2.0),
@@ -2113,7 +2159,7 @@ class XSProxyTabPageSelector extends XSJsonObjProxy {
       key: XSJSParse.getKey(context, bo, map, "key"),
       color: XSJSParse.getColor(context, bo, map, "color"),
       selectedColor: XSJSParse.getColor(context, bo, map, "selectedColor"),
-      indicatorSize: XSJSParse.getDouble(context, bo, map, "indicatorSize"),
+      indicatorSize: XSJSParse.getDouble(context, bo, map, "indicatorSize", defaultValue: 12.0),
       controller: XSJSParse.getObject(context, bo, map, "controller"),
     );
   }
@@ -2133,7 +2179,7 @@ class XSProxyTabBarView extends XSJsonObjProxy {
     return TabBarView(
       key: XSJSParse.getKey(context, bo, map, "key"),
       children: XSJSParse.getWidgetList(context, bo, map, "children"),
-      controller: XSJSParse.getTabController(context, bo, map, "controller"),
+      controller: XSJSParse.getObject(context, bo, map, "controller"),
       physics: XSJSParse.getScrollPhysics(context, bo, map, "physics"),
       dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.down),
     );
