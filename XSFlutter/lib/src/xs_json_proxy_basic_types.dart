@@ -29,9 +29,6 @@ class XSProxyRegisterHelperBasicTypesSeries {
 
     m.addAll(XSProxyDropdownMenuItem.registerProxy());
 
-    m.addAll(XSProxyInputDecorationTheme.registerProxy());
-    m.addAll(XSProxyIconTheme.registerProxy());
-
     m.addAll(XSProxyNotificationListener.registerProxy());
 
     m.addAll(XSProxyOpacity.registerProxy());
@@ -254,61 +251,6 @@ class XSProxyDropdownMenuItem extends XSJsonObjProxy {
 
 //-------------- F -----------------
 //-------------- I -----------------
-//****** InputDecorationTheme ******
-class XSProxyInputDecorationTheme extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "InputDecorationTheme";
-    return {
-      regClassName: () => XSProxyInputDecorationTheme()..init(className: regClassName)
-    };
-  }
-
-  @override
-  InputDecorationTheme constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return InputDecorationTheme(
-      labelStyle: XSJSParse.getTextStyle(context, bo, map, "labelStyle"),
-      helperStyle: XSJSParse.getTextStyle(context, bo, map, "helperStyle"),
-      hintStyle: XSJSParse.getTextStyle(context, bo, map, "hintStyle"),
-      errorStyle: XSJSParse.getTextStyle(context, bo, map, "errorStyle"),
-      errorMaxLines: XSJSParse.getInt(context, bo, map, "errorMaxLines"),
-      // ignore: deprecated_member_use
-      hasFloatingPlaceholder: XSJSParse.getBool(context, bo, map, "hasFloatingPlaceholder", defaultValue: true),
-      isDense: XSJSParse.getBool(context, bo, map, "isDense", defaultValue: false),
-      contentPadding: XSJSParse.getEdgeInsets(context, bo, map, "contentPadding"),
-      isCollapsed: XSJSParse.getBool(context, bo, map, "isCollapsed", defaultValue: false),
-      prefixStyle: XSJSParse.getTextStyle(context, bo, map, "prefixStyle"),
-      suffixStyle: XSJSParse.getTextStyle(context, bo, map, "suffixStyle"),
-      counterStyle: XSJSParse.getTextStyle(context, bo, map, "counterStyle"),
-      filled: XSJSParse.getBool(context, bo, map, "filled", defaultValue: false),
-      fillColor: XSJSParse.getColor(context, bo, map, "fillColor"),
-      errorBorder: XSJSParse.getInputBorder(context, bo, map, "errorBorder"),
-      focusedBorder: XSJSParse.getInputBorder(context, bo, map, "focusedBorder"),
-      focusedErrorBorder: XSJSParse.getInputBorder(context, bo, map, "focusedErrorBorder"),
-      disabledBorder: XSJSParse.getInputBorder(context, bo, map, "disabledBorder"),
-      enabledBorder: XSJSParse.getInputBorder(context, bo, map, "enabledBorder"),
-      border: XSJSParse.getInputBorder(context, bo, map, "border"),
-    );
-  }
-}
-
-//****** IconTheme ******
-class XSProxyIconTheme extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "IconTheme";
-    return {
-      regClassName: () => XSProxyIconTheme()..init(className: regClassName)
-    };
-  }
-
-  @override
-  IconTheme constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return IconTheme(
-      key: XSJSParse.getKey(context, bo, map, "key"),
-      data: XSJSParse.getIconThemeData(context, bo, map, "data"),
-      child: XSJSParse.getWidget(context, bo, map, "child"),
-    );
-  }
-}
 
 //-------------- N -----------------
 //****** NotificationListener ******

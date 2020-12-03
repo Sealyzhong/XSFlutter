@@ -6,6 +6,7 @@
  */
 
 import fs = require("flutter_sdk");
+import api = require("flutter_api");
 
 export class MyPackageInfoPage extends fs.StatefulWidget{
     createState() {
@@ -20,7 +21,7 @@ export class MyPackageInfoPage extends fs.StatefulWidget{
 class _MyPackageInfoPage extends fs.WidgetState{
     
    async _updatePackageInfo(){
-       await fs.PackageInfo.updateInfo();
+       await api.PackageInfo.updateInfo();
         this.setState();
     }
 
@@ -33,10 +34,10 @@ class _MyPackageInfoPage extends fs.WidgetState{
                 child:fs.Column.new({
                     mainAxisAlignment:fs.MainAxisAlignment.center,
                     children:[
-                        fs.Text.new("appName: "+String(fs.PackageInfo.appName)),
-                        fs.Text.new("buildNumber: "+String(fs.PackageInfo.buildNumber)),
-                        fs.Text.new("packageName: "+String(fs.PackageInfo.packageName)),
-                        fs.Text.new("version: "+String(fs.PackageInfo.version)),
+                        fs.Text.new("appName: "+String(api.PackageInfo.appName)),
+                        fs.Text.new("buildNumber: "+String(api.PackageInfo.buildNumber)),
+                        fs.Text.new("packageName: "+String(api.PackageInfo.packageName)),
+                        fs.Text.new("version: "+String(api.PackageInfo.version)),
                     ]
                 }),
             }),

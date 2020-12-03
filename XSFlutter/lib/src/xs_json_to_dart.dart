@@ -6,6 +6,7 @@
 
 import 'dart:core';
 import 'package:flutter/material.dart';
+import 'package:xsflutter/src/xs_json_proxy_dialog.dart';
 import 'xs_json_proxy_dio.dart';
 import 'xs_json_proxy_package.dart';
 import 'xs_build_owner.dart';
@@ -214,6 +215,7 @@ class XSJsonObjToDartObject {
 
     //helper widget
     registerProxy(XSProxyRegisterHelperWidgetSeries.registerProxys());
+    registerProxy(XSProxyRegisterHelperDialogSeries.registerProxys());
 
     //注册第三方
     registerProxy(XSProxyRegisterHelperPackageSeries.registerProxys());

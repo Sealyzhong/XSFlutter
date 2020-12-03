@@ -8,6 +8,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyLoadingPage = void 0;
 const fs = require("flutter_sdk");
+const api = require("flutter_api");
 class MyLoadingPage extends fs.StatelessWidget {
     constructor() {
         super(...arguments);
@@ -26,7 +27,7 @@ class MyLoadingPage extends fs.StatelessWidget {
                         title: fs.Text.new("show Success"),
                         subtitle: fs.Text.new("参数:info、duratio、alignment"),
                         onTap: function () {
-                            fs.Loading.showSuccess({ info: "加载成功！", alignment: fs.Alignment.center });
+                            api.Loading.showSuccess({ info: "加载成功！", alignment: fs.Alignment.center });
                         }
                     }),
                     fs.ListTile.new({
@@ -35,7 +36,7 @@ class MyLoadingPage extends fs.StatelessWidget {
                         title: fs.Text.new("show Error"),
                         subtitle: fs.Text.new("参数:info、duratio、alignment"),
                         onTap: function () {
-                            fs.Loading.showError({ info: "加载失败", alignment: fs.Alignment.center });
+                            api.Loading.showError({ info: "加载失败", alignment: fs.Alignment.center });
                         }
                     }),
                     fs.ListTile.new({
@@ -44,7 +45,7 @@ class MyLoadingPage extends fs.StatelessWidget {
                         title: fs.Text.new("show Info"),
                         subtitle: fs.Text.new("参数:info、duratio、alignment"),
                         onTap: function () {
-                            fs.Loading.showInfo({ info: "提示消息", alignment: fs.Alignment.center });
+                            api.Loading.showInfo({ info: "提示消息", alignment: fs.Alignment.center });
                         }
                     }),
                     fs.ListTile.new({
@@ -53,7 +54,7 @@ class MyLoadingPage extends fs.StatelessWidget {
                         title: fs.Text.new("show Toast"),
                         subtitle: fs.Text.new("参数:info、duratio、alignment"),
                         onTap: function () {
-                            fs.Loading.showToast({ info: "你有新的消息!", alignment: fs.Alignment.bottomCenter });
+                            api.Loading.showToast({ info: "你有新的消息!", alignment: fs.Alignment.bottomCenter });
                         }
                     }),
                     fs.ListTile.new({
@@ -62,11 +63,11 @@ class MyLoadingPage extends fs.StatelessWidget {
                         title: fs.Text.new("show(数据加载中...)"),
                         subtitle: fs.Text.new("参数:info"),
                         onTap: function () {
-                            fs.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
+                            api.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
                             fs.Future.delayed(fs.Duration.new({
                                 seconds: 5
                             }), function () {
-                                fs.Loading.dismiss();
+                                api.Loading.dismiss();
                             });
                         }
                     }),

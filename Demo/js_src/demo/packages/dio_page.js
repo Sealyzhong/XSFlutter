@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyDioPage = void 0;
 const section_title_1 = require("demo/widgets/section_title");
 const fs = require("flutter_sdk");
+const api = require("flutter_api");
 class MyDioPage extends fs.StatefulWidget {
     createState() {
         return new _MyDioPage(this);
@@ -23,7 +24,7 @@ class _MyDioPage extends fs.WidgetState {
         super(...arguments);
         this.response = "点击小人Run上面的代码";
         this.cgiDataUrl = "https://c.m.163.com/nc/article/headline/T1348649580692/0-10.html";
-        this.cgiJsonUrl = "https://reactnative.dev/movies.json";
+        this.cgiJsonUrl = "https://reactnative.dev/movies.json111";
     }
     dioCodeText() {
         return "let resp = await Dio().get(cgi);";
@@ -31,7 +32,7 @@ class _MyDioPage extends fs.WidgetState {
     //例子1，最简单的用法 
     async testDio1(url) {
         try {
-            let response = await fs.Dio.new().get({ path: url });
+            let response = await api.Dio.new().get({ path: url });
             fs.Log.log("await Dio.get(urlStr):request() :" + response);
             return response;
         }
@@ -42,7 +43,7 @@ class _MyDioPage extends fs.WidgetState {
     //例子2，接口还未完全支持
     async testDio2(url) {
         try {
-            let response = await fs.Dio.new().get({ path: url, onReceiveProgress: function (progress, total) {
+            let response = await api.Dio.new().get({ path: url, onReceiveProgress: function (progress, total) {
                     fs.Log.log("testDio(): progress: " + String(progress) + "/" + String(total));
                 } });
             fs.Log.log("await Dio.get(urlStr):request() :" + response);
@@ -53,17 +54,17 @@ class _MyDioPage extends fs.WidgetState {
         }
     }
     async _onTap1() {
-        fs.Loading.show({ info: "数据加载中..." });
+        api.Loading.show({ info: "数据加载中..." });
         let response = await this.testDio2(this.cgiDataUrl);
         this.response = response; // JSON.stringify(response);
-        fs.Loading.dismiss();
+        api.Loading.dismiss();
         this.setState();
     }
     async _onTap2() {
-        fs.Loading.show({ info: "数据加载中..." });
+        api.Loading.show({ info: "数据加载中..." });
         let response = await this.testDio1(this.cgiJsonUrl);
         this.response = response; // JSON.stringify(response);
-        fs.Loading.dismiss();
+        api.Loading.dismiss();
         this.setState();
     }
     build(context) {

@@ -34,6 +34,7 @@ flutter:
     - js_src/demo/base_widgets/
     - js_src/demo/packages/
     - js_src/demo/examples/
+    - js_src/demo/dialog/
     - js_src/demo/utils/
 
     #mxflutter app demo 使用到的图片资源

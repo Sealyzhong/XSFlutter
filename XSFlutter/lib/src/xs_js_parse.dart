@@ -17,6 +17,7 @@ import 'dart:math' as math;
 import 'dart:io';
 import 'xs_build_owner.dart';
 import 'xs_json_to_dart.dart';
+import 'package/mask_text_input_formatter.dart';
 
 //****** 常用解析
 class XSJSParse {
@@ -196,12 +197,12 @@ class XSJSParse {
   static AssetBundle getAssetBundle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {AssetBundle defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      var constructorName = _getConstructorName(v);
-      if (constructorName != null && constructorName.isNotEmpty) {
-        switch (constructorName) {
-          case 'network':
+      var className = _getClassName(v);
+      if (className != null && className.isNotEmpty) {
+        switch (className) {
+          case 'NetworkAssetBundle':
             return NetworkAssetBundle(getUri(context, bo, v, "baseUrl"));
-          case 'platform':
+          case 'PlatformAssetBundle':
             return PlatformAssetBundle();
         }
       }
@@ -372,7 +373,6 @@ class XSJSParse {
           left: getBorderSide(context, bo, v, "left", defaultValue: BorderSide.none),
         );
       }
-
       switch (constructorName) {
         case 'all':
           return Border.all(
@@ -796,7 +796,6 @@ class XSJSParse {
         hoverColor: getColor(context, bo, v, "hoverColor"),
         highlightColor: getColor(context, bo, v, "highlightColor"),
         splashColor: getColor(context, bo, v, "splashColor"),
-        colorScheme: getColorScheme(context, bo, v, "colorScheme"),
         materialTapTargetSize: getMaterialTapTargetSize(context, bo, v, "materialTapTargetSize"),
       );
     }
@@ -831,6 +830,7 @@ class XSJSParse {
         }
       }
     }
+
     return defaultValue;
   }
 
@@ -843,26 +843,26 @@ class XSJSParse {
   static OutlinedBorder getOutlinedBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {OutlinedBorder defaultValue}) {
     Map v = _getMap(map, key, defaultValue: map);
     if (v != null) {
-      var constructorName = _getConstructorName(map);
-      switch (constructorName) {
-        case "circleBorder":
+      var className = _getClassName(map);
+      switch (className) {
+        case "CircleBorder":
           return CircleBorder(side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none));
-        case "beveledRectangleBorder":
+        case "BeveledRectangleBorder":
           return BeveledRectangleBorder(
             side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none),
             borderRadius: getBorderRadius(context, bo, v, "borderRadius", defaultValue: BorderRadius.zero),
           );
-        case "continuousRectangleBorder":
+        case "ContinuousRectangleBorder":
           return ContinuousRectangleBorder(
             side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none),
             borderRadius: getBorderRadius(context, bo, v, "borderRadius", defaultValue: BorderRadius.zero),
           );
-        case "roundedRectangleBorder":
+        case "RoundedRectangleBorder":
           return RoundedRectangleBorder(
             side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none),
             borderRadius: getBorderRadius(context, bo, v, "borderRadius", defaultValue: BorderRadius.zero),
           );
-        case "stadiumBorder":
+        case "StadiumBorder":
           return StadiumBorder(side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none));
       }
     }
@@ -916,45 +916,6 @@ class XSJSParse {
       }
       return list;
     }
-    return defaultValue;
-  }
-
-  //****** ColorScheme ******/
-  static ColorScheme getColorScheme(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ColorScheme defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      var constructorName = _getConstructorName(v);
-      if (constructorName == null || constructorName.isEmpty) {
-        return ColorScheme(
-          primary: getColor(context, bo, v, "primary"),
-          primaryVariant: getColor(context, bo, v, "primaryVariant"),
-          secondary: getColor(context, bo, v, "secondary"),
-          secondaryVariant: getColor(context, bo, v, "secondaryVariant"),
-          surface: getColor(context, bo, v, "surface"),
-          background: getColor(context, bo, v, "background"),
-          error: getColor(context, bo, v, "error"),
-          onPrimary: getColor(context, bo, v, "onPrimary"),
-          onSecondary: getColor(context, bo, v, "onSecondary"),
-          onSurface: getColor(context, bo, v, "onSurface"),
-          onBackground: getColor(context, bo, v, "onBackground"),
-          onError: getColor(context, bo, v, "onError"),
-          brightness: getBrightness(context, bo, v, "brightness"),
-        );
-      }
-
-      switch (constructorName) {
-        case 'fromSwatch':
-          return ColorScheme.fromSwatch(
-            primaryColorDark: getColor(context, bo, v, "primaryColorDark"),
-            accentColor: getColor(context, bo, v, "accentColor"),
-            cardColor: getColor(context, bo, v, "cardColor"),
-            backgroundColor: getColor(context, bo, v, "backgroundColor"),
-            errorColor: getColor(context, bo, v, "errorColor"),
-            brightness: getBrightness(context, bo, v, "brightness", defaultValue: Brightness.light),
-          );
-      }
-    }
-
     return defaultValue;
   }
 
@@ -1212,8 +1173,13 @@ class XSJSParse {
     var v = _getMap(map, key);
     if (v != null) {
       var className = _getClassName(v);
+
       if (className == "BoxDecoration") {
         return getBoxDecoration(context, bo, map, key);
+      }
+
+      if (className == "FlutterLogoDecoration") {
+        return getFlutterLogoDecoration(context, bo, map, key);
       }
     }
     return defaultValue;
@@ -1506,8 +1472,8 @@ class XSJSParse {
     try {
       var v = _getMap(map, key);
       if (v != null) {
-        var _constructorName = _getConstructorName(v);
-        if (_constructorName == "linear") {
+        var _className = _getClassName(v);
+        if (_className == "LinearGradient") {
           return LinearGradient(
             begin: getAlignment(context, bo, v, "begin", defaultValue: Alignment.centerLeft),
             end: getAlignment(context, bo, v, "end", defaultValue: Alignment.centerRight),
@@ -1517,7 +1483,7 @@ class XSJSParse {
             transform: getGradientTransform(context, bo, v, "transform"),
           );
         }
-        if (_constructorName == "radial") {
+        if (_className == "RadialGradient") {
           return RadialGradient(
             center: getAlignment(context, bo, v, "center", defaultValue: Alignment.center),
             radius: getDouble(context, bo, v, "radius", defaultValue: 0.5),
@@ -1529,7 +1495,7 @@ class XSJSParse {
             transform: getGradientTransform(context, bo, v, "transform"),
           );
         }
-        if (_constructorName == "sweep") {
+        if (_className == "SweepGradient") {
           return SweepGradient(
             center: getAlignment(context, bo, v, "center", defaultValue: Alignment.center),
             startAngle: getDouble(context, bo, v, "startAngle", defaultValue: 0.0),
@@ -1551,9 +1517,9 @@ class XSJSParse {
   static GradientTransform getGradientTransform(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {GradientTransform defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      var constructorName = _getConstructorName(map);
-      switch (constructorName) {
-        case "rotation":
+      var className = _getClassName(map);
+      switch (className) {
+        case "GradientRotation":
           return GradientRotation(getDouble(context, bo, v, "radians"));
       }
     }
@@ -1606,19 +1572,6 @@ class XSJSParse {
         case 'noRepeat':
           return ImageRepeat.noRepeat;
       }
-    }
-    return defaultValue;
-  }
-
-  //****** IconThemeData ******/
-  static IconThemeData getIconThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {dynamic defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      return IconThemeData(
-        color: getColor(context, bo, v, "color"),
-        opacity: getDouble(context, bo, v, "opacity"),
-        size: getDouble(context, bo, v, "size"),
-      );
     }
     return defaultValue;
   }
@@ -3887,41 +3840,6 @@ class XSJSParse {
     return defaultValue;
   }
 
-  //****** InputDecorationTheme ******/
-  static InputDecorationTheme getInputDecorationTheme(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {InputDecorationTheme defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      return InputDecorationTheme(
-          labelStyle: getTextStyle(context, bo, v, "labelStyle"),
-          helperStyle: getTextStyle(context, bo, v, "helperStyle"),
-          helperMaxLines: getInt(context, bo, v, "helperMaxLines"),
-          hintStyle: getTextStyle(context, bo, v, "hintStyle"),
-          errorStyle: getTextStyle(context, bo, v, "errorStyle"),
-          errorMaxLines: getInt(context, bo, v, "errorMaxLines"),
-          // ignore: deprecated_member_use
-          hasFloatingPlaceholder: getBool(context, bo, v, "hasFloatingPlaceholder", defaultValue: true),
-          floatingLabelBehavior: getFloatingLabelBehavior(context, bo, v, "floatingLabelBehavior", defaultValue: FloatingLabelBehavior.auto),
-          isDense: getBool(context, bo, v, "isDense", defaultValue: false),
-          contentPadding: getEdgeInsets(context, bo, v, "contentPadding"),
-          isCollapsed: getBool(context, bo, v, "isCollapsed", defaultValue: false),
-          prefixStyle: getTextStyle(context, bo, v, "prefixStyle"),
-          suffixStyle: getTextStyle(context, bo, v, "suffixStyle"),
-          counterStyle: getTextStyle(context, bo, v, "counterStyle"),
-          filled: getBool(context, bo, v, "filled", defaultValue: false),
-          fillColor: getColor(context, bo, v, "fillColor"),
-          focusColor: getColor(context, bo, v, "focusColor"),
-          hoverColor: getColor(context, bo, v, "hoverColor"),
-          errorBorder: getInputBorder(context, bo, v, "errorBorder"),
-          focusedBorder: getInputBorder(context, bo, v, "focusedBorder"),
-          focusedErrorBorder: getInputBorder(context, bo, v, "focusedErrorBorder"),
-          disabledBorder: getInputBorder(context, bo, v, "disabledBorder"),
-          enabledBorder: getInputBorder(context, bo, v, "enabledBorder"),
-          border: getInputBorder(context, bo, v, "border"),
-          alignLabelWithHint: getBool(context, bo, v, "alignLabelWithHint", defaultValue: false));
-    }
-    return defaultValue;
-  }
-
   //****** InputDecoration ******/
   static InputDecoration getInputDecoration(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {InputDecoration defaultValue}) {
     var v = _getMap(map, key);
@@ -3996,17 +3914,25 @@ class XSJSParse {
   static InputBorder getInputBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {InputBorder defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      var constructorName = _getConstructorName(v);
-      switch (constructorName) {
-        case 'none':
-          return InputBorder.none;
-        case 'outline':
+      var className = _getClassName(v);
+
+      if (className == "InputBorder") {
+        var constructorName = _getConstructorName(v);
+        switch (constructorName) {
+          case 'none':
+            return InputBorder.none;
+        }
+        return defaultValue;
+      }
+
+      switch (className) {
+        case 'OutlineInputBorder':
           return OutlineInputBorder(
             borderSide: getBorderSide(context, bo, v, "borderSide", defaultValue: const BorderSide()),
             borderRadius: getBorderRadius(context, bo, v, "borderRadius", defaultValue: const BorderRadius.all(Radius.circular(4.0))),
             gapPadding: getDouble(context, bo, v, "gapPadding", defaultValue: 4.0),
           );
-        case 'underline':
+        case 'UnderlineInputBorder':
           return UnderlineInputBorder(
             borderSide: getBorderSide(context, bo, v, "borderSide", defaultValue: const BorderSide()),
             borderRadius: getBorderRadius(context, bo, v, "borderRadius", defaultValue: const BorderRadius.only(topLeft: Radius.circular(4.0), topRight: Radius.circular(4.0))),
@@ -4092,13 +4018,13 @@ class XSJSParse {
   static Key getKey(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Key defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      var constructorName = _getConstructorName(v);
-      switch (constructorName) {
-        case 'value':
+      var className = _getClassName(v);
+      switch (className) {
+        case 'ValueKey':
           return Key(getString(context, bo, v, "value"));
-        case 'unique':
+        case 'UniqueKey':
           return UniqueKey();
-        case 'global':
+        case 'GlobalKey':
           return GlobalKey(debugLabel: getString(context, bo, v, "debugLabel"));
       }
     }
@@ -4338,13 +4264,14 @@ class XSJSParse {
   static NotchedShape getNotchedShape(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {NotchedShape defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      var constructorName = _getConstructorName(v);
-      switch (constructorName) {
-        case 'circular':
+      var className = _getClassName(v);
+      switch (className) {
+        case 'CircularNotchedRectangle':
           return CircularNotchedRectangle();
-        case 'automatic':
+        case 'AutomaticNotchedShape':
           return AutomaticNotchedShape(
             getShapeBorder(context, bo, v, "host"),
+            getShapeBorder(context, bo, v, "guest"),
           );
       }
     }
@@ -5463,17 +5390,6 @@ class XSJSParse {
     return defaultValue;
   }
 
-  //****** TextEditingController ******/
-  /*static TextEditingController getTextEditingController(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextEditingController defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      return TextEditingController(
-        text: getString(context, bo, v, "text"),
-      );
-    }
-    return defaultValue;
-  }*/
-
   //****** TableBorder ******/
   static TableBorder getTableBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {dynamic defaultValue}) {
     var v = _getMap(map, key);
@@ -5510,7 +5426,25 @@ class XSJSParse {
 
   //****** TableColumnWidth ******/
   static TableColumnWidth getTableColumnWidth(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {dynamic defaultValue}) {
-    return _getClassObj(map[key], buildOwner: bo, defaultValue: defaultValue, context: context);
+    var v = _getMap(map, key);
+    if (v != null) {
+      var className = _getClassName(v);
+      switch (className) {
+        case 'IntrinsicColumnWidth':
+          return IntrinsicColumnWidth(flex: getDouble(context, bo, v, "flex"));
+        case 'FixedColumnWidth':
+          return FixedColumnWidth(getDouble(context, bo, v, "value"));
+        case 'FractionColumnWidth':
+          return FractionColumnWidth(getDouble(context, bo, v, "value"));
+        case 'FlexColumnWidth':
+          return FlexColumnWidth(getDouble(context, bo, v, "value", defaultValue: 1.0));
+        case 'MaxColumnWidth':
+          return MaxColumnWidth(getTableColumnWidth(context, bo, v, "a"), getTableColumnWidth(context, bo, v, "b"));
+        case 'MinColumnWidth':
+          return MinColumnWidth(getTableColumnWidth(context, bo, v, "a"), getTableColumnWidth(context, bo, v, "b"));
+      }
+    }
+    return defaultValue;
   }
 
   //****** ThemeData ******/
@@ -5550,13 +5484,9 @@ class XSJSParse {
         errorColor: getColor(context, bo, v, "errorColor"),
         toggleableActiveColor: getColor(context, bo, v, "toggleableActiveColor"),
         fontFamily: getString(context, bo, v, "fontFamily"),
-        iconTheme: getIconThemeData(context, bo, v, "iconTheme"),
-        primaryIconTheme: getIconThemeData(context, bo, v, "primaryIconTheme"),
-        accentIconTheme: getIconThemeData(context, bo, v, "accentIconTheme"),
         platform: getTargetPlatform(context, bo, v, "platform"),
         materialTapTargetSize: getMaterialTapTargetSize(context, bo, v, "materialTapTargetSize"),
         applyElevationOverlayColor: getBool(context, bo, v, "applyElevationOverlayColor"),
-        colorScheme: getColorScheme(context, bo, v, "colorScheme"),
       );
     }
     return defaultValue;
@@ -5581,40 +5511,55 @@ class XSJSParse {
       List<TextInputFormatter> result = List<TextInputFormatter>();
       for (var m in list) {
         if (m != null) {
-          var constructorName = _getConstructorName(m);
-          switch (constructorName) {
-            case 'lengthLimiting':
+          var className = _getClassName(m);
+          if (className != null && className.isNotEmpty) {
+            var constructorName = _getConstructorName(m);
+            if (className == "LengthLimitingTextInputFormatter") {
               result.add(LengthLimitingTextInputFormatter(XSJSParse.getInt(context, bo, m, "maxLength")));
-              break;
-            case 'filtering':
-              result.add(FilteringTextInputFormatter(
-                XSJSParse.getRegExp(context, bo, m, "filterPattern"),
-                allow: XSJSParse.getBool(context, bo, m, "allow"),
-                replacementString: XSJSParse.getString(context, bo, m, "replacementString"),
+            } else if (className == "FilteringTextInputFormatter") {
+              if (constructorName == null || constructorName.isEmpty) {
+                result.add(FilteringTextInputFormatter(
+                  XSJSParse.getRegExp(context, bo, m, "filterPattern"),
+                  allow: XSJSParse.getBool(context, bo, m, "allow"),
+                  replacementString: XSJSParse.getString(context, bo, m, "replacementString"),
+                ));
+              } else {
+                switch (constructorName) {
+                  case 'singleLineFormatter':
+                    result.add(FilteringTextInputFormatter.singleLineFormatter);
+                    break;
+                  case 'digitsOnly':
+                    result.add(FilteringTextInputFormatter.digitsOnly);
+                    break;
+                }
+              }
+            } else if (className == "MaskTextInputFormatter") {
+              result.add(MaskTextInputFormatter(
+                mask: XSJSParse.getString(context, bo, m, "mask"),
+                filter: XSJSParse.getStringRegExpMap(context, bo, m, "filter"),
+                initialText: XSJSParse.getString(context, bo, m, "initialText"),
               ));
-              break;
-            case 'filtering.allow':
-              result.add(FilteringTextInputFormatter.allow(
-                XSJSParse.getRegExp(context, bo, m, "filterPattern"),
-                replacementString: XSJSParse.getString(context, bo, m, "replacementString"),
-              ));
-              break;
-            case 'filtering.deny':
-              result.add(FilteringTextInputFormatter.deny(
-                XSJSParse.getRegExp(context, bo, m, "filterPattern"),
-                replacementString: XSJSParse.getString(context, bo, m, "replacementString"),
-              ));
-              break;
-            case 'singleLineFormatter':
-              result.add(FilteringTextInputFormatter.singleLineFormatter);
-              break;
-            case 'digitsOnly':
-              result.add(FilteringTextInputFormatter.digitsOnly);
-              break;
+            }
           }
         }
       }
 
+      return result;
+    }
+    return defaultValue;
+  }
+
+  //****** Map<string,RegExp> ******/
+  static Map<String, RegExp> getStringRegExpMap(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Map<String, RegExp> defaultValue}) {
+    if (map != null && map.keys.length > 0) {
+      Map<String, RegExp> result = Map<String, RegExp>();
+      for (var m in map.keys) {
+        if (m != null) {
+          result.addAll({
+            m: getRegExp(context, bo, map, m)
+          });
+        }
+      }
       return result;
     }
     return defaultValue;

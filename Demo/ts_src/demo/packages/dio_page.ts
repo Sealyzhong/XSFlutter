@@ -7,6 +7,7 @@
 
 import { MySectionTitle } from "demo/widgets/section_title";
 import fs = require("flutter_sdk");
+import api = require("flutter_api");
 
 export class MyDioPage extends fs.StatefulWidget{
     createState() {
@@ -23,7 +24,7 @@ class _MyDioPage extends fs.WidgetState{
     
     response = "点击小人Run上面的代码";
     cgiDataUrl = "https://c.m.163.com/nc/article/headline/T1348649580692/0-10.html";
-    cgiJsonUrl = "https://reactnative.dev/movies.json"
+    cgiJsonUrl = "https://reactnative.dev/movies.json111"
 
     dioCodeText() {
         return "let resp = await Dio().get(cgi);";
@@ -33,7 +34,7 @@ class _MyDioPage extends fs.WidgetState{
     async testDio1(url:string) {
         
         try {
-          let response = await fs.Dio.new().get({path:url});
+          let response = await api.Dio.new().get({path:url});
           fs.Log.log("await Dio.get(urlStr):request() :" + response);
           return response;    
         } catch (e) {
@@ -44,7 +45,7 @@ class _MyDioPage extends fs.WidgetState{
       //例子2，接口还未完全支持
     async testDio2(url:string) {
         try {
-          let response =  await fs.Dio.new().get( 
+          let response =  await api.Dio.new().get( 
             {path:url,
                 onReceiveProgress:function (progress:number,total:number){
             fs.Log.log("testDio(): progress: " + String(progress)+"/"+String(total));
@@ -59,18 +60,18 @@ class _MyDioPage extends fs.WidgetState{
     }
 
     async _onTap1(){
-        fs.Loading.show({info:"数据加载中..."});
+        api.Loading.show({info:"数据加载中..."});
         let response = await this.testDio2(this.cgiDataUrl);
         this.response =  response as string;// JSON.stringify(response);
-        fs.Loading.dismiss();
+        api.Loading.dismiss();
         this.setState();
     }
  
     async _onTap2(){
-        fs.Loading.show({info:"数据加载中..."});
+        api.Loading.show({info:"数据加载中..."});
         let response = await this.testDio1(this.cgiJsonUrl);
         this.response =  response as string;// JSON.stringify(response);
-        fs.Loading.dismiss();
+        api.Loading.dismiss();
         this.setState();
     }
 

@@ -200,8 +200,6 @@ export class Widget extends DartClass {
   }
 }
 
-//****** ShapeBorder ******
-export class ShapeBorder extends DartClass {}
 
 //格式转换
 export class Convert extends core.Object{
@@ -232,7 +230,7 @@ export class Convert extends core.Object{
 
 
 //#region ******** Framework ********
-export class JSBridge {
+  export class JSBridge {
 
     ///js->native->flutter 顶层通用调用通道
     static invokeFlutterCommonChannel(basicMethodCall:any, callback?:any) {
@@ -2031,4905 +2029,4991 @@ export class JSBridge {
 
 //#region ******** Class ********
 
+//#region ------- A ------- 
 
-  //#region ------- A -------
-//****** Alignment ******
-export class Alignment extends DartClass {
-    x?:number;
-    y?:number;
-  
-    constructor(x:number, y:number){
-      super();
-      this.x = x;
-      this.y = y;
-    }
-    
-    static new(x:number, y:number){
-      return new Alignment(x,y);
-    }
-  
-    static topLeft = Alignment.new(-1.0, -1.0); 
-    static topCenter = Alignment.new(0.0, -1.0); 
-    static topRight = Alignment.new(1.0, -1.0); 
-    static centerLeft = Alignment.new(-1.0, 0.0); 
-    static center = Alignment.new(0.0, 0.0); 
-    static centerRight = Alignment.new(1.0, 0.0);
-    static bottomLeft = Alignment.new(-1.0, 1.0);
-    static bottomCenter = Alignment.new(0.0, 1.0);
-    static bottomRight = Alignment.new(1.0, 1.0); 
-  } 
-  
-  //****** AlignmentDirectional ******
-  export class AlignmentDirectional extends DartClass {
-    start?:number;
-    y?:number;
-  
-    constructor(start:number, y:number){
-      super();
-      this.start = start;
-      this.y = y;
-    }
-  
-    static new(start:number, y:number){
-      return new AlignmentDirectional(start,y);
-    }
+//#region AlignmentGeometry 
+///AlignmentGeometry
+export abstract class AlignmentGeometry extends DartClass {
+  x?:number;
+  start?:number;
+  y?:number;
+}
+
+///Alignment
+export class Alignment extends AlignmentGeometry {
+  constructor(x:number, y:number){
+    super();
+    this.x = x;
+    this.y = y;
   }
   
-  //****** AlwaysScrollableScrollPhysics ******
-  export class AlwaysScrollableScrollPhysics extends DartClass {
-    parent?:AlwaysScrollableScrollPhysics;
-  
-    static new(parent?:AlwaysScrollableScrollPhysics):{} {
-      var v = new AlwaysScrollableScrollPhysics();
-      v.parent=parent;
-      return v;
-    }
-  }
-  
-  //****** AssetBundle ******
-  export class AssetBundle extends DartClass {
-    baseUrl?:Uri;
-  
-    static network(baseUrl:Uri) {
-      var v = new AssetBundle();
-      v.constructorName = "network";
-      v.baseUrl = baseUrl;
-      return v;
-    }
-  
-    static platform() {
-      var v = new AssetBundle();
-      v.constructorName = "platform";
-      return v;
-    }
-  }
-  
-  //****** AssetImage ******
-  interface AssetImageConfig {
-    bundle?:AssetBundle;
-    packageName?:string;
-  }
-  export class AssetImage extends DartClass {
-    assetName?:string;
-    bundle?:AssetBundle;
-    packageName?:string;
-  
-    /**
-     * @param config config: 
-      {
-        assetName:string, 
-        bundle?:BaseAssetBundle, 
-        packageName?:string
-      }
-     */
-    constructor(assetName:string,config?: AssetImageConfig){
-      super();
-      this.assetName = assetName
-      if(config!=null && config!=undefined){
-        this.bundle = config.bundle;
-        this.packageName = config.packageName;
-      }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        assetName:string, 
-        bundle?:BaseAssetBundle, 
-        packageName?:string
-      }
-     */
-    static new(assetName:string,config?: AssetImageConfig) {
-      return new AssetImage(assetName,config);
-    }
-  }
-  //#endregion
-  
-  //#region ------- B ------- 
-  //****** BoxConstraints ******
-  interface BoxConstraintsConfig {
-    minWidth?:number;
-    maxWidth?:number;
-    minHeight?:number;
-    maxHeight?:number;
-  }
-  export class BoxConstraints extends DartClass {
-    minWidth?:number;
-    maxWidth?:number;
-    minHeight?:number;
-    maxHeight?:number;
-  
-    /**
-     * @param config config: 
-      {
-        minWidth?:number, 
-        maxWidth?:number, 
-        minHeight?:number, 
-        maxHeight?:number
-      }
-     */
-    constructor(config?: BoxConstraintsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.minWidth = config.minWidth;
-        this.maxWidth = config.maxWidth;
-        this.minHeight = config.minHeight;
-        this.maxHeight = config.maxHeight;
-      }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        minWidth?:number, 
-        maxWidth?:number, 
-        minHeight?:number, 
-        maxHeight?:number
-      }
-     */
-    static new(config?: BoxConstraintsConfig){
-      return new BoxConstraints(config);
-    }
-  }
-  
-  //****** BorderSide ******
-  interface BorderSideConfig {
-    color?:Color;
-    width?:number;
-    style?:BorderStyle;
-  }
-  export class BorderSide extends DartClass {
-    color?:Color;
-    width?:number;
-    style?:BorderStyle;
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          width?:number, 
-          style?:BorderStyle
-        }
-     */
-    constructor(config?: BorderSideConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.color = config.color;
-        this.width = config.width;
-        this.style = config.style;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          width?:number, 
-          style?:BorderStyle
-        }
-     */
-    static new(config?: BorderSideConfig){
-      return new BorderSide(config);
-    }
-  
-    static none() {
-      let v = new BorderSide();
-      v.constructorName = "none";
-      return v;
-    }
-  }
-  
-  //****** BorderRadius ******
-  interface BorderRadiusConfig {
-    top?:Radius;
-    bottom?:Radius;
-    left?:Radius;
-    right?:Radius;
-    topLeft?:Radius;
-    topRight?:Radius;
-    bottomLeft?:Radius;
-    bottomRight?:Radius;
-  }
-  export class BorderRadius  extends DartClass {
-    radius?:number|Radius;
-    top?:Radius;
-    bottom?:Radius;
-    left?:Radius;
-    right?:Radius;
-    topLeft?:Radius;
-    topRight?:Radius;
-    bottomLeft?:Radius;
-    bottomRight?:Radius;
-  
-    static zero(){
-      let o = new BorderRadius();
-      o.constructorName = "zero";
-      return o;
-    }
-  
-    static all(radius:Radius){
-      let v = new BorderRadius();
-      v.constructorName = "all";
-      v.radius = radius;
-      return v;
-    }
-  
-    static circular(radius:number){
-      let v = new BorderRadius();
-      v.constructorName = "circular";
-      v.radius = radius;
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          top?:Radius, 
-          bottom?:Radius
-        }
-     */
-    static vertical(config?: BorderRadiusConfig){
-      let v = new BorderRadius();
-      v.constructorName = "vertical";
-      if(config!=null && config!=undefined){
-        v.top = config.top;
-        v.bottom = config.bottom;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          left?:Radius, 
-          right?:Radius
-        }
-     */
-    static horizontal(config?: BorderRadiusConfig){
-      let v = new BorderRadius();
-      v.constructorName = "horizontal";
-      if(config!=null && config!=undefined){
-        v.left = config.left;
-        v.right = config.right;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          topLeft?:Radius, 
-          topRight?:Radius, 
-          bottomLeft?:Radius, 
-          bottomRight?:Radius,
-        }
-     */
-    static only(config?: BorderRadiusConfig){
-      let v = new BorderRadius();
-      v.constructorName = "only";
-      if(config!=null && config!=undefined){
-        v.topLeft = config.topLeft;
-        v.topRight = config.topRight;
-        v.bottomLeft = config.bottomLeft;
-        v.bottomRight = config.bottomRight;
-      }
-      return v;
-    }
-  }
-  
-  //****** BorderRadiusDirectional ******
-  interface BorderRadiusDirectionalConfig {
-    top?:Radius;
-    bottom?:Radius;
-    start?:Radius;
-    end?:Radius;
-  
-    topStart?:Radius;
-    topEnd?:Radius;
-    bottomStart?:Radius;
-    bottomEnd?:Radius;
-  }
-  export class BorderRadiusDirectional  extends DartClass {
-    radius?:Radius| number;
-    top?:Radius;
-    bottom?:Radius;
-  
-    start?:Radius;
-    end?:Radius;
-  
-    topStart?:Radius;
-    topEnd?:Radius;
-    bottomStart?:Radius;
-    bottomEnd?:Radius;
-  
-    static zero(){
-      let o = new BorderRadiusDirectional();
-      o.constructorName = "zero";
-      return o;
-    }
-  
-    static all(radius:Radius){
-      let v = new BorderRadiusDirectional();
-      v.constructorName = "all";
-      v.radius = radius;
-      return v;
-    }
-  
-    static circular(radius:number){
-      let v = new BorderRadiusDirectional();
-      v.constructorName = "circular";
-      v.radius = radius;
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          top?:Radius, 
-          bottom?:Radius
-        }
-     */
-    static vertical(config?: BorderRadiusDirectionalConfig){
-      let v = new BorderRadiusDirectional();
-      v.constructorName = "vertical";
-      if(config!=null && config!=undefined){
-        v.top = config.top;
-        v.bottom = config.bottom;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          start?:Radius, 
-          end?:Radius
-        }
-     */
-    static horizontal(config?: BorderRadiusDirectionalConfig){
-      let v = new BorderRadiusDirectional();
-      v.constructorName = "horizontal";
-      if(config!=null && config!=undefined){
-        v.start = config.start;
-        v.end = config.end;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          topStart?:Radius, 
-          topEnd?:Radius, 
-          bottomLeft?:Radius, 
-          bottomRight?:Radius,
-        }
-     */
-    static only(config?: BorderRadiusDirectionalConfig){
-      let v = new BorderRadiusDirectional();
-      v.constructorName = "only";
-      if(config!=null && config!=undefined){
-        v.topStart = config.topStart;
-        v.topEnd = config.topEnd;
-        v.bottomStart = config.bottomStart;
-        v.bottomEnd = config.bottomEnd;
-      }
-      return v;
-    }
-  }
-  
-  
-  //****** Border ******
-  interface BorderConfig {
-    top?:BorderSide;
-    right?:BorderSide;
-    bottom?:BorderSide;
-    left?:BorderSide;
-    vertical?:BorderSide;
-    horizontal?:BorderSide;
-  
-    color?:Color;
-    width?:number;
-    style?:BorderStyle;
-  }
-  export class Border extends DartClass {
-    top?:BorderSide;
-    right?:BorderSide;
-    bottom?:BorderSide;
-    left?:BorderSide;
-    vertical?:BorderSide;
-    horizontal?:BorderSide;
-  
-    color?:Color;
-    width?:number;
-    style?:BorderStyle;
-  
-    /**
-     * @param config config: 
-      {
-        top?:BorderSide, 
-        right?:BorderSide, 
-        bottom?:BorderSide, 
-        left?:BorderSide,
-      }
-     */
-    constructor(config?: BorderConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.top = config.top;
-        this.right = config.right;
-        this.bottom = config.bottom;
-        this.left = config.left;
-      }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        top?:BorderSide, 
-        right?:BorderSide, 
-        bottom?:BorderSide, 
-        left?:BorderSide,
-      }
-     */
-    static new(config?: BorderConfig)  {
-      return new Border(config);
-    }
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          width?:number, 
-          style?:BorderStyle,
-        }
-     */
-    static all(config: BorderConfig) {
-      var v = new Border();  
-      v.constructorName = "all";
-      if(config!=null && config!=undefined){
-        v.color = config.color;
-        v.width = config.width;
-        v.style = config.style;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          vertical?:BorderSide, 
-          horizontal?:BorderSide
-        }
-     */
-    static symmetric(config?: BorderConfig) {
-      var v = new Border();
-      v.constructorName = "symmetric";
-      if(config!=null && config!=undefined){
-        v.vertical = config.vertical;
-        v.horizontal = config.horizontal;
-      }
-      return v;
-    }
-  }
-  
-  
-  //****** BorderDirectional ******
-  interface BorderDirectionalConfig {
-    top?:BorderSide;
-    start?:BorderSide;
-    bottom?:BorderSide;
-    end?:BorderSide;
-  }
-  export class BorderDirectional extends DartClass {
-    top?:BorderSide;
-    start?:BorderSide;
-    bottom?:BorderSide;
-    end?:BorderSide;
-  
-    /**
-     * @param config config: 
-        {
-          top?:BorderSide, 
-          start?:BorderSide,
-          bottom?:BorderSide,
-          end?:BorderSide,
-        }
-     */
-    constructor(config?: BorderDirectionalConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.top = config.top;
-        this.start = config.start;
-        this.end = config.end;
-        this.bottom = config.bottom;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          top?:BorderSide, 
-          start?:BorderSide,
-          bottom?:BorderSide,
-          end?:BorderSide,
-        }
-     */
-    static new(config?: BorderDirectionalConfig) {
-      return new BorderDirectional(config);
-    }
-  }
-  
-  //****** ButtonThemeData ******
-  interface ButtonThemeDataConfig { //定义了两个可选属性
-    textTheme?:ButtonTextTheme;
-    minWidth?:number;
-    height?:number;
-    padding?:EdgeInsets;
-    layoutBehavior?:ButtonBarLayoutBehavior;
-    alignedDropdown?:boolean;
-    buttonColor?:Color;
-    disabledColor?:Color;
-    focusColor?:Color;
-    hoverColor?:Color;
-    highlightColor?:Color;
-    splashColor?:Color;
-    colorScheme?:ColorScheme;
-  }
-  export class ButtonThemeData extends DartClass {
-    textTheme?:ButtonTextTheme;
-    minWidth?:number;
-    height?:number;
-    padding?:EdgeInsets;
-    layoutBehavior?:ButtonBarLayoutBehavior;
-    alignedDropdown?:boolean;
-    buttonColor?:Color;
-    disabledColor?:Color;
-    focusColor?:Color;
-    hoverColor?:Color;
-    highlightColor?:Color;
-    splashColor?:Color;
-    colorScheme?:ColorScheme;
-  
-  
-    /**
-     * @param config config: 
-        {
-          textTheme?:ButtonTextTheme, 
-          minWidth?:number, 
-          height?:number, 
-          padding?:EdgeInsets, 
-          layoutBehavior?:ButtonBarLayoutBehavior, 
-          alignedDropdown?:boolean, 
-          buttonColor?:Color, 
-          disabledColor?:Color, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          highlightColor?:Color, 
-          splashColor?:Color, 
-          colorScheme?:ColorScheme, 
-        }
-     */
-    constructor(config?: ButtonThemeDataConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.textTheme = config.textTheme;
-        this.minWidth = config.minWidth;
-        this.height = config.height;
-        this.padding = config.padding;
-        this.layoutBehavior = config.layoutBehavior;
-        this.alignedDropdown = config.alignedDropdown;
-        this.buttonColor = config.buttonColor;
-        this.disabledColor = config.disabledColor;
-        this.focusColor = config.focusColor;
-        this.hoverColor = config.hoverColor;
-        this.highlightColor = config.highlightColor;
-        this.splashColor = config.splashColor;
-        this.colorScheme = config.colorScheme;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          textTheme?:ButtonTextTheme, 
-          minWidth?:number, 
-          height?:number, 
-          padding?:EdgeInsets, 
-          layoutBehavior?:ButtonBarLayoutBehavior, 
-          alignedDropdown?:boolean, 
-          buttonColor?:Color, 
-          disabledColor?:Color, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          highlightColor?:Color, 
-          splashColor?:Color, 
-          colorScheme?:ColorScheme, 
-        }
-     */
-    static new(config?: ButtonThemeDataConfig) {
-      return new ButtonThemeData(config);
-    }
-  }
-  
-  //****** BoxDecoration ******
-  interface BoxDecorationConfig { 
-    color?:Color;
-    border?:Border;
-    borderRadius?:BorderRadius;
-    boxShadow?:BoxShadow;
-    gradient?:Gradient;
-    backgroundBlendMode?:BlendMode;
-    shape?:BoxShape;
-    image?:any;
-  }
-  export class BoxDecoration extends DartClass {
-    color?:Color;
-    border?:Border;
-    borderRadius?:BorderRadius;
-    boxShadow?:BoxShadow;
-    gradient?:Gradient;
-    backgroundBlendMode?:BlendMode;
-    shape?:BoxShape;
-    image?:any;
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          border?:Border;
-          borderRadius?:BorderRadius, 
-          boxShadow?:BoxShadow, 
-          gradient?:BaseGradient 
-          backgroundBlendMode?:BlendMode, 
-          shape?:BoxShape,
-          image?:DecorationImage, 
-        }
-      */
-    constructor(config?: BoxDecorationConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.color = config.color;
-        this.border = config.border;
-        this.borderRadius = config.borderRadius;
-        this.boxShadow = config.boxShadow;
-        this.gradient = config.gradient;
-        this.backgroundBlendMode = config.backgroundBlendMode;
-        this.shape = config.shape;
-        this.image = config.image;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          border?:Border;
-          borderRadius?:BorderRadius, 
-          boxShadow?:BoxShadow, 
-          gradient?:BaseGradient 
-          backgroundBlendMode?:BlendMode, 
-          shape?:BoxShape,
-          image?:DecorationImage, 
-        }
-      */
-    static new(config?: BoxDecorationConfig){
-      return new BoxDecoration(config);
-    }
-  }
-  
-  //****** BannerPainter ******
-  interface BannerPainterConfig {
-    message:string;
-    textDirection:TextDirection;
-    location:BannerLocation;
-    layoutDirection?:TextDirection;
-    color?:Color;
-    textStyle?:TextStyle;
-  }
-  export class BannerPainter extends DartClass {
-    message?:string;
-    textDirection?:TextDirection;
-    location?:BannerLocation;
-    layoutDirection?:TextDirection;
-    color?:Color;
-    textStyle?:TextStyle;
-  
-    /**
-     * @param config config: 
-        {
-          message?:string, 
-          textDirection?:TextDirection, 
-          location?:BannerLocation, 
-          layoutDirection?:TextDirection, 
-          color?:Color, 
-          textStyle?:TextStyle, 
-        }
-      */
-    constructor(config: BannerPainterConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.message = config.message;
-        this.textDirection = config.textDirection;
-        this.location = config.location;
-        this.layoutDirection = config.layoutDirection;
-        this.color = config.color;
-        this.textStyle = config.textStyle;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          message?:string, 
-          textDirection?:TextDirection, 
-          location?:BannerLocation, 
-          layoutDirection?:TextDirection, 
-          color?:Color, 
-          textStyle?:TextStyle, 
-        }
-      */
-    static new(config: BannerPainterConfig){
-      return new BannerPainter(config);
-    }
-  }
-  
-  //****** BoxShadow ******
-  interface BoxShadowConfig {
-    color?:Color;
-    offset?:Offset;
-    blurRadius?:number;
-    spreadRadius?:number;
-  }
-  export class BoxShadow extends DartClass {
-    color?:Color;
-    offset?:Offset;
-    blurRadius?:number;
-    spreadRadius?:number;
-  
-    /**
-     * @param config config: 
-      {
-        color?:Color, 
-        offset?:Offset, 
-        blurRadius?:number, 
-        spreadRadius?:number
-      }
-     */
-    constructor(config?: BoxShadowConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.color = config.color;
-        this.offset = config.offset;
-        this.blurRadius = config.blurRadius;
-        this.spreadRadius = config.spreadRadius;
-      }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        color?:Color, 
-        offset?:Offset, 
-        blurRadius?:number, 
-        spreadRadius?:number
-      }
-     */
-    static new(config?: BoxShadowConfig) {
-      return new BoxShadow(config);
-    }
-  }
-  
-  //****** BouncingScrollPhysics ******
-  export class BouncingScrollPhysics extends DartClass {
-    parent?:ScrollPhysics;
-    
-    constructor(config?: ScrollPhysicsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.parent = config.parent;
-      }
-    }
-  
-    static new(config?: ScrollPhysicsConfig) {
-      return new BouncingScrollPhysics(config);
-    }
-  }
-  //#endregion
-  
-  //#region ------- C -------
-  //****** Color ******
-  export class Color extends DartClass {
-    value?: number;
-    a?: number;
-    r?: number;
-    g?: number;
-    b?: number;
-    opacity?: number;
-  
-    constructor(value?: number){
-      super();
-      this.value =value;
-    }
-  
-    static new(value: number)  {    
-      return new Color(value);
-    }
-  
-    static fromARGB(a: number, r: number, g: number, b: number) {
-      let v = new Color();
-      v.constructorName = "fromARGB";
-      v.a = a;
-      v.r = r;
-      v.g = g;
-      v.b = b;
-      return v;
-    }
-  
-    static fromRGBO(r: number, g: number, b: number, opacity: number)  {
-      let v = new Color();
-      v.constructorName = "fromRGBO";
-      v.opacity = opacity;
-      v.r = r;
-      v.g = g;
-      v.b = b;
-      return v;
-    }
-  }
-  
-  //****** Color ******
-  export class Colors extends Color{
-    static transparent = Color.new(0x00000000);
-    static black = Color.new(0xff000000);
-    static black87 = Color.new(0xdd000000);
-    static black54 = Color.new(0x8a000000);
-    static black45 = Color.new(0x73000000);
-    static black38 = Color.new(0x61000000);
-    static black26 = Color.new(0x42000000);
-    static black12 = Color.new(0x1f000000);
-    static white = Color.new(0xffffffff);
-    static white70 = Color.new(0xb3ffffff);
-    static white54 = Color.new(0x8affffff);
-    static white30 = Color.new(0x4dffffff);
-    static white24 = Color.new(0x3dffffff);
-    static white12 = Color.new(0x1fffffff);
-    static white10 = Color.new(0x1affffff);
-    static red = Color.new(0xFFF44336);
-    static redAccent = Color.new(0xFFFF5252);
-    static pink = Color.new(0xFFE91E63);
-    static pinkAccent = Color.new(0xFFFF4081);
-    static purple = Color.new(0xFF9C27B0);
-    static purpleAccent = Color.new(0xFFE040FB);
-    static deepPurple = Color.new(0xFF673AB7);
-    static deepPurpleAccent = Color.new(0xFF7C4DFF);
-    static indigo = Color.new(0xFF3F51B5);
-    static indigoAccent = Color.new(0xFF536DFE);
-    static blue = Color.new(0xFF2196F3);
-    static blueAccent = Color.new(0xFF448AFF);
-    static lightBlue = Color.new(0xFF03A9F4);
-    static lightBlueAccent = Color.new(0xFF40C4FF);
-    static cyan = Color.new(0xFF00BCD4);
-    static cyanAccent = Color.new(0xFF18FFFF);
-    static teal = Color.new(0xff009688);
-    static tealAccent = Color.new(0xFF64FFDA);
-    static green = Color.new(0xFF4CAF50);
-    static greenAccent = Color.new(0xFF69F0AE);
-    static lightGreen = Color.new(0xFF8BC34A);
-    static lightGreenAccent = Color.new(0xFFB2FF59);
-    static lime = Color.new(0xFFCDDC39);
-    static limeAccent = Color.new(0xFFEEFF41);
-    static yellow = Color.new(0xFFFFEB3B);
-    static yellowAccent = Color.new(0xFFFFFF00);
-    static amber = Color.new(0xFFFFC107);
-    static amberAccent = Color.new(0xFFFFD740);
-    static orange = Color.new(0xFFFF9800);
-    static orangeAccent = Color.new(0xFFFFAB40);
-    static deepOrange = Color.new(0xFFFF5722);
-    static deepOrangeAccent = Color.new(0xFFFF6E40);
-    static brown = Color.new(0xFF795548);
-    static grey = Color.new(0xFF9E9E9E);
-    static blueGrey = Color.new(0xFF607D8B);
-  }
-  
-  //****** ColorFilter ******
-  export class ColorFilter extends DartClass {
-    color?:Color;
-    blendMode?:BlendMode;
-  
-    constructor(color:Color, blendMode:BlendMode){
-      super();
-      this.color = color;
-      this.blendMode =blendMode;
-    }
-  
-    static new(color:Color, blendMode:BlendMode) {
-      return new ColorFilter(color,blendMode);
-    }
-  
-    static mode(color:Color, blendMode:BlendMode){
-      let v = new ColorFilter(color,blendMode);
-      v.constructorName = "mode";
-      return v;
-    }
-  }
-  
-  //****** ColorScheme ******
-  interface ColorSchemeConfig {
-    primary?:Color;
-    primaryVariant?:Color;
-    secondary?:Color;
-    secondaryVariant?:Color;
-    surface?:Color;
-    background?:Color;
-    error?:Color;
-    onPrimary?:Color;
-    onSecondary?:Color;
-    onSurface?:Color;
-    onBackground?:Color;
-    onError?:Color;
-    brightness?:Brightness;
-    primarySwatch?:Color;
-    accentColor?:Color;
-    cardColor?:Color;
-    backgroundColor?:Color;
-    errorColor?:Color;
-  }
-  export class ColorScheme extends DartClass {
-    primary?:Color;
-    primaryVariant?:Color;
-    secondary?:Color;
-    secondaryVariant?:Color;
-    surface?:Color;
-    background?:Color;
-    error?:Color;
-    onPrimary?:Color;
-    onSecondary?:Color;
-    onSurface?:Color;
-    onBackground?:Color;
-    onError?:Color;
-    brightness?:Brightness;
-    primarySwatch?:Color;
-    accentColor?:Color;
-    cardColor?:Color;
-    backgroundColor?:Color;
-    errorColor?:Color;
-  
-    /**
-     * @param config config: 
-        {
-          primary?:Color, 
-          primaryVariant?:Color, 
-          secondary?:Color, 
-          secondaryVariant?:Color, 
-          surface?:Color, 
-          background?:Color, 
-          error?:Color,
-          onPrimary?:Color, 
-          onSecondary?:Color, 
-          onSurface?:Color, 
-          onBackground?:Color, 
-          onError?:Color, 
-          brightness?:Brightness
-        }
-     */
-    constructor(config?: ColorSchemeConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.primary = config.primary;
-        this.primaryVariant = config.primaryVariant;
-        this.secondary = config.secondary;
-        this.secondaryVariant = config.secondaryVariant;
-        this.surface = config.surface;
-        this.background = config.background;
-        this.error = config.error;
-        this.onPrimary = config.onPrimary;
-        this.onSecondary = config.onSecondary;
-        this.onSurface = config.onSurface;
-        this.onBackground = config.onBackground;
-        this.onError = config.onError;
-        this.brightness = config.brightness;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          primary?:Color, 
-          primaryVariant?:Color, 
-          secondary?:Color, 
-          secondaryVariant?:Color, 
-          surface?:Color, 
-          background?:Color, 
-          error?:Color,
-          onPrimary?:Color, 
-          onSecondary?:Color, 
-          onSurface?:Color, 
-          onBackground?:Color, 
-          onError?:Color, 
-          brightness?:Brightness
-        }
-     */
-    static new(config?: ColorSchemeConfig) {
-      return new ColorScheme(config); 
-    }
-    
-    static fromSwatch(primarySwatch?:Color,accentColor?:Color,cardColor?:Color,backgroundColor?:Color, errorColor?:Color,brightness?:Brightness) {
-      let v = new ColorScheme();
-      v.constructorName = "fromSwatch";
-  
-      v.primarySwatch = primarySwatch;
-      v.accentColor = accentColor;
-      v.cardColor = cardColor;
-      v.backgroundColor = backgroundColor;
-      v.errorColor = errorColor;
-      v.brightness = brightness;
-      return v;
-    }
-  }
-  
-  //****** CircularNotchedRectangle ******
-  export class CircularNotchedRectangle extends DartClass {
-    static new() {
-      return new CircularNotchedRectangle();
-    }
-  }
-  
-  //****** ClampingScrollPhysics ******
-  export class ClampingScrollPhysics extends DartClass {
-    parent?:ScrollPhysics;
-  
-    constructor(config?: ScrollPhysicsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.parent = config.parent;
-      }
-    }
-  
-    static new(config?: ScrollPhysicsConfig) {
-      return new ClampingScrollPhysics(config);
-      
-    }
-  }
-  
-  
-  //****** CurveTween ******
-  export class CurveTween extends Widget {
-    curve?:Curve;
-  
-    constructor(curve?:Curve){
-      super();
-      this.curve = curve;
-    }
-  
-    static new(curve?:Curve) {
-      return new CurveTween(curve);
-    };
-  }
-  
-  //#endregion
-  
-  //#region ------- D -------
-  
-  //****** DragDownDetails ******
-  interface DragDownDetailsConfig {
-    globalPosition?:Offset;
-    localPosition?:Offset;
-  }
-  export class DragDownDetails extends DartClass {
-    globalPosition?:Offset;
-    localPosition?:Offset;
-  
-    /**
-     * @param config config: 
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-        }
-     */
-    constructor(config?: DragDownDetailsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.globalPosition = config.globalPosition;
-        this.localPosition = config.localPosition;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-        }
-     */
-    static new (config?: DragDownDetailsConfig) {
-      return new DragDownDetails(config);
-    }
+  static new(x:number, y:number){
+    return new Alignment(x,y);
   }
 
-  //****** DragStartDetails ******
-  interface DragStartDetailsConfig {
-    globalPosition?:Offset;
-    localPosition?:Offset;
-    sourceTimeStamp?:Duration;
-  }
-  export class DragStartDetails extends DartClass {
-    globalPosition?:Offset;
-    localPosition?:Offset;
-    sourceTimeStamp?:Duration;
+  static topLeft = Alignment.new(-1.0, -1.0); 
+  static topCenter = Alignment.new(0.0, -1.0); 
+  static topRight = Alignment.new(1.0, -1.0); 
+  static centerLeft = Alignment.new(-1.0, 0.0); 
+  static center = Alignment.new(0.0, 0.0); 
+  static centerRight = Alignment.new(1.0, 0.0);
+  static bottomLeft = Alignment.new(-1.0, 1.0);
+  static bottomCenter = Alignment.new(0.0, 1.0);
+  static bottomRight = Alignment.new(1.0, 1.0); 
+} 
   
-    /**
-     * @param config config: 
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          sourceTimeStamp?:Duration,
-        }
-     */
-    constructor(config?: DragStartDetailsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.globalPosition = config.globalPosition;
-        this.localPosition = config.localPosition;
-        this.sourceTimeStamp = config.sourceTimeStamp;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          sourceTimeStamp?:Duration,
-        }
-     */
-    static new (config?: DragStartDetailsConfig) {
-      return new DragStartDetails(config);
-    }
+///AlignmentDirectional
+export class AlignmentDirectional extends AlignmentGeometry {
+  constructor(start:number, y:number){
+    super();
+    this.start = start;
+    this.y = y;
   }
 
-  //****** DragUpdateDetails ******
-  interface DragUpdateDetailsConfig {
-    globalPosition?:Offset;
-    localPosition?:Offset;
-    sourceTimeStamp?:Duration;
-    delta?:Offset;
-    primaryDelta?:number;
-  }
-  export class DragUpdateDetails extends DartClass {
-    globalPosition?:Offset;
-    localPosition?:Offset;
-    sourceTimeStamp?:Duration;
-    delta?:Offset;
-    primaryDelta?:number;
-  
-    /**
-     * @param config config: 
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          sourceTimeStamp?:Duration,
-          delta?:Offset,
-          primaryDelta?:number,
-        }
-     */
-    constructor(config?: DragUpdateDetailsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.globalPosition = config.globalPosition;
-        this.localPosition = config.localPosition;
-        this.sourceTimeStamp = config.sourceTimeStamp;
-        this.delta = config.delta;
-        this.primaryDelta = config.primaryDelta;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          sourceTimeStamp?:Duration,
-          delta?:Offset,
-          primaryDelta?:number,
-        }
-     */
-    static new (config?: DragUpdateDetailsConfig) {
-      return new DragUpdateDetails(config);
-    }
+  static new(start:number, y:number){
+    return new AlignmentDirectional(start,y);
   }
 
-  //****** DragEndDetails ******
-  interface DragEndDetailsConfig {
-    velocity?:Velocity;
-    primaryVelocity?:number;
-  }
-  export class DragEndDetails extends DartClass {
-    velocity?:Velocity;
-    primaryVelocity?:number;
-  
-    /**
-     * @param config config: 
-        {
-          velocity?:Velocity, 
-          primaryVelocity?:number, 
-        }
-     */
-    constructor(config?: DragEndDetailsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.velocity = config.velocity;
-        this.primaryVelocity = config.primaryVelocity;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          velocity?:Velocity, 
-          primaryVelocity?:number, 
-        }
-     */
-    static new (config?: DragEndDetailsConfig) {
-      return new DragEndDetails(config);
-    }
+  static topStart = AlignmentDirectional.new(-1.0, -1.0); 
+  static topCenter = AlignmentDirectional.new(0.0, -1.0); 
+  static topEnd = AlignmentDirectional.new(1.0, -1.0); 
+
+  static centerStart = AlignmentDirectional.new(-1.0, 0.0); 
+  static center = AlignmentDirectional.new(0.0, 0.0); 
+  static centerEnd = AlignmentDirectional.new(1.0, 0.0);
+
+  static bottomStart = AlignmentDirectional.new(-1.0, 1.0);
+  static bottomCenter = AlignmentDirectional.new(0.0, 1.0);
+  static bottomEnd = AlignmentDirectional.new(1.0, 1.0); 
+}
+
+//#endregion
+
+//#region AssetBundle 
+//****** AssetBundle ******
+export class AssetBundle extends DartClass {
+
+}
+
+//****** PlatformAssetBundle ******
+export class PlatformAssetBundle extends AssetBundle {
+  constructor(){
+    super();
   }
 
+  static new() {
+    return new PlatformAssetBundle();
+  }
+}
 
-  //****** Duration ******
-  interface DurationConfig {
-    days?:number;
-    hours?:number;
-    minutes?:number;
-    seconds?:number;
-    milliseconds?:number;
-  }
-  export class Duration extends DartClass {
-    days?:number;
-    hours?:number;
-    minutes?:number;
-    seconds?:number;
-    milliseconds?:number;
-    inMilliseconds:number;
-  
-    /**
-     * @param config config: 
-        {
-          days?:number, 
-          hours?:number, 
-          minutes?:number, 
-          seconds?:number, 
-          milliseconds?:number
-        }
-     */
-    constructor(config?: DurationConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.days = config.days;
-        this.hours = config.hours;
-        this.minutes = config.minutes;
-        this.seconds = config.seconds;
-        this.milliseconds = config.milliseconds;
-      }
-
-      this.inMilliseconds=0;
-      if(this.milliseconds!=null && this.milliseconds!=undefined){
-        this.inMilliseconds=this.inMilliseconds+this.milliseconds;
-      }
-
-      if(this.seconds!=null && this.seconds!=undefined){
-        this.inMilliseconds=this.inMilliseconds+this.seconds*1000;
-      }
-      if(this.minutes!=null && this.minutes!=undefined){
-        this.inMilliseconds=this.inMilliseconds+this.minutes*1000*60;
-      }
-      if(this.hours!=null && this.hours!=undefined){
-        this.inMilliseconds=this.inMilliseconds+this.hours*1000*60*60;
-      }
-      if(this.days!=null && this.days!=undefined){
-        this.inMilliseconds=this.inMilliseconds+this.days*1000*60*60*24;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          days?:number, 
-          hours?:number, 
-          minutes?:number, 
-          seconds?:number, 
-          milliseconds?:number
-        }
-     */
-    static new(config?: DurationConfig) {
-      return new Duration(config);
-    }
-  }
-  //#endregion
-  
-  //#region ------- E -------
-  //****** EdgeInsets ******
-  interface EdgeInsetsConfig {
-    left?:number;
-    top?:number;
-    right?:number;
-    bottom?:number;
-    value?:number;
-    vertical?:number;
-    horizontal?:number;
-  }
-  export class EdgeInsets extends DartClass {
-    left?:number;
-    top?:number;
-    right?:number;
-    bottom?:number;
-    value?:number;
-    vertical?:number;
-    horizontal?:number;
-  
-    /**
-     * @param config config:
-        {
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number
-        }
-     */
-    constructor(config?: EdgeInsetsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.left = config.left;
-        this.top = config.top;
-        this.right = config.right;
-        this.bottom = config.bottom;
-      }
-    }
-  
-    /**
-     * @param config config:
-        {
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number
-        }
-     */
-    static new(config?: EdgeInsetsConfig) {
-      return new EdgeInsets(config);
-    }
-  
-    static zero() {
-      let v = new EdgeInsets();
-      v.constructorName = "zero";
-      return v;
-    }
-  
-    static fromLTRB(left:number, top:number, right:number, bottom:number) {
-      let v = new EdgeInsets();
-      v.constructorName = "fromLTRB";
-      v.left = left;
-      v.top = top;
-      v.right = right;
-      v.bottom = bottom;
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          left?:number, 
-          top?:number, 
-          right?:number, 
-          bottom?:number
-        }
-     */
-    static only(config?: EdgeInsetsConfig) {
-      let v = new EdgeInsets();
-      v.constructorName = "only";
-      if(config!=null && config!=undefined){
-        v.left = config.left;
-        v.top = config.top;
-        v.right = config.right;
-        v.bottom = config.bottom;
-      }
-      return v;
-    }
-  
-    static all(value:number){
-      let v = new EdgeInsets();
-      v.constructorName = "all";
-      v.value = value;
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          vertical?:number, 
-          horizontal?:number
-        }
-     */
-    static symmetric(config?: EdgeInsetsConfig) {
-      let v = new EdgeInsets();
-      v.constructorName = "symmetric";
-      if(config!=null && config!=undefined){
-        v.vertical = config.vertical;
-        v.horizontal = config.horizontal;
-      }
-      return v;
-    }
-  }
-  
-  //****** EdgeInsetsDirectional ******
-  interface EdgeInsetsDirectionalConfig {
-    start?:number;
-    top?:number;
-    end?:number;
-    bottom?:number;
-  }
-  export class EdgeInsetsDirectional extends DartClass {
-    start?:number;
-    top?:number;
-    end?:number;
-    bottom?:number;
-  
-    /**
-     * @param config config: 
-        {
-          start?:number, 
-          top?:number, 
-          end?:number, 
-          bottom?:number,
-        }
-     */
-    constructor(config?: EdgeInsetsDirectionalConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.start = config.start;
-        this.top = config.top;
-        this.end = config.end;
-        this.bottom = config.bottom;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          start?:number, 
-          top?:number, 
-          end?:number, 
-          bottom?:number,
-        }
-     */
-    static new(config?: EdgeInsetsDirectionalConfig) {
-      return new EdgeInsetsDirectional(config);
-    }
-  
-    static fromSTEB(start:number, top:number, end:number, bottom:number) {
-      let v = new EdgeInsetsDirectional();
-      v.constructorName = "fromSTEB";
-    
-      v.start = start;
-      v.top = top;
-      v.end = end;
-      v.bottom = bottom;
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          start?:number, 
-          top?:number, 
-          end?:number, 
-          bottom?:number
-        }
-     */
-    static only(config?: EdgeInsetsDirectionalConfig) {
-      let v = new EdgeInsetsDirectional();
-      v.constructorName = "only";
-      if(config!=null && config!=undefined){
-        v.start = config.start;
-        v.top = config.top;
-        v.end = config.end;
-        v.bottom = config.bottom;
-      }
-      return v;
-    }
-  }
-  
-  //#endregion
-  
-  //#region ------- F -------
-
-  export class Future extends DartClass{
-    static delayed(duration:Duration,onBack?:VoidCallback){
-      dart_sdk.async.Future.delayed(duration,onBack);
-    }
+//****** NetworkAssetBundle ******
+export class NetworkAssetBundle extends AssetBundle {
+  baseUrl?:Uri;
+  constructor(baseUrl:Uri){
+    super();
+    this.baseUrl = baseUrl;
   }
 
-  //****** FlexColumnWidth ******
-  export class FlexColumnWidth extends DartClass {
-    value?:number;
-  
-    constructor(value:number){
-      super();
-      this.value = value;
-    }
-  
-    static new(value:number) {
-      return new FlexColumnWidth(value);
-    }
+  static new(baseUrl:Uri) {
+    return new NetworkAssetBundle(baseUrl);
   }
-  
-  //****** FlutterLogoDecoration ******
-  interface FlutterLogoDecorationConfig {
-    textColor?:Color;
-    style?:FlutterLogoStyle;
-    margin?:EdgeInsets;
-  }
-  export class FlutterLogoDecoration extends DartClass {
-    textColor?:Color;
-    style?:FlutterLogoStyle;
-    margin?:EdgeInsets;
-  
-    /**
-     * @param config config: 
-        {
-          textColor?:Color, 
-          style?:FlutterLogoStyle, 
-          margin?:EdgeInsets, 
-        }
-     */
-    constructor(config?: FlutterLogoDecorationConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.textColor = config.textColor;
-        this.style = config.style;
-        this.margin = config.margin;
-      }
-  
-    }
-  
-    /**
-     * @param config config: 
-        {
-          textColor?:Color, 
-          style?:FlutterLogoStyle, 
-          margin?:EdgeInsets, 
-        }
-     */
-    static new(config?: FlutterLogoDecorationConfig) {
-      return new FlutterLogoDecoration(config);
-    }
-  } 
+}
 
-   //****** FocusNode ******
-  interface FocusNodeConfig {
-    debugLabel?:string;
-    skipTraversal?:boolean;
-    canRequestFocus?:boolean;
-    descendantsAreFocusable?:boolean;
-  }
-  export class FocusNode extends DartClass {
-    debugLabel?:string;
-    skipTraversal?:boolean;
-    canRequestFocus?:boolean;
-    descendantsAreFocusable?:boolean;
-  
-    /**
-     * @param config config: 
-        {
-          debugLabel?:string,
-          skipTraversal?:boolean,
-          canRequestFocus?:boolean,
-          descendantsAreFocusable?:boolean,
-        }
-     */
-    constructor(config?: FocusNodeConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.debugLabel = config.debugLabel;
-        this.skipTraversal = config.skipTraversal;
-        this.canRequestFocus = config.canRequestFocus;
-        this.descendantsAreFocusable = config.descendantsAreFocusable;
-      }
-  
-    }
-  
-    /**
-     * @param config config: 
-        {
-          textColor?:Color, 
-          style?:FlutterLogoStyle, 
-          margin?:EdgeInsets, 
-        }
-     */
-    static new(config?: FocusNodeConfig) {
-      return new FocusNode(config);
-    }
-  } 
+//#endregion
 
-  
-  //****** FractionalOffset ******
-  export class FractionalOffset extends DartClass {
-    dx?:number;
-    dy?:number;
-  
-    constructor(dx:number, dy:number){
-      super();
-      this.dx = dx;
-      this.dy = dy;
-    }
-  
-    static new(dx:number, dy:number) {
-      return new FractionalOffset(dx,dy);
-    }
-  
-    static topLeft = FractionalOffset.new(0.0, 0.0); 
-    static topCenter = FractionalOffset.new(0.5, 0.0); 
-    static topRight = FractionalOffset.new(1.0, 0.0); 
-  
-    static centerLeft = FractionalOffset.new(0.0, 0.5); 
-    static center = FractionalOffset.new(0.5, 0.5); 
-    static centerRight = FractionalOffset.new(1.0, 0.5);
-  
-    static bottomLeft = FractionalOffset.new(0.0, 1.0);
-    static bottomCenter = FractionalOffset.new(0.5, 1.0);
-    static bottomRight = FractionalOffset.new(1.0, 1.0); 
-  
-  }
-  
-  //****** FixedColumnWidth ******
-  export class FixedColumnWidth extends DartClass {
-    value?:number;
-  
-    constructor(value:number){
-      super();
-      this.value = value;
-    }
-  
-  
-    static new(value:number) {
-      return new FixedColumnWidth(value);
-    }
-  }
-  
-  //****** File ******
-  export class File extends DartClass {
-    path?:string;
-    uri?:Uri;
-    rawPath?:Uint8List;
-  
-    constructor(path?:string){
-      super();
-      this.path = path;
-    }
-  
-    static new(path:string) {
-      return new File(path);
-    }
-  
-    static fromUri(uri:Uri) {
-      let v = new File();
-      v.constructorName = "fromUri";
-      v.uri = uri;
-      return v;
-    }
-  
-    static fromRawPath(rawPath:Uint8List) {
-      let v = new File();
-      v.constructorName = "fromRawPath";
-      v.rawPath = rawPath;
-      return v;
-    }
-  }
-  
-  
-  
-  //#endregion
-  
-  //#region ------- G -------
-  //****** GradientTransform ******
-  export class GradientTransform extends DartClass {
-    radians?:number;
-  
-    static rotation(radians?:number) {
-      var v = new GradientTransform();
-      v.constructorName = "rotation";
-      v.radians=radians;
-      return v;
-    }
-  }
-  
-  //****** Gradient ******
-  interface GradientConfig {
-    center?:Alignment;
-    startAngle?:number;
-    endAngle?:number;
-    colors:Array<Color>;
-    stops?:Array<number>;
-    tileMode?:TileMode;
-    transform?:GradientTransform;
-  
-  
-    radius?:number;
-    focal?:Alignment;
-    focalRadius?:number;
-  
-    begin?:Alignment;
-    end?:Alignment;
-  }
-  export class Gradient extends DartClass {
-    center?:Alignment;
-    startAngle?:number;
-    endAngle?:number;
-    colors?:Array<Color>;
-    stops?:Array<number>;
-    tileMode?:TileMode;
-    transform?:GradientTransform;
-  
-    //Radial
-    radius?:number;
-    focal?:Alignment;
-    focalRadius?:number;
-  
-    //
-    begin?:Alignment;
-    end?:Alignment;
-  
-  
-    /**
-     * @param config config: 
-        {
-          center?:Alignment, 
-          startAngle?:number, 
-          endAngle?:number, 
-          colors:Array<Color>, 
-          stops?:Array<number>, 
-          tileMode?:TileMode,
-          transform?:GradientRotation,
-        }
-     */
-    static sweep(config: GradientConfig) {
-      var v = new Gradient();
-      v.constructorName = "sweep";
-      if(config!=null && config!=undefined){
-        v.center = config.center;
-        v.startAngle = config.startAngle;
-        v.endAngle = config.endAngle;
-        v.colors = config.colors;
-        v.stops = config.stops;
-        v.tileMode = config.tileMode;
-        v.transform = config.transform;
-      }
-      return v;
-    }
-  
-     /**
-     * @param config config: 
-        {
-          center?:Alignment, 
-          radius?:number, 
-          colors:Array<Color>, 
-          stops?:Array<number>, 
-          tileMode?:TileMode, 
-          focal?:Alignment, 
-          focalRadius?:number,
-          transform?:GradientRotation,
-        }
-     */
-    static radial(config?: GradientConfig) {
-      var v = new Gradient();
-      v.constructorName = "radial";
-      if(config!=null && config!=undefined){
-        v.center = config.center;
-        v.radius = config.radius;
-        v.colors = config.colors;
-        v.stops = config.stops;
-        v.tileMode = config.tileMode;
-        v.focal = config.focal;
-        v.focalRadius = config.focalRadius;
-        v.transform = config.transform;
-      }
-      return v;
-    }
-  
-     /**
-     * @param config config: 
-        {
-          begin?:Alignment, 
-          end?:Alignment, 
-          colors:Array<Color>, 
-          stops?:Array<number>, 
-          tileMode?:TileMode,
-          transform?:GradientRotation,
-        }
-     */
-    static linear(config: GradientConfig) {
-      var v = new Gradient();
-      v.constructorName = "linear";
-      if(config!=null && config!=undefined){
-        v.begin = config.begin;
-        v.end = config.end;
-        v.colors = config.colors;
-        v.stops = config.stops;
-        v.tileMode = config.tileMode;
-        v.transform = config.transform;
-      }
-      return v;
-    }
-  }
-  
-  //#endregion
-  
-  //#region ------- I -------
-  
-  //****** InputBorder ******
-  interface InputBorderConfig {
-    borderSide?:BorderSide;
-    borderRadius?:BorderRadius;
-    gapPadding?:number;
-  }
-  
-  export class InputBorder extends ShapeBorder {
-  
-    borderSide?:BorderSide;
-    borderRadius?:BorderRadius;
-    gapPadding?:number;
-  
-    static none() {
-      var v = new InputBorder();
-      v.constructorName= "none";
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          borderSide?:BorderSide, 
-          borderRadius?:BorderRadius, 
-          gapPadding?:number,
-        }
-     */
-    static outline(config?: InputBorderConfig) {
-      var v = new InputBorder();
-      v.constructorName= "outline";
-      if(config!=null && config!=undefined){
-        v.borderRadius = config.borderRadius;
-        v.borderSide = config.borderSide;
-        v.gapPadding = config.gapPadding;
-      }
-      return v;
-    }
-    
-    /**
-     * @param config config: 
-        {
-          borderSide?:BorderSide, 
-          borderRadius?:BorderRadius,
-        }
-     */
-    static underline(config?: InputBorderConfig) {
-      var v = new InputBorder();
-      v.constructorName= "underline";
-      if(config!=null && config!=undefined){
-        v.borderRadius=config.borderRadius;
-        v.borderSide=config.borderSide;
-      }
-      return v;
-    };
-  
-  }
-  
-  //****** ImageProvider ******
-  interface ImageProviderConfig {
-    scale?:number;
-  
-    width?:number;
-    height?:number;
-    allowUpscaling?:boolean;
-  
-    bundle?:AssetBundle;
-    packageName?:string
-  
-  }
-  export class ImageProvider extends DartClass {
-    file?:File;
-    scale?:number;
-    bytes?:Uint8List;
-    url?:string;
-    imageName?:string;
-    bundle?:AssetBundle;
-    packageName?:string;
-  
-    width?:number;
-    height?:number;
-    allowUpscaling?:boolean;
-    imageProvider?:ImageProvider
-  
-    /**
-     * @param config config: 
-        {
-          scale?:number
-        }
-     */
-    static file(file:File,config?: ImageProviderConfig){
-      var v = new ImageProvider();
-      v.file = file;
-      v.constructorName = "file";
-      if(config!=null && config!=undefined){
-        v.scale = config.scale;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          scale?:number,
-        }
-     */
-    static memory(bytes:Uint8List,config?: ImageProviderConfig) {
-      var v = new ImageProvider();
-      v.bytes = bytes;
-      v.constructorName = "memory";
-      if(config!=null && config!=undefined){
-        v.scale = config.scale;
-      }
-      return v;
-    }
-  
-     /**
-     * @param config config: 
-        {
-          scale?:number,
-        }
-     */
-    static network(url:string, config: ImageProviderConfig) {
-      var v = new ImageProvider();
-      v.url = url;
-      v.constructorName = "Network";
-      if(config!=null && config!=undefined){
-        v.scale = config.scale;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          width?:number, 
-          height?:number, 
-          allowUpscaling?:boolean, 
-        }
-     */
-    static resize(imageProvider?:ImageProvider,config?: ImageProviderConfig) {
-      var v = new ImageProvider();
-      v.constructorName = "resize";
-      v.imageProvider= imageProvider;
-      if(config!=null && config!=undefined){
-        v.width = config.width;
-        v.allowUpscaling= config.allowUpscaling;
-        v.height = config.height;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          imageName:string, 
-          scale?:number, 
-          bundle?:BaseAssetBundle, 
-          packageName?:string,
-        }
-     */
-    static exactAsset(imageName:string,config?: ImageProviderConfig) {
-      var v = new ImageProvider();
-      v.constructorName = "exactAsset";
-      v.imageName = imageName;
-      if(config!=null && config!=undefined){      
-        v.scale = config.scale;
-        v.bundle = config.bundle;
-        v.packageName = config.packageName;
-      }
-      return v;
-    }
-  }
-  
-  //****** IconData ******
-  export class IconData extends DartClass {
-    icon:string;
-  
-    constructor(icon:string){
-      super();
-      this.icon = icon;
-    }
-    static new(icon:string) {
-     return new IconData(icon);
-    }
-  }
-  
-  //****** IconThemeData ******
-  interface IconThemeDataConfig {
-    color?:Color;
-    opacity?:number;
-    size?:number;
-  }
-  export class IconThemeData extends DartClass {
-    color?:Color;
-    opacity?:number;
-    size?:number;
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          opacity?:number, 
-          size?:number
-        }
-     */
-    constructor(config?: IconThemeDataConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.color = config.color;
-        this.opacity = config.opacity;
-        this.size = config.size;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          opacity?:number, 
-          size?:number
-        }
-     */
-    static new(config?: IconThemeDataConfig) {
-      return new IconThemeData(config);
-    }
-  }
-  
-  //****** ImageShader ******
-  export class ImageShader extends DartClass {
-    image?:ImageProvider;
-    tmx?:TileMode;
-    tmy?:TileMode;
-    matrix4?:Matrix4;
-  
-    constructor(image:ImageProvider,tmx:TileMode,tmy:TileMode,matrix4:Matrix4){
-      super();
-      this.image = image;
-      this.tmx = tmx;
-      this.tmy = tmy;
-      this.matrix4 = matrix4;
-  
-    }
-  
-    static new(image:ImageProvider,tmx:TileMode,tmy:TileMode,matrix4:Matrix4) {
-      return new ImageShader(image,tmx,tmy,matrix4);
-    }
-  }
-  
-  //****** InputDecorationTheme ******
-  interface InputDecorationThemeConfig {
-    labelStyle?:TextStyle;
-    helperStyle?:TextStyle;
-    helperMaxLines?:number;
-    hintStyle?:TextStyle;
-    errorStyle?:TextStyle;
-    errorMaxLines?:number;
-    hasFloatingPlaceholder?:boolean;
-    floatingLabelBehavior?:FloatingLabelBehavior;
-    isDense?:boolean;
-    contentPadding?:EdgeInsets;
-    isCollapsed?:boolean;
-    prefixStyle?:TextStyle;
-    suffixStyle?:TextStyle;
-    counterStyle?:TextStyle;
-    filled?:boolean;
-    fillColor?:Color;
-    focusColor?:Color;
-    hoverColor?:Color;
-    errorBorder?:InputBorder;
-    focusedBorder?:InputBorder;
-    focusedErrorBorder?:InputBorder;
-    disabledBorder?:InputBorder;
-    enabledBorder?:InputBorder;
-    border?:InputBorder;
-    alignLabelWithHint?:boolean;
-  }
-  export class InputDecorationTheme extends DartClass {
-    labelStyle?:TextStyle;
-    helperStyle?:TextStyle;
-    helperMaxLines?:number;
-    hintStyle?:TextStyle;
-    errorStyle?:TextStyle;
-    errorMaxLines?:number;
-    hasFloatingPlaceholder?:boolean;
-    floatingLabelBehavior?:FloatingLabelBehavior;
-    isDense?:boolean;
-    contentPadding?:EdgeInsets;
-    isCollapsed?:boolean;
-    prefixStyle?:TextStyle;
-    suffixStyle?:TextStyle;
-    counterStyle?:TextStyle;
-    filled?:boolean;
-    fillColor?:Color;
-    focusColor?:Color;
-    hoverColor?:Color;
-    errorBorder?:InputBorder;
-    focusedBorder?:InputBorder;
-    focusedErrorBorder?:InputBorder;
-    disabledBorder?:InputBorder;
-    enabledBorder?:InputBorder;
-    border?:InputBorder;
-    alignLabelWithHint?:boolean;
-  
-    /**
-     * @param config config: 
-        {
-          labelStyle?:TextStyle, 
-          helperStyle?:TextStyle, 
-          helperMaxLines?:number, 
-          hintStyle?:TextStyle, 
-          errorStyle?:TextStyle, 
-          errorMaxLines?:number, 
-          hasFloatingPlaceholder?:boolean, 
-          floatingLabelBehavior?:FloatingLabelBehavior, 
-          isDense?:boolean, 
-          contentPadding?:EdgeInsets, 
-          isCollapsed?:boolean, 
-          prefixStyle?:TextStyle, 
-          suffixStyle?:TextStyle, 
-          counterStyle?:TextStyle, 
-          filled?:boolean, 
-          fillColor?:Color, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          errorBorder?:InputBorder, 
-          focusedBorder?:InputBorder, 
-          focusedErrorBorder?:InputBorder, 
-          disabledBorder?:InputBorder, 
-          enabledBorder?:InputBorder, 
-          border?:InputBorder, 
-          alignLabelWithHint?:boolean, 
-        }
-     */
-    constructor(config?: InputDecorationThemeConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.labelStyle = config.labelStyle;
-        this.helperStyle = config.helperStyle;
-        this.helperMaxLines = config.helperMaxLines;
-        this.hintStyle = config.hintStyle;
-        this.errorStyle = config.errorStyle;
-        this.errorMaxLines = config.errorMaxLines;
-        this.hasFloatingPlaceholder = config.hasFloatingPlaceholder;
-        this.floatingLabelBehavior = config.floatingLabelBehavior;
-        this.isDense = config.isDense;
-        this.contentPadding = config.contentPadding;
-        this.isCollapsed = config.isCollapsed;
-        this.prefixStyle = config.prefixStyle;
-        this.suffixStyle = config.suffixStyle;
-        this.counterStyle = config.counterStyle;
-        this.filled = config.filled;
-        this.fillColor = config.fillColor;
-        this.focusColor = config.focusColor;
-        this.hoverColor = config.hoverColor;
-        this.errorBorder = config.errorBorder;
-        this.focusedBorder = config.focusedBorder;
-        this.focusedErrorBorder = config.focusedErrorBorder;
-        this.disabledBorder = config.disabledBorder;
-        this.enabledBorder = config.enabledBorder;
-        this.border = config.border;
-        this.alignLabelWithHint = config.alignLabelWithHint;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          labelStyle?:TextStyle, 
-          helperStyle?:TextStyle, 
-          helperMaxLines?:number, 
-          hintStyle?:TextStyle, 
-          errorStyle?:TextStyle, 
-          errorMaxLines?:number, 
-          hasFloatingPlaceholder?:boolean, 
-          floatingLabelBehavior?:FloatingLabelBehavior, 
-          isDense?:boolean, 
-          contentPadding?:EdgeInsets, 
-          isCollapsed?:boolean, 
-          prefixStyle?:TextStyle, 
-          suffixStyle?:TextStyle, 
-          counterStyle?:TextStyle, 
-          filled?:boolean, 
-          fillColor?:Color, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          errorBorder?:InputBorder, 
-          focusedBorder?:InputBorder, 
-          focusedErrorBorder?:InputBorder, 
-          disabledBorder?:InputBorder, 
-          enabledBorder?:InputBorder, 
-          border?:InputBorder, 
-          alignLabelWithHint?:boolean, 
-        }
-     */
-    static new (config?: InputDecorationThemeConfig) {
-  
-      return new InputDecorationTheme(config);
-    }
-  }
-  
-  //****** InputDecoration ******
-  interface InputDecorationConfig {
-    icon?:Widget;
-    labelText?:string;
-    labelStyle?:TextStyle;
-    helperText?:string;
-    helperStyle?:TextStyle;
-    helperMaxLines?:number;
-    hintText?:string;
-    hintStyle?:TextStyle;
-    hintMaxLines?:number;
-    errorText?:string;
-    errorStyle?:TextStyle;
-    errorMaxLines?:number;
-    hasFloatingPlaceholder?:boolean;
-    floatingLabelBehavior?:FloatingLabelBehavior;
-    isCollapsed?:boolean;
-    isDense?:boolean;
-    contentPadding?:EdgeInsets;
-    prefixIcon?:Widget;
-    prefixIconConstraints?:BoxConstraints;
-    prefix?:Widget;
-    prefixText?:string;
-    prefixStyle?:TextStyle;
-    suffixIcon?:Widget;
-    suffix?:Widget;
-    suffixText?:string;
-    suffixStyle?:TextStyle;
-    suffixIconConstraints?:BoxConstraints;
-    counter?:Widget;
-    counterText?:string;
-    counterStyle?:TextStyle;
-    filled?:boolean;
-    fillColor?:Color;
-    focusColor?:Color;
-    hoverColor?:Color;
-    errorBorder?:InputBorder;
-    focusedBorder?:InputBorder;
-    focusedErrorBorder?:InputBorder;
-    disabledBorder?:InputBorder;
-    enabledBorder?:InputBorder;
-    border?:InputBorder;
-    enabled?:boolean;
-    semanticCounterText?:string;
-    alignLabelWithHint?:boolean;
-  }
-  export class InputDecoration extends DartClass {
-    icon?:Widget;
-    labelText?:string;
-    labelStyle?:TextStyle;
-    helperText?:string;
-    helperStyle?:TextStyle;
-    helperMaxLines?:number;
-    hintText?:string;
-    hintStyle?:TextStyle;
-    hintMaxLines?:number;
-    errorText?:string;
-    errorStyle?:TextStyle;
-    errorMaxLines?:number;
-    hasFloatingPlaceholder?:boolean;
-    floatingLabelBehavior?:FloatingLabelBehavior;
-    isCollapsed?:boolean;
-    isDense?:boolean;
-    contentPadding?:EdgeInsets;
-    prefixIcon?:Widget;
-    prefixIconConstraints?:BoxConstraints;
-    prefix?:Widget;
-    prefixText?:string;
-    prefixStyle?:TextStyle;
-    suffixIcon?:Widget;
-    suffix?:Widget;
-    suffixText?:string;
-    suffixStyle?:TextStyle;
-    suffixIconConstraints?:BoxConstraints;
-    counter?:Widget;
-    counterText?:string;
-    counterStyle?:TextStyle;
-    filled?:boolean;
-    fillColor?:Color;
-    focusColor?:Color;
-    hoverColor?:Color;
-    errorBorder?:InputBorder;
-    focusedBorder?:InputBorder;
-    focusedErrorBorder?:InputBorder;
-    disabledBorder?:InputBorder;
-    enabledBorder?:InputBorder;
-    border?:InputBorder;
-    enabled?:boolean;
-    semanticCounterText?:string;
-    alignLabelWithHint?:boolean;
-  
-    /**
-     * @param config config: 
-        {
-          icon?:Widget, 
-          labelText?:string, 
-          labelStyle?:TextStyle, 
-          helperText?:string, 
-          helperStyle?:TextStyle, 
-          helperMaxLines?:number, 
-          hintText?:string, 
-          hintStyle?:TextStyle, 
-          hintMaxLines?:number, 
-          errorText?:string, 
-          errorStyle?:TextStyle, 
-          errorMaxLines?:number, 
-          hasFloatingPlaceholder?:boolean, 
-          floatingLabelBehavior?:FloatingLabelBehavior, 
-          isCollapsed?:boolean, 
-          isDense?:boolean, 
-          contentPadding?:EdgeInsets, 
-          prefixIcon?:Widget, 
-          prefixIconConstraints?:BoxConstraints, 
-          prefix?:Widget, 
-          prefixText?:string, 
-          prefixStyle?:TextStyle, 
-          suffixIcon?:Widget, 
-          suffix?:Widget, 
-          suffixText?:string, 
-          suffixStyle?:TextStyle, 
-          suffixIconConstraints?:BoxConstraints, 
-          counter?:Widget, 
-          counterText?:string, 
-          counterStyle?:TextStyle, 
-          filled?:boolean, 
-          fillColor?:Color, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          errorBorder?:InputBorder, 
-          focusedBorder?:InputBorder, 
-          focusedErrorBorder?:InputBorder, 
-          disabledBorder?:InputBorder, 
-          enabledBorder?:InputBorder, 
-          border?:InputBorder, 
-          enabled?:boolean, 
-          semanticCounterText?:string, 
-          alignLabelWithHint?:boolean, 
-        }
-     */
-    constructor(config?: InputDecorationConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.icon = config.icon;
-        this.labelText = config.labelText;
-        this.labelStyle = config.labelStyle;
-        this.helperText = config.helperText;
-        this.helperStyle = config.helperStyle;
-        this.helperMaxLines = config.helperMaxLines;
-        this.hintText = config.hintText;
-        this.hintStyle = config.hintStyle;
-        this.hintMaxLines = config.hintMaxLines;
-        this.errorText = config.errorText;
-        this.errorStyle = config.errorStyle;
-        this.errorMaxLines = config.errorMaxLines;
-        this.hasFloatingPlaceholder = config.hasFloatingPlaceholder;
-        this.floatingLabelBehavior = config.floatingLabelBehavior;
-        this.isCollapsed = config.isCollapsed;
-        this.isDense = config.isDense;
-        this.contentPadding = config.contentPadding;
-        this.prefixIcon = config.prefixIcon;
-        this.prefixIconConstraints = config.prefixIconConstraints;
-        this.prefix = config.prefix;
-        this.prefixText = config.prefixText;
-        this.prefixStyle = config.prefixStyle;
-        this.suffixIcon = config.suffixIcon;
-        this.suffix = config.suffix;
-        this.suffixText = config.suffixText;
-        this.suffixStyle = config.suffixStyle;
-        this.suffixIconConstraints = config.suffixIconConstraints;
-        this.counter = config.counter;
-        this.counterText = config.counterText;
-        this.counterStyle = config.counterStyle;
-        this.filled = config.filled;
-        this.fillColor = config.fillColor;
-        this.focusColor = config.focusColor;
-        this.hoverColor = config.hoverColor;
-        this.errorBorder = config.errorBorder;
-        this.focusedBorder = config.focusedBorder;
-        this.focusedErrorBorder = config.focusedErrorBorder;
-        this.disabledBorder = config.disabledBorder;
-        this.enabledBorder = config.enabledBorder;
-        this.border = config.border;
-        this.enabled = config.enabled;
-        this.semanticCounterText = config.semanticCounterText;
-        this.alignLabelWithHint = config.alignLabelWithHint;
-      }
-    }
-  
-  
-    /**
-     * @param config config: 
-        {
-          icon?:Widget, 
-          labelText?:string, 
-          labelStyle?:TextStyle, 
-          helperText?:string, 
-          helperStyle?:TextStyle, 
-          helperMaxLines?:number, 
-          hintText?:string, 
-          hintStyle?:TextStyle, 
-          hintMaxLines?:number, 
-          errorText?:string, 
-          errorStyle?:TextStyle, 
-          errorMaxLines?:number, 
-          hasFloatingPlaceholder?:boolean, 
-          floatingLabelBehavior?:FloatingLabelBehavior, 
-          isCollapsed?:boolean, 
-          isDense?:boolean, 
-          contentPadding?:EdgeInsets, 
-          prefixIcon?:Widget, 
-          prefixIconConstraints?:BoxConstraints, 
-          prefix?:Widget, 
-          prefixText?:string, 
-          prefixStyle?:TextStyle, 
-          suffixIcon?:Widget, 
-          suffix?:Widget, 
-          suffixText?:string, 
-          suffixStyle?:TextStyle, 
-          suffixIconConstraints?:BoxConstraints, 
-          counter?:Widget, 
-          counterText?:string, 
-          counterStyle?:TextStyle, 
-          filled?:boolean, 
-          fillColor?:Color, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          errorBorder?:InputBorder, 
-          focusedBorder?:InputBorder, 
-          focusedErrorBorder?:InputBorder, 
-          disabledBorder?:InputBorder, 
-          enabledBorder?:InputBorder, 
-          border?:InputBorder, 
-          enabled?:boolean, 
-          semanticCounterText?:string, 
-          alignLabelWithHint?:boolean, 
-        }
-     */
-      static new(config?: InputDecorationConfig) {
-        return new InputDecoration(config);
-    } 
-  
-    
-  
-    /**
-     * @param config config: 
-        {
-          hintText?:string, 
-          hasFloatingPlaceholder?:boolean, 
-          hintStyle?:TextStyle, 
-          filled?:boolean, 
-          fillColor?:Color, 
-          border?:InputBorder, 
-          enabled?:boolean 
-        }
-     */
-    static collapsed (config?: InputDecorationConfig) {
-      let v = new InputDecoration();
-      v.constructorName = "collapsed";
-  
-      if(config!=null && config!=undefined){
-        v.hintText = config.hintText;
-        v.hasFloatingPlaceholder = config.hasFloatingPlaceholder;
-        v.hintStyle = config.hintStyle;
-        v.filled = config.filled;
-        v.fillColor = config.fillColor;
-        v.border = config.border;
-        v.enabled = config.enabled;
-      }
-  
-      return v;
-    }
-  }
-  //#endregion
-  
-  //#region ------- K -------
-    //****** Key ******
-    export class Key extends DartClass {
-        value?:string;
-        debugLabel?:string;
-    
-        static value(value:string) {
-        var v = new Key();
-        v.constructorName = "value";
-        v.value = value;
-        return v;
-        }
-    
-        static unique() {
-        var v = new Key();
-        v.constructorName = "unique";
-        return v;
-        }
-    
-        static global(debugLabel:string) {
-        var v = new Key();
-        v.constructorName = "global";
-        v.debugLabel = debugLabel;
-        return v;
-        }
-    }
-  //#endregion
-  
-  //#region ------- L -------
-  
-  
-  
-  //#endregion
-  
-  //#region ------- M -------
-  //****** MaskFilter ******
-  export class MaskFilter extends DartClass {
-    style?:BlurStyle;
-    sigma?:number;
-  
-    constructor(style:BlurStyle, sigma:number){
-      super();
-      this.style = style;
-      this.sigma = sigma;
-    }
-  
-    static new(style:BlurStyle, sigma:number) {
-      return new MaskFilter(style,sigma);
-  
-    }
-    static blur(style:BlurStyle, sigma:number) {
-      let v = new MaskFilter(style,sigma);
-      v.constructorName = "blur";
-      return v;
-    }
-  }
-  
-  //****** Matrix4 ******
-  export class Matrix4 extends DartClass {
-    arg0?:number;
-    arg1?:number;
-    arg2?:number;
-    arg3?:number;
-    arg4?:number;
-    arg5?:number;
-    arg6?:number;
-    arg7?:number;
-    arg8?:number;
-    arg9?:number;
-    arg10?:number;
-    arg11?:number;
-    arg12?:number;
-    arg13?:number;
-    arg14?:number;
-    arg15?:number;
-    values?:Array<number>;
-  
-    v4_0?:Vector4;
-    v4_1?:Vector4;
-    v4_2?:Vector4;
-    v4_3?:Vector4;
-  
-    v4_u?:Vector4;
-    v4_v?:Vector4;
-  
-    radians?:number;
-    v3_t?:Vector3;
-    v3_s?:Vector3;
-    x?:number; 
-    y?:number; 
-    z?:number;
-    alpha?:number;
-    beta?:number;
-    rotation?:Quaternion;
-  
-  
-    scale(x?:any, y?:number, z?:number) {
-      let sx = null;
-      let sy = null;
-      let sz = null;
-      let sw = x instanceof Vector4 ? x.w : 1.0;
-      if (x instanceof Vector3) {
-        sx = x.x;
-        sy = x.y;
-        sz = x.z;
-      } else if (x instanceof Vector4) {
-        sx = x.x;
-        sy = x.y;
-        sz = x.z;
-      } else if (typeof x == "number") {
-        sx = x;
-        sy = y == null ? x : y;
-        sz = z == null ? x : z;
-      }
-  
-      if(this.arg0!=null && this.arg0!=undefined && sx!=null && sx!=undefined){
-        this.arg0 = this.arg0 *sx;
-      }
-  
-      if(this.arg1!=null && this.arg1!=undefined && sx!=null && sx!=undefined){
-        this.arg1 = this.arg1 *sx;
-      }
-      if(this.arg2!=null && this.arg2!=undefined && sx!=null && sx!=undefined){
-        this.arg2 = this.arg2 *sx;
-      }
-      if(this.arg3!=null && this.arg3!=undefined && sx!=null && sx!=undefined){
-        this.arg3 = this.arg3 *sx;
-      }
-      
-      if(this.arg4!=null && this.arg4!=undefined && sy!=null && sy!=undefined){
-        this.arg4 = this.arg4 *sy;
-      }
-      if(this.arg5!=null && this.arg5!=undefined && sy!=null && sy!=undefined){
-        this.arg5 = this.arg5 *sy;
-      }
-      if(this.arg6!=null && this.arg6!=undefined && sy!=null && sy!=undefined){
-        this.arg6 = this.arg6 *sy;
-      }
-      if(this.arg7!=null && this.arg7!=undefined && sy!=null && sy!=undefined){
-        this.arg7 = this.arg7 *sy;
-      }
-  
-  
-      if(this.arg8!=null && this.arg8!=undefined && sz!=null && sz!=undefined){
-        this.arg8 = this.arg8 *sz;
-      }
-      if(this.arg9!=null && this.arg9!=undefined && sz!=null && sz!=undefined){
-        this.arg9 = this.arg9 *sz;
-      }
-      if(this.arg10!=null && this.arg10!=undefined && sz!=null && sz!=undefined){
-        this.arg10 = this.arg10 *sz;
-      }
-      if(this.arg11!=null && this.arg11!=undefined && sz!=null && sz!=undefined){
-        this.arg11 = this.arg11 *sz;
-      }
-  
-      if(this.arg12!=null && this.arg12!=undefined && sw!=null && sw!=undefined){
-        this.arg12 = this.arg12 *sw;
-      }
-      if(this.arg13!=null && this.arg13!=undefined && sw!=null && sw!=undefined){
-        this.arg13 = this.arg13 *sw;
-      }
-      if(this.arg14!=null && this.arg14!=undefined && sw!=null && sw!=undefined){
-        this.arg14 = this.arg14 *sw;
-      }
-      if(this.arg15!=null && this.arg15!=undefined && sw!=null && sw!=undefined){
-        this.arg15 = this.arg15 *sw;
-      }
-    }
-  
-    constructor(arg0?:number,arg1?:number,arg2?:number,arg3?:number,arg4?:number,arg5?:number,arg6?:number,arg7?:number,
-      arg8?:number,arg9?:number,arg10?:number,arg11?:number,arg12?:number,arg13?:number,arg14?:number,arg15?:number){
-      super();
-      this.arg0 = arg0;
-        this.arg1 = arg1;
-        this.arg2 = arg2;
-        this.arg3 = arg3;
-        this.arg4 = arg4;
-        this.arg5 = arg5;
-        this.arg6 = arg6;
-        this.arg7 = arg7;
-        this.arg8 = arg8;
-        this.arg9 = arg9;
-        this.arg10 = arg10;
-        this.arg11 = arg11;
-        this.arg12 = arg12;
-        this.arg13 = arg13;
-        this.arg14 = arg14;
-        this.arg15 = arg15;
-    }
-  
-    static new(arg0:number,arg1:number,arg2:number,arg3:number,arg4:number,arg5:number,arg6:number,arg7:number,
-      arg8:number,arg9:number,arg10:number,arg11:number,arg12:number,arg13:number,arg14:number,arg15:number) {
-        return new Matrix4(arg0,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14,arg15);
-    }
-  
-    static identity() {
-      return Matrix4.new(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
-    }
-  
-    static fromList(values:Array<number>) {
-      let v = new Matrix4();
-      v.constructorName = "fromList";
-      v.values = values;
-      return v;
-    }
-  
-    static zero() {
-      let v = new Matrix4();
-      v.constructorName = "zero";
-      return v;
-    }
-  
-    static columns(v4_0:Vector4,v4_1:Vector4,v4_2:Vector4,v4_3:Vector4) {
-      let v = new Matrix4();
-      v.constructorName = "columns";
-    
-      v.v4_0 = v4_0;
-      v.v4_1 = v4_1;
-      v.v4_2 = v4_2;
-      v.v4_3 = v4_3;
-    
-      return v;
-    }
-  
-    static outer(v4_u:Vector4,v4_v:Vector4) {
-      let v = new Matrix4();
-      v.constructorName = "outer";
-      v.v4_u = v4_u;
-      v.v4_v = v4_v;
-      return v;
-    }
-  
-    static rotationX(radians:number) {
-      let v = new Matrix4();
-      v.constructorName = "rotationX";
-    
-      v.radians = radians;
-    
-      return v;
-    }
-  
-    static rotationY (radians:number) {
-      let v = new Matrix4();
-      v.constructorName = "rotationY";
-    
-      v.radians = radians;
-      return v;
-    }
-  
-    static rotationZ(radians:number) {
-      let v = new Matrix4();
-      v.constructorName = "rotationZ";
-      v.radians = radians;
-      return v;
-    }
-  
-     static translation(v3_t:Vector3) {
-      let v = new Matrix4();
-      v.constructorName = "translation";
-    
-      v.v3_t = v3_t;
-    
-      return v;
-    }
-  
-    static translationValues(x:number, y:number, z:number) {
-      let v = new Matrix4();
-      v.constructorName = "translationValues";
-    
-      v.x = x;
-      v.y = y;
-      v.z = z;
-    
-      return v;
-    }
-  
-    static diagonal3(v3_s:Vector3) {
-      let v = new Matrix4();
-      v.constructorName = "diagonal3";
-  
-      v.v3_s = v3_s;
-  
-      return v;
-    }
-  
-    static diagonal3Values(x:number, y:number, z:number) {
-      let v = new Matrix4();
-      v.constructorName = "diagonal3Values";
-  
-      v.x = x;
-      v.y = y;
-      v.z = z;
-  
-      return v;
-    }
-  
-    static skewX(alpha:number) {
-      let v = new Matrix4();
-      v.constructorName = "skewX";
-    
-      v.alpha = alpha;
-    
-      return v;
-    } 
-  
-    static skewY(beta:number) {
-      let v = new Matrix4();
-      v.constructorName = "skewY";
-    
-      v.beta = beta;
-      return v;
-    }
-  
-    static skew(alpha:number, beta:number) {
-      let v = new Matrix4();
-      v.constructorName = "skew";
-    
-      v.alpha = alpha;
-      v.beta = beta;
-    
-      return v;
-    }
-  
-    static compose(v3_t:Vector3, rotation:Quaternion, v3_s:Vector3) {
-      let v = new Matrix4();
-      v.constructorName = "compose";
-  
-      v.v3_t = v3_t;
-      v.rotation = rotation;
-      v.v3_s = v3_s;
-  
-      return v;
-    }
-  }
-  
-  //****** TODO MediaQuery ******
-  interface MediaQueryConfig {
-    key?:Key;
-    child?:Widget;
-    data?:MediaQueryData;
-  }
-  
-  export class MediaQuery extends DartClass {
-    key?:Key;
-    child?:Widget;
-    data?:MediaQueryData;
-    
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          data?:MediaQueryData, 
-        }
-     */
-    constructor(config: MediaQueryConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.key = config.key;
-        this.data = config.data;
-        this.child = config.child;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          data?:MediaQueryData, 
-        }
-     */
-  
-    static new(config: MediaQueryConfig) {
-      return new MediaQuery(config);
-    };
-  
-    static of(context:any) {
-      return context.mediaQueryData;
-    }
-  }
-  
-  //****** TODO MediaQueryData ******
-  interface MediaQueryDataConfig {
-    size?:Size;
-    devicePixelRatio?:number;
-    textScaleFactor?:number;
-    platformBrightness?:Brightness;
-    padding?:EdgeInsets;
-    viewInsets?:EdgeInsets;
-    alwaysUse24HourFormat?:boolean;
-    accessibleNavigation?:boolean;
-    invertColors?:boolean;
-    highContrast?:boolean;
-    disableAnimations?:boolean;
-    boldText?:boolean;
-    navigationMode?:NavigationMode;
-  }
-  export class MediaQueryData extends DartClass {
-    size?:Size;
-    devicePixelRatio?:number;
-    textScaleFactor?:number;
-    platformBrightness?:Brightness;
-    padding?:EdgeInsets;
-    viewInsets?:EdgeInsets;
-    alwaysUse24HourFormat?:boolean;
-    accessibleNavigation?:boolean;
-    invertColors?:boolean;
-    highContrast?:boolean;
-    disableAnimations?:boolean;
-    boldText?:boolean;
-    navigationMode?:NavigationMode;
-  
-    /**
-     * @param config config: 
-        {
-          size?:Size, 
-          devicePixelRatio?:number, 
-          textScaleFactor?:number, 
-          platformBrightness?:Brightness, 
-          padding?:EdgeInsets,
-          viewInsets?:EdgeInsets, 
-          alwaysUse24HourFormat?:boolean, 
-          accessibleNavigation?:boolean, 
-          invertColors?:boolean,
-          highContrast?:boolean, 
-          disableAnimations?:boolean, 
-          boldText?:boolean, 
-          navigationMode?:NavigationMode
-        }
-     */
-    constructor(config: MediaQueryDataConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.size = config.size;
-        this.devicePixelRatio = config.devicePixelRatio;
-        this.textScaleFactor = config.textScaleFactor;
-        this.padding = config.padding;
-        this.viewInsets = config.viewInsets;
-        this.alwaysUse24HourFormat = config.alwaysUse24HourFormat;
-        this.accessibleNavigation = config.accessibleNavigation;
-        this.invertColors = config.invertColors;
-        this.disableAnimations = config.disableAnimations;
-        this.boldText = config.boldText;
-        this.platformBrightness = config.platformBrightness;
-        this.highContrast = config.highContrast;
-        this.navigationMode= config.navigationMode;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          size?:Size, 
-          devicePixelRatio?:number, 
-          textScaleFactor?:number, 
-          platformBrightness?:Brightness, 
-          padding?:EdgeInsets,
-          viewInsets?:EdgeInsets, 
-          alwaysUse24HourFormat?:boolean, 
-          accessibleNavigation?:boolean, 
-          invertColors?:boolean,
-          highContrast?:boolean, 
-          disableAnimations?:boolean, 
-          boldText?:boolean, 
-          navigationMode?:NavigationMode
-        }
-     */
-    static new(config: MediaQueryDataConfig) {
-      return new MediaQueryData(config);
-    }
-  }
-  
-  //#endregion
-  
-  //#region ------- N -------
-  //****** NeverScrollableScrollPhysics ******
-  export class NeverScrollableScrollPhysics extends DartClass {
-    parent?:ScrollPhysics;
-  
-    constructor(config?: ScrollPhysicsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.parent = config.parent;
-      }
-    }
-  
-    static new(config?: ScrollPhysicsConfig) {
-      return new NeverScrollableScrollPhysics(config);
-    }
-  }
-  
-  //****** TODO Notification ******
-  export class Notification extends DartClass {
-    static new() {
-      return new Notification();
-    }
-  }
-  
-  //****** NotchedShape ******
-  interface NotchedShapeConfig {
-  
-  }
-  export class NotchedShape extends DartClass {
-    host?:ShapeBorder;
-  
-    static circular() {
-      var v = new NotchedShape();
-      v.constructorName = "circular";
-      return v;
-    }
-  
-  
-    static automatic(host:ShapeBorder) {
-      var v = new NotchedShape();
-      v.host = host;
-      return v;
-    }
-  }
-  
-  //#endregion
-  
-  //#region ------- O -------
-  //****** Offset ******
-  export class Offset extends DartClass {
-    dx?:number;
-    dy?:number;
-    direction?:number;
-  
-    constructor(dx?:number, dy?:number){
-      super();
-      this.dx = dx;
-      this.dy = dy;
-    }
-  
-    static new(dx:number, dy:number) {
-      return new Offset(dx,dy);
-    }
-  
-    static zero() {
-      let v = new Offset();
-      v.constructorName = "zero";
-      return v;
-    }
-  
-    static infinite() {
-      let v = new Offset();
-      v.constructorName = "infinite";
-      return v;
-    }
-  
-    static fromDirection(direction:number,) {
-      let v = new Offset();
-      v.constructorName = "fromDirection";
-      v.direction = direction;
-      return v;
-    }
-  }
-  
-  
-  //****** OutlinedBorder ******
-  interface OutlinedBorderConfig {
-    side?:BorderSide;
-    borderRadius?:BorderRadius;
-  }
-  export class OutlinedBorder extends ShapeBorder {
-    side?:BorderSide;
-  
-    borderRadius?:BorderRadius;
-  
-    /**
-     * @param config config: 
-        {
-          side?:BorderSide,
-        }
-     */
-    static circleBorder(config?: OutlinedBorderConfig) {
-      var v = new OutlinedBorder();
-      v.constructorName = "circleBorder";
-      if(config!=null && config!=undefined){
-        v.side = config.side;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadius,
-        }
-     */
-    static beveledRectangleBorder(config?: OutlinedBorderConfig) {
-      var v = new OutlinedBorder();
-      v.constructorName = "beveledRectangleBorder";
-      if(config!=null && config!=undefined){
-        v.side = config.side;
-        v.borderRadius = config.borderRadius;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadius,
-        }
-     */
-    static continuousRectangleBorder(config?: OutlinedBorderConfig) {
-      var v = new OutlinedBorder();
-      v.constructorName = "continuousRectangleBorder";
-      if(config!=null && config!=undefined){
-        v.side = config.side;
-        v.borderRadius = config.borderRadius;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadius,
-        }
-     */
-    static roundedRectangleBorder(config?: OutlinedBorderConfig) {
-      var v = new OutlinedBorder();
-      v.constructorName = "roundedRectangleBorder";
-      if(config!=null && config!=undefined){
-        v.side = config.side;
-        v.borderRadius = config.borderRadius;
-      }
-      return v;
-    }
-  
-     /**
-     * @param config config: 
-        {
-          side?:BorderSide,
-        }
-     */
-    static stadiumBorder(config?: OutlinedBorderConfig) {
-      var v = new OutlinedBorder();
-      v.constructorName = "stadiumBorder";
-      if(config!=null && config!=undefined){
-        v.side = config.side;
-      }
-      return v;
-    }
-  }
-  
-  
-  //#endregion
-  
-  //#region ------- P -------
-  //#endregion
-  
-  //#region ------- Q -------
-  //****** Quaternion ******
-  export class Quaternion extends DartClass {
-    x?:number;
-    y?:number;
-    z?:number;
-    w?:number;
-  
-    constructor(x?:number, y?:number, z?:number, w?:number){
-      super();
-      this.x = x;
-      this.y = y;
-      this.z = z;
-      this.w = w;
-    }
-  
-    static new(x:number, y:number, z:number, w:number) {
-      return new Quaternion(x,y,z,w);
-    }
-  }
-  //#endregion
-  
-  //#region ------- R -------
-  
-  //****** Radius ******
-  export class Radius extends DartClass {
-    radius?:number;
-    x?:number;
-    y?:number;
-  
-    static circular(radius:number) {
-      let v = new Radius();
-      v.constructorName = "circular";
-      v.radius = radius;
-      return v;
-    }
-  
-    static elliptical(x:number, y:number) {
-      let v = new Radius();
-      v.constructorName = "elliptical";
-      v.x = x;
-      v.y = y;
-      return v;
-    }
-  
-    static zero() {
-      let v = new Radius();
-      v.constructorName = "zero";
-      return v;
-    }
-  }
-  
-  //****** RegExp ******
-  interface RegExpConfig {
-    multiLine?:boolean; 
-    caseSensitive?:boolean;
-    unicode?:boolean; 
-    dotAll?:boolean;
-  }
-  export class RegExp extends DartClass {
-    source:string;
-    multiLine?:boolean; 
-    caseSensitive?:boolean;
-    unicode?:boolean; 
-    dotAll?:boolean;
-  
-    /**
-     * @param config config: 
-        {
-          multiLine?:boolean, 
-          caseSensitive?:boolean, 
-          unicode?:boolean, 
-          dotAll?:boolean, 
-        }
-     */
-    constructor(source:string,config?: RegExpConfig){
-      super();
-      this.source = source;
-      if(config!=null && config!=undefined){
-        this.multiLine = config.multiLine;
-        this.caseSensitive = config.caseSensitive;
-        this.unicode = config.unicode;
-        this.dotAll = config.dotAll;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          multiLine?:boolean, 
-          caseSensitive?:boolean, 
-          unicode?:boolean, 
-          dotAll?:boolean, 
-        }
-     */
-    static new(source:string,config?: RegExpConfig) {
-      return new RegExp(source,config);
-    }
-  }
+//#endregion
 
 
-  //****** Rect ******
-  interface RectConfig {
-    center?:Offset;
-    width?:number;
-    height?:number;
-    left?:number;
-    top?:number;
-    right?:number;
-    bottom?:number;
-    radius?:number;
-    a?:Offset;
-    b?:Offset;
-  }
-  export class Rect extends DartClass {
-    center?:Offset;
-    width?:number;
-    height?:number;
-    left?:number;
-    top?:number;
-    right?:number;
-    bottom?:number;
-    radius?:number;
-    a?:Offset;
-    b?:Offset;
-  
-    /**
-     * @param config config: 
-        {
-          center?:Offset, 
-          width?:number,
-          height?:number
-        }
-     */
-    static fromCenter (config: RectConfig) {
-      let v = new Rect();
-      v.constructorName = "fromCenter";
-      if(config!=null && config!=undefined){
-        v.center = config.center;
-        v.width = config.width;
-        v.height = config.height;  
-      }
-      return v;
-    }
-  
-    static fromLTRB(left:number, top:number, right:number, bottom:number) {
-      let v = new Rect();
-      v.constructorName = "fromLTRB";
-      v.left = left;
-      v.top = top;
-      v.right = right;
-      v.bottom = bottom;  
-      return v;
-    }
-    
-    static fromLTWH(left:number, top:number, width:number, height:number) {
-      let v = new Rect();
-      v.constructorName = "fromLTWH";
-  
-      v.left = left;
-      v.top = top;
-      v.width = width;
-      v.height = height;
-  
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-      {
-        center?:Offset, 
-        radius?:number
-      }
-     */
-    static fromCircle(config: RectConfig) {
-      let v = new Rect();
-      v.constructorName = "fromCircle";
-      if(config!=null && config!=undefined){
-        v.center = config.center;
-        v.radius = config.radius;
-      }
-      return v;
-    }
-  
-  
-    static fromPoints (a:Offset,b:Offset) {
-      let v = new Rect();
-      v.constructorName = "fromPoints";
-        v.a = a;
-        v.b = b;
-      return v;
-    }
-  
-    static zero() {
-      let v = new Rect();
-      v.constructorName = "zero";
-      return v;
-    }
-  
-    static largest() {
-      let v = new Rect();
-      v.constructorName = "largest";
-      return v;
-    }
-  }
-  
-  //****** RelativeRect ******
-  export class RelativeRect extends DartClass {
-    left?:number;
-    top?:number;
-    right?:number;
-    bottom?:number;
-  
-    rect?:Rect;
-    rect1?:Rect;
-    container?:Size;
-  
-    static fromLTRB(left:number, top:number, right:number, bottom:number) {
-      let v = new RelativeRect();
-      v.constructorName = "fromLTRB";
-      v.left = left;
-      v.top = top;
-      v.right = right;
-      v.bottom = bottom;  
-      return v;
-    }
-  
-    static fromSize(rect:Rect,container:Size) {
-      let v = new RelativeRect();
-      v.constructorName = "fromSize";
-      v.rect = rect;
-      v.container = container;
-      return v;
-    }
-  
-    static fromRect(rect:Rect,rect1:Rect) {
-      let v = new RelativeRect();
-      v.constructorName = "fromRect";
-      v.rect = rect;
-      v.rect1 = rect1;
-      return v;
-    }
-  
-    static fill() {
-      let v = new RelativeRect();
-      v.constructorName = "fill";
-      return v;
-    }
-  }
-  
-  //****** RRect ******
-  interface RRectConfig {
-    topLeft?:Radius;
-    topRight?:Radius;
-    bottomRight?:Radius;
-    bottomLeft?:Radius;
-  }
-  export class RRect extends DartClass {
-    left?:number;
-    top?:number;
-    right?:number;
-    bottom?:number;
-    radiusX?:number;
-    radiusY?:number;
-    radius?:Radius;
-    rect?:Rect;
-  
-    topLeft?:Radius;
-    topRight?:Radius;
-    bottomRight?:Radius;
-    bottomLeft?:Radius;
-  
-  
-    static fromLTRBXY(left:number,top:number, right:number,  bottom:number, radiusX:number, radiusY:number) {
-      let v = new RRect();
-      v.constructorName = "fromLTRBXY";
-      v.left = left;
-      v.top = top;
-      v.right = right;
-      v.bottom = bottom;  
-      v.radiusX = radiusX;
-      v.radiusY = radiusY;
-      return v;
-  
-    }
-  
-    static fromLTRBR(left:number,top:number, right:number,  bottom:number, radius:Radius) {
-      let v = new RRect();
-      v.constructorName = "fromLTRBR";
-      v.left = left;
-      v.top = top;
-      v.right = right;
-      v.bottom = bottom;  
-      v.radius = radius;
-      return v;
-    }
-  
-    static fromRectXY(rect:Rect, radiusX:number, radiusY:number) {
-      let v = new RRect();
-      v.constructorName = "fromRectXY";
-      v.rect = rect;
-      v.radiusX = radiusX;
-      v.radiusY = radiusY;
-  
-      return v;
-    }
-  
-    static fromRectAndRadius(rect:Rect, radius:Radius) {
-      let v = new RRect();
-      v.constructorName = "fromRectAndRadius";
-      v.rect = rect;
-      v.radius = radius;
-  
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-      {
-        topLeft?:Radius, 
-        topRight?:Radius, 
-        bottomRight?:Radius, 
-        bottomLeft?:Radius,
-      }
-     */
-    static fromLTRBAndCorners(left:number,top:number, right:number,  bottom:number, config?: RRectConfig) {
-      let v = new RRect();
-      v.constructorName = "fromLTRBAndCorners";
-      v.left = left;
-      v.top = top;
-      v.right = right;
-      v.bottom = bottom;
-      if(config!=null && config!=undefined){
-        v.topLeft = config.topLeft;
-        v.topRight = config.topRight;
-        v.bottomLeft = config.bottomLeft;
-        v.bottomRight = config.bottomRight;
-      }
-      return v;
-    }
-  
-    /**
-     * @param config config: 
-      {
-        topLeft?:Radius, 
-        topRight?:Radius, 
-        bottomRight?:Radius, 
-        bottomLeft?:Radius,
-      }
-     */
-    static fromRectAndCorners(rect:Rect, config?: RRectConfig) {
-      let v = new RRect();
-      v.constructorName = "fromRectAndCorners";
-      v.rect = rect;
-      if(config!=null && config!=undefined){
-        v.topLeft = config.topLeft;
-        v.topRight = config.topRight;
-        v.bottomLeft = config.bottomLeft;
-        v.bottomRight = config.bottomRight;
-      }
-      return v;
-    }
-  
-    static zero() {
-      let v = new RRect();
-      v.constructorName = "zero";
-      return v;
-    }
-  }
-  
-  //****** RSTransform ******
-  interface RSTransformConfig {
-    rotation:number;
-    scale:number;
-    anchorX:number;
-    anchorY:number;
-    translateX:number;
-    translateY:number;
-  }
-  export class RSTransform extends DartClass {
-    
-    rotation?:number;
-    scale?:number;
-    anchorX?:number;
-    anchorY?:number;
-    translateX?:number;
-    translateY?:number;
-  
-    scos?:number;
-    ssin?:number;
-    tx?:number;
-    ty?:number;
-  
-    /**
-     * @param config config: 
-        {
-          rotation?:number, 
-          scale?:number, 
-          anchorX?:number, 
-          anchorY?:number, 
-          translateX?:number, 
-          translateY?:number, 
-        }
-     */
-    static fromComponents (config: RSTransformConfig) {
-      let v = new RSTransform();
-      v.constructorName = "fromComponents";
-      if(config!=null && config!=undefined){
-        v.rotation =config.rotation;
-        v.scale   = config.scale;
-        v.anchorX = config.anchorX;
-        v.anchorY = config.anchorY;
-        v.translateX= config.translateX;
-        v.translateY = config.translateY;
-      }
-      return v;
-    }
-  
-    constructor(scos?:number, ssin?:number, tx?:number, ty?:number){
-      super();
-      this.scos = scos;
-      this.ssin = ssin;
-      this.tx = tx;
-      this.ty = ty; 
-    }
-  
-    static new(scos:number, ssin:number, tx:number, ty:number) {
-      return new RSTransform(scos,ssin,tx,ty);
-    }
-    
-  }
-  
-  
-  //****** RangeMaintainingScrollPhysics ******
-  export class RangeMaintainingScrollPhysics extends DartClass {
-    parent?:ScrollPhysics;
-  
-    constructor(config?: ScrollPhysicsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.parent = config.parent;
-      }
-    }
-  
-    static new(config?: ScrollPhysicsConfig) {
-      return new RangeMaintainingScrollPhysics(config);
-    }
-  }
-  
-  //#endregion
-  
-  //#region ------- S -------
+//#region ------- B ------- 
 
-  //****** ScaleStartDetails ******
-  interface ScaleStartDetailsConfig {
-    focalPoint?:Offset;
-    localFocalPoint?:Offset;
-  }
-  export class ScaleStartDetails extends DartClass {
-    focalPoint?:Offset;
-    localFocalPoint?:Offset;
-  
-    /**
-     * @param config config: 
-        {
-          focalPoint?:Offset,
-          localFocalPoint?:Offset,
-        }
-     */
-    constructor(config?: ScaleStartDetailsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.focalPoint = config.focalPoint;
-        this.localFocalPoint = config.localFocalPoint;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          focalPoint?:Offset,
-          localFocalPoint?:Offset,
-        }
-     */
-    static new (config?: ScaleStartDetailsConfig) {
-      return new ScaleStartDetails(config);
-    }
-  }
+//#region BorderSide 
+//****** BorderSide ******
+interface BorderSideConfig {
+  color?:Color;
+  width?:number;
+  style?:BorderStyle;
+}
+export class BorderSide extends DartClass {
+  color?:Color;
+  width?:number;
+  style?:BorderStyle;
 
-  //****** ScaleUpdateDetails ******
-  interface ScaleUpdateDetailsConfig {
-    focalPoint?:Offset;
-    localFocalPoint?:Offset;
-    scale?:number;
-    horizontalScale?:number;
-    verticalScale?:number;
-    rotation?:number;
-  }
-  export class ScaleUpdateDetails extends DartClass {
-    focalPoint?:Offset;
-    localFocalPoint?:Offset;
-    scale?:number;
-    horizontalScale?:number;
-    verticalScale?:number;
-    rotation?:number;
-  
-    /**
-     * @param config config: 
-        {
-          focalPoint?:Offset, 
-          localFocalPoint?:Offset, 
-          scale?:number, 
-          horizontalScale?:number, 
-          verticalScale?:number, 
-          rotation?:number, 
-        }
-     */
-    constructor(config?: ScaleUpdateDetailsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.focalPoint = config.focalPoint;
-        this.localFocalPoint = config.localFocalPoint;
-        this.scale = config.scale;
-        this.horizontalScale = config.horizontalScale;
-        this.verticalScale = config.verticalScale;
-        this.rotation = config.rotation;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          focalPoint?:Offset, 
-          localFocalPoint?:Offset, 
-          scale?:number, 
-          horizontalScale?:number, 
-          verticalScale?:number, 
-          rotation?:number, 
-        }
-     */
-    static new (config?: ScaleUpdateDetailsConfig) {
-      return new ScaleUpdateDetails(config);
-    }
-  }
-
-  //****** ScaleEndDetails ******
-  interface ScaleEndDetailsConfig {
-    velocity?:Velocity;
-  }
-  export class ScaleEndDetails extends DartClass {
-    velocity?:Velocity;
-  
-    /**
-     * @param config config: 
-        {
-          velocity?:Velocity, 
-        }
-     */
-    constructor(config?: ScaleEndDetailsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.velocity = config.velocity;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          velocity?:Velocity, 
-        }
-     */
-    static new (config?: ScaleEndDetailsConfig) {
-      return new ScaleEndDetails(config);
-    }
-  }
-  
-  //****** Size ******
-  export class Size extends DartClass {
-    width?:number;
-    height?:number;
-    dimension?:number;
-    radius?:number;
-  
-    constructor(width?:number, height?:number){
-      super();
-      this.width = width;
-      this.height = height;
-    }
-  
-    static new(width:number, height:number) {
-      return new Size(width,height);
-    }
-  
-    static fromHeight(height:number){
-      let v = new Size();
-      v.constructorName = "fromHeight";
-      v.height=height;
-      return v;
-    }
-  
-    static fromWidth(width:number) {
-      let v = new Size();
-      v.constructorName = "fromWidth";
-      v.width=width;
-      return v;
-    }
-  
-    static square (dimension:number) {
-      let v = new Size();
-      v.constructorName = "square";
-      v.dimension=dimension;
-      return v;
-    }
-  
-    static fromRadius (radius:number){
-      let v = new Size();
-      v.constructorName = "fromRadius";
-      v.radius=radius;
-      return v;
-    }
-  
-    static zero(){
-      let v = new Size();
-      v.constructorName = "zero";
-      return v;
-    }
-  
-    static infinite(){
-      let v = new Size();
-      v.constructorName = "infinite";
-      return v;
-    }
-  }
-  
-  //****** StrutStyle ******
-  interface StrutStyleConfig {
-    fontFamily?:string;
-    fontFamilyFallback?:Array<string>;
-    fontSize?:number;
-    height?:number;
-    leading?:number;
-    fontWeight?:FontWeight;
-    fontStyle?:FontStyle;
-    forceStrutHeight?:boolean;
-    debugLabel?:string;
-    packageName?:string;
-  }
-  export class StrutStyle extends DartClass {
-    fontFamily?:string;
-    fontFamilyFallback?:Array<string>;
-    fontSize?:number;
-    height?:number;
-    leading?:number;
-    fontWeight?:FontWeight;
-    fontStyle?:FontStyle;
-    forceStrutHeight?:boolean;
-    debugLabel?:string;
-    packageName?:string;
-  
-    /**
-     * @param config config: 
-        {
-          fontFamily?:string, 
-          fontFamilyFallback?:Array<string>, 
-          fontSize?:number, 
-          height?:number, 
-          leading?:number, 
-          fontWeight?:FontWeight, 
-          fontStyle?:FontStyle, 
-          forceStrutHeight?:boolean, 
-          debugLabel?:string, 
-          packageName?:string, 
-        }
-     */
-    constructor(config: StrutStyleConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.fontFamily = config.fontFamily;
-        this.fontFamilyFallback = config.fontFamilyFallback;
-        this.fontSize = config.fontSize;
-        this.height = config.height;
-        this.leading = config.leading;
-        this.fontWeight = config.fontWeight;
-        this.fontStyle = config.fontStyle;
-        this.forceStrutHeight = config.forceStrutHeight;
-        this.debugLabel = config.debugLabel;
-        this.packageName =config.packageName;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          fontFamily?:string, 
-          fontFamilyFallback?:Array<string>, 
-          fontSize?:number, 
-          height?:number, 
-          leading?:number, 
-          fontWeight?:FontWeight, 
-          fontStyle?:FontStyle, 
-          forceStrutHeight?:boolean, 
-          debugLabel?:string, 
-          packageName?:string, 
-        }
-     */
-    static new(config: StrutStyleConfig) {
-      return new StrutStyle(config);
-    }
-  }
-  
-  //****** SystemUiOverlayStyle ******
-  interface SystemUiOverlayStyleConfig {
-    systemNavigationBarColor?:Color;
-    systemNavigationBarDividerColor?:Color;
-    statusBarColor?:Color;
-    systemNavigationBarIconBrightness?:Brightness;
-    statusBarBrightness?:Brightness;
-    statusBarIconBrightness?:Brightness;
-  }
-  export class SystemUiOverlayStyle extends DartClass {
-    systemNavigationBarColor?:Color;
-    systemNavigationBarDividerColor?:Color;
-    statusBarColor?:Color;
-    systemNavigationBarIconBrightness?:Brightness;
-    statusBarBrightness?:Brightness;
-    statusBarIconBrightness?:Brightness;
-  
-    /**
-     * @param config config: 
-        {
-          systemNavigationBarColor?:Color, 
-          systemNavigationBarDividerColor?:Color, 
-          statusBarColor?:Color,
-          systemNavigationBarIconBrightness?:Brightness, 
-          statusBarBrightness?:Brightness, 
-          statusBarIconBrightness?:Brightness
-        }
-     */
-    constructor(config: SystemUiOverlayStyleConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.systemNavigationBarColor = config.systemNavigationBarColor;
-        this.systemNavigationBarDividerColor = config.systemNavigationBarDividerColor;
-        this.systemNavigationBarIconBrightness = config.systemNavigationBarIconBrightness;
-        this.statusBarColor = config.statusBarColor;
-        this.statusBarBrightness = config.statusBarBrightness;
-        this.statusBarIconBrightness = config.statusBarIconBrightness;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          systemNavigationBarColor?:Color, 
-          systemNavigationBarDividerColor?:Color, 
-          statusBarColor?:Color,
-          systemNavigationBarIconBrightness?:Brightness, 
-          statusBarBrightness?:Brightness, 
-          statusBarIconBrightness?:Brightness
-        }
-     */
-    static new(config: SystemUiOverlayStyleConfig) {
-      return new SystemUiOverlayStyle(config);
-    }
-  
-    static light = SystemUiOverlayStyle.new({
-      systemNavigationBarColor:Color.new(0xff000000),
-      systemNavigationBarIconBrightness:Brightness.light,
-      statusBarBrightness:Brightness.light,
-      statusBarIconBrightness:Brightness.dark
-    });
-  
-    static dark = SystemUiOverlayStyle.new({
-      systemNavigationBarColor:Color.new(0xff000000),
-      systemNavigationBarIconBrightness:Brightness.light,
-      statusBarBrightness:Brightness.dark,
-      statusBarIconBrightness:Brightness.light
-    });
-  }
-  
-  //****** SpringDescription ******
-  interface SpringDescriptionConfig {
-    mass:number;
-    stiffness:number; 
-    damping:number;
-  }
-  export class SpringDescription extends DartClass {
-    mass?:number;
-    stiffness?:number; 
-    damping?:number;
-  
-    /**
-     * @param config config: 
-        {
-          mass?:number,
-          stiffness?:number,
-          damping?:number
-        }
-     */
-    constructor(config: SpringDescriptionConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.mass = config.mass;
-        this.stiffness = config.stiffness;
-        this.damping = config.damping;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          mass?:number,
-          stiffness?:number,
-          damping?:number
-        }
-     */
-    static new(config: SpringDescriptionConfig) {
-      return new SpringDescription(config);
-    }
-  }
-  
-  //****** ScrollPhysics ******
-  interface ScrollPhysicsConfig {
-    parent?:ScrollPhysics;
-  }
-  export class ScrollPhysics extends DartClass {
-    parent?:ScrollPhysics;
-  
-    constructor(config?: ScrollPhysicsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.parent = config.parent;
-      }
-    }
-  
-    static new(config?: ScrollPhysicsConfig) {
-      return new ScrollPhysics(config);
-    }
-  }
-  
-  //****** ScrollController ******
-  interface ScrollControllerConfig {
-    initialScrollOffset?:number;
-    keepScrollOffset?:boolean;
-    debugLabel?:string;
-  }
-
-  interface ScrollControllerJumpToConfig {
-    value:number;
-  }
-
-  interface ScrollControllerAnimateToConfig {
-    offset:number;
-    duration:Duration;
-    curve:Curve;
-  }
-
-  export class ScrollController extends DartClass {
-    initialScrollOffset?:number;
-    keepScrollOffset?:boolean;
-    debugLabel?:string;
-  
-    /**
-     * @param config config: 
-        {
-          offset:number,
-          duration:Duration,
-          curve:Curve,
-        }
-     */
-    animateTo(config: ScrollControllerAnimateToConfig) {
-      JSFramework.invokeFlutterFunction(
-        JSCallConfig.new({
-          mirrorID:this.mirrorID,
-          className:this.className,
-          funcName:"animateTo",
-          args:config
-        })
-      );
-    }
-  
-    /**
-     * @param config config: 
-        {
-          value:number,
-        }
-     */
-    jumpTo(config:ScrollControllerJumpToConfig) {  
-      JSFramework.invokeFlutterFunction(
-        JSCallConfig.new({
-          mirrorID:this.mirrorID,
-          className:this.className,
-          funcName:"jumpTo",
-          args:config
-        })
-      );
-    }  
-
-  
-    /**
-     * @param config config: 
-        {
-          initialScrollOffset?:number, 
-          keepScrollOffset?:boolean, 
-          debugLabel?:string
-        }
-     */
-    constructor(config: ScrollControllerConfig){
-      super();
-      this.createMirrorID();
-      if(config!=null && config!=undefined){
-        this.initialScrollOffset = config.initialScrollOffset;
-        this.keepScrollOffset = config.keepScrollOffset;
-        this.debugLabel = config.debugLabel;
-      }
-    }
-
-    
-
-    //偏移量
-    async offset() {
-        var v= await this.invokeMirrorObjWithCallback(JSCallConfig.new({
-              mirrorID: this.mirrorID,
-              className: this.className,
-              funcName: "offset",
-          }));
-
-        return Convert.toNumber(v);
-    }
-  
-    /**
-     * @param config config: 
-        {
-          initialScrollOffset?:number, 
-          keepScrollOffset?:boolean, 
-          debugLabel?:string
-        }
-     */
-    static new(config: ScrollControllerConfig) {
-      return new ScrollController(config);
-    }
-  }
-  
-  //****** Shadow ******
-  interface ShadowConfig {
-    color?:Color;
-    offset?:Offset;
-    blurRadius?:number;
-  }
-  export class Shadow extends DartClass {
-    color?:Color;
-    offset?:Offset;
-    blurRadius?:number;
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          offset?:Offset, 
-          blurRadius?:number
-        }
-     */
-    constructor(config?: ShadowConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.color = config.color;
-        this.blurRadius = config.blurRadius;
-        this.offset = config.offset;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          offset?:Offset, 
-          blurRadius?:number
-        }
-     */
-    static new(config?: ShadowConfig) {
-      return new Shadow(config);
-    }
-  }
-  
-  //****** ScrollbarPainter ******
-  interface ScrollbarPainterConfig {
-    color:Color;
-    textDirection:TextDirection;
-    thickness:number;
-    fadeoutOpacityAnimation:any;
-    padding?:EdgeInsets;
-    mainAxisMargin?:number,
-    crossAxisMargin?:number;
-    radius?:Radius;
-    minLength?:number;
-    minOverscrollLength?:number;
-  }
-  export class ScrollbarPainter extends DartClass {
-    color?:Color;
-    textDirection?:TextDirection;
-    thickness?:number;
-    fadeoutOpacityAnimation?:any;
-    padding?:EdgeInsets;
-    mainAxisMargin?:number;
-    crossAxisMargin?:number;
-    radius?:Radius;
-    minLength?:number;
-    minOverscrollLength?:number;
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          textDirection?:TextDirection, 
-          thickness?:number, 
-          fadeoutOpacityAnimation?:any, 
-          padding?:EdgeInsets, 
-          mainAxisMargin?:number,
-          crossAxisMargin?:number, 
-          radius?:Radius, 
-          minLength?:number, 
-          minOverscrollLength?:number,  
-        }
-     */
-    constructor(config: ScrollbarPainterConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.color = config.color;
-        this.textDirection = config.textDirection;
-        this.thickness = config.thickness;
-        this.fadeoutOpacityAnimation = config.fadeoutOpacityAnimation;
-        this.padding = config.padding;
-        this.mainAxisMargin = config.mainAxisMargin;
-        this.crossAxisMargin = config.crossAxisMargin;
-        this.radius = config.radius;
-        this.minLength = config.minLength;
-        this.minOverscrollLength = config.minOverscrollLength;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          textDirection?:TextDirection, 
-          thickness?:number, 
-          fadeoutOpacityAnimation?:any, 
-          padding?:EdgeInsets, 
-          mainAxisMargin?:number,
-          crossAxisMargin?:number, 
-          radius?:Radius, 
-          minLength?:number, 
-          minOverscrollLength?:number,  
-        }
-     */
-    static new(config: ScrollbarPainterConfig) {
-      return new ScrollbarPainter(config);
-    }
-  }
-  //#endregion
-  
-  //#region ------- T -------
-  //****** TextAlignVertical ******
-  export class TextAlignVertical extends DartClass {
-    y?:number;
-  
-    constructor(y:number){
-      super();
-      this.y = y;
-    }
-    
-    static new(y:number){
-      return new TextAlignVertical(y);
-    }
-  
-    static top = TextAlignVertical.new(-1.0); 
-    static center = TextAlignVertical.new(0.0); 
-    static bottom = TextAlignVertical.new(1.0); 
-  } 
-  
-  //****** TapDownDetails ******
-  interface TapDownDetailsConfig {
-    globalPosition?:Offset;
-    localPosition?:Offset;
-    kind?:PointerDeviceKind;
-  }
-  export class TapDownDetails extends DartClass {
-    globalPosition?:Offset;
-    localPosition?:Offset;
-    kind?:PointerDeviceKind;
-  
-    /**
-     * @param config config: 
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          kind?:PointerDeviceKind,
-        }
-     */
-    constructor(config?: TapDownDetailsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.globalPosition = config.globalPosition;
-        this.localPosition = config.localPosition;
-        this.kind = config.kind;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          kind?:PointerDeviceKind,
-        }
-     */
-    static new (config?: TapDownDetailsConfig) {
-      return new TapDownDetails(config);
-    }
-  }
-
-  //****** TapUpDetails ******
-  interface TapUpDetailsConfig {
-    globalPosition?:Offset;
-    localPosition?:Offset;
-  }
-  export class TapUpDetails extends DartClass {
-    globalPosition?:Offset;
-    localPosition?:Offset;
-  
-    /**
-     * @param config config: 
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-        }
-     */
-    constructor(config?: TapUpDetailsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.globalPosition = config.globalPosition;
-        this.localPosition = config.localPosition;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-        }
-     */
-    static new (config?: TapUpDetailsConfig) {
-      return new TapUpDetails(config);
-    }
-  }
-
-  //****** TextStyle ******
-  interface TextStyleConfig {
-    inherit?:boolean;
-    color?:Color;
-    backgroundColor?:Color;
-    fontSize?:number;
-    fontWeight?:FontWeight;
-    fontStyle?:FontStyle;
-    letterSpacing?:number;
-    wordSpacing?:number;
-    textBaseline?:TextBaseline;
-    height?:number;
-    decoration?:TextDecoration;
-    decorationColor?:Color;
-    decorationStyle?:TextDecorationStyle;
-    decorationThickness?:number;
-    debugLabel?:string;
-    fontFamily?:string;
-    packageName?:string;
-  }
-  export class TextStyle extends DartClass {
-    inherit?:boolean;
-    color?:Color;
-    backgroundColor?:Color;
-    fontSize?:number;
-    fontWeight?:FontWeight;
-    fontStyle?:FontStyle;
-    letterSpacing?:number;
-    wordSpacing?:number;
-    textBaseline?:TextBaseline;
-    height?:number;
-    decoration?:TextDecoration;
-    decorationColor?:Color;
-    decorationStyle?:TextDecorationStyle;
-    decorationThickness?:number;
-    debugLabel?:string;
-    fontFamily?:string;
-    packageName?:string;
-  
-    /**
-     * @param config config: 
-        {
-          inherit?:boolean, 
-          color?:Color, 
-          backgroundColor?:Color, 
-          fontSize?:number, 
-          fontWeight?:FontWeight, 
-          fontStyle?:FontStyle, 
-          letterSpacing?:number, 
-          wordSpacing?:number, 
-          textBaseline?:TextBaseline, 
-          height?:number, 
-          decoration?:TextDecoration, 
-          decorationColor?:Color, 
-          decorationStyle?:TextDecorationStyle, 
-          decorationThickness?:number, 
-          debugLabel?:string, 
-          fontFamily?:string, 
-          packageName?:string, 
-        }
-     */
-    constructor(config?: TextStyleConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.inherit = config.inherit;
-        this.color = config.color;
-        this.backgroundColor = config.backgroundColor;
-        this.fontSize = config.fontSize;
-        this.fontWeight = config.fontWeight;
-        this.fontStyle = config.fontStyle;
-        this.letterSpacing = config.letterSpacing;
-        this.wordSpacing = config.wordSpacing;
-        this.textBaseline = config.textBaseline;
-        this.height = config.height;
-        this.decoration = config.decoration;
-        this.decorationColor = config.decorationColor;
-        this.decorationStyle = config.decorationStyle;
-        this.decorationThickness = config.decorationThickness;
-        this.debugLabel = config.debugLabel;
-        this.fontFamily = config.fontFamily;
-        this.packageName = config.packageName;
-      }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          inherit?:boolean, 
-          color?:Color, 
-          backgroundColor?:Color, 
-          fontSize?:number, 
-          fontWeight?:FontWeight, 
-          fontStyle?:FontStyle, 
-          letterSpacing?:number, 
-          wordSpacing?:number, 
-          textBaseline?:TextBaseline, 
-          height?:number, 
-          decoration?:TextDecoration, 
-          decorationColor?:Color, 
-          decorationStyle?:TextDecorationStyle, 
-          decorationThickness?:number, 
-          debugLabel?:string, 
-          fontFamily?:string, 
-          packageName?:string, 
-        }
-     */
-    static new (config?: TextStyleConfig) {
-      return new TextStyle(config);
-    }
-  }
-  
-  //****** TableRow ******
-  interface TableBorderConfig {
-    top?:BorderSide;
-    right?:BorderSide;
-    bottom?:BorderSide;
-    left?:BorderSide;
-    horizontalInside?:BorderSide;
-    verticalInside?:BorderSide;
-  
-    color?:Color;
-    width?:number;
-    style?:BorderStyle;
-  
-    inside?:BorderSide;
-    outside?:BorderSide;
-  }
-  export class TableBorder extends DartClass {
-    top?:BorderSide;
-    right?:BorderSide;
-    bottom?:BorderSide;
-    left?:BorderSide;
-    horizontalInside?:BorderSide;
-    verticalInside?:BorderSide;
-  
-    color?:Color;
-    width?:number;
-    style?:BorderStyle;
-  
-    inside?:BorderSide;
-    outside?:BorderSide;
-  
-    /**
-     * @param config config: 
-      {
-        top?:BorderSide, 
-        right?:BorderSide, 
-        bottom?:BorderSide, 
-        left?:BorderSide, 
-        horizontalInside?:BorderSide, 
-        verticalInside?:BorderSide
-      }
-     */
-    constructor(config?: TableBorderConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.top = config.top;
-        this.right = config.right;
-        this.bottom = config.bottom;
-        this.left = config.left;
-        this.horizontalInside = config.horizontalInside;
-        this.verticalInside = config.verticalInside;
-      }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        top?:BorderSide, 
-        right?:BorderSide, 
-        bottom?:BorderSide, 
-        left?:BorderSide, 
-        horizontalInside?:BorderSide, 
-        verticalInside?:BorderSide
-      }
-     */
-    static new(config?: TableBorderConfig) {
-      return new TableBorder(config);
-    }
-  
-    /**
-     * @param config config: 
+  /**
+   * @param config config: 
       {
         color?:Color, 
         width?:number, 
-        style?:BorderStyle, 
+        style?:BorderStyle
       }
-     */
-    static all(config?: TableBorderConfig) {
-      let v = new TableBorder();
-      v.constructorName = "all";
-      if(config!=null && config!=undefined){
-        v.color = config.color;
-        v.width = config.width;
-        v.style = config.style;
-      }
-      return v;
+   */
+  constructor(config?: BorderSideConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.color = config.color;
+      this.width = config.width;
+      this.style = config.style;
     }
-  
-    /**
-     * @param config config: 
+  }
+
+  /**
+   * @param config config: 
       {
-        inside?:BorderSide, 
-        outside?:BorderSide
+        color?:Color, 
+        width?:number, 
+        style?:BorderStyle
       }
-     */
-    static symmetric(config?: TableBorderConfig) {
-      let v = new TableBorder();
-      v.constructorName = "symmetric";
-      if(config!=null && config!=undefined){
-        v.inside = config.inside;
-        v.outside = config.outside;
-      }
-      return v;
-    }
+   */
+  static new(config?: BorderSideConfig){
+    return new BorderSide(config);
   }
-  
-  //****** TODO TableRow ******
-  export class TableColumnWidth extends DartClass {
-    static new() {
-      return new TableColumnWidth();
-    }
+
+  static none() {
+    let v = new BorderSide();
+    v.constructorName = "none";
+    return v;
   }
-  
-  //****** TabController ******
-  interface TabControllerConfig {
-    initialIndex?:number;
-    length?:number;
-    vsync?:any;
+}
+//#endregion
+
+//#region BorderRadiusGeometry 
+//****** BorderRadiusGeometry ******
+export abstract class BorderRadiusGeometry extends DartClass {}
+
+//****** BorderRadius ******
+interface BorderRadiusConfig {
+  top?:Radius;
+  bottom?:Radius;
+  left?:Radius;
+  right?:Radius;
+  topLeft?:Radius;
+  topRight?:Radius;
+  bottomLeft?:Radius;
+  bottomRight?:Radius;
+}
+export class BorderRadius  extends BorderRadiusGeometry {
+  radius?:number|Radius;
+  top?:Radius;
+  bottom?:Radius;
+  left?:Radius;
+  right?:Radius;
+  topLeft?:Radius;
+  topRight?:Radius;
+  bottomLeft?:Radius;
+  bottomRight?:Radius;
+
+  static zero(){
+    let o = new BorderRadius();
+    o.constructorName = "zero";
+    return o;
   }
-  export class TabController extends DartClass {
-    initialIndex?:number;
-    length?:number;
-    vsync?:any;
-  
-    /**
-     * @param config config: 
+
+  static all(radius:Radius){
+    let v = new BorderRadius();
+    v.constructorName = "all";
+    v.radius = radius;
+    return v;
+  }
+
+  static circular(radius:number){
+    let v = new BorderRadius();
+    v.constructorName = "circular";
+    v.radius = radius;
+    return v;
+  }
+
+  /**
+   * @param config config: 
       {
-        initialIndex?:number,
-        length?:number,
-        vsync?:any
+        top?:Radius, 
+        bottom?:Radius
       }
-     */
-    constructor(config?: TabControllerConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.initialIndex = config.initialIndex;
-        this.length = config.length;
-        this.vsync = config.vsync;
-      }
+   */
+  static vertical(config?: BorderRadiusConfig){
+    let v = new BorderRadius();
+    v.constructorName = "vertical";
+    if(config!=null && config!=undefined){
+      v.top = config.top;
+      v.bottom = config.bottom;
     }
-  
-    /**
-     * @param config config: 
+    return v;
+  }
+
+  /**
+   * @param config config: 
       {
-        initialIndex?:number,
-        length?:number,
-        vsync?:any
+        left?:Radius, 
+        right?:Radius
       }
-     */
-    static new (config?: TabControllerConfig) {
-      return new TabController(config);
+   */
+  static horizontal(config?: BorderRadiusConfig){
+    let v = new BorderRadius();
+    v.constructorName = "horizontal";
+    if(config!=null && config!=undefined){
+      v.left = config.left;
+      v.right = config.right;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        topLeft?:Radius, 
+        topRight?:Radius, 
+        bottomLeft?:Radius, 
+        bottomRight?:Radius,
+      }
+   */
+  static only(config?: BorderRadiusConfig){
+    let v = new BorderRadius();
+    v.constructorName = "only";
+    if(config!=null && config!=undefined){
+      v.topLeft = config.topLeft;
+      v.topRight = config.topRight;
+      v.bottomLeft = config.bottomLeft;
+      v.bottomRight = config.bottomRight;
+    }
+    return v;
+  }
+}
+
+//****** BorderRadiusDirectional ******
+interface BorderRadiusDirectionalConfig {
+  top?:Radius;
+  bottom?:Radius;
+  start?:Radius;
+  end?:Radius;
+
+  topStart?:Radius;
+  topEnd?:Radius;
+  bottomStart?:Radius;
+  bottomEnd?:Radius;
+}
+export class BorderRadiusDirectional  extends BorderRadiusGeometry {
+  radius?:Radius| number;
+  top?:Radius;
+  bottom?:Radius;
+
+  start?:Radius;
+  end?:Radius;
+
+  topStart?:Radius;
+  topEnd?:Radius;
+  bottomStart?:Radius;
+  bottomEnd?:Radius;
+
+  static zero(){
+    let o = new BorderRadiusDirectional();
+    o.constructorName = "zero";
+    return o;
+  }
+
+  static all(radius:Radius){
+    let v = new BorderRadiusDirectional();
+    v.constructorName = "all";
+    v.radius = radius;
+    return v;
+  }
+
+  static circular(radius:number){
+    let v = new BorderRadiusDirectional();
+    v.constructorName = "circular";
+    v.radius = radius;
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        top?:Radius, 
+        bottom?:Radius
+      }
+   */
+  static vertical(config?: BorderRadiusDirectionalConfig){
+    let v = new BorderRadiusDirectional();
+    v.constructorName = "vertical";
+    if(config!=null && config!=undefined){
+      v.top = config.top;
+      v.bottom = config.bottom;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        start?:Radius, 
+        end?:Radius
+      }
+   */
+  static horizontal(config?: BorderRadiusDirectionalConfig){
+    let v = new BorderRadiusDirectional();
+    v.constructorName = "horizontal";
+    if(config!=null && config!=undefined){
+      v.start = config.start;
+      v.end = config.end;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        topStart?:Radius, 
+        topEnd?:Radius, 
+        bottomLeft?:Radius, 
+        bottomRight?:Radius,
+      }
+   */
+  static only(config?: BorderRadiusDirectionalConfig){
+    let v = new BorderRadiusDirectional();
+    v.constructorName = "only";
+    if(config!=null && config!=undefined){
+      v.topStart = config.topStart;
+      v.topEnd = config.topEnd;
+      v.bottomStart = config.bottomStart;
+      v.bottomEnd = config.bottomEnd;
+    }
+    return v;
+  }
+}
+
+//#endregion
+
+
+//****** BannerPainter ******
+interface BannerPainterConfig {
+  message:string;
+  textDirection:TextDirection;
+  location:BannerLocation;
+  layoutDirection?:TextDirection;
+  color?:Color;
+  textStyle?:TextStyle;
+}
+export class BannerPainter extends DartClass {
+  message?:string;
+  textDirection?:TextDirection;
+  location?:BannerLocation;
+  layoutDirection?:TextDirection;
+  color?:Color;
+  textStyle?:TextStyle;
+
+  /**
+   * @param config config: 
+      {
+        message?:string, 
+        textDirection?:TextDirection, 
+        location?:BannerLocation, 
+        layoutDirection?:TextDirection, 
+        color?:Color, 
+        textStyle?:TextStyle, 
+      }
+    */
+  constructor(config: BannerPainterConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.message = config.message;
+      this.textDirection = config.textDirection;
+      this.location = config.location;
+      this.layoutDirection = config.layoutDirection;
+      this.color = config.color;
+      this.textStyle = config.textStyle;
     }
   }
-  
-  //****** TextEditingController ******
-  export class TextEditingController extends DartClass {
-    text?:string;
-  
-    constructor(text?:string){
-      super();
-      this.text=text;
 
-      //Mirror对象在构造函数创建 MirrorID
-      this.createMirrorID();
+  /**
+   * @param config config: 
+      {
+        message?:string, 
+        textDirection?:TextDirection, 
+        location?:BannerLocation, 
+        layoutDirection?:TextDirection, 
+        color?:Color, 
+        textStyle?:TextStyle, 
+      }
+    */
+  static new(config: BannerPainterConfig){
+    return new BannerPainter(config);
+  }
+}
 
-      //this.createMirrorObj();
+//****** BoxShadow ******
+interface BoxShadowConfig {
+  color?:Color;
+  offset?:Offset;
+  blurRadius?:number;
+  spreadRadius?:number;
+}
+export class BoxShadow extends DartClass {
+  color?:Color;
+  offset?:Offset;
+  blurRadius?:number;
+  spreadRadius?:number;
 
-      /*
-      //创建对应FLutter对象
-      var argument = new JSCallConfig({
-          mirrorID:this.mirrorID,
-          className:this.className,
-      });
-      JSBridge.createMirrorObj(argument, this.mirrorID, this);*/
+  /**
+   * @param config config: 
+    {
+      color?:Color, 
+      offset?:Offset, 
+      blurRadius?:number, 
+      spreadRadius?:number
     }
+   */
+  constructor(config?: BoxShadowConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.color = config.color;
+      this.offset = config.offset;
+      this.blurRadius = config.blurRadius;
+      this.spreadRadius = config.spreadRadius;
+    }
+  }
+
+  /**
+   * @param config config: 
+    {
+      color?:Color, 
+      offset?:Offset, 
+      blurRadius?:number, 
+      spreadRadius?:number
+    }
+   */
+  static new(config?: BoxShadowConfig) {
+    return new BoxShadow(config);
+  }
+}
+
+//#endregion
+
+
+//#region ------- C -------
+
+//#region ------- Constraints -------
+//****** Constraints ******
+export abstract class Constraints extends DartClass {
+
+  /**
+   * Constraints.box = new BoxConstraints(config?: BoxConstraintsConfig)
+   * @param config config: 
+    {
+      minWidth?:number, 
+      maxWidth?:number, 
+      minHeight?:number, 
+      maxHeight?:number
+    }
+   */
+  static box (config?: BoxConstraintsConfig){
+    return new BoxConstraints(config);
+  }
+}
+
+//****** BoxConstraints ******
+interface BoxConstraintsConfig {
+  minWidth?:number;
+  maxWidth?:number;
+  minHeight?:number;
+  maxHeight?:number;
+}
+export class BoxConstraints extends Constraints {
+  minWidth?:number;
+  maxWidth?:number;
+  minHeight?:number;
+  maxHeight?:number;
+
+  /**
+   * @param config config: 
+    {
+      minWidth?:number, 
+      maxWidth?:number, 
+      minHeight?:number, 
+      maxHeight?:number
+    }
+   */
+  constructor(config?: BoxConstraintsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.minWidth = config.minWidth;
+      this.maxWidth = config.maxWidth;
+      this.minHeight = config.minHeight;
+      this.maxHeight = config.maxHeight;
+    }
+  }
+
+  /**
+   * @param config config: 
+    {
+      minWidth?:number, 
+      maxWidth?:number, 
+      minHeight?:number, 
+      maxHeight?:number
+    }
+   */
+  static new(config?: BoxConstraintsConfig){
+    return new BoxConstraints(config);
+  }
+}
+
+//#endregion
+
+//#region Color
+export class Color extends DartClass {
+  value?: number;
+  a?: number;
+  r?: number;
+  g?: number;
+  b?: number;
+  opacity?: number;
+
+  constructor(value?: number){
+    super();
+    this.value =value;
+  }
+
+  static new(value: number)  {    
+    return new Color(value);
+  }
+
+  static fromARGB(a: number, r: number, g: number, b: number) {
+    let v = new Color();
+    v.constructorName = "fromARGB";
+    v.a = a;
+    v.r = r;
+    v.g = g;
+    v.b = b;
+    return v;
+  }
+
+  static fromRGBO(r: number, g: number, b: number, opacity: number)  {
+    let v = new Color();
+    v.constructorName = "fromRGBO";
+    v.opacity = opacity;
+    v.r = r;
+    v.g = g;
+    v.b = b;
+    return v;
+  }
+}
+//#endregion
+
+//#region Colors
+export class Colors extends Color{
+  static transparent = Color.new(0x00000000);
+  static black = Color.new(0xff000000);
+  static black87 = Color.new(0xdd000000);
+  static black54 = Color.new(0x8a000000);
+  static black45 = Color.new(0x73000000);
+  static black38 = Color.new(0x61000000);
+  static black26 = Color.new(0x42000000);
+  static black12 = Color.new(0x1f000000);
+  static white = Color.new(0xffffffff);
+  static white70 = Color.new(0xb3ffffff);
+  static white60 = Color.new(0x99FFFFFF);
+  static white54 = Color.new(0x8affffff);
+  static white38 = Color.new(0x62FFFFFF);
+  static white30 = Color.new(0x4dffffff);
+  static white24 = Color.new(0x3dffffff);
+  static white12 = Color.new(0x1fffffff);
+  static white10 = Color.new(0x1affffff);
+  static red = Color.new(0xFFF44336);
+  static redAccent = Color.new(0xFFFF5252);
+  static pink = Color.new(0xFFE91E63);
+  static pinkAccent = Color.new(0xFFFF4081);
+  static purple = Color.new(0xFF9C27B0);
+  static purpleAccent = Color.new(0xFFE040FB);
+  static deepPurple = Color.new(0xFF673AB7);
+  static deepPurpleAccent = Color.new(0xFF7C4DFF);
+  static indigo = Color.new(0xFF3F51B5);
+  static indigoAccent = Color.new(0xFF536DFE);
+  static blue = Color.new(0xFF2196F3);
+  static blueAccent = Color.new(0xFF448AFF);
+  static lightBlue = Color.new(0xFF03A9F4);
+  static lightBlueAccent = Color.new(0xFF40C4FF);
+  static cyan = Color.new(0xFF00BCD4);
+  static cyanAccent = Color.new(0xFF18FFFF);
+  static teal = Color.new(0xff009688);
+  static tealAccent = Color.new(0xFF64FFDA);
+  static green = Color.new(0xFF4CAF50);
+  static greenAccent = Color.new(0xFF69F0AE);
+  static lightGreen = Color.new(0xFF8BC34A);
+  static lightGreenAccent = Color.new(0xFFB2FF59);
+  static lime = Color.new(0xFFCDDC39);
+  static limeAccent = Color.new(0xFFEEFF41);
+  static yellow = Color.new(0xFFFFEB3B);
+  static yellowAccent = Color.new(0xFFFFFF00);
+  static amber = Color.new(0xFFFFC107);
+  static amberAccent = Color.new(0xFFFFD740);
+  static orange = Color.new(0xFFFF9800);
+  static orangeAccent = Color.new(0xFFFFAB40);
+  static deepOrange = Color.new(0xFFFF5722);
+  static deepOrangeAccent = Color.new(0xFFFF6E40);
+  static brown = Color.new(0xFF795548);
+  static grey = Color.new(0xFF9E9E9E);
+  static blueGrey = Color.new(0xFF607D8B);
+}
+//#endregion
+
+//#region ColorFilter
+export class ColorFilter extends DartClass {
+  color?:Color;
+  blendMode?:BlendMode;
+
+  constructor(color:Color, blendMode:BlendMode){
+    super();
+    this.color = color;
+    this.blendMode =blendMode;
+  }
+
+  static new(color:Color, blendMode:BlendMode) {
+    return new ColorFilter(color,blendMode);
+  }
+
+  static mode(color:Color, blendMode:BlendMode){
+    let v = new ColorFilter(color,blendMode);
+    v.constructorName = "mode";
+    return v;
+  }
+}
+//#endregion
+
+
+
+//#endregion
+
+
+//#region ------- D -------
+
+//#region ****** DragDetails ******
+//****** DragDownDetails ******
+interface DragDownDetailsConfig {
+  globalPosition?:Offset;
+  localPosition?:Offset;
+}
+export class DragDownDetails extends DartClass {
+  globalPosition?:Offset;
+  localPosition?:Offset;
+
+  /**
+   * @param config config: 
+      {
+        globalPosition?:Offset,
+        localPosition?:Offset,
+      }
+   */
+  constructor(config?: DragDownDetailsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.globalPosition = config.globalPosition;
+      this.localPosition = config.localPosition;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        globalPosition?:Offset,
+        localPosition?:Offset,
+      }
+   */
+  static new (config?: DragDownDetailsConfig) {
+    return new DragDownDetails(config);
+  }
+}
+
+//****** DragStartDetails ******
+interface DragStartDetailsConfig {
+  globalPosition?:Offset;
+  localPosition?:Offset;
+  sourceTimeStamp?:Duration;
+}
+export class DragStartDetails extends DartClass {
+  globalPosition?:Offset;
+  localPosition?:Offset;
+  sourceTimeStamp?:Duration;
+
+  /**
+   * @param config config: 
+      {
+        globalPosition?:Offset,
+        localPosition?:Offset,
+        sourceTimeStamp?:Duration,
+      }
+   */
+  constructor(config?: DragStartDetailsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.globalPosition = config.globalPosition;
+      this.localPosition = config.localPosition;
+      this.sourceTimeStamp = config.sourceTimeStamp;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        globalPosition?:Offset,
+        localPosition?:Offset,
+        sourceTimeStamp?:Duration,
+      }
+   */
+  static new (config?: DragStartDetailsConfig) {
+    return new DragStartDetails(config);
+  }
+}
+
+//****** DragUpdateDetails ******
+interface DragUpdateDetailsConfig {
+  globalPosition?:Offset;
+  localPosition?:Offset;
+  sourceTimeStamp?:Duration;
+  delta?:Offset;
+  primaryDelta?:number;
+}
+export class DragUpdateDetails extends DartClass {
+  globalPosition?:Offset;
+  localPosition?:Offset;
+  sourceTimeStamp?:Duration;
+  delta?:Offset;
+  primaryDelta?:number;
+
+  /**
+   * @param config config: 
+      {
+        globalPosition?:Offset,
+        localPosition?:Offset,
+        sourceTimeStamp?:Duration,
+        delta?:Offset,
+        primaryDelta?:number,
+      }
+   */
+  constructor(config?: DragUpdateDetailsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.globalPosition = config.globalPosition;
+      this.localPosition = config.localPosition;
+      this.sourceTimeStamp = config.sourceTimeStamp;
+      this.delta = config.delta;
+      this.primaryDelta = config.primaryDelta;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        globalPosition?:Offset,
+        localPosition?:Offset,
+        sourceTimeStamp?:Duration,
+        delta?:Offset,
+        primaryDelta?:number,
+      }
+   */
+  static new (config?: DragUpdateDetailsConfig) {
+    return new DragUpdateDetails(config);
+  }
+}
+
+//****** DragEndDetails ******
+interface DragEndDetailsConfig {
+  velocity?:Velocity;
+  primaryVelocity?:number;
+}
+export class DragEndDetails extends DartClass {
+  velocity?:Velocity;
+  primaryVelocity?:number;
+
+  /**
+   * @param config config: 
+      {
+        velocity?:Velocity, 
+        primaryVelocity?:number, 
+      }
+   */
+  constructor(config?: DragEndDetailsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.velocity = config.velocity;
+      this.primaryVelocity = config.primaryVelocity;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        velocity?:Velocity, 
+        primaryVelocity?:number, 
+      }
+   */
+  static new (config?: DragEndDetailsConfig) {
+    return new DragEndDetails(config);
+  }
+}
+//#endregion
+
+//#region ****** Duration ******
+interface DurationConfig {
+  days?:number;
+  hours?:number;
+  minutes?:number;
+  seconds?:number;
+  milliseconds?:number;
+}
+export class Duration extends DartClass {
+  days?:number;
+  hours?:number;
+  minutes?:number;
+  seconds?:number;
+  milliseconds?:number;
+  inMilliseconds:number;
+
+  /**
+   * @param config config: 
+      {
+        days?:number, 
+        hours?:number, 
+        minutes?:number, 
+        seconds?:number, 
+        milliseconds?:number
+      }
+   */
+  constructor(config?: DurationConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.days = config.days;
+      this.hours = config.hours;
+      this.minutes = config.minutes;
+      this.seconds = config.seconds;
+      this.milliseconds = config.milliseconds;
+    }
+
+    this.inMilliseconds=0;
+    if(this.milliseconds!=null && this.milliseconds!=undefined){
+      this.inMilliseconds=this.inMilliseconds+this.milliseconds;
+    }
+
+    if(this.seconds!=null && this.seconds!=undefined){
+      this.inMilliseconds=this.inMilliseconds+this.seconds*1000;
+    }
+    if(this.minutes!=null && this.minutes!=undefined){
+      this.inMilliseconds=this.inMilliseconds+this.minutes*1000*60;
+    }
+    if(this.hours!=null && this.hours!=undefined){
+      this.inMilliseconds=this.inMilliseconds+this.hours*1000*60*60;
+    }
+    if(this.days!=null && this.days!=undefined){
+      this.inMilliseconds=this.inMilliseconds+this.days*1000*60*60*24;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        days?:number, 
+        hours?:number, 
+        minutes?:number, 
+        seconds?:number, 
+        milliseconds?:number
+      }
+   */
+  static new(config?: DurationConfig) {
+    return new Duration(config);
+  }
+}
+//#endregion
+
+//#region ****** Decoration ******
+export abstract class Decoration extends DartClass{
+
+  /**
+   * Decoration.box = new BoxDecoration(config?: BoxDecorationConfig)
+   * @param config 
+      {
+        color?:Color, 
+        border?:Border;
+        borderRadius?:BorderRadius, 
+        boxShadow?:BoxShadow, 
+        gradient?:BaseGradient 
+        backgroundBlendMode?:BlendMode, 
+        shape?:BoxShape,
+        image?:DecorationImage, 
+      }
+   */
+  static box(config?: BoxDecorationConfig){
+    return new BoxDecoration(config);
+  }
+
+
+  /**
+   * Decoration.flutterLogo = new FlutterLogoDecoration(config?: FlutterLogoDecorationConfig)
+   * @param config config: 
+      {
+        textColor?:Color, 
+        style?:FlutterLogoStyle, 
+        margin?:EdgeInsets, 
+      }
+   */
+  static flutterLogo(config?: FlutterLogoDecorationConfig){
+    return new FlutterLogoDecoration(config);
+  }
+
+}
+
+//****** BoxDecoration ******
+interface BoxDecorationConfig { 
+  color?:Color;
+  border?:Border;
+  borderRadius?:BorderRadius;
+  boxShadow?:BoxShadow;
+  gradient?:Gradient;
+  backgroundBlendMode?:BlendMode;
+  shape?:BoxShape;
+  image?:any;
+}
+export class BoxDecoration extends Decoration {
+  color?:Color;
+  border?:Border;
+  borderRadius?:BorderRadius;
+  boxShadow?:BoxShadow;
+  gradient?:Gradient;
+  backgroundBlendMode?:BlendMode;
+  shape?:BoxShape;
+  image?:any;
+
+  /**
+   * @param config config: 
+      {
+        color?:Color, 
+        border?:Border;
+        borderRadius?:BorderRadius, 
+        boxShadow?:BoxShadow, 
+        gradient?:BaseGradient 
+        backgroundBlendMode?:BlendMode, 
+        shape?:BoxShape,
+        image?:DecorationImage, 
+      }
+    */
+  constructor(config?: BoxDecorationConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.color = config.color;
+      this.border = config.border;
+      this.borderRadius = config.borderRadius;
+      this.boxShadow = config.boxShadow;
+      this.gradient = config.gradient;
+      this.backgroundBlendMode = config.backgroundBlendMode;
+      this.shape = config.shape;
+      this.image = config.image;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        color?:Color, 
+        border?:Border;
+        borderRadius?:BorderRadius, 
+        boxShadow?:BoxShadow, 
+        gradient?:BaseGradient 
+        backgroundBlendMode?:BlendMode, 
+        shape?:BoxShape,
+        image?:DecorationImage, 
+      }
+    */
+  static new(config?: BoxDecorationConfig){
+    return new BoxDecoration(config);
+  }
+}
+
+//****** FlutterLogoDecoration ******
+interface FlutterLogoDecorationConfig {
+  textColor?:Color;
+  style?:FlutterLogoStyle;
+  margin?:EdgeInsets;
+}
+export class FlutterLogoDecoration extends Decoration {
+  textColor?:Color;
+  style?:FlutterLogoStyle;
+  margin?:EdgeInsets;
+
+  /**
+   * @param config config: 
+      {
+        textColor?:Color, 
+        style?:FlutterLogoStyle, 
+        margin?:EdgeInsets, 
+      }
+   */
+  constructor(config?: FlutterLogoDecorationConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.textColor = config.textColor;
+      this.style = config.style;
+      this.margin = config.margin;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        textColor?:Color, 
+        style?:FlutterLogoStyle, 
+        margin?:EdgeInsets, 
+      }
+   */
+  static new(config?: FlutterLogoDecorationConfig) {
+    return new FlutterLogoDecoration(config);
+  }
+} 
+
+
+//#endregion
+
+//#endregion
+
+
+//#region ------- E -------
+
+//#region ------- EdgeInsetsGeometry -------
+//EdgeInsetsGeometry
+export abstract class EdgeInsetsGeometry extends DartClass {}
+
+//EdgeInsets
+interface EdgeInsetsConfig {
+  left?:number;
+  top?:number;
+  right?:number;
+  bottom?:number;
+  value?:number;
+  vertical?:number;
+  horizontal?:number;
+}
+export class EdgeInsets extends EdgeInsetsGeometry {
+  left?:number;
+  top?:number;
+  right?:number;
+  bottom?:number;
+  value?:number;
+  vertical?:number;
+  horizontal?:number;
+
+  /**
+   * @param config config:
+      {
+        left?:number,
+        top?:number,
+        right?:number,
+        bottom?:number
+      }
+   */
+  constructor(config?: EdgeInsetsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.left = config.left;
+      this.top = config.top;
+      this.right = config.right;
+      this.bottom = config.bottom;
+    }
+  }
+
+  /**
+   * @param config config:
+      {
+        left?:number,
+        top?:number,
+        right?:number,
+        bottom?:number
+      }
+   */
+  static new(config?: EdgeInsetsConfig) {
+    return new EdgeInsets(config);
+  }
+
+  static zero() {
+    let v = new EdgeInsets();
+    v.constructorName = "zero";
+    return v;
+  }
+
+  static fromLTRB(left:number, top:number, right:number, bottom:number) {
+    let v = new EdgeInsets();
+    v.constructorName = "fromLTRB";
+    v.left = left;
+    v.top = top;
+    v.right = right;
+    v.bottom = bottom;
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        left?:number, 
+        top?:number, 
+        right?:number, 
+        bottom?:number
+      }
+   */
+  static only(config?: EdgeInsetsConfig) {
+    let v = new EdgeInsets();
+    v.constructorName = "only";
+    if(config!=null && config!=undefined){
+      v.left = config.left;
+      v.top = config.top;
+      v.right = config.right;
+      v.bottom = config.bottom;
+    }
+    return v;
+  }
+
+  static all(value:number){
+    let v = new EdgeInsets();
+    v.constructorName = "all";
+    v.value = value;
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        vertical?:number, 
+        horizontal?:number
+      }
+   */
+  static symmetric(config?: EdgeInsetsConfig) {
+    let v = new EdgeInsets();
+    v.constructorName = "symmetric";
+    if(config!=null && config!=undefined){
+      v.vertical = config.vertical;
+      v.horizontal = config.horizontal;
+    }
+    return v;
+  }
+}
+
+//EdgeInsetsDirectional
+interface EdgeInsetsDirectionalConfig {
+  start?:number;
+  top?:number;
+  end?:number;
+  bottom?:number;
+}
+export class EdgeInsetsDirectional extends EdgeInsetsGeometry {
+  start?:number;
+  top?:number;
+  end?:number;
+  bottom?:number;
+
+  /**
+   * @param config config: 
+      {
+        start?:number, 
+        top?:number, 
+        end?:number, 
+        bottom?:number,
+      }
+   */
+  constructor(config?: EdgeInsetsDirectionalConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.start = config.start;
+      this.top = config.top;
+      this.end = config.end;
+      this.bottom = config.bottom;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        start?:number, 
+        top?:number, 
+        end?:number, 
+        bottom?:number,
+      }
+   */
+  static new(config?: EdgeInsetsDirectionalConfig) {
+    return new EdgeInsetsDirectional(config);
+  }
+
+  static fromSTEB(start:number, top:number, end:number, bottom:number) {
+    let v = new EdgeInsetsDirectional();
+    v.constructorName = "fromSTEB";
   
-    static new(text?:string) {
-      return new TextEditingController(text);
+    v.start = start;
+    v.top = top;
+    v.end = end;
+    v.bottom = bottom;
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        start?:number, 
+        top?:number, 
+        end?:number, 
+        bottom?:number
+      }
+   */
+  static only(config?: EdgeInsetsDirectionalConfig) {
+    let v = new EdgeInsetsDirectional();
+    v.constructorName = "only";
+    if(config!=null && config!=undefined){
+      v.start = config.start;
+      v.top = config.top;
+      v.end = config.end;
+      v.bottom = config.bottom;
+    }
+    return v;
+  }
+}
+
+//#endregion
+
+//#endregion
+
+
+//#region ------- F -------
+
+//****** Future ******
+export class Future extends DartClass{
+  /**
+   * 延时处理
+   * @param duration 
+   * @param onBack 
+   */
+  static delayed(duration:Duration,onBack?:VoidCallback){
+    dart_sdk.async.Future.delayed(duration,onBack);
+  }
+}
+
+//****** FocusNode ******
+interface FocusNodeConfig {
+  debugLabel?:string;
+  skipTraversal?:boolean;
+  canRequestFocus?:boolean;
+  descendantsAreFocusable?:boolean;
+}
+export class FocusNode extends DartClass {
+  debugLabel?:string;
+  skipTraversal?:boolean;
+  canRequestFocus?:boolean;
+  descendantsAreFocusable?:boolean;
+
+  /**
+   * @param config config: 
+      {
+        debugLabel?:string,
+        skipTraversal?:boolean,
+        canRequestFocus?:boolean,
+        descendantsAreFocusable?:boolean,
+      }
+   */
+  constructor(config?: FocusNodeConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.debugLabel = config.debugLabel;
+      this.skipTraversal = config.skipTraversal;
+      this.canRequestFocus = config.canRequestFocus;
+      this.descendantsAreFocusable = config.descendantsAreFocusable;
+    }
+
+  }
+
+  /**
+   * @param config config: 
+      {
+        textColor?:Color, 
+        style?:FlutterLogoStyle, 
+        margin?:EdgeInsets, 
+      }
+   */
+  static new(config?: FocusNodeConfig) {
+    return new FocusNode(config);
+  }
+} 
+
+//****** FractionalOffset ******
+export class FractionalOffset extends DartClass {
+  dx?:number;
+  dy?:number;
+
+  constructor(dx:number, dy:number){
+    super();
+    this.dx = dx;
+    this.dy = dy;
+  }
+
+  static new(dx:number, dy:number) {
+    return new FractionalOffset(dx,dy);
+  }
+
+  static topLeft = FractionalOffset.new(0.0, 0.0); 
+  static topCenter = FractionalOffset.new(0.5, 0.0); 
+  static topRight = FractionalOffset.new(1.0, 0.0); 
+
+  static centerLeft = FractionalOffset.new(0.0, 0.5); 
+  static center = FractionalOffset.new(0.5, 0.5); 
+  static centerRight = FractionalOffset.new(1.0, 0.5);
+
+  static bottomLeft = FractionalOffset.new(0.0, 1.0);
+  static bottomCenter = FractionalOffset.new(0.5, 1.0);
+  static bottomRight = FractionalOffset.new(1.0, 1.0); 
+
+}
+
+//****** File ******
+export class File extends DartClass {
+  path?:string;
+  uri?:Uri;
+  rawPath?:Uint8List;
+
+  constructor(path?:string){
+    super();
+    this.path = path;
+  }
+
+  static new(path:string) {
+    return new File(path);
+  }
+
+  static fromUri(uri:Uri) {
+    let v = new File();
+    v.constructorName = "fromUri";
+    v.uri = uri;
+    return v;
+  }
+
+  static fromRawPath(rawPath:Uint8List) {
+    let v = new File();
+    v.constructorName = "fromRawPath";
+    v.rawPath = rawPath;
+    return v;
+  }
+}
+  
+//#endregion
+  
+
+//#region ------- G -------
+
+//#region ****** GradientTransform ******
+export abstract class GradientTransform extends DartClass {
+
+  static rotation(radians:number) {
+    return new GradientRotation(radians);
+  }
+}
+
+export class GradientRotation extends GradientTransform {
+  radians:number;
+
+  /**
+   * 
+   * @param radians 
+   */
+  constructor(radians:number){
+    super();
+    this.radians = radians;
+  }
+
+  /**
+   * 
+   * @param radians 
+   */
+  static new(radians:number) {
+    return new GradientRotation(radians);
+  }
+} 
+//#endregion
+
+
+//#region ****** Gradient ******
+export abstract class Gradient extends DartClass {
+
+  /**
+   * @param config config: 
+      {
+        begin?:Alignment, 
+        end?:Alignment, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode,
+        transform?:GradientRotation,
+      }
+   */
+  static linear(config?: LinearGradientConfig){
+    return new LinearGradient(config);
+  }
+
+  /**
+   * @param config config: 
+      {
+        center?:Alignment, 
+        radius?:number, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode, 
+        focal?:Alignment, 
+        focalRadius?:number,
+        transform?:GradientRotation,
+      }
+   */
+  static radial(config?: RadialGradientConfig){
+    return new RadialGradient(config);
+  }
+
+  /**
+   * @param config config: 
+      {
+        center?:Alignment, 
+        startAngle?:number, 
+        endAngle?:number, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode,
+        transform?:GradientRotation,
+      }
+   */
+  static sweep(config?: SweepGradientConfig){
+    return new SweepGradient(config);
+  }
+
+}
+
+//****** LinearGradient ******
+interface LinearGradientConfig {
+  
+  colors:Array<Color>;
+  stops?:Array<number>;
+  tileMode?:TileMode;
+  transform?:GradientTransform;
+
+  begin?:Alignment;
+  end?:Alignment;
+}
+export class LinearGradient extends Gradient {
+
+  colors?:Array<Color>;
+  stops?:Array<number>;
+  tileMode?:TileMode;
+  transform?:GradientTransform;
+
+  begin?:Alignment;
+  end?:Alignment;
+
+  /**
+   * @param config config: 
+      {
+        begin?:Alignment, 
+        end?:Alignment, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode,
+        transform?:GradientRotation,
+      }
+   */
+  constructor(config?: LinearGradientConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.begin = config.begin;
+      this.end = config.end;
+      this.colors = config.colors;
+      this.stops = config.stops;
+      this.tileMode = config.tileMode;
+      this.transform = config.transform;
+    }
+  }
+
+
+  /**
+   * @param config config: 
+      {
+        begin?:Alignment, 
+        end?:Alignment, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode,
+        transform?:GradientRotation,
+      }
+   */
+    static new(config?: LinearGradientConfig) {
+      return new LinearGradient(config);
+  } 
+}
+
+//****** RadialGradient ******
+interface RadialGradientConfig {
+  
+  center?:Alignment;
+  colors?:Array<Color>;
+  stops?:Array<number>;
+  tileMode?:TileMode;
+  transform?:GradientTransform;
+
+  radius?:number;
+  focal?:Alignment;
+  focalRadius?:number;
+}
+export class RadialGradient extends Gradient {
+
+  center?:Alignment;
+  colors?:Array<Color>;
+  stops?:Array<number>;
+  tileMode?:TileMode;
+  transform?:GradientTransform;
+
+  radius?:number;
+  focal?:Alignment;
+  focalRadius?:number;
+
+
+  /**
+   * @param config config: 
+      {
+        center?:Alignment, 
+        radius?:number, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode, 
+        focal?:Alignment, 
+        focalRadius?:number,
+        transform?:GradientRotation,
+      }
+   */
+  constructor(config?: RadialGradientConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.center = config.center;
+      this.radius = config.radius;
+      this.colors = config.colors;
+      this.stops = config.stops;
+      this.tileMode = config.tileMode;
+      this.focal = config.focal;
+      this.focalRadius = config.focalRadius;
+      this.transform = config.transform;
+    }
+  }
+
+
+  /**
+   * @param config config: 
+      {
+        center?:Alignment, 
+        radius?:number, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode, 
+        focal?:Alignment, 
+        focalRadius?:number,
+        transform?:GradientRotation,
+      }
+   */
+    static new(config?: RadialGradientConfig) {
+      return new RadialGradient(config);
+  } 
+}
+
+//****** SweepGradient ******
+interface SweepGradientConfig {
+  center?:Alignment;
+  startAngle?:number;
+  endAngle?:number;
+  colors?:Array<Color>;
+  stops?:Array<number>;
+  tileMode?:TileMode;
+  transform?:GradientTransform;
+}
+export class SweepGradient extends Gradient {
+
+  center?:Alignment;
+  startAngle?:number;
+  endAngle?:number;
+  colors?:Array<Color>;
+  stops?:Array<number>;
+  tileMode?:TileMode;
+  transform?:GradientTransform;
+
+  /**
+   * @param config config: 
+      {
+        center?:Alignment, 
+        startAngle?:number, 
+        endAngle?:number, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode,
+        transform?:GradientRotation,
+      }
+   */
+  constructor(config?: SweepGradientConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.center = config.center;
+      this.startAngle = config.startAngle;
+      this.endAngle = config.endAngle;
+      this.colors = config.colors;
+      this.stops = config.stops;
+      this.tileMode = config.tileMode;
+      this.transform = config.transform;
+    }
+  }
+
+
+  /**
+   * @param config config: 
+      {
+        center?:Alignment, 
+        startAngle?:number, 
+        endAngle?:number, 
+        colors:Array<Color>, 
+        stops?:Array<number>, 
+        tileMode?:TileMode,
+        transform?:GradientRotation,
+      }
+   */
+    static new(config?: SweepGradientConfig) {
+      return new SweepGradient(config);
+  } 
+}
+
+
+//#endregion
+
+
+//#endregion
+
+
+//#region ------- I -------
+
+//#region ImageProvider
+interface ImageProviderConfig {
+  scale?:number;
+
+  width?:number;
+  height?:number;
+  allowUpscaling?:boolean;
+
+  bundle?:AssetBundle;
+  packageName?:string
+
+}
+export class ImageProvider extends DartClass {
+  file?:File;
+  scale?:number;
+  bytes?:Uint8List;
+  url?:string;
+  imageName?:string;
+  bundle?:AssetBundle;
+  packageName?:string;
+
+  width?:number;
+  height?:number;
+  allowUpscaling?:boolean;
+  imageProvider?:ImageProvider
+
+  /**
+   * @param config config: 
+      {
+        scale?:number
+      }
+   */
+  static file(file:File,config?: ImageProviderConfig){
+    var v = new ImageProvider();
+    v.file = file;
+    v.constructorName = "file";
+    if(config!=null && config!=undefined){
+      v.scale = config.scale;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        scale?:number,
+      }
+   */
+  static memory(bytes:Uint8List,config?: ImageProviderConfig) {
+    var v = new ImageProvider();
+    v.bytes = bytes;
+    v.constructorName = "memory";
+    if(config!=null && config!=undefined){
+      v.scale = config.scale;
+    }
+    return v;
+  }
+
+   /**
+   * @param config config: 
+      {
+        scale?:number,
+      }
+   */
+  static network(url:string, config: ImageProviderConfig) {
+    var v = new ImageProvider();
+    v.url = url;
+    v.constructorName = "Network";
+    if(config!=null && config!=undefined){
+      v.scale = config.scale;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        width?:number, 
+        height?:number, 
+        allowUpscaling?:boolean, 
+      }
+   */
+  static resize(imageProvider?:ImageProvider,config?: ImageProviderConfig) {
+    var v = new ImageProvider();
+    v.constructorName = "resize";
+    v.imageProvider= imageProvider;
+    if(config!=null && config!=undefined){
+      v.width = config.width;
+      v.allowUpscaling= config.allowUpscaling;
+      v.height = config.height;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        imageName:string, 
+        scale?:number, 
+        bundle?:BaseAssetBundle, 
+        packageName?:string,
+      }
+   */
+  static exactAsset(imageName:string,config?: ImageProviderConfig) {
+    var v = new ImageProvider();
+    v.constructorName = "exactAsset";
+    v.imageName = imageName;
+    if(config!=null && config!=undefined){      
+      v.scale = config.scale;
+      v.bundle = config.bundle;
+      v.packageName = config.packageName;
+    }
+    return v;
+  }
+}
+//#endregion
+
+
+//****** IconData ******
+export class IconData extends DartClass {
+  icon:string;
+
+  constructor(icon:string){
+    super();
+    this.icon = icon;
+  }
+  static new(icon:string) {
+   return new IconData(icon);
+  }
+}
+  
+//****** InputDecoration ******
+interface InputDecorationConfig {
+  icon?:Widget;
+  labelText?:string;
+  labelStyle?:TextStyle;
+  helperText?:string;
+  helperStyle?:TextStyle;
+  helperMaxLines?:number;
+  hintText?:string;
+  hintStyle?:TextStyle;
+  hintMaxLines?:number;
+  errorText?:string;
+  errorStyle?:TextStyle;
+  errorMaxLines?:number;
+  hasFloatingPlaceholder?:boolean;
+  floatingLabelBehavior?:FloatingLabelBehavior;
+  isCollapsed?:boolean;
+  isDense?:boolean;
+  contentPadding?:EdgeInsets;
+  prefixIcon?:Widget;
+  prefixIconConstraints?:BoxConstraints;
+  prefix?:Widget;
+  prefixText?:string;
+  prefixStyle?:TextStyle;
+  suffixIcon?:Widget;
+  suffix?:Widget;
+  suffixText?:string;
+  suffixStyle?:TextStyle;
+  suffixIconConstraints?:BoxConstraints;
+  counter?:Widget;
+  counterText?:string;
+  counterStyle?:TextStyle;
+  filled?:boolean;
+  fillColor?:Color;
+  focusColor?:Color;
+  hoverColor?:Color;
+  errorBorder?:InputBorder;
+  focusedBorder?:InputBorder;
+  focusedErrorBorder?:InputBorder;
+  disabledBorder?:InputBorder;
+  enabledBorder?:InputBorder;
+  border?:InputBorder;
+  enabled?:boolean;
+  semanticCounterText?:string;
+  alignLabelWithHint?:boolean;
+}
+export class InputDecoration extends DartClass {
+  icon?:Widget;
+  labelText?:string;
+  labelStyle?:TextStyle;
+  helperText?:string;
+  helperStyle?:TextStyle;
+  helperMaxLines?:number;
+  hintText?:string;
+  hintStyle?:TextStyle;
+  hintMaxLines?:number;
+  errorText?:string;
+  errorStyle?:TextStyle;
+  errorMaxLines?:number;
+  hasFloatingPlaceholder?:boolean;
+  floatingLabelBehavior?:FloatingLabelBehavior;
+  isCollapsed?:boolean;
+  isDense?:boolean;
+  contentPadding?:EdgeInsets;
+  prefixIcon?:Widget;
+  prefixIconConstraints?:BoxConstraints;
+  prefix?:Widget;
+  prefixText?:string;
+  prefixStyle?:TextStyle;
+  suffixIcon?:Widget;
+  suffix?:Widget;
+  suffixText?:string;
+  suffixStyle?:TextStyle;
+  suffixIconConstraints?:BoxConstraints;
+  counter?:Widget;
+  counterText?:string;
+  counterStyle?:TextStyle;
+  filled?:boolean;
+  fillColor?:Color;
+  focusColor?:Color;
+  hoverColor?:Color;
+  errorBorder?:InputBorder;
+  focusedBorder?:InputBorder;
+  focusedErrorBorder?:InputBorder;
+  disabledBorder?:InputBorder;
+  enabledBorder?:InputBorder;
+  border?:InputBorder;
+  enabled?:boolean;
+  semanticCounterText?:string;
+  alignLabelWithHint?:boolean;
+
+  /**
+   * @param config config: 
+      {
+        icon?:Widget, 
+        labelText?:string, 
+        labelStyle?:TextStyle, 
+        helperText?:string, 
+        helperStyle?:TextStyle, 
+        helperMaxLines?:number, 
+        hintText?:string, 
+        hintStyle?:TextStyle, 
+        hintMaxLines?:number, 
+        errorText?:string, 
+        errorStyle?:TextStyle, 
+        errorMaxLines?:number, 
+        hasFloatingPlaceholder?:boolean, 
+        floatingLabelBehavior?:FloatingLabelBehavior, 
+        isCollapsed?:boolean, 
+        isDense?:boolean, 
+        contentPadding?:EdgeInsets, 
+        prefixIcon?:Widget, 
+        prefixIconConstraints?:BoxConstraints, 
+        prefix?:Widget, 
+        prefixText?:string, 
+        prefixStyle?:TextStyle, 
+        suffixIcon?:Widget, 
+        suffix?:Widget, 
+        suffixText?:string, 
+        suffixStyle?:TextStyle, 
+        suffixIconConstraints?:BoxConstraints, 
+        counter?:Widget, 
+        counterText?:string, 
+        counterStyle?:TextStyle, 
+        filled?:boolean, 
+        fillColor?:Color, 
+        focusColor?:Color, 
+        hoverColor?:Color, 
+        errorBorder?:InputBorder, 
+        focusedBorder?:InputBorder, 
+        focusedErrorBorder?:InputBorder, 
+        disabledBorder?:InputBorder, 
+        enabledBorder?:InputBorder, 
+        border?:InputBorder, 
+        enabled?:boolean, 
+        semanticCounterText?:string, 
+        alignLabelWithHint?:boolean, 
+      }
+   */
+  constructor(config?: InputDecorationConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.icon = config.icon;
+      this.labelText = config.labelText;
+      this.labelStyle = config.labelStyle;
+      this.helperText = config.helperText;
+      this.helperStyle = config.helperStyle;
+      this.helperMaxLines = config.helperMaxLines;
+      this.hintText = config.hintText;
+      this.hintStyle = config.hintStyle;
+      this.hintMaxLines = config.hintMaxLines;
+      this.errorText = config.errorText;
+      this.errorStyle = config.errorStyle;
+      this.errorMaxLines = config.errorMaxLines;
+      this.hasFloatingPlaceholder = config.hasFloatingPlaceholder;
+      this.floatingLabelBehavior = config.floatingLabelBehavior;
+      this.isCollapsed = config.isCollapsed;
+      this.isDense = config.isDense;
+      this.contentPadding = config.contentPadding;
+      this.prefixIcon = config.prefixIcon;
+      this.prefixIconConstraints = config.prefixIconConstraints;
+      this.prefix = config.prefix;
+      this.prefixText = config.prefixText;
+      this.prefixStyle = config.prefixStyle;
+      this.suffixIcon = config.suffixIcon;
+      this.suffix = config.suffix;
+      this.suffixText = config.suffixText;
+      this.suffixStyle = config.suffixStyle;
+      this.suffixIconConstraints = config.suffixIconConstraints;
+      this.counter = config.counter;
+      this.counterText = config.counterText;
+      this.counterStyle = config.counterStyle;
+      this.filled = config.filled;
+      this.fillColor = config.fillColor;
+      this.focusColor = config.focusColor;
+      this.hoverColor = config.hoverColor;
+      this.errorBorder = config.errorBorder;
+      this.focusedBorder = config.focusedBorder;
+      this.focusedErrorBorder = config.focusedErrorBorder;
+      this.disabledBorder = config.disabledBorder;
+      this.enabledBorder = config.enabledBorder;
+      this.border = config.border;
+      this.enabled = config.enabled;
+      this.semanticCounterText = config.semanticCounterText;
+      this.alignLabelWithHint = config.alignLabelWithHint;
+    }
+  }
+
+
+  /**
+   * @param config config: 
+      {
+        icon?:Widget, 
+        labelText?:string, 
+        labelStyle?:TextStyle, 
+        helperText?:string, 
+        helperStyle?:TextStyle, 
+        helperMaxLines?:number, 
+        hintText?:string, 
+        hintStyle?:TextStyle, 
+        hintMaxLines?:number, 
+        errorText?:string, 
+        errorStyle?:TextStyle, 
+        errorMaxLines?:number, 
+        hasFloatingPlaceholder?:boolean, 
+        floatingLabelBehavior?:FloatingLabelBehavior, 
+        isCollapsed?:boolean, 
+        isDense?:boolean, 
+        contentPadding?:EdgeInsets, 
+        prefixIcon?:Widget, 
+        prefixIconConstraints?:BoxConstraints, 
+        prefix?:Widget, 
+        prefixText?:string, 
+        prefixStyle?:TextStyle, 
+        suffixIcon?:Widget, 
+        suffix?:Widget, 
+        suffixText?:string, 
+        suffixStyle?:TextStyle, 
+        suffixIconConstraints?:BoxConstraints, 
+        counter?:Widget, 
+        counterText?:string, 
+        counterStyle?:TextStyle, 
+        filled?:boolean, 
+        fillColor?:Color, 
+        focusColor?:Color, 
+        hoverColor?:Color, 
+        errorBorder?:InputBorder, 
+        focusedBorder?:InputBorder, 
+        focusedErrorBorder?:InputBorder, 
+        disabledBorder?:InputBorder, 
+        enabledBorder?:InputBorder, 
+        border?:InputBorder, 
+        enabled?:boolean, 
+        semanticCounterText?:string, 
+        alignLabelWithHint?:boolean, 
+      }
+   */
+    static new(config?: InputDecorationConfig) {
+      return new InputDecoration(config);
+  } 
+
+  
+  /**
+   * @param config config: 
+      {
+        hintText?:string, 
+        hasFloatingPlaceholder?:boolean, 
+        hintStyle?:TextStyle, 
+        filled?:boolean, 
+        fillColor?:Color, 
+        border?:InputBorder, 
+        enabled?:boolean 
+      }
+   */
+  static collapsed (config?: InputDecorationConfig) {
+    let v = new InputDecoration();
+    v.constructorName = "collapsed";
+
+    if(config!=null && config!=undefined){
+      v.hintText = config.hintText;
+      v.hasFloatingPlaceholder = config.hasFloatingPlaceholder;
+      v.hintStyle = config.hintStyle;
+      v.filled = config.filled;
+      v.fillColor = config.fillColor;
+      v.border = config.border;
+      v.enabled = config.enabled;
+    }
+
+    return v;
+  }
+}
+
+//#endregion
+
+
+//#region ------- K -------
+
+//#region ****** Key ******
+export abstract class Key extends DartClass {
+  value?:string;
+  debugLabel?:string;
+
+  /**
+   * Key.value = new ValueKey(value:string)
+   * @param value 
+   */
+  static value(value:string) {
+    return new ValueKey(value);
+  }
+
+  /**
+   * Key.unique = new UniqueKey()
+   * @param value 
+   */
+  static unique() {
+    return new UniqueKey();
+  }
+
+  /**
+   * Key.global = new GlobalKey(debugLabel:string)
+   * @param debugLabel 标签
+   */
+  static global(debugLabel?:string) {
+    return new GlobalKey(debugLabel);
+  }
+}
+
+export class ValueKey extends Key {
+  value:string
+
+  constructor(value:string){
+    super();
+    this.value = value;
+  }
+
+  static new(value:string) {
+    return new ValueKey(value);
+
+  }
+}
+
+export class UniqueKey extends Key {
+
+  constructor(){
+    super();
+  }
+
+  static new() {
+    return new UniqueKey();
+
+  }
+}
+
+export class GlobalKey extends Key {
+  debugLabel?:string;
+
+  constructor(debugLabel?:string){
+    super();
+    this.debugLabel = debugLabel;
+  }
+
+  static new(debugLabel?:string) {
+    return new GlobalKey(debugLabel);
+
+  }
+}
+
+//#endregion
+
+
+
+
+//#endregion
+
+
+//#region ------- M -------
+//****** MaskFilter ******
+export class MaskFilter extends DartClass {
+  style?:BlurStyle;
+  sigma?:number;
+
+  constructor(style:BlurStyle, sigma:number){
+    super();
+    this.style = style;
+    this.sigma = sigma;
+  }
+
+  static new(style:BlurStyle, sigma:number) {
+    return new MaskFilter(style,sigma);
+
+  }
+  static blur(style:BlurStyle, sigma:number) {
+    let v = new MaskFilter(style,sigma);
+    v.constructorName = "blur";
+    return v;
+  }
+}
+
+//****** Matrix4 ******
+export class Matrix4 extends DartClass {
+  arg0?:number;
+  arg1?:number;
+  arg2?:number;
+  arg3?:number;
+  arg4?:number;
+  arg5?:number;
+  arg6?:number;
+  arg7?:number;
+  arg8?:number;
+  arg9?:number;
+  arg10?:number;
+  arg11?:number;
+  arg12?:number;
+  arg13?:number;
+  arg14?:number;
+  arg15?:number;
+  values?:Array<number>;
+
+  v4_0?:Vector4;
+  v4_1?:Vector4;
+  v4_2?:Vector4;
+  v4_3?:Vector4;
+
+  v4_u?:Vector4;
+  v4_v?:Vector4;
+
+  radians?:number;
+  v3_t?:Vector3;
+  v3_s?:Vector3;
+  x?:number; 
+  y?:number; 
+  z?:number;
+  alpha?:number;
+  beta?:number;
+  rotation?:Quaternion;
+
+
+  scale(x?:any, y?:number, z?:number) {
+    let sx = null;
+    let sy = null;
+    let sz = null;
+    let sw = x instanceof Vector4 ? x.w : 1.0;
+    if (x instanceof Vector3) {
+      sx = x.x;
+      sy = x.y;
+      sz = x.z;
+    } else if (x instanceof Vector4) {
+      sx = x.x;
+      sy = x.y;
+      sz = x.z;
+    } else if (typeof x == "number") {
+      sx = x;
+      sy = y == null ? x : y;
+      sz = z == null ? x : z;
+    }
+
+    if(this.arg0!=null && this.arg0!=undefined && sx!=null && sx!=undefined){
+      this.arg0 = this.arg0 *sx;
+    }
+
+    if(this.arg1!=null && this.arg1!=undefined && sx!=null && sx!=undefined){
+      this.arg1 = this.arg1 *sx;
+    }
+    if(this.arg2!=null && this.arg2!=undefined && sx!=null && sx!=undefined){
+      this.arg2 = this.arg2 *sx;
+    }
+    if(this.arg3!=null && this.arg3!=undefined && sx!=null && sx!=undefined){
+      this.arg3 = this.arg3 *sx;
+    }
+    
+    if(this.arg4!=null && this.arg4!=undefined && sy!=null && sy!=undefined){
+      this.arg4 = this.arg4 *sy;
+    }
+    if(this.arg5!=null && this.arg5!=undefined && sy!=null && sy!=undefined){
+      this.arg5 = this.arg5 *sy;
+    }
+    if(this.arg6!=null && this.arg6!=undefined && sy!=null && sy!=undefined){
+      this.arg6 = this.arg6 *sy;
+    }
+    if(this.arg7!=null && this.arg7!=undefined && sy!=null && sy!=undefined){
+      this.arg7 = this.arg7 *sy;
     }
 
 
-    //清理值
-    clear() {
-      this.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "clear",
-        }));
+    if(this.arg8!=null && this.arg8!=undefined && sz!=null && sz!=undefined){
+      this.arg8 = this.arg8 *sz;
+    }
+    if(this.arg9!=null && this.arg9!=undefined && sz!=null && sz!=undefined){
+      this.arg9 = this.arg9 *sz;
+    }
+    if(this.arg10!=null && this.arg10!=undefined && sz!=null && sz!=undefined){
+      this.arg10 = this.arg10 *sz;
+    }
+    if(this.arg11!=null && this.arg11!=undefined && sz!=null && sz!=undefined){
+      this.arg11 = this.arg11 *sz;
     }
 
-    //获取文本值
-    async getText() {
+    if(this.arg12!=null && this.arg12!=undefined && sw!=null && sw!=undefined){
+      this.arg12 = this.arg12 *sw;
+    }
+    if(this.arg13!=null && this.arg13!=undefined && sw!=null && sw!=undefined){
+      this.arg13 = this.arg13 *sw;
+    }
+    if(this.arg14!=null && this.arg14!=undefined && sw!=null && sw!=undefined){
+      this.arg14 = this.arg14 *sw;
+    }
+    if(this.arg15!=null && this.arg15!=undefined && sw!=null && sw!=undefined){
+      this.arg15 = this.arg15 *sw;
+    }
+  }
+
+  constructor(arg0?:number,arg1?:number,arg2?:number,arg3?:number,arg4?:number,arg5?:number,arg6?:number,arg7?:number,
+    arg8?:number,arg9?:number,arg10?:number,arg11?:number,arg12?:number,arg13?:number,arg14?:number,arg15?:number){
+    super();
+    this.arg0 = arg0;
+      this.arg1 = arg1;
+      this.arg2 = arg2;
+      this.arg3 = arg3;
+      this.arg4 = arg4;
+      this.arg5 = arg5;
+      this.arg6 = arg6;
+      this.arg7 = arg7;
+      this.arg8 = arg8;
+      this.arg9 = arg9;
+      this.arg10 = arg10;
+      this.arg11 = arg11;
+      this.arg12 = arg12;
+      this.arg13 = arg13;
+      this.arg14 = arg14;
+      this.arg15 = arg15;
+  }
+
+  static new(arg0:number,arg1:number,arg2:number,arg3:number,arg4:number,arg5:number,arg6:number,arg7:number,
+    arg8:number,arg9:number,arg10:number,arg11:number,arg12:number,arg13:number,arg14:number,arg15:number) {
+      return new Matrix4(arg0,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14,arg15);
+  }
+
+  static identity() {
+    return Matrix4.new(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
+  }
+
+  static fromList(values:Array<number>) {
+    let v = new Matrix4();
+    v.constructorName = "fromList";
+    v.values = values;
+    return v;
+  }
+
+  static zero() {
+    let v = new Matrix4();
+    v.constructorName = "zero";
+    return v;
+  }
+
+  static columns(v4_0:Vector4,v4_1:Vector4,v4_2:Vector4,v4_3:Vector4) {
+    let v = new Matrix4();
+    v.constructorName = "columns";
+  
+    v.v4_0 = v4_0;
+    v.v4_1 = v4_1;
+    v.v4_2 = v4_2;
+    v.v4_3 = v4_3;
+  
+    return v;
+  }
+
+  static outer(v4_u:Vector4,v4_v:Vector4) {
+    let v = new Matrix4();
+    v.constructorName = "outer";
+    v.v4_u = v4_u;
+    v.v4_v = v4_v;
+    return v;
+  }
+
+  static rotationX(radians:number) {
+    let v = new Matrix4();
+    v.constructorName = "rotationX";
+  
+    v.radians = radians;
+  
+    return v;
+  }
+
+  static rotationY (radians:number) {
+    let v = new Matrix4();
+    v.constructorName = "rotationY";
+  
+    v.radians = radians;
+    return v;
+  }
+
+  static rotationZ(radians:number) {
+    let v = new Matrix4();
+    v.constructorName = "rotationZ";
+    v.radians = radians;
+    return v;
+  }
+
+   static translation(v3_t:Vector3) {
+    let v = new Matrix4();
+    v.constructorName = "translation";
+  
+    v.v3_t = v3_t;
+  
+    return v;
+  }
+
+  static translationValues(x:number, y:number, z:number) {
+    let v = new Matrix4();
+    v.constructorName = "translationValues";
+  
+    v.x = x;
+    v.y = y;
+    v.z = z;
+  
+    return v;
+  }
+
+  static diagonal3(v3_s:Vector3) {
+    let v = new Matrix4();
+    v.constructorName = "diagonal3";
+
+    v.v3_s = v3_s;
+
+    return v;
+  }
+
+  static diagonal3Values(x:number, y:number, z:number) {
+    let v = new Matrix4();
+    v.constructorName = "diagonal3Values";
+
+    v.x = x;
+    v.y = y;
+    v.z = z;
+
+    return v;
+  }
+
+  static skewX(alpha:number) {
+    let v = new Matrix4();
+    v.constructorName = "skewX";
+  
+    v.alpha = alpha;
+  
+    return v;
+  } 
+
+  static skewY(beta:number) {
+    let v = new Matrix4();
+    v.constructorName = "skewY";
+  
+    v.beta = beta;
+    return v;
+  }
+
+  static skew(alpha:number, beta:number) {
+    let v = new Matrix4();
+    v.constructorName = "skew";
+  
+    v.alpha = alpha;
+    v.beta = beta;
+  
+    return v;
+  }
+
+  static compose(v3_t:Vector3, rotation:Quaternion, v3_s:Vector3) {
+    let v = new Matrix4();
+    v.constructorName = "compose";
+
+    v.v3_t = v3_t;
+    v.rotation = rotation;
+    v.v3_s = v3_s;
+
+    return v;
+  }
+}
+
+//#endregion
+
+
+//#region ------- N -------
+
+//#region NotchedShape
+//****** NotchedShape ******
+export abstract class NotchedShape extends DartClass {}
+
+//****** CircularNotchedRectangle ******
+export class CircularNotchedRectangle extends NotchedShape {
+  constructor(){
+    super();
+  }
+
+  static new() {
+    return new CircularNotchedRectangle();
+  }
+}
+
+//****** AutomaticNotchedShape ******
+export class AutomaticNotchedShape extends NotchedShape {
+  host:ShapeBorder;
+  guest?:ShapeBorder;
+
+  constructor(host:ShapeBorder, guest?:ShapeBorder){
+    super();
+    this.host = host;
+    this.guest = guest;
+  }
+
+  static new(host:ShapeBorder, guest?:ShapeBorder) {
+    return new AutomaticNotchedShape(host,guest);
+  }
+}
+
+//#endregion
+
+//****** TODO Notification ******
+export class Notification extends DartClass {
+  static new() {
+    return new Notification();
+  }
+}
+//#endregion
+
+
+//#region ------- O -------
+
+//****** Offset ****** 
+export class Offset extends DartClass {
+  dx?:number;
+  dy?:number;
+  direction?:number;
+
+  constructor(dx?:number, dy?:number){
+    super();
+    this.dx = dx;
+    this.dy = dy;
+  }
+
+  static new(dx:number, dy:number) {
+    return new Offset(dx,dy);
+  }
+
+  static zero() {
+    let v = new Offset();
+    v.constructorName = "zero";
+    return v;
+  }
+
+  static infinite() {
+    let v = new Offset();
+    v.constructorName = "infinite";
+    return v;
+  }
+
+  static fromDirection(direction:number,) {
+    let v = new Offset();
+    v.constructorName = "fromDirection";
+    v.direction = direction;
+    return v;
+  }
+}
+
+//#endregion
+
+
+//#region ------- Q -------
+//****** Quaternion ******
+export class Quaternion extends DartClass {
+  x?:number;
+  y?:number;
+  z?:number;
+  w?:number;
+
+  constructor(x?:number, y?:number, z?:number, w?:number){
+    super();
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.w = w;
+  }
+
+  static new(x:number, y:number, z:number, w:number) {
+    return new Quaternion(x,y,z,w);
+  }
+}
+//#endregion
+  
+
+//#region ------- R -------
+  
+//****** Radius ******
+export class Radius extends DartClass {
+  radius?:number;
+  x?:number;
+  y?:number;
+
+  static circular(radius:number) {
+    let v = new Radius();
+    v.constructorName = "circular";
+    v.radius = radius;
+    return v;
+  }
+
+  static elliptical(x:number, y:number) {
+    let v = new Radius();
+    v.constructorName = "elliptical";
+    v.x = x;
+    v.y = y;
+    return v;
+  }
+
+  static zero() {
+    let v = new Radius();
+    v.constructorName = "zero";
+    return v;
+  }
+}
+  
+//****** RegExp ******
+interface RegExpConfig {
+  multiLine?:boolean; 
+  caseSensitive?:boolean;
+  unicode?:boolean; 
+  dotAll?:boolean;
+}
+export class RegExp extends DartClass {
+  source:string;
+  multiLine?:boolean; 
+  caseSensitive?:boolean;
+  unicode?:boolean; 
+  dotAll?:boolean;
+
+  /**
+   * @param config config: 
+      {
+        multiLine?:boolean, 
+        caseSensitive?:boolean, 
+        unicode?:boolean, 
+        dotAll?:boolean, 
+      }
+   */
+  constructor(source:string,config?: RegExpConfig){
+    super();
+    this.source = source;
+    if(config!=null && config!=undefined){
+      this.multiLine = config.multiLine;
+      this.caseSensitive = config.caseSensitive;
+      this.unicode = config.unicode;
+      this.dotAll = config.dotAll;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        multiLine?:boolean, 
+        caseSensitive?:boolean, 
+        unicode?:boolean, 
+        dotAll?:boolean, 
+      }
+   */
+  static new(source:string,config?: RegExpConfig) {
+    return new RegExp(source,config);
+  }
+}
+
+
+//****** Rect ******
+interface RectConfig {
+  center?:Offset;
+  width?:number;
+  height?:number;
+  left?:number;
+  top?:number;
+  right?:number;
+  bottom?:number;
+  radius?:number;
+  a?:Offset;
+  b?:Offset;
+}
+export class Rect extends DartClass {
+  center?:Offset;
+  width?:number;
+  height?:number;
+  left?:number;
+  top?:number;
+  right?:number;
+  bottom?:number;
+  radius?:number;
+  a?:Offset;
+  b?:Offset;
+
+  /**
+   * @param config config: 
+      {
+        center?:Offset, 
+        width?:number,
+        height?:number
+      }
+   */
+  static fromCenter (config: RectConfig) {
+    let v = new Rect();
+    v.constructorName = "fromCenter";
+    if(config!=null && config!=undefined){
+      v.center = config.center;
+      v.width = config.width;
+      v.height = config.height;  
+    }
+    return v;
+  }
+
+  static fromLTRB(left:number, top:number, right:number, bottom:number) {
+    let v = new Rect();
+    v.constructorName = "fromLTRB";
+    v.left = left;
+    v.top = top;
+    v.right = right;
+    v.bottom = bottom;  
+    return v;
+  }
+  
+  static fromLTWH(left:number, top:number, width:number, height:number) {
+    let v = new Rect();
+    v.constructorName = "fromLTWH";
+
+    v.left = left;
+    v.top = top;
+    v.width = width;
+    v.height = height;
+
+    return v;
+  }
+
+  /**
+   * @param config config: 
+    {
+      center?:Offset, 
+      radius?:number
+    }
+   */
+  static fromCircle(config: RectConfig) {
+    let v = new Rect();
+    v.constructorName = "fromCircle";
+    if(config!=null && config!=undefined){
+      v.center = config.center;
+      v.radius = config.radius;
+    }
+    return v;
+  }
+
+
+  static fromPoints (a:Offset,b:Offset) {
+    let v = new Rect();
+    v.constructorName = "fromPoints";
+      v.a = a;
+      v.b = b;
+    return v;
+  }
+
+  static zero() {
+    let v = new Rect();
+    v.constructorName = "zero";
+    return v;
+  }
+
+  static largest() {
+    let v = new Rect();
+    v.constructorName = "largest";
+    return v;
+  }
+}
+  
+//****** RelativeRect ******
+export class RelativeRect extends DartClass {
+  left?:number;
+  top?:number;
+  right?:number;
+  bottom?:number;
+
+  rect?:Rect;
+  rect1?:Rect;
+  container?:Size;
+
+  static fromLTRB(left:number, top:number, right:number, bottom:number) {
+    let v = new RelativeRect();
+    v.constructorName = "fromLTRB";
+    v.left = left;
+    v.top = top;
+    v.right = right;
+    v.bottom = bottom;  
+    return v;
+  }
+
+  static fromSize(rect:Rect,container:Size) {
+    let v = new RelativeRect();
+    v.constructorName = "fromSize";
+    v.rect = rect;
+    v.container = container;
+    return v;
+  }
+
+  static fromRect(rect:Rect,rect1:Rect) {
+    let v = new RelativeRect();
+    v.constructorName = "fromRect";
+    v.rect = rect;
+    v.rect1 = rect1;
+    return v;
+  }
+
+  static fill() {
+    let v = new RelativeRect();
+    v.constructorName = "fill";
+    return v;
+  }
+}
+
+  
+//****** RRect ******
+interface RRectConfig {
+  topLeft?:Radius;
+  topRight?:Radius;
+  bottomRight?:Radius;
+  bottomLeft?:Radius;
+}
+export class RRect extends DartClass {
+  left?:number;
+  top?:number;
+  right?:number;
+  bottom?:number;
+  radiusX?:number;
+  radiusY?:number;
+  radius?:Radius;
+  rect?:Rect;
+
+  topLeft?:Radius;
+  topRight?:Radius;
+  bottomRight?:Radius;
+  bottomLeft?:Radius;
+
+
+  static fromLTRBXY(left:number,top:number, right:number,  bottom:number, radiusX:number, radiusY:number) {
+    let v = new RRect();
+    v.constructorName = "fromLTRBXY";
+    v.left = left;
+    v.top = top;
+    v.right = right;
+    v.bottom = bottom;  
+    v.radiusX = radiusX;
+    v.radiusY = radiusY;
+    return v;
+
+  }
+
+  static fromLTRBR(left:number,top:number, right:number,  bottom:number, radius:Radius) {
+    let v = new RRect();
+    v.constructorName = "fromLTRBR";
+    v.left = left;
+    v.top = top;
+    v.right = right;
+    v.bottom = bottom;  
+    v.radius = radius;
+    return v;
+  }
+
+  static fromRectXY(rect:Rect, radiusX:number, radiusY:number) {
+    let v = new RRect();
+    v.constructorName = "fromRectXY";
+    v.rect = rect;
+    v.radiusX = radiusX;
+    v.radiusY = radiusY;
+
+    return v;
+  }
+
+  static fromRectAndRadius(rect:Rect, radius:Radius) {
+    let v = new RRect();
+    v.constructorName = "fromRectAndRadius";
+    v.rect = rect;
+    v.radius = radius;
+
+    return v;
+  }
+
+  /**
+   * @param config config: 
+    {
+      topLeft?:Radius, 
+      topRight?:Radius, 
+      bottomRight?:Radius, 
+      bottomLeft?:Radius,
+    }
+   */
+  static fromLTRBAndCorners(left:number,top:number, right:number,  bottom:number, config?: RRectConfig) {
+    let v = new RRect();
+    v.constructorName = "fromLTRBAndCorners";
+    v.left = left;
+    v.top = top;
+    v.right = right;
+    v.bottom = bottom;
+    if(config!=null && config!=undefined){
+      v.topLeft = config.topLeft;
+      v.topRight = config.topRight;
+      v.bottomLeft = config.bottomLeft;
+      v.bottomRight = config.bottomRight;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+    {
+      topLeft?:Radius, 
+      topRight?:Radius, 
+      bottomRight?:Radius, 
+      bottomLeft?:Radius,
+    }
+   */
+  static fromRectAndCorners(rect:Rect, config?: RRectConfig) {
+    let v = new RRect();
+    v.constructorName = "fromRectAndCorners";
+    v.rect = rect;
+    if(config!=null && config!=undefined){
+      v.topLeft = config.topLeft;
+      v.topRight = config.topRight;
+      v.bottomLeft = config.bottomLeft;
+      v.bottomRight = config.bottomRight;
+    }
+    return v;
+  }
+
+  static zero() {
+    let v = new RRect();
+    v.constructorName = "zero";
+    return v;
+  }
+}
+  
+//****** RSTransform ******
+interface RSTransformConfig {
+  rotation:number;
+  scale:number;
+  anchorX:number;
+  anchorY:number;
+  translateX:number;
+  translateY:number;
+}
+export class RSTransform extends DartClass {
+  
+  rotation?:number;
+  scale?:number;
+  anchorX?:number;
+  anchorY?:number;
+  translateX?:number;
+  translateY?:number;
+
+  scos?:number;
+  ssin?:number;
+  tx?:number;
+  ty?:number;
+
+  /**
+   * @param config config: 
+      {
+        rotation?:number, 
+        scale?:number, 
+        anchorX?:number, 
+        anchorY?:number, 
+        translateX?:number, 
+        translateY?:number, 
+      }
+   */
+  static fromComponents (config: RSTransformConfig) {
+    let v = new RSTransform();
+    v.constructorName = "fromComponents";
+    if(config!=null && config!=undefined){
+      v.rotation =config.rotation;
+      v.scale   = config.scale;
+      v.anchorX = config.anchorX;
+      v.anchorY = config.anchorY;
+      v.translateX= config.translateX;
+      v.translateY = config.translateY;
+    }
+    return v;
+  }
+
+  constructor(scos?:number, ssin?:number, tx?:number, ty?:number){
+    super();
+    this.scos = scos;
+    this.ssin = ssin;
+    this.tx = tx;
+    this.ty = ty; 
+  }
+
+  static new(scos:number, ssin:number, tx:number, ty:number) {
+    return new RSTransform(scos,ssin,tx,ty);
+  }
+  
+}
+  
+//#endregion
+
+
+//#region ------- S -------
+
+//#region Shader 
+export abstract class Shader extends DartClass{
+
+  /**
+   * Shader.image = new ImageShader(image:ImageProvider,tmx:TileMode,tmy:TileMode,matrix4:Matrix4)
+   * @param image 
+   * @param tmx 
+   * @param tmy 
+   * @param matrix4 
+   */
+  static image(image:ImageProvider,tmx:TileMode,tmy:TileMode,matrix4:Matrix4){
+    return new ImageShader(image,tmx,tmy,matrix4);
+  }
+
+}
+
+//****** ImageShader ******
+export class ImageShader extends Shader {
+  image?:ImageProvider;
+  tmx?:TileMode;
+  tmy?:TileMode;
+  matrix4?:Matrix4;
+
+  constructor(image:ImageProvider,tmx:TileMode,tmy:TileMode,matrix4:Matrix4){
+    super();
+    this.image = image;
+    this.tmx = tmx;
+    this.tmy = tmy;
+    this.matrix4 = matrix4;
+
+  }
+
+  static new(image:ImageProvider,tmx:TileMode,tmy:TileMode,matrix4:Matrix4) {
+    return new ImageShader(image,tmx,tmy,matrix4);
+  }
+}
+
+//#endregion
+
+//#region ScaleDetails
+//****** ScaleStartDetails ******
+interface ScaleStartDetailsConfig {
+  focalPoint?:Offset;
+  localFocalPoint?:Offset;
+}
+export class ScaleStartDetails extends DartClass {
+  focalPoint?:Offset;
+  localFocalPoint?:Offset;
+
+  /**
+   * @param config config: 
+      {
+        focalPoint?:Offset,
+        localFocalPoint?:Offset,
+      }
+   */
+  constructor(config?: ScaleStartDetailsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.focalPoint = config.focalPoint;
+      this.localFocalPoint = config.localFocalPoint;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        focalPoint?:Offset,
+        localFocalPoint?:Offset,
+      }
+   */
+  static new (config?: ScaleStartDetailsConfig) {
+    return new ScaleStartDetails(config);
+  }
+}
+
+
+//****** ScaleUpdateDetails ******
+interface ScaleUpdateDetailsConfig {
+  focalPoint?:Offset;
+  localFocalPoint?:Offset;
+  scale?:number;
+  horizontalScale?:number;
+  verticalScale?:number;
+  rotation?:number;
+}
+export class ScaleUpdateDetails extends DartClass {
+  focalPoint?:Offset;
+  localFocalPoint?:Offset;
+  scale?:number;
+  horizontalScale?:number;
+  verticalScale?:number;
+  rotation?:number;
+
+  /**
+   * @param config config: 
+      {
+        focalPoint?:Offset, 
+        localFocalPoint?:Offset, 
+        scale?:number, 
+        horizontalScale?:number, 
+        verticalScale?:number, 
+        rotation?:number, 
+      }
+   */
+  constructor(config?: ScaleUpdateDetailsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.focalPoint = config.focalPoint;
+      this.localFocalPoint = config.localFocalPoint;
+      this.scale = config.scale;
+      this.horizontalScale = config.horizontalScale;
+      this.verticalScale = config.verticalScale;
+      this.rotation = config.rotation;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        focalPoint?:Offset, 
+        localFocalPoint?:Offset, 
+        scale?:number, 
+        horizontalScale?:number, 
+        verticalScale?:number, 
+        rotation?:number, 
+      }
+   */
+  static new (config?: ScaleUpdateDetailsConfig) {
+    return new ScaleUpdateDetails(config);
+  }
+}
+
+//****** ScaleEndDetails ******
+interface ScaleEndDetailsConfig {
+  velocity?:Velocity;
+}
+export class ScaleEndDetails extends DartClass {
+  velocity?:Velocity;
+
+  /**
+   * @param config config: 
+      {
+        velocity?:Velocity, 
+      }
+   */
+  constructor(config?: ScaleEndDetailsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.velocity = config.velocity;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        velocity?:Velocity, 
+      }
+   */
+  static new (config?: ScaleEndDetailsConfig) {
+    return new ScaleEndDetails(config);
+  }
+}
+
+//#endregion
+  
+//****** Size ******
+export class Size extends DartClass {
+  width?:number;
+  height?:number;
+  dimension?:number;
+  radius?:number;
+
+  constructor(width?:number, height?:number){
+    super();
+    this.width = width;
+    this.height = height;
+  }
+
+  static new(width:number, height:number) {
+    return new Size(width,height);
+  }
+
+  static fromHeight(height:number){
+    let v = new Size();
+    v.constructorName = "fromHeight";
+    v.height=height;
+    return v;
+  }
+
+  static fromWidth(width:number) {
+    let v = new Size();
+    v.constructorName = "fromWidth";
+    v.width=width;
+    return v;
+  }
+
+  static square (dimension:number) {
+    let v = new Size();
+    v.constructorName = "square";
+    v.dimension=dimension;
+    return v;
+  }
+
+  static fromRadius (radius:number){
+    let v = new Size();
+    v.constructorName = "fromRadius";
+    v.radius=radius;
+    return v;
+  }
+
+  static zero(){
+    let v = new Size();
+    v.constructorName = "zero";
+    return v;
+  }
+
+  static infinite(){
+    let v = new Size();
+    v.constructorName = "infinite";
+    return v;
+  }
+}
+  
+
+//****** StrutStyle ******
+interface StrutStyleConfig {
+  fontFamily?:string;
+  fontFamilyFallback?:Array<string>;
+  fontSize?:number;
+  height?:number;
+  leading?:number;
+  fontWeight?:FontWeight;
+  fontStyle?:FontStyle;
+  forceStrutHeight?:boolean;
+  debugLabel?:string;
+  packageName?:string;
+}
+export class StrutStyle extends DartClass {
+  fontFamily?:string;
+  fontFamilyFallback?:Array<string>;
+  fontSize?:number;
+  height?:number;
+  leading?:number;
+  fontWeight?:FontWeight;
+  fontStyle?:FontStyle;
+  forceStrutHeight?:boolean;
+  debugLabel?:string;
+  packageName?:string;
+
+  /**
+   * @param config config: 
+      {
+        fontFamily?:string, 
+        fontFamilyFallback?:Array<string>, 
+        fontSize?:number, 
+        height?:number, 
+        leading?:number, 
+        fontWeight?:FontWeight, 
+        fontStyle?:FontStyle, 
+        forceStrutHeight?:boolean, 
+        debugLabel?:string, 
+        packageName?:string, 
+      }
+   */
+  constructor(config: StrutStyleConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.fontFamily = config.fontFamily;
+      this.fontFamilyFallback = config.fontFamilyFallback;
+      this.fontSize = config.fontSize;
+      this.height = config.height;
+      this.leading = config.leading;
+      this.fontWeight = config.fontWeight;
+      this.fontStyle = config.fontStyle;
+      this.forceStrutHeight = config.forceStrutHeight;
+      this.debugLabel = config.debugLabel;
+      this.packageName =config.packageName;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        fontFamily?:string, 
+        fontFamilyFallback?:Array<string>, 
+        fontSize?:number, 
+        height?:number, 
+        leading?:number, 
+        fontWeight?:FontWeight, 
+        fontStyle?:FontStyle, 
+        forceStrutHeight?:boolean, 
+        debugLabel?:string, 
+        packageName?:string, 
+      }
+   */
+  static new(config: StrutStyleConfig) {
+    return new StrutStyle(config);
+  }
+}
+
+
+//****** SystemUiOverlayStyle ******
+interface SystemUiOverlayStyleConfig {
+  systemNavigationBarColor?:Color;
+  systemNavigationBarDividerColor?:Color;
+  statusBarColor?:Color;
+  systemNavigationBarIconBrightness?:Brightness;
+  statusBarBrightness?:Brightness;
+  statusBarIconBrightness?:Brightness;
+}
+export class SystemUiOverlayStyle extends DartClass {
+  systemNavigationBarColor?:Color;
+  systemNavigationBarDividerColor?:Color;
+  statusBarColor?:Color;
+  systemNavigationBarIconBrightness?:Brightness;
+  statusBarBrightness?:Brightness;
+  statusBarIconBrightness?:Brightness;
+
+  /**
+   * @param config config: 
+      {
+        systemNavigationBarColor?:Color, 
+        systemNavigationBarDividerColor?:Color, 
+        statusBarColor?:Color,
+        systemNavigationBarIconBrightness?:Brightness, 
+        statusBarBrightness?:Brightness, 
+        statusBarIconBrightness?:Brightness
+      }
+   */
+  constructor(config: SystemUiOverlayStyleConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.systemNavigationBarColor = config.systemNavigationBarColor;
+      this.systemNavigationBarDividerColor = config.systemNavigationBarDividerColor;
+      this.systemNavigationBarIconBrightness = config.systemNavigationBarIconBrightness;
+      this.statusBarColor = config.statusBarColor;
+      this.statusBarBrightness = config.statusBarBrightness;
+      this.statusBarIconBrightness = config.statusBarIconBrightness;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        systemNavigationBarColor?:Color, 
+        systemNavigationBarDividerColor?:Color, 
+        statusBarColor?:Color,
+        systemNavigationBarIconBrightness?:Brightness, 
+        statusBarBrightness?:Brightness, 
+        statusBarIconBrightness?:Brightness
+      }
+   */
+  static new(config: SystemUiOverlayStyleConfig) {
+    return new SystemUiOverlayStyle(config);
+  }
+
+  static light = SystemUiOverlayStyle.new({
+    systemNavigationBarColor:Color.new(0xff000000),
+    systemNavigationBarIconBrightness:Brightness.light,
+    statusBarBrightness:Brightness.light,
+    statusBarIconBrightness:Brightness.dark
+  });
+
+  static dark = SystemUiOverlayStyle.new({
+    systemNavigationBarColor:Color.new(0xff000000),
+    systemNavigationBarIconBrightness:Brightness.light,
+    statusBarBrightness:Brightness.dark,
+    statusBarIconBrightness:Brightness.light
+  });
+}
+
+//****** SpringDescription ******
+interface SpringDescriptionConfig {
+  mass:number;
+  stiffness:number; 
+  damping:number;
+}
+export class SpringDescription extends DartClass {
+  mass?:number;
+  stiffness?:number; 
+  damping?:number;
+
+  /**
+   * @param config config: 
+      {
+        mass?:number,
+        stiffness?:number,
+        damping?:number
+      }
+   */
+  constructor(config: SpringDescriptionConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.mass = config.mass;
+      this.stiffness = config.stiffness;
+      this.damping = config.damping;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        mass?:number,
+        stiffness?:number,
+        damping?:number
+      }
+   */
+  static new(config: SpringDescriptionConfig) {
+    return new SpringDescription(config);
+  }
+}
+  
+ 
+//****** ScrollController ******
+interface ScrollControllerConfig {
+  initialScrollOffset?:number;
+  keepScrollOffset?:boolean;
+  debugLabel?:string;
+}
+
+interface ScrollControllerJumpToConfig {
+  value:number;
+}
+
+interface ScrollControllerAnimateToConfig {
+  offset:number;
+  duration:Duration;
+  curve:Curve;
+}
+
+export class ScrollController extends DartClass {
+  initialScrollOffset?:number;
+  keepScrollOffset?:boolean;
+  debugLabel?:string;
+
+  /**
+   * @param config config: 
+      {
+        offset:number,
+        duration:Duration,
+        curve:Curve,
+      }
+   */
+  animateTo(config: ScrollControllerAnimateToConfig) {
+    JSFramework.invokeFlutterFunction(
+      JSCallConfig.new({
+        mirrorID:this.mirrorID,
+        className:this.className,
+        funcName:"animateTo",
+        args:config
+      })
+    );
+  }
+
+  /**
+   * @param config config: 
+      {
+        value:number,
+      }
+   */
+  jumpTo(config:ScrollControllerJumpToConfig) {  
+    JSFramework.invokeFlutterFunction(
+      JSCallConfig.new({
+        mirrorID:this.mirrorID,
+        className:this.className,
+        funcName:"jumpTo",
+        args:config
+      })
+    );
+  }  
+
+
+  /**
+   * @param config config: 
+      {
+        initialScrollOffset?:number, 
+        keepScrollOffset?:boolean, 
+        debugLabel?:string
+      }
+   */
+  constructor(config: ScrollControllerConfig){
+    super();
+    this.createMirrorID();
+    if(config!=null && config!=undefined){
+      this.initialScrollOffset = config.initialScrollOffset;
+      this.keepScrollOffset = config.keepScrollOffset;
+      this.debugLabel = config.debugLabel;
+    }
+  }
+
+  
+
+  //偏移量
+  async offset() {
       var v= await this.invokeMirrorObjWithCallback(JSCallConfig.new({
             mirrorID: this.mirrorID,
             className: this.className,
-            funcName: "getText",
+            funcName: "offset",
         }));
-      return String(v);
-    }
 
-    //设置文本值
-    async setText(text:string) {
-      this.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "setText",
-            args:text,
-        }));
-    }
+      return Convert.toNumber(v);
   }
-  
-  //****** ToolbarOptions ******
-  interface ToolbarOptionsConfig {
-    copy?:boolean;
-    cut?:boolean;
-    paste?:boolean;
-    selectAll?:boolean;
-  }
-  export class ToolbarOptions extends DartClass {
-    copy?:boolean;
-    cut?:boolean;
-    paste?:boolean;
-    selectAll?:boolean;
-  
-    /**
-     * @param config config: 
+
+  /**
+   * @param config config: 
       {
-        copy?:boolean,
-        cut?:boolean,
-        paste?:boolean,
-        selectAll?:boolean,
+        initialScrollOffset?:number, 
+        keepScrollOffset?:boolean, 
+        debugLabel?:string
       }
-     */
-    constructor(config?: ToolbarOptionsConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.copy = config.copy;
-        this.cut = config.cut;
-        this.paste = config.paste;
-        this.selectAll = config.selectAll;
-      }
-    }
+   */
+  static new(config: ScrollControllerConfig) {
+    return new ScrollController(config);
+  }
+}
   
-    /**
-     * @param config config: 
+
+//****** Shadow ******
+interface ShadowConfig {
+  color?:Color;
+  offset?:Offset;
+  blurRadius?:number;
+}
+export class Shadow extends DartClass {
+  color?:Color;
+  offset?:Offset;
+  blurRadius?:number;
+
+  /**
+   * @param config config: 
       {
-        copy?:boolean,
-        cut?:boolean,
-        paste?:boolean,
-        selectAll?:boolean,
+        color?:Color, 
+        offset?:Offset, 
+        blurRadius?:number
       }
-     */
-    static new (config?: ToolbarOptionsConfig) {
-      return new ToolbarOptions(config);
+   */
+  constructor(config?: ShadowConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.color = config.color;
+      this.blurRadius = config.blurRadius;
+      this.offset = config.offset;
     }
   }
-  
-  
-  //****** TextInputType ******
-  interface TextInputTypeConfig {
-    signed?:boolean;
-    decimal?:boolean;
+
+  /**
+   * @param config config: 
+      {
+        color?:Color, 
+        offset?:Offset, 
+        blurRadius?:number
+      }
+   */
+  static new(config?: ShadowConfig) {
+    return new Shadow(config);
   }
-  export class TextInputType extends DartClass {
-    
-    signed?:boolean;
-    decimal?:boolean;
+}
   
-    static new(){
-      return new TextInputType();
-    };
+
+//****** ScrollbarPainter ******
+interface ScrollbarPainterConfig {
+  color:Color;
+  textDirection:TextDirection;
+  thickness:number;
+  fadeoutOpacityAnimation:any;
+  padding?:EdgeInsets;
+  mainAxisMargin?:number,
+  crossAxisMargin?:number;
+  radius?:Radius;
+  minLength?:number;
+  minOverscrollLength?:number;
+}
+export class ScrollbarPainter extends DartClass {
+  color?:Color;
+  textDirection?:TextDirection;
+  thickness?:number;
+  fadeoutOpacityAnimation?:any;
+  padding?:EdgeInsets;
+  mainAxisMargin?:number;
+  crossAxisMargin?:number;
+  radius?:Radius;
+  minLength?:number;
+  minOverscrollLength?:number;
+
+  /**
+   * @param config config: 
+      {
+        color?:Color, 
+        textDirection?:TextDirection, 
+        thickness?:number, 
+        fadeoutOpacityAnimation?:any, 
+        padding?:EdgeInsets, 
+        mainAxisMargin?:number,
+        crossAxisMargin?:number, 
+        radius?:Radius, 
+        minLength?:number, 
+        minOverscrollLength?:number,  
+      }
+   */
+  constructor(config: ScrollbarPainterConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.color = config.color;
+      this.textDirection = config.textDirection;
+      this.thickness = config.thickness;
+      this.fadeoutOpacityAnimation = config.fadeoutOpacityAnimation;
+      this.padding = config.padding;
+      this.mainAxisMargin = config.mainAxisMargin;
+      this.crossAxisMargin = config.crossAxisMargin;
+      this.radius = config.radius;
+      this.minLength = config.minLength;
+      this.minOverscrollLength = config.minOverscrollLength;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        color?:Color, 
+        textDirection?:TextDirection, 
+        thickness?:number, 
+        fadeoutOpacityAnimation?:any, 
+        padding?:EdgeInsets, 
+        mainAxisMargin?:number,
+        crossAxisMargin?:number, 
+        radius?:Radius, 
+        minLength?:number, 
+        minOverscrollLength?:number,  
+      }
+   */
+  static new(config: ScrollbarPainterConfig) {
+    return new ScrollbarPainter(config);
+  }
+}
+
+
+//#region ------- ScrollPhysics -------
+//****** ScrollPhysics ******
+interface ScrollPhysicsConfig {
+  parent?:ScrollPhysics;
+}
+
+export class ScrollPhysics extends DartClass {
+  parent?:ScrollPhysics;
+
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  constructor(config?: ScrollPhysicsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.parent = config.parent;
+    }
+  }
+
+  static new(config?: ScrollPhysicsConfig) {
+    return new ScrollPhysics(config);
+  }
+}
+
+//****** AlwaysScrollableScrollPhysics ******
+export class AlwaysScrollableScrollPhysics extends ScrollPhysics {
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  constructor(config?: ScrollPhysicsConfig){
+    super(config);
+  }
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  static new(config?: ScrollPhysicsConfig) {
+    return new AlwaysScrollableScrollPhysics(config);
+  }
+}
+
+//****** BouncingScrollPhysics ******
+export class BouncingScrollPhysics extends ScrollPhysics {
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  constructor(config?: ScrollPhysicsConfig){
+    super(config);
+  }
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  static new(config?: ScrollPhysicsConfig) {
+    return new BouncingScrollPhysics(config);
+  }
+}
+
+//****** ClampingScrollPhysics ******
+export class ClampingScrollPhysics extends ScrollPhysics {
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  constructor(config?: ScrollPhysicsConfig){
+    super(config);
+  }
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  static new(config?: ScrollPhysicsConfig) {
+    return new ClampingScrollPhysics(config);
+  }
+}
+
+//****** NeverScrollableScrollPhysics ******
+export class NeverScrollableScrollPhysics extends ScrollPhysics {
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  constructor(config?: ScrollPhysicsConfig){
+    super(config);
+  }
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  static new(config?: ScrollPhysicsConfig) {
+    return new NeverScrollableScrollPhysics(config);
+  }
+}
+
+//****** RangeMaintainingScrollPhysics ******
+export class RangeMaintainingScrollPhysics extends ScrollPhysics {
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  constructor(config?: ScrollPhysicsConfig){
+    super(config);
+  }
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  static new(config?: ScrollPhysicsConfig) {
+    return new RangeMaintainingScrollPhysics(config);
+  }
+}
+//#endregion
+
+//#region ------- ShapeBorder -------
+export abstract class ShapeBorder extends DartClass {}
+
+//#region ****** BoxBorder ******
+//****** BoxBorder ******
+export abstract class BoxBorder extends ShapeBorder {}
+
+//****** Border ******
+interface BorderConfig {
+  top?:BorderSide;
+  right?:BorderSide;
+  bottom?:BorderSide;
+  left?:BorderSide;
+  vertical?:BorderSide;
+  horizontal?:BorderSide;
+
+  color?:Color;
+  width?:number;
+  style?:BorderStyle;
+}
+export class Border extends BoxBorder {
+  top?:BorderSide;
+  right?:BorderSide;
+  bottom?:BorderSide;
+  left?:BorderSide;
+  vertical?:BorderSide;
+  horizontal?:BorderSide;
+
+  color?:Color;
+  width?:number;
+  style?:BorderStyle;
+
+  /**
+   * @param config config: 
+    {
+      top?:BorderSide, 
+      right?:BorderSide, 
+      bottom?:BorderSide, 
+      left?:BorderSide,
+    }
+   */
+  constructor(config?: BorderConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.top = config.top;
+      this.right = config.right;
+      this.bottom = config.bottom;
+      this.left = config.left;
+    }
+  }
+
+  /**
+   * @param config config: 
+    {
+      top?:BorderSide, 
+      right?:BorderSide, 
+      bottom?:BorderSide, 
+      left?:BorderSide,
+    }
+   */
+  static new(config?: BorderConfig)  {
+    return new Border(config);
+  }
+
+  /**
+   * @param config config: 
+      {
+        color?:Color, 
+        width?:number, 
+        style?:BorderStyle,
+      }
+   */
+  static all(config: BorderConfig) {
+    var v = new Border();  
+    v.constructorName = "all";
+    if(config!=null && config!=undefined){
+      v.color = config.color;
+      v.width = config.width;
+      v.style = config.style;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+      {
+        vertical?:BorderSide, 
+        horizontal?:BorderSide
+      }
+   */
+  static symmetric(config?: BorderConfig) {
+    var v = new Border();
+    v.constructorName = "symmetric";
+    if(config!=null && config!=undefined){
+      v.vertical = config.vertical;
+      v.horizontal = config.horizontal;
+    }
+    return v;
+  }
+}
+
+//****** BorderDirectional ******
+interface BorderDirectionalConfig {
+  top?:BorderSide;
+  start?:BorderSide;
+  bottom?:BorderSide;
+  end?:BorderSide;
+}
+export class BorderDirectional extends BoxBorder {
+  top?:BorderSide;
+  start?:BorderSide;
+  bottom?:BorderSide;
+  end?:BorderSide;
+
+  /**
+   * @param config config: 
+      {
+        top?:BorderSide, 
+        start?:BorderSide,
+        bottom?:BorderSide,
+        end?:BorderSide,
+      }
+   */
+  constructor(config?: BorderDirectionalConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.top = config.top;
+      this.start = config.start;
+      this.end = config.end;
+      this.bottom = config.bottom;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        top?:BorderSide, 
+        start?:BorderSide,
+        bottom?:BorderSide,
+        end?:BorderSide,
+      }
+   */
+  static new(config?: BorderDirectionalConfig) {
+    return new BorderDirectional(config);
+  }
+}
+
+//#endregion
+
+//#region ****** OutlinedBorder ******
+export abstract class OutlinedBorder extends ShapeBorder {}
+
+interface OutlinedBorderConfig {
+  side?:BorderSide;
+  borderRadius?:BorderRadiusGeometry;
+}
+
+export class CircleBorder extends OutlinedBorder {
+  side?:BorderSide;
+
+  /**
+    * @param config config: 
+      {
+        side?:BorderSide,
+      }
+    */
+   constructor(config?: OutlinedBorderConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.side = config.side;
+    }
+  }
+
+  /**
+    * @param config config: 
+      {
+        side?:BorderSide,
+      }
+    */
+  static new(config?: OutlinedBorderConfig){
+    return new CircleBorder(config);
+  }
+}
+
+export class BeveledRectangleBorder extends OutlinedBorder {
+  side?:BorderSide;
+  borderRadius?:BorderRadiusGeometry;
+
+  /**
+    * @param config config: 
+      {
+        side?:BorderSide,
+        borderRadius?:BorderRadiusGeometry, 
+      }
+    */
+   constructor(config?: OutlinedBorderConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.side = config.side;
+      this.borderRadius = config.borderRadius;
+    }
+  }
+
+  /**
+    * @param config config: 
+      {
+        side?:BorderSide,
+        borderRadius?:BorderRadiusGeometry, 
+      }
+    */
+  static new(config?: OutlinedBorderConfig){
+    return new BeveledRectangleBorder(config);
+  }
+}
+
+export class ContinuousRectangleBorder extends OutlinedBorder {
+  side?:BorderSide;
+  borderRadius?:BorderRadiusGeometry;
+
+  /**
+    * @param config config: 
+      {
+        side?:BorderSide,
+        borderRadius?:BorderRadiusGeometry, 
+      }
+    */
+   constructor(config?: OutlinedBorderConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.side = config.side;
+      this.borderRadius = config.borderRadius;
+    }
+  }
+
+  /**
+    * @param config config: 
+      {
+        side?:BorderSide,
+        borderRadius?:BorderRadiusGeometry, 
+      }
+    */
+  static new(config?: OutlinedBorderConfig){
+    return new ContinuousRectangleBorder(config);
+  }
+}
+
+export class RoundedRectangleBorder extends OutlinedBorder {
+  side?:BorderSide;
+  borderRadius?:BorderRadiusGeometry;
+
+  /**
+    * @param config config: 
+      {
+        side?:BorderSide,
+        borderRadius?:BorderRadiusGeometry, 
+      }
+    */
+   constructor(config?: OutlinedBorderConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.side = config.side;
+      this.borderRadius = config.borderRadius;
+    }
+  }
+
+  /**
+    * @param config config: 
+      {
+        side?:BorderSide,
+        borderRadius?:BorderRadiusGeometry, 
+      }
+    */
+  static new(config?: OutlinedBorderConfig){
+    return new RoundedRectangleBorder(config);
+  }
+}
+
+export class StadiumBorder extends OutlinedBorder {
+  side?:BorderSide;
+
+  /**
+    * @param config config: 
+      {
+        side?:BorderSide,
+      }
+    */
+   constructor(config?: OutlinedBorderConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.side = config.side;
+    }
+  }
+
+  /**
+    * @param config config: 
+      {
+        side?:BorderSide,
+      }
+    */
+  static new(config?: OutlinedBorderConfig){
+    return new StadiumBorder(config);
+  }
+}
+//#endregion
+
+//#region ****** InputBorder ******
+export abstract class InputBorder extends ShapeBorder {
+  static none() {
+    var v = new _NoInputBorder();
+    v.className = "InputBorder";
+    v.constructorName= "none";
+    return v;
+  }
+
+  /**
+   * InputBorder.underline = new UnderlineInputBorder(config);
+   * @param config config: 
+      {
+        borderSide?:BorderSide, 
+        borderRadius?:BorderRadius,
+      }
+  */
+  static underline(config?: InputBorderConfig) {
+    return new UnderlineInputBorder(config);
+  }
+
+  /**
+   * InputBorder.outline = new OutlineInputBorder(config);
+   * @param config config: 
+      {
+        borderSide?:BorderSide, 
+        borderRadius?:BorderRadius,
+        gapPadding?:number,
+      }
+  */
+  static outline(config?: InputBorderConfig) {
+    return new OutlineInputBorder(config);
+  }
+
+}
+
+class _NoInputBorder extends InputBorder{}
+
+interface InputBorderConfig {
+  borderSide?:BorderSide;
+  borderRadius?:BorderRadius;
+  gapPadding?:number;
+}
+
+export class UnderlineInputBorder extends InputBorder {
+  borderSide?:BorderSide;
+  borderRadius?:BorderRadius;
   
-    static numberWithOptions(config?: TextInputTypeConfig) {
-      let v = new TextInputType();
-      v.constructorName = "numberWithOptions";
+  /**
+    * @param config config: 
+      {
+        borderSide?:BorderSide, 
+        borderRadius?:BorderRadius,
+      }
+    */
+   constructor(config?: InputBorderConfig){
+    super();
+    if(config!=null && config!=undefined){
       if(config!=null && config!=undefined){
-        v.signed = config.signed;
-        v.decimal = config.decimal;
+        this.borderRadius = config.borderRadius;
+        this.borderSide = config.borderSide;
       }
-      return v;
-    }
-  
-    static text() {
-      let v = new TextInputType();
-      v.constructorName = "text";
-      return v;
-    }
-  
-    static multiline() {
-      let v = new TextInputType();
-      v.constructorName = "multiline";
-      return v;
-    }
-  
-    static number() {
-      let v = new TextInputType();
-      v.constructorName = "number";
-    
-      return v;
-    }
-  
-    static phone() {
-      let v = new TextInputType();
-      v.constructorName = "phone";
-    
-      return v;
-    }
-  
-    static datetime() {
-      let v = new TextInputType();
-      v.constructorName = "datetime";
-    
-      return v;
-    }
-  
-    static emailAddress() {
-      let v = new TextInputType();
-      v.constructorName = "emailAddress";
-    
-      return v;
-    }
-  
-    static url(){
-      let v = new TextInputType();
-      v.constructorName = "url";
-      return v;
-    }
-  
-  }
-  
-  //****** TODO Tween ******
-  export class Tween extends DartClass {
-    begin?:number;
-    end?:number;
-  
-    constructor(begin?:number, end?:number){
-      super();
-      this.begin = begin;
-      this.end = end;
-    }
-    
-    lerp(t:number) {
-      //return dart.dsend(this.begin, '+', [dart.dsend(dart.dsend(this.end, '-', [this.begin]), '*', [t])]);
-    }
-    transform(t:number) {
-      if (t == 0.0) return this.begin;
-      if (t == 1.0) return this.end;
-      return this.lerp(t);
-    }
-  
-    static new(begin?:number, end?:number) {
-      return new Tween(begin,end);
-    };
-  }
-  
-
-  export class TextInputFormatter extends ShapeBorder {
-    maxLength?:number
-    filterPattern?:RegExp;
-    allow?:boolean;
-    replacementString?:string;
-    mask?:string;
-    initialText?:string;
-    filter?:Map<string,RegExp>;
-  
-    static lengthLimiting(maxLength?:number) {
-      var v = new TextInputFormatter();
-      v.constructorName= "lengthLimiting";
-      v.maxLength = maxLength;
-      return v;
-    }
-
-    /**
-     * @param allow true=白名单,false=黑名单
-     * @param filterPattern 正则表示式
-     * @param replacementString 替换字符串
-     */
-
-    static filtering(allow:boolean,filterPattern:RegExp,replacementString?:string) {
-      var v = new TextInputFormatter();
-      v.constructorName= "filtering";
-      v.allow=allow;
-      v.filterPattern = filterPattern;
-      v.replacementString = replacementString;
-      return v;
-    }
-
-    /**
-     * @param filterPattern 正则表示式
-     * @param replacementString 替换字符串
-     */
-
-    static filtering_allow(filterPattern:RegExp,replacementString?:string) {
-      var v = new TextInputFormatter();
-      v.constructorName= "filtering.allow";
-      v.filterPattern = filterPattern;
-      v.replacementString = replacementString;
-      return v;
-    }
-
-    /**
-     * @param filterPattern 正则表示式
-     * @param replacementString 替换字符串
-     */
-    static filtering_deny(filterPattern:RegExp,replacementString?:string) {
-      var v = new TextInputFormatter();
-      v.constructorName= "filtering.deny";
-      v.filterPattern = filterPattern;
-      v.replacementString = replacementString;
-      return v;
-    }
-
-    /**
-     * 单行
-     */
-    static singleLineFormatter() {
-      var v = new TextInputFormatter();
-      v.constructorName= "singleLineFormatter";
-      return v;
-    }
-
-    /**
-     * 数字
-     */
-    static digitsOnly() {
-      var v = new TextInputFormatter();
-      v.constructorName= "digitsOnly";
-      return v;
-    }
-
-    static maskFormat(mask:string,initialText?:string,filter?:Map<string,RegExp>) {
-      var v = new TextInputFormatter();
-      v.constructorName= "mask";
-      v.mask= mask;
-      v.initialText  =initialText;
-      v.filter =filter;
-      return v;
     }
   }
+
+
+  /**
+    * @param config config: 
+      {
+        borderSide?:BorderSide, 
+        borderRadius?:BorderRadius,
+      }
+    */
+   static new(config?: InputBorderConfig){
+    return new UnderlineInputBorder(config);
+  }
+}
+
+export class OutlineInputBorder extends InputBorder {
+  borderSide?:BorderSide;
+  borderRadius?:BorderRadius;
+  gapPadding?:number;
   
-  //#endregion
+  /**
+    * @param config config: 
+      {
+        borderSide?:BorderSide, 
+        borderRadius?:BorderRadius,
+        gapPadding?:number,
+      }
+    */
+   constructor(config?: InputBorderConfig){
+    super();
+    if(config!=null && config!=undefined){
+      if(config!=null && config!=undefined){
+        this.borderRadius = config.borderRadius;
+        this.borderSide = config.borderSide;
+        this.gapPadding = config.gapPadding;
+      }
+    }
+  }
+
+
+  /**
+    * @param config config: 
+      {
+        borderSide?:BorderSide, 
+        borderRadius?:BorderRadius,
+        gapPadding?:number,
+      }
+    */
+   static new(config?: InputBorderConfig){
+    return new OutlineInputBorder(config);
+  }
+}
+//#endregion
+
+//#endregion
+
+//#endregion
+
+
+//#region ------- T -------
   
-  //#region ------- U -------
+//****** TextAlignVertical ******
+export class TextAlignVertical extends DartClass {
+  y?:number;
+
+  constructor(y:number){
+    super();
+    this.y = y;
+  }
+  
+  static new(y:number){
+    return new TextAlignVertical(y);
+  }
+
+  static top = TextAlignVertical.new(-1.0); 
+  static center = TextAlignVertical.new(0.0); 
+  static bottom = TextAlignVertical.new(1.0); 
+}
+
+//****** TapDownDetails ******
+interface TapDownDetailsConfig {
+  globalPosition?:Offset;
+  localPosition?:Offset;
+  kind?:PointerDeviceKind;
+}
+export class TapDownDetails extends DartClass {
+  globalPosition?:Offset;
+  localPosition?:Offset;
+  kind?:PointerDeviceKind;
+
+  /**
+   * @param config config: 
+      {
+        globalPosition?:Offset,
+        localPosition?:Offset,
+        kind?:PointerDeviceKind,
+      }
+   */
+  constructor(config?: TapDownDetailsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.globalPosition = config.globalPosition;
+      this.localPosition = config.localPosition;
+      this.kind = config.kind;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        globalPosition?:Offset,
+        localPosition?:Offset,
+        kind?:PointerDeviceKind,
+      }
+   */
+  static new (config?: TapDownDetailsConfig) {
+    return new TapDownDetails(config);
+  }
+}
+
+//****** TapUpDetails ******
+interface TapUpDetailsConfig {
+  globalPosition?:Offset;
+  localPosition?:Offset;
+}
+export class TapUpDetails extends DartClass {
+  globalPosition?:Offset;
+  localPosition?:Offset;
+
+  /**
+   * @param config config: 
+      {
+        globalPosition?:Offset,
+        localPosition?:Offset,
+      }
+   */
+  constructor(config?: TapUpDetailsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.globalPosition = config.globalPosition;
+      this.localPosition = config.localPosition;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        globalPosition?:Offset,
+        localPosition?:Offset,
+      }
+   */
+  static new (config?: TapUpDetailsConfig) {
+    return new TapUpDetails(config);
+  }
+}
+
+//****** TextStyle ******
+interface TextStyleConfig {
+  inherit?:boolean;
+  color?:Color;
+  backgroundColor?:Color;
+  fontSize?:number;
+  fontWeight?:FontWeight;
+  fontStyle?:FontStyle;
+  letterSpacing?:number;
+  wordSpacing?:number;
+  textBaseline?:TextBaseline;
+  height?:number;
+  decoration?:TextDecoration;
+  decorationColor?:Color;
+  decorationStyle?:TextDecorationStyle;
+  decorationThickness?:number;
+  debugLabel?:string;
+  fontFamily?:string;
+  packageName?:string;
+}
+export class TextStyle extends DartClass {
+  inherit?:boolean;
+  color?:Color;
+  backgroundColor?:Color;
+  fontSize?:number;
+  fontWeight?:FontWeight;
+  fontStyle?:FontStyle;
+  letterSpacing?:number;
+  wordSpacing?:number;
+  textBaseline?:TextBaseline;
+  height?:number;
+  decoration?:TextDecoration;
+  decorationColor?:Color;
+  decorationStyle?:TextDecorationStyle;
+  decorationThickness?:number;
+  debugLabel?:string;
+  fontFamily?:string;
+  packageName?:string;
+
+  /**
+   * @param config config: 
+      {
+        inherit?:boolean, 
+        color?:Color, 
+        backgroundColor?:Color, 
+        fontSize?:number, 
+        fontWeight?:FontWeight, 
+        fontStyle?:FontStyle, 
+        letterSpacing?:number, 
+        wordSpacing?:number, 
+        textBaseline?:TextBaseline, 
+        height?:number, 
+        decoration?:TextDecoration, 
+        decorationColor?:Color, 
+        decorationStyle?:TextDecorationStyle, 
+        decorationThickness?:number, 
+        debugLabel?:string, 
+        fontFamily?:string, 
+        packageName?:string, 
+      }
+   */
+  constructor(config?: TextStyleConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.inherit = config.inherit;
+      this.color = config.color;
+      this.backgroundColor = config.backgroundColor;
+      this.fontSize = config.fontSize;
+      this.fontWeight = config.fontWeight;
+      this.fontStyle = config.fontStyle;
+      this.letterSpacing = config.letterSpacing;
+      this.wordSpacing = config.wordSpacing;
+      this.textBaseline = config.textBaseline;
+      this.height = config.height;
+      this.decoration = config.decoration;
+      this.decorationColor = config.decorationColor;
+      this.decorationStyle = config.decorationStyle;
+      this.decorationThickness = config.decorationThickness;
+      this.debugLabel = config.debugLabel;
+      this.fontFamily = config.fontFamily;
+      this.packageName = config.packageName;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        inherit?:boolean, 
+        color?:Color, 
+        backgroundColor?:Color, 
+        fontSize?:number, 
+        fontWeight?:FontWeight, 
+        fontStyle?:FontStyle, 
+        letterSpacing?:number, 
+        wordSpacing?:number, 
+        textBaseline?:TextBaseline, 
+        height?:number, 
+        decoration?:TextDecoration, 
+        decorationColor?:Color, 
+        decorationStyle?:TextDecorationStyle, 
+        decorationThickness?:number, 
+        debugLabel?:string, 
+        fontFamily?:string, 
+        packageName?:string, 
+      }
+   */
+  static new (config?: TextStyleConfig) {
+    return new TextStyle(config);
+  }
+}
+
+//****** TableBorder ******
+interface TableBorderConfig {
+  top?:BorderSide;
+  right?:BorderSide;
+  bottom?:BorderSide;
+  left?:BorderSide;
+  horizontalInside?:BorderSide;
+  verticalInside?:BorderSide;
+
+  color?:Color;
+  width?:number;
+  style?:BorderStyle;
+
+  inside?:BorderSide;
+  outside?:BorderSide;
+}
+export class TableBorder extends DartClass {
+  top?:BorderSide;
+  right?:BorderSide;
+  bottom?:BorderSide;
+  left?:BorderSide;
+  horizontalInside?:BorderSide;
+  verticalInside?:BorderSide;
+
+  color?:Color;
+  width?:number;
+  style?:BorderStyle;
+
+  inside?:BorderSide;
+  outside?:BorderSide;
+
+  /**
+   * @param config config: 
+    {
+      top?:BorderSide, 
+      right?:BorderSide, 
+      bottom?:BorderSide, 
+      left?:BorderSide, 
+      horizontalInside?:BorderSide, 
+      verticalInside?:BorderSide
+    }
+   */
+  constructor(config?: TableBorderConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.top = config.top;
+      this.right = config.right;
+      this.bottom = config.bottom;
+      this.left = config.left;
+      this.horizontalInside = config.horizontalInside;
+      this.verticalInside = config.verticalInside;
+    }
+  }
+
+  /**
+   * @param config config: 
+    {
+      top?:BorderSide, 
+      right?:BorderSide, 
+      bottom?:BorderSide, 
+      left?:BorderSide, 
+      horizontalInside?:BorderSide, 
+      verticalInside?:BorderSide
+    }
+   */
+  static new(config?: TableBorderConfig) {
+    return new TableBorder(config);
+  }
+
+  /**
+   * @param config config: 
+    {
+      color?:Color, 
+      width?:number, 
+      style?:BorderStyle, 
+    }
+   */
+  static all(config?: TableBorderConfig) {
+    let v = new TableBorder();
+    v.constructorName = "all";
+    if(config!=null && config!=undefined){
+      v.color = config.color;
+      v.width = config.width;
+      v.style = config.style;
+    }
+    return v;
+  }
+
+  /**
+   * @param config config: 
+    {
+      inside?:BorderSide, 
+      outside?:BorderSide
+    }
+   */
+  static symmetric(config?: TableBorderConfig) {
+    let v = new TableBorder();
+    v.constructorName = "symmetric";
+    if(config!=null && config!=undefined){
+      v.inside = config.inside;
+      v.outside = config.outside;
+    }
+    return v;
+  }
+}
+
+//#region ****** TableColumnWidth ******
+export abstract class TableColumnWidth extends DartClass{
+
+  /**
+   * TableColumnWidth.intrinsic = new IntrinsicColumnWidth(flex?:number);
+  */
+  static intrinsic(flex?:number) {
+    return new IntrinsicColumnWidth(flex);
+  }
+
+  /**
+   * TableColumnWidth.fixed = new FixedColumnWidth(value:number);
+  */
+  static fixed(value:number) {
+    return new FixedColumnWidth(value);
+  }
+
+  /**
+   * TableColumnWidth.fraction = new FractionColumnWidth(value:number);
+  */
+  static fraction(value:number) {
+    return new FractionColumnWidth(value);
+  }
+
+  /**
+   * TableColumnWidth.max = new MaxColumnWidth(a:TableColumnWidth, b:TableColumnWidth);
+  */
+  static max(a:TableColumnWidth, b:TableColumnWidth) {
+    return new MaxColumnWidth(a,b);
+  }
+
+  /**
+   * TableColumnWidth.max = new MinColumnWidth(a:TableColumnWidth, b:TableColumnWidth);
+  */
+  static min(a:TableColumnWidth, b:TableColumnWidth) {
+    return new MinColumnWidth(a,b);
+  }
+}
+
+export class IntrinsicColumnWidth extends TableColumnWidth {
+  flex?:number;
+  
+   constructor(flex?:number){
+    super();
+    this.flex = flex;
+  }
+
+   static new(flex?:number){
+    return new IntrinsicColumnWidth(flex);
+  }
+}
+
+export class FixedColumnWidth extends TableColumnWidth {
+  value:number;
+  
+   constructor(value:number){
+    super();
+    this.value = value;
+  }
+
+   static new(value:number){
+    return new FixedColumnWidth(value);
+  }
+}
+
+export class FractionColumnWidth extends TableColumnWidth {
+  value:number;
+  
+   constructor(value:number){
+    super();
+    this.value = value;
+  }
+
+   static new(value:number){
+    return new FractionColumnWidth(value);
+  }
+}
+
+export class FlexColumnWidth extends TableColumnWidth {
+  value?:number;
+  
+   constructor(value?:number){
+    super();
+    this.value = value;
+  }
+
+   static new(value?:number){
+    return new FlexColumnWidth(value);
+  }
+}
+
+export class MaxColumnWidth extends TableColumnWidth {
+  a:TableColumnWidth;
+  b:TableColumnWidth;
+  
+   constructor(a:TableColumnWidth, b:TableColumnWidth){
+    super();
+    this.a = a;
+    this.b = b;
+  }
+
+   static new(a:TableColumnWidth, b:TableColumnWidth){
+    return new MaxColumnWidth(a,b);
+  }
+}
+
+export class MinColumnWidth extends TableColumnWidth {
+  a:TableColumnWidth;
+  b:TableColumnWidth;
+  
+   constructor(a:TableColumnWidth, b:TableColumnWidth){
+    super();
+    this.a = a;
+    this.b = b;
+  }
+
+   static new(a:TableColumnWidth, b:TableColumnWidth){
+    return new MaxColumnWidth(a,b);
+  }
+}
+
+
+//#endregion
+
+
+//****** TODO TabController ******
+interface TabControllerConfig {
+  initialIndex?:number;
+  length?:number;
+  vsync?:any;
+}
+export class TabController extends DartClass {
+  initialIndex?:number;
+  length?:number;
+  vsync?:any;
+
+  /**
+   * @param config config: 
+    {
+      initialIndex?:number,
+      length?:number,
+      vsync?:any
+    }
+   */
+  constructor(config?: TabControllerConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.initialIndex = config.initialIndex;
+      this.length = config.length;
+      this.vsync = config.vsync;
+    }
+  }
+
+  /**
+   * @param config config: 
+    {
+      initialIndex?:number,
+      length?:number,
+      vsync?:any
+    }
+   */
+  static new (config?: TabControllerConfig) {
+    return new TabController(config);
+  }
+}
+
+
+//****** TODO  TextEditingController ******
+export class TextEditingController extends DartClass {
+  text?:string;
+
+  constructor(text?:string){
+    super();
+    this.text=text;
+
+    //Mirror对象在构造函数创建 MirrorID
+    this.createMirrorID();
+  }
+
+  static new(text?:string) {
+    return new TextEditingController(text);
+  }
+
+
+  //清理值
+  clear() {
+    this.invokeMirrorObjWithCallback(JSCallConfig.new({
+          mirrorID: this.mirrorID,
+          className: this.className,
+          funcName: "clear",
+      }));
+  }
+
+  //获取文本值
+  async getText() {
+    var v= await this.invokeMirrorObjWithCallback(JSCallConfig.new({
+          mirrorID: this.mirrorID,
+          className: this.className,
+          funcName: "getText",
+      }));
+    return String(v);
+  }
+
+  //设置文本值
+  async setText(text:string) {
+    this.invokeMirrorObjWithCallback(JSCallConfig.new({
+          mirrorID: this.mirrorID,
+          className: this.className,
+          funcName: "setText",
+          args:text,
+      }));
+  }
+}
+
+//****** ToolbarOptions ******
+interface ToolbarOptionsConfig {
+  copy?:boolean;
+  cut?:boolean;
+  paste?:boolean;
+  selectAll?:boolean;
+}
+export class ToolbarOptions extends DartClass {
+  copy?:boolean;
+  cut?:boolean;
+  paste?:boolean;
+  selectAll?:boolean;
+
+  /**
+   * @param config config: 
+    {
+      copy?:boolean,
+      cut?:boolean,
+      paste?:boolean,
+      selectAll?:boolean,
+    }
+   */
+  constructor(config?: ToolbarOptionsConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.copy = config.copy;
+      this.cut = config.cut;
+      this.paste = config.paste;
+      this.selectAll = config.selectAll;
+    }
+  }
+
+  /**
+   * @param config config: 
+    {
+      copy?:boolean,
+      cut?:boolean,
+      paste?:boolean,
+      selectAll?:boolean,
+    }
+   */
+  static new (config?: ToolbarOptionsConfig) {
+    return new ToolbarOptions(config);
+  }
+}
+
+
+//****** TextInputType ******
+interface TextInputTypeConfig {
+  signed?:boolean;
+  decimal?:boolean;
+}
+export class TextInputType extends DartClass {
+  
+  signed?:boolean;
+  decimal?:boolean;
+
+  static new(){
+    return new TextInputType();
+  };
+
+  static numberWithOptions(config?: TextInputTypeConfig) {
+    let v = new TextInputType();
+    v.constructorName = "numberWithOptions";
+    if(config!=null && config!=undefined){
+      v.signed = config.signed;
+      v.decimal = config.decimal;
+    }
+    return v;
+  }
+
+  static text() {
+    let v = new TextInputType();
+    v.constructorName = "text";
+    return v;
+  }
+
+  static multiline() {
+    let v = new TextInputType();
+    v.constructorName = "multiline";
+    return v;
+  }
+
+  static number() {
+    let v = new TextInputType();
+    v.constructorName = "number";
+  
+    return v;
+  }
+
+  static phone() {
+    let v = new TextInputType();
+    v.constructorName = "phone";
+  
+    return v;
+  }
+
+  static datetime() {
+    let v = new TextInputType();
+    v.constructorName = "datetime";
+  
+    return v;
+  }
+
+  static emailAddress() {
+    let v = new TextInputType();
+    v.constructorName = "emailAddress";
+  
+    return v;
+  }
+
+  static url(){
+    let v = new TextInputType();
+    v.constructorName = "url";
+    return v;
+  }
+}
+
+//****** TODO Tween ******
+export class Tween extends DartClass {
+  begin?:number;
+  end?:number;
+
+  constructor(begin?:number, end?:number){
+    super();
+    this.begin = begin;
+    this.end = end;
+  }
+  
+  lerp(t:number) {
+    //return dart.dsend(this.begin, '+', [dart.dsend(dart.dsend(this.end, '-', [this.begin]), '*', [t])]);
+  }
+  transform(t:number) {
+    if (t == 0.0) return this.begin;
+    if (t == 1.0) return this.end;
+    return this.lerp(t);
+  }
+
+  static new(begin?:number, end?:number) {
+    return new Tween(begin,end);
+  };
+}
+  
+//#region ****** TextInputFormatter ******
+export abstract class TextInputFormatter extends DartClass{
+
+  /**
+   * TextInputFormatter.lengthLimiting = new LengthLimitingTextInputFormatter(maxLength?:number);
+  */
+  static lengthLimiting(maxLength?:number) {
+    return new LengthLimitingTextInputFormatter(maxLength);
+  }
+
+  /**
+   * TextInputFormatter.filtering = new FilteringTextInputFormatter(allow:boolean,filterPattern:RegExp,replacementString?:string);
+  */
+  static filtering(allow:boolean,filterPattern:RegExp,replacementString?:string) {
+    return new FilteringTextInputFormatter(allow,filterPattern,replacementString);
+  }
+
+  /**
+   * TextInputFormatter.allow = FilteringTextInputFormatter.allow(filterPattern:RegExp,replacementString?:string);
+  */
+  static allow(filterPattern:RegExp,replacementString?:string) {
+    return FilteringTextInputFormatter.allow(filterPattern,replacementString);
+  }
+
+  /**
+   * TextInputFormatter.deny = FilteringTextInputFormatter.deny(filterPattern:RegExp,replacementString?:string);
+  */
+  static deny(filterPattern:RegExp,replacementString?:string) {
+    return FilteringTextInputFormatter.deny(filterPattern,replacementString);
+  }
+
+  /**
+   * TextInputFormatter.singleLineFormatter = FilteringTextInputFormatter.singleLineFormatter();
+  */
+  static singleLineFormatter() {
+    return FilteringTextInputFormatter.singleLineFormatter();
+  }
+
+  /**
+   * TextInputFormatter.digitsOnly = FilteringTextInputFormatter.digitsOnly();
+  */
+  static digitsOnly() {
+    return FilteringTextInputFormatter.digitsOnly();
+  }
+
+  /**
+   * TextInputFormatter.mask = new MaskTextInputFormatter(mask:string,initialText?:string,filter?:Map<string,RegExp>);
+  */
+  static mask(mask:string,initialText?:string,filter?:Map<string,RegExp>) {
+    return new MaskTextInputFormatter(mask,initialText,filter);
+  }
+
+}
+
+export class LengthLimitingTextInputFormatter extends TextInputFormatter {
+  maxLength?:number;
+  
+   constructor(maxLength?:number){
+    super();
+    this.maxLength = maxLength;
+  }
+
+   static new(maxLength?:number){
+    return new LengthLimitingTextInputFormatter(maxLength);
+  }
+}
+
+export class FilteringTextInputFormatter extends TextInputFormatter {
+  filterPattern?:RegExp;
+  allow?:boolean;
+  replacementString?:string;
+
+  constructor(allow?:boolean,filterPattern?:RegExp,replacementString?:string){
+    super();
+    this.allow = allow;
+    this.filterPattern = filterPattern;
+    this.replacementString =replacementString;
+
+  }
+
+  static new(allow:boolean,filterPattern:RegExp,replacementString?:string){
+    return new FilteringTextInputFormatter(allow,filterPattern,replacementString);
+  }
+
+  static allow(filterPattern:RegExp,replacementString?:string){
+    return new FilteringTextInputFormatter(true,filterPattern,replacementString);
+  }
+
+  static deny(filterPattern:RegExp,replacementString?:string){
+    return new FilteringTextInputFormatter(false,filterPattern,replacementString);
+  }
+
+  static singleLineFormatter(){
+    var v = new FilteringTextInputFormatter();
+    v.constructorName = "singleLineFormatter";
+    return v;
+  }
+
+  static digitsOnly(){
+    var v = new FilteringTextInputFormatter();
+    v.constructorName = "digitsOnly";
+    return v;
+  }
+
+}
+
+export class MaskTextInputFormatter extends TextInputFormatter {
+  mask?:string;
+  initialText?:string;
+  filter?:Map<string,RegExp>;
+  
+   constructor(mask:string,initialText?:string,filter?:Map<string,RegExp>){
+    super();
+    this.mask = mask;
+    this.filter = filter;
+    this.initialText =initialText;
+
+  }
+
+  static new(mask:string,initialText?:string,filter?:Map<string,RegExp>){
+    return new MaskTextInputFormatter(mask,initialText,filter);
+  }
+}
+
+//#endregion
+
+  
+//#endregion
+
+
+//#region ------- U -------
   
   //****** Uri ******
   interface UriConfig {
@@ -6992,7 +7076,7 @@ export class Alignment extends DartClass {
     }
   }
   
-  //****** VerticalDirection ******
+  //****** Uint8List ******
   export class Uint8List extends DartClass {
     length?:number;
     elements?:Array<number>;
@@ -7015,166 +7099,169 @@ export class Alignment extends DartClass {
     }
   }
   
+//#endregion
   
-  //#endregion
-  
-  //#region ------- V -------
-  //****** Vector3 ******
-  export class Vector3 extends DartClass {
-    x?:number;
-    y?:number;
-    z?:number;
-    value?:number;
-  
-    constructor(x?:number, y?:number, z?:number){
-      super();
-      this.x = x;
-      this.y = y;
-      this.z = z;
-    }
-  
-    static new(x:number, y:number, z:number) {
-      return new Vector3(x,y,z);
-    }
-  
-    static zero(){
-      let v = new Vector3();
-      v.constructorName = "zero";
-      return v;
-    }
-  
-    static all(value:number) {
-      let v = new Vector3();
-      v.constructorName = "all";
-      v.value = value;
-      return v;
-    }
-  }
-  
-  //****** Vector4 ******
-  export class Vector4 extends DartClass {
-    x?:number;
-    y?:number;
-    z?:number;
-    w?:number;
-    array?:Array<number>;
-    offset?:Offset;
-  
-    constructor(x?:number,y?:number,z?:number,w?:number){
-      super();
-      this.x = x;
-      this.y = y;
-      this.z = z;
-      this.w = w;
-    }
-  
-    static new(x?:number,y?:number,z?:number,w?:number) {
-      return new Vector4(x,y,z,w);
-    }
-  
-    static array (array?:Array<number>, offset?:Offset) {
-      let v = new Vector4();
-      v.constructorName = "array";
-      v.array = array;
-      v.offset = offset;  
-      return v;
-    }
-  
-    static identity() {
-      let v = new Vector4();
-      v.constructorName = "identity";
-      return v;
-    }
-  
-    static random() {
-      let v = new Vector4();
-      v.constructorName = "random";
-      return v;
-    }
-  }
-  
-  //****** VisualDensity ******
-  interface VisualDensityConfig {
-    horizontal?:number;
-    vertical?:number;
-  }
-  export class VisualDensity extends DartClass {
-    horizontal?:number;
-    vertical?:number;
-  
-    /**
-     * @param config config: 
-      {
-        horizontal?:number,
-        vertical?:number, 
-      }
-     */
-    constructor(config?: VisualDensityConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.horizontal=config.horizontal;
-        this.vertical=config.vertical;
-      }
-    }
-    
-    /**
-     * @param config config: 
-      {
-        horizontal?:number,
-        vertical?:number, 
-      }
-     */
-    static new(config?: VisualDensityConfig) {
-      return new VisualDensity(config);
-    }
-  
-    static comfortable =  VisualDensity.new({horizontal: -1.0, vertical: -1.0});
-    static compact = VisualDensity.new({horizontal: -2.0, vertical: -2.0});
-    static standard = VisualDensity.new();
-  } 
 
-  //****** Velocity ******
-  interface VelocityConfig {
-    pixelsPerSecond?:Offset;
-  }
-  export class Velocity extends DartClass {
-    pixelsPerSecond?:Offset;
-  
-    /**
-     * @param config config: 
-      {
-        pixelsPerSecond?:Offset,
-      }
-     */
-    constructor(config?: VelocityConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.pixelsPerSecond=config.pixelsPerSecond;
-      }
-    }
-    
-    /**
-     * @param config config: 
-      {
-        pixelsPerSecond?:Offset, 
-      }
-     */
-    static new(config?: VelocityConfig) {
-      return new Velocity(config);
-    }
-  
-    static zero() {
-      var v = new Velocity();
-      v.constructorName = "zero";
-      return v;
-    }
-  
-    
-  } 
+//#region ------- V -------
 
-  //#endregion
+//****** Vector3 ******
+export class Vector3 extends DartClass {
+  x?:number;
+  y?:number;
+  z?:number;
+  value?:number;
+
+  constructor(x?:number, y?:number, z?:number){
+    super();
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+
+  static new(x:number, y:number, z:number) {
+    return new Vector3(x,y,z);
+  }
+
+  static zero(){
+    let v = new Vector3();
+    v.constructorName = "zero";
+    return v;
+  }
+
+  static all(value:number) {
+    let v = new Vector3();
+    v.constructorName = "all";
+    v.value = value;
+    return v;
+  }
+}
+
+//****** Vector4 ******
+export class Vector4 extends DartClass {
+  x?:number;
+  y?:number;
+  z?:number;
+  w?:number;
+  array?:Array<number>;
+  offset?:Offset;
+
+  constructor(x?:number,y?:number,z?:number,w?:number){
+    super();
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.w = w;
+  }
+
+  static new(x?:number,y?:number,z?:number,w?:number) {
+    return new Vector4(x,y,z,w);
+  }
+
+  static array (array?:Array<number>, offset?:Offset) {
+    let v = new Vector4();
+    v.constructorName = "array";
+    v.array = array;
+    v.offset = offset;  
+    return v;
+  }
+
+  static identity() {
+    let v = new Vector4();
+    v.constructorName = "identity";
+    return v;
+  }
+
+  static random() {
+    let v = new Vector4();
+    v.constructorName = "random";
+    return v;
+  }
+}
   
-  //#endregion
+
+//****** VisualDensity ******
+interface VisualDensityConfig {
+  horizontal?:number;
+  vertical?:number;
+}
+export class VisualDensity extends DartClass {
+  horizontal?:number;
+  vertical?:number;
+
+  /**
+   * @param config config: 
+    {
+      horizontal?:number,
+      vertical?:number, 
+    }
+   */
+  constructor(config?: VisualDensityConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.horizontal=config.horizontal;
+      this.vertical=config.vertical;
+    }
+  }
+  
+  /**
+   * @param config config: 
+    {
+      horizontal?:number,
+      vertical?:number, 
+    }
+   */
+  static new(config?: VisualDensityConfig) {
+    return new VisualDensity(config);
+  }
+
+  static comfortable =  VisualDensity.new({horizontal: -1.0, vertical: -1.0});
+  static compact = VisualDensity.new({horizontal: -2.0, vertical: -2.0});
+  static standard = VisualDensity.new();
+} 
+
+//****** Velocity ******
+interface VelocityConfig {
+  pixelsPerSecond?:Offset;
+}
+export class Velocity extends DartClass {
+  pixelsPerSecond?:Offset;
+
+  /**
+   * @param config config: 
+    {
+      pixelsPerSecond?:Offset,
+    }
+   */
+  constructor(config?: VelocityConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.pixelsPerSecond=config.pixelsPerSecond;
+    }
+  }
+  
+  /**
+   * @param config config: 
+    {
+      pixelsPerSecond?:Offset, 
+    }
+   */
+  static new(config?: VelocityConfig) {
+    return new Velocity(config);
+  }
+
+  static zero() {
+    var v = new Velocity();
+    v.constructorName = "zero";
+    return v;
+  }
+
+  
+} 
+//#endregion
+
+
+//#endregion
+
   
 
 //#region ******** Icons ********
@@ -9879,8 +9966,6 @@ export class CupertinoIcons extends IconData{
     iconSize?:number;
     selectedItemColor?:Color;
     unselectedItemColor?:Color;
-    selectedIconTheme?:IconThemeData;
-    unselectedIconTheme?:IconThemeData;
     selectedFontSize?:number;
     unselectedFontSize?:number;
     selectedLabelStyle?:TextStyle;
@@ -9900,8 +9985,6 @@ export class CupertinoIcons extends IconData{
     iconSize?:number;
     selectedItemColor?:Color;
     unselectedItemColor?:Color;
-    selectedIconTheme?:IconThemeData;
-    unselectedIconTheme?:IconThemeData;
     selectedFontSize?:number;
     unselectedFontSize?:number;
     selectedLabelStyle?:TextStyle;
@@ -9923,8 +10006,6 @@ export class CupertinoIcons extends IconData{
           iconSize?:number, 
           selectedItemColor?:Color, 
           unselectedItemColor?:Color, 
-          selectedIconTheme?:IconThemeData, 
-          unselectedIconTheme?:IconThemeData, 
           selectedFontSize?:number, 
           unselectedFontSize?:number, 
           selectedLabelStyle?:TextStyle, 
@@ -9947,8 +10028,6 @@ export class CupertinoIcons extends IconData{
         this.iconSize = config.iconSize;
         this.selectedItemColor = config.selectedItemColor;
         this.unselectedItemColor = config.unselectedItemColor;
-        this.selectedIconTheme = config.selectedIconTheme;
-        this.unselectedIconTheme = config.unselectedIconTheme;
         this.selectedFontSize = config.selectedFontSize;
         this.unselectedFontSize = config.unselectedFontSize;
         this.selectedLabelStyle = config.selectedLabelStyle;
@@ -9972,8 +10051,6 @@ export class CupertinoIcons extends IconData{
           iconSize?:number, 
           selectedItemColor?:Color, 
           unselectedItemColor?:Color, 
-          selectedIconTheme?:IconThemeData, 
-          unselectedIconTheme?:IconThemeData, 
           selectedFontSize?:number, 
           unselectedFontSize?:number, 
           selectedLabelStyle?:TextStyle, 
@@ -17642,8 +17719,6 @@ export class CupertinoIcons extends IconData{
     forceElevated?:boolean;
     backgroundColor?:Color;  
     brightness?:Brightness;
-    iconTheme?:IconThemeData;
-    actionsIconTheme?:IconThemeData;
     primary?:boolean;
     centerTitle?:boolean;  
     excludeHeaderSemantics?:boolean;
@@ -17672,8 +17747,6 @@ export class CupertinoIcons extends IconData{
     forceElevated?:boolean;
     backgroundColor?:Color;
     brightness?:Brightness;
-    iconTheme?:IconThemeData;
-    actionsIconTheme?:IconThemeData;
     primary?:boolean;
     centerTitle?:boolean;  
     excludeHeaderSemantics?:boolean;
@@ -17704,8 +17777,6 @@ export class CupertinoIcons extends IconData{
         forceElevated?:boolean, 
         backgroundColor?:Color, 
         brightness?:Brightness, 
-        iconTheme?:IconThemeData, 
-        actionsIconTheme?:IconThemeData, 
         primary?:boolean, 
         centerTitle?:boolean, 
         excludeHeaderSemantics?:boolean, 
@@ -17737,8 +17808,6 @@ export class CupertinoIcons extends IconData{
         this.forceElevated = config.forceElevated;
         this.backgroundColor = config.backgroundColor;
         this.brightness = config.brightness;
-        this.iconTheme = config.iconTheme;
-        this.actionsIconTheme = config.actionsIconTheme;
         this.primary = config.primary;
         this.centerTitle = config.centerTitle;
         this.titleSpacing = config.titleSpacing;
@@ -17771,8 +17840,6 @@ export class CupertinoIcons extends IconData{
         forceElevated?:boolean, 
         backgroundColor?:Color, 
         brightness?:Brightness, 
-        iconTheme?:IconThemeData, 
-        actionsIconTheme?:IconThemeData, 
         primary?:boolean, 
         centerTitle?:boolean, 
         excludeHeaderSemantics?:boolean, 
@@ -21528,978 +21595,3 @@ interface CupertinoActivityIndicatorConfig {
   }
   
   //#endregion
-
-
-//#region ******** Base Api ********
-
-//****** Loading ******
-interface LoadingInfoConfig {
-    info:string;
-    duration?:Duration;
-    alignment?:Alignment;
-    animation?:boolean;
-}
-interface LoadingProgressConfig {
-    value:number;
-    alignment?:Alignment;
-}
-export class Loading extends DartClass {
-
-    static instance:Loading;
-
-    constructor() {
-        super();
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-
-    static getInstance() {
-        if (!this.instance) {
-          this.instance = new Loading();
-        }
-        return this.instance;
-      }
-   
-    /**
-     * @param config config: 
-      {
-        info:string, 
-        duration?:Duration, 
-        alignment?:Alignment, 
-      }
-     */
-    static showSuccess(config:LoadingInfoConfig){
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showSuccess",
-            args: config,
-        }));
-    }
-
-    /**
-     * @param config config: 
-      {
-        info:string, 
-        duration?:Duration, 
-        alignment?:Alignment, 
-      }
-     */
-    static showError(config:LoadingInfoConfig){
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showError",
-            args: config,
-        }));
-    }
-
-   /**
-     * @param config config: 
-      {
-        info:string, 
-        duration?:Duration, 
-        alignment?:Alignment, 
-      }
-     */
-    static showInfo(config:LoadingInfoConfig){
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showInfo",
-            args: config,
-        }));
-    }
-
-    /**
-     * @param config config: 
-      {
-        info:string, 
-        duration?:Duration, 
-        alignment?:Alignment, 
-      }
-     */
-    static showToast(config:LoadingInfoConfig){
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showToast",
-            args: config,
-        }));
-    }
-
-    /**
-     * @param config config: 
-      {
-        info:string, 
-        alignment?:Alignment, 
-      }
-     */
-    static show(config:LoadingInfoConfig){
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "show",
-            args: config,
-        }));
-    }
-
-    /**
-     * @param config config: 
-      {
-        value:number(0~100), 
-        alignment?:Alignment, 
-      }
-     */
-    static showProgress(config:LoadingProgressConfig){
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: "Loading",
-            funcName: "showProgress",
-            args: config,
-        }));
-    }
-
-     /**
-     * @param config config: 
-      {
-        animation?:animation,
-      }
-     */
-    static dismiss(config?:LoadingInfoConfig){
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: "Loading",
-            funcName: "dismiss",
-            args: config,
-        }));
-    }
-}
-
-//****** Sp ******
-interface SpGetConfig {
-    key:string;
-    defaultValue?:string|boolean|number;
-}
-interface SpSetConfig {
-    key:string;
-    value:string|boolean|number;
-}
-export class Sp extends DartClass {
-
-    static instance:Sp;
-
-    constructor() {
-        super();
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-
-        
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-
-    static getInstance() {
-        if (!this.instance) {
-          this.instance = new Sp();
-        }
-        return this.instance;
-      }
-    
-    /**
-     * @param config config: 
-      {
-        key:string;
-        defaultValue?:boolean;
-      }
-     */
-    static async getBool(config:SpGetConfig) {
-      var v= await Sp.getInstance().invokeMirrorObjWithCallback(
-        JSCallConfig.new({
-          mirrorID: Sp.getInstance().mirrorID,
-          className: Sp.getInstance().className,
-          funcName: "getBool",
-          args: config,
-        })
-      );
-      return Convert.toBoolean(v);
-    }
-
-    /**
-     * @param config config: 
-      {
-        key:string;
-        defaultValue?:number;
-      }
-     */
-    static async getInt(config:SpGetConfig) {
-      var v= await Sp.getInstance().invokeMirrorObjWithCallback(
-        JSCallConfig.new({
-          mirrorID: Sp.getInstance().mirrorID,
-          className: Sp.getInstance().className,
-          funcName: "getInt",
-          args: config,
-        })
-      );
-      return Convert.toNumber(v);
-    }
-
-    /**
-     * @param config config: 
-      {
-        key:string;
-        defaultValue?:double;
-      }
-     */
-    static async getDouble(config:SpGetConfig) {
-      var v= await Sp.getInstance().invokeMirrorObjWithCallback(
-        JSCallConfig.new({
-          mirrorID: Sp.getInstance().mirrorID,
-          className: Sp.getInstance().className,
-          funcName: "getDouble",
-          args: config,
-        })
-      );
-      return Convert.toNumber(v);
-    }
-
-    /**
-     * @param config config: 
-      {
-        key:string;
-        defaultValue?:string;
-      }
-     */
-    static async getString(config:SpGetConfig) {
-      var v= await Sp.getInstance().invokeMirrorObjWithCallback(
-        JSCallConfig.new({
-          mirrorID: Sp.getInstance().mirrorID,
-          className: Sp.getInstance().className,
-          funcName: "getString",
-          args: config,
-        })
-      );
-      return Convert.toString(v);
-    }
-
-    static async clear() {
-      var v = await Sp.getInstance().invokeMirrorObjWithCallback(
-        JSCallConfig.new({
-          mirrorID: Sp.getInstance().mirrorID,
-          className: Sp.getInstance().className,
-          funcName: "clear",
-        })
-      );
-      return Convert.toBoolean(v);
-    }
-
-    /**
-     * @param config config: 
-      {
-        key:string;
-      }
-     */
-    static async remove(config:SpGetConfig) {
-      var v = await Sp.getInstance().invokeMirrorObjWithCallback(
-        JSCallConfig.new({
-          mirrorID: Sp.getInstance().mirrorID,
-          className: Sp.getInstance().className,
-          funcName: "remove",
-        })
-      );
-      return Convert.toBoolean(v);
-    }
-
-    /**
-     * @param config config: 
-      {
-        key:string;
-        value:boolean;
-      }
-     */
-    static async setBool(config:SpSetConfig) {
-      var v = await  Sp.getInstance().invokeMirrorObjWithCallback(
-        JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setBool",
-            args: config,
-        })
-      );
-      return Convert.toBoolean(v);
-    }
-
-    /**
-     * @param config config: 
-      {
-        key:string;
-        value:number;
-      }
-     */
-    static async setDouble(config:SpSetConfig) {
-      var v = await  Sp.getInstance().invokeMirrorObjWithCallback(
-        JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setDouble",
-            args: config,
-        })
-      );
-      return Convert.toBoolean(v);
-    }
-
-    /**
-     * @param config config: 
-      {
-        key:string;
-        value:number;
-      }
-     */
-    static async setInt(config:SpSetConfig) {
-      var v = await Sp.getInstance().invokeMirrorObjWithCallback(
-        JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setInt",
-            args: config,
-        })
-      );
-      return Convert.toBoolean(v);
-    }
-
-    /**
-     * @param config config: 
-      {
-        key:string;
-        value:string;
-      }
-     */
-    static async setString(config:SpSetConfig) {
-      var v = await  Sp.getInstance().invokeMirrorObjWithCallback(
-        JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setString",
-            args: config,
-        })
-      );
-    }
-}
-
-
-//****** ScreenInfo ******
-export class ScreenInfo extends DartClass {
-
-  // 设计稿屏幕宽度(PX)
-  static uiWidthPx:number = 750.0;
-  //设计稿屏幕宽度(PX)
-  static uiHeightPx:number = 1334.0;
-  //设计稿屏幕密度
-  static uiDensity:number = 2.0;
-  //设计稿屏幕宽度(DP)
-  static uiWidth:number = 375.0;
-  //设计稿屏幕宽度(DP)
-  static uiHeight:number = 667.0;
-  //当前设备宽度 dp
-  static screenWidth:number = 375.0;
-  // 当前设备高度 dp
-  static screenHeight:number = 667.0;
-  // 当前设备宽度 px
-  static screenWidthPx:number = 750.0;
-  // 当前设备高度 px
-  static screenHeightPx:number = 1334.0;
-  // 设备的像素密度
-  static screenDensity:number = 2.0;
-  // 状态栏高度 dp 刘海屏会更高
-  static statusBarHeight:number = 20.0;
-  //底部工具栏高度
-  static bottomBarHeight:number = 0.0;
-  //App栏高
-  static appBarHeight:number = 0.0;
-  //缩放比例(Dp)
-  static dpRatio:number = 1.0;
-  //缩放比例(PX)
-  static pxRatio:number = 1.0;
-  //字体缩放放比例
-  static textScaleFactor:number=1.0;
-
-
-  constructor() {
-      super();
-      //Mirror对象在构造函数创建 MirrorID
-      this.createMirrorID();
-
-      //创建对应FLutter对象
-      this.createMirrorObj();
-  }
-
-
-  /*
-  * 将Dp按比例转换成Dp
-  * */
- static getValueWithDp(dp:number,isRatio:boolean=true) {
-    return isRatio ? (ScreenInfo.dpRatio * dp) : dp;
-  }
-
-  /*
-  * 将px按比例转换成Dp
-  * */
-  static getValueWithPx(px:number,isRatio:boolean=true) {
-    return isRatio ? (ScreenInfo.pxRatio * px) : px;
-  }
-
-  //
-  static async updateInfo() {
-    var info = new ScreenInfo();
-    var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-          mirrorID: info.mirrorID,
-          className: info.className,
-          funcName: "updateInfo",
-      }));
-      if(v!=null && v!=undefined){
-        var result= JSON.parse(String(v));
-        if(result!=null && result!=undefined){
-          ScreenInfo.appBarHeight = Convert.toNumber(result["appBarHeight"]);
-          ScreenInfo.bottomBarHeight = Convert.toNumber(result["bottomBarHeight"]);
-          ScreenInfo.dpRatio = Convert.toNumber(result["dpRatio"]);
-          ScreenInfo.pxRatio = Convert.toNumber(result["pxRatio"]);
-          ScreenInfo.screenDensity = Convert.toNumber(result["screenDensity"]);
-          ScreenInfo.screenHeight = Convert.toNumber(result["screenHeight"]);
-          ScreenInfo.screenHeightPx = Convert.toNumber(result["screenHeightPx"]);
-          ScreenInfo.screenWidth = Convert.toNumber(result["screenWidth"]);
-          ScreenInfo.screenWidthPx = Convert.toNumber(result["screenWidthPx"]);
-          ScreenInfo.statusBarHeight = Convert.toNumber(result["statusBarHeight"]);
-          ScreenInfo.uiDensity = Convert.toNumber(result["uiDensity"]);
-          ScreenInfo.uiHeight = Convert.toNumber(result["uiHeight"]);
-          ScreenInfo.uiWidth = Convert.toNumber(result["uiWidth"]);
-          ScreenInfo.uiWidthPx = Convert.toNumber(result["uiWidthPx"]);
-          ScreenInfo.uiHeightPx = Convert.toNumber(result["uiHeightPx"]);
-        }
-      }
-  }
-}
-
-//****** PackageInfo ******
-export class PackageInfo extends DartClass {
-  static appName:string = ""; //应用名称
-  static packageName:string = ""; //包名称
-  static version:string = ""; //版本号
-  static buildNumber:string = ""; //小版本号
-
-  constructor() {
-      super();
-      //Mirror对象在构造函数创建 MirrorID
-      this.createMirrorID();
-
-      //创建对应FLutter对象
-      this.createMirrorObj();
-  }
-
-  //
-  static async updateInfo() {
-    var info = new PackageInfo();
-    var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-          mirrorID: info.mirrorID,
-          className: info.className,
-          funcName: "updateInfo",
-      }));
-      if(v!=null && v!=undefined){
-        var result= JSON.parse(String(v));
-        if(result!=null && result!=undefined){
-          PackageInfo.appName = Convert.toString(result["appName"]);
-          PackageInfo.buildNumber = Convert.toString(result["buildNumber"]);
-          PackageInfo.packageName = Convert.toString(result["packageName"]);
-          PackageInfo.version = Convert.toString(result["version"]);
-        }
-      }
-  }
-}
-
-//****** Wakelock ******
-export class Wakelock extends DartClass {  
-  constructor() {
-    super();
-    //Mirror对象在构造函数创建 MirrorID
-    this.createMirrorID();
-
-    //创建对应FLutter对象
-    this.createMirrorObj();
-  }
-
-  
-  
-    //
-    static async disable() {
-      var info = new Wakelock();
-      var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "disable",
-        }));
-
-      return Convert.toBoolean(v);
-    }
-
-    //
-    static async enable() {
-      var info = new Wakelock();
-      var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "enable",
-        }));
-      return Convert.toBoolean(v);
-    }
-
-    //
-    static async isEnabled() {
-      var info = new Wakelock();
-      var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "isEnabled",
-        }));
-      return Convert.toBoolean(v);
-    }
-}
-
-//****** FocusScope ******
-export class FocusScope extends DartClass {  
-  constructor() {
-    super();
-    //Mirror对象在构造函数创建 MirrorID
-    this.createMirrorID();
-
-    //创建对应FLutter对象
-    this.createMirrorObj();
-  }
-
-
-  
-  //
-  static requestFocus() {
-    var info = new FocusScope();
-    info.invokeMirrorObjWithCallback(JSCallConfig.new({
-          mirrorID: info.mirrorID,
-          className: info.className,
-          funcName: "requestFocus",
-      }));
-  }
-
-  //
-  static unfocus() {
-    var info = new FocusScope();
-    info.invokeMirrorObjWithCallback(JSCallConfig.new({
-          mirrorID: info.mirrorID,
-          className: info.className,
-          funcName: "unfocus",
-      }));
-  }
-}
-
-//****** UrlLauncher ******
-interface UrlLauncherConfig {
-  urlString:string;
-  forceSafariVC?:boolean;
-  forceWebView?:boolean;
-  enableJavaScript?:boolean;
-  enableDomStorage?:boolean;
-  universalLinksOnly?:boolean;
-  headers?:Map<string,string>;
-  statusBarBrightness?:Brightness;
-  webOnlyWindowName?:string;
-}
-export class UrlLauncher extends DartClass {
-  constructor() {
-    super();
-    //Mirror对象在构造函数创建 MirrorID
-    this.createMirrorID();
-
-    //创建对应FLutter对象
-    this.createMirrorObj();
-  }
-
-    /**
-     * @param config config: 
-      {
-        urlString:string, 
-        forceSafariVC?:boolean, 
-        forceWebView?:boolean, 
-        enableJavaScript?:boolean, 
-        enableDomStorage?:boolean, 
-        universalLinksOnly?:boolean, 
-        headers?:Map<string,string>, 
-        statusBarBrightness?:Brightness, 
-        webOnlyWindowName?:string, 
-      }
-     */
-    static async openUrl(config:UrlLauncherConfig) {
-      var info = new UrlLauncher();
-      var v= await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "openUrl",
-            args:config,
-        }));
-
-      return Convert.toBoolean(v);
-    }
-}
-
-//#region ****** Dio ******
-
-//****** VoidCallbackDioProgress ******
-export type VoidCallbackDioProgress = (progress:number,total:number) => void;
-
-//****** DioResponseType ******
-export enum DioResponseType {
-  json = "json",
-  stream = "stream",
-  plain = "plain",
-  bytes = "bytes",
-}
-
-//****** DioBaseOptions ******
-interface DioBaseOptionsConfig {
-  method?:string;
-  connectTimeout?:number;
-  receiveTimeout?:number;
-  sendTimeout?:number;
-  baseUrl?:string;
-  queryParameters?:Map<string,any>;
-  extra?:Map<string,any>;
-  headers?:Map<string,any>;
-  responseType?:DioResponseType;
-  receiveDataWhenStatusError?:boolean;
-  followRedirects?:boolean;
-  maxRedirects?:number;
-}
-export class DioBaseOptions extends DartClass {
-  method?:string;
-  connectTimeout?:number;
-  receiveTimeout?:number;
-  sendTimeout?:number;
-  baseUrl?:string;
-  queryParameters?:Map<string,any>;
-  extra?:Map<string,any>;
-  headers?:Map<string,any>;
-  responseType?:DioResponseType;
-  receiveDataWhenStatusError?:boolean;
-  followRedirects?:boolean;
-  maxRedirects?:number;
-
-  /**
-     * @param config config: 
-      {
-        method?:string, 
-        connectTimeout?:number, 
-        receiveTimeout?:number, 
-        sendTimeout?:number, 
-        baseUrl?:string, 
-        queryParameters?:Map<string,any>, 
-        extra?:Map<string,any>, 
-        headers?:Map<string,any>, 
-        responseType?:DioResponseType, 
-        receiveDataWhenStatusError?:boolean, 
-        followRedirects?:boolean, 
-        maxRedirects?:number, 
-      }
-     */
-  constructor(config?:DioBaseOptionsConfig) {
-    super();
-    if(config!=null && config!=undefined){
-      this.method = config.method;
-      this.connectTimeout = config.connectTimeout;
-      this.receiveTimeout = config.receiveTimeout;
-      this.sendTimeout = config.sendTimeout;
-      this.baseUrl = config.baseUrl;
-      this.queryParameters = config.queryParameters;
-      this.extra = config.extra;
-      this.headers = config.headers;
-      this.responseType = config.responseType;
-      this.followRedirects = config.followRedirects;
-      this.maxRedirects = config.maxRedirects;
-    }
-  }
-
-  /**
-     * @param config config: 
-      {
-        method?:string, 
-        connectTimeout?:number, 
-        receiveTimeout?:number, 
-        sendTimeout?:number, 
-        baseUrl?:string, 
-        queryParameters?:Map<string,any>, 
-        extra?:Map<string,any>, 
-        headers?:Map<string,any>, 
-        responseType?:DioResponseType, 
-        receiveDataWhenStatusError?:boolean, 
-        followRedirects?:boolean, 
-        maxRedirects?:number, 
-      }
-     */
-  static new(config?:DioBaseOptionsConfig){
-    return new DioBaseOptions(config);
-  }
-}
-
-//****** DioOptions ******
-interface DioOptionsConfig {
-  method?:string;
-  receiveTimeout?:number;
-  sendTimeout?:number;
-  baseUrl?:string;
-  extra?:Map<string,any>;
-  headers?:Map<string,any>;
-  responseType?:DioResponseType;
-  receiveDataWhenStatusError?:boolean;
-  followRedirects?:boolean;
-  maxRedirects?:number;
-}
-export class DioOptions extends DartClass {
-  method?:string;
-  receiveTimeout?:number;
-  sendTimeout?:number;
-  baseUrl?:string;
-  extra?:Map<string,any>;
-  headers?:Map<string,any>;
-  responseType?:DioResponseType;
-  receiveDataWhenStatusError?:boolean;
-  followRedirects?:boolean;
-  maxRedirects?:number;
-
-  /**
-     * @param config config: 
-      {
-        method?:string, 
-        connectTimeout?:number, 
-        receiveTimeout?:number, 
-        sendTimeout?:number, 
-        baseUrl?:string, 
-        extra?:Map<string,any>, 
-        headers?:Map<string,any>, 
-        responseType?:DioResponseType, 
-        receiveDataWhenStatusError?:boolean, 
-        followRedirects?:boolean, 
-        maxRedirects?:number, 
-      }
-     */
-  constructor(config?:DioOptionsConfig) {
-    super();
-    if(config!=null && config!=undefined){
-      this.method = config.method;
-      this.receiveTimeout = config.receiveTimeout;
-      this.sendTimeout = config.sendTimeout;
-      this.baseUrl = config.baseUrl;
-      this.extra = config.extra;
-      this.headers = config.headers;
-      this.responseType = config.responseType;
-      this.followRedirects = config.followRedirects;
-      this.maxRedirects = config.maxRedirects;
-    }
-  }
-
-  /**
-     * @param config config: 
-      {
-        method?:string, 
-        receiveTimeout?:number, 
-        sendTimeout?:number, 
-        baseUrl?:string, 
-        extra?:Map<string,any>, 
-        headers?:Map<string,any>, 
-        responseType?:DioResponseType, 
-        receiveDataWhenStatusError?:boolean, 
-        followRedirects?:boolean, 
-        maxRedirects?:number, 
-      }
-     */
-  static new(config?:DioOptionsConfig){
-    return new DioOptions(config);
-  }
-}
-
-
-interface DioGetConfig {
-  path?:string;
-  queryParameters?:Map<string,any>;
-  options?:DioOptions;
-  onReceiveProgress?:VoidCallbackDioProgress;
-}
-
-interface DioGetUriConfig {
-  uri?:Uri;
-  options?:DioOptions;
-  onReceiveProgress?:VoidCallbackDioProgress;
-}
-
-interface DioPostConfig {
-  path?:string;
-  data?:any;
-  queryParameters?:Map<string,any>;
-  options?:DioOptions;
-  onSendProgress?:VoidCallbackDioProgress;
-  onReceiveProgress?:VoidCallbackDioProgress;
-}
-
-interface DioPostUriConfig {
-  uri?:Uri;
-  data?:any;
-  options?:DioOptions;
-  onSendProgress?:VoidCallbackDioProgress;
-  onReceiveProgress?:VoidCallbackDioProgress;
-}
-
-interface DioRequestConfig {
-  path?:string;
-  data?:any;
-  queryParameters?:Map<string,any>;
-  options?:DioOptions;
-  onSendProgress?:VoidCallbackDioProgress;
-  onReceiveProgress?:VoidCallbackDioProgress;
-}
-
-interface DioRequestUriConfig {
-  uri?:Uri;
-  data?:any;
-  options?:DioOptions;
-  onSendProgress?:VoidCallbackDioProgress;
-  onReceiveProgress?:VoidCallbackDioProgress;
-}
-
-
-export class Dio extends DartClass {
-
-  options?:DioBaseOptions;
-
-  constructor(options?:DioBaseOptions) {
-    super();
-    this.options = options;
-    //Mirror对象在构造函数创建 MirrorID
-    this.createMirrorID();
-
-    //创建对应FLutter对象
-    this.createMirrorObj();
-  }
-
-  static new(options?:DioBaseOptions){
-    return new Dio(options);
-  }
-
-  /**
-    * @param config config: 
-      {
-        path?:string, 
-        queryParameters?:Map<string,any>, 
-        options?:DioOptions, 
-      }
-  */
-  async get(config:DioGetConfig ) {
-    return await this.invokeMirrorObjWithCallback(
-      JSCallConfig.new({
-          mirrorID: this.mirrorID,
-          className: this.className,
-          funcName: "get",
-          args:config,
-      }));
-  }
-
-  /**
-    * @param config config: 
-      {
-        uri?:Uri,
-        options?:DioOptions, 
-      }
-    */
-  async getUri(config:DioGetUriConfig ) {
-    return await this.invokeMirrorObjWithCallback(
-      JSCallConfig.new({
-          mirrorID: this.mirrorID,
-          className: this.className,
-          funcName: "getUri",
-          args:config,
-      }));
-  }
-
-  /**
-    * @param config config: 
-      {
-        path?:string, 
-        data?:any;
-        queryParameters?:Map<string,any>, 
-        options?:DioOptions, 
-      }
-  */
-  async post(config:DioPostConfig ) {
-    return await this.invokeMirrorObjWithCallback(
-      JSCallConfig.new({
-          mirrorID: this.mirrorID,
-          className: this.className,
-          funcName: "post",
-          args:config,
-      }));
-  }
-
-  /**
-    * @param config config: 
-      {
-        uri?:Uri,
-        data?:any;
-        options?:DioOptions, 
-      }
-    */
-  async postUri(config:DioPostUriConfig ) {
-    return await this.invokeMirrorObjWithCallback(
-      JSCallConfig.new({
-          mirrorID: this.mirrorID,
-          className: this.className,
-          funcName: "postUri",
-          args:config,
-      }));
-  }
-
-  /**
-    * @param config config: 
-      {
-        path?:string, 
-        data?:any;
-        queryParameters?:Map<string,any>, 
-        options?:DioOptions, 
-      }
-  */
-  async request(config:DioRequestConfig ) {
-    return await this.invokeMirrorObjWithCallback(
-      JSCallConfig.new({
-          mirrorID: this.mirrorID,
-          className: this.className,
-          funcName: "request",
-          args:config,
-      }));
-  }
-
-  /**
-    * @param config config: 
-      {
-        uri?:Uri,
-        data?:any;
-        options?:DioOptions, 
-      }
-    */
-  async requestUri(config:DioRequestUriConfig ) {
-    return await this.invokeMirrorObjWithCallback(
-      JSCallConfig.new({
-          mirrorID: this.mirrorID,
-          className: this.className,
-          funcName: "requestUri",
-          args:config,
-      }));
-  }
-}
-
-//#endregion
-
-//#endregion

@@ -8,9 +8,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyHomePage = void 0;
 const fs = require("flutter_sdk");
+const api = require("flutter_api");
 const index_1 = require("demo/base_widgets/index");
 const index_2 = require("demo/packages/index");
 const index_3 = require("demo/examples/index");
+const index_4 = require("demo/dialog/index");
 class MyHomePage extends fs.StatefulWidget {
     createState() {
         return _MyHomePageState.new(this);
@@ -25,8 +27,8 @@ class _MyHomePageState extends fs.WidgetState {
     //subclass override
     initState() {
         fs.Log.log("MyHomePage.initState");
-        fs.ScreenInfo.updateInfo();
-        fs.PackageInfo.updateInfo();
+        api.ScreenInfo.updateInfo();
+        api.PackageInfo.updateInfo();
     }
     build(context) {
         return fs.Scaffold.new({
@@ -76,6 +78,19 @@ class _MyHomePageState extends fs.WidgetState {
                     }),
                     fs.ListTile.new({
                         leading: fs.Text.new("4", { style: this._style }),
+                        trailing: fs.Icon.new(fs.Icons.chevron_right),
+                        title: fs.Text.new("Dialog"),
+                        subtitle: fs.Text.new("常用提示框"),
+                        onTap: function () {
+                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                                builder: function (context) {
+                                    return index_4.MyDialogIndex.new();
+                                }
+                            }));
+                        }
+                    }),
+                    fs.ListTile.new({
+                        leading: fs.Text.new("5", { style: this._style }),
                         trailing: fs.Icon.new(fs.Icons.chevron_right),
                         title: fs.Text.new("TS2Project"),
                         subtitle: fs.Text.new("在本工程中实现JS与Project通信息"),

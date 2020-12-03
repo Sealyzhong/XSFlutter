@@ -6,6 +6,7 @@
  */
 
 import fs = require("flutter_sdk");
+import api = require("flutter_api");
 
 export class MyUrlLaucherPage extends fs.StatelessWidget{
 
@@ -28,7 +29,7 @@ export class MyUrlLaucherPage extends fs.StatelessWidget{
                             title:fs.Text.new("打开网站"),
                             subtitle:fs.Text.new("https://www.baidu.com"),
                             onTap:function(){
-                                fs.UrlLauncher.openUrl({urlString:"https://www.baidu.com"});
+                                api.UrlLauncher.openUrl({urlString:"https://www.baidu.com"});
                             }                        
                         }),
 
@@ -38,7 +39,7 @@ export class MyUrlLaucherPage extends fs.StatelessWidget{
                             title:fs.Text.new("打电话"),
                             subtitle:fs.Text.new("tels:10000"),
                             onTap:function(){
-                                fs.UrlLauncher.openUrl({urlString:"tels:10000"});
+                                api.UrlLauncher.openUrl({urlString:"tels:10000"});
                             }                        
                         }),
                         
@@ -48,7 +49,7 @@ export class MyUrlLaucherPage extends fs.StatelessWidget{
                             title:fs.Text.new("发短信"),
                             subtitle:fs.Text.new("sms:10000"),
                             onTap:function(){
-                                fs.UrlLauncher.openUrl({urlString:"sms:10000"});
+                                api.UrlLauncher.openUrl({urlString:"sms:10000"});
                             }                        
                         }),
                         

@@ -32,6 +32,12 @@ class _MyTextFieldPage extends fs.WidgetState{
                         child:fs.TextField.new({
                             decoration: fs.InputDecoration.new({
                                 icon:fs.Icon.new(fs.Icons.person,),
+                                errorBorder:fs.InputBorder.none(),
+                                disabledBorder:fs.InputBorder.outline({
+                                    borderSide:fs.BorderSide.new(),
+                                }),
+                                enabledBorder:fs.InputBorder.underline(),
+                                
                             }),
                             inputFormatters:[
                                 fs.TextInputFormatter.lengthLimiting(10),

@@ -6,7 +6,7 @@
  * @Description: JS Flutter SDK
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Dio = exports.DioOptions = exports.DioBaseOptions = exports.DioResponseType = exports.UrlLauncher = exports.FocusScope = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.Sp = exports.Loading = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.ScrollPhysics = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.RangeMaintainingScrollPhysics = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.OutlinedBorder = exports.Offset = exports.NotchedShape = exports.Notification = exports.NeverScrollableScrollPhysics = exports.MediaQueryData = exports.MediaQuery = exports.Matrix4 = exports.MaskFilter = exports.Key = exports.InputDecoration = exports.InputDecorationTheme = exports.ImageShader = exports.IconThemeData = exports.IconData = exports.ImageProvider = exports.InputBorder = exports.Gradient = exports.GradientTransform = exports.File = exports.FixedColumnWidth = exports.FractionalOffset = exports.FocusNode = exports.FlutterLogoDecoration = exports.FlexColumnWidth = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.CurveTween = exports.ClampingScrollPhysics = exports.CircularNotchedRectangle = exports.ColorScheme = exports.ColorFilter = exports.Colors = exports.Color = exports.BouncingScrollPhysics = exports.BoxShadow = exports.BannerPainter = exports.BoxDecoration = exports.ButtonThemeData = exports.BorderDirectional = exports.Border = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderSide = exports.BoxConstraints = exports.AssetImage = exports.AssetBundle = exports.AlwaysScrollableScrollPhysics = exports.AlignmentDirectional = exports.Alignment = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.ShapeBorder = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
+exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.Offset = exports.Notification = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -129,10 +129,6 @@ class Widget extends DartClass {
     }
 }
 exports.Widget = Widget;
-//****** ShapeBorder ******
-class ShapeBorder extends DartClass {
-}
-exports.ShapeBorder = ShapeBorder;
 //格式转换
 class Convert extends core.Object {
     static toBoolean(v) {
@@ -1657,9 +1653,14 @@ var WrapCrossAlignment;
 //#endregion 
 //#endregion
 //#region ******** Class ********
-//#region ------- A -------
-//****** Alignment ******
-class Alignment extends DartClass {
+//#region ------- A ------- 
+//#region AlignmentGeometry 
+///AlignmentGeometry
+class AlignmentGeometry extends DartClass {
+}
+exports.AlignmentGeometry = AlignmentGeometry;
+///Alignment
+class Alignment extends AlignmentGeometry {
     constructor(x, y) {
         super();
         this.x = x;
@@ -1679,8 +1680,8 @@ Alignment.centerRight = Alignment.new(1.0, 0.0);
 Alignment.bottomLeft = Alignment.new(-1.0, 1.0);
 Alignment.bottomCenter = Alignment.new(0.0, 1.0);
 Alignment.bottomRight = Alignment.new(1.0, 1.0);
-//****** AlignmentDirectional ******
-class AlignmentDirectional extends DartClass {
+///AlignmentDirectional
+class AlignmentDirectional extends AlignmentGeometry {
     constructor(start, y) {
         super();
         this.start = start;
@@ -1691,93 +1692,42 @@ class AlignmentDirectional extends DartClass {
     }
 }
 exports.AlignmentDirectional = AlignmentDirectional;
-//****** AlwaysScrollableScrollPhysics ******
-class AlwaysScrollableScrollPhysics extends DartClass {
-    static new(parent) {
-        var v = new AlwaysScrollableScrollPhysics();
-        v.parent = parent;
-        return v;
-    }
-}
-exports.AlwaysScrollableScrollPhysics = AlwaysScrollableScrollPhysics;
+AlignmentDirectional.topStart = AlignmentDirectional.new(-1.0, -1.0);
+AlignmentDirectional.topCenter = AlignmentDirectional.new(0.0, -1.0);
+AlignmentDirectional.topEnd = AlignmentDirectional.new(1.0, -1.0);
+AlignmentDirectional.centerStart = AlignmentDirectional.new(-1.0, 0.0);
+AlignmentDirectional.center = AlignmentDirectional.new(0.0, 0.0);
+AlignmentDirectional.centerEnd = AlignmentDirectional.new(1.0, 0.0);
+AlignmentDirectional.bottomStart = AlignmentDirectional.new(-1.0, 1.0);
+AlignmentDirectional.bottomCenter = AlignmentDirectional.new(0.0, 1.0);
+AlignmentDirectional.bottomEnd = AlignmentDirectional.new(1.0, 1.0);
+//#endregion
+//#region AssetBundle 
 //****** AssetBundle ******
 class AssetBundle extends DartClass {
-    static network(baseUrl) {
-        var v = new AssetBundle();
-        v.constructorName = "network";
-        v.baseUrl = baseUrl;
-        return v;
-    }
-    static platform() {
-        var v = new AssetBundle();
-        v.constructorName = "platform";
-        return v;
-    }
 }
 exports.AssetBundle = AssetBundle;
-class AssetImage extends DartClass {
-    /**
-     * @param config config:
-      {
-        assetName:string,
-        bundle?:BaseAssetBundle,
-        packageName?:string
-      }
-     */
-    constructor(assetName, config) {
+//****** PlatformAssetBundle ******
+class PlatformAssetBundle extends AssetBundle {
+    constructor() {
         super();
-        this.assetName = assetName;
-        if (config != null && config != undefined) {
-            this.bundle = config.bundle;
-            this.packageName = config.packageName;
-        }
     }
-    /**
-     * @param config config:
-      {
-        assetName:string,
-        bundle?:BaseAssetBundle,
-        packageName?:string
-      }
-     */
-    static new(assetName, config) {
-        return new AssetImage(assetName, config);
+    static new() {
+        return new PlatformAssetBundle();
     }
 }
-exports.AssetImage = AssetImage;
-class BoxConstraints extends DartClass {
-    /**
-     * @param config config:
-      {
-        minWidth?:number,
-        maxWidth?:number,
-        minHeight?:number,
-        maxHeight?:number
-      }
-     */
-    constructor(config) {
+exports.PlatformAssetBundle = PlatformAssetBundle;
+//****** NetworkAssetBundle ******
+class NetworkAssetBundle extends AssetBundle {
+    constructor(baseUrl) {
         super();
-        if (config != null && config != undefined) {
-            this.minWidth = config.minWidth;
-            this.maxWidth = config.maxWidth;
-            this.minHeight = config.minHeight;
-            this.maxHeight = config.maxHeight;
-        }
+        this.baseUrl = baseUrl;
     }
-    /**
-     * @param config config:
-      {
-        minWidth?:number,
-        maxWidth?:number,
-        minHeight?:number,
-        maxHeight?:number
-      }
-     */
-    static new(config) {
-        return new BoxConstraints(config);
+    static new(baseUrl) {
+        return new NetworkAssetBundle(baseUrl);
     }
 }
-exports.BoxConstraints = BoxConstraints;
+exports.NetworkAssetBundle = NetworkAssetBundle;
 class BorderSide extends DartClass {
     /**
      * @param config config:
@@ -1813,7 +1763,13 @@ class BorderSide extends DartClass {
     }
 }
 exports.BorderSide = BorderSide;
-class BorderRadius extends DartClass {
+//#endregion
+//#region BorderRadiusGeometry 
+//****** BorderRadiusGeometry ******
+class BorderRadiusGeometry extends DartClass {
+}
+exports.BorderRadiusGeometry = BorderRadiusGeometry;
+class BorderRadius extends BorderRadiusGeometry {
     static zero() {
         let o = new BorderRadius();
         o.constructorName = "zero";
@@ -1885,7 +1841,7 @@ class BorderRadius extends DartClass {
     }
 }
 exports.BorderRadius = BorderRadius;
-class BorderRadiusDirectional extends DartClass {
+class BorderRadiusDirectional extends BorderRadiusGeometry {
     static zero() {
         let o = new BorderRadiusDirectional();
         o.constructorName = "zero";
@@ -1957,211 +1913,6 @@ class BorderRadiusDirectional extends DartClass {
     }
 }
 exports.BorderRadiusDirectional = BorderRadiusDirectional;
-class Border extends DartClass {
-    /**
-     * @param config config:
-      {
-        top?:BorderSide,
-        right?:BorderSide,
-        bottom?:BorderSide,
-        left?:BorderSide,
-      }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.top = config.top;
-            this.right = config.right;
-            this.bottom = config.bottom;
-            this.left = config.left;
-        }
-    }
-    /**
-     * @param config config:
-      {
-        top?:BorderSide,
-        right?:BorderSide,
-        bottom?:BorderSide,
-        left?:BorderSide,
-      }
-     */
-    static new(config) {
-        return new Border(config);
-    }
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          width?:number,
-          style?:BorderStyle,
-        }
-     */
-    static all(config) {
-        var v = new Border();
-        v.constructorName = "all";
-        if (config != null && config != undefined) {
-            v.color = config.color;
-            v.width = config.width;
-            v.style = config.style;
-        }
-        return v;
-    }
-    /**
-     * @param config config:
-        {
-          vertical?:BorderSide,
-          horizontal?:BorderSide
-        }
-     */
-    static symmetric(config) {
-        var v = new Border();
-        v.constructorName = "symmetric";
-        if (config != null && config != undefined) {
-            v.vertical = config.vertical;
-            v.horizontal = config.horizontal;
-        }
-        return v;
-    }
-}
-exports.Border = Border;
-class BorderDirectional extends DartClass {
-    /**
-     * @param config config:
-        {
-          top?:BorderSide,
-          start?:BorderSide,
-          bottom?:BorderSide,
-          end?:BorderSide,
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.top = config.top;
-            this.start = config.start;
-            this.end = config.end;
-            this.bottom = config.bottom;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          top?:BorderSide,
-          start?:BorderSide,
-          bottom?:BorderSide,
-          end?:BorderSide,
-        }
-     */
-    static new(config) {
-        return new BorderDirectional(config);
-    }
-}
-exports.BorderDirectional = BorderDirectional;
-class ButtonThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          textTheme?:ButtonTextTheme,
-          minWidth?:number,
-          height?:number,
-          padding?:EdgeInsets,
-          layoutBehavior?:ButtonBarLayoutBehavior,
-          alignedDropdown?:boolean,
-          buttonColor?:Color,
-          disabledColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorScheme?:ColorScheme,
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.textTheme = config.textTheme;
-            this.minWidth = config.minWidth;
-            this.height = config.height;
-            this.padding = config.padding;
-            this.layoutBehavior = config.layoutBehavior;
-            this.alignedDropdown = config.alignedDropdown;
-            this.buttonColor = config.buttonColor;
-            this.disabledColor = config.disabledColor;
-            this.focusColor = config.focusColor;
-            this.hoverColor = config.hoverColor;
-            this.highlightColor = config.highlightColor;
-            this.splashColor = config.splashColor;
-            this.colorScheme = config.colorScheme;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          textTheme?:ButtonTextTheme,
-          minWidth?:number,
-          height?:number,
-          padding?:EdgeInsets,
-          layoutBehavior?:ButtonBarLayoutBehavior,
-          alignedDropdown?:boolean,
-          buttonColor?:Color,
-          disabledColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorScheme?:ColorScheme,
-        }
-     */
-    static new(config) {
-        return new ButtonThemeData(config);
-    }
-}
-exports.ButtonThemeData = ButtonThemeData;
-class BoxDecoration extends DartClass {
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          border?:Border;
-          borderRadius?:BorderRadius,
-          boxShadow?:BoxShadow,
-          gradient?:BaseGradient
-          backgroundBlendMode?:BlendMode,
-          shape?:BoxShape,
-          image?:DecorationImage,
-        }
-      */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.color = config.color;
-            this.border = config.border;
-            this.borderRadius = config.borderRadius;
-            this.boxShadow = config.boxShadow;
-            this.gradient = config.gradient;
-            this.backgroundBlendMode = config.backgroundBlendMode;
-            this.shape = config.shape;
-            this.image = config.image;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          border?:Border;
-          borderRadius?:BorderRadius,
-          boxShadow?:BoxShadow,
-          gradient?:BaseGradient
-          backgroundBlendMode?:BlendMode,
-          shape?:BoxShape,
-          image?:DecorationImage,
-        }
-      */
-    static new(config) {
-        return new BoxDecoration(config);
-    }
-}
-exports.BoxDecoration = BoxDecoration;
 class BannerPainter extends DartClass {
     /**
      * @param config config:
@@ -2234,22 +1985,61 @@ class BoxShadow extends DartClass {
     }
 }
 exports.BoxShadow = BoxShadow;
-//****** BouncingScrollPhysics ******
-class BouncingScrollPhysics extends DartClass {
+//#endregion
+//#region ------- C -------
+//#region ------- Constraints -------
+//****** Constraints ******
+class Constraints extends DartClass {
+    /**
+     * Constraints.box = new BoxConstraints(config?: BoxConstraintsConfig)
+     * @param config config:
+      {
+        minWidth?:number,
+        maxWidth?:number,
+        minHeight?:number,
+        maxHeight?:number
+      }
+     */
+    static box(config) {
+        return new BoxConstraints(config);
+    }
+}
+exports.Constraints = Constraints;
+class BoxConstraints extends Constraints {
+    /**
+     * @param config config:
+      {
+        minWidth?:number,
+        maxWidth?:number,
+        minHeight?:number,
+        maxHeight?:number
+      }
+     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
-            this.parent = config.parent;
+            this.minWidth = config.minWidth;
+            this.maxWidth = config.maxWidth;
+            this.minHeight = config.minHeight;
+            this.maxHeight = config.maxHeight;
         }
     }
+    /**
+     * @param config config:
+      {
+        minWidth?:number,
+        maxWidth?:number,
+        minHeight?:number,
+        maxHeight?:number
+      }
+     */
     static new(config) {
-        return new BouncingScrollPhysics(config);
+        return new BoxConstraints(config);
     }
 }
-exports.BouncingScrollPhysics = BouncingScrollPhysics;
+exports.BoxConstraints = BoxConstraints;
 //#endregion
-//#region ------- C -------
-//****** Color ******
+//#region Color
 class Color extends DartClass {
     constructor(value) {
         super();
@@ -2278,7 +2068,8 @@ class Color extends DartClass {
     }
 }
 exports.Color = Color;
-//****** Color ******
+//#endregion
+//#region Colors
 class Colors extends Color {
 }
 exports.Colors = Colors;
@@ -2292,7 +2083,9 @@ Colors.black26 = Color.new(0x42000000);
 Colors.black12 = Color.new(0x1f000000);
 Colors.white = Color.new(0xffffffff);
 Colors.white70 = Color.new(0xb3ffffff);
+Colors.white60 = Color.new(0x99FFFFFF);
 Colors.white54 = Color.new(0x8affffff);
+Colors.white38 = Color.new(0x62FFFFFF);
 Colors.white30 = Color.new(0x4dffffff);
 Colors.white24 = Color.new(0x3dffffff);
 Colors.white12 = Color.new(0x1fffffff);
@@ -2332,7 +2125,8 @@ Colors.deepOrangeAccent = Color.new(0xFFFF6E40);
 Colors.brown = Color.new(0xFF795548);
 Colors.grey = Color.new(0xFF9E9E9E);
 Colors.blueGrey = Color.new(0xFF607D8B);
-//****** ColorFilter ******
+//#endregion
+//#region ColorFilter
 class ColorFilter extends DartClass {
     constructor(color, blendMode) {
         super();
@@ -2349,109 +2143,6 @@ class ColorFilter extends DartClass {
     }
 }
 exports.ColorFilter = ColorFilter;
-class ColorScheme extends DartClass {
-    /**
-     * @param config config:
-        {
-          primary?:Color,
-          primaryVariant?:Color,
-          secondary?:Color,
-          secondaryVariant?:Color,
-          surface?:Color,
-          background?:Color,
-          error?:Color,
-          onPrimary?:Color,
-          onSecondary?:Color,
-          onSurface?:Color,
-          onBackground?:Color,
-          onError?:Color,
-          brightness?:Brightness
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.primary = config.primary;
-            this.primaryVariant = config.primaryVariant;
-            this.secondary = config.secondary;
-            this.secondaryVariant = config.secondaryVariant;
-            this.surface = config.surface;
-            this.background = config.background;
-            this.error = config.error;
-            this.onPrimary = config.onPrimary;
-            this.onSecondary = config.onSecondary;
-            this.onSurface = config.onSurface;
-            this.onBackground = config.onBackground;
-            this.onError = config.onError;
-            this.brightness = config.brightness;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          primary?:Color,
-          primaryVariant?:Color,
-          secondary?:Color,
-          secondaryVariant?:Color,
-          surface?:Color,
-          background?:Color,
-          error?:Color,
-          onPrimary?:Color,
-          onSecondary?:Color,
-          onSurface?:Color,
-          onBackground?:Color,
-          onError?:Color,
-          brightness?:Brightness
-        }
-     */
-    static new(config) {
-        return new ColorScheme(config);
-    }
-    static fromSwatch(primarySwatch, accentColor, cardColor, backgroundColor, errorColor, brightness) {
-        let v = new ColorScheme();
-        v.constructorName = "fromSwatch";
-        v.primarySwatch = primarySwatch;
-        v.accentColor = accentColor;
-        v.cardColor = cardColor;
-        v.backgroundColor = backgroundColor;
-        v.errorColor = errorColor;
-        v.brightness = brightness;
-        return v;
-    }
-}
-exports.ColorScheme = ColorScheme;
-//****** CircularNotchedRectangle ******
-class CircularNotchedRectangle extends DartClass {
-    static new() {
-        return new CircularNotchedRectangle();
-    }
-}
-exports.CircularNotchedRectangle = CircularNotchedRectangle;
-//****** ClampingScrollPhysics ******
-class ClampingScrollPhysics extends DartClass {
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.parent = config.parent;
-        }
-    }
-    static new(config) {
-        return new ClampingScrollPhysics(config);
-    }
-}
-exports.ClampingScrollPhysics = ClampingScrollPhysics;
-//****** CurveTween ******
-class CurveTween extends Widget {
-    constructor(curve) {
-        super();
-        this.curve = curve;
-    }
-    static new(curve) {
-        return new CurveTween(curve);
-    }
-    ;
-}
-exports.CurveTween = CurveTween;
 class DragDownDetails extends DartClass {
     /**
      * @param config config:
@@ -2624,7 +2315,124 @@ class Duration extends DartClass {
     }
 }
 exports.Duration = Duration;
-class EdgeInsets extends DartClass {
+//#endregion
+//#region ****** Decoration ******
+class Decoration extends DartClass {
+    /**
+     * Decoration.box = new BoxDecoration(config?: BoxDecorationConfig)
+     * @param config
+        {
+          color?:Color,
+          border?:Border;
+          borderRadius?:BorderRadius,
+          boxShadow?:BoxShadow,
+          gradient?:BaseGradient
+          backgroundBlendMode?:BlendMode,
+          shape?:BoxShape,
+          image?:DecorationImage,
+        }
+     */
+    static box(config) {
+        return new BoxDecoration(config);
+    }
+    /**
+     * Decoration.flutterLogo = new FlutterLogoDecoration(config?: FlutterLogoDecorationConfig)
+     * @param config config:
+        {
+          textColor?:Color,
+          style?:FlutterLogoStyle,
+          margin?:EdgeInsets,
+        }
+     */
+    static flutterLogo(config) {
+        return new FlutterLogoDecoration(config);
+    }
+}
+exports.Decoration = Decoration;
+class BoxDecoration extends Decoration {
+    /**
+     * @param config config:
+        {
+          color?:Color,
+          border?:Border;
+          borderRadius?:BorderRadius,
+          boxShadow?:BoxShadow,
+          gradient?:BaseGradient
+          backgroundBlendMode?:BlendMode,
+          shape?:BoxShape,
+          image?:DecorationImage,
+        }
+      */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.color = config.color;
+            this.border = config.border;
+            this.borderRadius = config.borderRadius;
+            this.boxShadow = config.boxShadow;
+            this.gradient = config.gradient;
+            this.backgroundBlendMode = config.backgroundBlendMode;
+            this.shape = config.shape;
+            this.image = config.image;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          color?:Color,
+          border?:Border;
+          borderRadius?:BorderRadius,
+          boxShadow?:BoxShadow,
+          gradient?:BaseGradient
+          backgroundBlendMode?:BlendMode,
+          shape?:BoxShape,
+          image?:DecorationImage,
+        }
+      */
+    static new(config) {
+        return new BoxDecoration(config);
+    }
+}
+exports.BoxDecoration = BoxDecoration;
+class FlutterLogoDecoration extends Decoration {
+    /**
+     * @param config config:
+        {
+          textColor?:Color,
+          style?:FlutterLogoStyle,
+          margin?:EdgeInsets,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.textColor = config.textColor;
+            this.style = config.style;
+            this.margin = config.margin;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          textColor?:Color,
+          style?:FlutterLogoStyle,
+          margin?:EdgeInsets,
+        }
+     */
+    static new(config) {
+        return new FlutterLogoDecoration(config);
+    }
+}
+exports.FlutterLogoDecoration = FlutterLogoDecoration;
+//#endregion
+//#endregion
+//#region ------- E -------
+//#region ------- EdgeInsetsGeometry -------
+//EdgeInsetsGeometry
+class EdgeInsetsGeometry extends DartClass {
+}
+exports.EdgeInsetsGeometry = EdgeInsetsGeometry;
+class EdgeInsets extends EdgeInsetsGeometry {
     /**
      * @param config config:
         {
@@ -2713,7 +2521,7 @@ class EdgeInsets extends DartClass {
     }
 }
 exports.EdgeInsets = EdgeInsets;
-class EdgeInsetsDirectional extends DartClass {
+class EdgeInsetsDirectional extends EdgeInsetsGeometry {
     /**
      * @param config config:
         {
@@ -2776,54 +2584,20 @@ class EdgeInsetsDirectional extends DartClass {
 }
 exports.EdgeInsetsDirectional = EdgeInsetsDirectional;
 //#endregion
+//#endregion
 //#region ------- F -------
+//****** Future ******
 class Future extends DartClass {
+    /**
+     * 延时处理
+     * @param duration
+     * @param onBack
+     */
     static delayed(duration, onBack) {
         dart_sdk.async.Future.delayed(duration, onBack);
     }
 }
 exports.Future = Future;
-//****** FlexColumnWidth ******
-class FlexColumnWidth extends DartClass {
-    constructor(value) {
-        super();
-        this.value = value;
-    }
-    static new(value) {
-        return new FlexColumnWidth(value);
-    }
-}
-exports.FlexColumnWidth = FlexColumnWidth;
-class FlutterLogoDecoration extends DartClass {
-    /**
-     * @param config config:
-        {
-          textColor?:Color,
-          style?:FlutterLogoStyle,
-          margin?:EdgeInsets,
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.textColor = config.textColor;
-            this.style = config.style;
-            this.margin = config.margin;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          textColor?:Color,
-          style?:FlutterLogoStyle,
-          margin?:EdgeInsets,
-        }
-     */
-    static new(config) {
-        return new FlutterLogoDecoration(config);
-    }
-}
-exports.FlutterLogoDecoration = FlutterLogoDecoration;
 class FocusNode extends DartClass {
     /**
      * @param config config:
@@ -2877,17 +2651,6 @@ FractionalOffset.centerRight = FractionalOffset.new(1.0, 0.5);
 FractionalOffset.bottomLeft = FractionalOffset.new(0.0, 1.0);
 FractionalOffset.bottomCenter = FractionalOffset.new(0.5, 1.0);
 FractionalOffset.bottomRight = FractionalOffset.new(1.0, 1.0);
-//****** FixedColumnWidth ******
-class FixedColumnWidth extends DartClass {
-    constructor(value) {
-        super();
-        this.value = value;
-    }
-    static new(value) {
-        return new FixedColumnWidth(value);
-    }
-}
-exports.FixedColumnWidth = FixedColumnWidth;
 //****** File ******
 class File extends DartClass {
     constructor(path) {
@@ -2913,17 +2676,64 @@ class File extends DartClass {
 exports.File = File;
 //#endregion
 //#region ------- G -------
-//****** GradientTransform ******
+//#region ****** GradientTransform ******
 class GradientTransform extends DartClass {
     static rotation(radians) {
-        var v = new GradientTransform();
-        v.constructorName = "rotation";
-        v.radians = radians;
-        return v;
+        return new GradientRotation(radians);
     }
 }
 exports.GradientTransform = GradientTransform;
+class GradientRotation extends GradientTransform {
+    /**
+     *
+     * @param radians
+     */
+    constructor(radians) {
+        super();
+        this.radians = radians;
+    }
+    /**
+     *
+     * @param radians
+     */
+    static new(radians) {
+        return new GradientRotation(radians);
+    }
+}
+exports.GradientRotation = GradientRotation;
+//#endregion
+//#region ****** Gradient ******
 class Gradient extends DartClass {
+    /**
+     * @param config config:
+        {
+          begin?:Alignment,
+          end?:Alignment,
+          colors:Array<Color>,
+          stops?:Array<number>,
+          tileMode?:TileMode,
+          transform?:GradientRotation,
+        }
+     */
+    static linear(config) {
+        return new LinearGradient(config);
+    }
+    /**
+     * @param config config:
+        {
+          center?:Alignment,
+          radius?:number,
+          colors:Array<Color>,
+          stops?:Array<number>,
+          tileMode?:TileMode,
+          focal?:Alignment,
+          focalRadius?:number,
+          transform?:GradientRotation,
+        }
+     */
+    static radial(config) {
+        return new RadialGradient(config);
+    }
     /**
      * @param config config:
         {
@@ -2937,116 +2747,136 @@ class Gradient extends DartClass {
         }
      */
     static sweep(config) {
-        var v = new Gradient();
-        v.constructorName = "sweep";
-        if (config != null && config != undefined) {
-            v.center = config.center;
-            v.startAngle = config.startAngle;
-            v.endAngle = config.endAngle;
-            v.colors = config.colors;
-            v.stops = config.stops;
-            v.tileMode = config.tileMode;
-            v.transform = config.transform;
-        }
-        return v;
-    }
-    /**
-    * @param config config:
-       {
-         center?:Alignment,
-         radius?:number,
-         colors:Array<Color>,
-         stops?:Array<number>,
-         tileMode?:TileMode,
-         focal?:Alignment,
-         focalRadius?:number,
-         transform?:GradientRotation,
-       }
-    */
-    static radial(config) {
-        var v = new Gradient();
-        v.constructorName = "radial";
-        if (config != null && config != undefined) {
-            v.center = config.center;
-            v.radius = config.radius;
-            v.colors = config.colors;
-            v.stops = config.stops;
-            v.tileMode = config.tileMode;
-            v.focal = config.focal;
-            v.focalRadius = config.focalRadius;
-            v.transform = config.transform;
-        }
-        return v;
-    }
-    /**
-    * @param config config:
-       {
-         begin?:Alignment,
-         end?:Alignment,
-         colors:Array<Color>,
-         stops?:Array<number>,
-         tileMode?:TileMode,
-         transform?:GradientRotation,
-       }
-    */
-    static linear(config) {
-        var v = new Gradient();
-        v.constructorName = "linear";
-        if (config != null && config != undefined) {
-            v.begin = config.begin;
-            v.end = config.end;
-            v.colors = config.colors;
-            v.stops = config.stops;
-            v.tileMode = config.tileMode;
-            v.transform = config.transform;
-        }
-        return v;
+        return new SweepGradient(config);
     }
 }
 exports.Gradient = Gradient;
-class InputBorder extends ShapeBorder {
-    static none() {
-        var v = new InputBorder();
-        v.constructorName = "none";
-        return v;
+class LinearGradient extends Gradient {
+    /**
+     * @param config config:
+        {
+          begin?:Alignment,
+          end?:Alignment,
+          colors:Array<Color>,
+          stops?:Array<number>,
+          tileMode?:TileMode,
+          transform?:GradientRotation,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.begin = config.begin;
+            this.end = config.end;
+            this.colors = config.colors;
+            this.stops = config.stops;
+            this.tileMode = config.tileMode;
+            this.transform = config.transform;
+        }
     }
     /**
      * @param config config:
         {
-          borderSide?:BorderSide,
-          borderRadius?:BorderRadius,
-          gapPadding?:number,
+          begin?:Alignment,
+          end?:Alignment,
+          colors:Array<Color>,
+          stops?:Array<number>,
+          tileMode?:TileMode,
+          transform?:GradientRotation,
         }
      */
-    static outline(config) {
-        var v = new InputBorder();
-        v.constructorName = "outline";
-        if (config != null && config != undefined) {
-            v.borderRadius = config.borderRadius;
-            v.borderSide = config.borderSide;
-            v.gapPadding = config.gapPadding;
-        }
-        return v;
+    static new(config) {
+        return new LinearGradient(config);
     }
-    /**
-     * @param config config:
-        {
-          borderSide?:BorderSide,
-          borderRadius?:BorderRadius,
-        }
-     */
-    static underline(config) {
-        var v = new InputBorder();
-        v.constructorName = "underline";
-        if (config != null && config != undefined) {
-            v.borderRadius = config.borderRadius;
-            v.borderSide = config.borderSide;
-        }
-        return v;
-    }
-    ;
 }
-exports.InputBorder = InputBorder;
+exports.LinearGradient = LinearGradient;
+class RadialGradient extends Gradient {
+    /**
+     * @param config config:
+        {
+          center?:Alignment,
+          radius?:number,
+          colors:Array<Color>,
+          stops?:Array<number>,
+          tileMode?:TileMode,
+          focal?:Alignment,
+          focalRadius?:number,
+          transform?:GradientRotation,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.center = config.center;
+            this.radius = config.radius;
+            this.colors = config.colors;
+            this.stops = config.stops;
+            this.tileMode = config.tileMode;
+            this.focal = config.focal;
+            this.focalRadius = config.focalRadius;
+            this.transform = config.transform;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          center?:Alignment,
+          radius?:number,
+          colors:Array<Color>,
+          stops?:Array<number>,
+          tileMode?:TileMode,
+          focal?:Alignment,
+          focalRadius?:number,
+          transform?:GradientRotation,
+        }
+     */
+    static new(config) {
+        return new RadialGradient(config);
+    }
+}
+exports.RadialGradient = RadialGradient;
+class SweepGradient extends Gradient {
+    /**
+     * @param config config:
+        {
+          center?:Alignment,
+          startAngle?:number,
+          endAngle?:number,
+          colors:Array<Color>,
+          stops?:Array<number>,
+          tileMode?:TileMode,
+          transform?:GradientRotation,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.center = config.center;
+            this.startAngle = config.startAngle;
+            this.endAngle = config.endAngle;
+            this.colors = config.colors;
+            this.stops = config.stops;
+            this.tileMode = config.tileMode;
+            this.transform = config.transform;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          center?:Alignment,
+          startAngle?:number,
+          endAngle?:number,
+          colors:Array<Color>,
+          stops?:Array<number>,
+          tileMode?:TileMode,
+          transform?:GradientRotation,
+        }
+     */
+    static new(config) {
+        return new SweepGradient(config);
+    }
+}
+exports.SweepGradient = SweepGradient;
 class ImageProvider extends DartClass {
     /**
      * @param config config:
@@ -3134,6 +2964,7 @@ class ImageProvider extends DartClass {
     }
 }
 exports.ImageProvider = ImageProvider;
+//#endregion
 //****** IconData ******
 class IconData extends DartClass {
     constructor(icon) {
@@ -3145,146 +2976,6 @@ class IconData extends DartClass {
     }
 }
 exports.IconData = IconData;
-class IconThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          opacity?:number,
-          size?:number
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.color = config.color;
-            this.opacity = config.opacity;
-            this.size = config.size;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          opacity?:number,
-          size?:number
-        }
-     */
-    static new(config) {
-        return new IconThemeData(config);
-    }
-}
-exports.IconThemeData = IconThemeData;
-//****** ImageShader ******
-class ImageShader extends DartClass {
-    constructor(image, tmx, tmy, matrix4) {
-        super();
-        this.image = image;
-        this.tmx = tmx;
-        this.tmy = tmy;
-        this.matrix4 = matrix4;
-    }
-    static new(image, tmx, tmy, matrix4) {
-        return new ImageShader(image, tmx, tmy, matrix4);
-    }
-}
-exports.ImageShader = ImageShader;
-class InputDecorationTheme extends DartClass {
-    /**
-     * @param config config:
-        {
-          labelStyle?:TextStyle,
-          helperStyle?:TextStyle,
-          helperMaxLines?:number,
-          hintStyle?:TextStyle,
-          errorStyle?:TextStyle,
-          errorMaxLines?:number,
-          hasFloatingPlaceholder?:boolean,
-          floatingLabelBehavior?:FloatingLabelBehavior,
-          isDense?:boolean,
-          contentPadding?:EdgeInsets,
-          isCollapsed?:boolean,
-          prefixStyle?:TextStyle,
-          suffixStyle?:TextStyle,
-          counterStyle?:TextStyle,
-          filled?:boolean,
-          fillColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          errorBorder?:InputBorder,
-          focusedBorder?:InputBorder,
-          focusedErrorBorder?:InputBorder,
-          disabledBorder?:InputBorder,
-          enabledBorder?:InputBorder,
-          border?:InputBorder,
-          alignLabelWithHint?:boolean,
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.labelStyle = config.labelStyle;
-            this.helperStyle = config.helperStyle;
-            this.helperMaxLines = config.helperMaxLines;
-            this.hintStyle = config.hintStyle;
-            this.errorStyle = config.errorStyle;
-            this.errorMaxLines = config.errorMaxLines;
-            this.hasFloatingPlaceholder = config.hasFloatingPlaceholder;
-            this.floatingLabelBehavior = config.floatingLabelBehavior;
-            this.isDense = config.isDense;
-            this.contentPadding = config.contentPadding;
-            this.isCollapsed = config.isCollapsed;
-            this.prefixStyle = config.prefixStyle;
-            this.suffixStyle = config.suffixStyle;
-            this.counterStyle = config.counterStyle;
-            this.filled = config.filled;
-            this.fillColor = config.fillColor;
-            this.focusColor = config.focusColor;
-            this.hoverColor = config.hoverColor;
-            this.errorBorder = config.errorBorder;
-            this.focusedBorder = config.focusedBorder;
-            this.focusedErrorBorder = config.focusedErrorBorder;
-            this.disabledBorder = config.disabledBorder;
-            this.enabledBorder = config.enabledBorder;
-            this.border = config.border;
-            this.alignLabelWithHint = config.alignLabelWithHint;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          labelStyle?:TextStyle,
-          helperStyle?:TextStyle,
-          helperMaxLines?:number,
-          hintStyle?:TextStyle,
-          errorStyle?:TextStyle,
-          errorMaxLines?:number,
-          hasFloatingPlaceholder?:boolean,
-          floatingLabelBehavior?:FloatingLabelBehavior,
-          isDense?:boolean,
-          contentPadding?:EdgeInsets,
-          isCollapsed?:boolean,
-          prefixStyle?:TextStyle,
-          suffixStyle?:TextStyle,
-          counterStyle?:TextStyle,
-          filled?:boolean,
-          fillColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          errorBorder?:InputBorder,
-          focusedBorder?:InputBorder,
-          focusedErrorBorder?:InputBorder,
-          disabledBorder?:InputBorder,
-          enabledBorder?:InputBorder,
-          border?:InputBorder,
-          alignLabelWithHint?:boolean,
-        }
-     */
-    static new(config) {
-        return new InputDecorationTheme(config);
-    }
-}
-exports.InputDecorationTheme = InputDecorationTheme;
 class InputDecoration extends DartClass {
     /**
      * @param config config:
@@ -3463,29 +3154,61 @@ class InputDecoration extends DartClass {
 exports.InputDecoration = InputDecoration;
 //#endregion
 //#region ------- K -------
-//****** Key ******
+//#region ****** Key ******
 class Key extends DartClass {
+    /**
+     * Key.value = new ValueKey(value:string)
+     * @param value
+     */
     static value(value) {
-        var v = new Key();
-        v.constructorName = "value";
-        v.value = value;
-        return v;
+        return new ValueKey(value);
     }
+    /**
+     * Key.unique = new UniqueKey()
+     * @param value
+     */
     static unique() {
-        var v = new Key();
-        v.constructorName = "unique";
-        return v;
+        return new UniqueKey();
     }
+    /**
+     * Key.global = new GlobalKey(debugLabel:string)
+     * @param debugLabel 标签
+     */
     static global(debugLabel) {
-        var v = new Key();
-        v.constructorName = "global";
-        v.debugLabel = debugLabel;
-        return v;
+        return new GlobalKey(debugLabel);
     }
 }
 exports.Key = Key;
+class ValueKey extends Key {
+    constructor(value) {
+        super();
+        this.value = value;
+    }
+    static new(value) {
+        return new ValueKey(value);
+    }
+}
+exports.ValueKey = ValueKey;
+class UniqueKey extends Key {
+    constructor() {
+        super();
+    }
+    static new() {
+        return new UniqueKey();
+    }
+}
+exports.UniqueKey = UniqueKey;
+class GlobalKey extends Key {
+    constructor(debugLabel) {
+        super();
+        this.debugLabel = debugLabel;
+    }
+    static new(debugLabel) {
+        return new GlobalKey(debugLabel);
+    }
+}
+exports.GlobalKey = GlobalKey;
 //#endregion
-//#region ------- L -------
 //#endregion
 //#region ------- M -------
 //****** MaskFilter ******
@@ -3703,115 +3426,36 @@ class Matrix4 extends DartClass {
     }
 }
 exports.Matrix4 = Matrix4;
-class MediaQuery extends DartClass {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          data?:MediaQueryData,
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.key = config.key;
-            this.data = config.data;
-            this.child = config.child;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          data?:MediaQueryData,
-        }
-     */
-    static new(config) {
-        return new MediaQuery(config);
-    }
-    ;
-    static of(context) {
-        return context.mediaQueryData;
-    }
-}
-exports.MediaQuery = MediaQuery;
-class MediaQueryData extends DartClass {
-    /**
-     * @param config config:
-        {
-          size?:Size,
-          devicePixelRatio?:number,
-          textScaleFactor?:number,
-          platformBrightness?:Brightness,
-          padding?:EdgeInsets,
-          viewInsets?:EdgeInsets,
-          alwaysUse24HourFormat?:boolean,
-          accessibleNavigation?:boolean,
-          invertColors?:boolean,
-          highContrast?:boolean,
-          disableAnimations?:boolean,
-          boldText?:boolean,
-          navigationMode?:NavigationMode
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.size = config.size;
-            this.devicePixelRatio = config.devicePixelRatio;
-            this.textScaleFactor = config.textScaleFactor;
-            this.padding = config.padding;
-            this.viewInsets = config.viewInsets;
-            this.alwaysUse24HourFormat = config.alwaysUse24HourFormat;
-            this.accessibleNavigation = config.accessibleNavigation;
-            this.invertColors = config.invertColors;
-            this.disableAnimations = config.disableAnimations;
-            this.boldText = config.boldText;
-            this.platformBrightness = config.platformBrightness;
-            this.highContrast = config.highContrast;
-            this.navigationMode = config.navigationMode;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          size?:Size,
-          devicePixelRatio?:number,
-          textScaleFactor?:number,
-          platformBrightness?:Brightness,
-          padding?:EdgeInsets,
-          viewInsets?:EdgeInsets,
-          alwaysUse24HourFormat?:boolean,
-          accessibleNavigation?:boolean,
-          invertColors?:boolean,
-          highContrast?:boolean,
-          disableAnimations?:boolean,
-          boldText?:boolean,
-          navigationMode?:NavigationMode
-        }
-     */
-    static new(config) {
-        return new MediaQueryData(config);
-    }
-}
-exports.MediaQueryData = MediaQueryData;
 //#endregion
 //#region ------- N -------
-//****** NeverScrollableScrollPhysics ******
-class NeverScrollableScrollPhysics extends DartClass {
-    constructor(config) {
+//#region NotchedShape
+//****** NotchedShape ******
+class NotchedShape extends DartClass {
+}
+exports.NotchedShape = NotchedShape;
+//****** CircularNotchedRectangle ******
+class CircularNotchedRectangle extends NotchedShape {
+    constructor() {
         super();
-        if (config != null && config != undefined) {
-            this.parent = config.parent;
-        }
     }
-    static new(config) {
-        return new NeverScrollableScrollPhysics(config);
+    static new() {
+        return new CircularNotchedRectangle();
     }
 }
-exports.NeverScrollableScrollPhysics = NeverScrollableScrollPhysics;
+exports.CircularNotchedRectangle = CircularNotchedRectangle;
+//****** AutomaticNotchedShape ******
+class AutomaticNotchedShape extends NotchedShape {
+    constructor(host, guest) {
+        super();
+        this.host = host;
+        this.guest = guest;
+    }
+    static new(host, guest) {
+        return new AutomaticNotchedShape(host, guest);
+    }
+}
+exports.AutomaticNotchedShape = AutomaticNotchedShape;
+//#endregion
 //****** TODO Notification ******
 class Notification extends DartClass {
     static new() {
@@ -3819,22 +3463,9 @@ class Notification extends DartClass {
     }
 }
 exports.Notification = Notification;
-class NotchedShape extends DartClass {
-    static circular() {
-        var v = new NotchedShape();
-        v.constructorName = "circular";
-        return v;
-    }
-    static automatic(host) {
-        var v = new NotchedShape();
-        v.host = host;
-        return v;
-    }
-}
-exports.NotchedShape = NotchedShape;
 //#endregion
 //#region ------- O -------
-//****** Offset ******
+//****** Offset ****** 
 class Offset extends DartClass {
     constructor(dx, dy) {
         super();
@@ -3862,87 +3493,6 @@ class Offset extends DartClass {
     }
 }
 exports.Offset = Offset;
-class OutlinedBorder extends ShapeBorder {
-    /**
-     * @param config config:
-        {
-          side?:BorderSide,
-        }
-     */
-    static circleBorder(config) {
-        var v = new OutlinedBorder();
-        v.constructorName = "circleBorder";
-        if (config != null && config != undefined) {
-            v.side = config.side;
-        }
-        return v;
-    }
-    /**
-     * @param config config:
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadius,
-        }
-     */
-    static beveledRectangleBorder(config) {
-        var v = new OutlinedBorder();
-        v.constructorName = "beveledRectangleBorder";
-        if (config != null && config != undefined) {
-            v.side = config.side;
-            v.borderRadius = config.borderRadius;
-        }
-        return v;
-    }
-    /**
-     * @param config config:
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadius,
-        }
-     */
-    static continuousRectangleBorder(config) {
-        var v = new OutlinedBorder();
-        v.constructorName = "continuousRectangleBorder";
-        if (config != null && config != undefined) {
-            v.side = config.side;
-            v.borderRadius = config.borderRadius;
-        }
-        return v;
-    }
-    /**
-     * @param config config:
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadius,
-        }
-     */
-    static roundedRectangleBorder(config) {
-        var v = new OutlinedBorder();
-        v.constructorName = "roundedRectangleBorder";
-        if (config != null && config != undefined) {
-            v.side = config.side;
-            v.borderRadius = config.borderRadius;
-        }
-        return v;
-    }
-    /**
-    * @param config config:
-       {
-         side?:BorderSide,
-       }
-    */
-    static stadiumBorder(config) {
-        var v = new OutlinedBorder();
-        v.constructorName = "stadiumBorder";
-        if (config != null && config != undefined) {
-            v.side = config.side;
-        }
-        return v;
-    }
-}
-exports.OutlinedBorder = OutlinedBorder;
-//#endregion
-//#region ------- P -------
 //#endregion
 //#region ------- Q -------
 //****** Quaternion ******
@@ -4247,19 +3797,36 @@ class RSTransform extends DartClass {
     }
 }
 exports.RSTransform = RSTransform;
-//****** RangeMaintainingScrollPhysics ******
-class RangeMaintainingScrollPhysics extends DartClass {
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.parent = config.parent;
-        }
-    }
-    static new(config) {
-        return new RangeMaintainingScrollPhysics(config);
+//#endregion
+//#region ------- S -------
+//#region Shader 
+class Shader extends DartClass {
+    /**
+     * Shader.image = new ImageShader(image:ImageProvider,tmx:TileMode,tmy:TileMode,matrix4:Matrix4)
+     * @param image
+     * @param tmx
+     * @param tmy
+     * @param matrix4
+     */
+    static image(image, tmx, tmy, matrix4) {
+        return new ImageShader(image, tmx, tmy, matrix4);
     }
 }
-exports.RangeMaintainingScrollPhysics = RangeMaintainingScrollPhysics;
+exports.Shader = Shader;
+//****** ImageShader ******
+class ImageShader extends Shader {
+    constructor(image, tmx, tmy, matrix4) {
+        super();
+        this.image = image;
+        this.tmx = tmx;
+        this.tmy = tmy;
+        this.matrix4 = matrix4;
+    }
+    static new(image, tmx, tmy, matrix4) {
+        return new ImageShader(image, tmx, tmy, matrix4);
+    }
+}
+exports.ImageShader = ImageShader;
 class ScaleStartDetails extends DartClass {
     /**
      * @param config config:
@@ -4350,6 +3917,7 @@ class ScaleEndDetails extends DartClass {
     }
 }
 exports.ScaleEndDetails = ScaleEndDetails;
+//#endregion
 //****** Size ******
 class Size extends DartClass {
     constructor(width, height) {
@@ -4528,18 +4096,6 @@ class SpringDescription extends DartClass {
     }
 }
 exports.SpringDescription = SpringDescription;
-class ScrollPhysics extends DartClass {
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.parent = config.parent;
-        }
-    }
-    static new(config) {
-        return new ScrollPhysics(config);
-    }
-}
-exports.ScrollPhysics = ScrollPhysics;
 class ScrollController extends DartClass {
     /**
      * @param config config:
@@ -4691,6 +4247,477 @@ class ScrollbarPainter extends DartClass {
     }
 }
 exports.ScrollbarPainter = ScrollbarPainter;
+class ScrollPhysics extends DartClass {
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.parent = config.parent;
+        }
+    }
+    static new(config) {
+        return new ScrollPhysics(config);
+    }
+}
+exports.ScrollPhysics = ScrollPhysics;
+//****** AlwaysScrollableScrollPhysics ******
+class AlwaysScrollableScrollPhysics extends ScrollPhysics {
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    constructor(config) {
+        super(config);
+    }
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    static new(config) {
+        return new AlwaysScrollableScrollPhysics(config);
+    }
+}
+exports.AlwaysScrollableScrollPhysics = AlwaysScrollableScrollPhysics;
+//****** BouncingScrollPhysics ******
+class BouncingScrollPhysics extends ScrollPhysics {
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    constructor(config) {
+        super(config);
+    }
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    static new(config) {
+        return new BouncingScrollPhysics(config);
+    }
+}
+exports.BouncingScrollPhysics = BouncingScrollPhysics;
+//****** ClampingScrollPhysics ******
+class ClampingScrollPhysics extends ScrollPhysics {
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    constructor(config) {
+        super(config);
+    }
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    static new(config) {
+        return new ClampingScrollPhysics(config);
+    }
+}
+exports.ClampingScrollPhysics = ClampingScrollPhysics;
+//****** NeverScrollableScrollPhysics ******
+class NeverScrollableScrollPhysics extends ScrollPhysics {
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    constructor(config) {
+        super(config);
+    }
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    static new(config) {
+        return new NeverScrollableScrollPhysics(config);
+    }
+}
+exports.NeverScrollableScrollPhysics = NeverScrollableScrollPhysics;
+//****** RangeMaintainingScrollPhysics ******
+class RangeMaintainingScrollPhysics extends ScrollPhysics {
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    constructor(config) {
+        super(config);
+    }
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    static new(config) {
+        return new RangeMaintainingScrollPhysics(config);
+    }
+}
+exports.RangeMaintainingScrollPhysics = RangeMaintainingScrollPhysics;
+//#endregion
+//#region ------- ShapeBorder -------
+class ShapeBorder extends DartClass {
+}
+exports.ShapeBorder = ShapeBorder;
+//#region ****** BoxBorder ******
+//****** BoxBorder ******
+class BoxBorder extends ShapeBorder {
+}
+exports.BoxBorder = BoxBorder;
+class Border extends BoxBorder {
+    /**
+     * @param config config:
+      {
+        top?:BorderSide,
+        right?:BorderSide,
+        bottom?:BorderSide,
+        left?:BorderSide,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.top = config.top;
+            this.right = config.right;
+            this.bottom = config.bottom;
+            this.left = config.left;
+        }
+    }
+    /**
+     * @param config config:
+      {
+        top?:BorderSide,
+        right?:BorderSide,
+        bottom?:BorderSide,
+        left?:BorderSide,
+      }
+     */
+    static new(config) {
+        return new Border(config);
+    }
+    /**
+     * @param config config:
+        {
+          color?:Color,
+          width?:number,
+          style?:BorderStyle,
+        }
+     */
+    static all(config) {
+        var v = new Border();
+        v.constructorName = "all";
+        if (config != null && config != undefined) {
+            v.color = config.color;
+            v.width = config.width;
+            v.style = config.style;
+        }
+        return v;
+    }
+    /**
+     * @param config config:
+        {
+          vertical?:BorderSide,
+          horizontal?:BorderSide
+        }
+     */
+    static symmetric(config) {
+        var v = new Border();
+        v.constructorName = "symmetric";
+        if (config != null && config != undefined) {
+            v.vertical = config.vertical;
+            v.horizontal = config.horizontal;
+        }
+        return v;
+    }
+}
+exports.Border = Border;
+class BorderDirectional extends BoxBorder {
+    /**
+     * @param config config:
+        {
+          top?:BorderSide,
+          start?:BorderSide,
+          bottom?:BorderSide,
+          end?:BorderSide,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.top = config.top;
+            this.start = config.start;
+            this.end = config.end;
+            this.bottom = config.bottom;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          top?:BorderSide,
+          start?:BorderSide,
+          bottom?:BorderSide,
+          end?:BorderSide,
+        }
+     */
+    static new(config) {
+        return new BorderDirectional(config);
+    }
+}
+exports.BorderDirectional = BorderDirectional;
+//#endregion
+//#region ****** OutlinedBorder ******
+class OutlinedBorder extends ShapeBorder {
+}
+exports.OutlinedBorder = OutlinedBorder;
+class CircleBorder extends OutlinedBorder {
+    /**
+      * @param config config:
+        {
+          side?:BorderSide,
+        }
+      */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.side = config.side;
+        }
+    }
+    /**
+      * @param config config:
+        {
+          side?:BorderSide,
+        }
+      */
+    static new(config) {
+        return new CircleBorder(config);
+    }
+}
+exports.CircleBorder = CircleBorder;
+class BeveledRectangleBorder extends OutlinedBorder {
+    /**
+      * @param config config:
+        {
+          side?:BorderSide,
+          borderRadius?:BorderRadiusGeometry,
+        }
+      */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.side = config.side;
+            this.borderRadius = config.borderRadius;
+        }
+    }
+    /**
+      * @param config config:
+        {
+          side?:BorderSide,
+          borderRadius?:BorderRadiusGeometry,
+        }
+      */
+    static new(config) {
+        return new BeveledRectangleBorder(config);
+    }
+}
+exports.BeveledRectangleBorder = BeveledRectangleBorder;
+class ContinuousRectangleBorder extends OutlinedBorder {
+    /**
+      * @param config config:
+        {
+          side?:BorderSide,
+          borderRadius?:BorderRadiusGeometry,
+        }
+      */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.side = config.side;
+            this.borderRadius = config.borderRadius;
+        }
+    }
+    /**
+      * @param config config:
+        {
+          side?:BorderSide,
+          borderRadius?:BorderRadiusGeometry,
+        }
+      */
+    static new(config) {
+        return new ContinuousRectangleBorder(config);
+    }
+}
+exports.ContinuousRectangleBorder = ContinuousRectangleBorder;
+class RoundedRectangleBorder extends OutlinedBorder {
+    /**
+      * @param config config:
+        {
+          side?:BorderSide,
+          borderRadius?:BorderRadiusGeometry,
+        }
+      */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.side = config.side;
+            this.borderRadius = config.borderRadius;
+        }
+    }
+    /**
+      * @param config config:
+        {
+          side?:BorderSide,
+          borderRadius?:BorderRadiusGeometry,
+        }
+      */
+    static new(config) {
+        return new RoundedRectangleBorder(config);
+    }
+}
+exports.RoundedRectangleBorder = RoundedRectangleBorder;
+class StadiumBorder extends OutlinedBorder {
+    /**
+      * @param config config:
+        {
+          side?:BorderSide,
+        }
+      */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.side = config.side;
+        }
+    }
+    /**
+      * @param config config:
+        {
+          side?:BorderSide,
+        }
+      */
+    static new(config) {
+        return new StadiumBorder(config);
+    }
+}
+exports.StadiumBorder = StadiumBorder;
+//#endregion
+//#region ****** InputBorder ******
+class InputBorder extends ShapeBorder {
+    static none() {
+        var v = new _NoInputBorder();
+        v.className = "InputBorder";
+        v.constructorName = "none";
+        return v;
+    }
+    /**
+     * InputBorder.underline = new UnderlineInputBorder(config);
+     * @param config config:
+        {
+          borderSide?:BorderSide,
+          borderRadius?:BorderRadius,
+        }
+    */
+    static underline(config) {
+        return new UnderlineInputBorder(config);
+    }
+    /**
+     * InputBorder.outline = new OutlineInputBorder(config);
+     * @param config config:
+        {
+          borderSide?:BorderSide,
+          borderRadius?:BorderRadius,
+          gapPadding?:number,
+        }
+    */
+    static outline(config) {
+        return new OutlineInputBorder(config);
+    }
+}
+exports.InputBorder = InputBorder;
+class _NoInputBorder extends InputBorder {
+}
+class UnderlineInputBorder extends InputBorder {
+    /**
+      * @param config config:
+        {
+          borderSide?:BorderSide,
+          borderRadius?:BorderRadius,
+        }
+      */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            if (config != null && config != undefined) {
+                this.borderRadius = config.borderRadius;
+                this.borderSide = config.borderSide;
+            }
+        }
+    }
+    /**
+      * @param config config:
+        {
+          borderSide?:BorderSide,
+          borderRadius?:BorderRadius,
+        }
+      */
+    static new(config) {
+        return new UnderlineInputBorder(config);
+    }
+}
+exports.UnderlineInputBorder = UnderlineInputBorder;
+class OutlineInputBorder extends InputBorder {
+    /**
+      * @param config config:
+        {
+          borderSide?:BorderSide,
+          borderRadius?:BorderRadius,
+          gapPadding?:number,
+        }
+      */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            if (config != null && config != undefined) {
+                this.borderRadius = config.borderRadius;
+                this.borderSide = config.borderSide;
+                this.gapPadding = config.gapPadding;
+            }
+        }
+    }
+    /**
+      * @param config config:
+        {
+          borderSide?:BorderSide,
+          borderRadius?:BorderRadius,
+          gapPadding?:number,
+        }
+      */
+    static new(config) {
+        return new OutlineInputBorder(config);
+    }
+}
+exports.OutlineInputBorder = OutlineInputBorder;
+//#endregion
+//#endregion
 //#endregion
 //#region ------- T -------
 //****** TextAlignVertical ******
@@ -4909,13 +4936,102 @@ class TableBorder extends DartClass {
     }
 }
 exports.TableBorder = TableBorder;
-//****** TODO TableRow ******
+//#region ****** TableColumnWidth ******
 class TableColumnWidth extends DartClass {
-    static new() {
-        return new TableColumnWidth();
+    /**
+     * TableColumnWidth.intrinsic = new IntrinsicColumnWidth(flex?:number);
+    */
+    static intrinsic(flex) {
+        return new IntrinsicColumnWidth(flex);
+    }
+    /**
+     * TableColumnWidth.fixed = new FixedColumnWidth(value:number);
+    */
+    static fixed(value) {
+        return new FixedColumnWidth(value);
+    }
+    /**
+     * TableColumnWidth.fraction = new FractionColumnWidth(value:number);
+    */
+    static fraction(value) {
+        return new FractionColumnWidth(value);
+    }
+    /**
+     * TableColumnWidth.max = new MaxColumnWidth(a:TableColumnWidth, b:TableColumnWidth);
+    */
+    static max(a, b) {
+        return new MaxColumnWidth(a, b);
+    }
+    /**
+     * TableColumnWidth.max = new MinColumnWidth(a:TableColumnWidth, b:TableColumnWidth);
+    */
+    static min(a, b) {
+        return new MinColumnWidth(a, b);
     }
 }
 exports.TableColumnWidth = TableColumnWidth;
+class IntrinsicColumnWidth extends TableColumnWidth {
+    constructor(flex) {
+        super();
+        this.flex = flex;
+    }
+    static new(flex) {
+        return new IntrinsicColumnWidth(flex);
+    }
+}
+exports.IntrinsicColumnWidth = IntrinsicColumnWidth;
+class FixedColumnWidth extends TableColumnWidth {
+    constructor(value) {
+        super();
+        this.value = value;
+    }
+    static new(value) {
+        return new FixedColumnWidth(value);
+    }
+}
+exports.FixedColumnWidth = FixedColumnWidth;
+class FractionColumnWidth extends TableColumnWidth {
+    constructor(value) {
+        super();
+        this.value = value;
+    }
+    static new(value) {
+        return new FractionColumnWidth(value);
+    }
+}
+exports.FractionColumnWidth = FractionColumnWidth;
+class FlexColumnWidth extends TableColumnWidth {
+    constructor(value) {
+        super();
+        this.value = value;
+    }
+    static new(value) {
+        return new FlexColumnWidth(value);
+    }
+}
+exports.FlexColumnWidth = FlexColumnWidth;
+class MaxColumnWidth extends TableColumnWidth {
+    constructor(a, b) {
+        super();
+        this.a = a;
+        this.b = b;
+    }
+    static new(a, b) {
+        return new MaxColumnWidth(a, b);
+    }
+}
+exports.MaxColumnWidth = MaxColumnWidth;
+class MinColumnWidth extends TableColumnWidth {
+    constructor(a, b) {
+        super();
+        this.a = a;
+        this.b = b;
+    }
+    static new(a, b) {
+        return new MaxColumnWidth(a, b);
+    }
+}
+exports.MinColumnWidth = MinColumnWidth;
 class TabController extends DartClass {
     /**
      * @param config config:
@@ -4946,21 +5062,13 @@ class TabController extends DartClass {
     }
 }
 exports.TabController = TabController;
-//****** TextEditingController ******
+//****** TODO  TextEditingController ******
 class TextEditingController extends DartClass {
     constructor(text) {
         super();
         this.text = text;
         //Mirror对象在构造函数创建 MirrorID
         this.createMirrorID();
-        //this.createMirrorObj();
-        /*
-        //创建对应FLutter对象
-        var argument = new JSCallConfig({
-            mirrorID:this.mirrorID,
-            className:this.className,
-        });
-        JSBridge.createMirrorObj(argument, this.mirrorID, this);*/
     }
     static new(text) {
         return new TextEditingController(text);
@@ -5100,74 +5208,102 @@ class Tween extends DartClass {
     ;
 }
 exports.Tween = Tween;
-class TextInputFormatter extends ShapeBorder {
+//#region ****** TextInputFormatter ******
+class TextInputFormatter extends DartClass {
+    /**
+     * TextInputFormatter.lengthLimiting = new LengthLimitingTextInputFormatter(maxLength?:number);
+    */
     static lengthLimiting(maxLength) {
-        var v = new TextInputFormatter();
-        v.constructorName = "lengthLimiting";
-        v.maxLength = maxLength;
-        return v;
+        return new LengthLimitingTextInputFormatter(maxLength);
     }
     /**
-     * @param allow true=白名单,false=黑名单
-     * @param filterPattern 正则表示式
-     * @param replacementString 替换字符串
-     */
+     * TextInputFormatter.filtering = new FilteringTextInputFormatter(allow:boolean,filterPattern:RegExp,replacementString?:string);
+    */
     static filtering(allow, filterPattern, replacementString) {
-        var v = new TextInputFormatter();
-        v.constructorName = "filtering";
-        v.allow = allow;
-        v.filterPattern = filterPattern;
-        v.replacementString = replacementString;
-        return v;
+        return new FilteringTextInputFormatter(allow, filterPattern, replacementString);
     }
     /**
-     * @param filterPattern 正则表示式
-     * @param replacementString 替换字符串
-     */
-    static filtering_allow(filterPattern, replacementString) {
-        var v = new TextInputFormatter();
-        v.constructorName = "filtering.allow";
-        v.filterPattern = filterPattern;
-        v.replacementString = replacementString;
-        return v;
+     * TextInputFormatter.allow = FilteringTextInputFormatter.allow(filterPattern:RegExp,replacementString?:string);
+    */
+    static allow(filterPattern, replacementString) {
+        return FilteringTextInputFormatter.allow(filterPattern, replacementString);
     }
     /**
-     * @param filterPattern 正则表示式
-     * @param replacementString 替换字符串
-     */
-    static filtering_deny(filterPattern, replacementString) {
-        var v = new TextInputFormatter();
-        v.constructorName = "filtering.deny";
-        v.filterPattern = filterPattern;
-        v.replacementString = replacementString;
-        return v;
+     * TextInputFormatter.deny = FilteringTextInputFormatter.deny(filterPattern:RegExp,replacementString?:string);
+    */
+    static deny(filterPattern, replacementString) {
+        return FilteringTextInputFormatter.deny(filterPattern, replacementString);
     }
     /**
-     * 单行
-     */
+     * TextInputFormatter.singleLineFormatter = FilteringTextInputFormatter.singleLineFormatter();
+    */
     static singleLineFormatter() {
-        var v = new TextInputFormatter();
-        v.constructorName = "singleLineFormatter";
-        return v;
+        return FilteringTextInputFormatter.singleLineFormatter();
     }
     /**
-     * 数字
-     */
+     * TextInputFormatter.digitsOnly = FilteringTextInputFormatter.digitsOnly();
+    */
     static digitsOnly() {
-        var v = new TextInputFormatter();
-        v.constructorName = "digitsOnly";
-        return v;
+        return FilteringTextInputFormatter.digitsOnly();
     }
-    static maskFormat(mask, initialText, filter) {
-        var v = new TextInputFormatter();
-        v.constructorName = "mask";
-        v.mask = mask;
-        v.initialText = initialText;
-        v.filter = filter;
-        return v;
+    /**
+     * TextInputFormatter.mask = new MaskTextInputFormatter(mask:string,initialText?:string,filter?:Map<string,RegExp>);
+    */
+    static mask(mask, initialText, filter) {
+        return new MaskTextInputFormatter(mask, initialText, filter);
     }
 }
 exports.TextInputFormatter = TextInputFormatter;
+class LengthLimitingTextInputFormatter extends TextInputFormatter {
+    constructor(maxLength) {
+        super();
+        this.maxLength = maxLength;
+    }
+    static new(maxLength) {
+        return new LengthLimitingTextInputFormatter(maxLength);
+    }
+}
+exports.LengthLimitingTextInputFormatter = LengthLimitingTextInputFormatter;
+class FilteringTextInputFormatter extends TextInputFormatter {
+    constructor(allow, filterPattern, replacementString) {
+        super();
+        this.allow = allow;
+        this.filterPattern = filterPattern;
+        this.replacementString = replacementString;
+    }
+    static new(allow, filterPattern, replacementString) {
+        return new FilteringTextInputFormatter(allow, filterPattern, replacementString);
+    }
+    static allow(filterPattern, replacementString) {
+        return new FilteringTextInputFormatter(true, filterPattern, replacementString);
+    }
+    static deny(filterPattern, replacementString) {
+        return new FilteringTextInputFormatter(false, filterPattern, replacementString);
+    }
+    static singleLineFormatter() {
+        var v = new FilteringTextInputFormatter();
+        v.constructorName = "singleLineFormatter";
+        return v;
+    }
+    static digitsOnly() {
+        var v = new FilteringTextInputFormatter();
+        v.constructorName = "digitsOnly";
+        return v;
+    }
+}
+exports.FilteringTextInputFormatter = FilteringTextInputFormatter;
+class MaskTextInputFormatter extends TextInputFormatter {
+    constructor(mask, initialText, filter) {
+        super();
+        this.mask = mask;
+        this.filter = filter;
+        this.initialText = initialText;
+    }
+    static new(mask, initialText, filter) {
+        return new MaskTextInputFormatter(mask, initialText, filter);
+    }
+}
+exports.MaskTextInputFormatter = MaskTextInputFormatter;
 class Uri extends DartClass {
     /**
      * @param config config:
@@ -5210,7 +5346,7 @@ class Uri extends DartClass {
     }
 }
 exports.Uri = Uri;
-//****** VerticalDirection ******
+//****** Uint8List ******
 class Uint8List extends DartClass {
     constructor(length) {
         super();
@@ -7516,8 +7652,6 @@ class BottomNavigationBar extends Widget {
           iconSize?:number,
           selectedItemColor?:Color,
           unselectedItemColor?:Color,
-          selectedIconTheme?:IconThemeData,
-          unselectedIconTheme?:IconThemeData,
           selectedFontSize?:number,
           unselectedFontSize?:number,
           selectedLabelStyle?:TextStyle,
@@ -7540,8 +7674,6 @@ class BottomNavigationBar extends Widget {
             this.iconSize = config.iconSize;
             this.selectedItemColor = config.selectedItemColor;
             this.unselectedItemColor = config.unselectedItemColor;
-            this.selectedIconTheme = config.selectedIconTheme;
-            this.unselectedIconTheme = config.unselectedIconTheme;
             this.selectedFontSize = config.selectedFontSize;
             this.unselectedFontSize = config.unselectedFontSize;
             this.selectedLabelStyle = config.selectedLabelStyle;
@@ -7564,8 +7696,6 @@ class BottomNavigationBar extends Widget {
           iconSize?:number,
           selectedItemColor?:Color,
           unselectedItemColor?:Color,
-          selectedIconTheme?:IconThemeData,
-          unselectedIconTheme?:IconThemeData,
           selectedFontSize?:number,
           unselectedFontSize?:number,
           selectedLabelStyle?:TextStyle,
@@ -12883,8 +13013,6 @@ class SliverAppBar extends Widget {
         forceElevated?:boolean,
         backgroundColor?:Color,
         brightness?:Brightness,
-        iconTheme?:IconThemeData,
-        actionsIconTheme?:IconThemeData,
         primary?:boolean,
         centerTitle?:boolean,
         excludeHeaderSemantics?:boolean,
@@ -12916,8 +13044,6 @@ class SliverAppBar extends Widget {
             this.forceElevated = config.forceElevated;
             this.backgroundColor = config.backgroundColor;
             this.brightness = config.brightness;
-            this.iconTheme = config.iconTheme;
-            this.actionsIconTheme = config.actionsIconTheme;
             this.primary = config.primary;
             this.centerTitle = config.centerTitle;
             this.titleSpacing = config.titleSpacing;
@@ -12949,8 +13075,6 @@ class SliverAppBar extends Widget {
         forceElevated?:boolean,
         backgroundColor?:Color,
         brightness?:Brightness,
-        iconTheme?:IconThemeData,
-        actionsIconTheme?:IconThemeData,
         primary?:boolean,
         centerTitle?:boolean,
         excludeHeaderSemantics?:boolean,
@@ -15498,741 +15622,4 @@ class CupertinoThemeData extends DartClass {
     }
 }
 exports.CupertinoThemeData = CupertinoThemeData;
-class Loading extends DartClass {
-    constructor() {
-        super();
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-    static getInstance() {
-        if (!this.instance) {
-            this.instance = new Loading();
-        }
-        return this.instance;
-    }
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
-    static showSuccess(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showSuccess",
-            args: config,
-        }));
-    }
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
-    static showError(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showError",
-            args: config,
-        }));
-    }
-    /**
-      * @param config config:
-       {
-         info:string,
-         duration?:Duration,
-         alignment?:Alignment,
-       }
-      */
-    static showInfo(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showInfo",
-            args: config,
-        }));
-    }
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
-    static showToast(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showToast",
-            args: config,
-        }));
-    }
-    /**
-     * @param config config:
-      {
-        info:string,
-        alignment?:Alignment,
-      }
-     */
-    static show(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "show",
-            args: config,
-        }));
-    }
-    /**
-     * @param config config:
-      {
-        value:number(0~100),
-        alignment?:Alignment,
-      }
-     */
-    static showProgress(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: "Loading",
-            funcName: "showProgress",
-            args: config,
-        }));
-    }
-    /**
-    * @param config config:
-     {
-       animation?:animation,
-     }
-    */
-    static dismiss(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: "Loading",
-            funcName: "dismiss",
-            args: config,
-        }));
-    }
-}
-exports.Loading = Loading;
-class Sp extends DartClass {
-    constructor() {
-        super();
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-    static getInstance() {
-        if (!this.instance) {
-            this.instance = new Sp();
-        }
-        return this.instance;
-    }
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:boolean;
-      }
-     */
-    static async getBool(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "getBool",
-            args: config,
-        }));
-        return Convert.toBoolean(v);
-    }
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:number;
-      }
-     */
-    static async getInt(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "getInt",
-            args: config,
-        }));
-        return Convert.toNumber(v);
-    }
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:double;
-      }
-     */
-    static async getDouble(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "getDouble",
-            args: config,
-        }));
-        return Convert.toNumber(v);
-    }
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:string;
-      }
-     */
-    static async getString(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "getString",
-            args: config,
-        }));
-        return Convert.toString(v);
-    }
-    static async clear() {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "clear",
-        }));
-        return Convert.toBoolean(v);
-    }
-    /**
-     * @param config config:
-      {
-        key:string;
-      }
-     */
-    static async remove(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "remove",
-        }));
-        return Convert.toBoolean(v);
-    }
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:boolean;
-      }
-     */
-    static async setBool(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setBool",
-            args: config,
-        }));
-        return Convert.toBoolean(v);
-    }
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:number;
-      }
-     */
-    static async setDouble(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setDouble",
-            args: config,
-        }));
-        return Convert.toBoolean(v);
-    }
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:number;
-      }
-     */
-    static async setInt(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setInt",
-            args: config,
-        }));
-        return Convert.toBoolean(v);
-    }
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:string;
-      }
-     */
-    static async setString(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setString",
-            args: config,
-        }));
-    }
-}
-exports.Sp = Sp;
-//****** ScreenInfo ******
-class ScreenInfo extends DartClass {
-    constructor() {
-        super();
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-    /*
-    * 将Dp按比例转换成Dp
-    * */
-    static getValueWithDp(dp, isRatio = true) {
-        return isRatio ? (ScreenInfo.dpRatio * dp) : dp;
-    }
-    /*
-    * 将px按比例转换成Dp
-    * */
-    static getValueWithPx(px, isRatio = true) {
-        return isRatio ? (ScreenInfo.pxRatio * px) : px;
-    }
-    //
-    static async updateInfo() {
-        var info = new ScreenInfo();
-        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "updateInfo",
-        }));
-        if (v != null && v != undefined) {
-            var result = JSON.parse(String(v));
-            if (result != null && result != undefined) {
-                ScreenInfo.appBarHeight = Convert.toNumber(result["appBarHeight"]);
-                ScreenInfo.bottomBarHeight = Convert.toNumber(result["bottomBarHeight"]);
-                ScreenInfo.dpRatio = Convert.toNumber(result["dpRatio"]);
-                ScreenInfo.pxRatio = Convert.toNumber(result["pxRatio"]);
-                ScreenInfo.screenDensity = Convert.toNumber(result["screenDensity"]);
-                ScreenInfo.screenHeight = Convert.toNumber(result["screenHeight"]);
-                ScreenInfo.screenHeightPx = Convert.toNumber(result["screenHeightPx"]);
-                ScreenInfo.screenWidth = Convert.toNumber(result["screenWidth"]);
-                ScreenInfo.screenWidthPx = Convert.toNumber(result["screenWidthPx"]);
-                ScreenInfo.statusBarHeight = Convert.toNumber(result["statusBarHeight"]);
-                ScreenInfo.uiDensity = Convert.toNumber(result["uiDensity"]);
-                ScreenInfo.uiHeight = Convert.toNumber(result["uiHeight"]);
-                ScreenInfo.uiWidth = Convert.toNumber(result["uiWidth"]);
-                ScreenInfo.uiWidthPx = Convert.toNumber(result["uiWidthPx"]);
-                ScreenInfo.uiHeightPx = Convert.toNumber(result["uiHeightPx"]);
-            }
-        }
-    }
-}
-exports.ScreenInfo = ScreenInfo;
-// 设计稿屏幕宽度(PX)
-ScreenInfo.uiWidthPx = 750.0;
-//设计稿屏幕宽度(PX)
-ScreenInfo.uiHeightPx = 1334.0;
-//设计稿屏幕密度
-ScreenInfo.uiDensity = 2.0;
-//设计稿屏幕宽度(DP)
-ScreenInfo.uiWidth = 375.0;
-//设计稿屏幕宽度(DP)
-ScreenInfo.uiHeight = 667.0;
-//当前设备宽度 dp
-ScreenInfo.screenWidth = 375.0;
-// 当前设备高度 dp
-ScreenInfo.screenHeight = 667.0;
-// 当前设备宽度 px
-ScreenInfo.screenWidthPx = 750.0;
-// 当前设备高度 px
-ScreenInfo.screenHeightPx = 1334.0;
-// 设备的像素密度
-ScreenInfo.screenDensity = 2.0;
-// 状态栏高度 dp 刘海屏会更高
-ScreenInfo.statusBarHeight = 20.0;
-//底部工具栏高度
-ScreenInfo.bottomBarHeight = 0.0;
-//App栏高
-ScreenInfo.appBarHeight = 0.0;
-//缩放比例(Dp)
-ScreenInfo.dpRatio = 1.0;
-//缩放比例(PX)
-ScreenInfo.pxRatio = 1.0;
-//字体缩放放比例
-ScreenInfo.textScaleFactor = 1.0;
-//****** PackageInfo ******
-class PackageInfo extends DartClass {
-    constructor() {
-        super();
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-    //
-    static async updateInfo() {
-        var info = new PackageInfo();
-        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "updateInfo",
-        }));
-        if (v != null && v != undefined) {
-            var result = JSON.parse(String(v));
-            if (result != null && result != undefined) {
-                PackageInfo.appName = Convert.toString(result["appName"]);
-                PackageInfo.buildNumber = Convert.toString(result["buildNumber"]);
-                PackageInfo.packageName = Convert.toString(result["packageName"]);
-                PackageInfo.version = Convert.toString(result["version"]);
-            }
-        }
-    }
-}
-exports.PackageInfo = PackageInfo;
-PackageInfo.appName = ""; //应用名称
-PackageInfo.packageName = ""; //包名称
-PackageInfo.version = ""; //版本号
-PackageInfo.buildNumber = ""; //小版本号
-//****** Wakelock ******
-class Wakelock extends DartClass {
-    constructor() {
-        super();
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-    //
-    static async disable() {
-        var info = new Wakelock();
-        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "disable",
-        }));
-        return Convert.toBoolean(v);
-    }
-    //
-    static async enable() {
-        var info = new Wakelock();
-        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "enable",
-        }));
-        return Convert.toBoolean(v);
-    }
-    //
-    static async isEnabled() {
-        var info = new Wakelock();
-        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "isEnabled",
-        }));
-        return Convert.toBoolean(v);
-    }
-}
-exports.Wakelock = Wakelock;
-//****** FocusScope ******
-class FocusScope extends DartClass {
-    constructor() {
-        super();
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-    //
-    static requestFocus() {
-        var info = new FocusScope();
-        info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "requestFocus",
-        }));
-    }
-    //
-    static unfocus() {
-        var info = new FocusScope();
-        info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "unfocus",
-        }));
-    }
-}
-exports.FocusScope = FocusScope;
-class UrlLauncher extends DartClass {
-    constructor() {
-        super();
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-    /**
-     * @param config config:
-      {
-        urlString:string,
-        forceSafariVC?:boolean,
-        forceWebView?:boolean,
-        enableJavaScript?:boolean,
-        enableDomStorage?:boolean,
-        universalLinksOnly?:boolean,
-        headers?:Map<string,string>,
-        statusBarBrightness?:Brightness,
-        webOnlyWindowName?:string,
-      }
-     */
-    static async openUrl(config) {
-        var info = new UrlLauncher();
-        var v = await info.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: info.mirrorID,
-            className: info.className,
-            funcName: "openUrl",
-            args: config,
-        }));
-        return Convert.toBoolean(v);
-    }
-}
-exports.UrlLauncher = UrlLauncher;
-//****** DioResponseType ******
-var DioResponseType;
-(function (DioResponseType) {
-    DioResponseType["json"] = "json";
-    DioResponseType["stream"] = "stream";
-    DioResponseType["plain"] = "plain";
-    DioResponseType["bytes"] = "bytes";
-})(DioResponseType = exports.DioResponseType || (exports.DioResponseType = {}));
-class DioBaseOptions extends DartClass {
-    /**
-       * @param config config:
-        {
-          method?:string,
-          connectTimeout?:number,
-          receiveTimeout?:number,
-          sendTimeout?:number,
-          baseUrl?:string,
-          queryParameters?:Map<string,any>,
-          extra?:Map<string,any>,
-          headers?:Map<string,any>,
-          responseType?:DioResponseType,
-          receiveDataWhenStatusError?:boolean,
-          followRedirects?:boolean,
-          maxRedirects?:number,
-        }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.method = config.method;
-            this.connectTimeout = config.connectTimeout;
-            this.receiveTimeout = config.receiveTimeout;
-            this.sendTimeout = config.sendTimeout;
-            this.baseUrl = config.baseUrl;
-            this.queryParameters = config.queryParameters;
-            this.extra = config.extra;
-            this.headers = config.headers;
-            this.responseType = config.responseType;
-            this.followRedirects = config.followRedirects;
-            this.maxRedirects = config.maxRedirects;
-        }
-    }
-    /**
-       * @param config config:
-        {
-          method?:string,
-          connectTimeout?:number,
-          receiveTimeout?:number,
-          sendTimeout?:number,
-          baseUrl?:string,
-          queryParameters?:Map<string,any>,
-          extra?:Map<string,any>,
-          headers?:Map<string,any>,
-          responseType?:DioResponseType,
-          receiveDataWhenStatusError?:boolean,
-          followRedirects?:boolean,
-          maxRedirects?:number,
-        }
-       */
-    static new(config) {
-        return new DioBaseOptions(config);
-    }
-}
-exports.DioBaseOptions = DioBaseOptions;
-class DioOptions extends DartClass {
-    /**
-       * @param config config:
-        {
-          method?:string,
-          connectTimeout?:number,
-          receiveTimeout?:number,
-          sendTimeout?:number,
-          baseUrl?:string,
-          extra?:Map<string,any>,
-          headers?:Map<string,any>,
-          responseType?:DioResponseType,
-          receiveDataWhenStatusError?:boolean,
-          followRedirects?:boolean,
-          maxRedirects?:number,
-        }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.method = config.method;
-            this.receiveTimeout = config.receiveTimeout;
-            this.sendTimeout = config.sendTimeout;
-            this.baseUrl = config.baseUrl;
-            this.extra = config.extra;
-            this.headers = config.headers;
-            this.responseType = config.responseType;
-            this.followRedirects = config.followRedirects;
-            this.maxRedirects = config.maxRedirects;
-        }
-    }
-    /**
-       * @param config config:
-        {
-          method?:string,
-          receiveTimeout?:number,
-          sendTimeout?:number,
-          baseUrl?:string,
-          extra?:Map<string,any>,
-          headers?:Map<string,any>,
-          responseType?:DioResponseType,
-          receiveDataWhenStatusError?:boolean,
-          followRedirects?:boolean,
-          maxRedirects?:number,
-        }
-       */
-    static new(config) {
-        return new DioOptions(config);
-    }
-}
-exports.DioOptions = DioOptions;
-class Dio extends DartClass {
-    constructor(options) {
-        super();
-        this.options = options;
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-    static new(options) {
-        return new Dio(options);
-    }
-    /**
-      * @param config config:
-        {
-          path?:string,
-          queryParameters?:Map<string,any>,
-          options?:DioOptions,
-        }
-    */
-    async get(config) {
-        return await this.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "get",
-            args: config,
-        }));
-    }
-    /**
-      * @param config config:
-        {
-          uri?:Uri,
-          options?:DioOptions,
-        }
-      */
-    async getUri(config) {
-        return await this.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "getUri",
-            args: config,
-        }));
-    }
-    /**
-      * @param config config:
-        {
-          path?:string,
-          data?:any;
-          queryParameters?:Map<string,any>,
-          options?:DioOptions,
-        }
-    */
-    async post(config) {
-        return await this.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "post",
-            args: config,
-        }));
-    }
-    /**
-      * @param config config:
-        {
-          uri?:Uri,
-          data?:any;
-          options?:DioOptions,
-        }
-      */
-    async postUri(config) {
-        return await this.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "postUri",
-            args: config,
-        }));
-    }
-    /**
-      * @param config config:
-        {
-          path?:string,
-          data?:any;
-          queryParameters?:Map<string,any>,
-          options?:DioOptions,
-        }
-    */
-    async request(config) {
-        return await this.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "request",
-            args: config,
-        }));
-    }
-    /**
-      * @param config config:
-        {
-          uri?:Uri,
-          data?:any;
-          options?:DioOptions,
-        }
-      */
-    async requestUri(config) {
-        return await this.invokeMirrorObjWithCallback(JSCallConfig.new({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "requestUri",
-            args: config,
-        }));
-    }
-}
-exports.Dio = Dio;
-//#endregion
 //#endregion

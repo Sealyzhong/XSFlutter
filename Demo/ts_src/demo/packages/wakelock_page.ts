@@ -6,6 +6,7 @@
  */
 
 import fs = require("flutter_sdk");
+import api = require("flutter_api");
 
 export class MyWakelockPage extends fs.StatefulWidget{
     createState() {
@@ -28,20 +29,20 @@ class _MyWakelockPage extends fs.WidgetState{
    }
 
     async _getStatus(){
-        this.isEnabled = await fs.Wakelock.isEnabled();
+        this.isEnabled = await api.Wakelock.isEnabled();
         this.setState();
     }
 
    async _enable(){
-    var v= await fs.Wakelock.enable();
-    var n = await fs.Wakelock.isEnabled();
+    var v= await api.Wakelock.enable();
+    var n = await api.Wakelock.isEnabled();
     this.isEnabled = n;
     this.setState();
    }
 
    async _disable(){
-    var v= await fs.Wakelock.disable();
-    var n = await fs.Wakelock.isEnabled();
+    var v= await api.Wakelock.disable();
+    var n = await api.Wakelock.isEnabled();
     this.isEnabled = n;
     this.setState();
    }

@@ -8,6 +8,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MySharedPreferncesPage = void 0;
 const fs = require("flutter_sdk");
+const api = require("flutter_api");
 class MySharedPreferncesPage extends fs.StatefulWidget {
     createState() {
         return new _MySharedPreferncesPage(this);
@@ -30,11 +31,11 @@ class _MySharedPreferncesPage extends fs.WidgetState {
         this.setState();
     }
     _saveValue() {
-        var isSuccess = fs.Sp.setInt({ key: this._userNumber, value: this._count });
-        fs.Loading.showSuccess({ info: isSuccess ? "保存成功！" : "保存失败" });
+        var isSuccess = api.Sp.setInt({ key: this._userNumber, value: this._count });
+        api.Loading.showSuccess({ info: isSuccess ? "保存成功！" : "保存失败" });
     }
     async _getValue() {
-        this._getCount = await fs.Sp.getInt({ key: this._userNumber, defaultValue: 0 });
+        this._getCount = await api.Sp.getInt({ key: this._userNumber, defaultValue: 0 });
         this.setState();
     }
     build(context) {

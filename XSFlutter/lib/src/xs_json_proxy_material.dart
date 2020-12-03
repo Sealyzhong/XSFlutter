@@ -218,8 +218,6 @@ class XSProxyBottomNavigationBar extends XSJsonObjProxy {
         iconSize: XSJSParse.getDouble(context, bo, map, "iconSize", defaultValue: 24.0),
         selectedItemColor: XSJSParse.getColor(context, bo, map, "selectedItemColor"),
         unselectedItemColor: XSJSParse.getColor(context, bo, map, "unselectedItemColor"),
-        selectedIconTheme: XSJSParse.getIconThemeData(context, bo, map, "selectedIconTheme"),
-        unselectedIconTheme: XSJSParse.getIconThemeData(context, bo, map, "unselectedIconTheme"),
         selectedFontSize: XSJSParse.getDouble(context, bo, map, "selectedFontSize", defaultValue: 14.0),
         unselectedFontSize: XSJSParse.getDouble(context, bo, map, "unselectedFontSize", defaultValue: 12.0),
         selectedLabelStyle: XSJSParse.getTextStyle(context, bo, map, "selectedLabelStyle"),

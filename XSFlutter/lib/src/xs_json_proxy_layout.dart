@@ -1264,7 +1264,6 @@ class XSProxySliverAppBar extends XSJsonObjProxy {
       forceElevated: XSJSParse.getBool(context, bo, map, "forceElevated", defaultValue: false),
       backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
       brightness: XSJSParse.getBrightness(context, bo, map, "brightness"),
-      iconTheme: XSJSParse.getIconThemeData(context, bo, map, "iconTheme"),
       primary: XSJSParse.getBool(context, bo, map, "primary", defaultValue: true),
       centerTitle: XSJSParse.getBool(context, bo, map, "centerTitle"),
       titleSpacing: XSJSParse.getDouble(context, bo, map, "titleSpacing", defaultValue: NavigationToolbar.kMiddleSpacing),

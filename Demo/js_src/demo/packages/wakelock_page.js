@@ -8,6 +8,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyWakelockPage = void 0;
 const fs = require("flutter_sdk");
+const api = require("flutter_api");
 class MyWakelockPage extends fs.StatefulWidget {
     createState() {
         return new _MyWakelockPage(this);
@@ -26,18 +27,18 @@ class _MyWakelockPage extends fs.WidgetState {
         fs.Future.delayed(fs.Duration.new({ seconds: 1 }), this._getStatus.bind(this));
     }
     async _getStatus() {
-        this.isEnabled = await fs.Wakelock.isEnabled();
+        this.isEnabled = await api.Wakelock.isEnabled();
         this.setState();
     }
     async _enable() {
-        var v = await fs.Wakelock.enable();
-        var n = await fs.Wakelock.isEnabled();
+        var v = await api.Wakelock.enable();
+        var n = await api.Wakelock.isEnabled();
         this.isEnabled = n;
         this.setState();
     }
     async _disable() {
-        var v = await fs.Wakelock.disable();
-        var n = await fs.Wakelock.isEnabled();
+        var v = await api.Wakelock.disable();
+        var n = await api.Wakelock.isEnabled();
         this.isEnabled = n;
         this.setState();
     }

@@ -6,9 +6,11 @@
  */
 
 import fs = require("flutter_sdk");
+import api = require("flutter_api");
 import { MyBaseWidgetsIndex } from "demo/base_widgets/index";
 import { MyPackageIndex } from "demo/packages/index";
 import { MyExamplesIndex } from "demo/examples/index";
+import { MyDialogIndex } from "demo/dialog/index";
 
 
 export class MyHomePage extends fs.StatefulWidget{
@@ -23,8 +25,8 @@ class _MyHomePageState extends fs.WidgetState{
     //subclass override
     initState() {
         fs.Log.log("MyHomePage.initState");
-        fs.ScreenInfo.updateInfo();
-        fs.PackageInfo.updateInfo();
+        api.ScreenInfo.updateInfo();
+        api.PackageInfo.updateInfo();
     }
     
     _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
@@ -84,6 +86,21 @@ class _MyHomePageState extends fs.WidgetState{
 
                     fs.ListTile.new({
                         leading:fs.Text.new("4",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Dialog"),
+                        subtitle:fs.Text.new("常用提示框"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyDialogIndex.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+
+                    fs.ListTile.new({
+                        leading:fs.Text.new("5",{style:this._style}),
                         trailing:fs.Icon.new(fs.Icons.chevron_right),
                         title:fs.Text.new("TS2Project"),
                         subtitle:fs.Text.new("在本工程中实现JS与Project通信息"),
