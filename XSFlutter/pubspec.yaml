@@ -36,6 +36,13 @@ dependencies:
   # 网络请求处理
   # https://github.com/flutterchina/dio
   dio: ^3.0.10  #latest version
+
+  # 下拉刷新
+  pull_to_refresh: ^1.6.0
+
+  # 实现下拉刷新以及上拉加载操作
+  # https://github.com/xuelongqy/flutter_easyrefresh
+  flutter_easyrefresh: ^2.1.0
   
 dev_dependencies:
   flutter_test:
@@ -58,7 +65,5 @@ flutter:
   plugin:
     androidPackage: com.xsyx.xsflutter
     pluginClass: XSFlutterPlugin
-
-
 
 

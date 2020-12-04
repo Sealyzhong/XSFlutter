@@ -364,32 +364,34 @@ class XSJSParse {
   static Border getBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {dynamic defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      var constructorName = _getConstructorName(v);
-      if (constructorName == null || constructorName.isEmpty) {
-        return Border(
-          top: getBorderSide(context, bo, v, "top", defaultValue: BorderSide.none),
-          right: getBorderSide(context, bo, v, "right", defaultValue: BorderSide.none),
-          bottom: getBorderSide(context, bo, v, "bottom", defaultValue: BorderSide.none),
-          left: getBorderSide(context, bo, v, "left", defaultValue: BorderSide.none),
-        );
-      }
-      switch (constructorName) {
-        case 'all':
-          return Border.all(
-            color: getColor(context, bo, v, "color", defaultValue: const Color(0xFF000000)),
-            width: getDouble(context, bo, v, "width", defaultValue: 1.0),
-            style: getBorderStyle(context, bo, v, "style", defaultValue: BorderStyle.solid),
+      var className = _getClassName(v);
+      if (className != null && className.isNotEmpty) {
+        var constructorName = _getConstructorName(v);
+        if (constructorName == null || constructorName.isEmpty) {
+          return Border(
+            top: getBorderSide(context, bo, v, "top", defaultValue: BorderSide.none),
+            right: getBorderSide(context, bo, v, "right", defaultValue: BorderSide.none),
+            bottom: getBorderSide(context, bo, v, "bottom", defaultValue: BorderSide.none),
+            left: getBorderSide(context, bo, v, "left", defaultValue: BorderSide.none),
           );
-        case 'fromBorderSide':
-          return Border.fromBorderSide(getBorderSide(context, bo, v, "size"));
-        case 'symmetric':
-          return Border.symmetric(
-            vertical: getBorderSide(context, bo, v, "vertical", defaultValue: BorderSide.none),
-            horizontal: getBorderSide(context, bo, v, "horizontal", defaultValue: BorderSide.none),
-          );
+        }
+        switch (constructorName) {
+          case 'all':
+            return Border.all(
+              color: getColor(context, bo, v, "color", defaultValue: const Color(0xFF000000)),
+              width: getDouble(context, bo, v, "width", defaultValue: 1.0),
+              style: getBorderStyle(context, bo, v, "style", defaultValue: BorderStyle.solid),
+            );
+          case 'fromBorderSide':
+            return Border.fromBorderSide(getBorderSide(context, bo, v, "size"));
+          case 'symmetric':
+            return Border.symmetric(
+              vertical: getBorderSide(context, bo, v, "vertical", defaultValue: BorderSide.none),
+              horizontal: getBorderSide(context, bo, v, "horizontal", defaultValue: BorderSide.none),
+            );
+        }
       }
     }
-
     return defaultValue;
   }
 
@@ -426,12 +428,15 @@ class XSJSParse {
   static BorderDirectional getBorderDirectional(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BorderDirectional defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      return BorderDirectional(
-        top: getBorderSide(context, bo, v, "top", defaultValue: BorderSide.none),
-        start: getBorderSide(context, bo, v, "start", defaultValue: BorderSide.none),
-        end: getBorderSide(context, bo, v, "end", defaultValue: BorderSide.none),
-        bottom: getBorderSide(context, bo, v, "bottom", defaultValue: BorderSide.none),
-      );
+      var className = _getClassName(v);
+      if (className != null && className.isNotEmpty) {
+        return BorderDirectional(
+          top: getBorderSide(context, bo, v, "top", defaultValue: BorderSide.none),
+          start: getBorderSide(context, bo, v, "start", defaultValue: BorderSide.none),
+          end: getBorderSide(context, bo, v, "end", defaultValue: BorderSide.none),
+          bottom: getBorderSide(context, bo, v, "bottom", defaultValue: BorderSide.none),
+        );
+      }
     }
     return defaultValue;
   }
@@ -4714,15 +4719,21 @@ class XSJSParse {
 
   //****** ShapeBorder ******/
   static ShapeBorder getShapeBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ShapeBorder defaultValue}) {
-    var v = _getMap(map, key);
+    ShapeBorder v = getOutlinedBorder(context, bo, map, key);
     if (v != null) {
-      var className = _getClassName(v);
-      if (className == "OutlinedBorder") {
-        return getOutlinedBorder(context, bo, map, key);
-      }
-      if (className == "InputBorder") {
-        return getInputBorder(context, bo, map, key);
-      }
+      return v;
+    }
+    v = getInputBorder(context, bo, map, key);
+    if (v != null) {
+      return v;
+    }
+    v = getBorder(context, bo, map, key);
+    if (v != null) {
+      return v;
+    }
+    v = getBorderDirectional(context, bo, map, key);
+    if (v != null) {
+      return v;
     }
     return defaultValue;
   }
@@ -5058,7 +5069,6 @@ class XSJSParse {
     }
     return defaultValue;
   }
-
   //-------------- T -----------------
 
   //****** ToolbarOptions ******/
@@ -5799,7 +5809,7 @@ class XSJSParse {
   }
 
   //****** Widget ******/
-  static Widget getWidget(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {dynamic defaultValue}) {
+  static Widget getWidget(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Widget defaultValue}) {
     return _getClassObj(map[key], buildOwner: bo, defaultValue: defaultValue, context: context);
   }
 
@@ -5810,6 +5820,15 @@ class XSJSParse {
       return null;
     }
     return List<Widget>.from(list);
+  }
+
+  //****** List<Widget> Index ******/
+  static Widget getWidgetListIndex(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Widget defaultValue, int index = 0}) {
+    var li = _getList(map, key);
+    if (li != null && li.length > index) {
+      return _getClassObj(li[index], buildOwner: bo, defaultValue: defaultValue, context: context);
+    }
+    return defaultValue;
   }
 
   //-------------- X -----------------

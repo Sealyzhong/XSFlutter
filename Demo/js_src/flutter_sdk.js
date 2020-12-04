@@ -6,7 +6,7 @@
  * @Description: JS Flutter SDK
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGrid = exports.SliverPadding = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.Offset = exports.Notification = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
+exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverOpacity = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverChildDelegate = exports.SliverGridDelegateWithFixedCrossAxisCount = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGridDelegate = exports.SliverGrid = exports.SliverPadding = exports.SliverFillRemaining = exports.SliverFillViewport = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.Offset = exports.Notification = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.ScrollViewKeyboardDismissBehavior = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -1463,6 +1463,12 @@ var StackFit;
     StackFit["expand"] = "expand";
     StackFit["passthrough"] = "passthrough";
 })(StackFit = exports.StackFit || (exports.StackFit = {}));
+//****** ScrollViewKeyboardDismissBehavior ******
+var ScrollViewKeyboardDismissBehavior;
+(function (ScrollViewKeyboardDismissBehavior) {
+    ScrollViewKeyboardDismissBehavior["manual"] = "manual";
+    ScrollViewKeyboardDismissBehavior["onDrag"] = "onDrag";
+})(ScrollViewKeyboardDismissBehavior = exports.ScrollViewKeyboardDismissBehavior || (exports.ScrollViewKeyboardDismissBehavior = {}));
 //****** StrokeCap ******
 var StrokeCap;
 (function (StrokeCap) {
@@ -10884,7 +10890,10 @@ class ListView extends Widget {
           cacheExtent?:number,
           semanticChildCount?:number,
           dragStartBehavior?:DragStartBehavior,
-          key?:Key
+          key?:Key,
+          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
+          restorationId?:string,
+          clipBehavior?:Clip,
         }
      */
     constructor(config) {
@@ -10906,18 +10915,31 @@ class ListView extends Widget {
             this.children = config.children;
             this.semanticChildCount = config.semanticChildCount;
             this.dragStartBehavior = config.dragStartBehavior;
+            this.keyboardDismissBehavior = config.keyboardDismissBehavior;
+            this.restorationId = config.restorationId;
+            this.clipBehavior = config.clipBehavior;
         }
     }
     preBuild(jsWidgetHelper, buildContext) {
         if (this.itemBuilder) {
-            this.children = [];
+            this.itemBuilderChildren = [];
             if (this.itemCount != null && this.itemCount != undefined) {
                 for (let i = 0; i < this.itemCount; ++i) {
                     let w = this.itemBuilder(buildContext, i);
-                    this.children.push(w);
+                    this.itemBuilderChildren.push(w);
                 }
             }
             delete this.itemBuilder;
+        }
+        if (this.separatorBuilder) {
+            this.separatorBuilderChildren = [];
+            if (this.itemCount != null && this.itemCount != undefined) {
+                for (let i = 0; i < this.itemCount; ++i) {
+                    let w = this.separatorBuilder(buildContext, i);
+                    this.separatorBuilderChildren.push(w);
+                }
+            }
+            delete this.separatorBuilder;
         }
         super.preBuild(jsWidgetHelper, buildContext);
     }
@@ -10939,7 +10961,10 @@ class ListView extends Widget {
           cacheExtent?:number,
           semanticChildCount?:number,
           dragStartBehavior?:DragStartBehavior,
-          key?:Key
+          key?:Key,
+          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
+          restorationId?:string,
+          clipBehavior?:Clip,
         }
      */
     static new(config) {
@@ -10947,7 +10972,7 @@ class ListView extends Widget {
     }
     /**
      * @param config config:
-        { itemBuilder?:any,
+        { itemBuilder?:IndexedWidgetBuilder,
           itemCount?:number,
           padding?:EdgeInsets,
           controller?:ScrollController,
@@ -10963,7 +10988,10 @@ class ListView extends Widget {
           cacheExtent?:number,
           semanticChildCount?:number,
           dragStartBehavior?:DragStartBehavior,
-          key?:Key
+          key?:Key,
+          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
+          restorationId?:string,
+          clipBehavior?:Clip,
         }
      */
     static builder(config) {
@@ -10987,6 +11015,106 @@ class ListView extends Widget {
             v.cacheExtent = config.cacheExtent;
             v.semanticChildCount = config.semanticChildCount;
             v.dragStartBehavior = config.dragStartBehavior;
+            v.keyboardDismissBehavior = config.keyboardDismissBehavior;
+            v.restorationId = config.restorationId;
+            v.clipBehavior = config.clipBehavior;
+        }
+        return v;
+    }
+    /**
+     * @param config config:
+        { itemBuilder?:IndexedWidgetBuilder,
+          separatorBuilder?:IndexedWidgetBuilder,
+          itemCount?:number,
+          padding?:EdgeInsets,
+          controller?:ScrollController,
+          scrollDirection?:Axis,
+          reverse?:boolean,
+          primary?:boolean,
+          physics?:ScrollPhysics,
+          shrinkWrap?:boolean,
+          itemExtent?:number,
+          addAutomaticKeepAlives?:boolean,
+          addRepaintBoundaries?:boolean,
+          addSemanticIndexes?:boolean,
+          cacheExtent?:number,
+          semanticChildCount?:number,
+          dragStartBehavior?:DragStartBehavior,
+          key?:Key,
+          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
+          restorationId?:string,
+          clipBehavior?:Clip,
+        }
+     */
+    static separatorBuilder(config) {
+        let v = new ListView();
+        v.constructorName = "separatorBuilder";
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.scrollDirection = config.scrollDirection;
+            v.reverse = config.reverse;
+            v.controller = config.controller;
+            v.primary = config.primary;
+            v.physics = config.physics;
+            v.shrinkWrap = config.shrinkWrap;
+            v.padding = config.padding;
+            v.itemExtent = config.itemExtent;
+            v.itemBuilder = config.itemBuilder;
+            v.separatorBuilder = config.separatorBuilder;
+            v.itemCount = config.itemCount;
+            v.addAutomaticKeepAlives = config.addAutomaticKeepAlives;
+            v.addRepaintBoundaries = config.addRepaintBoundaries;
+            v.addSemanticIndexes = config.addSemanticIndexes;
+            v.cacheExtent = config.cacheExtent;
+            v.semanticChildCount = config.semanticChildCount;
+            v.dragStartBehavior = config.dragStartBehavior;
+            v.keyboardDismissBehavior = config.keyboardDismissBehavior;
+            v.restorationId = config.restorationId;
+            v.clipBehavior = config.clipBehavior;
+        }
+        return v;
+    }
+    /**
+     * @param config config:
+        {
+          childrenDelegate:SliverChildDelegate;
+          padding?:EdgeInsets,
+          controller?:ScrollController,
+          scrollDirection?:Axis,
+          reverse?:boolean,
+          primary?:boolean,
+          physics?:ScrollPhysics,
+          shrinkWrap?:boolean,
+          itemExtent?:number,
+          cacheExtent?:number,
+          semanticChildCount?:number,
+          dragStartBehavior?:DragStartBehavior,
+          key?:Key,
+          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
+          restorationId?:string,
+          clipBehavior?:Clip,
+        }
+     */
+    static custom(config) {
+        let v = new ListView();
+        v.constructorName = "custom";
+        if (config != null && config != undefined) {
+            v.key = config.key;
+            v.scrollDirection = config.scrollDirection;
+            v.reverse = config.reverse;
+            v.controller = config.controller;
+            v.primary = config.primary;
+            v.physics = config.physics;
+            v.shrinkWrap = config.shrinkWrap;
+            v.padding = config.padding;
+            v.itemExtent = config.itemExtent;
+            v.childrenDelegate = config.childrenDelegate;
+            v.cacheExtent = config.cacheExtent;
+            v.semanticChildCount = config.semanticChildCount;
+            v.dragStartBehavior = config.dragStartBehavior;
+            v.keyboardDismissBehavior = config.keyboardDismissBehavior;
+            v.restorationId = config.restorationId;
+            v.clipBehavior = config.clipBehavior;
         }
         return v;
     }
@@ -13096,6 +13224,72 @@ class SliverAppBar extends Widget {
     }
 }
 exports.SliverAppBar = SliverAppBar;
+class SliverFillViewport extends Widget {
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        delegate:SliverChildDelegate,
+        viewportFraction?:number,
+        padEnds?:boolean,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.delegate = config.delegate;
+            this.viewportFraction = config.viewportFraction;
+            this.padEnds = config.padEnds;
+        }
+    }
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        delegate:SliverChildDelegate,
+        viewportFraction?:number,
+        padEnds?:boolean,
+      }
+     */
+    static new(config) {
+        return new SliverFillViewport(config);
+    }
+}
+exports.SliverFillViewport = SliverFillViewport;
+class SliverFillRemaining extends Widget {
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        child?:Widget,
+        hasScrollBody?:boolean,
+        fillOverscroll?:boolean,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.hasScrollBody = config.hasScrollBody;
+            this.fillOverscroll = config.fillOverscroll;
+        }
+    }
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        child?:Widget,
+        hasScrollBody?:boolean,
+        fillOverscroll?:boolean,
+      }
+     */
+    static new(config) {
+        return new SliverFillRemaining(config);
+    }
+}
+exports.SliverFillRemaining = SliverFillRemaining;
 class SliverPadding extends Widget {
     /**
      * @param config config:
@@ -13130,8 +13324,8 @@ class SliverGrid extends Widget {
     /**
      * @param config config:
       {
-        delegate?:any,
-        gridDelegate?:any,
+        delegate?:SliverChildDelegate,
+        gridDelegate?:SliverGridDelegate,
         key?:Key,
       }
      */
@@ -13146,8 +13340,8 @@ class SliverGrid extends Widget {
     /**
      * @param config config:
       {
-        delegate?:any,
-        gridDelegate?:any,
+        delegate?:SliverChildDelegate,
+        gridDelegate?:SliverGridDelegate,
         key?:Key,
       }
      */
@@ -13156,11 +13350,41 @@ class SliverGrid extends Widget {
     }
 }
 exports.SliverGrid = SliverGrid;
+//#region ****** SliverGridDelegate ******
+class SliverGridDelegate extends Widget {
+    /**
+     * SliverGridDelegate.withMax=new SliverGridDelegateWithMaxCrossAxisExtent(config: SliverGridDelegateWithMaxCrossAxisExtentConfig);
+     * @param config config:
+      {
+        maxCrossAxisExtent:number,
+        mainAxisSpacing?:number,
+        crossAxisSpacing?:number,
+        childAspectRatio?:number,
+      }
+     */
+    static withMax(config) {
+        return new SliverGridDelegateWithMaxCrossAxisExtent(config);
+    }
+    /**
+     * SliverGridDelegate.withFixed=new SliverGridDelegateWithFixedCrossAxisCount(config: SliverGridDelegateWithFixedCrossAxisCountConfig);
+     * @param config config:
+      {
+        crossAxisCount:number,
+        mainAxisSpacing?:number,
+        crossAxisSpacing?:number,
+        childAspectRatio?:number,
+      }
+     */
+    static withFixed(config) {
+        return new SliverGridDelegateWithFixedCrossAxisCount(config);
+    }
+}
+exports.SliverGridDelegate = SliverGridDelegate;
 class SliverGridDelegateWithMaxCrossAxisExtent extends Widget {
     /**
      * @param config config:
       {
-        maxCrossAxisExtent?:number,
+        maxCrossAxisExtent:number,
         mainAxisSpacing?:number,
         crossAxisSpacing?:number,
         childAspectRatio?:number,
@@ -13178,7 +13402,7 @@ class SliverGridDelegateWithMaxCrossAxisExtent extends Widget {
     /**
      * @param config config:
       {
-        maxCrossAxisExtent?:number,
+        maxCrossAxisExtent:number,
         mainAxisSpacing?:number,
         crossAxisSpacing?:number,
         childAspectRatio?:number,
@@ -13189,11 +13413,78 @@ class SliverGridDelegateWithMaxCrossAxisExtent extends Widget {
     }
 }
 exports.SliverGridDelegateWithMaxCrossAxisExtent = SliverGridDelegateWithMaxCrossAxisExtent;
-class SliverChildListDelegate extends DartClass {
+class SliverGridDelegateWithFixedCrossAxisCount extends Widget {
     /**
      * @param config config:
       {
-        children?:Array<Widget>,
+        crossAxisCount:number,
+        mainAxisSpacing?:number,
+        crossAxisSpacing?:number,
+        childAspectRatio?:number,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.crossAxisCount = config.crossAxisCount;
+            this.mainAxisSpacing = config.mainAxisSpacing;
+            this.crossAxisSpacing = config.crossAxisSpacing;
+            this.childAspectRatio = config.childAspectRatio;
+        }
+    }
+    /**
+     * @param config config:
+      {
+        crossAxisCount:number,
+        mainAxisSpacing?:number,
+        crossAxisSpacing?:number,
+        childAspectRatio?:number,
+      }
+     */
+    static new(config) {
+        return new SliverGridDelegateWithFixedCrossAxisCount(config);
+    }
+}
+exports.SliverGridDelegateWithFixedCrossAxisCount = SliverGridDelegateWithFixedCrossAxisCount;
+//#endregion
+//#region ****** SliverChildDelegate ******
+class SliverChildDelegate extends Widget {
+    /**
+     * SliverChildDelegate.list = new SliverChildListDelegate(config: SliverChildListDelegateConfig);
+     * @param config config:
+       {
+         children?:Array<Widget>,
+         addAutomaticKeepAlives?:boolean,
+         addRepaintBoundaries?:boolean,
+         addSemanticIndexes?:boolean,
+         semanticIndexOffset?:number,
+       }
+    */
+    static list(config) {
+        return new SliverChildListDelegate(config);
+    }
+    /**
+     * SliverChildDelegate.builder = new SliverChildBuilderDelegate(config: SliverChildBuilderDelegateConfig);
+     * @param config config:
+      {
+        builder:any,
+        childCount?:number,
+        addAutomaticKeepAlives?:boolean,
+        addRepaintBoundaries?:boolean,
+        addSemanticIndexes?:boolean,
+        semanticIndexOffset?:number,
+      }
+     */
+    static builder(config) {
+        return new SliverChildBuilderDelegate(config);
+    }
+}
+exports.SliverChildDelegate = SliverChildDelegate;
+class SliverChildListDelegate extends SliverChildDelegate {
+    /**
+     * @param config config:
+      {
+        children:Array<Widget>,
         addAutomaticKeepAlives?:boolean,
         addRepaintBoundaries?:boolean,
         addSemanticIndexes?:boolean,
@@ -13213,7 +13504,7 @@ class SliverChildListDelegate extends DartClass {
     /**
      * @param config config:
       {
-        children?:Array<Widget>,
+        children:Array<Widget>,
         addAutomaticKeepAlives?:boolean,
         addRepaintBoundaries?:boolean,
         addSemanticIndexes?:boolean,
@@ -13225,12 +13516,12 @@ class SliverChildListDelegate extends DartClass {
     }
 }
 exports.SliverChildListDelegate = SliverChildListDelegate;
-class SliverChildBuilderDelegate extends Widget {
+class SliverChildBuilderDelegate extends SliverChildDelegate {
     /**
      * @param config config:
       {
-        builder:any,
-        childCount?:number,
+        builder:IndexedWidgetBuilder,
+        childCount:number,
         addAutomaticKeepAlives?:boolean,
         addRepaintBoundaries?:boolean,
         addSemanticIndexes?:boolean,
@@ -13254,6 +13545,7 @@ class SliverChildBuilderDelegate extends Widget {
     preBuild(jsWidgetHelper, buildContext) {
         if (this.builder) {
             if (this.childCount != null && this.childCount != undefined) {
+                this.children = [];
                 for (let i = 0; i < this.childCount; ++i) {
                     let w = this.builder(buildContext, i);
                     if (this.children != null && this.children != undefined) {
@@ -13268,8 +13560,8 @@ class SliverChildBuilderDelegate extends Widget {
     /**
      * @param config config:
       {
-        builder:any,
-        childCount?:number,
+        builder:IndexedWidgetBuilder,
+        childCount:number,
         addAutomaticKeepAlives?:boolean,
         addRepaintBoundaries?:boolean,
         addSemanticIndexes?:boolean,
@@ -13286,7 +13578,7 @@ class SliverList extends Widget {
     /**
      * @param config config:
       {
-        delegate?:any,
+        delegate?:SliverChildDelegate,
         key?:Key
       }
      */
@@ -13300,7 +13592,7 @@ class SliverList extends Widget {
     /**
      * @param config config:
       {
-        delegate?:any,
+        delegate?:SliverChildDelegate,
         key?:Key
       }
      */
@@ -13309,6 +13601,39 @@ class SliverList extends Widget {
     }
 }
 exports.SliverList = SliverList;
+class SliverOpacity extends Widget {
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        sliver?:Widget,
+        opacity:number,
+        alwaysIncludeSemantics?:boolean,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.sliver = config.sliver;
+            this.opacity = config.opacity;
+            this.alwaysIncludeSemantics = config.alwaysIncludeSemantics;
+        }
+    }
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        sliver?:Widget,
+        opacity:number,
+        alwaysIncludeSemantics?:boolean,
+      }
+     */
+    static new(config) {
+        return new SliverOpacity(config);
+    }
+}
+exports.SliverOpacity = SliverOpacity;
 class SliverOverlapInjector extends Widget {
     /**
      * @param config config:
@@ -13344,7 +13669,7 @@ class SliverFixedExtentList extends Widget {
      * @param config config:
       {
         key?:Key,
-        delegate?:any,
+        delegate?:SliverChildDelegate,
         itemExtent?:number,
       }
      */
@@ -13360,7 +13685,7 @@ class SliverFixedExtentList extends Widget {
      * @param config config:
       {
         key?:Key,
-        delegate?:any,
+        delegate?:SliverChildDelegate,
         itemExtent?:number,
       }
      */

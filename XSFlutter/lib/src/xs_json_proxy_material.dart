@@ -24,7 +24,6 @@ class XSProxyRegisterHelperMaterialSeries {
 
     m.addAll(XSProxyAppBar.registerProxy());
     m.addAll(XSProxyAboutListTile.registerProxy());
-    m.addAll(XSProxyAboutDialog.registerProxy());
 
     m.addAll(XSProxyBuilder.registerProxy());
     m.addAll(XSProxyBottomAppBar.registerProxy());
@@ -175,26 +174,6 @@ class XSProxyAboutListTile extends XSJsonObjProxy {
       );
 }
 
-//****** AboutDialog ******
-class XSProxyAboutDialog extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName1 = "AboutDialog";
-    return {
-      regClassName1: () => XSProxyAboutDialog()..init(className: regClassName1)
-    };
-  }
-
-  @override
-  AboutDialog constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => AboutDialog(
-        key: XSJSParse.getKey(context, bo, map, "key"),
-        applicationName: XSJSParse.getString(context, bo, map, "applicationName"),
-        applicationIcon: XSJSParse.getWidget(context, bo, map, "icon"),
-        applicationLegalese: XSJSParse.getString(context, bo, map, "applicationLegalese"),
-        applicationVersion: XSJSParse.getString(context, bo, map, "applicationVersion"),
-        children: XSJSParse.getWidgetList(context, bo, map, "aboutBoxChildren"),
-      );
-}
-
 //-------------- B -----------------
 //****** XSProxyBottomNavigationBar ******
 class XSProxyBottomNavigationBar extends XSJsonObjProxy {
@@ -331,7 +310,7 @@ class XSProxyButtonSeries extends XSJsonObjProxy {
         highlightElevation: XSJSParse.getDouble(context, bo, map, "highlightElevation", defaultValue: 12.0),
         onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
         mini: XSJSParse.getBool(context, bo, map, "mini", defaultValue: false),
-        shape: XSJSParse.getObject(context, bo, map, "shape", defaultValue: const CircleBorder()),
+        shape: XSJSParse.getShapeBorder(context, bo, map, "shape", defaultValue: const CircleBorder()),
         clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
         materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
         isExtended: XSJSParse.getBool(context, bo, map, "isExtended", defaultValue: false),
@@ -485,7 +464,7 @@ class XSProxyCard extends XSJsonObjProxy {
       color: XSJSParse.getColor(context, bo, map, "color"),
       shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor"),
       elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
-      shape: XSJSParse.getObject(context, bo, map, "shape"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
       margin: XSJSParse.getEdgeInsets(context, bo, map, "margin", defaultValue: const EdgeInsets.all(4.0)),
       clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
       child: XSJSParse.getWidget(context, bo, map, "child"),
@@ -785,7 +764,7 @@ class XSProxyFloatingActionButton extends XSJsonObjProxy {
       highlightElevation: XSJSParse.getDouble(context, bo, map, "highlightElevation"),
       onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
       mini: XSJSParse.getBool(context, bo, map, "mini", defaultValue: false),
-      shape: XSJSParse.getObject(context, bo, map, "shape", defaultValue: const CircleBorder()),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape", defaultValue: const CircleBorder()),
       clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
       materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
       isExtended: XSJSParse.getBool(context, bo, map, "isExtended", defaultValue: false),
@@ -908,7 +887,7 @@ class XSProxyFlatButton extends XSJsonObjProxy {
         splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
         colorBrightness: XSJSParse.getBrightness(context, bo, map, "colorBrightness"),
         padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
-        shape: XSJSParse.getObject(context, bo, map, "shape"),
+        shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
         clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
         materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
         child: XSJSParse.getWidget(context, bo, map, "child"),
@@ -932,7 +911,7 @@ class XSProxyFlatButton extends XSJsonObjProxy {
         splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
         colorBrightness: XSJSParse.getBrightness(context, bo, map, "colorBrightness"),
         padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
-        shape: XSJSParse.getObject(context, bo, map, "shape"),
+        shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
         clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
         materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
         icon: XSJSParse.getWidget(context, bo, map, "icon"),
@@ -1262,7 +1241,7 @@ class XSProxyMaterial extends XSJsonObjProxy {
       shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor", defaultValue: const Color(0xFF000000)),
       textStyle: XSJSParse.getTextStyle(context, bo, map, "textStyle"),
       borderRadius: XSJSParse.getBorderRadius(context, bo, map, "borderRadius"),
-      shape: XSJSParse.getObject(context, bo, map, "shape"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
       borderOnForeground: XSJSParse.getBool(context, bo, map, "borderOnForeground", defaultValue: true),
       clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
       animationDuration: XSJSParse.getDuration(context, bo, map, "animationDuration", defaultValue: kThemeChangeDuration),
@@ -1325,7 +1304,7 @@ class XSProxyMaterialButton extends XSJsonObjProxy {
       highlightElevation: XSJSParse.getDouble(context, bo, map, "highlightElevation"),
       disabledElevation: XSJSParse.getDouble(context, bo, map, "disabledElevation"),
       padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
-      shape: XSJSParse.getObject(context, bo, map, "shape"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
       clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
       materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
       animationDuration: XSJSParse.getDuration(context, bo, map, "animationDuration"),
@@ -1433,7 +1412,7 @@ class XSProxyOutlineButton extends XSJsonObjProxy {
         highlightColor: XSJSParse.getColor(context, bo, map, "highlightColor"),
         splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
         padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
-        shape: XSJSParse.getObject(context, bo, map, "shape"),
+        shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
         clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
         child: XSJSParse.getWidget(context, bo, map, "child"),
         focusColor: XSJSParse.getColor(context, bo, map, "focusColor"),
@@ -1457,7 +1436,7 @@ class XSProxyOutlineButton extends XSJsonObjProxy {
         splashColor: XSJSParse.getColor(context, bo, map, "splashColor"),
         highlightElevation: XSJSParse.getDouble(context, bo, map, "highlightElevation"),
         padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
-        shape: XSJSParse.getObject(context, bo, map, "shape"),
+        shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
         clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
         icon: XSJSParse.getWidget(context, bo, map, "icon"),
         label: XSJSParse.getWidget(context, bo, map, "label"),
@@ -1527,7 +1506,7 @@ class XSProxyRaisedButton extends XSJsonObjProxy {
         highlightElevation: XSJSParse.getDouble(context, bo, map, "highlightElevation"),
         disabledElevation: XSJSParse.getDouble(context, bo, map, "disabledElevation"),
         padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
-        shape: XSJSParse.getObject(context, bo, map, "shape"),
+        shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
         clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
         materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
         animationDuration: XSJSParse.getDuration(context, bo, map, "animationDuration"),
@@ -1556,7 +1535,7 @@ class XSProxyRaisedButton extends XSJsonObjProxy {
         elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
         highlightElevation: XSJSParse.getDouble(context, bo, map, "highlightElevation"),
         disabledElevation: XSJSParse.getDouble(context, bo, map, "disabledElevation"),
-        shape: XSJSParse.getObject(context, bo, map, "shape"),
+        shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
         clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
         materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
         animationDuration: XSJSParse.getDuration(context, bo, map, "animationDuration"),
@@ -1598,7 +1577,7 @@ class XSProxyRawMaterialButton extends XSJsonObjProxy {
       disabledElevation: XSJSParse.getDouble(context, bo, map, "disabledElevation", defaultValue: 0.0),
       padding: XSJSParse.getEdgeInsets(context, bo, map, "padding", defaultValue: EdgeInsets.zero),
       constraints: XSJSParse.getBoxConstraints(context, bo, map, "constraints", defaultValue: const BoxConstraints(minWidth: 88.0, minHeight: 36.0)),
-      shape: XSJSParse.getObject(context, bo, map, "shape", defaultValue: const RoundedRectangleBorder()),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape", defaultValue: const RoundedRectangleBorder()),
       animationDuration: XSJSParse.getDuration(context, bo, map, "animationDuration", defaultValue: kThemeChangeDuration),
       clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
       autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
@@ -1927,7 +1906,7 @@ class XSProxySnackBar extends XSJsonObjProxy {
       content: XSJSParse.getWidget(context, bo, map, "content"),
       backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
       elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
-      shape: XSJSParse.getObject(context, bo, map, "shape"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
       behavior: XSJSParse.getObject(context, bo, map, "behavior"),
       action: XSJSParse.getObject(context, bo, map, "action"),
       duration: XSJSParse.getDuration(context, bo, map, "duration", defaultValue: _snackBarDisplayDuration),

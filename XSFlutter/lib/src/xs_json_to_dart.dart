@@ -22,6 +22,8 @@ import 'xs_json_proxy_animation.dart';
 
 import 'xs_json_proxy_widget.dart';
 import 'xs_js_mirror_obj_mgr.dart';
+import 'xs_json_proxy_pull_to_refresh.dart';
+import 'xs_json_proxy_easyrefresh.dart';
 
 typedef dynamic CreateJsonObjProxyFun();
 
@@ -219,6 +221,8 @@ class XSJsonObjToDartObject {
 
     //注册第三方
     registerProxy(XSProxyRegisterHelperPackageSeries.registerProxys());
+    registerProxy(XSProxyRegisterHelperEasyRefreshSeries.registerProxys());
+    registerProxy(XSProxyRegisterHelperPullToRefreshSeries.registerProxys());
 
     //注册第三方
     registerProxy(XSProxyRegisterHelperDioSeries.registerProxys());

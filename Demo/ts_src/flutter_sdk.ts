@@ -22,6 +22,11 @@ export type VoidCallbackBoolean = (value:boolean) => void;
 //****** VoidCallbackNumber ******
 export type VoidCallbackNumber = (value:number) => void;
 
+/**
+ * (context:BuildContext, index:number) => Widget
+ */
+export type IndexedWidgetBuilder = (context:BuildContext, index:number) => Widget;
+
 //****** VoidTapDownDetails ******
 export type VoidTapDown = (value:TapDownDetails) => void;
 
@@ -48,6 +53,7 @@ export type VoidScaleUpdate = (value:ScaleUpdateDetails) => void;
 
 //****** VoidScaleEnd ******
 export type VoidScaleEnd = (value:ScaleEndDetails) => void;
+
 
 //****** TODO JSWidget Mirror Mgr ******
 export class JSWidgetMirrorMgr {
@@ -1833,6 +1839,13 @@ export class Convert extends core.Object{
     expand = "expand",
     passthrough = "passthrough",
   }
+  
+  //****** ScrollViewKeyboardDismissBehavior ******
+  export enum ScrollViewKeyboardDismissBehavior {
+    manual = "manual",
+    onDrag = "onDrag",
+  }
+
   
   //****** StrokeCap ******
   export enum StrokeCap {
@@ -14626,9 +14639,8 @@ export class CupertinoIcons extends IconData{
     }
   }
   
-  //****** TODO ListView ******
-  interface ListViewConfig {
-    children?:Array<Widget>;
+  //****** ListView ******
+  interface ListViewBaseConfig {    
     padding?:EdgeInsets;
     controller?:ScrollController;
     scrollDirection?:Axis;
@@ -14637,18 +14649,46 @@ export class CupertinoIcons extends IconData{
     physics?:ScrollPhysics;
     shrinkWrap?:boolean;
     itemExtent?:number;
-    addAutomaticKeepAlives?:boolean;
-    addRepaintBoundaries?:boolean;
-    addSemanticIndexes?:boolean;
     cacheExtent?:number;
     semanticChildCount?:number;
     dragStartBehavior?:DragStartBehavior;
     key?:Key;
-  
-  
-    itemBuilder?:any;
-    itemCount?:number;
+    keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior;
+    restorationId?:string;
+    clipBehavior?:Clip;
   }
+
+  interface ListViewConfig extends ListViewBaseConfig {
+    addAutomaticKeepAlives?:boolean;
+    addRepaintBoundaries?:boolean;
+    addSemanticIndexes?:boolean;
+    itemCount?:number;
+    children?:Array<Widget>;
+  }
+
+  interface ListViewBuilderConfig extends ListViewBaseConfig {
+    addAutomaticKeepAlives?:boolean;
+    addRepaintBoundaries?:boolean;
+    addSemanticIndexes?:boolean;
+    itemCount:number;
+    itemBuilder:IndexedWidgetBuilder;
+  }
+
+  interface ListViewSeparatedConfig extends ListViewBaseConfig {
+    addAutomaticKeepAlives?:boolean;
+    addRepaintBoundaries?:boolean;
+    addSemanticIndexes?:boolean;
+    itemCount:number;
+    itemBuilder:IndexedWidgetBuilder;
+    separatorBuilder:IndexedWidgetBuilder;
+  }
+
+
+
+  interface ListViewCustomConfig extends ListViewBaseConfig {
+    childrenDelegate:SliverChildDelegate;
+  }
+
   export class ListView extends Widget {
     children?:Array<Widget>;
     padding?:EdgeInsets;
@@ -14666,22 +14706,44 @@ export class CupertinoIcons extends IconData{
     semanticChildCount?:number;
     dragStartBehavior?:DragStartBehavior;
     key?:Key;
+    keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior;
+    restorationId?:string;
+    clipBehavior?:Clip;
   
   
-    itemBuilder?:any;
+    itemBuilder?:IndexedWidgetBuilder;
+    itemBuilderChildren?:Array<Widget>;
     itemCount?:number;
+
+    separatorBuilder?:IndexedWidgetBuilder;
+    separatorBuilderChildren?:Array<Widget>;
+
+
+    childrenDelegate?:SliverChildDelegate;
   
     preBuild(jsWidgetHelper?:any, buildContext?:any) {
       if (this.itemBuilder) {
-        this.children = [];
+        this.itemBuilderChildren = [];
         if(this.itemCount!=null && this.itemCount!=undefined){
-        for (let i = 0; i < this.itemCount; ++i) {
-          let w = this.itemBuilder(buildContext, i);
-          this.children.push(w);
+          for (let i = 0; i < this.itemCount; ++i) {
+            let w = this.itemBuilder(buildContext, i);
+            this.itemBuilderChildren.push(w);
+          }
         }
-      }
         delete this.itemBuilder;
       }
+
+      if (this.separatorBuilder) {
+        this.separatorBuilderChildren = [];
+        if(this.itemCount!=null && this.itemCount!=undefined){
+          for (let i = 0; i < this.itemCount; ++i) {
+            let w = this.separatorBuilder(buildContext, i);
+            this.separatorBuilderChildren.push(w);
+          }
+        }
+        delete this.separatorBuilder;
+      }
+
       super.preBuild(jsWidgetHelper, buildContext);
     }
   
@@ -14703,7 +14765,10 @@ export class CupertinoIcons extends IconData{
           cacheExtent?:number,
           semanticChildCount?:number,
           dragStartBehavior?:DragStartBehavior, 
-          key?:Key
+          key?:Key,
+          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior, 
+          restorationId?:string, 
+          clipBehavior?:Clip, 
         }
      */
     constructor(config?: ListViewConfig){
@@ -14725,6 +14790,9 @@ export class CupertinoIcons extends IconData{
         this.children = config.children;
         this.semanticChildCount = config.semanticChildCount;
         this.dragStartBehavior = config.dragStartBehavior;
+        this.keyboardDismissBehavior = config.keyboardDismissBehavior;
+        this.restorationId = config.restorationId;
+        this.clipBehavior = config.clipBehavior;
       }
     }
   
@@ -14746,7 +14814,10 @@ export class CupertinoIcons extends IconData{
           cacheExtent?:number,
           semanticChildCount?:number,
           dragStartBehavior?:DragStartBehavior, 
-          key?:Key
+          key?:Key,
+          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior, 
+          restorationId?:string, 
+          clipBehavior?:Clip, 
         }
      */
     static new(config: ListViewConfig) {
@@ -14755,7 +14826,7 @@ export class CupertinoIcons extends IconData{
   
     /**
      * @param config config: 
-        { itemBuilder?:any,
+        { itemBuilder?:IndexedWidgetBuilder,
           itemCount?:number, 
           padding?:EdgeInsets, 
           controller?:ScrollController, 
@@ -14771,10 +14842,13 @@ export class CupertinoIcons extends IconData{
           cacheExtent?:number,
           semanticChildCount?:number,
           dragStartBehavior?:DragStartBehavior, 
-          key?:Key
+          key?:Key,
+          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior, 
+          restorationId?:string, 
+          clipBehavior?:Clip, 
         }
      */
-    static builder(config: ListViewConfig) {
+    static builder(config: ListViewBuilderConfig) {
         let v = new ListView();
         v.constructorName = "builder";
         if(config!=null && config!=undefined){
@@ -14795,8 +14869,110 @@ export class CupertinoIcons extends IconData{
           v.cacheExtent = config.cacheExtent;
           v.semanticChildCount = config.semanticChildCount;
           v.dragStartBehavior = config.dragStartBehavior;
+          v.keyboardDismissBehavior = config.keyboardDismissBehavior;
+          v.restorationId = config.restorationId;
+          v.clipBehavior = config.clipBehavior;
         }
         return v;
+    }
+
+    /**
+     * @param config config: 
+        { itemBuilder?:IndexedWidgetBuilder, 
+          separatorBuilder?:IndexedWidgetBuilder, 
+          itemCount?:number, 
+          padding?:EdgeInsets, 
+          controller?:ScrollController, 
+          scrollDirection?:Axis, 
+          reverse?:boolean,
+          primary?:boolean, 
+          physics?:ScrollPhysics, 
+          shrinkWrap?:boolean, 
+          itemExtent?:number,
+          addAutomaticKeepAlives?:boolean, 
+          addRepaintBoundaries?:boolean, 
+          addSemanticIndexes?:boolean, 
+          cacheExtent?:number,
+          semanticChildCount?:number,
+          dragStartBehavior?:DragStartBehavior, 
+          key?:Key,
+          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior, 
+          restorationId?:string, 
+          clipBehavior?:Clip, 
+        }
+     */
+    static separatorBuilder(config: ListViewSeparatedConfig) {
+      let v = new ListView();
+      v.constructorName = "separatorBuilder";
+      if(config!=null && config!=undefined){
+        v.key = config.key;
+        v.scrollDirection = config.scrollDirection;
+        v.reverse = config.reverse;
+        v.controller = config.controller;
+        v.primary = config.primary;
+        v.physics = config.physics;
+        v.shrinkWrap = config.shrinkWrap;
+        v.padding = config.padding;
+        v.itemExtent = config.itemExtent;
+        v.itemBuilder = config.itemBuilder;
+        v.separatorBuilder = config.separatorBuilder;
+        v.itemCount = config.itemCount;
+        v.addAutomaticKeepAlives = config.addAutomaticKeepAlives;
+        v.addRepaintBoundaries = config.addRepaintBoundaries;
+        v.addSemanticIndexes = config.addSemanticIndexes;
+        v.cacheExtent = config.cacheExtent;
+        v.semanticChildCount = config.semanticChildCount;
+        v.dragStartBehavior = config.dragStartBehavior;
+        v.keyboardDismissBehavior = config.keyboardDismissBehavior;
+        v.restorationId = config.restorationId;
+        v.clipBehavior = config.clipBehavior;
+      }
+      return v;
+    }
+
+    /**
+     * @param config config: 
+        { 
+          childrenDelegate:SliverChildDelegate;
+          padding?:EdgeInsets, 
+          controller?:ScrollController, 
+          scrollDirection?:Axis, 
+          reverse?:boolean,
+          primary?:boolean, 
+          physics?:ScrollPhysics, 
+          shrinkWrap?:boolean, 
+          itemExtent?:number,
+          cacheExtent?:number,
+          semanticChildCount?:number,
+          dragStartBehavior?:DragStartBehavior, 
+          key?:Key,
+          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior, 
+          restorationId?:string, 
+          clipBehavior?:Clip, 
+        }
+     */
+    static custom(config: ListViewCustomConfig) {
+      let v = new ListView();
+      v.constructorName = "custom";
+      if(config!=null && config!=undefined){
+        v.key = config.key;
+        v.scrollDirection = config.scrollDirection;
+        v.reverse = config.reverse;
+        v.controller = config.controller;
+        v.primary = config.primary;
+        v.physics = config.physics;
+        v.shrinkWrap = config.shrinkWrap;
+        v.padding = config.padding;
+        v.itemExtent = config.itemExtent;
+        v.childrenDelegate = config.childrenDelegate;
+        v.cacheExtent = config.cacheExtent;
+        v.semanticChildCount = config.semanticChildCount;
+        v.dragStartBehavior = config.dragStartBehavior;
+        v.keyboardDismissBehavior = config.keyboardDismissBehavior;
+        v.restorationId = config.restorationId;
+        v.clipBehavior = config.clipBehavior;
+      }
+      return v;
     }
   }
   
@@ -17731,7 +17907,7 @@ export class CupertinoIcons extends IconData{
     stretch?:boolean;
     stretchTriggerOffset?:number;
     onStretchTrigger?:VoidCallback;
-    shape?:any;
+    shape?:ShapeBorder;
     toolbarHeight?:number;
   }
   export class SliverAppBar extends Widget {
@@ -17759,7 +17935,7 @@ export class CupertinoIcons extends IconData{
     stretch?:boolean;
     stretchTriggerOffset?:number;
     onStretchTrigger?:VoidCallback;
-    shape?:any;
+    shape?:ShapeBorder;
     toolbarHeight?:number;
   
     /**
@@ -17861,6 +18037,98 @@ export class CupertinoIcons extends IconData{
     }
   }
   
+  //****** SliverFillViewport ******
+  interface SliverFillViewportConfig {
+    key?:Key;
+    delegate:SliverChildDelegate;
+    viewportFraction?:number;
+    padEnds?:boolean;
+  }
+  export class SliverFillViewport extends Widget {
+    key?:Key;
+    delegate?:SliverChildDelegate;
+    viewportFraction?:number;
+    padEnds?:boolean;
+  
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        delegate:SliverChildDelegate, 
+        viewportFraction?:number, 
+        padEnds?:boolean,
+      }
+     */
+    constructor(config: SliverFillViewportConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.delegate = config.delegate;
+        this.viewportFraction = config.viewportFraction;
+        this.padEnds = config.padEnds;
+      }
+    }
+  
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        delegate:SliverChildDelegate, 
+        viewportFraction?:number, 
+        padEnds?:boolean,
+      }
+     */
+    static new(config: SliverFillViewportConfig) {
+      return new SliverFillViewport(config);
+    }
+  }
+
+  //****** SliverFillRemaining ******
+  interface SliverFillRemainingConfig {
+    key?:Key;
+    child?:Widget;
+    hasScrollBody?:boolean;
+    fillOverscroll?:boolean;
+  }
+  export class SliverFillRemaining extends Widget {
+    key?:Key;
+    child?:Widget;
+    hasScrollBody?:boolean;
+    fillOverscroll?:boolean;
+  
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        child?:Widget, 
+        hasScrollBody?:boolean, 
+        fillOverscroll?:boolean, 
+      }
+     */
+    constructor(config: SliverFillRemainingConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.child = config.child;
+        this.hasScrollBody = config.hasScrollBody;
+        this.fillOverscroll = config.fillOverscroll;
+      }
+    }
+  
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        child?:Widget, 
+        hasScrollBody?:boolean, 
+        fillOverscroll?:boolean, 
+      }
+     */
+    static new(config: SliverFillRemainingConfig) {
+      return new SliverFillRemaining(config);
+    }
+  }
+
   //****** SliverPadding ******
   interface SliverPaddingConfig {
     key?:Key;
@@ -17902,22 +18170,22 @@ export class CupertinoIcons extends IconData{
     }
   }
   
-  //****** TODO SliverGrid ******
+  //****** SliverGrid ******
   interface SliverGridConfig {
-    delegate?:any;
-    gridDelegate?:any;
+    delegate?:SliverChildDelegate;
+    gridDelegate?:SliverGridDelegate;
     key?:Key;
   }
   export class SliverGrid extends Widget {
-    delegate?:any;
-    gridDelegate?:any;
+    delegate?:SliverChildDelegate;
+    gridDelegate?:SliverGridDelegate;
     key?:Key;
   
     /**
      * @param config config: 
       {
-        delegate?:any, 
-        gridDelegate?:any, 
+        delegate?:SliverChildDelegate, 
+        gridDelegate?:SliverGridDelegate, 
         key?:Key,
       }
      */
@@ -17933,8 +18201,8 @@ export class CupertinoIcons extends IconData{
     /**
      * @param config config: 
       {
-        delegate?:any, 
-        gridDelegate?:any, 
+        delegate?:SliverChildDelegate, 
+        gridDelegate?:SliverGridDelegate,
         key?:Key,
       }
      */
@@ -17943,9 +18211,41 @@ export class CupertinoIcons extends IconData{
     }
   }
   
-  //****** TODO SliverGridDelegateWithMaxCrossAxisExtent ******
+  //#region ****** SliverGridDelegate ******
+  export abstract class SliverGridDelegate extends Widget{
+
+    /**
+     * SliverGridDelegate.withMax=new SliverGridDelegateWithMaxCrossAxisExtent(config: SliverGridDelegateWithMaxCrossAxisExtentConfig);
+     * @param config config: 
+      {
+        maxCrossAxisExtent:number, 
+        mainAxisSpacing?:number, 
+        crossAxisSpacing?:number, 
+        childAspectRatio?:number, 
+      }
+     */
+    static withMax(config: SliverGridDelegateWithMaxCrossAxisExtentConfig){
+      return new SliverGridDelegateWithMaxCrossAxisExtent(config);
+    }
+
+    /**
+     * SliverGridDelegate.withFixed=new SliverGridDelegateWithFixedCrossAxisCount(config: SliverGridDelegateWithFixedCrossAxisCountConfig);
+     * @param config config: 
+      {
+        crossAxisCount:number, 
+        mainAxisSpacing?:number, 
+        crossAxisSpacing?:number, 
+        childAspectRatio?:number, 
+      }
+     */
+    static withFixed(config: SliverGridDelegateWithFixedCrossAxisCountConfig){
+      return new SliverGridDelegateWithFixedCrossAxisCount(config);
+    }
+  }
+
+  //******  SliverGridDelegateWithMaxCrossAxisExtent ******
   interface SliverGridDelegateWithMaxCrossAxisExtentConfig {
-    maxCrossAxisExtent?:number;
+    maxCrossAxisExtent:number;
     mainAxisSpacing?:number;
     crossAxisSpacing?:number;
     childAspectRatio?:number;
@@ -17959,7 +18259,7 @@ export class CupertinoIcons extends IconData{
     /**
      * @param config config: 
       {
-        maxCrossAxisExtent?:number, 
+        maxCrossAxisExtent:number, 
         mainAxisSpacing?:number, 
         crossAxisSpacing?:number, 
         childAspectRatio?:number, 
@@ -17978,7 +18278,7 @@ export class CupertinoIcons extends IconData{
     /**
      * @param config config: 
       {
-        maxCrossAxisExtent?:number, 
+        maxCrossAxisExtent:number, 
         mainAxisSpacing?:number, 
         crossAxisSpacing?:number, 
         childAspectRatio?:number, 
@@ -17988,16 +18288,101 @@ export class CupertinoIcons extends IconData{
       return new SliverGridDelegateWithMaxCrossAxisExtent(config);
     }
   }
+
+  //******  SliverGridDelegateWithFixedCrossAxisCount ******
+  interface SliverGridDelegateWithFixedCrossAxisCountConfig {
+    crossAxisCount:number;
+    mainAxisSpacing?:number;
+    crossAxisSpacing?:number;
+    childAspectRatio?:number;
+  }
+  export class SliverGridDelegateWithFixedCrossAxisCount extends Widget {
+    crossAxisCount?:number;
+    mainAxisSpacing?:number;
+    crossAxisSpacing?:number;
+    childAspectRatio?:number;
   
-  //****** TODO SliverChildListDelegate ******
+    /**
+     * @param config config: 
+      {
+        crossAxisCount:number, 
+        mainAxisSpacing?:number, 
+        crossAxisSpacing?:number, 
+        childAspectRatio?:number, 
+      }
+     */
+    constructor(config: SliverGridDelegateWithFixedCrossAxisCountConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.crossAxisCount = config.crossAxisCount;
+        this.mainAxisSpacing = config.mainAxisSpacing;
+        this.crossAxisSpacing = config.crossAxisSpacing;
+        this.childAspectRatio = config.childAspectRatio;
+      }
+    }
+  
+    /**
+     * @param config config: 
+      {
+        crossAxisCount:number, 
+        mainAxisSpacing?:number, 
+        crossAxisSpacing?:number, 
+        childAspectRatio?:number, 
+      }
+     */
+    static new(config: SliverGridDelegateWithFixedCrossAxisCountConfig) {
+      return new SliverGridDelegateWithFixedCrossAxisCount(config);
+    }
+  }
+
+
+  //#endregion
+
+  
+  //#region ****** SliverChildDelegate ******
+  export abstract class SliverChildDelegate extends Widget{
+
+     /**
+      * SliverChildDelegate.list = new SliverChildListDelegate(config: SliverChildListDelegateConfig);
+      * @param config config: 
+        {
+          children?:Array<Widget>, 
+          addAutomaticKeepAlives?:boolean, 
+          addRepaintBoundaries?:boolean, 
+          addSemanticIndexes?:boolean, 
+          semanticIndexOffset?:number, 
+        }
+     */
+    static list(config: SliverChildListDelegateConfig){
+      return new SliverChildListDelegate(config);
+    }
+
+    /**
+     * SliverChildDelegate.builder = new SliverChildBuilderDelegate(config: SliverChildBuilderDelegateConfig);
+     * @param config config: 
+      {
+        builder:any, 
+        childCount?:number, 
+        addAutomaticKeepAlives?:boolean, 
+        addRepaintBoundaries?:boolean, 
+        addSemanticIndexes?:boolean, 
+        semanticIndexOffset?:number, 
+      }
+     */
+    static builder(config: SliverChildBuilderDelegateConfig){
+      return new SliverChildBuilderDelegate(config);
+    }
+  }
+
+  //******  SliverChildListDelegate ******
   interface SliverChildListDelegateConfig {
-    children?:Array<Widget>;
+    children:Array<Widget>;
     addAutomaticKeepAlives?:boolean;
     addRepaintBoundaries?:boolean;
     addSemanticIndexes?:boolean;
     semanticIndexOffset?:number;
   }
-  export class SliverChildListDelegate extends DartClass {
+  export class SliverChildListDelegate extends SliverChildDelegate {
     children?:Array<Widget>;
     addAutomaticKeepAlives?:boolean;
     addRepaintBoundaries?:boolean;
@@ -18007,14 +18392,14 @@ export class CupertinoIcons extends IconData{
     /**
      * @param config config: 
       {
-        children?:Array<Widget>, 
+        children:Array<Widget>, 
         addAutomaticKeepAlives?:boolean, 
         addRepaintBoundaries?:boolean, 
         addSemanticIndexes?:boolean, 
         semanticIndexOffset?:number, 
       }
      */
-    constructor(config: SliverChildListDelegateConfig){
+    constructor(config:SliverChildListDelegateConfig){
       super();
       if(config!=null && config!=undefined){
         this.children = config.children;
@@ -18028,7 +18413,7 @@ export class CupertinoIcons extends IconData{
     /**
      * @param config config: 
       {
-        children?:Array<Widget>, 
+        children:Array<Widget>, 
         addAutomaticKeepAlives?:boolean, 
         addRepaintBoundaries?:boolean, 
         addSemanticIndexes?:boolean, 
@@ -18039,19 +18424,18 @@ export class CupertinoIcons extends IconData{
       return new SliverChildListDelegate(config);
     }
   }
-  
-  //****** TODO SliverChildBuilderDelegate ******
+
+  //****** SliverChildBuilderDelegate ******
   interface SliverChildBuilderDelegateConfig {
-    builder:any;
-    childCount?:number;
+    builder:IndexedWidgetBuilder;
+    childCount:number;
     addAutomaticKeepAlives?:boolean;
     addRepaintBoundaries?:boolean;
     addSemanticIndexes?:boolean;
     semanticIndexOffset?:number;
-    children?:Array<Widget>;
   }
-  export class SliverChildBuilderDelegate extends Widget {
-    builder:any;
+  export class SliverChildBuilderDelegate extends SliverChildDelegate {
+    builder?:IndexedWidgetBuilder;
     childCount?:number;
     addAutomaticKeepAlives?:boolean;
     addRepaintBoundaries?:boolean;
@@ -18062,13 +18446,14 @@ export class CupertinoIcons extends IconData{
     preBuild(jsWidgetHelper?:any, buildContext?:any) {
       if (this.builder) {
         if(this.childCount!=null && this.childCount!=undefined){
-        for (let i = 0; i < this.childCount; ++i) {
-          let w = this.builder(buildContext, i);
-          if(this.children!=null && this.children!=undefined){
-            this.children.push(w);
+          this.children = [];
+          for (let i = 0; i < this.childCount; ++i) {
+            let w = this.builder(buildContext, i);
+            if(this.children!=null && this.children!=undefined){
+              this.children.push(w);
+            }
           }
         }
-      }
         delete this.builder;
       }
   
@@ -18078,8 +18463,8 @@ export class CupertinoIcons extends IconData{
     /**
      * @param config config: 
       {
-        builder:any, 
-        childCount?:number, 
+        builder:IndexedWidgetBuilder, 
+        childCount:number, 
         addAutomaticKeepAlives?:boolean, 
         addRepaintBoundaries?:boolean, 
         addSemanticIndexes?:boolean, 
@@ -18104,8 +18489,8 @@ export class CupertinoIcons extends IconData{
     /**
      * @param config config: 
       {
-        builder:any, 
-        childCount?:number, 
+        builder:IndexedWidgetBuilder, 
+        childCount:number, 
         addAutomaticKeepAlives?:boolean, 
         addRepaintBoundaries?:boolean, 
         addSemanticIndexes?:boolean, 
@@ -18117,20 +18502,24 @@ export class CupertinoIcons extends IconData{
       return new SliverChildBuilderDelegate(config);
     }
   }
+
+
+  //#endregion
+
   
-  //****** TODO SliverList ******
+  //****** SliverList ******
   interface SliverListConfig {
-    delegate?:any;
+    delegate?:SliverChildDelegate;
     key?:Key;
   }
   export class SliverList extends Widget {
-    delegate?:any;
+    delegate?:SliverChildDelegate;
     key?:Key;
   
     /**
      * @param config config: 
       {
-        delegate?:any,
+        delegate?:SliverChildDelegate,
         key?:Key
       }
      */
@@ -18145,7 +18534,7 @@ export class CupertinoIcons extends IconData{
     /**
      * @param config config: 
       {
-        delegate?:any,
+        delegate?:SliverChildDelegate,
         key?:Key
       }
      */
@@ -18154,6 +18543,52 @@ export class CupertinoIcons extends IconData{
     }
   }
   
+  //****** SliverOpacity ******
+  interface SliverOpacityConfig {
+    key?:Key;
+    sliver?:Widget;
+    opacity:number;
+    alwaysIncludeSemantics?:boolean;
+  }
+  export class SliverOpacity extends Widget {
+    key?:Key;
+    sliver?:Widget;
+    opacity?:number;
+    alwaysIncludeSemantics?:boolean;
+  
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        sliver?:Widget, 
+        opacity:number, 
+        alwaysIncludeSemantics?:boolean, 
+      }
+     */
+    constructor(config: SliverOpacityConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.sliver = config.sliver;
+        this.opacity = config.opacity;
+        this.alwaysIncludeSemantics = config.alwaysIncludeSemantics;
+      }
+    }
+  
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        sliver?:Widget, 
+        opacity:number, 
+        alwaysIncludeSemantics?:boolean, 
+      }
+     */
+    static new(config: SliverOpacityConfig) {
+      return new SliverOpacity(config);
+    }
+  }
+
   //****** TODO SliverOverlapInjector ******
   interface SliverOverlapInjectorConfig {
     key?:Key;
@@ -18195,14 +18630,14 @@ export class CupertinoIcons extends IconData{
     }
   }
   
-  //****** TODO SliverFixedExtentList ******
+  //****** SliverFixedExtentList ******
   interface SliverFixedExtentListConfig {
     key?:Key;
-    delegate?:any;
+    delegate?:SliverChildDelegate;
     itemExtent?:number;
   }
   export class SliverFixedExtentList extends Widget {
-    delegate?:any;
+    delegate?:SliverChildDelegate;
     itemExtent?:number;
     key?:Key;
   
@@ -18210,7 +18645,7 @@ export class CupertinoIcons extends IconData{
      * @param config config: 
       {
         key?:Key, 
-        delegate?:any, 
+        delegate?:SliverChildDelegate, 
         itemExtent?:number, 
       }
      */
@@ -18228,7 +18663,7 @@ export class CupertinoIcons extends IconData{
      * @param config config: 
       {
         key?:Key, 
-        delegate?:any, 
+        delegate?:SliverChildDelegate, 
         itemExtent?:number, 
       }
      */

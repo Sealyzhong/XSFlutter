@@ -27,15 +27,6 @@ import 'dart:convert';
     4. Delegate
       CustomMultiChildLayout.delegate
 
-    // 5. controller
-    //   ListView.controller
-
-    // 6. ScrollPhysics
-    //   ListView.physics
-
-    7. SliverChildDelegate
-      ListView.childrenDelegate
-
     8.semanticIndexCallback: mxj2d(bo, map["semanticIndexCallback"]),
 */
 /******************TODO List****************************/
@@ -102,12 +93,16 @@ class XSProxyRegisterHelperLayoutSeries {
     m.addAll(XSProxySizedOverflowBox.registerProxy());
     m.addAll(XSProxyScrollController.registerProxy());
     m.addAll(XSProxySliverAppBar.registerProxy());
+    m.addAll(XSProxySliverFillViewport.registerProxy());
+    m.addAll(XSProxySliverFillRemaining.registerProxy());
     m.addAll(XSProxySliverPadding.registerProxy());
     m.addAll(XSProxySliverGrid.registerProxy());
+    m.addAll(XSProxySliverGridDelegateWithFixedCrossAxisCount.registerProxy());
     m.addAll(XSProxySliverGridDelegateWithMaxCrossAxisExtent.registerProxy());
     m.addAll(XSProxySliverChildBuilderDelegate.registerProxy());
     m.addAll(XSProxySliverChildListDelegate.registerProxy());
     m.addAll(XSProxySliverList.registerProxy());
+    m.addAll(XSProxySliverOpacity.registerProxy());
     m.addAll(XSProxySliverOverlapInjector.registerProxy());
     m.addAll(XSProxySliverFixedExtentList.registerProxy());
     m.addAll(XSProxySliverOverlapAbsorber.registerProxy());
@@ -751,7 +746,7 @@ class XSProxyListView extends XSJsonObjProxy {
     super.init(className: className);
 
     registerConstructor(className: regClassName, constructorName: "builder", constructor: constructorBuilder);
-    registerConstructor(className: regClassName, constructorName: "separated", constructor: constructorSeparated);
+    registerConstructor(className: regClassName, constructorName: "separatorBuilder", constructor: constructorSeparated);
     registerConstructor(className: regClassName, constructorName: "custom", constructor: constructorCustom);
   }
 
@@ -774,6 +769,9 @@ class XSProxyListView extends XSJsonObjProxy {
       cacheExtent: XSJSParse.getDouble(context, bo, map, "cacheExtent"),
       children: XSJSParse.getWidgetList(context, bo, map, "children"),
       semanticChildCount: XSJSParse.getInt(context, bo, map, "semanticChildCount"),
+      keyboardDismissBehavior: XSJSParse.getScrollViewKeyboardDismissBehavior(context, bo, map, "keyboardDismissBehavior", defaultValue: ScrollViewKeyboardDismissBehavior.manual),
+      restorationId: XSJSParse.getString(context, bo, map, "restorationId"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
     );
   }
 
@@ -796,8 +794,12 @@ class XSProxyListView extends XSJsonObjProxy {
       semanticChildCount: XSJSParse.getInt(context, bo, map, "semanticChildCount"),
       itemCount: XSJSParse.getInt(context, bo, map, "itemCount"),
       itemBuilder: (BuildContext context, int index) {
-        return XSJSParse.getWidgetList(context, bo, map, "children")[index];
+        return XSJSParse.getWidgetListIndex(context, bo, map, "itemBuilderChildren", index: index);
+        //return XSJSParse.getWidgetList(context, bo, map, "children")[index];
       },
+      keyboardDismissBehavior: XSJSParse.getScrollViewKeyboardDismissBehavior(context, bo, map, "keyboardDismissBehavior", defaultValue: ScrollViewKeyboardDismissBehavior.manual),
+      restorationId: XSJSParse.getString(context, bo, map, "restorationId"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
     );
   }
 
@@ -818,11 +820,14 @@ class XSProxyListView extends XSJsonObjProxy {
       cacheExtent: XSJSParse.getDouble(context, bo, map, "cacheExtent"),
       itemCount: XSJSParse.getInt(context, bo, map, "itemCount"),
       itemBuilder: (BuildContext context, int index) {
-        return XSJSParse.getWidgetList(context, bo, map, "children")[index];
+        return XSJSParse.getWidgetListIndex(context, bo, map, "itemBuilderChildren", index: index);
       },
       separatorBuilder: (BuildContext context, int index) {
-        return XSJSParse.getWidgetList(context, bo, map, "children")[index];
+        return XSJSParse.getWidgetListIndex(context, bo, map, "separatorBuilderChildren", index: index);
       },
+      keyboardDismissBehavior: XSJSParse.getScrollViewKeyboardDismissBehavior(context, bo, map, "keyboardDismissBehavior", defaultValue: ScrollViewKeyboardDismissBehavior.manual),
+      restorationId: XSJSParse.getString(context, bo, map, "restorationId"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
     );
   }
 
@@ -838,9 +843,13 @@ class XSProxyListView extends XSJsonObjProxy {
       shrinkWrap: XSJSParse.getBool(context, bo, map, "shrinkWrap", defaultValue: false),
       padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
       itemExtent: XSJSParse.getDouble(context, bo, map, "itemExtent"),
-      semanticChildCount: XSJSParse.getInt(context, bo, map, "semanticChildCount"),
-      cacheExtent: XSJSParse.getDouble(context, bo, map, "cacheExtent"),
       childrenDelegate: XSJSParse.getObject(context, bo, map, "childrenDelegate"),
+      cacheExtent: XSJSParse.getDouble(context, bo, map, "cacheExtent"),
+      semanticChildCount: XSJSParse.getInt(context, bo, map, "semanticChildCount"),
+      dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.start),
+      keyboardDismissBehavior: XSJSParse.getScrollViewKeyboardDismissBehavior(context, bo, map, "keyboardDismissBehavior", defaultValue: ScrollViewKeyboardDismissBehavior.manual),
+      restorationId: XSJSParse.getString(context, bo, map, "restorationId"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
     );
   }
 }
@@ -1274,9 +1283,49 @@ class XSProxySliverAppBar extends XSJsonObjProxy {
       pinned: XSJSParse.getBool(context, bo, map, "pinned", defaultValue: false),
       snap: XSJSParse.getBool(context, bo, map, "snap", defaultValue: false),
       stretch: XSJSParse.getBool(context, bo, map, "stretch", defaultValue: false),
-      shape: XSJSParse.getObject(context, bo, map, "shape"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
       toolbarHeight: XSJSParse.getDouble(context, bo, map, "toolbarHeight"),
       onStretchTrigger: XSJSParse.getVoidCallback(context, bo, map, "onStretchTrigger"),
+    );
+  }
+}
+
+//****** SliverFillViewport ******
+class XSProxySliverFillViewport extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "SliverFillViewport";
+    return {
+      regClassName: () => XSProxySliverPadding()..init(className: regClassName)
+    };
+  }
+
+  @override
+  SliverFillViewport constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return SliverFillViewport(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      delegate: XSJSParse.getObject(context, bo, map, "delegate"),
+      viewportFraction: XSJSParse.getDouble(context, bo, map, "viewportFraction", defaultValue: 1.0),
+      padEnds: XSJSParse.getBool(context, bo, map, "padEnds", defaultValue: true),
+    );
+  }
+}
+
+//****** SliverFillRemaining ******
+class XSProxySliverFillRemaining extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "SliverFillRemaining";
+    return {
+      regClassName: () => XSProxySliverPadding()..init(className: regClassName)
+    };
+  }
+
+  @override
+  SliverFillRemaining constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return SliverFillRemaining(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+      hasScrollBody: XSJSParse.getBool(context, bo, map, "hasScrollBody", defaultValue: true),
+      fillOverscroll: XSJSParse.getBool(context, bo, map, "fillOverscroll", defaultValue: false),
     );
   }
 }
@@ -1319,6 +1368,26 @@ class XSProxySliverGrid extends XSJsonObjProxy {
   }
 }
 
+//****** SliverGridDelegateWithFixedCrossAxisCount ******
+class XSProxySliverGridDelegateWithFixedCrossAxisCount extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "SliverGridDelegateWithFixedCrossAxisCount";
+    return {
+      regClassName: () => XSProxySliverGridDelegateWithFixedCrossAxisCount()..init(className: regClassName)
+    };
+  }
+
+  @override
+  SliverGridDelegateWithFixedCrossAxisCount constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: XSJSParse.getInt(context, bo, map, "crossAxisCount"),
+      mainAxisSpacing: XSJSParse.getDouble(context, bo, map, "mainAxisSpacing", defaultValue: 0.0),
+      crossAxisSpacing: XSJSParse.getDouble(context, bo, map, "crossAxisSpacing", defaultValue: 0.0),
+      childAspectRatio: XSJSParse.getDouble(context, bo, map, "childAspectRatio", defaultValue: 1.0),
+    );
+  }
+}
+
 //****** SliverGridDelegateWithMaxCrossAxisExtent ******
 class XSProxySliverGridDelegateWithMaxCrossAxisExtent extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -1348,7 +1417,6 @@ class XSProxySliverChildListDelegate extends XSJsonObjProxy {
     };
   }
 
-  //TODO:暂时不支持 semanticIndexCallback
   @override
   SliverChildListDelegate constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return SliverChildListDelegate(
@@ -1370,12 +1438,11 @@ class XSProxySliverChildBuilderDelegate extends XSJsonObjProxy {
     };
   }
 
-  //TODO:暂时不支持 semanticIndexCallback
   @override
   SliverChildBuilderDelegate constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
     return SliverChildBuilderDelegate(
       (BuildContext context, int index) {
-        return XSJSParse.getWidgetList(context, bo, map, "children")[index];
+        return XSJSParse.getWidgetListIndex(context, bo, map, "children", index: index);
       },
       childCount: XSJSParse.getInt(context, bo, map, "childCount"),
       addAutomaticKeepAlives: XSJSParse.getBool(context, bo, map, "addAutomaticKeepAlives", defaultValue: true),
@@ -1403,6 +1470,31 @@ class XSProxySliverList extends XSJsonObjProxy {
     );
   }
 }
+
+//****** SliverOpacity ******
+class XSProxySliverOpacity extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "SliverOpacity";
+    return {
+      regClassName: () => XSProxySliverOpacity()..init(className: regClassName)
+    };
+  }
+
+  @override
+  SliverOpacity constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return SliverOpacity(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      sliver: XSJSParse.getWidget(context, bo, map, "sliver"),
+      opacity: XSJSParse.getDouble(context, bo, map, "opacity"),
+      alwaysIncludeSemantics: XSJSParse.getBool(context, bo, map, "alwaysIncludeSemantics", defaultValue: false),
+    );
+  }
+}
+/*
+Key key,
+    @required this.opacity,
+    this.alwaysIncludeSemantics = false,
+    Widget sliver,*/
 
 //****** SliverOverlapInjector ******
 class XSProxySliverOverlapInjector extends XSJsonObjProxy {

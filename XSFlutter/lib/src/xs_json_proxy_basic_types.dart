@@ -179,7 +179,7 @@ class XSProxyChip extends XSJsonObjProxy {
       onDeleted: XSJSParse.getVoidCallback(context, bo, map, "onDeleted"),
       deleteIconColor: XSJSParse.getColor(context, bo, map, "deleteIconColor"),
       deleteButtonTooltipMessage: XSJSParse.getString(context, bo, map, "deleteButtonTooltipMessage"),
-      shape: XSJSParse.getObject(context, bo, map, "shape"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
       clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
       backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
       padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),

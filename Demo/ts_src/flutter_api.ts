@@ -5,13 +5,20 @@ import * as fs from "flutter_sdk";
 
 //****** ShowDialog ******
 
-interface showAboutDialogConfig {
+interface ShowAboutDialogConfig {
   applicationName?:string;
   applicationVersion?:string;
   applicationIcon?:fs.Widget;
   applicationLegalese?:string;
   children?:Array<fs.Widget>;
   useRootNavigator?:boolean;
+}
+
+interface ShowDialogConfig {
+  barrierDismissible?:boolean;
+  useSafeArea?:boolean;
+  useRootNavigator?:boolean;
+  child?:fs.Widget;
 }
 
 export class ShowDialog extends fs.DartClass {
@@ -45,11 +52,29 @@ export class ShowDialog extends fs.DartClass {
       useRootNavigator?:boolean,
     }
    */
-  static showAboutDialog(config:showAboutDialogConfig){
+  static showAboutDialog(config:ShowAboutDialogConfig){
     ShowDialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
           mirrorID: ShowDialog.getInstance().mirrorID,
           className: ShowDialog.getInstance().className,
           funcName: "showAboutDialog",
+          args: config,
+      }));
+  }
+
+  /**
+   * @param config config: 
+    {
+        barrierDismissible?:boolean, 
+        useSafeArea?:boolean, 
+        useRootNavigator?:boolean, 
+        child?:fs.Widget, 
+    }
+   */
+  static showDialog(config:ShowDialogConfig){
+    ShowDialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+          mirrorID: ShowDialog.getInstance().mirrorID,
+          className: ShowDialog.getInstance().className,
+          funcName: "showDialog",
           args: config,
       }));
   }

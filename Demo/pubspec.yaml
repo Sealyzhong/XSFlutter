@@ -31,6 +31,7 @@ flutter:
     - js_src/
     - js_src/demo/
     - js_src/demo/widgets/
+    - js_src/demo/listview/
     - js_src/demo/base_widgets/
     - js_src/demo/packages/
     - js_src/demo/examples/

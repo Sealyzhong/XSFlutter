@@ -55,6 +55,23 @@ class ShowDialog extends fs.DartClass {
             args: config,
         }));
     }
+    /**
+     * @param config config:
+      {
+          barrierDismissible?:boolean,
+          useSafeArea?:boolean,
+          useRootNavigator?:boolean,
+          child?:fs.Widget,
+      }
+     */
+    static showDialog(config) {
+        ShowDialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+            mirrorID: ShowDialog.getInstance().mirrorID,
+            className: ShowDialog.getInstance().className,
+            funcName: "showDialog",
+            args: config,
+        }));
+    }
 }
 exports.ShowDialog = ShowDialog;
 class Loading extends fs.DartClass {

@@ -97,6 +97,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_easyrefresh:
+    dependency: transitive
+    description:
+      name: flutter_easyrefresh
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.6"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -219,6 +226,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.13"
+  pull_to_refresh:
+    dependency: transitive
+    description:
+      name: pull_to_refresh
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.6.3"
   quiver:
     dependency: transitive
     description:

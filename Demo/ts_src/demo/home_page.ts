@@ -11,6 +11,7 @@ import { MyBaseWidgetsIndex } from "demo/base_widgets/index";
 import { MyPackageIndex } from "demo/packages/index";
 import { MyExamplesIndex } from "demo/examples/index";
 import { MyDialogIndex } from "demo/dialog/index";
+import { MyListViewIndex } from "demo/listview/index";
 
 
 export class MyHomePage extends fs.StatefulWidget{
@@ -98,9 +99,23 @@ class _MyHomePageState extends fs.WidgetState{
                         }                        
                     }),
 
-
                     fs.ListTile.new({
                         leading:fs.Text.new("5",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("ListView"),
+                        subtitle:fs.Text.new("builder、separated、custom"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyListViewIndex.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+
+                    fs.ListTile.new({
+                        leading:fs.Text.new("6",{style:this._style}),
                         trailing:fs.Icon.new(fs.Icons.chevron_right),
                         title:fs.Text.new("TS2Project"),
                         subtitle:fs.Text.new("在本工程中实现JS与Project通信息"),

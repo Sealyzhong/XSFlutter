@@ -13,6 +13,7 @@ const index_1 = require("demo/base_widgets/index");
 const index_2 = require("demo/packages/index");
 const index_3 = require("demo/examples/index");
 const index_4 = require("demo/dialog/index");
+const index_5 = require("demo/listview/index");
 class MyHomePage extends fs.StatefulWidget {
     createState() {
         return _MyHomePageState.new(this);
@@ -91,6 +92,19 @@ class _MyHomePageState extends fs.WidgetState {
                     }),
                     fs.ListTile.new({
                         leading: fs.Text.new("5", { style: this._style }),
+                        trailing: fs.Icon.new(fs.Icons.chevron_right),
+                        title: fs.Text.new("ListView"),
+                        subtitle: fs.Text.new("builder、separated、custom"),
+                        onTap: function () {
+                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                                builder: function (context) {
+                                    return index_5.MyListViewIndex.new();
+                                }
+                            }));
+                        }
+                    }),
+                    fs.ListTile.new({
+                        leading: fs.Text.new("6", { style: this._style }),
                         trailing: fs.Icon.new(fs.Icons.chevron_right),
                         title: fs.Text.new("TS2Project"),
                         subtitle: fs.Text.new("在本工程中实现JS与Project通信息"),

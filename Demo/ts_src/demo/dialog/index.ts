@@ -12,6 +12,10 @@ export class MyDialogIndex extends fs.StatelessWidget{
 
     _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
     
+    _saveValue(){
+        fs.Log.log("OK");
+     }
+
     build(context:fs.BuildContext){
         return fs.Scaffold.new({
             appBar:fs.AppBar.new({
@@ -28,6 +32,27 @@ export class MyDialogIndex extends fs.StatelessWidget{
                                 applicationName:api.PackageInfo.packageName,
                                 applicationVersion:api.PackageInfo.version,
                                 applicationLegalese:"兴盛优选版权所有."
+                            });
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("2、showDialog"),
+                        onTap:function(){
+                            api.ShowDialog.showDialog({
+                                barrierDismissible:false,
+                                child:fs.Material.new({
+                                    color:fs.Colors.transparent,
+                                    child:fs.Center.new({
+                                        child:fs.RaisedButton.new({
+                                            child:fs.Text.new("相信·帮助"),
+                                            onPressed: function(){
+                                                fs.Log.log("OK");
+                                            },
+                                        }),
+                                    }) ,
+                                })          
                             });
                         }                        
                     }),
