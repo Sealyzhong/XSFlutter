@@ -36,8 +36,10 @@ class _MyEasyRefreshBasicPageState extends fs.WidgetState {
                 enableControlFinishLoad: true,
                 enableControlFinishRefresh: true,
                 controller: this.refreshController,
-                header: tl.EasyRefreshClassicalHeader.zh_CN(),
-                footer: tl.EasyRefreshClassicalFooter.zh_CN(),
+                header: tl.EasyRefreshMaterialHeader.new(),
+                footer: tl.EasyRefreshMaterialFooter.new(),
+                topBouncing: false,
+                bottomBouncing: false,
                 onRefresh: function () {
                     tl.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
                     fs.Future.delayed(fs.Duration.new({

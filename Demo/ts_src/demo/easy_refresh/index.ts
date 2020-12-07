@@ -6,7 +6,9 @@
  */
 
 import fs = require("flutter_sdk");
-import { MyEasyRefreshBasicPage } from "demo/easy_refresh/basic";
+import { MyEasyRefreshClassicalDemoPage } from "demo/easy_refresh/classical_demo";
+import { MyEasyRefreshMaterialDemoPage } from "demo/easy_refresh/material_demo";
+import { MyEasyRefreshClassEmptyWidgetPage } from "demo/easy_refresh/empty_widget";
 
 export class MyEasyRefreshIndex extends fs.StatelessWidget{
 
@@ -27,12 +29,39 @@ export class MyEasyRefreshIndex extends fs.StatelessWidget{
                         onTap:function(){
                             fs.Navigator.push(context,fs.MaterialPageRoute.new({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyEasyRefreshBasicPage.new();
+                                    return MyEasyRefreshClassicalDemoPage.new();
                                 }
                             }));
                         }                        
                     }),
 
+                    fs.ListTile.new({
+                        leading:fs.Text.new("2",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Material Demo"),
+                        subtitle:fs.Text.new("经典(默认)风格Material Demo"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyEasyRefreshMaterialDemoPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        leading:fs.Text.new("3",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Empty Widget"),
+                        subtitle:fs.Text.new("空视图"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyEasyRefreshClassEmptyWidgetPage.new();
+                                }
+                            }));
+                        }                        
+                    }),
                 
                 ],
             }),

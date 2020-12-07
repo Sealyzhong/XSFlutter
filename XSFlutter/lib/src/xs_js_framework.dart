@@ -20,7 +20,7 @@ class XSFlutterApp {
   BasicMessageChannel<String> _jsFlutterAppRebuildChannel; //大数据通道
   BasicMessageChannel<String> _jsFlutterAppJSPushWidgetChannel; //大数据通道
   Map<String, dynamic> _jsFlutterAppChannelFunRegMap = {};
-  XSJsonBuildOwner _rootBuildOwner;
+  XSJsonBuildOwner rootBuildOwner;
 
   //JSWidget根节点
   dynamic rootWidget;
@@ -29,7 +29,7 @@ class XSFlutterApp {
   List<Map> _frequencyLimitMethodCallQueue = [];
 
   XSFlutterApp(this.name) {
-    _rootBuildOwner = XSJsonBuildOwner.rootBuildOwner(this);
+    rootBuildOwner = XSJsonBuildOwner.rootBuildOwner(this);
     _setupChannel();
   }
 
@@ -50,14 +50,14 @@ class XSFlutterApp {
   JSStatefulWidget navigatorPushWithName(String widgetName, Key widgetKey, {ThemeData themeData, MediaQueryData mediaQueryData, IconThemeData iconThemeData}) {
     XSJSLog.log("XSFlutterApp:navigatorPushWithName: widgetName: $widgetName ");
 
-    JSStatefulWidget jsWidget = _rootBuildOwner.findWidget(widgetKey);
+    JSStatefulWidget jsWidget = rootBuildOwner.findWidget(widgetKey);
 
     if (jsWidget != null) {
       XSJSLog.log("XSFlutterApp:_rootBuildOwner.findWidget(widgetKey) true: widgetName: $widgetName ");
       return jsWidget;
     }
 
-    jsWidget = JSStatefulWidget.createEmptyWidget(key: widgetKey, name: widgetName, parentBuildOwner: _rootBuildOwner);
+    jsWidget = JSStatefulWidget.createEmptyWidget(key: widgetKey, name: widgetName, parentBuildOwner: rootBuildOwner);
 
     callJSNavigatorPushWithName(jsWidget.name, jsWidget.widgetID, themeData: themeData, mediaQueryData: mediaQueryData, iconThemeData: iconThemeData);
 
@@ -66,7 +66,7 @@ class XSFlutterApp {
 
   //JS->Flutter， js侧调用Flutter，传递Json Widget Tree，������建JSWidget
   dynamic createJSWidget(Map widgetData) {
-    dynamic jsWidget = _rootBuildOwner.buildRootWidget(widgetData);
+    dynamic jsWidget = rootBuildOwner.buildRootWidget(widgetData);
     return jsWidget;
   }
 
@@ -160,23 +160,23 @@ class XSFlutterApp {
 
   /// JS ->  flutter  开放给调用 JS
   Future<dynamic> _jsRebuild(args) async {
-    _rootBuildOwner.jsCallRebuild(args);
+    rootBuildOwner.jsCallRebuild(args);
   }
 
   //js层 调用navigatorPush 主动push页面
   //和Flutter dart代码调用 XSFluter.navigatorPushWithName 的区别是_navigatorPush并不创建_rootBuildOwner，只是创建_rootBuildOwner的子Widget
   Future<dynamic> _navigatorPush(args) async {
-    _rootBuildOwner.jsCallNavigatorPush(args);
+    rootBuildOwner.jsCallNavigatorPush(args);
   }
 
   //js层 调用navigatorPop 主动pop页面
   Future<dynamic> _navigatorPop(args) async {
-    _rootBuildOwner.jsCallNavigatorPop(args);
+    rootBuildOwner.jsCallNavigatorPop(args);
   }
 
   //js层 调用Dart代码
   Future<dynamic> _jsInvoke(args) async {
-    _rootBuildOwner.jsCallInvoke(args);
+    rootBuildOwner.jsCallInvoke(args);
   }
 }
 

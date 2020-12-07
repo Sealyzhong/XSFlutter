@@ -16,8 +16,10 @@ class MyDialogIndex extends fs.StatelessWidget {
     }
     _saveValue() {
         fs.Log.log("OK");
+        tl.ShowDialog.dismiss(this);
     }
     build(context) {
+        //var that = this;
         return fs.Scaffold.new({
             appBar: fs.AppBar.new({
                 title: fs.Text.new("通用提示框"),
@@ -38,17 +40,15 @@ class MyDialogIndex extends fs.StatelessWidget {
                     fs.ListTile.new({
                         trailing: fs.Icon.new(fs.Icons.chevron_right),
                         title: fs.Text.new("2、showDialog"),
-                        onTap: function () {
-                            tl.ShowDialog.showDialog({
+                        onTap: () => {
+                            tl.ShowDialog.showDialog(this, {
                                 barrierDismissible: false,
                                 child: fs.Material.new({
                                     color: fs.Colors.transparent,
                                     child: fs.Center.new({
                                         child: fs.RaisedButton.new({
                                             child: fs.Text.new("相信·帮助"),
-                                            onPressed: function () {
-                                                fs.Log.log("OK");
-                                            },
+                                            onPressed: this._saveValue.bind(this)
                                         }),
                                     }),
                                 })

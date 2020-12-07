@@ -745,9 +745,9 @@ export class Convert extends core.Object{
       }
   
       //如果Build的root wiget 是StatelessWidget，则直接展开，优化性能
-      if (tempWidgetTreeObjMap instanceof StatelessWidget) {
+      /*if (tempWidgetTreeObjMap instanceof StatelessWidget) {
         tempWidgetTreeObjMap = tempWidgetTreeObjMap.build(this.widget.buildContext);
-      }
+      }*/
   
       //tempWidgetTree.widgetTreeObjMap = tempWidgetTreeObjMap; //不做diff不用保存，优化内存
   
@@ -769,8 +769,37 @@ export class Convert extends core.Object{
   
       return jsonMap;
     }
+
+    buildWidgetTreeSubWidget(widget:any) {
+      /*let tempWidgetTree = WidgetTree.new(this.widget.buildWidgetDataSeq
+      );
+      tempWidgetTree.ownerWidget = this.widget;
   
-    preBuildJson(widgetTree:WidgetTree, widgetTreeObjMap:any) {
+      this.widget.buildingWidgetTree = tempWidgetTree;*/
+      Log.log("JSWidget buildWidgetTree ::" + this.widget.getWidgetInfo());
+  
+      let tempWidgetTreeObjMap;
+      if (widget instanceof StatelessWidget) {
+        tempWidgetTreeObjMap = widget.build(this.widget.buildContext);
+      } else if (widget instanceof StatefulWidget) {
+        tempWidgetTreeObjMap = widget.state.build(this.widget.buildContext);
+      }else if (widget instanceof Widget) {
+        tempWidgetTreeObjMap=widget;
+      }
+  
+      //如果Build的root wiget 是StatelessWidget，则直接展开，优化性能
+      /*if (tempWidgetTreeObjMap instanceof StatelessWidget) {
+        tempWidgetTreeObjMap = tempWidgetTreeObjMap.build(this.widget.buildContext);
+      }*/
+  
+      //tempWidgetTree.widgetTreeObjMap = tempWidgetTreeObjMap; //不做diff不用保存，优化内存
+  
+      this.preBuildJson(this.widget.buildingWidgetTree, tempWidgetTreeObjMap);
+  
+      return tempWidgetTreeObjMap;
+    }
+  
+    preBuildJson(widgetTree?:WidgetTree, widgetTreeObjMap?:any) {
   
       //Log.log("preBuildJson:" + flutterWidget);
       if (!(widgetTreeObjMap instanceof Object)) {
@@ -866,7 +895,7 @@ export class Convert extends core.Object{
       let jsWidget = this.findWidgetWithWidgetID(widgetID);
   
       if (jsWidget != null) {
-        return jsWidget?.helper?.invokeCallback(buildWidgetDataSeq, callID, args["args"]);
+        return jsWidget?.helper?.invokeCallback(buildWidgetDataSeq, callID, callConfig);
       } else {
         Log.error(
           "onEventCallback error: jsWidget == null onEventCallback(args:" + args
@@ -7276,7 +7305,6 @@ export class Velocity extends DartClass {
 //#endregion
 
   
-
 //#region ******** Icons ********
 export class Icons extends IconData{
     constructor(icon:string){
@@ -22030,3 +22058,64 @@ interface CupertinoActivityIndicatorConfig {
   }
   
   //#endregion
+
+
+//#region ******** Custom Widgets ********
+
+//****** EmptyDataWidget ******
+interface EmptyDataWidgetConfig {
+  key?:Key;
+  title?:string;
+  imageName?:string;
+  imageSize?:string;
+  backgroundColor?:Color;
+  titleStyle?:TextStyle;
+}
+export class EmptyDataWidget extends Widget {
+  key?:Key;
+  title?:string;
+  imageName?:string;
+  imageSize?:string;
+  backgroundColor?:Color;
+  titleStyle?:TextStyle;
+
+  /**
+   * @param config config: 
+      {
+        key?:Key, 
+        title?:string, 
+        imageName?:string, 
+        imageSize?:string, 
+        backgroundColor?:Color, 
+        titleStyle?:TextStyle, 
+      }
+   */
+  constructor(config?: EmptyDataWidgetConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.key = config.key;
+      this.title = config.title;
+      this.imageName = config.imageName;
+      this.imageSize = config.imageSize;
+      this.backgroundColor = config.backgroundColor;
+      this.titleStyle = config.titleStyle;
+    }
+  }
+
+  /**
+   * @param config config: 
+      {
+        key?:Key, 
+        title?:string, 
+        imageName?:string, 
+        imageSize?:string, 
+        backgroundColor?:Color, 
+        titleStyle?:TextStyle, 
+      }
+   */
+  static new(config?: EmptyDataWidgetConfig) {
+    return new EmptyDataWidget(config);
+  }
+}
+
+//#endregion

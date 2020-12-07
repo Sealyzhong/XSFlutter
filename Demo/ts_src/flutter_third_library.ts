@@ -68,12 +68,32 @@ export class ShowDialog extends fs.DartClass {
         child?:fs.Widget, 
     }
    */
-  static showDialog(config:ShowDialogConfig){
+  static showDialog(baseWidget:fs.BaseWidget,config:ShowDialogConfig){
     ShowDialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+          widgetID:String(baseWidget.widgetID),
           mirrorID: ShowDialog.getInstance().mirrorID,
           className: ShowDialog.getInstance().className,
           funcName: "showDialog",
-          args: config,
+          args:{
+            widgetID:String(baseWidget.widgetID),
+            barrierDismissible: config.barrierDismissible,
+            useRootNavigator: config.useRootNavigator,
+            useSafeArea: config.useSafeArea,
+            child:baseWidget.helper.buildWidgetTreeSubWidget(config.child),
+          },
+      }));
+  }
+
+
+  static dismiss(baseWidget:fs.BaseWidget){
+    ShowDialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+          widgetID:String(baseWidget.widgetID),
+          mirrorID: ShowDialog.getInstance().mirrorID,
+          className: ShowDialog.getInstance().className,
+          funcName: "dismiss",
+          args:{
+            widgetID:String(baseWidget.widgetID),
+          },
       }));
   }
 
@@ -1544,13 +1564,13 @@ export abstract class PullToRefreshFooter extends fs.Widget {
         idleIcon?:fs.Widget, 
       }
    */
-  static classic(config?: PullToRefreshPullToRefreshClassicFooterConfig){
-    return new PullToRefreshPullToRefreshClassicFooter(config);
+  static classic(config?: PullToRefreshClassicFooterConfig){
+    return new PullToRefreshClassicFooter(config);
   }
 }
 
 //****** PullToRefreshClassicFooter ******
-interface PullToRefreshPullToRefreshClassicFooterConfig {
+interface PullToRefreshClassicFooterConfig {
   key?:fs.Key;
   onClick?: fs.VoidCallback;
   loadStyle?: PullToRefreshLoadStyle;
@@ -1570,7 +1590,7 @@ interface PullToRefreshPullToRefreshClassicFooterConfig {
   canLoadingIcon?:fs.Widget;
   idleIcon?:fs.Widget;
 }
-export class PullToRefreshPullToRefreshClassicFooter extends fs.Widget {
+export class PullToRefreshClassicFooter extends fs.Widget {
   key?:fs.Key;
   onClick?: fs.VoidCallback;
   loadStyle?: PullToRefreshLoadStyle;
@@ -1613,7 +1633,7 @@ export class PullToRefreshPullToRefreshClassicFooter extends fs.Widget {
         idleIcon?:fs.Widget, 
       }
    */
-  constructor(config?: PullToRefreshPullToRefreshClassicFooterConfig){
+  constructor(config?: PullToRefreshClassicFooterConfig){
     super();
     if(config!=null && config!=undefined){
       this.key = config.key;
@@ -1659,8 +1679,8 @@ export class PullToRefreshPullToRefreshClassicFooter extends fs.Widget {
         idleIcon?:fs.Widget, 
       }
    */
-  static new(config?: PullToRefreshPullToRefreshClassicFooterConfig) {
-    return new PullToRefreshPullToRefreshClassicFooter(config);
+  static new(config?: PullToRefreshClassicFooterConfig) {
+    return new PullToRefreshClassicFooter(config);
   }
 }
 
@@ -2305,7 +2325,6 @@ export class CachedNetworkImage extends fs.Widget {
 //#endregion
 
 
-
 //#region ******** EasyRefresh ********
 
 export abstract class EasyRefreshHeader extends fs.Widget {
@@ -2483,63 +2502,6 @@ export class EasyRefreshClassicalHeader extends EasyRefreshHeader {
   static new(config?: EasyRefreshClassicalHeaderConfig) {
     return new EasyRefreshClassicalHeader(config);
   }
-
-  /**
-   * @param config config: 
-      {
-        key?:fs.Key, 
-        extent?:number,
-        triggerDistance?:number, 
-        float?:boolean, 
-        completeDuration?:fs.Duration, 
-        enableInfiniteRefresh?:boolean, 
-        enableHapticFeedback?:boolean, 
-        overScroll?:boolean, 
-        alignment?:fs.Alignment, 
-        refreshText?:string, 
-        refreshReadyText?:string, 
-        refreshingText?:string, 
-        refreshedText?:string, 
-        refreshFailedText?:string, 
-        noMoreText?:string, 
-        showInfo?:boolean, 
-        infoText?:string, 
-        bgColor?:fs.Color, 
-        textColor?:fs.Color, 
-        infoColor?:fs.Color, 
-      }
-   */
-  static zh_CN(config?: EasyRefreshClassicalHeaderConfig){
-    var v = new EasyRefreshClassicalHeader(config);
-    if(v.refreshText== null || v.refreshText==undefined){
-      v.refreshText="刷新";
-    }
-
-    if(v.refreshReadyText== null || v.refreshReadyText==undefined){
-      v.refreshReadyText="释放刷新";
-    }
-
-    if(v.refreshingText== null || v.refreshingText==undefined){
-      v.refreshingText="正在刷新...";
-    }
-
-    if(v.refreshedText== null || v.refreshedText==undefined){
-      v.refreshedText="刷新完成";
-    }
-
-    if(v.refreshFailedText== null || v.refreshFailedText==undefined){
-      v.refreshFailedText="刷新失败";
-    }
-
-    if(v.noMoreText== null || v.noMoreText==undefined){
-      v.noMoreText="没有更多数据";
-    }
-    if(v.infoText== null || v.infoText==undefined){
-      v.infoText="更新于 %T";
-    }
-
-    return v;
-  }
 }
 
 //****** EasyRefreshMaterialHeader ******
@@ -2672,6 +2634,7 @@ interface EasyRefreshClassicalFooterConfig {
   bgColor?:fs.Color;
   textColor?:fs.Color;
   infoColor?:fs.Color;
+  isNoMoreText?:boolean;
 }
 export class EasyRefreshClassicalFooter extends fs.Widget {
   key?:fs.Key;
@@ -2696,6 +2659,7 @@ export class EasyRefreshClassicalFooter extends fs.Widget {
   bgColor?:fs.Color;
   textColor?:fs.Color;
   infoColor?:fs.Color;
+  isNoMoreText?:boolean;
 
   /**
    * @param config config: 
@@ -2722,6 +2686,7 @@ export class EasyRefreshClassicalFooter extends fs.Widget {
         bgColor?:fs.Color, 
         textColor?:fs.Color, 
         infoColor?:fs.Color, 
+        isNoMoreText?:boolean,
       }
    */
   constructor(config?: EasyRefreshClassicalFooterConfig){
@@ -2748,6 +2713,7 @@ export class EasyRefreshClassicalFooter extends fs.Widget {
       this.bgColor = config.bgColor;
       this.textColor = config.textColor;
       this.infoColor = config.infoColor;
+      this.isNoMoreText = config.isNoMoreText;
     }
   }
 
@@ -2781,62 +2747,6 @@ export class EasyRefreshClassicalFooter extends fs.Widget {
   static new(config?: EasyRefreshClassicalFooterConfig) {
     return new EasyRefreshClassicalFooter(config);
   }
-  /**
-   * @param config config: 
-      {
-        key?:fs.Key, 
-        extent?:number, 
-        triggerDistance?:number, 
-        float?:boolean, 
-        completeDuration?:fs.Duration, 
-        enableInfiniteLoad?:boolean, 
-        enableHapticFeedback?:boolean, 
-        overScroll?:boolean, 
-        safeArea?:boolean, 
-        padding?:fs.EdgeInsets, 
-        alignment?:fs.Alignment, 
-        loadText?:string, 
-        loadReadyText?:string, 
-        loadingText?:string, 
-        loadedText?:string, 
-        loadFailedText?:string, 
-        noMoreText?:string, 
-        showInfo?:boolean, 
-        infoText?:string, 
-        bgColor?:fs.Color, 
-        textColor?:fs.Color, 
-        infoColor?:fs.Color, 
-      }
-   */
-  static zh_CN(config?: EasyRefreshClassicalFooterConfig) {
-    var v= new EasyRefreshClassicalFooter(config);
-    if(v.loadText== null || v.loadText==undefined){
-      v.loadText="拉动加载";
-    }
-    if(v.loadReadyText== null || v.loadReadyText==undefined){
-      v.loadReadyText="释放加载";
-    }
-    if(v.loadingText== null || v.loadingText==undefined){
-      v.loadingText="正在加载...";
-    }
-
-    if(v.loadedText== null || v.loadedText==undefined){
-      v.loadedText="加载完成";
-    }
-
-    if(v.loadFailedText== null || v.loadFailedText==undefined){
-      v.loadedText="加载失败";
-    }
-
-    if(v.noMoreText== null || v.noMoreText==undefined){
-      v.noMoreText="没有更多数据";
-    }
-
-    if(v.infoText== null || v.infoText==undefined){
-      v.infoText="更新于 %T";
-    }
-    return v;
-  }
 }
 
 //****** EasyRefreshMaterialFooter ******
@@ -2848,6 +2758,8 @@ interface EasyRefreshMaterialFooterConfig {
   enableHapticFeedback?:boolean;
   enableInfiniteLoad?:boolean;
   overScroll?:boolean;
+  isNoMoreText?:boolean;
+  noMoreText?:string;
 }
 export class EasyRefreshMaterialFooter extends EasyRefreshFooter{
   key?:fs.Key;
@@ -2857,6 +2769,8 @@ export class EasyRefreshMaterialFooter extends EasyRefreshFooter{
   enableHapticFeedback?:boolean;
   enableInfiniteLoad?:boolean;
   overScroll?:boolean;
+  isNoMoreText?:boolean;
+  noMoreText?:string;
 
   /**
    * @param config config: 
@@ -2868,6 +2782,8 @@ export class EasyRefreshMaterialFooter extends EasyRefreshFooter{
         enableHapticFeedback?:boolean, 
         enableInfiniteLoad?:boolean, 
         overScroll?:boolean, 
+        isNoMoreText?:boolean, 
+        noMoreText?:string, 
       }
    */
   constructor(config?: EasyRefreshMaterialFooterConfig){
@@ -2880,6 +2796,8 @@ export class EasyRefreshMaterialFooter extends EasyRefreshFooter{
       this.enableHapticFeedback =config.enableHapticFeedback;
       this.enableInfiniteLoad = config.enableInfiniteLoad;
       this.overScroll = config.overScroll;
+      this.isNoMoreText = config.isNoMoreText;
+      this.noMoreText = config.noMoreText;
     }
   }
 
@@ -2893,6 +2811,8 @@ export class EasyRefreshMaterialFooter extends EasyRefreshFooter{
         enableHapticFeedback?:boolean, 
         enableInfiniteLoad?:boolean, 
         overScroll?:boolean, 
+        isNoMoreText?:boolean, 
+        noMoreText?:string, 
       }
    */
   static new(config?: EasyRefreshMaterialFooterConfig) {

@@ -24,7 +24,7 @@ class _MyDioPage extends fs.WidgetState {
         super(...arguments);
         this.response = "点击小人Run上面的代码";
         this.cgiDataUrl = "https://c.m.163.com/nc/article/headline/T1348649580692/0-10.html";
-        this.cgiJsonUrl = "https://reactnative.dev/movies.json111";
+        this.cgiJsonUrl = "https://reactnative.dev/movies.json";
     }
     dioCodeText() {
         return "let resp = await Dio().get(cgi);";

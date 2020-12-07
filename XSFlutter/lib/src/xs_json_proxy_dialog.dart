@@ -41,30 +41,48 @@ class XSProxyShowDialog extends XSJsonObjProxy {
   @override
   void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
     if (mirrorObj == null) return;
+    print(mirrorID);
+    XSJsonBuildOwner bo;
+    BuildContext context;
+    var widgetID = XSJSParse.getString(context, bo, map, "widgetID");
+    if (widgetID != null) {
+      bo = XSFlutterLib.getInstance().currentApp.rootBuildOwner.findBuildOwner(widgetID);
+
+      try {
+        context = bo.widget.context;
+      } catch (ex) {}
+    }
+
+    if (context == null) {
+      context = XSLoading.instance.getContext();
+    }
 
     switch (funcName) {
       case 'showAboutDialog':
         showAboutDialog(
-          context: XSLoading.instance.getContext(),
-          applicationName: XSJSParse.getString(null, null, map, "applicationName"),
-          applicationVersion: XSJSParse.getString(null, null, map, "applicationVersion"),
-          applicationLegalese: XSJSParse.getString(null, null, map, "applicationLegalese"),
-          useRootNavigator: XSJSParse.getBool(null, null, map, "useRootNavigator", defaultValue: true),
-          applicationIcon: XSJSParse.getWidget(null, null, map, "applicationIcon"),
-          children: XSJSParse.getWidgetList(null, null, map, "children"),
+          context: context,
+          applicationName: XSJSParse.getString(context, bo, map, "applicationName"),
+          applicationVersion: XSJSParse.getString(context, bo, map, "applicationVersion"),
+          applicationLegalese: XSJSParse.getString(context, bo, map, "applicationLegalese"),
+          useRootNavigator: XSJSParse.getBool(context, bo, map, "useRootNavigator", defaultValue: true),
+          applicationIcon: XSJSParse.getWidget(context, bo, map, "applicationIcon"),
+          children: XSJSParse.getWidgetList(context, bo, map, "children"),
         );
         break;
       case 'showDialog':
         showDialog(
-          context: XSLoading.instance.getContext(),
-          barrierDismissible: XSJSParse.getBool(null, null, map, "barrierDismissible", defaultValue: true),
-          useSafeArea: XSJSParse.getBool(null, null, map, "useSafeArea", defaultValue: true),
-          useRootNavigator: XSJSParse.getBool(null, null, map, "useRootNavigator", defaultValue: true),
+          context: context,
+          barrierDismissible: XSJSParse.getBool(context, bo, map, "barrierDismissible", defaultValue: true),
+          useSafeArea: XSJSParse.getBool(context, bo, map, "useSafeArea", defaultValue: true),
+          useRootNavigator: XSJSParse.getBool(context, bo, map, "useRootNavigator", defaultValue: true),
           builder: (context) {
-            return XSJSParse.getWidget(null, null, map, "child");
+            return XSJSParse.getWidget(context, bo, map, "child");
           },
         );
         break;
+
+      case 'dismiss':
+        Navigator.pop(context);
     }
   }
 }

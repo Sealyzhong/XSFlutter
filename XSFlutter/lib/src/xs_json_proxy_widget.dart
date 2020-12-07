@@ -5,12 +5,10 @@
 //  found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'widgets/empty_data_widget.dart';
 import 'xs_json_to_dart.dart';
 import 'xs_js_parse.dart';
 import 'xs_build_owner.dart';
-
-// TODO List
-// 1、默认值是私有类的方法
 
 ///把Widget按分类注册，方便写代码，
 ///分类：Material/Layout/Text/(Assets.Images.icons)/input...
@@ -20,6 +18,7 @@ class XSProxyRegisterHelperWidgetSeries {
     Map<String, CreateJsonObjProxyFun> m = {};
 
     m.addAll(XSProxyPlaceholder.registerProxy());
+    m.addAll(XSProxyEmptyDataWidget.registerProxy());
 
     return m;
   }
@@ -45,5 +44,26 @@ class XSProxyPlaceholder extends XSJsonObjProxy {
       fallbackHeight: XSJSParse.getDouble(context, bo, map, "fallbackHeight", defaultValue: 400.0),
     );
     return widget;
+  }
+}
+
+class XSProxyEmptyDataWidget extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "EmptyDataWidget";
+    return {
+      regClassName: () => XSProxyEmptyDataWidget()..init(className: regClassName)
+    };
+  }
+
+  @override
+  EmptyDataWidget constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return EmptyDataWidget(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      title: XSJSParse.getString(context, bo, map, "title", defaultValue: "没有更多数据"),
+      imageName: XSJSParse.getString(context, bo, map, "imageName", defaultValue: "assets/images/nodata.png"),
+      imageSize: XSJSParse.getDouble(context, bo, map, "imageSize", defaultValue: 128),
+      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor", defaultValue: Colors.transparent),
+      titleStyle: XSJSParse.getTextStyle(context, bo, map, "titleStyle", defaultValue: const TextStyle(fontSize: 14, color: Colors.grey)),
+    );
   }
 }

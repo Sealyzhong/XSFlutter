@@ -16,6 +16,7 @@ import 'dart:typed_data';
 import 'dart:math' as math;
 import 'dart:io';
 import 'xs_build_owner.dart';
+import 'xs_js_flutter.dart';
 import 'xs_json_to_dart.dart';
 import 'package/mask_text_input_formatter.dart';
 
@@ -5753,10 +5754,23 @@ class XSJSParse {
     if (v == null || v.isEmpty) {
       return null;
     }
+
     VoidCallback cb = () {
-      bo.eventCallback(_getString(map, key));
+      bo.eventCallback(v);
     };
     return cb;
+  }
+
+  //****** Fature<Void> ******/
+  static dynamic getFatureVoidCallback(BuildContext context, XSJsonBuildOwner bo, Map map, String key) {
+    var v = _getString(map, key);
+    if (v == null || v.isEmpty) {
+      return null;
+    }
+
+    return () async {
+      bo.eventCallback(v);
+    };
   }
 
   //****** ValueChanged<T> ******/

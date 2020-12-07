@@ -6,38 +6,39 @@
  * @Description: Google Counter
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MyEasyRefreshBasicPage = void 0;
+exports.MyEasyRefreshClassEmptyWidgetPage = void 0;
 const icon_data_1 = require("demo/model/icon_data");
 const fs = require("flutter_sdk");
 const tl = require("flutter_third_library");
-class MyEasyRefreshBasicPage extends fs.StatefulWidget {
+class MyEasyRefreshClassEmptyWidgetPage extends fs.StatefulWidget {
     createState() {
-        return new _MyEasyRefreshBasicPageState(this);
+        return new _MyEasyRefreshClassEmptyWidgetPageState(this);
     }
     static new() {
-        return new MyEasyRefreshBasicPage();
+        return new MyEasyRefreshClassEmptyWidgetPage();
     }
 }
-exports.MyEasyRefreshBasicPage = MyEasyRefreshBasicPage;
-class _MyEasyRefreshBasicPageState extends fs.WidgetState {
+exports.MyEasyRefreshClassEmptyWidgetPage = MyEasyRefreshClassEmptyWidgetPage;
+class _MyEasyRefreshClassEmptyWidgetPageState extends fs.WidgetState {
     constructor() {
         super(...arguments);
         this.refreshController = tl.EasyRefreshController.new();
-        this._count = 20;
+        this._count = 0;
     }
     //重构
     build(context) {
         var that = this;
         return fs.Scaffold.new({
             appBar: fs.AppBar.new({
-                title: fs.Text.new("经典样式"),
+                title: fs.Text.new("Empty Widget"),
             }),
             body: tl.EasyRefresher.new({
                 enableControlFinishLoad: true,
                 enableControlFinishRefresh: true,
                 controller: this.refreshController,
-                header: tl.EasyRefreshClassicalHeader.zh_CN(),
-                footer: tl.EasyRefreshClassicalFooter.zh_CN(),
+                emptyWidget: this._count <= 0 ? fs.EmptyDataWidget.new({}) : undefined,
+                header: tl.EasyRefreshClassicalHeader.new(),
+                footer: tl.EasyRefreshClassicalFooter.new({ isNoMoreText: true }),
                 onRefresh: function () {
                     tl.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
                     fs.Future.delayed(fs.Duration.new({
@@ -45,8 +46,8 @@ class _MyEasyRefreshBasicPageState extends fs.WidgetState {
                     }), function () {
                         that._count = 20;
                         tl.Loading.dismiss();
-                        that.refreshController.finishRefresh({ success: true });
-                        that.refreshController.finishLoad({ success: true, noMore: that._count >= icon_data_1.MyIconData.icons.length });
+                        that.refreshController.finishRefresh({ success: true, noMore: false });
+                        that.refreshController.finishLoad({ success: true, noMore: that._count >= icon_data_1.MyIconData.cupertinoIcons.length });
                         that.setState();
                     });
                 },

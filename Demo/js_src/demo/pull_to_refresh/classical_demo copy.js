@@ -6,23 +6,23 @@
  * @Description: Google Counter
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MyEasyRefreshBasicPage = void 0;
+exports.MyPullToRefreshClassicalDemoPage = void 0;
 const icon_data_1 = require("demo/model/icon_data");
 const fs = require("flutter_sdk");
 const tl = require("flutter_third_library");
-class MyEasyRefreshBasicPage extends fs.StatefulWidget {
+class MyPullToRefreshClassicalDemoPage extends fs.StatefulWidget {
     createState() {
-        return new _MyEasyRefreshBasicPageState(this);
+        return new _MyPullToRefreshClassicalDemoPageState(this);
     }
     static new() {
-        return new MyEasyRefreshBasicPage();
+        return new MyPullToRefreshClassicalDemoPage();
     }
 }
-exports.MyEasyRefreshBasicPage = MyEasyRefreshBasicPage;
-class _MyEasyRefreshBasicPageState extends fs.WidgetState {
+exports.MyPullToRefreshClassicalDemoPage = MyPullToRefreshClassicalDemoPage;
+class _MyPullToRefreshClassicalDemoPageState extends fs.WidgetState {
     constructor() {
         super(...arguments);
-        this.refreshController = tl.EasyRefreshController.new();
+        this.refreshController = tl.PullToRefreshController.new({});
         this._count = 20;
     }
     //重构
@@ -32,12 +32,12 @@ class _MyEasyRefreshBasicPageState extends fs.WidgetState {
             appBar: fs.AppBar.new({
                 title: fs.Text.new("经典样式"),
             }),
-            body: tl.EasyRefresher.new({
-                enableControlFinishLoad: true,
-                enableControlFinishRefresh: true,
+            body: tl.PullToRefreshRefresher.new({
                 controller: this.refreshController,
-                header: tl.EasyRefreshClassicalHeader.zh_CN(),
-                footer: tl.EasyRefreshClassicalFooter.zh_CN(),
+                enablePullDown: true,
+                enablePullUp: true,
+                header: tl.PullToRefreshClassicHeader.new(),
+                footer: tl.PullToRefreshClassicFooter.new(),
                 onRefresh: function () {
                     tl.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
                     fs.Future.delayed(fs.Duration.new({
@@ -45,12 +45,12 @@ class _MyEasyRefreshBasicPageState extends fs.WidgetState {
                     }), function () {
                         that._count = 20;
                         tl.Loading.dismiss();
-                        that.refreshController.finishRefresh({ success: true });
-                        that.refreshController.finishLoad({ success: true, noMore: that._count >= icon_data_1.MyIconData.icons.length });
+                        that.refreshController.refreshCompleted();
+                        that.refreshController.loadComplete();
                         that.setState();
                     });
                 },
-                onLoad: function () {
+                onLoading: function () {
                     tl.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
                     fs.Future.delayed(fs.Duration.new({
                         seconds: 2
@@ -60,7 +60,10 @@ class _MyEasyRefreshBasicPageState extends fs.WidgetState {
                             that._count = icon_data_1.MyIconData.cupertinoIcons.length;
                         }
                         tl.Loading.dismiss();
-                        that.refreshController.finishLoad({ success: true, noMore: that._count >= icon_data_1.MyIconData.cupertinoIcons.length });
+                        that.refreshController.loadComplete();
+                        if (that._count >= icon_data_1.MyIconData.cupertinoIcons.length) {
+                            that.refreshController.loadNoData();
+                        }
                         that.setState();
                     });
                 },

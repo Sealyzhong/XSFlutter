@@ -45,7 +45,7 @@ flutter:
     - js_src/demo/easy_refresh/
     - js_src/demo/model/
 
-    - assets/image/
+    - assets/images/
 
     #mxflutter app demo 使用到的图片资源
     - packages/flutter_gallery_assets/people/ali_landscape.png

@@ -151,6 +151,7 @@ class XSProxyRegisterHelperPullToRefreshSeries {
     m.addAll(XSProxyPullToRefreshWaterDropHeader.registerProxy());
     m.addAll(XSProxyPullToRefreshConfiguration.registerProxy());
     m.addAll(XSProxyPullToRefreshSmartRefresher.registerProxy());
+    m.addAll(XSProxyPullToPullToRefreshController.registerProxy());
 
     return m;
   }
@@ -173,14 +174,14 @@ class XSProxyPullToRefreshClassicHeader extends XSJsonObjProxy {
       height: XSJSParse.getDouble(context, bo, map, "height", defaultValue: 60.0),
       completeDuration: XSJSParse.getDuration(context, bo, map, "completeDuration", defaultValue: const Duration(milliseconds: 600)),
       textStyle: XSJSParse.getTextStyle(context, bo, map, "textStyle", defaultValue: const TextStyle(color: Colors.grey)),
-      releaseText: XSJSParse.getString(context, bo, map, "releaseText"),
-      refreshingText: XSJSParse.getString(context, bo, map, "refreshingText"),
+      releaseText: XSJSParse.getString(context, bo, map, "releaseText", defaultValue: "释放刷新"),
+      refreshingText: XSJSParse.getString(context, bo, map, "refreshingText", defaultValue: "正在刷新..."),
       canTwoLevelIcon: XSJSParse.getWidget(context, bo, map, "canTwoLevelIcon"),
       twoLevelView: XSJSParse.getWidget(context, bo, map, "twoLevelView"),
       canTwoLevelText: XSJSParse.getString(context, bo, map, "canTwoLevelText"),
-      completeText: XSJSParse.getString(context, bo, map, "completeText"),
-      failedText: XSJSParse.getString(context, bo, map, "failedText"),
-      idleText: XSJSParse.getString(context, bo, map, "idleText"),
+      completeText: XSJSParse.getString(context, bo, map, "completeText", defaultValue: "刷新完成"),
+      failedText: XSJSParse.getString(context, bo, map, "failedText", defaultValue: "刷新失败"),
+      idleText: XSJSParse.getString(context, bo, map, "idleText", defaultValue: "下拉刷新"),
       iconPos: XSPullToRefreshParse.getIconPosition(context, bo, map, "iconPos", defaultValue: IconPosition.left),
       spacing: XSJSParse.getDouble(context, bo, map, "spacing", defaultValue: 15.0),
       refreshingIcon: XSJSParse.getWidget(context, bo, map, "refreshingIcon"),
@@ -206,10 +207,10 @@ class XSProxyPullToRefreshWaterDropHeader extends XSJsonObjProxy {
     return WaterDropHeader(
       key: XSJSParse.getKey(context, bo, map, "key"),
       refresh: XSJSParse.getWidget(context, bo, map, "refresh"),
-      complete: XSJSParse.getWidget(context, bo, map, "complete"),
+      complete: XSJSParse.getWidget(context, bo, map, "complete", defaultValue: Center(child: Text("数据刷新完成"))),
       completeDuration: XSJSParse.getDuration(context, bo, map, "completeDuration", defaultValue: const Duration(milliseconds: 600)),
       failed: XSJSParse.getWidget(context, bo, map, "failed"),
-      waterDropColor: XSJSParse.getColor(context, bo, map, "waterDropColor", defaultValue: Colors.grey),
+      waterDropColor: XSJSParse.getColor(context, bo, map, "waterDropColor", defaultValue: Colors.red),
       idleIcon: XSJSParse.getWidget(context, bo, map, "idleIcon", defaultValue: const Icon(Icons.autorenew, size: 15, color: Colors.white)),
     );
   }
@@ -279,12 +280,12 @@ class XSProxyPullToRefreshClassicFooter extends XSJsonObjProxy {
       loadStyle: XSPullToRefreshParse.getLoadStyle(context, bo, map, "loadStyle", defaultValue: LoadStyle.ShowAlways),
       height: XSJSParse.getDouble(context, bo, map, "height", defaultValue: 60.0),
       textStyle: XSJSParse.getTextStyle(context, bo, map, "textStyle", defaultValue: const TextStyle(color: Colors.grey)),
-      loadingText: XSJSParse.getString(context, bo, map, "loadingText"),
-      noDataText: XSJSParse.getString(context, bo, map, "noDataText"),
+      loadingText: XSJSParse.getString(context, bo, map, "loadingText", defaultValue: "正在加载..."),
+      noDataText: XSJSParse.getString(context, bo, map, "noDataText", defaultValue: "~~~~ 亲，我们也是有底线的 ~~~~"),
       noMoreIcon: XSJSParse.getWidget(context, bo, map, "noMoreIcon"),
-      idleText: XSJSParse.getString(context, bo, map, "idleText"),
-      failedText: XSJSParse.getString(context, bo, map, "failedText"),
-      canLoadingText: XSJSParse.getString(context, bo, map, "canLoadingText"),
+      idleText: XSJSParse.getString(context, bo, map, "idleText", defaultValue: "上拉加载"),
+      failedText: XSJSParse.getString(context, bo, map, "failedText", defaultValue: "加载失败"),
+      canLoadingText: XSJSParse.getString(context, bo, map, "canLoadingText", defaultValue: "正在取消加载..."),
       failedIcon: XSJSParse.getWidget(context, bo, map, "failedIcon", defaultValue: const Icon(Icons.error, color: Colors.grey)),
       iconPos: XSPullToRefreshParse.getIconPosition(context, bo, map, "iconPos", defaultValue: IconPosition.left),
       spacing: XSJSParse.getDouble(context, bo, map, "spacing", defaultValue: 15.0),
@@ -348,9 +349,10 @@ class XSProxyPullToRefreshSmartRefresher extends XSJsonObjProxy {
 
   @override
   SmartRefresher constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return SmartRefresher(
+    var _controller = XSJSParse.getObject(context, bo, map, "controller");
+    var w = SmartRefresher(
       key: XSJSParse.getKey(context, bo, map, "key"),
-      controller: XSJSParse.getObject(context, bo, map, "controller"),
+      controller: _controller,
       child: XSJSParse.getWidget(context, bo, map, "child"),
       header: XSJSParse.getWidget(context, bo, map, "header"),
       footer: XSJSParse.getWidget(context, bo, map, "footer"),
@@ -370,15 +372,16 @@ class XSProxyPullToRefreshSmartRefresher extends XSJsonObjProxy {
       scrollDirection: XSJSParse.getAxis(context, bo, map, "scrollDirection"),
       scrollController: XSJSParse.getObject(context, bo, map, "scrollController"),
     );
+    return w;
   }
 }
 
-//****** RefreshController ******
-class XSProxyPullToScrollController extends XSJsonObjProxy {
+//****** PullToRefreshController ******
+class XSProxyPullToPullToRefreshController extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     final String regClassName = "PullToRefreshController";
     return {
-      regClassName: () => XSProxyPullToScrollController()..init(className: regClassName)
+      regClassName: () => XSProxyPullToPullToRefreshController()..init(className: regClassName)
     };
   }
 
