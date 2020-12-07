@@ -6,7 +6,7 @@
  */
 
 import fs = require("flutter_sdk");
-import api = require("flutter_api");
+import tl = require("flutter_third_library");
 
 export class MyDialogIndex extends fs.StatelessWidget{
 
@@ -28,9 +28,9 @@ export class MyDialogIndex extends fs.StatelessWidget{
                         trailing:fs.Icon.new(fs.Icons.chevron_right),
                         title:fs.Text.new("1、showAboutDialog"),
                         onTap:function(){
-                            api.ShowDialog.showAboutDialog({
-                                applicationName:api.PackageInfo.packageName,
-                                applicationVersion:api.PackageInfo.version,
+                            tl.ShowDialog.showAboutDialog({
+                                applicationName:tl.PackageInfo.packageName,
+                                applicationVersion:tl.PackageInfo.version,
                                 applicationLegalese:"兴盛优选版权所有."
                             });
                         }                        
@@ -40,7 +40,7 @@ export class MyDialogIndex extends fs.StatelessWidget{
                         trailing:fs.Icon.new(fs.Icons.chevron_right),
                         title:fs.Text.new("2、showDialog"),
                         onTap:function(){
-                            api.ShowDialog.showDialog({
+                            tl.ShowDialog.showDialog({
                                 barrierDismissible:false,
                                 child:fs.Material.new({
                                     color:fs.Colors.transparent,

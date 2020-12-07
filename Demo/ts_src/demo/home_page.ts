@@ -6,12 +6,14 @@
  */
 
 import fs = require("flutter_sdk");
-import api = require("flutter_api");
+import tl = require("flutter_third_library");
 import { MyBaseWidgetsIndex } from "demo/base_widgets/index";
 import { MyPackageIndex } from "demo/packages/index";
 import { MyExamplesIndex } from "demo/examples/index";
 import { MyDialogIndex } from "demo/dialog/index";
 import { MyListViewIndex } from "demo/listview/index";
+import { MyPullToRefreshIndex } from "demo/pull_to_refresh/index";
+import { MyEasyRefreshIndex } from "demo/easy_refresh/index";
 
 
 export class MyHomePage extends fs.StatefulWidget{
@@ -26,8 +28,8 @@ class _MyHomePageState extends fs.WidgetState{
     //subclass override
     initState() {
         fs.Log.log("MyHomePage.initState");
-        api.ScreenInfo.updateInfo();
-        api.PackageInfo.updateInfo();
+        tl.ScreenInfo.updateInfo();
+        tl.PackageInfo.updateInfo();
     }
     
     _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
@@ -113,9 +115,37 @@ class _MyHomePageState extends fs.WidgetState{
                         }                        
                     }),
 
-
                     fs.ListTile.new({
                         leading:fs.Text.new("6",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Easy Refresh"),
+                        subtitle:fs.Text.new("Flutter应用上实现下拉刷新"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyEasyRefreshIndex.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    fs.ListTile.new({
+                        leading:fs.Text.new("7",{style:this._style}),
+                        trailing:fs.Icon.new(fs.Icons.chevron_right),
+                        title:fs.Text.new("Pull To Refresh"),
+                        subtitle:fs.Text.new("Flutter应用上实现下拉刷新"),
+                        onTap:function(){
+                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                                builder:function(context?:fs.BuildContext){
+                                    return MyPullToRefreshIndex.new();
+                                }
+                            }));
+                        }                        
+                    }),
+
+
+                    fs.ListTile.new({
+                        leading:fs.Text.new("8",{style:this._style}),
                         trailing:fs.Icon.new(fs.Icons.chevron_right),
                         title:fs.Text.new("TS2Project"),
                         subtitle:fs.Text.new("在本工程中实现JS与Project通信息"),

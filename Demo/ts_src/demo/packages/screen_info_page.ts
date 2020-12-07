@@ -6,7 +6,7 @@
  */
 
 import fs = require("flutter_sdk");
-import api = require("flutter_api");
+import tl = require("flutter_third_library");
 
 export class MyScreenInfoPage extends fs.StatefulWidget{
     createState() {
@@ -21,7 +21,7 @@ export class MyScreenInfoPage extends fs.StatefulWidget{
 class _MyScreenInfoPage extends fs.WidgetState{
     
    async _updateScreenInfo(){
-       await api.ScreenInfo.updateInfo();
+       await tl.ScreenInfo.updateInfo();
         this.setState();
     }
 
@@ -34,16 +34,16 @@ class _MyScreenInfoPage extends fs.WidgetState{
                 child:fs.Column.new({
                     mainAxisAlignment:fs.MainAxisAlignment.center,
                     children:[
-                        fs.Text.new("appBarHeight:"+String(api.ScreenInfo.appBarHeight)),
-                        fs.Text.new("bottomBarHeight:"+String(api.ScreenInfo.bottomBarHeight)),
-                        fs.Text.new("screenDensity:"+String(api.ScreenInfo.screenDensity)),
-                        fs.Text.new("dpRatio:"+String(api.ScreenInfo.dpRatio)),
-                        fs.Text.new("pxRatio:"+String(api.ScreenInfo.pxRatio)),
-                        fs.Text.new("Width+Height:"+String(api.ScreenInfo.screenWidth)+"x"+String(api.ScreenInfo.screenHeight)),
-                        fs.Text.new("Width+Height(px):"+String(api.ScreenInfo.screenWidthPx)+"x"+String(api.ScreenInfo.screenHeightPx)),
-                        fs.Text.new("uiDensity:"+String(api.ScreenInfo.uiDensity)),
-                        fs.Text.new("Width+Height(UI):"+String(api.ScreenInfo.uiWidth)+"x"+String(api.ScreenInfo.uiHeight)),
-                        fs.Text.new("Width+Height(px)(UI):"+String(api.ScreenInfo.uiWidthPx)+"x"+String(api.ScreenInfo.uiHeightPx)),
+                        fs.Text.new("appBarHeight:"+String(tl.ScreenInfo.appBarHeight)),
+                        fs.Text.new("bottomBarHeight:"+String(tl.ScreenInfo.bottomBarHeight)),
+                        fs.Text.new("screenDensity:"+String(tl.ScreenInfo.screenDensity)),
+                        fs.Text.new("dpRatio:"+String(tl.ScreenInfo.dpRatio)),
+                        fs.Text.new("pxRatio:"+String(tl.ScreenInfo.pxRatio)),
+                        fs.Text.new("Width+Height:"+String(tl.ScreenInfo.screenWidth)+"x"+String(tl.ScreenInfo.screenHeight)),
+                        fs.Text.new("Width+Height(px):"+String(tl.ScreenInfo.screenWidthPx)+"x"+String(tl.ScreenInfo.screenHeightPx)),
+                        fs.Text.new("uiDensity:"+String(tl.ScreenInfo.uiDensity)),
+                        fs.Text.new("Width+Height(UI):"+String(tl.ScreenInfo.uiWidth)+"x"+String(tl.ScreenInfo.uiHeight)),
+                        fs.Text.new("Width+Height(px)(UI):"+String(tl.ScreenInfo.uiWidthPx)+"x"+String(tl.ScreenInfo.uiHeightPx)),
                         fs.RaisedButton.new({
                             child:fs.Text.new("更新屏幕值"),
                             onPressed:this._updateScreenInfo.bind(this),

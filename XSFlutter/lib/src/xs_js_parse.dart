@@ -5749,6 +5749,10 @@ class XSJSParse {
 
   //****** VoidCallback ******/
   static VoidCallback getVoidCallback(BuildContext context, XSJsonBuildOwner bo, Map map, String key) {
+    var v = _getString(map, key);
+    if (v == null || v.isEmpty) {
+      return null;
+    }
     VoidCallback cb = () {
       bo.eventCallback(_getString(map, key));
     };

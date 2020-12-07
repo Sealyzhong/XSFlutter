@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 //xsflutter
 import 'package:xsflutter/xsflutter.dart';
 import 'custom_js_api.dart';
@@ -23,6 +24,11 @@ class MyApp extends StatelessWidget {
         ),
         //方法一
         navigatorKey: XSLoading.instance.getNavigatorKey(),
+        localizationsDelegates: [
+          GlobalCupertinoLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate
+        ],
         home: MyFlutterExampleHome());
   }
 }

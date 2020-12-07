@@ -8,7 +8,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyPackageInfoPage = void 0;
 const fs = require("flutter_sdk");
-const api = require("flutter_api");
+const tl = require("flutter_third_library");
 class MyPackageInfoPage extends fs.StatefulWidget {
     createState() {
         return new _MyPackageInfoPage(this);
@@ -20,7 +20,7 @@ class MyPackageInfoPage extends fs.StatefulWidget {
 exports.MyPackageInfoPage = MyPackageInfoPage;
 class _MyPackageInfoPage extends fs.WidgetState {
     async _updatePackageInfo() {
-        await api.PackageInfo.updateInfo();
+        await tl.PackageInfo.updateInfo();
         this.setState();
     }
     build(context) {
@@ -32,10 +32,10 @@ class _MyPackageInfoPage extends fs.WidgetState {
                 child: fs.Column.new({
                     mainAxisAlignment: fs.MainAxisAlignment.center,
                     children: [
-                        fs.Text.new("appName: " + String(api.PackageInfo.appName)),
-                        fs.Text.new("buildNumber: " + String(api.PackageInfo.buildNumber)),
-                        fs.Text.new("packageName: " + String(api.PackageInfo.packageName)),
-                        fs.Text.new("version: " + String(api.PackageInfo.version)),
+                        fs.Text.new("appName: " + String(tl.PackageInfo.appName)),
+                        fs.Text.new("buildNumber: " + String(tl.PackageInfo.buildNumber)),
+                        fs.Text.new("packageName: " + String(tl.PackageInfo.packageName)),
+                        fs.Text.new("version: " + String(tl.PackageInfo.version)),
                     ]
                 }),
             }),

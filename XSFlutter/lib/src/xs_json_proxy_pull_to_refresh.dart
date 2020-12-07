@@ -31,6 +31,54 @@ class XSPullToRefreshParse {
     return defaultValue;
   }
 
+  //****** RefreshStatus ******/
+  static RefreshStatus getRefreshStatus(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {RefreshStatus defaultValue}) {
+    var v = XSJSParse.getString(context, bo, map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'idle':
+          return RefreshStatus.idle;
+        case 'canRefresh':
+          return RefreshStatus.canRefresh;
+        case 'refreshing':
+          return RefreshStatus.refreshing;
+        case 'completed':
+          return RefreshStatus.completed;
+        case 'failed':
+          return RefreshStatus.failed;
+        case 'canTwoLevel':
+          return RefreshStatus.canTwoLevel;
+        case 'twoLevelOpening':
+          return RefreshStatus.twoLevelOpening;
+        case 'twoLeveling':
+          return RefreshStatus.twoLeveling;
+        case 'twoLevelClosing':
+          return RefreshStatus.twoLevelClosing;
+      }
+    }
+    return defaultValue;
+  }
+
+//****** LoadStatus ******/
+  static LoadStatus getLoadStatus(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {LoadStatus defaultValue}) {
+    var v = XSJSParse.getString(context, bo, map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'idle':
+          return LoadStatus.idle;
+        case 'canLoading':
+          return LoadStatus.canLoading;
+        case 'loading':
+          return LoadStatus.loading;
+        case 'noMore':
+          return LoadStatus.noMore;
+        case 'failed':
+          return LoadStatus.failed;
+      }
+    }
+    return defaultValue;
+  }
+
   //****** IconPosition ******/
   static IconPosition getIconPosition(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {IconPosition defaultValue}) {
     var v = XSJSParse.getString(context, bo, map, key);
@@ -291,20 +339,11 @@ class XSProxyPullToRefreshConfiguration extends XSJsonObjProxy {
 
 //****** SmartRefresher ******
 class XSProxyPullToRefreshSmartRefresher extends XSJsonObjProxy {
-  static String regClassName = "SmartRefresher";
+  static String regClassName = "PullToRefreshRefresher";
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     return {
       regClassName: () => XSProxyPullToRefreshSmartRefresher()..init(className: regClassName)
     };
-  }
-
-  @override
-  void init({String className}) {
-    super.init(className: className);
-
-    //registerConstructor(className: regClassName, constructorName: "builder", constructor: constructorBuilder);
-    //registerConstructor(className: regClassName, constructorName: "separatorBuilder", constructor: constructorSeparated);
-    //registerConstructor(className: regClassName, constructorName: "custom", constructor: constructorCustom);
   }
 
   @override
@@ -331,5 +370,110 @@ class XSProxyPullToRefreshSmartRefresher extends XSJsonObjProxy {
       scrollDirection: XSJSParse.getAxis(context, bo, map, "scrollDirection"),
       scrollController: XSJSParse.getObject(context, bo, map, "scrollController"),
     );
+  }
+}
+
+//****** RefreshController ******
+class XSProxyPullToScrollController extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "PullToRefreshController";
+    return {
+      regClassName: () => XSProxyPullToScrollController()..init(className: regClassName)
+    };
+  }
+
+  @override
+  RefreshController constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return RefreshController(
+      initialRefreshStatus: XSPullToRefreshParse.getRefreshStatus(context, bo, map, "RefreshStatus"),
+      initialRefresh: XSJSParse.getBool(context, bo, map, "initialRefresh", defaultValue: false),
+      initialLoadStatus: XSPullToRefreshParse.getLoadStatus(context, bo, map, "initialLoadStatus"),
+    );
+  }
+
+  //mirrorObj 为一个AnimationController类的实例对象，把调用对象方法，路由到代理类
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map args, {InvokeCallback callback}) {
+    if (mirrorObj == null || !(mirrorObj is RefreshController)) {
+      return;
+    }
+
+    var sc = mirrorObj as RefreshController;
+
+    if (funcName == 'dispose') {
+      sc.dispose();
+      return;
+    }
+
+    if (funcName == 'loadComplete') {
+      sc.loadComplete();
+      return;
+    }
+
+    if (funcName == 'loadFailed') {
+      sc.loadFailed();
+      return;
+    }
+
+    if (funcName == 'loadNoData') {
+      sc.loadNoData();
+      return;
+    }
+
+    if (funcName == 'refreshCompleted') {
+      sc.refreshCompleted(
+        resetFooterState: XSJSParse.getBool(null, null, args, "resetFooterState"),
+      );
+      return;
+    }
+
+    if (funcName == 'refreshFailed') {
+      sc.refreshFailed();
+      return;
+    }
+
+    if (funcName == 'refreshToIdle') {
+      sc.refreshToIdle();
+      return;
+    }
+
+    if (funcName == 'requestLoading') {
+      sc.requestLoading(
+        needMove: XSJSParse.getBool(null, null, args, "needMove", defaultValue: true),
+        duration: XSJSParse.getDuration(null, null, args, "duration", defaultValue: const Duration(milliseconds: 500)),
+        curve: XSJSParse.getCurve(null, null, args, "curve", defaultValue: Curves.linear),
+      );
+      return;
+    }
+
+    if (funcName == 'requestRefresh') {
+      sc.requestRefresh(
+        needMove: XSJSParse.getBool(null, null, args, "needMove", defaultValue: true),
+        duration: XSJSParse.getDuration(null, null, args, "duration", defaultValue: const Duration(milliseconds: 500)),
+        curve: XSJSParse.getCurve(null, null, args, "curve", defaultValue: Curves.linear),
+      );
+      return;
+    }
+
+    if (funcName == 'requestTwoLevel') {
+      sc.requestTwoLevel(
+        duration: XSJSParse.getDuration(null, null, args, "duration", defaultValue: const Duration(milliseconds: 500)),
+        curve: XSJSParse.getCurve(null, null, args, "curve", defaultValue: Curves.linear),
+      );
+      return;
+    }
+
+    if (funcName == 'resetNoData') {
+      sc.resetNoData();
+      return;
+    }
+
+    if (funcName == 'twoLevelComplete') {
+      sc.twoLevelComplete(
+        duration: XSJSParse.getDuration(null, null, args, "duration", defaultValue: const Duration(milliseconds: 500)),
+        curve: XSJSParse.getCurve(null, null, args, "curve", defaultValue: Curves.linear),
+      );
+      return;
+    }
   }
 }

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'xs_js_parse.dart';
 import 'xs_json_to_dart.dart';
 import 'xs_build_owner.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class XSProxyRegisterHelperImageSeries {
   static Map<String, CreateJsonObjProxyFun> registerProxys() {
@@ -15,6 +16,7 @@ class XSProxyRegisterHelperImageSeries {
     m.addAll(XSProxyRawImage.registerProxy());
 
     m.addAll(XSProxyImage.registerProxy());
+    m.addAll(XSProxyCachedNetworkImage.registerProxy());
 
     return m;
   }
@@ -188,6 +190,45 @@ class XSProxyRawImage extends XSJsonObjProxy {
       invertColors: XSJSParse.getBool(context, bo, map, "invertColors", defaultValue: false),
       filterQuality: XSJSParse.getFilterQuality(context, bo, map, "filterQuality", defaultValue: FilterQuality.low),
       isAntiAlias: XSJSParse.getBool(context, bo, map, "isAntiAlias", defaultValue: false),
+    );
+  }
+}
+
+//****** CachedNetworkImage ******
+class XSProxyCachedNetworkImage extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "CachedNetworkImage";
+    return {
+      regClassName: () => XSProxyCachedNetworkImage()..init(className: regClassName)
+    };
+  }
+
+  @override
+  CachedNetworkImage constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return CachedNetworkImage(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      imageUrl: XSJSParse.getString(context, bo, map, "imageUrl"),
+      httpHeaders: XSJSParse.getMap(context, bo, map, "httpHeaders"),
+      placeholder: (BuildContext context, String url) => XSJSParse.getWidget(context, bo, map, "placeholder"),
+      errorWidget: (BuildContext context, String url, dynamic error) => XSJSParse.getWidget(context, bo, map, "errorWidget"),
+      fadeOutDuration: XSJSParse.getDuration(context, bo, map, "fadeOutDuration", defaultValue: const Duration(milliseconds: 1000)),
+      fadeOutCurve: XSJSParse.getCurve(context, bo, map, "fadeOutCurve", defaultValue: Curves.easeOut),
+      fadeInDuration: XSJSParse.getDuration(context, bo, map, "fadeInDuration", defaultValue: const Duration(milliseconds: 500)),
+      fadeInCurve: XSJSParse.getCurve(context, bo, map, "fadeInCurve", defaultValue: Curves.easeIn),
+      width: XSJSParse.getDouble(context, bo, map, "width"),
+      height: XSJSParse.getDouble(context, bo, map, "height"),
+      fit: XSJSParse.getBoxFit(context, bo, map, "fit"),
+      alignment: XSJSParse.getAlignment(context, bo, map, "alignment", defaultValue: Alignment.center),
+      repeat: XSJSParse.getImageRepeat(context, bo, map, "repeat", defaultValue: ImageRepeat.noRepeat),
+      matchTextDirection: XSJSParse.getBool(context, bo, map, "matchTextDirection", defaultValue: false),
+      useOldImageOnUrlChange: XSJSParse.getBool(context, bo, map, "useOldImageOnUrlChange", defaultValue: false),
+      color: XSJSParse.getColor(context, bo, map, "color"),
+      filterQuality: XSJSParse.getFilterQuality(context, bo, map, "filterQuality", defaultValue: FilterQuality.low),
+      colorBlendMode: XSJSParse.getBlendMode(context, bo, map, "colorBlendMode"),
+      placeholderFadeInDuration: XSJSParse.getDuration(context, bo, map, "placeholderFadeInDuration"),
+      memCacheWidth: XSJSParse.getInt(context, bo, map, "memCacheWidth"),
+      memCacheHeight: XSJSParse.getInt(context, bo, map, "memCacheHeight"),
+      cacheKey: XSJSParse.getString(context, bo, map, "cacheKey"),
     );
   }
 }

@@ -1,9 +1,15 @@
 {
 	"folders": [
 		{
+			"name": "XSFlutter",
 			"path": "XSFlutter"
 		},
 		{
+			"name": "assets",
+			"path": "Demo/assets"
+		},
+		{
+			"name": "Demo",
 			"path": "Demo"
 		}
 	],
