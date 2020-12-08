@@ -1,27 +1,823 @@
 
 import * as fs from "flutter_sdk";
 
-//#region ****** ShowDialog ******
-
-interface ShowAboutDialogConfig {
-  applicationName?:string;
-  applicationVersion?:string;
-  applicationIcon?:fs.Widget;
-  applicationLegalese?:string;
-  children?:Array<fs.Widget>;
-  useRootNavigator?:boolean;
-}
+//#region ****** Dialog ******
 
 interface ShowDialogConfig {
   barrierDismissible?:boolean;
   useSafeArea?:boolean;
   useRootNavigator?:boolean;
+  child:fs.Widget;
+}
+export class ShowDialog extends fs.Widget{
+  barrierDismissible?:boolean;
+  useSafeArea?:boolean;
+  useRootNavigator?:boolean;
   child?:fs.Widget;
+
+  /**
+     * @param config config: 
+        {
+          barrierDismissible?:boolean, 
+          useSafeArea?:boolean, 
+          useRootNavigator?:boolean, 
+          child:fs.Widget, 
+        }
+     */
+    constructor(config: ShowDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.barrierDismissible = config.barrierDismissible;
+        this.useSafeArea = config.useSafeArea;
+        this.useRootNavigator = config.useRootNavigator;
+        this.child = config.child;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          barrierDismissible?:boolean, 
+          useSafeArea?:boolean, 
+          useRootNavigator?:boolean, 
+          child:fs.Widget, 
+        }
+     */
+    static new(config: ShowDialogConfig){
+      return new ShowDialog(config);
+    }
 }
 
-export class ShowDialog extends fs.DartClass {
+interface ShowCupertinoDialogConfig {
+  barrierDismissible?:boolean;
+  useRootNavigator?:boolean;
+  child:fs.CupertinoAlertDialog;
+}
+export class ShowCupertinoDialog extends fs.Widget{
+  barrierDismissible?:boolean;
+  useRootNavigator?:boolean;
+  child?:fs.CupertinoAlertDialog;
 
-  static instance:ShowDialog;
+  /**
+     * @param config config: 
+        {
+          barrierDismissible?:boolean, 
+          useRootNavigator?:boolean, 
+          child:fs.CupertinoAlertDialog, 
+        }
+     */
+    constructor(config: ShowCupertinoDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.barrierDismissible = config.barrierDismissible;
+        this.useRootNavigator = config.useRootNavigator;
+        this.child = config.child;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          barrierDismissible?:boolean, 
+          useRootNavigator?:boolean, 
+          child:fs.CupertinoAlertDialog, 
+        }
+     */
+    static new(config: ShowCupertinoDialogConfig){
+      return new ShowCupertinoDialog(config);
+    }
+}
+
+interface ShowGeneralDialogConfig {
+  barrierDismissible?:boolean;
+  useRootNavigator?:boolean;
+  barrierLabel?:string;
+  barrierColor?:fs.Color;
+  transitionDuration?:fs.Duration;
+  child:fs.Widget;
+}
+export class ShowGeneralDialog extends fs.Widget{
+  barrierDismissible?:boolean;
+  useRootNavigator?:boolean;
+  barrierLabel?:string;
+  barrierColor?:fs.Color;
+  transitionDuration?:fs.Duration;
+  child?:fs.Widget;
+
+  /**
+     * @param config config: 
+        {
+          barrierDismissible?:boolean, 
+          useRootNavigator?:boolean, 
+          barrierLabel?:string, 
+          barrierColor?:fs.Color, 
+          transitionDuration?:fs.Duration, 
+          child:fs.Widget, 
+        }
+     */
+    constructor(config: ShowGeneralDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.barrierDismissible = config.barrierDismissible;
+        this.useRootNavigator = config.useRootNavigator;
+        this.barrierLabel = config.barrierLabel;
+        this.transitionDuration = config.transitionDuration;
+        this.child= config.child;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          barrierDismissible?:boolean, 
+          useRootNavigator?:boolean, 
+          barrierLabel?:string, 
+          barrierColor?:fs.Color, 
+          transitionDuration?:fs.Duration, 
+          child:fs.Widget, 
+        }
+     */
+    static new(config: ShowGeneralDialogConfig){
+      return new ShowGeneralDialog(config);
+    }
+}
+
+interface ShowBottomSheetConfig {
+  backgroundColor?:fs.Color;
+  elevation?:number;
+  shape?:fs.ShapeBorder;
+  clipBehavior?:fs.Clip;
+  child:fs.Widget;
+}
+export class ShowBottomSheet extends fs.Widget{
+  backgroundColor?:fs.Color;
+  elevation?:number;
+  shape?:fs.ShapeBorder;
+  clipBehavior?:fs.Clip;
+  child?:fs.Widget;
+
+  /**
+     * @param config config: 
+        {
+          backgroundColor?:fs.Color, 
+          elevation?:number, 
+          shape?:fs.ShapeBorder, 
+          clipBehavior?:fs.Clip, 
+          child:fs.Widget, 
+        }
+     */
+    constructor(config: ShowBottomSheetConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.backgroundColor = config.backgroundColor;
+        this.elevation = config.elevation;
+        this.shape = config.shape;
+        this.clipBehavior = config.clipBehavior;
+        this.child = config.child;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          backgroundColor?:fs.Color, 
+          elevation?:number, 
+          shape?:fs.ShapeBorder, 
+          clipBehavior?:fs.Clip, 
+          child:fs.Widget, 
+        }
+     */
+    static new(config: ShowBottomSheetConfig){
+      return new ShowBottomSheet(config);
+    }
+}
+
+interface ShowModalBottomSheetConfig {
+  backgroundColor?:fs.Color;
+  elevation?:number;
+  shape?:fs.ShapeBorder;
+  clipBehavior?:fs.Clip;
+  barrierColor?:fs.Color;
+  isScrollControlled?:boolean;
+  useRootNavigator?:boolean;
+  isDismissible?:boolean;
+  enableDrag?:boolean;
+  child:fs.Widget;
+}
+export class ShowModalBottomSheet extends fs.Widget{
+  backgroundColor?:fs.Color;
+  elevation?:number;
+  shape?:fs.ShapeBorder;
+  clipBehavior?:fs.Clip;
+  barrierColor?:fs.Color;
+  isScrollControlled?:boolean;
+  useRootNavigator?:boolean;
+  isDismissible?:boolean;
+  enableDrag?:boolean;
+  child?:fs.Widget;
+
+  /**
+     * @param config config: 
+        {
+          backgroundColor?:fs.Color, 
+          elevation?:number, 
+          shape?:fs.ShapeBorder, 
+          clipBehavior?:fs.Clip, 
+          barrierColor?:fs.Color, 
+          isScrollControlled?:boolean;, 
+          useRootNavigator?:boolean, 
+          isDismissible?:boolean, 
+          enableDrag?:boolean, 
+          child?:fs.Widget, 
+        }
+     */
+    constructor(config: ShowModalBottomSheetConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.backgroundColor = config.backgroundColor;
+        this.elevation = config.elevation;
+        this.shape = config.shape;
+        this.clipBehavior = config.clipBehavior;
+        this.barrierColor = config.barrierColor;
+        this.isScrollControlled = config.isScrollControlled;
+        this.useRootNavigator = config.useRootNavigator;
+        this.isDismissible = config.isDismissible;
+        this.enableDrag = config.enableDrag;
+        this.child = config.child;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          backgroundColor?:fs.Color, 
+          elevation?:number, 
+          shape?:fs.ShapeBorder, 
+          clipBehavior?:fs.Clip, 
+          barrierColor?:fs.Color, 
+          isScrollControlled?:boolean;, 
+          useRootNavigator?:boolean, 
+          isDismissible?:boolean, 
+          enableDrag?:boolean, 
+          child?:fs.Widget, 
+        }
+     */
+    static new(config: ShowModalBottomSheetConfig){
+      return new ShowModalBottomSheet(config);
+    }
+}
+
+interface ShowCupertinoModalPopupConfig {
+  useRootNavigator?:boolean;
+  semanticsDismissible?:boolean;
+  child:fs.Widget;
+}
+export class ShowCupertinoModalPopup extends fs.Widget{
+  useRootNavigator?:boolean;
+  semanticsDismissible?:boolean;
+  child?:fs.Widget;
+
+  /**
+     * @param config config: 
+        {
+          useRootNavigator?:boolean, 
+          semanticsDismissible?:boolean, 
+          child:fs.Widget, 
+        }
+     */
+    constructor(config: ShowCupertinoModalPopupConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.useRootNavigator = config.useRootNavigator;
+        this.semanticsDismissible = config.semanticsDismissible;
+        this.child = config.child;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          useRootNavigator?:boolean, 
+          semanticsDismissible?:boolean, 
+          child:fs.Widget, 
+        }
+     */
+    static new(config: ShowCupertinoModalPopupConfig){
+      return new ShowCupertinoModalPopup(config);
+    }
+}
+
+interface SimpleDialogButtonInfoConfig {
+  text?:string;
+  textStyle?:fs.TextStyle;
+}
+export class SimpleDialogButtonInfo extends fs.Widget{
+  text?:string;
+  textStyle?:fs.TextStyle;
+
+  /**
+     * @param config config: 
+        {
+          title?:string, 
+          textStyle?:fs.TextStyle,
+        }
+     */
+    constructor(config: SimpleDialogButtonInfoConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.text = config.text;
+        this.textStyle = config.textStyle;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          title?:string, 
+          textStyle?:fs.TextStyle,
+        }
+     */
+    static new(config: SimpleDialogButtonInfoConfig){
+      return new SimpleDialogButtonInfo(config);
+    }
+}
+
+//****** CustomAlertDialogAnimationType ******
+export enum CustomAlertDialogAnimationType {
+  fromRight = "fromRight",
+  fromLeft = "fromLeft",
+  fromTop = "fromTop",
+  fromBottom = "fromBottom",
+  grow = "grow",
+  shrink = "shrink",
+}
+
+interface CustomAlertDialogButtonConfig {
+  child?:fs.Widget;
+  width?:number;
+  height?:number;
+  bgColor?:fs.Color;
+  gradient?:fs.Gradient;
+  radius?:fs.BorderRadius;
+  onPressed?:fs.VoidCallback;
+}
+export class CustomAlertDialogButton extends fs.Widget{
+  child?:fs.Widget;
+  width?:number;
+  height?:number;
+  bgColor?:fs.Color;
+  gradient?:fs.Gradient;
+  radius?:fs.BorderRadius;
+  onPressed?:fs.VoidCallback;
+
+  /**
+     * @param config config: 
+        {
+          child?:fs.Widget, 
+          width?:number, 
+          height?:number, 
+          bgColor?:fs.Color, 
+          gradient?:fs.Gradient, 
+          radius?:fs.BorderRadius, 
+          onPressed?:fs.VoidCallback, 
+        }
+     */
+    constructor(config: CustomAlertDialogButtonConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.child = config.child;
+        this.width = config.width;
+        this.height = config.height;
+        this.bgColor = config.bgColor;
+        this.gradient = config.gradient;
+        this.radius = config.radius;
+        this.onPressed = config.onPressed;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          child?:fs.Widget, 
+          width?:number, 
+          height?:number, 
+          bgColor?:fs.Color, 
+          gradient?:fs.Gradient, 
+          radius?:fs.BorderRadius, 
+          onPressed?:fs.VoidCallback, 
+        }
+     */
+    static new(config: CustomAlertDialogButtonConfig){
+      return new CustomAlertDialogButton(config);
+    }
+}
+
+interface CustomAlertDialogStyleConfig {
+  animationType?:CustomAlertDialogAnimationType;
+  animationDuration?:fs.Duration;
+  alertBorder?:fs.ShapeBorder;
+  isCloseButton?:boolean;
+  isOverlayTapDismiss?:boolean;
+  backgroundColor?:fs.Color;
+  overlayColor?:fs.Color;
+  buttonSpace?:number;
+  titleHeight?:number;
+  titleStyle?:fs.TextStyle;
+  descStyle?:fs.TextStyle;
+  buttonAreaPadding?:fs.EdgeInsets;
+  constraints?:fs.BoxConstraints;
+}
+export class CustomAlertDialogStyle extends fs.Widget{
+  animationType?:CustomAlertDialogAnimationType;
+  animationDuration?:fs.Duration;
+  alertBorder?:fs.ShapeBorder;
+  isCloseButton?:boolean;
+  isOverlayTapDismiss?:boolean;
+  backgroundColor?:fs.Color;
+  overlayColor?:fs.Color;
+  buttonSpace?:number;
+  titleHeight?:number;
+  titleStyle?:fs.TextStyle;
+  descStyle?:fs.TextStyle;
+  buttonAreaPadding?:fs.EdgeInsets;
+  constraints?:fs.BoxConstraints;
+
+  /**
+     * @param config config: 
+        {
+          animationType?:CustomAlertDialogAnimationType, 
+          animationDuration?:fs.Duration, 
+          alertBorder?:fs.ShapeBorder, 
+          isCloseButton?:boolean, 
+          isOverlayTapDismiss?:boolean, 
+          backgroundColor?:fs.Color, 
+          overlayColor?:fs.Color, 
+          buttonSpace?:number, 
+          titleHeight?:number, 
+          titleStyle?:fs.TextStyle, 
+          descStyle?:fs.TextStyle, 
+          buttonAreaPadding?:fs.EdgeInsets, 
+          constraints?:fs.BoxConstraints, 
+        }
+     */
+    constructor(config: CustomAlertDialogStyleConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.animationType = config.animationType;
+        this.animationDuration = config.animationDuration;
+        this.alertBorder = config.alertBorder;
+        this.isCloseButton = config.isCloseButton;
+        this.isOverlayTapDismiss = config.isOverlayTapDismiss;
+        this.backgroundColor = config.backgroundColor;
+        this.overlayColor = config.overlayColor;
+        this.buttonSpace = config.buttonSpace;
+        this.titleHeight = config.titleHeight;
+        this.titleStyle = config.titleStyle;
+        this.descStyle = config.descStyle;
+        this.buttonAreaPadding = config.buttonAreaPadding;
+        this.constraints = config.constraints;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          animationType?:CustomAlertDialogAnimationType, 
+          animationDuration?:fs.Duration, 
+          alertBorder?:fs.ShapeBorder, 
+          isCloseButton?:boolean, 
+          isOverlayTapDismiss?:boolean, 
+          backgroundColor?:fs.Color, 
+          overlayColor?:fs.Color, 
+          buttonSpace?:number, 
+          titleHeight?:number, 
+          titleStyle?:fs.TextStyle, 
+          descStyle?:fs.TextStyle, 
+          buttonAreaPadding?:fs.EdgeInsets, 
+          constraints?:fs.BoxConstraints, 
+        }
+     */
+    static new(config: CustomAlertDialogStyleConfig){
+      return new CustomAlertDialogStyle(config);
+    }
+}
+
+
+interface ShowCustomAlertDialogConfig {
+  style?:CustomAlertDialogStyle;
+  image?:fs.Widget;
+  title?:string;
+  desc?:string;
+  content?:fs.Widget;
+  buttons?:Array<CustomAlertDialogButton>;
+  closeFunction?:fs.VoidCallback;
+}
+export class ShowCustomAlertDialog extends fs.Widget{
+  style?:CustomAlertDialogStyle;
+  image?:fs.Widget;
+  title?:string;
+  desc?:string;
+  content?:fs.Widget;
+  buttons?:Array<CustomAlertDialogButton>;
+  closeFunction?:fs.VoidCallback;
+
+  /**
+     * @param config config: 
+        {
+          style?:CustomAlertDialogStyle, 
+          image?:fs.Widget, 
+          title?:string, 
+          desc?:string, 
+          content?:fs.Widget, 
+          buttons?:Array<CustomAlertDialogButton>, 
+          closeFunction?:fs.VoidCallback, 
+        }
+     */
+    constructor(config: ShowCustomAlertDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.style = config.style;
+        this.image = config.image;
+        this.title = config.title;
+        this.desc = config.desc;
+        this.content = config.content;
+        this.buttons = config.buttons;
+        this.closeFunction= config.closeFunction;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          style?:CustomAlertDialogStyle, 
+          image?:fs.Widget, 
+          title?:string, 
+          desc?:string, 
+          content?:fs.Widget, 
+          buttons?:Array<CustomAlertDialogButton>, 
+          closeFunction?:fs.VoidCallback, 
+        }
+     */
+    static new(config: ShowCustomAlertDialogConfig){
+      return new ShowCustomAlertDialog(config);
+    }
+}
+
+interface SimpleCustomDialogButtonInfoConfig {
+  text?:string;
+  textStyle?:fs.TextStyle;
+  bgColor?:fs.Color;
+}
+export class SimpleCustomDialogButtonInfo extends fs.Widget{
+  text?:string;
+  textStyle?:fs.TextStyle;
+  bgColor?:fs.Color;
+
+  /**
+     * @param config config: 
+        {
+          title?:string, 
+          textStyle?:fs.TextStyle,
+          bgColor?:fs.Color,
+        }
+     */
+    constructor(config: SimpleCustomDialogButtonInfoConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.text = config.text;
+        this.textStyle = config.textStyle;
+        this.bgColor = config.bgColor;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          title?:string, 
+          textStyle?:fs.TextStyle,
+          bgColor?:fs.Color,
+        }
+     */
+    static new(config: SimpleCustomDialogButtonInfoConfig){
+      return new SimpleCustomDialogButtonInfo(config);
+    }
+}
+
+interface ShowSimpleCustomDialogConfig {
+  style?:CustomAlertDialogStyle;
+  image?:fs.Widget;
+  title?:string;
+  desc?:string;
+  content?:fs.Widget;
+  buttons?:Array<SimpleCustomDialogButtonInfo>;
+  onTap?:fs.VoidCallbackNumber;
+}
+export class ShowSimpleCustomDialog extends fs.Widget{
+  style?:CustomAlertDialogStyle;
+  image?:fs.Widget;
+  title?:string;
+  desc?:string;
+  content?:fs.Widget;
+  buttons?:Array<SimpleCustomDialogButtonInfo>;
+  onTap?:fs.VoidCallbackNumber;
+
+  /**
+     * @param config config: 
+        {
+          style?:CustomAlertDialogStyle, 
+          image?:fs.Widget, 
+          title?:string, 
+          desc?:string, 
+          content?:fs.Widget, 
+          buttons?:Array<CustomDialogButtonInfo>, 
+          onTap?:fs.VoidCallbackNumber, 
+        }
+     */
+    constructor(config: ShowSimpleCustomDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.style = config.style;
+        this.image = config.image;
+        this.title = config.title;
+        this.desc = config.desc;
+        this.content = config.content;
+        this.buttons = config.buttons;
+        this.onTap = config.onTap;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          style?:CustomAlertDialogStyle, 
+          image?:fs.Widget, 
+          title?:string, 
+          desc?:string, 
+          content?:fs.Widget, 
+          buttons?:Array<CustomDialogButtonInfo>, 
+          onTap?:fs.VoidCallbackNumber, 
+        }
+     */
+    static new(config: ShowSimpleCustomDialogConfig){
+      return new ShowSimpleCustomDialog(config);
+    }
+}
+
+
+interface ShowSimpleDialogConfig {
+  title?:string;
+  titleContent?:fs.Widget;
+  desc?:string;
+  descContent?:fs.Widget;
+  buttons?:Array<SimpleDialogButtonInfo>;
+  onTap?:fs.VoidCallbackNumber;
+  barrierDismissible?:boolean;
+}
+export class ShowSimpleDialog extends fs.Widget{
+  title?:string;
+  titleContent?:fs.Widget;
+  desc?:string;
+  descContent?:fs.Widget;
+  buttons?:Array<SimpleDialogButtonInfo>;
+  onTap?:fs.VoidCallbackNumber;
+  barrierDismissible?:boolean;
+
+  /**
+     * @param config config: 
+        {
+          title?:string, 
+          titleContent?:fs.Widget,
+          desc?:string,
+          descContent?:fs.Widget,
+          buttons:Array<SimpleDialogButtonInfo>,
+          onTap?:fs.VoidCallbackNumber,
+          barrierDismissible?:boolean,
+        }
+     */
+    constructor(config: ShowSimpleDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.title = config.title;
+        this.titleContent = config.titleContent;
+        this.desc = config.desc;
+        this.descContent = config.descContent;
+        this.buttons = config.buttons;
+        this.onTap = config.onTap;
+        this.barrierDismissible = config.barrierDismissible;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          title?:string, 
+          titleContent?:fs.Widget,
+          desc?:string,
+          descContent?:fs.Widget,
+          buttons:Array<SimpleDialogButtonInfo>,
+          onTap?:fs.VoidCallbackNumber,
+          barrierDismissible?:boolean,
+        }
+     */
+    static new(config: ShowSimpleDialogConfig){
+      return new ShowSimpleDialog(config);
+    }
+}
+
+interface ShowCustomActionSheetConfig {
+  title?:string;
+  titleContent?:fs.Widget;
+  itemList:Array<string>;
+  onTap:fs.VoidCallbackNumber;
+}
+export class ShowCustomActionSheet extends fs.Widget{
+  title?:string;
+  titleContent?:fs.Widget;
+  itemList?:Array<string>;
+  onTap?:fs.VoidCallbackNumber;
+
+  /**
+     * @param config config: 
+        {
+          title?:string, 
+          titleContent?:fs.Widget, 
+          itemList:Array<string>, 
+          onTap:fs.VoidCallbackNumber, 
+        }
+     */
+    constructor(config: ShowCustomActionSheetConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.title = config.title;
+        this.titleContent = config.titleContent;
+        this.itemList = config.itemList;
+        this.onTap = config.onTap;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          title?:string, 
+          titleContent?:fs.Widget, 
+          itemList:Array<string>, 
+          onTap:fs.VoidCallbackNumber, 
+        }
+     */
+    static new(config: ShowCustomActionSheetConfig){
+      return new ShowCustomActionSheet(config);
+    }
+}
+
+interface ShowSimpleActionSheetConfig {
+  title?:string;
+  titleContent?:fs.Widget;
+  itemList:Array<string>;
+  onTap:fs.VoidCallbackNumber;
+}
+export class ShowSimpleActionSheet extends fs.Widget{
+  title?:string;
+  titleContent?:fs.Widget;
+  itemList?:Array<string>;
+  onTap?:fs.VoidCallbackNumber;
+
+  /**
+     * @param config config: 
+        {
+          title?:string, 
+          titleContent?:fs.Widget, 
+          itemList:Array<string>, 
+          onTap:fs.VoidCallbackNumber, 
+        }
+     */
+    constructor(config: ShowSimpleActionSheetConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.title = config.title;
+        this.titleContent = config.titleContent;
+        this.itemList = config.itemList;
+        this.onTap = config.onTap;
+      }
+    }
+      
+    /**
+     * @param config config: 
+        {
+          title?:string, 
+          titleContent?:fs.Widget, 
+          itemList:Array<string>, 
+          onTap:fs.VoidCallbackNumber, 
+        }
+     */
+    static new(config: ShowSimpleActionSheetConfig){
+      return new ShowSimpleActionSheet(config);
+    }
+}
+
+
+export class Dialog extends fs.DartClass {
+
+  static instance:Dialog;
 
   constructor() {
       super();
@@ -34,70 +830,88 @@ export class ShowDialog extends fs.DartClass {
 
   static getInstance() {
     if (!this.instance) {
-      this.instance = new ShowDialog();
+      this.instance = new Dialog();
     }
     return this.instance;
   }
- 
-  /**
-   * @param config config: 
-    {
-      applicationName?:string, 
-      applicationVersion?:string, 
-      applicationIcon?:fs.Widget, 
-      applicationLegalese?:string, 
-      children?:Array<fs.Widget>, 
-      useRootNavigator?:boolean,
-    }
-   */
-  static showAboutDialog(config:ShowAboutDialogConfig){
-    ShowDialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
-          mirrorID: ShowDialog.getInstance().mirrorID,
-          className: ShowDialog.getInstance().className,
-          funcName: "showAboutDialog",
-          args: config,
-      }));
-  }
 
-  /**
-   * @param config config: 
-    {
-        barrierDismissible?:boolean, 
-        useSafeArea?:boolean, 
-        useRootNavigator?:boolean, 
-        child?:fs.Widget, 
-    }
-   */
-  static showDialog(baseWidget:fs.BaseWidget,config:ShowDialogConfig){
-    ShowDialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+  //显示简单选择
+  _show(baseWidget:fs.BaseWidget,funcName:string,child:any){
+    Dialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
           widgetID:String(baseWidget.widgetID),
-          mirrorID: ShowDialog.getInstance().mirrorID,
-          className: ShowDialog.getInstance().className,
-          funcName: "showDialog",
+          mirrorID: Dialog.getInstance().mirrorID,
+          className: Dialog.getInstance().className,
+          funcName: funcName,
           args:{
             widgetID:String(baseWidget.widgetID),
-            barrierDismissible: config.barrierDismissible,
-            useRootNavigator: config.useRootNavigator,
-            useSafeArea: config.useSafeArea,
-            child:baseWidget.helper.buildWidgetTreeSubWidget(config.child),
+            child:baseWidget.helper.buildWidgetTreeSubWidget(child),
           },
       }));
   }
 
+  static showDialog(baseWidget:fs.BaseWidget,child:ShowDialog){
+    Dialog.getInstance()._show(baseWidget,"showDialog",child);
+  }
+
+  static showCupertinoDialog(baseWidget:fs.BaseWidget,child:ShowCupertinoDialog){
+    Dialog.getInstance()._show(baseWidget,"showCupertinoDialog",child);
+  }
+
+  static showGeneralDialog(baseWidget:fs.BaseWidget,child:ShowGeneralDialog){
+    Dialog.getInstance()._show(baseWidget,"showGeneralDialog",child);
+  }
+
+  static showBottomSheet(baseWidget:fs.BaseWidget,child:ShowBottomSheet){
+    Dialog.getInstance()._show(baseWidget,"showBottomSheet",child);
+  }
+
+  static showModalBottomSheet(baseWidget:fs.BaseWidget,child:ShowModalBottomSheet){
+    Dialog.getInstance()._show(baseWidget,"showBottshowModalBottomSheetomSheet",child);
+  }
+
+  static showCupertinoModalPopup(baseWidget:fs.BaseWidget,child:ShowCupertinoModalPopup){
+    Dialog.getInstance()._show(baseWidget,"showCupertinoModalPopup",child);
+  }  
+  
+  static showCustomActionSheet(baseWidget:fs.BaseWidget,child:ShowCustomActionSheet){
+    Dialog.getInstance()._show(baseWidget,"showCustomActionSheet",child);
+  }
+
+  static showSimpleActionSheet(baseWidget:fs.BaseWidget,child:ShowSimpleActionSheet){
+    Dialog.getInstance()._show(baseWidget,"showSimpleActionSheet",child);
+  }
+
+  static showSimpleCupertinoDialog(baseWidget:fs.BaseWidget,child:ShowSimpleDialog){
+    Dialog.getInstance()._show(baseWidget,"showSimpleCupertinoDialog",child);
+  }
+
+  static showSimpleAlertDialog(baseWidget:fs.BaseWidget,child:ShowSimpleDialog){
+    Dialog.getInstance()._show(baseWidget,"showSimpleAlertDialog",child);
+  }
+
+  static showSimpleCustomDialog(baseWidget:fs.BaseWidget,child:ShowSimpleCustomDialog){
+    Dialog.getInstance()._show(baseWidget,"showSimpleCustomDialog",child);
+  }
+
+  static showCustomAlertDialog(baseWidget:fs.BaseWidget,child:ShowCustomAlertDialog){
+    Dialog.getInstance()._show(baseWidget,"showCustomAlertDialog",child);
+  }
+
 
   static dismiss(baseWidget:fs.BaseWidget){
-    ShowDialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+    Dialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
           widgetID:String(baseWidget.widgetID),
-          mirrorID: ShowDialog.getInstance().mirrorID,
-          className: ShowDialog.getInstance().className,
+          mirrorID: Dialog.getInstance().mirrorID,
+          className: Dialog.getInstance().className,
           funcName: "dismiss",
           args:{
             widgetID:String(baseWidget.widgetID),
           },
       }));
   }
-
 }
+
+
 //#endregion
 
 

@@ -6,7 +6,7 @@
  * @Description: JS Flutter SDK
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EmptyDataWidget = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverOpacity = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverChildDelegate = exports.SliverGridDelegateWithFixedCrossAxisCount = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGridDelegate = exports.SliverGrid = exports.SliverPadding = exports.SliverFillRemaining = exports.SliverFillViewport = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LicensePage = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.AboutDialog = exports.AboutListTile = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.Offset = exports.Notification = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.ScrollViewKeyboardDismissBehavior = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
+exports.EmptyDataWidget = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoDialogAction = exports.CupertinoButton = exports.CupertinoAlertDialog = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverOpacity = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverChildDelegate = exports.SliverGridDelegateWithFixedCrossAxisCount = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGridDelegate = exports.SliverGrid = exports.SliverPadding = exports.SliverFillRemaining = exports.SliverFillViewport = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LabelTitle = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.IconSpan = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.CheckboxEx = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.Offset = exports.Notification = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.ImageFilter = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.ScrollViewKeyboardDismissBehavior = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -2908,6 +2908,28 @@ class SweepGradient extends Gradient {
     }
 }
 exports.SweepGradient = SweepGradient;
+class ImageFilter extends DartClass {
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.sigmaX = config.sigmaX;
+            this.sigmaY = config.sigmaY;
+        }
+    }
+    static new(config) {
+        return new ImageFilter(config);
+    }
+    static blur(config) {
+        let v = new ImageFilter();
+        v.constructorName = "blur";
+        if (config != null && config != undefined) {
+            v.sigmaX = config.sigmaX;
+            v.sigmaY = config.sigmaY;
+        }
+        return v;
+    }
+}
+exports.ImageFilter = ImageFilter;
 class ImageProvider extends DartClass {
     /**
      * @param config config:
@@ -6760,93 +6782,6 @@ class Animation extends Widget {
     }
 }
 exports.Animation = Animation;
-class AboutListTile extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          icon?:Widget,
-          applicationName?:string,
-          applicationLegalese?:string,
-          applicationVersion?:string,
-          dense?:boolean,
-          applicationIcon?:Widget,
-          aboutBoxChildren?:Array<Widget>,
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.key = config.key;
-            this.child = config.child;
-            this.icon = config.icon;
-            this.applicationIcon = config.applicationIcon;
-            this.applicationName = config.applicationName;
-            this.applicationLegalese = config.applicationLegalese;
-            this.applicationVersion = config.applicationVersion;
-            this.dense = config.dense;
-            this.aboutBoxChildren = config.aboutBoxChildren;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          icon?:Widget,
-          applicationName?:string,
-          applicationLegalese?:string,
-          applicationVersion?:string,
-          dense?:boolean,
-          applicationIcon?:Widget,
-          aboutBoxChildren?:Array<Widget>,
-        }
-     */
-    static new(config) {
-        return new AboutListTile(config);
-    }
-}
-exports.AboutListTile = AboutListTile;
-class AboutDialog extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          applicationName?:string,
-          applicationLegalese?:string,
-          applicationVersion?:string,
-          applicationIcon?:Widget,
-          children?:Array<Widget>,
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.key = config.key;
-            this.applicationIcon = config.applicationIcon;
-            this.applicationName = config.applicationName;
-            this.applicationLegalese = config.applicationLegalese;
-            this.applicationVersion = config.applicationVersion;
-            this.children = config.children;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          applicationName?:string,
-          applicationLegalese?:string,
-          applicationVersion?:string,
-          applicationIcon?:Widget,
-          children?:Array<Widget>,
-        }
-     */
-    static new(config) {
-        return new AboutDialog(config);
-    }
-}
-exports.AboutDialog = AboutDialog;
 class AppBar extends Widget {
     /**
      * @param config config:
@@ -8228,6 +8163,54 @@ class Checkbox extends Widget {
     }
 }
 exports.Checkbox = Checkbox;
+class CheckboxEx extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          value:boolean,
+          tristate?:boolean,
+          onChanged:VoidCallbackBoolean,
+          activeColor?:Color,
+          width?:number,
+          checkColor?:Color,
+          isCircle?:boolean,
+          strokeWidth?:number,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.tristate = config.tristate;
+            this.onChanged = config.onChanged;
+            this.activeColor = config.activeColor;
+            this.width = config.width;
+            this.checkColor = config.checkColor;
+            this.isCircle = config.isCircle;
+            this.strokeWidth = config.strokeWidth;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          value:boolean,
+          tristate?:boolean,
+          onChanged:VoidCallbackBoolean,
+          activeColor?:Color,
+          width?:number,
+          checkColor?:Color,
+          isCircle?:boolean,
+          strokeWidth?:number,
+        }
+     */
+    static new(config) {
+        return new CheckboxEx(config);
+    }
+}
+exports.CheckboxEx = CheckboxEx;
 class ClipRRect extends Widget {
     /**
      * @param config config:
@@ -9926,6 +9909,36 @@ class InputDecorator extends Widget {
     }
 }
 exports.InputDecorator = InputDecorator;
+class IconSpan extends Widget {
+    /**
+     * @param config config:
+      {
+        icon:IconData,
+        color?:Color,
+        fontSize?:number,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.icon = config.icon;
+            this.color = config.color;
+            this.fontSize = config.fontSize;
+        }
+    }
+    /**
+     * @param config config:
+      {
+        cicon:IconData,
+        color?:Color,
+        fontSize?:number,
+      }
+     */
+    static new(config) {
+        return new IconSpan(config);
+    }
+}
+exports.IconSpan = IconSpan;
 class IndexedSemantics extends Widget {
     /**
      * @param config config:
@@ -10722,42 +10735,42 @@ class KeyedSubtree extends Widget {
     }
 }
 exports.KeyedSubtree = KeyedSubtree;
-class LicensePage extends Widget {
+class LabelTitle extends Widget {
     /**
      * @param config config:
         {
           key?:Key,
-          applicationName?:string,
-          applicationLegalese?:string,
-          applicationVersion?:string,
-          applicationIcon?:Widget,
+          label?:string,
+          labelStyle?:TextStyle,
+          title?:string,
+          titleStyle?:TextStyle,
         }
      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
             this.key = config.key;
-            this.applicationIcon = config.applicationIcon;
-            this.applicationName = config.applicationName;
-            this.applicationLegalese = config.applicationLegalese;
-            this.applicationVersion = config.applicationVersion;
+            this.label = config.label;
+            this.labelStyle = config.labelStyle;
+            this.title = config.title;
+            this.titleStyle = config.titleStyle;
         }
     }
     /**
      * @param config config:
         {
           key?:Key,
-          applicationName?:string,
-          applicationLegalese?:string,
-          applicationVersion?:string,
-          applicationIcon?:Widget,
+          label?:string,
+          labelStyle?:TextStyle,
+          title?:string,
+          titleStyle?:TextStyle,
         }
      */
     static new(config) {
-        return new LicensePage(config);
+        return new LabelTitle(config);
     }
 }
-exports.LicensePage = LicensePage;
+exports.LabelTitle = LabelTitle;
 class LimitedBox extends Widget {
     /**
      * @param config config:
@@ -15411,6 +15424,51 @@ class CupertinoActivityIndicator extends Widget {
     }
 }
 exports.CupertinoActivityIndicator = CupertinoActivityIndicator;
+class CupertinoAlertDialog extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          title?:Widget,
+          content?:Widget,
+          actions?:Array<CupertinoDialogAction>,
+          scrollController?:ScrollController,
+          actionScrollController?:ScrollController,
+          insetAnimationDuration?:Duration,
+          insetAnimationCurve?:Curve,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.title = config.title;
+            this.content = config.content;
+            this.actions = config.actions;
+            this.scrollController = config.scrollController;
+            this.actionScrollController = config.actionScrollController;
+            this.insetAnimationDuration = config.insetAnimationDuration;
+            this.insetAnimationCurve = config.insetAnimationCurve;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          title?:Widget,
+          content?:Widget,
+          actions?:Array<CupertinoDialogAction>,
+          scrollController?:ScrollController,
+          actionScrollController?:ScrollController,
+          insetAnimationDuration?:Duration,
+          insetAnimationCurve?:Curve,
+        }
+     */
+    static new(config) {
+        return new CupertinoAlertDialog(config);
+    }
+}
+exports.CupertinoAlertDialog = CupertinoAlertDialog;
 class CupertinoButton extends Widget {
     /**
      * @param config config:
@@ -15477,6 +15535,45 @@ class CupertinoButton extends Widget {
     }
 }
 exports.CupertinoButton = CupertinoButton;
+class CupertinoDialogAction extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          isDefaultAction?:boolean,
+          isDestructiveAction?:boolean,
+          onPressed?:VoidCallback,
+          child:Widget,
+          textStyle?:TextStyle,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.onPressed = config.onPressed;
+            this.isDefaultAction = config.isDefaultAction;
+            this.isDestructiveAction = config.isDestructiveAction;
+            this.textStyle = config.textStyle;
+            this.child = config.child;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          isDefaultAction?:boolean,
+          isDestructiveAction?:boolean,
+          onPressed?:VoidCallback,
+          child:Widget,
+          textStyle?:TextStyle,
+        }
+     */
+    static new(config) {
+        return new CupertinoDialogAction(config);
+    }
+}
+exports.CupertinoDialogAction = CupertinoDialogAction;
 class CupertinoNavigationBar extends Widget {
     /**
      * @param config config:

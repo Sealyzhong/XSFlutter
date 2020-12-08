@@ -925,6 +925,19 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** TextStyle<Color> ******/
+  static List<TextStyle> getTextStyleList(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {List<TextStyle> defaultValue}) {
+    var li = _getList(map, key);
+    if (li != null && li.length > 0) {
+      List<TextStyle> list = List<TextStyle>();
+      for (var a in li) {
+        list.add(getTextStyleNoKey(context, bo, a));
+      }
+      return list;
+    }
+    return defaultValue;
+  }
+
   //****** CrossAxisAlignment ******/
   static CrossAxisAlignment getCrossAxisAlignment(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {CrossAxisAlignment defaultValue}) {
     var v = _getString(map, key);
@@ -5372,8 +5385,8 @@ class XSJSParse {
   }
 
   //****** TextStyle ******/
-  static TextStyle getTextStyle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextStyle defaultValue}) {
-    var v = _getMap(map, key);
+  static TextStyle getTextStyleNoKey(BuildContext context, XSJsonBuildOwner bo, Map map, {TextStyle defaultValue}) {
+    var v = map;
     if (v != null) {
       return TextStyle(
         inherit: getBool(context, bo, v, "inherit", defaultValue: true),
@@ -5399,6 +5412,10 @@ class XSJSParse {
       );
     }
     return defaultValue;
+  }
+
+  static TextStyle getTextStyle(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextStyle defaultValue}) {
+    return getTextStyleNoKey(context, bo, _getMap(map, key), defaultValue: defaultValue);
   }
 
   //****** TableBorder ******/

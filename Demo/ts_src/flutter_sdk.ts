@@ -3726,6 +3726,39 @@ export class SweepGradient extends Gradient {
 
 //#region ------- I -------
 
+//****** ImageFilter ******
+interface ImageFilterBlurConfig {
+  sigmaX?:number;
+  sigmaY?:number;
+}
+export class ImageFilter extends DartClass {
+  sigmaX?:number;
+  sigmaY?:number;
+
+  constructor(config?:ImageFilterBlurConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.sigmaX = config.sigmaX;
+      this.sigmaY = config.sigmaY;
+    }
+  }
+
+  static new(config?:ImageFilterBlurConfig) {
+    return new ImageFilter(config);
+   }
+
+  static blur(config?:ImageFilterBlurConfig) {
+    let v = new ImageFilter();
+    v.constructorName = "blur";
+    if(config!=null && config!=undefined){
+      v.sigmaX = config.sigmaX;
+      v.sigmaY = config.sigmaY;
+    }
+    return v;
+  }
+}
+
+
 //#region ImageProvider
 interface ImageProviderConfig {
   scale?:number;
@@ -8660,132 +8693,7 @@ export class CupertinoIcons extends IconData{
   }
   
   
-  //****** AboutListTile ******
-  interface AboutListTileConfig {
-    key?:Key;
-    child?:Widget;
-    icon?:Widget;
-    applicationName?:string;
-    applicationLegalese?:string;
-    applicationVersion?:string;
-    dense?:boolean;
-    applicationIcon?:Widget;
-    aboutBoxChildren?:Array<Widget>;
-  }
-  export class AboutListTile extends Widget {
-    key?:Key;
-    child?:Widget;
-    icon?:Widget;
-    applicationName?:string;
-    applicationLegalese?:string;
-    applicationVersion?:string;
-    dense?:boolean;
-    applicationIcon?:Widget;
-    aboutBoxChildren?:Array<Widget>;
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          icon?:Widget, 
-          applicationName?:string, 
-          applicationLegalese?:string, 
-          applicationVersion?:string, 
-          dense?:boolean, 
-          applicationIcon?:Widget, 
-          aboutBoxChildren?:Array<Widget>, 
-        }
-     */
-    constructor(config: AboutListTileConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.key = config.key;
-        this.child = config.child;
-        this.icon = config.icon;
-        this.applicationIcon = config.applicationIcon;
-        this.applicationName = config.applicationName;
-        this.applicationLegalese = config.applicationLegalese;
-        this.applicationVersion = config.applicationVersion;
-        this.dense = config.dense;
-        this.aboutBoxChildren = config.aboutBoxChildren;
-      }
-    }
-      
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          icon?:Widget, 
-          applicationName?:string, 
-          applicationLegalese?:string, 
-          applicationVersion?:string, 
-          dense?:boolean, 
-          applicationIcon?:Widget, 
-          aboutBoxChildren?:Array<Widget>, 
-        }
-     */
-    static new(config: AboutListTileConfig){
-      return new AboutListTile(config);
-    }
-  }
-  
-  //****** AboutDialog ******
-  interface AboutDialogConfig {
-    key?:Key;
-    applicationName?:string;
-    applicationLegalese?:string;
-    applicationVersion?:string;
-    applicationIcon?:Widget;
-    children?:Array<Widget>;
-  }
-  export class AboutDialog extends Widget {
-    key?:Key;
-    applicationName?:string;
-    applicationLegalese?:string;
-    applicationVersion?:string;
-    applicationIcon?:Widget;
-    children?:Array<Widget>;
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          applicationName?:string, 
-          applicationLegalese?:string, 
-          applicationVersion?:string, 
-          applicationIcon?:Widget, 
-          children?:Array<Widget>, 
-        }
-     */
-    constructor(config: AboutDialogConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.key = config.key;
-        this.applicationIcon = config.applicationIcon;
-        this.applicationName = config.applicationName;
-        this.applicationLegalese = config.applicationLegalese;
-        this.applicationVersion = config.applicationVersion;
-        this.children = config.children;
-      }
-    }
-      
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          applicationName?:string, 
-          applicationLegalese?:string, 
-          applicationVersion?:string, 
-          applicationIcon?:Widget, 
-          children?:Array<Widget>, 
-        }
-     */
-    static new(config: AboutDialogConfig){
-      return new AboutDialog(config);
-    }
-  }
+
   
   //****** AppBar ******
   interface AppBarConfig {
@@ -10820,6 +10728,78 @@ export class CupertinoIcons extends IconData{
       return new Checkbox(config);
     }
   }
+
+  //****** CheckboxEx ******
+  interface CheckboxExConfig {
+    key?:Key;
+    value:boolean;
+    tristate?:boolean;
+    onChanged:VoidCallbackBoolean;
+    activeColor?:Color;
+    width?:number;
+    checkColor?:Color;
+    isCircle?:boolean;
+    strokeWidth?:number;
+  }
+  export class CheckboxEx extends Widget {
+    key?:Key;
+    value?:boolean;
+    tristate?:boolean;
+    onChanged?:VoidCallbackBoolean;
+    activeColor?:Color;
+    width?:number;
+    checkColor?:Color;
+    isCircle?:boolean;
+    strokeWidth?:number;
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          value:boolean, 
+          tristate?:boolean, 
+          onChanged:VoidCallbackBoolean, 
+          activeColor?:Color, 
+          width?:number, 
+          checkColor?:Color, 
+          isCircle?:boolean, 
+          strokeWidth?:number, 
+        }
+     */
+    constructor(config: CheckboxExConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.value = config.value;
+        this.tristate = config.tristate;
+        this.onChanged = config.onChanged;
+        this.activeColor = config.activeColor;
+        this.width = config.width;
+        this.checkColor = config.checkColor;
+        this.isCircle = config.isCircle;
+        this.strokeWidth = config.strokeWidth;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          value:boolean, 
+          tristate?:boolean, 
+          onChanged:VoidCallbackBoolean, 
+          activeColor?:Color, 
+          width?:number, 
+          checkColor?:Color, 
+          isCircle?:boolean, 
+          strokeWidth?:number, 
+        }
+     */
+    static new(config: CheckboxExConfig) {
+      return new CheckboxEx(config);
+    }
+  }
+  
   
   
   //****** TODO ClipRRect ******
@@ -13298,6 +13278,47 @@ export class CupertinoIcons extends IconData{
       return new InputDecorator(config);
     }
   }
+
+   //****** IconSpan ******
+  //TODO:recognizer => GestureRecognizer
+  interface IconSpanConfig {
+    icon:IconData;
+    color?:Color;
+    fontSize?:number;
+  }
+  export class IconSpan extends Widget {
+    icon?:IconData;
+    color?:Color;
+    fontSize?:number;
+    /**
+     * @param config config: 
+      {
+        icon:IconData, 
+        color?:Color, 
+        fontSize?:number, 
+      }
+     */
+    constructor(config: IconSpanConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.icon = config.icon;
+        this.color = config.color;
+        this.fontSize = config.fontSize;
+      }
+    }
+    
+    /**
+     * @param config config: 
+      {
+        cicon:IconData, 
+        color?:Color, 
+        fontSize?:number, 
+      }
+     */
+    static new(config: IconSpanConfig) {
+      return new IconSpan(config);
+    }
+  }
   
   //****** IndexedSemantics ******
   interface IndexedSemanticsConfig {
@@ -14413,39 +14434,39 @@ export class CupertinoIcons extends IconData{
   //#endregion
   
   //#region ------- L -------
-  //****** LicensePage ******
-  interface LicensePageConfig {
+  //****** LabelTitle ******
+  interface LabelTitleConfig {
     key?:Key;
-    applicationName?:string;
-    applicationLegalese?:string;
-    applicationVersion?:string;
-    applicationIcon?:Widget;
+    label?:string;
+    labelStyle?:TextStyle;
+    title?:string;
+    titleStyle?:TextStyle;
   }
-  export class LicensePage extends Widget {
+  export class LabelTitle extends Widget {
     key?:Key;
-    applicationName?:string;
-    applicationLegalese?:string;
-    applicationVersion?:string;
-    applicationIcon?:Widget;
+    label?:string;
+    labelStyle?:TextStyle;
+    title?:string;
+    titleStyle?:TextStyle;
   
     /**
      * @param config config: 
         {
           key?:Key, 
-          applicationName?:string, 
-          applicationLegalese?:string, 
-          applicationVersion?:string, 
-          applicationIcon?:Widget, 
+          label?:string, 
+          labelStyle?:TextStyle, 
+          title?:string, 
+          titleStyle?:TextStyle, 
         }
      */
-    constructor(config: LicensePageConfig){
+    constructor(config: LabelTitleConfig){
       super();
       if(config!=null && config!=undefined){
         this.key = config.key;
-        this.applicationIcon = config.applicationIcon;
-        this.applicationName = config.applicationName;
-        this.applicationLegalese = config.applicationLegalese;
-        this.applicationVersion = config.applicationVersion;
+        this.label = config.label;
+        this.labelStyle = config.labelStyle;
+        this.title = config.title;
+        this.titleStyle = config.titleStyle;
       }
     }
       
@@ -14453,14 +14474,14 @@ export class CupertinoIcons extends IconData{
      * @param config config: 
         {
           key?:Key, 
-          applicationName?:string, 
-          applicationLegalese?:string, 
-          applicationVersion?:string, 
-          applicationIcon?:Widget, 
+          label?:string, 
+          labelStyle?:TextStyle, 
+          title?:string, 
+          titleStyle?:TextStyle, 
         }
      */
-    static new(config: LicensePageConfig){
-      return new LicensePage(config);
+    static new(config: LabelTitleConfig){
+      return new LabelTitle(config);
     }
   }
   
@@ -20268,6 +20289,7 @@ export class CupertinoIcons extends IconData{
     }
   }
   
+
   
   //****** Texture ******
   interface TextureConfig {
@@ -21194,8 +21216,8 @@ export class CupertinoIcons extends IconData{
 
 //#region ******* Cupertino widgets ********
 //-------------- A -----------------
-//****** CupertinoActivityIndicator ******
-interface CupertinoActivityIndicatorConfig {
+  //****** CupertinoActivityIndicator ******
+  interface CupertinoActivityIndicatorConfig {
     key?:Key;
     animating?:boolean;
     radius?:number;
@@ -21235,6 +21257,74 @@ interface CupertinoActivityIndicatorConfig {
       return new CupertinoActivityIndicator(config);
     }
   }
+
+  //****** CupertinoAlertDialog ******
+  interface CupertinoAlertDialogConfig {
+    key?:Key;
+    title?:Widget;
+    content?:Widget;
+    actions?:Array<CupertinoDialogAction>;
+    scrollController?:ScrollController;
+    actionScrollController?:ScrollController;
+    insetAnimationDuration?:Duration;
+    insetAnimationCurve?:Curve;
+  }
+  export class CupertinoAlertDialog extends Widget {
+    key?:Key;
+    title?:Widget;
+    content?:Widget;
+    actions?:Array<CupertinoDialogAction>;
+    scrollController?:ScrollController;
+    actionScrollController?:ScrollController;
+    insetAnimationDuration?:Duration;
+    insetAnimationCurve?:Curve;
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          title?:Widget, 
+          content?:Widget, 
+          actions?:Array<CupertinoDialogAction>, 
+          scrollController?:ScrollController, 
+          actionScrollController?:ScrollController, 
+          insetAnimationDuration?:Duration, 
+          insetAnimationCurve?:Curve, 
+        }
+     */
+  
+    constructor(config: CupertinoAlertDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.title = config.title;
+        this.content = config.content;
+        this.actions = config.actions;
+        this.scrollController = config.scrollController;
+        this.actionScrollController = config.actionScrollController;
+        this.insetAnimationDuration = config.insetAnimationDuration;
+        this.insetAnimationCurve = config.insetAnimationCurve;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          title?:Widget, 
+          content?:Widget, 
+          actions?:Array<CupertinoDialogAction>, 
+          scrollController?:ScrollController, 
+          actionScrollController?:ScrollController, 
+          insetAnimationDuration?:Duration, 
+          insetAnimationCurve?:Curve, 
+        }
+     */
+    static new(config: CupertinoAlertDialogConfig) {
+      return new CupertinoAlertDialog(config);
+    }
+  }
+
   
   //-------------- B -----------------
   //****** CupertinoButton ******
@@ -21330,6 +21420,63 @@ interface CupertinoActivityIndicatorConfig {
   
   //-------------- D -----------------
   
+  //****** CupertinoDialogAction ******
+  interface CupertinoDialogActionConfig {
+    key?:Key;
+    isDefaultAction?:boolean;
+    isDestructiveAction?:boolean;
+    onPressed?:VoidCallback;
+    child:Widget;
+    textStyle?:TextStyle;
+  }
+  export class CupertinoDialogAction extends Widget {
+    key?:Key;
+    isDefaultAction?:boolean;
+    isDestructiveAction?:boolean;
+    onPressed?:VoidCallback;
+    child?:Widget;
+    textStyle?:TextStyle;
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          isDefaultAction?:boolean, 
+          isDestructiveAction?:boolean, 
+          onPressed?:VoidCallback, 
+          child:Widget, 
+          textStyle?:TextStyle, 
+        }
+     */
+  
+    constructor(config: CupertinoDialogActionConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.onPressed = config.onPressed;
+        this.isDefaultAction = config.isDefaultAction;
+        this.isDestructiveAction = config.isDestructiveAction;
+        this.textStyle = config.textStyle;
+        this.child = config.child;
+      }
+    }
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          isDefaultAction?:boolean, 
+          isDestructiveAction?:boolean, 
+          onPressed?:VoidCallback, 
+          child:Widget, 
+          textStyle?:TextStyle, 
+        }
+     */
+    static new(config: CupertinoDialogActionConfig) {
+      return new CupertinoDialogAction(config);
+    }
+  }
+
   
   //-------------- F -----------------
   

@@ -8,6 +8,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:xsflutter/src/widgets/label_title_widget.dart';
+import 'widgets/check_box.dart';
 import 'xs_json_to_dart.dart';
 import 'xs_build_owner.dart';
 import 'xs_js_parse.dart';
@@ -23,7 +25,6 @@ class XSProxyRegisterHelperMaterialSeries {
     Map<String, CreateJsonObjProxyFun> m = {};
 
     m.addAll(XSProxyAppBar.registerProxy());
-    m.addAll(XSProxyAboutListTile.registerProxy());
 
     m.addAll(XSProxyBuilder.registerProxy());
     m.addAll(XSProxyBottomAppBar.registerProxy());
@@ -38,6 +39,7 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyCheckedModeBanner.registerProxy());
     m.addAll(XSProxyCheckboxListTile.registerProxy());
     m.addAll(XSProxyCheckbox.registerProxy());
+    m.addAll(XSProxyCheckboxEx.registerProxy());
 
     m.addAll(XSProxyDefaultTabController.registerProxy());
     m.addAll(XSProxyDirectionality.registerProxy());
@@ -70,7 +72,7 @@ class XSProxyRegisterHelperMaterialSeries {
 
     m.addAll(XSProxyKeyedSubtree.registerProxy());
 
-    m.addAll(XSProxyLicensePage.registerProxy());
+    m.addAll(XSProxyLabelTitle.registerProxy());
 
     m.addAll(XSProxyMaterial.registerProxy());
     m.addAll(XSProxyMaterialBanner.registerProxy());
@@ -148,29 +150,6 @@ class XSProxyAppBar extends XSJsonObjProxy {
         toolbarOpacity: XSJSParse.getDouble(context, bo, map, "toolbarOpacity", defaultValue: 1.0),
         bottomOpacity: XSJSParse.getDouble(context, bo, map, "bottomOpacity", defaultValue: 1.0),
         toolbarHeight: XSJSParse.getDouble(context, bo, map, "toolbarHeight"),
-      );
-}
-
-//****** AboutListTile ******
-class XSProxyAboutListTile extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName1 = "AboutListTile";
-    return {
-      regClassName1: () => XSProxyAboutListTile()..init(className: regClassName1)
-    };
-  }
-
-  @override
-  AboutListTile constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => AboutListTile(
-        key: XSJSParse.getKey(context, bo, map, "key"),
-        child: XSJSParse.getWidget(context, bo, map, "child"),
-        icon: XSJSParse.getWidget(context, bo, map, "icon"),
-        applicationName: XSJSParse.getString(context, bo, map, "applicationName"),
-        applicationIcon: XSJSParse.getWidget(context, bo, map, "icon"),
-        applicationLegalese: XSJSParse.getString(context, bo, map, "applicationLegalese"),
-        applicationVersion: XSJSParse.getString(context, bo, map, "applicationVersion"),
-        dense: XSJSParse.getBool(context, bo, map, "dense"),
-        aboutBoxChildren: XSJSParse.getWidgetList(context, bo, map, "aboutBoxChildren"),
       );
 }
 
@@ -558,6 +537,27 @@ class XSProxyCheckbox extends XSJsonObjProxy {
         tristate: XSJSParse.getBool(context, bo, map, "tristate", defaultValue: false),
         materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
         visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
+      );
+}
+
+///****** CheckboxEx ******
+class XSProxyCheckboxEx extends XSJsonObjProxy {
+  static final String regClassName = "CheckboxEx";
+  static Map<String, CreateJsonObjProxyFun> registerProxy() => {
+        regClassName: () => XSProxyCheckboxEx()..init(className: regClassName),
+      };
+
+  @override
+  Widget constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => CheckboxEx(
+        key: XSJSParse.getKey(context, bo, map, "key"),
+        value: XSJSParse.getBool(context, bo, map, "value"),
+        onChanged: XSJSParse.getValueChanged<bool>(context, bo, map, "onChanged"),
+        activeColor: XSJSParse.getColor(context, bo, map, "activeColor"),
+        checkColor: XSJSParse.getColor(context, bo, map, "checkColor"),
+        width: XSJSParse.getDouble(context, bo, map, "width", defaultValue: 20.0),
+        strokeWidth: XSJSParse.getDouble(context, bo, map, "strokeWidth", defaultValue: 1.0),
+        isCircle: XSJSParse.getBool(context, bo, map, "isCircle", defaultValue: false),
+        tristate: XSJSParse.getBool(context, bo, map, "tristate", defaultValue: false),
       );
 }
 
@@ -1202,22 +1202,22 @@ class XSProxyKeyedSubtree extends XSJsonObjProxy {
 
 //-------------- L -----------------
 
-//****** LicensePage ******
-class XSProxyLicensePage extends XSJsonObjProxy {
+//****** LabelTitle ******
+class XSProxyLabelTitle extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName1 = "LicensePage";
+    final String regClassName1 = "LabelTitle";
     return {
-      regClassName1: () => XSProxyLicensePage()..init(className: regClassName1)
+      regClassName1: () => XSProxyLabelTitle()..init(className: regClassName1)
     };
   }
 
   @override
-  LicensePage constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => LicensePage(
+  LabelTitleWidget constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => LabelTitleWidget(
         key: XSJSParse.getKey(context, bo, map, "key"),
-        applicationName: XSJSParse.getString(context, bo, map, "applicationName"),
-        applicationIcon: XSJSParse.getWidget(context, bo, map, "icon"),
-        applicationLegalese: XSJSParse.getString(context, bo, map, "applicationLegalese"),
-        applicationVersion: XSJSParse.getString(context, bo, map, "applicationVersion"),
+        label: XSJSParse.getString(context, bo, map, "label"),
+        labelStyle: XSJSParse.getTextStyle(context, bo, map, "labelStyle"),
+        title: XSJSParse.getString(context, bo, map, "title"),
+        titleStyle: XSJSParse.getTextStyle(context, bo, map, "titleStyle"),
       );
 }
 

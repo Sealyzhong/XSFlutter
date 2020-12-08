@@ -7,6 +7,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'widgets/icon_span.dart';
+import 'widgets/label_title_widget.dart';
 import 'xs_json_to_dart.dart';
 import 'xs_build_owner.dart';
 import 'package:flutter/gestures.dart';
@@ -26,6 +28,7 @@ class XSProxyRegisterHelperTextSeries {
 
     m.addAll(XSProxyText.registerProxy());
     m.addAll(XSProxyTextSpan.registerProxy());
+    m.addAll(XSProxyIconSpan.registerProxy());
     m.addAll(XSProxyTextFormField.registerProxy());
     m.addAll(XSProxyTextField.registerProxy());
     return m;
@@ -242,6 +245,46 @@ class XSProxyTextSpan extends XSJsonObjProxy {
       children: toListT<TextSpan>(XSJSParse.getObject(context, bo, map, "children")),
       //recognizer: XSJSParse.getObject(context, bo, map, "recognizer"),
       semanticsLabel: XSJSParse.getString(context, bo, map, "semanticsLabel"),
+    );
+  }
+}
+
+//****** LabelTitle ******/
+class XSProxyLabelTitle extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "LabelTitle";
+    return {
+      regClassName1: () => XSProxyLabelTitle()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  LabelTitleWidget constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return LabelTitleWidget(
+      label: XSJSParse.getString(context, bo, map, "label"),
+      title: XSJSParse.getString(context, bo, map, "title"),
+      labelStyle: XSJSParse.getTextStyle(context, bo, map, "labelStyle"),
+      titleStyle: XSJSParse.getTextStyle(context, bo, map, "titleStyle"),
+    );
+  }
+}
+
+//****** IconSpan ******/
+class XSProxyIconSpan extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "IconSpan";
+    return {
+      regClassName1: () => XSProxyIconSpan()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  IconSpan constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return IconSpan(
+      icon: XSJSParse.getIconData(context, bo, map, "icon"),
+      color: XSJSParse.getColor(context, bo, map, "color", defaultValue: Colors.red),
+      fontSize: XSJSParse.getDouble(context, bo, map, "fontSize", defaultValue: 24),
+      //recognizer: XSJSParse.getObject(context, bo, map, "recognizer"),
     );
   }
 }
