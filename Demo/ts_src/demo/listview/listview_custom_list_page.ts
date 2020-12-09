@@ -8,10 +8,6 @@ export class MyListViewCustomListPage extends fs.StatefulWidget {
     createState() {
         return new _MyListViewCustomListPage(this);
     }
-
-    static new (){
-        return new MyListViewCustomListPage();
-    }
 }
 
 class _MyListViewCustomListPage extends fs.WidgetState {
@@ -19,14 +15,14 @@ class _MyListViewCustomListPage extends fs.WidgetState {
     getWidgetList(){
         var list = new Array<fs.Widget>();
         MyIconData.cupertinoIcons.forEach((model)=>{
-            list.push( fs.Container.new({
+            list.push( new fs.Container({
                 padding:fs.EdgeInsets.all(10),
-                child:fs.Row.new({
+                child:new fs.Row({
                   children: [
-                    fs.Icon.new(model.value),
-                    fs.SizedBox.new({width:10}),
-                    fs.Expanded.new({
-                        child:fs.Text.new(model.name,{overflow:fs.TextOverflow.ellipsis, style:fs.TextStyle.new({fontSize:16})},),
+                    new fs.Icon(model.value),
+                    new fs.SizedBox({width:10}),
+                    new fs.Expanded({
+                        child:new fs.Text(model.name,{overflow:fs.TextOverflow.ellipsis, style:new fs.TextStyle({fontSize:16})},),
                     }),
                   ]
                 }),
@@ -36,12 +32,12 @@ class _MyListViewCustomListPage extends fs.WidgetState {
     }
     //重构
     build(context:fs.BuildContext) {
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title:fs.Text.new("ListView.custom.kst")
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title:new fs.Text("ListView.custom.kst")
             }),
             body:fs.ListView.custom({
-                childrenDelegate:fs.SliverChildListDelegate.new({
+                childrenDelegate:new fs.SliverChildListDelegate({
                     children:this.getWidgetList()
                 })
             }),

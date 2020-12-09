@@ -3,10 +3,10 @@ export class MyImagePage extends fs.StatelessWidget{
 
     genImageUI(boxFitName:string,fit:fs.BoxFit){
         return [
-          fs.ListTile.new({
-            title: fs.Text.new('BoxFit.'+boxFitName,),
+          new fs.ListTile({
+            title: new fs.Text('BoxFit.'+boxFitName,),
           }),
-          fs.Container.new({
+          new fs.Container({
             height:150,
             width: 300,
             color:fs.Colors.orange,
@@ -20,20 +20,20 @@ export class MyImagePage extends fs.StatelessWidget{
       }
 
     build(context:fs.BuildContext) {
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title:fs.Text.new("Images"),
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title:new fs.Text("Images"),
             }),
-            body:fs.ListView.new({
+            body:new fs.ListView({
                 children:[                    
-                    fs.ListTile.new({title:fs.Text.new("加载网络图片"),}),
+                    new fs.ListTile({title:new fs.Text("加载网络图片"),}),
                     fs.Image.network('https://cdn.pixabay.com/photo/2015/10/30/20/13/sunrise-1014712_960_720.jpg',
                      {
                          fit:fs.BoxFit.cover,
                          height:250,
                      }),
           
-                    fs.ListTile.new({title:fs.Text.new("加载本地图片"),}),
+                    new fs.ListTile({title:new fs.Text("加载本地图片"),}),
                     fs.Image.asset('people/ali_landscape.png', {
                         package: 'flutter_gallery_assets',
                         fit: fs.BoxFit.cover,
@@ -50,9 +50,5 @@ export class MyImagePage extends fs.StatelessWidget{
                 ],
             }),
         });
-    }
-
-    static new (){
-        return new MyImagePage();
     }
 }

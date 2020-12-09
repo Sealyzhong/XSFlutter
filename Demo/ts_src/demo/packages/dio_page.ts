@@ -13,10 +13,6 @@ export class MyDioPage extends fs.StatefulWidget{
     createState() {
         return new _MyDioPage(this);
     }
-
-    static new (){
-        return new MyDioPage();
-    }
 }
 
 class _MyDioPage extends fs.WidgetState{
@@ -34,7 +30,7 @@ class _MyDioPage extends fs.WidgetState{
     async testDio1(url:string) {
         
         try {
-          let response = await tl.Dio.new().get({path:url});
+          let response = await new tl.Dio().get({path:url});
           fs.Log.log("await Dio.get(urlStr):request() :" + response);
           return response;    
         } catch (e) {
@@ -45,7 +41,7 @@ class _MyDioPage extends fs.WidgetState{
       //例子2，接口还未完全支持
     async testDio2(url:string) {
         try {
-          let response =  await tl.Dio.new().get( 
+          let response =  await new tl.Dio().get( 
             {path:url,
                 onReceiveProgress:function (progress:number,total:number){
             fs.Log.log("testDio(): progress: " + String(progress)+"/"+String(total));
@@ -60,58 +56,58 @@ class _MyDioPage extends fs.WidgetState{
     }
 
     async _onTap1(){
-        tl.Loading.show({info:"数据加载中..."});
+        fs.Loading.show({info:"数据加载中..."});
         let response = await this.testDio2(this.cgiDataUrl);
         this.response =  response as string;// JSON.stringify(response);
-        tl.Loading.dismiss();
+        fs.Loading.dismiss();
         this.setState();
     }
  
     async _onTap2(){
-        tl.Loading.show({info:"数据加载中..."});
+        fs.Loading.show({info:"数据加载中..."});
         let response = await this.testDio1(this.cgiJsonUrl);
         this.response =  response as string;// JSON.stringify(response);
-        tl.Loading.dismiss();
+        fs.Loading.dismiss();
         this.setState();
     }
 
     build(context:fs.BuildContext){
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title: fs.Text.new("Dio Demo"),
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title: new fs.Text("Dio Demo"),
             }),
-            body:fs.ListView.new({
+            body:new fs.ListView({
                 children:[
-                    MySectionTitle.new("Code 获取网易新闻text"),
+                    new MySectionTitle("Code 获取网易新闻text"),
 
-                    fs.ListTile.new({
-                        trailing: fs.Icon.new(fs.Icons["directions_run"]),
-                        title: fs.Text.new(this.dioCodeText(), {
-                        style: fs.TextStyle.new({
+                    new fs.ListTile({
+                        trailing: new fs.Icon(fs.Icons["directions_run"]),
+                        title: new fs.Text(this.dioCodeText(), {
+                        style: new fs.TextStyle({
                             color: fs.Colors.grey,
                             })
                         }),
                         onTap: this._onTap1.bind(this)
                     }),
 
-                    MySectionTitle.new("Code 获取Json Map"),
+                    new MySectionTitle("Code 获取Json Map"),
 
-                    fs.ListTile.new({
-                        trailing: fs.Icon.new(fs.Icons["directions_run"]),
-                        title: fs.Text.new(this.dioCodeText(), {
-                        style: fs.TextStyle.new({
+                    new fs.ListTile({
+                        trailing: new fs.Icon(fs.Icons["directions_run"]),
+                        title: new fs.Text(this.dioCodeText(), {
+                        style: new fs.TextStyle({
                             color: fs.Colors.grey,
                             })
                         }),
                         onTap: this._onTap2.bind(this)
                     }),
                     
-                    MySectionTitle.new("Response"),
+                    new MySectionTitle("Response"),
 
-                    fs.Padding.new({
+                    new fs.Padding({
                         padding: fs.EdgeInsets.all(10),
-                        child: fs.Text.new(this.response, {
-                        style: fs.TextStyle.new({
+                        child: new fs.Text(this.response, {
+                        style: new fs.TextStyle({
                             color: fs.Colors.grey,
                             })
                         }),

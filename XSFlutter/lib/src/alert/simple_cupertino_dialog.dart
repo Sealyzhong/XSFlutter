@@ -21,13 +21,13 @@ class SimpleCupertinoDialog {
     String desc = "",
     Widget descContent,
     ValueSetter<int> onTap,
-    List<SimpleDialogButtonInfo> buttons,
+    List<SimpleDialogButtonInfo> actions,
     bool barrierDismissible = false,
   }) {
     var widgetList = List<Widget>();
-    if (buttons != null && buttons.length > 0) {
-      for (var i = 0; i < buttons.length; i++) {
-        var model = buttons[i];
+    if (actions != null && actions.length > 0) {
+      for (var i = 0; i < actions.length; i++) {
+        var model = actions[i];
         widgetList.add(CupertinoDialogAction(
           onPressed: () {
             Navigator.pop(context);

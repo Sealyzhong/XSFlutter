@@ -15,68 +15,68 @@ import { MyListViewCustomBuilderPage } from "demo/listview/listview_custom_build
 export class MyListViewIndex extends fs.StatelessWidget{
 
     build(context:fs.BuildContext){
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title: fs.Text.new("ListView"),
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title: new fs.Text("ListView"),
             }),
-            body:fs.ListView.new({
+            body:new fs.ListView({
                 children:[
                   
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("1、ListView"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("1、ListView"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyListViewPage.new();
+                                    return new MyListViewPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("2、ListView.builder"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("2、ListView.builder"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyListViewBuilderPage.new();
+                                    return new MyListViewBuilderPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("3、ListView.separated"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("3、ListView.separated"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MySeparatorBuilderPage.new();
+                                    return new MySeparatorBuilderPage();
                                 }
                             }));
                         }                        
                     }),       
                     
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("4、ListView.custom.list"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("4、ListView.custom.list"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyListViewCustomListPage.new();
+                                    return new MyListViewCustomListPage();
                                 }
                             }));
                         }                        
                     }),  
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("5、ListView.custom.builder"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("5、ListView.custom.builder"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyListViewCustomBuilderPage.new();
+                                    return new MyListViewCustomBuilderPage();
                                 }
                             }));
                         }                        
@@ -84,9 +84,5 @@ export class MyListViewIndex extends fs.StatelessWidget{
                 ],
             }),
         });
-    }
-
-    static new(){
-        return new MyListViewIndex();
     }
 }

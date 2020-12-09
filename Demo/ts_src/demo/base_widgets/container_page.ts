@@ -1,67 +1,63 @@
 import fs = require("flutter_sdk");
 export class MyContainerPage extends fs.StatelessWidget{
     build(context:fs.BuildContext) {
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title:fs.Text.new("Container"),
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title:new fs.Text("Container"),
             }),
-            body:fs.ListView.new({
+            body:new fs.ListView({
                 children:[                    
-                    fs.ListTile.new({title:fs.Text.new("Container"),}),
-                    fs.Container.new({
+                    new fs.ListTile({title:new fs.Text("Container"),}),
+                    new fs.Container({
                       color:fs.Colors.red,
                       height:100,
                     }),
 
-                    fs.ListTile.new({title:fs.Text.new("放置内容的Container"),}),
-                    fs.Container.new({
+                    new fs.ListTile({title:new fs.Text("放置内容的Container"),}),
+                    new fs.Container({
                       color:fs.Colors.orange,
                       height:100,
-                      child:fs.Text.new("我有内容")
+                      child:new fs.Text("我有内容")
                     }),
 
-                    fs.ListTile.new({title:fs.Text.new("Container里的Padding"),}),
-                    fs.Container.new({
+                    new fs.ListTile({title:new fs.Text("Container里的Padding"),}),
+                    new fs.Container({
                       color:fs.Colors.yellow,
                       padding:fs.EdgeInsets.all(10),
-                      child:fs.Text.new("我有内容")
+                      child:new fs.Text("我有内容")
                     }),
 
 
-                    fs.ListTile.new({title:fs.Text.new("圆角的Container"),}),
-                    fs.Container.new({
+                    new fs.ListTile({title:new fs.Text("圆角的Container"),}),
+                    new fs.Container({
                       margin:fs.EdgeInsets.all(10),
                       padding:fs.EdgeInsets.all(10),
-                      decoration:fs.BoxDecoration.new({
+                      decoration:new fs.BoxDecoration({
                         borderRadius:fs.BorderRadius.all(fs.Radius.circular(4.0)),
                         color:fs.Colors.green,
                       }),
-                      child:fs.Text.new("我是圆角Container")
+                      child:new fs.Text("我是圆角Container")
                     }),
 
 
-                    fs.ListTile.new({title:fs.Text.new("固定高宽的Container"),}),
-                    fs.Center.new({
-                      child:fs.Container.new({
+                    new fs.ListTile({title:new fs.Text("固定高宽的Container"),}),
+                    new fs.Center({
+                      child:new fs.Container({
                         width:100,
                         height:100,
                         margin:fs.EdgeInsets.all(10),
                         padding:fs.EdgeInsets.all(10),
-                        decoration:fs.BoxDecoration.new({
+                        decoration:new fs.BoxDecoration({
                           borderRadius:fs.BorderRadius.all(fs.Radius.circular(4.0)),
                           color:fs.Colors.green,
                         }),
-                        child:fs.Text.new("100x100",{
-                          style:fs.TextStyle.new({color:fs.Colors.white}),
+                        child:new fs.Text("100x100",{
+                          style:new fs.TextStyle({color:fs.Colors.white}),
                         })
                       }),
                     })
                 ],
             }),
         });
-    }
-
-    static new (){
-        return new MyContainerPage();
     }
 }

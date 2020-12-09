@@ -11,65 +11,65 @@ import tl = require("flutter_third_library");
 
 export class MyDialogIndex extends fs.StatelessWidget{
 
-    _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
+    _style = new fs.TextStyle({fontSize:24,fontWeight:fs.FontWeight.bold});
 
     menu:Array<string>=["菜单1","菜单2","菜单3","菜单4"];
 
-    buttons:Array<tl.SimpleDialogButtonInfo>=[
-        tl.SimpleDialogButtonInfo.new({text:"取消",textStyle:fs.TextStyle.new({color:fs.Colors.grey})}),
-        tl.SimpleDialogButtonInfo.new({text:"确定"})
+    actions:Array<fs.SimpleDialogButtonInfo>=[
+        new fs.SimpleDialogButtonInfo({text:"取消",textStyle:new fs.TextStyle({color:fs.Colors.grey})}),
+        new fs.SimpleDialogButtonInfo({text:"确定"})
     ];
     
-    buttons1:Array<tl.SimpleCustomDialogButtonInfo>=[
-        tl.SimpleDialogButtonInfo.new({text:"取消"}),
-        tl.SimpleDialogButtonInfo.new({text:"确定"})
+    actions1:Array<fs.SimpleCustomDialogButtonInfo>=[
+        new fs.SimpleDialogButtonInfo({text:"取消"}),
+        new fs.SimpleDialogButtonInfo({text:"确定"})
     ];
 
     _saveValue(){
         fs.Log.log("OK");
-        tl.Dialog.dismiss(this);
+        fs.Dialog.dismiss(this);
      }
 
     build(context:fs.BuildContext){
         //var that = this;
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title: fs.Text.new("通用提示框"),
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title: new fs.Text("通用提示框"),
             }),
-            body:fs.ListView.new({
+            body:new fs.ListView({
                 children:[
-                    MySectionTitle.new("Dialog"),
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("1、Cupertino Dialog"),
+                    new  MySectionTitle("Dialog"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("1、Cupertino Dialog"),
                         onTap:()=>{
-                            tl.Dialog.showCupertinoDialog(this,tl.ShowCupertinoDialog.new({
-                                child:fs.CupertinoAlertDialog.new({
-                                    title:fs.Text.new("温馨提示"),
-                                    content:fs.RichText.new({
-                                        text:fs.TextSpan.new({text:'是否要拨打{',style:fs.TextStyle.new({color:fs.Colors.black}),children:[
-                                            fs.TextSpan.new({text:"181-5379-3927",style:fs.TextStyle.new({
+                            fs.Dialog.showCupertinoDialog(this,new  fs.ShowCupertinoDialog({
+                                child:new  fs.CupertinoAlertDialog({
+                                    title:new fs.Text("温馨提示"),
+                                    content:new  fs.RichText({
+                                        text:new fs.TextSpan({text:'是否要拨打{',style:new fs.TextStyle({color:fs.Colors.black}),children:[
+                                            new fs.TextSpan({text:"181-5379-3927",style:new fs.TextStyle({
                                                 color:fs.Colors.red,
                                             })}),
-                                            fs.TextSpan.new({text:"}电话？",style:fs.TextStyle.new({
+                                            new fs.TextSpan({text:"}电话？",style:new fs.TextStyle({
                                                 color:fs.Colors.black,
                                             })})
                                         ]})
                                     }),
                                     actions:[
-                                        fs.CupertinoDialogAction.new({
-                                            child:fs.Text.new("取消",),
+                                        new fs.CupertinoDialogAction({
+                                            child:new fs.Text("取消",),
                                             onPressed:()=>{
                                                 fs.Log.log("取消");
-                                                tl.Dialog.dismiss(this);
+                                                fs.Dialog.dismiss(this);
                                             }
                                         }),
 
-                                        fs.CupertinoDialogAction.new({
-                                            child:fs.Text.new("确定",{style:fs.TextStyle.new({color:fs.Colors.red})}),
+                                        new fs.CupertinoDialogAction({
+                                            child:new fs.Text("确定",{style:new fs.TextStyle({color:fs.Colors.red})}),
                                             onPressed:()=>{
                                                 fs.Log.log("确定");
-                                                tl.Dialog.dismiss(this);
+                                                fs.Dialog.dismiss(this);
                                             }
                                         }),
                                     ]
@@ -78,17 +78,17 @@ export class MyDialogIndex extends fs.StatelessWidget{
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("2、showDialog"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("2、Alert Dialog"),
                         onTap:()=>{                        
-                            tl.Dialog.showDialog(this,tl.ShowDialog.new({
+                            fs.Dialog.showDialog(this,new fs.ShowDialog({
                                 barrierDismissible:false,
-                                child:fs.Material.new({
+                                child:new fs.Material({
                                     color:fs.Colors.transparent,
-                                    child:fs.Center.new({
-                                        child:fs.RaisedButton.new({
-                                            child:fs.Text.new("相信·帮助"),
+                                    child:new fs.Center({
+                                        child:new fs.RaisedButton({
+                                            child:new fs.Text("相信·帮助"),
                                             onPressed: this._saveValue.bind(this)
                                         }),
                                     }) ,
@@ -98,36 +98,36 @@ export class MyDialogIndex extends fs.StatelessWidget{
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("3、Custom Dialog"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("3、Custom Dialog"),
                         onTap:()=>{                        
-                            tl.Dialog.showCustomAlertDialog(this,tl.ShowCustomAlertDialog.new({
-                                content:fs.RichText.new({
-                                    text:fs.TextSpan.new({text:'是否要拨打{',style:fs.TextStyle.new({color:fs.Colors.black}),children:[
-                                        fs.TextSpan.new({text:"181-5379-3927",style:fs.TextStyle.new({
+                            fs.Dialog.showCustomAlertDialog(this,new fs.ShowCustomAlertDialog({
+                                content:new fs.RichText({
+                                    text:new fs.TextSpan({text:'是否要拨打{',style:new fs.TextStyle({color:fs.Colors.black}),children:[
+                                        new fs.TextSpan({text:"181-5379-3927",style:new fs.TextStyle({
                                             color:fs.Colors.red,
                                         })}),
-                                        fs.TextSpan.new({text:"}电话？",style:fs.TextStyle.new({
+                                        new fs.TextSpan({text:"}电话？",style:new fs.TextStyle({
                                             color:fs.Colors.black,
                                         })})
                                     ]})
                                 }),
-                                buttons:[
-                                    tl.CustomAlertDialogButton.new({
+                                actions:[
+                                    new fs.CustomAlertDialogButton({
                                         bgColor:fs.Colors.blue,
-                                        child:fs.Text.new("取消",{style:fs.TextStyle.new({color:fs.Colors.white})}),
+                                        child:new fs.Text("取消",{style:new fs.TextStyle({color:fs.Colors.white})}),
                                         onPressed:()=>{
                                             fs.Log.log("取消");
-                                            tl.Dialog.dismiss(this);
+                                            fs.Dialog.dismiss(this);
                                         }
                                     }),
-                                    tl.CustomAlertDialogButton.new({
+                                    new fs.CustomAlertDialogButton({
                                         bgColor:fs.Colors.red,
-                                        child:fs.Text.new("确定",{style:fs.TextStyle.new({color:fs.Colors.white})}),
+                                        child:new fs.Text("确定",{style:new fs.TextStyle({color:fs.Colors.white})}),
                                         onPressed:()=>{
                                             fs.Log.log("确定");
-                                            tl.Dialog.dismiss(this);
+                                            fs.Dialog.dismiss(this);
                                         }
                                     })
                                 ]
@@ -136,12 +136,12 @@ export class MyDialogIndex extends fs.StatelessWidget{
                     }),
 
 
-                    MySectionTitle.new("ActionSheet"),
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("1、CustomActionSheet"),
+                    new MySectionTitle("ActionSheet"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("1、CustomActionSheet"),
                         onTap:()=>{ 
-                            tl.Dialog.showCustomActionSheet(this,tl.ShowCustomActionSheet.new({
+                            fs.Dialog.showCustomActionSheet(this,new fs.ShowCustomActionSheet({
                                 itemList:this.menu,
                                 onTap:(i:number)=>{
                                     fs.Log.log("点击:"+String(i));
@@ -151,11 +151,11 @@ export class MyDialogIndex extends fs.StatelessWidget{
                         }                      
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("2、SimpleActionSheet"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("2、SimpleActionSheet"),
                         onTap:()=>{ 
-                            tl.Dialog.showSimpleActionSheet(this,tl.ShowCustomActionSheet.new({
+                            fs.Dialog.showSimpleActionSheet(this,new fs.ShowCustomActionSheet({
                                 itemList:this.menu,
                                 onTap:(i:number)=>{
                                     fs.Log.log("点击:"+String(i));
@@ -164,13 +164,13 @@ export class MyDialogIndex extends fs.StatelessWidget{
                         }                        
                     }),
 
-                    MySectionTitle.new("Simple Alert Dialog"),
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("1、Simple Cupertino Dialog"),
+                    new MySectionTitle("Simple Alert Dialog"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("1、Simple Cupertino Dialog"),
                         onTap:()=>{ 
-                            tl.Dialog.showSimpleCupertinoDialog(this,tl.ShowSimpleDialog.new({
-                                buttons:this.buttons,
+                            fs.Dialog.showSimpleCupertinoDialog(this,new fs.ShowSimpleDialog({
+                                actions:this.actions,
                                 desc: "Alert Cupertino(Tow Button)",
                                 onTap:(i:number)=>{
                                     fs.Log.log("点击:"+String(i));
@@ -179,12 +179,12 @@ export class MyDialogIndex extends fs.StatelessWidget{
                         }                      
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("2、Simple Alert Dialog"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("2、Simple Alert Dialog"),
                         onTap:()=>{ 
-                            tl.Dialog.showSimpleAlertDialog(this,tl.ShowSimpleDialog.new({
-                                buttons:this.buttons,
+                            fs.Dialog.showSimpleAlertDialog(this,new fs.ShowSimpleDialog({
+                                actions:this.actions,
                                 desc: "Alert Material(Tow Button)",
                                 onTap:(i:number)=>{
                                     fs.Log.log("点击:"+String(i));
@@ -193,12 +193,12 @@ export class MyDialogIndex extends fs.StatelessWidget{
                         }                        
                     }),
                     
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("3、Simple Custom Dialog"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("3、Simple Custom Dialog"),
                         onTap:()=>{ 
-                            tl.Dialog.showSimpleCustomDialog(this,tl.ShowSimpleCustomDialog.new({
-                                buttons:this.buttons1,
+                            fs.Dialog.showSimpleCustomDialog(this,new fs.ShowSimpleCustomDialog({
+                                actions:this.actions1,
                                 desc: "Simple Custom Dialog",
                                 onTap:(i:number)=>{
                                     fs.Log.log("点击:"+String(i));
@@ -209,10 +209,5 @@ export class MyDialogIndex extends fs.StatelessWidget{
                 ],
             }),
         });
-    }
-
-
-    static new(){
-        return new MyDialogIndex();
     }
 }

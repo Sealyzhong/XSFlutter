@@ -12,10 +12,6 @@ export class MySharedPreferncesPage extends fs.StatefulWidget{
     createState() {
         return new _MySharedPreferncesPage(this);
     }
-
-    static new (){
-        return new MySharedPreferncesPage();
-    }
 }
 
 class _MySharedPreferncesPage extends fs.WidgetState{
@@ -32,7 +28,7 @@ class _MySharedPreferncesPage extends fs.WidgetState{
 
     _saveValue(){
        var isSuccess= tl.Sp.setInt({key:this._userNumber,value:this._count});
-       tl.Loading.showSuccess({info:isSuccess?"保存成功！":"保存失败"});
+       fs.Loading.showSuccess({info:isSuccess?"保存成功！":"保存失败"});
     }
 
     async _getValue(){
@@ -41,29 +37,29 @@ class _MySharedPreferncesPage extends fs.WidgetState{
     }
     
     build(context:fs.BuildContext){
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title: fs.Text.new("Shared Prefernces"),
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title: new fs.Text("Shared Prefernces"),
             }),
-            body:fs.Center.new({
-                child:fs.Column.new({
+            body:new fs.Center({
+                child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.center,
                     children:[
-                        fs.Text.new("关键字(key): userNum"),
-                        fs.Text.new("当前值: "+String(this._count)),
-                        fs.Text.new("存储值(get): "+String(this._getCount)),
-                        fs.RaisedButton.new({
-                            child:fs.Text.new("当前值+1"),
+                        new fs.Text("关键字(key): userNum"),
+                        new fs.Text("当前值: "+String(this._count)),
+                        new fs.Text("存储值(get): "+String(this._getCount)),
+                        new fs.RaisedButton({
+                            child:new fs.Text("当前值+1"),
                             onPressed:this._incrementCounter.bind(this),
                         }),
 
-                        fs.RaisedButton.new({
-                            child:fs.Text.new("保存值"),
+                        new fs.RaisedButton({
+                            child:new fs.Text("保存值"),
                             onPressed:this._saveValue.bind(this),
                         }),
 
-                        fs.RaisedButton.new({
-                            child:fs.Text.new("获取值"),
+                        new fs.RaisedButton({
+                            child:new fs.Text("获取值"),
                             onPressed:this._getValue.bind(this),
                         }),
                     ]

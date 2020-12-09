@@ -12,10 +12,6 @@ export class MyPackageInfoPage extends fs.StatefulWidget{
     createState() {
         return new _MyPackageInfoPage(this);
     }
-
-    static new (){
-        return new MyPackageInfoPage();
-    }
 }
 
 class _MyPackageInfoPage extends fs.WidgetState{
@@ -26,18 +22,18 @@ class _MyPackageInfoPage extends fs.WidgetState{
     }
 
     build(context:fs.BuildContext){
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title: fs.Text.new("包信息"),
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title: new fs.Text("包信息"),
             }),
-            body:fs.Center.new({
-                child:fs.Column.new({
+            body:new fs.Center({
+                child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.center,
                     children:[
-                        fs.Text.new("appName: "+String(tl.PackageInfo.appName)),
-                        fs.Text.new("buildNumber: "+String(tl.PackageInfo.buildNumber)),
-                        fs.Text.new("packageName: "+String(tl.PackageInfo.packageName)),
-                        fs.Text.new("version: "+String(tl.PackageInfo.version)),
+                        new fs.Text("appName: "+String(tl.PackageInfo.appName)),
+                        new fs.Text("buildNumber: "+String(tl.PackageInfo.buildNumber)),
+                        new fs.Text("packageName: "+String(tl.PackageInfo.packageName)),
+                        new fs.Text("version: "+String(tl.PackageInfo.version)),
                     ]
                 }),
             }),

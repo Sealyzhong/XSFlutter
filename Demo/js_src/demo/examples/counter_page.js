@@ -12,9 +12,6 @@ class MyCounterPage extends fs.StatefulWidget {
     createState() {
         return new _MyCounterPage(this);
     }
-    static new() {
-        return new MyCounterPage();
-    }
 }
 exports.MyCounterPage = MyCounterPage;
 class _MyCounterPage extends fs.WidgetState {
@@ -29,17 +26,17 @@ class _MyCounterPage extends fs.WidgetState {
     }
     //重构
     build(context) {
-        return fs.Scaffold.new({
-            appBar: fs.AppBar.new({
-                title: fs.Text.new("Counter"),
+        return new fs.Scaffold({
+            appBar: new fs.AppBar({
+                title: new fs.Text("Counter"),
             }),
-            body: fs.Center.new({
-                child: fs.Column.new({
+            body: new fs.Center({
+                child: new fs.Column({
                     mainAxisAlignment: fs.MainAxisAlignment.center,
                     children: [
-                        fs.Text.new("This example is developed using TS."),
-                        fs.Text.new(String(this._counter), {
-                            style: fs.TextStyle.new({
+                        new fs.Text("This example is developed using TS."),
+                        new fs.Text(String(this._counter), {
+                            style: new fs.TextStyle({
                                 fontWeight: fs.FontWeight.bold,
                                 fontSize: 24,
                             }),
@@ -47,9 +44,9 @@ class _MyCounterPage extends fs.WidgetState {
                     ],
                 }),
             }),
-            floatingActionButton: fs.FloatingActionButton.new({
+            floatingActionButton: new fs.FloatingActionButton({
                 onPressed: this._incrementCounter.bind(this),
-                child: fs.Icon.new(fs.Icons.add),
+                child: new fs.Icon(fs.Icons.add),
             }),
         });
     }

@@ -19,787 +19,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EasyRefresher = exports.EasyRefreshController = exports.EasyRefreshMaterialFooter = exports.EasyRefreshClassicalFooter = exports.EasyRefreshFooter = exports.EasyRefreshMaterialHeader = exports.EasyRefreshClassicalHeader = exports.EasyRefreshHeader = exports.CachedNetworkImage = exports.PullToRefreshRefresher = exports.PullToRefreshController = exports.PullToRefreshConfiguration = exports.PullToRefreshClassicFooter = exports.PullToRefreshFooter = exports.PullToRefreshWaterDropMaterialHeader = exports.PullToRefreshMaterialClassicHeader = exports.PullToRefreshWaterDropHeader = exports.PullToRefreshClassicHeader = exports.PullToRefreshHeader = exports.PullToRefreshLoadStyle = exports.PullToRefreshIconPosition = exports.PullToRefreshLoadStatus = exports.PullToRefreshStatus = exports.PullToRefreshStyle = exports.Dio = exports.DioOptions = exports.DioBaseOptions = exports.DioResponseType = exports.UrlLauncher = exports.FocusScope = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.Sp = exports.Loading = exports.Dialog = exports.ShowSimpleActionSheet = exports.ShowCustomActionSheet = exports.ShowSimpleDialog = exports.ShowSimpleCustomDialog = exports.SimpleCustomDialogButtonInfo = exports.ShowCustomAlertDialog = exports.CustomAlertDialogStyle = exports.CustomAlertDialogButton = exports.CustomAlertDialogAnimationType = exports.SimpleDialogButtonInfo = exports.ShowCupertinoModalPopup = exports.ShowModalBottomSheet = exports.ShowBottomSheet = exports.ShowGeneralDialog = exports.ShowCupertinoDialog = exports.ShowDialog = void 0;
+exports.EasyRefresher = exports.EasyRefreshController = exports.EasyRefreshMaterialFooter = exports.EasyRefreshClassicalFooter = exports.EasyRefreshFooter = exports.EasyRefreshMaterialHeader = exports.EasyRefreshClassicalHeader = exports.EasyRefreshHeader = exports.CachedNetworkImage = exports.PullToRefreshRefresher = exports.PullToRefreshController = exports.PullToRefreshConfiguration = exports.PullToRefreshClassicFooter = exports.PullToRefreshFooter = exports.PullToRefreshWaterDropMaterialHeader = exports.PullToRefreshMaterialClassicHeader = exports.PullToRefreshWaterDropHeader = exports.PullToRefreshClassicHeader = exports.PullToRefreshHeader = exports.PullToRefreshLoadStyle = exports.PullToRefreshIconPosition = exports.PullToRefreshLoadStatus = exports.PullToRefreshStatus = exports.PullToRefreshStyle = exports.Dio = exports.DioOptions = exports.DioBaseOptions = exports.DioResponseType = exports.UrlLauncher = exports.FocusScope = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.Sp = void 0;
 const fs = __importStar(require("flutter_sdk"));
-class ShowDialog extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            barrierDismissible?:boolean,
-            useSafeArea?:boolean,
-            useRootNavigator?:boolean,
-            child:fs.Widget,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.barrierDismissible = config.barrierDismissible;
-            this.useSafeArea = config.useSafeArea;
-            this.useRootNavigator = config.useRootNavigator;
-            this.child = config.child;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          barrierDismissible?:boolean,
-          useSafeArea?:boolean,
-          useRootNavigator?:boolean,
-          child:fs.Widget,
-        }
-     */
-    static new(config) {
-        return new ShowDialog(config);
-    }
-}
-exports.ShowDialog = ShowDialog;
-class ShowCupertinoDialog extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            barrierDismissible?:boolean,
-            useRootNavigator?:boolean,
-            child:fs.CupertinoAlertDialog,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.barrierDismissible = config.barrierDismissible;
-            this.useRootNavigator = config.useRootNavigator;
-            this.child = config.child;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          barrierDismissible?:boolean,
-          useRootNavigator?:boolean,
-          child:fs.CupertinoAlertDialog,
-        }
-     */
-    static new(config) {
-        return new ShowCupertinoDialog(config);
-    }
-}
-exports.ShowCupertinoDialog = ShowCupertinoDialog;
-class ShowGeneralDialog extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            barrierDismissible?:boolean,
-            useRootNavigator?:boolean,
-            barrierLabel?:string,
-            barrierColor?:fs.Color,
-            transitionDuration?:fs.Duration,
-            child:fs.Widget,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.barrierDismissible = config.barrierDismissible;
-            this.useRootNavigator = config.useRootNavigator;
-            this.barrierLabel = config.barrierLabel;
-            this.transitionDuration = config.transitionDuration;
-            this.child = config.child;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          barrierDismissible?:boolean,
-          useRootNavigator?:boolean,
-          barrierLabel?:string,
-          barrierColor?:fs.Color,
-          transitionDuration?:fs.Duration,
-          child:fs.Widget,
-        }
-     */
-    static new(config) {
-        return new ShowGeneralDialog(config);
-    }
-}
-exports.ShowGeneralDialog = ShowGeneralDialog;
-class ShowBottomSheet extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            backgroundColor?:fs.Color,
-            elevation?:number,
-            shape?:fs.ShapeBorder,
-            clipBehavior?:fs.Clip,
-            child:fs.Widget,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.backgroundColor = config.backgroundColor;
-            this.elevation = config.elevation;
-            this.shape = config.shape;
-            this.clipBehavior = config.clipBehavior;
-            this.child = config.child;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          backgroundColor?:fs.Color,
-          elevation?:number,
-          shape?:fs.ShapeBorder,
-          clipBehavior?:fs.Clip,
-          child:fs.Widget,
-        }
-     */
-    static new(config) {
-        return new ShowBottomSheet(config);
-    }
-}
-exports.ShowBottomSheet = ShowBottomSheet;
-class ShowModalBottomSheet extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            backgroundColor?:fs.Color,
-            elevation?:number,
-            shape?:fs.ShapeBorder,
-            clipBehavior?:fs.Clip,
-            barrierColor?:fs.Color,
-            isScrollControlled?:boolean;,
-            useRootNavigator?:boolean,
-            isDismissible?:boolean,
-            enableDrag?:boolean,
-            child?:fs.Widget,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.backgroundColor = config.backgroundColor;
-            this.elevation = config.elevation;
-            this.shape = config.shape;
-            this.clipBehavior = config.clipBehavior;
-            this.barrierColor = config.barrierColor;
-            this.isScrollControlled = config.isScrollControlled;
-            this.useRootNavigator = config.useRootNavigator;
-            this.isDismissible = config.isDismissible;
-            this.enableDrag = config.enableDrag;
-            this.child = config.child;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          backgroundColor?:fs.Color,
-          elevation?:number,
-          shape?:fs.ShapeBorder,
-          clipBehavior?:fs.Clip,
-          barrierColor?:fs.Color,
-          isScrollControlled?:boolean;,
-          useRootNavigator?:boolean,
-          isDismissible?:boolean,
-          enableDrag?:boolean,
-          child?:fs.Widget,
-        }
-     */
-    static new(config) {
-        return new ShowModalBottomSheet(config);
-    }
-}
-exports.ShowModalBottomSheet = ShowModalBottomSheet;
-class ShowCupertinoModalPopup extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            useRootNavigator?:boolean,
-            semanticsDismissible?:boolean,
-            child:fs.Widget,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.useRootNavigator = config.useRootNavigator;
-            this.semanticsDismissible = config.semanticsDismissible;
-            this.child = config.child;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          useRootNavigator?:boolean,
-          semanticsDismissible?:boolean,
-          child:fs.Widget,
-        }
-     */
-    static new(config) {
-        return new ShowCupertinoModalPopup(config);
-    }
-}
-exports.ShowCupertinoModalPopup = ShowCupertinoModalPopup;
-class SimpleDialogButtonInfo extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            title?:string,
-            textStyle?:fs.TextStyle,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.text = config.text;
-            this.textStyle = config.textStyle;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          title?:string,
-          textStyle?:fs.TextStyle,
-        }
-     */
-    static new(config) {
-        return new SimpleDialogButtonInfo(config);
-    }
-}
-exports.SimpleDialogButtonInfo = SimpleDialogButtonInfo;
-//****** CustomAlertDialogAnimationType ******
-var CustomAlertDialogAnimationType;
-(function (CustomAlertDialogAnimationType) {
-    CustomAlertDialogAnimationType["fromRight"] = "fromRight";
-    CustomAlertDialogAnimationType["fromLeft"] = "fromLeft";
-    CustomAlertDialogAnimationType["fromTop"] = "fromTop";
-    CustomAlertDialogAnimationType["fromBottom"] = "fromBottom";
-    CustomAlertDialogAnimationType["grow"] = "grow";
-    CustomAlertDialogAnimationType["shrink"] = "shrink";
-})(CustomAlertDialogAnimationType = exports.CustomAlertDialogAnimationType || (exports.CustomAlertDialogAnimationType = {}));
-class CustomAlertDialogButton extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            child?:fs.Widget,
-            width?:number,
-            height?:number,
-            bgColor?:fs.Color,
-            gradient?:fs.Gradient,
-            radius?:fs.BorderRadius,
-            onPressed?:fs.VoidCallback,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.child = config.child;
-            this.width = config.width;
-            this.height = config.height;
-            this.bgColor = config.bgColor;
-            this.gradient = config.gradient;
-            this.radius = config.radius;
-            this.onPressed = config.onPressed;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          child?:fs.Widget,
-          width?:number,
-          height?:number,
-          bgColor?:fs.Color,
-          gradient?:fs.Gradient,
-          radius?:fs.BorderRadius,
-          onPressed?:fs.VoidCallback,
-        }
-     */
-    static new(config) {
-        return new CustomAlertDialogButton(config);
-    }
-}
-exports.CustomAlertDialogButton = CustomAlertDialogButton;
-class CustomAlertDialogStyle extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            animationType?:CustomAlertDialogAnimationType,
-            animationDuration?:fs.Duration,
-            alertBorder?:fs.ShapeBorder,
-            isCloseButton?:boolean,
-            isOverlayTapDismiss?:boolean,
-            backgroundColor?:fs.Color,
-            overlayColor?:fs.Color,
-            buttonSpace?:number,
-            titleHeight?:number,
-            titleStyle?:fs.TextStyle,
-            descStyle?:fs.TextStyle,
-            buttonAreaPadding?:fs.EdgeInsets,
-            constraints?:fs.BoxConstraints,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.animationType = config.animationType;
-            this.animationDuration = config.animationDuration;
-            this.alertBorder = config.alertBorder;
-            this.isCloseButton = config.isCloseButton;
-            this.isOverlayTapDismiss = config.isOverlayTapDismiss;
-            this.backgroundColor = config.backgroundColor;
-            this.overlayColor = config.overlayColor;
-            this.buttonSpace = config.buttonSpace;
-            this.titleHeight = config.titleHeight;
-            this.titleStyle = config.titleStyle;
-            this.descStyle = config.descStyle;
-            this.buttonAreaPadding = config.buttonAreaPadding;
-            this.constraints = config.constraints;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          animationType?:CustomAlertDialogAnimationType,
-          animationDuration?:fs.Duration,
-          alertBorder?:fs.ShapeBorder,
-          isCloseButton?:boolean,
-          isOverlayTapDismiss?:boolean,
-          backgroundColor?:fs.Color,
-          overlayColor?:fs.Color,
-          buttonSpace?:number,
-          titleHeight?:number,
-          titleStyle?:fs.TextStyle,
-          descStyle?:fs.TextStyle,
-          buttonAreaPadding?:fs.EdgeInsets,
-          constraints?:fs.BoxConstraints,
-        }
-     */
-    static new(config) {
-        return new CustomAlertDialogStyle(config);
-    }
-}
-exports.CustomAlertDialogStyle = CustomAlertDialogStyle;
-class ShowCustomAlertDialog extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            style?:CustomAlertDialogStyle,
-            image?:fs.Widget,
-            title?:string,
-            desc?:string,
-            content?:fs.Widget,
-            buttons?:Array<CustomAlertDialogButton>,
-            closeFunction?:fs.VoidCallback,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.style = config.style;
-            this.image = config.image;
-            this.title = config.title;
-            this.desc = config.desc;
-            this.content = config.content;
-            this.buttons = config.buttons;
-            this.closeFunction = config.closeFunction;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          style?:CustomAlertDialogStyle,
-          image?:fs.Widget,
-          title?:string,
-          desc?:string,
-          content?:fs.Widget,
-          buttons?:Array<CustomAlertDialogButton>,
-          closeFunction?:fs.VoidCallback,
-        }
-     */
-    static new(config) {
-        return new ShowCustomAlertDialog(config);
-    }
-}
-exports.ShowCustomAlertDialog = ShowCustomAlertDialog;
-class SimpleCustomDialogButtonInfo extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            title?:string,
-            textStyle?:fs.TextStyle,
-            bgColor?:fs.Color,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.text = config.text;
-            this.textStyle = config.textStyle;
-            this.bgColor = config.bgColor;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          title?:string,
-          textStyle?:fs.TextStyle,
-          bgColor?:fs.Color,
-        }
-     */
-    static new(config) {
-        return new SimpleCustomDialogButtonInfo(config);
-    }
-}
-exports.SimpleCustomDialogButtonInfo = SimpleCustomDialogButtonInfo;
-class ShowSimpleCustomDialog extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            style?:CustomAlertDialogStyle,
-            image?:fs.Widget,
-            title?:string,
-            desc?:string,
-            content?:fs.Widget,
-            buttons?:Array<CustomDialogButtonInfo>,
-            onTap?:fs.VoidCallbackNumber,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.style = config.style;
-            this.image = config.image;
-            this.title = config.title;
-            this.desc = config.desc;
-            this.content = config.content;
-            this.buttons = config.buttons;
-            this.onTap = config.onTap;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          style?:CustomAlertDialogStyle,
-          image?:fs.Widget,
-          title?:string,
-          desc?:string,
-          content?:fs.Widget,
-          buttons?:Array<CustomDialogButtonInfo>,
-          onTap?:fs.VoidCallbackNumber,
-        }
-     */
-    static new(config) {
-        return new ShowSimpleCustomDialog(config);
-    }
-}
-exports.ShowSimpleCustomDialog = ShowSimpleCustomDialog;
-class ShowSimpleDialog extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            title?:string,
-            titleContent?:fs.Widget,
-            desc?:string,
-            descContent?:fs.Widget,
-            buttons:Array<SimpleDialogButtonInfo>,
-            onTap?:fs.VoidCallbackNumber,
-            barrierDismissible?:boolean,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.title = config.title;
-            this.titleContent = config.titleContent;
-            this.desc = config.desc;
-            this.descContent = config.descContent;
-            this.buttons = config.buttons;
-            this.onTap = config.onTap;
-            this.barrierDismissible = config.barrierDismissible;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          title?:string,
-          titleContent?:fs.Widget,
-          desc?:string,
-          descContent?:fs.Widget,
-          buttons:Array<SimpleDialogButtonInfo>,
-          onTap?:fs.VoidCallbackNumber,
-          barrierDismissible?:boolean,
-        }
-     */
-    static new(config) {
-        return new ShowSimpleDialog(config);
-    }
-}
-exports.ShowSimpleDialog = ShowSimpleDialog;
-class ShowCustomActionSheet extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            title?:string,
-            titleContent?:fs.Widget,
-            itemList:Array<string>,
-            onTap:fs.VoidCallbackNumber,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.title = config.title;
-            this.titleContent = config.titleContent;
-            this.itemList = config.itemList;
-            this.onTap = config.onTap;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          title?:string,
-          titleContent?:fs.Widget,
-          itemList:Array<string>,
-          onTap:fs.VoidCallbackNumber,
-        }
-     */
-    static new(config) {
-        return new ShowCustomActionSheet(config);
-    }
-}
-exports.ShowCustomActionSheet = ShowCustomActionSheet;
-class ShowSimpleActionSheet extends fs.Widget {
-    /**
-       * @param config config:
-          {
-            title?:string,
-            titleContent?:fs.Widget,
-            itemList:Array<string>,
-            onTap:fs.VoidCallbackNumber,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.title = config.title;
-            this.titleContent = config.titleContent;
-            this.itemList = config.itemList;
-            this.onTap = config.onTap;
-        }
-    }
-    /**
-     * @param config config:
-        {
-          title?:string,
-          titleContent?:fs.Widget,
-          itemList:Array<string>,
-          onTap:fs.VoidCallbackNumber,
-        }
-     */
-    static new(config) {
-        return new ShowSimpleActionSheet(config);
-    }
-}
-exports.ShowSimpleActionSheet = ShowSimpleActionSheet;
-class Dialog extends fs.DartClass {
-    constructor() {
-        super();
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-    static getInstance() {
-        if (!this.instance) {
-            this.instance = new Dialog();
-        }
-        return this.instance;
-    }
-    //显示简单选择
-    _show(baseWidget, funcName, child) {
-        Dialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
-            widgetID: String(baseWidget.widgetID),
-            mirrorID: Dialog.getInstance().mirrorID,
-            className: Dialog.getInstance().className,
-            funcName: funcName,
-            args: {
-                widgetID: String(baseWidget.widgetID),
-                child: baseWidget.helper.buildWidgetTreeSubWidget(child),
-            },
-        }));
-    }
-    static showDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showDialog", child);
-    }
-    static showCupertinoDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showCupertinoDialog", child);
-    }
-    static showGeneralDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showGeneralDialog", child);
-    }
-    static showBottomSheet(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showBottomSheet", child);
-    }
-    static showModalBottomSheet(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showBottshowModalBottomSheetomSheet", child);
-    }
-    static showCupertinoModalPopup(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showCupertinoModalPopup", child);
-    }
-    static showCustomActionSheet(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showCustomActionSheet", child);
-    }
-    static showSimpleActionSheet(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showSimpleActionSheet", child);
-    }
-    static showSimpleCupertinoDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showSimpleCupertinoDialog", child);
-    }
-    static showSimpleAlertDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showSimpleAlertDialog", child);
-    }
-    static showSimpleCustomDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showSimpleCustomDialog", child);
-    }
-    static showCustomAlertDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showCustomAlertDialog", child);
-    }
-    static dismiss(baseWidget) {
-        Dialog.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
-            widgetID: String(baseWidget.widgetID),
-            mirrorID: Dialog.getInstance().mirrorID,
-            className: Dialog.getInstance().className,
-            funcName: "dismiss",
-            args: {
-                widgetID: String(baseWidget.widgetID),
-            },
-        }));
-    }
-}
-exports.Dialog = Dialog;
-class Loading extends fs.DartClass {
-    constructor() {
-        super();
-        //Mirror对象在构造函数创建 MirrorID
-        this.createMirrorID();
-        //创建对应FLutter对象
-        this.createMirrorObj();
-    }
-    static getInstance() {
-        if (!this.instance) {
-            this.instance = new Loading();
-        }
-        return this.instance;
-    }
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
-    static showSuccess(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showSuccess",
-            args: config,
-        }));
-    }
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
-    static showError(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showError",
-            args: config,
-        }));
-    }
-    /**
-      * @param config config:
-       {
-         info:string,
-         duration?:Duration,
-         alignment?:Alignment,
-       }
-      */
-    static showInfo(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showInfo",
-            args: config,
-        }));
-    }
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
-    static showToast(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "showToast",
-            args: config,
-        }));
-    }
-    /**
-     * @param config config:
-      {
-        info:string,
-        alignment?:Alignment,
-      }
-     */
-    static show(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: Loading.getInstance().className,
-            funcName: "show",
-            args: config,
-        }));
-    }
-    /**
-     * @param config config:
-      {
-        value:number(0~100),
-        alignment?:Alignment,
-      }
-     */
-    static showProgress(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: "Loading",
-            funcName: "showProgress",
-            args: config,
-        }));
-    }
-    /**
-    * @param config config:
-     {
-       animation?:animation,
-     }
-    */
-    static dismiss(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
-            mirrorID: Loading.getInstance().mirrorID,
-            className: "Loading",
-            funcName: "dismiss",
-            args: config,
-        }));
-    }
-}
-exports.Loading = Loading;
 class Sp extends fs.DartClass {
     constructor() {
         super();
@@ -822,7 +43,7 @@ class Sp extends fs.DartClass {
       }
      */
     static async getBool(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: Sp.getInstance().mirrorID,
             className: Sp.getInstance().className,
             funcName: "getBool",
@@ -838,7 +59,7 @@ class Sp extends fs.DartClass {
       }
      */
     static async getInt(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: Sp.getInstance().mirrorID,
             className: Sp.getInstance().className,
             funcName: "getInt",
@@ -854,7 +75,7 @@ class Sp extends fs.DartClass {
       }
      */
     static async getDouble(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: Sp.getInstance().mirrorID,
             className: Sp.getInstance().className,
             funcName: "getDouble",
@@ -870,7 +91,7 @@ class Sp extends fs.DartClass {
       }
      */
     static async getString(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: Sp.getInstance().mirrorID,
             className: Sp.getInstance().className,
             funcName: "getString",
@@ -879,7 +100,7 @@ class Sp extends fs.DartClass {
         return fs.Convert.toString(v);
     }
     static async clear() {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: Sp.getInstance().mirrorID,
             className: Sp.getInstance().className,
             funcName: "clear",
@@ -893,7 +114,7 @@ class Sp extends fs.DartClass {
       }
      */
     static async remove(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: Sp.getInstance().mirrorID,
             className: Sp.getInstance().className,
             funcName: "remove",
@@ -908,7 +129,7 @@ class Sp extends fs.DartClass {
       }
      */
     static async setBool(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: Sp.getInstance().mirrorID,
             className: Sp.getInstance().className,
             funcName: "setBool",
@@ -924,7 +145,7 @@ class Sp extends fs.DartClass {
       }
      */
     static async setDouble(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: Sp.getInstance().mirrorID,
             className: Sp.getInstance().className,
             funcName: "setDouble",
@@ -940,7 +161,7 @@ class Sp extends fs.DartClass {
       }
      */
     static async setInt(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: Sp.getInstance().mirrorID,
             className: Sp.getInstance().className,
             funcName: "setInt",
@@ -956,7 +177,7 @@ class Sp extends fs.DartClass {
       }
      */
     static async setString(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: Sp.getInstance().mirrorID,
             className: Sp.getInstance().className,
             funcName: "setString",
@@ -990,7 +211,7 @@ class ScreenInfo extends fs.DartClass {
     //
     static async updateInfo() {
         var info = new ScreenInfo();
-        var v = await info.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await info.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "updateInfo",
@@ -1063,7 +284,7 @@ class PackageInfo extends fs.DartClass {
     //
     static async updateInfo() {
         var info = new PackageInfo();
-        var v = await info.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await info.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "updateInfo",
@@ -1097,7 +318,7 @@ class Wakelock extends fs.DartClass {
     //
     static async disable() {
         var info = new Wakelock();
-        var v = await info.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await info.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "disable",
@@ -1107,7 +328,7 @@ class Wakelock extends fs.DartClass {
     //
     static async enable() {
         var info = new Wakelock();
-        var v = await info.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await info.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "enable",
@@ -1117,7 +338,7 @@ class Wakelock extends fs.DartClass {
     //
     static async isEnabled() {
         var info = new Wakelock();
-        var v = await info.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await info.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "isEnabled",
@@ -1139,7 +360,7 @@ class FocusScope extends fs.DartClass {
     //
     static requestFocus() {
         var info = new FocusScope();
-        info.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        info.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "requestFocus",
@@ -1148,7 +369,7 @@ class FocusScope extends fs.DartClass {
     //
     static unfocus() {
         var info = new FocusScope();
-        info.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        info.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "unfocus",
@@ -1180,7 +401,7 @@ class UrlLauncher extends fs.DartClass {
      */
     static async openUrl(config) {
         var info = new UrlLauncher();
-        var v = await info.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        var v = await info.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "openUrl",
@@ -1232,26 +453,6 @@ class DioBaseOptions extends fs.DartClass {
             this.maxRedirects = config.maxRedirects;
         }
     }
-    /**
-       * @param config config:
-        {
-          method?:string,
-          connectTimeout?:number,
-          receiveTimeout?:number,
-          sendTimeout?:number,
-          baseUrl?:string,
-          queryParameters?:Map<string,any>,
-          extra?:Map<string,any>,
-          headers?:Map<string,any>,
-          responseType?:DioResponseType,
-          receiveDataWhenStatusError?:boolean,
-          followRedirects?:boolean,
-          maxRedirects?:number,
-        }
-       */
-    static new(config) {
-        return new DioBaseOptions(config);
-    }
 }
 exports.DioBaseOptions = DioBaseOptions;
 class DioOptions extends fs.DartClass {
@@ -1285,24 +486,6 @@ class DioOptions extends fs.DartClass {
             this.maxRedirects = config.maxRedirects;
         }
     }
-    /**
-       * @param config config:
-        {
-          method?:string,
-          receiveTimeout?:number,
-          sendTimeout?:number,
-          baseUrl?:string,
-          extra?:Map<string,any>,
-          headers?:Map<string,any>,
-          responseType?:DioResponseType,
-          receiveDataWhenStatusError?:boolean,
-          followRedirects?:boolean,
-          maxRedirects?:number,
-        }
-       */
-    static new(config) {
-        return new DioOptions(config);
-    }
 }
 exports.DioOptions = DioOptions;
 class Dio extends fs.DartClass {
@@ -1314,9 +497,6 @@ class Dio extends fs.DartClass {
         //创建对应FLutter对象
         this.createMirrorObj();
     }
-    static new(options) {
-        return new Dio(options);
-    }
     /**
       * @param config config:
         {
@@ -1326,7 +506,7 @@ class Dio extends fs.DartClass {
         }
     */
     async get(config) {
-        return await this.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        return await this.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "get",
@@ -1341,7 +521,7 @@ class Dio extends fs.DartClass {
         }
       */
     async getUri(config) {
-        return await this.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        return await this.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "getUri",
@@ -1358,7 +538,7 @@ class Dio extends fs.DartClass {
         }
     */
     async post(config) {
-        return await this.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        return await this.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "post",
@@ -1374,7 +554,7 @@ class Dio extends fs.DartClass {
         }
       */
     async postUri(config) {
-        return await this.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        return await this.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "postUri",
@@ -1391,7 +571,7 @@ class Dio extends fs.DartClass {
         }
     */
     async request(config) {
-        return await this.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        return await this.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "request",
@@ -1407,7 +587,7 @@ class Dio extends fs.DartClass {
         }
       */
     async requestUri(config) {
-        return await this.invokeMirrorObjWithCallback(fs.JSCallConfig.new({
+        return await this.invokeMirrorObjWithCallback(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "requestUri",
@@ -1596,34 +776,6 @@ class PullToRefreshClassicHeader extends PullToRefreshHeader {
             this.releaseIcon = config.releaseIcon;
         }
     }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          refreshStyle?:PullToRefreshStyle,
-          height?:number,
-          completeDuration?:fs.Duration,
-          textStyle?:fs.TextStyle,
-          releaseText?:string,
-          refreshingText?:string,
-          canTwoLevelIcon?:fs.Widget,
-          twoLevelView?:fs.Widget,
-          canTwoLevelText?:string,
-          completeText?:string,
-          failedText?:string,
-          idleText?:string,
-          iconPos?:PullToRefreshIconPosition,
-          spacing?:number,
-          refreshingIcon?:fs.Widget,
-          failedIcon?:fs.Widget,
-          completeIcon?:fs.Widget,
-          idleIcon?:fs.Widget,
-          releaseIcon?:fs.Widget,
-        }
-     */
-    static new(config) {
-        return new PullToRefreshClassicHeader(config);
-    }
 }
 exports.PullToRefreshClassicHeader = PullToRefreshClassicHeader;
 class PullToRefreshWaterDropHeader extends PullToRefreshHeader {
@@ -1650,21 +802,6 @@ class PullToRefreshWaterDropHeader extends PullToRefreshHeader {
             this.waterDropColor = config.waterDropColor;
             this.idleIcon = config.idleIcon;
         }
-    }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          refresh?:fs.Widget,
-          complete?:fs.Widget,
-          completeDuration?:fs.Duration,
-          failed?:fs.Widget,
-          waterDropColor?:fs.Color,
-          idleIcon?:fs.Widget,
-        }
-     */
-    static new(config) {
-        return new PullToRefreshWaterDropHeader(config);
     }
 }
 exports.PullToRefreshWaterDropHeader = PullToRefreshWaterDropHeader;
@@ -1695,22 +832,6 @@ class PullToRefreshMaterialClassicHeader extends PullToRefreshHeader {
             this.backgroundColor = config.backgroundColor;
         }
     }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          height?:number,
-          semanticsLabel?:string,
-          semanticsValue?:string,
-          color?:fs.Color,
-          offset?:number,
-          distance?:number,
-          backgroundColor?:fs.Color,
-        }
-     */
-    static new(config) {
-        return new PullToRefreshMaterialClassicHeader(config);
-    }
 }
 exports.PullToRefreshMaterialClassicHeader = PullToRefreshMaterialClassicHeader;
 class PullToRefreshWaterDropMaterialHeader extends PullToRefreshHeader {
@@ -1739,22 +860,6 @@ class PullToRefreshWaterDropMaterialHeader extends PullToRefreshHeader {
             this.distance = config.distance;
             this.backgroundColor = config.backgroundColor;
         }
-    }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          height?:number,
-          semanticsLabel?:string,
-          semanticsValue?:string,
-          color?:fs.Color,
-          offset?:number,
-          distance?:number,
-          backgroundColor?:fs.Color,
-        }
-     */
-    static new(config) {
-        return new PullToRefreshWaterDropMaterialHeader(config);
     }
 }
 exports.PullToRefreshWaterDropMaterialHeader = PullToRefreshWaterDropMaterialHeader;
@@ -1834,32 +939,6 @@ class PullToRefreshClassicFooter extends fs.Widget {
             this.idleIcon = config.idleIcon;
         }
     }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          onClick?: fs.VoidCallback,
-          loadStyle?: PullToRefreshLoadStyle,
-          height?: number,
-          textStyle?:fs.TextStyle,
-          loadingText?:string,
-          noDataText?:string,
-          noMoreIcon?:fs.Widget,
-          idleText?:string,
-          failedText?:string,
-          canLoadingText?:string,
-          failedIcon?:fs.Widget,
-          iconPos?:PullToRefreshIconPosition,
-          spacing?:number,
-          completeDuration?:fs.Duration,
-          loadingIcon?:fs.Widget,
-          canLoadingIcon?:fs.Widget,
-          idleIcon?:fs.Widget,
-        }
-     */
-    static new(config) {
-        return new PullToRefreshClassicFooter(config);
-    }
 }
 exports.PullToRefreshClassicFooter = PullToRefreshClassicFooter;
 class PullToRefreshConfiguration extends fs.Widget {
@@ -1923,39 +1002,6 @@ class PullToRefreshConfiguration extends fs.Widget {
             this.bottomHitBoundary = config.bottomHitBoundary;
         }
     }
-    /**
-     * @param config config:
-        {
-          child?:fs.Widget,
-          headerBuilder?:fs.Widget,
-          footerBuilder?:fs.Widget,
-          dragSpeedRatio?:number,
-          shouldFooterFollowWhenNotFull?:string,
-          enableScrollWhenTwoLevel?:boolean,
-          enableLoadingWhenNoData?:boolean,
-          enableBallisticRefresh?:boolean,
-          springDescription?:fs.SpringDescription,
-          enableScrollWhenRefreshCompleted?:boolean,
-          enableLoadingWhenFailed?:boolean,
-          twiceTriggerDistance?:number,
-          closeTwoLevelDistance?:number,
-          skipCanRefresh?:boolean,
-          autoLoad?:boolean,
-          maxOverScrollExtent?:number,
-          enableBallisticLoad?:boolean,
-          maxUnderScrollExtent?:number,
-          headerTriggerDistance?:number,
-          footerTriggerDistance?:number,
-          hideFooterWhenNotFull?:boolean,
-          enableRefreshVibrate?:boolean,
-          enableLoadMoreVibrate?:boolean,
-          topHitBoundary?:number,
-          bottomHitBoundary?:number,
-        }
-     */
-    static new(config) {
-        return new PullToRefreshConfiguration(config);
-    }
 }
 exports.PullToRefreshConfiguration = PullToRefreshConfiguration;
 class PullToRefreshController extends fs.DartClass {
@@ -1976,40 +1022,29 @@ class PullToRefreshController extends fs.DartClass {
             this.initialRefreshStatus = config.initialRefreshStatus;
         }
     }
-    /**
-     * @param config config:
-        {
-          initialRefreshStatus?:PullToRefreshStatus,
-          initialRefresh?:boolean,
-          initialLoadStatus?:PullToRefreshLoadStatus,
-        }
-     */
-    static new(config) {
-        return new PullToRefreshController(config);
-    }
     dispose() {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "dispose",
         }));
     }
     loadComplete() {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "loadComplete",
         }));
     }
     loadFailed() {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "loadFailed",
         }));
     }
     loadNoData() {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "loadNoData",
@@ -2022,7 +1057,7 @@ class PullToRefreshController extends fs.DartClass {
         }
      */
     refreshCompleted(config) {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "refreshCompleted",
@@ -2030,14 +1065,14 @@ class PullToRefreshController extends fs.DartClass {
         }));
     }
     refreshFailed() {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "refreshFailed",
         }));
     }
     refreshToIdle() {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "refreshToIdle",
@@ -2052,7 +1087,7 @@ class PullToRefreshController extends fs.DartClass {
         }
      */
     requestLoading(config) {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "requestLoading",
@@ -2068,7 +1103,7 @@ class PullToRefreshController extends fs.DartClass {
         }
      */
     requestRefresh(config) {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "requestRefresh",
@@ -2083,7 +1118,7 @@ class PullToRefreshController extends fs.DartClass {
         }
      */
     requestTwoLevel(config) {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "requestTwoLevel",
@@ -2091,7 +1126,7 @@ class PullToRefreshController extends fs.DartClass {
         }));
     }
     resetNoData() {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "resetNoData",
@@ -2105,7 +1140,7 @@ class PullToRefreshController extends fs.DartClass {
         }
      */
     twoLevelComplete(config) {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "twoLevelComplete",
@@ -2165,34 +1200,6 @@ class PullToRefreshRefresher extends fs.Widget {
             this.scrollController = config.scrollController;
         }
     }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          controller:PullToRefreshController,
-          child?:fs.Widget,
-          header?:PullToRefreshHeader,
-          footer?:PullToRefreshFooter,
-          enablePullDown?:boolean,
-          enablePullUp?:boolean,
-          enableTwoLevel?:boolean,
-          onRefresh?:fs.VoidCallback,
-          onLoading?:fs.VoidCallback,
-          onTwoLevel?:fs.VoidCallback,
-          onOffsetChange?:fs.VoidCallbackString,
-          dragStartBehavior?:fs.DragStartBehavior,
-          primary?:boolean,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          reverse?:boolean,
-          physics?:fs.ScrollPhysics,
-          scrollDirection?:fs.Axis,
-          scrollController?:fs.ScrollController,
-        }
-     */
-    static new(config) {
-        return new PullToRefreshRefresher(config);
-    }
 }
 exports.PullToRefreshRefresher = PullToRefreshRefresher;
 class CachedNetworkImage extends fs.Widget {
@@ -2251,37 +1258,6 @@ class CachedNetworkImage extends fs.Widget {
             this.memCacheWidth = config.memCacheWidth;
             this.cacheKey = config.cacheKey;
         }
-    }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          imageUrl:string,
-          httpHeaders?:Map<string,string>
-          placeholder?:fs.Widget,
-          errorWidget?:fs.Widget,
-          fadeOutDuration?:fs.Duration,
-          fadeOutCurve?:fs.Curve,
-          fadeInDuration?:fs.Duration,
-          fadeInCurve?:fs.Curve,
-          width?:number,
-          height?:number,
-          fit?:fs.BoxFit,
-          alignment?:fs.Alignment,
-          repeat?:fs.ImageRepeat,
-          matchTextDirection?:boolean,
-          useOldImageOnUrlChange?:boolean,
-          color?:fs.Color,
-          filterQuality?:fs.FilterQuality,
-          colorBlendMode?:fs.BlendMode,
-          placeholderFadeInDuration?:fs.Duration,
-          memCacheWidth?:number,
-          memCacheHeight?:number,
-          cacheKey?:string,
-        }
-     */
-    static new(config) {
-        return new CachedNetworkImage(config);
     }
 }
 exports.CachedNetworkImage = CachedNetworkImage;
@@ -2386,34 +1362,6 @@ class EasyRefreshClassicalHeader extends EasyRefreshHeader {
             this.infoColor = config.infoColor;
         }
     }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          extent?:number,
-          triggerDistance?:number,
-          float?:boolean,
-          completeDuration?:fs.Duration,
-          enableInfiniteRefresh?:boolean,
-          enableHapticFeedback?:boolean,
-          overScroll?:boolean,
-          alignment?:fs.Alignment,
-          refreshText?:string,
-          refreshReadyText?:string,
-          refreshingText?:string,
-          refreshedText?:string,
-          refreshFailedText?:string,
-          noMoreText?:string,
-          showInfo?:boolean,
-          infoText?:string,
-          bgColor?:fs.Color,
-          textColor?:fs.Color,
-          infoColor?:fs.Color,
-        }
-     */
-    static new(config) {
-        return new EasyRefreshClassicalHeader(config);
-    }
 }
 exports.EasyRefreshClassicalHeader = EasyRefreshClassicalHeader;
 class EasyRefreshMaterialHeader extends EasyRefreshHeader {
@@ -2436,19 +1384,6 @@ class EasyRefreshMaterialHeader extends EasyRefreshHeader {
             this.completeDuration = config.completeDuration;
             this.enableHapticFeedback = config.enableHapticFeedback;
         }
-    }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          displacement?:number,
-          backgroundColor?:fs.Color,
-          completeDuration?:fs.Duration,
-          enableHapticFeedback?:boolean,
-        }
-     */
-    static new(config) {
-        return new EasyRefreshMaterialHeader(config);
     }
 }
 exports.EasyRefreshMaterialHeader = EasyRefreshMaterialHeader;
@@ -2558,36 +1493,6 @@ class EasyRefreshClassicalFooter extends fs.Widget {
             this.isNoMoreText = config.isNoMoreText;
         }
     }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          extent?:number,
-          triggerDistance?:number,
-          float?:boolean,
-          completeDuration?:fs.Duration,
-          enableInfiniteLoad?:boolean,
-          enableHapticFeedback?:boolean,
-          overScroll?:boolean,
-          safeArea?:boolean,
-          padding?:fs.EdgeInsets,
-          alignment?:fs.Alignment,
-          loadText?:string,
-          loadReadyText?:string,
-          loadingText?:string,
-          loadedText?:string,
-          loadFailedText?:string,
-          noMoreText?:string,
-          showInfo?:boolean,
-          infoText?:string,
-          bgColor?:fs.Color,
-          textColor?:fs.Color,
-          infoColor?:fs.Color,
-        }
-     */
-    static new(config) {
-        return new EasyRefreshClassicalFooter(config);
-    }
 }
 exports.EasyRefreshClassicalFooter = EasyRefreshClassicalFooter;
 class EasyRefreshMaterialFooter extends EasyRefreshFooter {
@@ -2619,32 +1524,12 @@ class EasyRefreshMaterialFooter extends EasyRefreshFooter {
             this.noMoreText = config.noMoreText;
         }
     }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          displacement?:number,
-          backgroundColor?:fs.Color,
-          completeDuration?:fs.Duration,
-          enableHapticFeedback?:boolean,
-          enableInfiniteLoad?:boolean,
-          overScroll?:boolean,
-          isNoMoreText?:boolean,
-          noMoreText?:string,
-        }
-     */
-    static new(config) {
-        return new EasyRefreshMaterialFooter(config);
-    }
 }
 exports.EasyRefreshMaterialFooter = EasyRefreshMaterialFooter;
 class EasyRefreshController extends fs.DartClass {
     constructor() {
         super();
         this.createMirrorID();
-    }
-    static new() {
-        return new EasyRefreshController();
     }
     /**
      * @param config config:
@@ -2653,7 +1538,7 @@ class EasyRefreshController extends fs.DartClass {
         }
      */
     callRefresh(config) {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "callRefresh",
@@ -2667,7 +1552,7 @@ class EasyRefreshController extends fs.DartClass {
         }
      */
     callLoad(config) {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "callLoad",
@@ -2682,7 +1567,7 @@ class EasyRefreshController extends fs.DartClass {
         }
      */
     finishRefresh(config) {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "finishRefresh",
@@ -2697,7 +1582,7 @@ class EasyRefreshController extends fs.DartClass {
         }
      */
     finishLoad(config) {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "finishLoad",
@@ -2705,21 +1590,21 @@ class EasyRefreshController extends fs.DartClass {
         }));
     }
     resetRefreshState() {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "resetRefreshState",
         }));
     }
     resetLoadState() {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "resetLoadState",
         }));
     }
     dispose() {
-        fs.JSFramework.invokeFlutterFunction(fs.JSCallConfig.new({
+        fs.JSFramework.invokeFlutterFunction(new fs.JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "dispose",
@@ -2838,31 +1723,6 @@ class EasyRefresher extends fs.Widget {
             v.slivers = config.slivers;
         }
         return v;
-    }
-    /**
-     * @param config config:
-        {
-          key?:fs.Key,
-          controller?:EasyRefreshController,
-          onRefresh?:fs.VoidCallback,
-          onLoad?:fs.VoidCallback,
-          enableControlFinishRefresh?:boolean,
-          enableControlFinishLoad?:boolean,
-          taskIndependence?:boolean,
-          scrollController?:fs.ScrollController,
-          header?:EasyRefreshHeader
-          footer?:EasyRefreshFooter,
-          firstRefresh?:boolean,
-          firstRefreshWidget?:fs.Widget,
-          headerIndex?:number,
-          emptyWidget?:fs.Widget,
-          topBouncing?:boolean,
-          bottomBouncing?:boolean,
-          child:fs.Widget,
-        }
-     */
-    static new(config) {
-        return new EasyRefresher(config);
     }
 }
 exports.EasyRefresher = EasyRefresher;

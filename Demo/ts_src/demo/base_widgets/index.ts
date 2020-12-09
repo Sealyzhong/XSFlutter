@@ -22,36 +22,36 @@ import { MyImagePage } from "demo/base_widgets/image_page";
 
 export class MyBaseWidgetsIndex extends fs.StatelessWidget{
 
-    _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
+    _style = new fs.TextStyle({fontSize:24,fontWeight:fs.FontWeight.bold});
     
     build(context:fs.BuildContext){
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title: fs.Text.new("通用组件"),
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title: new fs.Text("通用组件"),
             }),
-            body:fs.ListView.new({
+            body:new fs.ListView({
                 children:[
-                    MySectionTitle.new("基础组件"),
+                    new MySectionTitle("基础组件"),
                 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Material Icons"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Material Icons"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyMaterialIconsPage.new();
+                                    return new MyMaterialIconsPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Cupertino Icons"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Cupertino Icons"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyCupertinoIconsPage.new();
+                                    return new MyCupertinoIconsPage();
                                 }
                             }));
                         }                        
@@ -62,7 +62,7 @@ export class MyBaseWidgetsIndex extends fs.StatelessWidget{
                         trailing:new fs.Icon(fs.Icons.chevron_right),
                         title:new fs.Text("AppBar"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
                                     return new MyAppBarPage();
                                 }
@@ -70,61 +70,61 @@ export class MyBaseWidgetsIndex extends fs.StatelessWidget{
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("PlaceHolder"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("PlaceHolder"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyPlaceholderPage.new();
+                                    return new MyPlaceholderPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Image"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Image"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyImagePage.new();
+                                    return new MyImagePage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Text"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Text"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyTextPage.new();
+                                    return new MyTextPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("TextField"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("TextField"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyTextFieldPage.new();
+                                    return new MyTextFieldPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Button"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Button"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyButtonPage.new();
+                                    return new MyButtonPage();
                                 }
                             }));
                         }                        
@@ -132,51 +132,51 @@ export class MyBaseWidgetsIndex extends fs.StatelessWidget{
 
 
 
-                    MySectionTitle.new("布局组件"),
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Container"),
+                    new MySectionTitle("布局组件"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Container"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyContainerPage.new();
+                                    return new MyContainerPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Column"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Column"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyColumnPage.new();
+                                    return new MyColumnPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Row"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Row"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyRowPage.new();
+                                    return new MyRowPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    MySectionTitle.new("其它组件"),
-                    fs.ListTile.new({
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Flutter Logo"),
+                    new MySectionTitle("其它组件"),
+                    new fs.ListTile({
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Flutter Logo"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyFlutterLogoPage.new();
+                                    return new MyFlutterLogoPage();
                                 }
                             }));
                         }                        
@@ -185,9 +185,5 @@ export class MyBaseWidgetsIndex extends fs.StatelessWidget{
                 ],
             }),
         });
-    }
-
-    static new(){
-        return new MyBaseWidgetsIndex();
     }
 }

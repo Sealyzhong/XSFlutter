@@ -3,47 +3,47 @@ import fs = require("flutter_sdk");
 export class MyButtonPage extends fs.StatelessWidget{
    
     build(context:fs.BuildContext) {
-        return fs.Scaffold.new({
-            appBar: fs.AppBar.new({
-              title: fs.Text.new('Button',),
+        return new fs.Scaffold({
+            appBar: new fs.AppBar({
+              title: new fs.Text('Button',),
             }),
-            body: fs.ListView.new({
+            body: new fs.ListView({
               children:[
-                MySectionTitle.new("RaisedButton"),
-                fs.RaisedButton.new({
-                  child:fs.Text.new("普通按钮"),
+                new MySectionTitle("RaisedButton"),
+                new fs.RaisedButton({
+                  child:new fs.Text("普通按钮"),
                   onPressed:function () {
                     fs.Log.log("Click");
                   },
                 }),
-                MySectionTitle.new("失效Disable"),
-                fs.RaisedButton.new({
-                  child:fs.Text.new("Disable 按钮"),
+                new MySectionTitle("失效Disable"),
+                new fs.RaisedButton({
+                  child:new fs.Text("Disable 按钮"),
                 }),
-                MySectionTitle.new("FlatButton"),
-                fs.FlatButton.new({
-                  child:fs.Text.new("Flat 按钮"),
+                new MySectionTitle("FlatButton"),
+                new fs.FlatButton({
+                  child:new fs.Text("Flat 按钮"),
                   onPressed:function(){
                     fs.Log.log("Click");
                   }
                 }),
-                fs.FlatButton.new({
+                new fs.FlatButton({
                   textColor:fs.Colors.black,
-                  child:fs.Text.new("Flat 按钮"),
+                  child:new fs.Text("Flat 按钮"),
                   onPressed:function(){
                     fs.Log.log("Click");
                   }
                 }),
-                MySectionTitle.new("Icon Button"),
-                fs.IconButton.new({
-                  icon:fs.Icon.new(fs.Icons.camera),
+                new MySectionTitle("Icon Button"),
+                new fs.IconButton({
+                  icon:new fs.Icon(fs.Icons.camera),
                   onPressed:function(){
                     fs.Log.log("Click");
                   }
                 }),
-                MySectionTitle.new("Floating Action Button"),
-                fs.FloatingActionButton.new({
-                  child:fs.Icon.new(fs.Icons.camera),
+                new MySectionTitle("Floating Action Button"),
+                new fs.FloatingActionButton({
+                  child:new fs.Icon(fs.Icons.camera),
                   onPressed:function(){
                     fs.Log.log("Click");
                   }
@@ -51,9 +51,5 @@ export class MyButtonPage extends fs.StatelessWidget{
               ],
             })
           });
-    }
-
-    static new(){
-        return new MyButtonPage();
     }
 }

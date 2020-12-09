@@ -9,31 +9,25 @@ export class MySectionTitle extends fs.StatelessWidget{
   constructor(title:string){
     super();
     this.title = title;
-  }
-
-  static new(title:string){
-    return new MySectionTitle(title);
-  }
-
-  
+  }  
   build(context?:fs.BuildContext){
-    return fs.Container.new({
+    return new fs.Container({
 
       padding:fs.EdgeInsets.all(10.0),
       color:MyColorUtil.primaryColor,
-      child:fs.Row.new({
+      child:new fs.Row({
         mainAxisAlignment:fs.MainAxisAlignment.start,
         children:[
-          fs.Icon.new(
+          new fs.Icon(
             fs.Icons.list,
             {
               color:fs.Colors.white,
             }
           ),
-          fs.Container.new({
+          new fs.Container({
             width:10,
           }),
-          fs.Text.new(this.title, { style:fs.TextStyle.new({
+          new fs.Text(this.title, { style:new fs.TextStyle({
             color:fs.Colors.white,
             fontWeight:fs.FontWeight.bold,
             fontSize:18,

@@ -129,20 +129,6 @@ export class JSCallConfig {
       this.args = config.args;
     }
   }
-
-  /**
-   * @param config config: 
-    {
-      widgetID?:string, 
-      mirrorID?:string, 
-      className?:string, 
-      funcName?:string,        
-      args?:any
-    }
-   */
-  static new(config:JSCallArgsConfig){
-    return new JSCallConfig(config);
-  }
 }
 
 //flutter 中 非widget继承 DartClass
@@ -256,7 +242,7 @@ export class Convert extends core.Object{
     ///*重要区分： JS Logic MirrorObj的生命周期JS侧控制，由Native Weak Ref辅助完成释放
     static createMirrorObj(flutterCallConfig:any, mirrorID:any, needMonitordGCValue:any) {
   
-      let basicMethodCall = JSMethodCall.new("JSBridgeCreateMirrorObj", flutterCallConfig);
+      let basicMethodCall = new JSMethodCall("JSBridgeCreateMirrorObj", flutterCallConfig);
       JSBridge.invokeFlutterCommonChannel(basicMethodCall);
   
       //监控jsvalue 释放，同步释放flutter侧对象
@@ -303,7 +289,7 @@ export class Convert extends core.Object{
   
     static invokeMirrorObjWithCallback(flutterCallConfig:any, callback:any) {
   
-      let basicMethodCall = JSMethodCall.new("JSBridgeInvokeMirrorObjWithCallback", flutterCallConfig);
+      let basicMethodCall = new JSMethodCall("JSBridgeInvokeMirrorObjWithCallback", flutterCallConfig);
       JSBridge.invokeFlutterCommonChannel(basicMethodCall, callback);
     }
   
@@ -375,7 +361,7 @@ export class Convert extends core.Object{
   
       //这个接口暂时不完备，要在JS侧创建setInheritedInfo，参照navigatorPush
   
-      let bc = BuildContext.new(widget);
+      let bc = new BuildContext(widget);
       widget.buildContext = bc;
   
       this.rootWidget?.helper?.addChildWidget(widget);
@@ -388,7 +374,7 @@ export class Convert extends core.Object{
     //当Flutter层 PageRoute(builder: (context) =>  被调用时，创建XSJSWidget，build后调用rebuild界面
     navigatorPush(widget:any, args?:any) {
   
-      let bc = BuildContext.new(widget);
+      let bc = new BuildContext(widget);
       bc.setInheritedInfo(args);
       widget.buildContext = bc;
   
@@ -571,15 +557,13 @@ export class Convert extends core.Object{
     name?:string;
     args?:Map<string,any>;
   
+    constructor(name:string,args?:Map<string,any>) {
+      this.name = name;
+      this.args = args;
+
+    }
     encodeJSON() {
       return JSON.stringify({ "funcName": this.name, "args": this.args });
-    }
-  
-    static new(name:string,args?:Map<string,any>){
-      var v = new JSMethodCall();
-      v.name = name;
-      v.args = args;
-      return v;
     }
   }
   
@@ -632,17 +616,16 @@ export class Convert extends core.Object{
     widget?:BaseWidget;
     parentBuildContext?:BuildContext;
     inheritedInfo?:any;
-    static new(widget:BaseWidget, parentBuildContext?:BuildContext){
-      var v = new BuildContext();
-      v.widget = widget;
-      v.widget.buildContext = v;
-      v.parentBuildContext = parentBuildContext;
-      v.inheritedInfo = {};
-      return v;
+    
+    constructor(widget:BaseWidget, parentBuildContext?:BuildContext) {
+      this.widget = widget;
+      this.widget.buildContext = this;
+      this.parentBuildContext = parentBuildContext;
+      this.inheritedInfo = {};
     }
   
     static inheritBuildContext(widget:BaseWidget, buildContext?:BuildContext) {
-      var context = BuildContext.new(widget, buildContext);
+      var context = new BuildContext(widget, buildContext);
       context.inheritedInfo = buildContext?.inheritedInfo;
       return context;
     }
@@ -723,7 +706,7 @@ export class Convert extends core.Object{
         ++this.widget.buildWidgetDataSeqFeed
       );
   
-      let tempWidgetTree = WidgetTree.new(
+      let tempWidgetTree = new WidgetTree(
         this.widget.buildWidgetDataSeq
       );
       tempWidgetTree.ownerWidget = this.widget;
@@ -771,11 +754,6 @@ export class Convert extends core.Object{
     }
 
     buildWidgetTreeSubWidget(widget:any) {
-      /*let tempWidgetTree = WidgetTree.new(this.widget.buildWidgetDataSeq
-      );
-      tempWidgetTree.ownerWidget = this.widget;
-  
-      this.widget.buildingWidgetTree = tempWidgetTree;*/
       Log.log("JSWidget buildWidgetTree ::" + this.widget.getWidgetInfo());
   
       let tempWidgetTreeObjMap;
@@ -786,13 +764,6 @@ export class Convert extends core.Object{
       }else if (widget instanceof Widget) {
         tempWidgetTreeObjMap=widget;
       }
-  
-      //如果Build的root wiget 是StatelessWidget，则直接展开，优化性能
-      /*if (tempWidgetTreeObjMap instanceof StatelessWidget) {
-        tempWidgetTreeObjMap = tempWidgetTreeObjMap.build(this.widget.buildContext);
-      }*/
-  
-      //tempWidgetTree.widgetTreeObjMap = tempWidgetTreeObjMap; //不做diff不用保存，优化内存
   
       this.preBuildJson(this.widget.buildingWidgetTree, tempWidgetTreeObjMap);
   
@@ -839,7 +810,7 @@ export class Convert extends core.Object{
     }
   
     setupAsRootWidget() {
-      this.widget.buildingWidgetTree = WidgetTree.new("1");
+      this.widget.buildingWidgetTree = new WidgetTree("1");
       this.widget.currentWidgetTree = this.widget.buildingWidgetTree;
   
     }
@@ -1215,19 +1186,12 @@ export class Convert extends core.Object{
     widgetTreeObjMap?:any;
     ownerWidget?:BaseWidget;
   
-    constructor(){
-      this.buildWidgetDataSeq="";
+    constructor(buildWidgetDataSeq:string){
+      this.buildWidgetDataSeq=buildWidgetDataSeq;
       this.childrenWidget = new Map();
-    }
-  
-    static new(buildWidgetDataSeq:string){
-      var v = new WidgetTree();
-      v.buildWidgetDataSeq=buildWidgetDataSeq;
-      v.childrenWidget = new Map();
-      v.callbackID2fun =new Map();
-      v.widgetTreeObjMap = null;
-      v.ownerWidget = undefined;
-      return v;
+      this.callbackID2fun =new Map();
+      this.widgetTreeObjMap = null;
+      this.ownerWidget = undefined;
     }
   
     //统一用全局的id生成器
@@ -2089,19 +2053,15 @@ export class Alignment extends AlignmentGeometry {
     this.y = y;
   }
   
-  static new(x:number, y:number){
-    return new Alignment(x,y);
-  }
-
-  static topLeft = Alignment.new(-1.0, -1.0); 
-  static topCenter = Alignment.new(0.0, -1.0); 
-  static topRight = Alignment.new(1.0, -1.0); 
-  static centerLeft = Alignment.new(-1.0, 0.0); 
-  static center = Alignment.new(0.0, 0.0); 
-  static centerRight = Alignment.new(1.0, 0.0);
-  static bottomLeft = Alignment.new(-1.0, 1.0);
-  static bottomCenter = Alignment.new(0.0, 1.0);
-  static bottomRight = Alignment.new(1.0, 1.0); 
+  static topLeft = new Alignment(-1.0, -1.0); 
+  static topCenter = new Alignment(0.0, -1.0); 
+  static topRight = new Alignment(1.0, -1.0); 
+  static centerLeft = new Alignment(-1.0, 0.0); 
+  static center = new Alignment(0.0, 0.0); 
+  static centerRight = new Alignment(1.0, 0.0);
+  static bottomLeft = new Alignment(-1.0, 1.0);
+  static bottomCenter = new Alignment(0.0, 1.0);
+  static bottomRight = new Alignment(1.0, 1.0); 
 } 
   
 ///AlignmentDirectional
@@ -2112,21 +2072,17 @@ export class AlignmentDirectional extends AlignmentGeometry {
     this.y = y;
   }
 
-  static new(start:number, y:number){
-    return new AlignmentDirectional(start,y);
-  }
+  static topStart = new AlignmentDirectional(-1.0, -1.0); 
+  static topCenter = new AlignmentDirectional(0.0, -1.0); 
+  static topEnd = new AlignmentDirectional(1.0, -1.0); 
 
-  static topStart = AlignmentDirectional.new(-1.0, -1.0); 
-  static topCenter = AlignmentDirectional.new(0.0, -1.0); 
-  static topEnd = AlignmentDirectional.new(1.0, -1.0); 
+  static centerStart = new AlignmentDirectional(-1.0, 0.0); 
+  static center = new AlignmentDirectional(0.0, 0.0); 
+  static centerEnd = new AlignmentDirectional(1.0, 0.0);
 
-  static centerStart = AlignmentDirectional.new(-1.0, 0.0); 
-  static center = AlignmentDirectional.new(0.0, 0.0); 
-  static centerEnd = AlignmentDirectional.new(1.0, 0.0);
-
-  static bottomStart = AlignmentDirectional.new(-1.0, 1.0);
-  static bottomCenter = AlignmentDirectional.new(0.0, 1.0);
-  static bottomEnd = AlignmentDirectional.new(1.0, 1.0); 
+  static bottomStart = new AlignmentDirectional(-1.0, 1.0);
+  static bottomCenter =new AlignmentDirectional(0.0, 1.0);
+  static bottomEnd = new AlignmentDirectional(1.0, 1.0); 
 }
 
 //#endregion
@@ -2142,10 +2098,6 @@ export class PlatformAssetBundle extends AssetBundle {
   constructor(){
     super();
   }
-
-  static new() {
-    return new PlatformAssetBundle();
-  }
 }
 
 //****** NetworkAssetBundle ******
@@ -2154,10 +2106,6 @@ export class NetworkAssetBundle extends AssetBundle {
   constructor(baseUrl:Uri){
     super();
     this.baseUrl = baseUrl;
-  }
-
-  static new(baseUrl:Uri) {
-    return new NetworkAssetBundle(baseUrl);
   }
 }
 
@@ -2195,18 +2143,6 @@ export class BorderSide extends DartClass {
       this.width = config.width;
       this.style = config.style;
     }
-  }
-
-  /**
-   * @param config config: 
-      {
-        color?:Color, 
-        width?:number, 
-        style?:BorderStyle
-      }
-   */
-  static new(config?: BorderSideConfig){
-    return new BorderSide(config);
   }
 
   static none() {
@@ -2462,21 +2398,6 @@ export class BannerPainter extends DartClass {
       this.textStyle = config.textStyle;
     }
   }
-
-  /**
-   * @param config config: 
-      {
-        message?:string, 
-        textDirection?:TextDirection, 
-        location?:BannerLocation, 
-        layoutDirection?:TextDirection, 
-        color?:Color, 
-        textStyle?:TextStyle, 
-      }
-    */
-  static new(config: BannerPainterConfig){
-    return new BannerPainter(config);
-  }
 }
 
 //****** BoxShadow ******
@@ -2509,19 +2430,6 @@ export class BoxShadow extends DartClass {
       this.blurRadius = config.blurRadius;
       this.spreadRadius = config.spreadRadius;
     }
-  }
-
-  /**
-   * @param config config: 
-    {
-      color?:Color, 
-      offset?:Offset, 
-      blurRadius?:number, 
-      spreadRadius?:number
-    }
-   */
-  static new(config?: BoxShadowConfig) {
-    return new BoxShadow(config);
   }
 }
 
@@ -2580,19 +2488,6 @@ export class BoxConstraints extends Constraints {
       this.maxHeight = config.maxHeight;
     }
   }
-
-  /**
-   * @param config config: 
-    {
-      minWidth?:number, 
-      maxWidth?:number, 
-      minHeight?:number, 
-      maxHeight?:number
-    }
-   */
-  static new(config?: BoxConstraintsConfig){
-    return new BoxConstraints(config);
-  }
 }
 
 //#endregion
@@ -2609,10 +2504,6 @@ export class Color extends DartClass {
   constructor(value?: number){
     super();
     this.value =value;
-  }
-
-  static new(value: number)  {    
-    return new Color(value);
   }
 
   static fromARGB(a: number, r: number, g: number, b: number) {
@@ -2639,58 +2530,58 @@ export class Color extends DartClass {
 
 //#region Colors
 export class Colors extends Color{
-  static transparent = Color.new(0x00000000);
-  static black = Color.new(0xff000000);
-  static black87 = Color.new(0xdd000000);
-  static black54 = Color.new(0x8a000000);
-  static black45 = Color.new(0x73000000);
-  static black38 = Color.new(0x61000000);
-  static black26 = Color.new(0x42000000);
-  static black12 = Color.new(0x1f000000);
-  static white = Color.new(0xffffffff);
-  static white70 = Color.new(0xb3ffffff);
-  static white60 = Color.new(0x99FFFFFF);
-  static white54 = Color.new(0x8affffff);
-  static white38 = Color.new(0x62FFFFFF);
-  static white30 = Color.new(0x4dffffff);
-  static white24 = Color.new(0x3dffffff);
-  static white12 = Color.new(0x1fffffff);
-  static white10 = Color.new(0x1affffff);
-  static red = Color.new(0xFFF44336);
-  static redAccent = Color.new(0xFFFF5252);
-  static pink = Color.new(0xFFE91E63);
-  static pinkAccent = Color.new(0xFFFF4081);
-  static purple = Color.new(0xFF9C27B0);
-  static purpleAccent = Color.new(0xFFE040FB);
-  static deepPurple = Color.new(0xFF673AB7);
-  static deepPurpleAccent = Color.new(0xFF7C4DFF);
-  static indigo = Color.new(0xFF3F51B5);
-  static indigoAccent = Color.new(0xFF536DFE);
-  static blue = Color.new(0xFF2196F3);
-  static blueAccent = Color.new(0xFF448AFF);
-  static lightBlue = Color.new(0xFF03A9F4);
-  static lightBlueAccent = Color.new(0xFF40C4FF);
-  static cyan = Color.new(0xFF00BCD4);
-  static cyanAccent = Color.new(0xFF18FFFF);
-  static teal = Color.new(0xff009688);
-  static tealAccent = Color.new(0xFF64FFDA);
-  static green = Color.new(0xFF4CAF50);
-  static greenAccent = Color.new(0xFF69F0AE);
-  static lightGreen = Color.new(0xFF8BC34A);
-  static lightGreenAccent = Color.new(0xFFB2FF59);
-  static lime = Color.new(0xFFCDDC39);
-  static limeAccent = Color.new(0xFFEEFF41);
-  static yellow = Color.new(0xFFFFEB3B);
-  static yellowAccent = Color.new(0xFFFFFF00);
-  static amber = Color.new(0xFFFFC107);
-  static amberAccent = Color.new(0xFFFFD740);
-  static orange = Color.new(0xFFFF9800);
-  static orangeAccent = Color.new(0xFFFFAB40);
-  static deepOrange = Color.new(0xFFFF5722);
-  static deepOrangeAccent = Color.new(0xFFFF6E40);
-  static brown = Color.new(0xFF795548);
-  static grey = Color.new(0xFF9E9E9E);
-  static blueGrey = Color.new(0xFF607D8B);
+  static transparent = new Color(0x00000000);
+  static black = new Color(0xff000000);
+  static black87 = new Color(0xdd000000);
+  static black54 = new Color(0x8a000000);
+  static black45 = new Color(0x73000000);
+  static black38 = new Color(0x61000000);
+  static black26 = new Color(0x42000000);
+  static black12 = new Color(0x1f000000);
+  static white = new Color(0xffffffff);
+  static white70 = new Color(0xb3ffffff);
+  static white60 = new Color(0x99FFFFFF);
+  static white54 = new Color(0x8affffff);
+  static white38 = new Color(0x62FFFFFF);
+  static white30 = new Color(0x4dffffff);
+  static white24 = new Color(0x3dffffff);
+  static white12 = new Color(0x1fffffff);
+  static white10 = new Color(0x1affffff);
+  static red = new Color(0xFFF44336);
+  static redAccent = new Color(0xFFFF5252);
+  static pink = new Color(0xFFE91E63);
+  static pinkAccent = new Color(0xFFFF4081);
+  static purple = new Color(0xFF9C27B0);
+  static purpleAccent = new Color(0xFFE040FB);
+  static deepPurple = new Color(0xFF673AB7);
+  static deepPurpleAccent = new Color(0xFF7C4DFF);
+  static indigo = new Color(0xFF3F51B5);
+  static indigoAccent = new Color(0xFF536DFE);
+  static blue = new Color(0xFF2196F3);
+  static blueAccent = new Color(0xFF448AFF);
+  static lightBlue = new Color(0xFF03A9F4);
+  static lightBlueAccent = new Color(0xFF40C4FF);
+  static cyan = new Color(0xFF00BCD4);
+  static cyanAccent = new Color(0xFF18FFFF);
+  static teal = new Color(0xff009688);
+  static tealAccent = new Color(0xFF64FFDA);
+  static green = new Color(0xFF4CAF50);
+  static greenAccent = new Color(0xFF69F0AE);
+  static lightGreen = new Color(0xFF8BC34A);
+  static lightGreenAccent = new Color(0xFFB2FF59);
+  static lime = new Color(0xFFCDDC39);
+  static limeAccent = new Color(0xFFEEFF41);
+  static yellow = new Color(0xFFFFEB3B);
+  static yellowAccent = new Color(0xFFFFFF00);
+  static amber = new Color(0xFFFFC107);
+  static amberAccent = new Color(0xFFFFD740);
+  static orange = new Color(0xFFFF9800);
+  static orangeAccent = new Color(0xFFFFAB40);
+  static deepOrange = new Color(0xFFFF5722);
+  static deepOrangeAccent = new Color(0xFFFF6E40);
+  static brown = new Color(0xFF795548);
+  static grey = new Color(0xFF9E9E9E);
+  static blueGrey = new Color(0xFF607D8B);
 }
 //#endregion
 
@@ -2703,10 +2594,6 @@ export class ColorFilter extends DartClass {
     super();
     this.color = color;
     this.blendMode =blendMode;
-  }
-
-  static new(color:Color, blendMode:BlendMode) {
-    return new ColorFilter(color,blendMode);
   }
 
   static mode(color:Color, blendMode:BlendMode){
@@ -2748,17 +2635,6 @@ export class DragDownDetails extends DartClass {
       this.localPosition = config.localPosition;
     }
   }
-
-  /**
-   * @param config config: 
-      {
-        globalPosition?:Offset,
-        localPosition?:Offset,
-      }
-   */
-  static new (config?: DragDownDetailsConfig) {
-    return new DragDownDetails(config);
-  }
 }
 
 //****** DragStartDetails ******
@@ -2787,18 +2663,6 @@ export class DragStartDetails extends DartClass {
       this.localPosition = config.localPosition;
       this.sourceTimeStamp = config.sourceTimeStamp;
     }
-  }
-
-  /**
-   * @param config config: 
-      {
-        globalPosition?:Offset,
-        localPosition?:Offset,
-        sourceTimeStamp?:Duration,
-      }
-   */
-  static new (config?: DragStartDetailsConfig) {
-    return new DragStartDetails(config);
   }
 }
 
@@ -2837,20 +2701,6 @@ export class DragUpdateDetails extends DartClass {
       this.primaryDelta = config.primaryDelta;
     }
   }
-
-  /**
-   * @param config config: 
-      {
-        globalPosition?:Offset,
-        localPosition?:Offset,
-        sourceTimeStamp?:Duration,
-        delta?:Offset,
-        primaryDelta?:number,
-      }
-   */
-  static new (config?: DragUpdateDetailsConfig) {
-    return new DragUpdateDetails(config);
-  }
 }
 
 //****** DragEndDetails ******
@@ -2875,17 +2725,6 @@ export class DragEndDetails extends DartClass {
       this.velocity = config.velocity;
       this.primaryVelocity = config.primaryVelocity;
     }
-  }
-
-  /**
-   * @param config config: 
-      {
-        velocity?:Velocity, 
-        primaryVelocity?:number, 
-      }
-   */
-  static new (config?: DragEndDetailsConfig) {
-    return new DragEndDetails(config);
   }
 }
 //#endregion
@@ -2943,20 +2782,6 @@ export class Duration extends DartClass {
     if(this.days!=null && this.days!=undefined){
       this.inMilliseconds=this.inMilliseconds+this.days*1000*60*60*24;
     }
-  }
-
-  /**
-   * @param config config: 
-      {
-        days?:number, 
-        hours?:number, 
-        minutes?:number, 
-        seconds?:number, 
-        milliseconds?:number
-      }
-   */
-  static new(config?: DurationConfig) {
-    return new Duration(config);
   }
 }
 //#endregion
@@ -3045,23 +2870,6 @@ export class BoxDecoration extends Decoration {
       this.image = config.image;
     }
   }
-
-  /**
-   * @param config config: 
-      {
-        color?:Color, 
-        border?:Border;
-        borderRadius?:BorderRadius, 
-        boxShadow?:BoxShadow, 
-        gradient?:BaseGradient 
-        backgroundBlendMode?:BlendMode, 
-        shape?:BoxShape,
-        image?:DecorationImage, 
-      }
-    */
-  static new(config?: BoxDecorationConfig){
-    return new BoxDecoration(config);
-  }
 }
 
 //****** FlutterLogoDecoration ******
@@ -3090,18 +2898,6 @@ export class FlutterLogoDecoration extends Decoration {
       this.style = config.style;
       this.margin = config.margin;
     }
-  }
-
-  /**
-   * @param config config: 
-      {
-        textColor?:Color, 
-        style?:FlutterLogoStyle, 
-        margin?:EdgeInsets, 
-      }
-   */
-  static new(config?: FlutterLogoDecorationConfig) {
-    return new FlutterLogoDecoration(config);
   }
 } 
 
@@ -3153,19 +2949,6 @@ export class EdgeInsets extends EdgeInsetsGeometry {
       this.right = config.right;
       this.bottom = config.bottom;
     }
-  }
-
-  /**
-   * @param config config:
-      {
-        left?:number,
-        top?:number,
-        right?:number,
-        bottom?:number
-      }
-   */
-  static new(config?: EdgeInsetsConfig) {
-    return new EdgeInsets(config);
   }
 
   static zero() {
@@ -3262,19 +3045,6 @@ export class EdgeInsetsDirectional extends EdgeInsetsGeometry {
     }
   }
 
-  /**
-   * @param config config: 
-      {
-        start?:number, 
-        top?:number, 
-        end?:number, 
-        bottom?:number,
-      }
-   */
-  static new(config?: EdgeInsetsDirectionalConfig) {
-    return new EdgeInsetsDirectional(config);
-  }
-
   static fromSTEB(start:number, top:number, end:number, bottom:number) {
     let v = new EdgeInsetsDirectional();
     v.constructorName = "fromSTEB";
@@ -3359,18 +3129,6 @@ export class FocusNode extends DartClass {
     }
 
   }
-
-  /**
-   * @param config config: 
-      {
-        textColor?:Color, 
-        style?:FlutterLogoStyle, 
-        margin?:EdgeInsets, 
-      }
-   */
-  static new(config?: FocusNodeConfig) {
-    return new FocusNode(config);
-  }
 } 
 
 //****** FractionalOffset ******
@@ -3383,22 +3141,17 @@ export class FractionalOffset extends DartClass {
     this.dx = dx;
     this.dy = dy;
   }
+  static topLeft = new FractionalOffset(0.0, 0.0); 
+  static topCenter = new FractionalOffset(0.5, 0.0); 
+  static topRight = new FractionalOffset(1.0, 0.0); 
 
-  static new(dx:number, dy:number) {
-    return new FractionalOffset(dx,dy);
-  }
+  static centerLeft = new FractionalOffset(0.0, 0.5); 
+  static center = new FractionalOffset(0.5, 0.5); 
+  static centerRight = new FractionalOffset(1.0, 0.5);
 
-  static topLeft = FractionalOffset.new(0.0, 0.0); 
-  static topCenter = FractionalOffset.new(0.5, 0.0); 
-  static topRight = FractionalOffset.new(1.0, 0.0); 
-
-  static centerLeft = FractionalOffset.new(0.0, 0.5); 
-  static center = FractionalOffset.new(0.5, 0.5); 
-  static centerRight = FractionalOffset.new(1.0, 0.5);
-
-  static bottomLeft = FractionalOffset.new(0.0, 1.0);
-  static bottomCenter = FractionalOffset.new(0.5, 1.0);
-  static bottomRight = FractionalOffset.new(1.0, 1.0); 
+  static bottomLeft = new FractionalOffset(0.0, 1.0);
+  static bottomCenter = new FractionalOffset(0.5, 1.0);
+  static bottomRight = new FractionalOffset(1.0, 1.0); 
 
 }
 
@@ -3411,10 +3164,6 @@ export class File extends DartClass {
   constructor(path?:string){
     super();
     this.path = path;
-  }
-
-  static new(path:string) {
-    return new File(path);
   }
 
   static fromUri(uri:Uri) {
@@ -3455,14 +3204,6 @@ export class GradientRotation extends GradientTransform {
   constructor(radians:number){
     super();
     this.radians = radians;
-  }
-
-  /**
-   * 
-   * @param radians 
-   */
-  static new(radians:number) {
-    return new GradientRotation(radians);
   }
 } 
 //#endregion
@@ -3564,22 +3305,6 @@ export class LinearGradient extends Gradient {
       this.transform = config.transform;
     }
   }
-
-
-  /**
-   * @param config config: 
-      {
-        begin?:Alignment, 
-        end?:Alignment, 
-        colors:Array<Color>, 
-        stops?:Array<number>, 
-        tileMode?:TileMode,
-        transform?:GradientRotation,
-      }
-   */
-    static new(config?: LinearGradientConfig) {
-      return new LinearGradient(config);
-  } 
 }
 
 //****** RadialGradient ******
@@ -3634,24 +3359,6 @@ export class RadialGradient extends Gradient {
       this.transform = config.transform;
     }
   }
-
-
-  /**
-   * @param config config: 
-      {
-        center?:Alignment, 
-        radius?:number, 
-        colors:Array<Color>, 
-        stops?:Array<number>, 
-        tileMode?:TileMode, 
-        focal?:Alignment, 
-        focalRadius?:number,
-        transform?:GradientRotation,
-      }
-   */
-    static new(config?: RadialGradientConfig) {
-      return new RadialGradient(config);
-  } 
 }
 
 //****** SweepGradient ******
@@ -3698,23 +3405,6 @@ export class SweepGradient extends Gradient {
       this.transform = config.transform;
     }
   }
-
-
-  /**
-   * @param config config: 
-      {
-        center?:Alignment, 
-        startAngle?:number, 
-        endAngle?:number, 
-        colors:Array<Color>, 
-        stops?:Array<number>, 
-        tileMode?:TileMode,
-        transform?:GradientRotation,
-      }
-   */
-    static new(config?: SweepGradientConfig) {
-      return new SweepGradient(config);
-  } 
 }
 
 
@@ -3742,10 +3432,6 @@ export class ImageFilter extends DartClass {
       this.sigmaY = config.sigmaY;
     }
   }
-
-  static new(config?:ImageFilterBlurConfig) {
-    return new ImageFilter(config);
-   }
 
   static blur(config?:ImageFilterBlurConfig) {
     let v = new ImageFilter();
@@ -3884,9 +3570,6 @@ export class IconData extends DartClass {
   constructor(icon:string){
     super();
     this.icon = icon;
-  }
-  static new(icon:string) {
-   return new IconData(icon);
   }
 }
   
@@ -4082,59 +3765,6 @@ export class InputDecoration extends DartClass {
   /**
    * @param config config: 
       {
-        icon?:Widget, 
-        labelText?:string, 
-        labelStyle?:TextStyle, 
-        helperText?:string, 
-        helperStyle?:TextStyle, 
-        helperMaxLines?:number, 
-        hintText?:string, 
-        hintStyle?:TextStyle, 
-        hintMaxLines?:number, 
-        errorText?:string, 
-        errorStyle?:TextStyle, 
-        errorMaxLines?:number, 
-        hasFloatingPlaceholder?:boolean, 
-        floatingLabelBehavior?:FloatingLabelBehavior, 
-        isCollapsed?:boolean, 
-        isDense?:boolean, 
-        contentPadding?:EdgeInsets, 
-        prefixIcon?:Widget, 
-        prefixIconConstraints?:BoxConstraints, 
-        prefix?:Widget, 
-        prefixText?:string, 
-        prefixStyle?:TextStyle, 
-        suffixIcon?:Widget, 
-        suffix?:Widget, 
-        suffixText?:string, 
-        suffixStyle?:TextStyle, 
-        suffixIconConstraints?:BoxConstraints, 
-        counter?:Widget, 
-        counterText?:string, 
-        counterStyle?:TextStyle, 
-        filled?:boolean, 
-        fillColor?:Color, 
-        focusColor?:Color, 
-        hoverColor?:Color, 
-        errorBorder?:InputBorder, 
-        focusedBorder?:InputBorder, 
-        focusedErrorBorder?:InputBorder, 
-        disabledBorder?:InputBorder, 
-        enabledBorder?:InputBorder, 
-        border?:InputBorder, 
-        enabled?:boolean, 
-        semanticCounterText?:string, 
-        alignLabelWithHint?:boolean, 
-      }
-   */
-    static new(config?: InputDecorationConfig) {
-      return new InputDecoration(config);
-  } 
-
-  
-  /**
-   * @param config config: 
-      {
         hintText?:string, 
         hasFloatingPlaceholder?:boolean, 
         hintStyle?:TextStyle, 
@@ -4204,22 +3834,12 @@ export class ValueKey extends Key {
     super();
     this.value = value;
   }
-
-  static new(value:string) {
-    return new ValueKey(value);
-
-  }
 }
 
 export class UniqueKey extends Key {
 
   constructor(){
     super();
-  }
-
-  static new() {
-    return new UniqueKey();
-
   }
 }
 
@@ -4229,11 +3849,6 @@ export class GlobalKey extends Key {
   constructor(debugLabel?:string){
     super();
     this.debugLabel = debugLabel;
-  }
-
-  static new(debugLabel?:string) {
-    return new GlobalKey(debugLabel);
-
   }
 }
 
@@ -4255,11 +3870,6 @@ export class MaskFilter extends DartClass {
     super();
     this.style = style;
     this.sigma = sigma;
-  }
-
-  static new(style:BlurStyle, sigma:number) {
-    return new MaskFilter(style,sigma);
-
   }
   static blur(style:BlurStyle, sigma:number) {
     let v = new MaskFilter(style,sigma);
@@ -4402,13 +4012,8 @@ export class Matrix4 extends DartClass {
       this.arg15 = arg15;
   }
 
-  static new(arg0:number,arg1:number,arg2:number,arg3:number,arg4:number,arg5:number,arg6:number,arg7:number,
-    arg8:number,arg9:number,arg10:number,arg11:number,arg12:number,arg13:number,arg14:number,arg15:number) {
-      return new Matrix4(arg0,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14,arg15);
-  }
-
   static identity() {
-    return Matrix4.new(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
+    return new Matrix4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
   }
 
   static fromList(values:Array<number>) {
@@ -4561,10 +4166,6 @@ export class CircularNotchedRectangle extends NotchedShape {
   constructor(){
     super();
   }
-
-  static new() {
-    return new CircularNotchedRectangle();
-  }
 }
 
 //****** AutomaticNotchedShape ******
@@ -4577,20 +4178,10 @@ export class AutomaticNotchedShape extends NotchedShape {
     this.host = host;
     this.guest = guest;
   }
-
-  static new(host:ShapeBorder, guest?:ShapeBorder) {
-    return new AutomaticNotchedShape(host,guest);
-  }
 }
 
 //#endregion
 
-//****** TODO Notification ******
-export class Notification extends DartClass {
-  static new() {
-    return new Notification();
-  }
-}
 //#endregion
 
 
@@ -4608,9 +4199,6 @@ export class Offset extends DartClass {
     this.dy = dy;
   }
 
-  static new(dx:number, dy:number) {
-    return new Offset(dx,dy);
-  }
 
   static zero() {
     let v = new Offset();
@@ -4649,10 +4237,6 @@ export class Quaternion extends DartClass {
     this.y = y;
     this.z = z;
     this.w = w;
-  }
-
-  static new(x:number, y:number, z:number, w:number) {
-    return new Quaternion(x,y,z,w);
   }
 }
 //#endregion
@@ -4720,19 +4304,6 @@ export class RegExp extends DartClass {
       this.unicode = config.unicode;
       this.dotAll = config.dotAll;
     }
-  }
-
-  /**
-   * @param config config: 
-      {
-        multiLine?:boolean, 
-        caseSensitive?:boolean, 
-        unicode?:boolean, 
-        dotAll?:boolean, 
-      }
-   */
-  static new(source:string,config?: RegExpConfig) {
-    return new RegExp(source,config);
   }
 }
 
@@ -5062,10 +4633,6 @@ export class RSTransform extends DartClass {
     this.tx = tx;
     this.ty = ty; 
   }
-
-  static new(scos:number, ssin:number, tx:number, ty:number) {
-    return new RSTransform(scos,ssin,tx,ty);
-  }
   
 }
   
@@ -5105,10 +4672,6 @@ export class ImageShader extends Shader {
     this.matrix4 = matrix4;
 
   }
-
-  static new(image:ImageProvider,tmx:TileMode,tmy:TileMode,matrix4:Matrix4) {
-    return new ImageShader(image,tmx,tmy,matrix4);
-  }
 }
 
 //#endregion
@@ -5136,17 +4699,6 @@ export class ScaleStartDetails extends DartClass {
       this.focalPoint = config.focalPoint;
       this.localFocalPoint = config.localFocalPoint;
     }
-  }
-
-  /**
-   * @param config config: 
-      {
-        focalPoint?:Offset,
-        localFocalPoint?:Offset,
-      }
-   */
-  static new (config?: ScaleStartDetailsConfig) {
-    return new ScaleStartDetails(config);
   }
 }
 
@@ -5190,21 +4742,6 @@ export class ScaleUpdateDetails extends DartClass {
       this.rotation = config.rotation;
     }
   }
-
-  /**
-   * @param config config: 
-      {
-        focalPoint?:Offset, 
-        localFocalPoint?:Offset, 
-        scale?:number, 
-        horizontalScale?:number, 
-        verticalScale?:number, 
-        rotation?:number, 
-      }
-   */
-  static new (config?: ScaleUpdateDetailsConfig) {
-    return new ScaleUpdateDetails(config);
-  }
 }
 
 //****** ScaleEndDetails ******
@@ -5226,16 +4763,6 @@ export class ScaleEndDetails extends DartClass {
       this.velocity = config.velocity;
     }
   }
-
-  /**
-   * @param config config: 
-      {
-        velocity?:Velocity, 
-      }
-   */
-  static new (config?: ScaleEndDetailsConfig) {
-    return new ScaleEndDetails(config);
-  }
 }
 
 //#endregion
@@ -5251,10 +4778,6 @@ export class Size extends DartClass {
     super();
     this.width = width;
     this.height = height;
-  }
-
-  static new(width:number, height:number) {
-    return new Size(width,height);
   }
 
   static fromHeight(height:number){
@@ -5354,25 +4877,6 @@ export class StrutStyle extends DartClass {
       this.packageName =config.packageName;
     }
   }
-
-  /**
-   * @param config config: 
-      {
-        fontFamily?:string, 
-        fontFamilyFallback?:Array<string>, 
-        fontSize?:number, 
-        height?:number, 
-        leading?:number, 
-        fontWeight?:FontWeight, 
-        fontStyle?:FontStyle, 
-        forceStrutHeight?:boolean, 
-        debugLabel?:string, 
-        packageName?:string, 
-      }
-   */
-  static new(config: StrutStyleConfig) {
-    return new StrutStyle(config);
-  }
 }
 
 
@@ -5416,30 +4920,15 @@ export class SystemUiOverlayStyle extends DartClass {
     }
   }
 
-  /**
-   * @param config config: 
-      {
-        systemNavigationBarColor?:Color, 
-        systemNavigationBarDividerColor?:Color, 
-        statusBarColor?:Color,
-        systemNavigationBarIconBrightness?:Brightness, 
-        statusBarBrightness?:Brightness, 
-        statusBarIconBrightness?:Brightness
-      }
-   */
-  static new(config: SystemUiOverlayStyleConfig) {
-    return new SystemUiOverlayStyle(config);
-  }
-
-  static light = SystemUiOverlayStyle.new({
-    systemNavigationBarColor:Color.new(0xff000000),
+  static light =new SystemUiOverlayStyle({
+    systemNavigationBarColor:new Color(0xff000000),
     systemNavigationBarIconBrightness:Brightness.light,
     statusBarBrightness:Brightness.light,
     statusBarIconBrightness:Brightness.dark
   });
 
-  static dark = SystemUiOverlayStyle.new({
-    systemNavigationBarColor:Color.new(0xff000000),
+  static dark = new SystemUiOverlayStyle({
+    systemNavigationBarColor:new Color(0xff000000),
     systemNavigationBarIconBrightness:Brightness.light,
     statusBarBrightness:Brightness.dark,
     statusBarIconBrightness:Brightness.light
@@ -5472,18 +4961,6 @@ export class SpringDescription extends DartClass {
       this.stiffness = config.stiffness;
       this.damping = config.damping;
     }
-  }
-
-  /**
-   * @param config config: 
-      {
-        mass?:number,
-        stiffness?:number,
-        damping?:number
-      }
-   */
-  static new(config: SpringDescriptionConfig) {
-    return new SpringDescription(config);
   }
 }
   
@@ -5520,7 +4997,7 @@ export class ScrollController extends DartClass {
    */
   animateTo(config: ScrollControllerAnimateToConfig) {
     JSFramework.invokeFlutterFunction(
-      JSCallConfig.new({
+      new JSCallConfig({
         mirrorID:this.mirrorID,
         className:this.className,
         funcName:"animateTo",
@@ -5537,7 +5014,7 @@ export class ScrollController extends DartClass {
    */
   jumpTo(config:ScrollControllerJumpToConfig) {  
     JSFramework.invokeFlutterFunction(
-      JSCallConfig.new({
+      new JSCallConfig({
         mirrorID:this.mirrorID,
         className:this.className,
         funcName:"jumpTo",
@@ -5569,25 +5046,13 @@ export class ScrollController extends DartClass {
 
   //偏移量
   async offset() {
-      var v= await this.invokeMirrorObjWithCallback(JSCallConfig.new({
+      var v= await this.invokeMirrorObjWithCallback(new JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "offset",
         }));
 
       return Convert.toNumber(v);
-  }
-
-  /**
-   * @param config config: 
-      {
-        initialScrollOffset?:number, 
-        keepScrollOffset?:boolean, 
-        debugLabel?:string
-      }
-   */
-  static new(config: ScrollControllerConfig) {
-    return new ScrollController(config);
   }
 }
   
@@ -5618,18 +5083,6 @@ export class Shadow extends DartClass {
       this.blurRadius = config.blurRadius;
       this.offset = config.offset;
     }
-  }
-
-  /**
-   * @param config config: 
-      {
-        color?:Color, 
-        offset?:Offset, 
-        blurRadius?:number
-      }
-   */
-  static new(config?: ShadowConfig) {
-    return new Shadow(config);
   }
 }
   
@@ -5689,25 +5142,6 @@ export class ScrollbarPainter extends DartClass {
       this.minOverscrollLength = config.minOverscrollLength;
     }
   }
-
-  /**
-   * @param config config: 
-      {
-        color?:Color, 
-        textDirection?:TextDirection, 
-        thickness?:number, 
-        fadeoutOpacityAnimation?:any, 
-        padding?:EdgeInsets, 
-        mainAxisMargin?:number,
-        crossAxisMargin?:number, 
-        radius?:Radius, 
-        minLength?:number, 
-        minOverscrollLength?:number,  
-      }
-   */
-  static new(config: ScrollbarPainterConfig) {
-    return new ScrollbarPainter(config);
-  }
 }
 
 
@@ -5733,10 +5167,6 @@ export class ScrollPhysics extends DartClass {
       this.parent = config.parent;
     }
   }
-
-  static new(config?: ScrollPhysicsConfig) {
-    return new ScrollPhysics(config);
-  }
 }
 
 //****** AlwaysScrollableScrollPhysics ******
@@ -5750,16 +5180,6 @@ export class AlwaysScrollableScrollPhysics extends ScrollPhysics {
     */
   constructor(config?: ScrollPhysicsConfig){
     super(config);
-  }
-
-  /**
-    * @param config config: 
-      {
-        parent?:ScrollPhysics,
-      }
-    */
-  static new(config?: ScrollPhysicsConfig) {
-    return new AlwaysScrollableScrollPhysics(config);
   }
 }
 
@@ -5775,16 +5195,6 @@ export class BouncingScrollPhysics extends ScrollPhysics {
   constructor(config?: ScrollPhysicsConfig){
     super(config);
   }
-
-  /**
-    * @param config config: 
-      {
-        parent?:ScrollPhysics,
-      }
-    */
-  static new(config?: ScrollPhysicsConfig) {
-    return new BouncingScrollPhysics(config);
-  }
 }
 
 //****** ClampingScrollPhysics ******
@@ -5798,16 +5208,6 @@ export class ClampingScrollPhysics extends ScrollPhysics {
     */
   constructor(config?: ScrollPhysicsConfig){
     super(config);
-  }
-
-  /**
-    * @param config config: 
-      {
-        parent?:ScrollPhysics,
-      }
-    */
-  static new(config?: ScrollPhysicsConfig) {
-    return new ClampingScrollPhysics(config);
   }
 }
 
@@ -5823,16 +5223,6 @@ export class NeverScrollableScrollPhysics extends ScrollPhysics {
   constructor(config?: ScrollPhysicsConfig){
     super(config);
   }
-
-  /**
-    * @param config config: 
-      {
-        parent?:ScrollPhysics,
-      }
-    */
-  static new(config?: ScrollPhysicsConfig) {
-    return new NeverScrollableScrollPhysics(config);
-  }
 }
 
 //****** RangeMaintainingScrollPhysics ******
@@ -5846,16 +5236,6 @@ export class RangeMaintainingScrollPhysics extends ScrollPhysics {
     */
   constructor(config?: ScrollPhysicsConfig){
     super(config);
-  }
-
-  /**
-    * @param config config: 
-      {
-        parent?:ScrollPhysics,
-      }
-    */
-  static new(config?: ScrollPhysicsConfig) {
-    return new RangeMaintainingScrollPhysics(config);
   }
 }
 //#endregion
@@ -5909,19 +5289,6 @@ export class Border extends BoxBorder {
       this.bottom = config.bottom;
       this.left = config.left;
     }
-  }
-
-  /**
-   * @param config config: 
-    {
-      top?:BorderSide, 
-      right?:BorderSide, 
-      bottom?:BorderSide, 
-      left?:BorderSide,
-    }
-   */
-  static new(config?: BorderConfig)  {
-    return new Border(config);
   }
 
   /**
@@ -5992,19 +5359,6 @@ export class BorderDirectional extends BoxBorder {
       this.bottom = config.bottom;
     }
   }
-
-  /**
-   * @param config config: 
-      {
-        top?:BorderSide, 
-        start?:BorderSide,
-        bottom?:BorderSide,
-        end?:BorderSide,
-      }
-   */
-  static new(config?: BorderDirectionalConfig) {
-    return new BorderDirectional(config);
-  }
 }
 
 //#endregion
@@ -6032,16 +5386,6 @@ export class CircleBorder extends OutlinedBorder {
       this.side = config.side;
     }
   }
-
-  /**
-    * @param config config: 
-      {
-        side?:BorderSide,
-      }
-    */
-  static new(config?: OutlinedBorderConfig){
-    return new CircleBorder(config);
-  }
 }
 
 export class BeveledRectangleBorder extends OutlinedBorder {
@@ -6061,17 +5405,6 @@ export class BeveledRectangleBorder extends OutlinedBorder {
       this.side = config.side;
       this.borderRadius = config.borderRadius;
     }
-  }
-
-  /**
-    * @param config config: 
-      {
-        side?:BorderSide,
-        borderRadius?:BorderRadiusGeometry, 
-      }
-    */
-  static new(config?: OutlinedBorderConfig){
-    return new BeveledRectangleBorder(config);
   }
 }
 
@@ -6093,17 +5426,6 @@ export class ContinuousRectangleBorder extends OutlinedBorder {
       this.borderRadius = config.borderRadius;
     }
   }
-
-  /**
-    * @param config config: 
-      {
-        side?:BorderSide,
-        borderRadius?:BorderRadiusGeometry, 
-      }
-    */
-  static new(config?: OutlinedBorderConfig){
-    return new ContinuousRectangleBorder(config);
-  }
 }
 
 export class RoundedRectangleBorder extends OutlinedBorder {
@@ -6124,17 +5446,6 @@ export class RoundedRectangleBorder extends OutlinedBorder {
       this.borderRadius = config.borderRadius;
     }
   }
-
-  /**
-    * @param config config: 
-      {
-        side?:BorderSide,
-        borderRadius?:BorderRadiusGeometry, 
-      }
-    */
-  static new(config?: OutlinedBorderConfig){
-    return new RoundedRectangleBorder(config);
-  }
 }
 
 export class StadiumBorder extends OutlinedBorder {
@@ -6151,16 +5462,6 @@ export class StadiumBorder extends OutlinedBorder {
     if(config!=null && config!=undefined){
       this.side = config.side;
     }
-  }
-
-  /**
-    * @param config config: 
-      {
-        side?:BorderSide,
-      }
-    */
-  static new(config?: OutlinedBorderConfig){
-    return new StadiumBorder(config);
   }
 }
 //#endregion
@@ -6229,18 +5530,6 @@ export class UnderlineInputBorder extends InputBorder {
       }
     }
   }
-
-
-  /**
-    * @param config config: 
-      {
-        borderSide?:BorderSide, 
-        borderRadius?:BorderRadius,
-      }
-    */
-   static new(config?: InputBorderConfig){
-    return new UnderlineInputBorder(config);
-  }
 }
 
 export class OutlineInputBorder extends InputBorder {
@@ -6266,19 +5555,6 @@ export class OutlineInputBorder extends InputBorder {
       }
     }
   }
-
-
-  /**
-    * @param config config: 
-      {
-        borderSide?:BorderSide, 
-        borderRadius?:BorderRadius,
-        gapPadding?:number,
-      }
-    */
-   static new(config?: InputBorderConfig){
-    return new OutlineInputBorder(config);
-  }
 }
 //#endregion
 
@@ -6298,13 +5574,10 @@ export class TextAlignVertical extends DartClass {
     this.y = y;
   }
   
-  static new(y:number){
-    return new TextAlignVertical(y);
-  }
 
-  static top = TextAlignVertical.new(-1.0); 
-  static center = TextAlignVertical.new(0.0); 
-  static bottom = TextAlignVertical.new(1.0); 
+  static top = new TextAlignVertical(-1.0); 
+  static center = new TextAlignVertical(0.0); 
+  static bottom = new TextAlignVertical(1.0); 
 }
 
 //****** TapDownDetails ******
@@ -6334,18 +5607,6 @@ export class TapDownDetails extends DartClass {
       this.kind = config.kind;
     }
   }
-
-  /**
-   * @param config config: 
-      {
-        globalPosition?:Offset,
-        localPosition?:Offset,
-        kind?:PointerDeviceKind,
-      }
-   */
-  static new (config?: TapDownDetailsConfig) {
-    return new TapDownDetails(config);
-  }
 }
 
 //****** TapUpDetails ******
@@ -6370,17 +5631,6 @@ export class TapUpDetails extends DartClass {
       this.globalPosition = config.globalPosition;
       this.localPosition = config.localPosition;
     }
-  }
-
-  /**
-   * @param config config: 
-      {
-        globalPosition?:Offset,
-        localPosition?:Offset,
-      }
-   */
-  static new (config?: TapUpDetailsConfig) {
-    return new TapUpDetails(config);
   }
 }
 
@@ -6467,32 +5717,6 @@ export class TextStyle extends DartClass {
       this.packageName = config.packageName;
     }
   }
-
-  /**
-   * @param config config: 
-      {
-        inherit?:boolean, 
-        color?:Color, 
-        backgroundColor?:Color, 
-        fontSize?:number, 
-        fontWeight?:FontWeight, 
-        fontStyle?:FontStyle, 
-        letterSpacing?:number, 
-        wordSpacing?:number, 
-        textBaseline?:TextBaseline, 
-        height?:number, 
-        decoration?:TextDecoration, 
-        decorationColor?:Color, 
-        decorationStyle?:TextDecorationStyle, 
-        decorationThickness?:number, 
-        debugLabel?:string, 
-        fontFamily?:string, 
-        packageName?:string, 
-      }
-   */
-  static new (config?: TextStyleConfig) {
-    return new TextStyle(config);
-  }
 }
 
 //****** TableBorder ******
@@ -6547,21 +5771,6 @@ export class TableBorder extends DartClass {
       this.horizontalInside = config.horizontalInside;
       this.verticalInside = config.verticalInside;
     }
-  }
-
-  /**
-   * @param config config: 
-    {
-      top?:BorderSide, 
-      right?:BorderSide, 
-      bottom?:BorderSide, 
-      left?:BorderSide, 
-      horizontalInside?:BorderSide, 
-      verticalInside?:BorderSide
-    }
-   */
-  static new(config?: TableBorderConfig) {
-    return new TableBorder(config);
   }
 
   /**
@@ -6647,10 +5856,6 @@ export class IntrinsicColumnWidth extends TableColumnWidth {
     super();
     this.flex = flex;
   }
-
-   static new(flex?:number){
-    return new IntrinsicColumnWidth(flex);
-  }
 }
 
 export class FixedColumnWidth extends TableColumnWidth {
@@ -6659,10 +5864,6 @@ export class FixedColumnWidth extends TableColumnWidth {
    constructor(value:number){
     super();
     this.value = value;
-  }
-
-   static new(value:number){
-    return new FixedColumnWidth(value);
   }
 }
 
@@ -6674,9 +5875,6 @@ export class FractionColumnWidth extends TableColumnWidth {
     this.value = value;
   }
 
-   static new(value:number){
-    return new FractionColumnWidth(value);
-  }
 }
 
 export class FlexColumnWidth extends TableColumnWidth {
@@ -6685,10 +5883,6 @@ export class FlexColumnWidth extends TableColumnWidth {
    constructor(value?:number){
     super();
     this.value = value;
-  }
-
-   static new(value?:number){
-    return new FlexColumnWidth(value);
   }
 }
 
@@ -6701,10 +5895,6 @@ export class MaxColumnWidth extends TableColumnWidth {
     this.a = a;
     this.b = b;
   }
-
-   static new(a:TableColumnWidth, b:TableColumnWidth){
-    return new MaxColumnWidth(a,b);
-  }
 }
 
 export class MinColumnWidth extends TableColumnWidth {
@@ -6715,10 +5905,6 @@ export class MinColumnWidth extends TableColumnWidth {
     super();
     this.a = a;
     this.b = b;
-  }
-
-   static new(a:TableColumnWidth, b:TableColumnWidth){
-    return new MaxColumnWidth(a,b);
   }
 }
 
@@ -6753,18 +5939,6 @@ export class TabController extends DartClass {
       this.vsync = config.vsync;
     }
   }
-
-  /**
-   * @param config config: 
-    {
-      initialIndex?:number,
-      length?:number,
-      vsync?:any
-    }
-   */
-  static new (config?: TabControllerConfig) {
-    return new TabController(config);
-  }
 }
 
 
@@ -6780,14 +5954,9 @@ export class TextEditingController extends DartClass {
     this.createMirrorID();
   }
 
-  static new(text?:string) {
-    return new TextEditingController(text);
-  }
-
-
   //清理值
   clear() {
-    this.invokeMirrorObjWithCallback(JSCallConfig.new({
+    this.invokeMirrorObjWithCallback(new JSCallConfig({
           mirrorID: this.mirrorID,
           className: this.className,
           funcName: "clear",
@@ -6796,7 +5965,7 @@ export class TextEditingController extends DartClass {
 
   //获取文本值
   async getText() {
-    var v= await this.invokeMirrorObjWithCallback(JSCallConfig.new({
+    var v= await this.invokeMirrorObjWithCallback(new JSCallConfig({
           mirrorID: this.mirrorID,
           className: this.className,
           funcName: "getText",
@@ -6806,7 +5975,7 @@ export class TextEditingController extends DartClass {
 
   //设置文本值
   async setText(text:string) {
-    this.invokeMirrorObjWithCallback(JSCallConfig.new({
+    this.invokeMirrorObjWithCallback(new JSCallConfig({
           mirrorID: this.mirrorID,
           className: this.className,
           funcName: "setText",
@@ -6846,19 +6015,6 @@ export class ToolbarOptions extends DartClass {
       this.selectAll = config.selectAll;
     }
   }
-
-  /**
-   * @param config config: 
-    {
-      copy?:boolean,
-      cut?:boolean,
-      paste?:boolean,
-      selectAll?:boolean,
-    }
-   */
-  static new (config?: ToolbarOptionsConfig) {
-    return new ToolbarOptions(config);
-  }
 }
 
 
@@ -6872,9 +6028,6 @@ export class TextInputType extends DartClass {
   signed?:boolean;
   decimal?:boolean;
 
-  static new(){
-    return new TextInputType();
-  };
 
   static numberWithOptions(config?: TextInputTypeConfig) {
     let v = new TextInputType();
@@ -6952,10 +6105,6 @@ export class Tween extends DartClass {
     if (t == 1.0) return this.end;
     return this.lerp(t);
   }
-
-  static new(begin?:number, end?:number) {
-    return new Tween(begin,end);
-  };
 }
   
 //#region ****** TextInputFormatter ******
@@ -7019,10 +6168,6 @@ export class LengthLimitingTextInputFormatter extends TextInputFormatter {
     super();
     this.maxLength = maxLength;
   }
-
-   static new(maxLength?:number){
-    return new LengthLimitingTextInputFormatter(maxLength);
-  }
 }
 
 export class FilteringTextInputFormatter extends TextInputFormatter {
@@ -7036,10 +6181,6 @@ export class FilteringTextInputFormatter extends TextInputFormatter {
     this.filterPattern = filterPattern;
     this.replacementString =replacementString;
 
-  }
-
-  static new(allow:boolean,filterPattern:RegExp,replacementString?:string){
-    return new FilteringTextInputFormatter(allow,filterPattern,replacementString);
   }
 
   static allow(filterPattern:RegExp,replacementString?:string){
@@ -7075,11 +6216,7 @@ export class MaskTextInputFormatter extends TextInputFormatter {
     this.filter = filter;
     this.initialText =initialText;
 
-  }
-
-  static new(mask:string,initialText?:string,filter?:Map<string,RegExp>){
-    return new MaskTextInputFormatter(mask,initialText,filter);
-  }
+   }
 }
 
 //#endregion
@@ -7133,22 +6270,6 @@ export class MaskTextInputFormatter extends TextInputFormatter {
         this.query = config.query;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        scheme?:string,
-        fragment?:string,
-        userInfo?:string, 
-        host?:string, 
-        port?:number, 
-        path?:string, 
-        query?:string
-      }
-     */
-    static new(config?: UriConfig){
-      return new Uri(config);
-    }
   }
   
   //****** Uint8List ******
@@ -7159,10 +6280,6 @@ export class MaskTextInputFormatter extends TextInputFormatter {
     constructor(length?:number){
       super();
       this.length = length;
-    }
-  
-    static new(length?:number) {
-      return new Uint8List(length);
     }
   
     static fromList(elements?:Array<number>) {
@@ -7191,10 +6308,6 @@ export class Vector3 extends DartClass {
     this.x = x;
     this.y = y;
     this.z = z;
-  }
-
-  static new(x:number, y:number, z:number) {
-    return new Vector3(x,y,z);
   }
 
   static zero(){
@@ -7226,10 +6339,6 @@ export class Vector4 extends DartClass {
     this.y = y;
     this.z = z;
     this.w = w;
-  }
-
-  static new(x?:number,y?:number,z?:number,w?:number) {
-    return new Vector4(x,y,z,w);
   }
 
   static array (array?:Array<number>, offset?:Offset) {
@@ -7278,20 +6387,10 @@ export class VisualDensity extends DartClass {
     }
   }
   
-  /**
-   * @param config config: 
-    {
-      horizontal?:number,
-      vertical?:number, 
-    }
-   */
-  static new(config?: VisualDensityConfig) {
-    return new VisualDensity(config);
-  }
 
-  static comfortable =  VisualDensity.new({horizontal: -1.0, vertical: -1.0});
-  static compact = VisualDensity.new({horizontal: -2.0, vertical: -2.0});
-  static standard = VisualDensity.new();
+  static comfortable = new VisualDensity({horizontal: -1.0, vertical: -1.0});
+  static compact = new VisualDensity({horizontal: -2.0, vertical: -2.0});
+  static standard = new VisualDensity();
 } 
 
 //****** Velocity ******
@@ -7314,15 +6413,6 @@ export class Velocity extends DartClass {
     }
   }
   
-  /**
-   * @param config config: 
-    {
-      pixelsPerSecond?:Offset, 
-    }
-   */
-  static new(config?: VelocityConfig) {
-    return new Velocity(config);
-  }
 
   static zero() {
     var v = new Velocity();
@@ -7343,995 +6433,992 @@ export class Icons extends IconData{
     constructor(icon:string){
       super(icon);
     }
-    static new(icon:string) {
-     return new Icons(icon);
-    }
   
-    static threesixty = Icons.new("threesixty");
-    static threed_rotation = Icons.new("threed_rotation");
-    static four_k = Icons.new("four_k");
-    static ac_unit = Icons.new("ac_unit");
-    static access_alarm = Icons.new("access_alarm");
-    static access_alarms = Icons.new("access_alarms");
-    static access_time = Icons.new("access_time");
-    static accessibility = Icons.new("accessibility");
-    static accessibility_new = Icons.new("accessibility_new");
-    static accessible = Icons.new("accessible");
-    static accessible_forward = Icons.new("accessible_forward");
-    static account_balance = Icons.new("account_balance");
-    static account_balance_wallet = Icons.new("account_balance_wallet");
-    static account_box = Icons.new("account_box");
-    static account_circle = Icons.new("account_circle");
-    static adb = Icons.new("adb");
-    static add = Icons.new("add");
-    static add_a_photo = Icons.new("add_a_photo");
-    static add_alarm = Icons.new("add_alarm");
-    static add_alert = Icons.new("add_alert");
-    static add_box = Icons.new("add_box");
-    static add_call = Icons.new("add_call");
-    static add_circle = Icons.new("add_circle");
-    static add_circle_outline = Icons.new("add_circle_outline");
-    static add_comment = Icons.new("add_comment");
-    static add_location = Icons.new("add_location");
-    static add_photo_alternate = Icons.new("add_photo_alternate");
-    static add_shopping_cart = Icons.new("add_shopping_cart");
-    static add_to_home_screen = Icons.new("add_to_home_screen");
-    static add_to_photos = Icons.new("add_to_photos");
-    static add_to_queue = Icons.new("add_to_queue");
-    static adjust = Icons.new("adjust");
-    static airline_seat_flat = Icons.new("airline_seat_flat");
-    static airline_seat_flat_angled = Icons.new("airline_seat_flat_angled");
-    static airline_seat_individual_suite = Icons.new("airline_seat_individual_suite");
-    static airline_seat_legroom_extra = Icons.new("airline_seat_legroom_extra");
-    static airline_seat_legroom_normal = Icons.new("airline_seat_legroom_normal");
-    static airline_seat_legroom_reduced = Icons.new("airline_seat_legroom_reduced");
-    static airline_seat_recline_extra = Icons.new("airline_seat_recline_extra");
-    static airline_seat_recline_normal = Icons.new("airline_seat_recline_normal");
-    static airplanemode_active = Icons.new("airplanemode_active");
-    static airplanemode_inactive = Icons.new("airplanemode_inactive");
-    static airplay = Icons.new("airplay");
-    static airport_shuttle = Icons.new("airport_shuttle");
-    static alarm = Icons.new("alarm");
-    static alarm_add = Icons.new("alarm_add");
-    static alarm_off = Icons.new("alarm_off");
-    static alarm_on = Icons.new("alarm_on");
-    static album = Icons.new("album");
-    static all_inclusive = Icons.new("all_inclusive");
-    static all_out = Icons.new("all_out");
-    static alternate_email = Icons.new("alternate_email");
-    static android = Icons.new("android");
-    static announcement = Icons.new("announcement");
-    static apps = Icons.new("apps");
-    static archive = Icons.new("archive");
-    static arrow_back = Icons.new("arrow_back");
-    static arrow_back_ios = Icons.new("arrow_back_ios");
-    static arrow_downward = Icons.new("arrow_downward");
-    static arrow_drop_down = Icons.new("arrow_drop_down");
-    static arrow_drop_down_circle = Icons.new("arrow_drop_down_circle");
-    static arrow_drop_up = Icons.new("arrow_drop_up");
-    static arrow_forward = Icons.new("arrow_forward");
-    static arrow_forward_ios = Icons.new("arrow_forward_ios");
-    static arrow_left = Icons.new("arrow_left");
-    static arrow_right = Icons.new("arrow_right");
-    static arrow_upward = Icons.new("arrow_upward");
-    static art_track = Icons.new("art_track");
-    static aspect_ratio = Icons.new("aspect_ratio");
-    static assessment = Icons.new("assessment");
-    static assignment = Icons.new("assignment");
-    static assignment_ind = Icons.new("assignment_ind");
-    static assignment_late = Icons.new("assignment_late");
-    static assignment_return = Icons.new("assignment_return");
-    static assignment_returned = Icons.new("assignment_returned");
-    static assignment_turned_in = Icons.new("assignment_turned_in");
-    static assistant = Icons.new("assistant");
-    static assistant_photo = Icons.new("assistant_photo");
-    static atm = Icons.new("atm");
-    static attach_file = Icons.new("attach_file");
-    static attach_money = Icons.new("attach_money");
-    static attachment = Icons.new("attachment");
-    static audiotrack = Icons.new("audiotrack");
-    static autorenew = Icons.new("autorenew");
-    static av_timer = Icons.new("av_timer");
-    static backspace = Icons.new("backspace");
-    static backup = Icons.new("backup");
-    static battery_alert = Icons.new("battery_alert");
-    static battery_charging_full = Icons.new("battery_charging_full");
-    static battery_full = Icons.new("battery_full");
-    static battery_std = Icons.new("battery_std");
-    static battery_unknown = Icons.new("battery_unknown");
-    static beach_access = Icons.new("beach_access");
-    static beenhere = Icons.new("beenhere");
-    static block = Icons.new("block");
-    static bluetooth = Icons.new("bluetooth");
-    static bluetooth_audio = Icons.new("bluetooth_audio");
-    static bluetooth_connected = Icons.new("bluetooth_connected");
-    static bluetooth_disabled = Icons.new("bluetooth_disabled");
-    static bluetooth_searching = Icons.new("bluetooth_searching");
-    static blur_circular = Icons.new("blur_circular");
-    static blur_linear = Icons.new("blur_linear");
-    static blur_off = Icons.new("blur_off");
-    static blur_on = Icons.new("blur_on");
-    static book = Icons.new("book");
-    static bookmark = Icons.new("bookmark");
-    static bookmark_border = Icons.new("bookmark_border");
-    static border_all = Icons.new("border_all");
-    static border_bottom = Icons.new("border_bottom");
-    static border_clear = Icons.new("border_clear");
-    static border_color = Icons.new("border_color");
-    static border_horizontal = Icons.new("border_horizontal");
-    static border_inner = Icons.new("border_inner");
-    static border_left = Icons.new("border_left");
-    static border_outer = Icons.new("border_outer");
-    static border_right = Icons.new("border_right");
-    static border_style = Icons.new("border_style");
-    static border_top = Icons.new("border_top");
-    static border_vertical = Icons.new("border_vertical");
-    static branding_watermark = Icons.new("branding_watermark");
-    static brightness_1 = Icons.new("brightness_1");
-    static brightness_2 = Icons.new("brightness_2");
-    static brightness_3 = Icons.new("brightness_3");
-    static brightness_4 = Icons.new("brightness_4");
-    static brightness_5 = Icons.new("brightness_5");
-    static brightness_6 = Icons.new("brightness_6");
-    static brightness_7 = Icons.new("brightness_7");
-    static brightness_auto = Icons.new("brightness_auto");
-    static brightness_high = Icons.new("brightness_high");
-    static brightness_low = Icons.new("brightness_low");
-    static brightness_medium = Icons.new("brightness_medium");
-    static broken_image = Icons.new("broken_image");
-    static brush = Icons.new("brush");
-    static bubble_chart = Icons.new("bubble_chart");
-    static bug_report = Icons.new("bug_report");
-    static build = Icons.new("build");
-    static burst_mode = Icons.new("burst_mode");
-    static business = Icons.new("business");
-    static business_center = Icons.new("business_center");
-    static cached = Icons.new("cached");
-    static cake = Icons.new("cake");
-    static calendar_today = Icons.new("calendar_today");
-    static calendar_view_day = Icons.new("calendar_view_day");
-    static call = Icons.new("call");
-    static call_end = Icons.new("call_end");
-    static call_made = Icons.new("call_made");
-    static call_merge = Icons.new("call_merge");
-    static call_missed = Icons.new("call_missed");
-    static call_missed_outgoing = Icons.new("call_missed_outgoing");
-    static call_received = Icons.new("call_received");
-    static call_split = Icons.new("call_split");
-    static call_to_action = Icons.new("call_to_action");
-    static camera = Icons.new("camera");
-    static camera_alt = Icons.new("camera_alt");
-    static camera_enhance = Icons.new("camera_enhance");
-    static camera_front = Icons.new("camera_front");
-    static camera_rear = Icons.new("camera_rear");
-    static camera_roll = Icons.new("camera_roll");
-    static cancel = Icons.new("cancel");
-    static card_giftcard = Icons.new("card_giftcard");
-    static card_membership = Icons.new("card_membership");
-    static card_travel = Icons.new("card_travel");
-    static casino = Icons.new("casino");
-    static cast = Icons.new("cast");
-    static cast_connected = Icons.new("cast_connected");
-    static category = Icons.new("category");
-    static center_focus_strong = Icons.new("center_focus_strong");
-    static center_focus_weak = Icons.new("center_focus_weak");
-    static change_history = Icons.new("change_history");
-    static chat = Icons.new("chat");
-    static chat_bubble = Icons.new("chat_bubble");
-    static chat_bubble_outline = Icons.new("chat_bubble_outline");
-    static check = Icons.new("check");
-    static check_box = Icons.new("check_box");
-    static check_box_outline_blank = Icons.new("check_box_outline_blank");
-    static check_circle = Icons.new("check_circle");
-    static check_circle_outline = Icons.new("check_circle_outline");
-    static chevron_left = Icons.new("chevron_left");
-    static chevron_right = Icons.new("chevron_right");
-    static child_care = Icons.new("child_care");
-    static child_friendly = Icons.new("child_friendly");
-    static chrome_reader_mode = Icons.new("chrome_reader_mode");
-    static class_ = Icons.new("class_");
-    static clear = Icons.new("clear");
-    static clear_all = Icons.new("clear_all");
-    static close = Icons.new("close");
-    static closed_caption = Icons.new("closed_caption");
-    static cloud = Icons.new("cloud");
-    static cloud_circle = Icons.new("cloud_circle");
-    static cloud_done = Icons.new("cloud_done");
-    static cloud_download = Icons.new("cloud_download");
-    static cloud_off = Icons.new("cloud_off");
-    static cloud_queue = Icons.new("cloud_queue");
-    static cloud_upload = Icons.new("cloud_upload");
-    static code = Icons.new("code");
-    static collections = Icons.new("collections");
-    static collections_bookmark = Icons.new("collections_bookmark");
-    static color_lens = Icons.new("color_lens");
-    static colorize = Icons.new("colorize");
-    static comment = Icons.new("comment");
-    static compare = Icons.new("compare");
-    static compare_arrows = Icons.new("compare_arrows");
-    static computer = Icons.new("computer");
-    static confirmation_number = Icons.new("confirmation_number");
-    static contact_mail = Icons.new("contact_mail");
-    static contact_phone = Icons.new("contact_phone");
-    static contacts = Icons.new("contacts");
-  static content_copy = Icons.new("content_copy");
-    static content_cut = Icons.new("content_cut");
-    static content_paste = Icons.new("content_paste");
-    static control_point = Icons.new("control_point");
-    static control_point_duplicate = Icons.new("control_point_duplicate");
-    static copyright = Icons.new("copyright");
-    static create = Icons.new("create");
-    static create_new_folder = Icons.new("create_new_folder");
-    static credit_card = Icons.new("credit_card");
-    static crop = Icons.new("crop");
-    static crop_16_9 = Icons.new("crop_16_9");
-    static crop_3_2 = Icons.new("crop_3_2");
-    static crop_5_4 = Icons.new("crop_5_4");
-    static crop_7_5 = Icons.new("crop_7_5");
-    static crop_din = Icons.new("crop_din");
-    static crop_free = Icons.new("crop_free");
-    static crop_landscape = Icons.new("crop_landscape");
-    static crop_original = Icons.new("crop_original");
-    static crop_portrait = Icons.new("crop_portrait");
-    static crop_rotate = Icons.new("crop_rotate");
-    static crop_square = Icons.new("crop_square");
-    static dashboard = Icons.new("dashboard");
-    static data_usage = Icons.new("data_usage");
-    static date_range = Icons.new("date_range");
-    static dehaze = Icons.new("dehaze");
-    static delete = Icons.new("delete");
-    static delete_forever = Icons.new("delete_forever");
-    static delete_outline = Icons.new("delete_outline");
-    static delete_sweep = Icons.new("delete_sweep");
-    static departure_board = Icons.new("departure_board");
-    static description = Icons.new("description");
-    static desktop_mac = Icons.new("desktop_mac");
-    static desktop_windows = Icons.new("desktop_windows");
-    static details = Icons.new("details");
-    static developer_board = Icons.new("developer_board");
-    static developer_mode = Icons.new("developer_mode");
-    static device_hub = Icons.new("device_hub");
-    static device_unknown = Icons.new("device_unknown");
-    static devices = Icons.new("devices");
-    static devices_other = Icons.new("devices_other");
-    static dialer_sip = Icons.new("dialer_sip");
-    static dialpad = Icons.new("dialpad");
-    static directions = Icons.new("directions");
-    static directions_bike = Icons.new("directions_bike");
-    static directions_boat = Icons.new("directions_boat");
-    static directions_bus = Icons.new("directions_bus");
-    static directions_car = Icons.new("directions_car");
-    static directions_railway = Icons.new("directions_railway");
-    static directions_run = Icons.new("directions_run");
-    static directions_subway = Icons.new("directions_subway");
-    static directions_transit = Icons.new("directions_transit");
-    static directions_walk = Icons.new("directions_walk");
-    static disc_full = Icons.new("disc_full");
-    static dns = Icons.new("dns");
-    static do_not_disturb = Icons.new("do_not_disturb");
-    static do_not_disturb_alt = Icons.new("do_not_disturb_alt");
-    static do_not_disturb_off = Icons.new("do_not_disturb_off");
-    static do_not_disturb_on = Icons.new("do_not_disturb_on");
-    static dock = Icons.new("dock");
-    static domain = Icons.new("domain");
-    static done = Icons.new("done");
-    static done_all = Icons.new("done_all");
-    static done_outline = Icons.new("done_outline");
-    static donut_large = Icons.new("donut_large");
-    static donut_small = Icons.new("donut_small");
-    static drafts = Icons.new("drafts");
-    static drag_handle = Icons.new("drag_handle");
-    static drive_eta = Icons.new("drive_eta");
-    static dvr = Icons.new("dvr");
-    static edit = Icons.new("edit");
-    static edit_attributes = Icons.new("edit_attributes");
-    static edit_location = Icons.new("edit_location");
-    static eject = Icons.new("eject");
-    static email = Icons.new("email");
-    static enhanced_encryption = Icons.new("enhanced_encryption");
-    static equalizer = Icons.new("equalizer");
-    static error = Icons.new("error");
-    static error_outline = Icons.new("error_outline");
-    static euro_symbol = Icons.new("euro_symbol");
-    static ev_station = Icons.new("ev_station");
-    static event = Icons.new("event");
-    static event_available = Icons.new("event_available");
-    static event_busy = Icons.new("event_busy");
-    static event_note = Icons.new("event_note");
-    static event_seat = Icons.new("event_seat");
-    static exit_to_app = Icons.new("exit_to_app");
-    static expand_less = Icons.new("expand_less");
-    static expand_more = Icons.new("expand_more");
-    static explicit = Icons.new("explicit");
-    static explore = Icons.new("explore");
-    static exposure = Icons.new("exposure");
-    static exposure_neg_1 = Icons.new("exposure_neg_1");
-    static exposure_neg_2 = Icons.new("exposure_neg_2");
-    static exposure_plus_1 = Icons.new("exposure_plus_1");
-    static exposure_plus_2 = Icons.new("exposure_plus_2");
-    static exposure_zero = Icons.new("exposure_zero");
-    static extension = Icons.new("extension");
-    static face = Icons.new("face");
-    static fast_forward = Icons.new("fast_forward");
-    static fast_rewind = Icons.new("fast_rewind");
-    static fastfood = Icons.new("fastfood");
-    static favorite = Icons.new("favorite");
-    static favorite_border = Icons.new("favorite_border");
-    static featured_play_list = Icons.new("featured_play_list");
-    static featured_video = Icons.new("featured_video");
-    static feedback = Icons.new("feedback");
-    static fiber_dvr = Icons.new("fiber_dvr");
-    static fiber_manual_record = Icons.new("fiber_manual_record");
-    static fiber_new = Icons.new("fiber_new");
-    static fiber_pin = Icons.new("fiber_pin");
-    static fiber_smart_record = Icons.new("fiber_smart_record");
-    static file_download = Icons.new("file_download");
-    static file_upload = Icons.new("file_upload");
-    static filter = Icons.new("filter");
-    static filter_1 = Icons.new("filter_1");
-    static filter_2 = Icons.new("filter_2");
-    static filter_3 = Icons.new("filter_3");
-    static filter_4 = Icons.new("filter_4");
-    static filter_5 = Icons.new("filter_5");
-    static filter_6 = Icons.new("filter_6");
-    static filter_7 = Icons.new("filter_7");
-    static filter_8 = Icons.new("filter_8");
-    static filter_9 = Icons.new("filter_9");
-    static filter_9_plus = Icons.new("filter_9_plus");
-    static filter_b_and_w = Icons.new("filter_b_and_w");
-    static filter_center_focus = Icons.new("filter_center_focus");
-    static filter_drama = Icons.new("filter_drama");
-    static filter_frames = Icons.new("filter_frames");
-    static filter_hdr = Icons.new("filter_hdr");
-    static filter_list = Icons.new("filter_list");
-    static filter_none = Icons.new("filter_none");
-    static filter_tilt_shift = Icons.new("filter_tilt_shift");
-    static filter_vintage = Icons.new("filter_vintage");
-    static find_in_page = Icons.new("find_in_page");
-    static find_replace = Icons.new("find_replace");
-    static fingerprint = Icons.new("fingerprint");
-    static first_page = Icons.new("first_page");
-    static fitness_center = Icons.new("fitness_center");
-    static flag = Icons.new("flag");
-    static flare = Icons.new("flare");
-    static flash_auto = Icons.new("flash_auto");
-    static flash_off = Icons.new("flash_off");
-    static flash_on = Icons.new("flash_on");
-    static flight = Icons.new("flight");
-    static flight_land = Icons.new("flight_land");
-    static flight_takeoff = Icons.new("flight_takeoff");
-    static flip = Icons.new("flip");
-    static flip_to_back = Icons.new("flip_to_back");
-    static flip_to_front = Icons.new("flip_to_front");
-    static folder = Icons.new("folder");
-    static folder_open = Icons.new("folder_open");
-    static folder_shared = Icons.new("folder_shared");
-    static folder_special = Icons.new("folder_special");
-    static font_download = Icons.new("font_download");
-    static format_align_center = Icons.new("format_align_center");
-    static format_align_justify = Icons.new("format_align_justify");
-    static format_align_left = Icons.new("format_align_left");
-    static format_align_right = Icons.new("format_align_right");
-    static format_bold = Icons.new("format_bold");
-    static format_clear = Icons.new("format_clear");
-    static format_color_fill = Icons.new("format_color_fill");
-    static format_color_reset = Icons.new("format_color_reset");
-    static format_color_text = Icons.new("format_color_text");
-    static format_indent_decrease = Icons.new("format_indent_decrease");
-    static format_indent_increase = Icons.new("format_indent_increase");
-    static format_italic = Icons.new("format_italic");
-    static format_line_spacing = Icons.new("format_line_spacing");
-    static format_list_bulleted = Icons.new("format_list_bulleted");
-    static format_list_numbered = Icons.new("format_list_numbered");
-    static format_list_numbered_rtl = Icons.new("format_list_numbered_rtl");
-    static format_paint = Icons.new("format_paint");
-    static format_quote = Icons.new("format_quote");
-    static format_shapes = Icons.new("format_shapes");
-    static format_size = Icons.new("format_size");
-    static format_strikethrough = Icons.new("format_strikethrough");
-    static format_textdirection_l_to_r = Icons.new("format_textdirection_l_to_r");
-    static format_textdirection_r_to_l = Icons.new("format_textdirection_r_to_l");
-    static format_underlined = Icons.new("format_underlined");
-    static forum = Icons.new("forum");
-    static forward = Icons.new("forward");
-    static forward_10 = Icons.new("forward_10");
-    static forward_30 = Icons.new("forward_30");
-    static forward_5 = Icons.new("forward_5");
-    static free_breakfast = Icons.new("free_breakfast");
-    static fullscreen = Icons.new("fullscreen");
-    static fullscreen_exit = Icons.new("fullscreen_exit");
-    static functions = Icons.new("functions");
-    static g_translate = Icons.new("g_translate");
-    static gamepad = Icons.new("gamepad");
-    static games = Icons.new("games");
-    static gavel = Icons.new("gavel");
-    static gesture = Icons.new("gesture");
-    static get_app = Icons.new("get_app");
-    static gif = Icons.new("gif");
-    static golf_course = Icons.new("golf_course");
-    static gps_fixed = Icons.new("gps_fixed");
-    static gps_not_fixed = Icons.new("gps_not_fixed");
-    static gps_off = Icons.new("gps_off");
-    static grade = Icons.new("grade");
-    static gradient = Icons.new("gradient");
-    static grain = Icons.new("grain");
-    static graphic_eq = Icons.new("graphic_eq");
-    static grid_off = Icons.new("grid_off");
-    static grid_on = Icons.new("grid_on");
-    static group = Icons.new("group");
-    static group_add = Icons.new("group_add");
-    static group_work = Icons.new("group_work");
-    static hd = Icons.new("hd");
-    static hdr_off = Icons.new("hdr_off");
-    static hdr_on = Icons.new("hdr_on");
-    static hdr_strong = Icons.new("hdr_strong");
-    static hdr_weak = Icons.new("hdr_weak");
-    static headset = Icons.new("headset");
-    static headset_mic = Icons.new("headset_mic");
-    static headset_off = Icons.new("headset_off");
-    static healing = Icons.new("healing");
-    static hearing = Icons.new("hearing");
-    static help = Icons.new("help");
-    static help_outline = Icons.new("help_outline");
-    static high_quality = Icons.new("high_quality");
-    static highlight = Icons.new("highlight");
-    static highlight_off = Icons.new("highlight_off");
-    static history = Icons.new("history");
-    static home = Icons.new("home");
-    static hot_tub = Icons.new("hot_tub");
-    static hotel = Icons.new("hotel");
-    static hourglass_empty = Icons.new("hourglass_empty");
-    static hourglass_full = Icons.new("hourglass_full");
-    static http = Icons.new("http");
-    static https = Icons.new("https");
-    static image = Icons.new("image");
-    static image_aspect_ratio = Icons.new("image_aspect_ratio");
-    static import_contacts = Icons.new("import_contacts");
-    static import_export = Icons.new("import_export");
-    static important_devices = Icons.new("important_devices");
-    static inbox = Icons.new("inbox");
-    static indeterminate_check_box = Icons.new("indeterminate_check_box");
-    static info = Icons.new("info");
-    static info_outline = Icons.new("info_outline");
-    static input = Icons.new("input");
-    static insert_chart = Icons.new("insert_chart");
-    static insert_comment = Icons.new("insert_comment");
-    static insert_drive_file = Icons.new("insert_drive_file");
-    static insert_emoticon = Icons.new("insert_emoticon");
-    static insert_invitation = Icons.new("insert_invitation");
-    static insert_link = Icons.new("insert_link");
-    static insert_photo = Icons.new("insert_photo");
-    static invert_colors = Icons.new("invert_colors");
-    static invert_colors_off = Icons.new("invert_colors_off");
-    static iso = Icons.new("iso");
-    static keyboard = Icons.new("keyboard");
-    static keyboard_arrow_down = Icons.new("keyboard_arrow_down");
-    static keyboard_arrow_left = Icons.new("keyboard_arrow_left");
-    static keyboard_arrow_right = Icons.new("keyboard_arrow_right");
-    static keyboard_arrow_up = Icons.new("keyboard_arrow_up");
-    static keyboard_backspace = Icons.new("keyboard_backspace");
-    static keyboard_capslock = Icons.new("keyboard_capslock");
-    static keyboard_hide = Icons.new("keyboard_hide");
-    static keyboard_return = Icons.new("keyboard_return");
-    static keyboard_tab = Icons.new("keyboard_tab");
-    static keyboard_voice = Icons.new("keyboard_voice");
-    static kitchen = Icons.new("kitchen");
-    static label = Icons.new("label");
-    static label_important = Icons.new("label_important");
-    static label_outline = Icons.new("label_outline");
-    static landscape = Icons.new("landscape");
-    static language = Icons.new("language");
-    static laptop = Icons.new("laptop");
-    static laptop_chromebook = Icons.new("laptop_chromebook");
-    static laptop_mac = Icons.new("laptop_mac");
-    static laptop_windows = Icons.new("laptop_windows");
-    static last_page = Icons.new("last_page");
-    static launch = Icons.new("launch");
-    static layers = Icons.new("layers");
-    static layers_clear = Icons.new("layers_clear");
-    static leak_add = Icons.new("leak_add");
-    static leak_remove = Icons.new("leak_remove");
-    static lens = Icons.new("lens");
-    static library_add = Icons.new("library_add");
-    static library_books = Icons.new("library_books");
-    static library_music = Icons.new("library_music");
-    static lightbulb_outline = Icons.new("lightbulb_outline");
-    static line_style = Icons.new("line_style");
-    static line_weight = Icons.new("line_weight");
-    static linear_scale = Icons.new("linear_scale");
-    static link = Icons.new("link");
-    static link_off = Icons.new("link_off");
-    static linked_camera = Icons.new("linked_camera");
-    static list = Icons.new("list");
-    static live_help = Icons.new("live_help");
-    static live_tv = Icons.new("live_tv");
-    static local_activity = Icons.new("local_activity");
-    static local_airport = Icons.new("local_airport");
-    static local_atm = Icons.new("local_atm");
-    static local_bar = Icons.new("local_bar");
-    static local_cafe = Icons.new("local_cafe");
-    static local_car_wash = Icons.new("local_car_wash");
-    static local_convenience_store = Icons.new("local_convenience_store");
-    static local_dining = Icons.new("local_dining");
-    static local_drink = Icons.new("local_drink");
-    static local_florist = Icons.new("local_florist");
-    static local_gas_station = Icons.new("local_gas_station");
-    static local_grocery_store = Icons.new("local_grocery_store");
-    static local_hospital = Icons.new("local_hospital");
-    static local_hotel = Icons.new("local_hotel");
-    static local_laundry_service = Icons.new("local_laundry_service");
-    static local_library = Icons.new("local_library");
-    static local_mall = Icons.new("local_mall");
-    static local_movies = Icons.new("local_movies");
-    static local_offer = Icons.new("local_offer");
-    static local_parking = Icons.new("local_parking");
-    static local_pharmacy = Icons.new("local_pharmacy");
-    static local_phone = Icons.new("local_phone");
-    static local_pizza = Icons.new("local_pizza");
-    static local_play = Icons.new("local_play");
-    static local_post_office = Icons.new("local_post_office");
-    static local_printshop = Icons.new("local_printshop");
-    static local_see = Icons.new("local_see");
-    static local_shipping = Icons.new("local_shipping");
-    static local_taxi = Icons.new("local_taxi");
-    static location_city = Icons.new("location_city");
-    static location_disabled = Icons.new("location_disabled");
-    static location_off = Icons.new("location_off");
-    static location_on = Icons.new("location_on");
-    static location_searching = Icons.new("location_searching");
-    static lock = Icons.new("lock");
-    static lock_open = Icons.new("lock_open");
-    static lock_outline = Icons.new("lock_outline");
-    static looks = Icons.new("looks");
-    static looks_3 = Icons.new("looks_3");
-    static looks_4 = Icons.new("looks_4");
-    static looks_5 = Icons.new("looks_5");
-    static looks_6 = Icons.new("looks_6");
-    static looks_one = Icons.new("looks_one");
-    static looks_two = Icons.new("looks_two");
-    static loop = Icons.new("loop");
-    static loupe = Icons.new("loupe");
-    static low_priority = Icons.new("low_priority");
-    static loyalty = Icons.new("loyalty");
-    static mail = Icons.new("mail");
-    static mail_outline = Icons.new("mail_outline");
-    static map = Icons.new("map");
-    static markunread = Icons.new("markunread");
-    static markunread_mailbox = Icons.new("markunread_mailbox");
-    static maximize = Icons.new("maximize");
-    static memory = Icons.new("memory");
-    static menu = Icons.new("menu");
-    static merge_type = Icons.new("merge_type");
-    static message = Icons.new("message");
-    static mic = Icons.new("mic");
-    static mic_none = Icons.new("mic_none");
-    static mic_off = Icons.new("mic_off");
-    static minimize = Icons.new("minimize");
-    static missed_video_call = Icons.new("missed_video_call");
-    static mms = Icons.new("mms");
-    static mobile_screen_share = Icons.new("mobile_screen_share");
-    static mode_comment = Icons.new("mode_comment");
-    static mode_edit = Icons.new("mode_edit");
-    static monetization_on = Icons.new("monetization_on");
-    static money_off = Icons.new("money_off");
-    static monochrome_photos = Icons.new("monochrome_photos");
-    static mood = Icons.new("mood");
-    static mood_bad = Icons.new("mood_bad");
-    static more = Icons.new("more");
-    static more_horiz = Icons.new("more_horiz");
-    static more_vert = Icons.new("more_vert");
-    static motorcycle = Icons.new("motorcycle");
-    static mouse = Icons.new("mouse");
-    static move_to_inbox = Icons.new("move_to_inbox");
-    static movie = Icons.new("movie");
-    static movie_creation = Icons.new("movie_creation");
-    static movie_filter = Icons.new("movie_filter");
-    static multiline_chart = Icons.new("multiline_chart");
-    static music_note = Icons.new("music_note");
-    static music_video = Icons.new("music_video");
-    static my_location = Icons.new("my_location");
-    static nature = Icons.new("nature");
-    static nature_people = Icons.new("nature_people");
-    static navigate_before = Icons.new("navigate_before");
-    static navigate_next = Icons.new("navigate_next");
-    static navigation = Icons.new("navigation");
-    static near_me = Icons.new("near_me");
-    static network_cell = Icons.new("network_cell");
-    static network_check = Icons.new("network_check");
-    static network_locked = Icons.new("network_locked");
-    static network_wifi = Icons.new("network_wifi");
-    static new_releases = Icons.new("new_releases");
-    static next_week = Icons.new("next_week");
-    static nfc = Icons.new("nfc");
-    static no_encryption = Icons.new("no_encryption");
-    static no_sim = Icons.new("no_sim");
-    static not_interested = Icons.new("not_interested");
-    static not_listed_location = Icons.new("not_listed_location");
-    static note = Icons.new("note");
-    static note_add = Icons.new("note_add");
-    static notification_important = Icons.new("notification_important");
-    static notifications = Icons.new("notifications");
-    static notifications_active = Icons.new("notifications_active");
-    static notifications_none = Icons.new("notifications_none");
-    static notifications_off = Icons.new("notifications_off");
-    static notifications_paused = Icons.new("notifications_paused");
-    static offline_bolt = Icons.new("offline_bolt");
-    static offline_pin = Icons.new("offline_pin");
-    static ondemand_video = Icons.new("ondemand_video");
-    static opacity = Icons.new("opacity");
-    static open_in_browser = Icons.new("open_in_browser");
-    static open_in_new = Icons.new("open_in_new");
-    static open_with = Icons.new("open_with");
-    static outlined_flag = Icons.new("outlined_flag");
-    static pages = Icons.new("pages");
-    static pageview = Icons.new("pageview");
-    static palette = Icons.new("palette");
-    static pan_tool = Icons.new("pan_tool");
-    static panorama = Icons.new("panorama");
-    static panorama_fish_eye = Icons.new("panorama_fish_eye");
-    static panorama_horizontal = Icons.new("panorama_horizontal");
-    static panorama_vertical = Icons.new("panorama_vertical");
-    static panorama_wide_angle = Icons.new("panorama_wide_angle");
-    static party_mode = Icons.new("party_mode");
-    static pause = Icons.new("pause");
-    static pause_circle_filled = Icons.new("pause_circle_filled");
-    static pause_circle_outline = Icons.new("pause_circle_outline");
-    static payment = Icons.new("payment");
-    static people = Icons.new("people");
-    static people_outline = Icons.new("people_outline");
-    static perm_camera_mic = Icons.new("perm_camera_mic");
-    static perm_contact_calendar = Icons.new("perm_contact_calendar");
-    static perm_data_setting = Icons.new("perm_data_setting");
-    static perm_device_information = Icons.new("perm_device_information");
-    static perm_identity = Icons.new("perm_identity");
-    static perm_media = Icons.new("perm_media");
-    static perm_phone_msg = Icons.new("perm_phone_msg");
-    static perm_scan_wifi = Icons.new("perm_scan_wifi");
-    static person = Icons.new("person");
-    static person_add = Icons.new("person_add");
-    static person_outline = Icons.new("person_outline");
-    static person_pin = Icons.new("person_pin");
-    static person_pin_circle = Icons.new("person_pin_circle");
-    static personal_video = Icons.new("personal_video");
-    static pets = Icons.new("pets");
-    static phone = Icons.new("phone");
-    static phone_android = Icons.new("phone_android");
-    static phone_bluetooth_speaker = Icons.new("phone_bluetooth_speaker");
-    static phone_forwarded = Icons.new("phone_forwarded");
-    static phone_in_talk = Icons.new("phone_in_talk");
-    static phone_iphone = Icons.new("phone_iphone");
-    static phone_locked = Icons.new("phone_locked");
-    static phone_missed = Icons.new("phone_missed");
-    static phone_paused = Icons.new("phone_paused");
-    static phonelink = Icons.new("phonelink");
-    static phonelink_erase = Icons.new("phonelink_erase");
-    static phonelink_lock = Icons.new("phonelink_lock");
-    static phonelink_off = Icons.new("phonelink_off");
-    static phonelink_ring = Icons.new("phonelink_ring");
-    static phonelink_setup = Icons.new("phonelink_setup");
-    static photo = Icons.new("photo");
-    static photo_album = Icons.new("photo_album");
-    static photo_camera = Icons.new("photo_camera");
-    static photo_filter = Icons.new("photo_filter");
-    static photo_library = Icons.new("photo_library");
-    static photo_size_select_actual = Icons.new("photo_size_select_actual");
-    static photo_size_select_large = Icons.new("photo_size_select_large");
-    static photo_size_select_small = Icons.new("photo_size_select_small");
-    static picture_as_pdf = Icons.new("picture_as_pdf");
-    static picture_in_picture = Icons.new("picture_in_picture");
-    static picture_in_picture_alt = Icons.new("picture_in_picture_alt");
-    static pie_chart = Icons.new("pie_chart");
-    static pie_chart_outlined = Icons.new("pie_chart_outlined");
-    static pin_drop = Icons.new("pin_drop");
-    static place = Icons.new("place");
-    static play_arrow = Icons.new("play_arrow");
-    static play_circle_filled = Icons.new("play_circle_filled");
-    static play_circle_outline = Icons.new("play_circle_outline");
-    static play_for_work = Icons.new("play_for_work");
-    static playlist_add = Icons.new("playlist_add");
-    static playlist_add_check = Icons.new("playlist_add_check");
-    static playlist_play = Icons.new("playlist_play");
-    static plus_one = Icons.new("plus_one");
-    static poll = Icons.new("poll");
-    static polymer = Icons.new("polymer");
-    static pool = Icons.new("pool");
-    static portable_wifi_off = Icons.new("portable_wifi_off");
-    static portrait = Icons.new("portrait");
-    static power = Icons.new("power");
-    static power_input = Icons.new("power_input");
-    static power_settings_new = Icons.new("power_settings_new");
-    static pregnant_woman = Icons.new("pregnant_woman");
-    static present_to_all = Icons.new("present_to_all");
-    static print = Icons.new("print");
-    static priority_high = Icons.new("priority_high");
-    static public = Icons.new("public");
-    static publish = Icons.new("publish");
-    static query_builder = Icons.new("query_builder");
-    static question_answer = Icons.new("question_answer");
-    static queue = Icons.new("queue");
-    static queue_music = Icons.new("queue_music");
-    static queue_play_next = Icons.new("queue_play_next");
-    static radio = Icons.new("radio");
-    static radio_button_checked = Icons.new("radio_button_checked");
-    static radio_button_unchecked = Icons.new("radio_button_unchecked");
-    static rate_review = Icons.new("rate_review");
-    static receipt = Icons.new("receipt");
-    static recent_actors = Icons.new("recent_actors");
-    static record_voice_over = Icons.new("record_voice_over");
-    static redeem = Icons.new("redeem");
-    static redo = Icons.new("redo");
-    static refresh = Icons.new("refresh");
-    static remove = Icons.new("remove");
-    static remove_circle = Icons.new("remove_circle");
-    static remove_circle_outline = Icons.new("remove_circle_outline");
-    static remove_from_queue = Icons.new("remove_from_queue");
-    static remove_red_eye = Icons.new("remove_red_eye");
-    static remove_shopping_cart = Icons.new("remove_shopping_cart");
-    static reorder = Icons.new("reorder");
-    static repeat = Icons.new("repeat");
-    static repeat_one = Icons.new("repeat_one");
-    static replay = Icons.new("replay");
-    static replay_10 = Icons.new("replay_10");
-    static replay_30 = Icons.new("replay_30");
-    static replay_5 = Icons.new("replay_5");
-    static reply = Icons.new("reply");
-    static reply_all = Icons.new("reply_all");
-    static report = Icons.new("report");
-    static report_off = Icons.new("report_off");
-    static report_problem = Icons.new("report_problem");
-    static restaurant = Icons.new("restaurant");
-    static restaurant_menu = Icons.new("restaurant_menu");
-    static restore = Icons.new("restore");
-    static restore_from_trash = Icons.new("restore_from_trash");
-    static restore_page = Icons.new("restore_page");
-    static ring_volume = Icons.new("ring_volume");
-    static room = Icons.new("room");
-    static room_service = Icons.new("room_service");
-    static rotate_90_degrees_ccw = Icons.new("rotate_90_degrees_ccw");
-    static rotate_left = Icons.new("rotate_left");
-    static rotate_right = Icons.new("rotate_right");
-    static rounded_corner = Icons.new("rounded_corner");
-    static router = Icons.new("router");
-    static rowing = Icons.new("rowing");
-    static rss_feed = Icons.new("rss_feed");
-    static rv_hookup = Icons.new("rv_hookup");
-    static satellite = Icons.new("satellite");
-    static save = Icons.new("save");
-    static save_alt = Icons.new("save_alt");
-    static scanner = Icons.new("scanner");
-    static scatter_plot = Icons.new("scatter_plot");
-    static schedule = Icons.new("schedule");
-    static school = Icons.new("school");
-    static score = Icons.new("score");
-    static screen_lock_landscape = Icons.new("screen_lock_landscape");
-    static screen_lock_portrait = Icons.new("screen_lock_portrait");
-    static screen_lock_rotation = Icons.new("screen_lock_rotation");
-    static screen_rotation = Icons.new("screen_rotation");
-    static screen_share = Icons.new("screen_share");
-    static sd_card = Icons.new("sd_card");
-    static sd_storage = Icons.new("sd_storage");
-    static search = Icons.new("search");
-    static security = Icons.new("security");
-    static select_all = Icons.new("select_all");
-    static send = Icons.new("send");
-    static sentiment_dissatisfied = Icons.new("sentiment_dissatisfied");
-    static sentiment_neutral = Icons.new("sentiment_neutral");
-    static sentiment_satisfied = Icons.new("sentiment_satisfied");
-    static sentiment_very_dissatisfied = Icons.new("sentiment_very_dissatisfied");
-    static sentiment_very_satisfied = Icons.new("sentiment_very_satisfied");
-    static settings = Icons.new("settings");
-    static settings_applications = Icons.new("settings_applications");
-    static settings_backup_restore = Icons.new("settings_backup_restore");
-    static settings_bluetooth = Icons.new("settings_bluetooth");
-    static settings_brightness = Icons.new("settings_brightness");
-    static settings_cell = Icons.new("settings_cell");
-    static settings_ethernet = Icons.new("settings_ethernet");
-    static settings_input_antenna = Icons.new("settings_input_antenna");
-    static settings_input_component = Icons.new("settings_input_component");
-    static settings_input_composite = Icons.new("settings_input_composite");
-    static settings_input_hdmi = Icons.new("settings_input_hdmi");
-    static settings_input_svideo = Icons.new("settings_input_svideo");
-    static settings_overscan = Icons.new("settings_overscan");
-    static settings_phone = Icons.new("settings_phone");
-    static settings_power = Icons.new("settings_power");
-    static settings_remote = Icons.new("settings_remote");
-    static settings_system_daydream = Icons.new("settings_system_daydream");
-    static settings_voice = Icons.new("settings_voice");
-    static share = Icons.new("share");
-    static shop = Icons.new("shop");
-    static shop_two = Icons.new("shop_two");
-    static shopping_basket = Icons.new("shopping_basket");
-    static shopping_cart = Icons.new("shopping_cart");
-    static short_text = Icons.new("short_text");
-    static show_chart = Icons.new("show_chart");
-    static shuffle = Icons.new("shuffle");
-    static shutter_speed = Icons.new("shutter_speed");
-    static signal_cellular_4_bar = Icons.new("signal_cellular_4_bar");
-    static signal_cellular_connected_no_internet_4_bar = Icons.new("signal_cellular_connected_no_internet_4_bar");
-    static signal_cellular_no_sim = Icons.new("signal_cellular_no_sim");
-    static signal_cellular_null = Icons.new("signal_cellular_null");
-    static signal_cellular_off = Icons.new("signal_cellular_off");
-    static signal_wifi_4_bar = Icons.new("signal_wifi_4_bar");
-    static signal_wifi_4_bar_lock = Icons.new("signal_wifi_4_bar_lock");
-    static signal_wifi_off = Icons.new("signal_wifi_off");
-    static sim_card = Icons.new("sim_card");
-    static sim_card_alert = Icons.new("sim_card_alert");
-    static skip_next = Icons.new("skip_next");
-    static skip_previous = Icons.new("skip_previous");
-    static slideshow = Icons.new("slideshow");
-    static slow_motion_video = Icons.new("slow_motion_video");
-    static smartphone = Icons.new("smartphone");
-    static smoke_free = Icons.new("smoke_free");
-    static smoking_rooms = Icons.new("smoking_rooms");
-    static sms = Icons.new("sms");
-    static sms_failed = Icons.new("sms_failed");
-    static snooze = Icons.new("snooze");
-    static sort = Icons.new("sort");
-    static sort_by_alpha = Icons.new("sort_by_alpha");
-    static spa = Icons.new("spa");
-    static space_bar = Icons.new("space_bar");
-    static speaker = Icons.new("speaker");
-    static speaker_group = Icons.new("speaker_group");
-    static speaker_notes = Icons.new("speaker_notes");
-    static speaker_notes_off = Icons.new("speaker_notes_off");
-    static speaker_phone = Icons.new("speaker_phone");
-    static spellcheck = Icons.new("spellcheck");
-    static star = Icons.new("star");
-    static star_border = Icons.new("star_border");
-    static star_half = Icons.new("star_half");
-    static stars = Icons.new("stars");
-    static stay_current_landscape = Icons.new("stay_current_landscape");
-    static stay_current_portrait = Icons.new("stay_current_portrait");
-    static stay_primary_landscape = Icons.new("stay_primary_landscape");
-    static stay_primary_portrait = Icons.new("stay_primary_portrait");
-    static stop = Icons.new("stop");
-    static stop_screen_share = Icons.new("stop_screen_share");
-    static storage = Icons.new("storage");
-    static store = Icons.new("store");
-    static store_mall_directory = Icons.new("store_mall_directory");
-    static straighten = Icons.new("straighten");
-    static streetview = Icons.new("streetview");
-    static strikethrough_s = Icons.new("strikethrough_s");
-    static style = Icons.new("style");
-    static subdirectory_arrow_left = Icons.new("subdirectory_arrow_left");
-    static subdirectory_arrow_right = Icons.new("subdirectory_arrow_right");
-    static subject = Icons.new("subject");
-    static subscriptions = Icons.new("subscriptions");
-    static subtitles = Icons.new("subtitles");
-    static subway = Icons.new("subway");
-    static supervised_user_circle = Icons.new("supervised_user_circle");
-    static supervisor_account = Icons.new("supervisor_account");
-    static surround_sound = Icons.new("surround_sound");
-    static swap_calls = Icons.new("swap_calls");
-    static swap_horiz = Icons.new("swap_horiz");
-    static swap_horizontal_circle = Icons.new("swap_horizontal_circle");
-    static swap_vert = Icons.new("swap_vert");
-    static swap_vertical_circle = Icons.new("swap_vertical_circle");
-    static switch_camera = Icons.new("switch_camera");
-    static switch_video = Icons.new("switch_video");
-    static sync = Icons.new("sync");
-    static sync_disabled = Icons.new("sync_disabled");
-    static sync_problem = Icons.new("sync_problem");
-    static system_update = Icons.new("system_update");
-    static system_update_alt = Icons.new("system_update_alt");
-    static tab = Icons.new("tab");
-    static tab_unselected = Icons.new("tab_unselected");
-    static table_chart = Icons.new("table_chart");
-    static tablet = Icons.new("tablet");
-    static tablet_android = Icons.new("tablet_android");
-    static tablet_mac = Icons.new("tablet_mac");
-    static tag_faces = Icons.new("tag_faces");
-    static tap_and_play = Icons.new("tap_and_play");
-    static terrain = Icons.new("terrain");
-    static text_fields = Icons.new("text_fields");
-    static text_format = Icons.new("text_format");
-    static text_rotate_up = Icons.new("text_rotate_up");
-    static text_rotate_vertical = Icons.new("text_rotate_vertical");
-    static text_rotation_angledown = Icons.new("text_rotation_angledown");
-    static text_rotation_angleup = Icons.new("text_rotation_angleup");
-    static text_rotation_down = Icons.new("text_rotation_down");
-    static text_rotation_none = Icons.new("text_rotation_none");
-    static textsms = Icons.new("textsms");
-    static texture = Icons.new("texture");
-    static theaters = Icons.new("theaters");
-    static thumb_down = Icons.new("thumb_down");
-    static thumb_up = Icons.new("thumb_up");
-    static thumbs_up_down = Icons.new("thumbs_up_down");
-    static time_to_leave = Icons.new("time_to_leave");
-    static timelapse = Icons.new("timelapse");
-    static timeline = Icons.new("timeline");
-    static timer = Icons.new("timer");
-    static timer_10 = Icons.new("timer_10");
-    static timer_3 = Icons.new("timer_3");
-    static timer_off = Icons.new("timer_off");
-    static title = Icons.new("title");
-    static toc = Icons.new("toc");
-    static today = Icons.new("today");
-    static toll = Icons.new("toll");
-    static tonality = Icons.new("tonality");
-    static touch_app = Icons.new("touch_app");
-    static toys = Icons.new("toys");
-    static track_changes = Icons.new("track_changes");
-    static traffic = Icons.new("traffic");
-    static train = Icons.new("train");
-    static tram = Icons.new("tram");
-    static transfer_within_a_station = Icons.new("transfer_within_a_station");
-    static transform = Icons.new("transform");
-    static transit_enterexit = Icons.new("transit_enterexit");
-    static translate = Icons.new("translate");
-    static trending_down = Icons.new("trending_down");
-    static trending_flat = Icons.new("trending_flat");
-    static trending_up = Icons.new("trending_up");
-    static trip_origin = Icons.new("trip_origin");
-    static tune = Icons.new("tune");
-    static turned_in = Icons.new("turned_in");
-    static turned_in_not = Icons.new("turned_in_not");
-    static tv = Icons.new("tv");
-    static unarchive = Icons.new("unarchive");
-    static undo = Icons.new("undo");
-    static unfold_less = Icons.new("unfold_less");
-    static unfold_more = Icons.new("unfold_more");
-    static update = Icons.new("update");
-    static usb = Icons.new("usb");
-    static verified_user = Icons.new("verified_user");
-    static vertical_align_bottom = Icons.new("vertical_align_bottom");
-    static vertical_align_center = Icons.new("vertical_align_center");
-    static vertical_align_top = Icons.new("vertical_align_top");
-    static vibration = Icons.new("vibration");
-    static video_call = Icons.new("video_call");
-    static video_label = Icons.new("video_label");
-    static video_library = Icons.new("video_library");
-    static videocam = Icons.new("videocam");
-    static videocam_off = Icons.new("videocam_off");
-    static videogame_asset = Icons.new("videogame_asset");
-    static view_agenda = Icons.new("view_agenda");
-    static view_array = Icons.new("view_array");
-    static view_carousel = Icons.new("view_carousel");
-    static view_column = Icons.new("view_column");
-    static view_comfy = Icons.new("view_comfy");
-    static view_compact = Icons.new("view_compact");
-    static view_day = Icons.new("view_day");
-    static view_headline = Icons.new("view_headline");
-    static view_list = Icons.new("view_list");
-    static view_module = Icons.new("view_module");
-    static view_quilt = Icons.new("view_quilt");
-    static view_stream = Icons.new("view_stream");
-    static view_week = Icons.new("view_week");
-    static vignette = Icons.new("vignette");
-    static visibility = Icons.new("visibility");
-    static visibility_off = Icons.new("visibility_off");
-    static voice_chat = Icons.new("voice_chat");
-    static voicemail = Icons.new("voicemail");
-    static volume_down = Icons.new("volume_down");
-    static volume_mute = Icons.new("volume_mute");
-    static volume_off = Icons.new("volume_off");
-    static volume_up = Icons.new("volume_up");
-    static vpn_key = Icons.new("vpn_key");
-    static vpn_lock = Icons.new("vpn_lock");
-    static wallpaper = Icons.new("wallpaper");
-    static warning = Icons.new("warning");
-    static watch = Icons.new("watch");
-    static watch_later = Icons.new("watch_later");
-    static wb_auto = Icons.new("wb_auto");
-    static wb_cloudy = Icons.new("wb_cloudy");
-    static wb_incandescent = Icons.new("wb_incandescent");
-    static wb_iridescent = Icons.new("wb_iridescent");
-    static wb_sunny = Icons.new("wb_sunny");
-    static wc = Icons.new("wc");
-    static web = Icons.new("web");
-    static web_asset = Icons.new("web_asset");
-    static weekend = Icons.new("weekend");
-    static whatshot = Icons.new("whatshot");
-    static widgets = Icons.new("widgets");
-    static wifi = Icons.new("wifi");
-    static wifi_lock = Icons.new("wifi_lock");
-    static wifi_tethering = Icons.new("wifi_tethering");
-    static work = Icons.new("work");
-    static wrap_text = Icons.new("wrap_text");
-    static youtube_searched_for = Icons.new("youtube_searched_for");
-    static zoom_in = Icons.new("zoom_in");
-    static zoom_out = Icons.new("zoom_out");
-    static zoom_out_map = Icons.new("zoom_out_map");
+    static threesixty = new Icons("threesixty");
+    static threed_rotation = new Icons("threed_rotation");
+    static four_k = new Icons("four_k");
+    static ac_unit = new Icons("ac_unit");
+    static access_alarm = new Icons("access_alarm");
+    static access_alarms = new Icons("access_alarms");
+    static access_time = new Icons("access_time");
+    static accessibility = new Icons("accessibility");
+    static accessibility_new = new Icons("accessibility_new");
+    static accessible = new Icons("accessible");
+    static accessible_forward = new Icons("accessible_forward");
+    static account_balance = new Icons("account_balance");
+    static account_balance_wallet = new Icons("account_balance_wallet");
+    static account_box = new Icons("account_box");
+    static account_circle = new Icons("account_circle");
+    static adb = new Icons("adb");
+    static add = new Icons("add");
+    static add_a_photo = new Icons("add_a_photo");
+    static add_alarm = new Icons("add_alarm");
+    static add_alert = new Icons("add_alert");
+    static add_box = new Icons("add_box");
+    static add_call = new Icons("add_call");
+    static add_circle = new Icons("add_circle");
+    static add_circle_outline = new Icons("add_circle_outline");
+    static add_comment = new Icons("add_comment");
+    static add_location = new Icons("add_location");
+    static add_photo_alternate = new Icons("add_photo_alternate");
+    static add_shopping_cart = new Icons("add_shopping_cart");
+    static add_to_home_screen = new Icons("add_to_home_screen");
+    static add_to_photos = new Icons("add_to_photos");
+    static add_to_queue = new Icons("add_to_queue");
+    static adjust = new Icons("adjust");
+    static airline_seat_flat = new Icons("airline_seat_flat");
+    static airline_seat_flat_angled = new Icons("airline_seat_flat_angled");
+    static airline_seat_individual_suite = new Icons("airline_seat_individual_suite");
+    static airline_seat_legroom_extra = new Icons("airline_seat_legroom_extra");
+    static airline_seat_legroom_normal = new Icons("airline_seat_legroom_normal");
+    static airline_seat_legroom_reduced = new Icons("airline_seat_legroom_reduced");
+    static airline_seat_recline_extra = new Icons("airline_seat_recline_extra");
+    static airline_seat_recline_normal = new Icons("airline_seat_recline_normal");
+    static airplanemode_active = new Icons("airplanemode_active");
+    static airplanemode_inactive = new Icons("airplanemode_inactive");
+    static airplay = new Icons("airplay");
+    static airport_shuttle = new Icons("airport_shuttle");
+    static alarm = new Icons("alarm");
+    static alarm_add = new Icons("alarm_add");
+    static alarm_off = new Icons("alarm_off");
+    static alarm_on = new Icons("alarm_on");
+    static album = new Icons("album");
+    static all_inclusive = new Icons("all_inclusive");
+    static all_out = new Icons("all_out");
+    static alternate_email = new Icons("alternate_email");
+    static android = new Icons("android");
+    static announcement = new Icons("announcement");
+    static apps = new Icons("apps");
+    static archive = new Icons("archive");
+    static arrow_back = new Icons("arrow_back");
+    static arrow_back_ios = new Icons("arrow_back_ios");
+    static arrow_downward = new Icons("arrow_downward");
+    static arrow_drop_down = new Icons("arrow_drop_down");
+    static arrow_drop_down_circle = new Icons("arrow_drop_down_circle");
+    static arrow_drop_up = new Icons("arrow_drop_up");
+    static arrow_forward = new Icons("arrow_forward");
+    static arrow_forward_ios = new Icons("arrow_forward_ios");
+    static arrow_left = new Icons("arrow_left");
+    static arrow_right = new Icons("arrow_right");
+    static arrow_upward = new Icons("arrow_upward");
+    static art_track = new Icons("art_track");
+    static aspect_ratio = new Icons("aspect_ratio");
+    static assessment = new Icons("assessment");
+    static assignment = new Icons("assignment");
+    static assignment_ind = new Icons("assignment_ind");
+    static assignment_late = new Icons("assignment_late");
+    static assignment_return = new Icons("assignment_return");
+    static assignment_returned = new Icons("assignment_returned");
+    static assignment_turned_in = new Icons("assignment_turned_in");
+    static assistant = new Icons("assistant");
+    static assistant_photo = new Icons("assistant_photo");
+    static atm = new Icons("atm");
+    static attach_file = new Icons("attach_file");
+    static attach_money = new Icons("attach_money");
+    static attachment = new Icons("attachment");
+    static audiotrack = new Icons("audiotrack");
+    static autorenew = new Icons("autorenew");
+    static av_timer = new Icons("av_timer");
+    static backspace = new Icons("backspace");
+    static backup = new Icons("backup");
+    static battery_alert = new Icons("battery_alert");
+    static battery_charging_full = new Icons("battery_charging_full");
+    static battery_full = new Icons("battery_full");
+    static battery_std = new Icons("battery_std");
+    static battery_unknown = new Icons("battery_unknown");
+    static beach_access = new Icons("beach_access");
+    static beenhere = new Icons("beenhere");
+    static block = new Icons("block");
+    static bluetooth = new Icons("bluetooth");
+    static bluetooth_audio = new Icons("bluetooth_audio");
+    static bluetooth_connected = new Icons("bluetooth_connected");
+    static bluetooth_disabled = new Icons("bluetooth_disabled");
+    static bluetooth_searching = new Icons("bluetooth_searching");
+    static blur_circular = new Icons("blur_circular");
+    static blur_linear = new Icons("blur_linear");
+    static blur_off = new Icons("blur_off");
+    static blur_on = new Icons("blur_on");
+    static book = new Icons("book");
+    static bookmark = new Icons("bookmark");
+    static bookmark_border = new Icons("bookmark_border");
+    static border_all = new Icons("border_all");
+    static border_bottom = new Icons("border_bottom");
+    static border_clear = new Icons("border_clear");
+    static border_color = new Icons("border_color");
+    static border_horizontal = new Icons("border_horizontal");
+    static border_inner = new Icons("border_inner");
+    static border_left = new Icons("border_left");
+    static border_outer = new Icons("border_outer");
+    static border_right = new Icons("border_right");
+    static border_style = new Icons("border_style");
+    static border_top = new Icons("border_top");
+    static border_vertical = new Icons("border_vertical");
+    static branding_watermark = new Icons("branding_watermark");
+    static brightness_1 = new Icons("brightness_1");
+    static brightness_2 = new Icons("brightness_2");
+    static brightness_3 = new Icons("brightness_3");
+    static brightness_4 = new Icons("brightness_4");
+    static brightness_5 = new Icons("brightness_5");
+    static brightness_6 = new Icons("brightness_6");
+    static brightness_7 = new Icons("brightness_7");
+    static brightness_auto = new Icons("brightness_auto");
+    static brightness_high = new Icons("brightness_high");
+    static brightness_low = new Icons("brightness_low");
+    static brightness_medium = new Icons("brightness_medium");
+    static broken_image = new Icons("broken_image");
+    static brush = new Icons("brush");
+    static bubble_chart = new Icons("bubble_chart");
+    static bug_report = new Icons("bug_report");
+    static build = new Icons("build");
+    static burst_mode = new Icons("burst_mode");
+    static business = new Icons("business");
+    static business_center = new Icons("business_center");
+    static cached = new Icons("cached");
+    static cake = new Icons("cake");
+    static calendar_today = new Icons("calendar_today");
+    static calendar_view_day = new Icons("calendar_view_day");
+    static call = new Icons("call");
+    static call_end = new Icons("call_end");
+    static call_made = new Icons("call_made");
+    static call_merge = new Icons("call_merge");
+    static call_missed = new Icons("call_missed");
+    static call_missed_outgoing = new Icons("call_missed_outgoing");
+    static call_received = new Icons("call_received");
+    static call_split = new Icons("call_split");
+    static call_to_action = new Icons("call_to_action");
+    static camera = new Icons("camera");
+    static camera_alt = new Icons("camera_alt");
+    static camera_enhance = new Icons("camera_enhance");
+    static camera_front = new Icons("camera_front");
+    static camera_rear = new Icons("camera_rear");
+    static camera_roll = new Icons("camera_roll");
+    static cancel = new Icons("cancel");
+    static card_giftcard = new Icons("card_giftcard");
+    static card_membership = new Icons("card_membership");
+    static card_travel = new Icons("card_travel");
+    static casino = new Icons("casino");
+    static cast = new Icons("cast");
+    static cast_connected = new Icons("cast_connected");
+    static category = new Icons("category");
+    static center_focus_strong = new Icons("center_focus_strong");
+    static center_focus_weak = new Icons("center_focus_weak");
+    static change_history = new Icons("change_history");
+    static chat = new Icons("chat");
+    static chat_bubble = new Icons("chat_bubble");
+    static chat_bubble_outline = new Icons("chat_bubble_outline");
+    static check = new Icons("check");
+    static check_box = new Icons("check_box");
+    static check_box_outline_blank = new Icons("check_box_outline_blank");
+    static check_circle = new Icons("check_circle");
+    static check_circle_outline = new Icons("check_circle_outline");
+    static chevron_left = new Icons("chevron_left");
+    static chevron_right = new Icons("chevron_right");
+    static child_care = new Icons("child_care");
+    static child_friendly = new Icons("child_friendly");
+    static chrome_reader_mode = new Icons("chrome_reader_mode");
+    static class_ = new Icons("class_");
+    static clear = new Icons("clear");
+    static clear_all = new Icons("clear_all");
+    static close = new Icons("close");
+    static closed_caption = new Icons("closed_caption");
+    static cloud = new Icons("cloud");
+    static cloud_circle = new Icons("cloud_circle");
+    static cloud_done = new Icons("cloud_done");
+    static cloud_download = new Icons("cloud_download");
+    static cloud_off = new Icons("cloud_off");
+    static cloud_queue = new Icons("cloud_queue");
+    static cloud_upload = new Icons("cloud_upload");
+    static code = new Icons("code");
+    static collections = new Icons("collections");
+    static collections_bookmark = new Icons("collections_bookmark");
+    static color_lens = new Icons("color_lens");
+    static colorize = new Icons("colorize");
+    static comment = new Icons("comment");
+    static compare = new Icons("compare");
+    static compare_arrows = new Icons("compare_arrows");
+    static computer = new Icons("computer");
+    static confirmation_number = new Icons("confirmation_number");
+    static contact_mail = new Icons("contact_mail");
+    static contact_phone = new Icons("contact_phone");
+    static contacts = new Icons("contacts");
+  static content_copy = new Icons("content_copy");
+    static content_cut = new Icons("content_cut");
+    static content_paste = new Icons("content_paste");
+    static control_point = new Icons("control_point");
+    static control_point_duplicate = new Icons("control_point_duplicate");
+    static copyright = new Icons("copyright");
+    static create = new Icons("create");
+    static create_new_folder = new Icons("create_new_folder");
+    static credit_card = new Icons("credit_card");
+    static crop = new Icons("crop");
+    static crop_16_9 = new Icons("crop_16_9");
+    static crop_3_2 = new Icons("crop_3_2");
+    static crop_5_4 = new Icons("crop_5_4");
+    static crop_7_5 = new Icons("crop_7_5");
+    static crop_din = new Icons("crop_din");
+    static crop_free = new Icons("crop_free");
+    static crop_landscape = new Icons("crop_landscape");
+    static crop_original = new Icons("crop_original");
+    static crop_portrait = new Icons("crop_portrait");
+    static crop_rotate = new Icons("crop_rotate");
+    static crop_square = new Icons("crop_square");
+    static dashboard = new Icons("dashboard");
+    static data_usage = new Icons("data_usage");
+    static date_range = new Icons("date_range");
+    static dehaze = new Icons("dehaze");
+    static delete = new Icons("delete");
+    static delete_forever = new Icons("delete_forever");
+    static delete_outline = new Icons("delete_outline");
+    static delete_sweep = new Icons("delete_sweep");
+    static departure_board = new Icons("departure_board");
+    static description = new Icons("description");
+    static desktop_mac = new Icons("desktop_mac");
+    static desktop_windows = new Icons("desktop_windows");
+    static details = new Icons("details");
+    static developer_board = new Icons("developer_board");
+    static developer_mode = new Icons("developer_mode");
+    static device_hub = new Icons("device_hub");
+    static device_unknown = new Icons("device_unknown");
+    static devices = new Icons("devices");
+    static devices_other = new Icons("devices_other");
+    static dialer_sip = new Icons("dialer_sip");
+    static dialpad = new Icons("dialpad");
+    static directions = new Icons("directions");
+    static directions_bike = new Icons("directions_bike");
+    static directions_boat = new Icons("directions_boat");
+    static directions_bus = new Icons("directions_bus");
+    static directions_car = new Icons("directions_car");
+    static directions_railway = new Icons("directions_railway");
+    static directions_run = new Icons("directions_run");
+    static directions_subway = new Icons("directions_subway");
+    static directions_transit = new Icons("directions_transit");
+    static directions_walk = new Icons("directions_walk");
+    static disc_full = new Icons("disc_full");
+    static dns = new Icons("dns");
+    static do_not_disturb = new Icons("do_not_disturb");
+    static do_not_disturb_alt = new Icons("do_not_disturb_alt");
+    static do_not_disturb_off = new Icons("do_not_disturb_off");
+    static do_not_disturb_on = new Icons("do_not_disturb_on");
+    static dock = new Icons("dock");
+    static domain = new Icons("domain");
+    static done = new Icons("done");
+    static done_all = new Icons("done_all");
+    static done_outline = new Icons("done_outline");
+    static donut_large = new Icons("donut_large");
+    static donut_small = new Icons("donut_small");
+    static drafts = new Icons("drafts");
+    static drag_handle = new Icons("drag_handle");
+    static drive_eta = new Icons("drive_eta");
+    static dvr = new Icons("dvr");
+    static edit = new Icons("edit");
+    static edit_attributes = new Icons("edit_attributes");
+    static edit_location = new Icons("edit_location");
+    static eject = new Icons("eject");
+    static email = new Icons("email");
+    static enhanced_encryption = new Icons("enhanced_encryption");
+    static equalizer = new Icons("equalizer");
+    static error = new Icons("error");
+    static error_outline = new Icons("error_outline");
+    static euro_symbol = new Icons("euro_symbol");
+    static ev_station = new Icons("ev_station");
+    static event = new Icons("event");
+    static event_available = new Icons("event_available");
+    static event_busy = new Icons("event_busy");
+    static event_note = new Icons("event_note");
+    static event_seat = new Icons("event_seat");
+    static exit_to_app = new Icons("exit_to_app");
+    static expand_less = new Icons("expand_less");
+    static expand_more = new Icons("expand_more");
+    static explicit = new Icons("explicit");
+    static explore = new Icons("explore");
+    static exposure = new Icons("exposure");
+    static exposure_neg_1 = new Icons("exposure_neg_1");
+    static exposure_neg_2 = new Icons("exposure_neg_2");
+    static exposure_plus_1 = new Icons("exposure_plus_1");
+    static exposure_plus_2 = new Icons("exposure_plus_2");
+    static exposure_zero = new Icons("exposure_zero");
+    static extension = new Icons("extension");
+    static face = new Icons("face");
+    static fast_forward = new Icons("fast_forward");
+    static fast_rewind = new Icons("fast_rewind");
+    static fastfood = new Icons("fastfood");
+    static favorite = new Icons("favorite");
+    static favorite_border = new Icons("favorite_border");
+    static featured_play_list = new Icons("featured_play_list");
+    static featured_video = new Icons("featured_video");
+    static feedback = new Icons("feedback");
+    static fiber_dvr = new Icons("fiber_dvr");
+    static fiber_manual_record = new Icons("fiber_manual_record");
+    static fiber_new = new Icons("fiber_new");
+    static fiber_pin = new Icons("fiber_pin");
+    static fiber_smart_record = new Icons("fiber_smart_record");
+    static file_download = new Icons("file_download");
+    static file_upload = new Icons("file_upload");
+    static filter = new Icons("filter");
+    static filter_1 = new Icons("filter_1");
+    static filter_2 = new Icons("filter_2");
+    static filter_3 = new Icons("filter_3");
+    static filter_4 = new Icons("filter_4");
+    static filter_5 = new Icons("filter_5");
+    static filter_6 = new Icons("filter_6");
+    static filter_7 = new Icons("filter_7");
+    static filter_8 = new Icons("filter_8");
+    static filter_9 = new Icons("filter_9");
+    static filter_9_plus = new Icons("filter_9_plus");
+    static filter_b_and_w = new Icons("filter_b_and_w");
+    static filter_center_focus = new Icons("filter_center_focus");
+    static filter_drama = new Icons("filter_drama");
+    static filter_frames = new Icons("filter_frames");
+    static filter_hdr = new Icons("filter_hdr");
+    static filter_list = new Icons("filter_list");
+    static filter_none = new Icons("filter_none");
+    static filter_tilt_shift = new Icons("filter_tilt_shift");
+    static filter_vintage = new Icons("filter_vintage");
+    static find_in_page = new Icons("find_in_page");
+    static find_replace = new Icons("find_replace");
+    static fingerprint = new Icons("fingerprint");
+    static first_page = new Icons("first_page");
+    static fitness_center = new Icons("fitness_center");
+    static flag = new Icons("flag");
+    static flare = new Icons("flare");
+    static flash_auto = new Icons("flash_auto");
+    static flash_off = new Icons("flash_off");
+    static flash_on = new Icons("flash_on");
+    static flight = new Icons("flight");
+    static flight_land = new Icons("flight_land");
+    static flight_takeoff = new Icons("flight_takeoff");
+    static flip = new Icons("flip");
+    static flip_to_back = new Icons("flip_to_back");
+    static flip_to_front = new Icons("flip_to_front");
+    static folder = new Icons("folder");
+    static folder_open = new Icons("folder_open");
+    static folder_shared = new Icons("folder_shared");
+    static folder_special = new Icons("folder_special");
+    static font_download = new Icons("font_download");
+    static format_align_center = new Icons("format_align_center");
+    static format_align_justify = new Icons("format_align_justify");
+    static format_align_left = new Icons("format_align_left");
+    static format_align_right = new Icons("format_align_right");
+    static format_bold = new Icons("format_bold");
+    static format_clear = new Icons("format_clear");
+    static format_color_fill = new Icons("format_color_fill");
+    static format_color_reset = new Icons("format_color_reset");
+    static format_color_text = new Icons("format_color_text");
+    static format_indent_decrease = new Icons("format_indent_decrease");
+    static format_indent_increase = new Icons("format_indent_increase");
+    static format_italic = new Icons("format_italic");
+    static format_line_spacing = new Icons("format_line_spacing");
+    static format_list_bulleted = new Icons("format_list_bulleted");
+    static format_list_numbered = new Icons("format_list_numbered");
+    static format_list_numbered_rtl = new Icons("format_list_numbered_rtl");
+    static format_paint = new Icons("format_paint");
+    static format_quote = new Icons("format_quote");
+    static format_shapes = new Icons("format_shapes");
+    static format_size = new Icons("format_size");
+    static format_strikethrough = new Icons("format_strikethrough");
+    static format_textdirection_l_to_r = new Icons("format_textdirection_l_to_r");
+    static format_textdirection_r_to_l = new Icons("format_textdirection_r_to_l");
+    static format_underlined = new Icons("format_underlined");
+    static forum = new Icons("forum");
+    static forward = new Icons("forward");
+    static forward_10 = new Icons("forward_10");
+    static forward_30 = new Icons("forward_30");
+    static forward_5 = new Icons("forward_5");
+    static free_breakfast = new Icons("free_breakfast");
+    static fullscreen = new Icons("fullscreen");
+    static fullscreen_exit = new Icons("fullscreen_exit");
+    static functions = new Icons("functions");
+    static g_translate = new Icons("g_translate");
+    static gamepad = new Icons("gamepad");
+    static games = new Icons("games");
+    static gavel = new Icons("gavel");
+    static gesture = new Icons("gesture");
+    static get_app = new Icons("get_app");
+    static gif = new Icons("gif");
+    static golf_course = new Icons("golf_course");
+    static gps_fixed = new Icons("gps_fixed");
+    static gps_not_fixed = new Icons("gps_not_fixed");
+    static gps_off = new Icons("gps_off");
+    static grade = new Icons("grade");
+    static gradient = new Icons("gradient");
+    static grain = new Icons("grain");
+    static graphic_eq = new Icons("graphic_eq");
+    static grid_off = new Icons("grid_off");
+    static grid_on = new Icons("grid_on");
+    static group = new Icons("group");
+    static group_add = new Icons("group_add");
+    static group_work = new Icons("group_work");
+    static hd = new Icons("hd");
+    static hdr_off = new Icons("hdr_off");
+    static hdr_on = new Icons("hdr_on");
+    static hdr_strong = new Icons("hdr_strong");
+    static hdr_weak = new Icons("hdr_weak");
+    static headset = new Icons("headset");
+    static headset_mic = new Icons("headset_mic");
+    static headset_off = new Icons("headset_off");
+    static healing = new Icons("healing");
+    static hearing = new Icons("hearing");
+    static help = new Icons("help");
+    static help_outline = new Icons("help_outline");
+    static high_quality = new Icons("high_quality");
+    static highlight = new Icons("highlight");
+    static highlight_off = new Icons("highlight_off");
+    static history = new Icons("history");
+    static home = new Icons("home");
+    static hot_tub = new Icons("hot_tub");
+    static hotel = new Icons("hotel");
+    static hourglass_empty = new Icons("hourglass_empty");
+    static hourglass_full = new Icons("hourglass_full");
+    static http = new Icons("http");
+    static https = new Icons("https");
+    static image = new Icons("image");
+    static image_aspect_ratio = new Icons("image_aspect_ratio");
+    static import_contacts = new Icons("import_contacts");
+    static import_export = new Icons("import_export");
+    static important_devices = new Icons("important_devices");
+    static inbox = new Icons("inbox");
+    static indeterminate_check_box = new Icons("indeterminate_check_box");
+    static info = new Icons("info");
+    static info_outline = new Icons("info_outline");
+    static input = new Icons("input");
+    static insert_chart = new Icons("insert_chart");
+    static insert_comment = new Icons("insert_comment");
+    static insert_drive_file = new Icons("insert_drive_file");
+    static insert_emoticon = new Icons("insert_emoticon");
+    static insert_invitation = new Icons("insert_invitation");
+    static insert_link = new Icons("insert_link");
+    static insert_photo = new Icons("insert_photo");
+    static invert_colors = new Icons("invert_colors");
+    static invert_colors_off = new Icons("invert_colors_off");
+    static iso = new Icons("iso");
+    static keyboard = new Icons("keyboard");
+    static keyboard_arrow_down = new Icons("keyboard_arrow_down");
+    static keyboard_arrow_left = new Icons("keyboard_arrow_left");
+    static keyboard_arrow_right = new Icons("keyboard_arrow_right");
+    static keyboard_arrow_up = new Icons("keyboard_arrow_up");
+    static keyboard_backspace = new Icons("keyboard_backspace");
+    static keyboard_capslock = new Icons("keyboard_capslock");
+    static keyboard_hide = new Icons("keyboard_hide");
+    static keyboard_return = new Icons("keyboard_return");
+    static keyboard_tab = new Icons("keyboard_tab");
+    static keyboard_voice = new Icons("keyboard_voice");
+    static kitchen = new Icons("kitchen");
+    static label = new Icons("label");
+    static label_important = new Icons("label_important");
+    static label_outline = new Icons("label_outline");
+    static landscape = new Icons("landscape");
+    static language = new Icons("language");
+    static laptop = new Icons("laptop");
+    static laptop_chromebook = new Icons("laptop_chromebook");
+    static laptop_mac = new Icons("laptop_mac");
+    static laptop_windows = new Icons("laptop_windows");
+    static last_page = new Icons("last_page");
+    static launch = new Icons("launch");
+    static layers = new Icons("layers");
+    static layers_clear = new Icons("layers_clear");
+    static leak_add = new Icons("leak_add");
+    static leak_remove = new Icons("leak_remove");
+    static lens = new Icons("lens");
+    static library_add = new Icons("library_add");
+    static library_books = new Icons("library_books");
+    static library_music = new Icons("library_music");
+    static lightbulb_outline = new Icons("lightbulb_outline");
+    static line_style = new Icons("line_style");
+    static line_weight = new Icons("line_weight");
+    static linear_scale = new Icons("linear_scale");
+    static link = new Icons("link");
+    static link_off = new Icons("link_off");
+    static linked_camera = new Icons("linked_camera");
+    static list = new Icons("list");
+    static live_help = new Icons("live_help");
+    static live_tv = new Icons("live_tv");
+    static local_activity = new Icons("local_activity");
+    static local_airport = new Icons("local_airport");
+    static local_atm = new Icons("local_atm");
+    static local_bar = new Icons("local_bar");
+    static local_cafe = new Icons("local_cafe");
+    static local_car_wash = new Icons("local_car_wash");
+    static local_convenience_store = new Icons("local_convenience_store");
+    static local_dining = new Icons("local_dining");
+    static local_drink = new Icons("local_drink");
+    static local_florist = new Icons("local_florist");
+    static local_gas_station = new Icons("local_gas_station");
+    static local_grocery_store = new Icons("local_grocery_store");
+    static local_hospital = new Icons("local_hospital");
+    static local_hotel = new Icons("local_hotel");
+    static local_laundry_service = new Icons("local_laundry_service");
+    static local_library = new Icons("local_library");
+    static local_mall = new Icons("local_mall");
+    static local_movies = new Icons("local_movies");
+    static local_offer = new Icons("local_offer");
+    static local_parking = new Icons("local_parking");
+    static local_pharmacy = new Icons("local_pharmacy");
+    static local_phone = new Icons("local_phone");
+    static local_pizza = new Icons("local_pizza");
+    static local_play = new Icons("local_play");
+    static local_post_office = new Icons("local_post_office");
+    static local_printshop = new Icons("local_printshop");
+    static local_see = new Icons("local_see");
+    static local_shipping = new Icons("local_shipping");
+    static local_taxi = new Icons("local_taxi");
+    static location_city = new Icons("location_city");
+    static location_disabled = new Icons("location_disabled");
+    static location_off = new Icons("location_off");
+    static location_on = new Icons("location_on");
+    static location_searching = new Icons("location_searching");
+    static lock = new Icons("lock");
+    static lock_open = new Icons("lock_open");
+    static lock_outline = new Icons("lock_outline");
+    static looks = new Icons("looks");
+    static looks_3 = new Icons("looks_3");
+    static looks_4 = new Icons("looks_4");
+    static looks_5 = new Icons("looks_5");
+    static looks_6 = new Icons("looks_6");
+    static looks_one = new Icons("looks_one");
+    static looks_two = new Icons("looks_two");
+    static loop = new Icons("loop");
+    static loupe = new Icons("loupe");
+    static low_priority = new Icons("low_priority");
+    static loyalty = new Icons("loyalty");
+    static mail = new Icons("mail");
+    static mail_outline = new Icons("mail_outline");
+    static map = new Icons("map");
+    static markunread = new Icons("markunread");
+    static markunread_mailbox = new Icons("markunread_mailbox");
+    static maximize = new Icons("maximize");
+    static memory = new Icons("memory");
+    static menu = new Icons("menu");
+    static merge_type = new Icons("merge_type");
+    static message = new Icons("message");
+    static mic = new Icons("mic");
+    static mic_none = new Icons("mic_none");
+    static mic_off = new Icons("mic_off");
+    static minimize = new Icons("minimize");
+    static missed_video_call = new Icons("missed_video_call");
+    static mms = new Icons("mms");
+    static mobile_screen_share = new Icons("mobile_screen_share");
+    static mode_comment = new Icons("mode_comment");
+    static mode_edit = new Icons("mode_edit");
+    static monetization_on = new Icons("monetization_on");
+    static money_off = new Icons("money_off");
+    static monochrome_photos = new Icons("monochrome_photos");
+    static mood = new Icons("mood");
+    static mood_bad = new Icons("mood_bad");
+    static more = new Icons("more");
+    static more_horiz = new Icons("more_horiz");
+    static more_vert = new Icons("more_vert");
+    static motorcycle = new Icons("motorcycle");
+    static mouse = new Icons("mouse");
+    static move_to_inbox = new Icons("move_to_inbox");
+    static movie = new Icons("movie");
+    static movie_creation = new Icons("movie_creation");
+    static movie_filter = new Icons("movie_filter");
+    static multiline_chart = new Icons("multiline_chart");
+    static music_note = new Icons("music_note");
+    static music_video = new Icons("music_video");
+    static my_location = new Icons("my_location");
+    static nature = new Icons("nature");
+    static nature_people = new Icons("nature_people");
+    static navigate_before = new Icons("navigate_before");
+    static navigate_next = new Icons("navigate_next");
+    static navigation = new Icons("navigation");
+    static near_me = new Icons("near_me");
+    static network_cell = new Icons("network_cell");
+    static network_check = new Icons("network_check");
+    static network_locked = new Icons("network_locked");
+    static network_wifi = new Icons("network_wifi");
+    static new_releases = new Icons("new_releases");
+    static next_week = new Icons("next_week");
+    static nfc = new Icons("nfc");
+    static no_encryption = new Icons("no_encryption");
+    static no_sim = new Icons("no_sim");
+    static not_interested = new Icons("not_interested");
+    static not_listed_location = new Icons("not_listed_location");
+    static note = new Icons("note");
+    static note_add = new Icons("note_add");
+    static notification_important = new Icons("notification_important");
+    static notifications = new Icons("notifications");
+    static notifications_active = new Icons("notifications_active");
+    static notifications_none = new Icons("notifications_none");
+    static notifications_off = new Icons("notifications_off");
+    static notifications_paused = new Icons("notifications_paused");
+    static offline_bolt = new Icons("offline_bolt");
+    static offline_pin = new Icons("offline_pin");
+    static ondemand_video = new Icons("ondemand_video");
+    static opacity = new Icons("opacity");
+    static open_in_browser = new Icons("open_in_browser");
+    static open_in_new = new Icons("open_in_new");
+    static open_with = new Icons("open_with");
+    static outlined_flag = new Icons("outlined_flag");
+    static pages = new Icons("pages");
+    static pageview = new Icons("pageview");
+    static palette = new Icons("palette");
+    static pan_tool = new Icons("pan_tool");
+    static panorama = new Icons("panorama");
+    static panorama_fish_eye = new Icons("panorama_fish_eye");
+    static panorama_horizontal = new Icons("panorama_horizontal");
+    static panorama_vertical = new Icons("panorama_vertical");
+    static panorama_wide_angle = new Icons("panorama_wide_angle");
+    static party_mode = new Icons("party_mode");
+    static pause = new Icons("pause");
+    static pause_circle_filled = new Icons("pause_circle_filled");
+    static pause_circle_outline = new Icons("pause_circle_outline");
+    static payment = new Icons("payment");
+    static people = new Icons("people");
+    static people_outline = new Icons("people_outline");
+    static perm_camera_mic = new Icons("perm_camera_mic");
+    static perm_contact_calendar = new Icons("perm_contact_calendar");
+    static perm_data_setting = new Icons("perm_data_setting");
+    static perm_device_information = new Icons("perm_device_information");
+    static perm_identity = new Icons("perm_identity");
+    static perm_media = new Icons("perm_media");
+    static perm_phone_msg = new Icons("perm_phone_msg");
+    static perm_scan_wifi = new Icons("perm_scan_wifi");
+    static person = new Icons("person");
+    static person_add = new Icons("person_add");
+    static person_outline = new Icons("person_outline");
+    static person_pin = new Icons("person_pin");
+    static person_pin_circle = new Icons("person_pin_circle");
+    static personal_video = new Icons("personal_video");
+    static pets = new Icons("pets");
+    static phone = new Icons("phone");
+    static phone_android = new Icons("phone_android");
+    static phone_bluetooth_speaker = new Icons("phone_bluetooth_speaker");
+    static phone_forwarded = new Icons("phone_forwarded");
+    static phone_in_talk = new Icons("phone_in_talk");
+    static phone_iphone = new Icons("phone_iphone");
+    static phone_locked = new Icons("phone_locked");
+    static phone_missed = new Icons("phone_missed");
+    static phone_paused = new Icons("phone_paused");
+    static phonelink = new Icons("phonelink");
+    static phonelink_erase = new Icons("phonelink_erase");
+    static phonelink_lock = new Icons("phonelink_lock");
+    static phonelink_off = new Icons("phonelink_off");
+    static phonelink_ring = new Icons("phonelink_ring");
+    static phonelink_setup = new Icons("phonelink_setup");
+    static photo = new Icons("photo");
+    static photo_album = new Icons("photo_album");
+    static photo_camera = new Icons("photo_camera");
+    static photo_filter = new Icons("photo_filter");
+    static photo_library = new Icons("photo_library");
+    static photo_size_select_actual = new Icons("photo_size_select_actual");
+    static photo_size_select_large = new Icons("photo_size_select_large");
+    static photo_size_select_small = new Icons("photo_size_select_small");
+    static picture_as_pdf = new Icons("picture_as_pdf");
+    static picture_in_picture = new Icons("picture_in_picture");
+    static picture_in_picture_alt = new Icons("picture_in_picture_alt");
+    static pie_chart = new Icons("pie_chart");
+    static pie_chart_outlined = new Icons("pie_chart_outlined");
+    static pin_drop = new Icons("pin_drop");
+    static place = new Icons("place");
+    static play_arrow = new Icons("play_arrow");
+    static play_circle_filled = new Icons("play_circle_filled");
+    static play_circle_outline = new Icons("play_circle_outline");
+    static play_for_work = new Icons("play_for_work");
+    static playlist_add = new Icons("playlist_add");
+    static playlist_add_check = new Icons("playlist_add_check");
+    static playlist_play = new Icons("playlist_play");
+    static plus_one = new Icons("plus_one");
+    static poll = new Icons("poll");
+    static polymer = new Icons("polymer");
+    static pool = new Icons("pool");
+    static portable_wifi_off = new Icons("portable_wifi_off");
+    static portrait = new Icons("portrait");
+    static power = new Icons("power");
+    static power_input = new Icons("power_input");
+    static power_settings_new = new Icons("power_settings_new");
+    static pregnant_woman = new Icons("pregnant_woman");
+    static present_to_all = new Icons("present_to_all");
+    static print = new Icons("print");
+    static priority_high = new Icons("priority_high");
+    static public = new Icons("public");
+    static publish = new Icons("publish");
+    static query_builder = new Icons("query_builder");
+    static question_answer = new Icons("question_answer");
+    static queue = new Icons("queue");
+    static queue_music = new Icons("queue_music");
+    static queue_play_next = new Icons("queue_play_next");
+    static radio = new Icons("radio");
+    static radio_button_checked = new Icons("radio_button_checked");
+    static radio_button_unchecked = new Icons("radio_button_unchecked");
+    static rate_review = new Icons("rate_review");
+    static receipt = new Icons("receipt");
+    static recent_actors = new Icons("recent_actors");
+    static record_voice_over = new Icons("record_voice_over");
+    static redeem = new Icons("redeem");
+    static redo = new Icons("redo");
+    static refresh = new Icons("refresh");
+    static remove = new Icons("remove");
+    static remove_circle = new Icons("remove_circle");
+    static remove_circle_outline = new Icons("remove_circle_outline");
+    static remove_from_queue = new Icons("remove_from_queue");
+    static remove_red_eye = new Icons("remove_red_eye");
+    static remove_shopping_cart = new Icons("remove_shopping_cart");
+    static reorder = new Icons("reorder");
+    static repeat = new Icons("repeat");
+    static repeat_one = new Icons("repeat_one");
+    static replay = new Icons("replay");
+    static replay_10 = new Icons("replay_10");
+    static replay_30 = new Icons("replay_30");
+    static replay_5 = new Icons("replay_5");
+    static reply = new Icons("reply");
+    static reply_all = new Icons("reply_all");
+    static report = new Icons("report");
+    static report_off = new Icons("report_off");
+    static report_problem = new Icons("report_problem");
+    static restaurant = new Icons("restaurant");
+    static restaurant_menu = new Icons("restaurant_menu");
+    static restore = new Icons("restore");
+    static restore_from_trash = new Icons("restore_from_trash");
+    static restore_page = new Icons("restore_page");
+    static ring_volume = new Icons("ring_volume");
+    static room = new Icons("room");
+    static room_service = new Icons("room_service");
+    static rotate_90_degrees_ccw = new Icons("rotate_90_degrees_ccw");
+    static rotate_left = new Icons("rotate_left");
+    static rotate_right = new Icons("rotate_right");
+    static rounded_corner = new Icons("rounded_corner");
+    static router = new Icons("router");
+    static rowing = new Icons("rowing");
+    static rss_feed = new Icons("rss_feed");
+    static rv_hookup = new Icons("rv_hookup");
+    static satellite = new Icons("satellite");
+    static save = new Icons("save");
+    static save_alt = new Icons("save_alt");
+    static scanner = new Icons("scanner");
+    static scatter_plot = new Icons("scatter_plot");
+    static schedule = new Icons("schedule");
+    static school = new Icons("school");
+    static score = new Icons("score");
+    static screen_lock_landscape = new Icons("screen_lock_landscape");
+    static screen_lock_portrait = new Icons("screen_lock_portrait");
+    static screen_lock_rotation = new Icons("screen_lock_rotation");
+    static screen_rotation = new Icons("screen_rotation");
+    static screen_share = new Icons("screen_share");
+    static sd_card = new Icons("sd_card");
+    static sd_storage = new Icons("sd_storage");
+    static search = new Icons("search");
+    static security = new Icons("security");
+    static select_all = new Icons("select_all");
+    static send = new Icons("send");
+    static sentiment_dissatisfied = new Icons("sentiment_dissatisfied");
+    static sentiment_neutral = new Icons("sentiment_neutral");
+    static sentiment_satisfied = new Icons("sentiment_satisfied");
+    static sentiment_very_dissatisfied = new Icons("sentiment_very_dissatisfied");
+    static sentiment_very_satisfied = new Icons("sentiment_very_satisfied");
+    static settings = new Icons("settings");
+    static settings_applications = new Icons("settings_applications");
+    static settings_backup_restore = new Icons("settings_backup_restore");
+    static settings_bluetooth = new Icons("settings_bluetooth");
+    static settings_brightness = new Icons("settings_brightness");
+    static settings_cell = new Icons("settings_cell");
+    static settings_ethernet = new Icons("settings_ethernet");
+    static settings_input_antenna = new Icons("settings_input_antenna");
+    static settings_input_component = new Icons("settings_input_component");
+    static settings_input_composite = new Icons("settings_input_composite");
+    static settings_input_hdmi = new Icons("settings_input_hdmi");
+    static settings_input_svideo = new Icons("settings_input_svideo");
+    static settings_overscan = new Icons("settings_overscan");
+    static settings_phone = new Icons("settings_phone");
+    static settings_power = new Icons("settings_power");
+    static settings_remote = new Icons("settings_remote");
+    static settings_system_daydream = new Icons("settings_system_daydream");
+    static settings_voice = new Icons("settings_voice");
+    static share = new Icons("share");
+    static shop = new Icons("shop");
+    static shop_two = new Icons("shop_two");
+    static shopping_basket = new Icons("shopping_basket");
+    static shopping_cart = new Icons("shopping_cart");
+    static short_text = new Icons("short_text");
+    static show_chart = new Icons("show_chart");
+    static shuffle = new Icons("shuffle");
+    static shutter_speed = new Icons("shutter_speed");
+    static signal_cellular_4_bar = new Icons("signal_cellular_4_bar");
+    static signal_cellular_connected_no_internet_4_bar = new Icons("signal_cellular_connected_no_internet_4_bar");
+    static signal_cellular_no_sim = new Icons("signal_cellular_no_sim");
+    static signal_cellular_null = new Icons("signal_cellular_null");
+    static signal_cellular_off = new Icons("signal_cellular_off");
+    static signal_wifi_4_bar = new Icons("signal_wifi_4_bar");
+    static signal_wifi_4_bar_lock = new Icons("signal_wifi_4_bar_lock");
+    static signal_wifi_off = new Icons("signal_wifi_off");
+    static sim_card = new Icons("sim_card");
+    static sim_card_alert = new Icons("sim_card_alert");
+    static skip_next = new Icons("skip_next");
+    static skip_previous = new Icons("skip_previous");
+    static slideshow = new Icons("slideshow");
+    static slow_motion_video = new Icons("slow_motion_video");
+    static smartphone = new Icons("smartphone");
+    static smoke_free = new Icons("smoke_free");
+    static smoking_rooms = new Icons("smoking_rooms");
+    static sms = new Icons("sms");
+    static sms_failed = new Icons("sms_failed");
+    static snooze = new Icons("snooze");
+    static sort = new Icons("sort");
+    static sort_by_alpha = new Icons("sort_by_alpha");
+    static spa = new Icons("spa");
+    static space_bar = new Icons("space_bar");
+    static speaker = new Icons("speaker");
+    static speaker_group = new Icons("speaker_group");
+    static speaker_notes = new Icons("speaker_notes");
+    static speaker_notes_off = new Icons("speaker_notes_off");
+    static speaker_phone = new Icons("speaker_phone");
+    static spellcheck = new Icons("spellcheck");
+    static star = new Icons("star");
+    static star_border = new Icons("star_border");
+    static star_half = new Icons("star_half");
+    static stars = new Icons("stars");
+    static stay_current_landscape = new Icons("stay_current_landscape");
+    static stay_current_portrait = new Icons("stay_current_portrait");
+    static stay_primary_landscape = new Icons("stay_primary_landscape");
+    static stay_primary_portrait = new Icons("stay_primary_portrait");
+    static stop = new Icons("stop");
+    static stop_screen_share = new Icons("stop_screen_share");
+    static storage = new Icons("storage");
+    static store = new Icons("store");
+    static store_mall_directory = new Icons("store_mall_directory");
+    static straighten = new Icons("straighten");
+    static streetview = new Icons("streetview");
+    static strikethrough_s = new Icons("strikethrough_s");
+    static style = new Icons("style");
+    static subdirectory_arrow_left = new Icons("subdirectory_arrow_left");
+    static subdirectory_arrow_right = new Icons("subdirectory_arrow_right");
+    static subject = new Icons("subject");
+    static subscriptions = new Icons("subscriptions");
+    static subtitles = new Icons("subtitles");
+    static subway = new Icons("subway");
+    static supervised_user_circle = new Icons("supervised_user_circle");
+    static supervisor_account = new Icons("supervisor_account");
+    static surround_sound = new Icons("surround_sound");
+    static swap_calls = new Icons("swap_calls");
+    static swap_horiz = new Icons("swap_horiz");
+    static swap_horizontal_circle = new Icons("swap_horizontal_circle");
+    static swap_vert = new Icons("swap_vert");
+    static swap_vertical_circle = new Icons("swap_vertical_circle");
+    static switch_camera = new Icons("switch_camera");
+    static switch_video = new Icons("switch_video");
+    static sync = new Icons("sync");
+    static sync_disabled = new Icons("sync_disabled");
+    static sync_problem = new Icons("sync_problem");
+    static system_update = new Icons("system_update");
+    static system_update_alt = new Icons("system_update_alt");
+    static tab = new Icons("tab");
+    static tab_unselected = new Icons("tab_unselected");
+    static table_chart = new Icons("table_chart");
+    static tablet = new Icons("tablet");
+    static tablet_android = new Icons("tablet_android");
+    static tablet_mac = new Icons("tablet_mac");
+    static tag_faces = new Icons("tag_faces");
+    static tap_and_play = new Icons("tap_and_play");
+    static terrain = new Icons("terrain");
+    static text_fields = new Icons("text_fields");
+    static text_format = new Icons("text_format");
+    static text_rotate_up = new Icons("text_rotate_up");
+    static text_rotate_vertical = new Icons("text_rotate_vertical");
+    static text_rotation_angledown = new Icons("text_rotation_angledown");
+    static text_rotation_angleup = new Icons("text_rotation_angleup");
+    static text_rotation_down = new Icons("text_rotation_down");
+    static text_rotation_none = new Icons("text_rotation_none");
+    static textsms = new Icons("textsms");
+    static texture = new Icons("texture");
+    static theaters = new Icons("theaters");
+    static thumb_down = new Icons("thumb_down");
+    static thumb_up = new Icons("thumb_up");
+    static thumbs_up_down = new Icons("thumbs_up_down");
+    static time_to_leave = new Icons("time_to_leave");
+    static timelapse = new Icons("timelapse");
+    static timeline = new Icons("timeline");
+    static timer = new Icons("timer");
+    static timer_10 = new Icons("timer_10");
+    static timer_3 = new Icons("timer_3");
+    static timer_off = new Icons("timer_off");
+    static title = new Icons("title");
+    static toc = new Icons("toc");
+    static today = new Icons("today");
+    static toll = new Icons("toll");
+    static tonality = new Icons("tonality");
+    static touch_app = new Icons("touch_app");
+    static toys = new Icons("toys");
+    static track_changes = new Icons("track_changes");
+    static traffic = new Icons("traffic");
+    static train = new Icons("train");
+    static tram = new Icons("tram");
+    static transfer_within_a_station = new Icons("transfer_within_a_station");
+    static transform = new Icons("transform");
+    static transit_enterexit = new Icons("transit_enterexit");
+    static translate = new Icons("translate");
+    static trending_down = new Icons("trending_down");
+    static trending_flat = new Icons("trending_flat");
+    static trending_up = new Icons("trending_up");
+    static trip_origin = new Icons("trip_origin");
+    static tune = new Icons("tune");
+    static turned_in = new Icons("turned_in");
+    static turned_in_not = new Icons("turned_in_not");
+    static tv = new Icons("tv");
+    static unarchive = new Icons("unarchive");
+    static undo = new Icons("undo");
+    static unfold_less = new Icons("unfold_less");
+    static unfold_more = new Icons("unfold_more");
+    static update = new Icons("update");
+    static usb = new Icons("usb");
+    static verified_user = new Icons("verified_user");
+    static vertical_align_bottom = new Icons("vertical_align_bottom");
+    static vertical_align_center = new Icons("vertical_align_center");
+    static vertical_align_top = new Icons("vertical_align_top");
+    static vibration = new Icons("vibration");
+    static video_call = new Icons("video_call");
+    static video_label = new Icons("video_label");
+    static video_library = new Icons("video_library");
+    static videocam = new Icons("videocam");
+    static videocam_off = new Icons("videocam_off");
+    static videogame_asset = new Icons("videogame_asset");
+    static view_agenda = new Icons("view_agenda");
+    static view_array = new Icons("view_array");
+    static view_carousel = new Icons("view_carousel");
+    static view_column = new Icons("view_column");
+    static view_comfy = new Icons("view_comfy");
+    static view_compact = new Icons("view_compact");
+    static view_day = new Icons("view_day");
+    static view_headline = new Icons("view_headline");
+    static view_list = new Icons("view_list");
+    static view_module = new Icons("view_module");
+    static view_quilt = new Icons("view_quilt");
+    static view_stream = new Icons("view_stream");
+    static view_week = new Icons("view_week");
+    static vignette = new Icons("vignette");
+    static visibility = new Icons("visibility");
+    static visibility_off = new Icons("visibility_off");
+    static voice_chat = new Icons("voice_chat");
+    static voicemail = new Icons("voicemail");
+    static volume_down = new Icons("volume_down");
+    static volume_mute = new Icons("volume_mute");
+    static volume_off = new Icons("volume_off");
+    static volume_up = new Icons("volume_up");
+    static vpn_key = new Icons("vpn_key");
+    static vpn_lock = new Icons("vpn_lock");
+    static wallpaper = new Icons("wallpaper");
+    static warning = new Icons("warning");
+    static watch = new Icons("watch");
+    static watch_later = new Icons("watch_later");
+    static wb_auto = new Icons("wb_auto");
+    static wb_cloudy = new Icons("wb_cloudy");
+    static wb_incandescent = new Icons("wb_incandescent");
+    static wb_iridescent = new Icons("wb_iridescent");
+    static wb_sunny = new Icons("wb_sunny");
+    static wc = new Icons("wc");
+    static web = new Icons("web");
+    static web_asset = new Icons("web_asset");
+    static weekend = new Icons("weekend");
+    static whatshot = new Icons("whatshot");
+    static widgets = new Icons("widgets");
+    static wifi = new Icons("wifi");
+    static wifi_lock = new Icons("wifi_lock");
+    static wifi_tethering = new Icons("wifi_tethering");
+    static work = new Icons("work");
+    static wrap_text = new Icons("wrap_text");
+    static youtube_searched_for = new Icons("youtube_searched_for");
+    static zoom_in = new Icons("zoom_in");
+    static zoom_out = new Icons("zoom_out");
+    static zoom_out_map = new Icons("zoom_out_map");
   }
 //#endregion
 
@@ -8341,148 +7428,146 @@ export class CupertinoIcons extends IconData{
     constructor(icon:string){
       super(icon);
     }
-    static new(icon:string) {
-     return new CupertinoIcons(icon);
-    }
+
   
-    static left_chevron = CupertinoIcons.new("left_chevron");
-    static right_chevron = CupertinoIcons.new("right_chevron");
-    static share = CupertinoIcons.new("share");
-    static share_solid = CupertinoIcons.new("share_solid");
-    static book = CupertinoIcons.new("book");
-    static book_solid = CupertinoIcons.new("book_solid");
-    static bookmark = CupertinoIcons.new("bookmark");
-    static bookmark_solid = CupertinoIcons.new("bookmark_solid");
-    static info = CupertinoIcons.new("info");
-    static reply = CupertinoIcons.new("reply");
-    static conversation_bubble = CupertinoIcons.new("conversation_bubble");
-    static profile_circled = CupertinoIcons.new("profile_circled");
-    static plus_circled = CupertinoIcons.new("plus_circled");
-    static minus_circled = CupertinoIcons.new("minus_circled");
-    static flag = CupertinoIcons.new("flag");
-    static search = CupertinoIcons.new("search");
-    static check_mark = CupertinoIcons.new("check_mark");
-    static check_mark_circled = CupertinoIcons.new("check_mark_circled");
-    static check_mark_circled_solid = CupertinoIcons.new("check_mark_circled_solid");
-    static circle = CupertinoIcons.new("circle");
-    static circle_filled = CupertinoIcons.new("circle_filled");
-    static back = CupertinoIcons.new("back");
-    static forward = CupertinoIcons.new("forward");
-    static home = CupertinoIcons.new("home");
-    static shopping_cart = CupertinoIcons.new("shopping_cart");
-    static ellipsis = CupertinoIcons.new("ellipsis");
-    static phone = CupertinoIcons.new("phone");
-    static phone_solid = CupertinoIcons.new("phone_solid");
-    static down_arrow = CupertinoIcons.new("down_arrow");
-    static up_arrow = CupertinoIcons.new("up_arrow");
-    static battery_charging = CupertinoIcons.new("battery_charging");
-    static battery_empty = CupertinoIcons.new("battery_empty");
-    static battery_full = CupertinoIcons.new("battery_full");
-    static battery_75_percent = CupertinoIcons.new("battery_75_percent");
-    static battery_25_percent = CupertinoIcons.new("battery_25_percent");
-    static bluetooth = CupertinoIcons.new("bluetooth");
-    static restart = CupertinoIcons.new("restart");
-    static reply_all = CupertinoIcons.new("reply_all");
-    static reply_thick_solid = CupertinoIcons.new("reply_thick_solid");
-    static share_up = CupertinoIcons.new("share_up");
-    static shuffle = CupertinoIcons.new("shuffle");
-    static shuffle_medium = CupertinoIcons.new("shuffle_medium");
-    static shuffle_thick = CupertinoIcons.new("shuffle_thick");
-    static photo_camera = CupertinoIcons.new("photo_camera");
-    static photo_camera_solid = CupertinoIcons.new("photo_camera_solid");
-    static video_camera = CupertinoIcons.new("video_camera");
-    static video_camera_solid = CupertinoIcons.new("video_camera_solid");
-    static switch_camera = CupertinoIcons.new("switch_camera");
-    static switch_camera_solid = CupertinoIcons.new("switch_camera_solid");
-    static collections = CupertinoIcons.new("collections");
-    static collections_solid = CupertinoIcons.new("collections_solid");
-    static folder = CupertinoIcons.new("folder");
-    static folder_solid = CupertinoIcons.new("folder_solid");
-    static folder_open = CupertinoIcons.new("folder_open");
-    static delete = CupertinoIcons.new("delete");
-    static delete_solid = CupertinoIcons.new("delete_solid");
-    static delete_simple = CupertinoIcons.new("delete_simple");
-    static pen = CupertinoIcons.new("pen");
-    static pencil = CupertinoIcons.new("pencil");
-    static create = CupertinoIcons.new("create");
-    static create_solid = CupertinoIcons.new("create_solid");
-    static refresh = CupertinoIcons.new("refresh");
-    static refresh_circled = CupertinoIcons.new("refresh_circled");
-    static refresh_circled_solid = CupertinoIcons.new("refresh_circled_solid");
-    static refresh_thin = CupertinoIcons.new("refresh_thin");
-    static refresh_thick = CupertinoIcons.new("refresh_thick");
-    static refresh_bold = CupertinoIcons.new("refresh_bold");
-    static clear_thick = CupertinoIcons.new("clear_thick");
-    static clear_thick_circled = CupertinoIcons.new("clear_thick_circled");
-    static clear = CupertinoIcons.new("clear");
-    static clear_circled = CupertinoIcons.new("clear_circled");
-    static clear_circled_solid = CupertinoIcons.new("clear_circled_solid");
-    static add = CupertinoIcons.new("add");
-    static add_circled = CupertinoIcons.new("add_circled");
-    static add_circled_solid = CupertinoIcons.new("add_circled_solid");
-    static gear = CupertinoIcons.new("gear");
-    static gear_solid = CupertinoIcons.new("gear_solid");
-    static gear_big = CupertinoIcons.new("gear_big");
-    static settings = CupertinoIcons.new("settings");
-    static settings_solid = CupertinoIcons.new("settings_solid");
-    static music_note = CupertinoIcons.new("music_note");
-    static double_music_note = CupertinoIcons.new("double_music_note");
-    static play_arrow = CupertinoIcons.new("play_arrow");
-    static play_arrow_solid = CupertinoIcons.new("play_arrow_solid");
-    static pause = CupertinoIcons.new("pause");
-    static pause_solid = CupertinoIcons.new("pause_solid");
-    static loop = CupertinoIcons.new("loop");
-    static loop_thick = CupertinoIcons.new("loop_thick");
-    static volume_down = CupertinoIcons.new("volume_down");
-    static volume_mute = CupertinoIcons.new("volume_mute");
-    static volume_off = CupertinoIcons.new("volume_off");
-    static volume_up = CupertinoIcons.new("volume_up");
-    static fullscreen = CupertinoIcons.new("fullscreen");
-    static fullscreen_exit = CupertinoIcons.new("fullscreen_exit");
-    static mic_off = CupertinoIcons.new("mic_off");
-    static mic = CupertinoIcons.new("mic");
-    static mic_solid = CupertinoIcons.new("mic_solid");
-    static clock = CupertinoIcons.new("clock");
-    static clock_solid = CupertinoIcons.new("clock_solid");
-    static time = CupertinoIcons.new("time");
-    static time_solid = CupertinoIcons.new("time_solid");
-    static padlock = CupertinoIcons.new("padlock");
-    static padlock_solid = CupertinoIcons.new("padlock_solid");
-    static eye = CupertinoIcons.new("eye");
-    static eye_solid = CupertinoIcons.new("eye_solid");
-    static person = CupertinoIcons.new("person");
-    static person_solid = CupertinoIcons.new("person_solid");
-    static person_add = CupertinoIcons.new("person_add");
-    static person_add_solid = CupertinoIcons.new("person_add_solid");
-    static group = CupertinoIcons.new("group");
-    static group_solid = CupertinoIcons.new("group_solid");
-    static mail = CupertinoIcons.new("mail");
-    static mail_solid = CupertinoIcons.new("mail_solid");
-    static location = CupertinoIcons.new("location");
-    static location_solid = CupertinoIcons.new("location_solid");
-    static tag = CupertinoIcons.new("tag");
-    static tag_solid = CupertinoIcons.new("tag_solid");
-    static tags = CupertinoIcons.new("tags");
-    static tags_solid = CupertinoIcons.new("tags_solid");
-    static bus = CupertinoIcons.new("bus");
-    static car = CupertinoIcons.new("car");
-    static car_detailed = CupertinoIcons.new("car_detailed");
-    static train_style_one = CupertinoIcons.new("train_style_one");
-    static train_style_two = CupertinoIcons.new("train_style_two");
-    static paw = CupertinoIcons.new("paw");
-    static paw_solid = CupertinoIcons.new("paw_solid");
-    static game_controller = CupertinoIcons.new("game_controller");
-    static game_controller_solid = CupertinoIcons.new("game_controller_solid");
-    static lab_flask = CupertinoIcons.new("lab_flask");
-    static lab_flask_solid = CupertinoIcons.new("lab_flask_solid");
-    static heart = CupertinoIcons.new("heart");
-    static heart_solid = CupertinoIcons.new("heart_solid");
-    static bell = CupertinoIcons.new("bell");
-    static bell_solid = CupertinoIcons.new("bell_solid");
-    static news = CupertinoIcons.new("news");
-    static news_solid = CupertinoIcons.new("news_solid");
-    static brightness = CupertinoIcons.new("brightness");
-    static brightness_solid = CupertinoIcons.new("brightness_solid");
+    static left_chevron = new CupertinoIcons("left_chevron");
+    static right_chevron = new CupertinoIcons("right_chevron");
+    static share = new CupertinoIcons("share");
+    static share_solid = new CupertinoIcons("share_solid");
+    static book = new CupertinoIcons("book");
+    static book_solid = new CupertinoIcons("book_solid");
+    static bookmark = new CupertinoIcons("bookmark");
+    static bookmark_solid = new CupertinoIcons("bookmark_solid");
+    static info = new CupertinoIcons("info");
+    static reply = new CupertinoIcons("reply");
+    static conversation_bubble = new CupertinoIcons("conversation_bubble");
+    static profile_circled = new CupertinoIcons("profile_circled");
+    static plus_circled = new CupertinoIcons("plus_circled");
+    static minus_circled = new CupertinoIcons("minus_circled");
+    static flag = new CupertinoIcons("flag");
+    static search = new CupertinoIcons("search");
+    static check_mark = new CupertinoIcons("check_mark");
+    static check_mark_circled = new CupertinoIcons("check_mark_circled");
+    static check_mark_circled_solid = new CupertinoIcons("check_mark_circled_solid");
+    static circle = new CupertinoIcons("circle");
+    static circle_filled = new CupertinoIcons("circle_filled");
+    static back = new CupertinoIcons("back");
+    static forward = new CupertinoIcons("forward");
+    static home = new CupertinoIcons("home");
+    static shopping_cart = new CupertinoIcons("shopping_cart");
+    static ellipsis = new CupertinoIcons("ellipsis");
+    static phone = new CupertinoIcons("phone");
+    static phone_solid = new CupertinoIcons("phone_solid");
+    static down_arrow = new CupertinoIcons("down_arrow");
+    static up_arrow = new CupertinoIcons("up_arrow");
+    static battery_charging = new CupertinoIcons("battery_charging");
+    static battery_empty = new CupertinoIcons("battery_empty");
+    static battery_full = new CupertinoIcons("battery_full");
+    static battery_75_percent = new CupertinoIcons("battery_75_percent");
+    static battery_25_percent = new CupertinoIcons("battery_25_percent");
+    static bluetooth = new CupertinoIcons("bluetooth");
+    static restart = new CupertinoIcons("restart");
+    static reply_all = new CupertinoIcons("reply_all");
+    static reply_thick_solid = new CupertinoIcons("reply_thick_solid");
+    static share_up = new CupertinoIcons("share_up");
+    static shuffle = new CupertinoIcons("shuffle");
+    static shuffle_medium = new CupertinoIcons("shuffle_medium");
+    static shuffle_thick = new CupertinoIcons("shuffle_thick");
+    static photo_camera = new CupertinoIcons("photo_camera");
+    static photo_camera_solid = new CupertinoIcons("photo_camera_solid");
+    static video_camera = new CupertinoIcons("video_camera");
+    static video_camera_solid = new CupertinoIcons("video_camera_solid");
+    static switch_camera = new CupertinoIcons("switch_camera");
+    static switch_camera_solid = new CupertinoIcons("switch_camera_solid");
+    static collections = new CupertinoIcons("collections");
+    static collections_solid = new CupertinoIcons("collections_solid");
+    static folder = new CupertinoIcons("folder");
+    static folder_solid = new CupertinoIcons("folder_solid");
+    static folder_open = new CupertinoIcons("folder_open");
+    static delete = new CupertinoIcons("delete");
+    static delete_solid = new CupertinoIcons("delete_solid");
+    static delete_simple = new CupertinoIcons("delete_simple");
+    static pen = new CupertinoIcons("pen");
+    static pencil = new CupertinoIcons("pencil");
+    static create = new CupertinoIcons("create");
+    static create_solid = new CupertinoIcons("create_solid");
+    static refresh = new CupertinoIcons("refresh");
+    static refresh_circled = new CupertinoIcons("refresh_circled");
+    static refresh_circled_solid = new CupertinoIcons("refresh_circled_solid");
+    static refresh_thin = new CupertinoIcons("refresh_thin");
+    static refresh_thick = new CupertinoIcons("refresh_thick");
+    static refresh_bold = new CupertinoIcons("refresh_bold");
+    static clear_thick = new CupertinoIcons("clear_thick");
+    static clear_thick_circled = new CupertinoIcons("clear_thick_circled");
+    static clear = new CupertinoIcons("clear");
+    static clear_circled = new CupertinoIcons("clear_circled");
+    static clear_circled_solid = new CupertinoIcons("clear_circled_solid");
+    static add = new CupertinoIcons("add");
+    static add_circled = new CupertinoIcons("add_circled");
+    static add_circled_solid = new CupertinoIcons("add_circled_solid");
+    static gear = new CupertinoIcons("gear");
+    static gear_solid = new CupertinoIcons("gear_solid");
+    static gear_big = new CupertinoIcons("gear_big");
+    static settings = new CupertinoIcons("settings");
+    static settings_solid = new CupertinoIcons("settings_solid");
+    static music_note = new CupertinoIcons("music_note");
+    static double_music_note = new CupertinoIcons("double_music_note");
+    static play_arrow = new CupertinoIcons("play_arrow");
+    static play_arrow_solid = new CupertinoIcons("play_arrow_solid");
+    static pause = new CupertinoIcons("pause");
+    static pause_solid = new CupertinoIcons("pause_solid");
+    static loop = new CupertinoIcons("loop");
+    static loop_thick = new CupertinoIcons("loop_thick");
+    static volume_down = new CupertinoIcons("volume_down");
+    static volume_mute = new CupertinoIcons("volume_mute");
+    static volume_off = new CupertinoIcons("volume_off");
+    static volume_up = new CupertinoIcons("volume_up");
+    static fullscreen = new CupertinoIcons("fullscreen");
+    static fullscreen_exit = new CupertinoIcons("fullscreen_exit");
+    static mic_off = new CupertinoIcons("mic_off");
+    static mic = new CupertinoIcons("mic");
+    static mic_solid = new CupertinoIcons("mic_solid");
+    static clock = new CupertinoIcons("clock");
+    static clock_solid = new CupertinoIcons("clock_solid");
+    static time = new CupertinoIcons("time");
+    static time_solid = new CupertinoIcons("time_solid");
+    static padlock = new CupertinoIcons("padlock");
+    static padlock_solid = new CupertinoIcons("padlock_solid");
+    static eye = new CupertinoIcons("eye");
+    static eye_solid = new CupertinoIcons("eye_solid");
+    static person = new CupertinoIcons("person");
+    static person_solid = new CupertinoIcons("person_solid");
+    static person_add = new CupertinoIcons("person_add");
+    static person_add_solid = new CupertinoIcons("person_add_solid");
+    static group = new CupertinoIcons("group");
+    static group_solid = new CupertinoIcons("group_solid");
+    static mail = new CupertinoIcons("mail");
+    static mail_solid = new CupertinoIcons("mail_solid");
+    static location = new CupertinoIcons("location");
+    static location_solid = new CupertinoIcons("location_solid");
+    static tag = new CupertinoIcons("tag");
+    static tag_solid = new CupertinoIcons("tag_solid");
+    static tags = new CupertinoIcons("tags");
+    static tags_solid = new CupertinoIcons("tags_solid");
+    static bus = new CupertinoIcons("bus");
+    static car = new CupertinoIcons("car");
+    static car_detailed = new CupertinoIcons("car_detailed");
+    static train_style_one = new CupertinoIcons("train_style_one");
+    static train_style_two = new CupertinoIcons("train_style_two");
+    static paw = new CupertinoIcons("paw");
+    static paw_solid = new CupertinoIcons("paw_solid");
+    static game_controller = new CupertinoIcons("game_controller");
+    static game_controller_solid = new CupertinoIcons("game_controller_solid");
+    static lab_flask = new CupertinoIcons("lab_flask");
+    static lab_flask_solid = new CupertinoIcons("lab_flask_solid");
+    static heart = new CupertinoIcons("heart");
+    static heart_solid = new CupertinoIcons("heart_solid");
+    static bell = new CupertinoIcons("bell");
+    static bell_solid = new CupertinoIcons("bell_solid");
+    static news = new CupertinoIcons("news");
+    static news_solid = new CupertinoIcons("news_solid");
+    static brightness = new CupertinoIcons("brightness");
+    static brightness_solid = new CupertinoIcons("brightness_solid");
   }
 //#endregion
 
@@ -8522,19 +7607,6 @@ export class CupertinoIcons extends IconData{
         this.ignoringSemantics = config.ignoringSemantics;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          absorbing?:boolean, 
-          ignoringSemantics?:boolean, 
-        }
-     */
-    static new(config?: AbsorbPointerConfig) {
-      return new AbsorbPointer(config);
-    }
   }
   
   //****** TODO AnimationController ******
@@ -8555,34 +7627,7 @@ export class CupertinoIcons extends IconData{
     upperBound?:number;
     animationBehavior?:AnimationBehavior;
     vsync?:any;
-    /**
-     * @param config config: 
-        {
-          value?:number,
-          duration?:Duration, 
-          debugLabel?:string;, 
-          lowerBound?:number, 
-          upperBound?:number,
-          animationBehavior?:AnimationBehavior,
-          vsync?:any,
-        }
-     */
-    static new(config: AnimationControllerConfig) {
-      var v = new AnimationController();
-      v.createMirrorID();
-      if(config!=null && config!=undefined){
-        v.value = config.value;
-        v.duration = config.duration;
-        v.debugLabel = config.debugLabel;
-        v.lowerBound = config.lowerBound;
-        v.upperBound = config.upperBound;
-        v.animationBehavior = config.animationBehavior;
-        v.vsync = config.vsync;
-      }
-  
-      return v;
-    }
-  
+
   
     ///TODO:
     dispose() { }
@@ -8645,17 +7690,6 @@ export class CupertinoIcons extends IconData{
     controller?:AnimationController;
     statusListenerList?:any;
     listenerList?:any;
-  
-    static new(tween?:Tween, controller?:AnimationController) {
-      var v = new Animation();
-      v.createMirrorID();
-  
-      v.tween = tween;
-      v.controller = controller;
-      v.statusListenerList = [];
-      v.listenerList = [];
-      return v;
-    }
   
     statusListenerCallback(status:any) {
       for (let funcKey in this.statusListenerList) {
@@ -8786,34 +7820,6 @@ export class CupertinoIcons extends IconData{
         this.toolbarHeight = config.toolbarHeight;
       }
     }
-      
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          leading?:Widget, 
-          automaticallyImplyLeading?:boolean, 
-          title?:Widget, 
-          actions?:Array<Widget>, 
-          flexibleSpace?:Widget, 
-          bottom?:Widget, 
-          elevation?:number, 
-          shadowColor?:Color, 
-          shape?:ShapeBorder, 
-          backgroundColor?:Color,
-          brightness?:Brightness,
-          primary?:boolean, 
-          centerTitle?:boolean, 
-          excludeHeaderSemantics?:boolean, 
-          titleSpacing?:number, 
-          toolbarOpacity?:number, 
-          bottomOpacity?:number, 
-          toolbarHeight?:number
-        }
-     */
-    static new(config: AppBarConfig){
-      return new AppBar(config);
-    }
   }
   
   //****** Align ******
@@ -8851,20 +7857,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget,
-        alignment?:Alignment, 
-        widthFactor?:number, 
-        heightFactor?:number,
-      }
-     */
-    static new(config: AlignConfig) {
-      return new Align(config);
-    }
   }
   
   //****** AspectRatio ******
@@ -8893,18 +7885,6 @@ export class CupertinoIcons extends IconData{
         this.aspectRatio = config.aspectRatio;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          aspectRatio?:number,
-        }
-     */
-    static new(config: AspectRatioConfig) {
-      return new AspectRatio(config);
     }
   }
   
@@ -8938,19 +7918,6 @@ export class CupertinoIcons extends IconData{
         this.value = config.value;
         this.sized = config.sized;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          value?:number, 
-          sized?:boolean,
-        }
-     */
-    static new(config: AnnotatedRegionConfig){
-      return new AnnotatedRegion(config);
     }
   }
   
@@ -9013,26 +7980,6 @@ export class CupertinoIcons extends IconData{
         this.layoutBuilder = config.layoutBuilder;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          firstChild?:Widget, 
-          secondChild?:Widget, 
-          firstCurve?:Curve, 
-          secondCurve?:Curve,
-          sizeCurve?:Curve, 
-          alignment?:Alignment, 
-          crossFadeState?:CrossFadeState, 
-          duration?:Duration, 
-          reverseDuration?:Duration, 
-          layoutBuilder?:any
-        }
-     */
-    static new(config: AnimatedCrossFadeConfig) {
-      return new AnimatedCrossFade(config);
-    };
   }
   
   //****** TODO AnimatedOpacity ******
@@ -9078,22 +8025,6 @@ export class CupertinoIcons extends IconData{
         this.alwaysIncludeSemantics = config.alwaysIncludeSemantics;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          opacity?:number, 
-          curve?:Curve, 
-          duration?:Duration, 
-          onEnd?:VoidCallback, 
-          alwaysIncludeSemantics?:boolean
-        }
-     */
-    static new(config: AnimatedOpacityConfig) {
-      return new AnimatedOpacity(config);
-    };
   }
   
   //****** TODO AnimatedBuilder ******
@@ -9128,20 +8059,6 @@ export class CupertinoIcons extends IconData{
       this.builder = config.builder;
       this.child = config.child;
       this.widget = config.widget;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          animation?:Animation, 
-          builder?:any, 
-          child?:Widget, 
-          widget?:Widget
-        }
-     */
-    static new(config: AnimatedBuilderConfig) {
-      return new AnimatedBuilder(config);
     }
   }
   
@@ -9221,30 +8138,6 @@ export class CupertinoIcons extends IconData{
       }
     }
   
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          alignment?:Alignment, 
-          margin?:EdgeInsets, 
-          padding?:EdgeInsets, 
-          child?:Widget, 
-          color?:Color, 
-          decoration?:BoxDecoration, 
-          foregroundDecoration?:BoxDecoration, 
-          width?:number, 
-          height?:number, 
-          constraints?:BoxConstraints, 
-          transform?:Matrix4, 
-          curve?:Curve, 
-          duration?:Duration, 
-          onEnd?:VoidCallback,
-        }
-     */
-    static new(config: AnimatedContainerConfig) {
-      return new AnimatedContainer(config);
-    }
-  
   }
   
   //****** TODO AnimatedPhysicalModel ******
@@ -9314,28 +8207,6 @@ export class CupertinoIcons extends IconData{
         this.onEnd = config.onEnd;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          shape?:any, 
-          clipBehavior?:Clip, 
-          borderRadius?:BorderRadius, 
-          elevation?:number,
-          color?:Color, 
-          animateColor?:boolean, 
-          shadowColor?:Color, 
-          animateShadowColor?:boolean, 
-          curve?:Curve, 
-          duration?:Duration, 
-          onEnd?:VoidCallback
-        }
-     */
-    static new(config: AnimatedPhysicalModelConfig) {
-      return new AnimatedPhysicalModel(config);
-    }
   }
   
   //****** TODO AnimatedPositioned ******
@@ -9396,26 +8267,6 @@ export class CupertinoIcons extends IconData{
         this.onEnd = config.onEnd;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          left?:number, 
-          top?:number, 
-          right?:number, 
-          bottom?:number,
-          width?:number, 
-          height?:number, 
-          curve?:Curve, 
-          duration?:Duration, 
-          onEnd?:VoidCallback,
-        }
-     */
-    static new(config: AnimatedPositionedConfig) {
-      return new AnimatedPositioned(config);
-    }
   }
   
   //****** TODO AnimatedSize ******
@@ -9460,22 +8311,6 @@ export class CupertinoIcons extends IconData{
         this.reverseDuration = config.reverseDuration;
         this.vsync = config.vsync;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          alignment?:Alignment, 
-          curve?:Curve, 
-          duration?:Duration, 
-          reverseDuration?:Duration, 
-          vsync?:any
-        }
-     */
-    static new(config: AnimatedSizeConfig) {
-      return new AnimatedSize(config);
     }
   }
   
@@ -9533,25 +8368,6 @@ export class CupertinoIcons extends IconData{
         this.onEnd =config.onEnd;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          style?:TextStyle, 
-          textAlign?:TextAlign, 
-          softWrap?:boolean, 
-          overflow?:TextOverflow,
-          maxLines?:number, 
-          curve?:Curve, 
-          duration?:Duration, 
-          onEnd?:VoidCallback
-        }
-     */
-    static new(config: AnimatedDefaultTextStyleConfig) {
-      return new AnimatedDefaultTextStyle(config);
-    }
   }
   
   //#endregion
@@ -9587,19 +8403,6 @@ export class CupertinoIcons extends IconData{
         this.activeIcon = config.activeIcon;
         this.backgroundColor = config.backgroundColor;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          icon:Widget, 
-          title?:Widget,
-          activeIcon?:Widget, 
-          backgroundColor?:Color
-        }
-     */
-    static new (config: BottomNavigationBarItemConfig) {
-      return new BottomNavigationBarItem(config);
     }
   }
   
@@ -9649,23 +8452,6 @@ export class CupertinoIcons extends IconData{
         this.textStyle =config.textStyle;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          message:string, 
-          textDirection?:TextDirection, 
-          location:BannerLocation, 
-          layoutDirection?:TextDirection, 
-          color?:Color, 
-          textStyle?:TextStyle, 
-        }
-     */
-    static new(config: BannerConfig) {
-      return new Banner(config);
-    }
   }
   
   //****** Baseline ******
@@ -9698,19 +8484,6 @@ export class CupertinoIcons extends IconData{
         this.baselineType = config.baselineType;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key,
-          child?:Widget,
-          baseline:number,
-          baselineType:TextBaseline,
-        }
-     */
-    static new(config: BaselineConfig) {
-      return new Baseline(config);
     }
   }
   
@@ -9777,27 +8550,6 @@ export class CupertinoIcons extends IconData{
         this.children = config.children;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          children?:Array<Widget>, 
-          alignment?:MainAxisAlignment, 
-          mainAxisSize?:MainAxisSize, 
-          buttonTextTheme?:ButtonTextTheme, 
-          buttonHeight?:number, 
-          buttonMinWidth?:number, 
-          buttonPadding?:EdgeInsets, 
-          buttonAlignedDropdown?:boolean, 
-          layoutBehavior?:ButtonBarLayoutBehavior, 
-          overflowButtonSpacing?:number, 
-          overflowDirection?:VerticalDirection, 
-        }
-     */
-    static new(config: ButtonBarConfig) {
-      return new ButtonBar(config);
-    }
   }
   
   //****** BlockSemantics ******
@@ -9826,18 +8578,6 @@ export class CupertinoIcons extends IconData{
         this.blocking = config.blocking;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          blocking?:boolean,
-        }
-     */
-    static new(config: BlockSemanticsConfig) {
-      return new BlockSemantics(config);
     }
   }
   
@@ -9883,22 +8623,6 @@ export class CupertinoIcons extends IconData{
         this.notchMargin = config.notchMargin;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          color?:Color, 
-          elevation?:number, 
-          shape?:NotchedShape, 
-          clipBehavior?:Clip, 
-          notchMargin?:number, 
-        }
-     */
-    static new(config: BottomAppBarConfig) {
-      return new BottomAppBar(config);
     }
   }
   
@@ -9985,32 +8709,6 @@ export class CupertinoIcons extends IconData{
         this.showUnselectedLabels = config.showUnselectedLabels;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          items:Array<BottomNavigationBarItem>, 
-          onTap?:VoidValueChangedInt, 
-          currentIndex?:number, 
-          elevation?:number, 
-          type?:BottomNavigationBarType, 
-          fixedColor?:Color, 
-          backgroundColor?:Color, 
-          iconSize?:number, 
-          selectedItemColor?:Color, 
-          unselectedItemColor?:Color, 
-          selectedFontSize?:number, 
-          unselectedFontSize?:number, 
-          selectedLabelStyle?:TextStyle, 
-          unselectedLabelStyle?:TextStyle, 
-          showSelectedLabels?:boolean, 
-          showUnselectedLabels?:boolean, 
-        }
-     */
-    static new(config: BottomNavigationBarConfig) {
-      return new BottomNavigationBar(config);
-    }
   }
   
   //****** BackButtonIcon ******
@@ -10031,17 +8729,6 @@ export class CupertinoIcons extends IconData{
       if(config!=null && config!=undefined){
         this.key = config.key;
       }
-    }
-  
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-        }
-     */
-    static new(config: BackButtonIconConfig) {
-      return new BackButtonIcon(config);
     }
   }
   
@@ -10067,17 +8754,6 @@ export class CupertinoIcons extends IconData{
         this.key = config.key;
         this.onPressed = config.onPressed;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          onPressed?:VoidCallback,
-        }
-     */
-    static new(config: BackButtonConfig) {
-      return new BackButton(config);
     }
   }
   
@@ -10106,10 +8782,6 @@ export class CupertinoIcons extends IconData{
   
       // 本地创建的，供flutter使用
       this.child = undefined;
-    }
-  
-    static new(builder?:any, key?:Key) {
-      return new Builder(builder,key);
     }
   }
   //#endregion
@@ -10142,18 +8814,6 @@ export class CupertinoIcons extends IconData{
         this.onPressed = config.onPressed;
         this.color = config.color;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          onPressed?:VoidCallback,
-          color?:Color, 
-        }
-     */
-    static new(config: CloseButtonConfig) {
-      return new CloseButton(config);
     }
   }
   
@@ -10224,28 +8884,6 @@ export class CupertinoIcons extends IconData{
         this.clipBehavior = config.clipBehavior;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          alignment?:Alignment, 
-          margin?:EdgeInsets, 
-          padding?:EdgeInsets, 
-          color?:Color,
-          width?:number, 
-          height?:number, 
-          decoration?:BoxDecoration, 
-          foregroundDecoration?:BoxDecoration,
-          constraints?:BoxConstraints, 
-          transform?:Matrix4,
-          clipBehavior?:Clip,
-        }
-     */
-    static new(config: ContainerConfig) {
-        return new Container(config);
-    }
   }
   
   //****** Center ******
@@ -10279,19 +8917,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          widthFactor?:number, 
-          heightFactor?:number, 
-        }
-     */
-    static new(config: CenterConfig) {
-      return new Center(config);
-    }
   }
   
   //****** ColoredBox ******
@@ -10320,18 +8945,6 @@ export class CupertinoIcons extends IconData{
         this.color = config.color;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          color:Color, 
-        }
-     */
-    static new(config: ColoredBoxConfig) {
-      return new ColoredBox(config);
     }
   }
   
@@ -10381,23 +8994,6 @@ export class CupertinoIcons extends IconData{
         this.minRadius = config.minRadius;
         this.maxRadius = config.maxRadius;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          backgroundColor?:Color, 
-          foregroundColor?:Color, 
-          radius?:number, 
-          backgroundImage?:any,
-          minRadius?:number, 
-          maxRadius?:number,
-          key?:Key, 
-        }
-     */
-    static new(config: CircleAvatarConfig) {
-      return new CircleAvatar(config);
     }
   }
   
@@ -10483,32 +9079,6 @@ export class CupertinoIcons extends IconData{
         this.visualDensity = config.visualDensity;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          deleteIcon?:Widget,
-          onDeleted?:VoidCallback, 
-          deleteIconColor?:Color, 
-          deleteButtonTooltipMessage?:string, 
-          clipBehavior?:Clip,
-          backgroundColor?:Color, 
-          padding?:EdgeInsets, 
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          key?:Key,
-          shadowColor?:Color,
-          visualDensity?:VisualDensity,
-          autofocus?:boolean,
-        }
-     */
-    static new (config: ChipConfig) {
-      return new Chip(config);
-    }
   }
   
   //****** CheckedModeBanner ******
@@ -10533,17 +9103,6 @@ export class CupertinoIcons extends IconData{
         this.key = config.key;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child:Widget, 
-        }
-     */
-    static new(config: CheckedModeBannerConfig) {
-      return new CheckedModeBanner(config);
     }
   }
   
@@ -10622,30 +9181,6 @@ export class CupertinoIcons extends IconData{
         this.tristate = config.tristate;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          value:boolean, 
-          onChanged:VoidCallbackBoolean, 
-          activeColor?:Color, 
-          checkColor?:Color, 
-          title?:Widget, 
-          subtitle?:Widget, 
-          isThreeLine?:boolean, 
-          dense?:boolean, 
-          contentPadding?:EdgeInsets, 
-          secondary?:Widget, 
-          selected?:boolean, 
-          autofocus?:boolean, 
-          controlAffinity?:ListTileControlAffinity, 
-          tristate?:boolean, 
-        }
-     */
-    static new(config: CheckboxListTileConfig) {
-      return new CheckboxListTile(config);
-    }
   }
   
   //****** Checkbox ******
@@ -10707,26 +9242,6 @@ export class CupertinoIcons extends IconData{
         this.tristate = config.tristate;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          value:boolean, 
-          onChanged:VoidCallbackBoolean, 
-          activeColor?:Color, 
-          checkColor?:Color, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          materialTapTargetSize?:MaterialTapTargetSize, 
-          visualDensity?:VisualDensity, 
-          autofocus?:boolean, 
-          tristate?:boolean, 
-        }
-     */
-    static new(config: CheckboxConfig) {
-      return new Checkbox(config);
-    }
   }
 
   //****** CheckboxEx ******
@@ -10780,24 +9295,6 @@ export class CupertinoIcons extends IconData{
         this.strokeWidth = config.strokeWidth;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          value:boolean, 
-          tristate?:boolean, 
-          onChanged:VoidCallbackBoolean, 
-          activeColor?:Color, 
-          width?:number, 
-          checkColor?:Color, 
-          isCircle?:boolean, 
-          strokeWidth?:number, 
-        }
-     */
-    static new(config: CheckboxExConfig) {
-      return new CheckboxEx(config);
-    }
   }
   
   
@@ -10833,19 +9330,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-    
-    /**
-     * @param config config: 
-        {
-          child?:Widget,
-          borderRadius?:BorderRadius,
-          clipBehavior?:Clip,
-          key?:Key
-        }
-     */
-    static new(config: ClipRRectConfig){
-      return new ClipRRect(config);
-    }
   }
   
   //****** ConstrainedBox ******
@@ -10875,18 +9359,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-    
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          constraints:BoxConstraints, 
-          key?:Key,
-        }
-     */
-    static new(config: ConstrainedBoxConfig) {
-      return new ConstrainedBox(config);
-    }
   }
   
   //****** TODO CustomSingleChildLayout ******
@@ -10915,18 +9387,6 @@ export class CupertinoIcons extends IconData{
         this.delegate = config.delegate;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          delegate?:any, 
-          key?:Key,
-        }
-     */
-    static new(config: CustomSingleChildLayoutConfig) {
-      return new CustomSingleChildLayout(config);
     }
   }
   
@@ -10976,23 +9436,6 @@ export class CupertinoIcons extends IconData{
         this.children = config.children;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          children?:Array<Widget>, 
-          mainAxisAlignment?:MainAxisAlignment, 
-          crossAxisAlignment?:CrossAxisAlignment,
-          mainAxisSize?:MainAxisSize, 
-          textDirection?:TextDirection, 
-          verticalDirection?:VerticalDirection,
-          textBaseline?:TextBaseline, 
-          key?:Key,
-        }
-     */
-    static new(config: ColumnConfig) {
-      return new Column(config);
-    }
   }
   
   //****** TODO CustomMultiChildLayout ******
@@ -11021,18 +9464,6 @@ export class CupertinoIcons extends IconData{
         this.delegate = config.delegate;
         this.children = config.children;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          children?:Array<Widget>, 
-          delegate?:any, 
-          key?:Key
-        }
-     */
-    static new(config: CustomMultiChildLayoutConfig) {
-      return new CustomMultiChildLayout(config);
     }
   }
   
@@ -11111,30 +9542,6 @@ export class CupertinoIcons extends IconData{
         this.clipBehavior = config.clipBehavior;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          slivers?:Array<Widget>, 
-          controller?:ScrollController, 
-          scrollDirection?:Axis, 
-          reverse?:boolean, 
-          primary?:boolean, 
-          physics?:ScrollPhysics, 
-          shrinkWrap?:boolean, 
-          center?:Key, 
-          anchor?:number, 
-          cacheExtent?:number, 
-          semanticChildCount?:number, 
-          dragStartBehavior?:DragStartBehavior, 
-          restorationId?:string, 
-          clipBehavior?:Clip, 
-        }
-     */
-    static new(config: CustomScrollViewConfig) {
-      return new CustomScrollView(config);
-    }
   }
   
   //****** Card ******
@@ -11192,25 +9599,6 @@ export class CupertinoIcons extends IconData{
         this.shadowColor = config.shadowColor;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key,
-          child?:Widget, 
-          margin?:EdgeInsets, 
-          color?:Color,
-          shadowColor?:Color, 
-          elevation?:number, 
-          shape?:any, 
-          clipBehavior?:Clip, 
-          semanticContainer?:boolean, 
-          borderOnForeground?:boolean,
-        }
-     */
-    static new(config: CardConfig) {
-       return new Card(config);
-    }
   }
   //#endregion
   
@@ -11253,21 +9641,6 @@ export class CupertinoIcons extends IconData{
         this.endIndent = config.endIndent;
         this.color = config.color;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        height?:number, 
-        thickness?:number, 
-        indent?:number, 
-        endIndent?:number, 
-        color?:Color
-      }
-     */
-    static new(config: DividerConfig) {
-      return new Divider(config);
     }
   }
 
@@ -11314,22 +9687,6 @@ export class CupertinoIcons extends IconData{
         this.padding = config.padding;
       }
     }
-
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child:Widget, 
-        decoration?:BoxDecoration, 
-        margin?:EdgeInsets, 
-        padding?:EdgeInsets, 
-        duration?:Duration, 
-        curve?:Curve,
-      }
-    */
-    static new(config: DrawerHeaderConfig) {
-      return new DrawerHeader(config);
-    }
   }
   
   //****** Drawer ******
@@ -11363,19 +9720,6 @@ export class CupertinoIcons extends IconData{
         this.semanticLabel = config.semanticLabel;
       }
     }
-
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        elevation?:number, 
-        semanticLabel?:string, 
-      }
-    */
-    static new(config: DrawerConfig) {
-      return new Drawer(config);
-    }
   }
 
   //****** Directionality ******
@@ -11404,18 +9748,6 @@ export class CupertinoIcons extends IconData{
         this.textDirection = config.textDirection;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key,
-          child:Widget,
-          textDirection:TextDirection,
-        }
-     */
-    static new(config: DirectionalityConfig) {
-      return new Directionality(config);
     }
   }
   
@@ -11450,19 +9782,6 @@ export class CupertinoIcons extends IconData{
         this.onTap = config.onTap;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          child:Widget,
-          value?:number,
-          key?:Key,
-          onTap?:VoidCallback,
-        }
-     */
-    static new(config: DropdownMenuItemConfig) {
-      return new DropdownMenuItem(config);
-    }
   }
   
   //****** DecoratedBox ******
@@ -11495,19 +9814,6 @@ export class CupertinoIcons extends IconData{
         this.position = config.position;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          decoration:BoxDecoration, 
-          position?:DecorationPosition, 
-          key?:Key,
-        }
-     */
-    static new(config: DecoratedBoxConfig) {
-      return new DecoratedBox(config);
     }
   }
   
@@ -11569,25 +9875,6 @@ export class CupertinoIcons extends IconData{
         this.isExpanded = config.isExpanded;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          items?:Array<DropdownMenuItem>, 
-          onChanged?:any, 
-          value?:any, hint?:Widget,
-          disabledHint?:Widget, 
-          elevation?:number, 
-          style?:TextStyle, 
-          iconSize?:number,
-          isDense?:boolean, 
-          isExpanded?:boolean, 
-          key?:Key,
-        }
-     */
-    static new(config: DropdownButtonConfig) {
-      return new DropdownButton(config);
-    }
   }
   
   //****** DefaultTabController ******
@@ -11620,19 +9907,6 @@ export class CupertinoIcons extends IconData{
         this.initialIndex = config.initialIndex;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child:Widget, 
-          length:number, 
-          initialIndex?:number, 
-        }
-     */
-    static new(config: DefaultTabControllerConfig) {
-      return new DefaultTabController(config);
     }
   }
   
@@ -11683,23 +9957,6 @@ export class CupertinoIcons extends IconData{
         this.scale = config.scale;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          image?:ImageProvider, 
-          alignment?:Alignment, 
-          colorFilter?:ColorFilter, 
-          fit?:BoxFit, 
-          centerSlice?:Rect, 
-          repeat?:ImageRepeat, 
-          matchTextDirection?:boolean, 
-          scale?:number,
-        }
-     */
-    static new(config: DecorationImageConfig) {
-      return new DecorationImage(config);
-    }
   }
   
   //****** DefaultTextStyle ******
@@ -11749,23 +10006,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          style?:TextStyle, 
-          textAlign?:TextAlign, 
-          softWrap?:boolean, 
-          overflow?:TextOverflow, 
-          maxLines?:number, 
-          textWidthBasis?:TextWidthBasis, 
-          key?:Key
-        }
-     */
-    static new(config: DefaultTextStyleConfig) {
-      return new DefaultTextStyle(config);
-    }
   }
   
   //****** TODO DecoratedBoxTransition ******
@@ -11799,19 +10039,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          decoration?:any, 
-          position?:DecorationPosition, 
-          child?:Widget
-        }
-     */
-    static new(config: DecoratedBoxTransitionConfig) {
-      return new DecoratedBoxTransition(config);
-    }
   }
   //#endregion
   
@@ -11843,18 +10070,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          excluding?:boolean,
-        }
-     */
-    static new(config?: ExcludeSemanticsConfig) {
-      return new ExcludeSemantics();
-    }
   }
   
   //****** Expanded ******
@@ -11882,18 +10097,6 @@ export class CupertinoIcons extends IconData{
         this.flex = config.flex;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          child:Widget, 
-          flex?:number, 
-          key?:Key,
-        }
-     */
-    static new(config: ExpandedConfig) {
-      return new Expanded(config);
     }
   }
   
@@ -11942,22 +10145,6 @@ export class CupertinoIcons extends IconData{
         this.disabledColor = config.disabledColor;
         this.expandedColor = config.expandedColor;
       }
-    }
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          isExpanded?:boolean, 
-          size?:number, 
-          onPressed:VoidCallbackBoolean, 
-          padding?:EdgeInsets, 
-          color?:Color, 
-          disabledColor?:Color, 
-          expandedColor?:Color, 
-        }
-     */
-    static new(config: ExpandIconConfig) {
-      return new ExpandIcon(config);
     }
   }
   
@@ -12033,29 +10220,6 @@ export class CupertinoIcons extends IconData{
         this.childrenPadding = config.childrenPadding;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          leading?:Widget, 
-          title?:Widget, 
-          subtitle?:Widget, 
-          backgroundColor?:Color, 
-          onExpansionChanged?:VoidCallbackBoolean, 
-          children?:Array<Widget>,
-          trailing?:Widget, 
-          initiallyExpanded?:boolean, 
-          maintainState?:boolean, 
-          tilePadding?:EdgeInsets, 
-          expandedCrossAxisAlignment?:CrossAxisAlignment, 
-          expandedAlignment?:Alignment, 
-          childrenPadding?:EdgeInsets,
-        }
-     */
-    static new(config: ExpansionTileConfig) {
-      return new ExpansionTile(config);
-    }
   }
   
   //#endregion
@@ -12094,19 +10258,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child:Widget, 
-          flex?:number, 
-          fit?:FlexFit,
-        }
-     */
-    static new (config: FlexibleConfig) {
-      return new Flexible(config);
-    }
   }
   
   //****** FittedBox ******
@@ -12139,19 +10290,6 @@ export class CupertinoIcons extends IconData{
         this.alignment = config.alignment;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        alignment?:Alignment, 
-        fit?:BoxFit,
-      }
-     */
-    static new (config: FittedBoxConfig) {
-      return new FittedBox(config);
     }
   }
   
@@ -12188,20 +10326,6 @@ export class CupertinoIcons extends IconData{
         this.heightFactor = config.heightFactor;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          alignment?:Alignment, 
-          widthFactor?:number, 
-          heightFactor?:number, 
-          key?:Key
-        }
-     */
-    static new(config: FractionallySizedBoxConfig) {
-      return new FractionallySizedBox(config);
     }
   
   }
@@ -12261,25 +10385,6 @@ export class CupertinoIcons extends IconData{
         this.children = config.children;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          direction:Axis, 
-          mainAxisAlignment?:MainAxisAlignment, 
-          mainAxisSize?:MainAxisSize, 
-          crossAxisAlignment?:CrossAxisAlignment, 
-          textDirection?:TextDirection, 
-          verticalDirection?:VerticalDirection, 
-          textBaseline?:TextBaseline, 
-          clipBehavior?:Clip, 
-          children?:Array<Widget>, 
-        }
-     */
-    static new (config: FlexConfig) {
-      return new Flex(config);
-    }
   }
   
   //****** TODO Flow ******
@@ -12308,18 +10413,6 @@ export class CupertinoIcons extends IconData{
         this.delegate = config.delegate;
         this.children = config.children;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          children?:Array<Widget>, 
-          delegate?:any, 
-          key?:Key,
-        }
-     */
-    static new (config: FlowConfig) {
-      return new Flow(config);
     }
   }
   
@@ -12428,37 +10521,6 @@ export class CupertinoIcons extends IconData{
         this.autofocus = config.autofocus;
         this.child = config.child;
       }
-    }
-    
-    /**
-     * @param config config: 
-        {
-          child:Widget, 
-          onPressed:VoidCallback, 
-          padding?:EdgeInsets;, 
-          onHighlightChanged?:VoidCallbackBoolean, 
-          textTheme?:ButtonTextTheme, 
-          textColor?:Color, 
-          disabledTextColor?:Color, 
-          color?:Color, 
-          disabledColor?:Color, 
-          highlightColor?:Color, 
-          splashColor?:Color, 
-          colorBrightness?:Brightness, 
-          shape?:any, 
-          clipBehavior?:Clip, 
-          materialTapTargetSize?:MaterialTapTargetSize, 
-          key?:Key, 
-  
-          onLongPress?: VoidCallback, 
-          focusColor?: Color, 
-          hoverColor?: Color, 
-          visualDensity?: VisualDensity, 
-          autofocus?: boolean,
-        }
-     */
-    static new(config: FlatButtonConfig) {
-      return new FlatButton(config);
     }
   
     /**
@@ -12617,35 +10679,6 @@ export class CupertinoIcons extends IconData{
         this.autofocus = config.autofocus;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          tooltip?:string, 
-          foregroundColor?:Color, 
-          backgroundColor?:Color, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          splashColor?:Color, 
-          elevation?:number, 
-          focusElevation?:number, 
-          hoverElevation?:number, 
-          highlightElevation?:number, 
-          disabledElevation?:number, 
-          onPressed:VoidCallback, 
-          mini?:boolean, 
-          shape?:ShapeBorder, 
-          clipBehavior?:Clip, 
-          autofocus?:boolean, 
-          materialTapTargetSize?:MaterialTapTargetSize, 
-          isExtended?:boolean, 
-        }
-     */
-    static new(config: FloatingActionButtonConfig) {
-      return  new FloatingActionButton(config);
-    }
   }
   
   //****** FlexibleSpaceBar ******
@@ -12687,21 +10720,6 @@ export class CupertinoIcons extends IconData{
         this.collapseMode = config.collapseMode;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          title?:Widget, 
-          background?:Widget, 
-          centerTitle?:boolean, 
-          titlePadding?:EdgeInsets, 
-          collapseMode?:CollapseMode, 
-        }
-     */
-    static new(config: FlexibleSpaceBarConfig) {
-      return new FlexibleSpaceBar(config);
-    }
   }
   
   //****** FlexibleSpaceBarSettings ******
@@ -12742,21 +10760,6 @@ export class CupertinoIcons extends IconData{
         this.currentExtent = config.currentExtent;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child:Widget, 
-          toolbarOpacity:number, 
-          minExtent:number, 
-          maxExtent:number, 
-          currentExtent:number, 
-        }
-     */
-    static new(config: FlexibleSpaceBarSettingsConfig) {
-      return new FlexibleSpaceBarSettings(config);
     }
   }
   
@@ -12800,21 +10803,6 @@ export class CupertinoIcons extends IconData{
         this.curve = config.curve;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          size?:number, 
-          textColor?:Color, 
-          style?:FlutterLogoStyle, 
-          duration?:Duration, 
-          curve?:Curve, 
-        }
-     */
-    static new(config: FlutterLogoConfig) {
-      return new FlutterLogo(config);
-    }
   }
   
   //****** FractionalTranslation ******
@@ -12847,19 +10835,6 @@ export class CupertinoIcons extends IconData{
         this.transformHitTests = config.transformHitTests;
         this.translation = config.translation;
       }
-    }
-    /**
-     * @param config config: 
-        {
-          translation:Offset, 
-  
-          key?:Key, 
-          transformHitTests?:boolean, 
-          child?:Widget,   
-        }
-     */
-    static new(config: FractionalTranslationConfig) {
-      return new FractionalTranslation(config);
     }
   }
   
@@ -12997,45 +10972,6 @@ export class CupertinoIcons extends IconData{
         this.excludeFromSemantics = config.excludeFromSemantics;
       }
     }
-  
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        onTap?:VoidCallback, 
-        onTapDown?:VoidTapDown, 
-        onTapUp?:VoidTapUp, 
-        onTapCancel?:VoidCallback, 
-        onDoubleTap?:VoidCallback, 
-        onLongPress?:VoidCallback, 
-        onLongPressUp?:VoidCallback, 
-        onVerticalDragDown?:VoidDragDown, 
-        onVerticalDragStart?:VoidDragStart, 
-        onVerticalDragUpdate?:VoidDragUpdate, 
-        onVerticalDragEnd?:VoidDragEnd, 
-        onVerticalDragCancel?:VoidCallback, 
-        onHorizontalDragDown?:VoidDragDown, 
-        onHorizontalDragStart?:VoidDragStart, 
-        onHorizontalDragUpdate?:VoidDragUpdate, 
-        onHorizontalDragEnd?:VoidDragEnd, 
-        onHorizontalDragCancel?:VoidCallback, 
-        onPanDown?:VoidDragDown, 
-        onPanStart?:VoidDragStart, 
-        onPanUpdate?:VoidDragUpdate, 
-        onPanEnd?:VoidDragEnd, 
-        onPanCancel?:VoidCallback, 
-        onScaleStart?:VoidScaleStart, 
-        onScaleUpdate?:VoidScaleUpdate, 
-        onScaleEnd?:VoidScaleEnd, 
-        behavior?:HitTestBehavior, 
-        excludeFromSemantics?:boolean,   
-      }
-     */
-    static new(config: GestureDetectorConfig) {
-      return new GestureDetector(config);
-    }
   }
   
   //****** GridTileBar ******
@@ -13077,21 +11013,6 @@ export class CupertinoIcons extends IconData{
         this.trailing = config.trailing;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        backgroundColor?:Color, 
-        leading?:Widget, 
-        title?:Widget, 
-        subtitle?:Widget, 
-        trailing?:Widget, 
-      }
-     */
-    static new(config: GridTileBarConfig) {
-      return new GridTileBar(config);
-    }
   }
   
   
@@ -13124,20 +11045,6 @@ export class CupertinoIcons extends IconData{
         this.footer = config.footer;
         this.child = config.child;
       }
-    }
-  
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key,
-        child?:Widget,
-        header?:Widget,
-        footer?:Widget, 
-      }
-     */
-    static new(config: GridTileConfig) {
-      return new GridTile(config);
     }
   }
   
@@ -13179,21 +11086,6 @@ export class CupertinoIcons extends IconData{
         this.interval = config.interval;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          color?:Color, 
-          divisions?:number, 
-          interval?:number, 
-          subdivisions?:number, 
-        }
-     */
-    static new(config: GridPaperConfig) {
-      return new GridPaper(config);
     }
   }
   
@@ -13258,25 +11150,6 @@ export class CupertinoIcons extends IconData{
         this.expands = config.expands;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          decoration:InputDecoration, 
-          baseStyle?:TextStyle, 
-          textAlign?:TextAlign, 
-          textAlignVertical?:TextAlignVertical, 
-          isFocused?:boolean, 
-          isHovering?:boolean, 
-          expands?:boolean, 
-          isEmpty?:boolean, 
-        }
-     */
-    static new(config: InputDecoratorConfig) {
-      return new InputDecorator(config);
-    }
   }
 
    //****** IconSpan ******
@@ -13305,18 +11178,6 @@ export class CupertinoIcons extends IconData{
         this.color = config.color;
         this.fontSize = config.fontSize;
       }
-    }
-    
-    /**
-     * @param config config: 
-      {
-        cicon:IconData, 
-        color?:Color, 
-        fontSize?:number, 
-      }
-     */
-    static new(config: IconSpanConfig) {
-      return new IconSpan(config);
     }
   }
   
@@ -13347,18 +11208,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          index?:number,
-        }
-     */
-    static new(config: IndexedSemanticsConfig) {
-      return new IndexedSemantics(config);
-    }
   }
   
   //****** IntrinsicHeight ******
@@ -13383,17 +11232,6 @@ export class CupertinoIcons extends IconData{
         this.key = config.key;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget,         
-        }
-     */
-    static new(config: IntrinsicHeightConfig) {
-      return new IntrinsicHeight(config);
     }
   }
   
@@ -13427,19 +11265,6 @@ export class CupertinoIcons extends IconData{
         this.stepHeight = config.stepHeight;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          stepWidth?:number, 
-          stepHeight?:number, 
-          key?:Key
-        }
-     */
-    static new(config: IntrinsicWidthConfig) {
-      return new IntrinsicWidth(config);
     }
   }
   
@@ -13483,21 +11308,6 @@ export class CupertinoIcons extends IconData{
       }
   
     }
-  
-    /**
-     * @param config config: 
-        {
-          children?:Array<Widget>,
-          index?:number,
-          alignment?:AlignmentDirectional, 
-          textDirection?:TextDirection, 
-          sizing?:StackFit, 
-          key?:Key, 
-        }
-     */
-    static new(config: IndexedStackConfig) {
-      return new IndexedStack(config);
-    }
   }
   
   //****** IgnorePointer ******
@@ -13530,19 +11340,6 @@ export class CupertinoIcons extends IconData{
         this.ignoring = config.ignoring;
         this.ignoringSemantics = config.ignoringSemantics;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          ignoring?:boolean, 
-          ignoringSemantics?:boolean, 
-        }
-     */
-    static new(config: IgnorePointerConfig) {
-      return new IgnorePointer(config);
     }
   }
   
@@ -13632,33 +11429,6 @@ export class CupertinoIcons extends IconData{
         this.constraints = config.constraints;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          icon:Widget, 
-          onPressed:VoidCallback, 
-          iconSize?:number, 
-          padding?:EdgeInsets, 
-          alignment?:Alignment, 
-          visualDensity?:VisualDensity, 
-          splashRadius?:number, 
-          color?:Color, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          highlightColor?:Color, 
-          splashColor?:Color, 
-          disabledColor?:Color, 
-          autofocus?:boolean, 
-          tooltip?:string, 
-          enableFeedback?:boolean,
-          constraints?:BoxConstraints, 
-        }
-     */
-    static new(config: IconButtonConfig) {
-      return new IconButton(config);
-    }
   }
   
   //****** Icon ******
@@ -13700,21 +11470,6 @@ export class CupertinoIcons extends IconData{
         this.textDirection = config.textDirection;
       }
     }
-  
-    /**
-     * @param icon icon:IconData
-     * @param config config: 
-        {
-          key?:Key,
-          size?:number, 
-          color?:Color, 
-          semanticLabel?:string, 
-          textDirection?:TextDirection,
-        }
-     */
-    static new(icon:IconData,config?: IconConfig) {
-      return new Icon(icon,config);
-    }
   }
   
   //****** ImageIcon ******
@@ -13751,21 +11506,6 @@ export class CupertinoIcons extends IconData{
         this.color = config.color;
         this.semanticLabel = config.semanticLabel;
       }
-    }
-    
-    /**
-     * @param image image:ImageProvider
-     * @param config config: 
-        {
-          key?:Key,
-          size?:number, 
-          color?:Color, 
-          semanticLabel?:string, 
-          textDirection?:TextDirection,
-        }
-     */
-    static new(image:ImageProvider,config?: ImageIconConfig) {
-      return new ImageIcon(image,config);
     }
   }
   
@@ -13880,39 +11620,6 @@ export class CupertinoIcons extends IconData{
 
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          onTap?:VoidCallback, 
-          onTapDown?:VoidTapDown, 
-          onTapCancel?:VoidCallback, 
-          onDoubleTap?:VoidCallback, 
-          onLongPress?:VoidCallback, 
-          onHighlightChanged?:VoidCallbackBoolean, 
-          onHover?:VoidCallbackBoolean, 
-          containedInkWell?:boolean, 
-          highlightShape?:BoxShape, 
-          radius?:number, 
-          borderRadius?:BorderRadius, 
-          customBorder?:ShapeBorder, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          highlightColor?:Color, 
-          overlayColor?:Color, 
-          splashColor?:Color, 
-          enableFeedback?:boolean, 
-          excludeFromSemantics?:boolean, 
-          canRequestFocus ?:boolean, 
-          onFocusChange?:VoidCallbackBoolean, 
-          autofocus?:boolean, 
-        }
-     */
-    static new(config: InkResponseConfig) {
-      return new InkResponse(config);
-    }
   }
 
   //****** InkWell ******
@@ -14018,37 +11725,6 @@ export class CupertinoIcons extends IconData{
 
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          onTap?:VoidCallback, 
-          onTapDown?:VoidTapDown, 
-          onTapCancel?:VoidCallback, 
-          onDoubleTap?:VoidCallback, 
-          onLongPress?:VoidCallback, 
-          onHighlightChanged?:VoidCallbackBoolean, 
-          onHover?:VoidCallbackBoolean, 
-          radius?:number, 
-          borderRadius?:BorderRadius, 
-          customBorder?:ShapeBorder, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          highlightColor?:Color, 
-          overlayColor?:Color, 
-          splashColor?:Color, 
-          enableFeedback?:boolean, 
-          excludeFromSemantics?:boolean, 
-          canRequestFocus ?:boolean, 
-          onFocusChange?:VoidCallbackBoolean, 
-          autofocus?:boolean, 
-        }
-     */
-    static new(config: InkWellConfig) {
-      return new InkWell(config);
-    }
   }
 
   //****** Image ******
@@ -14151,31 +11827,6 @@ export class CupertinoIcons extends IconData{
         this.isAntiAlias = config.isAntiAlias;
         this.filterQuality = config.filterQuality;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key,
-          image:ImageProvider,
-          semanticLabel?:string,
-          excludeFromSemantics?:boolean,
-          width?:number,
-          height?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          gaplessPlayback?:boolean,
-          isAntiAlias?:boolean,
-          filterQuality?:FilterQuality,
-        }
-     */
-    static new(config: ImageConfig) {
-      return new Image(config);
     }
 
     /**
@@ -14419,17 +12070,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          child:Widget, 
-          key?:Key,
-        }
-     */
-    static new(config: KeyedSubtreeConfig) {
-      return new KeyedSubtree(config);
-    }
   }
   //#endregion
   
@@ -14469,20 +12109,7 @@ export class CupertinoIcons extends IconData{
         this.titleStyle = config.titleStyle;
       }
     }
-      
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          label?:string, 
-          labelStyle?:TextStyle, 
-          title?:string, 
-          titleStyle?:TextStyle, 
-        }
-     */
-    static new(config: LabelTitleConfig){
-      return new LabelTitle(config);
-    }
+    
   }
   
   //****** LimitedBox ******
@@ -14517,18 +12144,6 @@ export class CupertinoIcons extends IconData{
       }
     }
   
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          maxWidth?:number, 
-          maxHeight?:number, 
-          key?:Key,
-        }
-     */
-    static new(config: LimitedBoxConfig) {
-      return new LimitedBox(config);
-    }
   }
   
   //****** ListBody ******
@@ -14562,19 +12177,7 @@ export class CupertinoIcons extends IconData{
         this.children = config.children;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          children?:Array<Widget>, 
-          reverse?:boolean, 
-          mainAxis?:Axis, 
-          key?:Key
-        }
-     */
-    static new (config:ListBodyConfig) {
-      return new ListBody(config);
-    }
+
   }
   
   //****** ListTile ******
@@ -14659,32 +12262,6 @@ export class CupertinoIcons extends IconData{
         this.hoverColor = config.hoverColor;
         this.autofocus = config.autofocus;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          leading?:Widget, 
-          title?:Widget, 
-          subtitle?:Widget, 
-          trailing?:Widget, 
-          onTap?:VoidCallback, 
-          onLongPress?:VoidCallback, 
-          selected?:boolean, 
-          isThreeLine?:boolean, 
-          dense?:boolean, 
-          visualDensity?:VisualDensity, 
-          shape?:ShapeBorder, 
-          contentPadding?:EdgeInsets, 
-          enabled?:boolean, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          autofocus?:boolean,  
-        }
-     */
-    static new(config: ListTileConfig) {
-      return new ListTile(config);
     }
   }
   
@@ -14843,34 +12420,6 @@ export class CupertinoIcons extends IconData{
         this.restorationId = config.restorationId;
         this.clipBehavior = config.clipBehavior;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          children?:Array<Widget>, 
-          padding?:EdgeInsets, 
-          controller?:ScrollController, 
-          scrollDirection?:Axis, 
-          reverse?:boolean,
-          primary?:boolean, 
-          physics?:ScrollPhysics, 
-          shrinkWrap?:boolean, 
-          itemExtent?:number,
-          addAutomaticKeepAlives?:boolean, 
-          addRepaintBoundaries?:boolean, 
-          addSemanticIndexes?:boolean, 
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior, 
-          key?:Key,
-          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior, 
-          restorationId?:string, 
-          clipBehavior?:Clip, 
-        }
-     */
-    static new(config: ListViewConfig) {
-      return new ListView(config);
     }
   
     /**
@@ -15048,17 +12597,6 @@ export class CupertinoIcons extends IconData{
         this.builder = config.builder;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          builder?:any, 
-          key?:Key
-        }
-     */
-    static new (config: LayoutBuilderConfig) {
-      return new LayoutBuilder(config);
-    }
   }
   //#endregion
   
@@ -15126,27 +12664,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          elevation?:number, 
-          color?:Color, 
-          shadowColor?:Color, 
-          textStyle?:TextStyle,
-          borderRadius?:BorderRadius, 
-          type?:MaterialType, 
-          shape?:any, 
-          borderOnForeground?:boolean, 
-          clipBehavior?:Clip,
-          animationDuration?:Duration, 
-          key?:Key,
-        }
-     */
-    static new(config: MaterialConfig) {
-      return new Material(config);
-    }
   }
   
   //****** TODO MaterialPageRoute ******
@@ -15194,19 +12711,6 @@ export class CupertinoIcons extends IconData{
         this.fullscreenDialog = config.fullscreenDialog;
       }
       this.child = undefined;
-    }
-  
-    /**
-     * @param config config: 
-        {
-          builder?:any, 
-          settings?:any, 
-          maintainState?:boolean, 
-          fullscreenDialog?:boolean
-        }
-     */
-    static new(config: MaterialPageRouteConfig) {
-      return new MaterialPageRoute(config);
     }
   }
   
@@ -15261,24 +12765,6 @@ export class CupertinoIcons extends IconData{
         this.forceActionsBelow = config.forceActionsBelow;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          content:Widget, 
-          contentTextStyle?:TextStyle, 
-          actions:Array<Widget>, 
-          leading?:Widget, 
-          backgroundColor?:Color, 
-          padding?:EdgeInsets, 
-          leadingPadding?:EdgeInsets, 
-          forceActionsBelow?:boolean, 
-        }
-     */
-    static new(config: MaterialBannerConfig) {
-      return new MaterialBanner(config);
-    }
   }
   
   //#endregion
@@ -15305,16 +12791,6 @@ export class CupertinoIcons extends IconData{
         this.key = config.key;
         this.child = config.child;
       }
-    }
-    /**
-     * @param config config: 
-        {
-          child?:Widget,
-          key?:Key
-        }
-     */
-    static new (config: NotificationListenerConfig) {
-      return new NotificationListener(config);
     }
   }
   
@@ -15380,22 +12856,6 @@ export class CupertinoIcons extends IconData{
       // 本地创建的，供flutter使用
       this.children = [];
     }
-    /**
-     * @param config config: 
-        {
-          body?:Widget, 
-          controller?:ScrollController, 
-          scrollDirection?:Axis, 
-          reverse?:boolean,
-          physics?:ScrollPhysics, 
-          headerSliverBuilder?:any, 
-          dragStartBehavior?:DragStartBehavior, 
-          key?:Key
-        }
-     */
-    static new(config: NestedScrollViewConfig) {
-      return new NestedScrollView(config);
-    }
   }
   
   //****** Navigator ******
@@ -15446,19 +12906,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key,
-          child?:Widget,
-          opacity:number,
-          alwaysIncludeSemantics?:boolean
-        }
-     */
-    static new(config: OpacityConfig) {
-      return new Opacity(config);
-    }
   }
   
   //****** Offstage ******
@@ -15487,18 +12934,6 @@ export class CupertinoIcons extends IconData{
         this.offstage = config.offstage;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          child?:.Widget, 
-          offstage?:boolean, 
-          key?:Key, 
-        }
-     */
-    static new (config: OffstageConfig) {
-      return new Offstage(config);
     }
   }
   
@@ -15543,22 +12978,6 @@ export class CupertinoIcons extends IconData{
         this.maxHeight = config.maxHeight;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          alignment?:Alignment, 
-          minWidth?:number, 
-          maxWidth?:number, 
-          minHeight?:number, 
-          maxHeight?:number, 
-          key?:Key,
-        }
-     */
-    static new(config: OverflowBoxConfig) {
-      return new OverflowBox(config);
     }
   }
   
@@ -15684,39 +13103,6 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           child?:Widget, 
-          onPressed:VoidCallback, 
-          onLongPress?:VoidCallback, 
-          padding?:EdgeInsets, 
-          textTheme?:ButtonTextTheme, 
-          textColor?:Color, 
-          disabledTextColor?:Color, 
-          color?:Color, 
-          disabledColor?:Color, 
-          highlightColor?:Color, 
-          splashColor?:Color, 
-          colorBrightness?:Brightness, 
-          shape?:any, 
-          clipBehavior?:Clip, 
-          materialTapTargetSize?:MaterialTapTargetSize,   
-          highlightElevation?:number,   
-          focusColor?: Color, 
-          hoverColor?: Color, 
-          visualDensity?: VisualDensity, 
-          autofocus?: boolean, 
-          borderSide?:BorderSide, 
-          disabledBorderColor?:Color, 
-          highlightedBorderColor?:Color, 
-        }
-     */
-    static new(config: OutlineButtonConfig) {
-      return new OutlineButton(config);
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
           onPressed?:VoidCallback, 
           onLongPress?:VoidCallback, 
           padding?:EdgeInsets, 
@@ -15805,18 +13191,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          padding?:EdgeInsets, 
-          key?:Key
-        }
-     */
-    static new(config: PaddingConfig) {
-      return new Padding(config);
-    }
   }
   
   //****** PhysicalModel ******
@@ -15864,24 +13238,6 @@ export class CupertinoIcons extends IconData{
         this.clipBehavior = config.clipBehavior;
         this.elevation = config.elevation;
       }
-    }
-  
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          color:Color, 
-          shape?:BoxShape, 
-          child?:Widget, 
-          clipBehavior?:Clip, 
-          borderRadius?:BorderRadius, 
-          elevation?:number, 
-          shadowColor?:Color, 
-        }
-     */
-    static new(config: PhysicalModelConfig) {
-      return new PhysicalModel(config);
     }
   }
   
@@ -15940,22 +13296,6 @@ export class CupertinoIcons extends IconData{
       }
     }
   
-    /**
-     * @param config config: 
-        {
-          key?:Key
-          child:Widget,
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number,
-          width?:number,
-          height?:number,        
-        }
-     */
-    static new(config: PositionedConfig) {
-      return new Positioned(config);
-    }
   
     /**
      * @param config config: 
@@ -16082,23 +13422,6 @@ export class CupertinoIcons extends IconData{
       }
     }
     
-    
-    /**
-     * @param config config: 
-        {
-          key?:Key
-          child:Widget,
-          start?:number,
-          top?:number,
-          end?:number,
-          bottom?:number,
-          width?:number,
-          height?:number,        
-        }
-     */
-    static new(config: PositionedDirectionalConfig) {
-      return new PositionedDirectional(config);
-    }
   }
   
   //****** PreferredSize ******
@@ -16128,25 +13451,11 @@ export class CupertinoIcons extends IconData{
         this.preferredSize =  config.preferredSize;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          preferredSize?:Size, 
-          key?:Key
-        }
-     */
-    static new (config:PreferredSizeConfig) {
-      return new PreferredSize(config);
-    }
   }
   
   //****** TODO PreferredSizeWidget ******
   export class PreferredSizeWidget extends Widget {
-    static new() {
-      return new PreferredSizeWidget();
-    }
+  
   }
   
   //****** Placeholder ******
@@ -16183,20 +13492,6 @@ export class CupertinoIcons extends IconData{
         this.fallbackWidth = config.fallbackWidth;
         this.fallbackHeight = config.fallbackHeight;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          color?:Color, 
-          strokeWidth?:number, 
-          fallbackWidth?:number, 
-          fallbackHeight?:number, 
-          key?:Key,
-        }
-     */
-    static new(config: PlaceholderConfig) {
-      return new Placeholder(config);
     }
   }
   
@@ -16278,26 +13573,6 @@ export class CupertinoIcons extends IconData{
       // 本地创建的，供flutter使用
       this.children = [];
     }
-  
-    /**
-     * @param config config: 
-        {
-          itemBuilder?:any, 
-          initialValue?:any, 
-          onSelected?:any, 
-          onCanceled?:any, 
-          tooltip?:string, 
-          elevation?:number, 
-          padding?:EdgeInsets, 
-          child?:Widget, 
-          icon?:Widget, 
-          offset?:Offset, 
-          key?:Key
-        }
-     */
-    static new(config: PopupMenuButtonConfig) {
-      return new PopupMenuButton(config);
-    }
   }
   
   //****** TODO PopupMenuItem ******
@@ -16334,20 +13609,6 @@ export class CupertinoIcons extends IconData{
         this.height = config.height;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          value?:any, 
-          enabled?:boolean, 
-          height?:number, 
-          key?:Key
-        }
-     */
-    static new(config: PopupMenuItemConfig) {
-      return new PopupMenuItem(config);
     }
   }
   //#endregion
@@ -16400,23 +13661,6 @@ export class CupertinoIcons extends IconData{
         this.children = config.children;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          children?:Array<Widget>, 
-          mainAxisAlignment?:MainAxisAlignment, 
-          mainAxisSize?:MainAxisSize, 
-          crossAxisAlignment?:CrossAxisAlignment,
-          textDirection?:TextDirection, 
-          verticalDirection?:VerticalDirection, 
-          textBaseline?:TextBaseline, 
-          key?:Key,
-        }
-     */
-    static new(config: RowConfig) {
-      return new Row(config);
-    }
   }
   
   //****** RepaintBoundary ******
@@ -16442,17 +13686,6 @@ export class CupertinoIcons extends IconData{
         this.key = config.key;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget,
-        }
-     */
-    static new(config: RepaintBoundaryConfig) {
-      return new RepaintBoundary(config);
     }
   
     static wrap(child:Widget,childIndex:number) {
@@ -16543,31 +13776,6 @@ export class CupertinoIcons extends IconData{
         this.isAntiAlias = config.isAntiAlias;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          image?:ImageProvider, 
-          debugImageLabel?:string, 
-          width?:number, 
-          height?:number, 
-          scale?:number, 
-          color?:Color, 
-          colorBlendMode?:BlendMode, 
-          fit?:BoxFit, 
-          alignment?:Alignment, 
-          repeat?:ImageRepeat, 
-          centerSlice?:Rect, 
-          matchTextDirection?:boolean, 
-          invertColors?:boolean, 
-          filterQuality?:FilterQuality, 
-          isAntiAlias?:boolean, 
-        }
-     */
-    static new(config: RawImageConfig) {
-      return new RawImage(config);
-    }
   }
   
   //****** RotatedBox ******
@@ -16595,18 +13803,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
         this.quarterTurns = config.quarterTurns;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          quarterTurns:number, 
-          child?:Widget, 
-        }
-     */
-    static new(config: RotatedBoxConfig) {
-      return new RotatedBox(config);
     }
   }
   
@@ -16740,42 +13936,6 @@ export class CupertinoIcons extends IconData{
   
     /**
      * @param config config: 
-        {
-          key?:Key,
-          child?:Widget, 
-          onPressed?:VoidCallback, 
-          onHighlightChanged?:VoidCallbackBoolean, 
-          padding?:EdgeInsets,
-          textColor?:Color, 
-          disabledTextColor?:Color, 
-          color?:Color, 
-          disabledColor?:Color,
-          highlightColor?:Color, 
-          splashColor?:Color, 
-          colorBrightness?:Brightness, 
-          elevation?:number,
-          highlightElevation?:number, 
-          disabledElevation?:number, 
-          shape?:any, 
-          clipBehavior?:Clip,
-          materialTapTargetSize?:MaterialTapTargetSize, 
-          animationDuration?:Duration, 
-        
-          onLongPress?:VoidCallback, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          focusElevation?:number, 
-          hoverElevation?:number, 
-          visualDensity?:VisualDensity, 
-          autofocus?:boolean,
-        }
-     */
-    static new(config: RaisedButtonConfig) {
-      return new RaisedButton(config);
-    }
-  
-    /**
-     * @param config config: 
       {
         key?:Key,
         icon?:Widget, 
@@ -16880,21 +14040,6 @@ export class CupertinoIcons extends IconData{
         this.activeColor = config.activeColor;
         this.materialTapTargetSize = config.materialTapTargetSize;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key,
-        value?:any,
-        groupValue?:any,
-        onChanged?:any,
-        activeColor?:Color,
-        materialTapTargetSize?:MaterialTapTargetSize
-      }
-     */
-    static new(config: RadioConfig) {
-      return new Radio(config);
     }
   }
   
@@ -17013,40 +14158,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key,   
-        onPressed:VoidCallback, 
-        onLongPress?:VoidCallback, 
-        onHighlightChanged?:VoidCallbackBoolean, 
-        textStyle?:TextStyle, 
-        padding?:EdgeInsets, 
-        fillColor?:Color, 
-        focusColor?:Color, 
-        hoverColor?:Color, 
-        highlightColor?:Color, 
-        splashColor?:Color, 
-        constraints?:BoxConstraints, 
-        elevation?:number, 
-        focusElevation?:number, 
-        hoverElevation?:number, 
-        highlightElevation?:number, 
-        disabledElevation?:number, 
-        visualDensity?:VisualDensity, 
-        autofocus?:boolean, 
-        shape?:any, 
-        clipBehavior?:Clip, 
-        materialTapTargetSize?:MaterialTapTargetSize, 
-        animationDuration?:Duration, 
-        enableFeedback?:boolean, 
-        child?:Widget, 
-      }
-     */
-    static new(config: RawMaterialButtonConfig) {
-      return new RawMaterialButton(config);
-    }
   }
   
   //****** RichText ******
@@ -17101,24 +14212,6 @@ export class CupertinoIcons extends IconData{
         this.textWidthBasis = config.textWidthBasis;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        text:Widget, 
-        textAlign?:TextAlign, 
-        textDirection?:TextDirection, 
-        softWrap?:boolean, 
-        overflow?:Overflow, 
-        textScaleFactor?:number, 
-        maxLines?:number, 
-        textWidthBasis?:TextWidthBasis, 
-      }
-     */
-    static new (config: RichTextConfig) {
-      return new RichText(config);
-    }
   }
   //#endregion
   
@@ -17145,19 +14238,7 @@ export class CupertinoIcons extends IconData{
         this.key = config.key;
         this.flex = config.flex;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key,
-        flex?:number
-      }
-     */
-    static new(config: SpacerConfig) {
-      return new Spacer(config);
-    }
-  
+    }  
   }
   
   //****** Semantics ******
@@ -17374,66 +14455,6 @@ export class CupertinoIcons extends IconData{
         this.onDidLoseAccessibilityFocus = config.onDidLoseAccessibilityFocus;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        container?:boolean, 
-        explicitChildNodes?:boolean, 
-        excludeSemantics?:boolean, 
-        enabled?:boolean, 
-        checked?:boolean, 
-        selected?:boolean, 
-        toggled?:boolean, 
-        button?:boolean, 
-        link?:boolean, 
-        header?:boolean, 
-        textField?:boolean, 
-        readOnly?:boolean, 
-        focusable?:boolean, 
-        focused?:boolean, 
-        inMutuallyExclusiveGroup?:boolean, 
-        obscured?:boolean, 
-        multiline?:boolean, 
-        scopesRoute?:boolean, 
-        namesRoute?:boolean, 
-        hidden?:boolean, 
-        image?:boolean, 
-        liveRegion?:boolean, 
-        maxValueLength?:number, 
-        currentValueLength?:number, 
-  
-        label?:string, 
-        value?:string, 
-        increasedValue?:string, 
-        decreasedValue?:string, 
-        hint?:string, 
-        onTapHint?:string, 
-        onLongPressHint?:string, 
-        textDirection?:TextDirection, 
-  
-        onTap?:VoidCallback, 
-        onLongPress?:VoidCallback, 
-        onScrollLeft?:VoidCallback, 
-        onScrollRight?:VoidCallback, 
-        onScrollUp?:VoidCallback, 
-        onScrollDown?:VoidCallback, 
-        onIncrease?:VoidCallback, 
-        onDecrease?:VoidCallback, 
-        onCopy?:VoidCallback, 
-        onCut?:VoidCallback, 
-        onPaste?:VoidCallback, 
-        onDismiss?:VoidCallback, 
-        onDidGainAccessibilityFocus?:VoidCallback, 
-        onDidLoseAccessibilityFocus?:VoidCallback, 
-      }
-     */
-    static new(config: SemanticsConfig) {
-      return new Semantics(config);
-    }
-  
   }
   
   //****** SwitchListTile ******
@@ -17515,32 +14536,6 @@ export class CupertinoIcons extends IconData{
         this.controlAffinity = config.controlAffinity;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          value:boolean, 
-          onChanged:VoidCallbackBoolean, 
-          activeColor?:Color, 
-          activeTrackColor?:Color, 
-          inactiveThumbColor?:Color, 
-          inactiveTrackColor?:Color, 
-          title?:Widget, 
-          subtitle?:Widget, 
-          isThreeLine?:boolean, 
-          dense?:boolean, 
-          contentPadding?:EdgeInsets, 
-          secondary?:Widget, 
-          selected?:boolean, 
-          autofocus?:boolean, 
-          controlAffinity?:ListTileControlAffinity, 
-        }
-     */
-    static new(config: SwitchListTileConfig) {
-      return new SwitchListTile(config);
-    }
-  
   }
 
   //****** Switch ******
@@ -17605,29 +14600,7 @@ export class CupertinoIcons extends IconData{
         this.dragStartBehavior = config.dragStartBehavior;
         this.autofocus = config.autofocus;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          value:boolean, 
-          onChanged?:VoidCallbackBoolean, 
-          activeColor?:Color, 
-          activeTrackColor?:Color, 
-          inactiveThumbColor?:Color, 
-          inactiveTrackColor?:Color, 
-          focusColor?:Color, 
-          hoverColor?:Color, 
-          materialTapTargetSize?:MaterialTapTargetSize, 
-          dragStartBehavior?:DragStartBehavior, 
-          autofocus?:boolean, 
-        }
-     */
-    static new(config: SwitchConfig) {
-      return new Switch(config);
-    }
-  
+    }  
   }
   
   //****** Slider ******
@@ -17697,29 +14670,6 @@ export class CupertinoIcons extends IconData{
         this.autofocus = config.autofocus;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key,
-        value?:number, 
-        onChanged?:VoidCallbackNumber, 
-        onChangeStart?:VoidCallbackNumber, 
-        onChangeEnd?:VoidCallbackNumber, 
-        min?:number, 
-        max?:number, 
-        divisions?:number, 
-        label?:string, 
-        activeColor?:Color,
-        inactiveColor?:Color, 
-        semanticFormatterCallback?:VoidCallbackNumber, 
-        autofocus?:boolean,
-      }
-     */
-    static new(config: SliderConfig) {
-      return new Slider(config);
-    }
-  
   }
   
   //****** SizedBox ******
@@ -17756,19 +14706,6 @@ export class CupertinoIcons extends IconData{
       }
     }
     
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        width?:number, 
-        height?:number, 
-      }
-     */
-    static new(config: SizedBoxConfig) {
-      return new SizedBox(config);
-    }
   
     /**
      * @param config config: 
@@ -17855,19 +14792,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        alignment?:Alignment, 
-        size:Size, 
-      }
-     */
-    static new(config: SizedOverflowBoxConfig) {
-      return new SizedOverflowBox(config);
-    }
   }
   
   //****** Stack ******
@@ -17911,22 +14835,6 @@ export class CupertinoIcons extends IconData{
         this.overflow = config.overflow;
         this.children = config.children;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        children?:Array<Widget>, 
-        alignment?:AlignmentDirectional, 
-        textDirection?:TextDirection, 
-        fit?:StackFit, 
-        overflow?:Overflow, 
-        clipBehavior?:Clip, 
-      }
-     */
-    static new(config: StackConfig) {
-      return new Stack(config);
     }
   }
   
@@ -18049,41 +14957,6 @@ export class CupertinoIcons extends IconData{
         this.toolbarHeight = config.toolbarHeight;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        leading?:Widget, 
-        automaticallyImplyLeading?:boolean, 
-        title?:Widget, 
-        actions?:Array<Widget>, 
-        flexibleSpace?:Widget, 
-        bottom?:Widget, 
-        elevation?:number, 
-        shadowColor?:Color,
-        forceElevated?:boolean, 
-        backgroundColor?:Color, 
-        brightness?:Brightness, 
-        primary?:boolean, 
-        centerTitle?:boolean, 
-        excludeHeaderSemantics?:boolean, 
-        titleSpacing?:number, 
-        collapsedHeight?:number, 
-        expandedHeight?:number, 
-        floating?:boolean, 
-        pinned?:boolean, 
-        snap?:boolean, 
-        stretch?:boolean, 
-        stretchTriggerOffset?:number 
-        onStretchTrigger?:VoidCallback, 
-        shape?:any, 
-        toolbarHeight?:number,
-      }
-     */
-    static new(config: SliverAppBarConfig) {
-      return new SliverAppBar(config);
-    }
   }
   
   //****** SliverFillViewport ******
@@ -18116,19 +14989,6 @@ export class CupertinoIcons extends IconData{
         this.viewportFraction = config.viewportFraction;
         this.padEnds = config.padEnds;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        delegate:SliverChildDelegate, 
-        viewportFraction?:number, 
-        padEnds?:boolean,
-      }
-     */
-    static new(config: SliverFillViewportConfig) {
-      return new SliverFillViewport(config);
     }
   }
 
@@ -18163,19 +15023,6 @@ export class CupertinoIcons extends IconData{
         this.fillOverscroll = config.fillOverscroll;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        hasScrollBody?:boolean, 
-        fillOverscroll?:boolean, 
-      }
-     */
-    static new(config: SliverFillRemainingConfig) {
-      return new SliverFillRemaining(config);
-    }
   }
 
   //****** SliverPadding ******
@@ -18204,18 +15051,6 @@ export class CupertinoIcons extends IconData{
         this.padding = config.padding;
         this.sliver = config.sliver;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        sliver?:Widget, 
-        padding:EdgeInsets, 
-      }
-     */
-    static new(config: SliverPaddingConfig) {
-      return new SliverPadding(config);
     }
   }
   
@@ -18246,18 +15081,6 @@ export class CupertinoIcons extends IconData{
         this.gridDelegate = config.gridDelegate;
       }
     } 
-  
-    /**
-     * @param config config: 
-      {
-        delegate?:SliverChildDelegate, 
-        gridDelegate?:SliverGridDelegate,
-        key?:Key,
-      }
-     */
-    static new(config: SliverGridConfig) {
-      return new SliverGrid(config);
-    }
   }
   
   //#region ****** SliverGridDelegate ******
@@ -18323,19 +15146,6 @@ export class CupertinoIcons extends IconData{
         this.childAspectRatio = config.childAspectRatio;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        maxCrossAxisExtent:number, 
-        mainAxisSpacing?:number, 
-        crossAxisSpacing?:number, 
-        childAspectRatio?:number, 
-      }
-     */
-    static new(config: SliverGridDelegateWithMaxCrossAxisExtentConfig) {
-      return new SliverGridDelegateWithMaxCrossAxisExtent(config);
-    }
   }
 
   //******  SliverGridDelegateWithFixedCrossAxisCount ******
@@ -18368,19 +15178,6 @@ export class CupertinoIcons extends IconData{
         this.crossAxisSpacing = config.crossAxisSpacing;
         this.childAspectRatio = config.childAspectRatio;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        crossAxisCount:number, 
-        mainAxisSpacing?:number, 
-        crossAxisSpacing?:number, 
-        childAspectRatio?:number, 
-      }
-     */
-    static new(config: SliverGridDelegateWithFixedCrossAxisCountConfig) {
-      return new SliverGridDelegateWithFixedCrossAxisCount(config);
     }
   }
 
@@ -18458,20 +15255,6 @@ export class CupertinoIcons extends IconData{
         this.semanticIndexOffset = config.semanticIndexOffset;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        children:Array<Widget>, 
-        addAutomaticKeepAlives?:boolean, 
-        addRepaintBoundaries?:boolean, 
-        addSemanticIndexes?:boolean, 
-        semanticIndexOffset?:number, 
-      }
-     */
-    static new(config: SliverChildListDelegateConfig) {
-      return new SliverChildListDelegate(config);
-    }
   }
 
   //****** SliverChildBuilderDelegate ******
@@ -18534,22 +15317,6 @@ export class CupertinoIcons extends IconData{
       // 本地创建的，供flutter使用
       this.children = [];
     }
-    
-    /**
-     * @param config config: 
-      {
-        builder:IndexedWidgetBuilder, 
-        childCount:number, 
-        addAutomaticKeepAlives?:boolean, 
-        addRepaintBoundaries?:boolean, 
-        addSemanticIndexes?:boolean, 
-        semanticIndexOffset?:number, 
-        children?:Array<Widget>, 
-      }
-     */
-    static new(config: SliverChildBuilderDelegateConfig) {
-      return new SliverChildBuilderDelegate(config);
-    }
   }
 
 
@@ -18578,17 +15345,6 @@ export class CupertinoIcons extends IconData{
         this.key = config.key;
         this.delegate = config.delegate;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        delegate?:SliverChildDelegate,
-        key?:Key
-      }
-     */
-    static new(config: SliverListConfig) {
-      return new SliverList(config);
     }
   }
   
@@ -18623,19 +15379,6 @@ export class CupertinoIcons extends IconData{
         this.alwaysIncludeSemantics = config.alwaysIncludeSemantics;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        sliver?:Widget, 
-        opacity:number, 
-        alwaysIncludeSemantics?:boolean, 
-      }
-     */
-    static new(config: SliverOpacityConfig) {
-      return new SliverOpacity(config);
-    }
   }
 
   //****** TODO SliverOverlapInjector ******
@@ -18664,18 +15407,6 @@ export class CupertinoIcons extends IconData{
         this.handle = config.handle;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        handle?:any, 
-      }
-     */
-    static new(config: SliverOverlapInjectorConfig) {
-      return new SliverOverlapInjector(config);
     }
   }
   
@@ -18706,19 +15437,6 @@ export class CupertinoIcons extends IconData{
         this.itemExtent = config.itemExtent;
       }
     }
-  
-   
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        delegate?:SliverChildDelegate, 
-        itemExtent?:number, 
-      }
-     */
-    static new(config: SliverFixedExtentListConfig) {
-      return new SliverFixedExtentList(config);
-    }
   }
   
   //****** TODO SliverOverlapAbsorber ******
@@ -18747,18 +15465,6 @@ export class CupertinoIcons extends IconData{
         this.handle = config.handle;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        handle?:any, 
-      }
-     */
-    static new(config: SliverOverlapAbsorberConfig) {
-      return new SliverOverlapAbsorber(config);
     }
   }
   
@@ -18817,25 +15523,6 @@ export class CupertinoIcons extends IconData{
         this.clipBehavior = config.clipBehavior;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        scrollDirection?:Axis, 
-        reverse?:boolean, 
-        padding?:EdgeInsets, 
-        primary?:boolean, 
-        physics?:ScrollPhysics, 
-        controller?:ScrollController, 
-        dragStartBehavior?:DragStartBehavior, 
-        clipBehavior?:Clip, 
-      }
-     */
-    static new(config: SingleChildScrollViewConfig) {
-        return new SingleChildScrollView(config);
-    }
   }
   
   //****** SliverToBoxAdapter ******
@@ -18860,18 +15547,6 @@ export class CupertinoIcons extends IconData{
         this.key = config.key;
         this.child = config.child;
       }
-    }
-  
-  
-    /**
-     * @param config config: 
-      {
-        child?:Widget,
-        key?:Key
-      }
-     */
-    static new(config: SliverToBoxAdapterConfig) {
-      return new SliverToBoxAdapter(config);
     }
   }
   
@@ -18975,43 +15650,11 @@ export class CupertinoIcons extends IconData{
 
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key;
-        appBar?:Widget;
-        body?:Widget;
-        floatingActionButton?:Widget;
-        floatingActionButtonLocation?:FloatingActionButtonLocation;
-        persistentFooterButtons?:Array<Widget>;
-        drawer?:Widget;
-        endDrawer?:Widget;
-        bottomNavigationBar?:Widget;
-        bottomSheet?:Widget;
-        backgroundColor?:Color;
-        resizeToAvoidBottomPadding?:boolean;
-        resizeToAvoidBottomInset?:boolean;
-        primary?:boolean;
-        drawerDragStartBehavior?:DragStartBehavior;
-        extendBody?:boolean;
-        extendBodyBehindAppBar?:boolean;
-        drawerScrimColor?:Color;
-        drawerEdgeDragWidth?:number;
-        drawerEnableOpenDragGesture?:boolean;
-        endDrawerEnableOpenDragGesture?:boolean;
-      }
-     */
-    static new(config: ScaffoldConfig){
-      return new Scaffold(config);
-    }
   }
   
   //****** TODO Scaffold ******
   export class ScaffoldState extends DartClass {
-    static new() {
-      return new ScaffoldState();
-    }
+    
   }
   
   //****** SafeArea ******
@@ -19061,23 +15704,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key,
-          child:Widget,
-          left?:boolean,
-          top?:boolean,
-          right?:boolean,
-          bottom?:boolean,
-          minimum?:EdgeInsets,
-          maintainBottomViewPadding?:boolean, 
-        }
-     */
-    static new(config: SafeAreaConfig) {
-      return new SafeArea(config);
-    }
   }
   
   //****** SliverSafeArea ******
@@ -19123,22 +15749,6 @@ export class CupertinoIcons extends IconData{
         this.sliver = config.sliver;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key,
-        sliver:Widget,
-        left?:boolean,
-        top?:boolean,
-        right?:boolean,
-        bottom?:boolean,
-        minimum?:EdgeInsets,
-      }
-     */
-    static new(config: SliverSafeAreaConfig) {
-      return new SliverSafeArea(config);
-    }
   }
   
   //****** Scrollbar ******
@@ -19170,19 +15780,6 @@ export class CupertinoIcons extends IconData{
         this.controller = config.controller;
         this.isAlwaysShown = config.isAlwaysShown;
       }
-    }
-    
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child:Widget, 
-        controller?:ScrollController, 
-        isAlwaysShown?:boolean,   
-      }
-     */
-    static new (config: ScrollbarConfig) {
-      return new Scrollbar(config);
     }
   }
   
@@ -19241,25 +15838,6 @@ export class CupertinoIcons extends IconData{
         this.onVisible = config.onVisible;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Widget, 
-        content:Widget, 
-        backgroundColor?:Color, 
-        elevation?:number, 
-        shape?:any, 
-        behavior?:any, 
-        action?:any, 
-        duration?:Duration, 
-        animation?:any, 
-        onVisible?:VoidCallback, 
-      }
-     */
-    static new(config: SnackBarConfig) {
-      return new SnackBar(config);
-    }
   }
   
   //****** SnackBarAction ******
@@ -19296,20 +15874,6 @@ export class CupertinoIcons extends IconData{
         this.disabledTextColor = config.disabledTextColor;
         this.onPressed = config.onPressed;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Widget, 
-        lable:string, 
-        onPressed?:VoidCallback, 
-        disabledTextColor?:Color, 
-        textColor?:Color, 
-      }
-     */
-    static new(config: SnackBarActionConfig) {
-      return new SnackBarAction(config);
     }
   }
   
@@ -19365,23 +15929,6 @@ export class CupertinoIcons extends IconData{
       }
     }
   
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        sliver:Widget, 
-        replacement?:Widget, 
-        visible?:boolean, 
-        maintainState?:boolean, 
-        maintainAnimation?:boolean, 
-        maintainSize?:boolean, 
-        maintainSemantics?:boolean, 
-        maintainInteractivity?:boolean, 
-      }
-    */
-    static new(config: SliverVisibilityConfig) {
-      return new SliverVisibility(config);
-    }
   }
   
   
@@ -19415,18 +15962,7 @@ export class CupertinoIcons extends IconData{
         this.children = config.children;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        children?:Array<Widget>, 
-        decoration?:BoxDecoration, 
-      }
-     */
-     static new(config: TableRowConfig) {
-      return new TableRow(config);
-    }
+
   }
   
   //****** TableCell ******
@@ -19455,18 +15991,6 @@ export class CupertinoIcons extends IconData{
         this.verticalAlignment = config.verticalAlignment;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        verticalAlignment?:TableCellVerticalAlignment, 
-      }
-     */
-    static new(config: TableCellConfig) {
-      return new TableCell(config);
     }
   }
   
@@ -19535,21 +16059,6 @@ export class CupertinoIcons extends IconData{
       }
     }
   
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        alignment?:Alignment, 
-        origin?:Offset, 
-        transform:Matrix4, 
-        transformHitTests?:boolean, 
-      }
-     */
-    static new(config: TransformNewConfig) {
-      return new Transform(config);
-    }
   
     /**
      * @param config config: 
@@ -19691,29 +16200,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
       }
     }
-  
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        message:string, 
-        height?:number, 
-        padding?:EdgeInsets, 
-        margin?:EdgeInsets, 
-        verticalOffset?:number, 
-        preferBelow?:boolean, 
-        excludeFromSemantics?:boolean, 
-        decoration?:BoxDecoration, 
-        textStyle?:TextStyle, 
-        waitDuration?:Duration, 
-        showDuration?:Duration, 
-        child?:Widget
-      }
-     */
-    static new(config: TooltipConfig) {
-      return new Tooltip(config);
-    }
   }
   
   //****** Table ******
@@ -19765,23 +16251,6 @@ export class CupertinoIcons extends IconData{
       }
     }
     
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        children?:Array<Widget>, 
-        defaultColumnWidth?:TableColumnWidth, 
-        defaultVerticalAlignment?:TableCellVerticalAlignment, 
-        textDirection?:TextDecoration, 
-        border?:TableBorder, 
-        textBaseline?:TextBaseline, 
-        columnWidths?:Map<string,TableColumnWidth>,       
-      }
-     */
-    static new(config: TableConfig) {
-      return new Table(config);
-    }
   }
   
   //****** TabBar ******
@@ -19867,32 +16336,6 @@ export class CupertinoIcons extends IconData{
         this.physics = config.physics;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        tabs?:Array<Widget>,
-        onTap?:VoidCallbackNumber, 
-        controller?:TabController, 
-        isScrollable?:boolean, 
-        indicatorColor?:Color, 
-        indicatorWeight?:number, 
-        indicatorPadding?:EdgeInsets, 
-        indicator?:BoxDecoration, 
-        indicatorSize?:TabBarIndicatorSize, 
-        labelColor?:Color, 
-        labelStyle?:TextStyle, 
-        labelPadding?:EdgeInsets, 
-        unselectedLabelColor?:Color, 
-        unselectedLabelStyle?:TextStyle, 
-        dragStartBehavior?:DragStartBehavior,
-        physics?:ScrollPhysics,
-      }
-     */
-    static new(config: TabBarConfig) {
-      return new TabBar(config);
-    }
   }
   
   //****** Tab ******
@@ -19928,20 +16371,6 @@ export class CupertinoIcons extends IconData{
         this.icon = config.icon;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        child?:Widget, 
-        text?:string, 
-        icon?:Widget, 
-        iconMargin?:EdgeInsets,
-      }
-     */
-    static new(config: TabConfig) {
-      return new Tab(config);
     }
   }
   
@@ -19980,20 +16409,6 @@ export class CupertinoIcons extends IconData{
         this.dragStartBehavior = config.dragStartBehavior;
       }
     }
-  
-    /**
-     * @param config config:
-      {
-        key?:Key, 
-        children?:Array<Widget>, 
-        controller?:TabController, 
-        physics?:ScrollPhysics, 
-        dragStartBehavior?:DragStartBehavior,      
-      }
-     */
-    static new(config: TabBarViewConfig) {
-      return new TabBarView(config);
-    }
   }
   
   //****** TabPageSelectorIndicator ******
@@ -20026,19 +16441,6 @@ export class CupertinoIcons extends IconData{
         this.borderColor = config.borderColor;
         this.size = config.size;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        backgroundColor?:Color, 
-        borderColor?:Color, 
-        size?:number,
-      }
-     */
-    static new(config: TabPageSelectorIndicatorConfig) {
-      return new TabPageSelectorIndicator(config);
     }
   }
   
@@ -20078,20 +16480,6 @@ export class CupertinoIcons extends IconData{
       }
     }
     
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key,
-        color?:Color,
-        selectedColor?:Color,
-        indicatorSize?:number,
-        controller?:TabController,
-      }
-     */
-    static new(config: TabPageSelectorConfig) {
-      return new TabPageSelector(config);
-    }
   }
   
   //****** Title ******
@@ -20126,19 +16514,6 @@ export class CupertinoIcons extends IconData{
       }
     }
   
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key,
-        child?:Widget,
-        title?:string,
-        color?:Color
-      }
-     */
-    static new(config: TitleConfig) {
-      return new Title(config);
-    }
   }
   
   //****** Text ******
@@ -20214,25 +16589,6 @@ export class CupertinoIcons extends IconData{
         textWidthBasis?:TextWidthBasis,
       }
      */
-    static new(data:string, config?: TextConfig) {
-      return new Text(data,config);
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key,
-        style?:TextStyle,
-        textAlign?:TextAlign,
-        textDirection?:TextDirection,
-        softWrap?:boolean,
-        overflow?:TextOverflow,
-        textScaleFactor?:number,
-        maxLines?:number,
-        semanticsLabel?:string,
-        textWidthBasis?:TextWidthBasis,
-      }
-     */
     static rich(data:TextSpan, config?: TextConfig) {
       var v = new Text(data,config);
       v.constructorName= "rich";
@@ -20274,19 +16630,6 @@ export class CupertinoIcons extends IconData{
         this.semanticsLabel = config.semanticsLabel;
       }
     }
-    
-    /**
-     * @param config config: 
-      {
-        children?:Array<Widget>, 
-        style?:TextStyle, 
-        text?:string, 
-        semanticsLabel?:string,
-      }
-     */
-    static new(config: TextSpanConfig) {
-      return new TextSpan(config);
-    }
   }
   
 
@@ -20317,18 +16660,6 @@ export class CupertinoIcons extends IconData{
         this.textureId = config.textureId;
         this.filterQuality = config.filterQuality;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        textureId?:number, 
-        filterQuality?:FilterQuality, 
-      }
-     */
-    static new(config: TextureConfig) {
-      return new Texture(config);
     }
   }
   
@@ -20530,61 +16861,6 @@ export class CupertinoIcons extends IconData{
         this.strutStyle = config.strutStyle;
       }
     }
-  
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key,
-        controller?:TextEditingController,
-        initialValue?:string,
-        focusNode?:FocusNode,
-        decoration?:InputDecoration,
-        keyboardType?:TextInputType,
-        textInputAction?:TextInputAction,
-        textCapitalization?:TextCapitalization,
-        style?:TextStyle,
-        textAlign?:TextAlign,
-        textAlignVertical?:TextAlignVertical,
-        textDirection?:TextDirection,
-        readOnly?:boolean,
-        toolbarOptions?:ToolbarOptions,
-        showCursor?:boolean,
-        autofocus?:boolean,
-        obscuringCharacter?:string,
-        obscureText?:boolean,
-        autocorrect?:boolean,
-        smartDashesType?:SmartDashesType,
-        smartQuotesType?:SmartQuotesType,
-        enableSuggestions?:boolean,
-        autovalidate?:boolean,
-        maxLines?:number,
-        minLines?:number,
-        expands?:boolean,
-        maxLength?:number,
-        maxLengthEnforced?:boolean,
-        onChanged?:VoidCallbackString,
-        onTap?:VoidCallback,
-        onEditingComplete?:VoidCallback,
-        onFieldSubmitted?:VoidCallbackString,
-        onSaved?:VoidCallbackString,
-        validator?:VoidCallbackString,
-        enabled?:boolean,
-        cursorWidth?:number,
-        cursorRadius?:Radius,
-        cursorColor?:Color,
-        keyboardAppearance?:Brightness,
-        scrollPadding?:EdgeInsets,
-        dragStartBehavior?:DragStartBehavior,
-        enableInteractiveSelection?:boolean, 
-        scrollPhysics?:ScrollPhysics,    
-        inputFormatters?:Array<TextInputFormatter>,
-        strutStyle?:StrutStyle,
-      }
-     */
-    static new(config: TextFormFieldConfig) {
-      return new TextFormField(config);
-    }
   }
 
   //****** TextField ******
@@ -20780,60 +17056,6 @@ export class CupertinoIcons extends IconData{
         this.strutStyle = config.strutStyle;
       }
     }
-  
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key,
-        controller?:TextEditingController,
-        focusNode?:FocusNode,
-        decoration?:InputDecoration,
-        keyboardType?:TextInputType,
-        textInputAction?:TextInputAction,
-        textCapitalization?:TextCapitalization,
-        style?:TextStyle,
-        textAlign?:TextAlign,
-        textAlignVertical?:TextAlignVertical,
-        textDirection?:TextDirection,
-        readOnly?:boolean,
-        toolbarOptions?:ToolbarOptions,
-        showCursor?:boolean,
-        autofocus?:boolean,
-        obscuringCharacter?:string,
-        obscureText?:boolean,
-        autocorrect?:boolean,
-        smartDashesType?:SmartDashesType,
-        smartQuotesType?:SmartQuotesType,
-        enableSuggestions?:boolean,
-        maxLines?:number,
-        minLines?:number,
-        expands?:boolean,
-        maxLength?:number,
-        maxLengthEnforced?:boolean,
-        onChanged?:VoidCallbackString,
-        onEditingComplete?:VoidCallback,
-        onSubmitted?:VoidCallbackString,
-        enabled?:boolean,
-        cursorWidth?:number,
-        cursorRadius?:Radius,
-        cursorColor?:Color,
-        selectionHeightStyle?:BoxHeightStyle,
-        selectionWidthStyle?:BoxWidthStyle,
-        keyboardAppearance?:Brightness,
-        scrollPadding?:EdgeInsets,
-        dragStartBehavior?:DragStartBehavior,
-        enableInteractiveSelection?:boolean,
-        onTap?:VoidCallback,
-        scrollController?:ScrollController,
-        scrollPhysics?:ScrollPhysics,   
-        inputFormatters?:Array<TextInputFormatter>, 
-        strutStyle?:StrutStyle, 
-      }
-     */
-    static new(config: TextFieldConfig) {
-      return new TextField(config);
-    }
   }
 
   //#endregion
@@ -20877,23 +17099,7 @@ export class CupertinoIcons extends IconData{
         this.constrainedAxis = config.constrainedAxis;
         this.clipBehavior = config.clipBehavior;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child?:Widget, 
-          alignment?:Alignment;
-          textDirection?:TextDirection, 
-          constrainedAxis?:Axis, 
-          clipBehavior?:Clip, 
-        }
-     */
-    static new(config: UnconstrainedBoxConfig) {
-      return new UnconstrainedBox(config);
-    }
-  
+    }  
   }
   //#endregion
   
@@ -20936,21 +17142,6 @@ export class CupertinoIcons extends IconData{
         this.endIndent = config.endIndent;
         this.color = config.color;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        width?:number, 
-        thickness?:number, 
-        indent?:number, 
-        endIndent?:number, 
-        color?:Color 
-      }
-    */
-    static new(config: VerticalDividerConfig) {
-      return new VerticalDivider(config);
     }
   }
   
@@ -21006,25 +17197,6 @@ export class CupertinoIcons extends IconData{
         this.maintainSemantics = config.maintainSemantics;
         this.maintainInteractivity = config.maintainInteractivity;
       }
-    }
-    
-    /**
-     * @param config config: 
-      {
-        child:Widget, 
-  
-        key?:Key, 
-        replacement?:Widget, 
-        visible?:boolean, 
-        maintainState?:boolean, 
-        maintainAnimation?:boolean, 
-        maintainSize?:boolean, 
-        maintainSemantics?:boolean, 
-        maintainInteractivity?:boolean, 
-      }
-    */
-    static new(config: VisibilityConfig) {
-      return new Visibility(config);
     }
   }
   
@@ -21091,26 +17263,6 @@ export class CupertinoIcons extends IconData{
         this.clipBehavior = config.clipBehavior;
       }
     }
-  
-    /**
-     * @param config config: 
-      {
-        key?:Key, 
-        children?:Array<Widget>, 
-        alignment?:WrapAlignment, 
-        spacing?:number, 
-        crossAxisAlignment?:WrapCrossAlignment, 
-        textDirection?:TextDecoration, 
-        direction?:Axis, 
-        verticalDirection?:VerticalDirection, 
-        runAlignment?:WrapAlignment, 
-        runSpacing?:number,     
-        clipBehavior?:Clip, 
-      }
-     */
-    static new(config: WrapConfig) {
-      return new Wrap(config);
-    }
   }
   
   //****** WillPopScope ******
@@ -21141,19 +17293,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
         this.onWillPop = config.onWillPop;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        child:Widget, 
-        onWillPop:VoidCallback, 
-  
-        key?:Key, 
-      }
-     */
-    static new(config: WillPopScopeConfig) {
-      return new WillPopScope(config);
     }
   }
   
@@ -21190,20 +17329,6 @@ export class CupertinoIcons extends IconData{
         this.baseline = config.baseline;
         this.style = config.style;
       }
-    }
-  
-    /**
-     * @param config config: 
-      {
-        child:Widget, 
-  
-        alignment?:PlaceholderAlignment, 
-        baseline?:TextBaseline, 
-        style?:TextStyle, 
-      }
-     */
-    static new(config: WidgetSpanConfig) {
-      return new WidgetSpan(config);
     }
   
   }
@@ -21243,18 +17368,6 @@ export class CupertinoIcons extends IconData{
         this.animating = config.animating;
         this.radius = config.radius;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          animating?:boolean, 
-          radius?:number, 
-        }
-     */
-    static new(config: CupertinoActivityIndicatorConfig) {
-      return new CupertinoActivityIndicator(config);
     }
   }
 
@@ -21305,23 +17418,6 @@ export class CupertinoIcons extends IconData{
         this.insetAnimationDuration = config.insetAnimationDuration;
         this.insetAnimationCurve = config.insetAnimationCurve;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          title?:Widget, 
-          content?:Widget, 
-          actions?:Array<CupertinoDialogAction>, 
-          scrollController?:ScrollController, 
-          actionScrollController?:ScrollController, 
-          insetAnimationDuration?:Duration, 
-          insetAnimationCurve?:Curve, 
-        }
-     */
-    static new(config: CupertinoAlertDialogConfig) {
-      return new CupertinoAlertDialog(config);
     }
   }
 
@@ -21380,23 +17476,6 @@ export class CupertinoIcons extends IconData{
       }
     }
   
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child:Widget, 
-          onPressed:VoidCallback, 
-          padding?:EdgeInsets, 
-          color?:Color, 
-          disabledColor?:Color, 
-          minSize?:number, 
-          pressedOpacity?:number, 
-          borderRadius?:BorderRadius, 
-        }
-     */
-    static new(config: CupertinoButtonConfig) {
-      return new CupertinoButton(config);
-    }
   
     /**
      * @param config config: 
@@ -21459,21 +17538,6 @@ export class CupertinoIcons extends IconData{
         this.textStyle = config.textStyle;
         this.child = config.child;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          isDefaultAction?:boolean, 
-          isDestructiveAction?:boolean, 
-          onPressed?:VoidCallback, 
-          child:Widget, 
-          textStyle?:TextStyle, 
-        }
-     */
-    static new(config: CupertinoDialogActionConfig) {
-      return new CupertinoDialogAction(config);
     }
   }
 
@@ -21549,28 +17613,6 @@ export class CupertinoIcons extends IconData{
         this.transitionBetweenRoutes = config.transitionBetweenRoutes;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          leading?:Widget, 
-          automaticallyImplyLeading?:boolean, 
-          automaticallyImplyMiddle?:boolean, 
-          previousPageTitle?:string, 
-          middle?:Widget, 
-          trailing?:Widget, 
-          border?:Border, 
-          backgroundColor?:Color, 
-          brightness?:Brightness, 
-          padding?:EdgeInsets, 
-          actionsForegroundColor?:Color, 
-          transitionBetweenRoutes?:boolean, 
-        }
-     */
-    static new(config: CupertinoNavigationBarConfig) {
-      return new CupertinoNavigationBar(config);
-    }
   }
   
   //****** CupertinoNavigationBarBackButton ******
@@ -21603,19 +17645,6 @@ export class CupertinoIcons extends IconData{
         this.previousPageTitle= config.previousPageTitle;
         this.onPressed =config.onPressed;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          color?:Color, 
-          previousPageTitle?:string, 
-          onPressed?:VoidCallback, 
-        }
-     */
-    static new(config:CupertinoNavigationBarBackButtonConfig) {
-      return new CupertinoNavigationBarBackButton(config);
     }
   }
   
@@ -21677,25 +17706,6 @@ export class CupertinoIcons extends IconData{
         this.thumbColor = config.thumbColor;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          value:number, 
-          onChanged:VoidCallbackNumber, 
-          onChangeStart?:VoidCallbackNumber, 
-          onChangeEnd?:VoidCallbackNumber, 
-          min?:number, 
-          max?:number, 
-          divisions?:number, 
-          activeColor?:Color, 
-          thumbColor?:Color, 
-        }
-     */
-    static new(config: CupertinoSliderConfig) {
-      return new CupertinoSlider(config);
-    }
   }
   
   //****** CupertinoSwitch ******
@@ -21737,21 +17747,6 @@ export class CupertinoIcons extends IconData{
         this.dragStartBehavior = config.dragStartBehavior;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          value:boolean, 
-          onChanged:VoidCallbackBoolean, 
-          activeColor?:Color, 
-          trackColor?:Color, 
-          dragStartBehavior?:DragStartBehavior, 
-        }
-     */
-    static new(config: CupertinoSwitchConfig) {
-      return new CupertinoSwitch(config);
-    }
   }
   
   //****** CupertinoScrollbar ******
@@ -21784,19 +17779,6 @@ export class CupertinoIcons extends IconData{
         this.controller = config.controller;
         this.isAlwaysShown = config.isAlwaysShown;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child:Widget, 
-          controller?:ScrollController, 
-          isAlwaysShown?:boolean, 
-        }
-     */
-    static new(config: CupertinoScrollbarConfig) {
-      return new CupertinoScrollbar(config);
     }
   }
   
@@ -21869,30 +17851,7 @@ export class CupertinoIcons extends IconData{
         this.padding = config.padding;
         this.actionsForegroundColor = config.actionsForegroundColor;
         this.transitionBetweenRoutes = config.transitionBetweenRoutes;
-      }
-  
-    }
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          leading?:Widget, 
-          largeTitle?:Widget, 
-          automaticallyImplyLeading?:boolean, 
-          automaticallyImplyTitle?:boolean, 
-          previousPageTitle?:string, 
-          middle?:Widget, 
-          trailing?:Widget, 
-          border?:Border, 
-          backgroundColor?:Color, 
-          brightness?:Brightness, 
-          padding?:EdgeInsets, 
-          actionsForegroundColor?:Color, 
-          transitionBetweenRoutes?:boolean, 
-        }
-     */
-    static new(config: CupertinoSliverNavigationBarConfig) {
-      return new CupertinoSliverNavigationBar(config);
+      }  
     }
   }
   
@@ -21921,17 +17880,7 @@ export class CupertinoIcons extends IconData{
         this.stops = config.stops;
       }
     }
-  
-    /**
-     * @param config config: 
-        {
-          colors:Array<Color>,
-          stops?:Array<number>,
-        }
-     */
-    static new(config: TestWidgetConfig) {
-      return new TestWidget(config);
-    }
+
   }
 
 
@@ -21987,23 +17936,6 @@ export class CupertinoIcons extends IconData{
       }
     }
   
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          items:Array<BottomNavigationBarItem>, 
-          onTap?:VoidCallbackNumber, 
-          currentIndex?:number, 
-          backgroundColor?:Color, 
-          activeColor?:Color, 
-          inactiveColor?:Color, 
-          iconSize?:number, 
-          border?:Border, 
-        }
-     */
-    static new(config: CupertinoTabBarConfig) {
-      return new CupertinoTabBar(config);
-    }
   }
   //****** CupertinoTabController ******
   interface CupertinoTabControllerConfig {
@@ -22023,16 +17955,6 @@ export class CupertinoIcons extends IconData{
       if(config!=null && config!=undefined){
         this.initialIndex = config.initialIndex;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          initialIndex?:number, 
-        }
-     */
-    static new(config: CupertinoTabControllerConfig) {
-      return new CupertinoTabController(config);
     }
   }
   
@@ -22062,18 +17984,6 @@ export class CupertinoIcons extends IconData{
         this.child = config.child;
         this.data = config.data;
       }
-    }
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          child:Widget, 
-          data:CupertinoThemeData, 
-        }
-     */
-    static new(config: CupertinoThemeConfig) {
-      return new CupertinoTheme(config);
     }
   }
   
@@ -22129,23 +18039,6 @@ export class CupertinoIcons extends IconData{
       }
     }
   
-    /**
-     * @param config config: 
-        {
-          primaryColor?:Color, 
-          textStyle?:TextStyle, 
-          actionTextStyle?:TextStyle, 
-          tabLabelTextStyle?:TextStyle, 
-          navTitleTextStyle?:TextStyle, 
-          navLargeTitleTextStyle?:TextStyle, 
-          navActionTextStyle?:TextStyle, 
-          pickerTextStyle?:TextStyle, 
-          dateTimePickerTextStyle?:TextStyle, 
-        }
-     */
-    static new(config: CupertinoTextThemeDataConfig) {
-      return new CupertinoTextThemeData(config);
-    }
   }
   
   //****** CupertinoThemeData ******
@@ -22188,20 +18081,6 @@ export class CupertinoIcons extends IconData{
       }
     }
   
-    /**
-     * @param config config: 
-        {
-          primaryColor?:Color, 
-          brightness?:Brightness, 
-          primaryContrastingColor?:Color, 
-          textTheme?:CupertinoTextThemeData, 
-          barBackgroundColor?:Color, 
-          scaffoldBackgroundColor?:Color, 
-        }
-     */
-    static new(config: CupertinoThemeDataConfig) {
-      return new CupertinoThemeData(config);
-    }
   }
   
   //#endregion
@@ -22249,20 +18128,945 @@ export class EmptyDataWidget extends Widget {
     }
   }
 
+}
+
+//#endregion
+
+
+//#region ****** Dialog ******
+interface ShowDialogConfig {
+  barrierDismissible?:boolean;
+  useSafeArea?:boolean;
+  useRootNavigator?:boolean;
+  child:Widget;
+}
+export class ShowDialog extends Widget{
+  barrierDismissible?:boolean;
+  useSafeArea?:boolean;
+  useRootNavigator?:boolean;
+  child?:Widget;
+
+  /**
+     * @param config config: 
+        {
+          barrierDismissible?:boolean, 
+          useSafeArea?:boolean, 
+          useRootNavigator?:boolean, 
+          child:Widget (通常返回Dialog组件，比如SimpleDialog和AlertDialog),
+        }
+     */
+    constructor(config: ShowDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.barrierDismissible = config.barrierDismissible;
+        this.useSafeArea = config.useSafeArea;
+        this.useRootNavigator = config.useRootNavigator;
+        this.child = config.child;
+      }
+    }
+
+}
+
+//****** AlertDialog ******
+interface AlertDialogConfig {
+  key?:Key;
+  title?:Widget;
+  titlePadding?:EdgeInsets;
+  titleTextStyle?:TextStyle;
+  content?:Widget;
+  contentPadding?:EdgeInsets;
+  contentTextStyle?:TextStyle;
+  actions?:Array<Widget>;
+  actionsPadding?:EdgeInsets;
+  actionsOverflowDirection?:VerticalDirection;
+  actionsOverflowButtonSpacing?:number;
+  buttonPadding?:EdgeInsets;
+  backgroundColor?:Color;
+  elevation?:number;
+  semanticLabel?:string;
+  insetPadding?:EdgeInsets;
+  clipBehavior?:Clip;
+  shape?:ShapeBorder;
+  scrollable?:boolean;
+}
+export class AlertDialog extends Widget {
+  key?:Key;
+  title?:Widget;
+  titlePadding?:EdgeInsets;
+  titleTextStyle?:TextStyle;
+  content?:Widget;
+  contentPadding?:EdgeInsets;
+  contentTextStyle?:TextStyle;
+  actions?:Array<Widget>;
+  actionsPadding?:EdgeInsets;
+  actionsOverflowDirection?:VerticalDirection;
+  actionsOverflowButtonSpacing?:number;
+  buttonPadding?:EdgeInsets;
+  backgroundColor?:Color;
+  elevation?:number;
+  semanticLabel?:string;
+  insetPadding?:EdgeInsets;
+  clipBehavior?:Clip;
+  shape?:ShapeBorder;
+  scrollable?:boolean;
+
   /**
    * @param config config: 
       {
         key?:Key, 
-        title?:string, 
-        imageName?:string, 
-        imageSize?:string, 
+        title?:Widget, 
+        titlePadding?:EdgeInsets, 
+        titleTextStyle?:TextStyle, 
+        content?:Widget, 
+        contentPadding?:EdgeInsets, 
+        contentTextStyle?:TextStyle, 
+        actions?:Array<Widget>, 
+        actionsPadding?:EdgeInsets, 
+        actionsOverflowDirection?:VerticalDirection, 
+        actionsOverflowButtonSpacing?:number, 
+        buttonPadding?:EdgeInsets, 
         backgroundColor?:Color, 
-        titleStyle?:TextStyle, 
+        elevation?:number, 
+        semanticLabel?:string, 
+        insetPadding?:EdgeInsets, 
+        clipBehavior?:Clip, 
+        shape?:ShapeBorder, 
+        scrollable?:boolean, 
       }
    */
-  static new(config?: EmptyDataWidgetConfig) {
-    return new EmptyDataWidget(config);
+
+  constructor(config: AlertDialogConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.title = config.title;
+      this.titlePadding = config.titlePadding;
+      this.titleTextStyle = config.titleTextStyle;
+      this.content = config.content;
+      this.contentPadding = config.contentPadding;
+      this.contentTextStyle = config.contentTextStyle;
+      this.actions = config.actions;
+      this.actionsPadding = config.actionsPadding;
+      this.actionsOverflowDirection = config.actionsOverflowDirection;
+      this.actionsOverflowButtonSpacing = config.actionsOverflowButtonSpacing;
+      this.buttonPadding = config.buttonPadding;
+      this.backgroundColor = config.backgroundColor;
+      this.elevation = config.elevation;
+      this.semanticLabel = config.semanticLabel;
+      this.insetPadding = config.insetPadding;
+      this.shape = config.shape;
+      this.scrollable = config.scrollable;
+    }
   }
 }
 
+
+
+interface ShowCupertinoDialogConfig {
+  barrierDismissible?:boolean;
+  useRootNavigator?:boolean;
+  child:CupertinoAlertDialog;
+}
+export class ShowCupertinoDialog extends Widget{
+  barrierDismissible?:boolean;
+  useRootNavigator?:boolean;
+  child?:CupertinoAlertDialog;
+
+  /**
+     * @param config config: 
+        {
+          barrierDismissible?:boolean, 
+          useRootNavigator?:boolean, 
+          child:CupertinoAlertDialog, 
+        }
+     */
+    constructor(config: ShowCupertinoDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.barrierDismissible = config.barrierDismissible;
+        this.useRootNavigator = config.useRootNavigator;
+        this.child = config.child;
+      }
+    }
+}
+
+interface ShowGeneralDialogConfig {
+  barrierDismissible?:boolean;
+  useRootNavigator?:boolean;
+  barrierLabel?:string;
+  barrierColor?:Color;
+  transitionDuration?:Duration;
+  child:Widget;
+}
+export class ShowGeneralDialog extends Widget{
+  barrierDismissible?:boolean;
+  useRootNavigator?:boolean;
+  barrierLabel?:string;
+  barrierColor?:Color;
+  transitionDuration?:Duration;
+  child?:Widget;
+
+  /**
+     * @param config config: 
+        {
+          barrierDismissible?:boolean, 
+          useRootNavigator?:boolean, 
+          barrierLabel?:string, 
+          barrierColor?:Color, 
+          transitionDuration?:Duration, 
+          child:Widget, 
+        }
+     */
+    constructor(config: ShowGeneralDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.barrierDismissible = config.barrierDismissible;
+        this.useRootNavigator = config.useRootNavigator;
+        this.barrierLabel = config.barrierLabel;
+        this.transitionDuration = config.transitionDuration;
+        this.child= config.child;
+      }
+    }
+}
+
+interface ShowBottomSheetConfig {
+  backgroundColor?:Color;
+  elevation?:number;
+  shape?:ShapeBorder;
+  clipBehavior?:Clip;
+  child:Widget;
+}
+export class ShowBottomSheet extends Widget{
+  backgroundColor?:Color;
+  elevation?:number;
+  shape?:ShapeBorder;
+  clipBehavior?:Clip;
+  child?:Widget;
+
+  /**
+     * @param config config: 
+        {
+          backgroundColor?:Color, 
+          elevation?:number, 
+          shape?:ShapeBorder, 
+          clipBehavior?:Clip, 
+          child:Widget, 
+        }
+     */
+    constructor(config: ShowBottomSheetConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.backgroundColor = config.backgroundColor;
+        this.elevation = config.elevation;
+        this.shape = config.shape;
+        this.clipBehavior = config.clipBehavior;
+        this.child = config.child;
+      }
+    }
+}
+
+interface ShowModalBottomSheetConfig {
+  backgroundColor?:Color;
+  elevation?:number;
+  shape?:ShapeBorder;
+  clipBehavior?:Clip;
+  barrierColor?:Color;
+  isScrollControlled?:boolean;
+  useRootNavigator?:boolean;
+  isDismissible?:boolean;
+  enableDrag?:boolean;
+  child:Widget;
+}
+export class ShowModalBottomSheet extends Widget{
+  backgroundColor?:Color;
+  elevation?:number;
+  shape?:ShapeBorder;
+  clipBehavior?:Clip;
+  barrierColor?:Color;
+  isScrollControlled?:boolean;
+  useRootNavigator?:boolean;
+  isDismissible?:boolean;
+  enableDrag?:boolean;
+  child?:Widget;
+
+  /**
+     * @param config config: 
+        {
+          backgroundColor?:Color, 
+          elevation?:number, 
+          shape?:ShapeBorder, 
+          clipBehavior?:Clip, 
+          barrierColor?:Color, 
+          isScrollControlled?:boolean;, 
+          useRootNavigator?:boolean, 
+          isDismissible?:boolean, 
+          enableDrag?:boolean, 
+          child?:Widget, 
+        }
+     */
+    constructor(config: ShowModalBottomSheetConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.backgroundColor = config.backgroundColor;
+        this.elevation = config.elevation;
+        this.shape = config.shape;
+        this.clipBehavior = config.clipBehavior;
+        this.barrierColor = config.barrierColor;
+        this.isScrollControlled = config.isScrollControlled;
+        this.useRootNavigator = config.useRootNavigator;
+        this.isDismissible = config.isDismissible;
+        this.enableDrag = config.enableDrag;
+        this.child = config.child;
+      }
+    }
+}
+
+interface ShowCupertinoModalPopupConfig {
+  useRootNavigator?:boolean;
+  semanticsDismissible?:boolean;
+  child:Widget;
+}
+export class ShowCupertinoModalPopup extends Widget{
+  useRootNavigator?:boolean;
+  semanticsDismissible?:boolean;
+  child?:Widget;
+
+  /**
+     * @param config config: 
+        {
+          useRootNavigator?:boolean, 
+          semanticsDismissible?:boolean, 
+          child:Widget, 
+        }
+     */
+    constructor(config: ShowCupertinoModalPopupConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.useRootNavigator = config.useRootNavigator;
+        this.semanticsDismissible = config.semanticsDismissible;
+        this.child = config.child;
+      }
+    }
+}
+
+interface SimpleDialogButtonInfoConfig {
+  text?:string;
+  textStyle?:TextStyle;
+}
+export class SimpleDialogButtonInfo extends Widget{
+  text?:string;
+  textStyle?:TextStyle;
+
+  /**
+     * @param config config: 
+        {
+          title?:string, 
+          textStyle?:TextStyle,
+        }
+     */
+    constructor(config: SimpleDialogButtonInfoConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.text = config.text;
+        this.textStyle = config.textStyle;
+      }
+    }
+}
+
+//****** CustomAlertDialogAnimationType ******
+export enum CustomAlertDialogAnimationType {
+  fromRight = "fromRight",
+  fromLeft = "fromLeft",
+  fromTop = "fromTop",
+  fromBottom = "fromBottom",
+  grow = "grow",
+  shrink = "shrink",
+}
+
+interface CustomAlertDialogButtonConfig {
+  child?:Widget;
+  width?:number;
+  height?:number;
+  bgColor?:Color;
+  gradient?:Gradient;
+  radius?:BorderRadius;
+  onPressed?:VoidCallback;
+}
+export class CustomAlertDialogButton extends Widget{
+  child?:Widget;
+  width?:number;
+  height?:number;
+  bgColor?:Color;
+  gradient?:Gradient;
+  radius?:BorderRadius;
+  onPressed?:VoidCallback;
+
+  /**
+     * @param config config: 
+        {
+          child?:Widget, 
+          width?:number, 
+          height?:number, 
+          bgColor?:Color, 
+          gradient?:Gradient, 
+          radius?:BorderRadius, 
+          onPressed?:VoidCallback, 
+        }
+     */
+    constructor(config: CustomAlertDialogButtonConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.child = config.child;
+        this.width = config.width;
+        this.height = config.height;
+        this.bgColor = config.bgColor;
+        this.gradient = config.gradient;
+        this.radius = config.radius;
+        this.onPressed = config.onPressed;
+      }
+    }
+}
+
+interface CustomAlertDialogStyleConfig {
+  animationType?:CustomAlertDialogAnimationType;
+  animationDuration?:Duration;
+  alertBorder?:ShapeBorder;
+  isCloseButton?:boolean;
+  isOverlayTapDismiss?:boolean;
+  backgroundColor?:Color;
+  overlayColor?:Color;
+  buttonSpace?:number;
+  titleHeight?:number;
+  titleStyle?:TextStyle;
+  descStyle?:TextStyle;
+  buttonAreaPadding?:EdgeInsets;
+  constraints?:BoxConstraints;
+}
+export class CustomAlertDialogStyle extends Widget{
+  animationType?:CustomAlertDialogAnimationType;
+  animationDuration?:Duration;
+  alertBorder?:ShapeBorder;
+  isCloseButton?:boolean;
+  isOverlayTapDismiss?:boolean;
+  backgroundColor?:Color;
+  overlayColor?:Color;
+  buttonSpace?:number;
+  titleHeight?:number;
+  titleStyle?:TextStyle;
+  descStyle?:TextStyle;
+  buttonAreaPadding?:EdgeInsets;
+  constraints?:BoxConstraints;
+
+  /**
+     * @param config config: 
+        {
+          animationType?:CustomAlertDialogAnimationType, 
+          animationDuration?:Duration, 
+          alertBorder?:ShapeBorder, 
+          isCloseButton?:boolean, 
+          isOverlayTapDismiss?:boolean, 
+          backgroundColor?:Color, 
+          overlayColor?:Color, 
+          buttonSpace?:number, 
+          titleHeight?:number, 
+          titleStyle?:TextStyle, 
+          descStyle?:TextStyle, 
+          buttonAreaPadding?:EdgeInsets, 
+          constraints?:BoxConstraints, 
+        }
+     */
+    constructor(config: CustomAlertDialogStyleConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.animationType = config.animationType;
+        this.animationDuration = config.animationDuration;
+        this.alertBorder = config.alertBorder;
+        this.isCloseButton = config.isCloseButton;
+        this.isOverlayTapDismiss = config.isOverlayTapDismiss;
+        this.backgroundColor = config.backgroundColor;
+        this.overlayColor = config.overlayColor;
+        this.buttonSpace = config.buttonSpace;
+        this.titleHeight = config.titleHeight;
+        this.titleStyle = config.titleStyle;
+        this.descStyle = config.descStyle;
+        this.buttonAreaPadding = config.buttonAreaPadding;
+        this.constraints = config.constraints;
+      }
+    }
+}
+
+
+interface ShowCustomAlertDialogConfig {
+  style?:CustomAlertDialogStyle;
+  image?:Widget;
+  title?:string;
+  desc?:string;
+  content?:Widget;
+  actions?:Array<CustomAlertDialogButton>;
+  closeFunction?:VoidCallback;
+}
+export class ShowCustomAlertDialog extends Widget{
+  style?:CustomAlertDialogStyle;
+  image?:Widget;
+  title?:string;
+  desc?:string;
+  content?:Widget;
+  actions?:Array<CustomAlertDialogButton>;
+  closeFunction?:VoidCallback;
+
+  /**
+     * @param config config: 
+        {
+          style?:CustomAlertDialogStyle, 
+          image?:Widget, 
+          title?:string, 
+          desc?:string, 
+          content?:Widget, 
+          actions?:Array<CustomAlertDialogButton>, 
+          closeFunction?:VoidCallback, 
+        }
+     */
+    constructor(config: ShowCustomAlertDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.style = config.style;
+        this.image = config.image;
+        this.title = config.title;
+        this.desc = config.desc;
+        this.content = config.content;
+        this.actions = config.actions;
+        this.closeFunction= config.closeFunction;
+      }
+    }
+}
+
+interface SimpleCustomDialogButtonInfoConfig {
+  text?:string;
+  textStyle?:TextStyle;
+  bgColor?:Color;
+}
+export class SimpleCustomDialogButtonInfo extends Widget{
+  text?:string;
+  textStyle?:TextStyle;
+  bgColor?:Color;
+
+  /**
+     * @param config config: 
+        {
+          title?:string, 
+          textStyle?:TextStyle,
+          bgColor?:Color,
+        }
+     */
+    constructor(config: SimpleCustomDialogButtonInfoConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.text = config.text;
+        this.textStyle = config.textStyle;
+        this.bgColor = config.bgColor;
+      }
+    }
+     
+}
+
+interface ShowSimpleCustomDialogConfig {
+  style?:CustomAlertDialogStyle;
+  image?:Widget;
+  title?:string;
+  desc?:string;
+  content?:Widget;
+  actions?:Array<SimpleCustomDialogButtonInfo>;
+  onTap?:VoidCallbackNumber;
+}
+export class ShowSimpleCustomDialog extends Widget{
+  style?:CustomAlertDialogStyle;
+  image?:Widget;
+  title?:string;
+  desc?:string;
+  content?:Widget;
+  actions?:Array<SimpleCustomDialogButtonInfo>;
+  onTap?:VoidCallbackNumber;
+
+  /**
+     * @param config config: 
+        {
+          style?:CustomAlertDialogStyle, 
+          image?:Widget, 
+          title?:string, 
+          desc?:string, 
+          content?:Widget, 
+          actions?:Array<CustomDialogButtonInfo>, 
+          onTap?:VoidCallbackNumber, 
+        }
+     */
+    constructor(config: ShowSimpleCustomDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.style = config.style;
+        this.image = config.image;
+        this.title = config.title;
+        this.desc = config.desc;
+        this.content = config.content;
+        this.actions = config.actions;
+        this.onTap = config.onTap;
+      }
+    }
+}
+
+
+interface ShowSimpleDialogConfig {
+  title?:string;
+  titleContent?:Widget;
+  desc?:string;
+  descContent?:Widget;
+  actions?:Array<SimpleDialogButtonInfo>;
+  onTap?:VoidCallbackNumber;
+  barrierDismissible?:boolean;
+}
+export class ShowSimpleDialog extends Widget{
+  title?:string;
+  titleContent?:Widget;
+  desc?:string;
+  descContent?:Widget;
+  actions?:Array<SimpleDialogButtonInfo>;
+  onTap?:VoidCallbackNumber;
+  barrierDismissible?:boolean;
+
+  /**
+     * @param config config: 
+        {
+          title?:string, 
+          titleContent?:Widget,
+          desc?:string,
+          descContent?:Widget,
+          actions:Array<SimpleDialogButtonInfo>,
+          onTap?:VoidCallbackNumber,
+          barrierDismissible?:boolean,
+        }
+     */
+    constructor(config: ShowSimpleDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.title = config.title;
+        this.titleContent = config.titleContent;
+        this.desc = config.desc;
+        this.descContent = config.descContent;
+        this.actions = config.actions;
+        this.onTap = config.onTap;
+        this.barrierDismissible = config.barrierDismissible;
+      }
+    }
+}
+
+interface ShowCustomActionSheetConfig {
+  title?:string;
+  titleContent?:Widget;
+  itemList:Array<string>;
+  onTap:VoidCallbackNumber;
+}
+export class ShowCustomActionSheet extends Widget{
+  title?:string;
+  titleContent?:Widget;
+  itemList?:Array<string>;
+  onTap?:VoidCallbackNumber;
+
+  /**
+     * @param config config: 
+        {
+          title?:string, 
+          titleContent?:Widget, 
+          itemList:Array<string>, 
+          onTap:VoidCallbackNumber, 
+        }
+     */
+    constructor(config: ShowCustomActionSheetConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.title = config.title;
+        this.titleContent = config.titleContent;
+        this.itemList = config.itemList;
+        this.onTap = config.onTap;
+      }
+    }
+}
+
+interface ShowSimpleActionSheetConfig {
+  title?:string;
+  titleContent?:Widget;
+  itemList:Array<string>;
+  onTap:VoidCallbackNumber;
+}
+export class ShowSimpleActionSheet extends Widget{
+  title?:string;
+  titleContent?:Widget;
+  itemList?:Array<string>;
+  onTap?:VoidCallbackNumber;
+
+  /**
+     * @param config config: 
+        {
+          title?:string, 
+          titleContent?:Widget, 
+          itemList:Array<string>, 
+          onTap:VoidCallbackNumber, 
+        }
+     */
+    constructor(config: ShowSimpleActionSheetConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.title = config.title;
+        this.titleContent = config.titleContent;
+        this.itemList = config.itemList;
+        this.onTap = config.onTap;
+      }
+    }
+}
+
+
+export class Dialog extends DartClass {
+
+  static instance:Dialog;
+
+  constructor() {
+      super();
+      //Mirror对象在构造函数创建 MirrorID
+      this.createMirrorID();
+
+      //创建对应FLutter对象
+      this.createMirrorObj();
+  }
+
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new Dialog();
+    }
+    return this.instance;
+  }
+
+  //显示简单选择
+  _show(baseWidget:BaseWidget,funcName:string,child:any){
+    Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+          widgetID:String(baseWidget.widgetID),
+          mirrorID: Dialog.getInstance().mirrorID,
+          className: Dialog.getInstance().className,
+          funcName: funcName,
+          args:{
+            widgetID:String(baseWidget.widgetID),
+            child:baseWidget.helper.buildWidgetTreeSubWidget(child),
+          },
+      }));
+  }
+
+  static showDialog(baseWidget:BaseWidget,child:ShowDialog){
+    Dialog.getInstance()._show(baseWidget,"showDialog",child);
+  }
+
+  static showCupertinoDialog(baseWidget:BaseWidget,child:ShowCupertinoDialog){
+    Dialog.getInstance()._show(baseWidget,"showCupertinoDialog",child);
+  }
+
+  static showGeneralDialog(baseWidget:BaseWidget,child:ShowGeneralDialog){
+    Dialog.getInstance()._show(baseWidget,"showGeneralDialog",child);
+  }
+
+  static showBottomSheet(baseWidget:BaseWidget,child:ShowBottomSheet){
+    Dialog.getInstance()._show(baseWidget,"showBottomSheet",child);
+  }
+
+  static showModalBottomSheet(baseWidget:BaseWidget,child:ShowModalBottomSheet){
+    Dialog.getInstance()._show(baseWidget,"showBottshowModalBottomSheetomSheet",child);
+  }
+
+  static showCupertinoModalPopup(baseWidget:BaseWidget,child:ShowCupertinoModalPopup){
+    Dialog.getInstance()._show(baseWidget,"showCupertinoModalPopup",child);
+  }  
+  
+  static showCustomActionSheet(baseWidget:BaseWidget,child:ShowCustomActionSheet){
+    Dialog.getInstance()._show(baseWidget,"showCustomActionSheet",child);
+  }
+
+  static showSimpleActionSheet(baseWidget:BaseWidget,child:ShowSimpleActionSheet){
+    Dialog.getInstance()._show(baseWidget,"showSimpleActionSheet",child);
+  }
+
+  static showSimpleCupertinoDialog(baseWidget:BaseWidget,child:ShowSimpleDialog){
+    Dialog.getInstance()._show(baseWidget,"showSimpleCupertinoDialog",child);
+  }
+
+  static showSimpleAlertDialog(baseWidget:BaseWidget,child:ShowSimpleDialog){
+    Dialog.getInstance()._show(baseWidget,"showSimpleAlertDialog",child);
+  }
+
+  static showSimpleCustomDialog(baseWidget:BaseWidget,child:ShowSimpleCustomDialog){
+    Dialog.getInstance()._show(baseWidget,"showSimpleCustomDialog",child);
+  }
+
+  static showCustomAlertDialog(baseWidget:BaseWidget,child:ShowCustomAlertDialog){
+    Dialog.getInstance()._show(baseWidget,"showCustomAlertDialog",child);
+  }
+
+
+  static dismiss(baseWidget:BaseWidget){
+    Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+          widgetID:String(baseWidget.widgetID),
+          mirrorID: Dialog.getInstance().mirrorID,
+          className: Dialog.getInstance().className,
+          funcName: "dismiss",
+          args:{
+            widgetID:String(baseWidget.widgetID),
+          },
+      }));
+  }
+}
+
+
 //#endregion
+
+
+//#region ****** Loading ******
+interface LoadingInfoConfig {
+    info:string;
+    duration?:Duration;
+    alignment?:Alignment;
+    animation?:boolean;
+}
+interface LoadingProgressConfig {
+    value:number;
+    alignment?:Alignment;
+}
+export class Loading extends DartClass {
+
+    static instance:Loading;
+
+    constructor() {
+        super();
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
+
+        //创建对应FLutter对象
+        this.createMirrorObj();
+    }
+
+    static getInstance() {
+        if (!this.instance) {
+          this.instance = new Loading();
+        }
+        return this.instance;
+      }
+   
+    /**
+     * @param config config: 
+      {
+        info:string, 
+        duration?:Duration, 
+        alignment?:Alignment, 
+      }
+     */
+    static showSuccess(config:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: Loading.getInstance().className,
+            funcName: "showSuccess",
+            args: config,
+        }));
+    }
+
+    /**
+     * @param config config: 
+      {
+        info:string, 
+        duration?:Duration, 
+        alignment?:Alignment, 
+      }
+     */
+    static showError(config:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: Loading.getInstance().className,
+            funcName: "showError",
+            args: config,
+        }));
+    }
+
+   /**
+     * @param config config: 
+      {
+        info:string, 
+        duration?:Duration, 
+        alignment?:Alignment, 
+      }
+     */
+    static showInfo(config:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: Loading.getInstance().className,
+            funcName: "showInfo",
+            args: config,
+        }));
+    }
+
+    /**
+     * @param config config: 
+      {
+        info:string, 
+        duration?:Duration, 
+        alignment?:Alignment, 
+      }
+     */
+    static showToast(config:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: Loading.getInstance().className,
+            funcName: "showToast",
+            args: config,
+        }));
+    }
+
+    /**
+     * @param config config: 
+      {
+        info:string, 
+        alignment?:Alignment, 
+      }
+     */
+    static show(config:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: Loading.getInstance().className,
+            funcName: "show",
+            args: config,
+        }));
+    }
+
+    /**
+     * @param config config: 
+      {
+        value:number(0~100), 
+        alignment?:Alignment, 
+      }
+     */
+    static showProgress(config:LoadingProgressConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: "Loading",
+            funcName: "showProgress",
+            args: config,
+        }));
+    }
+
+     /**
+     * @param config config: 
+      {
+        animation?:animation,
+      }
+     */
+    static dismiss(config?:LoadingInfoConfig){
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: Loading.getInstance().mirrorID,
+            className: "Loading",
+            funcName: "dismiss",
+            args: config,
+        }));
+    }
+}
+//#endregion
+

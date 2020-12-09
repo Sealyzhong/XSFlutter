@@ -11,38 +11,38 @@ import { MyTestWidgetPage } from "demo/examples/test_widget_page";
 
 export class MyExamplesIndex extends fs.StatelessWidget{
 
-    _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
+    _style = new fs.TextStyle({fontSize:24,fontWeight:fs.FontWeight.bold});
 
     build(context:fs.BuildContext){
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title: fs.Text.new("通用案例"),
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title: new fs.Text("通用案例"),
             }),
-            body:fs.ListView.new({
+            body:new fs.ListView({
                 children:[
-                    fs.ListTile.new({
-                        leading:fs.Text.new("1",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Flutter Counter"),
-                        subtitle:fs.Text.new("Flutter 官方 Demo"),
+                    new fs.ListTile({
+                        leading:new fs.Text("1",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Flutter Counter"),
+                        subtitle:new fs.Text("Flutter 官方 Demo"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyCounterPage.new();
+                                    return new MyCounterPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        leading:fs.Text.new("2",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Test Widget"),
-                        subtitle:fs.Text.new("测试常用属于DSL JSON字符,方便映射开发"),
+                    new fs.ListTile({
+                        leading:new fs.Text("2",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Test Widget"),
+                        subtitle:new fs.Text("测试常用属于DSL JSON字符,方便映射开发"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyTestWidgetPage.new();
+                                    return new MyTestWidgetPage();
                                 }
                             }));
                         }                        
@@ -50,9 +50,5 @@ export class MyExamplesIndex extends fs.StatelessWidget{
                 ],
             }),
         });
-    }
-
-    static new(){
-        return new MyExamplesIndex();
     }
 }

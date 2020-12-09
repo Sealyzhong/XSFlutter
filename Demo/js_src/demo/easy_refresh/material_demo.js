@@ -14,53 +14,50 @@ class MyEasyRefreshMaterialDemoPage extends fs.StatefulWidget {
     createState() {
         return new _MyEasyRefreshMaterialDemoPageState(this);
     }
-    static new() {
-        return new MyEasyRefreshMaterialDemoPage();
-    }
 }
 exports.MyEasyRefreshMaterialDemoPage = MyEasyRefreshMaterialDemoPage;
 class _MyEasyRefreshMaterialDemoPageState extends fs.WidgetState {
     constructor() {
         super(...arguments);
-        this.refreshController = tl.EasyRefreshController.new();
+        this.refreshController = new tl.EasyRefreshController();
         this._maxCount = icon_data_1.MyIconData.cupertinoIcons.length;
         this._count = 20;
     }
     //重构
     build(context) {
         var that = this;
-        return fs.Scaffold.new({
-            appBar: fs.AppBar.new({
-                title: fs.Text.new("Material Demo"),
+        return new fs.Scaffold({
+            appBar: new fs.AppBar({
+                title: new fs.Text("Material Demo"),
             }),
-            body: tl.EasyRefresher.new({
+            body: new tl.EasyRefresher({
                 enableControlFinishRefresh: true,
                 enableControlFinishLoad: true,
                 controller: this.refreshController,
-                header: tl.EasyRefreshMaterialHeader.new(),
-                footer: tl.EasyRefreshMaterialFooter.new({ isNoMoreText: true }),
+                header: new tl.EasyRefreshMaterialHeader(),
+                footer: new tl.EasyRefreshMaterialFooter({ isNoMoreText: true }),
                 onRefresh: function () {
-                    tl.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
-                    fs.Future.delayed(fs.Duration.new({
+                    fs.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
+                    fs.Future.delayed(new fs.Duration({
                         seconds: 2
                     }), function () {
                         that._count = 20;
-                        tl.Loading.dismiss();
+                        fs.Loading.dismiss();
                         that.refreshController.finishRefresh({ success: true, noMore: false });
                         that.refreshController.finishLoad({ success: true, noMore: that._count >= that._maxCount });
                         that.setState();
                     });
                 },
                 onLoad: function () {
-                    tl.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
-                    fs.Future.delayed(fs.Duration.new({
+                    fs.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
+                    fs.Future.delayed(new fs.Duration({
                         seconds: 2
                     }), function () {
                         that._count = that._count + 20;
                         if (that._count >= that._maxCount) {
                             that._count = that._maxCount;
                         }
-                        tl.Loading.dismiss();
+                        fs.Loading.dismiss();
                         that.refreshController.finishLoad({ success: true, noMore: that._count >= that._maxCount });
                         that.setState();
                     });
@@ -69,14 +66,14 @@ class _MyEasyRefreshMaterialDemoPageState extends fs.WidgetState {
                     itemCount: this._count,
                     itemBuilder: (context, index) => {
                         var model = icon_data_1.MyIconData.cupertinoIcons[index];
-                        return fs.Container.new({
+                        return new fs.Container({
                             padding: fs.EdgeInsets.all(10),
-                            child: fs.Row.new({
+                            child: new fs.Row({
                                 children: [
-                                    fs.Icon.new(model.value),
-                                    fs.SizedBox.new({ width: 10 }),
-                                    fs.Expanded.new({
-                                        child: fs.Text.new(model.name, { overflow: fs.TextOverflow.ellipsis, style: fs.TextStyle.new({ fontSize: 16 }) }),
+                                    new fs.Icon(model.value),
+                                    new fs.SizedBox({ width: 10 }),
+                                    new fs.Expanded({
+                                        child: new fs.Text(model.name, { overflow: fs.TextOverflow.ellipsis, style: new fs.TextStyle({ fontSize: 16 }) }),
                                     }),
                                 ]
                             })

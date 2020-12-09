@@ -150,14 +150,14 @@ export class MyTestWidgetPage extends fs.StatelessWidget{
     getWidgetList(){
         var list = new Array<fs.Widget>();
         this.l.forEach((v,k)=>{
-            list.push( fs.Container.new({
+            list.push( new fs.Container({
                 padding:fs.EdgeInsets.all(10),
-                child:fs.Row.new({
+                child:new fs.Row({
                   children: [
-                    fs.Icon.new(v),
-                    fs.SizedBox.new({width:10}),
-                    fs.Expanded.new({
-                        child:fs.Text.new(k,{overflow:fs.TextOverflow.ellipsis, style:fs.TextStyle.new({fontSize:16})},),
+                    new fs.Icon(v),
+                    new fs.SizedBox({width:10}),
+                    new fs.Expanded({
+                        child:new fs.Text(k,{overflow:fs.TextOverflow.ellipsis, style:new fs.TextStyle({fontSize:16})},),
                     }),
                     
                   ]
@@ -170,7 +170,7 @@ export class MyTestWidgetPage extends fs.StatelessWidget{
     async _goTo(){
         /*this.sc.animateTo({
             offset:200,
-            duration:fs.Duration.new({seconds:4}),
+            duration:new fs.Duration({seconds:4}),
             curve:fs.Curve.linear,
         });*/
         /*this.sc.jumpTo({
@@ -183,27 +183,23 @@ export class MyTestWidgetPage extends fs.StatelessWidget{
 
     }
 
-    sc = fs.ScrollController.new({});
+    sc = new fs.ScrollController({});
     //重构
     build(context:fs.BuildContext) {
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title:fs.Text.new("Test Widget")
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title:new fs.Text("Test Widget")
             }),
-            body: fs.SingleChildScrollView.new({
-                child:fs.Column.new({
+            body: new fs.SingleChildScrollView({
+                child:new fs.Column({
                     children:this.getWidgetList()
                 }),
                 controller:this.sc,
             }),
-            floatingActionButton:fs.FloatingActionButton.new({
+            floatingActionButton:new fs.FloatingActionButton({
                 onPressed:this._goTo.bind(this),
-                child:fs.Icon.new(fs.Icons.add),
+                child:new fs.Icon(fs.Icons.add),
             }),
         });
-    }
-
-    static new(){
-        return new MyTestWidgetPage();
     }
 }

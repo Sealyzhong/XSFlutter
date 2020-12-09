@@ -13,9 +13,6 @@ class MyScreenInfoPage extends fs.StatefulWidget {
     createState() {
         return new _MyScreenInfoPage(this);
     }
-    static new() {
-        return new MyScreenInfoPage();
-    }
 }
 exports.MyScreenInfoPage = MyScreenInfoPage;
 class _MyScreenInfoPage extends fs.WidgetState {
@@ -24,26 +21,26 @@ class _MyScreenInfoPage extends fs.WidgetState {
         this.setState();
     }
     build(context) {
-        return fs.Scaffold.new({
-            appBar: fs.AppBar.new({
-                title: fs.Text.new("屏幕信息"),
+        return new fs.Scaffold({
+            appBar: new fs.AppBar({
+                title: new fs.Text("屏幕信息"),
             }),
-            body: fs.Center.new({
-                child: fs.Column.new({
+            body: new fs.Center({
+                child: new fs.Column({
                     mainAxisAlignment: fs.MainAxisAlignment.center,
                     children: [
-                        fs.Text.new("appBarHeight:" + String(tl.ScreenInfo.appBarHeight)),
-                        fs.Text.new("bottomBarHeight:" + String(tl.ScreenInfo.bottomBarHeight)),
-                        fs.Text.new("screenDensity:" + String(tl.ScreenInfo.screenDensity)),
-                        fs.Text.new("dpRatio:" + String(tl.ScreenInfo.dpRatio)),
-                        fs.Text.new("pxRatio:" + String(tl.ScreenInfo.pxRatio)),
-                        fs.Text.new("Width+Height:" + String(tl.ScreenInfo.screenWidth) + "x" + String(tl.ScreenInfo.screenHeight)),
-                        fs.Text.new("Width+Height(px):" + String(tl.ScreenInfo.screenWidthPx) + "x" + String(tl.ScreenInfo.screenHeightPx)),
-                        fs.Text.new("uiDensity:" + String(tl.ScreenInfo.uiDensity)),
-                        fs.Text.new("Width+Height(UI):" + String(tl.ScreenInfo.uiWidth) + "x" + String(tl.ScreenInfo.uiHeight)),
-                        fs.Text.new("Width+Height(px)(UI):" + String(tl.ScreenInfo.uiWidthPx) + "x" + String(tl.ScreenInfo.uiHeightPx)),
-                        fs.RaisedButton.new({
-                            child: fs.Text.new("更新屏幕值"),
+                        new fs.Text("appBarHeight:" + String(tl.ScreenInfo.appBarHeight)),
+                        new fs.Text("bottomBarHeight:" + String(tl.ScreenInfo.bottomBarHeight)),
+                        new fs.Text("screenDensity:" + String(tl.ScreenInfo.screenDensity)),
+                        new fs.Text("dpRatio:" + String(tl.ScreenInfo.dpRatio)),
+                        new fs.Text("pxRatio:" + String(tl.ScreenInfo.pxRatio)),
+                        new fs.Text("Width+Height:" + String(tl.ScreenInfo.screenWidth) + "x" + String(tl.ScreenInfo.screenHeight)),
+                        new fs.Text("Width+Height(px):" + String(tl.ScreenInfo.screenWidthPx) + "x" + String(tl.ScreenInfo.screenHeightPx)),
+                        new fs.Text("uiDensity:" + String(tl.ScreenInfo.uiDensity)),
+                        new fs.Text("Width+Height(UI):" + String(tl.ScreenInfo.uiWidth) + "x" + String(tl.ScreenInfo.uiHeight)),
+                        new fs.Text("Width+Height(px)(UI):" + String(tl.ScreenInfo.uiWidthPx) + "x" + String(tl.ScreenInfo.uiHeightPx)),
+                        new fs.RaisedButton({
+                            child: new fs.Text("更新屏幕值"),
                             onPressed: this._updateScreenInfo.bind(this),
                         }),
                     ]

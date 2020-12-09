@@ -15,63 +15,63 @@ const listview_custom_list_page_1 = require("demo/listview/listview_custom_list_
 const listview_custom_builder_page_1 = require("demo/listview/listview_custom_builder_page");
 class MyListViewIndex extends fs.StatelessWidget {
     build(context) {
-        return fs.Scaffold.new({
-            appBar: fs.AppBar.new({
-                title: fs.Text.new("ListView"),
+        return new fs.Scaffold({
+            appBar: new fs.AppBar({
+                title: new fs.Text("ListView"),
             }),
-            body: fs.ListView.new({
+            body: new fs.ListView({
                 children: [
-                    fs.ListTile.new({
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("1、ListView"),
+                    new fs.ListTile({
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("1、ListView"),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return listview_page_1.MyListViewPage.new();
+                                    return new listview_page_1.MyListViewPage();
                                 }
                             }));
                         }
                     }),
-                    fs.ListTile.new({
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("2、ListView.builder"),
+                    new fs.ListTile({
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("2、ListView.builder"),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return listview_builder_page_1.MyListViewBuilderPage.new();
+                                    return new listview_builder_page_1.MyListViewBuilderPage();
                                 }
                             }));
                         }
                     }),
-                    fs.ListTile.new({
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("3、ListView.separated"),
+                    new fs.ListTile({
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("3、ListView.separated"),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return listview_separatorBuilder_page_1.MySeparatorBuilderPage.new();
+                                    return new listview_separatorBuilder_page_1.MySeparatorBuilderPage();
                                 }
                             }));
                         }
                     }),
-                    fs.ListTile.new({
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("4、ListView.custom.list"),
+                    new fs.ListTile({
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("4、ListView.custom.list"),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return listview_custom_list_page_1.MyListViewCustomListPage.new();
+                                    return new listview_custom_list_page_1.MyListViewCustomListPage();
                                 }
                             }));
                         }
                     }),
-                    fs.ListTile.new({
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("5、ListView.custom.builder"),
+                    new fs.ListTile({
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("5、ListView.custom.builder"),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return listview_custom_builder_page_1.MyListViewCustomBuilderPage.new();
+                                    return new listview_custom_builder_page_1.MyListViewCustomBuilderPage();
                                 }
                             }));
                         }
@@ -79,9 +79,6 @@ class MyListViewIndex extends fs.StatelessWidget {
                 ],
             }),
         });
-    }
-    static new() {
-        return new MyListViewIndex();
     }
 }
 exports.MyListViewIndex = MyListViewIndex;

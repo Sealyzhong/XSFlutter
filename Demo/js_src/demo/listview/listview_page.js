@@ -7,14 +7,14 @@ class MyListViewPage extends fs.StatelessWidget {
     getWidgetList() {
         var list = new Array();
         icon_data_1.MyIconData.cupertinoIcons.forEach((model) => {
-            list.push(fs.Container.new({
+            list.push(new fs.Container({
                 padding: fs.EdgeInsets.all(10),
-                child: fs.Row.new({
+                child: new fs.Row({
                     children: [
-                        fs.Icon.new(model.value),
-                        fs.SizedBox.new({ width: 10 }),
-                        fs.Expanded.new({
-                            child: fs.Text.new(model.name, { overflow: fs.TextOverflow.ellipsis, style: fs.TextStyle.new({ fontSize: 16 }) }),
+                        new fs.Icon(model.value),
+                        new fs.SizedBox({ width: 10 }),
+                        new fs.Expanded({
+                            child: new fs.Text(model.name, { overflow: fs.TextOverflow.ellipsis, style: new fs.TextStyle({ fontSize: 16 }) }),
                         }),
                     ]
                 }),
@@ -24,17 +24,14 @@ class MyListViewPage extends fs.StatelessWidget {
     }
     //重构
     build(context) {
-        return fs.Scaffold.new({
-            appBar: fs.AppBar.new({
-                title: fs.Text.new("ListView")
+        return new fs.Scaffold({
+            appBar: new fs.AppBar({
+                title: new fs.Text("ListView")
             }),
-            body: fs.ListView.new({
+            body: new fs.ListView({
                 children: this.getWidgetList()
             }),
         });
-    }
-    static new() {
-        return new MyListViewPage();
     }
 }
 exports.MyListViewPage = MyListViewPage;

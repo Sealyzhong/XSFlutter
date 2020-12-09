@@ -3,32 +3,32 @@ export class MyColumnPage extends fs.StatelessWidget{
 
     genSevenContainers(){
         return  [
-          fs.Container.new({
+          new fs.Container({
             color:fs.Colors.red,
             height:30,
             width:100,
           }),
-          fs.Container.new({
+          new fs.Container({
             color:fs.Colors.orange,
             height:30,
             width:100,
           }),
-          fs.Container.new({
+          new fs.Container({
             color:fs.Colors.yellow,
             height:30,
             width:100,
           }),
-          fs.Container.new({
+          new fs.Container({
             color:fs.Colors.green,
             height:30,
             width:100,
           }),
-          fs.Container.new({
+          new fs.Container({
             color:fs.Colors.indigo,
             height:30,
             width:100,
           }),
-          fs.Container.new({
+          new fs.Container({
             color:fs.Colors.purple,
             height:30,
             width:100,
@@ -39,17 +39,17 @@ export class MyColumnPage extends fs.StatelessWidget{
     
       genThreeContainers(){
         return  [
-          fs.Container.new({
+          new fs.Container({
             color:fs.Colors.red,
             height:30,
             width:100,
           }),
-          fs.Container.new({
+          new fs.Container({
             color:fs.Colors.orange,
             height:30,
             width:100,
           }),
-          fs.Container.new({
+          new fs.Container({
             color:fs.Colors.yellow,
             height:30,
             width:100,
@@ -59,129 +59,129 @@ export class MyColumnPage extends fs.StatelessWidget{
 
       
     build(context:fs.BuildContext) {
-        return fs.Scaffold.new({
-            appBar: fs.AppBar.new({
-              title: fs.Text.new('Column',),
+        return new fs.Scaffold({
+            appBar: new fs.AppBar({
+              title: new fs.Text('Column',),
             }),
-            body: fs.ListView.new({
+            body: new fs.ListView({
               children:[
-                fs.ListTile.new({title:fs.Text.new("Column"),}),
-                fs.Column.new({
+                new fs.ListTile({title:new fs.Text("Column"),}),
+                new fs.Column({
                   children: [
-                    fs.Container.new({
+                    new fs.Container({
                       color:fs.Colors.red,
                       height:30,
                     }),
-                    fs.Container.new({
+                    new fs.Container({
                       color:fs.Colors.orange,
                       height:30,
                     }),
-                    fs.Container.new({
+                    new fs.Container({
                       color:fs.Colors.yellow,
                       height:30,
                     }),
-                    fs.Container.new({
+                    new fs.Container({
                       color:fs.Colors.green,
                       height:30,
                     }),
-                    fs.Container.new({
+                    new fs.Container({
                       color:fs.Colors.indigo,
                       height:30,
                     }),
-                    fs.Container.new({
+                    new fs.Container({
                       color:fs.Colors.purple,
                       height:30,
                     }),
                   ],
                 }),
       
-                fs.ListTile.new({title:fs.Text.new("Column Top-Left"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column Top-Left"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.start,
                     crossAxisAlignment:fs.CrossAxisAlignment.start,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column Top-Middle"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column Top-Middle"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.start,
                     crossAxisAlignment:fs.CrossAxisAlignment.center,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column Top-Right"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column Top-Right"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.start,
                     crossAxisAlignment:fs.CrossAxisAlignment.end,
                     children: this.genThreeContainers(),
                   }),
                 }),
       
-                fs.ListTile.new({title:fs.Text.new("Column Center-Left"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column Center-Left"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.center,
                     crossAxisAlignment:fs.CrossAxisAlignment.start,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column Center-Center"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column Center-Center"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.center,
                     crossAxisAlignment:fs.CrossAxisAlignment.center,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column Center-Right"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column Center-Right"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.center,
                     crossAxisAlignment:fs.CrossAxisAlignment.end,
                     children: this.genThreeContainers(),
                   }),
                 }),
       
-                fs.ListTile.new({title:fs.Text.new("Column Bottom-Left"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column Bottom-Left"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.end,
                     crossAxisAlignment:fs.CrossAxisAlignment.start,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column Bottom-Middle"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column Bottom-Middle"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.end,
                     crossAxisAlignment:fs.CrossAxisAlignment.center,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column Bottom-Right"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column Bottom-Right"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.end,
                     crossAxisAlignment:fs.CrossAxisAlignment.end,
                     children: this.genThreeContainers(),
@@ -190,31 +190,31 @@ export class MyColumnPage extends fs.StatelessWidget{
       
       
       
-                fs.ListTile.new({title:fs.Text.new("Column SpaceAround-Left"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column SpaceAround-Left"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.spaceAround,
                     crossAxisAlignment:fs.CrossAxisAlignment.start,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column SpaceAround-Middle"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column SpaceAround-Middle"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.spaceAround,
                     crossAxisAlignment:fs.CrossAxisAlignment.center,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column SpaceAround-Right"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column SpaceAround-Right"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.spaceAround,
                     crossAxisAlignment:fs.CrossAxisAlignment.end,
                     children: this.genThreeContainers(),
@@ -224,62 +224,62 @@ export class MyColumnPage extends fs.StatelessWidget{
       
       
       
-                fs.ListTile.new({title:fs.Text.new("Column SpaceBetween-Left"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column SpaceBetween-Left"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.spaceBetween,
                     crossAxisAlignment:fs.CrossAxisAlignment.start,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column SpaceBetween-Middle"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column SpaceBetween-Middle"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.spaceBetween,
                     crossAxisAlignment:fs.CrossAxisAlignment.center,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column SpaceBetween-Right"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column SpaceBetween-Right"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.spaceBetween,
                     crossAxisAlignment:fs.CrossAxisAlignment.end,
                     children: this.genThreeContainers(),
                   }),
                 }),
       
-                fs.ListTile.new({title:fs.Text.new("Column SpaceEvenly-Left"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column SpaceEvenly-Left"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment:fs.CrossAxisAlignment.start,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column SpaceEvenly-Middle"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column SpaceEvenly-Middle"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment:fs.CrossAxisAlignment.center,
                     children: this.genThreeContainers(),
                   }),
                 }),
-                fs.ListTile.new({title:fs.Text.new("Column SpaceEvenly-Right"),}),
-                fs.Container.new({
+                new fs.ListTile({title:new fs.Text("Column SpaceEvenly-Right"),}),
+                new fs.Container({
                   color:fs.Colors.grey,
                   height:200,
-                  child:fs.Column.new({
+                  child:new fs.Column({
                     mainAxisAlignment:fs.MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment:fs.CrossAxisAlignment.end,
                     children: this.genThreeContainers(),
@@ -290,9 +290,5 @@ export class MyColumnPage extends fs.StatelessWidget{
               ],
             })
           });
-    }
-
-    static new(){
-        return new MyColumnPage();
     }
 }

@@ -14,52 +14,49 @@ class MyPullToRefreshClassicalDemoPage extends fs.StatefulWidget {
     createState() {
         return new _MyPullToRefreshClassicalDemoPageState(this);
     }
-    static new() {
-        return new MyPullToRefreshClassicalDemoPage();
-    }
 }
 exports.MyPullToRefreshClassicalDemoPage = MyPullToRefreshClassicalDemoPage;
 class _MyPullToRefreshClassicalDemoPageState extends fs.WidgetState {
     constructor() {
         super(...arguments);
-        this.refreshController = tl.PullToRefreshController.new({});
+        this.refreshController = new tl.PullToRefreshController({});
         this._count = 20;
     }
     //重构
     build(context) {
         var that = this;
-        return fs.Scaffold.new({
-            appBar: fs.AppBar.new({
-                title: fs.Text.new("经典样式"),
+        return new fs.Scaffold({
+            appBar: new fs.AppBar({
+                title: new fs.Text("经典样式"),
             }),
-            body: tl.PullToRefreshRefresher.new({
+            body: new tl.PullToRefreshRefresher({
                 controller: this.refreshController,
                 enablePullDown: true,
                 enablePullUp: true,
-                header: tl.PullToRefreshClassicHeader.new(),
-                footer: tl.PullToRefreshClassicFooter.new(),
+                header: new tl.PullToRefreshClassicHeader(),
+                footer: new tl.PullToRefreshClassicFooter(),
                 onRefresh: function () {
-                    tl.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
-                    fs.Future.delayed(fs.Duration.new({
+                    fs.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
+                    fs.Future.delayed(new fs.Duration({
                         seconds: 2
                     }), function () {
                         that._count = 20;
-                        tl.Loading.dismiss();
+                        fs.Loading.dismiss();
                         that.refreshController.refreshCompleted();
                         that.refreshController.loadComplete();
                         that.setState();
                     });
                 },
                 onLoading: function () {
-                    tl.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
-                    fs.Future.delayed(fs.Duration.new({
+                    fs.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
+                    fs.Future.delayed(new fs.Duration({
                         seconds: 2
                     }), function () {
                         that._count = that._count + 20;
                         if (that._count >= icon_data_1.MyIconData.cupertinoIcons.length) {
                             that._count = icon_data_1.MyIconData.cupertinoIcons.length;
                         }
-                        tl.Loading.dismiss();
+                        fs.Loading.dismiss();
                         that.refreshController.loadComplete();
                         if (that._count >= icon_data_1.MyIconData.cupertinoIcons.length) {
                             that.refreshController.loadNoData();
@@ -71,14 +68,14 @@ class _MyPullToRefreshClassicalDemoPageState extends fs.WidgetState {
                     itemCount: this._count,
                     itemBuilder: (context, index) => {
                         var model = icon_data_1.MyIconData.cupertinoIcons[index];
-                        return fs.Container.new({
+                        return new fs.Container({
                             padding: fs.EdgeInsets.all(10),
-                            child: fs.Row.new({
+                            child: new fs.Row({
                                 children: [
-                                    fs.Icon.new(model.value),
-                                    fs.SizedBox.new({ width: 10 }),
-                                    fs.Expanded.new({
-                                        child: fs.Text.new(model.name, { overflow: fs.TextOverflow.ellipsis, style: fs.TextStyle.new({ fontSize: 16 }) }),
+                                    new fs.Icon(model.value),
+                                    new fs.SizedBox({ width: 10 }),
+                                    new fs.Expanded({
+                                        child: new fs.Text(model.name, { overflow: fs.TextOverflow.ellipsis, style: new fs.TextStyle({ fontSize: 16 }) }),
                                     }),
                                 ]
                             })

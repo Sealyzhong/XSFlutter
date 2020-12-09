@@ -100,7 +100,7 @@ class CustomAlertDialogAnimationTransition {
   }
 }
 
-/// Used for defining alert buttons.
+/// Used for defining alert actions.
 ///
 /// [child] and [onPressed] parameters are required.
 class CustomAlertDialogButton extends StatelessWidget {
@@ -124,7 +124,7 @@ class CustomAlertDialogButton extends StatelessWidget {
     @required this.onPressed,
   }) : super(key: key);
 
-  /// Creates alert buttons based on constructor params
+  /// Creates alert actions based on constructor params
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -186,7 +186,7 @@ class CustomAlertDialog {
   final String title;
   final String desc;
   final Widget content;
-  final List<CustomAlertDialogButton> buttons;
+  final List<CustomAlertDialogButton> actions;
   final VoidCallback closeFunction;
 
   /// Alert constructor
@@ -199,7 +199,7 @@ class CustomAlertDialog {
     @required this.title,
     this.desc,
     this.content,
-    this.buttons,
+    this.actions,
     this.closeFunction,
   });
 
@@ -312,15 +312,15 @@ class CustomAlertDialog {
     );
   }
 
-  // Returns defined buttons. Default: Cancel Button
+  // Returns defined actions. Default: Cancel Button
   List<Widget> _getButtons() {
     List<Widget> expandedButtons = [];
-    if (buttons != null) {
-      for (int i = 0; i < buttons.length; i++) {
-        if (buttons.length == 1) {
-          expandedButtons.add(Expanded(child: buttons[i]));
+    if (actions != null) {
+      for (int i = 0; i < actions.length; i++) {
+        if (actions.length == 1) {
+          expandedButtons.add(Expanded(child: actions[i]));
         } else {
-          expandedButtons.add(Expanded(child: Padding(padding: EdgeInsets.only(left: i == 0 ? 0 : style.buttonSpace), child: buttons[i])));
+          expandedButtons.add(Expanded(child: Padding(padding: EdgeInsets.only(left: i == 0 ? 0 : style.buttonSpace), child: actions[i])));
         }
       }
     }
@@ -354,12 +354,12 @@ class CustomAlertDialog {
     String desc,
     Widget content,
     ValueSetter<int> onTap,
-    List<CustomDialogButtonInfo> buttons,
+    List<CustomDialogButtonInfo> actions,
   }) {
     var widgetList = List<CustomAlertDialogButton>();
-    if (buttons != null && buttons.length > 0) {
-      for (var i = 0; i < buttons.length; i++) {
-        var model = buttons[i];
+    if (actions != null && actions.length > 0) {
+      for (var i = 0; i < actions.length; i++) {
+        var model = actions[i];
         widgetList.add(CustomAlertDialogButton(
           color: model.bgColor,
           onPressed: () {
@@ -377,7 +377,7 @@ class CustomAlertDialog {
     }
 
     //提示是否
-    CustomAlertDialog(context: context, image: image, style: style, title: title, content: content, desc: desc, buttons: widgetList).show();
+    CustomAlertDialog(context: context, image: image, style: style, title: title, content: content, desc: desc, actions: widgetList).show();
   }
 
   // Shows alert with selected animation

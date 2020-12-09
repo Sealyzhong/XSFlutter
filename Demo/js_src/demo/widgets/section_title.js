@@ -8,23 +8,20 @@ class MySectionTitle extends fs.StatelessWidget {
         super();
         this.title = title;
     }
-    static new(title) {
-        return new MySectionTitle(title);
-    }
     build(context) {
-        return fs.Container.new({
+        return new fs.Container({
             padding: fs.EdgeInsets.all(10.0),
             color: color_util_1.MyColorUtil.primaryColor,
-            child: fs.Row.new({
+            child: new fs.Row({
                 mainAxisAlignment: fs.MainAxisAlignment.start,
                 children: [
-                    fs.Icon.new(fs.Icons.list, {
+                    new fs.Icon(fs.Icons.list, {
                         color: fs.Colors.white,
                     }),
-                    fs.Container.new({
+                    new fs.Container({
                         width: 10,
                     }),
-                    fs.Text.new(this.title, { style: fs.TextStyle.new({
+                    new fs.Text(this.title, { style: new fs.TextStyle({
                             color: fs.Colors.white,
                             fontWeight: fs.FontWeight.bold,
                             fontSize: 18,

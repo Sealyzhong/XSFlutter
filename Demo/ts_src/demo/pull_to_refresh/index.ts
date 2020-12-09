@@ -14,81 +14,81 @@ import { MyPullToRefreshEmptyWidgetPage } from "demo/pull_to_refresh/empty_widge
 
 export class MyPullToRefreshIndex extends fs.StatelessWidget{
 
-    _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
+    _style = new fs.TextStyle({fontSize:24,fontWeight:fs.FontWeight.bold});
 
     build(context:fs.BuildContext){
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title: fs.Text.new("Pull To Refresh"),
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title: new fs.Text("Pull To Refresh"),
             }),
-            body:fs.ListView.new({
+            body:new fs.ListView({
                 children:[
-                    fs.ListTile.new({
-                        leading:fs.Text.new("1",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("经典样式"),
-                        subtitle:fs.Text.new("经典(默认)风格"),
+                    new fs.ListTile({
+                        leading:new fs.Text("1",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("经典样式"),
+                        subtitle:new fs.Text("经典(默认)风格"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyPullToRefreshClassicalDemoPage.new();
+                                    return new MyPullToRefreshClassicalDemoPage();
                                 }
                             }));
                         }                        
                     }),
 
                     
-                    fs.ListTile.new({
-                        leading:fs.Text.new("2",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Material Demo"),
-                        subtitle:fs.Text.new("经典(默认)风格Material Demo"),
+                    new fs.ListTile({
+                        leading:new fs.Text("2",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Material Demo"),
+                        subtitle:new fs.Text("经典(默认)风格Material Demo"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyPullToRefreshMaterialDemoPage.new();
+                                    return new MyPullToRefreshMaterialDemoPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        leading:fs.Text.new("3",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Water Drop"),
-                        subtitle:fs.Text.new("WaterDrop"),
+                    new fs.ListTile({
+                        leading:new fs.Text("3",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Water Drop"),
+                        subtitle:new fs.Text("WaterDrop"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyPullToRefreshWaterDropDemoPage.new();
+                                    return new MyPullToRefreshWaterDropDemoPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        leading:fs.Text.new("4",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Water Drop Material"),
-                        subtitle:fs.Text.new("Water Drop Material"),
+                    new fs.ListTile({
+                        leading:new fs.Text("4",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Water Drop Material"),
+                        subtitle:new fs.Text("Water Drop Material"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyPullToRefreshWaterDropMaterialDemoPage.new();
+                                    return new MyPullToRefreshWaterDropMaterialDemoPage();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        leading:fs.Text.new("5",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Empty Widget"),
-                        subtitle:fs.Text.new("空视图"),
+                    new fs.ListTile({
+                        leading:new fs.Text("5",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Empty Widget"),
+                        subtitle:new fs.Text("空视图"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyPullToRefreshEmptyWidgetPage.new();
+                                    return new MyPullToRefreshEmptyWidgetPage();
                                 }
                             }));
                         }                        
@@ -99,7 +99,4 @@ export class MyPullToRefreshIndex extends fs.StatelessWidget{
         });
     }
 
-    static new(){
-        return new MyPullToRefreshIndex();
-    }
 }

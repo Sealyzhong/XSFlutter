@@ -289,7 +289,7 @@ class XSProxyDialog extends XSJsonObjProxy {
           desc: XSJSParse.getString(context, bo, v, "desc", defaultValue: ""),
           descContent: XSJSParse.getWidget(context, bo, v, "descContent"),
           barrierDismissible: XSJSParse.getBool(context, bo, v, "barrierDismissible", defaultValue: false),
-          buttons: XSDialogParse.getDialogSimpleButtonInfolList(context, bo, v, "buttons"),
+          actions: XSDialogParse.getDialogSimpleButtonInfolList(context, bo, v, "actions"),
           onTap: XSJSParse.getValueChanged<int>(context, bo, v, "onTap"),
         );
         break;
@@ -303,7 +303,7 @@ class XSProxyDialog extends XSJsonObjProxy {
           desc: XSJSParse.getString(context, bo, sub, "desc", defaultValue: ""),
           descContent: XSJSParse.getWidget(context, bo, sub, "descContent"),
           barrierDismissible: XSJSParse.getBool(context, bo, sub, "barrierDismissible", defaultValue: false),
-          buttons: XSDialogParse.getDialogSimpleButtonInfolList(context, bo, sub, "buttons"),
+          actions: XSDialogParse.getDialogSimpleButtonInfolList(context, bo, sub, "actions"),
           onTap: XSJSParse.getValueChanged<int>(context, bo, sub, "onTap"),
         );
         break;
@@ -317,7 +317,7 @@ class XSProxyDialog extends XSJsonObjProxy {
           title: XSJSParse.getString(context, bo, v, "title", defaultValue: "温馨提示"),
           desc: XSJSParse.getString(context, bo, v, "desc"),
           content: XSJSParse.getWidget(context, bo, v, "content"),
-          buttons: XSDialogParse.getCustomAlertDialogButtonList(context, bo, v, "buttons"),
+          actions: XSDialogParse.getCustomAlertDialogButtonList(context, bo, v, "actions"),
           closeFunction: XSJSParse.getVoidCallback(context, bo, map, "closeFunction"),
         ).show();
         break;
@@ -331,7 +331,7 @@ class XSProxyDialog extends XSJsonObjProxy {
           title: XSJSParse.getString(context, bo, v, "title", defaultValue: "温馨提示"),
           desc: XSJSParse.getString(context, bo, v, "desc"),
           content: XSJSParse.getWidget(context, bo, v, "content"),
-          buttons: XSDialogParse.getCustomDialogButtonInfolList(context, bo, v, "buttons"),
+          actions: XSDialogParse.getCustomDialogButtonInfolList(context, bo, v, "actions"),
           onTap: XSJSParse.getValueChanged<int>(context, bo, v, "onTap"),
         );
         break;

@@ -18,102 +18,102 @@ const dio_page_1 = require("demo/packages/dio_page");
 class MyPackageIndex extends fs.StatelessWidget {
     constructor() {
         super(...arguments);
-        this._style = fs.TextStyle.new({ fontSize: 24, fontWeight: fs.FontWeight.bold });
+        this._style = new fs.TextStyle({ fontSize: 24, fontWeight: fs.FontWeight.bold });
     }
     build(context) {
-        return fs.Scaffold.new({
-            appBar: fs.AppBar.new({
-                title: fs.Text.new("第三方包"),
+        return new fs.Scaffold({
+            appBar: new fs.AppBar({
+                title: new fs.Text("第三方包"),
             }),
-            body: fs.ListView.new({
+            body: new fs.ListView({
                 children: [
-                    fs.ListTile.new({
-                        leading: fs.Text.new("1", { style: this._style }),
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("Loading..."),
-                        subtitle: fs.Text.new("showSuccess、showError、showInfo、showToast..."),
+                    new fs.ListTile({
+                        leading: new fs.Text("1", { style: this._style }),
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("Loading..."),
+                        subtitle: new fs.Text("showSuccess、showError、showInfo、showToast..."),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return loading_page_1.MyLoadingPage.new();
+                                    return new loading_page_1.MyLoadingPage();
                                 }
                             }));
                         }
                     }),
-                    fs.ListTile.new({
-                        leading: fs.Text.new("2", { style: this._style }),
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("本地数据存储(shared_preferences)"),
-                        subtitle: fs.Text.new("get、set"),
+                    new fs.ListTile({
+                        leading: new fs.Text("2", { style: this._style }),
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("本地数据存储(shared_preferences)"),
+                        subtitle: new fs.Text("get、set"),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return shared_preferences_page_1.MySharedPreferncesPage.new();
+                                    return new shared_preferences_page_1.MySharedPreferncesPage();
                                 }
                             }));
                         }
                     }),
-                    fs.ListTile.new({
-                        leading: fs.Text.new("3", { style: this._style }),
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("屏幕信息(ScreenInfo)"),
-                        subtitle: fs.Text.new("宽、高、密度、像素"),
+                    new fs.ListTile({
+                        leading: new fs.Text("3", { style: this._style }),
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("屏幕信息(ScreenInfo)"),
+                        subtitle: new fs.Text("宽、高、密度、像素"),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return screen_info_page_1.MyScreenInfoPage.new();
+                                    return new screen_info_page_1.MyScreenInfoPage();
                                 }
                             }));
                         }
                     }),
-                    fs.ListTile.new({
-                        leading: fs.Text.new("4", { style: this._style }),
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("包信息(PackageInfo)"),
-                        subtitle: fs.Text.new("版本信息、包信息"),
+                    new fs.ListTile({
+                        leading: new fs.Text("4", { style: this._style }),
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("包信息(PackageInfo)"),
+                        subtitle: new fs.Text("版本信息、包信息"),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return package_info_page_1.MyPackageInfoPage.new();
+                                    return new package_info_page_1.MyPackageInfoPage();
                                 }
                             }));
                         }
                     }),
-                    fs.ListTile.new({
-                        leading: fs.Text.new("5", { style: this._style }),
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("wakelock"),
-                        subtitle: fs.Text.new("enable、disable、isEnabled"),
+                    new fs.ListTile({
+                        leading: new fs.Text("5", { style: this._style }),
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("wakelock"),
+                        subtitle: new fs.Text("enable、disable、isEnabled"),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return wakelock_page_1.MyWakelockPage.new();
+                                    return new wakelock_page_1.MyWakelockPage();
                                 }
                             }));
                         }
                     }),
-                    fs.ListTile.new({
-                        leading: fs.Text.new("6", { style: this._style }),
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("Url Launcher"),
-                        subtitle: fs.Text.new("enable、disable、isEnabled"),
+                    new fs.ListTile({
+                        leading: new fs.Text("6", { style: this._style }),
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("Url Launcher"),
+                        subtitle: new fs.Text("enable、disable、isEnabled"),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return url_laucher_page_1.MyUrlLaucherPage.new();
+                                    return new url_laucher_page_1.MyUrlLaucherPage();
                                 }
                             }));
                         }
                     }),
-                    fs.ListTile.new({
-                        leading: fs.Text.new("7", { style: this._style }),
-                        trailing: fs.Icon.new(fs.Icons.chevron_right),
-                        title: fs.Text.new("Dio Demo"),
-                        subtitle: fs.Text.new("Get、Post、Request"),
+                    new fs.ListTile({
+                        leading: new fs.Text("7", { style: this._style }),
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("Dio Demo"),
+                        subtitle: new fs.Text("Get、Post、Request"),
                         onTap: function () {
-                            fs.Navigator.push(context, fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
-                                    return dio_page_1.MyDioPage.new();
+                                    return new dio_page_1.MyDioPage();
                                 }
                             }));
                         }
@@ -121,9 +121,6 @@ class MyPackageIndex extends fs.StatelessWidget {
                 ],
             }),
         });
-    }
-    static new() {
-        return new MyPackageIndex();
     }
 }
 exports.MyPackageIndex = MyPackageIndex;

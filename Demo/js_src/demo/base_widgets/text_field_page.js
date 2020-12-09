@@ -7,35 +7,32 @@ class MyTextFieldPage extends fs.StatefulWidget {
     createState() {
         return new _MyTextFieldPage(this);
     }
-    static new() {
-        return new MyTextFieldPage();
-    }
 }
 exports.MyTextFieldPage = MyTextFieldPage;
 class _MyTextFieldPage extends fs.WidgetState {
     build(context) {
-        return fs.Scaffold.new({
-            appBar: fs.AppBar.new({
-                title: fs.Text.new("Text Field"),
+        return new fs.Scaffold({
+            appBar: new fs.AppBar({
+                title: new fs.Text("Text Field"),
             }),
-            body: fs.ListView.new({
+            body: new fs.ListView({
                 children: [
-                    section_title_1.MySectionTitle.new("默认样式"),
-                    fs.Padding.new({
+                    new section_title_1.MySectionTitle("默认样式"),
+                    new fs.Padding({
                         padding: fs.EdgeInsets.all(10),
-                        child: fs.TextField.new({
-                            decoration: fs.InputDecoration.new(),
+                        child: new fs.TextField({
+                            decoration: new fs.InputDecoration(),
                         }),
                     }),
-                    section_title_1.MySectionTitle.new("icon"),
-                    fs.Padding.new({
+                    new section_title_1.MySectionTitle("icon"),
+                    new fs.Padding({
                         padding: fs.EdgeInsets.all(10),
-                        child: fs.TextField.new({
-                            decoration: fs.InputDecoration.new({
-                                icon: fs.Icon.new(fs.Icons.person),
+                        child: new fs.TextField({
+                            decoration: new fs.InputDecoration({
+                                icon: new fs.Icon(fs.Icons.person),
                                 errorBorder: fs.InputBorder.none(),
                                 disabledBorder: fs.InputBorder.outline({
-                                    borderSide: fs.BorderSide.new(),
+                                    borderSide: new fs.BorderSide(),
                                 }),
                                 enabledBorder: fs.InputBorder.underline(),
                             }),

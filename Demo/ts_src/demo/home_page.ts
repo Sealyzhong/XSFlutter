@@ -18,7 +18,7 @@ import { MyEasyRefreshIndex } from "demo/easy_refresh/index";
 
 export class MyHomePage extends fs.StatefulWidget{
     createState() {
-        return _MyHomePageState.new(this)
+        return new _MyHomePageState(this)
     }
 }
 
@@ -32,40 +32,40 @@ class _MyHomePageState extends fs.WidgetState{
         tl.PackageInfo.updateInfo();
     }
     
-    _style = fs.TextStyle.new({fontSize:24,fontWeight:fs.FontWeight.bold});
+    _style = new fs.TextStyle({fontSize:24,fontWeight:fs.FontWeight.bold});
 
     build(context:fs.BuildContext){
-        return fs.Scaffold.new({
-            appBar:fs.AppBar.new({
-                title: fs.Text.new("TS Demo"),
+        return new fs.Scaffold({
+            appBar:new fs.AppBar({
+                title: new fs.Text("TS Demo"),
             }),
-            body:fs.ListView.new({
+            body:new fs.ListView({
                 children:[
                     
-                    fs.ListTile.new({
-                        leading:fs.Text.new("1",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("基础组件"),
-                        subtitle:fs.Text.new("Icons、Cupertino、Widgets、App Bar"),
+                    new fs.ListTile({
+                        leading:new fs.Text("1",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("基础组件"),
+                        subtitle:new fs.Text("Icons、Cupertino、Widgets、App Bar"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyBaseWidgetsIndex.new();
+                                    return new MyBaseWidgetsIndex();
                                 }
                             }));
                         }                        
                     }),
 
                     
-                    fs.ListTile.new({
-                        leading:fs.Text.new("2",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("常用实例"),
-                        subtitle:fs.Text.new("计数器、图片库"),
+                    new fs.ListTile({
+                        leading:new fs.Text("2",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("常用实例"),
+                        subtitle:new fs.Text("计数器、图片库"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyExamplesIndex.new();
+                                    return new MyExamplesIndex();
                                 }
                             }));
                         }                        
@@ -73,86 +73,86 @@ class _MyHomePageState extends fs.WidgetState{
 
                     
 
-                    fs.ListTile.new({
-                        leading:fs.Text.new("3",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("第三方库"),
-                        subtitle:fs.Text.new("Loading、PackageInfo、ScreenInfo..."),
+                    new fs.ListTile({
+                        leading:new fs.Text("3",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("第三方库"),
+                        subtitle:new fs.Text("Loading、PackageInfo、ScreenInfo..."),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyPackageIndex.new();
+                                    return new MyPackageIndex();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        leading:fs.Text.new("4",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Dialog"),
-                        subtitle:fs.Text.new("常用提示框"),
+                    new fs.ListTile({
+                        leading:new fs.Text("4",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Dialog"),
+                        subtitle:new fs.Text("常用提示框"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyDialogIndex.new();
+                                    return new MyDialogIndex();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        leading:fs.Text.new("5",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("ListView"),
-                        subtitle:fs.Text.new("builder、separated、custom"),
+                    new fs.ListTile({
+                        leading:new fs.Text("5",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("ListView"),
+                        subtitle:new fs.Text("builder、separated、custom"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyListViewIndex.new();
+                                    return new  MyListViewIndex();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        leading:fs.Text.new("6",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Easy Refresh"),
-                        subtitle:fs.Text.new("Flutter应用上实现下拉刷新"),
+                    new fs.ListTile({
+                        leading:new fs.Text("6",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Easy Refresh"),
+                        subtitle:new fs.Text("Flutter应用上实现下拉刷新"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyEasyRefreshIndex.new();
+                                    return new MyEasyRefreshIndex();
                                 }
                             }));
                         }                        
                     }),
 
-                    fs.ListTile.new({
-                        leading:fs.Text.new("7",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("Pull To Refresh"),
-                        subtitle:fs.Text.new("Flutter应用上实现下拉刷新"),
+                    new fs.ListTile({
+                        leading:new fs.Text("7",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Pull To Refresh"),
+                        subtitle:new fs.Text("Flutter应用上实现下拉刷新"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    return MyPullToRefreshIndex.new();
+                                    return new MyPullToRefreshIndex();
                                 }
                             }));
                         }                        
                     }),
 
 
-                    fs.ListTile.new({
-                        leading:fs.Text.new("8",{style:this._style}),
-                        trailing:fs.Icon.new(fs.Icons.chevron_right),
-                        title:fs.Text.new("TS2Project"),
-                        subtitle:fs.Text.new("在本工程中实现JS与Project通信息"),
+                    new fs.ListTile({
+                        leading:new fs.Text("8",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("TS2Project"),
+                        subtitle:new fs.Text("在本工程中实现JS与Project通信息"),
                         onTap:function(){
-                            fs.Navigator.push(context,fs.MaterialPageRoute.new({
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
-                                    //return MySharedPreferncesPage.new();
+                                    //return MySharedPreferncesPage();
                                 }
                             }));
                         }                        
@@ -160,9 +160,5 @@ class _MyHomePageState extends fs.WidgetState{
                 ],
             }),
         });
-    }
-
-    static new(widget:fs.StatefulWidget){
-        return new _MyHomePageState(widget);
     }
 }

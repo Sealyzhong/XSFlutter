@@ -13,9 +13,6 @@ class MyWakelockPage extends fs.StatefulWidget {
     createState() {
         return new _MyWakelockPage(this);
     }
-    static new() {
-        return new MyWakelockPage();
-    }
 }
 exports.MyWakelockPage = MyWakelockPage;
 class _MyWakelockPage extends fs.WidgetState {
@@ -24,7 +21,7 @@ class _MyWakelockPage extends fs.WidgetState {
         this.isEnabled = false;
     }
     async initState() {
-        fs.Future.delayed(fs.Duration.new({ seconds: 1 }), this._getStatus.bind(this));
+        fs.Future.delayed(new fs.Duration({ seconds: 1 }), this._getStatus.bind(this));
     }
     async _getStatus() {
         this.isEnabled = await tl.Wakelock.isEnabled();
@@ -43,28 +40,28 @@ class _MyWakelockPage extends fs.WidgetState {
         this.setState();
     }
     build(context) {
-        return fs.Scaffold.new({
-            appBar: fs.AppBar.new({
-                title: fs.Text.new("WakeLock"),
+        return new fs.Scaffold({
+            appBar: new fs.AppBar({
+                title: new fs.Text("WakeLock"),
             }),
-            body: fs.Center.new({
-                child: fs.Column.new({
+            body: new fs.Center({
+                child: new fs.Column({
                     mainAxisAlignment: fs.MainAxisAlignment.center,
                     children: [
-                        fs.Row.new({
+                        new fs.Row({
                             mainAxisAlignment: fs.MainAxisAlignment.center,
                             crossAxisAlignment: fs.CrossAxisAlignment.center,
                             children: [
-                                fs.Text.new("Wakelock(" + String(this.isEnabled) + "): "),
-                                fs.Switch.new({ value: this.isEnabled, activeColor: fs.Colors.green }),
+                                new fs.Text("Wakelock(" + String(this.isEnabled) + "): "),
+                                new fs.Switch({ value: this.isEnabled, activeColor: fs.Colors.green }),
                             ]
                         }),
-                        fs.RaisedButton.new({
-                            child: fs.Text.new("启用"),
+                        new fs.RaisedButton({
+                            child: new fs.Text("启用"),
                             onPressed: this._enable.bind(this),
                         }),
-                        fs.RaisedButton.new({
-                            child: fs.Text.new("禁用"),
+                        new fs.RaisedButton({
+                            child: new fs.Text("禁用"),
                             onPressed: this._disable.bind(this),
                         }),
                     ]
