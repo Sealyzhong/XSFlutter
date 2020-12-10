@@ -1610,6 +1610,18 @@ export class Convert extends core.Object{
     start = "start",
   }
   
+  //****** DatePickerMode ******
+  export enum DatePickerMode {
+    day = "day",
+    year = "year",
+  }
+
+  //****** DatePickerEntryMode ******
+  export enum DatePickerEntryMode {
+    calendar = "calendar",
+    input = "input",
+  }
+
   //****** DecorationPosition ******
   export enum DecorationPosition  {
     background = "background",
@@ -1759,6 +1771,13 @@ export class Convert extends core.Object{
     traditional = "traditional",
     directional = "directional",
   }
+
+  //****** NavigationRailLabelType ******
+  export enum NavigationRailLabelType {
+    none = "none",
+    selected = "selected",
+    all = "all",
+  }
   //#endregion
   
   //#region ------ O ------
@@ -1832,6 +1851,21 @@ export class Convert extends core.Object{
     expand = "expand",
     passthrough = "passthrough",
   }
+
+  //****** SnackBarBehavior ******
+  export enum SnackBarBehavior {
+    fixed = "fixed",
+    floating = "floating",
+  }
+
+  //****** ShowValueIndicator ******
+  export enum ShowValueIndicator {
+    onlyForDiscrete = "onlyForDiscrete",
+    onlyForContinuous = "onlyForContinuous",
+    always = "always",
+    never = "passthrounevergh",
+  }
+
   
   //****** ScrollViewKeyboardDismissBehavior ******
   export enum ScrollViewKeyboardDismissBehavior {
@@ -3801,30 +3835,6 @@ export class InputDecoration extends DartClass {
 export abstract class Key extends DartClass {
   value?:string;
   debugLabel?:string;
-
-  /**
-   * Key.value = new ValueKey(value:string)
-   * @param value 
-   */
-  static value(value:string) {
-    return new ValueKey(value);
-  }
-
-  /**
-   * Key.unique = new UniqueKey()
-   * @param value 
-   */
-  static unique() {
-    return new UniqueKey();
-  }
-
-  /**
-   * Key.global = new GlobalKey(debugLabel:string)
-   * @param debugLabel 标签
-   */
-  static global(debugLabel?:string) {
-    return new GlobalKey(debugLabel);
-  }
 }
 
 export class ValueKey extends Key {
@@ -3845,12 +3855,19 @@ export class UniqueKey extends Key {
 
 export class GlobalKey extends Key {
   debugLabel?:string;
-
-  constructor(debugLabel?:string){
+  constructor(){
     super();
-    this.debugLabel = debugLabel;
   }
 }
+
+export class BindKey extends Key {
+  constructor(){
+    super();
+    this.createMirrorID();
+  }
+}
+
+
 
 //#endregion
 
@@ -5564,7 +5581,10 @@ export class OutlineInputBorder extends InputBorder {
 
 
 //#region ------- T -------
-  
+
+
+
+
 //****** TextAlignVertical ******
 export class TextAlignVertical extends DartClass {
   y?:number;
@@ -6427,6 +6447,1783 @@ export class Velocity extends DartClass {
 
 //#endregion
 
+
+//#region ******** ThemeData ********
+//****** ColorScheme ******
+interface ColorSchemeConfig {
+  primary:Color;
+  primaryVariant:Color;
+  secondary:Color;
+  secondaryVariant:Color;
+  surface:Color;
+  background:Color;
+  error:Color;
+  onPrimary:Color;
+  onSecondary:Color;
+  onSurface:Color;
+  onBackground:Color;
+  onError:Color;
+  brightness?:Brightness;
+}
+export class ColorScheme extends DartClass {
+  primary?:Color;
+  primaryVariant?:Color;
+  secondary?:Color;
+  secondaryVariant?:Color;
+  surface?:Color;
+  background?:Color;
+  error?:Color;
+  onPrimary?:Color;
+  onSecondary?:Color;
+  onSurface?:Color;
+  onBackground?:Color;
+  onError?:Color;
+  brightness?:Brightness;
+
+  /**
+   * @param config config: 
+      {
+        primary:Color, 
+        primaryVariant:Color, 
+        secondary:Color, 
+        secondaryVariant:Color, 
+        surface:Color, 
+        background:Color, 
+        error:Color, 
+        onPrimary:Color, 
+        onSecondary:Color, 
+        onSurface:Color, 
+        onBackground:Color, 
+        onError:Color, 
+        brightness?:Brightness, 
+      }
+   */
+  constructor(config: ColorSchemeConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.primary = config.primary;
+      this.primaryVariant = config.primaryVariant;
+      this.secondary = config.secondary;
+      this.secondaryVariant = config.secondaryVariant;
+      this.surface = config.surface;
+      this.background = config.background;
+      this.error = config.error;
+      this.onPrimary = config.onPrimary;
+      this.onSecondary = config.onSecondary;
+      this.onSurface = config.onSurface;
+      this.onBackground = config.background;
+      this.onError = config.onError;
+      this.brightness = config.brightness;
+    }
+  }
+
+}
+
+//****** ButtonThemeData ******
+interface ButtonThemeDataConfig {
+  textTheme?:ButtonTextTheme;
+  minWidth?:number;
+  height?:number;
+  padding?:EdgeInsets;
+  shape?:ShapeBorder;
+  layoutBehavior?:ButtonBarLayoutBehavior;
+  alignedDropdown?:boolean;
+  buttonColor?:Color;
+  disabledColor?:Color;
+  focusColor?:Color;
+  hoverColor?:Color;
+  highlightColor?:Color;
+  splashColor?:Color;
+  colorScheme?:ColorScheme;
+  materialTapTargetSize?:MaterialTapTargetSize;
+
+}
+export class ButtonThemeData extends DartClass {
+  textTheme?:ButtonTextTheme;
+  minWidth?:number;
+  height?:number;
+  padding?:EdgeInsets;
+  shape?:ShapeBorder;
+  layoutBehavior?:ButtonBarLayoutBehavior;
+  alignedDropdown?:boolean;
+  buttonColor?:Color;
+  disabledColor?:Color;
+  focusColor?:Color;
+  hoverColor?:Color;
+  highlightColor?:Color;
+  splashColor?:Color;
+  colorScheme?:ColorScheme;
+  materialTapTargetSize?:MaterialTapTargetSize;
+
+  /**
+   * @param config config: 
+      {
+        textTheme?:ButtonTextTheme, 
+        minWidth?:number, 
+        height?:number, 
+        padding?:EdgeInsets, 
+        shape?:ShapeBorder, 
+        layoutBehavior?:ButtonBarLayoutBehavior, 
+        alignedDropdown?:boolean, 
+        buttonColor?:Color, 
+        disabledColor?:Color, 
+        focusColor?:Color, 
+        hoverColor?:Color, 
+        highlightColor?:Color, 
+        splashColor?:Color, 
+        colorScheme?:ColorScheme, 
+        materialTapTargetSize?:MaterialTapTargetSize,
+      }
+   */
+  constructor(config: ButtonThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.textTheme = config.textTheme;
+      this.minWidth = config.minWidth;
+      this.height = config.height;
+      this.padding = config.padding;
+      this.shape = config.shape;
+      this.layoutBehavior = config.layoutBehavior;
+      this.alignedDropdown = config.alignedDropdown;
+      this.buttonColor = config.buttonColor;
+      this.disabledColor = config.disabledColor;
+      this.focusColor = config.focusColor;
+      this.hoverColor = config.hoverColor;
+      this.highlightColor = config.highlightColor;
+      this.splashColor = config.splashColor;
+      this.colorScheme = config.colorScheme;
+      this.materialTapTargetSize = config.materialTapTargetSize;
+    }
+  }
+
+}
+
+//****** ToggleButtonsThemeData ******
+interface ToggleButtonsThemeDataConfig {
+  textStyle?:TextStyle;
+  constraints?:BoxConstraints;
+  color?:Color;
+  selectedColor?:Color;
+  disabledColor?:Color;
+  fillColor?:Color;
+  focusColor?:Color;
+  highlightColor?:Color;
+  hoverColor?:Color;
+  splashColor?:Color;
+  borderColor?:Color;
+  selectedBorderColor?:Color;
+  disabledBorderColor?:Color;
+  borderRadius?:BorderRadius;
+  borderWidth?:number;
+
+}
+export class ToggleButtonsThemeData extends DartClass {
+  textStyle?:TextStyle;
+  constraints?:BoxConstraints;
+  color?:Color;
+  selectedColor?:Color;
+  disabledColor?:Color;
+  fillColor?:Color;
+  focusColor?:Color;
+  highlightColor?:Color;
+  hoverColor?:Color;
+  splashColor?:Color;
+  borderColor?:Color;
+  selectedBorderColor?:Color;
+  disabledBorderColor?:Color;
+  borderRadius?:BorderRadius;
+  borderWidth?:number;
+
+  /**
+   * @param config config: 
+      {
+        textStyle?:TextStyle, 
+        constraints?:BoxConstraints, 
+        color?:Color, 
+        selectedColor?:Color, 
+        disabledColor?:Color, 
+        fillColor?:Color, 
+        focusColor?:Color, 
+        highlightColor?:Color, 
+        hoverColor?:Color, 
+        splashColor?:Color, 
+        borderColor?:Color, 
+        selectedBorderColor?:Color, 
+        disabledBorderColor?:Color, 
+        borderRadius?:BorderRadius, 
+        borderWidth?:number, 
+      }
+   */
+  constructor(config: ToggleButtonsThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.textStyle = config.textStyle;
+      this.constraints = config.constraints;
+      this.color = config.color;
+      this.selectedColor = config.selectedColor;
+      this.disabledColor = config.disabledColor;
+      this.fillColor = config.fillColor;
+      this.focusColor = config.focusColor;
+      this.highlightColor = config.highlightColor;
+      this.hoverColor = config.hoverColor;
+      this.splashColor = config.splashColor;
+      this.borderColor = config.borderColor;
+      this.selectedBorderColor = config.selectedBorderColor;
+      this.disabledBorderColor = config.disabledBorderColor;
+      this.borderRadius = config.borderRadius;
+      this.borderWidth = config.borderWidth;
+    }
+  }
+
+}
+
+//****** TextTheme ******
+interface TextThemeConfig {
+  headline1?:TextStyle;
+  headline2?:TextStyle;
+  headline3?:TextStyle;
+  headline4?:TextStyle;
+  headline5?:TextStyle;
+  headline6?:TextStyle;
+  subtitle1?:TextStyle;
+  subtitle2?:TextStyle;
+  bodyText1?:TextStyle;
+  bodyText2?:TextStyle;
+  caption?:TextStyle;
+  button?:TextStyle;
+  overline?:TextStyle;
+}
+export class TextTheme extends DartClass {
+  headline1?:TextStyle;
+  headline2?:TextStyle;
+  headline3?:TextStyle;
+  headline4?:TextStyle;
+  headline5?:TextStyle;
+  headline6?:TextStyle;
+  subtitle1?:TextStyle;
+  subtitle2?:TextStyle;
+  bodyText1?:TextStyle;
+  bodyText2?:TextStyle;
+  caption?:TextStyle;
+  button?:TextStyle;
+  overline?:TextStyle;
+  /**
+   * @param config config: 
+      {
+        headline1?:TextStyle, 
+        headline2?:TextStyle, 
+        headline3?:TextStyle, 
+        headline4?:TextStyle, 
+        headline5?:TextStyle, 
+        headline6?:TextStyle, 
+        subtitle1?:TextStyle, 
+        subtitle2?:TextStyle, 
+        bodyText1?:TextStyle, 
+        bodyText2?:TextStyle, 
+        caption?:TextStyle, 
+        button?:TextStyle, 
+        overline?:TextStyle, 
+      }
+   */
+  constructor(config: TextThemeConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.headline1 = config.headline1;
+      this.headline2 = config.headline2;
+      this.headline3 = config.headline3;
+      this.headline4 = config.headline4;
+      this.headline5 = config.headline5;
+      this.headline6 = config.headline6;
+      this.subtitle1 = config.subtitle1;
+      this.subtitle2 = config.subtitle2;
+      this.bodyText1 = config.bodyText1;
+      this.bodyText2 = config.bodyText2;
+      this.caption = config.caption;
+      this.button = config.button;
+      this.overline = config.overline;
+
+    }
+  }
+
+}
+
+//****** InputDecorationTheme ******
+interface InputDecorationThemeConfig {
+  labelStyle?:TextStyle;
+  helperStyle?:TextStyle;
+  helperMaxLines?:number;
+  hintStyle?:TextStyle;
+  errorStyle?:TextStyle;
+  errorMaxLines?:number;
+  floatingLabelBehavior?:FloatingLabelBehavior;
+  isDense?:boolean;
+  contentPadding?:EdgeInsets;
+  isCollapsed?:boolean;
+  prefixStyle?:TextStyle;
+  suffixStyle?:TextStyle;
+  counterStyle?:TextStyle;
+  filled?:boolean;
+  fillColor?:Color;
+  focusColor?:Color;
+  hoverColor?:Color;
+  errorBorder?:InputBorder;
+  focusedBorder?:InputBorder;
+  focusedErrorBorder?:InputBorder;
+  disabledBorder?:InputBorder;
+  enabledBorder?:InputBorder;
+  border?:InputBorder;
+  alignLabelWithHint?:boolean;
+}
+export class InputDecorationTheme extends DartClass {
+  labelStyle?:TextStyle;
+  helperStyle?:TextStyle;
+  helperMaxLines?:number;
+  hintStyle?:TextStyle;
+  errorStyle?:TextStyle;
+  errorMaxLines?:number;
+  floatingLabelBehavior?:FloatingLabelBehavior;
+  isDense?:boolean;
+  contentPadding?:EdgeInsets;
+  isCollapsed?:boolean;
+  prefixStyle?:TextStyle;
+  suffixStyle?:TextStyle;
+  counterStyle?:TextStyle;
+  filled?:boolean;
+  fillColor?:Color;
+  focusColor?:Color;
+  hoverColor?:Color;
+  errorBorder?:InputBorder;
+  focusedBorder?:InputBorder;
+  focusedErrorBorder?:InputBorder;
+  disabledBorder?:InputBorder;
+  enabledBorder?:InputBorder;
+  border?:InputBorder;
+  alignLabelWithHint?:boolean;
+
+  /**
+   * @param config config: 
+      {
+      labelStyle?:TextStyle, 
+      helperStyle?:TextStyle, 
+      helperMaxLines?:number, 
+      hintStyle?:TextStyle, 
+      errorStyle?:TextStyle, 
+      errorMaxLines?:number, 
+      floatingLabelBehavior?:FloatingLabelBehavior, 
+      isDense?:boolean, 
+      contentPadding?:EdgeInsets, 
+      isCollapsed?:boolean, 
+      prefixStyle?:TextStyle, 
+      suffixStyle?:TextStyle, 
+      counterStyle?:TextStyle, 
+      filled?:boolean, 
+      fillColor?:Color, 
+      focusColor?:Color, 
+      hoverColor?:Color, 
+      errorBorder?:InputBorder, 
+      focusedBorder?:InputBorder, 
+      focusedErrorBorder?:InputBorder, 
+      disabledBorder?:InputBorder, 
+      enabledBorder?:InputBorder, 
+      border?:InputBorder, 
+      alignLabelWithHint?:boolean, 
+      }
+   */
+  constructor(config: InputDecorationThemeConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.labelStyle = config.labelStyle;
+      this.helperStyle = config.helperStyle;
+      this.helperMaxLines = config.helperMaxLines;
+      this.hintStyle = config.hintStyle;
+      this.errorStyle = config.errorStyle;
+      this.errorMaxLines = config.errorMaxLines;
+      this.floatingLabelBehavior = config.floatingLabelBehavior;
+      this.isDense = config.isDense;
+      this.contentPadding = config.contentPadding;
+      this.prefixStyle = config.prefixStyle;
+      this.suffixStyle = config.suffixStyle;
+      this.counterStyle = config.counterStyle;
+      this.filled = config.filled;
+      this.fillColor = config.fillColor;
+      this.focusColor =config.focusColor;
+      this.hoverColor = config.hoverColor;
+      this.errorBorder = config.errorBorder;
+      this.focusColor = config.focusColor;
+      this.focusedErrorBorder = config.focusedErrorBorder;
+      this.disabledBorder = config.disabledBorder;
+      this.border = config.border;
+      this.alignLabelWithHint = config.alignLabelWithHint;
+    }
+  }
+
+}
+
+//****** IconThemeData ******
+interface IconThemeDataConfig {
+  color?:Color;
+  opacity?:number;
+  size?:number;
+}
+export class IconThemeData extends DartClass {
+  color?:Color;
+  opacity?:number;
+  size?:number;
+  /**
+   * @param config config: 
+      {
+        color?:Color, 
+        opacity?:number, 
+        size?:number, 
+      }
+   */
+  constructor(config: IconThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.color =config.color;
+      this.opacity = config.opacity;
+      this.size = config.size;
+    }
+  }
+
+}
+
+
+//****** SliderThemeData ******
+interface SliderThemeDataConfig {
+  trackHeight?:number;
+  activeTrackColor?:Color;
+  inactiveTrackColor?:Color;
+  disabledActiveTrackColor?:Color;
+  disabledInactiveTrackColor?:Color;
+  activeTickMarkColor?:Color;
+  inactiveTickMarkColor?:Color;
+  disabledActiveTickMarkColor?:Color;
+  disabledInactiveTickMarkColor?:Color;
+  thumbColor?:Color;
+  overlappingShapeStrokeColor?:Color;
+  disabledThumbColor?:Color;
+  overlayColor?:Color;
+  valueIndicatorColor?:Color;
+  showValueIndicator?:ShowValueIndicator;
+  valueIndicatorTextStyle?:TextStyle;
+  minThumbSeparation?:number;
+
+}
+export class SliderThemeData extends DartClass {
+  trackHeight?:number;
+  activeTrackColor?:Color;
+  inactiveTrackColor?:Color;
+  disabledActiveTrackColor?:Color;
+  disabledInactiveTrackColor?:Color;
+  activeTickMarkColor?:Color;
+  inactiveTickMarkColor?:Color;
+  disabledActiveTickMarkColor?:Color;
+  disabledInactiveTickMarkColor?:Color;
+  thumbColor?:Color;
+  overlappingShapeStrokeColor?:Color;
+  disabledThumbColor?:Color;
+  overlayColor?:Color;
+  valueIndicatorColor?:Color;
+  showValueIndicator?:ShowValueIndicator;
+  valueIndicatorTextStyle?:TextStyle;
+  minThumbSeparation?:number;
+  /**
+   * @param config config: 
+      {
+        trackHeight?:number, 
+        activeTrackColor?:Color, 
+        inactiveTrackColor?:Color, 
+        disabledActiveTrackColor?:Color, 
+        disabledInactiveTrackColor?:Color, 
+        activeTickMarkColor?:Color, 
+        inactiveTickMarkColor?:Color, 
+        disabledActiveTickMarkColor?:Color, 
+        disabledInactiveTickMarkColor?:Color, 
+        thumbColor?:Color, 
+        overlappingShapeStrokeColor?:Color, 
+        disabledThumbColor?:Color, 
+        overlayColor?:Color, 
+        valueIndicatorColor?:Color, 
+        showValueIndicator?:ShowValueIndicator, 
+        valueIndicatorTextStyle?:TextStyle, 
+        minThumbSeparation?:number, 
+      }
+   */
+  constructor(config: SliderThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.trackHeight = config.trackHeight;
+      this.activeTrackColor = config.activeTrackColor;
+      this.inactiveTrackColor = config.inactiveTrackColor;
+      this.disabledActiveTrackColor = config.disabledActiveTrackColor;
+      this.disabledInactiveTrackColor = config.disabledInactiveTrackColor;
+      this.activeTickMarkColor = config.activeTickMarkColor;
+      this.inactiveTickMarkColor = config.inactiveTickMarkColor;
+      this.disabledActiveTickMarkColor = config.disabledActiveTickMarkColor;
+      this.disabledInactiveTickMarkColor = config.disabledInactiveTickMarkColor;
+      this.thumbColor = config.thumbColor;
+      this.overlappingShapeStrokeColor = config.overlappingShapeStrokeColor;
+      this.disabledThumbColor = config.disabledThumbColor;
+      this.overlayColor = config.overlayColor;
+      this.valueIndicatorColor = config.valueIndicatorColor;
+      this.showValueIndicator = config.showValueIndicator;
+      this.valueIndicatorTextStyle = config.valueIndicatorTextStyle;
+      this.minThumbSeparation = config.minThumbSeparation;
+    }
+  }
+
+}
+
+
+//****** TabBarTheme ******
+interface TabBarThemeConfig {
+  indicator?:Decoration;
+  indicatorSize?:TabBarIndicatorSize;
+  labelColor?:Color;
+  labelPadding?:EdgeInsets;
+  labelStyle?:TextStyle;
+  unselectedLabelColor?:Color;
+  unselectedLabelStyle?:TextStyle;
+}
+export class TabBarTheme extends DartClass {
+  indicator?:Decoration;
+  indicatorSize?:TabBarIndicatorSize;
+  labelColor?:Color;
+  labelPadding?:EdgeInsets;
+  labelStyle?:TextStyle;
+  unselectedLabelColor?:Color;
+  unselectedLabelStyle?:TextStyle;
+  /**
+   * @param config config: 
+      {
+        indicator?:Decoration, 
+        indicatorSize?:TabBarIndicatorSize, 
+        labelColor?:Color, 
+        labelPadding?:EdgeInsets, 
+        labelStyle?:TextStyle, 
+        unselectedLabelColor?:Color, 
+        unselectedLabelStyle?:TextStyle, 
+      }
+   */
+  constructor(config: TabBarThemeConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.indicator = config.indicator;
+      this.indicatorSize = config.indicatorSize;
+      this.labelColor = config.labelColor;
+      this.labelPadding = config.labelPadding;
+      this.labelStyle = config.labelStyle;
+      this.unselectedLabelColor = config.unselectedLabelColor;
+      this.unselectedLabelStyle = config.unselectedLabelStyle;
+    }
+  }
+
+}
+
+
+//****** TooltipThemeData ******
+interface TooltipThemeDataConfig {
+  height?:number;
+  padding?:EdgeInsets;
+  margin?:EdgeInsets;
+  verticalOffset?:number;
+  preferBelow?:boolean;
+  excludeFromSemantics?:boolean;
+  decoration?:Decoration;
+  textStyle?:TextStyle;
+  waitDuration?:Duration;
+  showDuration?:Duration;
+}
+export class TooltipThemeData extends DartClass {
+  height?:number;
+  padding?:EdgeInsets;
+  margin?:EdgeInsets;
+  verticalOffset?:number;
+  preferBelow?:boolean;
+  excludeFromSemantics?:boolean;
+  decoration?:Decoration;
+  textStyle?:TextStyle;
+  waitDuration?:Duration;
+  showDuration?:Duration;
+  /**
+   * @param config config: 
+      {
+        height?:number, 
+        padding?:EdgeInsets, 
+        margin?:EdgeInsets, 
+        verticalOffset?:number, 
+        preferBelow?:boolean, 
+        excludeFromSemantics?:boolean, 
+        decoration?:Decoration, 
+        textStyle?:TextStyle, 
+        waitDuration?:Duration, 
+        showDuration?:Duration,     
+      }
+   */
+  constructor(config: TooltipThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.height = config.height;
+      this.padding = config.padding;
+      this.margin = config.margin;
+      this.verticalOffset = config.verticalOffset;
+      this.preferBelow = config.preferBelow;
+      this.excludeFromSemantics = config.excludeFromSemantics;
+      this.decoration = config.decoration;
+      this.textStyle = config.textStyle;
+      this.waitDuration = config.waitDuration;
+      this.showDuration = config.showDuration;
+    }
+  }
+
+}
+
+
+//****** CardTheme ******
+interface CardThemeConfig {
+  clipBehavior?:Clip;
+  color?:Color;
+  shadowColor?:Color;
+  elevation?:number;
+  margin?:EdgeInsets;
+}
+export class CardTheme extends DartClass {
+  clipBehavior?:Clip;
+  color?:Color;
+  shadowColor?:Color;
+  elevation?:number;
+  margin?:EdgeInsets;
+  /**
+   * @param config config: 
+      {
+        clipBehavior?:Clip, 
+        color?:Color, 
+        shadowColor?:Color, 
+        elevation?:number, 
+        margin?:EdgeInsets, 
+      }
+   */
+  constructor(config: CardThemeConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.clipBehavior = config.clipBehavior;
+      this.color = config.color;
+      this.shadowColor = config.shadowColor;
+      this.elevation = config.elevation;
+      this.margin = config.margin;
+    }
+  }
+
+}
+
+
+//****** ChipThemeData ******
+interface ChipThemeDataConfig {
+  backgroundColor:Color;
+  deleteIconColor?:Color;
+  disabledColor:Color;
+  selectedColor:Color;
+  secondarySelectedColor:Color;
+  shadowColor?:Color;
+  selectedShadowColor?:Color;
+  showCheckmark?:boolean;
+  checkmarkColor?:Color;
+  labelPadding?:EdgeInsets;
+  padding:EdgeInsets;
+  shape:ShapeBorder;
+  labelStyle:TextStyle;
+  secondaryLabelStyle:TextStyle;
+  brightness:Brightness;
+  elevation?:number;
+  pressElevation?:number;
+}
+export class ChipThemeData extends DartClass {
+  backgroundColor?:Color;
+  deleteIconColor?:Color;
+  disabledColor?:Color;
+  selectedColor?:Color;
+  secondarySelectedColor?:Color;
+  shadowColor?:Color;
+  selectedShadowColor?:Color;
+  showCheckmark?:boolean;
+  checkmarkColor?:Color;
+  labelPadding?:EdgeInsets;
+  padding?:EdgeInsets;
+  shape?:ShapeBorder;
+  labelStyle?:TextStyle;
+  secondaryLabelStyle?:TextStyle;
+  brightness?:Brightness;
+  elevation?:number;
+  pressElevation?:number;
+  /**
+   * @param config config: 
+      {
+        backgroundColor?:Color, 
+        deleteIconColor?:Color, 
+        disabledColor?:Color, 
+        selectedColor?:Color, 
+        secondarySelectedColor?:Color, 
+        shadowColor?:Color, 
+        selectedShadowColor?:Color, 
+        showCheckmark?:boolean, 
+        checkmarkColor?:Color, 
+        labelPadding?:EdgeInsets, 
+        padding?:EdgeInsets, 
+        shape?:ShapeBorder, 
+        labelStyle?:TextStyle, 
+        secondaryLabelStyle?:TextStyle, 
+        brightness?:Brightness, 
+        elevation?:number, 
+        pressElevation?:number, 
+      }
+   */
+  constructor(config: ChipThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.backgroundColor = config.backgroundColor;
+      this.deleteIconColor = config.deleteIconColor;
+      this.disabledColor = config.disabledColor;
+      this.selectedColor = config.selectedColor;
+      this.secondarySelectedColor = config.secondarySelectedColor;
+      this.shadowColor = config.shadowColor;
+      this.selectedShadowColor = config.selectedShadowColor;
+      this.showCheckmark = config.showCheckmark;
+      this.checkmarkColor = config.checkmarkColor;
+      this.labelPadding = config.labelPadding;
+      this.padding = config.padding;
+      this.shape = config.shape;
+      this.labelStyle = config.labelStyle;
+      this.secondaryLabelStyle = config.secondaryLabelStyle;
+      this.brightness = config.brightness;
+      this.elevation = config.elevation;
+      this.pressElevation = config.pressElevation;
+    }
+  }
+}
+
+
+//****** AppBarTheme ******
+interface AppBarThemeConfig {
+  brightness?:Brightness;
+  color?:Color;
+  elevation?:number;
+  shadowColor?:Color;
+  iconTheme?:IconThemeData;
+  actionsIconTheme?:IconThemeData;
+  textTheme?:TextTheme;
+  centerTitle?:boolean;
+}
+export class AppBarTheme extends DartClass {
+  brightness?:Brightness;
+  color?:Color;
+  elevation?:number;
+  shadowColor?:Color;
+  iconTheme?:IconThemeData;
+  actionsIconTheme?:IconThemeData;
+  textTheme?:TextTheme;
+  centerTitle?:boolean;
+  /**
+   * @param config config: 
+      {
+        brightness?:Brightness, 
+        color?:Color, 
+        elevation?:number, 
+        shadowColor?:Color, 
+        iconTheme?:IconThemeData, 
+        actionsIconTheme?:IconThemeData, 
+        textTheme?:TextTheme, 
+        centerTitle?:boolean, 
+      }
+   */
+  constructor(config: AppBarThemeConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.brightness = config.brightness;
+      this.color = config.color;
+      this.elevation = config.elevation;
+      this.shadowColor = config.shadowColor;
+      this.iconTheme = config.iconTheme;
+      this.actionsIconTheme = config.actionsIconTheme;
+      this.textTheme = config.textTheme;
+      this.centerTitle = config.centerTitle;
+    }
+  }
+
+}
+
+//****** BottomAppBarTheme ******
+interface BottomAppBarThemeConfig {
+  color?:Color;
+  elevation?:number;
+  shape?:NotchedShape;
+}
+export class BottomAppBarTheme extends DartClass {
+  color?:Color;
+  elevation?:number;
+  shape?:NotchedShape;
+  /**
+   * @param config config: 
+      {
+        color?:Color, 
+        elevation?:number, 
+        shape?:NotchedShape, 
+      }
+   */
+  constructor(config: BottomAppBarThemeConfig){
+    super();
+    if(config!=null && config!=undefined){
+
+      this.color = config.color;
+      this.elevation = config.elevation;
+      this.shape = config.shape;
+    }
+  }
+
+}
+
+//****** DialogTheme ******
+interface DialogThemeConfig {
+  backgroundColor?:Color;
+  elevation?:number;
+  shape?:ShapeBorder;
+  titleTextStyle?:TextStyle;
+  contentTextStyle?:TextStyle;
+}
+export class DialogTheme extends DartClass {
+  backgroundColor?:Color;
+  elevation?:number;
+  shape?:ShapeBorder;
+  titleTextStyle?:TextStyle;
+  contentTextStyle?:TextStyle;
+  /**
+   * @param config config: 
+      {
+        backgroundColor?:Color, 
+        elevation?:number, 
+        shape?:ShapeBorder, 
+        titleTextStyle?:TextStyle, 
+        contentTextStyle?:TextStyle, 
+      }
+   */
+  constructor(config: DialogThemeConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.backgroundColor = config.backgroundColor;
+      this.elevation = config.elevation;
+      this.shape = config.shape;
+      this.titleTextStyle = config.titleTextStyle;
+      this.contentTextStyle = config.contentTextStyle;
+    }
+  }
+
+}
+
+//****** FloatingActionButtonThemeData ******
+interface FloatingActionButtonThemeDataConfig {
+  foregroundColor?:Color;
+  backgroundColor?:Color;
+  focusColor?:Color;
+  hoverColor?:Color;
+  splashColor?:Color;
+  elevation?:number;
+  focusElevation?:number;
+  hoverElevation?:number;
+  disabledElevation?:number;
+  highlightElevation?:number;
+  shape?:ShapeBorder;
+}
+export class FloatingActionButtonThemeData extends DartClass {
+  foregroundColor?:Color;
+  backgroundColor?:Color;
+  focusColor?:Color;
+  hoverColor?:Color;
+  splashColor?:Color;
+  elevation?:number;
+  focusElevation?:number;
+  hoverElevation?:number;
+  disabledElevation?:number;
+  highlightElevation?:number;
+  shape?:ShapeBorder;
+  /**
+   * @param config config: 
+      {
+        foregroundColor?:Color, 
+        backgroundColor?:Color, 
+        focusColor?:Color, 
+        hoverColor?:Color, 
+        splashColor?:Color, 
+        elevation?:number, 
+        focusElevation?:number, 
+        hoverElevation?:number, 
+        disabledElevation?:number, 
+        highlightElevation?:number, 
+        shape?:ShapeBorder, 
+      }
+   */
+  constructor(config: FloatingActionButtonThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.foregroundColor = config.foregroundColor;
+      this.backgroundColor =config.backgroundColor;
+      this.focusColor = config.focusColor;
+      this.hoverColor = config.hoverColor;
+      this.splashColor = config.splashColor;
+      this.elevation = config.elevation;
+      this.focusElevation = config.focusElevation;
+      this.hoverElevation = config.hoverElevation;
+      this.disabledElevation = config.disabledElevation;
+      this.highlightElevation = config.highlightElevation;
+      this.shape = config.shape;
+    }
+  }
+
+}
+
+
+//****** NavigationRailThemeData ******
+interface NavigationRailThemeDataConfig {
+  backgroundColor?:Color;
+  elevation?:number;
+  unselectedLabelTextStyle?:TextStyle;
+  selectedLabelTextStyle?:TextStyle;
+  unselectedIconTheme?:IconThemeData;
+  selectedIconTheme?:IconThemeData;
+  groupAlignment?:number;
+  labelType?:NavigationRailLabelType;
+}
+export class NavigationRailThemeData extends DartClass {
+  backgroundColor?:Color;
+  elevation?:number;
+  unselectedLabelTextStyle?:TextStyle;
+  selectedLabelTextStyle?:TextStyle;
+  unselectedIconTheme?:IconThemeData;
+  selectedIconTheme?:IconThemeData;
+  groupAlignment?:number;
+  labelType?:NavigationRailLabelType;
+  /**
+   * @param config config: 
+      {
+        backgroundColor?:Color, 
+        elevation?:number, 
+        unselectedLabelTextStyle?:TextStyle, 
+        selectedLabelTextStyle?:TextStyle, 
+        unselectedIconTheme?:IconThemeData, 
+        selectedIconTheme?:IconThemeData, 
+        groupAlignment?:number, 
+        labelType?:NavigationRailLabelType, 
+      }
+   */
+  constructor(config: NavigationRailThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.backgroundColor = config.backgroundColor;
+      this.elevation = config.elevation;
+      this.unselectedLabelTextStyle = config.unselectedLabelTextStyle;
+      this.selectedLabelTextStyle = config.selectedLabelTextStyle;
+      this.unselectedIconTheme = config.unselectedIconTheme;
+      this.selectedIconTheme = config.selectedIconTheme;
+      this.groupAlignment = config.groupAlignment;
+      this.labelType = config.labelType;
+    }
+  }
+
+}
+
+ //****** CupertinoThemeData ******
+ interface CupertinoThemeDataConfig {
+  primaryColor?:Color;
+  brightness?:Brightness;
+  primaryContrastingColor?:Color;
+  textTheme?:CupertinoTextThemeData;
+  barBackgroundColor?:Color;
+  scaffoldBackgroundColor?:Color;
+}
+export class CupertinoThemeData extends DartClass {
+  primaryColor?:Color;
+  brightness?:Brightness;
+  primaryContrastingColor?:Color;
+  textTheme?:CupertinoTextThemeData;
+  barBackgroundColor?:Color;
+  scaffoldBackgroundColor?:Color;
+
+  /**
+   * @param config config: 
+      {
+        primaryColor?:Color, 
+        brightness?:Brightness, 
+        primaryContrastingColor?:Color, 
+        textTheme?:CupertinoTextThemeData, 
+        barBackgroundColor?:Color, 
+        scaffoldBackgroundColor?:Color, 
+      }
+   */
+  constructor(config: CupertinoThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.primaryColor = config.primaryColor;
+      this.brightness = config.brightness;
+      this.primaryContrastingColor = config.primaryContrastingColor;
+      this.textTheme = config.textTheme;
+      this.barBackgroundColor = config.barBackgroundColor;
+      this.scaffoldBackgroundColor = config.scaffoldBackgroundColor;
+    }
+  }
+
+}
+
+//****** SnackBarThemeData ******
+interface SnackBarThemeDataConfig {
+  backgroundColor?:Color;
+  actionTextColor?:Color;
+  disabledActionTextColor?:Color;
+  contentTextStyle?:TextStyle;
+  elevation?:number;
+  shape?:ShapeBorder;
+  behavior?:SnackBarBehavior;
+}
+export class SnackBarThemeData extends DartClass {
+  backgroundColor?:Color;
+  actionTextColor?:Color;
+  disabledActionTextColor?:Color;
+  contentTextStyle?:TextStyle;
+  elevation?:number;
+  shape?:ShapeBorder;
+  behavior?:SnackBarBehavior;
+  /**
+   * @param config config: 
+      {
+        backgroundColor?:Color, 
+        actionTextColor?:Color, 
+        disabledActionTextColor?:Color, 
+        contentTextStyle?:TextStyle, 
+        elevation?:number, 
+        shape?:ShapeBorder, 
+        behavior?:SnackBarBehavior, 
+      }
+   */
+  constructor(config: SnackBarThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.backgroundColor = config.backgroundColor;
+      this.actionTextColor = config.actionTextColor;
+      this.disabledActionTextColor = config.disabledActionTextColor;
+      this.contentTextStyle = config.contentTextStyle;
+      this.elevation = config.elevation;
+      this.shape = config.shape;
+      this.behavior = config.behavior;
+    }
+  }
+
+}
+
+//****** BottomSheetThemeData ******
+interface BottomSheetThemeDataConfig {
+  backgroundColor?:Color;
+  elevation?:number;
+  modalBackgroundColor?:Color;
+  modalElevation?:number;
+  shape?:ShapeBorder;
+  clipBehavior?:Clip;
+}
+export class BottomSheetThemeData extends DartClass {
+  backgroundColor?:Color;
+  elevation?:number;
+  modalBackgroundColor?:Color;
+  modalElevation?:number;
+  shape?:ShapeBorder;
+  clipBehavior?:Clip;
+  /**
+   * @param config config: 
+      {
+        backgroundColor?:Color, 
+        elevation?:number, 
+        modalBackgroundColor?:Color, 
+        modalElevation?:number, 
+        shape?:ShapeBorder, 
+        clipBehavior?:Clip, 
+      }
+   */
+  constructor(config: BottomSheetThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.backgroundColor = config.backgroundColor;
+      this.elevation = config.elevation;
+      this.modalBackgroundColor = config.modalBackgroundColor;
+      this.modalElevation = config.modalElevation;
+      this.shape = config.shape;
+      this.clipBehavior = config.clipBehavior;
+
+    }
+  }
+}
+
+//****** PopupMenuThemeData ******
+interface PopupMenuThemeDataConfig {
+  color?:Color;
+  shape?:ShapeBorder;
+  elevation?:number;
+  textStyle?:TextStyle;
+}
+export class PopupMenuThemeData extends DartClass {
+  color?:Color;
+  shape?:ShapeBorder;
+  elevation?:number;
+  textStyle?:TextStyle;
+  /**
+   * @param config config: 
+      {
+        color?:Color, 
+        shape?:ShapeBorder, 
+        elevation?:number, 
+        textStyle?:TextStyle, 
+      }
+   */
+  constructor(config: PopupMenuThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.color = config.color;
+      this.shape = config.shape;
+      this.elevation = config.elevation;
+      this.textStyle = config.textStyle;
+    }
+  }
+}
+
+//****** MaterialBannerThemeData ******
+interface MaterialBannerThemeDataConfig {
+  backgroundColor?:Color;
+  contentTextStyle?:TextStyle;
+  padding?:EdgeInsets;
+  leadingPadding?:EdgeInsets;
+}
+export class MaterialBannerThemeData extends DartClass {
+  backgroundColor?:Color;
+  contentTextStyle?:TextStyle;
+  padding?:EdgeInsets;
+  leadingPadding?:EdgeInsets;
+  /**
+   * @param config config: 
+      {
+        backgroundColor?:Color, 
+        contentTextStyle?:TextStyle, 
+        padding?:EdgeInsets, 
+        leadingPadding?:EdgeInsets, 
+      }
+   */
+  constructor(config: MaterialBannerThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.backgroundColor = config.backgroundColor;
+      this.contentTextStyle = config.contentTextStyle;
+      this.padding = config.padding;
+      this.leadingPadding = config.leadingPadding;
+    }
+  }
+}
+
+//****** DividerThemeData ******
+interface DividerThemeDataConfig {
+  color?:Color;
+  space?:number;
+  thickness?:number;
+  indent?:number;
+  endIndent?:number;
+}
+export class DividerThemeData extends DartClass {
+  color?:Color;
+  space?:number;
+  thickness?:number;
+  indent?:number;
+  endIndent?:number;
+  /**
+   * @param config config: 
+      {
+        color?:Color, 
+        space?:ShapeBorder, 
+        thickness?:number, 
+        indent?:number, 
+        endIndent?:number,
+      }
+   */
+  constructor(config: DividerThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.color = config.color;
+      this.space = config.space;
+      this.thickness = config.thickness;
+      this.indent = config.indent;
+      this.endIndent = config.endIndent;
+    }
+  }
+}
+
+//****** ButtonBarThemeData ******
+interface ButtonBarThemeDataConfig {
+  alignment?:MainAxisAlignment;
+  mainAxisSize?:MainAxisSize;
+  buttonTextTheme?:ButtonTextTheme;
+  buttonMinWidth?:number;
+  buttonHeight?:number;
+  buttonPadding?:EdgeInsets;
+  buttonAlignedDropdown?:boolean;
+  layoutBehavior?:ButtonBarLayoutBehavior;
+  overflowDirection?:VerticalDirection;
+}
+export class ButtonBarThemeData extends DartClass {
+  alignment?:MainAxisAlignment;
+  mainAxisSize?:MainAxisSize;
+  buttonTextTheme?:ButtonTextTheme;
+  buttonMinWidth?:number;
+  buttonHeight?:number;
+  buttonPadding?:EdgeInsets;
+  buttonAlignedDropdown?:boolean;
+  layoutBehavior?:ButtonBarLayoutBehavior;
+  overflowDirection?:VerticalDirection;
+  /**
+   * @param config config: 
+      {
+        alignment?:MainAxisAlignment, 
+        mainAxisSize?:MainAxisSize, 
+        buttonTextTheme?:ButtonTextTheme, 
+        buttonMinWidth?:number, 
+        buttonHeight?:number, 
+        buttonPadding?:EdgeInsets, 
+        buttonAlignedDropdown?:boolean, 
+        layoutBehavior?:ButtonBarLayoutBehavior, 
+        overflowDirection?:VerticalDirection, 
+      }
+   */
+  constructor(config: ButtonBarThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.alignment = config.alignment;
+      this.mainAxisSize = config.mainAxisSize;
+      this.buttonTextTheme = config.buttonTextTheme;
+      this.buttonMinWidth = config.buttonMinWidth;
+      this.buttonHeight = config.buttonHeight;
+      this.buttonPadding = config.buttonPadding;
+      this.buttonAlignedDropdown = config.buttonAlignedDropdown;
+      this.layoutBehavior = config.layoutBehavior;
+      this.overflowDirection = config.overflowDirection;
+    }
+  }
+}
+
+
+//****** BottomNavigationBarThemeData ******
+interface BottomNavigationBarThemeDataConfig {
+  backgroundColor?:Color;
+  elevation?:number;
+  selectedIconTheme?:IconThemeData;
+  unselectedIconTheme?:IconThemeData;
+  selectedItemColor?:Color;
+  unselectedItemColor?:Color;
+  selectedLabelStyle?:TextStyle;
+  unselectedLabelStyle?:TextStyle;
+  showSelectedLabels?:boolean;
+  showUnselectedLabels?:boolean;
+  type?:BottomNavigationBarType;
+}
+export class BottomNavigationBarThemeData extends DartClass {
+  backgroundColor?:Color;
+  elevation?:number;
+  selectedIconTheme?:IconThemeData;
+  unselectedIconTheme?:IconThemeData;
+  selectedItemColor?:Color;
+  unselectedItemColor?:Color;
+  selectedLabelStyle?:TextStyle;
+  unselectedLabelStyle?:TextStyle;
+  showSelectedLabels?:boolean;
+  showUnselectedLabels?:boolean;
+  type?:BottomNavigationBarType;
+  /**
+   * @param config config: 
+      {
+        backgroundColor?:Color, 
+        elevation?:number, 
+        selectedIconTheme?:IconThemeData, 
+        unselectedIconTheme?:IconThemeData, 
+        selectedItemColor?:Color, 
+        unselectedItemColor?:Color, 
+        selectedLabelStyle?:TextStyle, 
+        unselectedLabelStyle?:TextStyle, 
+        showSelectedLabels?:boolean, 
+        showUnselectedLabels?:boolean, 
+        type?:BottomNavigationBarType, 
+      }
+   */
+  constructor(config: BottomNavigationBarThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.backgroundColor = config.backgroundColor;
+      this.elevation = config.elevation;
+      this.selectedIconTheme = config.selectedIconTheme;
+      this.unselectedIconTheme = config.unselectedIconTheme;
+      this.selectedItemColor = config.selectedItemColor;
+      this.unselectedItemColor = config.unselectedItemColor;
+      this.selectedLabelStyle = config.selectedLabelStyle;
+      this.unselectedLabelStyle = config.unselectedLabelStyle;
+      this.showSelectedLabels = config.showSelectedLabels;
+      this.showUnselectedLabels = config.showUnselectedLabels;
+      this.type = config.type;
+      
+    }
+  }
+}
+
+
+//****** TimePickerThemeData ******
+interface TimePickerThemeDataConfig {
+  backgroundColor?:Color;
+  hourMinuteTextColor?:Color;
+  hourMinuteColor?:Color;
+  dayPeriodTextColor?:Color;
+  dayPeriodColor?:Color;
+  dialHandColor?:Color;
+  dialBackgroundColor?:Color;
+  dialTextColor?:Color;
+  entryModeIconColor?:Color;
+  hourMinuteTextStyle?:TextStyle;
+  dayPeriodTextStyle?:TextStyle;
+  helpTextStyle?:TextStyle;
+  shape?:ShapeBorder;
+  hourMinuteShape?:ShapeBorder;
+  dayPeriodShape?:ShapeBorder;
+  dayPeriodBorderSide?:BorderSide;
+  inputDecorationTheme?:InputDecorationTheme;
+}
+export class TimePickerThemeData extends DartClass {
+  backgroundColor?:Color;
+  hourMinuteTextColor?:Color;
+  hourMinuteColor?:Color;
+  dayPeriodTextColor?:Color;
+  dayPeriodColor?:Color;
+  dialHandColor?:Color;
+  dialBackgroundColor?:Color;
+  dialTextColor?:Color;
+  entryModeIconColor?:Color;
+  hourMinuteTextStyle?:TextStyle;
+  dayPeriodTextStyle?:TextStyle;
+  helpTextStyle?:TextStyle;
+  shape?:ShapeBorder;
+  hourMinuteShape?:ShapeBorder;
+  dayPeriodShape?:ShapeBorder;
+  dayPeriodBorderSide?:BorderSide;
+  inputDecorationTheme?:InputDecorationTheme;
+  /**
+   * @param config config: 
+      {
+        backgroundColor?:Color, 
+        hourMinuteTextColor?:Color, 
+        hourMinuteColor?:Color, 
+        dayPeriodTextColor?:Color, 
+        dayPeriodColor?:Color, 
+        dialHandColor?:Color, 
+        dialBackgroundColor?:Color, 
+        dialTextColor?:Color, 
+        entryModeIconColor?:Color, 
+        hourMinuteTextStyle?:TextStyle, 
+        dayPeriodTextStyle?:TextStyle, 
+        helpTextStyle?:TextStyle, 
+        shape?:ShapeBorder, 
+        hourMinuteShape?:ShapeBorder, 
+        dayPeriodShape?:ShapeBorder, 
+        dayPeriodBorderSide?:BorderSide, 
+        inputDecorationTheme?:InputDecorationTheme, 
+      }
+   */
+  constructor(config: TimePickerThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.backgroundColor = config.backgroundColor;
+      this.hourMinuteTextColor = config.hourMinuteTextColor;
+      this.hourMinuteColor = config.hourMinuteColor;
+      this.dayPeriodColor = config.dayPeriodColor;
+      this.dayPeriodTextColor = config.dayPeriodTextColor;
+      this.dialHandColor = config.dialHandColor;
+      this.dialBackgroundColor = config.dialBackgroundColor;
+      this.entryModeIconColor = config.entryModeIconColor;
+      this.hourMinuteTextStyle = config.hourMinuteTextStyle;
+      this.dayPeriodTextStyle = config.dayPeriodTextStyle;
+      this.helpTextStyle = config.helpTextStyle;
+      this.shape = config.shape;
+      this.hourMinuteShape = config.hourMinuteShape;
+      this.dayPeriodShape = config.dayPeriodShape;
+      this.dayPeriodBorderSide = config.dayPeriodBorderSide;
+      this.inputDecorationTheme = config.inputDecorationTheme;
+    }
+  }
+}
+
+//****** TextSelectionThemeData ******
+interface TextSelectionThemeDataConfig {
+  cursorColor?:Color;
+  selectionColor?:Color;  
+  selectionHandleColor?:Color;
+}
+export class TextSelectionThemeData extends DartClass {
+  cursorColor?:Color;
+  selectionColor?:Color;  
+  selectionHandleColor?:Color;
+  /**
+   * @param config config: 
+      {
+        cursorColor?:Color, 
+        selectionColor?:Color,   
+        selectionHandleColor?:Color, 
+      }
+   */
+  constructor(config: TextSelectionThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.cursorColor = config.cursorColor;
+      this.selectionColor = config.selectionColor;
+      this.selectionHandleColor = config.selectionHandleColor;
+    }
+  }
+}
+
+//****** DataTableThemeData ******
+interface DataTableThemeDataConfig {
+  dataRowHeight?:number;
+  dataTextStyle?:TextStyle;
+  headingRowHeight?:number;
+  headingTextStyle?:TextStyle;
+  horizontalMargin?:number;
+  columnSpacing?:number;
+  dividerThickness?:number;
+}
+export class DataTableThemeData extends DartClass {
+  dataRowHeight?:number;
+  dataTextStyle?:TextStyle;
+  headingRowHeight?:number;
+  headingTextStyle?:TextStyle;
+  horizontalMargin?:number;
+  columnSpacing?:number;
+  dividerThickness?:number;
+  /**
+   * @param config config: 
+      {
+        dataRowHeight?:number, 
+        dataTextStyle?:TextStyle, 
+        headingRowHeight?:number, 
+        headingTextStyle?:TextStyle, 
+        horizontalMargin?:number, 
+        columnSpacing?:number, 
+        dividerThickness?:number, 
+      }
+   */
+  constructor(config: DataTableThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.dataRowHeight = config.dataRowHeight;
+      this.dataTextStyle = config.dataTextStyle;
+      this.headingRowHeight = config.headingRowHeight;
+      this.headingTextStyle = config.headingTextStyle;
+      this.horizontalMargin = config.horizontalMargin;
+      this.columnSpacing = config.columnSpacing;
+      this.dividerThickness = config.dividerThickness;
+    }
+  }
+}
+
+
+//****** ThemeData ******
+interface ThemeDataConfig {
+  brightness?:Brightness;
+  visualDensity?:VisualDensity;
+  primaryColor?:Color;
+  primaryColorBrightness?:Brightness;
+  primaryColorLight?:Color;
+  primaryColorDark?:Color;
+  accentColor?:Color;
+  accentColorBrightness?:Brightness;
+  canvasColor?:Color;
+  shadowColor?:Color;
+  scaffoldBackgroundColor?:Color;
+  bottomAppBarColor?:Color;
+  cardColor?:Color;
+  focusColor?:Color;
+  dividerColor?:Color;
+  hoverColor?:Color;
+  highlightColor?:Color;
+  splashColor?:Color;
+  selectedRowColor?:Color;
+  unselectedWidgetColor?:Color;
+  disabledColor?:Color;
+  buttonColor?:Color;
+  buttonTheme?:ButtonThemeData;
+  toggleButtonsTheme?:ToggleButtonsThemeData;
+  secondaryHeaderColor?:Color;
+  textSelectionColor?:Color;
+  cursorColor?:Color;
+  textSelectionHandleColor?:Color;
+  backgroundColor?:Color;
+  dialogBackgroundColor?:Color;
+  indicatorColor?:Color;
+  hintColor?:Color;
+  errorColor?:Color;
+  toggleableActiveColor?:Color;
+  fontFamily?:string;
+  textTheme?:TextTheme;
+  primaryTextTheme?:TextTheme;
+  accentTextTheme?:TextTheme;
+  inputDecorationTheme?:InputDecorationTheme;
+  iconTheme?:IconThemeData;
+  primaryIconTheme?:IconThemeData;
+  accentIconTheme?:IconThemeData;
+  sliderTheme?:SliderThemeData;
+  tabBarTheme?:TabBarTheme;
+  tooltipTheme?:TooltipThemeData;
+  cardTheme?:CardTheme;
+  chipTheme?:ChipThemeData;
+  platform?:TargetPlatform;
+  materialTapTargetSize?:MaterialTapTargetSize;
+  applyElevationOverlayColor?:boolean;
+  appBarTheme?:AppBarTheme;
+  bottomAppBarTheme?:BottomAppBarTheme;
+  colorScheme?:ColorScheme;
+  dialogTheme?:DialogTheme;
+  floatingActionButtonTheme?:FloatingActionButtonThemeData;
+  navigationRailTheme?:NavigationRailThemeData;
+  cupertinoOverrideTheme?:CupertinoThemeData;
+  snackBarTheme?:SnackBarThemeData;
+  bottomSheetTheme?:BottomSheetThemeData;
+  popupMenuTheme?:PopupMenuThemeData;
+  bannerTheme?:MaterialBannerThemeData;
+  dividerTheme?:DividerThemeData;
+  buttonBarTheme?:ButtonBarThemeData;
+  bottomNavigationBarTheme?:BottomNavigationBarThemeData;
+  timePickerTheme?:TimePickerThemeData;
+  textSelectionTheme?:TextSelectionThemeData;
+  dataTableTheme?:DataTableThemeData;
+  fixTextFieldOutlineLabel?:boolean;
+  useTextSelectionTheme?:boolean;
+}
+export class ThemeData extends DartClass {
+  brightness?:Brightness;
+  visualDensity?:Visibility;
+  primaryColor?:Color;
+  primaryColorBrightness?:Brightness;
+  primaryColorLight?:Color;
+  primaryColorDark?:Color;
+  accentColor?:Color;
+  accentColorBrightness?:Brightness;
+  canvasColor?:Color;
+  shadowColor?:Color;
+  scaffoldBackgroundColor?:Color;
+  bottomAppBarColor?:Color;
+  cardColor?:Color;
+  focusColor?:Color;
+  dividerColor?:Color;
+  hoverColor?:Color;
+  highlightColor?:Color;
+  splashColor?:Color;
+  selectedRowColor?:Color;
+  unselectedWidgetColor?:Color;
+  disabledColor?:Color;
+  buttonColor?:Color;
+  buttonTheme?:ButtonThemeData;
+  toggleButtonsTheme?:ToggleButtonsThemeData;
+  secondaryHeaderColor?:Color;
+  textSelectionColor?:Color;
+  cursorColor?:Color;
+  textSelectionHandleColor?:Color;
+  backgroundColor?:Color;
+  dialogBackgroundColor?:Color;
+  indicatorColor?:Color;
+  hintColor?:Color;
+  errorColor?:Color;
+  toggleableActiveColor?:Color;
+  fontFamily?:string;
+  textTheme?:TextTheme;
+  primaryTextTheme?:TextTheme;
+  accentTextTheme?:TextTheme;
+  inputDecorationTheme?:InputDecorationTheme;
+  iconTheme?:IconThemeData;
+  primaryIconTheme?:IconThemeData;
+  accentIconTheme?:IconThemeData;
+  sliderTheme?:SliderThemeData;
+  tabBarTheme?:TabBarTheme;
+  tooltipTheme?:TooltipThemeData;
+  cardTheme?:CardTheme;
+  chipTheme?:ChipThemeData;
+  platform?:TargetPlatform;
+  materialTapTargetSize?:MaterialTapTargetSize;
+  applyElevationOverlayColor?:boolean;
+  appBarTheme?:AppBarTheme;
+  bottomAppBarTheme?:BottomAppBarTheme;
+  colorScheme?:ColorScheme;
+  dialogTheme?:DialogTheme;
+  floatingActionButtonTheme?:FloatingActionButtonThemeData;
+  navigationRailTheme?:NavigationRailThemeData;
+  cupertinoOverrideTheme?:CupertinoThemeData;
+  snackBarTheme?:SnackBarThemeData;
+  bottomSheetTheme?:BottomSheetThemeData;
+  popupMenuTheme?:PopupMenuThemeData;
+  bannerTheme?:MaterialBannerThemeData;
+  dividerTheme?:DividerThemeData;
+  buttonBarTheme?:ButtonBarThemeData;
+  bottomNavigationBarTheme?:BottomNavigationBarThemeData;
+  timePickerTheme?:TimePickerThemeData;
+  textSelectionTheme?:TextSelectionThemeData;
+  dataTableTheme?:DataTableThemeData;
+  fixTextFieldOutlineLabel?:boolean;
+  useTextSelectionTheme?:boolean;
+
+  /**
+   * @param config config: 
+      {
+        brightness?:Brightness, 
+        visualDensity?:Visibility, 
+        primaryColor?:Color, 
+        primaryColorBrightness?:Brightness, 
+        primaryColorLight?:Color, 
+        primaryColorDark?:Color, 
+        accentColor?:Color, 
+        accentColorBrightness?:Brightness, 
+        canvasColor?:Color, 
+        shadowColor?:Color, 
+        scaffoldBackgroundColor?:Color, 
+        bottomAppBarColor?:Color, 
+        cardColor?:Color, 
+        focusColor?:Color, 
+        dividerColor?:Color, 
+        hoverColor?:Color, 
+        highlightColor?:Color, 
+        splashColor?:Color, 
+        selectedRowColor?:Color, 
+        unselectedWidgetColor?:Color, 
+        disabledColor?:Color, 
+        buttonColor?:Color, 
+        buttonTheme?:ButtonThemeData, 
+        toggleButtonsTheme?:ToggleButtonsThemeData, 
+        secondaryHeaderColor?:Color, 
+        textSelectionColor?:Color, 
+        cursorColor?:Color, 
+        textSelectionHandleColor?:Color, 
+        backgroundColor?:Color, 
+        dialogBackgroundColor?:Color, 
+        indicatorColor?:Color, 
+        hintColor?:Color, 
+        errorColor?:Color, 
+        toggleableActiveColor?:Color, 
+        fontFamily?:string, 
+        textTheme?:TextTheme, 
+        primaryTextTheme?:TextTheme, 
+        accentTextTheme?:TextTheme, 
+        inputDecorationTheme?:InputDecorationTheme, 
+        iconTheme?:IconThemeData, 
+        primaryIconTheme?:IconThemeData, 
+        accentIconTheme?:IconThemeData, 
+        sliderTheme?:SliderThemeData, 
+        tabBarTheme?:TabBarTheme, 
+        tooltipTheme?:TooltipThemeData, 
+        cardTheme?:CardTheme, 
+        chipTheme?:ChipThemeData, 
+        platform?:TargetPlatform, 
+        materialTapTargetSize?:MaterialTapTargetSize, 
+        applyElevationOverlayColor?:boolean, 
+        appBarTheme?:AppBarTheme, 
+        bottomAppBarTheme?:BottomAppBarTheme, 
+        colorScheme?:ColorScheme, 
+        dialogTheme?:DialogTheme, 
+        floatingActionButtonTheme?:FloatingActionButtonThemeData, 
+        navigationRailTheme?:NavigationRailThemeData, 
+        cupertinoOverrideTheme?:CupertinoThemeData, 
+        snackBarTheme?:SnackBarThemeData, 
+        bottomSheetTheme?:BottomSheetThemeData, 
+        popupMenuTheme?:PopupMenuThemeData, 
+        bannerTheme?:MaterialBannerThemeData, 
+        dividerTheme?:DividerThemeData, 
+        buttonBarTheme?:ButtonBarThemeData, 
+        bottomNavigationBarTheme?:BottomNavigationBarThemeData, 
+        timePickerTheme?:TimePickerThemeData, 
+        textSelectionTheme?:TextSelectionThemeData, 
+        dataTableTheme?:DataTableThemeData, 
+        fixTextFieldOutlineLabel?:boolean, 
+        useTextSelectionTheme?:boolean, 
+      }
+   */
+  constructor(config: ThemeDataConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.brightness = config.brightness;
+      this.visualDensity = config.visualDensity;
+      this.primaryColor = config.primaryColor;
+      this.primaryColorBrightness = config.primaryColorBrightness;
+      this.primaryColorLight = config.primaryColorLight;
+      this.primaryColorDark = config.primaryColorDark;
+      this.accentColor = config.accentColor;
+      this.accentColorBrightness = config.accentColorBrightness;
+      this.canvasColor = config.canvasColor;
+      this.shadowColor = config.shadowColor;
+      this.scaffoldBackgroundColor = config.scaffoldBackgroundColor;
+      this.bottomAppBarColor = config.bottomAppBarColor;
+      this.cardColor = config.cardColor;
+      this.focusColor = config.focusColor;
+      this.dividerColor = config.dividerColor;
+      this.hoverColor = config.hoverColor;
+      this.highlightColor = config.highlightColor;
+      this.splashColor = config.splashColor;
+      this.selectedRowColor = config.selectedRowColor;
+      this.unselectedWidgetColor = config.unselectedWidgetColor;
+      this.disabledColor = config.disabledColor;
+      this.buttonColor = config.buttonColor;
+      this.buttonTheme = config.buttonTheme;
+      this.toggleButtonsTheme = config.toggleButtonsTheme;
+      this.secondaryHeaderColor = config.secondaryHeaderColor;
+      this.textSelectionColor = config.textSelectionColor;
+      this.cursorColor = config.cursorColor;
+      this.textSelectionHandleColor = config.textSelectionHandleColor;
+      this.backgroundColor = config.backgroundColor;
+      this.dialogBackgroundColor = config.dialogBackgroundColor;
+      this.indicatorColor = config.indicatorColor;
+      this.hintColor = config.hintColor;
+      this.errorColor = config.errorColor;
+      this.toggleableActiveColor = config.toggleableActiveColor;
+      this.fontFamily = config.fontFamily;
+      this.textTheme = config.textTheme;
+      this.primaryTextTheme = config.primaryTextTheme;
+      this.accentTextTheme = config.accentTextTheme;
+      this.inputDecorationTheme = config.inputDecorationTheme;
+      this.iconTheme = config.iconTheme;
+      this.primaryIconTheme = config.primaryIconTheme;
+      this.accentIconTheme = config.accentIconTheme;
+      this.sliderTheme = config.sliderTheme;
+      this.tabBarTheme = config.tabBarTheme;
+      this.tooltipTheme = config.tooltipTheme;
+      this.cardTheme = config.cardTheme;
+      this.chipTheme = config.chipTheme;
+      this.platform = config.platform;
+      this.materialTapTargetSize = config.materialTapTargetSize;
+      this.applyElevationOverlayColor = config.applyElevationOverlayColor;
+      this.appBarTheme = config.appBarTheme;
+      this.bottomAppBarTheme = config.bottomAppBarTheme;
+      this.colorScheme = config.colorScheme;
+      this.dialogTheme = config.dialogTheme;
+      this.floatingActionButtonTheme = config.floatingActionButtonTheme;
+      this.navigationRailTheme = config.navigationRailTheme;
+      this.cupertinoOverrideTheme = config.cupertinoOverrideTheme;
+      this.snackBarTheme = config.snackBarTheme;
+      this.bottomSheetTheme = config.bottomSheetTheme;
+      this.popupMenuTheme = config.popupMenuTheme;
+      this.bannerTheme = config.bannerTheme;
+      this.dividerTheme = config.dividerTheme;
+      this.buttonBarTheme = config.buttonBarTheme;
+      this.bottomNavigationBarTheme = config.bottomNavigationBarTheme;
+      this.timePickerTheme = config.timePickerTheme;
+      this.textSelectionTheme = config.textSelectionTheme;
+      this.dataTableTheme = config.dataTableTheme;
+      this.fixTextFieldOutlineLabel = config.fixTextFieldOutlineLabel;
+      this.useTextSelectionTheme = config.useTextSelectionTheme;
+    }
+  }
+
+}
+
+//#endregion
   
 //#region ******** Icons ********
 export class Icons extends IconData{
@@ -17371,55 +19168,7 @@ export class CupertinoIcons extends IconData{
     }
   }
 
-  //****** CupertinoAlertDialog ******
-  interface CupertinoAlertDialogConfig {
-    key?:Key;
-    title?:Widget;
-    content?:Widget;
-    actions?:Array<CupertinoDialogAction>;
-    scrollController?:ScrollController;
-    actionScrollController?:ScrollController;
-    insetAnimationDuration?:Duration;
-    insetAnimationCurve?:Curve;
-  }
-  export class CupertinoAlertDialog extends Widget {
-    key?:Key;
-    title?:Widget;
-    content?:Widget;
-    actions?:Array<CupertinoDialogAction>;
-    scrollController?:ScrollController;
-    actionScrollController?:ScrollController;
-    insetAnimationDuration?:Duration;
-    insetAnimationCurve?:Curve;
-  
-    /**
-     * @param config config: 
-        {
-          key?:Key, 
-          title?:Widget, 
-          content?:Widget, 
-          actions?:Array<CupertinoDialogAction>, 
-          scrollController?:ScrollController, 
-          actionScrollController?:ScrollController, 
-          insetAnimationDuration?:Duration, 
-          insetAnimationCurve?:Curve, 
-        }
-     */
-  
-    constructor(config: CupertinoAlertDialogConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.key = config.key;
-        this.title = config.title;
-        this.content = config.content;
-        this.actions = config.actions;
-        this.scrollController = config.scrollController;
-        this.actionScrollController = config.actionScrollController;
-        this.insetAnimationDuration = config.insetAnimationDuration;
-        this.insetAnimationCurve = config.insetAnimationCurve;
-      }
-    }
-  }
+ 
 
   
   //-------------- B -----------------
@@ -18041,47 +19790,7 @@ export class CupertinoIcons extends IconData{
   
   }
   
-  //****** CupertinoThemeData ******
-  interface CupertinoThemeDataConfig {
-    primaryColor?:Color;
-    brightness?:Brightness;
-    primaryContrastingColor?:Color;
-    textTheme?:CupertinoTextThemeData;
-    barBackgroundColor?:Color;
-    scaffoldBackgroundColor?:Color;
-  }
-  export class CupertinoThemeData extends DartClass {
-    primaryColor?:Color;
-    brightness?:Brightness;
-    primaryContrastingColor?:Color;
-    textTheme?:CupertinoTextThemeData;
-    barBackgroundColor?:Color;
-    scaffoldBackgroundColor?:Color;
-  
-    /**
-     * @param config config: 
-        {
-          primaryColor?:Color, 
-          brightness?:Brightness, 
-          primaryContrastingColor?:Color, 
-          textTheme?:CupertinoTextThemeData, 
-          barBackgroundColor?:Color, 
-          scaffoldBackgroundColor?:Color, 
-        }
-     */
-    constructor(config: CupertinoThemeDataConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.primaryColor = config.primaryColor;
-        this.brightness = config.brightness;
-        this.primaryContrastingColor = config.primaryContrastingColor;
-        this.textTheme = config.textTheme;
-        this.barBackgroundColor = config.barBackgroundColor;
-        this.scaffoldBackgroundColor = config.scaffoldBackgroundColor;
-      }
-    }
-  
-  }
+ 
   
   //#endregion
 
@@ -18134,17 +19843,22 @@ export class EmptyDataWidget extends Widget {
 
 
 //#region ****** Dialog ******
+
+export abstract class ShowBaseDialog extends Widget{
+
+}
+
 interface ShowDialogConfig {
   barrierDismissible?:boolean;
   useSafeArea?:boolean;
   useRootNavigator?:boolean;
-  child:Widget;
+  child:Widget; //(通常返回Dialog组件，比如SimpleDialog和AlertDialog),
 }
-export class ShowDialog extends Widget{
+export class ShowDialog extends ShowBaseDialog{
   barrierDismissible?:boolean;
   useSafeArea?:boolean;
   useRootNavigator?:boolean;
-  child?:Widget;
+  child?:Widget;  //(通常返回Dialog组件，比如SimpleDialog和AlertDialog),
 
   /**
      * @param config config: 
@@ -18259,24 +19973,81 @@ export class AlertDialog extends Widget {
   }
 }
 
+//****** SimpleDialog ******
+interface SimpleDialogConfig {
+  key?:Key;
+  title?:Widget;
+  titlePadding?:EdgeInsets;
+  titleTextStyle?:TextStyle;
+  children?:Array<Widget>;
+  contentPadding?:EdgeInsets;
+  backgroundColor?:Color;
+  elevation?:number;
+  semanticLabel?:string;
+  shape?:ShapeBorder;
+}
+export class SimpleDialog extends Widget {
+  key?:Key;
+  title?:Widget;
+  titlePadding?:EdgeInsets;
+  titleTextStyle?:TextStyle;
+  children?:Array<Widget>;
+  contentPadding?:EdgeInsets;
+  backgroundColor?:Color;
+  elevation?:number;
+  semanticLabel?:string;
+  shape?:ShapeBorder;
+
+  /**
+   * @param config config: 
+      {
+        key?:Key, 
+        title?:Widget, 
+        titlePadding?:EdgeInsets, 
+        titleTextStyle?:TextStyle, 
+        children?:Array<Widget>, 
+        contentPadding?:EdgeInsets, 
+        backgroundColor?:Color, 
+        elevation?:number, 
+        semanticLabel?:string, 
+        shape?:ShapeBorder, 
+      }
+   */
+
+  constructor(config: SimpleDialogConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.title = config.title;
+      this.titlePadding = config.titlePadding;
+      this.titleTextStyle = config.titleTextStyle;
+      this.children = config.children;
+      this.contentPadding = config.contentPadding;
+      this.backgroundColor = config.backgroundColor;
+      this.elevation = config.elevation;
+      this.semanticLabel = config.semanticLabel;
+      this.shape = config.shape;
+    }
+  }
+}
 
 
+//****** ShowCupertinoDialog ******
 interface ShowCupertinoDialogConfig {
   barrierDismissible?:boolean;
   useRootNavigator?:boolean;
-  child:CupertinoAlertDialog;
+  child:Widget;
 }
-export class ShowCupertinoDialog extends Widget{
+export class ShowCupertinoDialog extends ShowBaseDialog{
   barrierDismissible?:boolean;
   useRootNavigator?:boolean;
-  child?:CupertinoAlertDialog;
+  child?:Widget;
 
   /**
      * @param config config: 
         {
           barrierDismissible?:boolean, 
           useRootNavigator?:boolean, 
-          child:CupertinoAlertDialog, 
+          child:Widget(通常使用CupertinoAlertDialog), 
         }
      */
     constructor(config: ShowCupertinoDialogConfig){
@@ -18289,6 +20060,58 @@ export class ShowCupertinoDialog extends Widget{
     }
 }
 
+//****** CupertinoAlertDialog ******
+interface CupertinoAlertDialogConfig {
+  key?:Key;
+  title?:Widget;
+  content?:Widget;
+  actions?:Array<CupertinoDialogAction>;
+  scrollController?:ScrollController;
+  actionScrollController?:ScrollController;
+  insetAnimationDuration?:Duration;
+  insetAnimationCurve?:Curve;
+}
+export class CupertinoAlertDialog extends Widget {
+  key?:Key;
+  title?:Widget;
+  content?:Widget;
+  actions?:Array<CupertinoDialogAction>;
+  scrollController?:ScrollController;
+  actionScrollController?:ScrollController;
+  insetAnimationDuration?:Duration;
+  insetAnimationCurve?:Curve;
+
+  /**
+   * @param config config: 
+      {
+        key?:Key, 
+        title?:Widget, 
+        content?:Widget, 
+        actions?:Array<CupertinoDialogAction>, 
+        scrollController?:ScrollController, 
+        actionScrollController?:ScrollController, 
+        insetAnimationDuration?:Duration, 
+        insetAnimationCurve?:Curve, 
+      }
+   */
+
+  constructor(config: CupertinoAlertDialogConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.key = config.key;
+      this.title = config.title;
+      this.content = config.content;
+      this.actions = config.actions;
+      this.scrollController = config.scrollController;
+      this.actionScrollController = config.actionScrollController;
+      this.insetAnimationDuration = config.insetAnimationDuration;
+      this.insetAnimationCurve = config.insetAnimationCurve;
+    }
+  }
+}
+
+
+//****** ShowGeneralDialog ******
 interface ShowGeneralDialogConfig {
   barrierDismissible?:boolean;
   useRootNavigator?:boolean;
@@ -18297,7 +20120,7 @@ interface ShowGeneralDialogConfig {
   transitionDuration?:Duration;
   child:Widget;
 }
-export class ShowGeneralDialog extends Widget{
+export class ShowGeneralDialog extends ShowBaseDialog{
   barrierDismissible?:boolean;
   useRootNavigator?:boolean;
   barrierLabel?:string;
@@ -18328,41 +20151,6 @@ export class ShowGeneralDialog extends Widget{
     }
 }
 
-interface ShowBottomSheetConfig {
-  backgroundColor?:Color;
-  elevation?:number;
-  shape?:ShapeBorder;
-  clipBehavior?:Clip;
-  child:Widget;
-}
-export class ShowBottomSheet extends Widget{
-  backgroundColor?:Color;
-  elevation?:number;
-  shape?:ShapeBorder;
-  clipBehavior?:Clip;
-  child?:Widget;
-
-  /**
-     * @param config config: 
-        {
-          backgroundColor?:Color, 
-          elevation?:number, 
-          shape?:ShapeBorder, 
-          clipBehavior?:Clip, 
-          child:Widget, 
-        }
-     */
-    constructor(config: ShowBottomSheetConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.backgroundColor = config.backgroundColor;
-        this.elevation = config.elevation;
-        this.shape = config.shape;
-        this.clipBehavior = config.clipBehavior;
-        this.child = config.child;
-      }
-    }
-}
 
 interface ShowModalBottomSheetConfig {
   backgroundColor?:Color;
@@ -18376,7 +20164,7 @@ interface ShowModalBottomSheetConfig {
   enableDrag?:boolean;
   child:Widget;
 }
-export class ShowModalBottomSheet extends Widget{
+export class ShowModalBottomSheet extends ShowBaseDialog{
   backgroundColor?:Color;
   elevation?:number;
   shape?:ShapeBorder;
@@ -18419,13 +20207,63 @@ export class ShowModalBottomSheet extends Widget{
       }
     }
 }
+//****** BottomSheet ******
+//TODO:animationController
+interface BottomSheetConfig {
+  key?:Key;
+  enableDrag?:boolean;
+  backgroundColor?:Color;
+  elevation?:number;
+  shape?:ShapeBorder;
+  clipBehavior?:Clip;
+  onClosing:VoidCallback;
+  child:Widget;
+}
+export class BottomSheet extends Widget {
+  key?:Key;
+  enableDrag?:boolean;
+  backgroundColor?:Color;
+  elevation?:number;
+  shape?:ShapeBorder;
+  clipBehavior?:Clip;
+  onClosing?:VoidCallback;
+  child?:Widget;
+
+  /**
+   * @param config config: 
+      {
+        key?:Key, 
+        enableDrag?:boolean, 
+        backgroundColor?:Color, 
+        elevation?:number, 
+        shape?:ShapeBorder, 
+        clipBehavior?:Clip, 
+        onClosing?:VoidCallback, 
+        child?:Widget, 
+      }
+   */
+
+  constructor(config: BottomSheetConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.key = config.key;
+      this.elevation = config.elevation;
+      this.backgroundColor = config.backgroundColor;
+      this.shape = config.shape;
+      this.clipBehavior = config.clipBehavior;
+      this.onClosing = config.onClosing;
+      this.child = config.child;
+    }
+  }
+}
+
 
 interface ShowCupertinoModalPopupConfig {
   useRootNavigator?:boolean;
   semanticsDismissible?:boolean;
   child:Widget;
 }
-export class ShowCupertinoModalPopup extends Widget{
+export class ShowCupertinoModalPopup extends ShowBaseDialog{
   useRootNavigator?:boolean;
   semanticsDismissible?:boolean;
   child?:Widget;
@@ -18435,7 +20273,7 @@ export class ShowCupertinoModalPopup extends Widget{
         {
           useRootNavigator?:boolean, 
           semanticsDismissible?:boolean, 
-          child:Widget, 
+          child:Widget(通常情况下和CupertinoActionSheet配合使用)
         }
      */
     constructor(config: ShowCupertinoModalPopupConfig){
@@ -18446,6 +20284,92 @@ export class ShowCupertinoModalPopup extends Widget{
         this.child = config.child;
       }
     }
+}
+
+//****** CupertinoActionSheet ******
+interface CupertinoActionSheetConfig {
+  key?:Key;
+  title?:Widget;
+  message?:Widget;
+  actions?:Array<Widget>;
+  messageScrollController?:ScrollController;
+  actionScrollController?:ScrollController;
+  cancelButton?:Widget;
+
+}
+export class CupertinoActionSheet extends Widget {
+  key?:Key;
+  title?:Widget;
+  message?:Widget;
+  actions?:Array<Widget>;
+  messageScrollController?:ScrollController;
+  actionScrollController?:ScrollController;
+  cancelButton?:Widget;
+
+  /**
+   * @param config config: 
+      {
+        key?:Key, 
+        title?:Widget, 
+        message?:Widget, 
+        actions?:Array<Widget>, (actions:[CupertinoActionSheetAction])
+        messageScrollController?:ScrollController, 
+        actionScrollController?:ScrollController, 
+        cancelButton?:Widget, 
+      }
+   */
+
+  constructor(config: CupertinoActionSheetConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.key = config.key;
+      this.title = config.title;
+      this.message = config.message;
+      this.actions = config.actions;
+      this.messageScrollController = config.messageScrollController;
+      this.actionScrollController = config.actionScrollController;
+      this.cancelButton = config.cancelButton;
+    }
+  }
+}
+
+//****** CupertinoActionSheetAction ******
+interface CupertinoActionSheetActionConfig {
+  key?:Key;
+  child:Widget;
+  onPressed:VoidCallback;
+  isDefaultAction?:boolean;
+  isDestructiveAction?:boolean;
+
+}
+export class CupertinoActionSheetAction extends Widget {
+  key?:Key;
+  child?:Widget;
+  onPressed?:VoidCallback;
+  isDefaultAction?:boolean;
+  isDestructiveAction?:boolean;
+
+  /**
+   * @param config config: 
+      {
+        key?:Key, 
+        child:Widget, 
+        onPressed:VoidCallback, 
+        isDefaultAction?:boolean, 
+        isDestructiveAction?:boolean, 
+      }
+   */
+
+  constructor(config: CupertinoActionSheetActionConfig){
+    super();
+    if(config!=null && config!=undefined){
+      this.key = config.key;
+      this.child = config.child;
+      this.onPressed = config.onPressed;
+      this.isDefaultAction = config.isDefaultAction;
+      this.isDestructiveAction = config.isDestructiveAction;
+    }
+  }
 }
 
 interface SimpleDialogButtonInfoConfig {
@@ -18604,7 +20528,7 @@ interface ShowCustomAlertDialogConfig {
   actions?:Array<CustomAlertDialogButton>;
   closeFunction?:VoidCallback;
 }
-export class ShowCustomAlertDialog extends Widget{
+export class ShowCustomAlertDialog extends ShowBaseDialog{
   style?:CustomAlertDialogStyle;
   image?:Widget;
   title?:string;
@@ -18644,7 +20568,7 @@ interface SimpleCustomDialogButtonInfoConfig {
   textStyle?:TextStyle;
   bgColor?:Color;
 }
-export class SimpleCustomDialogButtonInfo extends Widget{
+export class SimpleCustomDialogButtonInfo extends ShowBaseDialog{
   text?:string;
   textStyle?:TextStyle;
   bgColor?:Color;
@@ -18677,7 +20601,7 @@ interface ShowSimpleCustomDialogConfig {
   actions?:Array<SimpleCustomDialogButtonInfo>;
   onTap?:VoidCallbackNumber;
 }
-export class ShowSimpleCustomDialog extends Widget{
+export class ShowSimpleCustomDialog extends ShowBaseDialog{
   style?:CustomAlertDialogStyle;
   image?:Widget;
   title?:string;
@@ -18713,7 +20637,7 @@ export class ShowSimpleCustomDialog extends Widget{
 }
 
 
-interface ShowSimpleDialogConfig {
+interface ShowSimpleAlertDialogConfig {
   title?:string;
   titleContent?:Widget;
   desc?:string;
@@ -18722,7 +20646,7 @@ interface ShowSimpleDialogConfig {
   onTap?:VoidCallbackNumber;
   barrierDismissible?:boolean;
 }
-export class ShowSimpleDialog extends Widget{
+export class ShowSimpleAlertDialog extends ShowBaseDialog{
   title?:string;
   titleContent?:Widget;
   desc?:string;
@@ -18743,7 +20667,7 @@ export class ShowSimpleDialog extends Widget{
           barrierDismissible?:boolean,
         }
      */
-    constructor(config: ShowSimpleDialogConfig){
+    constructor(config: ShowSimpleAlertDialogConfig){
       super();
       if(config!=null && config!=undefined){
         this.title = config.title;
@@ -18757,13 +20681,58 @@ export class ShowSimpleDialog extends Widget{
     }
 }
 
+interface ShowSimpleCupertinoDialogConfig {
+  title?:string;
+  titleContent?:Widget;
+  desc?:string;
+  descContent?:Widget;
+  actions?:Array<SimpleDialogButtonInfo>;
+  onTap?:VoidCallbackNumber;
+  barrierDismissible?:boolean;
+}
+export class ShowSimpleCupertinoDialog extends ShowBaseDialog{
+  title?:string;
+  titleContent?:Widget;
+  desc?:string;
+  descContent?:Widget;
+  actions?:Array<SimpleDialogButtonInfo>;
+  onTap?:VoidCallbackNumber;
+  barrierDismissible?:boolean;
+
+  /**
+     * @param config config: 
+        {
+          title?:string, 
+          titleContent?:Widget,
+          desc?:string,
+          descContent?:Widget,
+          actions:Array<SimpleDialogButtonInfo>,
+          onTap?:VoidCallbackNumber,
+          barrierDismissible?:boolean,
+        }
+     */
+    constructor(config: ShowSimpleCupertinoDialogConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.title = config.title;
+        this.titleContent = config.titleContent;
+        this.desc = config.desc;
+        this.descContent = config.descContent;
+        this.actions = config.actions;
+        this.onTap = config.onTap;
+        this.barrierDismissible = config.barrierDismissible;
+      }
+    }
+}
+
+
 interface ShowCustomActionSheetConfig {
   title?:string;
   titleContent?:Widget;
   itemList:Array<string>;
   onTap:VoidCallbackNumber;
 }
-export class ShowCustomActionSheet extends Widget{
+export class ShowCustomActionSheet extends ShowBaseDialog{
   title?:string;
   titleContent?:Widget;
   itemList?:Array<string>;
@@ -18795,7 +20764,7 @@ interface ShowSimpleActionSheetConfig {
   itemList:Array<string>;
   onTap:VoidCallbackNumber;
 }
-export class ShowSimpleActionSheet extends Widget{
+export class ShowSimpleActionSheet extends ShowBaseDialog{
   title?:string;
   titleContent?:Widget;
   itemList?:Array<string>;
@@ -18821,6 +20790,154 @@ export class ShowSimpleActionSheet extends Widget{
     }
 }
 
+interface ShowCustomPopupMenuConfig {
+  superkey:BindKey;
+  menuList:Array<CustomPopupMenuItem>;
+  barrierDismissible?:boolean;
+  bgColor?:Color;
+  textFontSize?:number;
+  onTap?:VoidCallbackNumber;
+}
+export class ShowCustomPopupMenu extends ShowBaseDialog{
+  superkey?:BindKey;
+  menuList?:Array<CustomPopupMenuItem>;
+  barrierDismissible?:boolean;
+  bgColor?:Color;
+  textFontSize?:number;
+  onTap?:VoidCallbackNumber;
+
+  /**
+     * @param config config: 
+        {
+          superkey:BindKey, 
+          menuList?:Array<CustomPopupMenuItem>, 
+          barrierDismissible?:boolean, 
+          bgColor?:Color, 
+          textFontSize?:number, 
+          onTap?:VoidCallbackNumber, 
+        }
+     */
+    constructor(config: ShowCustomPopupMenuConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.superkey = config.superkey;
+        this.menuList = config.menuList;
+        this.barrierDismissible = config.barrierDismissible;
+        this.bgColor = config.bgColor;
+        this.textFontSize = config.textFontSize;
+        this.onTap = config.onTap;
+      }
+    }
+}
+
+interface CustomPopupMenuItemConfig {
+  title:string;
+  titleTextStyle?:TextStyle;
+  image?:Widget;
+}
+export class CustomPopupMenuItem extends Widget{
+  title?:string;
+  titleTextStyle?:TextStyle;
+  image?:Widget;
+
+  /**
+     * @param config config: 
+        {
+          title:string, 
+          titleTextStyle?:TextStyle, 
+          image?:Widget, 
+        }
+     */
+    constructor(config: CustomPopupMenuItemConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.title = config.title;
+        this.titleTextStyle = config.titleTextStyle;
+        this.image = config.image;
+      }
+    }
+}
+
+
+interface ShowDatePickerConfig {
+
+  initialDate?:number;
+  firstDate?:number;
+  lastDate?:number;
+  currentDate?:number;
+  initialEntryMode?:DatePickerEntryMode;
+  helpText?:string;
+  cancelText?:string;
+  confirmText?:string;
+  useRootNavigator?:boolean;
+  textDirection?:TextDirection;
+  initialDatePickerMode?:DatePickerMode;
+  errorFormatText?:string;
+  errorInvalidText?:string;
+  fieldHintText?:string;
+  fieldLabelText?:string;
+
+}
+export class ShowDatePicker extends ShowBaseDialog{
+  initialDate?:number;
+  firstDate?:number;
+  lastDate?:number;
+  currentDate?:number;
+  initialEntryMode?:DatePickerEntryMode;
+  helpText?:string;
+  cancelText?:string;
+  confirmText?:string;
+  useRootNavigator?:boolean;
+  textDirection?:TextDirection;
+  initialDatePickerMode?:DatePickerMode;
+  errorFormatText?:string;
+  errorInvalidText?:string;
+  fieldHintText?:string;
+  fieldLabelText?:string;
+
+  /**
+     * @param config config: 
+        {
+          initialDate?:number(10位、13位、18位时间戳), 
+          firstDate?:number(10位、13位、18位时间戳), 
+          lastDate?:number(10位、13位、18位时间戳), 
+          currentDate?:number(10位、13位、18位时间戳), 
+          initialEntryMode?:DatePickerEntryMode, 
+          helpText?:string, 
+          cancelText?:string, 
+          confirmText?:string, 
+          useRootNavigator?:boolean, 
+          textDirection?:TextDirection, 
+          initialDatePickerMode?:DatePickerMode, 
+          errorFormatText?:string, 
+          errorInvalidText?:string, 
+          fieldHintText?:string, 
+          fieldLabelText?:string, 
+        }
+     */
+    constructor(config: ShowDatePickerConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.initialDate = config.initialDate;
+        this.firstDate = config.firstDate;
+        this.lastDate = config.lastDate;
+        this.currentDate = config.currentDate;
+        this.initialEntryMode= config.initialEntryMode;
+        this.helpText = config.helpText;
+        this.cancelText = config.cancelText;
+        this.confirmText = config.confirmText;
+        this.useRootNavigator = config.useRootNavigator;
+        this.textDirection = config.textDirection;
+        this.initialEntryMode = config.initialEntryMode;
+        this.errorFormatText = config.errorFormatText;
+        this.errorInvalidText = config.errorFormatText;
+        this.fieldHintText = config.fieldHintText;
+        this.fieldLabelText = config.fieldLabelText;
+      }
+    }
+}
+
+
 
 export class Dialog extends DartClass {
 
@@ -18842,68 +20959,21 @@ export class Dialog extends DartClass {
     return this.instance;
   }
 
-  //显示简单选择
-  _show(baseWidget:BaseWidget,funcName:string,child:any){
-    Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-          widgetID:String(baseWidget.widgetID),
-          mirrorID: Dialog.getInstance().mirrorID,
-          className: Dialog.getInstance().className,
-          funcName: funcName,
-          args:{
-            widgetID:String(baseWidget.widgetID),
-            child:baseWidget.helper.buildWidgetTreeSubWidget(child),
-          },
-      }));
-  }
+   //显示简单选择
+   static async show(baseWidget:BaseWidget,child:ShowBaseDialog){
 
-  static showDialog(baseWidget:BaseWidget,child:ShowDialog){
-    Dialog.getInstance()._show(baseWidget,"showDialog",child);
+    var v= await Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+      widgetID:String(baseWidget.widgetID),
+      mirrorID: Dialog.getInstance().mirrorID,
+      className: Dialog.getInstance().className,
+      funcName: child.className,
+      args:{
+        widgetID:String(baseWidget.widgetID),
+        child:baseWidget.helper.buildWidgetTreeSubWidget(child),
+      },
+    }));
+    return Convert.toString(v);
   }
-
-  static showCupertinoDialog(baseWidget:BaseWidget,child:ShowCupertinoDialog){
-    Dialog.getInstance()._show(baseWidget,"showCupertinoDialog",child);
-  }
-
-  static showGeneralDialog(baseWidget:BaseWidget,child:ShowGeneralDialog){
-    Dialog.getInstance()._show(baseWidget,"showGeneralDialog",child);
-  }
-
-  static showBottomSheet(baseWidget:BaseWidget,child:ShowBottomSheet){
-    Dialog.getInstance()._show(baseWidget,"showBottomSheet",child);
-  }
-
-  static showModalBottomSheet(baseWidget:BaseWidget,child:ShowModalBottomSheet){
-    Dialog.getInstance()._show(baseWidget,"showBottshowModalBottomSheetomSheet",child);
-  }
-
-  static showCupertinoModalPopup(baseWidget:BaseWidget,child:ShowCupertinoModalPopup){
-    Dialog.getInstance()._show(baseWidget,"showCupertinoModalPopup",child);
-  }  
-  
-  static showCustomActionSheet(baseWidget:BaseWidget,child:ShowCustomActionSheet){
-    Dialog.getInstance()._show(baseWidget,"showCustomActionSheet",child);
-  }
-
-  static showSimpleActionSheet(baseWidget:BaseWidget,child:ShowSimpleActionSheet){
-    Dialog.getInstance()._show(baseWidget,"showSimpleActionSheet",child);
-  }
-
-  static showSimpleCupertinoDialog(baseWidget:BaseWidget,child:ShowSimpleDialog){
-    Dialog.getInstance()._show(baseWidget,"showSimpleCupertinoDialog",child);
-  }
-
-  static showSimpleAlertDialog(baseWidget:BaseWidget,child:ShowSimpleDialog){
-    Dialog.getInstance()._show(baseWidget,"showSimpleAlertDialog",child);
-  }
-
-  static showSimpleCustomDialog(baseWidget:BaseWidget,child:ShowSimpleCustomDialog){
-    Dialog.getInstance()._show(baseWidget,"showSimpleCustomDialog",child);
-  }
-
-  static showCustomAlertDialog(baseWidget:BaseWidget,child:ShowCustomAlertDialog){
-    Dialog.getInstance()._show(baseWidget,"showCustomAlertDialog",child);
-  }
-
 
   static dismiss(baseWidget:BaseWidget){
     Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({

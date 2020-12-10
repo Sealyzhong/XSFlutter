@@ -16,7 +16,6 @@ class XSProxyRegisterHelperCupertinoSeries {
     Map<String, CreateJsonObjProxyFun> m = {};
 
     m.addAll(XSProxyCupertinoActivityIndicator.registerProxy());
-    m.addAll(XSProxyCupertinoAlertDialog.registerProxy());
 
     m.addAll(XSProxyCupertinoButton.registerProxy());
 
@@ -53,30 +52,6 @@ class XSProxyCupertinoActivityIndicator extends XSJsonObjProxy {
       key: XSJSParse.getKey(context, bo, map, "key"),
       animating: XSJSParse.getBool(context, bo, map, "animating"),
       radius: XSJSParse.getDouble(context, bo, map, "radius", defaultValue: 10.0),
-    );
-  }
-}
-
-//****** CupertinoAlertDialog ******
-class XSProxyCupertinoAlertDialog extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "CupertinoAlertDialog";
-    return {
-      regClassName: () => XSProxyCupertinoAlertDialog()..init(className: regClassName)
-    };
-  }
-
-  @override
-  CupertinoAlertDialog constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return CupertinoAlertDialog(
-      key: XSJSParse.getKey(context, bo, map, "key"),
-      title: XSJSParse.getWidget(context, bo, map, "title"),
-      content: XSJSParse.getWidget(context, bo, map, "content"),
-      actions: XSJSParse.getWidgetList(context, bo, map, "actions", defaultValue: const <Widget>[]),
-      scrollController: XSJSParse.getObject(context, bo, map, "scrollController"),
-      actionScrollController: XSJSParse.getObject(context, bo, map, "actionScrollController"),
-      insetAnimationDuration: XSJSParse.getDuration(context, bo, map, "insetAnimationDuration", defaultValue: const Duration(milliseconds: 100)),
-      insetAnimationCurve: XSJSParse.getCurve(context, bo, map, "insetAnimationCurve", defaultValue: Curves.decelerate),
     );
   }
 }

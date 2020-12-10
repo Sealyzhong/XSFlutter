@@ -8,7 +8,7 @@ void main() {
   //-------1. XSFlutter 启动---------
   XSFlutter.getInstance().runJSApp();
 
-  //注册自定义JSApi，可以在JS侧调用自定义dart代码，先在MXJsonObjToDartObject这里注册，可以搜索CustomJSApi 看增加过程
+  //注册自定义JSApi，可以在JS侧调用自定义dart代码，先在XSJsonObjToDartObject这里注册，可以搜索CustomJSApi 看增加过程
   XSFlutter.getInstance().registerMirrorObjProxy(CustomJSApiProxy.registerProxy());
 
   runApp(MyApp());
@@ -24,10 +24,19 @@ class MyApp extends StatelessWidget {
         ),
         //方法一
         navigatorKey: XSLoading.instance.getNavigatorKey(),
+        localeListResolutionCallback: (List<Locale> locales, Iterable<Locale> supportedLocales) {
+          return Locale('zh');
+        },
+        localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
+          return Locale('zh');
+        },
         localizationsDelegates: [
-          GlobalCupertinoLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('zh', 'CH'),
         ],
         home: MyFlutterExampleHome());
   }

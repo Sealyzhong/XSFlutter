@@ -16,19 +16,28 @@ import 'dart:typed_data';
 import 'dart:math' as math;
 import 'dart:io';
 import 'xs_build_owner.dart';
-import 'xs_js_flutter.dart';
 import 'xs_json_to_dart.dart';
 import 'package/mask_text_input_formatter.dart';
 
 //****** 常用解析
 class XSJSParse {
   //-------------- Basic -----------------
+  //****** CheckMapKey ******/
+  static bool _checkMapKey(Map map, String key) {
+    try {
+      if (map == null) return false;
+      if (key == null || key.isEmpty) return false;
+      if (!map.containsKey(key)) return false;
+    } catch (e) {}
+    return true;
+  }
+
   //****** String ******/
   static String _getString(Map map, String key) {
     try {
-      if (map == null) return null;
-      if (key == null || key.isEmpty) return null;
-      if (!map.containsKey(key)) return null;
+      if (!_checkMapKey(map, key)) {
+        return null;
+      }
       var v = map[key];
       if (v is String) return v;
       return v.toString();
@@ -39,9 +48,9 @@ class XSJSParse {
   //****** double ******/
   static double _getDouble(Map map, String key) {
     try {
-      if (map == null) return null;
-      if (key == null || key.isEmpty) return null;
-      if (!map.containsKey(key)) return null;
+      if (!_checkMapKey(map, key)) {
+        return null;
+      }
       var v = map[key];
       if (v is num) return v.toDouble();
       if (v is double) return v;
@@ -53,9 +62,9 @@ class XSJSParse {
   //****** int ******/
   static int _getInt(Map map, String key) {
     try {
-      if (map == null) return null;
-      if (key == null || key.isEmpty) return null;
-      if (!map.containsKey(key)) return null;
+      if (!_checkMapKey(map, key)) {
+        return null;
+      }
       var v = map[key];
       if (v is num) return v.toInt();
       if (v is int) return v;
@@ -67,9 +76,9 @@ class XSJSParse {
   //****** bool ******/
   static bool _getBool(Map map, String key) {
     try {
-      if (map == null) return null;
-      if (key == null || key.isEmpty) return null;
-      if (!map.containsKey(key)) return null;
+      if (!_checkMapKey(map, key)) {
+        return null;
+      }
       var v = map[key];
       if (v is bool) return v;
     } catch (e) {}
@@ -91,9 +100,9 @@ class XSJSParse {
   //****** bool ******/
   static List _getList(Map map, String key) {
     try {
-      if (map == null) return null;
-      if (key == null || key.isEmpty) return null;
-      if (!map.containsKey(key)) return null;
+      if (!_checkMapKey(map, key)) {
+        return null;
+      }
       var v = map[key];
       if (v is List) return v;
     } catch (e) {}
@@ -288,6 +297,24 @@ class XSJSParse {
   //****** Animation<double> ******/
   static Animation<double> getAnimationDouble(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {dynamic defaultValue}) {
     return _getClassObj(map[key], buildOwner: bo, defaultValue: defaultValue, context: context);
+  }
+
+  //****** AppBarTheme ******/
+  static AppBarTheme getAppBarTheme(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {AppBarTheme defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return AppBarTheme(
+        brightness: getBrightness(context, bo, v, "Brightness"),
+        color: getColor(context, bo, v, "color"),
+        shadowColor: getColor(context, bo, v, "shadowColor"),
+        elevation: getDouble(context, bo, v, "elevation"),
+        iconTheme: getIconThemeData(context, bo, v, "iconTheme"),
+        actionsIconTheme: getIconThemeData(context, bo, v, "actionsIconTheme"),
+        textTheme: getTextTheme(context, bo, v, "textTheme"),
+        centerTitle: getBool(context, bo, v, "centerTitle"),
+      );
+    }
+    return defaultValue;
   }
 
   //-------------- B -----------------
@@ -793,7 +820,7 @@ class XSJSParse {
         minWidth: getDouble(context, bo, v, "minWidth", defaultValue: 88.0),
         height: getDouble(context, bo, v, "height", defaultValue: 36.0),
         padding: getEdgeInsets(context, bo, v, "padding"),
-        //shape: getbo(context, bo, v, "shape"]),
+        shape: getShapeBorder(context, bo, v, "shape"),
         layoutBehavior: getButtonBarLayoutBehavior(context, bo, v, "layoutBehavior", defaultValue: ButtonBarLayoutBehavior.padded),
         alignedDropdown: getBool(context, bo, v, "alignedDropdown", defaultValue: false),
         buttonColor: getColor(context, bo, v, "buttonColor"),
@@ -802,7 +829,77 @@ class XSJSParse {
         hoverColor: getColor(context, bo, v, "hoverColor"),
         highlightColor: getColor(context, bo, v, "highlightColor"),
         splashColor: getColor(context, bo, v, "splashColor"),
+        colorScheme: getColorScheme(context, bo, v, "colorScheme"),
         materialTapTargetSize: getMaterialTapTargetSize(context, bo, v, "materialTapTargetSize"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** ButtonBarThemeData ******/
+  static ButtonBarThemeData getButtonBarThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ButtonBarThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return ButtonBarThemeData(
+        alignment: getMainAxisAlignment(context, bo, v, "alignment"),
+        mainAxisSize: getMainAxisSize(context, bo, v, "mainAxisSize"),
+        buttonTextTheme: getButtonTextTheme(context, bo, v, "buttonTextTheme"),
+        buttonMinWidth: getDouble(context, bo, v, "buttonMinWidth"),
+        buttonHeight: getDouble(context, bo, v, "buttonHeight"),
+        buttonPadding: getEdgeInsets(context, bo, v, "buttonPadding"),
+        buttonAlignedDropdown: getBool(context, bo, v, "buttonAlignedDropdown"),
+        layoutBehavior: getButtonBarLayoutBehavior(context, bo, v, "layoutBehavior"),
+        overflowDirection: getVerticalDirection(context, bo, v, "overflowDirection"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** BottomNavigationBarThemeData ******/
+  static BottomNavigationBarThemeData getBottomNavigationBarThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BottomNavigationBarThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return BottomNavigationBarThemeData(
+        backgroundColor: getColor(context, bo, v, "backgroundColor"),
+        elevation: getDouble(context, bo, v, "elevation"),
+        selectedIconTheme: getIconThemeData(context, bo, v, "selectedIconTheme"),
+        unselectedIconTheme: getIconThemeData(context, bo, v, "unselectedIconTheme"),
+        selectedItemColor: getColor(context, bo, v, "selectedItemColor"),
+        unselectedItemColor: getColor(context, bo, v, "unselectedItemColor"),
+        selectedLabelStyle: getTextStyle(context, bo, v, "selectedLabelStyle"),
+        unselectedLabelStyle: getTextStyle(context, bo, v, "unselectedLabelStyle"),
+        showSelectedLabels: getBool(context, bo, v, "showSelectedLabels"),
+        showUnselectedLabels: getBool(context, bo, v, "showUnselectedLabels"),
+        type: getBottomNavigationBarType(context, bo, v, "type"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** BottomSheetThemeData ******/
+  static BottomSheetThemeData getBottomSheetThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BottomSheetThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return BottomSheetThemeData(
+        backgroundColor: getColor(context, bo, v, "backgroundColor"),
+        elevation: getDouble(context, bo, v, "elevation"),
+        modalBackgroundColor: getColor(context, bo, v, "modalBackgroundColor"),
+        modalElevation: getDouble(context, bo, v, "hmodalElevationeight"),
+        shape: getShapeBorder(context, bo, v, "shape"),
+        clipBehavior: getClip(context, bo, v, "clipBehavior"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** BottomAppBarTheme ******/
+  static BottomAppBarTheme getBottomAppBarTheme(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {BottomAppBarTheme defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return BottomAppBarTheme(
+        color: getColor(context, bo, v, "color"),
+        elevation: getDouble(context, bo, v, "elevation"),
+        shape: getNotchedShape(context, bo, v, "shape"),
       );
     }
     return defaultValue;
@@ -811,27 +908,28 @@ class XSJSParse {
   //-------------- C -----------------
   //****** Color ******/
   static Color getColorNoKey(BuildContext context, XSJsonBuildOwner bo, Map map, {Color defaultValue}) {
-    if (map != null) {
-      var className = _getClassName(map);
-      var constructorName = _getConstructorName(map);
+    var v = map;
+    if (v != null) {
+      var className = _getClassName(v);
+      var constructorName = _getConstructorName(v);
       if (className == "Color") {
         if (constructorName == null || constructorName.isEmpty) {
-          return Color(getInt(context, bo, map, "value", defaultValue: 0));
+          return Color(getInt(context, bo, v, "value", defaultValue: 0));
         }
         switch (constructorName) {
           case 'fromRGBO':
             return Color.fromRGBO(
-              getInt(context, bo, map, "r", defaultValue: 0),
-              getInt(context, bo, map, "g", defaultValue: 0),
-              getInt(context, bo, map, "b", defaultValue: 0),
-              getDouble(context, bo, map, "opacity", defaultValue: 0.0),
+              getInt(context, bo, v, "r", defaultValue: 0),
+              getInt(context, bo, v, "g", defaultValue: 0),
+              getInt(context, bo, v, "b", defaultValue: 0),
+              getDouble(context, bo, v, "opacity", defaultValue: 0.0),
             );
           case 'fromARGB':
             return Color.fromARGB(
-              getInt(context, bo, map, "a", defaultValue: 0),
-              getInt(context, bo, map, "r", defaultValue: 0),
-              getInt(context, bo, map, "g", defaultValue: 0),
-              getInt(context, bo, map, "b", defaultValue: 0),
+              getInt(context, bo, v, "a", defaultValue: 0),
+              getInt(context, bo, v, "r", defaultValue: 0),
+              getInt(context, bo, v, "g", defaultValue: 0),
+              getInt(context, bo, v, "b", defaultValue: 0),
             );
         }
       }
@@ -845,11 +943,80 @@ class XSJSParse {
     return getColorNoKey(context, bo, v, defaultValue: defaultValue);
   }
 
+  //****** CardTheme ******/
+  static CardTheme getCardTheme(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {CardTheme defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return CardTheme(
+        clipBehavior: getClip(context, bo, v, "clipBehavior"),
+        margin: getEdgeInsets(context, bo, v, "margin"),
+        shape: getShapeBorder(context, bo, v, "shape"),
+        color: getColor(context, bo, v, "color"),
+        shadowColor: getColor(context, bo, v, "shadowColor"),
+        elevation: getDouble(context, bo, v, "elevation"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** ChipThemeData ******/
+  static ChipThemeData getChipThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ChipThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return ChipThemeData(
+        backgroundColor: getColor(context, bo, v, "backgroundColor"),
+        deleteIconColor: getColor(context, bo, v, "deleteIconColor"),
+        disabledColor: getColor(context, bo, v, "disabledColor"),
+        selectedColor: getColor(context, bo, v, "selectedColor"),
+        secondarySelectedColor: getColor(context, bo, v, "secondarySelectedColor"),
+        shadowColor: getColor(context, bo, v, "shadowColor"),
+        selectedShadowColor: getColor(context, bo, v, "selectedShadowColor"),
+        showCheckmark: getBool(context, bo, v, "showCheckmark"),
+        checkmarkColor: getColor(context, bo, v, "checkmarkColor"),
+        labelPadding: getEdgeInsets(context, bo, v, "labelPadding"),
+        padding: getEdgeInsets(context, bo, v, "padding"),
+        shape: getShapeBorder(context, bo, v, "shape"),
+        labelStyle: getTextStyle(context, bo, v, "labelStyle"),
+        secondaryLabelStyle: getTextStyle(context, bo, v, "secondaryLabelStyle"),
+        brightness: getBrightness(context, bo, v, "brightness"),
+        elevation: getDouble(context, bo, v, "elevation"),
+        pressElevation: getDouble(context, bo, v, "pressElevation"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** ColorScheme ******/
+  static ColorScheme getColorScheme(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ColorScheme defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      var _constructorName = _getConstructorName(v);
+      if (_constructorName == null) {
+        return ColorScheme(
+          brightness: getBrightness(context, bo, v, "brightness"),
+          primary: getColor(context, bo, v, "primary"),
+          primaryVariant: getColor(context, bo, v, "primaryVariant"),
+          secondary: getColor(context, bo, v, "secondary"),
+          secondaryVariant: getColor(context, bo, v, "secondaryVariant"),
+          surface: getColor(context, bo, v, "surface"),
+          background: getColor(context, bo, v, "background"),
+          error: getColor(context, bo, v, "error"),
+          onPrimary: getColor(context, bo, v, "onPrimary"),
+          onSecondary: getColor(context, bo, v, "onSecondary"),
+          onSurface: getColor(context, bo, v, "onSurface"),
+          onBackground: getColor(context, bo, v, "onBackground"),
+          onError: getColor(context, bo, v, "onError"),
+        );
+      }
+    }
+    return defaultValue;
+  }
+
   //****** OutlinedBorder ******/
   static OutlinedBorder getOutlinedBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {OutlinedBorder defaultValue}) {
     Map v = _getMap(map, key, defaultValue: map);
     if (v != null) {
-      var className = _getClassName(map);
+      var className = _getClassName(v);
       switch (className) {
         case "CircleBorder":
           return CircleBorder(side: getBorderSide(context, bo, v, "side", defaultValue: BorderSide.none));
@@ -1083,6 +1250,54 @@ class XSJSParse {
   }
 
   //-------------- D -----------------
+
+  //****** DialogTheme ******/
+  static DialogTheme getDialogTheme(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DialogTheme defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return DialogTheme(
+        backgroundColor: getColor(context, bo, v, "backgroundColor"),
+        elevation: getDouble(context, bo, v, "elevation"),
+        shape: getShapeBorder(context, bo, v, "shape"),
+        titleTextStyle: getTextStyle(context, bo, v, "titleTextStyle"),
+        contentTextStyle: getTextStyle(context, bo, v, "contentTextStyle"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** DataTableThemeData ******/
+  static DataTableThemeData getDataTableThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DataTableThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return DataTableThemeData(
+        dataRowHeight: getDouble(context, bo, v, "dataRowHeight"),
+        dataTextStyle: getTextStyle(context, bo, v, "dataTextStyle"),
+        headingRowHeight: getDouble(context, bo, v, "headingRowHeight"),
+        headingTextStyle: getTextStyle(context, bo, v, "headingTextStyle"),
+        horizontalMargin: getDouble(context, bo, v, "horizontalMargin"),
+        columnSpacing: getDouble(context, bo, v, "columnSpacing"),
+        dividerThickness: getDouble(context, bo, v, "dividerThickness"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** DividerThemeData ******/
+  static DividerThemeData getDividerThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DividerThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return DividerThemeData(
+        color: getColor(context, bo, v, "color"),
+        space: getDouble(context, bo, v, "space"),
+        thickness: getDouble(context, bo, v, "thickness"),
+        indent: getDouble(context, bo, v, "indent"),
+        endIndent: getDouble(context, bo, v, "endIndent"),
+      );
+    }
+    return defaultValue;
+  }
+
   //****** Double ******/
   static double getDouble(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {double defaultValue}) {
     return _getDouble(map, key) ?? defaultValue;
@@ -1097,6 +1312,26 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** DateTime ******/
+  static DateTime getDateTime(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DateTime defaultValue}) {
+    var v = _getInt(map, key);
+    if (v != null) {
+      try {
+        if (v.toString().length == 10) {
+          return DateTime.fromMillisecondsSinceEpoch(v * 1000);
+        }
+        if (v.toString().length == 13) {
+          return DateTime.fromMillisecondsSinceEpoch(v);
+        }
+
+        if (v.toString().length == 18) {
+          return DateTime.fromMicrosecondsSinceEpoch(v);
+        }
+      } catch (ex) {}
+    }
+    return defaultValue;
+  }
+
   //****** DragStartBehavior ******/
   static DragStartBehavior getDragStartBehavior(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DragStartBehavior defaultValue}) {
     var v = _getString(map, key);
@@ -1106,6 +1341,34 @@ class XSJSParse {
           return DragStartBehavior.start;
         case 'down':
           return DragStartBehavior.down;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** DatePickerMode ******/
+  static DatePickerMode getDatePickerMode(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DatePickerMode defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'day':
+          return DatePickerMode.day;
+        case 'year':
+          return DatePickerMode.year;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** DatePickerEntryMode ******/
+  static DatePickerEntryMode getDatePickerEntryMode(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {DatePickerEntryMode defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'calendar':
+          return DatePickerEntryMode.calendar;
+        case 'input':
+          return DatePickerEntryMode.input;
       }
     }
     return defaultValue;
@@ -1446,9 +1709,9 @@ class XSJSParse {
     if (v != null) {
       return FocusNode(
         debugLabel: getString(context, bo, v, "debugLabel"),
-        skipTraversal: getBool(context, bo, map, "skipTraversal", defaultValue: false),
-        canRequestFocus: getBool(context, bo, map, "canRequestFocus", defaultValue: true),
-        descendantsAreFocusable: getBool(context, bo, map, "descendantsAreFocusable", defaultValue: true),
+        skipTraversal: getBool(context, bo, v, "skipTraversal", defaultValue: false),
+        canRequestFocus: getBool(context, bo, v, "canRequestFocus", defaultValue: true),
+        descendantsAreFocusable: getBool(context, bo, v, "descendantsAreFocusable", defaultValue: true),
       );
     }
     return defaultValue;
@@ -1485,6 +1748,27 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** FloatingActionButtonThemeData ******/
+  static FloatingActionButtonThemeData getFloatingActionButtonThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {FloatingActionButtonThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return FloatingActionButtonThemeData(
+        foregroundColor: getColor(context, bo, v, "foregroundColor"),
+        backgroundColor: getColor(context, bo, v, "backgroundColor"),
+        focusColor: getColor(context, bo, v, "focusColor"),
+        hoverColor: getColor(context, bo, v, "hoverColor"),
+        splashColor: getColor(context, bo, v, "splashColor"),
+        elevation: getDouble(context, bo, v, "elevation"),
+        focusElevation: getDouble(context, bo, v, "focusElevation"),
+        hoverElevation: getDouble(context, bo, v, "hoverElevation"),
+        disabledElevation: getDouble(context, bo, v, "disabledElevation"),
+        highlightElevation: getDouble(context, bo, v, "highlightElevation"),
+        shape: getShapeBorder(context, bo, v, "shape"),
+      );
+    }
+    return defaultValue;
+  }
+
   //-------------- G -----------------
   //****** Gradient ******/
   static Gradient getGradient(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Gradient defaultValue}) {
@@ -1497,7 +1781,7 @@ class XSJSParse {
             begin: getAlignment(context, bo, v, "begin", defaultValue: Alignment.centerLeft),
             end: getAlignment(context, bo, v, "end", defaultValue: Alignment.centerRight),
             colors: getColorList(context, bo, v, "colors"),
-            stops: getDoubleList(context, bo, map, "stops"),
+            stops: getDoubleList(context, bo, v, "stops"),
             tileMode: getTileMode(context, bo, v, "tileMode", defaultValue: TileMode.clamp),
             transform: getGradientTransform(context, bo, v, "transform"),
           );
@@ -1507,7 +1791,7 @@ class XSJSParse {
             center: getAlignment(context, bo, v, "center", defaultValue: Alignment.center),
             radius: getDouble(context, bo, v, "radius", defaultValue: 0.5),
             colors: getColorList(context, bo, v, "colors"),
-            stops: getDoubleList(context, bo, map, "stops"),
+            stops: getDoubleList(context, bo, v, "stops"),
             tileMode: getTileMode(context, bo, v, "tileMode", defaultValue: TileMode.clamp),
             focal: getAlignment(context, bo, v, "focal"),
             focalRadius: getDouble(context, bo, v, "focalRadius", defaultValue: 0.0),
@@ -1520,7 +1804,7 @@ class XSJSParse {
             startAngle: getDouble(context, bo, v, "startAngle", defaultValue: 0.0),
             endAngle: getDouble(context, bo, v, "endAngle", defaultValue: math.pi * 2),
             colors: getColorList(context, bo, v, "colors"),
-            stops: getDoubleList(context, bo, map, "stops"),
+            stops: getDoubleList(context, bo, v, "stops"),
             tileMode: getTileMode(context, bo, v, "tileMode", defaultValue: TileMode.clamp),
             transform: getGradientTransform(context, bo, v, "transform"),
           );
@@ -1536,7 +1820,7 @@ class XSJSParse {
   static GradientTransform getGradientTransform(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {GradientTransform defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      var className = _getClassName(map);
+      var className = _getClassName(v);
       switch (className) {
         case "GradientRotation":
           return GradientRotation(getDouble(context, bo, v, "radians"));
@@ -1591,6 +1875,53 @@ class XSJSParse {
         case 'noRepeat':
           return ImageRepeat.noRepeat;
       }
+    }
+    return defaultValue;
+  }
+
+  //****** InputDecorationTheme ******/
+  static InputDecorationTheme getInputDecorationTheme(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {InputDecorationTheme defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return InputDecorationTheme(
+        labelStyle: getTextStyle(context, bo, v, "labelStyle"),
+        helperStyle: getTextStyle(context, bo, v, "helperStyle"),
+        helperMaxLines: getInt(context, bo, v, "helperMaxLines"),
+        hintStyle: getTextStyle(context, bo, v, "hintStyle"),
+        errorStyle: getTextStyle(context, bo, v, "errorStyle"),
+        errorMaxLines: getInt(context, bo, v, "errorMaxLines"),
+        floatingLabelBehavior: getFloatingLabelBehavior(context, bo, v, "floatingLabelBehavior", defaultValue: FloatingLabelBehavior.auto),
+        isDense: getBool(context, bo, v, "isDense", defaultValue: false),
+        contentPadding: getEdgeInsets(context, bo, v, "contentPadding"),
+        isCollapsed: getBool(context, bo, v, "isCollapsed", defaultValue: true),
+        prefixStyle: getTextStyle(context, bo, v, "prefixStyle"),
+        suffixStyle: getTextStyle(context, bo, v, "suffixStyle"),
+        counterStyle: getTextStyle(context, bo, v, "counterStyle"),
+        filled: getBool(context, bo, v, "filled", defaultValue: false),
+        fillColor: getColor(context, bo, v, "fillColor"),
+        focusColor: getColor(context, bo, v, "focusColor"),
+        hoverColor: getColor(context, bo, v, "hoverColor"),
+        errorBorder: getInputBorder(context, bo, v, "errorBorder"),
+        focusedBorder: getInputBorder(context, bo, v, "focusedBorder"),
+        focusedErrorBorder: getInputBorder(context, bo, v, "focusedErrorBorder"),
+        disabledBorder: getInputBorder(context, bo, v, "disabledBorder"),
+        enabledBorder: getInputBorder(context, bo, v, "enabledBorder"),
+        border: getInputBorder(context, bo, v, "border"),
+        alignLabelWithHint: getBool(context, bo, v, "alignLabelWithHint", defaultValue: false),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** IconThemeData ******/
+  static IconThemeData getIconThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {IconThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return IconThemeData(
+        color: getColor(context, bo, v, "color"),
+        opacity: getDouble(context, bo, v, "opacity"),
+        size: getDouble(context, bo, v, "size"),
+      );
     }
     return defaultValue;
   }
@@ -4045,6 +4376,8 @@ class XSJSParse {
           return UniqueKey();
         case 'GlobalKey':
           return GlobalKey(debugLabel: getString(context, bo, v, "debugLabel"));
+        case 'BindKey':
+          return getObject(context, bo, map, key);
       }
     }
     return defaultValue;
@@ -4163,6 +4496,20 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** MaterialBannerThemeData ******/
+  static MaterialBannerThemeData getMaterialBannerThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {MaterialBannerThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return MaterialBannerThemeData(
+        backgroundColor: getColor(context, bo, v, "backgroundColor"),
+        padding: getEdgeInsets(context, bo, v, "padding"),
+        leadingPadding: getEdgeInsets(context, bo, v, "leadingPadding"),
+        contentTextStyle: getTextStyle(context, bo, v, "contentTextStyle"),
+      );
+    }
+    return defaultValue;
+  }
+
   //****** Matrix4 ******/
   static Matrix4 getMatrix4(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Matrix4 defaultValue}) {
     var v = _getMap(map, key);
@@ -4191,7 +4538,7 @@ class XSJSParse {
 
       switch (constructorName) {
         case 'fromList':
-          return Matrix4.fromList(getDoubleList(context, bo, map, "values"));
+          return Matrix4.fromList(getDoubleList(context, bo, v, "values"));
         case 'outer':
           return Matrix4.outer(
             getObject(context, bo, v, "u"),
@@ -4295,6 +4642,41 @@ class XSJSParse {
       }
     }
 
+    return defaultValue;
+  }
+
+  //****** NavigationRailLabelType ******/
+  static NavigationRailLabelType getNavigationRailLabelType(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {NavigationRailLabelType defaultValue}) {
+    var v = _getString(map, key);
+
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'all':
+          return NavigationRailLabelType.all;
+        case 'selected':
+          return NavigationRailLabelType.selected;
+        case 'none':
+          return NavigationRailLabelType.none;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** NavigationRailThemeData ******/
+  static NavigationRailThemeData getNavigationRailThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {NavigationRailThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return NavigationRailThemeData(
+        backgroundColor: getColor(context, bo, v, "backgroundColor"),
+        elevation: getDouble(context, bo, v, "elevation"),
+        unselectedLabelTextStyle: getTextStyle(context, bo, v, "unselectedLabelTextStyle"),
+        selectedLabelTextStyle: getTextStyle(context, bo, v, "selectedLabelTextStyle"),
+        unselectedIconTheme: getIconThemeData(context, bo, v, "unselectedIconTheme"),
+        selectedIconTheme: getIconThemeData(context, bo, v, "selectedIconTheme"),
+        groupAlignment: getDouble(context, bo, v, "groupAlignment"),
+        labelType: getNavigationRailLabelType(context, bo, v, "labelType"),
+      );
+    }
     return defaultValue;
   }
 
@@ -4466,6 +4848,20 @@ class XSJSParse {
           ..style = getPaintingStyle(context, bo, v, "style");
         return obj;
       }
+    }
+    return defaultValue;
+  }
+
+  //****** PopupMenuThemeData ******/
+  static PopupMenuThemeData getPopupMenuThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {PopupMenuThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return PopupMenuThemeData(
+        color: getColor(context, bo, v, "color"),
+        elevation: getDouble(context, bo, v, "elevation"),
+        shape: getShapeBorder(context, bo, v, "shape"),
+        textStyle: getTextStyle(context, bo, v, "textStyle"),
+      );
     }
     return defaultValue;
   }
@@ -4670,11 +5066,11 @@ class XSJSParse {
     var v = _getMap(map, key);
     if (v != null) {
       return RegExp(
-        getString(context, bo, map, "source"),
-        multiLine: getBool(context, bo, map, "multiLine", defaultValue: false),
-        caseSensitive: getBool(context, bo, map, "caseSensitive", defaultValue: true),
-        unicode: getBool(context, bo, map, "unicode", defaultValue: false),
-        dotAll: getBool(context, bo, map, "dotAll", defaultValue: false),
+        getString(context, bo, v, "source"),
+        multiLine: getBool(context, bo, v, "multiLine", defaultValue: false),
+        caseSensitive: getBool(context, bo, v, "caseSensitive", defaultValue: true),
+        unicode: getBool(context, bo, v, "unicode", defaultValue: false),
+        dotAll: getBool(context, bo, v, "dotAll", defaultValue: false),
       );
     }
 
@@ -4731,23 +5127,103 @@ class XSJSParse {
 
   //-------------- S -----------------
 
+  //****** ShowValueIndicator ******/
+  static ShowValueIndicator getShowValueIndicator(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ShowValueIndicator defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'always':
+          return ShowValueIndicator.always;
+        case 'never':
+          return ShowValueIndicator.never;
+        case 'onlyForContinuous':
+          return ShowValueIndicator.onlyForContinuous;
+        case 'onlyForDiscrete':
+          return ShowValueIndicator.onlyForDiscrete;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** SliderThemeData ******/
+  static SliderThemeData getSliderThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {SliderThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return SliderThemeData(
+        trackHeight: getDouble(context, bo, v, "trackHeight"),
+        activeTrackColor: getColor(context, bo, v, "activeTrackColor"),
+        inactiveTrackColor: getColor(context, bo, v, "inactiveTrackColor"),
+        disabledActiveTrackColor: getColor(context, bo, v, "disabledActiveTrackColor"),
+        disabledInactiveTrackColor: getColor(context, bo, v, "disabledInactiveTrackColor"),
+        activeTickMarkColor: getColor(context, bo, v, "activeTickMarkColor"),
+        inactiveTickMarkColor: getColor(context, bo, v, "inactiveTickMarkColor"),
+        disabledActiveTickMarkColor: getColor(context, bo, v, "disabledActiveTickMarkColor"),
+        disabledInactiveTickMarkColor: getColor(context, bo, v, "disabledInactiveTickMarkColor"),
+        thumbColor: getColor(context, bo, v, "thumbColor"),
+        overlappingShapeStrokeColor: getColor(context, bo, v, "overlappingShapeStrokeColor"),
+        disabledThumbColor: getColor(context, bo, v, "disabledThumbColor"),
+        overlayColor: getColor(context, bo, v, "overlayColor"),
+        valueIndicatorColor: getColor(context, bo, v, "valueIndicatorColor"),
+        showValueIndicator: getShowValueIndicator(context, bo, v, "showValueIndicator"),
+        valueIndicatorTextStyle: getTextStyle(context, bo, v, "valueIndicatorTextStyle"),
+        minThumbSeparation: getDouble(context, bo, v, "minThumbSeparation"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** SnackBarBehavior ******/
+  static SnackBarBehavior getSnackBarBehavior(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {SnackBarBehavior defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'fixed':
+          return SnackBarBehavior.fixed;
+        case 'floating':
+          return SnackBarBehavior.floating;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** SnackBarThemeData ******/
+  static SnackBarThemeData getSnackBarThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {SnackBarThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return SnackBarThemeData(
+        backgroundColor: getColor(context, bo, v, "backgroundColor"),
+        actionTextColor: getColor(context, bo, v, "actionTextColor"),
+        disabledActionTextColor: getColor(context, bo, v, "disabledActionTextColor"),
+        contentTextStyle: getTextStyle(context, bo, v, "contentTextStyle"),
+        elevation: getDouble(context, bo, v, "elevation"),
+        shape: getShapeBorder(context, bo, v, "shape"),
+        behavior: getSnackBarBehavior(context, bo, v, "behavior"),
+      );
+    }
+    return defaultValue;
+  }
+
   //****** ShapeBorder ******/
   static ShapeBorder getShapeBorder(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ShapeBorder defaultValue}) {
-    ShapeBorder v = getOutlinedBorder(context, bo, map, key);
-    if (v != null) {
-      return v;
+    if (!_checkMapKey(map, key)) {
+      return defaultValue;
     }
-    v = getInputBorder(context, bo, map, key);
-    if (v != null) {
-      return v;
+    var v = map;
+    ShapeBorder o = getOutlinedBorder(context, bo, v, key);
+    if (o != null) {
+      return o;
     }
-    v = getBorder(context, bo, map, key);
-    if (v != null) {
-      return v;
+    o = getInputBorder(context, bo, v, key);
+    if (o != null) {
+      return o;
     }
-    v = getBorderDirectional(context, bo, map, key);
-    if (v != null) {
-      return v;
+    o = getBorder(context, bo, v, key);
+    if (o != null) {
+      return o;
+    }
+    o = getBorderDirectional(context, bo, v, key);
+    if (o != null) {
+      return o;
     }
     return defaultValue;
   }
@@ -5004,7 +5480,7 @@ class XSJSParse {
     if (v != null) {
       return StrutStyle(
         fontFamily: getString(context, bo, v, "fontFamily"),
-        fontFamilyFallback: getStringList(context, bo, map, "fontFamilyFallback"),
+        fontFamilyFallback: getStringList(context, bo, v, "fontFamilyFallback"),
         fontSize: getDouble(context, bo, v, "fontSize"),
         height: getDouble(context, bo, v, "height"),
         leading: getDouble(context, bo, v, "leading"),
@@ -5084,6 +5560,210 @@ class XSJSParse {
     return defaultValue;
   }
   //-------------- T -----------------
+
+  //****** ToggleButtonsThemeData ******/
+  static ToggleButtonsThemeData getToggleButtonsThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ToggleButtonsThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return ToggleButtonsThemeData(
+        textStyle: getTextStyle(context, bo, v, "textStyle"),
+        constraints: getBoxConstraints(context, bo, v, "constraints"),
+        color: getColor(context, bo, v, "color"),
+        selectedColor: getColor(context, bo, v, "selectedColor"),
+        disabledColor: getColor(context, bo, v, "disabledColor"),
+        fillColor: getColor(context, bo, v, "fillColor"),
+        focusColor: getColor(context, bo, v, "focusColor"),
+        highlightColor: getColor(context, bo, v, "highlightColor"),
+        hoverColor: getColor(context, bo, v, "hoverColor"),
+        splashColor: getColor(context, bo, v, "splashColor"),
+        borderColor: getColor(context, bo, v, "borderColor"),
+        selectedBorderColor: getColor(context, bo, v, "selectedBorderColor"),
+        disabledBorderColor: getColor(context, bo, v, "disabledBorderColor"),
+        borderRadius: getBorderRadius(context, bo, v, "borderRadius"),
+        borderWidth: getDouble(context, bo, v, "borderWidth"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** ThemeData ******/
+  static ThemeData getThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return ThemeData(
+        brightness: getBrightness(context, bo, v, "brightness"),
+        visualDensity: getVisualDensity(context, bo, v, "visualDensity"),
+        primaryColor: getColor(context, bo, v, "primaryColor"),
+        primaryColorBrightness: getBrightness(context, bo, v, "primaryColorBrightness"),
+        primaryColorLight: getColor(context, bo, v, "primaryColorLight"),
+        primaryColorDark: getColor(context, bo, v, "primaryColorDark"),
+        accentColor: getColor(context, bo, v, "accentColor"),
+        accentColorBrightness: getBrightness(context, bo, v, "accentColorBrightness"),
+        canvasColor: getColor(context, bo, v, "canvasColor"),
+        shadowColor: getColor(context, bo, v, "shadowColor"),
+        scaffoldBackgroundColor: getColor(context, bo, v, "scaffoldBackgroundColor"),
+        bottomAppBarColor: getColor(context, bo, v, "bottomAppBarColor"),
+        cardColor: getColor(context, bo, v, "cardColor"),
+        focusColor: getColor(context, bo, v, "focusColor"),
+        dividerColor: getColor(context, bo, v, "dividerColor"),
+        hoverColor: getColor(context, bo, v, "hoverColor"),
+        highlightColor: getColor(context, bo, v, "highlightColor"),
+        splashColor: getColor(context, bo, v, "splashColor"),
+        selectedRowColor: getColor(context, bo, v, "selectedRowColor"),
+        unselectedWidgetColor: getColor(context, bo, v, "unselectedWidgetColor"),
+        disabledColor: getColor(context, bo, v, "disabledColor"),
+        buttonColor: getColor(context, bo, v, "buttonColor"),
+        buttonTheme: getButtonThemeData(context, bo, v, "buttonTheme"),
+        toggleButtonsTheme: getToggleButtonsThemeData(context, bo, v, "toggleButtonsTheme"),
+        secondaryHeaderColor: getColor(context, bo, v, "secondaryHeaderColor"),
+        textSelectionColor: getColor(context, bo, v, "textSelectionColor"),
+        cursorColor: getColor(context, bo, v, "cursorColor"),
+        textSelectionHandleColor: getColor(context, bo, v, "textSelectionHandleColor"),
+        backgroundColor: getColor(context, bo, v, "backgroundColor"),
+        dialogBackgroundColor: getColor(context, bo, v, "dialogBackgroundColor"),
+        indicatorColor: getColor(context, bo, v, "indicatorColor"),
+        hintColor: getColor(context, bo, v, "hintColor"),
+        errorColor: getColor(context, bo, v, "errorColor"),
+        toggleableActiveColor: getColor(context, bo, v, "toggleableActiveColor"),
+        fontFamily: getString(context, bo, v, "fontFamily"),
+        textTheme: getTextTheme(context, bo, v, "textTheme"),
+        primaryTextTheme: getTextTheme(context, bo, v, "primaryTextTheme"),
+        accentTextTheme: getTextTheme(context, bo, v, "accentTextTheme"),
+        inputDecorationTheme: getInputDecorationTheme(context, bo, v, "inputDecorationTheme"),
+        iconTheme: getIconThemeData(context, bo, v, "iconTheme"),
+        primaryIconTheme: getIconThemeData(context, bo, v, "primaryIconTheme"),
+        accentIconTheme: getIconThemeData(context, bo, v, "accentIconTheme"),
+        sliderTheme: getSliderThemeData(context, bo, v, "sliderTheme"),
+        tabBarTheme: getTabBarTheme(context, bo, v, "tabBarTheme"),
+        tooltipTheme: getTooltipThemeData(context, bo, v, "tooltipTheme"),
+        cardTheme: getCardTheme(context, bo, v, "chipTheme"),
+        chipTheme: getChipThemeData(context, bo, v, "chipTheme"),
+        platform: getTargetPlatform(context, bo, v, "platform"),
+        materialTapTargetSize: getMaterialTapTargetSize(context, bo, v, "materialTapTargetSize"),
+        applyElevationOverlayColor: getBool(context, bo, v, "applyElevationOverlayColor"),
+        appBarTheme: getAppBarTheme(context, bo, v, "appBarTheme"),
+        bottomAppBarTheme: getBottomAppBarTheme(context, bo, v, "bottomAppBarTheme"),
+        colorScheme: getColorScheme(context, bo, v, "colorScheme"),
+        dialogTheme: getDialogTheme(context, bo, v, "dialogTheme"),
+        floatingActionButtonTheme: getFloatingActionButtonThemeData(context, bo, v, "floatingActionButtonTheme"),
+        navigationRailTheme: getNavigationRailThemeData(context, bo, v, "navigationRailTheme"),
+        cupertinoOverrideTheme: getCupertinoThemeData(context, bo, v, "cupertinoOverrideTheme"),
+        snackBarTheme: getSnackBarThemeData(context, bo, v, "snackBarTheme"),
+        bottomSheetTheme: getBottomSheetThemeData(context, bo, v, "bottomSheetTheme"),
+        popupMenuTheme: getPopupMenuThemeData(context, bo, v, "popupMenuTheme"),
+        bannerTheme: getMaterialBannerThemeData(context, bo, v, "bannerTheme"),
+        dividerTheme: getDividerThemeData(context, bo, v, "dividerTheme"),
+        buttonBarTheme: getButtonBarThemeData(context, bo, v, "buttonBarTheme"),
+        bottomNavigationBarTheme: getBottomNavigationBarThemeData(context, bo, v, "bottomNavigationBarTheme"),
+        timePickerTheme: getTimePickerThemeData(context, bo, v, "timePickerTheme"),
+        textSelectionTheme: getTextSelectionThemeData(context, bo, v, "textSelectionTheme"),
+        dataTableTheme: getDataTableThemeData(context, bo, v, "dataTableTheme"),
+        fixTextFieldOutlineLabel: getBool(context, bo, v, "fixTextFieldOutlineLabel"),
+        useTextSelectionTheme: getBool(context, bo, v, "useTextSelectionTheme"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** TabBarTheme ******/
+  static TabBarTheme getTabBarTheme(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TabBarTheme defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return TabBarTheme(
+        indicator: getDecoration(context, bo, v, "indicator"),
+        indicatorSize: getTabBarIndicatorSize(context, bo, v, "indicatorSize"),
+        labelColor: getColor(context, bo, v, "labelColor"),
+        labelPadding: getEdgeInsets(context, bo, v, "labelPadding"),
+        labelStyle: getTextStyle(context, bo, v, "labelStyle"),
+        unselectedLabelColor: getColor(context, bo, v, "unselectedLabelColor"),
+        unselectedLabelStyle: getTextStyle(context, bo, v, "unselectedLabelStyle"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** TextSelectionThemeData ******/
+  static TextSelectionThemeData getTextSelectionThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextSelectionThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return TextSelectionThemeData(
+        cursorColor: getColor(context, bo, v, "cursorColor"),
+        selectionColor: getColor(context, bo, v, "selectionColor"),
+        selectionHandleColor: getColor(context, bo, v, "selectionHandleColor"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** TimePickerThemeData ******/
+  static TimePickerThemeData getTimePickerThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TimePickerThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return TimePickerThemeData(
+        backgroundColor: getColor(context, bo, v, "backgroundColor"),
+        hourMinuteTextColor: getColor(context, bo, v, "hourMinuteTextColor"),
+        hourMinuteColor: getColor(context, bo, v, "hourMinuteColor"),
+        dayPeriodTextColor: getColor(context, bo, v, "dayPeriodTextColor"),
+        dayPeriodColor: getColor(context, bo, v, "dayPeriodColor"),
+        dialHandColor: getColor(context, bo, v, "dialHandColor"),
+        dialBackgroundColor: getColor(context, bo, v, "dialBackgroundColor"),
+        dialTextColor: getColor(context, bo, v, "dialTextColor"),
+        entryModeIconColor: getColor(context, bo, v, "entryModeIconColor"),
+        hourMinuteTextStyle: getTextStyle(context, bo, v, "hourMinuteTextStyle"),
+        dayPeriodTextStyle: getTextStyle(context, bo, v, "dayPeriodTextStyle"),
+        helpTextStyle: getTextStyle(context, bo, v, "helpTextStyle"),
+        shape: getShapeBorder(context, bo, v, "shape"),
+        hourMinuteShape: getShapeBorder(context, bo, v, "hourMinuteShape"),
+        dayPeriodShape: getShapeBorder(context, bo, v, "dayPeriodShape"),
+        dayPeriodBorderSide: getBorderSide(context, bo, v, "dayPeriodBorderSide"),
+        inputDecorationTheme: getInputDecorationTheme(context, bo, v, "inputDecorationTheme"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** TooltipThemeData ******/
+  static TooltipThemeData getTooltipThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TooltipThemeData defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return TooltipThemeData(
+        height: getDouble(context, bo, v, "height"),
+        padding: getEdgeInsets(context, bo, v, "padding"),
+        margin: getEdgeInsets(context, bo, v, "margin"),
+        verticalOffset: getDouble(context, bo, v, "verticalOffset"),
+        preferBelow: getBool(context, bo, v, "preferBelow"),
+        excludeFromSemantics: getBool(context, bo, v, "excludeFromSemantics"),
+        decoration: getDecoration(context, bo, v, "decoration"),
+        textStyle: getTextStyle(context, bo, v, "textStyle"),
+        waitDuration: getDuration(context, bo, v, "waitDuration"),
+        showDuration: getDuration(context, bo, v, "showDuration"),
+      );
+    }
+    return defaultValue;
+  }
+
+  //****** TextTheme ******/
+  static TextTheme getTextTheme(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {TextTheme defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return TextTheme(
+        headline1: getTextStyle(context, bo, v, "headline1"),
+        headline2: getTextStyle(context, bo, v, "headline2"),
+        headline3: getTextStyle(context, bo, v, "headline3"),
+        headline4: getTextStyle(context, bo, v, "headline4"),
+        headline5: getTextStyle(context, bo, v, "headline5"),
+        headline6: getTextStyle(context, bo, v, "headline6"),
+        subtitle1: getTextStyle(context, bo, v, "subtitle1"),
+        subtitle2: getTextStyle(context, bo, v, "subtitle2"),
+        bodyText1: getTextStyle(context, bo, v, "bodyText1"),
+        bodyText2: getTextStyle(context, bo, v, "bodyText2"),
+        caption: getTextStyle(context, bo, v, "caption"),
+        button: getTextStyle(context, bo, v, "button"),
+        overline: getTextStyle(context, bo, v, "overline"),
+      );
+    }
+    return defaultValue;
+  }
 
   //****** ToolbarOptions ******/
   static ToolbarOptions getToolbarOptions(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ToolbarOptions defaultValue}) {
@@ -5475,51 +6155,6 @@ class XSJSParse {
     return defaultValue;
   }
 
-  //****** ThemeData ******/
-  static ThemeData getThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ThemeData defaultValue}) {
-    var v = _getMap(map, key);
-    if (v != null) {
-      return ThemeData(
-        brightness: getBrightness(context, bo, v, "brightness"),
-        primaryColor: getColor(context, bo, v, "primaryColor"),
-        primaryColorBrightness: getBrightness(context, bo, v, "primaryColorBrightness"),
-        primaryColorLight: getColor(context, bo, v, "primaryColorLight"),
-        primaryColorDark: getColor(context, bo, v, "primaryColorDark"),
-        accentColor: getColor(context, bo, v, "accentColor"),
-        accentColorBrightness: getBrightness(context, bo, v, "accentColorBrightness"),
-        canvasColor: getColor(context, bo, v, "canvasColor"),
-        scaffoldBackgroundColor: getColor(context, bo, v, "scaffoldBackgroundColor"),
-        bottomAppBarColor: getColor(context, bo, v, "bottomAppBarColor"),
-        cardColor: getColor(context, bo, v, "cardColor"),
-        dividerColor: getColor(context, bo, v, "dividerColor"),
-        focusColor: getColor(context, bo, v, "focusColor"),
-        hoverColor: getColor(context, bo, v, "hoverColor"),
-        highlightColor: getColor(context, bo, v, "highlightColor"),
-        splashColor: getColor(context, bo, v, "splashColor"),
-        selectedRowColor: getColor(context, bo, v, "selectedRowColor"),
-        unselectedWidgetColor: getColor(context, bo, v, "unselectedWidgetColor"),
-        disabledColor: getColor(context, bo, v, "disabledColor"),
-        buttonColor: getColor(context, bo, v, "buttonColor"),
-        buttonTheme: getButtonThemeData(context, bo, v, "buttonTheme"),
-        secondaryHeaderColor: getColor(context, bo, v, "secondaryHeaderColor"),
-        textSelectionColor: getColor(context, bo, v, "textSelectionColor"),
-        cursorColor: getColor(context, bo, v, "cursorColor"),
-        textSelectionHandleColor: getColor(context, bo, v, "textSelectionHandleColor"),
-        backgroundColor: getColor(context, bo, v, "backgroundColor"),
-        dialogBackgroundColor: getColor(context, bo, v, "dialogBackgroundColor"),
-        indicatorColor: getColor(context, bo, v, "indicatorColor"),
-        hintColor: getColor(context, bo, v, "hintColor"),
-        errorColor: getColor(context, bo, v, "errorColor"),
-        toggleableActiveColor: getColor(context, bo, v, "toggleableActiveColor"),
-        fontFamily: getString(context, bo, v, "fontFamily"),
-        platform: getTargetPlatform(context, bo, v, "platform"),
-        materialTapTargetSize: getMaterialTapTargetSize(context, bo, v, "materialTapTargetSize"),
-        applyElevationOverlayColor: getBool(context, bo, v, "applyElevationOverlayColor"),
-      );
-    }
-    return defaultValue;
-  }
-
   //****** Tween ******/
   static Tween getTween(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Tween defaultValue}) {
     var v = _getMap(map, key);
@@ -5537,19 +6172,19 @@ class XSJSParse {
     var list = _getList(map, key);
     if (list != null && list.length > 0) {
       List<TextInputFormatter> result = List<TextInputFormatter>();
-      for (var m in list) {
-        if (m != null) {
-          var className = _getClassName(m);
+      for (var v in list) {
+        if (v != null) {
+          var className = _getClassName(v);
           if (className != null && className.isNotEmpty) {
-            var constructorName = _getConstructorName(m);
+            var constructorName = _getConstructorName(v);
             if (className == "LengthLimitingTextInputFormatter") {
-              result.add(LengthLimitingTextInputFormatter(XSJSParse.getInt(context, bo, m, "maxLength")));
+              result.add(LengthLimitingTextInputFormatter(XSJSParse.getInt(context, bo, v, "maxLength")));
             } else if (className == "FilteringTextInputFormatter") {
               if (constructorName == null || constructorName.isEmpty) {
                 result.add(FilteringTextInputFormatter(
-                  XSJSParse.getRegExp(context, bo, m, "filterPattern"),
-                  allow: XSJSParse.getBool(context, bo, m, "allow"),
-                  replacementString: XSJSParse.getString(context, bo, m, "replacementString"),
+                  XSJSParse.getRegExp(context, bo, v, "filterPattern"),
+                  allow: XSJSParse.getBool(context, bo, v, "allow"),
+                  replacementString: XSJSParse.getString(context, bo, v, "replacementString"),
                 ));
               } else {
                 switch (constructorName) {
@@ -5563,9 +6198,9 @@ class XSJSParse {
               }
             } else if (className == "MaskTextInputFormatter") {
               result.add(MaskTextInputFormatter(
-                mask: XSJSParse.getString(context, bo, m, "mask"),
-                filter: XSJSParse.getStringRegExpMap(context, bo, m, "filter"),
-                initialText: XSJSParse.getString(context, bo, m, "initialText"),
+                mask: XSJSParse.getString(context, bo, v, "mask"),
+                filter: XSJSParse.getStringRegExpMap(context, bo, v, "filter"),
+                initialText: XSJSParse.getString(context, bo, v, "initialText"),
               ));
             }
           }
@@ -5627,7 +6262,7 @@ class XSJSParse {
 
       switch (constructorName) {
         case 'fromList':
-          return Uint8List.fromList(getIntList(context, bo, map, "elements"));
+          return Uint8List.fromList(getIntList(context, bo, v, "elements"));
         case 'view':
           return Uint8List.view(
             getObject(context, bo, v, "buffer"),
@@ -5673,7 +6308,7 @@ class XSJSParse {
         switch (constructorName) {
           case 'array':
             return Vector4.array(
-              getDoubleList(context, bo, map, "array"),
+              getDoubleList(context, bo, v, "array"),
               getInt(context, bo, v, "offset", defaultValue: 0),
             );
           case 'zero':

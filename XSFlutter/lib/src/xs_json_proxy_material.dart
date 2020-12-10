@@ -9,7 +9,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:xsflutter/src/widgets/label_title_widget.dart';
-import 'package:xsflutter/src/xs_json_proxy_dialog.dart';
 import 'widgets/check_box.dart';
 import 'xs_json_to_dart.dart';
 import 'xs_build_owner.dart';
@@ -26,7 +25,6 @@ class XSProxyRegisterHelperMaterialSeries {
     Map<String, CreateJsonObjProxyFun> m = {};
 
     m.addAll(XSProxyAppBar.registerProxy());
-    m.addAll(XSProxyAlertDialog.registerProxy());
 
     m.addAll(XSProxyBuilder.registerProxy());
     m.addAll(XSProxyBottomAppBar.registerProxy());
@@ -90,8 +88,6 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyRouteSettings.registerProxy());
     m.addAll(XSProxyRawMaterialButton.registerProxy());
     m.addAll(XSProxyRaisedButton.registerProxy());
-
-    m.addAll(XSProxySimpleDialog.registerProxy());
     m.addAll(XSProxyScaffold.registerProxy());
     m.addAll(XSProxyScaffoldState.registerProxy());
     m.addAll(XSProxySemantics.registerProxy());
@@ -154,41 +150,6 @@ class XSProxyAppBar extends XSJsonObjProxy {
         bottomOpacity: XSJSParse.getDouble(context, bo, map, "bottomOpacity", defaultValue: 1.0),
         toolbarHeight: XSJSParse.getDouble(context, bo, map, "toolbarHeight"),
       );
-}
-
-//****** AlertDialog ******
-class XSProxyAlertDialog extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "AlertDialog";
-    return {
-      regClassName: () => XSProxyAlertDialog()..init(className: regClassName)
-    };
-  }
-
-  @override
-  AlertDialog constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return AlertDialog(
-      key: XSJSParse.getKey(context, bo, map, "key"),
-      title: XSJSParse.getWidget(context, bo, map, "title"),
-      titlePadding: XSJSParse.getEdgeInsets(context, bo, map, "titlePadding"),
-      titleTextStyle: XSJSParse.getTextStyle(context, bo, map, "titleTextStyle"),
-      content: XSJSParse.getWidget(context, bo, map, "content"),
-      contentPadding: XSJSParse.getEdgeInsets(context, bo, map, "contentPadding", defaultValue: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0)),
-      contentTextStyle: XSJSParse.getTextStyle(context, bo, map, "contentTextStyle"),
-      actions: XSJSParse.getWidgetList(context, bo, map, "actions"),
-      actionsPadding: XSJSParse.getEdgeInsets(context, bo, map, "actionsPadding", defaultValue: EdgeInsets.zero),
-      actionsOverflowDirection: XSJSParse.getVerticalDirection(context, bo, map, "actionsOverflowDirection"),
-      actionsOverflowButtonSpacing: XSJSParse.getDouble(context, bo, map, "actionsOverflowButtonSpacing"),
-      buttonPadding: XSJSParse.getEdgeInsets(context, bo, map, "buttonPadding"),
-      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
-      elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
-      semanticLabel: XSJSParse.getString(context, bo, map, "semanticLabel"),
-      insetPadding: XSJSParse.getEdgeInsets(context, bo, map, "insetPadding", defaultValue: EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0)),
-      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
-      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
-      scrollable: XSJSParse.getBool(context, bo, map, "scrollable", defaultValue: false),
-    );
-  }
 }
 
 //-------------- B -----------------
@@ -1745,32 +1706,6 @@ class XSProxySpacer extends XSJsonObjProxy {
     return Spacer(
       key: XSJSParse.getKey(context, bo, map, "key"),
       flex: XSJSParse.getInt(context, bo, map, "flex"),
-    );
-  }
-}
-
-//****** SimpleDialog ******
-class XSProxySimpleDialog extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "SimpleDialog";
-    return {
-      regClassName: () => XSProxySimpleDialog()..init(className: regClassName)
-    };
-  }
-
-  @override
-  SimpleDialog constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return SimpleDialog(
-      key: XSJSParse.getKey(context, bo, map, "key"),
-      title: XSJSParse.getWidget(context, bo, map, "title"),
-      titlePadding: XSJSParse.getEdgeInsets(context, bo, map, "titlePadding"),
-      titleTextStyle: XSJSParse.getTextStyle(context, bo, map, "titleTextStyle"),
-      children: XSJSParse.getWidgetList(context, bo, map, "children"),
-      contentPadding: XSJSParse.getEdgeInsets(context, bo, map, "contentPadding", defaultValue: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0)),
-      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
-      elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
-      semanticLabel: XSJSParse.getString(context, bo, map, "semanticLabel"),
-      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
     );
   }
 }

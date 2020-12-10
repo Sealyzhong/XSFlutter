@@ -6,7 +6,7 @@
  * @Description: JS Flutter SDK
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Loading = exports.Dialog = exports.ShowSimpleActionSheet = exports.ShowCustomActionSheet = exports.ShowSimpleDialog = exports.ShowSimpleCustomDialog = exports.SimpleCustomDialogButtonInfo = exports.ShowCustomAlertDialog = exports.CustomAlertDialogStyle = exports.CustomAlertDialogButton = exports.CustomAlertDialogAnimationType = exports.SimpleDialogButtonInfo = exports.ShowCupertinoModalPopup = exports.ShowModalBottomSheet = exports.ShowBottomSheet = exports.ShowGeneralDialog = exports.ShowCupertinoDialog = exports.AlertDialog = exports.ShowDialog = exports.EmptyDataWidget = exports.CupertinoThemeData = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoDialogAction = exports.CupertinoButton = exports.CupertinoAlertDialog = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverOpacity = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverChildDelegate = exports.SliverGridDelegateWithFixedCrossAxisCount = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGridDelegate = exports.SliverGrid = exports.SliverPadding = exports.SliverFillRemaining = exports.SliverFillViewport = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LabelTitle = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.IconSpan = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.CheckboxEx = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.Offset = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.ImageFilter = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.ScrollViewKeyboardDismissBehavior = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
+exports.Loading = exports.Dialog = exports.ShowDatePicker = exports.CustomPopupMenuItem = exports.ShowCustomPopupMenu = exports.ShowSimpleActionSheet = exports.ShowCustomActionSheet = exports.ShowSimpleCupertinoDialog = exports.ShowSimpleAlertDialog = exports.ShowSimpleCustomDialog = exports.SimpleCustomDialogButtonInfo = exports.ShowCustomAlertDialog = exports.CustomAlertDialogStyle = exports.CustomAlertDialogButton = exports.CustomAlertDialogAnimationType = exports.SimpleDialogButtonInfo = exports.CupertinoActionSheetAction = exports.CupertinoActionSheet = exports.ShowCupertinoModalPopup = exports.BottomSheet = exports.ShowModalBottomSheet = exports.ShowGeneralDialog = exports.CupertinoAlertDialog = exports.ShowCupertinoDialog = exports.SimpleDialog = exports.AlertDialog = exports.ShowDialog = exports.ShowBaseDialog = exports.EmptyDataWidget = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoDialogAction = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverOpacity = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverChildDelegate = exports.SliverGridDelegateWithFixedCrossAxisCount = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGridDelegate = exports.SliverGrid = exports.SliverPadding = exports.SliverFillRemaining = exports.SliverFillViewport = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LabelTitle = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.IconSpan = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.CheckboxEx = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.ThemeData = exports.DataTableThemeData = exports.TextSelectionThemeData = exports.TimePickerThemeData = exports.BottomNavigationBarThemeData = exports.ButtonBarThemeData = exports.DividerThemeData = exports.MaterialBannerThemeData = exports.PopupMenuThemeData = exports.BottomSheetThemeData = exports.SnackBarThemeData = exports.CupertinoThemeData = exports.NavigationRailThemeData = exports.FloatingActionButtonThemeData = exports.DialogTheme = exports.BottomAppBarTheme = exports.AppBarTheme = exports.ChipThemeData = exports.CardTheme = exports.TooltipThemeData = exports.TabBarTheme = exports.SliderThemeData = exports.IconThemeData = exports.InputDecorationTheme = exports.TextTheme = exports.ToggleButtonsThemeData = exports.ButtonThemeData = exports.ColorScheme = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.Offset = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.BindKey = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.ImageFilter = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.ScrollViewKeyboardDismissBehavior = exports.ShowValueIndicator = exports.SnackBarBehavior = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationRailLabelType = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DatePickerEntryMode = exports.DatePickerMode = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -1235,6 +1235,18 @@ var DragStartBehavior;
     DragStartBehavior["down"] = "down";
     DragStartBehavior["start"] = "start";
 })(DragStartBehavior = exports.DragStartBehavior || (exports.DragStartBehavior = {}));
+//****** DatePickerMode ******
+var DatePickerMode;
+(function (DatePickerMode) {
+    DatePickerMode["day"] = "day";
+    DatePickerMode["year"] = "year";
+})(DatePickerMode = exports.DatePickerMode || (exports.DatePickerMode = {}));
+//****** DatePickerEntryMode ******
+var DatePickerEntryMode;
+(function (DatePickerEntryMode) {
+    DatePickerEntryMode["calendar"] = "calendar";
+    DatePickerEntryMode["input"] = "input";
+})(DatePickerEntryMode = exports.DatePickerEntryMode || (exports.DatePickerEntryMode = {}));
 //****** DecorationPosition ******
 var DecorationPosition;
 (function (DecorationPosition) {
@@ -1384,6 +1396,13 @@ var NavigationMode;
     NavigationMode["traditional"] = "traditional";
     NavigationMode["directional"] = "directional";
 })(NavigationMode = exports.NavigationMode || (exports.NavigationMode = {}));
+//****** NavigationRailLabelType ******
+var NavigationRailLabelType;
+(function (NavigationRailLabelType) {
+    NavigationRailLabelType["none"] = "none";
+    NavigationRailLabelType["selected"] = "selected";
+    NavigationRailLabelType["all"] = "all";
+})(NavigationRailLabelType = exports.NavigationRailLabelType || (exports.NavigationRailLabelType = {}));
 //#endregion
 //#region ------ O ------
 //****** Overflow ******
@@ -1455,6 +1474,20 @@ var StackFit;
     StackFit["expand"] = "expand";
     StackFit["passthrough"] = "passthrough";
 })(StackFit = exports.StackFit || (exports.StackFit = {}));
+//****** SnackBarBehavior ******
+var SnackBarBehavior;
+(function (SnackBarBehavior) {
+    SnackBarBehavior["fixed"] = "fixed";
+    SnackBarBehavior["floating"] = "floating";
+})(SnackBarBehavior = exports.SnackBarBehavior || (exports.SnackBarBehavior = {}));
+//****** ShowValueIndicator ******
+var ShowValueIndicator;
+(function (ShowValueIndicator) {
+    ShowValueIndicator["onlyForDiscrete"] = "onlyForDiscrete";
+    ShowValueIndicator["onlyForContinuous"] = "onlyForContinuous";
+    ShowValueIndicator["always"] = "always";
+    ShowValueIndicator["never"] = "passthrounevergh";
+})(ShowValueIndicator = exports.ShowValueIndicator || (exports.ShowValueIndicator = {}));
 //****** ScrollViewKeyboardDismissBehavior ******
 var ScrollViewKeyboardDismissBehavior;
 (function (ScrollViewKeyboardDismissBehavior) {
@@ -2875,27 +2908,6 @@ exports.InputDecoration = InputDecoration;
 //#region ------- K -------
 //#region ****** Key ******
 class Key extends DartClass {
-    /**
-     * Key.value = new ValueKey(value:string)
-     * @param value
-     */
-    static value(value) {
-        return new ValueKey(value);
-    }
-    /**
-     * Key.unique = new UniqueKey()
-     * @param value
-     */
-    static unique() {
-        return new UniqueKey();
-    }
-    /**
-     * Key.global = new GlobalKey(debugLabel:string)
-     * @param debugLabel 标签
-     */
-    static global(debugLabel) {
-        return new GlobalKey(debugLabel);
-    }
 }
 exports.Key = Key;
 class ValueKey extends Key {
@@ -2912,12 +2924,18 @@ class UniqueKey extends Key {
 }
 exports.UniqueKey = UniqueKey;
 class GlobalKey extends Key {
-    constructor(debugLabel) {
+    constructor() {
         super();
-        this.debugLabel = debugLabel;
     }
 }
 exports.GlobalKey = GlobalKey;
+class BindKey extends Key {
+    constructor() {
+        super();
+        this.createMirrorID();
+    }
+}
+exports.BindKey = BindKey;
 //#endregion
 //#endregion
 //#region ------- M -------
@@ -4719,7 +4737,1011 @@ class Velocity extends DartClass {
     }
 }
 exports.Velocity = Velocity;
-//#endregion
+class ColorScheme extends DartClass {
+    /**
+     * @param config config:
+        {
+          primary:Color,
+          primaryVariant:Color,
+          secondary:Color,
+          secondaryVariant:Color,
+          surface:Color,
+          background:Color,
+          error:Color,
+          onPrimary:Color,
+          onSecondary:Color,
+          onSurface:Color,
+          onBackground:Color,
+          onError:Color,
+          brightness?:Brightness,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.primary = config.primary;
+            this.primaryVariant = config.primaryVariant;
+            this.secondary = config.secondary;
+            this.secondaryVariant = config.secondaryVariant;
+            this.surface = config.surface;
+            this.background = config.background;
+            this.error = config.error;
+            this.onPrimary = config.onPrimary;
+            this.onSecondary = config.onSecondary;
+            this.onSurface = config.onSurface;
+            this.onBackground = config.background;
+            this.onError = config.onError;
+            this.brightness = config.brightness;
+        }
+    }
+}
+exports.ColorScheme = ColorScheme;
+class ButtonThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          textTheme?:ButtonTextTheme,
+          minWidth?:number,
+          height?:number,
+          padding?:EdgeInsets,
+          shape?:ShapeBorder,
+          layoutBehavior?:ButtonBarLayoutBehavior,
+          alignedDropdown?:boolean,
+          buttonColor?:Color,
+          disabledColor?:Color,
+          focusColor?:Color,
+          hoverColor?:Color,
+          highlightColor?:Color,
+          splashColor?:Color,
+          colorScheme?:ColorScheme,
+          materialTapTargetSize?:MaterialTapTargetSize,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.textTheme = config.textTheme;
+            this.minWidth = config.minWidth;
+            this.height = config.height;
+            this.padding = config.padding;
+            this.shape = config.shape;
+            this.layoutBehavior = config.layoutBehavior;
+            this.alignedDropdown = config.alignedDropdown;
+            this.buttonColor = config.buttonColor;
+            this.disabledColor = config.disabledColor;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.highlightColor = config.highlightColor;
+            this.splashColor = config.splashColor;
+            this.colorScheme = config.colorScheme;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+        }
+    }
+}
+exports.ButtonThemeData = ButtonThemeData;
+class ToggleButtonsThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          textStyle?:TextStyle,
+          constraints?:BoxConstraints,
+          color?:Color,
+          selectedColor?:Color,
+          disabledColor?:Color,
+          fillColor?:Color,
+          focusColor?:Color,
+          highlightColor?:Color,
+          hoverColor?:Color,
+          splashColor?:Color,
+          borderColor?:Color,
+          selectedBorderColor?:Color,
+          disabledBorderColor?:Color,
+          borderRadius?:BorderRadius,
+          borderWidth?:number,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.textStyle = config.textStyle;
+            this.constraints = config.constraints;
+            this.color = config.color;
+            this.selectedColor = config.selectedColor;
+            this.disabledColor = config.disabledColor;
+            this.fillColor = config.fillColor;
+            this.focusColor = config.focusColor;
+            this.highlightColor = config.highlightColor;
+            this.hoverColor = config.hoverColor;
+            this.splashColor = config.splashColor;
+            this.borderColor = config.borderColor;
+            this.selectedBorderColor = config.selectedBorderColor;
+            this.disabledBorderColor = config.disabledBorderColor;
+            this.borderRadius = config.borderRadius;
+            this.borderWidth = config.borderWidth;
+        }
+    }
+}
+exports.ToggleButtonsThemeData = ToggleButtonsThemeData;
+class TextTheme extends DartClass {
+    /**
+     * @param config config:
+        {
+          headline1?:TextStyle,
+          headline2?:TextStyle,
+          headline3?:TextStyle,
+          headline4?:TextStyle,
+          headline5?:TextStyle,
+          headline6?:TextStyle,
+          subtitle1?:TextStyle,
+          subtitle2?:TextStyle,
+          bodyText1?:TextStyle,
+          bodyText2?:TextStyle,
+          caption?:TextStyle,
+          button?:TextStyle,
+          overline?:TextStyle,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.headline1 = config.headline1;
+            this.headline2 = config.headline2;
+            this.headline3 = config.headline3;
+            this.headline4 = config.headline4;
+            this.headline5 = config.headline5;
+            this.headline6 = config.headline6;
+            this.subtitle1 = config.subtitle1;
+            this.subtitle2 = config.subtitle2;
+            this.bodyText1 = config.bodyText1;
+            this.bodyText2 = config.bodyText2;
+            this.caption = config.caption;
+            this.button = config.button;
+            this.overline = config.overline;
+        }
+    }
+}
+exports.TextTheme = TextTheme;
+class InputDecorationTheme extends DartClass {
+    /**
+     * @param config config:
+        {
+        labelStyle?:TextStyle,
+        helperStyle?:TextStyle,
+        helperMaxLines?:number,
+        hintStyle?:TextStyle,
+        errorStyle?:TextStyle,
+        errorMaxLines?:number,
+        floatingLabelBehavior?:FloatingLabelBehavior,
+        isDense?:boolean,
+        contentPadding?:EdgeInsets,
+        isCollapsed?:boolean,
+        prefixStyle?:TextStyle,
+        suffixStyle?:TextStyle,
+        counterStyle?:TextStyle,
+        filled?:boolean,
+        fillColor?:Color,
+        focusColor?:Color,
+        hoverColor?:Color,
+        errorBorder?:InputBorder,
+        focusedBorder?:InputBorder,
+        focusedErrorBorder?:InputBorder,
+        disabledBorder?:InputBorder,
+        enabledBorder?:InputBorder,
+        border?:InputBorder,
+        alignLabelWithHint?:boolean,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.labelStyle = config.labelStyle;
+            this.helperStyle = config.helperStyle;
+            this.helperMaxLines = config.helperMaxLines;
+            this.hintStyle = config.hintStyle;
+            this.errorStyle = config.errorStyle;
+            this.errorMaxLines = config.errorMaxLines;
+            this.floatingLabelBehavior = config.floatingLabelBehavior;
+            this.isDense = config.isDense;
+            this.contentPadding = config.contentPadding;
+            this.prefixStyle = config.prefixStyle;
+            this.suffixStyle = config.suffixStyle;
+            this.counterStyle = config.counterStyle;
+            this.filled = config.filled;
+            this.fillColor = config.fillColor;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.errorBorder = config.errorBorder;
+            this.focusColor = config.focusColor;
+            this.focusedErrorBorder = config.focusedErrorBorder;
+            this.disabledBorder = config.disabledBorder;
+            this.border = config.border;
+            this.alignLabelWithHint = config.alignLabelWithHint;
+        }
+    }
+}
+exports.InputDecorationTheme = InputDecorationTheme;
+class IconThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          color?:Color,
+          opacity?:number,
+          size?:number,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.color = config.color;
+            this.opacity = config.opacity;
+            this.size = config.size;
+        }
+    }
+}
+exports.IconThemeData = IconThemeData;
+class SliderThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          trackHeight?:number,
+          activeTrackColor?:Color,
+          inactiveTrackColor?:Color,
+          disabledActiveTrackColor?:Color,
+          disabledInactiveTrackColor?:Color,
+          activeTickMarkColor?:Color,
+          inactiveTickMarkColor?:Color,
+          disabledActiveTickMarkColor?:Color,
+          disabledInactiveTickMarkColor?:Color,
+          thumbColor?:Color,
+          overlappingShapeStrokeColor?:Color,
+          disabledThumbColor?:Color,
+          overlayColor?:Color,
+          valueIndicatorColor?:Color,
+          showValueIndicator?:ShowValueIndicator,
+          valueIndicatorTextStyle?:TextStyle,
+          minThumbSeparation?:number,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.trackHeight = config.trackHeight;
+            this.activeTrackColor = config.activeTrackColor;
+            this.inactiveTrackColor = config.inactiveTrackColor;
+            this.disabledActiveTrackColor = config.disabledActiveTrackColor;
+            this.disabledInactiveTrackColor = config.disabledInactiveTrackColor;
+            this.activeTickMarkColor = config.activeTickMarkColor;
+            this.inactiveTickMarkColor = config.inactiveTickMarkColor;
+            this.disabledActiveTickMarkColor = config.disabledActiveTickMarkColor;
+            this.disabledInactiveTickMarkColor = config.disabledInactiveTickMarkColor;
+            this.thumbColor = config.thumbColor;
+            this.overlappingShapeStrokeColor = config.overlappingShapeStrokeColor;
+            this.disabledThumbColor = config.disabledThumbColor;
+            this.overlayColor = config.overlayColor;
+            this.valueIndicatorColor = config.valueIndicatorColor;
+            this.showValueIndicator = config.showValueIndicator;
+            this.valueIndicatorTextStyle = config.valueIndicatorTextStyle;
+            this.minThumbSeparation = config.minThumbSeparation;
+        }
+    }
+}
+exports.SliderThemeData = SliderThemeData;
+class TabBarTheme extends DartClass {
+    /**
+     * @param config config:
+        {
+          indicator?:Decoration,
+          indicatorSize?:TabBarIndicatorSize,
+          labelColor?:Color,
+          labelPadding?:EdgeInsets,
+          labelStyle?:TextStyle,
+          unselectedLabelColor?:Color,
+          unselectedLabelStyle?:TextStyle,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.indicator = config.indicator;
+            this.indicatorSize = config.indicatorSize;
+            this.labelColor = config.labelColor;
+            this.labelPadding = config.labelPadding;
+            this.labelStyle = config.labelStyle;
+            this.unselectedLabelColor = config.unselectedLabelColor;
+            this.unselectedLabelStyle = config.unselectedLabelStyle;
+        }
+    }
+}
+exports.TabBarTheme = TabBarTheme;
+class TooltipThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          height?:number,
+          padding?:EdgeInsets,
+          margin?:EdgeInsets,
+          verticalOffset?:number,
+          preferBelow?:boolean,
+          excludeFromSemantics?:boolean,
+          decoration?:Decoration,
+          textStyle?:TextStyle,
+          waitDuration?:Duration,
+          showDuration?:Duration,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.height = config.height;
+            this.padding = config.padding;
+            this.margin = config.margin;
+            this.verticalOffset = config.verticalOffset;
+            this.preferBelow = config.preferBelow;
+            this.excludeFromSemantics = config.excludeFromSemantics;
+            this.decoration = config.decoration;
+            this.textStyle = config.textStyle;
+            this.waitDuration = config.waitDuration;
+            this.showDuration = config.showDuration;
+        }
+    }
+}
+exports.TooltipThemeData = TooltipThemeData;
+class CardTheme extends DartClass {
+    /**
+     * @param config config:
+        {
+          clipBehavior?:Clip,
+          color?:Color,
+          shadowColor?:Color,
+          elevation?:number,
+          margin?:EdgeInsets,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.clipBehavior = config.clipBehavior;
+            this.color = config.color;
+            this.shadowColor = config.shadowColor;
+            this.elevation = config.elevation;
+            this.margin = config.margin;
+        }
+    }
+}
+exports.CardTheme = CardTheme;
+class ChipThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          backgroundColor?:Color,
+          deleteIconColor?:Color,
+          disabledColor?:Color,
+          selectedColor?:Color,
+          secondarySelectedColor?:Color,
+          shadowColor?:Color,
+          selectedShadowColor?:Color,
+          showCheckmark?:boolean,
+          checkmarkColor?:Color,
+          labelPadding?:EdgeInsets,
+          padding?:EdgeInsets,
+          shape?:ShapeBorder,
+          labelStyle?:TextStyle,
+          secondaryLabelStyle?:TextStyle,
+          brightness?:Brightness,
+          elevation?:number,
+          pressElevation?:number,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.backgroundColor = config.backgroundColor;
+            this.deleteIconColor = config.deleteIconColor;
+            this.disabledColor = config.disabledColor;
+            this.selectedColor = config.selectedColor;
+            this.secondarySelectedColor = config.secondarySelectedColor;
+            this.shadowColor = config.shadowColor;
+            this.selectedShadowColor = config.selectedShadowColor;
+            this.showCheckmark = config.showCheckmark;
+            this.checkmarkColor = config.checkmarkColor;
+            this.labelPadding = config.labelPadding;
+            this.padding = config.padding;
+            this.shape = config.shape;
+            this.labelStyle = config.labelStyle;
+            this.secondaryLabelStyle = config.secondaryLabelStyle;
+            this.brightness = config.brightness;
+            this.elevation = config.elevation;
+            this.pressElevation = config.pressElevation;
+        }
+    }
+}
+exports.ChipThemeData = ChipThemeData;
+class AppBarTheme extends DartClass {
+    /**
+     * @param config config:
+        {
+          brightness?:Brightness,
+          color?:Color,
+          elevation?:number,
+          shadowColor?:Color,
+          iconTheme?:IconThemeData,
+          actionsIconTheme?:IconThemeData,
+          textTheme?:TextTheme,
+          centerTitle?:boolean,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.brightness = config.brightness;
+            this.color = config.color;
+            this.elevation = config.elevation;
+            this.shadowColor = config.shadowColor;
+            this.iconTheme = config.iconTheme;
+            this.actionsIconTheme = config.actionsIconTheme;
+            this.textTheme = config.textTheme;
+            this.centerTitle = config.centerTitle;
+        }
+    }
+}
+exports.AppBarTheme = AppBarTheme;
+class BottomAppBarTheme extends DartClass {
+    /**
+     * @param config config:
+        {
+          color?:Color,
+          elevation?:number,
+          shape?:NotchedShape,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.color = config.color;
+            this.elevation = config.elevation;
+            this.shape = config.shape;
+        }
+    }
+}
+exports.BottomAppBarTheme = BottomAppBarTheme;
+class DialogTheme extends DartClass {
+    /**
+     * @param config config:
+        {
+          backgroundColor?:Color,
+          elevation?:number,
+          shape?:ShapeBorder,
+          titleTextStyle?:TextStyle,
+          contentTextStyle?:TextStyle,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.backgroundColor = config.backgroundColor;
+            this.elevation = config.elevation;
+            this.shape = config.shape;
+            this.titleTextStyle = config.titleTextStyle;
+            this.contentTextStyle = config.contentTextStyle;
+        }
+    }
+}
+exports.DialogTheme = DialogTheme;
+class FloatingActionButtonThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          foregroundColor?:Color,
+          backgroundColor?:Color,
+          focusColor?:Color,
+          hoverColor?:Color,
+          splashColor?:Color,
+          elevation?:number,
+          focusElevation?:number,
+          hoverElevation?:number,
+          disabledElevation?:number,
+          highlightElevation?:number,
+          shape?:ShapeBorder,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.foregroundColor = config.foregroundColor;
+            this.backgroundColor = config.backgroundColor;
+            this.focusColor = config.focusColor;
+            this.hoverColor = config.hoverColor;
+            this.splashColor = config.splashColor;
+            this.elevation = config.elevation;
+            this.focusElevation = config.focusElevation;
+            this.hoverElevation = config.hoverElevation;
+            this.disabledElevation = config.disabledElevation;
+            this.highlightElevation = config.highlightElevation;
+            this.shape = config.shape;
+        }
+    }
+}
+exports.FloatingActionButtonThemeData = FloatingActionButtonThemeData;
+class NavigationRailThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          backgroundColor?:Color,
+          elevation?:number,
+          unselectedLabelTextStyle?:TextStyle,
+          selectedLabelTextStyle?:TextStyle,
+          unselectedIconTheme?:IconThemeData,
+          selectedIconTheme?:IconThemeData,
+          groupAlignment?:number,
+          labelType?:NavigationRailLabelType,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.backgroundColor = config.backgroundColor;
+            this.elevation = config.elevation;
+            this.unselectedLabelTextStyle = config.unselectedLabelTextStyle;
+            this.selectedLabelTextStyle = config.selectedLabelTextStyle;
+            this.unselectedIconTheme = config.unselectedIconTheme;
+            this.selectedIconTheme = config.selectedIconTheme;
+            this.groupAlignment = config.groupAlignment;
+            this.labelType = config.labelType;
+        }
+    }
+}
+exports.NavigationRailThemeData = NavigationRailThemeData;
+class CupertinoThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          primaryColor?:Color,
+          brightness?:Brightness,
+          primaryContrastingColor?:Color,
+          textTheme?:CupertinoTextThemeData,
+          barBackgroundColor?:Color,
+          scaffoldBackgroundColor?:Color,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.primaryColor = config.primaryColor;
+            this.brightness = config.brightness;
+            this.primaryContrastingColor = config.primaryContrastingColor;
+            this.textTheme = config.textTheme;
+            this.barBackgroundColor = config.barBackgroundColor;
+            this.scaffoldBackgroundColor = config.scaffoldBackgroundColor;
+        }
+    }
+}
+exports.CupertinoThemeData = CupertinoThemeData;
+class SnackBarThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          backgroundColor?:Color,
+          actionTextColor?:Color,
+          disabledActionTextColor?:Color,
+          contentTextStyle?:TextStyle,
+          elevation?:number,
+          shape?:ShapeBorder,
+          behavior?:SnackBarBehavior,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.backgroundColor = config.backgroundColor;
+            this.actionTextColor = config.actionTextColor;
+            this.disabledActionTextColor = config.disabledActionTextColor;
+            this.contentTextStyle = config.contentTextStyle;
+            this.elevation = config.elevation;
+            this.shape = config.shape;
+            this.behavior = config.behavior;
+        }
+    }
+}
+exports.SnackBarThemeData = SnackBarThemeData;
+class BottomSheetThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          backgroundColor?:Color,
+          elevation?:number,
+          modalBackgroundColor?:Color,
+          modalElevation?:number,
+          shape?:ShapeBorder,
+          clipBehavior?:Clip,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.backgroundColor = config.backgroundColor;
+            this.elevation = config.elevation;
+            this.modalBackgroundColor = config.modalBackgroundColor;
+            this.modalElevation = config.modalElevation;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+        }
+    }
+}
+exports.BottomSheetThemeData = BottomSheetThemeData;
+class PopupMenuThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          color?:Color,
+          shape?:ShapeBorder,
+          elevation?:number,
+          textStyle?:TextStyle,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.color = config.color;
+            this.shape = config.shape;
+            this.elevation = config.elevation;
+            this.textStyle = config.textStyle;
+        }
+    }
+}
+exports.PopupMenuThemeData = PopupMenuThemeData;
+class MaterialBannerThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          backgroundColor?:Color,
+          contentTextStyle?:TextStyle,
+          padding?:EdgeInsets,
+          leadingPadding?:EdgeInsets,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.backgroundColor = config.backgroundColor;
+            this.contentTextStyle = config.contentTextStyle;
+            this.padding = config.padding;
+            this.leadingPadding = config.leadingPadding;
+        }
+    }
+}
+exports.MaterialBannerThemeData = MaterialBannerThemeData;
+class DividerThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          color?:Color,
+          space?:ShapeBorder,
+          thickness?:number,
+          indent?:number,
+          endIndent?:number,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.color = config.color;
+            this.space = config.space;
+            this.thickness = config.thickness;
+            this.indent = config.indent;
+            this.endIndent = config.endIndent;
+        }
+    }
+}
+exports.DividerThemeData = DividerThemeData;
+class ButtonBarThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          alignment?:MainAxisAlignment,
+          mainAxisSize?:MainAxisSize,
+          buttonTextTheme?:ButtonTextTheme,
+          buttonMinWidth?:number,
+          buttonHeight?:number,
+          buttonPadding?:EdgeInsets,
+          buttonAlignedDropdown?:boolean,
+          layoutBehavior?:ButtonBarLayoutBehavior,
+          overflowDirection?:VerticalDirection,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.alignment = config.alignment;
+            this.mainAxisSize = config.mainAxisSize;
+            this.buttonTextTheme = config.buttonTextTheme;
+            this.buttonMinWidth = config.buttonMinWidth;
+            this.buttonHeight = config.buttonHeight;
+            this.buttonPadding = config.buttonPadding;
+            this.buttonAlignedDropdown = config.buttonAlignedDropdown;
+            this.layoutBehavior = config.layoutBehavior;
+            this.overflowDirection = config.overflowDirection;
+        }
+    }
+}
+exports.ButtonBarThemeData = ButtonBarThemeData;
+class BottomNavigationBarThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          backgroundColor?:Color,
+          elevation?:number,
+          selectedIconTheme?:IconThemeData,
+          unselectedIconTheme?:IconThemeData,
+          selectedItemColor?:Color,
+          unselectedItemColor?:Color,
+          selectedLabelStyle?:TextStyle,
+          unselectedLabelStyle?:TextStyle,
+          showSelectedLabels?:boolean,
+          showUnselectedLabels?:boolean,
+          type?:BottomNavigationBarType,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.backgroundColor = config.backgroundColor;
+            this.elevation = config.elevation;
+            this.selectedIconTheme = config.selectedIconTheme;
+            this.unselectedIconTheme = config.unselectedIconTheme;
+            this.selectedItemColor = config.selectedItemColor;
+            this.unselectedItemColor = config.unselectedItemColor;
+            this.selectedLabelStyle = config.selectedLabelStyle;
+            this.unselectedLabelStyle = config.unselectedLabelStyle;
+            this.showSelectedLabels = config.showSelectedLabels;
+            this.showUnselectedLabels = config.showUnselectedLabels;
+            this.type = config.type;
+        }
+    }
+}
+exports.BottomNavigationBarThemeData = BottomNavigationBarThemeData;
+class TimePickerThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          backgroundColor?:Color,
+          hourMinuteTextColor?:Color,
+          hourMinuteColor?:Color,
+          dayPeriodTextColor?:Color,
+          dayPeriodColor?:Color,
+          dialHandColor?:Color,
+          dialBackgroundColor?:Color,
+          dialTextColor?:Color,
+          entryModeIconColor?:Color,
+          hourMinuteTextStyle?:TextStyle,
+          dayPeriodTextStyle?:TextStyle,
+          helpTextStyle?:TextStyle,
+          shape?:ShapeBorder,
+          hourMinuteShape?:ShapeBorder,
+          dayPeriodShape?:ShapeBorder,
+          dayPeriodBorderSide?:BorderSide,
+          inputDecorationTheme?:InputDecorationTheme,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.backgroundColor = config.backgroundColor;
+            this.hourMinuteTextColor = config.hourMinuteTextColor;
+            this.hourMinuteColor = config.hourMinuteColor;
+            this.dayPeriodColor = config.dayPeriodColor;
+            this.dayPeriodTextColor = config.dayPeriodTextColor;
+            this.dialHandColor = config.dialHandColor;
+            this.dialBackgroundColor = config.dialBackgroundColor;
+            this.entryModeIconColor = config.entryModeIconColor;
+            this.hourMinuteTextStyle = config.hourMinuteTextStyle;
+            this.dayPeriodTextStyle = config.dayPeriodTextStyle;
+            this.helpTextStyle = config.helpTextStyle;
+            this.shape = config.shape;
+            this.hourMinuteShape = config.hourMinuteShape;
+            this.dayPeriodShape = config.dayPeriodShape;
+            this.dayPeriodBorderSide = config.dayPeriodBorderSide;
+            this.inputDecorationTheme = config.inputDecorationTheme;
+        }
+    }
+}
+exports.TimePickerThemeData = TimePickerThemeData;
+class TextSelectionThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          cursorColor?:Color,
+          selectionColor?:Color,
+          selectionHandleColor?:Color,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.cursorColor = config.cursorColor;
+            this.selectionColor = config.selectionColor;
+            this.selectionHandleColor = config.selectionHandleColor;
+        }
+    }
+}
+exports.TextSelectionThemeData = TextSelectionThemeData;
+class DataTableThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          dataRowHeight?:number,
+          dataTextStyle?:TextStyle,
+          headingRowHeight?:number,
+          headingTextStyle?:TextStyle,
+          horizontalMargin?:number,
+          columnSpacing?:number,
+          dividerThickness?:number,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.dataRowHeight = config.dataRowHeight;
+            this.dataTextStyle = config.dataTextStyle;
+            this.headingRowHeight = config.headingRowHeight;
+            this.headingTextStyle = config.headingTextStyle;
+            this.horizontalMargin = config.horizontalMargin;
+            this.columnSpacing = config.columnSpacing;
+            this.dividerThickness = config.dividerThickness;
+        }
+    }
+}
+exports.DataTableThemeData = DataTableThemeData;
+class ThemeData extends DartClass {
+    /**
+     * @param config config:
+        {
+          brightness?:Brightness,
+          visualDensity?:Visibility,
+          primaryColor?:Color,
+          primaryColorBrightness?:Brightness,
+          primaryColorLight?:Color,
+          primaryColorDark?:Color,
+          accentColor?:Color,
+          accentColorBrightness?:Brightness,
+          canvasColor?:Color,
+          shadowColor?:Color,
+          scaffoldBackgroundColor?:Color,
+          bottomAppBarColor?:Color,
+          cardColor?:Color,
+          focusColor?:Color,
+          dividerColor?:Color,
+          hoverColor?:Color,
+          highlightColor?:Color,
+          splashColor?:Color,
+          selectedRowColor?:Color,
+          unselectedWidgetColor?:Color,
+          disabledColor?:Color,
+          buttonColor?:Color,
+          buttonTheme?:ButtonThemeData,
+          toggleButtonsTheme?:ToggleButtonsThemeData,
+          secondaryHeaderColor?:Color,
+          textSelectionColor?:Color,
+          cursorColor?:Color,
+          textSelectionHandleColor?:Color,
+          backgroundColor?:Color,
+          dialogBackgroundColor?:Color,
+          indicatorColor?:Color,
+          hintColor?:Color,
+          errorColor?:Color,
+          toggleableActiveColor?:Color,
+          fontFamily?:string,
+          textTheme?:TextTheme,
+          primaryTextTheme?:TextTheme,
+          accentTextTheme?:TextTheme,
+          inputDecorationTheme?:InputDecorationTheme,
+          iconTheme?:IconThemeData,
+          primaryIconTheme?:IconThemeData,
+          accentIconTheme?:IconThemeData,
+          sliderTheme?:SliderThemeData,
+          tabBarTheme?:TabBarTheme,
+          tooltipTheme?:TooltipThemeData,
+          cardTheme?:CardTheme,
+          chipTheme?:ChipThemeData,
+          platform?:TargetPlatform,
+          materialTapTargetSize?:MaterialTapTargetSize,
+          applyElevationOverlayColor?:boolean,
+          appBarTheme?:AppBarTheme,
+          bottomAppBarTheme?:BottomAppBarTheme,
+          colorScheme?:ColorScheme,
+          dialogTheme?:DialogTheme,
+          floatingActionButtonTheme?:FloatingActionButtonThemeData,
+          navigationRailTheme?:NavigationRailThemeData,
+          cupertinoOverrideTheme?:CupertinoThemeData,
+          snackBarTheme?:SnackBarThemeData,
+          bottomSheetTheme?:BottomSheetThemeData,
+          popupMenuTheme?:PopupMenuThemeData,
+          bannerTheme?:MaterialBannerThemeData,
+          dividerTheme?:DividerThemeData,
+          buttonBarTheme?:ButtonBarThemeData,
+          bottomNavigationBarTheme?:BottomNavigationBarThemeData,
+          timePickerTheme?:TimePickerThemeData,
+          textSelectionTheme?:TextSelectionThemeData,
+          dataTableTheme?:DataTableThemeData,
+          fixTextFieldOutlineLabel?:boolean,
+          useTextSelectionTheme?:boolean,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.brightness = config.brightness;
+            this.visualDensity = config.visualDensity;
+            this.primaryColor = config.primaryColor;
+            this.primaryColorBrightness = config.primaryColorBrightness;
+            this.primaryColorLight = config.primaryColorLight;
+            this.primaryColorDark = config.primaryColorDark;
+            this.accentColor = config.accentColor;
+            this.accentColorBrightness = config.accentColorBrightness;
+            this.canvasColor = config.canvasColor;
+            this.shadowColor = config.shadowColor;
+            this.scaffoldBackgroundColor = config.scaffoldBackgroundColor;
+            this.bottomAppBarColor = config.bottomAppBarColor;
+            this.cardColor = config.cardColor;
+            this.focusColor = config.focusColor;
+            this.dividerColor = config.dividerColor;
+            this.hoverColor = config.hoverColor;
+            this.highlightColor = config.highlightColor;
+            this.splashColor = config.splashColor;
+            this.selectedRowColor = config.selectedRowColor;
+            this.unselectedWidgetColor = config.unselectedWidgetColor;
+            this.disabledColor = config.disabledColor;
+            this.buttonColor = config.buttonColor;
+            this.buttonTheme = config.buttonTheme;
+            this.toggleButtonsTheme = config.toggleButtonsTheme;
+            this.secondaryHeaderColor = config.secondaryHeaderColor;
+            this.textSelectionColor = config.textSelectionColor;
+            this.cursorColor = config.cursorColor;
+            this.textSelectionHandleColor = config.textSelectionHandleColor;
+            this.backgroundColor = config.backgroundColor;
+            this.dialogBackgroundColor = config.dialogBackgroundColor;
+            this.indicatorColor = config.indicatorColor;
+            this.hintColor = config.hintColor;
+            this.errorColor = config.errorColor;
+            this.toggleableActiveColor = config.toggleableActiveColor;
+            this.fontFamily = config.fontFamily;
+            this.textTheme = config.textTheme;
+            this.primaryTextTheme = config.primaryTextTheme;
+            this.accentTextTheme = config.accentTextTheme;
+            this.inputDecorationTheme = config.inputDecorationTheme;
+            this.iconTheme = config.iconTheme;
+            this.primaryIconTheme = config.primaryIconTheme;
+            this.accentIconTheme = config.accentIconTheme;
+            this.sliderTheme = config.sliderTheme;
+            this.tabBarTheme = config.tabBarTheme;
+            this.tooltipTheme = config.tooltipTheme;
+            this.cardTheme = config.cardTheme;
+            this.chipTheme = config.chipTheme;
+            this.platform = config.platform;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.applyElevationOverlayColor = config.applyElevationOverlayColor;
+            this.appBarTheme = config.appBarTheme;
+            this.bottomAppBarTheme = config.bottomAppBarTheme;
+            this.colorScheme = config.colorScheme;
+            this.dialogTheme = config.dialogTheme;
+            this.floatingActionButtonTheme = config.floatingActionButtonTheme;
+            this.navigationRailTheme = config.navigationRailTheme;
+            this.cupertinoOverrideTheme = config.cupertinoOverrideTheme;
+            this.snackBarTheme = config.snackBarTheme;
+            this.bottomSheetTheme = config.bottomSheetTheme;
+            this.popupMenuTheme = config.popupMenuTheme;
+            this.bannerTheme = config.bannerTheme;
+            this.dividerTheme = config.dividerTheme;
+            this.buttonBarTheme = config.buttonBarTheme;
+            this.bottomNavigationBarTheme = config.bottomNavigationBarTheme;
+            this.timePickerTheme = config.timePickerTheme;
+            this.textSelectionTheme = config.textSelectionTheme;
+            this.dataTableTheme = config.dataTableTheme;
+            this.fixTextFieldOutlineLabel = config.fixTextFieldOutlineLabel;
+            this.useTextSelectionTheme = config.useTextSelectionTheme;
+        }
+    }
+}
+exports.ThemeData = ThemeData;
 //#endregion
 //#region ******** Icons ********
 class Icons extends IconData {
@@ -11806,35 +12828,6 @@ class CupertinoActivityIndicator extends Widget {
     }
 }
 exports.CupertinoActivityIndicator = CupertinoActivityIndicator;
-class CupertinoAlertDialog extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          title?:Widget,
-          content?:Widget,
-          actions?:Array<CupertinoDialogAction>,
-          scrollController?:ScrollController,
-          actionScrollController?:ScrollController,
-          insetAnimationDuration?:Duration,
-          insetAnimationCurve?:Curve,
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.key = config.key;
-            this.title = config.title;
-            this.content = config.content;
-            this.actions = config.actions;
-            this.scrollController = config.scrollController;
-            this.actionScrollController = config.actionScrollController;
-            this.insetAnimationDuration = config.insetAnimationDuration;
-            this.insetAnimationCurve = config.insetAnimationCurve;
-        }
-    }
-}
-exports.CupertinoAlertDialog = CupertinoAlertDialog;
 class CupertinoButton extends Widget {
     /**
      * @param config config:
@@ -12202,31 +13195,6 @@ class CupertinoTextThemeData extends DartClass {
     }
 }
 exports.CupertinoTextThemeData = CupertinoTextThemeData;
-class CupertinoThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          primaryColor?:Color,
-          brightness?:Brightness,
-          primaryContrastingColor?:Color,
-          textTheme?:CupertinoTextThemeData,
-          barBackgroundColor?:Color,
-          scaffoldBackgroundColor?:Color,
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.primaryColor = config.primaryColor;
-            this.brightness = config.brightness;
-            this.primaryContrastingColor = config.primaryContrastingColor;
-            this.textTheme = config.textTheme;
-            this.barBackgroundColor = config.barBackgroundColor;
-            this.scaffoldBackgroundColor = config.scaffoldBackgroundColor;
-        }
-    }
-}
-exports.CupertinoThemeData = CupertinoThemeData;
 class EmptyDataWidget extends Widget {
     /**
      * @param config config:
@@ -12252,7 +13220,12 @@ class EmptyDataWidget extends Widget {
     }
 }
 exports.EmptyDataWidget = EmptyDataWidget;
-class ShowDialog extends Widget {
+//#endregion
+//#region ****** Dialog ******
+class ShowBaseDialog extends Widget {
+}
+exports.ShowBaseDialog = ShowBaseDialog;
+class ShowDialog extends ShowBaseDialog {
     /**
        * @param config config:
           {
@@ -12322,13 +13295,45 @@ class AlertDialog extends Widget {
     }
 }
 exports.AlertDialog = AlertDialog;
-class ShowCupertinoDialog extends Widget {
+class SimpleDialog extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          title?:Widget,
+          titlePadding?:EdgeInsets,
+          titleTextStyle?:TextStyle,
+          children?:Array<Widget>,
+          contentPadding?:EdgeInsets,
+          backgroundColor?:Color,
+          elevation?:number,
+          semanticLabel?:string,
+          shape?:ShapeBorder,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.title = config.title;
+            this.titlePadding = config.titlePadding;
+            this.titleTextStyle = config.titleTextStyle;
+            this.children = config.children;
+            this.contentPadding = config.contentPadding;
+            this.backgroundColor = config.backgroundColor;
+            this.elevation = config.elevation;
+            this.semanticLabel = config.semanticLabel;
+            this.shape = config.shape;
+        }
+    }
+}
+exports.SimpleDialog = SimpleDialog;
+class ShowCupertinoDialog extends ShowBaseDialog {
     /**
        * @param config config:
           {
             barrierDismissible?:boolean,
             useRootNavigator?:boolean,
-            child:CupertinoAlertDialog,
+            child:Widget(通常使用CupertinoAlertDialog),
           }
        */
     constructor(config) {
@@ -12341,7 +13346,36 @@ class ShowCupertinoDialog extends Widget {
     }
 }
 exports.ShowCupertinoDialog = ShowCupertinoDialog;
-class ShowGeneralDialog extends Widget {
+class CupertinoAlertDialog extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          title?:Widget,
+          content?:Widget,
+          actions?:Array<CupertinoDialogAction>,
+          scrollController?:ScrollController,
+          actionScrollController?:ScrollController,
+          insetAnimationDuration?:Duration,
+          insetAnimationCurve?:Curve,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.title = config.title;
+            this.content = config.content;
+            this.actions = config.actions;
+            this.scrollController = config.scrollController;
+            this.actionScrollController = config.actionScrollController;
+            this.insetAnimationDuration = config.insetAnimationDuration;
+            this.insetAnimationCurve = config.insetAnimationCurve;
+        }
+    }
+}
+exports.CupertinoAlertDialog = CupertinoAlertDialog;
+class ShowGeneralDialog extends ShowBaseDialog {
     /**
        * @param config config:
           {
@@ -12365,30 +13399,7 @@ class ShowGeneralDialog extends Widget {
     }
 }
 exports.ShowGeneralDialog = ShowGeneralDialog;
-class ShowBottomSheet extends Widget {
-    /**
-       * @param config config:
-          {
-            backgroundColor?:Color,
-            elevation?:number,
-            shape?:ShapeBorder,
-            clipBehavior?:Clip,
-            child:Widget,
-          }
-       */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.backgroundColor = config.backgroundColor;
-            this.elevation = config.elevation;
-            this.shape = config.shape;
-            this.clipBehavior = config.clipBehavior;
-            this.child = config.child;
-        }
-    }
-}
-exports.ShowBottomSheet = ShowBottomSheet;
-class ShowModalBottomSheet extends Widget {
+class ShowModalBottomSheet extends ShowBaseDialog {
     /**
        * @param config config:
           {
@@ -12421,13 +13432,41 @@ class ShowModalBottomSheet extends Widget {
     }
 }
 exports.ShowModalBottomSheet = ShowModalBottomSheet;
-class ShowCupertinoModalPopup extends Widget {
+class BottomSheet extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          enableDrag?:boolean,
+          backgroundColor?:Color,
+          elevation?:number,
+          shape?:ShapeBorder,
+          clipBehavior?:Clip,
+          onClosing?:VoidCallback,
+          child?:Widget,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.elevation = config.elevation;
+            this.backgroundColor = config.backgroundColor;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.onClosing = config.onClosing;
+            this.child = config.child;
+        }
+    }
+}
+exports.BottomSheet = BottomSheet;
+class ShowCupertinoModalPopup extends ShowBaseDialog {
     /**
        * @param config config:
           {
             useRootNavigator?:boolean,
             semanticsDismissible?:boolean,
-            child:Widget,
+            child:Widget(通常情况下和CupertinoActionSheet配合使用)
           }
        */
     constructor(config) {
@@ -12440,6 +13479,56 @@ class ShowCupertinoModalPopup extends Widget {
     }
 }
 exports.ShowCupertinoModalPopup = ShowCupertinoModalPopup;
+class CupertinoActionSheet extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          title?:Widget,
+          message?:Widget,
+          actions?:Array<Widget>, (actions:[CupertinoActionSheetAction])
+          messageScrollController?:ScrollController,
+          actionScrollController?:ScrollController,
+          cancelButton?:Widget,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.title = config.title;
+            this.message = config.message;
+            this.actions = config.actions;
+            this.messageScrollController = config.messageScrollController;
+            this.actionScrollController = config.actionScrollController;
+            this.cancelButton = config.cancelButton;
+        }
+    }
+}
+exports.CupertinoActionSheet = CupertinoActionSheet;
+class CupertinoActionSheetAction extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          child:Widget,
+          onPressed:VoidCallback,
+          isDefaultAction?:boolean,
+          isDestructiveAction?:boolean,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.child = config.child;
+            this.onPressed = config.onPressed;
+            this.isDefaultAction = config.isDefaultAction;
+            this.isDestructiveAction = config.isDestructiveAction;
+        }
+    }
+}
+exports.CupertinoActionSheetAction = CupertinoActionSheetAction;
 class SimpleDialogButtonInfo extends Widget {
     /**
        * @param config config:
@@ -12533,7 +13622,7 @@ class CustomAlertDialogStyle extends Widget {
     }
 }
 exports.CustomAlertDialogStyle = CustomAlertDialogStyle;
-class ShowCustomAlertDialog extends Widget {
+class ShowCustomAlertDialog extends ShowBaseDialog {
     /**
        * @param config config:
           {
@@ -12560,7 +13649,7 @@ class ShowCustomAlertDialog extends Widget {
     }
 }
 exports.ShowCustomAlertDialog = ShowCustomAlertDialog;
-class SimpleCustomDialogButtonInfo extends Widget {
+class SimpleCustomDialogButtonInfo extends ShowBaseDialog {
     /**
        * @param config config:
           {
@@ -12579,7 +13668,7 @@ class SimpleCustomDialogButtonInfo extends Widget {
     }
 }
 exports.SimpleCustomDialogButtonInfo = SimpleCustomDialogButtonInfo;
-class ShowSimpleCustomDialog extends Widget {
+class ShowSimpleCustomDialog extends ShowBaseDialog {
     /**
        * @param config config:
           {
@@ -12606,7 +13695,7 @@ class ShowSimpleCustomDialog extends Widget {
     }
 }
 exports.ShowSimpleCustomDialog = ShowSimpleCustomDialog;
-class ShowSimpleDialog extends Widget {
+class ShowSimpleAlertDialog extends ShowBaseDialog {
     /**
        * @param config config:
           {
@@ -12632,8 +13721,35 @@ class ShowSimpleDialog extends Widget {
         }
     }
 }
-exports.ShowSimpleDialog = ShowSimpleDialog;
-class ShowCustomActionSheet extends Widget {
+exports.ShowSimpleAlertDialog = ShowSimpleAlertDialog;
+class ShowSimpleCupertinoDialog extends ShowBaseDialog {
+    /**
+       * @param config config:
+          {
+            title?:string,
+            titleContent?:Widget,
+            desc?:string,
+            descContent?:Widget,
+            actions:Array<SimpleDialogButtonInfo>,
+            onTap?:VoidCallbackNumber,
+            barrierDismissible?:boolean,
+          }
+       */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.title = config.title;
+            this.titleContent = config.titleContent;
+            this.desc = config.desc;
+            this.descContent = config.descContent;
+            this.actions = config.actions;
+            this.onTap = config.onTap;
+            this.barrierDismissible = config.barrierDismissible;
+        }
+    }
+}
+exports.ShowSimpleCupertinoDialog = ShowSimpleCupertinoDialog;
+class ShowCustomActionSheet extends ShowBaseDialog {
     /**
        * @param config config:
           {
@@ -12654,7 +13770,7 @@ class ShowCustomActionSheet extends Widget {
     }
 }
 exports.ShowCustomActionSheet = ShowCustomActionSheet;
-class ShowSimpleActionSheet extends Widget {
+class ShowSimpleActionSheet extends ShowBaseDialog {
     /**
        * @param config config:
           {
@@ -12675,6 +13791,93 @@ class ShowSimpleActionSheet extends Widget {
     }
 }
 exports.ShowSimpleActionSheet = ShowSimpleActionSheet;
+class ShowCustomPopupMenu extends ShowBaseDialog {
+    /**
+       * @param config config:
+          {
+            superkey:BindKey,
+            menuList?:Array<CustomPopupMenuItem>,
+            barrierDismissible?:boolean,
+            bgColor?:Color,
+            textFontSize?:number,
+            onTap?:VoidCallbackNumber,
+          }
+       */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.superkey = config.superkey;
+            this.menuList = config.menuList;
+            this.barrierDismissible = config.barrierDismissible;
+            this.bgColor = config.bgColor;
+            this.textFontSize = config.textFontSize;
+            this.onTap = config.onTap;
+        }
+    }
+}
+exports.ShowCustomPopupMenu = ShowCustomPopupMenu;
+class CustomPopupMenuItem extends Widget {
+    /**
+       * @param config config:
+          {
+            title:string,
+            titleTextStyle?:TextStyle,
+            image?:Widget,
+          }
+       */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.title = config.title;
+            this.titleTextStyle = config.titleTextStyle;
+            this.image = config.image;
+        }
+    }
+}
+exports.CustomPopupMenuItem = CustomPopupMenuItem;
+class ShowDatePicker extends ShowBaseDialog {
+    /**
+       * @param config config:
+          {
+            initialDate?:number(10位、13位、18位时间戳),
+            firstDate?:number(10位、13位、18位时间戳),
+            lastDate?:number(10位、13位、18位时间戳),
+            currentDate?:number(10位、13位、18位时间戳),
+            initialEntryMode?:DatePickerEntryMode,
+            helpText?:string,
+            cancelText?:string,
+            confirmText?:string,
+            useRootNavigator?:boolean,
+            textDirection?:TextDirection,
+            initialDatePickerMode?:DatePickerMode,
+            errorFormatText?:string,
+            errorInvalidText?:string,
+            fieldHintText?:string,
+            fieldLabelText?:string,
+          }
+       */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.initialDate = config.initialDate;
+            this.firstDate = config.firstDate;
+            this.lastDate = config.lastDate;
+            this.currentDate = config.currentDate;
+            this.initialEntryMode = config.initialEntryMode;
+            this.helpText = config.helpText;
+            this.cancelText = config.cancelText;
+            this.confirmText = config.confirmText;
+            this.useRootNavigator = config.useRootNavigator;
+            this.textDirection = config.textDirection;
+            this.initialEntryMode = config.initialEntryMode;
+            this.errorFormatText = config.errorFormatText;
+            this.errorInvalidText = config.errorFormatText;
+            this.fieldHintText = config.fieldHintText;
+            this.fieldLabelText = config.fieldLabelText;
+        }
+    }
+}
+exports.ShowDatePicker = ShowDatePicker;
 class Dialog extends DartClass {
     constructor() {
         super();
@@ -12690,53 +13893,18 @@ class Dialog extends DartClass {
         return this.instance;
     }
     //显示简单选择
-    _show(baseWidget, funcName, child) {
-        Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+    static async show(baseWidget, child) {
+        var v = await Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
             widgetID: String(baseWidget.widgetID),
             mirrorID: Dialog.getInstance().mirrorID,
             className: Dialog.getInstance().className,
-            funcName: funcName,
+            funcName: child.className,
             args: {
                 widgetID: String(baseWidget.widgetID),
                 child: baseWidget.helper.buildWidgetTreeSubWidget(child),
             },
         }));
-    }
-    static showDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showDialog", child);
-    }
-    static showCupertinoDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showCupertinoDialog", child);
-    }
-    static showGeneralDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showGeneralDialog", child);
-    }
-    static showBottomSheet(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showBottomSheet", child);
-    }
-    static showModalBottomSheet(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showBottshowModalBottomSheetomSheet", child);
-    }
-    static showCupertinoModalPopup(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showCupertinoModalPopup", child);
-    }
-    static showCustomActionSheet(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showCustomActionSheet", child);
-    }
-    static showSimpleActionSheet(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showSimpleActionSheet", child);
-    }
-    static showSimpleCupertinoDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showSimpleCupertinoDialog", child);
-    }
-    static showSimpleAlertDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showSimpleAlertDialog", child);
-    }
-    static showSimpleCustomDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showSimpleCustomDialog", child);
-    }
-    static showCustomAlertDialog(baseWidget, child) {
-        Dialog.getInstance()._show(baseWidget, "showCustomAlertDialog", child);
+        return Convert.toString(v);
     }
     static dismiss(baseWidget) {
         Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({

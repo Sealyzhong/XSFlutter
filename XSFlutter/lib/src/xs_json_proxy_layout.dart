@@ -43,6 +43,7 @@ class XSProxyRegisterHelperLayoutSeries {
     m.addAll(XSProxyAbsorbPointer.registerProxy());
 
     m.addAll(XSProxyBaseline.registerProxy());
+    m.addAll(XSProxyBindKey.registerProxy());
 
     m.addAll(XSProxyContainer.registerProxy());
     m.addAll(XSProxyCenter.registerProxy());
@@ -532,6 +533,29 @@ class XSProxyFlow extends XSJsonObjProxy {
 }
 
 //-------------- G -----------------
+//****** BindKey ******
+class XSProxyBindKey extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "BindKey";
+    return {
+      regClassName: () => XSProxyBindKey()..init(className: regClassName)
+    };
+  }
+
+  @override
+  GlobalKey constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return GlobalKey();
+  }
+
+  //mirrorObj 为一个AnimationController类的实例对象，把调用对象方法，路由到代理类
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map args, {InvokeCallback callback}) {
+    if (mirrorObj == null || !(mirrorObj is ScrollController)) {
+      return;
+    }
+  }
+}
+
 //****** GestureDetector ******
 class XSProxyGestureDetector extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {

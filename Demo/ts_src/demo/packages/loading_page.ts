@@ -7,6 +7,7 @@
 
 import fs = require("flutter_sdk");
 import tl = require("flutter_third_library");
+import moment = require("moment");
 
 export class MyLoadingPage extends fs.StatelessWidget{
 
@@ -66,7 +67,6 @@ export class MyLoadingPage extends fs.StatelessWidget{
                         subtitle:new fs.Text("参数:info"),
                         onTap:function(){
                             fs.Loading.show({info:"数据加载中...",alignment:fs.Alignment.center});
-
                             fs.Future.delayed(new fs.Duration({
                                 seconds:5
                             }),
