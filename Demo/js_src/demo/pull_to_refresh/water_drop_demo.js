@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyPullToRefreshWaterDropDemoPage = void 0;
 const icon_data_1 = require("demo/model/icon_data");
 const fs = require("flutter_sdk");
-const tl = require("flutter_third_library");
 class MyPullToRefreshWaterDropDemoPage extends fs.StatefulWidget {
     createState() {
         return new _MyPullToRefreshWaterDropDemoPageState(this);
@@ -19,7 +18,7 @@ exports.MyPullToRefreshWaterDropDemoPage = MyPullToRefreshWaterDropDemoPage;
 class _MyPullToRefreshWaterDropDemoPageState extends fs.WidgetState {
     constructor() {
         super(...arguments);
-        this.refreshController = new tl.PullToRefreshController({});
+        this.refreshController = new fs.PullToRefreshController({});
         this._count = 20;
     }
     //重构
@@ -29,12 +28,12 @@ class _MyPullToRefreshWaterDropDemoPageState extends fs.WidgetState {
             appBar: new fs.AppBar({
                 title: new fs.Text("WaterDrop Style"),
             }),
-            body: new tl.PullToRefreshRefresher({
+            body: new fs.PullToRefreshRefresher({
                 controller: this.refreshController,
                 enablePullDown: true,
                 enablePullUp: true,
-                header: new tl.PullToRefreshWaterDropHeader(),
-                footer: new tl.PullToRefreshClassicFooter(),
+                header: new fs.PullToRefreshWaterDropHeader(),
+                footer: new fs.PullToRefreshClassicFooter(),
                 onRefresh: function () {
                     fs.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
                     fs.Future.delayed(new fs.Duration({

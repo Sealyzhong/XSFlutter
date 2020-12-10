@@ -7,7 +7,6 @@
 
 import { MySectionTitle } from "demo/widgets/section_title";
 import fs = require("flutter_sdk");
-import tl = require("flutter_third_library");
 
 export class MyDioPage extends fs.StatefulWidget{
     createState() {
@@ -30,7 +29,7 @@ class _MyDioPage extends fs.WidgetState{
     async testDio1(url:string) {
         
         try {
-          let response = await new tl.Dio().get({path:url});
+          let response = await new fs.Dio().get({path:url});
           fs.Log.log("await Dio.get(urlStr):request() :" + response);
           return response;    
         } catch (e) {
@@ -41,7 +40,7 @@ class _MyDioPage extends fs.WidgetState{
       //例子2，接口还未完全支持
     async testDio2(url:string) {
         try {
-          let response =  await new tl.Dio().get( 
+          let response =  await new fs.Dio().get( 
             {path:url,
                 onReceiveProgress:function (progress:number,total:number){
             fs.Log.log("testDio(): progress: " + String(progress)+"/"+String(total));

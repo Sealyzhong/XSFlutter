@@ -8003,7 +8003,7 @@ interface ThemeDataConfig {
 }
 export class ThemeData extends DartClass {
   brightness?:Brightness;
-  visualDensity?:Visibility;
+  visualDensity?:VisualDensity;
   primaryColor?:Color;
   primaryColorBrightness?:Brightness;
   primaryColorLight?:Color;
@@ -8076,7 +8076,7 @@ export class ThemeData extends DartClass {
    * @param config config: 
       {
         brightness?:Brightness, 
-        visualDensity?:Visibility, 
+        visualDensity?:VisualDensity, 
         primaryColor?:Color, 
         primaryColorBrightness?:Brightness, 
         primaryColorLight?:Color, 
@@ -8221,10 +8221,23 @@ export class ThemeData extends DartClass {
     }
   }
 
+  static dark(){
+    var v = new ThemeData({});
+    v.constructorName = "dark";
+    return v;
+  }
+
+  static light(){
+    var v = new ThemeData({});
+    v.constructorName = "light";
+    return v;
+  }
+
 }
 
 //#endregion
-  
+
+
 //#region ******** Icons ********
 export class Icons extends IconData{
     constructor(icon:string){
@@ -20876,6 +20889,8 @@ interface ShowDatePickerConfig {
   errorInvalidText?:string;
   fieldHintText?:string;
   fieldLabelText?:string;
+  themeData?:ThemeData;
+  isMaterialAppTheme?:boolean;
 
 }
 export class ShowDatePicker extends ShowBaseDialog{
@@ -20894,6 +20909,8 @@ export class ShowDatePicker extends ShowBaseDialog{
   errorInvalidText?:string;
   fieldHintText?:string;
   fieldLabelText?:string;
+  themeData?:ThemeData;
+  isMaterialAppTheme?:boolean;
 
   /**
      * @param config config: 
@@ -20913,6 +20930,8 @@ export class ShowDatePicker extends ShowBaseDialog{
           errorInvalidText?:string, 
           fieldHintText?:string, 
           fieldLabelText?:string, 
+          themeData?:ThemeData, 
+          isMaterialAppTheme?:boolean, 
         }
      */
     constructor(config: ShowDatePickerConfig){
@@ -20933,6 +20952,8 @@ export class ShowDatePicker extends ShowBaseDialog{
         this.errorInvalidText = config.errorFormatText;
         this.fieldHintText = config.fieldHintText;
         this.fieldLabelText = config.fieldLabelText;
+        this.themeData = config.themeData;
+        this.isMaterialAppTheme = config.isMaterialAppTheme;
       }
     }
 }
@@ -21139,4 +21160,2548 @@ export class Loading extends DartClass {
     }
 }
 //#endregion
+
+
+//#region ****** Sp ******
+interface SpGetConfig {
+  key:string;
+  defaultValue?:string|boolean|number;
+}
+interface SpSetConfig {
+  key:string;
+  value:string|boolean|number;
+}
+export class Sp extends DartClass {
+
+  static instance:Sp;
+
+  constructor() {
+      super();
+      //Mirror对象在构造函数创建 MirrorID
+      this.createMirrorID();
+
+      
+      //创建对应FLutter对象
+      this.createMirrorObj();
+  }
+
+  static getInstance() {
+      if (!this.instance) {
+        this.instance = new Sp();
+      }
+      return this.instance;
+    }
+  
+  /**
+   * @param config config: 
+    {
+      key:string;
+      defaultValue?:boolean;
+    }
+   */
+  static async getBool(config:SpGetConfig) {
+    var v= await Sp.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sp.getInstance().mirrorID,
+        className: Sp.getInstance().className,
+        funcName: "getBool",
+        args: config,
+      })
+    );
+    return Convert.toBoolean(v);
+  }
+
+  /**
+   * @param config config: 
+    {
+      key:string;
+      defaultValue?:number;
+    }
+   */
+  static async getInt(config:SpGetConfig) {
+    var v= await Sp.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sp.getInstance().mirrorID,
+        className: Sp.getInstance().className,
+        funcName: "getInt",
+        args: config,
+      })
+    );
+    return Convert.toNumber(v);
+  }
+
+  /**
+   * @param config config: 
+    {
+      key:string;
+      defaultValue?:double;
+    }
+   */
+  static async getDouble(config:SpGetConfig) {
+    var v= await Sp.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sp.getInstance().mirrorID,
+        className: Sp.getInstance().className,
+        funcName: "getDouble",
+        args: config,
+      })
+    );
+    return Convert.toNumber(v);
+  }
+
+  /**
+   * @param config config: 
+    {
+      key:string;
+      defaultValue?:string;
+    }
+   */
+  static async getString(config:SpGetConfig) {
+    var v= await Sp.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sp.getInstance().mirrorID,
+        className: Sp.getInstance().className,
+        funcName: "getString",
+        args: config,
+      })
+    );
+    return Convert.toString(v);
+  }
+
+  static async clear() {
+    var v = await Sp.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sp.getInstance().mirrorID,
+        className: Sp.getInstance().className,
+        funcName: "clear",
+      })
+    );
+    return Convert.toBoolean(v);
+  }
+
+  /**
+   * @param config config: 
+    {
+      key:string;
+    }
+   */
+  static async remove(config:SpGetConfig) {
+    var v = await Sp.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sp.getInstance().mirrorID,
+        className: Sp.getInstance().className,
+        funcName: "remove",
+      })
+    );
+    return Convert.toBoolean(v);
+  }
+
+  /**
+   * @param config config: 
+    {
+      key:string;
+      value:boolean;
+    }
+   */
+  static async setBool(config:SpSetConfig) {
+    var v = await  Sp.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+          mirrorID: Sp.getInstance().mirrorID,
+          className: Sp.getInstance().className,
+          funcName: "setBool",
+          args: config,
+      })
+    );
+    return Convert.toBoolean(v);
+  }
+
+  /**
+   * @param config config: 
+    {
+      key:string;
+      value:number;
+    }
+   */
+  static async setDouble(config:SpSetConfig) {
+    var v = await  Sp.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+          mirrorID: Sp.getInstance().mirrorID,
+          className: Sp.getInstance().className,
+          funcName: "setDouble",
+          args: config,
+      })
+    );
+    return Convert.toBoolean(v);
+  }
+
+  /**
+   * @param config config: 
+    {
+      key:string;
+      value:number;
+    }
+   */
+  static async setInt(config:SpSetConfig) {
+    var v = await Sp.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+          mirrorID: Sp.getInstance().mirrorID,
+          className: Sp.getInstance().className,
+          funcName: "setInt",
+          args: config,
+      })
+    );
+    return Convert.toBoolean(v);
+  }
+
+  /**
+   * @param config config: 
+    {
+      key:string;
+      value:string;
+    }
+   */
+  static async setString(config:SpSetConfig) {
+    var v = await  Sp.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+          mirrorID: Sp.getInstance().mirrorID,
+          className: Sp.getInstance().className,
+          funcName: "setString",
+          args: config,
+      })
+    );
+  }
+}
+//#endregion
+
+
+//#region ****** ScreenInfo ******
+export class ScreenInfo extends DartClass {
+
+// 设计稿屏幕宽度(PX)
+static uiWidthPx:number = 750.0;
+//设计稿屏幕宽度(PX)
+static uiHeightPx:number = 1334.0;
+//设计稿屏幕密度
+static uiDensity:number = 2.0;
+//设计稿屏幕宽度(DP)
+static uiWidth:number = 375.0;
+//设计稿屏幕宽度(DP)
+static uiHeight:number = 667.0;
+//当前设备宽度 dp
+static screenWidth:number = 375.0;
+// 当前设备高度 dp
+static screenHeight:number = 667.0;
+// 当前设备宽度 px
+static screenWidthPx:number = 750.0;
+// 当前设备高度 px
+static screenHeightPx:number = 1334.0;
+// 设备的像素密度
+static screenDensity:number = 2.0;
+// 状态栏高度 dp 刘海屏会更高
+static statusBarHeight:number = 20.0;
+//底部工具栏高度
+static bottomBarHeight:number = 0.0;
+//App栏高
+static appBarHeight:number = 0.0;
+//缩放比例(Dp)
+static dpRatio:number = 1.0;
+//缩放比例(PX)
+static pxRatio:number = 1.0;
+//字体缩放放比例
+static textScaleFactor:number=1.0;
+
+
+constructor() {
+    super();
+    //Mirror对象在构造函数创建 MirrorID
+    this.createMirrorID();
+
+    //创建对应FLutter对象
+    this.createMirrorObj();
+}
+
+
+/*
+* 将Dp按比例转换成Dp
+* */
+static getValueWithDp(dp:number,isRatio:boolean=true) {
+  return isRatio ? (ScreenInfo.dpRatio * dp) : dp;
+}
+
+/*
+* 将px按比例转换成Dp
+* */
+static getValueWithPx(px:number,isRatio:boolean=true) {
+  return isRatio ? (ScreenInfo.pxRatio * px) : px;
+}
+
+//
+static async updateInfo() {
+  var info = new ScreenInfo();
+  var v= await info.invokeMirrorObjWithCallback(new JSCallConfig({
+        mirrorID: info.mirrorID,
+        className: info.className,
+        funcName: "updateInfo",
+    }));
+    if(v!=null && v!=undefined){
+      var result= JSON.parse(String(v));
+      if(result!=null && result!=undefined){
+        ScreenInfo.appBarHeight = Convert.toNumber(result["appBarHeight"]);
+        ScreenInfo.bottomBarHeight = Convert.toNumber(result["bottomBarHeight"]);
+        ScreenInfo.dpRatio = Convert.toNumber(result["dpRatio"]);
+        ScreenInfo.pxRatio = Convert.toNumber(result["pxRatio"]);
+        ScreenInfo.screenDensity = Convert.toNumber(result["screenDensity"]);
+        ScreenInfo.screenHeight = Convert.toNumber(result["screenHeight"]);
+        ScreenInfo.screenHeightPx = Convert.toNumber(result["screenHeightPx"]);
+        ScreenInfo.screenWidth = Convert.toNumber(result["screenWidth"]);
+        ScreenInfo.screenWidthPx = Convert.toNumber(result["screenWidthPx"]);
+        ScreenInfo.statusBarHeight = Convert.toNumber(result["statusBarHeight"]);
+        ScreenInfo.uiDensity = Convert.toNumber(result["uiDensity"]);
+        ScreenInfo.uiHeight = Convert.toNumber(result["uiHeight"]);
+        ScreenInfo.uiWidth = Convert.toNumber(result["uiWidth"]);
+        ScreenInfo.uiWidthPx = Convert.toNumber(result["uiWidthPx"]);
+        ScreenInfo.uiHeightPx = Convert.toNumber(result["uiHeightPx"]);
+      }
+    }
+}
+}
+//#endregion
+
+
+//#region ****** PackageInfo ******
+export class PackageInfo extends DartClass {
+static appName:string = ""; //应用名称
+static packageName:string = ""; //包名称
+static version:string = ""; //版本号
+static buildNumber:string = ""; //小版本号
+
+constructor() {
+    super();
+    //Mirror对象在构造函数创建 MirrorID
+    this.createMirrorID();
+
+    //创建对应FLutter对象
+    this.createMirrorObj();
+}
+
+//
+static async updateInfo() {
+  var info = new PackageInfo();
+  var v= await info.invokeMirrorObjWithCallback(new JSCallConfig({
+        mirrorID: info.mirrorID,
+        className: info.className,
+        funcName: "updateInfo",
+    }));
+    if(v!=null && v!=undefined){
+      var result= JSON.parse(String(v));
+      if(result!=null && result!=undefined){
+        PackageInfo.appName = Convert.toString(result["appName"]);
+        PackageInfo.buildNumber = Convert.toString(result["buildNumber"]);
+        PackageInfo.packageName = Convert.toString(result["packageName"]);
+        PackageInfo.version = Convert.toString(result["version"]);
+      }
+    }
+}
+}
+//#endregion
+
+
+//#region ****** Wakelock ******
+export class Wakelock extends DartClass {  
+constructor() {
+  super();
+  //Mirror对象在构造函数创建 MirrorID
+  this.createMirrorID();
+
+  //创建对应FLutter对象
+  this.createMirrorObj();
+}
+
+
+
+  //
+  static async disable() {
+    var info = new Wakelock();
+    var v= await info.invokeMirrorObjWithCallback(new JSCallConfig({
+          mirrorID: info.mirrorID,
+          className: info.className,
+          funcName: "disable",
+      }));
+
+    return Convert.toBoolean(v);
+  }
+
+  //
+  static async enable() {
+    var info = new Wakelock();
+    var v= await info.invokeMirrorObjWithCallback(new JSCallConfig({
+          mirrorID: info.mirrorID,
+          className: info.className,
+          funcName: "enable",
+      }));
+    return Convert.toBoolean(v);
+  }
+
+  //
+  static async isEnabled() {
+    var info = new Wakelock();
+    var v= await info.invokeMirrorObjWithCallback(new JSCallConfig({
+          mirrorID: info.mirrorID,
+          className: info.className,
+          funcName: "isEnabled",
+      }));
+    return Convert.toBoolean(v);
+  }
+}
+//#endregion
+
+
+//#region ****** FocusScope ******
+export class FocusScope extends DartClass {  
+constructor() {
+  super();
+  //Mirror对象在构造函数创建 MirrorID
+  this.createMirrorID();
+
+  //创建对应FLutter对象
+  this.createMirrorObj();
+}
+
+
+
+//
+static requestFocus() {
+  var info = new FocusScope();
+  info.invokeMirrorObjWithCallback(new JSCallConfig({
+        mirrorID: info.mirrorID,
+        className: info.className,
+        funcName: "requestFocus",
+    }));
+}
+
+//
+static unfocus() {
+  var info = new FocusScope();
+  info.invokeMirrorObjWithCallback(new JSCallConfig({
+        mirrorID: info.mirrorID,
+        className: info.className,
+        funcName: "unfocus",
+    }));
+}
+}
+//#endregion
+
+
+//#region ****** UrlLauncher ******
+interface UrlLauncherConfig {
+urlString:string;
+forceSafariVC?:boolean;
+forceWebView?:boolean;
+enableJavaScript?:boolean;
+enableDomStorage?:boolean;
+universalLinksOnly?:boolean;
+headers?:Map<string,string>;
+statusBarBrightness?:Brightness;
+webOnlyWindowName?:string;
+}
+export class UrlLauncher extends DartClass {
+constructor() {
+  super();
+  //Mirror对象在构造函数创建 MirrorID
+  this.createMirrorID();
+
+  //创建对应FLutter对象
+  this.createMirrorObj();
+}
+
+  /**
+   * @param config config: 
+    {
+      urlString:string, 
+      forceSafariVC?:boolean, 
+      forceWebView?:boolean, 
+      enableJavaScript?:boolean, 
+      enableDomStorage?:boolean, 
+      universalLinksOnly?:boolean, 
+      headers?:Map<string,string>, 
+      statusBarBrightness?:Brightness, 
+      webOnlyWindowName?:string, 
+    }
+   */
+  static async openUrl(config:UrlLauncherConfig) {
+    var info = new UrlLauncher();
+    var v= await info.invokeMirrorObjWithCallback(new JSCallConfig({
+          mirrorID: info.mirrorID,
+          className: info.className,
+          funcName: "openUrl",
+          args:config,
+      }));
+
+    return Convert.toBoolean(v);
+  }
+}
+//#endregion
+
+
+//#region ****** Dio ******
+
+//****** VoidCallbackDioProgress ******
+export type VoidCallbackDioProgress = (progress:number,total:number) => void;
+
+//****** DioResponseType ******
+export enum DioResponseType {
+json = "json",
+stream = "stream",
+plain = "plain",
+bytes = "bytes",
+}
+
+//****** DioBaseOptions ******
+interface DioBaseOptionsConfig {
+method?:string;
+connectTimeout?:number;
+receiveTimeout?:number;
+sendTimeout?:number;
+baseUrl?:string;
+queryParameters?:Map<string,any>;
+extra?:Map<string,any>;
+headers?:Map<string,any>;
+responseType?:DioResponseType;
+receiveDataWhenStatusError?:boolean;
+followRedirects?:boolean;
+maxRedirects?:number;
+}
+export class DioBaseOptions extends DartClass {
+method?:string;
+connectTimeout?:number;
+receiveTimeout?:number;
+sendTimeout?:number;
+baseUrl?:string;
+queryParameters?:Map<string,any>;
+extra?:Map<string,any>;
+headers?:Map<string,any>;
+responseType?:DioResponseType;
+receiveDataWhenStatusError?:boolean;
+followRedirects?:boolean;
+maxRedirects?:number;
+
+/**
+   * @param config config: 
+    {
+      method?:string, 
+      connectTimeout?:number, 
+      receiveTimeout?:number, 
+      sendTimeout?:number, 
+      baseUrl?:string, 
+      queryParameters?:Map<string,any>, 
+      extra?:Map<string,any>, 
+      headers?:Map<string,any>, 
+      responseType?:DioResponseType, 
+      receiveDataWhenStatusError?:boolean, 
+      followRedirects?:boolean, 
+      maxRedirects?:number, 
+    }
+   */
+constructor(config?:DioBaseOptionsConfig) {
+  super();
+  if(config!=null && config!=undefined){
+    this.method = config.method;
+    this.connectTimeout = config.connectTimeout;
+    this.receiveTimeout = config.receiveTimeout;
+    this.sendTimeout = config.sendTimeout;
+    this.baseUrl = config.baseUrl;
+    this.queryParameters = config.queryParameters;
+    this.extra = config.extra;
+    this.headers = config.headers;
+    this.responseType = config.responseType;
+    this.followRedirects = config.followRedirects;
+    this.maxRedirects = config.maxRedirects;
+  }
+}
+}
+
+//****** DioOptions ******
+interface DioOptionsConfig {
+method?:string;
+receiveTimeout?:number;
+sendTimeout?:number;
+baseUrl?:string;
+extra?:Map<string,any>;
+headers?:Map<string,any>;
+responseType?:DioResponseType;
+receiveDataWhenStatusError?:boolean;
+followRedirects?:boolean;
+maxRedirects?:number;
+}
+export class DioOptions extends DartClass {
+method?:string;
+receiveTimeout?:number;
+sendTimeout?:number;
+baseUrl?:string;
+extra?:Map<string,any>;
+headers?:Map<string,any>;
+responseType?:DioResponseType;
+receiveDataWhenStatusError?:boolean;
+followRedirects?:boolean;
+maxRedirects?:number;
+
+/**
+   * @param config config: 
+    {
+      method?:string, 
+      connectTimeout?:number, 
+      receiveTimeout?:number, 
+      sendTimeout?:number, 
+      baseUrl?:string, 
+      extra?:Map<string,any>, 
+      headers?:Map<string,any>, 
+      responseType?:DioResponseType, 
+      receiveDataWhenStatusError?:boolean, 
+      followRedirects?:boolean, 
+      maxRedirects?:number, 
+    }
+   */
+constructor(config?:DioOptionsConfig) {
+  super();
+  if(config!=null && config!=undefined){
+    this.method = config.method;
+    this.receiveTimeout = config.receiveTimeout;
+    this.sendTimeout = config.sendTimeout;
+    this.baseUrl = config.baseUrl;
+    this.extra = config.extra;
+    this.headers = config.headers;
+    this.responseType = config.responseType;
+    this.followRedirects = config.followRedirects;
+    this.maxRedirects = config.maxRedirects;
+  }
+}
+}
+
+
+interface DioGetConfig {
+path?:string;
+queryParameters?:Map<string,any>;
+options?:DioOptions;
+onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+interface DioGetUriConfig {
+uri?:Uri;
+options?:DioOptions;
+onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+interface DioPostConfig {
+path?:string;
+data?:any;
+queryParameters?:Map<string,any>;
+options?:DioOptions;
+onSendProgress?:VoidCallbackDioProgress;
+onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+interface DioPostUriConfig {
+uri?:Uri;
+data?:any;
+options?:DioOptions;
+onSendProgress?:VoidCallbackDioProgress;
+onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+interface DioRequestConfig {
+path?:string;
+data?:any;
+queryParameters?:Map<string,any>;
+options?:DioOptions;
+onSendProgress?:VoidCallbackDioProgress;
+onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+interface DioRequestUriConfig {
+uri?:Uri;
+data?:any;
+options?:DioOptions;
+onSendProgress?:VoidCallbackDioProgress;
+onReceiveProgress?:VoidCallbackDioProgress;
+}
+
+
+export class Dio extends DartClass {
+
+options?:DioBaseOptions;
+
+constructor(options?:DioBaseOptions) {
+  super();
+  this.options = options;
+  //Mirror对象在构造函数创建 MirrorID
+  this.createMirrorID();
+
+  //创建对应FLutter对象
+  this.createMirrorObj();
+}
+
+/**
+  * @param config config: 
+    {
+      path?:string, 
+      queryParameters?:Map<string,any>, 
+      options?:DioOptions, 
+    }
+*/
+async get(config:DioGetConfig ) {
+  return await this.invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: this.mirrorID,
+        className: this.className,
+        funcName: "get",
+        args:config,
+    }));
+}
+
+/**
+  * @param config config: 
+    {
+      uri?:Uri,
+      options?:DioOptions, 
+    }
+  */
+async getUri(config:DioGetUriConfig ) {
+  return await this.invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: this.mirrorID,
+        className: this.className,
+        funcName: "getUri",
+        args:config,
+    }));
+}
+
+/**
+  * @param config config: 
+    {
+      path?:string, 
+      data?:any;
+      queryParameters?:Map<string,any>, 
+      options?:DioOptions, 
+    }
+*/
+async post(config:DioPostConfig ) {
+  return await this.invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: this.mirrorID,
+        className: this.className,
+        funcName: "post",
+        args:config,
+    }));
+}
+
+/**
+  * @param config config: 
+    {
+      uri?:Uri,
+      data?:any;
+      options?:DioOptions, 
+    }
+  */
+async postUri(config:DioPostUriConfig ) {
+  return await this.invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: this.mirrorID,
+        className: this.className,
+        funcName: "postUri",
+        args:config,
+    }));
+}
+
+/**
+  * @param config config: 
+    {
+      path?:string, 
+      data?:any;
+      queryParameters?:Map<string,any>, 
+      options?:DioOptions, 
+    }
+*/
+async request(config:DioRequestConfig ) {
+  return await this.invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: this.mirrorID,
+        className: this.className,
+        funcName: "request",
+        args:config,
+    }));
+}
+
+/**
+  * @param config config: 
+    {
+      uri?:Uri,
+      data?:any;
+      options?:DioOptions, 
+    }
+  */
+async requestUri(config:DioRequestUriConfig ) {
+  return await this.invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: this.mirrorID,
+        className: this.className,
+        funcName: "requestUri",
+        args:config,
+    }));
+}
+}
+
+//#endregion
+
+
+//#region ******** PullToRefresh ********
+
+//****** PullToRefreshStyle ******
+export enum PullToRefreshStyle {
+Behind = "Behind",
+UnFollow = "UnFollow",
+Follow = "Follow",
+Front = "Front",
+}
+
+//****** PullToRefreshStatus ******
+export enum PullToRefreshStatus {
+idle = "idle",
+canRefresh = "canRefresh",
+refreshing = "refreshing",
+completed = "completed",
+failed = "failed",
+canTwoLevel = "canTwoLevel",
+twoLevelOpening = "twoLevelOpening",
+twoLeveling = "twoLeveling",
+twoLevelClosing = "twoLevelClosing",
+}
+
+//****** PullToRefreshLoadStatus ******
+export enum PullToRefreshLoadStatus {
+idle = "idle",
+canLoading = "canLoading",
+loading = "loading",
+noMore = "noMore",
+failed = "failed",
+}
+
+//****** PullToRefreshIconPosition ******
+export enum PullToRefreshIconPosition {
+left = "left",
+right = "right",
+top = "top",
+bottom = "bottom",
+}
+
+//****** PullToRefreshLoadStyle ******
+export enum PullToRefreshLoadStyle {
+ShowAlways = "ShowAlways",
+HideAlways = "HideAlways",
+ShowWhenLoading = "ShowWhenLoading",
+}
+
+export abstract class PullToRefreshHeader extends Widget {
+
+/**
+ * PullToRefreshHeader.classic = new PullToRefreshClassicHeader(config);
+ * @param config config: 
+    {
+      key?:Key, 
+      refreshStyle?:PullToRefreshStyle, 
+      height?:number, 
+      completeDuration?:Duration, 
+      textStyle?:TextStyle, 
+      releaseText?:string, 
+      refreshingText?:string, 
+      canTwoLevelIcon?:Widget, 
+      twoLevelView?:Widget, 
+      canTwoLevelText?:string, 
+      completeText?:string, 
+      failedText?:string, 
+      idleText?:string, 
+      iconPos?:PullToRefreshIconPosition, 
+      spacing?:number, 
+      refreshingIcon?:Widget, 
+      failedIcon?:Widget, 
+      completeIcon?:Widget, 
+      idleIcon?:Widget, 
+      releaseIcon?:Widget, 
+    }
+ */
+static classic(config?: PullToRefreshClassicHeaderConfig){
+  return new PullToRefreshClassicHeader(config);
+}
+
+/**
+ * PullToRefreshHeader.WwterDrop
+ * @param config config: 
+    {
+      key?:Key, 
+      refresh?:Widget, 
+      complete?:Widget, 
+      completeDuration?:Duration, 
+      failed?:Widget, 
+      waterDropColor?:Color, 
+      idleIcon?:Widget, 
+    }
+ */
+static  waterDrop(config?: PullToRefreshWaterDropHeaderConfig){
+  return new PullToRefreshWaterDropMaterialHeader(config);
+}
+
+/**
+ * PullToRefreshHeader.materialClassic = new PullToRefreshWaterDropMaterialHeader(config);
+ * @param config config: 
+    {
+      key?:Key, 
+      height?:number, 
+      semanticsLabel?:string, 
+      semanticsValue?:string, 
+      color?:Color, 
+      offset?:number, 
+      distance?:number, 
+      backgroundColor?:Color, 
+    }
+ */
+static materialClassic (config?: PullToRefreshMaterialClassicHeaderConfig){
+  return new PullToRefreshWaterDropMaterialHeader(config);
+}
+
+/**
+ * PullToRefreshHeader.waterDropMaterial = new PullToRefreshWaterDropMaterialHeader(config);
+ * @param config config: 
+    {
+      key?:Key, 
+      height?:number, 
+      semanticsLabel?:string, 
+      semanticsValue?:string, 
+      color?:Color, 
+      offset?:number, 
+      distance?:number, 
+      backgroundColor?:Color, 
+    }
+ */
+static waterDropMaterial(config?: PullToRefreshWaterDropMaterialHeaderConfig){
+  return new PullToRefreshWaterDropMaterialHeader(config);
+}
+
+}
+//****** PullToRefreshClassicHeader ******
+interface PullToRefreshClassicHeaderConfig {
+key?:Key;
+refreshStyle?:PullToRefreshStyle;
+height?:number;
+completeDuration?:Duration;
+textStyle?:TextStyle;
+releaseText?:string;
+refreshingText?:string;
+canTwoLevelIcon?:Widget;
+twoLevelView?:Widget;
+canTwoLevelText?:string;
+completeText?:string;
+failedText?:string;
+idleText?:string;
+iconPos?:PullToRefreshIconPosition;
+spacing?:number;
+refreshingIcon?:Widget;
+failedIcon?:Widget;
+completeIcon?:Widget;
+idleIcon?:Widget;
+releaseIcon?:Widget;
+}
+export class PullToRefreshClassicHeader extends PullToRefreshHeader {
+key?:Key;
+refreshStyle?:PullToRefreshStyle;
+height?:number;
+completeDuration?:Duration;
+textStyle?:TextStyle;
+releaseText?:string;
+refreshingText?:string;
+canTwoLevelIcon?:Widget;
+twoLevelView?:Widget;
+canTwoLevelText?:string;
+completeText?:string;
+failedText?:string;
+idleText?:string;
+iconPos?:PullToRefreshIconPosition;
+spacing?:number;
+refreshingIcon?:Widget;
+failedIcon?:Widget;
+completeIcon?:Widget;
+idleIcon?:Widget;
+releaseIcon?:Widget;
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      refreshStyle?:PullToRefreshStyle, 
+      height?:number, 
+      completeDuration?:Duration, 
+      textStyle?:TextStyle, 
+      releaseText?:string, 
+      refreshingText?:string, 
+      canTwoLevelIcon?:Widget, 
+      twoLevelView?:Widget, 
+      canTwoLevelText?:string, 
+      completeText?:string, 
+      failedText?:string, 
+      idleText?:string, 
+      iconPos?:PullToRefreshIconPosition, 
+      spacing?:number, 
+      refreshingIcon?:Widget, 
+      failedIcon?:Widget, 
+      completeIcon?:Widget, 
+      idleIcon?:Widget, 
+      releaseIcon?:Widget, 
+    }
+ */
+constructor(config?: PullToRefreshClassicHeaderConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.refreshStyle = config.refreshStyle;
+    this.height = config.height;
+    this.completeDuration = config.completeDuration;
+    this.textStyle = config.textStyle;
+    this.releaseText = config.releaseText;
+    this.refreshingText = config.refreshingText;
+    this.canTwoLevelIcon = config.canTwoLevelIcon;
+    this.twoLevelView = config.twoLevelView;
+    this.canTwoLevelText = config.canTwoLevelText;
+    this.completeText = config.completeText;
+    this.failedText = config.failedText;
+    this.idleText = config.idleText;
+    this.iconPos = config.iconPos;
+    this.spacing = config.spacing;
+    this.refreshingIcon = config.refreshingIcon;
+    this.failedIcon = config.failedIcon;
+    this.completeIcon = config.completeIcon;
+    this.idleIcon = config.idleIcon;
+    this.releaseIcon = config.releaseIcon;
+
+  }
+}
+}
+
+//****** PullToRefreshWaterDropHeader ******
+interface PullToRefreshWaterDropHeaderConfig {
+key?:Key;
+refresh?:Widget;
+complete?:Widget;
+completeDuration?:Duration;
+failed?:Widget;
+waterDropColor?:Color;
+idleIcon?:Widget;
+}
+export class PullToRefreshWaterDropHeader extends PullToRefreshHeader{
+key?:Key;
+refresh?:Widget;
+complete?:Widget;
+completeDuration?:Duration;
+failed?:Widget;
+waterDropColor?:Color;
+idleIcon?:Widget;
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      refresh?:Widget, 
+      complete?:Widget, 
+      completeDuration?:Duration, 
+      failed?:Widget, 
+      waterDropColor?:Color, 
+      idleIcon?:Widget, 
+    }
+ */
+constructor(config?: PullToRefreshWaterDropHeaderConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.refresh = config.refresh;
+    this.complete = config.complete;
+    this.completeDuration = config.completeDuration;
+    this.failed = config.failed;
+    this.waterDropColor = config.waterDropColor;
+    this.idleIcon = config.idleIcon;
+  }
+}
+}
+
+//****** MaterialClassicHeader ******
+interface PullToRefreshMaterialClassicHeaderConfig {
+key?:Key;
+height?:number;
+semanticsLabel?:string;
+semanticsValue?:string;
+color?:Color;
+offset?:number;
+distance?:number;
+backgroundColor?:Color;
+}
+export class PullToRefreshMaterialClassicHeader extends PullToRefreshHeader {
+key?:Key;
+height?:number;
+semanticsLabel?:string;
+semanticsValue?:string;
+color?:Color;
+offset?:number;
+distance?:number;
+backgroundColor?:Color;
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      height?:number, 
+      semanticsLabel?:string, 
+      semanticsValue?:string, 
+      color?:Color, 
+      offset?:number, 
+      distance?:number, 
+      backgroundColor?:Color, 
+    }
+ */
+constructor(config?: PullToRefreshMaterialClassicHeaderConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.height = config.height;
+    this.semanticsLabel = config.semanticsLabel;
+    this.semanticsValue = config.semanticsValue;
+    this.color = config.color;
+    this.offset = config.offset;
+    this.distance = config.distance;
+    this.backgroundColor = config.backgroundColor;
+  }
+}
+}
+
+//****** WaterDropMaterialHeader ******
+interface PullToRefreshWaterDropMaterialHeaderConfig {
+key?:Key;
+height?:number;
+semanticsLabel?:string;
+semanticsValue?:string;
+color?:Color;
+offset?:number;
+distance?:number;
+backgroundColor?:Color;
+}
+export class PullToRefreshWaterDropMaterialHeader extends PullToRefreshHeader {
+key?:Key;
+height?:number;
+semanticsLabel?:string;
+semanticsValue?:string;
+color?:Color;
+offset?:number;
+distance?:number;
+backgroundColor?:Color;
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      height?:number, 
+      semanticsLabel?:string, 
+      semanticsValue?:string, 
+      color?:Color, 
+      offset?:number, 
+      distance?:number, 
+      backgroundColor?:Color, 
+    }
+ */
+constructor(config?: PullToRefreshWaterDropMaterialHeaderConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.height = config.height;
+    this.semanticsLabel = config.semanticsLabel;
+    this.semanticsValue = config.semanticsValue;
+    this.color = config.color;
+    this.offset = config.offset;
+    this.distance = config.distance;
+    this.backgroundColor = config.backgroundColor;
+  }
+}
+}
+
+export abstract class PullToRefreshFooter extends Widget {
+
+/**
+ * PullToRefreshFooter.classic = new PullToRefreshPullToRefreshClassicFooter(config);
+ * @param config config: 
+    {
+      key?:Key, 
+      onClick?: VoidCallback, 
+      loadStyle?: PullToRefreshLoadStyle, 
+      height?: number, 
+      textStyle?:TextStyle, 
+      loadingText?:string, 
+      noDataText?:string, 
+      noMoreIcon?:Widget, 
+      idleText?:string, 
+      failedText?:string, 
+      canLoadingText?:string, 
+      failedIcon?:Widget, 
+      iconPos?:PullToRefreshIconPosition, 
+      spacing?:number, 
+      completeDuration?:Duration, 
+      loadingIcon?:Widget, 
+      canLoadingIcon?:Widget, 
+      idleIcon?:Widget, 
+    }
+ */
+static classic(config?: PullToRefreshClassicFooterConfig){
+  return new PullToRefreshClassicFooter(config);
+}
+}
+
+//****** PullToRefreshClassicFooter ******
+interface PullToRefreshClassicFooterConfig {
+key?:Key;
+onClick?: VoidCallback;
+loadStyle?: PullToRefreshLoadStyle;
+height?: number;
+textStyle?:TextStyle;
+loadingText?:string;
+noDataText?:string;
+noMoreIcon?:Widget;
+idleText?:string;
+failedText?:string;
+canLoadingText?:string;
+failedIcon?:Widget;
+iconPos?:PullToRefreshIconPosition;
+spacing?:number;
+completeDuration?:Duration;
+loadingIcon?:Widget;
+canLoadingIcon?:Widget;
+idleIcon?:Widget;
+}
+export class PullToRefreshClassicFooter extends Widget {
+key?:Key;
+onClick?: VoidCallback;
+loadStyle?: PullToRefreshLoadStyle;
+height?: number;
+textStyle?:TextStyle;
+loadingText?:string;
+noDataText?:string;
+noMoreIcon?:Widget;
+idleText?:string;
+failedText?:string;
+canLoadingText?:string;
+failedIcon?:Widget;
+iconPos?:PullToRefreshIconPosition;
+spacing?:number;
+completeDuration?:Duration;
+loadingIcon?:Widget;
+canLoadingIcon?:Widget;
+idleIcon?:Widget;
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      onClick?: VoidCallback, 
+      loadStyle?: PullToRefreshLoadStyle, 
+      height?: number, 
+      textStyle?:TextStyle, 
+      loadingText?:string, 
+      noDataText?:string, 
+      noMoreIcon?:Widget, 
+      idleText?:string, 
+      failedText?:string, 
+      canLoadingText?:string, 
+      failedIcon?:Widget, 
+      iconPos?:PullToRefreshIconPosition, 
+      spacing?:number, 
+      completeDuration?:Duration, 
+      loadingIcon?:Widget, 
+      canLoadingIcon?:Widget, 
+      idleIcon?:Widget, 
+    }
+ */
+constructor(config?: PullToRefreshClassicFooterConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.onClick = config.onClick;
+    this.loadStyle = config.loadStyle;
+    this.height = config.height;
+    this.textStyle = config.textStyle;
+    this.loadingText = config.loadingText;
+    this.noDataText = config.noDataText;
+    this.noMoreIcon = config.noMoreIcon;
+    this.idleText = config.idleText;
+    this.failedText = config.failedText;
+    this.canLoadingText = config.canLoadingText;
+    this.iconPos = config.iconPos;
+    this.spacing = config.spacing;
+    this.completeDuration = config.completeDuration;
+    this.loadingIcon = config.loadingIcon;
+    this.canLoadingIcon = config.canLoadingIcon;
+    this.idleIcon = config.idleIcon;
+  }
+}
+}
+
+//****** PullToRefreshConfiguration ******
+interface PullToRefreshConfigurationConfig {
+child?:Widget;
+headerBuilder?:Widget;
+footerBuilder?:Widget;
+dragSpeedRatio?:number;
+shouldFooterFollowWhenNotFull?:string;
+enableScrollWhenTwoLevel?:boolean;
+enableLoadingWhenNoData?:boolean;
+enableBallisticRefresh?:boolean;
+springDescription?:SpringDescription;
+enableScrollWhenRefreshCompleted?:boolean;
+enableLoadingWhenFailed?:boolean;
+twiceTriggerDistance?:number;
+closeTwoLevelDistance?:number;
+skipCanRefresh?:boolean;
+autoLoad?:boolean;
+maxOverScrollExtent?:number;
+enableBallisticLoad?:boolean;
+maxUnderScrollExtent?:number;
+headerTriggerDistance?:number;
+footerTriggerDistance?:number;
+hideFooterWhenNotFull?:boolean;
+enableRefreshVibrate?:boolean;
+enableLoadMoreVibrate?:boolean;
+topHitBoundary?:number;
+bottomHitBoundary?:number;
+}
+export class PullToRefreshConfiguration extends Widget {
+child?:Widget;
+headerBuilder?:Widget;
+footerBuilder?:Widget;
+dragSpeedRatio?:number;
+shouldFooterFollowWhenNotFull?:string;
+enableScrollWhenTwoLevel?:boolean;
+enableLoadingWhenNoData?:boolean;
+enableBallisticRefresh?:boolean;
+springDescription?:SpringDescription;
+enableScrollWhenRefreshCompleted?:boolean;
+enableLoadingWhenFailed?:boolean;
+twiceTriggerDistance?:number;
+closeTwoLevelDistance?:number;
+skipCanRefresh?:boolean;
+autoLoad?:boolean;
+maxOverScrollExtent?:number;
+enableBallisticLoad?:boolean;
+maxUnderScrollExtent?:number;
+headerTriggerDistance?:number;
+footerTriggerDistance?:number;
+hideFooterWhenNotFull?:boolean;
+enableRefreshVibrate?:boolean;
+enableLoadMoreVibrate?:boolean;
+topHitBoundary?:number;
+bottomHitBoundary?:number;
+
+/**
+ * @param config config: 
+    {
+      child?:Widget, 
+      headerBuilder?:Widget, 
+      footerBuilder?:Widget, 
+      dragSpeedRatio?:number, 
+      shouldFooterFollowWhenNotFull?:string, 
+      enableScrollWhenTwoLevel?:boolean, 
+      enableLoadingWhenNoData?:boolean, 
+      enableBallisticRefresh?:boolean, 
+      springDescription?:SpringDescription, 
+      enableScrollWhenRefreshCompleted?:boolean, 
+      enableLoadingWhenFailed?:boolean, 
+      twiceTriggerDistance?:number, 
+      closeTwoLevelDistance?:number, 
+      skipCanRefresh?:boolean, 
+      autoLoad?:boolean, 
+      maxOverScrollExtent?:number, 
+      enableBallisticLoad?:boolean, 
+      maxUnderScrollExtent?:number, 
+      headerTriggerDistance?:number, 
+      footerTriggerDistance?:number, 
+      hideFooterWhenNotFull?:boolean, 
+      enableRefreshVibrate?:boolean, 
+      enableLoadMoreVibrate?:boolean, 
+      topHitBoundary?:number, 
+      bottomHitBoundary?:number, 
+    }
+ */
+constructor(config?: PullToRefreshConfigurationConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.child = config.child;
+    this.headerBuilder = config.headerBuilder;
+    this.footerBuilder = config.footerBuilder;
+    this.dragSpeedRatio = config.dragSpeedRatio;
+    this.shouldFooterFollowWhenNotFull = config.shouldFooterFollowWhenNotFull;
+    this.enableScrollWhenTwoLevel = config.enableScrollWhenTwoLevel;
+    this.enableLoadingWhenNoData = config.enableLoadingWhenNoData;
+    this.enableBallisticRefresh = config.enableBallisticRefresh;
+    this.springDescription = config.springDescription;
+    this.enableScrollWhenRefreshCompleted = config.enableScrollWhenRefreshCompleted;
+    this.enableLoadingWhenFailed = config.enableLoadingWhenFailed;
+    this.twiceTriggerDistance = config.twiceTriggerDistance;
+    this.closeTwoLevelDistance = config.closeTwoLevelDistance;
+    this.skipCanRefresh = config.skipCanRefresh;
+    this.autoLoad = config.autoLoad;
+    this.maxOverScrollExtent = config.maxOverScrollExtent;
+    this.maxUnderScrollExtent = config.maxUnderScrollExtent;
+    this.enableBallisticLoad = config.enableBallisticLoad;
+    this.headerTriggerDistance = config.headerTriggerDistance;
+    this.footerTriggerDistance = config.footerTriggerDistance;
+    this.hideFooterWhenNotFull = config.hideFooterWhenNotFull;
+    this.enableLoadMoreVibrate = config.enableLoadMoreVibrate;
+    this.enableRefreshVibrate = config.enableRefreshVibrate;
+    this.topHitBoundary = config.topHitBoundary;
+    this.bottomHitBoundary = config.bottomHitBoundary;
+  }
+}
+}
+
+//****** PullToRefreshController ******
+interface PullToRefreshControllerConfig {
+initialRefreshStatus?:PullToRefreshStatus;
+initialRefresh?:boolean;
+initialLoadStatus?:PullToRefreshLoadStatus;
+}
+interface PullToRefreshControllerEventConfig {
+duration?:Duration;
+needMove?:boolean;
+curve?:Curve;
+resetFooterState?:boolean;
+}
+export class PullToRefreshController extends DartClass {
+initialRefreshStatus?:PullToRefreshStatus;
+initialRefresh?:boolean;
+initialLoadStatus?:PullToRefreshLoadStatus;
+
+
+/**
+ * @param config config: 
+    {
+      initialRefreshStatus?:PullToRefreshStatus, 
+      initialRefresh?:boolean, 
+      initialLoadStatus?:PullToRefreshLoadStatus, 
+    }
+ */
+constructor(config: PullToRefreshControllerConfig){
+  super();
+  this.createMirrorID();
+  if(config!=null && config!=undefined){
+    this.initialLoadStatus = config.initialLoadStatus;
+    this.initialRefresh = config.initialRefresh;
+    this.initialRefreshStatus = config.initialRefreshStatus;
+  }
+}
+
+dispose() {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"dispose",
+    })
+  );
+}
+
+loadComplete() {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"loadComplete",
+    })
+  );
+}
+
+loadFailed() {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"loadFailed",
+    })
+  );
+}
+
+loadNoData() {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"loadNoData",
+    })
+  );
+}
+
+/**
+ * @param config config: 
+    {
+      resetFooterState?:boolean;
+    }
+ */
+refreshCompleted(config?:PullToRefreshControllerEventConfig) {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"refreshCompleted",
+      args:config
+    })
+  );
+}
+
+
+refreshFailed() {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"refreshFailed",
+    })
+  );
+}
+
+refreshToIdle() {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"refreshToIdle",
+    })
+  );
+}
+
+/**
+ * @param config config: 
+    {
+      duration?:Duration, 
+      needMove?:boolean, 
+      curve?:Curve, 
+    }
+ */
+requestLoading(config?:PullToRefreshControllerEventConfig) {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"requestLoading",
+      args:config
+    })
+  );
+}
+
+/**
+ * @param config config: 
+    {
+      duration?:Duration, 
+      needMove?:boolean, 
+      curve?:Curve, 
+    }
+ */
+requestRefresh(config?:PullToRefreshControllerEventConfig) {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"requestRefresh",
+      args:config
+    })
+  );
+}
+
+/**
+ * @param config config: 
+    {
+      duration?:Duration, 
+      curve?:Curve, 
+    }
+ */
+requestTwoLevel(config?:PullToRefreshControllerEventConfig) {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"requestTwoLevel",
+      args:config
+    })
+  );
+}
+
+resetNoData() {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"resetNoData",
+    })
+  );
+}
+
+/**
+ * @param config config: 
+    {
+      duration?:Duration, 
+      curve?:Curve, 
+    }
+ */
+twoLevelComplete(config?:PullToRefreshControllerEventConfig) {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"twoLevelComplete",
+      args:config
+    })
+  );
+}
+}
+
+
+//****** PullToRefreshRefresher ******
+interface PullToRefreshRefresherConfig {
+key?:Key;
+controller:PullToRefreshController;
+child?:Widget;
+header?:PullToRefreshHeader;
+footer?:PullToRefreshFooter;
+enablePullDown?:boolean;
+enablePullUp?:boolean;
+enableTwoLevel?:boolean;
+onRefresh?:VoidCallback;
+onLoading?:VoidCallback;
+onTwoLevel?:VoidCallback;
+onOffsetChange?:VoidCallbackString;
+dragStartBehavior?:DragStartBehavior;
+primary?:boolean;
+cacheExtent?:number;
+semanticChildCount?:number;
+reverse?:boolean;
+physics?:ScrollPhysics;
+scrollDirection?:Axis;
+scrollController?:ScrollController;
+}
+export class PullToRefreshRefresher extends Widget {
+key?:Key;
+controller?:PullToRefreshController;
+child?:Widget;
+header?:PullToRefreshHeader;
+footer?:PullToRefreshFooter;
+enablePullDown?:boolean;
+enablePullUp?:boolean;
+enableTwoLevel?:boolean;
+onRefresh?:VoidCallback;
+onLoading?:VoidCallback;
+onTwoLevel?:VoidCallback;
+onOffsetChange?:VoidCallbackString;
+dragStartBehavior?:DragStartBehavior;
+primary?:boolean;
+cacheExtent?:number;
+semanticChildCount?:number;
+reverse?:boolean;
+physics?:ScrollPhysics;
+scrollDirection?:Axis;
+scrollController?:ScrollController;
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      controller:PullToRefreshController, 
+      child?:Widget, 
+      header?:PullToRefreshHeader, 
+      footer?:PullToRefreshFooter, 
+      enablePullDown?:boolean, 
+      enablePullUp?:boolean, 
+      enableTwoLevel?:boolean, 
+      onRefresh?:VoidCallback, 
+      onLoading?:VoidCallback, 
+      onTwoLevel?:VoidCallback, 
+      onOffsetChange?:VoidCallbackString, 
+      dragStartBehavior?:DragStartBehavior, 
+      primary?:boolean, 
+      cacheExtent?:number, 
+      semanticChildCount?:number, 
+      reverse?:boolean, 
+      physics?:ScrollPhysics, 
+      scrollDirection?:Axis, 
+      scrollController?:ScrollController, 
+    }
+ */
+constructor(config?: PullToRefreshRefresherConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.controller = config.controller;
+    this.child = config.child;
+    this.header = config.header;
+    this.footer = config.footer;
+    this.enablePullDown = config.enablePullDown;
+    this.enablePullUp = config.enablePullUp;
+    this.enableTwoLevel = config.enableTwoLevel;
+    this.onLoading = config.onLoading;
+    this.onRefresh = config.onRefresh;
+    this.onTwoLevel = config.onTwoLevel;
+    this.onOffsetChange = config.onOffsetChange;
+    this.dragStartBehavior = config.dragStartBehavior;
+    this.primary = config.primary;
+    this.cacheExtent = config.cacheExtent;
+    this.semanticChildCount = config.semanticChildCount;
+    this.reverse = config.reverse;
+    this.physics = config.physics;
+    this.scrollDirection = config.scrollDirection;
+    this.scrollController = config.scrollController;
+  }
+}
+}
+
+//#endregion
+
+
+//#region ******** CachedNetworkImage ********
+
+//****** CachedNetworkImage ******
+interface CachedNetworkImageConfig {
+key?:Key;
+imageUrl:string;
+httpHeaders?:Map<string,string>
+placeholder?:Widget;
+errorWidget?:Widget;
+fadeOutDuration?:Duration;
+fadeOutCurve?:Curve;
+fadeInDuration?:Duration;
+fadeInCurve?:Curve;
+width?:number;
+height?:number;
+fit?:BoxFit;
+alignment?:Alignment;
+repeat?:ImageRepeat;
+matchTextDirection?:boolean;
+useOldImageOnUrlChange?:boolean;
+color?:Color;
+filterQuality?:FilterQuality;
+colorBlendMode?:BlendMode;
+placeholderFadeInDuration?:Duration;
+memCacheWidth?:number;
+memCacheHeight?:number;
+cacheKey?:string;
+}
+export class CachedNetworkImage extends Widget {
+key?:Key;
+imageUrl?:string;
+httpHeaders?:Map<string,string>
+placeholder?:Widget;
+errorWidget?:Widget;
+fadeOutDuration?:Duration;
+fadeOutCurve?:Curve;
+fadeInDuration?:Duration;
+fadeInCurve?:Curve;
+width?:number;
+height?:number;
+fit?:BoxFit;
+alignment?:Alignment;
+repeat?:ImageRepeat;
+matchTextDirection?:boolean;
+useOldImageOnUrlChange?:boolean;
+color?:Color;
+filterQuality?:FilterQuality;
+colorBlendMode?:BlendMode;
+placeholderFadeInDuration?:Duration;
+memCacheWidth?:number;
+memCacheHeight?:number;
+cacheKey?:string;
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      imageUrl:string, 
+      httpHeaders?:Map<string,string>
+      placeholder?:Widget, 
+      errorWidget?:Widget, 
+      fadeOutDuration?:Duration, 
+      fadeOutCurve?:Curve, 
+      fadeInDuration?:Duration, 
+      fadeInCurve?:Curve, 
+      width?:number, 
+      height?:number, 
+      fit?:BoxFit, 
+      alignment?:Alignment, 
+      repeat?:ImageRepeat, 
+      matchTextDirection?:boolean, 
+      useOldImageOnUrlChange?:boolean, 
+      color?:Color, 
+      filterQuality?:FilterQuality, 
+      colorBlendMode?:BlendMode, 
+      placeholderFadeInDuration?:Duration, 
+      memCacheWidth?:number, 
+      memCacheHeight?:number, 
+      cacheKey?:string, 
+    }
+ */
+constructor(config?: CachedNetworkImageConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.imageUrl = config.imageUrl;
+    this.httpHeaders = config.httpHeaders;
+    this.placeholder = config.placeholder;
+    this.errorWidget = config.errorWidget;
+    this.fadeInDuration = config.fadeInDuration;
+    this.fadeInCurve = config.fadeInCurve;
+    this.fadeOutDuration = config.fadeOutDuration;
+    this.fadeOutCurve = config.fadeOutCurve;
+    this.width = config.width;
+    this.height = config.height;
+    this.fit = config.fit;
+    this.alignment = config.alignment;
+    this.repeat = config.repeat;
+    this.matchTextDirection = config.matchTextDirection;
+    this.useOldImageOnUrlChange = config.useOldImageOnUrlChange;
+    this.color = config.color;
+    this.filterQuality= config.filterQuality;
+    this.colorBlendMode = config.colorBlendMode;
+    this.placeholderFadeInDuration = config.placeholderFadeInDuration;
+    this.memCacheHeight = config.memCacheHeight;
+    this.memCacheWidth = config.memCacheWidth;
+    this.cacheKey = config.cacheKey;
+
+  }
+}
+}
+
+//#endregion
+
+
+//#region ******** EasyRefresh ********
+
+export abstract class EasyRefreshHeader extends Widget {
+
+/**
+ * EasyRefreshHeader.classic = new EasyRefreshClassicalHeader(config);
+ * @param config config: 
+    {
+      key?:Key, 
+      extent?:number,
+      triggerDistance?:number, 
+      float?:boolean, 
+      completeDuration?:Duration, 
+      enableInfiniteRefresh?:boolean, 
+      enableHapticFeedback?:boolean, 
+      overScroll?:boolean, 
+      alignment?:Alignment, 
+      refreshText?:string, 
+      refreshReadyText?:string, 
+      refreshingText?:string, 
+      refreshedText?:string, 
+      refreshFailedText?:string, 
+      noMoreText?:string, 
+      showInfo?:boolean, 
+      infoText?:string, 
+      bgColor?:Color, 
+      textColor?:Color, 
+      infoColor?:Color, 
+    }
+ */
+static classical(config?: EasyRefreshClassicalHeaderConfig){
+  return new EasyRefreshClassicalHeader(config);
+}
+
+/**
+ * EasyRefreshHeader.WwterDrop = new EasyRefreshMaterialHeader(config);
+ * @param config config: 
+    {
+      key?:Key, 
+      displacement?:number, 
+      backgroundColor?:Color, 
+      completeDuration?:Duration, 
+      enableHapticFeedback?:boolean, 
+      enableInfiniteLoad?:boolean, 
+      overScroll?:boolean, 
+    }
+ */
+static  material(config?: EasyRefreshMaterialHeaderConfig){
+  return new EasyRefreshMaterialHeader(config);
+}
+
+}
+//****** EasyRefreshClassicalHeader ******
+interface EasyRefreshClassicalHeaderConfig {
+key?:Key;
+extent?:number;
+triggerDistance?:number;
+float?:boolean;
+completeDuration?:Duration;
+enableInfiniteRefresh?:boolean;
+enableHapticFeedback?:boolean;
+overScroll?:boolean;
+alignment?:Alignment;
+refreshText?:string;
+refreshReadyText?:string;
+refreshingText?:string;
+refreshedText?:string;
+refreshFailedText?:string;
+noMoreText?:string;
+showInfo?:boolean;
+infoText?:string;
+bgColor?:Color;
+textColor?:Color;
+infoColor?:Color;
+}
+export class EasyRefreshClassicalHeader extends EasyRefreshHeader {
+key?:Key;
+extent?:number;
+triggerDistance?:number;
+float?:boolean;
+completeDuration?:Duration;
+enableInfiniteRefresh?:boolean;
+enableHapticFeedback?:boolean;
+overScroll?:boolean;
+alignment?:Alignment;
+refreshText?:string;
+refreshReadyText?:string;
+refreshingText?:string;
+refreshedText?:string;
+refreshFailedText?:string;
+noMoreText?:string;
+showInfo?:boolean;
+infoText?:string;
+bgColor?:Color;
+textColor?:Color;
+infoColor?:Color;
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      extent?:number,
+      triggerDistance?:number, 
+      float?:boolean, 
+      completeDuration?:Duration, 
+      enableInfiniteRefresh?:boolean, 
+      enableHapticFeedback?:boolean, 
+      overScroll?:boolean, 
+      alignment?:Alignment, 
+      refreshText?:string, 
+      refreshReadyText?:string, 
+      refreshingText?:string, 
+      refreshedText?:string, 
+      refreshFailedText?:string, 
+      noMoreText?:string, 
+      showInfo?:boolean, 
+      infoText?:string, 
+      bgColor?:Color, 
+      textColor?:Color, 
+      infoColor?:Color, 
+    }
+ */
+constructor(config?: EasyRefreshClassicalHeaderConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.extent = config.extent;
+    this.triggerDistance = config.triggerDistance;
+    this.float = config.float;
+    this.completeDuration = config.completeDuration;
+    this.enableInfiniteRefresh = config.enableInfiniteRefresh;
+    this.enableHapticFeedback = config.enableHapticFeedback;
+    this.overScroll = config.overScroll;
+    this.alignment = config.alignment;
+    this.refreshText = config.refreshText;
+    this.refreshReadyText = config.refreshReadyText;
+    this.refreshingText = config.refreshingText;
+    this.refreshedText = config.refreshedText;
+    this.refreshFailedText = config.refreshFailedText;
+    this.noMoreText = config.noMoreText;
+    this.showInfo = config.showInfo;
+    this.infoText = config.infoText;
+    this.bgColor = config.bgColor;
+    this.textColor = config.textColor;
+    this.infoColor = config.infoColor;
+
+  }
+}
+}
+
+//****** EasyRefreshMaterialHeader ******
+interface EasyRefreshMaterialHeaderConfig {
+key?:Key;
+displacement?:number;
+backgroundColor?:Color;
+completeDuration?:Duration;
+enableHapticFeedback?:boolean;
+}
+export class EasyRefreshMaterialHeader extends EasyRefreshHeader {
+key?:Key;
+displacement?:number;
+backgroundColor?:Color;
+completeDuration?:Duration;
+enableHapticFeedback?:boolean;
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      displacement?:number, 
+      backgroundColor?:Color, 
+      completeDuration?:Duration, 
+      enableHapticFeedback?:boolean, 
+    }
+ */
+constructor(config?: EasyRefreshMaterialHeaderConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.displacement = config.displacement;
+    this.backgroundColor = config.backgroundColor;
+    this.completeDuration =config.completeDuration;
+    this.enableHapticFeedback = config.enableHapticFeedback;
+  }
+}
+}
+
+
+export abstract class EasyRefreshFooter extends Widget {
+
+/**
+ * EasyRefreshFooter.classical = new EasyRefreshClassicalFooter(config);
+ * @param config config: 
+    {
+      key?:Key, 
+      extent?:number, 
+      triggerDistance?:number, 
+      float?:boolean, 
+      completeDuration?:Duration, 
+      enableInfiniteLoad?:boolean, 
+      enableHapticFeedback?:boolean, 
+      overScroll?:boolean, 
+      safeArea?:boolean, 
+      padding?:EdgeInsets, 
+      alignment?:Alignment, 
+      loadText?:string, 
+      loadReadyText?:string, 
+      loadingText?:string, 
+      loadedText?:string, 
+      loadFailedText?:string, 
+      noMoreText?:string, 
+      showInfo?:boolean, 
+      infoText?:string, 
+      bgColor?:Color, 
+      textColor?:Color, 
+      infoColor?:Color, 
+    }
+ */
+static classical(config?: EasyRefreshClassicalFooterConfig){
+  return new EasyRefreshClassicalFooter(config);
+}
+
+
+/**
+ * EasyRefreshFooter.material = new EasyRefreshMaterialFooter(config);
+ * @param config config: 
+    {
+      key?:Key, 
+      displacement?:number, 
+      backgroundColor?:Color, 
+      completeDuration?:Duration, 
+      enableHapticFeedback?:boolean, 
+      enableInfiniteLoad?:boolean, 
+      overScroll?:boolean, 
+    }
+ */
+static material(config?: EasyRefreshMaterialFooterConfig){
+  return new EasyRefreshMaterialFooter(config);
+}
+
+}
+
+//****** EasyRefreshClassicalFooter ******
+interface EasyRefreshClassicalFooterConfig {
+key?:Key;
+extent?:number;
+triggerDistance?:number;
+float?:boolean;
+completeDuration?:Duration;
+enableInfiniteLoad?:boolean;
+enableHapticFeedback?:boolean;
+overScroll?:boolean;
+safeArea?:boolean;
+padding?:EdgeInsets;
+alignment?:Alignment;
+loadText?:string;
+loadReadyText?:string;
+loadingText?:string;
+loadedText?:string;
+loadFailedText?:string;
+noMoreText?:string;
+showInfo?:boolean;
+infoText?:string;
+bgColor?:Color;
+textColor?:Color;
+infoColor?:Color;
+isNoMoreText?:boolean;
+}
+export class EasyRefreshClassicalFooter extends Widget {
+key?:Key;
+extent?:number;
+triggerDistance?:number;
+float?:boolean;
+completeDuration?:Duration;
+enableInfiniteLoad?:boolean;
+enableHapticFeedback?:boolean;
+overScroll?:boolean;
+safeArea?:boolean;
+padding?:EdgeInsets;
+alignment?:Alignment;
+loadText?:string;
+loadReadyText?:string;
+loadingText?:string;
+loadedText?:string;
+loadFailedText?:string;
+noMoreText?:string;
+showInfo?:boolean;
+infoText?:string;
+bgColor?:Color;
+textColor?:Color;
+infoColor?:Color;
+isNoMoreText?:boolean;
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      extent?:number, 
+      triggerDistance?:number, 
+      float?:boolean, 
+      completeDuration?:Duration, 
+      enableInfiniteLoad?:boolean, 
+      enableHapticFeedback?:boolean, 
+      overScroll?:boolean, 
+      safeArea?:boolean, 
+      padding?:EdgeInsets, 
+      alignment?:Alignment, 
+      loadText?:string, 
+      loadReadyText?:string, 
+      loadingText?:string, 
+      loadedText?:string, 
+      loadFailedText?:string, 
+      noMoreText?:string, 
+      showInfo?:boolean, 
+      infoText?:string, 
+      bgColor?:Color, 
+      textColor?:Color, 
+      infoColor?:Color, 
+      isNoMoreText?:boolean,
+    }
+ */
+constructor(config?: EasyRefreshClassicalFooterConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.extent = config.extent;
+    this.triggerDistance = config.triggerDistance;
+    this.float = config.float;
+    this.completeDuration = config.completeDuration;
+    this.enableInfiniteLoad = config.enableInfiniteLoad;
+    this.enableHapticFeedback = config.enableHapticFeedback;
+    this.overScroll = config.overScroll;
+    this.safeArea = config.safeArea;
+    this.padding = config.padding;
+    this.alignment = config.alignment;
+    this.loadText = config.loadText;
+    this.loadReadyText = config.loadReadyText;
+    this.loadedText = config.loadedText;
+    this.loadFailedText = config.loadFailedText;
+    this.noMoreText = config.noMoreText;
+    this.showInfo = config.showInfo;
+    this.infoText = config.infoText;
+    this.bgColor = config.bgColor;
+    this.textColor = config.textColor;
+    this.infoColor = config.infoColor;
+    this.isNoMoreText = config.isNoMoreText;
+  }
+}
+
+}
+
+//****** EasyRefreshMaterialFooter ******
+interface EasyRefreshMaterialFooterConfig {
+key?:Key;
+displacement?:number;
+backgroundColor?:Color;
+completeDuration?:Duration;
+enableHapticFeedback?:boolean;
+enableInfiniteLoad?:boolean;
+overScroll?:boolean;
+isNoMoreText?:boolean;
+noMoreText?:string;
+}
+export class EasyRefreshMaterialFooter extends EasyRefreshFooter{
+key?:Key;
+displacement?:number;
+backgroundColor?:Color;
+completeDuration?:Duration;
+enableHapticFeedback?:boolean;
+enableInfiniteLoad?:boolean;
+overScroll?:boolean;
+isNoMoreText?:boolean;
+noMoreText?:string;
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      displacement?:number, 
+      backgroundColor?:Color, 
+      completeDuration?:Duration, 
+      enableHapticFeedback?:boolean, 
+      enableInfiniteLoad?:boolean, 
+      overScroll?:boolean, 
+      isNoMoreText?:boolean, 
+      noMoreText?:string, 
+    }
+ */
+constructor(config?: EasyRefreshMaterialFooterConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.displacement = config.displacement;
+    this.backgroundColor = config.backgroundColor;
+    this.completeDuration = config.completeDuration;
+    this.enableHapticFeedback =config.enableHapticFeedback;
+    this.enableInfiniteLoad = config.enableInfiniteLoad;
+    this.overScroll = config.overScroll;
+    this.isNoMoreText = config.isNoMoreText;
+    this.noMoreText = config.noMoreText;
+  }
+}
+
+}
+
+
+//****** EasyRefreshController ******
+interface EasyRefreshControllerConfig {
+duration?:Duration;
+success?:boolean;
+noMore?:boolean;
+}
+export class EasyRefreshController extends DartClass {
+
+
+constructor(){
+  super();
+  this.createMirrorID();
+}
+
+
+/**
+ * @param config config: 
+    {
+      duration?:Duration,
+    }
+ */
+callRefresh(config?:EasyRefreshControllerConfig) {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"callRefresh",
+      args:config
+    })
+  );
+}
+
+/**
+ * @param config config: 
+    {
+      duration?:Duration,
+    }
+ */
+callLoad(config?:EasyRefreshControllerConfig) {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"callLoad",
+      args:config
+    })
+  );
+}
+
+/**
+ * @param config config: 
+    {
+      success?:boolean, 
+      noMore?:boolean, 
+    }
+ */
+finishRefresh(config?:EasyRefreshControllerConfig) {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"finishRefresh",
+      args:config
+    })
+  );
+}
+
+/**
+ * @param config config: 
+    {
+      success?:boolean, 
+      noMore?:boolean, 
+    }
+ */
+finishLoad(config?:EasyRefreshControllerConfig) {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"finishLoad",
+      args:config
+    })
+  );
+}
+
+
+
+
+resetRefreshState() {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"resetRefreshState",
+    })
+  );
+}
+
+resetLoadState() {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"resetLoadState",
+    })
+  );
+}
+
+dispose() {
+  JSFramework.invokeFlutterFunction(
+    new JSCallConfig({
+      mirrorID:this.mirrorID,
+      className:this.className,
+      funcName:"dispose",
+    })
+  );
+}
+}
+
+
+//****** EasyRefresher ******
+interface EasyRefresherConfig {
+key?:Key;
+controller?:EasyRefreshController;
+onRefresh?:VoidCallback;
+onLoad?:VoidCallback;
+enableControlFinishRefresh?:boolean;
+enableControlFinishLoad?:boolean;
+taskIndependence?:boolean;
+scrollController?:ScrollController;
+header?:EasyRefreshHeader
+footer?:EasyRefreshFooter;
+firstRefresh?:boolean;
+firstRefreshWidget?:Widget;
+headerIndex?:number;
+emptyWidget?:Widget;
+topBouncing?:boolean;
+bottomBouncing?:boolean;
+child:Widget;
+}
+interface EasyRefresherCustomConfig {
+key?:Key;
+listKey?:Key;
+controller?:EasyRefreshController;
+onRefresh?:VoidCallback;
+onLoad?:VoidCallback;
+enableControlFinishRefresh?:boolean;
+enableControlFinishLoad?:boolean;
+taskIndependence?:boolean;
+scrollController?:ScrollController;
+header?:EasyRefreshHeader
+headerIndex?:number;
+footer?:EasyRefreshFooter;
+scrollDirection?:Axis;
+reverse?:boolean;
+primary?:boolean;
+shrinkWrap?:boolean;
+center?:Key;
+anchor?:number;
+cacheExtent?:number;
+semanticChildCount?:number;
+dragStartBehavior?:DragStartBehavior;
+
+firstRefresh?:boolean;
+firstRefreshWidget?:Widget;
+emptyWidget?:Widget;
+topBouncing?:boolean;
+bottomBouncing?:boolean;
+slivers:Array<Widget>;
+}
+
+export class EasyRefresher extends Widget {
+key?:Key;
+controller?:EasyRefreshController;
+onRefresh?:VoidCallback;
+onLoad?:VoidCallback;
+enableControlFinishRefresh?:boolean;
+enableControlFinishLoad?:boolean;
+taskIndependence?:boolean;
+scrollController?:ScrollController;
+header?:EasyRefreshHeader
+footer?:EasyRefreshFooter;
+firstRefresh?:boolean;
+firstRefreshWidget?:Widget;
+headerIndex?:number;
+emptyWidget?:Widget;
+topBouncing?:boolean;
+bottomBouncing?:boolean;
+child?:Widget;
+
+listKey?:Key;
+scrollDirection?:Axis;
+reverse?:boolean;
+primary?:boolean;
+shrinkWrap?:boolean;
+center?:Key;
+anchor?:number;
+cacheExtent?:number;
+semanticChildCount?:number;
+dragStartBehavior?:DragStartBehavior;
+slivers?:Array<Widget>;
+
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      controller?:EasyRefreshController, 
+      onRefresh?:VoidCallback, 
+      onLoad?:VoidCallback, 
+      enableControlFinishRefresh?:boolean, 
+      enableControlFinishLoad?:boolean, 
+      taskIndependence?:boolean, 
+      scrollController?:ScrollController, 
+      header?:EasyRefreshHeader
+      footer?:EasyRefreshFooter, 
+      firstRefresh?:boolean, 
+      firstRefreshWidget?:Widget, 
+      headerIndex?:number, 
+      emptyWidget?:Widget, 
+      topBouncing?:boolean, 
+      bottomBouncing?:boolean, 
+      child:Widget, 
+    }
+ */
+constructor(config?: EasyRefresherConfig){
+  super();
+  if(config!=null && config!=undefined){
+    this.key = config.key;
+    this.controller = config.controller;
+    this.onRefresh = config.onRefresh;
+    this.onLoad = config.onLoad;
+    this.enableControlFinishRefresh = config.enableControlFinishRefresh;
+    this.enableControlFinishLoad = config.enableControlFinishLoad;
+    this.taskIndependence = config.taskIndependence;
+    this.scrollController = config.scrollController;
+    this.header = config.header;
+    this.footer = config.footer;
+    this.firstRefresh = config.firstRefresh;
+    this.firstRefreshWidget = config.firstRefreshWidget;
+    this.headerIndex = config.headerIndex;
+    this.emptyWidget = config.emptyWidget;
+    this.topBouncing = config.topBouncing;
+    this.bottomBouncing = config.bottomBouncing;
+    this.child = config.child;
+  }
+}
+
+/**
+ * @param config config: 
+    {
+      key?:Key, 
+      listKey?:Key, 
+      controller?:EasyRefreshController, 
+      onRefresh?:VoidCallback, 
+      onLoad?:VoidCallback, 
+      enableControlFinishRefresh?:boolean, 
+      enableControlFinishLoad?:boolean, 
+      taskIndependence?:boolean, 
+      scrollController?:ScrollController, 
+      header?:EasyRefreshHeader
+      headerIndex?:number, 
+      footer?:EasyRefreshFooter, 
+      scrollDirection?:Axis, 
+      reverse?:boolean, 
+      primary?:boolean, 
+      shrinkWrap?:boolean, 
+      center?:Key, 
+      anchor?:number, 
+      cacheExtent?:number, 
+      semanticChildCount?:number, 
+      dragStartBehavior?:DragStartBehavior, 
+
+      firstRefresh?:boolean, 
+      firstRefreshWidget?:Widget, 
+      emptyWidget?:Widget, 
+      topBouncing?:boolean, 
+      bottomBouncing?:boolean, 
+      slivers:Array<Widget>, 
+    }
+ */
+static custom(config?: EasyRefresherCustomConfig){
+  var v = new EasyRefresher();
+  if(config!=null && config!=undefined){
+    v.key = config.key;
+    v.listKey = config.listKey;
+    v.controller = config.controller;
+    v.onRefresh = config.onRefresh;
+    v.onLoad = config.onLoad;
+    v.enableControlFinishLoad = config.enableControlFinishLoad;
+    v.enableControlFinishRefresh = config.enableControlFinishRefresh;
+    v.taskIndependence = config.taskIndependence;
+    v.header = config.header;
+    v.headerIndex = config.headerIndex;
+    v.footer = config.footer;
+    v.scrollDirection = config.scrollDirection;
+    v.reverse = config.reverse;
+    v.scrollController = config.scrollController;
+    v.primary = config.primary;
+    v.shrinkWrap = config.shrinkWrap;
+    v.center = config.center;
+    v.anchor = config.anchor;
+    v.cacheExtent = config.cacheExtent;
+    v.semanticChildCount = config.semanticChildCount;
+    v.dragStartBehavior = config.dragStartBehavior;
+    v.firstRefresh = config.firstRefresh;
+    v.firstRefreshWidget = config.firstRefreshWidget;
+    v.firstRefresh = config.firstRefresh;
+    v.emptyWidget = config.emptyWidget;
+    v.topBouncing = config.topBouncing;
+    v.bottomBouncing = config.bottomBouncing;
+    v.slivers = config.slivers;
+  }
+  return v;
+}
+}
+
+//#endregion
+
+
 

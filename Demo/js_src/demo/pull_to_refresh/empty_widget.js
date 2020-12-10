@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyPullToRefreshEmptyWidgetPage = void 0;
 const icon_data_1 = require("demo/model/icon_data");
 const fs = require("flutter_sdk");
-const tl = require("flutter_third_library");
 class MyPullToRefreshEmptyWidgetPage extends fs.StatefulWidget {
     createState() {
         return new _MyPullToRefreshEmptyWidgetPageState(this);
@@ -19,7 +18,7 @@ exports.MyPullToRefreshEmptyWidgetPage = MyPullToRefreshEmptyWidgetPage;
 class _MyPullToRefreshEmptyWidgetPageState extends fs.WidgetState {
     constructor() {
         super(...arguments);
-        this.refreshController = new tl.PullToRefreshController({});
+        this.refreshController = new fs.PullToRefreshController({});
         this._count = 0;
     }
     //重构
@@ -29,12 +28,12 @@ class _MyPullToRefreshEmptyWidgetPageState extends fs.WidgetState {
             appBar: new fs.AppBar({
                 title: new fs.Text("空视图"),
             }),
-            body: new tl.PullToRefreshRefresher({
+            body: new fs.PullToRefreshRefresher({
                 controller: this.refreshController,
                 enablePullDown: true,
                 enablePullUp: true,
-                header: new tl.PullToRefreshMaterialClassicHeader(),
-                footer: new tl.PullToRefreshClassicFooter(),
+                header: new fs.PullToRefreshMaterialClassicHeader(),
+                footer: new fs.PullToRefreshClassicFooter(),
                 onRefresh: function () {
                     fs.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
                     fs.Future.delayed(new fs.Duration({

@@ -7,7 +7,6 @@
 
 import { MyIconData } from "demo/model/icon_data";
 import fs = require("flutter_sdk");
-import tl = require("flutter_third_library");
 
 export class MyPullToRefreshWaterDropDemoPage extends fs.StatefulWidget{
     createState() {
@@ -17,7 +16,7 @@ export class MyPullToRefreshWaterDropDemoPage extends fs.StatefulWidget{
 
 class _MyPullToRefreshWaterDropDemoPageState extends fs.WidgetState{
 
-    refreshController:tl.PullToRefreshController= new tl.PullToRefreshController({});
+    refreshController:fs.PullToRefreshController= new fs.PullToRefreshController({});
 
     _count:number=20;
     //重构
@@ -27,12 +26,12 @@ class _MyPullToRefreshWaterDropDemoPageState extends fs.WidgetState{
             appBar:new fs.AppBar({
                 title:new fs.Text("WaterDrop Style"),
             }),
-            body:new tl.PullToRefreshRefresher({
+            body:new fs.PullToRefreshRefresher({
                 controller:this.refreshController,
                 enablePullDown:true,
                 enablePullUp:true,
-                header:new tl.PullToRefreshWaterDropHeader(),
-                footer:new tl.PullToRefreshClassicFooter(),
+                header:new fs.PullToRefreshWaterDropHeader(),
+                footer:new fs.PullToRefreshClassicFooter(),
                 onRefresh: function(){
                     fs.Loading.show({info:"数据加载中...",alignment:fs.Alignment.center});
                     fs.Future.delayed(new fs.Duration({

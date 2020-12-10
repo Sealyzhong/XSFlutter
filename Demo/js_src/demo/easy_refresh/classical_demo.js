@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyEasyRefreshClassicalDemoPage = void 0;
 const icon_data_1 = require("demo/model/icon_data");
 const fs = require("flutter_sdk");
-const tl = require("flutter_third_library");
 class MyEasyRefreshClassicalDemoPage extends fs.StatefulWidget {
     createState() {
         return new _MyEasyRefreshClassicalDemoPageState(this);
@@ -19,7 +18,7 @@ exports.MyEasyRefreshClassicalDemoPage = MyEasyRefreshClassicalDemoPage;
 class _MyEasyRefreshClassicalDemoPageState extends fs.WidgetState {
     constructor() {
         super(...arguments);
-        this.refreshController = new tl.EasyRefreshController();
+        this.refreshController = new fs.EasyRefreshController();
         this._count = 20;
     }
     //重构
@@ -29,12 +28,12 @@ class _MyEasyRefreshClassicalDemoPageState extends fs.WidgetState {
             appBar: new fs.AppBar({
                 title: new fs.Text("经典样式"),
             }),
-            body: new tl.EasyRefresher({
+            body: new fs.EasyRefresher({
                 enableControlFinishLoad: true,
                 enableControlFinishRefresh: true,
                 controller: this.refreshController,
-                header: new tl.EasyRefreshClassicalHeader(),
-                footer: new tl.EasyRefreshClassicalFooter({ isNoMoreText: true }),
+                header: new fs.EasyRefreshClassicalHeader(),
+                footer: new fs.EasyRefreshClassicalFooter({ isNoMoreText: true }),
                 onRefresh: function () {
                     fs.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
                     fs.Future.delayed(new fs.Duration({

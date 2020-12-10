@@ -7,7 +7,6 @@
 
 import { MyIconData } from "demo/model/icon_data";
 import fs = require("flutter_sdk");
-import tl = require("flutter_third_library");
 
 export class MyPullToRefreshClassicalDemoPage extends fs.StatefulWidget{
     createState() {
@@ -17,7 +16,7 @@ export class MyPullToRefreshClassicalDemoPage extends fs.StatefulWidget{
 
 class _MyPullToRefreshClassicalDemoPageState extends fs.WidgetState{
 
-    refreshController:tl.PullToRefreshController= new tl.PullToRefreshController({});
+    refreshController:fs.PullToRefreshController= new fs.PullToRefreshController({});
 
     _count:number=20;
     //重构
@@ -27,12 +26,12 @@ class _MyPullToRefreshClassicalDemoPageState extends fs.WidgetState{
             appBar:new fs.AppBar({
                 title:new fs.Text("经典样式"),
             }),
-            body:new tl.PullToRefreshRefresher({
+            body:new fs.PullToRefreshRefresher({
                 controller:this.refreshController,
                 enablePullDown:true,
                 enablePullUp:true,
-                header:new tl.PullToRefreshClassicHeader(),
-                footer:new tl.PullToRefreshClassicFooter(),
+                header:new fs.PullToRefreshClassicHeader(),
+                footer:new fs.PullToRefreshClassicFooter(),
                 onRefresh: function(){
                     fs.Loading.show({info:"数据加载中...",alignment:fs.Alignment.center});
                     fs.Future.delayed(new fs.Duration({

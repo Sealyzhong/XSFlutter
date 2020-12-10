@@ -906,6 +906,12 @@ class XSJSParse {
   }
 
   //-------------- C -----------------
+
+  //****** bool ******/
+  static bool checkMapKey(BuildContext context, XSJsonBuildOwner bo, Map map, String key) {
+    return _checkMapKey(map, key);
+  }
+
   //****** Color ******/
   static Color getColorNoKey(BuildContext context, XSJsonBuildOwner bo, Map map, {Color defaultValue}) {
     var v = map;
@@ -5590,77 +5596,89 @@ class XSJSParse {
   static ThemeData getThemeData(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ThemeData defaultValue}) {
     var v = _getMap(map, key);
     if (v != null) {
-      return ThemeData(
-        brightness: getBrightness(context, bo, v, "brightness"),
-        visualDensity: getVisualDensity(context, bo, v, "visualDensity"),
-        primaryColor: getColor(context, bo, v, "primaryColor"),
-        primaryColorBrightness: getBrightness(context, bo, v, "primaryColorBrightness"),
-        primaryColorLight: getColor(context, bo, v, "primaryColorLight"),
-        primaryColorDark: getColor(context, bo, v, "primaryColorDark"),
-        accentColor: getColor(context, bo, v, "accentColor"),
-        accentColorBrightness: getBrightness(context, bo, v, "accentColorBrightness"),
-        canvasColor: getColor(context, bo, v, "canvasColor"),
-        shadowColor: getColor(context, bo, v, "shadowColor"),
-        scaffoldBackgroundColor: getColor(context, bo, v, "scaffoldBackgroundColor"),
-        bottomAppBarColor: getColor(context, bo, v, "bottomAppBarColor"),
-        cardColor: getColor(context, bo, v, "cardColor"),
-        focusColor: getColor(context, bo, v, "focusColor"),
-        dividerColor: getColor(context, bo, v, "dividerColor"),
-        hoverColor: getColor(context, bo, v, "hoverColor"),
-        highlightColor: getColor(context, bo, v, "highlightColor"),
-        splashColor: getColor(context, bo, v, "splashColor"),
-        selectedRowColor: getColor(context, bo, v, "selectedRowColor"),
-        unselectedWidgetColor: getColor(context, bo, v, "unselectedWidgetColor"),
-        disabledColor: getColor(context, bo, v, "disabledColor"),
-        buttonColor: getColor(context, bo, v, "buttonColor"),
-        buttonTheme: getButtonThemeData(context, bo, v, "buttonTheme"),
-        toggleButtonsTheme: getToggleButtonsThemeData(context, bo, v, "toggleButtonsTheme"),
-        secondaryHeaderColor: getColor(context, bo, v, "secondaryHeaderColor"),
-        textSelectionColor: getColor(context, bo, v, "textSelectionColor"),
-        cursorColor: getColor(context, bo, v, "cursorColor"),
-        textSelectionHandleColor: getColor(context, bo, v, "textSelectionHandleColor"),
-        backgroundColor: getColor(context, bo, v, "backgroundColor"),
-        dialogBackgroundColor: getColor(context, bo, v, "dialogBackgroundColor"),
-        indicatorColor: getColor(context, bo, v, "indicatorColor"),
-        hintColor: getColor(context, bo, v, "hintColor"),
-        errorColor: getColor(context, bo, v, "errorColor"),
-        toggleableActiveColor: getColor(context, bo, v, "toggleableActiveColor"),
-        fontFamily: getString(context, bo, v, "fontFamily"),
-        textTheme: getTextTheme(context, bo, v, "textTheme"),
-        primaryTextTheme: getTextTheme(context, bo, v, "primaryTextTheme"),
-        accentTextTheme: getTextTheme(context, bo, v, "accentTextTheme"),
-        inputDecorationTheme: getInputDecorationTheme(context, bo, v, "inputDecorationTheme"),
-        iconTheme: getIconThemeData(context, bo, v, "iconTheme"),
-        primaryIconTheme: getIconThemeData(context, bo, v, "primaryIconTheme"),
-        accentIconTheme: getIconThemeData(context, bo, v, "accentIconTheme"),
-        sliderTheme: getSliderThemeData(context, bo, v, "sliderTheme"),
-        tabBarTheme: getTabBarTheme(context, bo, v, "tabBarTheme"),
-        tooltipTheme: getTooltipThemeData(context, bo, v, "tooltipTheme"),
-        cardTheme: getCardTheme(context, bo, v, "chipTheme"),
-        chipTheme: getChipThemeData(context, bo, v, "chipTheme"),
-        platform: getTargetPlatform(context, bo, v, "platform"),
-        materialTapTargetSize: getMaterialTapTargetSize(context, bo, v, "materialTapTargetSize"),
-        applyElevationOverlayColor: getBool(context, bo, v, "applyElevationOverlayColor"),
-        appBarTheme: getAppBarTheme(context, bo, v, "appBarTheme"),
-        bottomAppBarTheme: getBottomAppBarTheme(context, bo, v, "bottomAppBarTheme"),
-        colorScheme: getColorScheme(context, bo, v, "colorScheme"),
-        dialogTheme: getDialogTheme(context, bo, v, "dialogTheme"),
-        floatingActionButtonTheme: getFloatingActionButtonThemeData(context, bo, v, "floatingActionButtonTheme"),
-        navigationRailTheme: getNavigationRailThemeData(context, bo, v, "navigationRailTheme"),
-        cupertinoOverrideTheme: getCupertinoThemeData(context, bo, v, "cupertinoOverrideTheme"),
-        snackBarTheme: getSnackBarThemeData(context, bo, v, "snackBarTheme"),
-        bottomSheetTheme: getBottomSheetThemeData(context, bo, v, "bottomSheetTheme"),
-        popupMenuTheme: getPopupMenuThemeData(context, bo, v, "popupMenuTheme"),
-        bannerTheme: getMaterialBannerThemeData(context, bo, v, "bannerTheme"),
-        dividerTheme: getDividerThemeData(context, bo, v, "dividerTheme"),
-        buttonBarTheme: getButtonBarThemeData(context, bo, v, "buttonBarTheme"),
-        bottomNavigationBarTheme: getBottomNavigationBarThemeData(context, bo, v, "bottomNavigationBarTheme"),
-        timePickerTheme: getTimePickerThemeData(context, bo, v, "timePickerTheme"),
-        textSelectionTheme: getTextSelectionThemeData(context, bo, v, "textSelectionTheme"),
-        dataTableTheme: getDataTableThemeData(context, bo, v, "dataTableTheme"),
-        fixTextFieldOutlineLabel: getBool(context, bo, v, "fixTextFieldOutlineLabel"),
-        useTextSelectionTheme: getBool(context, bo, v, "useTextSelectionTheme"),
-      );
+      var c = _getConstructorName(v);
+
+      if (c == null || c.isEmpty) {
+        return ThemeData(
+          brightness: getBrightness(context, bo, v, "brightness"),
+          visualDensity: getVisualDensity(context, bo, v, "visualDensity"),
+          primaryColor: getColor(context, bo, v, "primaryColor"),
+          primaryColorBrightness: getBrightness(context, bo, v, "primaryColorBrightness"),
+          primaryColorLight: getColor(context, bo, v, "primaryColorLight"),
+          primaryColorDark: getColor(context, bo, v, "primaryColorDark"),
+          accentColor: getColor(context, bo, v, "accentColor"),
+          accentColorBrightness: getBrightness(context, bo, v, "accentColorBrightness"),
+          canvasColor: getColor(context, bo, v, "canvasColor"),
+          shadowColor: getColor(context, bo, v, "shadowColor"),
+          scaffoldBackgroundColor: getColor(context, bo, v, "scaffoldBackgroundColor"),
+          bottomAppBarColor: getColor(context, bo, v, "bottomAppBarColor"),
+          cardColor: getColor(context, bo, v, "cardColor"),
+          focusColor: getColor(context, bo, v, "focusColor"),
+          dividerColor: getColor(context, bo, v, "dividerColor"),
+          hoverColor: getColor(context, bo, v, "hoverColor"),
+          highlightColor: getColor(context, bo, v, "highlightColor"),
+          splashColor: getColor(context, bo, v, "splashColor"),
+          selectedRowColor: getColor(context, bo, v, "selectedRowColor"),
+          unselectedWidgetColor: getColor(context, bo, v, "unselectedWidgetColor"),
+          disabledColor: getColor(context, bo, v, "disabledColor"),
+          buttonColor: getColor(context, bo, v, "buttonColor"),
+          buttonTheme: getButtonThemeData(context, bo, v, "buttonTheme"),
+          toggleButtonsTheme: getToggleButtonsThemeData(context, bo, v, "toggleButtonsTheme"),
+          secondaryHeaderColor: getColor(context, bo, v, "secondaryHeaderColor"),
+          textSelectionColor: getColor(context, bo, v, "textSelectionColor"),
+          cursorColor: getColor(context, bo, v, "cursorColor"),
+          textSelectionHandleColor: getColor(context, bo, v, "textSelectionHandleColor"),
+          backgroundColor: getColor(context, bo, v, "backgroundColor"),
+          dialogBackgroundColor: getColor(context, bo, v, "dialogBackgroundColor"),
+          indicatorColor: getColor(context, bo, v, "indicatorColor"),
+          hintColor: getColor(context, bo, v, "hintColor"),
+          errorColor: getColor(context, bo, v, "errorColor"),
+          toggleableActiveColor: getColor(context, bo, v, "toggleableActiveColor"),
+          fontFamily: getString(context, bo, v, "fontFamily"),
+          textTheme: getTextTheme(context, bo, v, "textTheme"),
+          primaryTextTheme: getTextTheme(context, bo, v, "primaryTextTheme"),
+          accentTextTheme: getTextTheme(context, bo, v, "accentTextTheme"),
+          inputDecorationTheme: getInputDecorationTheme(context, bo, v, "inputDecorationTheme"),
+          iconTheme: getIconThemeData(context, bo, v, "iconTheme"),
+          primaryIconTheme: getIconThemeData(context, bo, v, "primaryIconTheme"),
+          accentIconTheme: getIconThemeData(context, bo, v, "accentIconTheme"),
+          sliderTheme: getSliderThemeData(context, bo, v, "sliderTheme"),
+          tabBarTheme: getTabBarTheme(context, bo, v, "tabBarTheme"),
+          tooltipTheme: getTooltipThemeData(context, bo, v, "tooltipTheme"),
+          cardTheme: getCardTheme(context, bo, v, "chipTheme"),
+          chipTheme: getChipThemeData(context, bo, v, "chipTheme"),
+          platform: getTargetPlatform(context, bo, v, "platform"),
+          materialTapTargetSize: getMaterialTapTargetSize(context, bo, v, "materialTapTargetSize"),
+          applyElevationOverlayColor: getBool(context, bo, v, "applyElevationOverlayColor"),
+          appBarTheme: getAppBarTheme(context, bo, v, "appBarTheme"),
+          bottomAppBarTheme: getBottomAppBarTheme(context, bo, v, "bottomAppBarTheme"),
+          colorScheme: getColorScheme(context, bo, v, "colorScheme"),
+          dialogTheme: getDialogTheme(context, bo, v, "dialogTheme"),
+          floatingActionButtonTheme: getFloatingActionButtonThemeData(context, bo, v, "floatingActionButtonTheme"),
+          navigationRailTheme: getNavigationRailThemeData(context, bo, v, "navigationRailTheme"),
+          cupertinoOverrideTheme: getCupertinoThemeData(context, bo, v, "cupertinoOverrideTheme"),
+          snackBarTheme: getSnackBarThemeData(context, bo, v, "snackBarTheme"),
+          bottomSheetTheme: getBottomSheetThemeData(context, bo, v, "bottomSheetTheme"),
+          popupMenuTheme: getPopupMenuThemeData(context, bo, v, "popupMenuTheme"),
+          bannerTheme: getMaterialBannerThemeData(context, bo, v, "bannerTheme"),
+          dividerTheme: getDividerThemeData(context, bo, v, "dividerTheme"),
+          buttonBarTheme: getButtonBarThemeData(context, bo, v, "buttonBarTheme"),
+          bottomNavigationBarTheme: getBottomNavigationBarThemeData(context, bo, v, "bottomNavigationBarTheme"),
+          timePickerTheme: getTimePickerThemeData(context, bo, v, "timePickerTheme"),
+          textSelectionTheme: getTextSelectionThemeData(context, bo, v, "textSelectionTheme"),
+          dataTableTheme: getDataTableThemeData(context, bo, v, "dataTableTheme"),
+          fixTextFieldOutlineLabel: getBool(context, bo, v, "fixTextFieldOutlineLabel"),
+          useTextSelectionTheme: getBool(context, bo, v, "useTextSelectionTheme"),
+        );
+      }
+      switch (c) {
+        case "dark":
+          return ThemeData.dark();
+          break;
+        case "light":
+          return ThemeData.light();
+          break;
+      }
     }
     return defaultValue;
   }

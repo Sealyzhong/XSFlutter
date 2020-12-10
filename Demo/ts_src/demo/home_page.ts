@@ -6,7 +6,6 @@
  */
 
 import fs = require("flutter_sdk");
-import tl = require("flutter_third_library");
 import { MyBaseWidgetsIndex } from "demo/base_widgets/index";
 import { MyPackageIndex } from "demo/packages/index";
 import { MyExamplesIndex } from "demo/examples/index";
@@ -28,8 +27,8 @@ class _MyHomePageState extends fs.WidgetState{
     //subclass override
     initState() {
         fs.Log.log("MyHomePage.initState");
-        tl.ScreenInfo.updateInfo();
-        tl.PackageInfo.updateInfo();
+        fs.ScreenInfo.updateInfo();
+        fs.PackageInfo.updateInfo();
     }
     
     _style = new fs.TextStyle({fontSize:24,fontWeight:fs.FontWeight.bold});

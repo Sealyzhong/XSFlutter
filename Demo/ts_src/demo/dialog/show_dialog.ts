@@ -7,7 +7,6 @@
 
 import { MySectionTitle } from "demo/widgets/section_title";
 import fs = require("flutter_sdk");
-import tl = require("flutter_third_library");
 
 export class MyShowDialogPage extends fs.StatelessWidget{
 

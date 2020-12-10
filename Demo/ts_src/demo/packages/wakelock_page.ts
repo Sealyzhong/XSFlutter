@@ -6,7 +6,6 @@
  */
 
 import fs = require("flutter_sdk");
-import tl = require("flutter_third_library");
 
 export class MyWakelockPage extends fs.StatefulWidget{
     createState() {
@@ -25,20 +24,20 @@ class _MyWakelockPage extends fs.WidgetState{
    }
 
     async _getStatus(){
-        this.isEnabled = await tl.Wakelock.isEnabled();
+        this.isEnabled = await fs.Wakelock.isEnabled();
         this.setState();
     }
 
    async _enable(){
-    var v= await tl.Wakelock.enable();
-    var n = await tl.Wakelock.isEnabled();
+    var v= await fs.Wakelock.enable();
+    var n = await fs.Wakelock.isEnabled();
     this.isEnabled = n;
     this.setState();
    }
 
    async _disable(){
-    var v= await tl.Wakelock.disable();
-    var n = await tl.Wakelock.isEnabled();
+    var v= await fs.Wakelock.disable();
+    var n = await fs.Wakelock.isEnabled();
     this.isEnabled = n;
     this.setState();
    }

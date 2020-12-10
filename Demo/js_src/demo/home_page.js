@@ -8,7 +8,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyHomePage = void 0;
 const fs = require("flutter_sdk");
-const tl = require("flutter_third_library");
 const index_1 = require("demo/base_widgets/index");
 const index_2 = require("demo/packages/index");
 const index_3 = require("demo/examples/index");
@@ -30,8 +29,8 @@ class _MyHomePageState extends fs.WidgetState {
     //subclass override
     initState() {
         fs.Log.log("MyHomePage.initState");
-        tl.ScreenInfo.updateInfo();
-        tl.PackageInfo.updateInfo();
+        fs.ScreenInfo.updateInfo();
+        fs.PackageInfo.updateInfo();
     }
     build(context) {
         return new fs.Scaffold({

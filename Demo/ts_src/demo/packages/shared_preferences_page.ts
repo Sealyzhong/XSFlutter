@@ -6,7 +6,6 @@
  */
 
 import fs = require("flutter_sdk");
-import tl = require("flutter_third_library");
 
 export class MySharedPreferncesPage extends fs.StatefulWidget{
     createState() {
@@ -27,12 +26,12 @@ class _MySharedPreferncesPage extends fs.WidgetState{
     }
 
     _saveValue(){
-       var isSuccess= tl.Sp.setInt({key:this._userNumber,value:this._count});
+       var isSuccess= fs.Sp.setInt({key:this._userNumber,value:this._count});
        fs.Loading.showSuccess({info:isSuccess?"保存成功！":"保存失败"});
     }
 
     async _getValue(){
-        this._getCount = await tl.Sp.getInt({key:this._userNumber,defaultValue:0});
+        this._getCount = await fs.Sp.getInt({key:this._userNumber,defaultValue:0});
         this.setState();
     }
     

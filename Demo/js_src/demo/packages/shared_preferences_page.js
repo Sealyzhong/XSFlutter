@@ -8,7 +8,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MySharedPreferncesPage = void 0;
 const fs = require("flutter_sdk");
-const tl = require("flutter_third_library");
 class MySharedPreferncesPage extends fs.StatefulWidget {
     createState() {
         return new _MySharedPreferncesPage(this);
@@ -28,11 +27,11 @@ class _MySharedPreferncesPage extends fs.WidgetState {
         this.setState();
     }
     _saveValue() {
-        var isSuccess = tl.Sp.setInt({ key: this._userNumber, value: this._count });
+        var isSuccess = fs.Sp.setInt({ key: this._userNumber, value: this._count });
         fs.Loading.showSuccess({ info: isSuccess ? "保存成功！" : "保存失败" });
     }
     async _getValue() {
-        this._getCount = await tl.Sp.getInt({ key: this._userNumber, defaultValue: 0 });
+        this._getCount = await fs.Sp.getInt({ key: this._userNumber, defaultValue: 0 });
         this.setState();
     }
     build(context) {

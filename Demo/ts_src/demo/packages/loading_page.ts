@@ -6,7 +6,6 @@
  */
 
 import fs = require("flutter_sdk");
-import tl = require("flutter_third_library");
 import moment = require("moment");
 
 export class MyLoadingPage extends fs.StatelessWidget{

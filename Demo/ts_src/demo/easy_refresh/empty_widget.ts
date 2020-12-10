@@ -7,7 +7,6 @@
 
 import { MyIconData } from "demo/model/icon_data";
 import fs = require("flutter_sdk");
-import tl = require("flutter_third_library");
 
 export class MyEasyRefreshClassEmptyWidgetPage extends fs.StatefulWidget{
     createState() {
@@ -17,7 +16,7 @@ export class MyEasyRefreshClassEmptyWidgetPage extends fs.StatefulWidget{
 
 class _MyEasyRefreshClassEmptyWidgetPageState extends fs.WidgetState{
 
-    refreshController:tl.EasyRefreshController= new tl.EasyRefreshController();
+    refreshController:fs.EasyRefreshController= new fs.EasyRefreshController();
 
     _count:number=0;
     //重构
@@ -27,13 +26,13 @@ class _MyEasyRefreshClassEmptyWidgetPageState extends fs.WidgetState{
             appBar:new fs.AppBar({
                 title:new fs.Text("Empty Widget"),
             }),
-            body:new tl.EasyRefresher({
+            body:new fs.EasyRefresher({
                 enableControlFinishLoad:true,
                 enableControlFinishRefresh:true,
                 controller:this.refreshController,
                 emptyWidget:this._count<=0?new fs.EmptyDataWidget({}):undefined,
-                header:new tl.EasyRefreshClassicalHeader(),
-                footer:new tl.EasyRefreshClassicalFooter({isNoMoreText:true}),
+                header:new fs.EasyRefreshClassicalHeader(),
+                footer:new fs.EasyRefreshClassicalFooter({isNoMoreText:true}),
                 onRefresh: function(){
                     fs.Loading.show({info:"数据加载中...",alignment:fs.Alignment.center});
                     fs.Future.delayed(new fs.Duration({

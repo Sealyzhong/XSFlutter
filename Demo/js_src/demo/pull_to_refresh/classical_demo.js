@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyPullToRefreshClassicalDemoPage = void 0;
 const icon_data_1 = require("demo/model/icon_data");
 const fs = require("flutter_sdk");
-const tl = require("flutter_third_library");
 class MyPullToRefreshClassicalDemoPage extends fs.StatefulWidget {
     createState() {
         return new _MyPullToRefreshClassicalDemoPageState(this);
@@ -19,7 +18,7 @@ exports.MyPullToRefreshClassicalDemoPage = MyPullToRefreshClassicalDemoPage;
 class _MyPullToRefreshClassicalDemoPageState extends fs.WidgetState {
     constructor() {
         super(...arguments);
-        this.refreshController = new tl.PullToRefreshController({});
+        this.refreshController = new fs.PullToRefreshController({});
         this._count = 20;
     }
     //重构
@@ -29,12 +28,12 @@ class _MyPullToRefreshClassicalDemoPageState extends fs.WidgetState {
             appBar: new fs.AppBar({
                 title: new fs.Text("经典样式"),
             }),
-            body: new tl.PullToRefreshRefresher({
+            body: new fs.PullToRefreshRefresher({
                 controller: this.refreshController,
                 enablePullDown: true,
                 enablePullUp: true,
-                header: new tl.PullToRefreshClassicHeader(),
-                footer: new tl.PullToRefreshClassicFooter(),
+                header: new fs.PullToRefreshClassicHeader(),
+                footer: new fs.PullToRefreshClassicFooter(),
                 onRefresh: function () {
                     fs.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
                     fs.Future.delayed(new fs.Duration({

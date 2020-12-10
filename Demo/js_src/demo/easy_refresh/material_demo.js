@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyEasyRefreshMaterialDemoPage = void 0;
 const icon_data_1 = require("demo/model/icon_data");
 const fs = require("flutter_sdk");
-const tl = require("flutter_third_library");
 class MyEasyRefreshMaterialDemoPage extends fs.StatefulWidget {
     createState() {
         return new _MyEasyRefreshMaterialDemoPageState(this);
@@ -19,7 +18,7 @@ exports.MyEasyRefreshMaterialDemoPage = MyEasyRefreshMaterialDemoPage;
 class _MyEasyRefreshMaterialDemoPageState extends fs.WidgetState {
     constructor() {
         super(...arguments);
-        this.refreshController = new tl.EasyRefreshController();
+        this.refreshController = new fs.EasyRefreshController();
         this._maxCount = icon_data_1.MyIconData.cupertinoIcons.length;
         this._count = 20;
     }
@@ -30,12 +29,12 @@ class _MyEasyRefreshMaterialDemoPageState extends fs.WidgetState {
             appBar: new fs.AppBar({
                 title: new fs.Text("Material Demo"),
             }),
-            body: new tl.EasyRefresher({
+            body: new fs.EasyRefresher({
                 enableControlFinishRefresh: true,
                 enableControlFinishLoad: true,
                 controller: this.refreshController,
-                header: new tl.EasyRefreshMaterialHeader(),
-                footer: new tl.EasyRefreshMaterialFooter({ isNoMoreText: true }),
+                header: new fs.EasyRefreshMaterialHeader(),
+                footer: new fs.EasyRefreshMaterialFooter({ isNoMoreText: true }),
                 onRefresh: function () {
                     fs.Loading.show({ info: "数据加载中...", alignment: fs.Alignment.center });
                     fs.Future.delayed(new fs.Duration({

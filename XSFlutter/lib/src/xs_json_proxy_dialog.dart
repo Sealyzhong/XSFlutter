@@ -539,23 +539,33 @@ class XSProxyDialog extends XSJsonObjProxy {
         {
           var v = XSJSParse.getMap(context, bo, map, "child");
           var r = await showDatePicker(
-            context: context,
-            initialDate: XSJSParse.getDateTime(context, bo, v, "initialDate", defaultValue: DateTime.now()),
-            firstDate: XSJSParse.getDateTime(context, bo, v, "firstDate", defaultValue: DateTime.now().add(Duration(days: -3650))),
-            lastDate: XSJSParse.getDateTime(context, bo, v, "lastDate", defaultValue: DateTime.now().add(Duration(days: 3650))),
-            currentDate: XSJSParse.getDateTime(context, bo, v, "currentDate"),
-            initialEntryMode: XSJSParse.getDatePickerEntryMode(context, bo, map, "initialEntryMode", defaultValue: DatePickerEntryMode.calendar),
-            helpText: XSJSParse.getString(context, bo, map, "helpText"),
-            cancelText: XSJSParse.getString(context, bo, map, "cancelText"),
-            confirmText: XSJSParse.getString(context, bo, map, "confirmText"),
-            useRootNavigator: XSJSParse.getBool(context, bo, map, "useRootNavigator", defaultValue: true),
-            textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
-            initialDatePickerMode: XSJSParse.getDatePickerMode(context, bo, v, "initialDatePickerMode", defaultValue: DatePickerMode.day),
-            errorFormatText: XSJSParse.getString(context, bo, map, "errorFormatText"),
-            errorInvalidText: XSJSParse.getString(context, bo, map, "errorInvalidText"),
-            fieldHintText: XSJSParse.getString(context, bo, map, "fieldHintText"),
-            fieldLabelText: XSJSParse.getString(context, bo, map, "fieldLabelText"),
-          );
+              context: context,
+              initialDate: XSJSParse.getDateTime(context, bo, v, "initialDate", defaultValue: DateTime.now()),
+              firstDate: XSJSParse.getDateTime(context, bo, v, "firstDate", defaultValue: DateTime.now().add(Duration(days: -3650))),
+              lastDate: XSJSParse.getDateTime(context, bo, v, "lastDate", defaultValue: DateTime.now().add(Duration(days: 3650))),
+              currentDate: XSJSParse.getDateTime(context, bo, v, "currentDate"),
+              initialEntryMode: XSJSParse.getDatePickerEntryMode(context, bo, v, "initialEntryMode", defaultValue: DatePickerEntryMode.calendar),
+              helpText: XSJSParse.getString(context, bo, v, "helpText"),
+              cancelText: XSJSParse.getString(context, bo, v, "cancelText"),
+              confirmText: XSJSParse.getString(context, bo, v, "confirmText"),
+              useRootNavigator: XSJSParse.getBool(context, bo, v, "useRootNavigator", defaultValue: true),
+              textDirection: XSJSParse.getTextDirection(context, bo, v, "textDirection"),
+              initialDatePickerMode: XSJSParse.getDatePickerMode(context, bo, v, "initialDatePickerMode", defaultValue: DatePickerMode.day),
+              errorFormatText: XSJSParse.getString(context, bo, v, "errorFormatText"),
+              errorInvalidText: XSJSParse.getString(context, bo, v, "errorInvalidText"),
+              fieldHintText: XSJSParse.getString(context, bo, v, "fieldHintText"),
+              fieldLabelText: XSJSParse.getString(context, bo, v, "fieldLabelText"),
+              builder: (context, child) {
+                if (XSJSParse.checkMapKey(context, bo, v, "themeData")) {
+                  return Theme(
+                    data: XSJSParse.getThemeData(context, bo, v, "themeData"),
+                    isMaterialAppTheme: XSJSParse.getBool(context, bo, v, "isMaterialAppTheme", defaultValue: false),
+                    child: child,
+                  );
+                }
+
+                return child;
+              });
           if (r != null) {
             result = r.millisecondsSinceEpoch;
           }

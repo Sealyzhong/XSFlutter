@@ -7,7 +7,6 @@
 
 import { MyIconData } from "demo/model/icon_data";
 import fs = require("flutter_sdk");
-import tl = require("flutter_third_library");
 
 export class MyEasyRefreshMaterialDemoPage extends fs.StatefulWidget{
     createState() {
@@ -18,7 +17,7 @@ export class MyEasyRefreshMaterialDemoPage extends fs.StatefulWidget{
 
 class _MyEasyRefreshMaterialDemoPageState extends fs.WidgetState{
 
-    refreshController:tl.EasyRefreshController= new tl.EasyRefreshController();
+    refreshController:fs.EasyRefreshController= new fs.EasyRefreshController();
 
     _maxCount:number = MyIconData.cupertinoIcons.length;
     _count:number=20;
@@ -29,12 +28,12 @@ class _MyEasyRefreshMaterialDemoPageState extends fs.WidgetState{
             appBar:new fs.AppBar({
                 title:new fs.Text("Material Demo"),
             }),
-            body:new tl.EasyRefresher({
+            body:new fs.EasyRefresher({
                 enableControlFinishRefresh:true,
                 enableControlFinishLoad:true,
                 controller:this.refreshController,
-                header:new tl.EasyRefreshMaterialHeader(),
-                footer:new tl.EasyRefreshMaterialFooter({isNoMoreText:true}),
+                header:new fs.EasyRefreshMaterialHeader(),
+                footer:new fs.EasyRefreshMaterialFooter({isNoMoreText:true}),
                 onRefresh: function(){
                     fs.Loading.show({info:"数据加载中...",alignment:fs.Alignment.center});
                     fs.Future.delayed(new fs.Duration({

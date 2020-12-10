@@ -8,7 +8,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyUrlLaucherPage = void 0;
 const fs = require("flutter_sdk");
-const tl = require("flutter_third_library");
 class MyUrlLaucherPage extends fs.StatelessWidget {
     constructor() {
         super(...arguments);
@@ -27,7 +26,7 @@ class MyUrlLaucherPage extends fs.StatelessWidget {
                         title: new fs.Text("打开网站"),
                         subtitle: new fs.Text("https://www.baidu.com"),
                         onTap: function () {
-                            tl.UrlLauncher.openUrl({ urlString: "https://www.baidu.com" });
+                            fs.UrlLauncher.openUrl({ urlString: "https://www.baidu.com" });
                         }
                     }),
                     new fs.ListTile({
@@ -36,7 +35,7 @@ class MyUrlLaucherPage extends fs.StatelessWidget {
                         title: new fs.Text("打电话"),
                         subtitle: new fs.Text("tels:10000"),
                         onTap: function () {
-                            tl.UrlLauncher.openUrl({ urlString: "tels:10000" });
+                            fs.UrlLauncher.openUrl({ urlString: "tels:10000" });
                         }
                     }),
                     new fs.ListTile({
@@ -45,7 +44,7 @@ class MyUrlLaucherPage extends fs.StatelessWidget {
                         title: new fs.Text("发短信"),
                         subtitle: new fs.Text("sms:10000"),
                         onTap: function () {
-                            tl.UrlLauncher.openUrl({ urlString: "sms:10000" });
+                            fs.UrlLauncher.openUrl({ urlString: "sms:10000" });
                         }
                     }),
                 ]
