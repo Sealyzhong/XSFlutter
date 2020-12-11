@@ -949,6 +949,14 @@ class XSJSParse {
     return getColorNoKey(context, bo, v, defaultValue: defaultValue);
   }
 
+  static MaterialStateProperty<Color> getMaterialStatePropertyColor(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {MaterialStateProperty<Color> defaultValue}) {
+    Map v = _getMap(map, key);
+    if (v != null) {
+      return MaterialStateProperty.all(getColor(context, bo, map, key));
+    }
+    return defaultValue;
+  }
+
   //****** CardTheme ******/
   static CardTheme getCardTheme(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {CardTheme defaultValue}) {
     var v = _getMap(map, key);
@@ -4340,6 +4348,18 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** ImageFilter ******/
+  static ImageFilter getImageFilter(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ImageFilter defaultValue}) {
+    var v = _getMap(map, key);
+    if (v != null) {
+      return ImageFilter.blur(
+        sigmaX: getDouble(context, bo, v, "sigmaX", defaultValue: 0.0),
+        sigmaY: getDouble(context, bo, v, "sigmaY", defaultValue: 0.0),
+      );
+    }
+    return defaultValue;
+  }
+
   //****** ImageShader ******/
   static ImageShader getImageShader(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ImageShader defaultValue}) {
     var v = _getMap(map, key);
@@ -5416,6 +5436,40 @@ class XSJSParse {
     return defaultValue;
   }
 
+  //****** StepState ******/
+  static StepState getStepState(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {StepState defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'indexed':
+          return StepState.indexed;
+        case 'editing':
+          return StepState.editing;
+        case 'complete':
+          return StepState.complete;
+        case 'disabled':
+          return StepState.disabled;
+        case 'error':
+          return StepState.error;
+      }
+    }
+    return defaultValue;
+  }
+
+  //****** StepperType ******/
+  static StepperType getStepperType(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {StepperType defaultValue}) {
+    var v = _getString(map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'vertical':
+          return StepperType.vertical;
+        case 'horizontal':
+          return StepperType.horizontal;
+      }
+    }
+    return defaultValue;
+  }
+
   //****** ScrollPositionAlignmentPolicy ******/
   static ScrollPositionAlignmentPolicy getScrollPositionAlignmentPolicy(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {ScrollPositionAlignmentPolicy defaultValue}) {
     var v = _getString(map, key);
@@ -5460,6 +5514,14 @@ class XSJSParse {
           );
         case 'NeverScrollableScrollPhysics':
           return NeverScrollableScrollPhysics(
+            parent: getScrollPhysics(context, bo, v, "parent"),
+          );
+        case 'FixedExtentScrollPhysics':
+          return FixedExtentScrollPhysics(
+            parent: getScrollPhysics(context, bo, v, "parent"),
+          );
+        case 'PageScrollPhysics':
+          return PageScrollPhysics(
             parent: getScrollPhysics(context, bo, v, "parent"),
           );
       }
@@ -6501,7 +6563,7 @@ class XSJSParse {
     return _getClassObj(map[key], buildOwner: bo, defaultValue: defaultValue, context: context);
   }
 
-  //****** List<Widget> ******/
+  //****** List<T> ******/
   static List<Widget> getWidgetList(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {dynamic defaultValue}) {
     var list = _getClassObj(map[key], buildOwner: bo, defaultValue: defaultValue, context: context);
     if (list == null) {

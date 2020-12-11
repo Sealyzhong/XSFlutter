@@ -62,7 +62,7 @@ class MyShowDialogPage extends fs.StatelessWidget {
                     new section_title_1.MySectionTitle("Dialog"),
                     new fs.ListTile({
                         trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("1、ShowDialog"),
+                        title: new fs.Text("1、ShowDialog - AlertDialog"),
                         subtitle: new fs.Text("child:[AlertDialog、SimpleDialog、widget]"),
                         onTap: () => {
                             fs.Dialog.show(this, new fs.ShowDialog({
@@ -82,6 +82,42 @@ class MyShowDialogPage extends fs.StatelessWidget {
                                                 fs.Log.log("确认");
                                                 fs.Dialog.dismiss(this);
                                             } }),
+                                    ],
+                                })
+                            }));
+                        }
+                    }),
+                    new fs.ListTile({
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("1、ShowDialog - SimpleDialog"),
+                        subtitle: new fs.Text("child:[AlertDialog、SimpleDialog、widget]"),
+                        onTap: () => {
+                            fs.Dialog.show(this, new fs.ShowDialog({
+                                barrierDismissible: false,
+                                child: new fs.SimpleDialog({
+                                    title: new fs.Text('提示'),
+                                    children: [
+                                        new fs.Container({
+                                            height: 80,
+                                            alignment: fs.Alignment.center,
+                                            child: new fs.Text('确认删除吗？'),
+                                        }),
+                                        new fs.Divider({ height: 1, }),
+                                        new fs.FlatButton({
+                                            child: new fs.Text('取消'),
+                                            onPressed: () => {
+                                                fs.Log.log("取消");
+                                                fs.Dialog.dismiss(this);
+                                            }
+                                        }),
+                                        new fs.Divider({ height: 1, }),
+                                        new fs.FlatButton({
+                                            child: new fs.Text('确认'),
+                                            onPressed: () => {
+                                                fs.Log.log("确认");
+                                                fs.Dialog.dismiss(this);
+                                            }
+                                        }),
                                     ],
                                 })
                             }));

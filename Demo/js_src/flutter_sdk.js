@@ -6,7 +6,7 @@
  * @Description: JS Flutter SDK
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EasyRefresher = exports.EasyRefreshController = exports.EasyRefreshMaterialFooter = exports.EasyRefreshClassicalFooter = exports.EasyRefreshFooter = exports.EasyRefreshMaterialHeader = exports.EasyRefreshClassicalHeader = exports.EasyRefreshHeader = exports.CachedNetworkImage = exports.PullToRefreshRefresher = exports.PullToRefreshController = exports.PullToRefreshConfiguration = exports.PullToRefreshClassicFooter = exports.PullToRefreshFooter = exports.PullToRefreshWaterDropMaterialHeader = exports.PullToRefreshMaterialClassicHeader = exports.PullToRefreshWaterDropHeader = exports.PullToRefreshClassicHeader = exports.PullToRefreshHeader = exports.PullToRefreshLoadStyle = exports.PullToRefreshIconPosition = exports.PullToRefreshLoadStatus = exports.PullToRefreshStatus = exports.PullToRefreshStyle = exports.Dio = exports.DioOptions = exports.DioBaseOptions = exports.DioResponseType = exports.UrlLauncher = exports.FocusScope = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.Sp = exports.Loading = exports.Dialog = exports.ShowDatePicker = exports.CustomPopupMenuItem = exports.ShowCustomPopupMenu = exports.ShowSimpleActionSheet = exports.ShowCustomActionSheet = exports.ShowSimpleCupertinoDialog = exports.ShowSimpleAlertDialog = exports.ShowSimpleCustomDialog = exports.SimpleCustomDialogButtonInfo = exports.ShowCustomAlertDialog = exports.CustomAlertDialogStyle = exports.CustomAlertDialogButton = exports.CustomAlertDialogAnimationType = exports.SimpleDialogButtonInfo = exports.CupertinoActionSheetAction = exports.CupertinoActionSheet = exports.ShowCupertinoModalPopup = exports.BottomSheet = exports.ShowModalBottomSheet = exports.ShowGeneralDialog = exports.CupertinoAlertDialog = exports.ShowCupertinoDialog = exports.SimpleDialog = exports.AlertDialog = exports.ShowDialog = exports.ShowBaseDialog = exports.EmptyDataWidget = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoDialogAction = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverOpacity = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverChildDelegate = exports.SliverGridDelegateWithFixedCrossAxisCount = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGridDelegate = exports.SliverGrid = exports.SliverPadding = exports.SliverFillRemaining = exports.SliverFillViewport = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.RichText = exports.RawMaterialButton = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.Row = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LabelTitle = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.IconSpan = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.CustomSingleChildLayout = exports.ConstrainedBox = exports.ClipRRect = exports.CheckboxEx = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.Center = exports.Container = exports.CloseButton = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.Animation = exports.AnimationController = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.ThemeData = exports.DataTableThemeData = exports.TextSelectionThemeData = exports.TimePickerThemeData = exports.BottomNavigationBarThemeData = exports.ButtonBarThemeData = exports.DividerThemeData = exports.MaterialBannerThemeData = exports.PopupMenuThemeData = exports.BottomSheetThemeData = exports.SnackBarThemeData = exports.CupertinoThemeData = exports.NavigationRailThemeData = exports.FloatingActionButtonThemeData = exports.DialogTheme = exports.BottomAppBarTheme = exports.AppBarTheme = exports.ChipThemeData = exports.CardTheme = exports.TooltipThemeData = exports.TabBarTheme = exports.SliderThemeData = exports.IconThemeData = exports.InputDecorationTheme = exports.TextTheme = exports.ToggleButtonsThemeData = exports.ButtonThemeData = exports.ColorScheme = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.Offset = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.BindKey = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.ImageFilter = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.ScrollViewKeyboardDismissBehavior = exports.ShowValueIndicator = exports.SnackBarBehavior = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationRailLabelType = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DatePickerEntryMode = exports.DatePickerMode = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
+exports.EasyRefresher = exports.EasyRefreshController = exports.EasyRefreshMaterialFooter = exports.EasyRefreshClassicalFooter = exports.EasyRefreshFooter = exports.EasyRefreshMaterialHeader = exports.EasyRefreshClassicalHeader = exports.EasyRefreshHeader = exports.CachedNetworkImage = exports.PullToRefreshRefresher = exports.PullToRefreshController = exports.PullToRefreshConfiguration = exports.PullToRefreshClassicFooter = exports.PullToRefreshFooter = exports.PullToRefreshWaterDropMaterialHeader = exports.PullToRefreshMaterialClassicHeader = exports.PullToRefreshWaterDropHeader = exports.PullToRefreshClassicHeader = exports.PullToRefreshHeader = exports.PullToRefreshLoadStyle = exports.PullToRefreshIconPosition = exports.PullToRefreshLoadStatus = exports.PullToRefreshStatus = exports.PullToRefreshStyle = exports.Dio = exports.DioOptions = exports.DioBaseOptions = exports.DioResponseType = exports.UrlLauncher = exports.FocusScope = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.Sp = exports.Loading = exports.Dialog = exports.ShowDatePicker = exports.CustomPopupMenuItem = exports.ShowCustomPopupMenu = exports.ShowSimpleActionSheet = exports.ShowCustomActionSheet = exports.ShowSimpleCupertinoDialog = exports.ShowSimpleAlertDialog = exports.ShowSimpleCustomDialog = exports.SimpleCustomDialogButtonInfo = exports.ShowCustomAlertDialog = exports.CustomAlertDialogStyle = exports.CustomAlertDialogButton = exports.CustomAlertDialogAnimationType = exports.SimpleDialogButtonInfo = exports.CupertinoActionSheetAction = exports.CupertinoActionSheet = exports.ShowCupertinoModalPopup = exports.BottomSheet = exports.ShowModalBottomSheet = exports.ShowGeneralDialog = exports.CupertinoAlertDialog = exports.ShowCupertinoDialog = exports.SimpleDialog = exports.AlertDialog = exports.ShowDialog = exports.ShowBaseDialog = exports.EmptyDataWidget = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabView = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSlidingSegmentedControl = exports.CupertinoSegmentedControl = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoDialogAction = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SelectableText = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverOpacity = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverChildDelegate = exports.SliverGridDelegateWithFixedCrossAxisCount = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGridDelegate = exports.SliverGrid = exports.SliverPadding = exports.SliverFillRemaining = exports.SliverFillViewport = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.Stepper = exports.Step = exports.RichText = exports.RawMaterialButton = exports.RadioListTile = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.RawChip = exports.Row = exports.PageView = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LabelTitle = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.IconSpan = exports.InputChip = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GridView = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.FilterChip = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.ConstrainedBox = exports.ClipRRect = exports.ClipOval = exports.ClipRect = exports.CheckboxEx = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.ChoiceChip = exports.Center = exports.Container = exports.CloseButton = exports.ColorFiltered = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.Animation = exports.AnimationController = exports.ActionChip = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.ThemeData = exports.DataTableThemeData = exports.TextSelectionThemeData = exports.TimePickerThemeData = exports.BottomNavigationBarThemeData = exports.ButtonBarThemeData = exports.DividerThemeData = exports.MaterialBannerThemeData = exports.PopupMenuThemeData = exports.BottomSheetThemeData = exports.SnackBarThemeData = exports.CupertinoThemeData = exports.NavigationRailThemeData = exports.FloatingActionButtonThemeData = exports.DialogTheme = exports.BottomAppBarTheme = exports.AppBarTheme = exports.ChipThemeData = exports.CardTheme = exports.TooltipThemeData = exports.TabBarTheme = exports.SliderThemeData = exports.IconThemeData = exports.InputDecorationTheme = exports.TextTheme = exports.ToggleButtonsThemeData = exports.ButtonThemeData = exports.ColorScheme = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.PageScrollPhysics = exports.FixedExtentScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.PageController = exports.Offset = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.BindKey = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.ImageFilter = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.ScrollViewKeyboardDismissBehavior = exports.ShowValueIndicator = exports.SnackBarBehavior = exports.StepperType = exports.StepState = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationRailLabelType = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DatePickerEntryMode = exports.DatePickerMode = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -1474,6 +1474,21 @@ var StackFit;
     StackFit["expand"] = "expand";
     StackFit["passthrough"] = "passthrough";
 })(StackFit = exports.StackFit || (exports.StackFit = {}));
+//****** StepState ******
+var StepState;
+(function (StepState) {
+    StepState["indexed"] = "indexed";
+    StepState["editing"] = "editing";
+    StepState["complete"] = "complete";
+    StepState["disabled"] = "disabled";
+    StepState["error"] = "error";
+})(StepState = exports.StepState || (exports.StepState = {}));
+//****** StepperType ******
+var StepperType;
+(function (StepperType) {
+    StepperType["vertical"] = "vertical";
+    StepperType["horizontal"] = "horizontal";
+})(StepperType = exports.StepperType || (exports.StepperType = {}));
 //****** SnackBarBehavior ******
 var SnackBarBehavior;
 (function (SnackBarBehavior) {
@@ -2452,6 +2467,14 @@ class Future extends DartClass {
     static delayed(duration, onBack) {
         dart_sdk.async.Future.delayed(duration, onBack);
     }
+    /**
+     * 定时处理
+     * @param duration
+     * @param onBack
+     */
+    static timer(duration, onBack) {
+        dart_sdk.async.Timer.new(duration, onBack);
+    }
 }
 exports.Future = Future;
 class FocusNode extends DartClass {
@@ -3199,6 +3222,95 @@ class Offset extends DartClass {
     }
 }
 exports.Offset = Offset;
+class PageController extends DartClass {
+    /**
+     * @param config config:
+        {
+          initialPage?:number,
+          keepPage?:boolean,
+          viewportFraction?:number,
+        }
+     */
+    constructor(config) {
+        super();
+        this.createMirrorID();
+        if (config != null && config != undefined) {
+            this.initialPage = this.initialPage;
+            this.keepPage = this.keepPage;
+            this.viewportFraction = this.viewportFraction;
+        }
+    }
+    /**
+     * @param config config:
+        {
+          page:number,
+          duration:Duration,
+          curve:Curve,
+        }
+     */
+    animateToPage(config) {
+        JSFramework.invokeFlutterFunction(new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "animateToPage",
+            args: config
+        }));
+    }
+    /**
+     * @param config config:
+        {
+          duration:Duration,
+          curve:Curve,
+        }
+     */
+    nextPage(config) {
+        JSFramework.invokeFlutterFunction(new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "nextPage",
+            args: config
+        }));
+    }
+    /**
+     * @param config config:
+        {
+          duration:Duration,
+          curve:Curve,
+        }
+     */
+    previousPage(config) {
+        JSFramework.invokeFlutterFunction(new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "previousPage",
+            args: config
+        }));
+    }
+    /**
+     * @param config config:
+        {
+          page:number,
+        }
+     */
+    jumpToPage(config) {
+        JSFramework.invokeFlutterFunction(new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "jumpToPage",
+            args: config
+        }));
+    }
+    //偏移量
+    async page() {
+        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "page",
+        }));
+        return Convert.toNumber(v);
+    }
+}
+exports.PageController = PageController;
 //#endregion
 //#region ------- Q -------
 //****** Quaternion ******
@@ -3841,6 +3953,32 @@ class AlwaysScrollableScrollPhysics extends ScrollPhysics {
     }
 }
 exports.AlwaysScrollableScrollPhysics = AlwaysScrollableScrollPhysics;
+//****** FixedExtentScrollPhysics ******
+class FixedExtentScrollPhysics extends ScrollPhysics {
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    constructor(config) {
+        super(config);
+    }
+}
+exports.FixedExtentScrollPhysics = FixedExtentScrollPhysics;
+//****** PageScrollPhysics ******
+class PageScrollPhysics extends ScrollPhysics {
+    /**
+      * @param config config:
+        {
+          parent?:ScrollPhysics,
+        }
+      */
+    constructor(config) {
+        super(config);
+    }
+}
+exports.PageScrollPhysics = PageScrollPhysics;
 //****** BouncingScrollPhysics ******
 class BouncingScrollPhysics extends ScrollPhysics {
     /**
@@ -4387,6 +4525,8 @@ class TabController extends DartClass {
      */
     constructor(config) {
         super();
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
         if (config != null && config != undefined) {
             this.initialIndex = config.initialIndex;
             this.length = config.length;
@@ -6912,6 +7052,55 @@ class AbsorbPointer extends Widget {
     }
 }
 exports.AbsorbPointer = AbsorbPointer;
+class ActionChip extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          avatar?:Widget,
+          label:Widget,
+          labelStyle?:TextStyle,
+          labelPadding?:EdgeInsets,
+          onPressed:OnCallback,
+          pressElevation?:number,
+          tooltip?:string,
+          shape?:ShapeBorder,
+          clipBehavior?:Clip,
+          focusNode?:FocusNode,
+          autofocus?:boolean,
+          backgroundColor?:Color,
+          padding?:EdgeInsets,
+          visualDensity?:VisualDensity,
+          materialTapTargetSize?:MaterialTapTargetSize,
+          elevation?:number,
+          shadowColor?:Color,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.avatar = config.avatar;
+            this.label = config.label;
+            this.labelStyle = config.labelStyle;
+            this.labelPadding = config.labelPadding;
+            this.onPressed = config.onPressed;
+            this.pressElevation = config.pressElevation;
+            this.tooltip = config.tooltip;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.focusNode = config.focusNode;
+            this.autofocus = config.autofocus;
+            this.backgroundColor = config.backgroundColor;
+            this.padding = config.padding;
+            this.visualDensity = config.visualDensity;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.elevation = config.elevation;
+            this.shadowColor = config.shadowColor;
+        }
+    }
+}
+exports.ActionChip = ActionChip;
 class AnimationController extends Widget {
     ///TODO:
     dispose() { }
@@ -7106,7 +7295,7 @@ class AnimatedOpacity extends Widget {
           opacity?:number,
           curve?:Curve,
           duration?:Duration,
-          onEnd?:VoidCallback,
+          onEnd?:OnCallback,
           alwaysIncludeSemantics?:boolean
         }
      */
@@ -7163,7 +7352,7 @@ class AnimatedContainer extends Widget {
           transform?:Matrix4,
           curve?:Curve,
           duration?:Duration,
-          onEnd?:VoidCallback,
+          onEnd?:OnCallback,
         }
      */
     constructor(config) {
@@ -7204,7 +7393,7 @@ class AnimatedPhysicalModel extends Widget {
           animateShadowColor?:boolean,
           curve?:Curve,
           duration?:Duration,
-          onEnd?:VoidCallback
+          onEnd?:OnCallback
         }
      */
     constructor(config) {
@@ -7241,7 +7430,7 @@ class AnimatedPositioned extends Widget {
           height?:number,
           curve?:Curve,
           duration?:Duration,
-          onEnd?:VoidCallback,
+          onEnd?:OnCallback,
         }
      */
     constructor(config) {
@@ -7301,7 +7490,7 @@ class AnimatedDefaultTextStyle extends Widget {
           maxLines?:number,
           curve?:Curve,
           duration?:Duration,
-          onEnd?:VoidCallback
+          onEnd?:OnCallback
         }
      */
     constructor(config) {
@@ -7542,7 +7731,7 @@ class BackButton extends Widget {
      * @param config config:
         {
           key?:Key,
-          onPressed?:VoidCallback,
+          onPressed?:OnCallback,
         }
      */
     constructor(config) {
@@ -7571,12 +7760,31 @@ class Builder extends Widget {
     }
 }
 exports.Builder = Builder;
+class ColorFiltered extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          colorFilter:ColorFilter,
+          child?:Color,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.colorFilter = config.colorFilter;
+            this.child = config.child;
+        }
+    }
+}
+exports.ColorFiltered = ColorFiltered;
 class CloseButton extends Widget {
     /**
      * @param config config:
         {
           key?:Key,
-          onPressed?:VoidCallback,
+          onPressed?:OnCallback,
           color?:Color,
         }
      */
@@ -7650,6 +7858,65 @@ class Center extends Widget {
     }
 }
 exports.Center = Center;
+class ChoiceChip extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          avatar?:Widget,
+          label:Widget,
+          labelStyle?:TextStyle,
+          labelPadding?:EdgeInsets,
+          selected?:boolean,
+          onSelected?:OnCallbackBoolean,
+          pressElevation?:number,
+          disabledColor?:Color,
+          selectedColor?:Color,
+          tooltip?:string,
+          shape?:ShapeBorder,
+          clipBehavior?:Clip,
+          focusNode?:FocusNode,
+          autofocus?:boolean,
+          backgroundColor?:Color,
+          padding?:EdgeInsets,
+          visualDensity?:VisualDensity,
+          materialTapTargetSize?:MaterialTapTargetSize,
+          elevation?:number,
+          shadowColor?:Color,
+          selectedShadowColor?:Color,
+          avatarBorder?:ShapeBorder,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.avatar = config.avatar;
+            this.label = config.label;
+            this.labelStyle = config.labelStyle;
+            this.labelPadding = config.labelPadding;
+            this.selected = config.selected;
+            this.onSelected = config.onSelected;
+            this.pressElevation = config.pressElevation;
+            this.disabledColor = config.disabledColor;
+            this.selectedColor = config.selectedColor;
+            this.tooltip = config.tooltip;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.focusNode = config.focusNode;
+            this.autofocus = config.autofocus;
+            this.backgroundColor = config.backgroundColor;
+            this.padding = config.padding;
+            this.visualDensity = config.visualDensity;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.elevation = config.elevation;
+            this.shadowColor = config.shadowColor;
+            this.selectedShadowColor = config.selectedShadowColor;
+            this.avatarBorder = config.avatarBorder;
+        }
+    }
+}
+exports.ChoiceChip = ChoiceChip;
 class ColoredBox extends Widget {
     /**
      * @param config config:
@@ -7707,7 +7974,7 @@ class Chip extends Widget {
           labelStyle?:TextStyle,
           labelPadding?:EdgeInsets,
           deleteIcon?:Widget,
-          onDeleted?:VoidCallback,
+          onDeleted?:OnCallback,
           deleteIconColor?:Color,
           deleteButtonTooltipMessage?:string,
           clipBehavior?:Clip,
@@ -7768,7 +8035,7 @@ class CheckboxListTile extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidCallbackBoolean,
+          onChanged:OnCallbackBoolean,
           activeColor?:Color,
           checkColor?:Color,
           title?:Widget,
@@ -7811,7 +8078,7 @@ class Checkbox extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidCallbackBoolean,
+          onChanged:OnCallbackBoolean,
           activeColor?:Color,
           checkColor?:Color,
           focusColor?:Color,
@@ -7847,7 +8114,7 @@ class CheckboxEx extends Widget {
           key?:Key,
           value:boolean,
           tristate?:boolean,
-          onChanged:VoidCallbackBoolean,
+          onChanged:OnCallbackBoolean,
           activeColor?:Color,
           width?:number,
           checkColor?:Color,
@@ -7871,6 +8138,44 @@ class CheckboxEx extends Widget {
     }
 }
 exports.CheckboxEx = CheckboxEx;
+class ClipRect extends Widget {
+    /**
+     * @param config config:
+        {
+          child?:Widget,
+          clipBehavior?:Clip,
+          key?:Key
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.clipBehavior = config.clipBehavior;
+            this.child = config.child;
+        }
+    }
+}
+exports.ClipRect = ClipRect;
+class ClipOval extends Widget {
+    /**
+     * @param config config:
+        {
+          child?:Widget,
+          clipBehavior?:Clip,
+          key?:Key
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.clipBehavior = config.clipBehavior;
+            this.child = config.child;
+        }
+    }
+}
+exports.ClipOval = ClipOval;
 class ClipRRect extends Widget {
     /**
      * @param config config:
@@ -7911,25 +8216,6 @@ class ConstrainedBox extends Widget {
     }
 }
 exports.ConstrainedBox = ConstrainedBox;
-class CustomSingleChildLayout extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          delegate?:any,
-          key?:Key,
-        }
-     */
-    constructor(config) {
-        super();
-        if (config != null && config != undefined) {
-            this.key = config.key;
-            this.delegate = config.delegate;
-            this.child = config.child;
-        }
-    }
-}
-exports.CustomSingleChildLayout = CustomSingleChildLayout;
 class Column extends Widget {
     /**
      * @param config config:
@@ -8153,7 +8439,7 @@ class DropdownMenuItem extends Widget {
           child:Widget,
           value?:number,
           key?:Key,
-          onTap?:VoidCallback,
+          onTap?:OnCallback,
         }
      */
     constructor(config) {
@@ -8367,7 +8653,7 @@ class ExpandIcon extends Widget {
           key?:Key,
           isExpanded?:boolean,
           size?:number,
-          onPressed:VoidCallbackBoolean,
+          onPressed:OnCallbackBoolean,
           padding?:EdgeInsets,
           color?:Color,
           disabledColor?:Color,
@@ -8398,7 +8684,7 @@ class ExpansionTile extends Widget {
           title?:Widget,
           subtitle?:Widget,
           backgroundColor?:Color,
-          onExpansionChanged?:VoidCallbackBoolean,
+          onExpansionChanged?:OnCallbackBoolean,
           children?:Array<Widget>,
           trailing?:Widget,
           initiallyExpanded?:boolean,
@@ -8451,6 +8737,69 @@ class Flexible extends Widget {
     }
 }
 exports.Flexible = Flexible;
+class FilterChip extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          avatar?:Widget,
+          label:Widget,
+          labelStyle?:TextStyle,
+          labelPadding?:EdgeInsets,
+          selected?:boolean,
+          onSelected:OnCallbackBoolean,
+          pressElevation?:number,
+          disabledColor?:Color,
+          selectedColor?:Color,
+          tooltip?:string,
+          shape?:ShapeBorder,
+          clipBehavior?:Clip,
+          focusNode?:FocusNode,
+          autofocus?:boolean,
+          backgroundColor?:Color,
+          padding?:EdgeInsets,
+          visualDensity?:VisualDensity,
+          materialTapTargetSize?:MaterialTapTargetSize,
+          elevation?:number,
+          shadowColor?:Color,
+          selectedShadowColor?:Color,
+          showCheckmark?:boolean,
+          checkmarkColor?:Color,
+          avatarBorder?:ShapeBorder,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.avatar = config.avatar;
+            this.label = config.label;
+            this.labelStyle = config.labelStyle;
+            this.labelPadding = config.labelPadding;
+            this.selected = config.selected;
+            this.onSelected = config.onSelected;
+            this.pressElevation = config.pressElevation;
+            this.disabledColor = config.disabledColor;
+            this.selectedColor = config.selectedColor;
+            this.tooltip = config.tooltip;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.focusNode = config.focusNode;
+            this.autofocus = config.autofocus;
+            this.backgroundColor = config.backgroundColor;
+            this.padding = config.padding;
+            this.visualDensity = config.visualDensity;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.elevation = config.elevation;
+            this.shadowColor = config.shadowColor;
+            this.selectedShadowColor = config.selectedShadowColor;
+            this.showCheckmark = config.showCheckmark;
+            this.checkmarkColor = config.checkmarkColor;
+            this.avatarBorder = config.avatarBorder;
+        }
+    }
+}
+exports.FilterChip = FilterChip;
 class FittedBox extends Widget {
     /**
      * @param config config:
@@ -8551,9 +8900,9 @@ class FlatButton extends Widget {
      * @param config config:
         {
           child:Widget,
-          onPressed:VoidCallback,
+          onPressed:OnCallback,
           padding?:EdgeInsets;,
-          onHighlightChanged?:VoidCallbackBoolean,
+          onHighlightChanged?:OnCallbackBoolean,
           textTheme?:ButtonTextTheme,
           textColor?:Color,
           disabledTextColor?:Color,
@@ -8567,7 +8916,7 @@ class FlatButton extends Widget {
           materialTapTargetSize?:MaterialTapTargetSize,
           key?:Key,
   
-          onLongPress?: VoidCallback,
+          onLongPress?: OnCallback,
           focusColor?: Color,
           hoverColor?: Color,
           visualDensity?: VisualDensity,
@@ -8604,9 +8953,9 @@ class FlatButton extends Widget {
      * @param config config:
         {
           child:Widget,
-          onPressed:VoidCallback,
+          onPressed:OnCallback,
           padding?:EdgeInsets,
-          onHighlightChanged?:VoidCallbackBoolean,
+          onHighlightChanged?:OnCallbackBoolean,
           textTheme?:ButtonTextTheme,
           textColor?:Color,
           disabledTextColor?:Color,
@@ -8620,7 +8969,7 @@ class FlatButton extends Widget {
           materialTapTargetSize?:MaterialTapTargetSize,
           key?:Key,
   
-          onLongPress?: VoidCallback,
+          onLongPress?: OnCallback,
           focusColor?: Color,
           hoverColor?: Color,
           autofocus?: boolean,
@@ -8676,7 +9025,7 @@ class FloatingActionButton extends Widget {
           hoverElevation?:number,
           highlightElevation?:number,
           disabledElevation?:number,
-          onPressed:VoidCallback,
+          onPressed:OnCallback,
           mini?:boolean,
           shape?:ShapeBorder,
           clipBehavior?:Clip,
@@ -8814,31 +9163,31 @@ class GestureDetector extends Widget {
       {
         key?:Key,
         child?:Widget,
-        onTap?:VoidCallback,
-        onTapDown?:VoidTapDown,
-        onTapUp?:VoidTapUp,
-        onTapCancel?:VoidCallback,
-        onDoubleTap?:VoidCallback,
-        onLongPress?:VoidCallback,
-        onLongPressUp?:VoidCallback,
-        onVerticalDragDown?:VoidDragDown,
-        onVerticalDragStart?:VoidDragStart,
-        onVerticalDragUpdate?:VoidDragUpdate,
-        onVerticalDragEnd?:VoidDragEnd,
-        onVerticalDragCancel?:VoidCallback,
-        onHorizontalDragDown?:VoidDragDown,
-        onHorizontalDragStart?:VoidDragStart,
-        onHorizontalDragUpdate?:VoidDragUpdate,
-        onHorizontalDragEnd?:VoidDragEnd,
-        onHorizontalDragCancel?:VoidCallback,
-        onPanDown?:VoidDragDown,
-        onPanStart?:VoidDragStart,
-        onPanUpdate?:VoidDragUpdate,
-        onPanEnd?:VoidDragEnd,
-        onPanCancel?:VoidCallback,
-        onScaleStart?:VoidScaleStart,
-        onScaleUpdate?:VoidScaleUpdate,
-        onScaleEnd?:VoidScaleEnd,
+        onTap?:OnCallback,
+        onTapDown?:OnTapDown,
+        onTapUp?:OnTapUp,
+        onTapCancel?:OnCallback,
+        onDoubleTap?:OnCallback,
+        onLongPress?:OnCallback,
+        onLongPressUp?:OnCallback,
+        onVerticalDragDown?:OnDragDown,
+        onVerticalDragStart?:OnDragStart,
+        onVerticalDragUpdate?:OnDragUpdate,
+        onVerticalDragEnd?:OnDragEnd,
+        onVerticalDragCancel?:OnCallback,
+        onHorizontalDragDown?:OnDragDown,
+        onHorizontalDragStart?:OnDragStart,
+        onHorizontalDragUpdate?:OnDragUpdate,
+        onHorizontalDragEnd?:OnDragEnd,
+        onHorizontalDragCancel?:OnCallback,
+        onPanDown?:OnDragDown,
+        onPanStart?:OnDragStart,
+        onPanUpdate?:OnDragUpdate,
+        onPanEnd?:OnDragEnd,
+        onPanCancel?:OnCallback,
+        onScaleStart?:OnScaleStart,
+        onScaleUpdate?:OnScaleUpdate,
+        onScaleEnd?:OnScaleEnd,
         behavior?:HitTestBehavior,
         excludeFromSemantics?:boolean,
       }
@@ -8879,6 +9228,57 @@ class GestureDetector extends Widget {
     }
 }
 exports.GestureDetector = GestureDetector;
+class GridView extends Widget {
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        scrollDirection?:Axis,
+        reverse?:boolean,
+        controller?:ScrollController,
+        primary?:boolean,
+        physics?:ScrollPhysics,
+        shrinkWrap?:boolean,
+        padding?:EdgeInsets,
+        gridDelegate:SliverGridDelegate,
+        addAutomaticKeepAlives?:boolean,
+        addRepaintBoundaries?:boolean,
+        addSemanticIndexes?:boolean,
+        cacheExtent?:number,
+        children?:Array<Widget>,
+        semanticChildCount?:number,
+        dragStartBehavior?:DragStartBehavior,
+        clipBehavior?:Clip,
+        keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
+        restorationId?:string,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.scrollDirection = config.scrollDirection;
+            this.reverse = config.reverse;
+            this.controller = config.controller;
+            this.primary = config.primary;
+            this.physics = config.physics;
+            this.shrinkWrap = config.shrinkWrap;
+            this.padding = config.padding;
+            this.gridDelegate = config.gridDelegate;
+            this.addAutomaticKeepAlives = config.addAutomaticKeepAlives;
+            this.addRepaintBoundaries = config.addRepaintBoundaries;
+            this.addSemanticIndexes = config.addSemanticIndexes;
+            this.cacheExtent = config.cacheExtent;
+            this.children = config.children;
+            this.semanticChildCount = config.semanticChildCount;
+            this.dragStartBehavior = config.dragStartBehavior;
+            this.clipBehavior = config.clipBehavior;
+            this.keyboardDismissBehavior = config.keyboardDismissBehavior;
+            this.restorationId = config.restorationId;
+        }
+    }
+}
+exports.GridView = GridView;
 class GridTileBar extends Widget {
     /**
      * @param config config:
@@ -8983,6 +9383,81 @@ class InputDecorator extends Widget {
     }
 }
 exports.InputDecorator = InputDecorator;
+class InputChip extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          avatar?:Widget,
+          label:Widget,
+          labelStyle?:TextStyle,
+          labelPadding?:EdgeInsets,
+          selected?:boolean,
+          isEnabled?:boolean,
+          onSelected?:OnCallbackBoolean,
+          deleteIcon?:Widget,
+          onDeleted?:OnCallback,
+          deleteIconColor?:Color,
+          deleteButtonTooltipMessage?:string,
+          onPressed?:OnCallback,
+          pressElevation?:number,
+          disabledColor?:Color,
+          selectedColor?:Color,
+          tooltip?:string,
+          shape?:ShapeBorder,
+          clipBehavior?:Clip,
+          focusNode?:FocusNode,
+          autofocus?:boolean,
+          backgroundColor?:Color,
+          padding?:EdgeInsets,
+          visualDensity?:VisualDensity,
+          materialTapTargetSize?:MaterialTapTargetSize,
+          elevation?:number,
+          shadowColor?:Color,
+          selectedShadowColor?:Color,
+          showCheckmark?:boolean,
+          checkmarkColor?:Color,
+          avatarBorder?:ShapeBorder,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.avatar = config.avatar;
+            this.label = config.label;
+            this.labelStyle = config.labelStyle;
+            this.labelPadding = config.labelPadding;
+            this.selected = config.selected;
+            this.isEnabled = config.isEnabled;
+            this.onSelected = config.onSelected;
+            this.deleteIcon = config.deleteIcon;
+            this.onDeleted = config.onDeleted;
+            this.deleteIconColor = config.deleteIconColor;
+            this.deleteButtonTooltipMessage = config.deleteButtonTooltipMessage;
+            this.onPressed = config.onPressed;
+            this.pressElevation = config.pressElevation;
+            this.disabledColor = config.disabledColor;
+            this.selectedColor = config.selectedColor;
+            this.tooltip = config.tooltip;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.focusNode = config.focusNode;
+            this.autofocus = config.autofocus;
+            this.backgroundColor = config.backgroundColor;
+            this.padding = config.padding;
+            this.visualDensity = config.visualDensity;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.elevation = config.elevation;
+            this.shadowColor = config.shadowColor;
+            this.selectedShadowColor = config.selectedShadowColor;
+            this.showCheckmark = config.showCheckmark;
+            this.checkmarkColor = config.checkmarkColor;
+            this.avatarBorder = config.avatarBorder;
+        }
+    }
+}
+exports.InputChip = InputChip;
 class IconSpan extends Widget {
     /**
      * @param config config:
@@ -9111,7 +9586,7 @@ class IconButton extends Widget {
         {
           key?:Key,
           icon:Widget,
-          onPressed:VoidCallback,
+          onPressed:OnCallback,
           iconSize?:number,
           padding?:EdgeInsets,
           alignment?:Alignment,
@@ -9209,13 +9684,13 @@ class InkResponse extends Widget {
         {
           key?:Key,
           child?:Widget,
-          onTap?:VoidCallback,
-          onTapDown?:VoidTapDown,
-          onTapCancel?:VoidCallback,
-          onDoubleTap?:VoidCallback,
-          onLongPress?:VoidCallback,
-          onHighlightChanged?:VoidCallbackBoolean,
-          onHover?:VoidCallbackBoolean,
+          onTap?:OnCallback,
+          onTapDown?:OnTapDown,
+          onTapCancel?:OnCallback,
+          onDoubleTap?:OnCallback,
+          onLongPress?:OnCallback,
+          onHighlightChanged?:OnCallbackBoolean,
+          onHover?:OnCallbackBoolean,
           containedInkWell?:boolean,
           highlightShape?:BoxShape,
           radius?:number,
@@ -9229,7 +9704,7 @@ class InkResponse extends Widget {
           enableFeedback?:boolean,
           excludeFromSemantics?:boolean,
           canRequestFocus ?:boolean,
-          onFocusChange?:VoidCallbackBoolean,
+          onFocusChange?:OnCallbackBoolean,
           autofocus?:boolean,
         }
      */
@@ -9270,13 +9745,13 @@ class InkWell extends Widget {
         {
           key?:Key,
           child?:Widget,
-          onTap?:VoidCallback,
-          onTapDown?:VoidTapDown,
-          onTapCancel?:VoidCallback,
-          onDoubleTap?:VoidCallback,
-          onLongPress?:VoidCallback,
-          onHighlightChanged?:VoidCallbackBoolean,
-          onHover?:VoidCallbackBoolean,
+          onTap?:OnCallback,
+          onTapDown?:OnTapDown,
+          onTapCancel?:OnCallback,
+          onDoubleTap?:OnCallback,
+          onLongPress?:OnCallback,
+          onHighlightChanged?:OnCallbackBoolean,
+          onHover?:OnCallbackBoolean,
           radius?:number,
           borderRadius?:BorderRadius,
           customBorder?:ShapeBorder,
@@ -9288,7 +9763,7 @@ class InkWell extends Widget {
           enableFeedback?:boolean,
           excludeFromSemantics?:boolean,
           canRequestFocus ?:boolean,
-          onFocusChange?:VoidCallbackBoolean,
+          onFocusChange?:OnCallbackBoolean,
           autofocus?:boolean,
         }
      */
@@ -9663,8 +10138,8 @@ class ListTile extends Widget {
           title?:Widget,
           subtitle?:Widget,
           trailing?:Widget,
-          onTap?:VoidCallback,
-          onLongPress?:VoidCallback,
+          onTap?:OnCallback,
+          onLongPress?:OnCallback,
           selected?:boolean,
           isThreeLine?:boolean,
           dense?:boolean,
@@ -10176,8 +10651,8 @@ class OutlineButton extends Widget {
         {
           key?:Key,
           child?:Widget,
-          onPressed:VoidCallback,
-          onLongPress?:VoidCallback,
+          onPressed:OnCallback,
+          onLongPress?:OnCallback,
           padding?:EdgeInsets,
           textTheme?:ButtonTextTheme,
           textColor?:Color,
@@ -10234,8 +10709,8 @@ class OutlineButton extends Widget {
         {
           key?:Key,
           child?:Widget,
-          onPressed?:VoidCallback,
-          onLongPress?:VoidCallback,
+          onPressed?:OnCallback,
+          onLongPress?:OnCallback,
           padding?:EdgeInsets,
           textTheme?:ButtonTextTheme,
           textColor?:Color,
@@ -10589,6 +11064,43 @@ class PopupMenuItem extends Widget {
     }
 }
 exports.PopupMenuItem = PopupMenuItem;
+class PageView extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          scrollDirection?:Axis,
+          reverse?:boolean,
+          controller?:PageController,
+          physics?:ScrollPhysics,
+          pageSnapping?:boolean,
+          onPageChanged?:OnCallbackNumber,
+          children?:Array<Widget>,
+          dragStartBehavior?:DragStartBehavior,
+          allowImplicitScrolling?:boolean,
+          restorationId?:string,
+          clipBehavior?:Clip,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.scrollDirection = config.scrollDirection;
+            this.reverse = config.reverse;
+            this.controller = config.controller;
+            this.physics = config.physics;
+            this.pageSnapping = config.pageSnapping;
+            this.onPageChanged = config.onPageChanged;
+            this.children = config.children;
+            this.dragStartBehavior = config.dragStartBehavior;
+            this.allowImplicitScrolling = config.allowImplicitScrolling;
+            this.restorationId = config.restorationId;
+            this.clipBehavior = config.clipBehavior;
+        }
+    }
+}
+exports.PageView = PageView;
 class Row extends Widget {
     /**
      * @param config config:
@@ -10618,6 +11130,83 @@ class Row extends Widget {
     }
 }
 exports.Row = Row;
+class RawChip extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          avatar?:Widget,
+          label:Widget,
+          labelStyle?:TextStyle,
+          labelPadding?:EdgeInsets,
+          selected?:boolean,
+          isEnabled?:boolean,
+          tapEnabled?:boolean,
+          onSelected?:OnCallbackBoolean,
+          deleteIcon?:Widget,
+          onDeleted?:OnCallback,
+          deleteIconColor?:Color,
+          deleteButtonTooltipMessage?:string,
+          onPressed?:OnCallback,
+          pressElevation?:number,
+          disabledColor?:Color,
+          selectedColor?:Color,
+          tooltip?:string,
+          shape?:ShapeBorder,
+          clipBehavior?:Clip,
+          focusNode?:FocusNode,
+          autofocus?:boolean,
+          backgroundColor?:Color,
+          padding?:EdgeInsets,
+          visualDensity?:VisualDensity,
+          materialTapTargetSize?:MaterialTapTargetSize,
+          elevation?:number,
+          shadowColor?:Color,
+          selectedShadowColor?:Color,
+          showCheckmark?:boolean,
+          checkmarkColor?:Color,
+          avatarBorder?:ShapeBorder,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.avatar = config.avatar;
+            this.label = config.label;
+            this.labelStyle = config.labelStyle;
+            this.labelPadding = config.labelPadding;
+            this.selected = config.selected;
+            this.isEnabled = config.isEnabled;
+            this.tapEnabled = config.tapEnabled;
+            this.onSelected = config.onSelected;
+            this.deleteIcon = config.deleteIcon;
+            this.onDeleted = config.onDeleted;
+            this.deleteIconColor = config.deleteIconColor;
+            this.deleteButtonTooltipMessage = config.deleteButtonTooltipMessage;
+            this.onPressed = config.onPressed;
+            this.pressElevation = config.pressElevation;
+            this.disabledColor = config.disabledColor;
+            this.selectedColor = config.selectedColor;
+            this.tooltip = config.tooltip;
+            this.shape = config.shape;
+            this.clipBehavior = config.clipBehavior;
+            this.focusNode = config.focusNode;
+            this.autofocus = config.autofocus;
+            this.backgroundColor = config.backgroundColor;
+            this.padding = config.padding;
+            this.visualDensity = config.visualDensity;
+            this.materialTapTargetSize = config.materialTapTargetSize;
+            this.elevation = config.elevation;
+            this.shadowColor = config.shadowColor;
+            this.selectedShadowColor = config.selectedShadowColor;
+            this.showCheckmark = config.showCheckmark;
+            this.checkmarkColor = config.checkmarkColor;
+            this.avatarBorder = config.avatarBorder;
+        }
+    }
+}
+exports.RawChip = RawChip;
 class RepaintBoundary extends Widget {
     /**
      * @param config config:
@@ -10712,8 +11301,8 @@ class RaisedButton extends Widget {
         {
           key?:Key,
           child?:Widget,
-          onPressed?:VoidCallback,
-          onHighlightChanged?:VoidCallbackBoolean,
+          onPressed?:OnCallback,
+          onHighlightChanged?:OnCallbackBoolean,
           padding?:EdgeInsets,
           textColor?:Color,
           disabledTextColor?:Color,
@@ -10730,7 +11319,7 @@ class RaisedButton extends Widget {
           materialTapTargetSize?:MaterialTapTargetSize,
           animationDuration?:Duration,
         
-          onLongPress?:VoidCallback,
+          onLongPress?:OnCallback,
           focusColor?:Color,
           hoverColor?:Color,
           focusElevation?:number,
@@ -10776,8 +11365,8 @@ class RaisedButton extends Widget {
         key?:Key,
         icon?:Widget,
         label?:Widget,
-        onPressed?:VoidCallback,
-        onHighlightChanged?:VoidCallbackBoolean,
+        onPressed?:OnCallback,
+        onHighlightChanged?:OnCallbackBoolean,
         padding?:EdgeInsets,
         textColor?:Color,
         disabledTextColor?:Color,
@@ -10793,7 +11382,7 @@ class RaisedButton extends Widget {
         clipBehavior?:Clip,
         materialTapTargetSize?:MaterialTapTargetSize,
         animationDuration?:Duration,
-        onLongPress?:VoidCallback,
+        onLongPress?:OnCallback,
         focusColor?:Color,
         hoverColor?:Color,
         focusElevation?:number,
@@ -10842,9 +11431,9 @@ class Radio extends Widget {
      * @param config config:
       {
         key?:Key,
-        value?:any,
-        groupValue?:any,
-        onChanged?:any,
+        value?:string,
+        groupValue?:string,
+        onChanged?:OnCallbackString,
         activeColor?:Color,
         materialTapTargetSize?:MaterialTapTargetSize
       }
@@ -10862,14 +11451,54 @@ class Radio extends Widget {
     }
 }
 exports.Radio = Radio;
+class RadioListTile extends Widget {
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        value:string,
+        groupValue:string,
+        onChanged:OnCallbackString,
+        toggleable?:boolean,
+        activeColor?:Color,
+        title?:Widget,
+        subtitle?:Widget,
+        isThreeLine?:boolean,
+        dense?:boolean,
+        secondary?:Widget,
+        selected?:boolean,
+        controlAffinity?:ListTileControlAffinity,
+        autofocus?:boolean,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.value = config.value;
+            this.groupValue = config.groupValue;
+            this.onChanged = config.onChanged;
+            this.toggleable = config.toggleable;
+            this.activeColor = config.activeColor;
+            this.title = config.title;
+            this.subtitle = config.subtitle;
+            this.isThreeLine = config.isThreeLine;
+            this.dense = config.dense;
+            this.secondary = config.secondary;
+            this.controlAffinity = config.controlAffinity;
+            this.autofocus = config.autofocus;
+        }
+    }
+}
+exports.RadioListTile = RadioListTile;
 class RawMaterialButton extends Widget {
     /**
      * @param config config:
       {
         key?:Key,
-        onPressed:VoidCallback,
-        onLongPress?:VoidCallback,
-        onHighlightChanged?:VoidCallbackBoolean,
+        onPressed:OnCallback,
+        onLongPress?:OnCallback,
+        onHighlightChanged?:OnCallbackBoolean,
         textStyle?:TextStyle,
         padding?:EdgeInsets,
         fillColor?:Color,
@@ -10956,6 +11585,58 @@ class RichText extends Widget {
     }
 }
 exports.RichText = RichText;
+class Step extends Widget {
+    /**
+     * @param config config:
+      {
+        title:Widget,
+        subtitle?:Widget,
+        content:Widget,
+        state?:StepState,
+        isActive?:boolean,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.title = config.title;
+            this.subtitle = config.subtitle;
+            this.content = config.content;
+            this.state = config.state;
+            this.isActive = config.isActive;
+        }
+    }
+}
+exports.Step = Step;
+class Stepper extends Widget {
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        steps?:Array<Step>,
+        physics?:ScrollPhysics,
+        type?:StepperType,
+        currentStep?:number,
+        onStepTapped?:OnCallbackNumber,
+        onStepContinue?:OnCallback,
+        onStepCancel?:OnCallback,
+      }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.steps = config.steps;
+            this.physics = config.physics;
+            this.type = config.type;
+            this.currentStep = config.currentStep;
+            this.onStepTapped = config.onStepTapped;
+            this.onStepContinue = config.onStepContinue;
+            this.onStepCancel = config.onStepCancel;
+        }
+    }
+}
+exports.Stepper = Stepper;
 class Spacer extends Widget {
     /**
      * @param config config:
@@ -11013,20 +11694,20 @@ class Semantics extends Widget {
         onLongPressHint?:string,
         textDirection?:TextDirection,
   
-        onTap?:VoidCallback,
-        onLongPress?:VoidCallback,
-        onScrollLeft?:VoidCallback,
-        onScrollRight?:VoidCallback,
-        onScrollUp?:VoidCallback,
-        onScrollDown?:VoidCallback,
-        onIncrease?:VoidCallback,
-        onDecrease?:VoidCallback,
-        onCopy?:VoidCallback,
-        onCut?:VoidCallback,
-        onPaste?:VoidCallback,
-        onDismiss?:VoidCallback,
-        onDidGainAccessibilityFocus?:VoidCallback,
-        onDidLoseAccessibilityFocus?:VoidCallback,
+        onTap?:OnCallback,
+        onLongPress?:OnCallback,
+        onScrollLeft?:OnCallback,
+        onScrollRight?:OnCallback,
+        onScrollUp?:OnCallback,
+        onScrollDown?:OnCallback,
+        onIncrease?:OnCallback,
+        onDecrease?:OnCallback,
+        onCopy?:OnCallback,
+        onCut?:OnCallback,
+        onPaste?:OnCallback,
+        onDismiss?:OnCallback,
+        onDidGainAccessibilityFocus?:OnCallback,
+        onDidLoseAccessibilityFocus?:OnCallback,
       }
      */
     constructor(config) {
@@ -11090,7 +11771,7 @@ class SwitchListTile extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidCallbackBoolean,
+          onChanged:OnCallbackBoolean,
           activeColor?:Color,
           activeTrackColor?:Color,
           inactiveThumbColor?:Color,
@@ -11135,7 +11816,7 @@ class Switch extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged?:VoidCallbackBoolean,
+          onChanged?:OnCallbackBoolean,
           activeColor?:Color,
           activeTrackColor?:Color,
           inactiveThumbColor?:Color,
@@ -11172,16 +11853,16 @@ class Slider extends Widget {
       {
         key?:Key,
         value?:number,
-        onChanged?:VoidCallbackNumber,
-        onChangeStart?:VoidCallbackNumber,
-        onChangeEnd?:VoidCallbackNumber,
+        onChanged?:OnCallbackNumber,
+        onChangeStart?:OnCallbackNumber,
+        onChangeEnd?:OnCallbackNumber,
         min?:number,
         max?:number,
         divisions?:number,
         label?:string,
         activeColor?:Color,
         inactiveColor?:Color,
-        semanticFormatterCallback?:VoidCallbackNumber,
+        semanticFormatterCallback?:OnCallbackNumber,
         autofocus?:boolean,
       }
      */
@@ -11350,7 +12031,7 @@ class SliverAppBar extends Widget {
         snap?:boolean,
         stretch?:boolean,
         stretchTriggerOffset?:number
-        onStretchTrigger?:VoidCallback,
+        onStretchTrigger?:OnCallback,
         shape?:any,
         toolbarHeight?:number,
       }
@@ -11934,7 +12615,7 @@ class SnackBar extends Widget {
         action?:any,
         duration?:Duration,
         animation?:any,
-        onVisible?:VoidCallback,
+        onVisible?:OnCallback,
       }
      */
     constructor(config) {
@@ -11960,7 +12641,7 @@ class SnackBarAction extends Widget {
       {
         key?:Widget,
         lable:string,
-        onPressed?:VoidCallback,
+        onPressed?:OnCallback,
         disabledTextColor?:Color,
         textColor?:Color,
       }
@@ -12008,6 +12689,82 @@ class SliverVisibility extends Widget {
     }
 }
 exports.SliverVisibility = SliverVisibility;
+class SelectableText extends Widget {
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        key?:Key,
+        focusNode?:FocusNode,
+        style?:TextStyle,
+        strutStyle?:StrutStyle,
+        textAlign?:TextAlign,
+        textDirection?:TextDirection,
+        textScaleFactor?:number,
+        showCursor?:boolean,
+        autofocus?:boolean,
+        toolbarOptions?:ToolbarOptions,
+        minLines?:number,
+        maxLines?:number,
+        cursorWidth?:number,
+        cursorHeight?:number,
+        cursorRadius?:Radius,
+        cursorColor?:Color,
+        dragStartBehavior?:DragStartBehavior,
+        enableInteractiveSelection?:boolean,
+        onTap?:OnCallback,
+        scrollPhysics?:ScrollPhysics,
+        textWidthBasis?:TextWidthBasis,
+      }
+     */
+    constructor(data, config) {
+        super();
+        this.data = data;
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.focusNode = config.focusNode;
+            this.style = config.style;
+            this.strutStyle = config.strutStyle;
+            this.textAlign = config.textAlign;
+            this.textDirection = config.textDirection;
+            this.textScaleFactor = config.textScaleFactor;
+            this.autofocus = config.autofocus;
+            this.toolbarOptions = config.toolbarOptions;
+            this.minLines = config.minLines;
+            this.maxLines = config.maxLines;
+            this.cursorWidth = config.cursorWidth;
+            this.cursorHeight = config.cursorHeight;
+            this.cursorColor = config.cursorColor;
+            this.dragStartBehavior = config.dragStartBehavior;
+            this.enableInteractiveSelection = config.enableInteractiveSelection;
+            this.onTap = config.onTap;
+            this.scrollPhysics = config.scrollPhysics;
+            this.textWidthBasis = config.textWidthBasis;
+        }
+    }
+    /**
+     * @param config config:
+      {
+        key?:Key,
+        style?:TextStyle,
+        textAlign?:TextAlign,
+        textDirection?:TextDirection,
+        softWrap?:boolean,
+        overflow?:TextOverflow,
+        textScaleFactor?:number,
+        maxLines?:number,
+        semanticsLabel?:string,
+        textWidthBasis?:TextWidthBasis,
+      }
+     */
+    static rich(data, config) {
+        var v = new SelectableText(data, config);
+        v.constructorName = "rich";
+        v.data = data;
+        return v;
+    }
+}
+exports.SelectableText = SelectableText;
 class TableRow extends Widget {
     /**
      * @param config config:
@@ -12213,7 +12970,7 @@ class TabBar extends Widget {
       {
         key?:Key,
         tabs?:Array<Widget>,
-        onTap?:VoidCallbackNumber,
+        onTap?:OnCallbackNumber,
         controller?:TabController,
         isScrollable?:boolean,
         indicatorColor?:Color,
@@ -12370,6 +13127,7 @@ class Text extends Widget {
       {
         key?:Key,
         style?:TextStyle,
+        strutStyle?:StrutStyle,
         textAlign?:TextAlign,
         textDirection?:TextDirection,
         softWrap?:boolean,
@@ -12386,6 +13144,7 @@ class Text extends Widget {
         if (config != null && config != undefined) {
             this.key = config.key;
             this.style = config.style;
+            this.strutStyle = config.strutStyle;
             this.textAlign = config.textAlign;
             this.textDirection = config.textDirection;
             this.softWrap = config.softWrap;
@@ -12491,12 +13250,12 @@ class TextFormField extends Widget {
         expands?:boolean,
         maxLength?:number,
         maxLengthEnforced?:boolean,
-        onChanged?:VoidCallbackString,
-        onTap?:VoidCallback,
-        onEditingComplete?:VoidCallback,
-        onFieldSubmitted?:VoidCallbackString,
-        onSaved?:VoidCallbackString,
-        validator?:VoidCallbackString,
+        onChanged?:OnCallbackString,
+        onTap?:OnCallback,
+        onEditingComplete?:OnCallback,
+        onFieldSubmitted?:OnCallbackString,
+        onSaved?:OnCallbackString,
+        validator?:OnCallbackString,
         enabled?:boolean,
         cursorWidth?:number,
         cursorRadius?:Radius,
@@ -12590,9 +13349,9 @@ class TextField extends Widget {
         expands?:boolean,
         maxLength?:number,
         maxLengthEnforced?:boolean,
-        onChanged?:VoidCallbackString,
-        onEditingComplete?:VoidCallback,
-        onSubmitted?:VoidCallbackString,
+        onChanged?:OnCallbackString,
+        onEditingComplete?:OnCallback,
+        onSubmitted?:OnCallbackString,
         enabled?:boolean,
         cursorWidth?:number,
         cursorRadius?:Radius,
@@ -12603,7 +13362,7 @@ class TextField extends Widget {
         scrollPadding?:EdgeInsets,
         dragStartBehavior?:DragStartBehavior,
         enableInteractiveSelection?:boolean,
-        onTap?:VoidCallback,
+        onTap?:OnCallback,
         scrollController?:ScrollController,
         scrollPhysics?:ScrollPhysics,
 
@@ -12782,7 +13541,7 @@ class WillPopScope extends Widget {
      * @param config config:
       {
         child:Widget,
-        onWillPop:VoidCallback,
+        onWillPop:OnCallback,
   
         key?:Key,
       }
@@ -12844,7 +13603,7 @@ class CupertinoButton extends Widget {
         {
           key?:Key,
           child:Widget,
-          onPressed:VoidCallback,
+          onPressed:OnCallback,
           padding?:EdgeInsets,
           color?:Color,
           disabledColor?:Color,
@@ -12872,7 +13631,7 @@ class CupertinoButton extends Widget {
         {
           key?:Key,
           child:Widget,
-          onPressed:VoidCallback,
+          onPressed:OnCallback,
           padding?:EdgeInsets,
           disabledColor?:Color,
           minSize?:number,
@@ -12894,7 +13653,7 @@ class CupertinoDialogAction extends Widget {
           key?:Key,
           isDefaultAction?:boolean,
           isDestructiveAction?:boolean,
-          onPressed?:VoidCallback,
+          onPressed?:OnCallback,
           child:Widget,
           textStyle?:TextStyle,
         }
@@ -12958,7 +13717,7 @@ class CupertinoNavigationBarBackButton extends Widget {
           key?:Key,
           color?:Color,
           previousPageTitle?:string,
-          onPressed?:VoidCallback,
+          onPressed?:OnCallback,
         }
      */
     constructor(config) {
@@ -12978,9 +13737,9 @@ class CupertinoSlider extends Widget {
         {
           key?:Key,
           value:number,
-          onChanged:VoidCallbackNumber,
-          onChangeStart?:VoidCallbackNumber,
-          onChangeEnd?:VoidCallbackNumber,
+          onChanged:OnCallbackNumber,
+          onChangeStart?:OnCallbackNumber,
+          onChangeEnd?:OnCallbackNumber,
           min?:number,
           max?:number,
           divisions?:number,
@@ -13011,7 +13770,7 @@ class CupertinoSwitch extends Widget {
         {
           key?:Key,
           value:boolean,
-          onChanged:VoidCallbackBoolean,
+          onChanged:OnCallbackBoolean,
           activeColor?:Color,
           trackColor?:Color,
           dragStartBehavior?:DragStartBehavior,
@@ -13030,6 +13789,66 @@ class CupertinoSwitch extends Widget {
     }
 }
 exports.CupertinoSwitch = CupertinoSwitch;
+class CupertinoSegmentedControl extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          children:Array<Widget>,
+          onValueChanged:OnCallbackNumber,
+          groupValue?:number,
+          unselectedColor?:Color,
+          selectedColor?:Color,
+          borderColor?:Color,
+          pressedColor?:Color,
+          padding?:EdgeInsets,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.children = config.children;
+            this.onValueChanged = config.onValueChanged;
+            this.groupValue = config.groupValue;
+            this.groupValue = config.groupValue;
+            this.unselectedColor = config.unselectedColor;
+            this.selectedColor = config.selectedColor;
+            this.borderColor = config.borderColor;
+            this.pressedColor = config.pressedColor;
+            this.padding = config.padding;
+        }
+    }
+}
+exports.CupertinoSegmentedControl = CupertinoSegmentedControl;
+class CupertinoSlidingSegmentedControl extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          children:Array<Widget>,
+          onValueChanged:OnCallbackNumber,
+          groupValue?:number,
+          thumbColor?:Color,
+          backgroundColor?:Color,
+          padding?:EdgeInsets,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.children = config.children;
+            this.onValueChanged = config.onValueChanged;
+            this.groupValue = config.groupValue;
+            this.groupValue = config.groupValue;
+            this.thumbColor = config.thumbColor;
+            this.backgroundColor = config.backgroundColor;
+            this.padding = config.padding;
+        }
+    }
+}
+exports.CupertinoSlidingSegmentedControl = CupertinoSlidingSegmentedControl;
 class CupertinoScrollbar extends Widget {
     /**
      * @param config config:
@@ -13115,7 +13934,7 @@ class CupertinoTabBar extends Widget {
         {
           key?:Key,
           items:Array<BottomNavigationBarItem>,
-          onTap?:VoidCallbackNumber,
+          onTap?:OnCallbackNumber,
           currentIndex?:number,
           backgroundColor?:Color,
           activeColor?:Color,
@@ -13149,12 +13968,32 @@ class CupertinoTabController extends DartClass {
      */
     constructor(config) {
         super();
+        this.createMirrorID();
         if (config != null && config != undefined) {
             this.initialIndex = config.initialIndex;
         }
     }
 }
 exports.CupertinoTabController = CupertinoTabController;
+class CupertinoTabView extends Widget {
+    /**
+     * @param config config:
+        {
+          key?:Key,
+          defaultTitle?:string,
+          child:Widget,
+        }
+     */
+    constructor(config) {
+        super();
+        if (config != null && config != undefined) {
+            this.key = config.key;
+            this.defaultTitle = this.defaultTitle;
+            this.child = config.child;
+        }
+    }
+}
+exports.CupertinoTabView = CupertinoTabView;
 class CupertinoTheme extends Widget {
     /**
      * @param config config:
@@ -13452,7 +14291,7 @@ class BottomSheet extends Widget {
           elevation?:number,
           shape?:ShapeBorder,
           clipBehavior?:Clip,
-          onClosing?:VoidCallback,
+          onClosing?:OnCallback,
           child?:Widget,
         }
      */
@@ -13522,7 +14361,7 @@ class CupertinoActionSheetAction extends Widget {
         {
           key?:Key,
           child:Widget,
-          onPressed:VoidCallback,
+          onPressed:OnCallback,
           isDefaultAction?:boolean,
           isDestructiveAction?:boolean,
         }
@@ -13576,7 +14415,7 @@ class CustomAlertDialogButton extends Widget {
             bgColor?:Color,
             gradient?:Gradient,
             radius?:BorderRadius,
-            onPressed?:VoidCallback,
+            onPressed?:OnCallback,
           }
        */
     constructor(config) {
@@ -13642,7 +14481,7 @@ class ShowCustomAlertDialog extends ShowBaseDialog {
             desc?:string,
             content?:Widget,
             actions?:Array<CustomAlertDialogButton>,
-            closeFunction?:VoidCallback,
+            closeFunction?:OnCallback,
           }
        */
     constructor(config) {
@@ -13688,7 +14527,7 @@ class ShowSimpleCustomDialog extends ShowBaseDialog {
             desc?:string,
             content?:Widget,
             actions?:Array<CustomDialogButtonInfo>,
-            onTap?:VoidCallbackNumber,
+            onTap?:OnCallbackNumber,
           }
        */
     constructor(config) {
@@ -13714,7 +14553,7 @@ class ShowSimpleAlertDialog extends ShowBaseDialog {
             desc?:string,
             descContent?:Widget,
             actions:Array<SimpleDialogButtonInfo>,
-            onTap?:VoidCallbackNumber,
+            onTap?:OnCallbackNumber,
             barrierDismissible?:boolean,
           }
        */
@@ -13741,7 +14580,7 @@ class ShowSimpleCupertinoDialog extends ShowBaseDialog {
             desc?:string,
             descContent?:Widget,
             actions:Array<SimpleDialogButtonInfo>,
-            onTap?:VoidCallbackNumber,
+            onTap?:OnCallbackNumber,
             barrierDismissible?:boolean,
           }
        */
@@ -13766,7 +14605,7 @@ class ShowCustomActionSheet extends ShowBaseDialog {
             title?:string,
             titleContent?:Widget,
             itemList:Array<string>,
-            onTap:VoidCallbackNumber,
+            onTap:OnCallbackNumber,
           }
        */
     constructor(config) {
@@ -13787,7 +14626,7 @@ class ShowSimpleActionSheet extends ShowBaseDialog {
             title?:string,
             titleContent?:Widget,
             itemList:Array<string>,
-            onTap:VoidCallbackNumber,
+            onTap:OnCallbackNumber,
           }
        */
     constructor(config) {
@@ -13810,7 +14649,7 @@ class ShowCustomPopupMenu extends ShowBaseDialog {
             barrierDismissible?:boolean,
             bgColor?:Color,
             textFontSize?:number,
-            onTap?:VoidCallbackNumber,
+            onTap?:OnCallbackNumber,
           }
        */
     constructor(config) {
@@ -14905,7 +15744,7 @@ class PullToRefreshFooter extends Widget {
      * @param config config:
         {
           key?:Key,
-          onClick?: VoidCallback,
+          onClick?: OnCallback,
           loadStyle?: PullToRefreshLoadStyle,
           height?: number,
           textStyle?:TextStyle,
@@ -14934,7 +15773,7 @@ class PullToRefreshClassicFooter extends Widget {
      * @param config config:
         {
           key?:Key,
-          onClick?: VoidCallback,
+          onClick?: OnCallback,
           loadStyle?: PullToRefreshLoadStyle,
           height?: number,
           textStyle?:TextStyle,
@@ -15197,10 +16036,10 @@ class PullToRefreshRefresher extends Widget {
           enablePullDown?:boolean,
           enablePullUp?:boolean,
           enableTwoLevel?:boolean,
-          onRefresh?:VoidCallback,
-          onLoading?:VoidCallback,
-          onTwoLevel?:VoidCallback,
-          onOffsetChange?:VoidCallbackString,
+          onRefresh?:OnCallback,
+          onLoading?:OnCallback,
+          onTwoLevel?:OnCallback,
+          onOffsetChange?:OnCallbackString,
           dragStartBehavior?:DragStartBehavior,
           primary?:boolean,
           cacheExtent?:number,
@@ -15654,8 +16493,8 @@ class EasyRefresher extends Widget {
         {
           key?:Key,
           controller?:EasyRefreshController,
-          onRefresh?:VoidCallback,
-          onLoad?:VoidCallback,
+          onRefresh?:OnCallback,
+          onLoad?:OnCallback,
           enableControlFinishRefresh?:boolean,
           enableControlFinishLoad?:boolean,
           taskIndependence?:boolean,
@@ -15699,8 +16538,8 @@ class EasyRefresher extends Widget {
           key?:Key,
           listKey?:Key,
           controller?:EasyRefreshController,
-          onRefresh?:VoidCallback,
-          onLoad?:VoidCallback,
+          onRefresh?:OnCallback,
+          onLoad?:OnCallback,
           enableControlFinishRefresh?:boolean,
           enableControlFinishLoad?:boolean,
           taskIndependence?:boolean,

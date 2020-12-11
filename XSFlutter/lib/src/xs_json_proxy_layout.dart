@@ -49,7 +49,6 @@ class XSProxyRegisterHelperLayoutSeries {
     m.addAll(XSProxyCenter.registerProxy());
     m.addAll(XSProxyColumn.registerProxy());
     m.addAll(XSProxyConstrainedBox.registerProxy());
-    m.addAll(XSProxyCustomSingleChildLayout.registerProxy());
     m.addAll(XSProxyCustomMultiChildLayout.registerProxy());
     m.addAll(XSProxyCustomScrollView.registerProxy());
 
@@ -64,6 +63,7 @@ class XSProxyRegisterHelperLayoutSeries {
     m.addAll(XSProxyFractionallySizedBox.registerProxy());
 
     m.addAll(XSProxyGestureDetector.registerProxy());
+    m.addAll(XSProxyGridView.registerProxy());
 
     m.addAll(XSProxyIndexedStack.registerProxy());
     m.addAll(XSProxyIntrinsicHeight.registerProxy());
@@ -85,6 +85,8 @@ class XSProxyRegisterHelperLayoutSeries {
 
     m.addAll(XSProxyPadding.registerProxy());
     m.addAll(XSProxyPhysicalModel.registerProxy());
+    m.addAll(XSProxyPageView.registerProxy());
+    m.addAll(XSProxyPageController.registerProxy());
 
     m.addAll(XSProxyRow.registerProxy());
     m.addAll(XSProxyRotatedBox.registerProxy());
@@ -205,6 +207,29 @@ class XSProxyBaseline extends XSJsonObjProxy {
   }
 }
 
+//****** BindKey ******
+class XSProxyBindKey extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "BindKey";
+    return {
+      regClassName: () => XSProxyBindKey()..init(className: regClassName)
+    };
+  }
+
+  @override
+  GlobalKey constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return GlobalKey();
+  }
+
+  //mirrorObj 为一个AnimationController类的实例对象，把调用对象方法，路由到代理类
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map args, {InvokeCallback callback}) {
+    if (mirrorObj == null || !(mirrorObj is ScrollController)) {
+      return;
+    }
+  }
+}
+
 //-------------- C -----------------
 //****** Container ******
 class XSProxyContainer extends XSJsonObjProxy {
@@ -269,26 +294,6 @@ class XSProxyConstrainedBox extends XSJsonObjProxy {
     return ConstrainedBox(
       key: XSJSParse.getKey(context, bo, map, "key"),
       constraints: XSJSParse.getBoxConstraints(context, bo, map, "constraints"),
-      child: XSJSParse.getWidget(context, bo, map, "child"),
-    );
-  }
-}
-
-//****** CustomSingleChildLayout ******
-class XSProxyCustomSingleChildLayout extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "CustomSingleChildLayout";
-    return {
-      regClassName: () => XSProxyCustomSingleChildLayout()..init(className: regClassName)
-    };
-  }
-
-  @override
-  CustomSingleChildLayout constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return CustomSingleChildLayout(
-      key: XSJSParse.getKey(context, bo, map, "key"),
-      //TODO:delegate
-      delegate: null,
       child: XSJSParse.getWidget(context, bo, map, "child"),
     );
   }
@@ -533,28 +538,6 @@ class XSProxyFlow extends XSJsonObjProxy {
 }
 
 //-------------- G -----------------
-//****** BindKey ******
-class XSProxyBindKey extends XSJsonObjProxy {
-  static Map<String, CreateJsonObjProxyFun> registerProxy() {
-    final String regClassName = "BindKey";
-    return {
-      regClassName: () => XSProxyBindKey()..init(className: regClassName)
-    };
-  }
-
-  @override
-  GlobalKey constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    return GlobalKey();
-  }
-
-  //mirrorObj 为一个AnimationController类的实例对象，把调用对象方法，路由到代理类
-  @override
-  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map args, {InvokeCallback callback}) {
-    if (mirrorObj == null || !(mirrorObj is ScrollController)) {
-      return;
-    }
-  }
-}
 
 //****** GestureDetector ******
 class XSProxyGestureDetector extends XSJsonObjProxy {
@@ -597,6 +580,41 @@ class XSProxyGestureDetector extends XSJsonObjProxy {
       onScaleStart: XSJSParse.getValueChanged<ScaleStartDetails>(context, bo, map, "onScaleStart"),
       onScaleUpdate: XSJSParse.getValueChanged<ScaleUpdateDetails>(context, bo, map, "onScaleUpdate"),
       onScaleEnd: XSJSParse.getValueChanged<ScaleEndDetails>(context, bo, map, "onScaleEnd"),
+    );
+  }
+}
+
+//****** GridView ******
+class XSProxyGridView extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "GridView";
+    return {
+      regClassName: () => XSProxyGridView()..init(className: regClassName)
+    };
+  }
+
+  @override
+  GridView constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return GridView(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      scrollDirection: XSJSParse.getAxis(context, bo, map, "scrollDirection", defaultValue: Axis.vertical),
+      reverse: XSJSParse.getBool(context, bo, map, "reverse", defaultValue: false),
+      controller: XSJSParse.getObject(context, bo, map, "controller"),
+      primary: XSJSParse.getBool(context, bo, map, "primary"),
+      physics: XSJSParse.getScrollPhysics(context, bo, map, "physics"),
+      shrinkWrap: XSJSParse.getBool(context, bo, map, "shrinkWrap", defaultValue: false),
+      padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+      gridDelegate: XSJSParse.getObject(context, bo, map, "gridDelegate"),
+      addAutomaticKeepAlives: XSJSParse.getBool(context, bo, map, "shrinkWrap", defaultValue: true),
+      addRepaintBoundaries: XSJSParse.getBool(context, bo, map, "shrinkWrap", defaultValue: true),
+      addSemanticIndexes: XSJSParse.getBool(context, bo, map, "shrinkWrap", defaultValue: true),
+      cacheExtent: XSJSParse.getDouble(context, bo, map, "cacheExtent"),
+      children: XSJSParse.getWidgetList(context, bo, map, "children"),
+      semanticChildCount: XSJSParse.getInt(context, bo, map, "semanticChildCount"),
+      dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.start),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
+      keyboardDismissBehavior: XSJSParse.getScrollViewKeyboardDismissBehavior(context, bo, map, "keyboardDismissBehavior", defaultValue: ScrollViewKeyboardDismissBehavior.manual),
+      restorationId: XSJSParse.getString(context, bo, map, "restorationId"),
     );
   }
 }
@@ -1045,6 +1063,102 @@ class XSProxyPhysicalModel extends XSJsonObjProxy {
       color: XSJSParse.getColor(context, bo, map, "color"),
       shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor", defaultValue: const Color(0xFF000000)),
       child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
+//****** PageController ******
+class XSProxyPageController extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "PageController";
+    return {
+      regClassName: () => XSProxyPageController()..init(className: regClassName)
+    };
+  }
+
+  @override
+  PageController constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return PageController(
+      initialPage: XSJSParse.getInt(context, bo, map, "initialPage", defaultValue: 0),
+      keepPage: XSJSParse.getBool(context, bo, map, "keepPage", defaultValue: true),
+      viewportFraction: XSJSParse.getDouble(context, bo, map, "viewportFraction", defaultValue: 1.0),
+    );
+  }
+
+  //mirrorObj 为一个AnimationController类的实例对象，把调用对象方法，路由到代理类
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map args, {InvokeCallback callback}) {
+    if (mirrorObj == null || !(mirrorObj is PageController)) {
+      return;
+    }
+
+    var sc = mirrorObj as PageController;
+    if (funcName == 'jumpToPage') {
+      sc.jumpToPage(
+        XSJSParse.getInt(null, null, args, "page"),
+      );
+      return;
+    }
+
+    if (funcName == 'animateToPage') {
+      sc.animateToPage(
+        XSJSParse.getInt(null, null, args, "page"),
+        duration: XSJSParse.getDuration(null, null, args, "duration"),
+        curve: XSJSParse.getCurve(null, null, args, "curve"),
+      );
+      return;
+    }
+
+    if (funcName == 'nextPage') {
+      sc.nextPage(
+        duration: XSJSParse.getDuration(null, null, args, "duration"),
+        curve: XSJSParse.getCurve(null, null, args, "curve"),
+      );
+      return;
+    }
+
+    if (funcName == 'previousPage') {
+      sc.previousPage(
+        duration: XSJSParse.getDuration(null, null, args, "duration"),
+        curve: XSJSParse.getCurve(null, null, args, "curve"),
+      );
+      return;
+    }
+
+    //获取当前位置
+    if (funcName == 'page') {
+      if (callback != null) {
+        callback(sc.page);
+      }
+      return;
+    }
+  }
+}
+
+//****** PageView ******
+class XSProxyPageView extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "PageView";
+    return {
+      regClassName: () => XSProxyPageView()..init(className: regClassName)
+    };
+  }
+
+  @override
+  PageView constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return PageView(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      scrollDirection: XSJSParse.getAxis(context, bo, map, "scrollDirection", defaultValue: Axis.horizontal),
+      reverse: XSJSParse.getBool(context, bo, map, "reverse", defaultValue: false),
+      controller: XSJSParse.getObject(context, bo, map, "controller"),
+      physics: XSJSParse.getScrollPhysics(context, bo, map, "physics"),
+      pageSnapping: XSJSParse.getBool(context, bo, map, "pageSnapping", defaultValue: true),
+      onPageChanged: XSJSParse.getValueChanged(context, bo, map, "onPageChanged"),
+      children: XSJSParse.getWidgetList(context, bo, map, "children", defaultValue: const <Widget>[]),
+      dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.start),
+      allowImplicitScrolling: XSJSParse.getBool(context, bo, map, "allowImplicitScrolling", defaultValue: false),
+      restorationId: XSJSParse.getString(context, bo, map, "restorationId"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
     );
   }
 }

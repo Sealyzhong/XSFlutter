@@ -28,10 +28,13 @@ class XSProxyRegisterHelperCupertinoSeries {
     m.addAll(XSProxyCupertinoSwitch.registerProxy());
     m.addAll(XSProxyCupertinoScrollbar.registerProxy());
     m.addAll(XSProxyCupertinoSliverNavigationBar.registerProxy());
+    m.addAll(XSProxyCupertinoSegmentedControl.registerProxy());
+    m.addAll(XSProxyCupertinoSlidingSegmentedControl.registerProxy());
 
     m.addAll(XSProxyCupertinoTabBar.registerProxy());
     m.addAll(XSProxyCupertinoTheme.registerProxy());
     m.addAll(XSProxyCupertinoTabScaffold.registerProxy());
+    m.addAll(XSProxyCupertinoTabView.registerProxy());
     return m;
   }
 }
@@ -255,6 +258,68 @@ class XSProxyCupertinoScrollbar extends XSJsonObjProxy {
   }
 }
 
+//****** CupertinoSegmentedControl ******
+class XSProxyCupertinoSegmentedControl extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "CupertinoSegmentedControl";
+    return {
+      regClassName: () => XSProxyCupertinoSegmentedControl()..init(className: regClassName)
+    };
+  }
+
+  @override
+  CupertinoSegmentedControl constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    var list = XSJSParse.getWidgetList(context, bo, map, "children");
+    Map<int, Widget> children = Map<int, Widget>();
+    for (var i = 0; i < list.length; i++) {
+      children.addAll({
+        i: list[i]
+      });
+    }
+    return CupertinoSegmentedControl(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      children: children,
+      onValueChanged: XSJSParse.getValueChanged(context, bo, map, "onValueChanged"),
+      groupValue: XSJSParse.getInt(context, bo, map, "groupValue"),
+      unselectedColor: XSJSParse.getColor(context, bo, map, "unselectedColor"),
+      selectedColor: XSJSParse.getColor(context, bo, map, "selectedColor"),
+      borderColor: XSJSParse.getColor(context, bo, map, "borderColor"),
+      pressedColor: XSJSParse.getColor(context, bo, map, "pressedColor"),
+      padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+    );
+  }
+}
+
+//****** CupertinoSlidingSegmentedControl ******
+class XSProxyCupertinoSlidingSegmentedControl extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "CupertinoSlidingSegmentedControl";
+    return {
+      regClassName: () => XSProxyCupertinoSlidingSegmentedControl()..init(className: regClassName)
+    };
+  }
+
+  @override
+  CupertinoSlidingSegmentedControl constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    var list = XSJSParse.getWidgetList(context, bo, map, "children");
+    Map<int, Widget> children = Map<int, Widget>();
+    for (var i = 0; i < list.length; i++) {
+      children.addAll({
+        i: list[i]
+      });
+    }
+    return CupertinoSlidingSegmentedControl(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      children: children,
+      onValueChanged: XSJSParse.getValueChanged(context, bo, map, "onValueChanged"),
+      groupValue: XSJSParse.getInt(context, bo, map, "groupValue"),
+      thumbColor: XSJSParse.getColor(context, bo, map, "thumbColor", defaultValue: Color(0xFFFFFFFF)),
+      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor", defaultValue: Color.fromARGB(30, 118, 118, 128)),
+      padding: XSJSParse.getEdgeInsets(context, bo, map, "padding", defaultValue: EdgeInsets.symmetric(vertical: 2, horizontal: 3)),
+    );
+  }
+}
+
 //****** CupertinoSliverNavigationBar ******
 class XSProxyCupertinoSliverNavigationBar extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -361,8 +426,28 @@ class XSProxyCupertinoTabScaffold extends XSJsonObjProxy {
       key: XSJSParse.getKey(context, bo, map, "key"),
       tabBar: XSJSParse.getObject(context, bo, map, "tabBar"),
       tabBuilder: (BuildContext context, int index) {
-        List<Widget> children = XSJSParse.getWidgetList(context, bo, map, "children");
-        return children[index];
+        return XSJSParse.getWidgetListIndex(context, bo, map, "children");
+      },
+    );
+  }
+}
+
+//****** CupertinoTabView ******
+class XSProxyCupertinoTabView extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "CupertinoTabView";
+    return {
+      regClassName: () => XSProxyCupertinoTabView()..init(className: regClassName)
+    };
+  }
+
+  @override
+  CupertinoTabView constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return CupertinoTabView(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      defaultTitle: XSJSParse.getString(context, bo, map, "defaultTitle"),
+      builder: (BuildContext context) {
+        return XSJSParse.getWidgetListIndex(context, bo, map, "child");
       },
     );
   }

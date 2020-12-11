@@ -24,6 +24,8 @@ class XSProxyRegisterHelperBasicTypesSeries {
 
     m.addAll(XSProxyCircularNotchedRectangle.registerProxy());
     m.addAll(XSProxyClipRRect.registerProxy());
+    m.addAll(XSProxyClipRect.registerProxy());
+    m.addAll(XSProxyClipOval.registerProxy());
     m.addAll(XSProxyCircleAvatar.registerProxy());
     m.addAll(XSProxyChip.registerProxy());
 
@@ -228,6 +230,46 @@ class XSProxyClipRRect extends XSJsonObjProxy {
   }
 }
 
+//****** ClipRect ******
+class XSProxyClipRect extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "ClipRect";
+    return {
+      regClassName: () => XSProxyClipRect()..init(className: regClassName)
+    };
+  }
+
+  @override
+  ClipRect constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return ClipRect(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      clipper: XSJSParse.getObject(context, bo, map, "clipper"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.hardEdge),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
+//****** ClipOval ******
+class XSProxyClipOval extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "ClipOval";
+    return {
+      regClassName: () => XSProxyClipOval()..init(className: regClassName)
+    };
+  }
+
+  @override
+  ClipOval constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return ClipOval(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      clipper: XSJSParse.getObject(context, bo, map, "clipper"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.antiAlias),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
 //-------------- D -----------------
 //****** DropdownMenuItem ******
 class XSProxyDropdownMenuItem extends XSJsonObjProxy {
@@ -250,6 +292,25 @@ class XSProxyDropdownMenuItem extends XSJsonObjProxy {
 }
 
 //-------------- F -----------------
+//****** ColorFiltered ******
+class XSProxyColorFiltered extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "ColorFiltered";
+    return {
+      regClassName: () => XSProxyColorFiltered()..init(className: regClassName)
+    };
+  }
+
+  @override
+  ColorFiltered constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return ColorFiltered(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      colorFilter: XSJSParse.getColorFilter(context, bo, map, "colorFilter"),
+      child: XSJSParse.getWidget(context, bo, map, "child"),
+    );
+  }
+}
+
 //-------------- I -----------------
 
 //-------------- N -----------------
@@ -408,6 +469,8 @@ class XSProxyPreferredSize extends XSJsonObjProxy {
     );
   }
 }
+
+//-------------- R -----------------
 
 //-------------- S -----------------
 //****** SystemUiOverlayStyle ******

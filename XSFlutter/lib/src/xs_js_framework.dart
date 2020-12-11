@@ -339,8 +339,11 @@ class JSStatefulWidget extends StatefulWidget with JSBaseWidget {
   }
 }
 
-class JSWidgetState extends State<JSStatefulWidget> with SingleTickerProviderStateMixin {
+class JSWidgetState extends State<JSStatefulWidget> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   JSWidgetState();
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -359,6 +362,7 @@ class JSWidgetState extends State<JSStatefulWidget> with SingleTickerProviderSta
   }
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     XSJSLog.log("StatefulWidget:build begin: widgetID ${widget.widgetID} curBuildWidgetDataSeq:${widget.buildWidgetDataSeq} buildingWidgetDataSeq:${widget.buildingWidgetDataSeq}");
 

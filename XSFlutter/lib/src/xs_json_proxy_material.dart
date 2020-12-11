@@ -25,6 +25,7 @@ class XSProxyRegisterHelperMaterialSeries {
     Map<String, CreateJsonObjProxyFun> m = {};
 
     m.addAll(XSProxyAppBar.registerProxy());
+    m.addAll(XSProxyActionChip.registerProxy());
 
     m.addAll(XSProxyBuilder.registerProxy());
     m.addAll(XSProxyBottomAppBar.registerProxy());
@@ -33,6 +34,7 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyButtonBar.registerProxy());
     m.addAll(XSProxyBlockSemantics.registerProxy());
     m.addAll(XSProxyBanner.registerProxy());
+    m.addAll(XSProxyBackdropFilter.registerProxy());
 
     m.addAll(XSProxyCloseButtonSeries.registerProxy());
     m.addAll(XSProxyCard.registerProxy());
@@ -40,6 +42,7 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyCheckboxListTile.registerProxy());
     m.addAll(XSProxyCheckbox.registerProxy());
     m.addAll(XSProxyCheckboxEx.registerProxy());
+    m.addAll(XSProxyChoiceChip.registerProxy());
 
     m.addAll(XSProxyDefaultTabController.registerProxy());
     m.addAll(XSProxyDirectionality.registerProxy());
@@ -57,12 +60,14 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyFractionalTranslation.registerProxy());
     m.addAll(XSProxyFlatButton.registerProxy());
     m.addAll(XSProxyFloatingActionButton.registerProxy());
+    m.addAll(XSProxyFilterChip.registerProxy());
 
     m.addAll(XSProxyGridTile.registerProxy());
     m.addAll(XSProxyGridTileBar.registerProxy());
     m.addAll(XSProxyGridPaper.registerProxy());
 
     m.addAll(XSProxyIcon.registerProxy());
+    m.addAll(XSProxyInputChip.registerProxy());
     m.addAll(XSProxyIndexedSemantics.registerProxy());
     m.addAll(XSProxyImageIcon.registerProxy());
     m.addAll(XSProxyIconButton.registerProxy());
@@ -85,9 +90,12 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxyPopupMenuItem.registerProxy());
 
     m.addAll(XSProxyRadio.registerProxy());
+    m.addAll(XSProxyRadioListTile.registerProxy());
     m.addAll(XSProxyRouteSettings.registerProxy());
     m.addAll(XSProxyRawMaterialButton.registerProxy());
     m.addAll(XSProxyRaisedButton.registerProxy());
+    m.addAll(XSProxyRawChip.registerProxy());
+
     m.addAll(XSProxyScaffold.registerProxy());
     m.addAll(XSProxyScaffoldState.registerProxy());
     m.addAll(XSProxySemantics.registerProxy());
@@ -100,6 +108,8 @@ class XSProxyRegisterHelperMaterialSeries {
     m.addAll(XSProxySliverVisibility.registerProxy());
     m.addAll(XSProxySwitchListTile.registerProxy());
     m.addAll(XSProxySwitch.registerProxy());
+    m.addAll(XSProxyStep.registerProxy());
+    m.addAll(XSProxyStepper.registerProxy());
 
     m.addAll(XSProxyTabBar.registerProxy());
     m.addAll(XSProxyTabBarView.registerProxy());
@@ -150,6 +160,40 @@ class XSProxyAppBar extends XSJsonObjProxy {
         bottomOpacity: XSJSParse.getDouble(context, bo, map, "bottomOpacity", defaultValue: 1.0),
         toolbarHeight: XSJSParse.getDouble(context, bo, map, "toolbarHeight"),
       );
+}
+
+//****** ActionChip ******
+class XSProxyActionChip extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "ActionChip";
+    return {
+      regClassName1: () => XSProxyActionChip()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  ActionChip constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return ActionChip(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      avatar: XSJSParse.getWidget(context, bo, map, "avatar"),
+      label: XSJSParse.getWidget(context, bo, map, "label"),
+      labelStyle: XSJSParse.getTextStyle(context, bo, map, "labelStyle"),
+      labelPadding: XSJSParse.getEdgeInsets(context, bo, map, "labelPadding"),
+      onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
+      pressElevation: XSJSParse.getDouble(context, bo, map, "pressElevation"),
+      tooltip: XSJSParse.getString(context, bo, map, "tooltip"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+      focusNode: XSJSParse.getFocusNode(context, bo, map, "focusNode"),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
+      padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+      visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
+      materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+      elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
+      shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor"),
+    );
+  }
 }
 
 //-------------- B -----------------
@@ -218,6 +262,23 @@ class XSProxyBlockSemantics extends XSJsonObjProxy {
   BlockSemantics constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => BlockSemantics(
         key: XSJSParse.getKey(context, bo, map, "key"),
         blocking: XSJSParse.getBool(context, bo, map, "blocking", defaultValue: true),
+        child: XSJSParse.getWidget(context, bo, map, "child"),
+      );
+}
+
+//****** BackdropFilter ******
+class XSProxyBackdropFilter extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "BackdropFilter";
+    return {
+      regClassName1: () => XSProxyBackdropFilter()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  BackdropFilter constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) => BackdropFilter(
+        key: XSJSParse.getKey(context, bo, map, "key"),
+        filter: XSJSParse.getImageFilter(context, bo, map, "filter"),
         child: XSJSParse.getWidget(context, bo, map, "child"),
       );
 }
@@ -560,6 +621,45 @@ class XSProxyCheckboxEx extends XSJsonObjProxy {
       );
 }
 
+//****** ChoiceChip ******
+class XSProxyChoiceChip extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "ChoiceChip";
+    return {
+      regClassName1: () => XSProxyChoiceChip()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  ChoiceChip constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return ChoiceChip(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      avatar: XSJSParse.getWidget(context, bo, map, "avatar"),
+      label: XSJSParse.getWidget(context, bo, map, "label"),
+      labelStyle: XSJSParse.getTextStyle(context, bo, map, "labelStyle"),
+      labelPadding: XSJSParse.getEdgeInsets(context, bo, map, "labelPadding"),
+      selected: XSJSParse.getBool(context, bo, map, "selected"),
+      pressElevation: XSJSParse.getDouble(context, bo, map, "pressElevation"),
+      onSelected: XSJSParse.getValueChanged<bool>(context, bo, map, "onSelected"),
+      selectedColor: XSJSParse.getColor(context, bo, map, "selectedColor"),
+      disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
+      tooltip: XSJSParse.getString(context, bo, map, "tooltip"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+      focusNode: XSJSParse.getFocusNode(context, bo, map, "focusNode"),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
+      padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+      visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
+      materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+      elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
+      shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor"),
+      selectedShadowColor: XSJSParse.getColor(context, bo, map, "selectedShadowColor"),
+      avatarBorder: XSJSParse.getShapeBorder(context, bo, map, "avatarBorder", defaultValue: const CircleBorder()),
+    );
+  }
+}
+
 //-------------- D -----------------
 //****** DefaultTabController ******
 class XSProxyDefaultTabController extends XSJsonObjProxy {
@@ -768,6 +868,47 @@ class XSProxyFloatingActionButton extends XSJsonObjProxy {
       materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
       isExtended: XSJSParse.getBool(context, bo, map, "isExtended", defaultValue: false),
       autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+    );
+  }
+}
+
+//****** FilterChip ******
+class XSProxyFilterChip extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "FilterChip";
+    return {
+      regClassName1: () => XSProxyFilterChip()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  FilterChip constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return FilterChip(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      avatar: XSJSParse.getWidget(context, bo, map, "avatar"),
+      label: XSJSParse.getWidget(context, bo, map, "label"),
+      labelStyle: XSJSParse.getTextStyle(context, bo, map, "labelStyle"),
+      labelPadding: XSJSParse.getEdgeInsets(context, bo, map, "labelPadding"),
+      selected: XSJSParse.getBool(context, bo, map, "selected", defaultValue: false),
+      onSelected: XSJSParse.getValueChanged<bool>(context, bo, map, "onSelected"),
+      pressElevation: XSJSParse.getDouble(context, bo, map, "pressElevation"),
+      disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
+      selectedColor: XSJSParse.getColor(context, bo, map, "selectedColor"),
+      tooltip: XSJSParse.getString(context, bo, map, "tooltip"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+      focusNode: XSJSParse.getFocusNode(context, bo, map, "focusNode"),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
+      padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+      visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
+      materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+      elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
+      shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor"),
+      selectedShadowColor: XSJSParse.getColor(context, bo, map, "selectedShadowColor"),
+      showCheckmark: XSJSParse.getBool(context, bo, map, "showCheckmark"),
+      checkmarkColor: XSJSParse.getColor(context, bo, map, "checkmarkColor"),
+      avatarBorder: XSJSParse.getShapeBorder(context, bo, map, "avatarBorder", defaultValue: const CircleBorder()),
     );
   }
 }
@@ -1047,6 +1188,53 @@ class XSProxyIcon extends XSJsonObjProxy {
       color: XSJSParse.getColor(context, bo, map, "color"),
       semanticLabel: XSJSParse.getString(context, bo, map, "semanticLabel"),
       textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
+    );
+  }
+}
+
+//****** InputChip ******
+class XSProxyInputChip extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "InputChip";
+    return {
+      regClassName1: () => XSProxyInputChip()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  InputChip constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return InputChip(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      avatar: XSJSParse.getWidget(context, bo, map, "avatar"),
+      label: XSJSParse.getWidget(context, bo, map, "label"),
+      labelStyle: XSJSParse.getTextStyle(context, bo, map, "labelStyle"),
+      labelPadding: XSJSParse.getEdgeInsets(context, bo, map, "labelPadding"),
+      selected: XSJSParse.getBool(context, bo, map, "selected", defaultValue: false),
+      isEnabled: XSJSParse.getBool(context, bo, map, "isEnabled", defaultValue: true),
+      onSelected: XSJSParse.getValueChanged<bool>(context, bo, map, "onSelected"),
+      deleteIcon: XSJSParse.getWidget(context, bo, map, "deleteIcon"),
+      onDeleted: XSJSParse.getVoidCallback(context, bo, map, "onDeleted"),
+      deleteIconColor: XSJSParse.getColor(context, bo, map, "deleteIconColor"),
+      deleteButtonTooltipMessage: XSJSParse.getString(context, bo, map, "deleteButtonTooltipMessage"),
+      onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
+      pressElevation: XSJSParse.getDouble(context, bo, map, "pressElevation"),
+      disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
+      selectedColor: XSJSParse.getColor(context, bo, map, "selectedColor"),
+      tooltip: XSJSParse.getString(context, bo, map, "tooltip"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+      focusNode: XSJSParse.getFocusNode(context, bo, map, "focusNode"),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
+      padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+      visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
+      materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+      elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
+      shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor"),
+      selectedShadowColor: XSJSParse.getColor(context, bo, map, "selectedShadowColor"),
+      showCheckmark: XSJSParse.getBool(context, bo, map, "showCheckmark"),
+      checkmarkColor: XSJSParse.getColor(context, bo, map, "checkmarkColor"),
+      avatarBorder: XSJSParse.getShapeBorder(context, bo, map, "avatarBorder", defaultValue: const CircleBorder()),
     );
   }
 }
@@ -1472,6 +1660,55 @@ class XSProxyPopupMenuItem extends XSJsonObjProxy {
 }
 
 //-------------- R -----------------
+
+//****** RawChip ******
+class XSProxyRawChip extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName1 = "RawChip";
+    return {
+      regClassName1: () => XSProxyRawChip()..init(className: regClassName1)
+    };
+  }
+
+  @override
+  RawChip constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return RawChip(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      avatar: XSJSParse.getWidget(context, bo, map, "avatar"),
+      label: XSJSParse.getWidget(context, bo, map, "label"),
+      labelStyle: XSJSParse.getTextStyle(context, bo, map, "labelStyle"),
+      labelPadding: XSJSParse.getEdgeInsets(context, bo, map, "labelPadding"),
+      selected: XSJSParse.getBool(context, bo, map, "selected", defaultValue: false),
+      isEnabled: XSJSParse.getBool(context, bo, map, "isEnabled", defaultValue: true),
+      tapEnabled: XSJSParse.getBool(context, bo, map, "tapEnabled", defaultValue: true),
+      onSelected: XSJSParse.getValueChanged<bool>(context, bo, map, "onSelected"),
+      deleteIcon: XSJSParse.getWidget(context, bo, map, "deleteIcon"),
+      onDeleted: XSJSParse.getVoidCallback(context, bo, map, "onDeleted"),
+      deleteIconColor: XSJSParse.getColor(context, bo, map, "deleteIconColor"),
+      deleteButtonTooltipMessage: XSJSParse.getString(context, bo, map, "deleteButtonTooltipMessage"),
+      onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
+      pressElevation: XSJSParse.getDouble(context, bo, map, "pressElevation"),
+      disabledColor: XSJSParse.getColor(context, bo, map, "disabledColor"),
+      selectedColor: XSJSParse.getColor(context, bo, map, "selectedColor"),
+      tooltip: XSJSParse.getString(context, bo, map, "tooltip"),
+      shape: XSJSParse.getShapeBorder(context, bo, map, "shape"),
+      clipBehavior: XSJSParse.getClip(context, bo, map, "clipBehavior", defaultValue: Clip.none),
+      focusNode: XSJSParse.getFocusNode(context, bo, map, "focusNode"),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
+      padding: XSJSParse.getEdgeInsets(context, bo, map, "padding"),
+      visualDensity: XSJSParse.getVisualDensity(context, bo, map, "visualDensity"),
+      materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+      elevation: XSJSParse.getDouble(context, bo, map, "elevation"),
+      shadowColor: XSJSParse.getColor(context, bo, map, "shadowColor"),
+      selectedShadowColor: XSJSParse.getColor(context, bo, map, "selectedShadowColor"),
+      showCheckmark: XSJSParse.getBool(context, bo, map, "showCheckmark", defaultValue: true),
+      checkmarkColor: XSJSParse.getColor(context, bo, map, "checkmarkColor"),
+      avatarBorder: XSJSParse.getShapeBorder(context, bo, map, "avatarBorder", defaultValue: const CircleBorder()),
+    );
+  }
+}
+
 ///****** RaisedButton ******
 class XSProxyRaisedButton extends XSJsonObjProxy {
   static final String regClassName = "RaisedButton";
@@ -1599,17 +1836,43 @@ class XSProxyRadio extends XSJsonObjProxy {
 
   @override
   Radio constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    //都转成字符串，便于Radio 比较和回传
-    var value = json.encode(map["value"]);
-    var groupValue = json.encode(map["groupValue"]);
-
     return Radio(
       key: XSJSParse.getKey(context, bo, map, "key"),
-      value: value,
-      groupValue: groupValue,
-      onChanged: XSJSParse.getValueChanged<dynamic>(context, bo, map, "onChanged"),
+      value: XSJSParse.getString(context, bo, map, "value"),
+      groupValue: XSJSParse.getString(context, bo, map, "groupValue"),
+      onChanged: XSJSParse.getValueChanged<String>(context, bo, map, "onChanged"),
       activeColor: XSJSParse.getColor(context, bo, map, "activeColor"),
       materialTapTargetSize: XSJSParse.getMaterialTapTargetSize(context, bo, map, "materialTapTargetSize"),
+    );
+  }
+}
+
+//****** RadioListTile ******
+class XSProxyRadioListTile extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "RadioListTile";
+    return {
+      regClassName: () => XSProxyRadioListTile()..init(className: regClassName)
+    };
+  }
+
+  @override
+  RadioListTile constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return RadioListTile(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      value: XSJSParse.getString(context, bo, map, "value"),
+      groupValue: XSJSParse.getString(context, bo, map, "groupValue"),
+      onChanged: XSJSParse.getValueChanged<String>(context, bo, map, "onChanged"),
+      activeColor: XSJSParse.getColor(context, bo, map, "activeColor"),
+      toggleable: XSJSParse.getBool(context, bo, map, "toggleable", defaultValue: false),
+      title: XSJSParse.getWidget(context, bo, map, "title"),
+      subtitle: XSJSParse.getWidget(context, bo, map, "subtitle"),
+      isThreeLine: XSJSParse.getBool(context, bo, map, "isThreeLine", defaultValue: false),
+      dense: XSJSParse.getBool(context, bo, map, "dense"),
+      secondary: XSJSParse.getWidget(context, bo, map, "secondary"),
+      selected: XSJSParse.getBool(context, bo, map, "selected", defaultValue: false),
+      controlAffinity: XSJSParse.getListTileControlAffinity(context, bo, map, "controlAffinity", defaultValue: ListTileControlAffinity.platform),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
     );
   }
 }
@@ -1911,6 +2174,51 @@ class XSProxySnackBar extends XSJsonObjProxy {
       duration: XSJSParse.getDuration(context, bo, map, "duration", defaultValue: _snackBarDisplayDuration),
       animation: XSJSParse.getAnimationDouble(context, bo, map, "animation"),
       onVisible: XSJSParse.getVoidCallback(context, bo, map, "onVisible"),
+    );
+  }
+}
+
+//****** Stepper ******
+class XSProxyStepper extends XSJsonObjProxy {
+  static String regClassName = "Stepper";
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    return {
+      regClassName: () => XSProxyStepper()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Stepper constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Stepper(
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      steps: toListT(XSJSParse.getWidgetList(context, bo, map, "steps")),
+      physics: XSJSParse.getScrollPhysics(context, bo, map, "physics"),
+      type: XSJSParse.getStepperType(context, bo, map, "type", defaultValue: StepperType.vertical),
+      currentStep: XSJSParse.getInt(context, bo, map, "currentStep", defaultValue: 0),
+      onStepTapped: XSJSParse.getValueChanged(context, bo, map, "onStepTapped"),
+      onStepContinue: XSJSParse.getVoidCallback(context, bo, map, "onStepContinue"),
+      onStepCancel: XSJSParse.getVoidCallback(context, bo, map, "onStepCancel"),
+    );
+  }
+}
+
+//****** Step ******
+class XSProxyStep extends XSJsonObjProxy {
+  static String regClassName = "Step";
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    return {
+      regClassName: () => XSProxyStep()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Step constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return Step(
+      title: XSJSParse.getWidget(context, bo, map, "title"),
+      subtitle: XSJSParse.getWidget(context, bo, map, "subtitle"),
+      content: XSJSParse.getWidget(context, bo, map, "content"),
+      state: XSJSParse.getStepState(context, bo, map, "state", defaultValue: StepState.indexed),
+      isActive: XSJSParse.getBool(context, bo, map, "isActive", defaultValue: false),
     );
   }
 }

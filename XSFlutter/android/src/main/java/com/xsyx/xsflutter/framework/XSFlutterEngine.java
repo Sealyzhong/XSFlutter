@@ -86,7 +86,7 @@ public class XSFlutterEngine {
                     Map param = methodCall.argument("param");
                     mJsEngine.callJSCallbackFunction(jsAppName, param);
                     result.success("success");
-                } else if (methodCall.method.equals("mxLog")) {
+                } else if (methodCall.method.equals("XSNativeLog")) {
                     Log.i(TAG, methodCall.arguments.toString());
                 }
             }

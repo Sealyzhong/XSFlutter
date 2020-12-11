@@ -10,49 +10,49 @@ import dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
 
 //#region ******** Base Type ********
-//****** VoidCallback ******
-export type VoidCallback = () => void;
+//****** OnCallback ******
+export type OnCallback = () => void;
 
-//****** VoidCallbackString ******
-export type VoidCallbackString = (value:string) => void;
+//****** OnCallbackString ******
+export type OnCallbackString = (value:string) => void;
 
-//****** VoidCallbackBoolean ******
-export type VoidCallbackBoolean = (value:boolean) => void;
+//****** OnCallbackBoolean ******
+export type OnCallbackBoolean = (value:boolean) => void;
 
-//****** VoidCallbackNumber ******
-export type VoidCallbackNumber = (value:number) => void;
+//****** OnCallbackNumber ******
+export type OnCallbackNumber = (value:number) => void;
 
 /**
  * (context:BuildContext, index:number) => Widget
  */
 export type IndexedWidgetBuilder = (context:BuildContext, index:number) => Widget;
 
-//****** VoidTapDownDetails ******
-export type VoidTapDown = (value:TapDownDetails) => void;
+//****** OnTapDownDetails ******
+export type OnTapDown = (value:TapDownDetails) => void;
 
-//****** VoidTapUpDetails ******
-export type VoidTapUp = (value:TapUpDetails) => void;
+//****** OnTapUpDetails ******
+export type OnTapUp = (value:TapUpDetails) => void;
 
-//****** VoidDragDownDetails ******
-export type VoidDragDown = (value:DragDownDetails) => void;
+//****** OnDragDownDetails ******
+export type OnDragDown = (value:DragDownDetails) => void;
 
-//****** VoidDragStartDetails ******
-export type VoidDragStart = (value:DragStartDetails) => void;
+//****** OnDragStartDetails ******
+export type OnDragStart = (value:DragStartDetails) => void;
 
-//****** VoidDragUpdateDetails ******
-export type VoidDragUpdate = (value:DragUpdateDetails) => void;
+//****** OnDragUpdateDetails ******
+export type OnDragUpdate = (value:DragUpdateDetails) => void;
 
-//****** VoidDragEnd ******
-export type VoidDragEnd = (value:DragEndDetails) => void;
+//****** OnDragEnd ******
+export type OnDragEnd = (value:DragEndDetails) => void;
 
-//****** VoidScaleStartDetails ******
-export type VoidScaleStart = (value:ScaleStartDetails) => void;
+//****** OnScaleStartDetails ******
+export type OnScaleStart = (value:ScaleStartDetails) => void;
 
-//****** VoidScaleUpdateDetails ******
-export type VoidScaleUpdate = (value:ScaleUpdateDetails) => void;
+//****** OnScaleUpdateDetails ******
+export type OnScaleUpdate = (value:ScaleUpdateDetails) => void;
 
-//****** VoidScaleEnd ******
-export type VoidScaleEnd = (value:ScaleEndDetails) => void;
+//****** OnScaleEnd ******
+export type OnScaleEnd = (value:ScaleEndDetails) => void;
 
 
 //****** TODO JSWidget Mirror Mgr ******
@@ -1852,6 +1852,22 @@ export class Convert extends core.Object{
     passthrough = "passthrough",
   }
 
+  //****** StepState ******
+  export enum StepState {
+    indexed = "indexed",
+    editing = "editing",
+    complete = "complete",
+    disabled = "disabled",
+    error = "error",
+  }
+
+  //****** StepperType ******
+  export enum StepperType {
+    vertical = "vertical",
+    horizontal = "horizontal",
+  }
+
+
   //****** SnackBarBehavior ******
   export enum SnackBarBehavior {
     fixed = "fixed",
@@ -3126,9 +3142,18 @@ export class Future extends DartClass{
    * @param duration 
    * @param onBack 
    */
-  static delayed(duration:Duration,onBack?:VoidCallback){
+  static delayed(duration:Duration,onBack?:OnCallback){
     dart_sdk.async.Future.delayed(duration,onBack);
   }
+  
+  /**
+   * 定时处理
+   * @param duration 
+   * @param onBack 
+   */
+  static timer(duration:Duration,onBack?:OnCallback){
+    dart_sdk.async.Timer.new(duration,onBack);
+  } 
 }
 
 //****** FocusNode ******
@@ -3451,7 +3476,7 @@ export class SweepGradient extends Gradient {
 //#region ------- I -------
 
 //****** ImageFilter ******
-interface ImageFilterBlurConfig {
+interface ImageFilterConfig {
   sigmaX?:number;
   sigmaY?:number;
 }
@@ -3459,7 +3484,7 @@ export class ImageFilter extends DartClass {
   sigmaX?:number;
   sigmaY?:number;
 
-  constructor(config?:ImageFilterBlurConfig){
+  constructor(config?:ImageFilterConfig){
     super();
     if(config!=null && config!=undefined){
       this.sigmaX = config.sigmaX;
@@ -3467,7 +3492,7 @@ export class ImageFilter extends DartClass {
     }
   }
 
-  static blur(config?:ImageFilterBlurConfig) {
+  static blur(config?:ImageFilterConfig) {
     let v = new ImageFilter();
     v.constructorName = "blur";
     if(config!=null && config!=undefined){
@@ -4239,6 +4264,141 @@ export class Offset extends DartClass {
 
 //#endregion
 
+//#region ------- O -------
+//****** PageController ******
+interface PageControllerConfig {
+  initialPage?:number;
+  keepPage?:boolean;
+  viewportFraction?:number;
+}
+
+interface PageControllerJumpToPageConfig {
+  page:number;
+}
+
+interface PageControllerAnimateToPageConfig {
+  page:number;
+  duration:Duration;
+  curve:Curve;
+}
+
+interface PageControllerToPageConfig {
+  duration:Duration;
+  curve:Curve;
+}
+
+export class PageController extends DartClass {
+  initialPage?:number;
+  keepPage?:boolean;
+  viewportFraction?:number;
+
+  /**
+   * @param config config: 
+      {
+        page:number,
+        duration:Duration,
+        curve:Curve,
+      }
+   */
+  animateToPage(config: PageControllerAnimateToPageConfig) {
+    JSFramework.invokeFlutterFunction(
+      new JSCallConfig({
+        mirrorID:this.mirrorID,
+        className:this.className,
+        funcName:"animateToPage",
+        args:config
+      })
+    );
+  }
+
+  /**
+   * @param config config: 
+      {
+        duration:Duration,
+        curve:Curve,
+      }
+   */
+  nextPage(config: PageControllerToPageConfig) {
+    JSFramework.invokeFlutterFunction(
+      new JSCallConfig({
+        mirrorID:this.mirrorID,
+        className:this.className,
+        funcName:"nextPage",
+        args:config
+      })
+    );
+  }
+
+  /**
+   * @param config config: 
+      {
+        duration:Duration,
+        curve:Curve,
+      }
+   */
+  previousPage(config: PageControllerToPageConfig) {
+    JSFramework.invokeFlutterFunction(
+      new JSCallConfig({
+        mirrorID:this.mirrorID,
+        className:this.className,
+        funcName:"previousPage",
+        args:config
+      })
+    );
+  }
+
+
+  /**
+   * @param config config: 
+      {
+        page:number,
+      }
+   */
+  jumpToPage(config:PageControllerJumpToPageConfig) {  
+    JSFramework.invokeFlutterFunction(
+      new JSCallConfig({
+        mirrorID:this.mirrorID,
+        className:this.className,
+        funcName:"jumpToPage",
+        args:config
+      })
+    );
+  }  
+
+
+  /**
+   * @param config config: 
+      {
+        initialPage?:number, 
+        keepPage?:boolean, 
+        viewportFraction?:number, 
+      }
+   */
+  constructor(config: PageControllerConfig){
+    super();
+    this.createMirrorID();
+    if(config!=null && config!=undefined){
+      this.initialPage = this.initialPage;
+      this.keepPage = this.keepPage;
+      this.viewportFraction = this.viewportFraction;
+    }
+  }
+
+  
+
+  //偏移量
+  async page() {
+      var v= await this.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "page",
+        }));
+
+      return Convert.toNumber(v);
+  }
+}
+
+//#endregion
 
 //#region ------- Q -------
 //****** Quaternion ******
@@ -5200,6 +5360,34 @@ export class AlwaysScrollableScrollPhysics extends ScrollPhysics {
   }
 }
 
+//****** FixedExtentScrollPhysics ******
+export class FixedExtentScrollPhysics extends ScrollPhysics {
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  constructor(config?: ScrollPhysicsConfig){
+    super(config);
+  }
+}
+
+//****** PageScrollPhysics ******
+export class PageScrollPhysics extends ScrollPhysics {
+
+  /**
+    * @param config config: 
+      {
+        parent?:ScrollPhysics,
+      }
+    */
+  constructor(config?: ScrollPhysicsConfig){
+    super(config);
+  }
+}
+
 //****** BouncingScrollPhysics ******
 export class BouncingScrollPhysics extends ScrollPhysics {
 
@@ -5953,6 +6141,8 @@ export class TabController extends DartClass {
    */
   constructor(config?: TabControllerConfig){
     super();
+    //Mirror对象在构造函数创建 MirrorID
+    this.createMirrorID();
     if(config!=null && config!=undefined){
       this.initialIndex = config.initialIndex;
       this.length = config.length;
@@ -9419,6 +9609,94 @@ export class CupertinoIcons extends IconData{
     }
   }
   
+  //****** ActionChip ******
+  interface ActionChipConfig {
+    key?:Key;
+    avatar?:Widget;
+    label:Widget;
+    labelStyle?:TextStyle;
+    labelPadding?:EdgeInsets;
+    onPressed:OnCallback;
+    pressElevation?:number;
+    tooltip?:string;
+    shape?:ShapeBorder;
+    clipBehavior?:Clip;
+    focusNode?:FocusNode;
+    autofocus?:boolean;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    visualDensity?:VisualDensity;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    elevation?:number;
+    shadowColor?:Color;
+  }
+  export class ActionChip extends Widget {
+    key?:Key;
+    avatar?:Widget;
+    label?:Widget;
+    labelStyle?:TextStyle;
+    labelPadding?:EdgeInsets;
+    onPressed?:OnCallback;
+    pressElevation?:number;
+    tooltip?:string;
+    shape?:ShapeBorder;
+    clipBehavior?:Clip;
+    focusNode?:FocusNode;
+    autofocus?:boolean;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    visualDensity?:VisualDensity;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    elevation?:number;
+    shadowColor?:Color;
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          avatar?:Widget, 
+          label:Widget, 
+          labelStyle?:TextStyle, 
+          labelPadding?:EdgeInsets, 
+          onPressed:OnCallback, 
+          pressElevation?:number, 
+          tooltip?:string, 
+          shape?:ShapeBorder, 
+          clipBehavior?:Clip, 
+          focusNode?:FocusNode, 
+          autofocus?:boolean, 
+          backgroundColor?:Color, 
+          padding?:EdgeInsets, 
+          visualDensity?:VisualDensity, 
+          materialTapTargetSize?:MaterialTapTargetSize, 
+          elevation?:number, 
+          shadowColor?:Color, 
+        }
+     */
+    constructor(config: ActionChipConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.avatar = config.avatar;
+        this.label = config.label;
+        this.labelStyle = config.labelStyle;
+        this.labelPadding = config.labelPadding;
+        this.onPressed = config.onPressed;
+        this.pressElevation = config.pressElevation;
+        this.tooltip = config.tooltip;
+        this.shape = config.shape;
+        this.clipBehavior = config.clipBehavior;
+        this.focusNode = config.focusNode;
+        this.autofocus = config.autofocus;
+        this.backgroundColor = config.backgroundColor;
+        this.padding = config.padding;
+        this.visualDensity = config.visualDensity;
+        this.materialTapTargetSize = config.materialTapTargetSize;
+        this.elevation = config.elevation;
+        this.shadowColor = config.shadowColor;
+      }
+    }
+  }
+
   //****** TODO AnimationController ******
   interface AnimationControllerConfig {
     value?:number;
@@ -9799,7 +10077,7 @@ export class CupertinoIcons extends IconData{
     opacity?:number;
     curve?:Curve;
     duration?:Duration;
-    onEnd?:VoidCallback;
+    onEnd?:OnCallback;
     alwaysIncludeSemantics?:boolean;
   }
   export class AnimatedOpacity extends Widget {
@@ -9808,7 +10086,7 @@ export class CupertinoIcons extends IconData{
     opacity?:number;
     curve?:Curve;
     duration?:Duration;
-    onEnd?:VoidCallback;
+    onEnd?:OnCallback;
     alwaysIncludeSemantics?:boolean;
   
     /**
@@ -9819,7 +10097,7 @@ export class CupertinoIcons extends IconData{
           opacity?:number, 
           curve?:Curve, 
           duration?:Duration, 
-          onEnd?:VoidCallback, 
+          onEnd?:OnCallback, 
           alwaysIncludeSemantics?:boolean
         }
      */
@@ -9888,7 +10166,7 @@ export class CupertinoIcons extends IconData{
     transform?:Matrix4;
     curve?:Curve;
     duration?:Duration;
-    onEnd?:VoidCallback;
+    onEnd?:OnCallback;
   }
   export class AnimatedContainer extends Widget {
     key?:Key;
@@ -9905,7 +10183,7 @@ export class CupertinoIcons extends IconData{
     transform?:Matrix4;
     curve?:Curve;
     duration?:Duration;
-    onEnd?:VoidCallback;
+    onEnd?:OnCallback;
   
     /**
      * @param config config: 
@@ -9924,7 +10202,7 @@ export class CupertinoIcons extends IconData{
           transform?:Matrix4, 
           curve?:Curve, 
           duration?:Duration, 
-          onEnd?:VoidCallback,
+          onEnd?:OnCallback,
         }
      */
     constructor(config: AnimatedContainerConfig){
@@ -9964,7 +10242,7 @@ export class CupertinoIcons extends IconData{
     animateShadowColor?:boolean;
     curve?:Curve;
     duration?:Duration;
-    onEnd?:VoidCallback;
+    onEnd?:OnCallback;
   }
   export class AnimatedPhysicalModel extends Widget {
     key?:Key;
@@ -9979,7 +10257,7 @@ export class CupertinoIcons extends IconData{
     animateShadowColor?:boolean;
     curve?:Curve;
     duration?:Duration;
-    onEnd?:VoidCallback;
+    onEnd?:OnCallback;
   
     /**
      * @param config config: 
@@ -9996,7 +10274,7 @@ export class CupertinoIcons extends IconData{
           animateShadowColor?:boolean, 
           curve?:Curve, 
           duration?:Duration, 
-          onEnd?:VoidCallback
+          onEnd?:OnCallback
         }
      */
     constructor(config: AnimatedPhysicalModelConfig){
@@ -10031,7 +10309,7 @@ export class CupertinoIcons extends IconData{
     height?:number;
     curve?:Curve;
     duration?:Duration;
-    onEnd?:VoidCallback;
+    onEnd?:OnCallback;
   }
   export class AnimatedPositioned extends Widget {
     key?:Key;
@@ -10044,7 +10322,7 @@ export class CupertinoIcons extends IconData{
     height?:number;
     curve?:Curve;
     duration?:Duration;
-    onEnd?:VoidCallback;
+    onEnd?:OnCallback;
   
     /**
      * @param config config: 
@@ -10059,7 +10337,7 @@ export class CupertinoIcons extends IconData{
           height?:number, 
           curve?:Curve, 
           duration?:Duration, 
-          onEnd?:VoidCallback,
+          onEnd?:OnCallback,
         }
      */
     constructor(config: AnimatedPositionedConfig){
@@ -10135,7 +10413,7 @@ export class CupertinoIcons extends IconData{
     maxLines?:number;
     curve?:Curve;
     duration?:Duration;
-    onEnd?:VoidCallback;
+    onEnd?:OnCallback;
   }
   export class AnimatedDefaultTextStyle extends Widget {
     key?:Key;
@@ -10147,7 +10425,7 @@ export class CupertinoIcons extends IconData{
     maxLines?:number;
     curve?:Curve;
     duration?:Duration;
-    onEnd?:VoidCallback;
+    onEnd?:OnCallback;
     /**
      * @param config config: 
         {
@@ -10160,7 +10438,7 @@ export class CupertinoIcons extends IconData{
           maxLines?:number, 
           curve?:Curve, 
           duration?:Duration, 
-          onEnd?:VoidCallback
+          onEnd?:OnCallback
         }
      */
     constructor(config: AnimatedDefaultTextStyleConfig){
@@ -10440,7 +10718,7 @@ export class CupertinoIcons extends IconData{
   interface BottomNavigationBarConfig {
     key?:Key;
     items:Array<BottomNavigationBarItem>;
-    onTap?:VoidCallbackNumber;
+    onTap?:OnCallbackNumber;
     currentIndex?:number;
     elevation?:number;
     type?:BottomNavigationBarType;
@@ -10459,7 +10737,7 @@ export class CupertinoIcons extends IconData{
   export class BottomNavigationBar extends Widget {
     key?:Key;
     items?:Array<BottomNavigationBarItem>;
-    onTap?:VoidCallbackNumber;
+    onTap?:OnCallbackNumber;
     currentIndex?:number;
     elevation?:number;
     type?:BottomNavigationBarType;
@@ -10545,17 +10823,17 @@ export class CupertinoIcons extends IconData{
   //****** BackButton ******
   interface BackButtonConfig {
     key?:Key;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
   }
   export class BackButton extends Widget {
     key?:Key;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
   
     /**
      * @param config config: 
         {
           key?:Key, 
-          onPressed?:VoidCallback,
+          onPressed?:OnCallback,
         }
      */
     constructor(config: BackButtonConfig){
@@ -10598,22 +10876,51 @@ export class CupertinoIcons extends IconData{
   
   //#region ------- C -------
   
+  //****** ColorFiltered ******
+  interface ColorFilteredConfig {
+    key?:Key;
+    colorFilter:ColorFilter;
+    child?:Color;
+  }
+  export class ColorFiltered extends Widget {
+    key?:Key;
+    colorFilter?:ColorFilter;
+    child?:Color;
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          colorFilter:ColorFilter, 
+          child?:Color, 
+        }
+     */
+    constructor(config: ColorFilteredConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.colorFilter = config.colorFilter;
+        this.child = config.child;
+      }
+    }
+  }
+
   //****** CloseButton ******
   interface CloseButtonConfig {
     key?:Key;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
     color?:Color;
   }
   export class CloseButton extends Widget {
     key?:Key;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
     color?:Color;
   
     /**
      * @param config config: 
         {
           key?:Key, 
-          onPressed?:VoidCallback,
+          onPressed?:OnCallback,
           color?:Color, 
         }
      */
@@ -10729,6 +11036,115 @@ export class CupertinoIcons extends IconData{
     }
   }
   
+  //****** ChoiceChip ******
+  interface ChoiceChipConfig {
+    key?:Key;
+    avatar?:Widget;
+    label:Widget;
+    labelStyle?:TextStyle;
+    labelPadding?:EdgeInsets;
+    selected:boolean;
+    onSelected?:OnCallbackBoolean;
+    pressElevation?:number;
+    disabledColor?:Color;
+    selectedColor?:Color;
+    tooltip?:string;
+    shape?:ShapeBorder;
+    clipBehavior?:Clip;
+    focusNode?:FocusNode;
+    autofocus?:boolean;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    visualDensity?:VisualDensity;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    elevation?:number;
+    shadowColor?:Color;
+    selectedShadowColor?:Color;
+    avatarBorder?:ShapeBorder;
+  }
+  export class ChoiceChip extends Widget {
+    key?:Key;
+    avatar?:Widget;
+    label?:Widget;
+    labelStyle?:TextStyle;
+    labelPadding?:EdgeInsets;
+    selected?:boolean;
+    onSelected?:OnCallbackBoolean;
+    pressElevation?:number;
+    disabledColor?:Color;
+    selectedColor?:Color;
+    tooltip?:string;
+    shape?:ShapeBorder;
+    clipBehavior?:Clip;
+    focusNode?:FocusNode;
+    autofocus?:boolean;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    visualDensity?:VisualDensity;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    elevation?:number;
+    shadowColor?:Color;
+    selectedShadowColor?:Color;
+    avatarBorder?:ShapeBorder;
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          avatar?:Widget, 
+          label:Widget, 
+          labelStyle?:TextStyle, 
+          labelPadding?:EdgeInsets, 
+          selected?:boolean, 
+          onSelected?:OnCallbackBoolean, 
+          pressElevation?:number, 
+          disabledColor?:Color, 
+          selectedColor?:Color, 
+          tooltip?:string, 
+          shape?:ShapeBorder, 
+          clipBehavior?:Clip, 
+          focusNode?:FocusNode, 
+          autofocus?:boolean, 
+          backgroundColor?:Color, 
+          padding?:EdgeInsets, 
+          visualDensity?:VisualDensity, 
+          materialTapTargetSize?:MaterialTapTargetSize, 
+          elevation?:number, 
+          shadowColor?:Color, 
+          selectedShadowColor?:Color, 
+          avatarBorder?:ShapeBorder, 
+        }
+     */
+    constructor(config: ChoiceChipConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.avatar = config.avatar;
+        this.label = config.label;
+        this.labelStyle = config.labelStyle;
+        this.labelPadding = config.labelPadding;
+        this.selected = config.selected;
+        this.onSelected = config.onSelected;
+        this.pressElevation = config.pressElevation;
+        this.disabledColor = config.disabledColor;
+        this.selectedColor = config.selectedColor;
+        this.tooltip = config.tooltip;
+        this.shape = config.shape;
+        this.clipBehavior = config.clipBehavior;
+        this.focusNode = config.focusNode;
+        this.autofocus = config.autofocus;
+        this.backgroundColor = config.backgroundColor;
+        this.padding = config.padding;
+        this.visualDensity = config.visualDensity;
+        this.materialTapTargetSize = config.materialTapTargetSize;
+        this.elevation = config.elevation;
+        this.shadowColor = config.shadowColor;
+        this.selectedShadowColor = config.selectedShadowColor;
+        this.avatarBorder = config.avatarBorder;
+      }
+    }
+  }
+
+
   //****** ColoredBox ******
   interface ColoredBoxConfig {
     key?:Key;
@@ -10815,7 +11231,7 @@ export class CupertinoIcons extends IconData{
     labelStyle?:TextStyle;
     labelPadding?:EdgeInsets;
     deleteIcon?:Widget;
-    onDeleted?:VoidCallback;
+    onDeleted?:OnCallback;
     deleteIconColor?:Color;
     deleteButtonTooltipMessage?:string;
     clipBehavior?:Clip;
@@ -10834,7 +11250,7 @@ export class CupertinoIcons extends IconData{
     labelStyle?:TextStyle;
     labelPadding?:EdgeInsets;
     deleteIcon?:Widget;
-    onDeleted?:VoidCallback;
+    onDeleted?:OnCallback;
     deleteIconColor?:Color;
     deleteButtonTooltipMessage?:string;
     clipBehavior?:Clip;
@@ -10853,7 +11269,7 @@ export class CupertinoIcons extends IconData{
           labelStyle?:TextStyle,
           labelPadding?:EdgeInsets,
           deleteIcon?:Widget,
-          onDeleted?:VoidCallback, 
+          onDeleted?:OnCallback, 
           deleteIconColor?:Color, 
           deleteButtonTooltipMessage?:string, 
           clipBehavior?:Clip,
@@ -10920,7 +11336,7 @@ export class CupertinoIcons extends IconData{
   interface CheckboxListTileConfig {
     key?:Key;
     value:boolean;
-    onChanged:VoidCallbackBoolean;
+    onChanged:OnCallbackBoolean;
     activeColor?:Color;
     checkColor?:Color;
     title?:Widget;
@@ -10937,7 +11353,7 @@ export class CupertinoIcons extends IconData{
   export class CheckboxListTile extends Widget {
     key?:Key;
     value?:boolean;
-    onChanged?:VoidCallbackBoolean;
+    onChanged?:OnCallbackBoolean;
     activeColor?:Color;
     checkColor?:Color;
     title?:Widget;
@@ -10956,7 +11372,7 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidCallbackBoolean, 
+          onChanged:OnCallbackBoolean, 
           activeColor?:Color, 
           checkColor?:Color, 
           title?:Widget, 
@@ -10997,7 +11413,7 @@ export class CupertinoIcons extends IconData{
   interface CheckboxConfig {
     key?:Key;
     value:boolean;
-    onChanged:VoidCallbackBoolean;
+    onChanged:OnCallbackBoolean;
     activeColor?:Color;
     checkColor?:Color;
     focusColor?:Color;
@@ -11010,7 +11426,7 @@ export class CupertinoIcons extends IconData{
   export class Checkbox extends Widget {
     key?:Key;
     value?:boolean;
-    onChanged?:VoidCallbackBoolean;
+    onChanged?:OnCallbackBoolean;
     activeColor?:Color;
     checkColor?:Color;
     focusColor?:Color;
@@ -11025,7 +11441,7 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidCallbackBoolean, 
+          onChanged:OnCallbackBoolean, 
           activeColor?:Color, 
           checkColor?:Color, 
           focusColor?:Color, 
@@ -11059,7 +11475,7 @@ export class CupertinoIcons extends IconData{
     key?:Key;
     value:boolean;
     tristate?:boolean;
-    onChanged:VoidCallbackBoolean;
+    onChanged:OnCallbackBoolean;
     activeColor?:Color;
     width?:number;
     checkColor?:Color;
@@ -11070,7 +11486,7 @@ export class CupertinoIcons extends IconData{
     key?:Key;
     value?:boolean;
     tristate?:boolean;
-    onChanged?:VoidCallbackBoolean;
+    onChanged?:OnCallbackBoolean;
     activeColor?:Color;
     width?:number;
     checkColor?:Color;
@@ -11083,7 +11499,7 @@ export class CupertinoIcons extends IconData{
           key?:Key, 
           value:boolean, 
           tristate?:boolean, 
-          onChanged:VoidCallbackBoolean, 
+          onChanged:OnCallbackBoolean, 
           activeColor?:Color, 
           width?:number, 
           checkColor?:Color, 
@@ -11107,9 +11523,66 @@ export class CupertinoIcons extends IconData{
     }
   }
   
+  //****** ClipRect ******
+  interface ClipRectConfig {
+    key?:Key;
+    clipBehavior?:Clip;
+    child?:Widget;
+  }
+  export class ClipRect extends Widget {
+    key?:Key;
+    clipBehavior?:Clip;
+    child?:Widget;
   
+    /**
+     * @param config config: 
+        {
+          child?:Widget,
+          clipBehavior?:Clip,
+          key?:Key
+        }
+     */
+    constructor(config: ClipRectConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.clipBehavior = config.clipBehavior;
+        this.child = config.child;
+      }
+    }
+  }
+
+  //****** ClipOval ******
+  interface ClipOvalConfig {
+    key?:Key;
+    clipBehavior?:Clip;
+    child?:Widget;
+  }
+  export class ClipOval extends Widget {
+    key?:Key;
+    clipBehavior?:Clip;
+    child?:Widget;
   
-  //****** TODO ClipRRect ******
+    /**
+     * @param config config: 
+        {
+          child?:Widget,
+          clipBehavior?:Clip,
+          key?:Key
+        }
+     */
+    constructor(config: ClipOvalConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.clipBehavior = config.clipBehavior;
+        this.child = config.child;
+      }
+    }
+  }
+
+  
+  //****** ClipRRect ******
   interface ClipRRectConfig {
     key?:Key;
     borderRadius?:BorderRadius;
@@ -11171,34 +11644,7 @@ export class CupertinoIcons extends IconData{
     }
   }
   
-  //****** TODO CustomSingleChildLayout ******
-  interface CustomSingleChildLayoutConfig {
-    key?:Key;
-    child?:Widget;
-    delegate?:any;
-  }
-  export class CustomSingleChildLayout extends Widget {
-    child?:Widget;
-    delegate?:any;
-    key?:Key;
-  
-    /**
-     * @param config config: 
-        {
-          child?:Widget, 
-          delegate?:any, 
-          key?:Key,
-        }
-     */
-    constructor(config: CustomSingleChildLayoutConfig){
-      super();
-      if(config!=null && config!=undefined){
-        this.key = config.key;
-        this.delegate = config.delegate;
-        this.child = config.child;
-      }
-    }
-  }
+
   
   //****** Column ******
   interface ColumnConfig {
@@ -11566,13 +12012,13 @@ export class CupertinoIcons extends IconData{
     child:Widget;  
     value?:number;
     key?:Key;
-    onTap?:VoidCallback;
+    onTap?:OnCallback;
   }
   export class DropdownMenuItem extends Widget {
     child?:Widget;  
     value?:number;
     key?:Key;
-    onTap?:VoidCallback;
+    onTap?:OnCallback;
   
     /**
      * @param config config: 
@@ -11580,7 +12026,7 @@ export class CupertinoIcons extends IconData{
           child:Widget,
           value?:number,
           key?:Key,
-          onTap?:VoidCallback,
+          onTap?:OnCallback,
         }
      */
     constructor(config: DropdownMenuItemConfig){
@@ -11915,7 +12361,7 @@ export class CupertinoIcons extends IconData{
     key?:Key;
     isExpanded?:boolean;
     size?:number;
-    onPressed:VoidCallbackBoolean;
+    onPressed:OnCallbackBoolean;
     padding?:EdgeInsets;
     color?:Color;
     disabledColor?:Color;
@@ -11925,7 +12371,7 @@ export class CupertinoIcons extends IconData{
     key?:Key;
     isExpanded?:boolean;
     size?:number;
-    onPressed?:VoidCallbackBoolean;
+    onPressed?:OnCallbackBoolean;
     padding?:EdgeInsets;
     color?:Color;
     disabledColor?:Color;
@@ -11936,7 +12382,7 @@ export class CupertinoIcons extends IconData{
           key?:Key, 
           isExpanded?:boolean, 
           size?:number, 
-          onPressed:VoidCallbackBoolean, 
+          onPressed:OnCallbackBoolean, 
           padding?:EdgeInsets, 
           color?:Color, 
           disabledColor?:Color, 
@@ -11966,7 +12412,7 @@ export class CupertinoIcons extends IconData{
       title?:Widget;
       subtitle?:Widget;
       backgroundColor?:Color;
-      onExpansionChanged?:VoidCallbackBoolean;
+      onExpansionChanged?:OnCallbackBoolean;
       children?:Array<Widget>;
       trailing?:Widget;
       initiallyExpanded?:boolean;
@@ -11982,7 +12428,7 @@ export class CupertinoIcons extends IconData{
       title?:Widget;
       subtitle?:Widget;
       backgroundColor?:Color;
-      onExpansionChanged?:VoidCallbackBoolean;
+      onExpansionChanged?:OnCallbackBoolean;
       children?:Array<Widget>;
       trailing?:Widget;
       initiallyExpanded?:boolean;
@@ -12000,7 +12446,7 @@ export class CupertinoIcons extends IconData{
           title?:Widget, 
           subtitle?:Widget, 
           backgroundColor?:Color, 
-          onExpansionChanged?:VoidCallbackBoolean, 
+          onExpansionChanged?:OnCallbackBoolean, 
           children?:Array<Widget>,
           trailing?:Widget, 
           initiallyExpanded?:boolean, 
@@ -12070,6 +12516,122 @@ export class CupertinoIcons extends IconData{
     }
   }
   
+  //****** FilterChip ******
+  interface FilterChipConfig {
+    key?:Key;
+    avatar?:Widget;
+    label:Widget;
+    labelStyle?:TextStyle;
+    labelPadding?:EdgeInsets;
+    selected?:boolean;
+    onSelected:OnCallbackBoolean;
+    pressElevation?:number;
+    disabledColor?:Color;
+    selectedColor?:Color;
+    tooltip?:string;
+    shape?:ShapeBorder;
+    clipBehavior?:Clip;
+    focusNode?:FocusNode;
+    autofocus?:boolean;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    visualDensity?:VisualDensity;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    elevation?:number;
+    shadowColor?:Color;
+    selectedShadowColor?:Color;
+    showCheckmark?:boolean;
+    checkmarkColor?:Color;
+    avatarBorder?:ShapeBorder;
+  }
+  export class FilterChip extends Widget {
+    key?:Key;
+    avatar?:Widget;
+    label?:Widget;
+    labelStyle?:TextStyle;
+    labelPadding?:EdgeInsets;
+    selected?:boolean;   
+    onSelected?:OnCallbackBoolean;    
+    pressElevation?:number;
+    disabledColor?:Color;
+    selectedColor?:Color;
+    tooltip?:string;
+    shape?:ShapeBorder;
+    clipBehavior?:Clip;
+    focusNode?:FocusNode;
+    autofocus?:boolean;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    visualDensity?:VisualDensity;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    elevation?:number;
+    shadowColor?:Color;
+    selectedShadowColor?:Color;
+    showCheckmark?:boolean;
+    checkmarkColor?:Color;
+    avatarBorder?:ShapeBorder;
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          avatar?:Widget, 
+          label:Widget, 
+          labelStyle?:TextStyle, 
+          labelPadding?:EdgeInsets, 
+          selected?:boolean, 
+          onSelected:OnCallbackBoolean,     
+          pressElevation?:number, 
+          disabledColor?:Color, 
+          selectedColor?:Color, 
+          tooltip?:string, 
+          shape?:ShapeBorder, 
+          clipBehavior?:Clip, 
+          focusNode?:FocusNode, 
+          autofocus?:boolean, 
+          backgroundColor?:Color, 
+          padding?:EdgeInsets, 
+          visualDensity?:VisualDensity, 
+          materialTapTargetSize?:MaterialTapTargetSize, 
+          elevation?:number, 
+          shadowColor?:Color, 
+          selectedShadowColor?:Color, 
+          showCheckmark?:boolean, 
+          checkmarkColor?:Color, 
+          avatarBorder?:ShapeBorder, 
+        }
+     */
+    constructor(config: FilterChipConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.avatar = config.avatar;
+        this.label = config.label;
+        this.labelStyle = config.labelStyle;
+        this.labelPadding = config.labelPadding;
+        this.selected = config.selected;
+        this.onSelected = config.onSelected;
+        this.pressElevation = config.pressElevation;
+        this.disabledColor = config.disabledColor;
+        this.selectedColor = config.selectedColor;
+        this.tooltip = config.tooltip;
+        this.shape = config.shape;
+        this.clipBehavior = config.clipBehavior;
+        this.focusNode = config.focusNode;
+        this.autofocus = config.autofocus;
+        this.backgroundColor = config.backgroundColor;
+        this.padding = config.padding;
+        this.visualDensity = config.visualDensity;
+        this.materialTapTargetSize = config.materialTapTargetSize;
+        this.elevation = config.elevation;
+        this.shadowColor = config.shadowColor;
+        this.selectedShadowColor = config.selectedShadowColor;
+        this.showCheckmark = config.showCheckmark;
+        this.checkmarkColor = config.checkmarkColor;
+        this.avatarBorder = config.avatarBorder;
+      }
+    }
+  }
+
   //****** FittedBox ******
   interface FittedBoxConfig {
     key?:Key;
@@ -12229,9 +12791,9 @@ export class CupertinoIcons extends IconData{
   //****** FlatButton ******
   interface FlatButtonConfig {
     child:Widget;
-    onPressed:VoidCallback;
+    onPressed:OnCallback;
     padding?:EdgeInsets;
-    onHighlightChanged?:VoidCallbackBoolean;
+    onHighlightChanged?:OnCallbackBoolean;
     textTheme?:ButtonTextTheme;
     textColor?:Color;
     disabledTextColor?:Color;
@@ -12245,7 +12807,7 @@ export class CupertinoIcons extends IconData{
     materialTapTargetSize?:MaterialTapTargetSize;
     key?:Key;
   
-    onLongPress?: VoidCallback;
+    onLongPress?: OnCallback;
     focusColor?: Color;
     hoverColor?: Color;
     visualDensity?: VisualDensity;
@@ -12256,9 +12818,9 @@ export class CupertinoIcons extends IconData{
   }
   export class FlatButton extends Widget {
     child?:Widget;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
     padding?:EdgeInsets;
-    onHighlightChanged?:VoidCallbackBoolean;
+    onHighlightChanged?:OnCallbackBoolean;
     textTheme?:ButtonTextTheme;
     textColor?:Color;
     disabledTextColor?:Color;
@@ -12271,7 +12833,7 @@ export class CupertinoIcons extends IconData{
     clipBehavior?:Clip;
     materialTapTargetSize?:MaterialTapTargetSize;
     key?:Key;
-    onLongPress?:VoidCallback;
+    onLongPress?:OnCallback;
     focusColor?: Color;
     hoverColor?: Color;
     visualDensity?: VisualDensity;
@@ -12283,9 +12845,9 @@ export class CupertinoIcons extends IconData{
      * @param config config: 
         {
           child:Widget, 
-          onPressed:VoidCallback, 
+          onPressed:OnCallback, 
           padding?:EdgeInsets;, 
-          onHighlightChanged?:VoidCallbackBoolean, 
+          onHighlightChanged?:OnCallbackBoolean, 
           textTheme?:ButtonTextTheme, 
           textColor?:Color, 
           disabledTextColor?:Color, 
@@ -12299,7 +12861,7 @@ export class CupertinoIcons extends IconData{
           materialTapTargetSize?:MaterialTapTargetSize, 
           key?:Key, 
   
-          onLongPress?: VoidCallback, 
+          onLongPress?: OnCallback, 
           focusColor?: Color, 
           hoverColor?: Color, 
           visualDensity?: VisualDensity, 
@@ -12337,9 +12899,9 @@ export class CupertinoIcons extends IconData{
      * @param config config: 
         {
           child:Widget, 
-          onPressed:VoidCallback, 
+          onPressed:OnCallback, 
           padding?:EdgeInsets, 
-          onHighlightChanged?:VoidCallbackBoolean, 
+          onHighlightChanged?:OnCallbackBoolean, 
           textTheme?:ButtonTextTheme, 
           textColor?:Color, 
           disabledTextColor?:Color, 
@@ -12353,7 +12915,7 @@ export class CupertinoIcons extends IconData{
           materialTapTargetSize?:MaterialTapTargetSize, 
           key?:Key, 
   
-          onLongPress?: VoidCallback, 
+          onLongPress?: OnCallback, 
           focusColor?: Color, 
           hoverColor?: Color,
           autofocus?: boolean, 
@@ -12407,7 +12969,7 @@ export class CupertinoIcons extends IconData{
     hoverElevation?:number;
     highlightElevation?:number;
     disabledElevation?:number;
-    onPressed:VoidCallback;
+    onPressed:OnCallback;
     mini?:boolean;
     shape?:ShapeBorder;
     clipBehavior?:Clip;
@@ -12430,7 +12992,7 @@ export class CupertinoIcons extends IconData{
     hoverElevation?:number;
     highlightElevation?:number;
     disabledElevation?:number;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
     mini?:boolean;
     shape?:ShapeBorder;
     clipBehavior?:Clip;
@@ -12454,7 +13016,7 @@ export class CupertinoIcons extends IconData{
           hoverElevation?:number, 
           highlightElevation?:number, 
           disabledElevation?:number, 
-          onPressed:VoidCallback, 
+          onPressed:OnCallback, 
           mini?:boolean, 
           shape?:ShapeBorder, 
           clipBehavior?:Clip, 
@@ -12655,62 +13217,62 @@ export class CupertinoIcons extends IconData{
   interface GestureDetectorConfig {
     key?:Key;
     child?:Widget;
-    onTap?:VoidCallback;
-    onTapDown?:VoidTapDown;
-    onTapUp?:VoidTapUp;
-    onTapCancel?:VoidCallback;
-    onDoubleTap?:VoidCallback;
-    onLongPress?:VoidCallback;
-    onLongPressUp?:VoidCallback;
-    onVerticalDragDown?:VoidDragDown;
-    onVerticalDragStart?:VoidDragStart;
-    onVerticalDragUpdate?:VoidDragUpdate;
-    onVerticalDragEnd?:VoidDragEnd;
-    onVerticalDragCancel?:VoidCallback;
-    onHorizontalDragDown?:VoidDragDown;
-    onHorizontalDragStart?:VoidDragStart;
-    onHorizontalDragUpdate?:VoidDragUpdate;
-    onHorizontalDragEnd?:VoidDragEnd;
-    onHorizontalDragCancel?:VoidCallback;
-    onPanDown?:VoidDragDown;
-    onPanStart?:VoidDragStart;
-    onPanUpdate?:VoidDragUpdate;
-    onPanEnd?:VoidDragEnd;
-    onPanCancel?:VoidCallback;
-    onScaleStart?:VoidScaleStart;
-    onScaleUpdate?:VoidScaleUpdate;
-    onScaleEnd?:VoidScaleEnd;
+    onTap?:OnCallback;
+    onTapDown?:OnTapDown;
+    onTapUp?:OnTapUp;
+    onTapCancel?:OnCallback;
+    onDoubleTap?:OnCallback;
+    onLongPress?:OnCallback;
+    onLongPressUp?:OnCallback;
+    onVerticalDragDown?:OnDragDown;
+    onVerticalDragStart?:OnDragStart;
+    onVerticalDragUpdate?:OnDragUpdate;
+    onVerticalDragEnd?:OnDragEnd;
+    onVerticalDragCancel?:OnCallback;
+    onHorizontalDragDown?:OnDragDown;
+    onHorizontalDragStart?:OnDragStart;
+    onHorizontalDragUpdate?:OnDragUpdate;
+    onHorizontalDragEnd?:OnDragEnd;
+    onHorizontalDragCancel?:OnCallback;
+    onPanDown?:OnDragDown;
+    onPanStart?:OnDragStart;
+    onPanUpdate?:OnDragUpdate;
+    onPanEnd?:OnDragEnd;
+    onPanCancel?:OnCallback;
+    onScaleStart?:OnScaleStart;
+    onScaleUpdate?:OnScaleUpdate;
+    onScaleEnd?:OnScaleEnd;
     behavior?:HitTestBehavior;
     excludeFromSemantics?:boolean;    
   }
   export class GestureDetector extends Widget {
     key?:Key;
     child?:Widget;
-    onTap?:VoidCallback;
-    onTapDown?:VoidTapDown;
-    onTapUp?:VoidTapUp;
-    onTapCancel?:VoidCallback;
-    onDoubleTap?:VoidCallback;
-    onLongPress?:VoidCallback;
-    onLongPressUp?:VoidCallback;
-    onVerticalDragDown?:VoidDragDown;
-    onVerticalDragStart?:VoidDragStart;
-    onVerticalDragUpdate?:VoidDragUpdate;
-    onVerticalDragEnd?:VoidDragEnd;
-    onVerticalDragCancel?:VoidCallback;
-    onHorizontalDragDown?:VoidDragDown;
-    onHorizontalDragStart?:VoidDragStart;
-    onHorizontalDragUpdate?:VoidDragUpdate;
-    onHorizontalDragEnd?:VoidDragEnd;
-    onHorizontalDragCancel?:VoidCallback;
-    onPanDown?:VoidDragDown;
-    onPanStart?:VoidDragStart;
-    onPanUpdate?:VoidDragUpdate;
-    onPanEnd?:VoidDragEnd;
-    onPanCancel?:VoidCallback;
-    onScaleStart?:VoidScaleStart;
-    onScaleUpdate?:VoidScaleUpdate;
-    onScaleEnd?:VoidScaleEnd;
+    onTap?:OnCallback;
+    onTapDown?:OnTapDown;
+    onTapUp?:OnTapUp;
+    onTapCancel?:OnCallback;
+    onDoubleTap?:OnCallback;
+    onLongPress?:OnCallback;
+    onLongPressUp?:OnCallback;
+    onVerticalDragDown?:OnDragDown;
+    onVerticalDragStart?:OnDragStart;
+    onVerticalDragUpdate?:OnDragUpdate;
+    onVerticalDragEnd?:OnDragEnd;
+    onVerticalDragCancel?:OnCallback;
+    onHorizontalDragDown?:OnDragDown;
+    onHorizontalDragStart?:OnDragStart;
+    onHorizontalDragUpdate?:OnDragUpdate;
+    onHorizontalDragEnd?:OnDragEnd;
+    onHorizontalDragCancel?:OnCallback;
+    onPanDown?:OnDragDown;
+    onPanStart?:OnDragStart;
+    onPanUpdate?:OnDragUpdate;
+    onPanEnd?:OnDragEnd;
+    onPanCancel?:OnCallback;
+    onScaleStart?:OnScaleStart;
+    onScaleUpdate?:OnScaleUpdate;
+    onScaleEnd?:OnScaleEnd;
     behavior?:HitTestBehavior;
     excludeFromSemantics?:boolean;  
     
@@ -12719,31 +13281,31 @@ export class CupertinoIcons extends IconData{
       {
         key?:Key, 
         child?:Widget, 
-        onTap?:VoidCallback, 
-        onTapDown?:VoidTapDown, 
-        onTapUp?:VoidTapUp, 
-        onTapCancel?:VoidCallback, 
-        onDoubleTap?:VoidCallback, 
-        onLongPress?:VoidCallback, 
-        onLongPressUp?:VoidCallback, 
-        onVerticalDragDown?:VoidDragDown, 
-        onVerticalDragStart?:VoidDragStart, 
-        onVerticalDragUpdate?:VoidDragUpdate, 
-        onVerticalDragEnd?:VoidDragEnd, 
-        onVerticalDragCancel?:VoidCallback, 
-        onHorizontalDragDown?:VoidDragDown, 
-        onHorizontalDragStart?:VoidDragStart, 
-        onHorizontalDragUpdate?:VoidDragUpdate, 
-        onHorizontalDragEnd?:VoidDragEnd, 
-        onHorizontalDragCancel?:VoidCallback, 
-        onPanDown?:VoidDragDown, 
-        onPanStart?:VoidDragStart, 
-        onPanUpdate?:VoidDragUpdate, 
-        onPanEnd?:VoidDragEnd, 
-        onPanCancel?:VoidCallback, 
-        onScaleStart?:VoidScaleStart, 
-        onScaleUpdate?:VoidScaleUpdate, 
-        onScaleEnd?:VoidScaleEnd, 
+        onTap?:OnCallback, 
+        onTapDown?:OnTapDown, 
+        onTapUp?:OnTapUp, 
+        onTapCancel?:OnCallback, 
+        onDoubleTap?:OnCallback, 
+        onLongPress?:OnCallback, 
+        onLongPressUp?:OnCallback, 
+        onVerticalDragDown?:OnDragDown, 
+        onVerticalDragStart?:OnDragStart, 
+        onVerticalDragUpdate?:OnDragUpdate, 
+        onVerticalDragEnd?:OnDragEnd, 
+        onVerticalDragCancel?:OnCallback, 
+        onHorizontalDragDown?:OnDragDown, 
+        onHorizontalDragStart?:OnDragStart, 
+        onHorizontalDragUpdate?:OnDragUpdate, 
+        onHorizontalDragEnd?:OnDragEnd, 
+        onHorizontalDragCancel?:OnCallback, 
+        onPanDown?:OnDragDown, 
+        onPanStart?:OnDragStart, 
+        onPanUpdate?:OnDragUpdate, 
+        onPanEnd?:OnDragEnd, 
+        onPanCancel?:OnCallback, 
+        onScaleStart?:OnScaleStart, 
+        onScaleUpdate?:OnScaleUpdate, 
+        onScaleEnd?:OnScaleEnd, 
         behavior?:HitTestBehavior, 
         excludeFromSemantics?:boolean,   
       }
@@ -12784,6 +13346,99 @@ export class CupertinoIcons extends IconData{
     }
   }
   
+  //****** GridView ******
+  interface GridViewConfig {
+    key?:Key;
+    scrollDirection?:Axis;
+    reverse?:boolean;
+    controller?:ScrollController;
+    primary?:boolean;
+    physics?:ScrollPhysics;
+    shrinkWrap?:boolean;
+    padding?:EdgeInsets;
+    gridDelegate:SliverGridDelegate;
+    addAutomaticKeepAlives?:boolean;
+    addRepaintBoundaries?:boolean;
+    addSemanticIndexes?:boolean;
+    cacheExtent?:number;
+    children?:Array<Widget>;
+    semanticChildCount?:number;
+    dragStartBehavior?:DragStartBehavior;
+    clipBehavior?:Clip;
+    keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior;
+    restorationId?:string;
+  }
+  export class GridView extends Widget {
+    key?:Key;
+    scrollDirection?:Axis;
+    reverse?:boolean;
+    controller?:ScrollController;
+    primary?:boolean;
+    physics?:ScrollPhysics;
+    shrinkWrap?:boolean;
+    padding?:EdgeInsets;
+    gridDelegate?:SliverGridDelegate;
+    addAutomaticKeepAlives?:boolean;
+    addRepaintBoundaries?:boolean;
+    addSemanticIndexes?:boolean;
+    cacheExtent?:number;
+    children?:Array<Widget>;
+    semanticChildCount?:number;
+    dragStartBehavior?:DragStartBehavior;
+    clipBehavior?:Clip;
+    keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior;
+    restorationId?:string;
+  
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        scrollDirection?:Axis, 
+        reverse?:boolean, 
+        controller?:ScrollController, 
+        primary?:boolean, 
+        physics?:ScrollPhysics, 
+        shrinkWrap?:boolean, 
+        padding?:EdgeInsets, 
+        gridDelegate:SliverGridDelegate, 
+        addAutomaticKeepAlives?:boolean, 
+        addRepaintBoundaries?:boolean, 
+        addSemanticIndexes?:boolean, 
+        cacheExtent?:number, 
+        children?:Array<Widget>, 
+        semanticChildCount?:number, 
+        dragStartBehavior?:DragStartBehavior, 
+        clipBehavior?:Clip, 
+        keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior, 
+        restorationId?:string, 
+      }
+     */
+    constructor(config: GridViewConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.scrollDirection = config.scrollDirection;
+        this.reverse = config.reverse;
+        this.controller = config.controller;
+        this.primary = config.primary;
+        this.physics = config.physics;
+        this.shrinkWrap = config.shrinkWrap;
+        this.padding = config.padding;
+        this.gridDelegate = config.gridDelegate;
+        this.addAutomaticKeepAlives = config.addAutomaticKeepAlives;
+        this.addRepaintBoundaries = config.addRepaintBoundaries;
+        this.addSemanticIndexes = config.addSemanticIndexes;
+        this.cacheExtent = config.cacheExtent;
+        this.children = config.children;
+        this.semanticChildCount = config.semanticChildCount;
+        this.dragStartBehavior = config.dragStartBehavior;
+        this.clipBehavior = config.clipBehavior;
+        this.keyboardDismissBehavior = config.keyboardDismissBehavior;
+        this.restorationId = config.restorationId;
+      }
+    }
+  }
+
   //****** GridTileBar ******
   interface GridTileBarConfig {
     key?:Key;
@@ -12905,6 +13560,8 @@ export class CupertinoIcons extends IconData{
   //#endregion
   
   //#region ------- I -------
+
+
   //****** InputDecorator ******
   interface InputDecoratorConfig {
     key?:Key;
@@ -12961,6 +13618,147 @@ export class CupertinoIcons extends IconData{
       }
     }
   }
+
+  //****** InputChip ******
+  interface InputChipConfig {
+    key?:Key;
+    avatar?:Widget;
+    label:Widget;
+    labelStyle?:TextStyle;
+    labelPadding?:EdgeInsets;
+    selected?:boolean;
+    isEnabled?:boolean;
+    onSelected?:OnCallbackBoolean;
+    deleteIcon?:Widget;
+    onDeleted?:OnCallback;
+    deleteIconColor?:Color;
+    deleteButtonTooltipMessage?:string;
+    onPressed?:OnCallback;
+    pressElevation?:number;
+    disabledColor?:Color;
+    selectedColor?:Color;
+    tooltip?:string;
+    shape?:ShapeBorder;
+    clipBehavior?:Clip;
+    focusNode?:FocusNode;
+    autofocus?:boolean;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    visualDensity?:VisualDensity;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    elevation?:number;
+    shadowColor?:Color;
+    selectedShadowColor?:Color;
+    showCheckmark?:boolean;
+    checkmarkColor?:Color;
+    avatarBorder?:ShapeBorder;
+  }
+  export class InputChip extends Widget {
+    key?:Key;
+    avatar?:Widget;
+    label?:Widget;
+    labelStyle?:TextStyle;
+    labelPadding?:EdgeInsets;
+    selected?:boolean;
+    isEnabled?:boolean;
+    onSelected?:OnCallbackBoolean;
+    deleteIcon?:Widget;
+    onDeleted?:OnCallback;
+    deleteIconColor?:Color;
+    deleteButtonTooltipMessage?:string;
+    onPressed?:OnCallback;
+    pressElevation?:number;
+    disabledColor?:Color;
+    selectedColor?:Color;
+    tooltip?:string;
+    shape?:ShapeBorder;
+    clipBehavior?:Clip;
+    focusNode?:FocusNode;
+    autofocus?:boolean;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    visualDensity?:VisualDensity;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    elevation?:number;
+    shadowColor?:Color;
+    selectedShadowColor?:Color;
+    showCheckmark?:boolean;
+    checkmarkColor?:Color;
+    avatarBorder?:ShapeBorder;
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          avatar?:Widget, 
+          label:Widget, 
+          labelStyle?:TextStyle, 
+          labelPadding?:EdgeInsets, 
+          selected?:boolean, 
+          isEnabled?:boolean, 
+          onSelected?:OnCallbackBoolean, 
+          deleteIcon?:Widget, 
+          onDeleted?:OnCallback, 
+          deleteIconColor?:Color, 
+          deleteButtonTooltipMessage?:string, 
+          onPressed?:OnCallback, 
+          pressElevation?:number, 
+          disabledColor?:Color, 
+          selectedColor?:Color, 
+          tooltip?:string, 
+          shape?:ShapeBorder, 
+          clipBehavior?:Clip, 
+          focusNode?:FocusNode, 
+          autofocus?:boolean, 
+          backgroundColor?:Color, 
+          padding?:EdgeInsets, 
+          visualDensity?:VisualDensity, 
+          materialTapTargetSize?:MaterialTapTargetSize, 
+          elevation?:number, 
+          shadowColor?:Color, 
+          selectedShadowColor?:Color, 
+          showCheckmark?:boolean, 
+          checkmarkColor?:Color, 
+          avatarBorder?:ShapeBorder, 
+        }
+     */
+    constructor(config: InputChipConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.avatar = config.avatar;
+        this.label = config.label;
+        this.labelStyle = config.labelStyle;
+        this.labelPadding = config.labelPadding;
+        this.selected = config.selected;
+        this.isEnabled = config.isEnabled;
+        this.onSelected = config.onSelected;
+        this.deleteIcon = config.deleteIcon;
+        this.onDeleted = config.onDeleted;
+        this.deleteIconColor = config.deleteIconColor;
+        this.deleteButtonTooltipMessage = config.deleteButtonTooltipMessage;
+        this.onPressed = config.onPressed;
+        this.pressElevation = config.pressElevation;
+        this.disabledColor = config.disabledColor;
+        this.selectedColor = config.selectedColor;
+        this.tooltip = config.tooltip;
+        this.shape = config.shape;
+        this.clipBehavior = config.clipBehavior;
+        this.focusNode = config.focusNode;
+        this.autofocus = config.autofocus;
+        this.backgroundColor = config.backgroundColor;
+        this.padding = config.padding;
+        this.visualDensity = config.visualDensity;
+        this.materialTapTargetSize = config.materialTapTargetSize;
+        this.elevation = config.elevation;
+        this.shadowColor = config.shadowColor;
+        this.selectedShadowColor = config.selectedShadowColor;
+        this.showCheckmark = config.showCheckmark;
+        this.checkmarkColor = config.checkmarkColor;
+        this.avatarBorder = config.avatarBorder;
+      }
+    }
+  }
+
 
    //****** IconSpan ******
   //TODO:recognizer => GestureRecognizer
@@ -13157,7 +13955,7 @@ export class CupertinoIcons extends IconData{
   interface IconButtonConfig {
     key?:Key;
     icon:Widget;
-    onPressed:VoidCallback;
+    onPressed:OnCallback;
     iconSize?:number;
     padding?:EdgeInsets;
     alignment?:Alignment;
@@ -13177,7 +13975,7 @@ export class CupertinoIcons extends IconData{
   export class IconButton extends Widget {
     key?:Key;
     icon?:Widget;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
     iconSize?:number;
     padding?:EdgeInsets;
     alignment?:Alignment;
@@ -13198,7 +13996,7 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           icon:Widget, 
-          onPressed:VoidCallback, 
+          onPressed:OnCallback, 
           iconSize?:number, 
           padding?:EdgeInsets, 
           alignment?:Alignment, 
@@ -13323,13 +14121,13 @@ export class CupertinoIcons extends IconData{
   interface InkResponseConfig {
     key?:Key;
     child?:Widget;
-    onTap?:VoidCallback;
-    onTapDown?:VoidTapDown;
-    onTapCancel?:VoidCallback;
-    onDoubleTap?:VoidCallback;
-    onLongPress?:VoidCallback;
-    onHighlightChanged?:VoidCallbackBoolean;
-    onHover?:VoidCallbackBoolean;
+    onTap?:OnCallback;
+    onTapDown?:OnTapDown;
+    onTapCancel?:OnCallback;
+    onDoubleTap?:OnCallback;
+    onLongPress?:OnCallback;
+    onHighlightChanged?:OnCallbackBoolean;
+    onHover?:OnCallbackBoolean;
     containedInkWell?:boolean;
     highlightShape?:BoxShape;
     radius?:number;
@@ -13343,19 +14141,19 @@ export class CupertinoIcons extends IconData{
     enableFeedback?:boolean;
     excludeFromSemantics?:boolean;
     canRequestFocus ?:boolean;
-    onFocusChange?:VoidCallbackBoolean;
+    onFocusChange?:OnCallbackBoolean;
     autofocus?:boolean;
   }
   export class InkResponse extends Widget {
     key?:Key;
     child?:Widget;
-    onTap?:VoidCallback;
-    onTapDown?:VoidTapDown;
-    onTapCancel?:VoidCallback;
-    onDoubleTap?:VoidCallback;
-    onLongPress?:VoidCallback;
-    onHighlightChanged?:VoidCallbackBoolean;
-    onHover?:VoidCallbackBoolean;
+    onTap?:OnCallback;
+    onTapDown?:OnTapDown;
+    onTapCancel?:OnCallback;
+    onDoubleTap?:OnCallback;
+    onLongPress?:OnCallback;
+    onHighlightChanged?:OnCallbackBoolean;
+    onHover?:OnCallbackBoolean;
     containedInkWell?:boolean;
     highlightShape?:BoxShape;
     radius?:number;
@@ -13369,20 +14167,20 @@ export class CupertinoIcons extends IconData{
     enableFeedback?:boolean;
     excludeFromSemantics?:boolean;
     canRequestFocus ?:boolean;
-    onFocusChange?:VoidCallbackBoolean;
+    onFocusChange?:OnCallbackBoolean;
     autofocus?:boolean;
     /**
      * @param config config: 
         {
           key?:Key, 
           child?:Widget, 
-          onTap?:VoidCallback, 
-          onTapDown?:VoidTapDown, 
-          onTapCancel?:VoidCallback, 
-          onDoubleTap?:VoidCallback, 
-          onLongPress?:VoidCallback, 
-          onHighlightChanged?:VoidCallbackBoolean, 
-          onHover?:VoidCallbackBoolean, 
+          onTap?:OnCallback, 
+          onTapDown?:OnTapDown, 
+          onTapCancel?:OnCallback, 
+          onDoubleTap?:OnCallback, 
+          onLongPress?:OnCallback, 
+          onHighlightChanged?:OnCallbackBoolean, 
+          onHover?:OnCallbackBoolean, 
           containedInkWell?:boolean, 
           highlightShape?:BoxShape, 
           radius?:number, 
@@ -13396,7 +14194,7 @@ export class CupertinoIcons extends IconData{
           enableFeedback?:boolean, 
           excludeFromSemantics?:boolean, 
           canRequestFocus ?:boolean, 
-          onFocusChange?:VoidCallbackBoolean, 
+          onFocusChange?:OnCallbackBoolean, 
           autofocus?:boolean, 
         }
      */
@@ -13436,13 +14234,13 @@ export class CupertinoIcons extends IconData{
   interface InkWellConfig {
     key?:Key;
     child?:Widget;
-    onTap?:VoidCallback;
-    onTapDown?:VoidTapDown;
-    onTapCancel?:VoidCallback;
-    onDoubleTap?:VoidCallback;
-    onLongPress?:VoidCallback;
-    onHighlightChanged?:VoidCallbackBoolean;
-    onHover?:VoidCallbackBoolean;
+    onTap?:OnCallback;
+    onTapDown?:OnTapDown;
+    onTapCancel?:OnCallback;
+    onDoubleTap?:OnCallback;
+    onLongPress?:OnCallback;
+    onHighlightChanged?:OnCallbackBoolean;
+    onHover?:OnCallbackBoolean;
     radius?:number;
     borderRadius?:BorderRadius;
     customBorder?:ShapeBorder;
@@ -13454,19 +14252,19 @@ export class CupertinoIcons extends IconData{
     enableFeedback?:boolean;
     excludeFromSemantics?:boolean;
     canRequestFocus ?:boolean;
-    onFocusChange?:VoidCallbackBoolean;
+    onFocusChange?:OnCallbackBoolean;
     autofocus?:boolean;
   }
   export class InkWell extends Widget {
     key?:Key;
     child?:Widget;
-    onTap?:VoidCallback;
-    onTapDown?:VoidTapDown;
-    onTapCancel?:VoidCallback;
-    onDoubleTap?:VoidCallback;
-    onLongPress?:VoidCallback;
-    onHighlightChanged?:VoidCallbackBoolean;
-    onHover?:VoidCallbackBoolean;
+    onTap?:OnCallback;
+    onTapDown?:OnTapDown;
+    onTapCancel?:OnCallback;
+    onDoubleTap?:OnCallback;
+    onLongPress?:OnCallback;
+    onHighlightChanged?:OnCallbackBoolean;
+    onHover?:OnCallbackBoolean;
     radius?:number;
     borderRadius?:BorderRadius;
     customBorder?:ShapeBorder;
@@ -13478,20 +14276,20 @@ export class CupertinoIcons extends IconData{
     enableFeedback?:boolean;
     excludeFromSemantics?:boolean;
     canRequestFocus ?:boolean;
-    onFocusChange?:VoidCallbackBoolean;
+    onFocusChange?:OnCallbackBoolean;
     autofocus?:boolean;
     /**
      * @param config config: 
         {
           key?:Key, 
           child?:Widget, 
-          onTap?:VoidCallback, 
-          onTapDown?:VoidTapDown, 
-          onTapCancel?:VoidCallback, 
-          onDoubleTap?:VoidCallback, 
-          onLongPress?:VoidCallback, 
-          onHighlightChanged?:VoidCallbackBoolean, 
-          onHover?:VoidCallbackBoolean, 
+          onTap?:OnCallback, 
+          onTapDown?:OnTapDown, 
+          onTapCancel?:OnCallback, 
+          onDoubleTap?:OnCallback, 
+          onLongPress?:OnCallback, 
+          onHighlightChanged?:OnCallbackBoolean, 
+          onHover?:OnCallbackBoolean, 
           radius?:number, 
           borderRadius?:BorderRadius, 
           customBorder?:ShapeBorder, 
@@ -13503,7 +14301,7 @@ export class CupertinoIcons extends IconData{
           enableFeedback?:boolean, 
           excludeFromSemantics?:boolean, 
           canRequestFocus ?:boolean, 
-          onFocusChange?:VoidCallbackBoolean, 
+          onFocusChange?:OnCallbackBoolean, 
           autofocus?:boolean, 
         }
      */
@@ -13997,8 +14795,8 @@ export class CupertinoIcons extends IconData{
     title?:Widget;
     subtitle?:Widget;
     trailing?:Widget;
-    onTap?:VoidCallback;
-    onLongPress?:VoidCallback;
+    onTap?:OnCallback;
+    onLongPress?:OnCallback;
     selected?:boolean;
     isThreeLine?:boolean;
     dense?:boolean;
@@ -14016,8 +14814,8 @@ export class CupertinoIcons extends IconData{
     title?:Widget;
     subtitle?:Widget;
     trailing?:Widget;
-    onTap?:VoidCallback;
-    onLongPress?:VoidCallback;
+    onTap?:OnCallback;
+    onLongPress?:OnCallback;
     selected?:boolean;
     isThreeLine?:boolean;
     dense?:boolean;
@@ -14037,8 +14835,8 @@ export class CupertinoIcons extends IconData{
           title?:Widget, 
           subtitle?:Widget, 
           trailing?:Widget, 
-          onTap?:VoidCallback, 
-          onLongPress?:VoidCallback, 
+          onTap?:OnCallback, 
+          onLongPress?:OnCallback, 
           selected?:boolean, 
           isThreeLine?:boolean, 
           dense?:boolean, 
@@ -14795,8 +15593,8 @@ export class CupertinoIcons extends IconData{
   interface OutlineButtonConfig {
     key?:Key;
     child?:Widget;
-    onPressed:VoidCallback;
-    onLongPress?:VoidCallback;
+    onPressed:OnCallback;
+    onLongPress?:OnCallback;
     padding?:EdgeInsets;
     textTheme?:ButtonTextTheme;
     textColor?:Color;
@@ -14824,8 +15622,8 @@ export class CupertinoIcons extends IconData{
   export class OutlineButton extends Widget {
     key?:Key;
     child?:Widget;
-    onPressed?:VoidCallback;
-    onLongPress?:VoidCallback;
+    onPressed?:OnCallback;
+    onLongPress?:OnCallback;
     padding?:EdgeInsets;
     textTheme?:ButtonTextTheme;
     textColor?:Color;
@@ -14853,8 +15651,8 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           child?:Widget, 
-          onPressed:VoidCallback, 
-          onLongPress?:VoidCallback, 
+          onPressed:OnCallback, 
+          onLongPress?:OnCallback, 
           padding?:EdgeInsets, 
           textTheme?:ButtonTextTheme, 
           textColor?:Color, 
@@ -14913,8 +15711,8 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           child?:Widget, 
-          onPressed?:VoidCallback, 
-          onLongPress?:VoidCallback, 
+          onPressed?:OnCallback, 
+          onLongPress?:OnCallback, 
           padding?:EdgeInsets, 
           textTheme?:ButtonTextTheme, 
           textColor?:Color, 
@@ -15002,6 +15800,7 @@ export class CupertinoIcons extends IconData{
       }
     }
   }
+
   
   //****** PhysicalModel ******
   interface PhysicalModelConfig {
@@ -15421,6 +16220,72 @@ export class CupertinoIcons extends IconData{
       }
     }
   }
+
+  //****** PageView ******
+  interface PageViewConfig {
+    key?:Key;
+    scrollDirection?:Axis;
+    reverse?:boolean;
+    controller?:PageController;
+    physics?:ScrollPhysics;
+    pageSnapping?:boolean;
+    onPageChanged?:OnCallbackNumber;
+    children?:Array<Widget>;
+    dragStartBehavior?:DragStartBehavior;
+    allowImplicitScrolling?:boolean;
+    restorationId?:string;
+    clipBehavior?:Clip;
+  }
+  export class PageView extends Widget {
+    key?:Key;
+    scrollDirection?:Axis;
+    reverse?:boolean;
+    controller?:PageController;
+    physics?:ScrollPhysics;
+    pageSnapping?:boolean;
+    onPageChanged?:OnCallbackNumber;
+    children?:Array<Widget>;
+    dragStartBehavior?:DragStartBehavior;
+    allowImplicitScrolling?:boolean;
+    restorationId?:string;
+    clipBehavior?:Clip;
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          scrollDirection?:Axis, 
+          reverse?:boolean, 
+          controller?:PageController, 
+          physics?:ScrollPhysics, 
+          pageSnapping?:boolean, 
+          onPageChanged?:OnCallbackNumber, 
+          children?:Array<Widget>, 
+          dragStartBehavior?:DragStartBehavior, 
+          allowImplicitScrolling?:boolean, 
+          restorationId?:string, 
+          clipBehavior?:Clip, 
+        }
+     */
+    constructor(config: PageViewConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.scrollDirection = config.scrollDirection;
+        this.reverse= config.reverse;
+        this.controller = config.controller;
+        this.physics = config.physics;
+        this.pageSnapping = config.pageSnapping;
+        this.onPageChanged = config.onPageChanged;
+        this.children = config.children;
+        this.dragStartBehavior = config.dragStartBehavior;
+        this.allowImplicitScrolling = config.allowImplicitScrolling;
+        this.restorationId = config.restorationId;
+        this.clipBehavior = config.clipBehavior;
+      }
+    }
+  }
+
   //#endregion
   
   //#region ------- R -------
@@ -15469,6 +16334,150 @@ export class CupertinoIcons extends IconData{
         this.verticalDirection = config.verticalDirection;
         this.textBaseline = config.textBaseline;
         this.children = config.children;
+      }
+    }
+  }
+
+  //****** RawChip ******
+  interface RawChipConfig {
+    key?:Key;
+    avatar?:Widget;
+    label:Widget;
+    labelStyle?:TextStyle;
+    labelPadding?:EdgeInsets;
+    selected?:boolean;
+    isEnabled?:boolean;
+    tapEnabled?:boolean;
+    onSelected?:OnCallbackBoolean;
+    deleteIcon?:Widget;
+    onDeleted?:OnCallback;
+    deleteIconColor?:Color;
+    deleteButtonTooltipMessage?:string;
+    onPressed?:OnCallback;
+    pressElevation?:number;
+    disabledColor?:Color;
+    selectedColor?:Color;
+    tooltip?:string;
+    shape?:ShapeBorder;
+    clipBehavior?:Clip;
+    focusNode?:FocusNode;
+    autofocus?:boolean;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    visualDensity?:VisualDensity;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    elevation?:number;
+    shadowColor?:Color;
+    selectedShadowColor?:Color;
+    showCheckmark?:boolean;
+    checkmarkColor?:Color;
+    avatarBorder?:ShapeBorder;
+  }
+  export class RawChip extends Widget {
+    key?:Key;
+    avatar?:Widget;
+    label?:Widget;
+    labelStyle?:TextStyle;
+    labelPadding?:EdgeInsets;
+    selected?:boolean;
+    isEnabled?:boolean;
+    tapEnabled?:boolean;
+    onSelected?:OnCallbackBoolean;
+    deleteIcon?:Widget;
+    onDeleted?:OnCallback;
+    deleteIconColor?:Color;
+    deleteButtonTooltipMessage?:string;
+    onPressed?:OnCallback;
+    pressElevation?:number;
+    disabledColor?:Color;
+    selectedColor?:Color;
+    tooltip?:string;
+    shape?:ShapeBorder;
+    clipBehavior?:Clip;
+    focusNode?:FocusNode;
+    autofocus?:boolean;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+    visualDensity?:VisualDensity;
+    materialTapTargetSize?:MaterialTapTargetSize;
+    elevation?:number;
+    shadowColor?:Color;
+    selectedShadowColor?:Color;
+    showCheckmark?:boolean;
+    checkmarkColor?:Color;
+    avatarBorder?:ShapeBorder;
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          avatar?:Widget, 
+          label:Widget, 
+          labelStyle?:TextStyle, 
+          labelPadding?:EdgeInsets, 
+          selected?:boolean, 
+          isEnabled?:boolean, 
+          tapEnabled?:boolean, 
+          onSelected?:OnCallbackBoolean, 
+          deleteIcon?:Widget, 
+          onDeleted?:OnCallback, 
+          deleteIconColor?:Color, 
+          deleteButtonTooltipMessage?:string, 
+          onPressed?:OnCallback, 
+          pressElevation?:number, 
+          disabledColor?:Color, 
+          selectedColor?:Color, 
+          tooltip?:string, 
+          shape?:ShapeBorder, 
+          clipBehavior?:Clip, 
+          focusNode?:FocusNode, 
+          autofocus?:boolean, 
+          backgroundColor?:Color, 
+          padding?:EdgeInsets, 
+          visualDensity?:VisualDensity, 
+          materialTapTargetSize?:MaterialTapTargetSize, 
+          elevation?:number, 
+          shadowColor?:Color, 
+          selectedShadowColor?:Color, 
+          showCheckmark?:boolean, 
+          checkmarkColor?:Color, 
+          avatarBorder?:ShapeBorder, 
+        }
+     */
+    constructor(config: RawChipConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.avatar = config.avatar;
+        this.label = config.label;
+        this.labelStyle = config.labelStyle;
+        this.labelPadding = config.labelPadding;
+        this.selected = config.selected;
+        this.isEnabled = config.isEnabled;
+        this.tapEnabled = config.tapEnabled;
+        this.onSelected = config.onSelected;
+        this.deleteIcon = config.deleteIcon;
+        this.onDeleted = config.onDeleted;
+        this.deleteIconColor = config.deleteIconColor;
+        this.deleteButtonTooltipMessage = config.deleteButtonTooltipMessage;
+        this.onPressed = config.onPressed;
+        this.pressElevation = config.pressElevation;
+        this.disabledColor = config.disabledColor;
+        this.selectedColor = config.selectedColor;
+        this.tooltip = config.tooltip;
+        this.shape = config.shape;
+        this.clipBehavior = config.clipBehavior;
+        this.focusNode = config.focusNode;
+        this.autofocus = config.autofocus;
+        this.backgroundColor = config.backgroundColor;
+        this.padding = config.padding;
+        this.visualDensity = config.visualDensity;
+        this.materialTapTargetSize = config.materialTapTargetSize;
+        this.elevation = config.elevation;
+        this.shadowColor = config.shadowColor;
+        this.selectedShadowColor = config.selectedShadowColor;
+        this.showCheckmark = config.showCheckmark;
+        this.checkmarkColor = config.checkmarkColor;
+        this.avatarBorder = config.avatarBorder;
       }
     }
   }
@@ -15619,8 +16628,8 @@ export class CupertinoIcons extends IconData{
   //****** RaisedButton ******
   interface RaisedButtonConfig {
     child?:Widget;
-    onPressed?:VoidCallback;
-    onHighlightChanged?:VoidCallbackBoolean;
+    onPressed?:OnCallback;
+    onHighlightChanged?:OnCallbackBoolean;
     padding?:EdgeInsets;
     textColor?:Color;
     disabledTextColor?:Color;
@@ -15640,7 +16649,7 @@ export class CupertinoIcons extends IconData{
   
     icon?:Widget;
     label?:Widget;
-    onLongPress?:VoidCallback;
+    onLongPress?:OnCallback;
     focusColor?:Color;
     hoverColor?:Color;
     focusElevation?:number;
@@ -15650,8 +16659,8 @@ export class CupertinoIcons extends IconData{
   }
   export class RaisedButton extends Widget {
     child?:Widget;
-    onPressed?:VoidCallback;
-    onHighlightChanged?:VoidCallbackBoolean;
+    onPressed?:OnCallback;
+    onHighlightChanged?:OnCallbackBoolean;
     padding?:EdgeInsets;
     textColor?:Color;
     disabledTextColor?:Color;
@@ -15672,7 +16681,7 @@ export class CupertinoIcons extends IconData{
     icon?:Widget;
     label?:Widget;
   
-    onLongPress?:VoidCallback;
+    onLongPress?:OnCallback;
     focusColor?:Color;
     hoverColor?:Color;
     focusElevation?:number;
@@ -15685,8 +16694,8 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key,
           child?:Widget, 
-          onPressed?:VoidCallback, 
-          onHighlightChanged?:VoidCallbackBoolean, 
+          onPressed?:OnCallback, 
+          onHighlightChanged?:OnCallbackBoolean, 
           padding?:EdgeInsets,
           textColor?:Color, 
           disabledTextColor?:Color, 
@@ -15703,7 +16712,7 @@ export class CupertinoIcons extends IconData{
           materialTapTargetSize?:MaterialTapTargetSize, 
           animationDuration?:Duration, 
         
-          onLongPress?:VoidCallback, 
+          onLongPress?:OnCallback, 
           focusColor?:Color, 
           hoverColor?:Color, 
           focusElevation?:number, 
@@ -15750,8 +16759,8 @@ export class CupertinoIcons extends IconData{
         key?:Key,
         icon?:Widget, 
         label?:Widget,
-        onPressed?:VoidCallback, 
-        onHighlightChanged?:VoidCallbackBoolean, 
+        onPressed?:OnCallback, 
+        onHighlightChanged?:OnCallbackBoolean, 
         padding?:EdgeInsets,
         textColor?:Color, 
         disabledTextColor?:Color, 
@@ -15767,7 +16776,7 @@ export class CupertinoIcons extends IconData{
         clipBehavior?:Clip, 
         materialTapTargetSize?:MaterialTapTargetSize, 
         animationDuration?:Duration, 
-        onLongPress?:VoidCallback, 
+        onLongPress?:OnCallback, 
         focusColor?:Color, 
         hoverColor?:Color, 
         focusElevation?:number, 
@@ -15812,20 +16821,20 @@ export class CupertinoIcons extends IconData{
     }
   }
   
-  //****** TODO Radio ******
+  //****** Radio ******
   interface RadioConfig {
     key?:Key;
-    value?:any;
-    groupValue?:any;
-    onChanged?:any;
+    value?:string;
+    groupValue?:string;
+    onChanged?:OnCallbackString;
     activeColor?:Color;
     materialTapTargetSize?:MaterialTapTargetSize;
   }
   export class Radio extends Widget {
     key?:Key;
-    value?:any;
-    groupValue?:any;
-    onChanged?:any;
+    value?:string;
+    groupValue?:string;
+    onChanged?:OnCallbackString;
     activeColor?:Color;
     materialTapTargetSize?:MaterialTapTargetSize;
   
@@ -15833,9 +16842,9 @@ export class CupertinoIcons extends IconData{
      * @param config config: 
       {
         key?:Key,
-        value?:any,
-        groupValue?:any,
-        onChanged?:any,
+        value?:string,
+        groupValue?:string,
+        onChanged?:OnCallbackString,
         activeColor?:Color,
         materialTapTargetSize?:MaterialTapTargetSize
       }
@@ -15852,13 +16861,84 @@ export class CupertinoIcons extends IconData{
       }
     }
   }
+
+  //****** RadioListTile ******
+  interface RadioListTileConfig {
+    key?:Key;
+    value:string;
+    groupValue:string;
+    onChanged:OnCallbackString;
+    toggleable?:boolean;
+    activeColor?:Color;
+    title?:Widget;
+    subtitle?:Widget;
+    isThreeLine?:boolean;
+    dense?:boolean;
+    secondary?:Widget;
+    selected?:boolean;
+    controlAffinity?:ListTileControlAffinity;
+    autofocus?:boolean;
+  }
+  export class RadioListTile extends Widget {
+    key?:Key;
+    value?:string;
+    groupValue?:string;
+    onChanged?:OnCallbackString;
+    toggleable?:boolean;
+    activeColor?:Color;
+    title?:Widget;
+    subtitle?:Widget;
+    isThreeLine?:boolean;
+    dense?:boolean;
+    secondary?:Widget;
+    selected?:boolean;
+    controlAffinity?:ListTileControlAffinity;
+    autofocus?:boolean;
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        value:string, 
+        groupValue:string, 
+        onChanged:OnCallbackString, 
+        toggleable?:boolean, 
+        activeColor?:Color, 
+        title?:Widget, 
+        subtitle?:Widget, 
+        isThreeLine?:boolean, 
+        dense?:boolean, 
+        secondary?:Widget, 
+        selected?:boolean, 
+        controlAffinity?:ListTileControlAffinity, 
+        autofocus?:boolean, 
+      }
+     */
+    constructor(config: RadioListTileConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.value = config.value;
+        this.groupValue = config.groupValue;
+        this.onChanged = config.onChanged;
+        this.toggleable = config.toggleable;
+        this.activeColor = config.activeColor;
+        this.title = config.title;
+        this.subtitle = config.subtitle;
+        this.isThreeLine = config.isThreeLine;
+        this.dense = config.dense;
+        this.secondary = config.secondary;
+        this.controlAffinity = config.controlAffinity;
+        this.autofocus = config.autofocus;
+      }
+    }
+  }
   
   //****** RawMaterialButton ******
   interface RawMaterialButtonConfig {
     key?:Key;  
-    onPressed:VoidCallback;
-    onLongPress?:VoidCallback;
-    onHighlightChanged?:VoidCallbackBoolean;
+    onPressed:OnCallback;
+    onLongPress?:OnCallback;
+    onHighlightChanged?:OnCallbackBoolean;
     textStyle?:TextStyle;
     padding?:EdgeInsets;
     fillColor?:Color;
@@ -15883,9 +16963,9 @@ export class CupertinoIcons extends IconData{
   }
   export class RawMaterialButton extends Widget {
     key?:Key;  
-    onPressed?:VoidCallback;
-    onLongPress?:VoidCallback;
-    onHighlightChanged?:VoidCallbackBoolean;
+    onPressed?:OnCallback;
+    onLongPress?:OnCallback;
+    onHighlightChanged?:OnCallbackBoolean;
     textStyle?:TextStyle;
     padding?:EdgeInsets;
     fillColor?:Color;
@@ -15912,9 +16992,9 @@ export class CupertinoIcons extends IconData{
      * @param config config: 
       {
         key?:Key,   
-        onPressed:VoidCallback, 
-        onLongPress?:VoidCallback, 
-        onHighlightChanged?:VoidCallbackBoolean, 
+        onPressed:OnCallback, 
+        onLongPress?:OnCallback, 
+        onHighlightChanged?:OnCallbackBoolean, 
         textStyle?:TextStyle, 
         padding?:EdgeInsets, 
         fillColor?:Color, 
@@ -16027,6 +17107,91 @@ export class CupertinoIcons extends IconData{
   
   //#region ------- S -------
   
+  //****** Step ******
+  interface StepConfig {
+    title:Widget;
+    subtitle?:Widget;
+    content:Widget;
+    state?:StepState;
+    isActive?:boolean;
+  }
+  export class Step extends Widget {
+    title?:Widget;
+    subtitle?:Widget;
+    content?:Widget;
+    state?:StepState;
+    isActive?:boolean;
+    /**
+     * @param config config: 
+      {
+        title:Widget, 
+        subtitle?:Widget, 
+        content:Widget, 
+        state?:StepState, 
+        isActive?:boolean, 
+      }
+     */
+    constructor(config: StepConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.title = config.title;
+        this.subtitle = config.subtitle;
+        this.content = config.content;
+        this.state = config.state;
+        this.isActive = config.isActive;
+      }
+    }  
+  }
+
+  //****** Stepper ******
+  interface StepperConfig {
+    key?:Key;
+    steps?:Array<Step>;
+    physics?:ScrollPhysics;
+    type?:StepperType;
+    currentStep?:number;
+    onStepTapped?:OnCallbackNumber;
+    onStepContinue?:OnCallback;
+    onStepCancel?:OnCallback;
+  }
+  export class Stepper extends Widget {
+    key?:Key;
+    steps?:Array<Step>;
+    physics?:ScrollPhysics;
+    type?:StepperType;
+    currentStep?:number;
+    onStepTapped?:OnCallbackNumber;
+    onStepContinue?:OnCallback;
+    onStepCancel?:OnCallback;
+    /**
+     * @param config config: 
+      {
+        key?:Key, 
+        steps?:Array<Step>, 
+        physics?:ScrollPhysics, 
+        type?:StepperType, 
+        currentStep?:number, 
+        onStepTapped?:OnCallbackNumber, 
+        onStepContinue?:OnCallback, 
+        onStepCancel?:OnCallback, 
+      }
+     */
+    constructor(config: StepperConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.steps = config.steps;
+        this.physics = config.physics;
+        this.type = config.type;
+        this.currentStep = config.currentStep;
+        this.onStepTapped = config.onStepTapped;
+        this.onStepContinue = config.onStepContinue;
+        this.onStepCancel = config.onStepCancel;
+      }
+    }  
+  }
+
+
   //****** Spacer ******
   interface SpacerConfig {
     flex?:number;
@@ -16050,6 +17215,7 @@ export class CupertinoIcons extends IconData{
       }
     }  
   }
+  
   
   //****** Semantics ******
   interface SemanticsConfig {
@@ -16089,20 +17255,20 @@ export class CupertinoIcons extends IconData{
     onLongPressHint?:string;
     textDirection?:TextDirection;
   
-    onTap?:VoidCallback;
-    onLongPress?:VoidCallback;
-    onScrollLeft?:VoidCallback;
-    onScrollRight?:VoidCallback;
-    onScrollUp?:VoidCallback;
-    onScrollDown?:VoidCallback;
-    onIncrease?:VoidCallback;
-    onDecrease?:VoidCallback;
-    onCopy?:VoidCallback;
-    onCut?:VoidCallback;
-    onPaste?:VoidCallback;
-    onDismiss?:VoidCallback;
-    onDidGainAccessibilityFocus?:VoidCallback;
-    onDidLoseAccessibilityFocus?:VoidCallback;
+    onTap?:OnCallback;
+    onLongPress?:OnCallback;
+    onScrollLeft?:OnCallback;
+    onScrollRight?:OnCallback;
+    onScrollUp?:OnCallback;
+    onScrollDown?:OnCallback;
+    onIncrease?:OnCallback;
+    onDecrease?:OnCallback;
+    onCopy?:OnCallback;
+    onCut?:OnCallback;
+    onPaste?:OnCallback;
+    onDismiss?:OnCallback;
+    onDidGainAccessibilityFocus?:OnCallback;
+    onDidLoseAccessibilityFocus?:OnCallback;
   }
   export class Semantics extends Widget {
     key?:Key;
@@ -16141,20 +17307,20 @@ export class CupertinoIcons extends IconData{
     onLongPressHint?:string;
     textDirection?:TextDirection;
   
-    onTap?:VoidCallback;
-    onLongPress?:VoidCallback;
-    onScrollLeft?:VoidCallback;
-    onScrollRight?:VoidCallback;
-    onScrollUp?:VoidCallback;
-    onScrollDown?:VoidCallback;
-    onIncrease?:VoidCallback;
-    onDecrease?:VoidCallback;
-    onCopy?:VoidCallback;
-    onCut?:VoidCallback;
-    onPaste?:VoidCallback;
-    onDismiss?:VoidCallback;
-    onDidGainAccessibilityFocus?:VoidCallback;
-    onDidLoseAccessibilityFocus?:VoidCallback;
+    onTap?:OnCallback;
+    onLongPress?:OnCallback;
+    onScrollLeft?:OnCallback;
+    onScrollRight?:OnCallback;
+    onScrollUp?:OnCallback;
+    onScrollDown?:OnCallback;
+    onIncrease?:OnCallback;
+    onDecrease?:OnCallback;
+    onCopy?:OnCallback;
+    onCut?:OnCallback;
+    onPaste?:OnCallback;
+    onDismiss?:OnCallback;
+    onDidGainAccessibilityFocus?:OnCallback;
+    onDidLoseAccessibilityFocus?:OnCallback;
   
     /**
      * @param config config: 
@@ -16195,20 +17361,20 @@ export class CupertinoIcons extends IconData{
         onLongPressHint?:string, 
         textDirection?:TextDirection, 
   
-        onTap?:VoidCallback, 
-        onLongPress?:VoidCallback, 
-        onScrollLeft?:VoidCallback, 
-        onScrollRight?:VoidCallback, 
-        onScrollUp?:VoidCallback, 
-        onScrollDown?:VoidCallback, 
-        onIncrease?:VoidCallback, 
-        onDecrease?:VoidCallback, 
-        onCopy?:VoidCallback, 
-        onCut?:VoidCallback, 
-        onPaste?:VoidCallback, 
-        onDismiss?:VoidCallback, 
-        onDidGainAccessibilityFocus?:VoidCallback, 
-        onDidLoseAccessibilityFocus?:VoidCallback, 
+        onTap?:OnCallback, 
+        onLongPress?:OnCallback, 
+        onScrollLeft?:OnCallback, 
+        onScrollRight?:OnCallback, 
+        onScrollUp?:OnCallback, 
+        onScrollDown?:OnCallback, 
+        onIncrease?:OnCallback, 
+        onDecrease?:OnCallback, 
+        onCopy?:OnCallback, 
+        onCut?:OnCallback, 
+        onPaste?:OnCallback, 
+        onDismiss?:OnCallback, 
+        onDidGainAccessibilityFocus?:OnCallback, 
+        onDidLoseAccessibilityFocus?:OnCallback, 
       }
      */
     constructor(config: SemanticsConfig){
@@ -16271,7 +17437,7 @@ export class CupertinoIcons extends IconData{
   interface SwitchListTileConfig {
     key?:Key;
     value:boolean;
-    onChanged:VoidCallbackBoolean;
+    onChanged:OnCallbackBoolean;
     activeColor?:Color;
     activeTrackColor?:Color;
     inactiveThumbColor?:Color;
@@ -16289,7 +17455,7 @@ export class CupertinoIcons extends IconData{
   export class SwitchListTile extends Widget {
     key?:Key;
     value?:boolean;
-    onChanged?:VoidCallbackBoolean;
+    onChanged?:OnCallbackBoolean;
     activeColor?:Color;
     activeTrackColor?:Color;
     inactiveThumbColor?:Color;
@@ -16309,7 +17475,7 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidCallbackBoolean, 
+          onChanged:OnCallbackBoolean, 
           activeColor?:Color, 
           activeTrackColor?:Color, 
           inactiveThumbColor?:Color, 
@@ -16352,7 +17518,7 @@ export class CupertinoIcons extends IconData{
   interface SwitchConfig {
     key?:Key;
     value:boolean;
-    onChanged?:VoidCallbackBoolean;
+    onChanged?:OnCallbackBoolean;
     activeColor?:Color;
     activeTrackColor?:Color;
     inactiveThumbColor?:Color;
@@ -16366,7 +17532,7 @@ export class CupertinoIcons extends IconData{
   export class Switch extends Widget {
     key?:Key;
     value?:boolean;
-    onChanged?:VoidCallbackBoolean;
+    onChanged?:OnCallbackBoolean;
     activeColor?:Color;
     activeTrackColor?:Color;
     inactiveThumbColor?:Color;
@@ -16382,7 +17548,7 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           value:boolean, 
-          onChanged?:VoidCallbackBoolean, 
+          onChanged?:OnCallbackBoolean, 
           activeColor?:Color, 
           activeTrackColor?:Color, 
           inactiveThumbColor?:Color, 
@@ -16417,31 +17583,31 @@ export class CupertinoIcons extends IconData{
   interface SliderConfig {
     key?:Key;
     value?:number;
-    onChanged?:VoidCallbackNumber;
-    onChangeStart?:VoidCallbackNumber;
-    onChangeEnd?:VoidCallbackNumber;
+    onChanged?:OnCallbackNumber;
+    onChangeStart?:OnCallbackNumber;
+    onChangeEnd?:OnCallbackNumber;
     min?:number;
     max?:number;
     divisions?:number;
     label?:string;
     activeColor?:Color;
     inactiveColor?:Color;
-    semanticFormatterCallback?:VoidCallbackNumber;
+    semanticFormatterCallback?:OnCallbackNumber;
     autofocus?:boolean;  
   }
   export class Slider extends Widget {
     key?:Key;
     value?:number;
-    onChanged?:VoidCallbackNumber;
-    onChangeStart?:VoidCallbackNumber;
-    onChangeEnd?:VoidCallbackNumber;
+    onChanged?:OnCallbackNumber;
+    onChangeStart?:OnCallbackNumber;
+    onChangeEnd?:OnCallbackNumber;
     min?:number;
     max?:number;
     divisions?:number;
     label?:string;
     activeColor?:Color;
     inactiveColor?:Color;
-    semanticFormatterCallback?:VoidCallbackNumber;
+    semanticFormatterCallback?:OnCallbackNumber;
     autofocus?:boolean;  
   
     /**
@@ -16449,16 +17615,16 @@ export class CupertinoIcons extends IconData{
       {
         key?:Key,
         value?:number, 
-        onChanged?:VoidCallbackNumber, 
-        onChangeStart?:VoidCallbackNumber, 
-        onChangeEnd?:VoidCallbackNumber, 
+        onChanged?:OnCallbackNumber, 
+        onChangeStart?:OnCallbackNumber, 
+        onChangeEnd?:OnCallbackNumber, 
         min?:number, 
         max?:number, 
         divisions?:number, 
         label?:string, 
         activeColor?:Color,
         inactiveColor?:Color, 
-        semanticFormatterCallback?:VoidCallbackNumber, 
+        semanticFormatterCallback?:OnCallbackNumber, 
         autofocus?:boolean,
       }
      */
@@ -16673,7 +17839,7 @@ export class CupertinoIcons extends IconData{
     snap?:boolean;
     stretch?:boolean;
     stretchTriggerOffset?:number;
-    onStretchTrigger?:VoidCallback;
+    onStretchTrigger?:OnCallback;
     shape?:ShapeBorder;
     toolbarHeight?:number;
   }
@@ -16701,7 +17867,7 @@ export class CupertinoIcons extends IconData{
     snap?:boolean;
     stretch?:boolean;
     stretchTriggerOffset?:number;
-    onStretchTrigger?:VoidCallback;
+    onStretchTrigger?:OnCallback;
     shape?:ShapeBorder;
     toolbarHeight?:number;
   
@@ -16731,7 +17897,7 @@ export class CupertinoIcons extends IconData{
         snap?:boolean, 
         stretch?:boolean, 
         stretchTriggerOffset?:number 
-        onStretchTrigger?:VoidCallback, 
+        onStretchTrigger?:OnCallback, 
         shape?:any, 
         toolbarHeight?:number,
       }
@@ -17604,7 +18770,7 @@ export class CupertinoIcons extends IconData{
     action?:any;
     duration?:Duration;
     animation?:any;
-    onVisible?:VoidCallback;
+    onVisible?:OnCallback;
   }
   export class SnackBar extends Widget {
     content?:Widget;
@@ -17615,7 +18781,7 @@ export class CupertinoIcons extends IconData{
     action?:any;
     duration?:Duration;
     animation?:any;
-    onVisible?:VoidCallback;
+    onVisible?:OnCallback;
     key?:Widget;
   
     /**
@@ -17630,7 +18796,7 @@ export class CupertinoIcons extends IconData{
         action?:any, 
         duration?:Duration, 
         animation?:any, 
-        onVisible?:VoidCallback, 
+        onVisible?:OnCallback, 
       }
      */
     constructor(config: SnackBarConfig){
@@ -17654,14 +18820,14 @@ export class CupertinoIcons extends IconData{
   interface SnackBarActionConfig {
     key?:Widget;
     lable:string;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
     disabledTextColor?:Color;
     textColor?:Color;
   }
   export class SnackBarAction extends Widget {
     key?:Widget;
     lable?:string;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
     disabledTextColor?:Color;
     textColor?:Color;
   
@@ -17670,7 +18836,7 @@ export class CupertinoIcons extends IconData{
       {
         key?:Widget, 
         lable:string, 
-        onPressed?:VoidCallback, 
+        onPressed?:OnCallback, 
         disabledTextColor?:Color, 
         textColor?:Color, 
       }
@@ -17738,8 +18904,133 @@ export class CupertinoIcons extends IconData{
         this.maintainInteractivity = config.maintainInteractivity;
       }
     }
-  
   }
+
+
+  //****** SelectableText ******
+  interface SelectableTextConfig {
+    key?:Key;
+    focusNode?:FocusNode;
+    style?:TextStyle;
+    strutStyle?:StrutStyle;
+    textAlign?:TextAlign;
+    textDirection?:TextDirection;
+    textScaleFactor?:number;
+    showCursor?:boolean;
+    autofocus?:boolean;
+    toolbarOptions?:ToolbarOptions;
+    minLines?:number;
+    maxLines?:number;
+    cursorWidth?:number;
+    cursorHeight?:number;
+    cursorRadius?:Radius;
+    cursorColor?:Color;
+    dragStartBehavior?:DragStartBehavior;
+    enableInteractiveSelection?:boolean;
+    onTap?:OnCallback;
+    scrollPhysics?:ScrollPhysics;
+    textWidthBasis?:TextWidthBasis;
+  }
+  export class SelectableText extends Widget {
+    data?:string | TextSpan;
+    key?:Key;
+    focusNode?:FocusNode;
+    style?:TextStyle;
+    strutStyle?:StrutStyle;
+    textAlign?:TextAlign;
+    textDirection?:TextDirection;
+    textScaleFactor?:number;
+    showCursor?:boolean;
+    autofocus?:boolean;
+    toolbarOptions?:ToolbarOptions;
+    minLines?:number;
+    maxLines?:number;
+    cursorWidth?:number;
+    cursorHeight?:number;
+    cursorRadius?:Radius;
+    cursorColor?:Color;
+    dragStartBehavior?:DragStartBehavior;
+    enableInteractiveSelection?:boolean;
+    onTap?:OnCallback;
+    scrollPhysics?:ScrollPhysics;
+    textWidthBasis?:TextWidthBasis;
+  
+    /**
+     * @param config config: 
+      {
+        key?:Key,
+        key?:Key, 
+        focusNode?:FocusNode, 
+        style?:TextStyle, 
+        strutStyle?:StrutStyle, 
+        textAlign?:TextAlign, 
+        textDirection?:TextDirection, 
+        textScaleFactor?:number, 
+        showCursor?:boolean, 
+        autofocus?:boolean, 
+        toolbarOptions?:ToolbarOptions, 
+        minLines?:number, 
+        maxLines?:number, 
+        cursorWidth?:number, 
+        cursorHeight?:number, 
+        cursorRadius?:Radius, 
+        cursorColor?:Color, 
+        dragStartBehavior?:DragStartBehavior, 
+        enableInteractiveSelection?:boolean, 
+        onTap?:OnCallback, 
+        scrollPhysics?:ScrollPhysics, 
+        textWidthBasis?:TextWidthBasis, 
+      }
+     */
+    constructor(data:string | TextSpan, config?: SelectableTextConfig){
+      super();
+      this.data = data;
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.focusNode = config.focusNode;
+        this.style = config.style;
+        this.strutStyle = config.strutStyle;
+        this.textAlign = config.textAlign;
+        this.textDirection = config.textDirection;
+        this.textScaleFactor = config.textScaleFactor;
+        this.autofocus = config.autofocus;
+        this.toolbarOptions = config.toolbarOptions;
+        this.minLines = config.minLines;
+        this.maxLines = config.maxLines;
+        this.cursorWidth = config.cursorWidth;
+        this.cursorHeight = config.cursorHeight;
+        this.cursorColor = config.cursorColor;
+        this.dragStartBehavior = config.dragStartBehavior;
+        this.enableInteractiveSelection = config.enableInteractiveSelection;
+        this.onTap = config.onTap;
+        this.scrollPhysics = config.scrollPhysics;
+        this.textWidthBasis = config.textWidthBasis;
+      }
+    }
+  
+    /**
+     * @param config config: 
+      {
+        key?:Key,
+        style?:TextStyle,
+        textAlign?:TextAlign,
+        textDirection?:TextDirection,
+        softWrap?:boolean,
+        overflow?:TextOverflow,
+        textScaleFactor?:number,
+        maxLines?:number,
+        semanticsLabel?:string,
+        textWidthBasis?:TextWidthBasis,
+      }
+     */
+    static rich(data:TextSpan, config?: SelectableTextConfig) {
+      var v = new SelectableText(data,config);
+      v.constructorName= "rich";
+      v.data = data;
+      return v;
+    }
+  }
+
   
   
   //#endregion
@@ -18067,7 +19358,7 @@ export class CupertinoIcons extends IconData{
   interface TabBarConfig {
     key?:Key;
     tabs?:Array<Widget>;
-    onTap?:VoidCallbackNumber;
+    onTap?:OnCallbackNumber;
     controller?:TabController;
     isScrollable?:boolean;
     indicatorColor?:Color;
@@ -18086,7 +19377,7 @@ export class CupertinoIcons extends IconData{
   export class TabBar extends  Widget {
     key?:Key;
     tabs?:Array<Widget>;
-    onTap?:VoidCallbackNumber;
+    onTap?:OnCallbackNumber;
     controller?:TabController;
     isScrollable?:boolean;
     indicatorColor?:Color;
@@ -18107,7 +19398,7 @@ export class CupertinoIcons extends IconData{
       {
         key?:Key, 
         tabs?:Array<Widget>,
-        onTap?:VoidCallbackNumber, 
+        onTap?:OnCallbackNumber, 
         controller?:TabController, 
         isScrollable?:boolean, 
         indicatorColor?:Color, 
@@ -18330,6 +19621,7 @@ export class CupertinoIcons extends IconData{
   interface TextConfig {
     key?:Key;
     style?:TextStyle;
+    strutStyle?:StrutStyle;
     textAlign?:TextAlign;
     textDirection?:TextDirection;
     softWrap?:boolean;
@@ -18343,6 +19635,7 @@ export class CupertinoIcons extends IconData{
     data?:string | TextSpan;
     key?:Key;
     style?:TextStyle;
+    strutStyle?:StrutStyle;
     textAlign?:TextAlign;
     textDirection?:TextDirection;
     softWrap?:boolean;
@@ -18357,6 +19650,7 @@ export class CupertinoIcons extends IconData{
       {
         key?:Key,
         style?:TextStyle,
+        strutStyle?:StrutStyle,
         textAlign?:TextAlign,
         textDirection?:TextDirection,
         softWrap?:boolean,
@@ -18373,6 +19667,7 @@ export class CupertinoIcons extends IconData{
       if(config!=null && config!=undefined){
         this.key = config.key;
         this.style = config.style;
+        this.strutStyle = config.strutStyle;
         this.textAlign = config.textAlign;
         this.textDirection = config.textDirection;
         this.softWrap = config.softWrap;
@@ -18406,6 +19701,7 @@ export class CupertinoIcons extends IconData{
       return v;
     }
   }
+
   
   //****** TextSpan ******
   //TODO:recognizer => GestureRecognizer
@@ -18504,12 +19800,12 @@ export class CupertinoIcons extends IconData{
     expands?:boolean;
     maxLength?:number;
     maxLengthEnforced?:boolean;
-    onChanged?:VoidCallbackString;
-    onTap?:VoidCallback;
-    onEditingComplete?:VoidCallback;
-    onFieldSubmitted?:VoidCallbackString;
-    onSaved?:VoidCallbackString;
-    validator?:VoidCallbackString;
+    onChanged?:OnCallbackString;
+    onTap?:OnCallback;
+    onEditingComplete?:OnCallback;
+    onFieldSubmitted?:OnCallbackString;
+    onSaved?:OnCallbackString;
+    validator?:OnCallbackString;
     enabled?:boolean;
     cursorWidth?:number;
     cursorRadius?:Radius;
@@ -18553,12 +19849,12 @@ export class CupertinoIcons extends IconData{
     expands?:boolean;
     maxLength?:number;
     maxLengthEnforced?:boolean;
-    onChanged?:VoidCallbackString;
-    onTap?:VoidCallback;
-    onEditingComplete?:VoidCallback;
-    onFieldSubmitted?:VoidCallbackString;
-    onSaved?:VoidCallbackString;
-    validator?:VoidCallbackString;
+    onChanged?:OnCallbackString;
+    onTap?:OnCallback;
+    onEditingComplete?:OnCallback;
+    onFieldSubmitted?:OnCallbackString;
+    onSaved?:OnCallbackString;
+    validator?:OnCallbackString;
     enabled?:boolean;
     cursorWidth?:number;
     cursorRadius?:Radius;
@@ -18602,12 +19898,12 @@ export class CupertinoIcons extends IconData{
         expands?:boolean,
         maxLength?:number,
         maxLengthEnforced?:boolean,
-        onChanged?:VoidCallbackString,
-        onTap?:VoidCallback,
-        onEditingComplete?:VoidCallback,
-        onFieldSubmitted?:VoidCallbackString,
-        onSaved?:VoidCallbackString,
-        validator?:VoidCallbackString,
+        onChanged?:OnCallbackString,
+        onTap?:OnCallback,
+        onEditingComplete?:OnCallback,
+        onFieldSubmitted?:OnCallbackString,
+        onSaved?:OnCallbackString,
+        validator?:OnCallbackString,
         enabled?:boolean,
         cursorWidth?:number,
         cursorRadius?:Radius,
@@ -18702,9 +19998,9 @@ export class CupertinoIcons extends IconData{
     expands?:boolean;
     maxLength?:number;
     maxLengthEnforced?:boolean;
-    onChanged?:VoidCallbackString;
-    onEditingComplete?:VoidCallback;
-    onSubmitted?:VoidCallbackString;
+    onChanged?:OnCallbackString;
+    onEditingComplete?:OnCallback;
+    onSubmitted?:OnCallbackString;
     enabled?:boolean;
     cursorWidth?:number;
     cursorRadius?:Radius;
@@ -18715,7 +20011,7 @@ export class CupertinoIcons extends IconData{
     scrollPadding?:EdgeInsets;
     dragStartBehavior?:DragStartBehavior;
     enableInteractiveSelection?:boolean;
-    onTap?:VoidCallback;
+    onTap?:OnCallback;
     scrollController?:ScrollController;
     scrollPhysics?:ScrollPhysics; 
     inputFormatters?:Array<TextInputFormatter>; 
@@ -18749,9 +20045,9 @@ export class CupertinoIcons extends IconData{
     expands?:boolean;
     maxLength?:number;
     maxLengthEnforced?:boolean;
-    onChanged?:VoidCallbackString;
-    onEditingComplete?:VoidCallback;
-    onSubmitted?:VoidCallbackString;
+    onChanged?:OnCallbackString;
+    onEditingComplete?:OnCallback;
+    onSubmitted?:OnCallbackString;
     enabled?:boolean;
     cursorWidth?:number;
     cursorRadius?:Radius;
@@ -18762,7 +20058,7 @@ export class CupertinoIcons extends IconData{
     scrollPadding?:EdgeInsets;
     dragStartBehavior?:DragStartBehavior;
     enableInteractiveSelection?:boolean;
-    onTap?:VoidCallback;
+    onTap?:OnCallback;
     scrollController?:ScrollController;
     scrollPhysics?:ScrollPhysics;
     inputFormatters?:Array<TextInputFormatter>; 
@@ -18798,9 +20094,9 @@ export class CupertinoIcons extends IconData{
         expands?:boolean,
         maxLength?:number,
         maxLengthEnforced?:boolean,
-        onChanged?:VoidCallbackString,
-        onEditingComplete?:VoidCallback,
-        onSubmitted?:VoidCallbackString,
+        onChanged?:OnCallbackString,
+        onEditingComplete?:OnCallback,
+        onSubmitted?:OnCallbackString,
         enabled?:boolean,
         cursorWidth?:number,
         cursorRadius?:Radius,
@@ -18811,7 +20107,7 @@ export class CupertinoIcons extends IconData{
         scrollPadding?:EdgeInsets,
         dragStartBehavior?:DragStartBehavior,
         enableInteractiveSelection?:boolean,
-        onTap?:VoidCallback,
+        onTap?:OnCallback,
         scrollController?:ScrollController,
         scrollPhysics?:ScrollPhysics,     
 
@@ -19078,20 +20374,20 @@ export class CupertinoIcons extends IconData{
   //****** WillPopScope ******
   interface WillPopScopeConfig {
     child:Widget;
-    onWillPop:VoidCallback;
+    onWillPop:OnCallback;
   
     key?:Key;
   }
   export class WillPopScope extends Widget {
     key?:Key;
     child?:Widget;
-    onWillPop?:VoidCallback;
+    onWillPop?:OnCallback;
   
     /**
      * @param config config: 
       {
         child:Widget, 
-        onWillPop:VoidCallback, 
+        onWillPop:OnCallback, 
   
         key?:Key, 
       }
@@ -19181,6 +20477,7 @@ export class CupertinoIcons extends IconData{
     }
   }
 
+
  
 
   
@@ -19189,7 +20486,7 @@ export class CupertinoIcons extends IconData{
   interface CupertinoButtonConfig {
     key?:Key;
     child:Widget;
-    onPressed:VoidCallback;
+    onPressed:OnCallback;
     padding?:EdgeInsets;
     color?:Color;
     disabledColor?:Color;
@@ -19199,7 +20496,7 @@ export class CupertinoIcons extends IconData{
   }
   export class CupertinoButton extends Widget {
     child?:Widget;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
     padding?:EdgeInsets;
     color?:Color;
     disabledColor?:Color;
@@ -19213,7 +20510,7 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           child:Widget, 
-          onPressed:VoidCallback, 
+          onPressed:OnCallback, 
           padding?:EdgeInsets, 
           color?:Color, 
           disabledColor?:Color, 
@@ -19244,7 +20541,7 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           child:Widget, 
-          onPressed:VoidCallback, 
+          onPressed:OnCallback, 
           padding?:EdgeInsets, 
           disabledColor?:Color, 
           minSize?:number, 
@@ -19266,7 +20563,7 @@ export class CupertinoIcons extends IconData{
     key?:Key;
     isDefaultAction?:boolean;
     isDestructiveAction?:boolean;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
     child:Widget;
     textStyle?:TextStyle;
   }
@@ -19274,7 +20571,7 @@ export class CupertinoIcons extends IconData{
     key?:Key;
     isDefaultAction?:boolean;
     isDestructiveAction?:boolean;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
     child?:Widget;
     textStyle?:TextStyle;
   
@@ -19284,7 +20581,7 @@ export class CupertinoIcons extends IconData{
           key?:Key, 
           isDefaultAction?:boolean, 
           isDestructiveAction?:boolean, 
-          onPressed?:VoidCallback, 
+          onPressed?:OnCallback, 
           child:Widget, 
           textStyle?:TextStyle, 
         }
@@ -19382,13 +20679,13 @@ export class CupertinoIcons extends IconData{
     key?:Key;
     color?:Color;
     previousPageTitle?:string;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
   }
   export class CupertinoNavigationBarBackButton extends Widget {
     key?:Key;
     color?:Color;
     previousPageTitle?:string;
-    onPressed?:VoidCallback;
+    onPressed?:OnCallback;
   
     /**
      * @param config config: 
@@ -19396,7 +20693,7 @@ export class CupertinoIcons extends IconData{
           key?:Key, 
           color?:Color, 
           previousPageTitle?:string, 
-          onPressed?:VoidCallback, 
+          onPressed?:OnCallback, 
         }
      */
     constructor(config:CupertinoNavigationBarBackButtonConfig){
@@ -19417,9 +20714,9 @@ export class CupertinoIcons extends IconData{
   interface CupertinoSliderConfig {
     key?:Key;
     value:number;
-    onChanged:VoidCallbackNumber;
-    onChangeStart?:VoidCallbackNumber;
-    onChangeEnd?:VoidCallbackNumber;
+    onChanged:OnCallbackNumber;
+    onChangeStart?:OnCallbackNumber;
+    onChangeEnd?:OnCallbackNumber;
     min?:number;
     max?:number;
     divisions?:number;
@@ -19429,9 +20726,9 @@ export class CupertinoIcons extends IconData{
   export class CupertinoSlider extends Widget {
     key?:Key;
     value?:number;
-    onChanged?:VoidCallbackNumber;
-    onChangeStart?:VoidCallbackNumber;
-    onChangeEnd?:VoidCallbackNumber;
+    onChanged?:OnCallbackNumber;
+    onChangeStart?:OnCallbackNumber;
+    onChangeEnd?:OnCallbackNumber;
     min?:number;
     max?:number;
     divisions?:number;
@@ -19443,9 +20740,9 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           value:number, 
-          onChanged:VoidCallbackNumber, 
-          onChangeStart?:VoidCallbackNumber, 
-          onChangeEnd?:VoidCallbackNumber, 
+          onChanged:OnCallbackNumber, 
+          onChangeStart?:OnCallbackNumber, 
+          onChangeEnd?:OnCallbackNumber, 
           min?:number, 
           max?:number, 
           divisions?:number, 
@@ -19474,7 +20771,7 @@ export class CupertinoIcons extends IconData{
   interface CupertinoSwitchConfig {
     key?:Key;
     value:boolean;
-    onChanged:VoidCallbackBoolean;
+    onChanged:OnCallbackBoolean;
     activeColor?:Color;
     trackColor?:Color;
     dragStartBehavior?:DragStartBehavior;
@@ -19482,7 +20779,7 @@ export class CupertinoIcons extends IconData{
   export class CupertinoSwitch extends Widget {
     key?:Key;
     value?:boolean;
-    onChanged?:VoidCallbackBoolean;
+    onChanged?:OnCallbackBoolean;
     activeColor?:Color;
     trackColor?:Color;
     dragStartBehavior?:DragStartBehavior;
@@ -19492,7 +20789,7 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           value:boolean, 
-          onChanged:VoidCallbackBoolean, 
+          onChanged:OnCallbackBoolean, 
           activeColor?:Color, 
           trackColor?:Color, 
           dragStartBehavior?:DragStartBehavior, 
@@ -19510,6 +20807,107 @@ export class CupertinoIcons extends IconData{
       }
     }
   }
+
+  //****** CupertinoSegmentedControl ******
+  interface CupertinoSegmentedControlConfig {
+    key?:Key;
+    children:Array<Widget>;
+    onValueChanged:OnCallbackNumber;
+    groupValue?:number;
+    unselectedColor?:Color;
+    selectedColor?:Color;
+    borderColor?:Color;
+    pressedColor?:Color;
+    padding?:EdgeInsets;
+  }
+  export class CupertinoSegmentedControl extends Widget {
+    key?:Key;
+    children?:Array<Widget>;
+    onValueChanged?:OnCallbackNumber;
+    groupValue?:number;
+    unselectedColor?:Color;
+    selectedColor?:Color;
+    borderColor?:Color;
+    pressedColor?:Color;
+    padding?:EdgeInsets;
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          children:Array<Widget>, 
+          onValueChanged:OnCallbackNumber, 
+          groupValue?:number, 
+          unselectedColor?:Color, 
+          selectedColor?:Color, 
+          borderColor?:Color, 
+          pressedColor?:Color, 
+          padding?:EdgeInsets, 
+        }
+     */
+    constructor(config: CupertinoSegmentedControlConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.children = config.children;
+        this.onValueChanged = config.onValueChanged;
+        this.groupValue = config.groupValue;
+        this.groupValue  = config.groupValue;
+        this.unselectedColor = config.unselectedColor;
+        this.selectedColor = config.selectedColor;
+        this.borderColor = config.borderColor;
+        this.pressedColor = config.pressedColor;
+        this.padding = config.padding;
+      }
+    }
+  }
+
+  //****** CupertinoSlidingSegmentedControl ******
+  interface CupertinoSlidingSegmentedControlConfig {
+    key?:Key;
+    children:Array<Widget>;
+    onValueChanged:OnCallbackNumber;
+    groupValue?:number;
+    thumbColor?:Color;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+  }
+  export class CupertinoSlidingSegmentedControl extends Widget {
+    key?:Key;
+    children?:Array<Widget>;
+    onValueChanged?:OnCallbackNumber;
+    groupValue?:number;
+    thumbColor?:Color;
+    backgroundColor?:Color;
+    padding?:EdgeInsets;
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          children:Array<Widget>, 
+          onValueChanged:OnCallbackNumber, 
+          groupValue?:number, 
+          thumbColor?:Color, 
+          backgroundColor?:Color, 
+          padding?:EdgeInsets, 
+        }
+     */
+    constructor(config: CupertinoSlidingSegmentedControlConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.children = config.children;
+        this.onValueChanged = config.onValueChanged;
+        this.groupValue = config.groupValue;
+        this.groupValue  = config.groupValue;
+        this.thumbColor = config.thumbColor;
+        this.backgroundColor = config.backgroundColor;
+        this.padding = config.padding;
+      }
+    }
+  }
+
   
   //****** CupertinoScrollbar ******
   interface CupertinoScrollbarConfig {
@@ -19642,7 +21040,6 @@ export class CupertinoIcons extends IconData{
         this.stops = config.stops;
       }
     }
-
   }
 
 
@@ -19650,7 +21047,7 @@ export class CupertinoIcons extends IconData{
   interface CupertinoTabBarConfig {
     key?:Key;
     items:Array<BottomNavigationBarItem>;
-    onTap?:VoidCallbackNumber;
+    onTap?:OnCallbackNumber;
     currentIndex?:number;
     backgroundColor?:Color;
     activeColor?:Color;
@@ -19661,7 +21058,7 @@ export class CupertinoIcons extends IconData{
   export class CupertinoTabBar extends Widget {
     key?:Key;
     items?:Array<BottomNavigationBarItem>;
-    onTap?:VoidCallbackNumber;
+    onTap?:OnCallbackNumber;
     currentIndex?:number;
     backgroundColor?:Color;
     activeColor?:Color;
@@ -19674,7 +21071,7 @@ export class CupertinoIcons extends IconData{
         {
           key?:Key, 
           items:Array<BottomNavigationBarItem>, 
-          onTap?:VoidCallbackNumber, 
+          onTap?:OnCallbackNumber, 
           currentIndex?:number, 
           backgroundColor?:Color, 
           activeColor?:Color, 
@@ -19699,6 +21096,7 @@ export class CupertinoIcons extends IconData{
     }
   
   }
+
   //****** CupertinoTabController ******
   interface CupertinoTabControllerConfig {
     initialIndex?:number;
@@ -19714,11 +21112,42 @@ export class CupertinoIcons extends IconData{
      */
     constructor(config: CupertinoTabControllerConfig){
       super();
+      this.createMirrorID();
       if(config!=null && config!=undefined){
         this.initialIndex = config.initialIndex;
       }
     }
   }
+
+  //****** CupertinoTabView ******
+  interface CupertinoTabViewConfig {
+    key?:Key;
+    defaultTitle?:string;
+    child:Widget;
+  }
+  export class CupertinoTabView extends Widget {
+    key?:Key;
+    defaultTitle?:string;
+    child?:Widget;
+  
+    /**
+     * @param config config: 
+        {
+          key?:Key, 
+          defaultTitle?:string, 
+          child:Widget, 
+        }
+     */
+    constructor(config: CupertinoTabViewConfig){
+      super();
+      if(config!=null && config!=undefined){
+        this.key = config.key;
+        this.defaultTitle = this.defaultTitle;
+        this.child = config.child;
+      }
+    }
+  }
+
   
   //****** CupertinoTheme ******
   interface CupertinoThemeConfig {
@@ -20229,7 +21658,7 @@ interface BottomSheetConfig {
   elevation?:number;
   shape?:ShapeBorder;
   clipBehavior?:Clip;
-  onClosing:VoidCallback;
+  onClosing:OnCallback;
   child:Widget;
 }
 export class BottomSheet extends Widget {
@@ -20239,7 +21668,7 @@ export class BottomSheet extends Widget {
   elevation?:number;
   shape?:ShapeBorder;
   clipBehavior?:Clip;
-  onClosing?:VoidCallback;
+  onClosing?:OnCallback;
   child?:Widget;
 
   /**
@@ -20251,7 +21680,7 @@ export class BottomSheet extends Widget {
         elevation?:number, 
         shape?:ShapeBorder, 
         clipBehavior?:Clip, 
-        onClosing?:VoidCallback, 
+        onClosing?:OnCallback, 
         child?:Widget, 
       }
    */
@@ -20350,7 +21779,7 @@ export class CupertinoActionSheet extends Widget {
 interface CupertinoActionSheetActionConfig {
   key?:Key;
   child:Widget;
-  onPressed:VoidCallback;
+  onPressed:OnCallback;
   isDefaultAction?:boolean;
   isDestructiveAction?:boolean;
 
@@ -20358,7 +21787,7 @@ interface CupertinoActionSheetActionConfig {
 export class CupertinoActionSheetAction extends Widget {
   key?:Key;
   child?:Widget;
-  onPressed?:VoidCallback;
+  onPressed?:OnCallback;
   isDefaultAction?:boolean;
   isDestructiveAction?:boolean;
 
@@ -20367,7 +21796,7 @@ export class CupertinoActionSheetAction extends Widget {
       {
         key?:Key, 
         child:Widget, 
-        onPressed:VoidCallback, 
+        onPressed:OnCallback, 
         isDefaultAction?:boolean, 
         isDestructiveAction?:boolean, 
       }
@@ -20426,7 +21855,7 @@ interface CustomAlertDialogButtonConfig {
   bgColor?:Color;
   gradient?:Gradient;
   radius?:BorderRadius;
-  onPressed?:VoidCallback;
+  onPressed?:OnCallback;
 }
 export class CustomAlertDialogButton extends Widget{
   child?:Widget;
@@ -20435,7 +21864,7 @@ export class CustomAlertDialogButton extends Widget{
   bgColor?:Color;
   gradient?:Gradient;
   radius?:BorderRadius;
-  onPressed?:VoidCallback;
+  onPressed?:OnCallback;
 
   /**
      * @param config config: 
@@ -20446,7 +21875,7 @@ export class CustomAlertDialogButton extends Widget{
           bgColor?:Color, 
           gradient?:Gradient, 
           radius?:BorderRadius, 
-          onPressed?:VoidCallback, 
+          onPressed?:OnCallback, 
         }
      */
     constructor(config: CustomAlertDialogButtonConfig){
@@ -20539,7 +21968,7 @@ interface ShowCustomAlertDialogConfig {
   desc?:string;
   content?:Widget;
   actions?:Array<CustomAlertDialogButton>;
-  closeFunction?:VoidCallback;
+  closeFunction?:OnCallback;
 }
 export class ShowCustomAlertDialog extends ShowBaseDialog{
   style?:CustomAlertDialogStyle;
@@ -20548,7 +21977,7 @@ export class ShowCustomAlertDialog extends ShowBaseDialog{
   desc?:string;
   content?:Widget;
   actions?:Array<CustomAlertDialogButton>;
-  closeFunction?:VoidCallback;
+  closeFunction?:OnCallback;
 
   /**
      * @param config config: 
@@ -20559,7 +21988,7 @@ export class ShowCustomAlertDialog extends ShowBaseDialog{
           desc?:string, 
           content?:Widget, 
           actions?:Array<CustomAlertDialogButton>, 
-          closeFunction?:VoidCallback, 
+          closeFunction?:OnCallback, 
         }
      */
     constructor(config: ShowCustomAlertDialogConfig){
@@ -20612,7 +22041,7 @@ interface ShowSimpleCustomDialogConfig {
   desc?:string;
   content?:Widget;
   actions?:Array<SimpleCustomDialogButtonInfo>;
-  onTap?:VoidCallbackNumber;
+  onTap?:OnCallbackNumber;
 }
 export class ShowSimpleCustomDialog extends ShowBaseDialog{
   style?:CustomAlertDialogStyle;
@@ -20621,7 +22050,7 @@ export class ShowSimpleCustomDialog extends ShowBaseDialog{
   desc?:string;
   content?:Widget;
   actions?:Array<SimpleCustomDialogButtonInfo>;
-  onTap?:VoidCallbackNumber;
+  onTap?:OnCallbackNumber;
 
   /**
      * @param config config: 
@@ -20632,7 +22061,7 @@ export class ShowSimpleCustomDialog extends ShowBaseDialog{
           desc?:string, 
           content?:Widget, 
           actions?:Array<CustomDialogButtonInfo>, 
-          onTap?:VoidCallbackNumber, 
+          onTap?:OnCallbackNumber, 
         }
      */
     constructor(config: ShowSimpleCustomDialogConfig){
@@ -20656,7 +22085,7 @@ interface ShowSimpleAlertDialogConfig {
   desc?:string;
   descContent?:Widget;
   actions?:Array<SimpleDialogButtonInfo>;
-  onTap?:VoidCallbackNumber;
+  onTap?:OnCallbackNumber;
   barrierDismissible?:boolean;
 }
 export class ShowSimpleAlertDialog extends ShowBaseDialog{
@@ -20665,7 +22094,7 @@ export class ShowSimpleAlertDialog extends ShowBaseDialog{
   desc?:string;
   descContent?:Widget;
   actions?:Array<SimpleDialogButtonInfo>;
-  onTap?:VoidCallbackNumber;
+  onTap?:OnCallbackNumber;
   barrierDismissible?:boolean;
 
   /**
@@ -20676,7 +22105,7 @@ export class ShowSimpleAlertDialog extends ShowBaseDialog{
           desc?:string,
           descContent?:Widget,
           actions:Array<SimpleDialogButtonInfo>,
-          onTap?:VoidCallbackNumber,
+          onTap?:OnCallbackNumber,
           barrierDismissible?:boolean,
         }
      */
@@ -20700,7 +22129,7 @@ interface ShowSimpleCupertinoDialogConfig {
   desc?:string;
   descContent?:Widget;
   actions?:Array<SimpleDialogButtonInfo>;
-  onTap?:VoidCallbackNumber;
+  onTap?:OnCallbackNumber;
   barrierDismissible?:boolean;
 }
 export class ShowSimpleCupertinoDialog extends ShowBaseDialog{
@@ -20709,7 +22138,7 @@ export class ShowSimpleCupertinoDialog extends ShowBaseDialog{
   desc?:string;
   descContent?:Widget;
   actions?:Array<SimpleDialogButtonInfo>;
-  onTap?:VoidCallbackNumber;
+  onTap?:OnCallbackNumber;
   barrierDismissible?:boolean;
 
   /**
@@ -20720,7 +22149,7 @@ export class ShowSimpleCupertinoDialog extends ShowBaseDialog{
           desc?:string,
           descContent?:Widget,
           actions:Array<SimpleDialogButtonInfo>,
-          onTap?:VoidCallbackNumber,
+          onTap?:OnCallbackNumber,
           barrierDismissible?:boolean,
         }
      */
@@ -20743,13 +22172,13 @@ interface ShowCustomActionSheetConfig {
   title?:string;
   titleContent?:Widget;
   itemList:Array<string>;
-  onTap:VoidCallbackNumber;
+  onTap:OnCallbackNumber;
 }
 export class ShowCustomActionSheet extends ShowBaseDialog{
   title?:string;
   titleContent?:Widget;
   itemList?:Array<string>;
-  onTap?:VoidCallbackNumber;
+  onTap?:OnCallbackNumber;
 
   /**
      * @param config config: 
@@ -20757,7 +22186,7 @@ export class ShowCustomActionSheet extends ShowBaseDialog{
           title?:string, 
           titleContent?:Widget, 
           itemList:Array<string>, 
-          onTap:VoidCallbackNumber, 
+          onTap:OnCallbackNumber, 
         }
      */
     constructor(config: ShowCustomActionSheetConfig){
@@ -20775,13 +22204,13 @@ interface ShowSimpleActionSheetConfig {
   title?:string;
   titleContent?:Widget;
   itemList:Array<string>;
-  onTap:VoidCallbackNumber;
+  onTap:OnCallbackNumber;
 }
 export class ShowSimpleActionSheet extends ShowBaseDialog{
   title?:string;
   titleContent?:Widget;
   itemList?:Array<string>;
-  onTap?:VoidCallbackNumber;
+  onTap?:OnCallbackNumber;
 
   /**
      * @param config config: 
@@ -20789,7 +22218,7 @@ export class ShowSimpleActionSheet extends ShowBaseDialog{
           title?:string, 
           titleContent?:Widget, 
           itemList:Array<string>, 
-          onTap:VoidCallbackNumber, 
+          onTap:OnCallbackNumber, 
         }
      */
     constructor(config: ShowSimpleActionSheetConfig){
@@ -20809,7 +22238,7 @@ interface ShowCustomPopupMenuConfig {
   barrierDismissible?:boolean;
   bgColor?:Color;
   textFontSize?:number;
-  onTap?:VoidCallbackNumber;
+  onTap?:OnCallbackNumber;
 }
 export class ShowCustomPopupMenu extends ShowBaseDialog{
   superkey?:BindKey;
@@ -20817,7 +22246,7 @@ export class ShowCustomPopupMenu extends ShowBaseDialog{
   barrierDismissible?:boolean;
   bgColor?:Color;
   textFontSize?:number;
-  onTap?:VoidCallbackNumber;
+  onTap?:OnCallbackNumber;
 
   /**
      * @param config config: 
@@ -20827,7 +22256,7 @@ export class ShowCustomPopupMenu extends ShowBaseDialog{
           barrierDismissible?:boolean, 
           bgColor?:Color, 
           textFontSize?:number, 
-          onTap?:VoidCallbackNumber, 
+          onTap?:OnCallbackNumber, 
         }
      */
     constructor(config: ShowCustomPopupMenuConfig){
@@ -21645,8 +23074,8 @@ constructor() {
 
 //#region ****** Dio ******
 
-//****** VoidCallbackDioProgress ******
-export type VoidCallbackDioProgress = (progress:number,total:number) => void;
+//****** OnCallbackDioProgress ******
+export type OnCallbackDioProgress = (progress:number,total:number) => void;
 
 //****** DioResponseType ******
 export enum DioResponseType {
@@ -21782,13 +23211,13 @@ interface DioGetConfig {
 path?:string;
 queryParameters?:Map<string,any>;
 options?:DioOptions;
-onReceiveProgress?:VoidCallbackDioProgress;
+onReceiveProgress?:OnCallbackDioProgress;
 }
 
 interface DioGetUriConfig {
 uri?:Uri;
 options?:DioOptions;
-onReceiveProgress?:VoidCallbackDioProgress;
+onReceiveProgress?:OnCallbackDioProgress;
 }
 
 interface DioPostConfig {
@@ -21796,16 +23225,16 @@ path?:string;
 data?:any;
 queryParameters?:Map<string,any>;
 options?:DioOptions;
-onSendProgress?:VoidCallbackDioProgress;
-onReceiveProgress?:VoidCallbackDioProgress;
+onSendProgress?:OnCallbackDioProgress;
+onReceiveProgress?:OnCallbackDioProgress;
 }
 
 interface DioPostUriConfig {
 uri?:Uri;
 data?:any;
 options?:DioOptions;
-onSendProgress?:VoidCallbackDioProgress;
-onReceiveProgress?:VoidCallbackDioProgress;
+onSendProgress?:OnCallbackDioProgress;
+onReceiveProgress?:OnCallbackDioProgress;
 }
 
 interface DioRequestConfig {
@@ -21813,16 +23242,16 @@ path?:string;
 data?:any;
 queryParameters?:Map<string,any>;
 options?:DioOptions;
-onSendProgress?:VoidCallbackDioProgress;
-onReceiveProgress?:VoidCallbackDioProgress;
+onSendProgress?:OnCallbackDioProgress;
+onReceiveProgress?:OnCallbackDioProgress;
 }
 
 interface DioRequestUriConfig {
 uri?:Uri;
 data?:any;
 options?:DioOptions;
-onSendProgress?:VoidCallbackDioProgress;
-onReceiveProgress?:VoidCallbackDioProgress;
+onSendProgress?:OnCallbackDioProgress;
+onReceiveProgress?:OnCallbackDioProgress;
 }
 
 
@@ -22334,7 +23763,7 @@ export abstract class PullToRefreshFooter extends Widget {
  * @param config config: 
     {
       key?:Key, 
-      onClick?: VoidCallback, 
+      onClick?: OnCallback, 
       loadStyle?: PullToRefreshLoadStyle, 
       height?: number, 
       textStyle?:TextStyle, 
@@ -22361,7 +23790,7 @@ static classic(config?: PullToRefreshClassicFooterConfig){
 //****** PullToRefreshClassicFooter ******
 interface PullToRefreshClassicFooterConfig {
 key?:Key;
-onClick?: VoidCallback;
+onClick?: OnCallback;
 loadStyle?: PullToRefreshLoadStyle;
 height?: number;
 textStyle?:TextStyle;
@@ -22381,7 +23810,7 @@ idleIcon?:Widget;
 }
 export class PullToRefreshClassicFooter extends Widget {
 key?:Key;
-onClick?: VoidCallback;
+onClick?: OnCallback;
 loadStyle?: PullToRefreshLoadStyle;
 height?: number;
 textStyle?:TextStyle;
@@ -22403,7 +23832,7 @@ idleIcon?:Widget;
  * @param config config: 
     {
       key?:Key, 
-      onClick?: VoidCallback, 
+      onClick?: OnCallback, 
       loadStyle?: PullToRefreshLoadStyle, 
       height?: number, 
       textStyle?:TextStyle, 
@@ -22773,10 +24202,10 @@ footer?:PullToRefreshFooter;
 enablePullDown?:boolean;
 enablePullUp?:boolean;
 enableTwoLevel?:boolean;
-onRefresh?:VoidCallback;
-onLoading?:VoidCallback;
-onTwoLevel?:VoidCallback;
-onOffsetChange?:VoidCallbackString;
+onRefresh?:OnCallback;
+onLoading?:OnCallback;
+onTwoLevel?:OnCallback;
+onOffsetChange?:OnCallbackString;
 dragStartBehavior?:DragStartBehavior;
 primary?:boolean;
 cacheExtent?:number;
@@ -22795,10 +24224,10 @@ footer?:PullToRefreshFooter;
 enablePullDown?:boolean;
 enablePullUp?:boolean;
 enableTwoLevel?:boolean;
-onRefresh?:VoidCallback;
-onLoading?:VoidCallback;
-onTwoLevel?:VoidCallback;
-onOffsetChange?:VoidCallbackString;
+onRefresh?:OnCallback;
+onLoading?:OnCallback;
+onTwoLevel?:OnCallback;
+onOffsetChange?:OnCallbackString;
 dragStartBehavior?:DragStartBehavior;
 primary?:boolean;
 cacheExtent?:number;
@@ -22819,10 +24248,10 @@ scrollController?:ScrollController;
       enablePullDown?:boolean, 
       enablePullUp?:boolean, 
       enableTwoLevel?:boolean, 
-      onRefresh?:VoidCallback, 
-      onLoading?:VoidCallback, 
-      onTwoLevel?:VoidCallback, 
-      onOffsetChange?:VoidCallbackString, 
+      onRefresh?:OnCallback, 
+      onLoading?:OnCallback, 
+      onTwoLevel?:OnCallback, 
+      onOffsetChange?:OnCallbackString, 
       dragStartBehavior?:DragStartBehavior, 
       primary?:boolean, 
       cacheExtent?:number, 
@@ -23508,8 +24937,8 @@ dispose() {
 interface EasyRefresherConfig {
 key?:Key;
 controller?:EasyRefreshController;
-onRefresh?:VoidCallback;
-onLoad?:VoidCallback;
+onRefresh?:OnCallback;
+onLoad?:OnCallback;
 enableControlFinishRefresh?:boolean;
 enableControlFinishLoad?:boolean;
 taskIndependence?:boolean;
@@ -23528,8 +24957,8 @@ interface EasyRefresherCustomConfig {
 key?:Key;
 listKey?:Key;
 controller?:EasyRefreshController;
-onRefresh?:VoidCallback;
-onLoad?:VoidCallback;
+onRefresh?:OnCallback;
+onLoad?:OnCallback;
 enableControlFinishRefresh?:boolean;
 enableControlFinishLoad?:boolean;
 taskIndependence?:boolean;
@@ -23558,8 +24987,8 @@ slivers:Array<Widget>;
 export class EasyRefresher extends Widget {
 key?:Key;
 controller?:EasyRefreshController;
-onRefresh?:VoidCallback;
-onLoad?:VoidCallback;
+onRefresh?:OnCallback;
+onLoad?:OnCallback;
 enableControlFinishRefresh?:boolean;
 enableControlFinishLoad?:boolean;
 taskIndependence?:boolean;
@@ -23592,8 +25021,8 @@ slivers?:Array<Widget>;
     {
       key?:Key, 
       controller?:EasyRefreshController, 
-      onRefresh?:VoidCallback, 
-      onLoad?:VoidCallback, 
+      onRefresh?:OnCallback, 
+      onLoad?:OnCallback, 
       enableControlFinishRefresh?:boolean, 
       enableControlFinishLoad?:boolean, 
       taskIndependence?:boolean, 
@@ -23638,8 +25067,8 @@ constructor(config?: EasyRefresherConfig){
       key?:Key, 
       listKey?:Key, 
       controller?:EasyRefreshController, 
-      onRefresh?:VoidCallback, 
-      onLoad?:VoidCallback, 
+      onRefresh?:OnCallback, 
+      onLoad?:OnCallback, 
       enableControlFinishRefresh?:boolean, 
       enableControlFinishLoad?:boolean, 
       taskIndependence?:boolean, 

@@ -85,7 +85,7 @@ class XSProxySimpleDialog extends XSJsonObjProxy {
     return SimpleDialog(
       key: XSJSParse.getKey(context, bo, map, "key"),
       title: XSJSParse.getWidget(context, bo, map, "title"),
-      titlePadding: XSJSParse.getEdgeInsets(context, bo, map, "titlePadding"),
+      titlePadding: XSJSParse.getEdgeInsets(context, bo, map, "titlePadding", defaultValue: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0)),
       titleTextStyle: XSJSParse.getTextStyle(context, bo, map, "titleTextStyle"),
       children: XSJSParse.getWidgetList(context, bo, map, "children"),
       contentPadding: XSJSParse.getEdgeInsets(context, bo, map, "contentPadding", defaultValue: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0)),

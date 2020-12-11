@@ -175,6 +175,82 @@ class XSProxyRichText extends XSJsonObjProxy {
   }
 }
 
+//****** SelectableText ******/
+class XSProxySelectableText extends XSJsonObjProxy {
+  static String _regClassName = "SelectableText";
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    return {
+      _regClassName: () => XSProxySelectableText()..init(className: _regClassName)
+    };
+  }
+
+  @override
+  void init({String className}) {
+    super.init(className: className);
+    registerConstructor(className: _regClassName, constructorName: "rich", constructor: constructorRich);
+  }
+
+  ///
+//  const Text(this.data,
+  @override
+  SelectableText constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return SelectableText(
+      XSJSParse.getString(context, bo, map, "data"),
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      focusNode: XSJSParse.getFocusNode(context, bo, map, "focusNode"),
+      style: XSJSParse.getTextStyle(context, bo, map, "style"),
+      strutStyle: XSJSParse.getStrutStyle(context, bo, map, "strutStyle"),
+      textAlign: XSJSParse.getTextAlign(context, bo, map, "textAlign"),
+      textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
+      textScaleFactor: XSJSParse.getDouble(context, bo, map, "textScaleFactor"),
+      showCursor: XSJSParse.getBool(context, bo, map, "showCursor", defaultValue: false),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      toolbarOptions: XSJSParse.getToolbarOptions(context, bo, map, "toolbarOptions"),
+      minLines: XSJSParse.getInt(context, bo, map, "minLines"),
+      maxLines: XSJSParse.getInt(context, bo, map, "maxLines"),
+      cursorWidth: XSJSParse.getDouble(context, bo, map, "cursorWidth", defaultValue: 2.0),
+      cursorHeight: XSJSParse.getDouble(context, bo, map, "cursorHeight"),
+      cursorRadius: XSJSParse.getRadius(context, bo, map, "cursorRadius"),
+      cursorColor: XSJSParse.getColor(context, bo, map, "cursorColor"),
+      dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.start),
+      enableInteractiveSelection: XSJSParse.getBool(context, bo, map, "enableInteractiveSelection", defaultValue: true),
+      onTap: XSJSParse.getVoidCallback(context, bo, map, "onTap"),
+      scrollPhysics: XSJSParse.getScrollPhysics(context, bo, map, "scrollPhysics"),
+      textWidthBasis: XSJSParse.getTextWidthBasis(context, bo, map, "textWidthBasis"),
+    );
+  }
+
+//
+//  /// Creates a text widget with a [TextSpan].
+//  const Text.rich(this.textSpan, {
+  SelectableText constructorRich(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
+    return SelectableText.rich(
+      XSJSParse.getObject(context, bo, map, "data"),
+      key: XSJSParse.getKey(context, bo, map, "key"),
+      focusNode: XSJSParse.getFocusNode(context, bo, map, "focusNode"),
+      style: XSJSParse.getTextStyle(context, bo, map, "style"),
+      strutStyle: XSJSParse.getStrutStyle(context, bo, map, "strutStyle"),
+      textAlign: XSJSParse.getTextAlign(context, bo, map, "textAlign"),
+      textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
+      textScaleFactor: XSJSParse.getDouble(context, bo, map, "textScaleFactor"),
+      showCursor: XSJSParse.getBool(context, bo, map, "showCursor", defaultValue: false),
+      autofocus: XSJSParse.getBool(context, bo, map, "autofocus", defaultValue: false),
+      toolbarOptions: XSJSParse.getToolbarOptions(context, bo, map, "toolbarOptions"),
+      minLines: XSJSParse.getInt(context, bo, map, "minLines"),
+      maxLines: XSJSParse.getInt(context, bo, map, "maxLines"),
+      cursorWidth: XSJSParse.getDouble(context, bo, map, "cursorWidth", defaultValue: 2.0),
+      cursorHeight: XSJSParse.getDouble(context, bo, map, "cursorHeight"),
+      cursorRadius: XSJSParse.getRadius(context, bo, map, "cursorRadius"),
+      cursorColor: XSJSParse.getColor(context, bo, map, "cursorColor"),
+      dragStartBehavior: XSJSParse.getDragStartBehavior(context, bo, map, "dragStartBehavior", defaultValue: DragStartBehavior.start),
+      enableInteractiveSelection: XSJSParse.getBool(context, bo, map, "enableInteractiveSelection", defaultValue: true),
+      onTap: XSJSParse.getVoidCallback(context, bo, map, "onTap"),
+      scrollPhysics: XSJSParse.getScrollPhysics(context, bo, map, "scrollPhysics"),
+      textWidthBasis: XSJSParse.getTextWidthBasis(context, bo, map, "textWidthBasis"),
+    );
+  }
+}
+
 //-------------- T -----------------
 //****** Text ******/
 class XSProxyText extends XSJsonObjProxy {
@@ -199,6 +275,7 @@ class XSProxyText extends XSJsonObjProxy {
       XSJSParse.getString(context, bo, map, "data"),
       key: XSJSParse.getKey(context, bo, map, "key"),
       style: XSJSParse.getTextStyle(context, bo, map, "style"),
+      strutStyle: XSJSParse.getStrutStyle(context, bo, map, "strutStyle"),
       textAlign: XSJSParse.getTextAlign(context, bo, map, "textAlign"),
       textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
       softWrap: XSJSParse.getBool(context, bo, map, "softWrap"),
@@ -206,6 +283,7 @@ class XSProxyText extends XSJsonObjProxy {
       textScaleFactor: XSJSParse.getDouble(context, bo, map, "textScaleFactor"),
       maxLines: XSJSParse.getInt(context, bo, map, "maxLines"),
       semanticsLabel: XSJSParse.getString(context, bo, map, "semanticsLabel"),
+      textWidthBasis: XSJSParse.getTextWidthBasis(context, bo, map, "textWidthBasis"),
     );
   }
 
@@ -217,6 +295,7 @@ class XSProxyText extends XSJsonObjProxy {
       XSJSParse.getObject(context, bo, map, "data"),
       key: XSJSParse.getKey(context, bo, map, "key"),
       style: XSJSParse.getTextStyle(context, bo, map, "style"),
+      strutStyle: XSJSParse.getStrutStyle(context, bo, map, "strutStyle"),
       textAlign: XSJSParse.getTextAlign(context, bo, map, "textAlign"),
       textDirection: XSJSParse.getTextDirection(context, bo, map, "textDirection"),
       softWrap: XSJSParse.getBool(context, bo, map, "softWrap"),
@@ -224,6 +303,7 @@ class XSProxyText extends XSJsonObjProxy {
       textScaleFactor: XSJSParse.getDouble(context, bo, map, "textScaleFactor"),
       maxLines: XSJSParse.getInt(context, bo, map, "maxLines"),
       semanticsLabel: XSJSParse.getString(context, bo, map, "semanticsLabel"),
+      textWidthBasis: XSJSParse.getTextWidthBasis(context, bo, map, "textWidthBasis"),
     );
   }
 }
