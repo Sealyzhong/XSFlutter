@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xsflutter/src/alert/custom_alert_dialog.dart';
 import 'package:xsflutter/src/widgets/popup_menu.dart';
+import 'package:xsflutter/xsflutter.dart';
 import 'alert/simple_cupertino_dialog.dart';
 import 'alert/simple_alert_dialog.dart';
 import 'loading/loading.dart';
@@ -342,7 +343,7 @@ class XSProxyDialog extends XSJsonObjProxy {
   void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
     if (mirrorObj == null) return;
 
-    var result;
+    ResponseModel result;
 
     XSJsonBuildOwner bo;
     BuildContext context;
@@ -567,7 +568,7 @@ class XSProxyDialog extends XSJsonObjProxy {
                 return child;
               });
           if (r != null) {
-            result = r.millisecondsSinceEpoch;
+            result = ResponseModel(isSuccess: true, data: r.millisecondsSinceEpoch);
           }
         }
         break;

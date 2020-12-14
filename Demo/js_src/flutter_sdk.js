@@ -6,7 +6,7 @@
  * @Description: JS Flutter SDK
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EasyRefresher = exports.EasyRefreshController = exports.EasyRefreshMaterialFooter = exports.EasyRefreshClassicalFooter = exports.EasyRefreshFooter = exports.EasyRefreshMaterialHeader = exports.EasyRefreshClassicalHeader = exports.EasyRefreshHeader = exports.CachedNetworkImage = exports.PullToRefreshRefresher = exports.PullToRefreshController = exports.PullToRefreshConfiguration = exports.PullToRefreshClassicFooter = exports.PullToRefreshFooter = exports.PullToRefreshWaterDropMaterialHeader = exports.PullToRefreshMaterialClassicHeader = exports.PullToRefreshWaterDropHeader = exports.PullToRefreshClassicHeader = exports.PullToRefreshHeader = exports.PullToRefreshLoadStyle = exports.PullToRefreshIconPosition = exports.PullToRefreshLoadStatus = exports.PullToRefreshStatus = exports.PullToRefreshStyle = exports.Dio = exports.DioOptions = exports.DioBaseOptions = exports.DioResponseType = exports.UrlLauncher = exports.FocusScope = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.Sp = exports.Loading = exports.Dialog = exports.ShowDatePicker = exports.CustomPopupMenuItem = exports.ShowCustomPopupMenu = exports.ShowSimpleActionSheet = exports.ShowCustomActionSheet = exports.ShowSimpleCupertinoDialog = exports.ShowSimpleAlertDialog = exports.ShowSimpleCustomDialog = exports.SimpleCustomDialogButtonInfo = exports.ShowCustomAlertDialog = exports.CustomAlertDialogStyle = exports.CustomAlertDialogButton = exports.CustomAlertDialogAnimationType = exports.SimpleDialogButtonInfo = exports.CupertinoActionSheetAction = exports.CupertinoActionSheet = exports.ShowCupertinoModalPopup = exports.BottomSheet = exports.ShowModalBottomSheet = exports.ShowGeneralDialog = exports.CupertinoAlertDialog = exports.ShowCupertinoDialog = exports.SimpleDialog = exports.AlertDialog = exports.ShowDialog = exports.ShowBaseDialog = exports.EmptyDataWidget = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabView = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSlidingSegmentedControl = exports.CupertinoSegmentedControl = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoDialogAction = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SelectableText = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverOpacity = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverChildDelegate = exports.SliverGridDelegateWithFixedCrossAxisCount = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGridDelegate = exports.SliverGrid = exports.SliverPadding = exports.SliverFillRemaining = exports.SliverFillViewport = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.Stepper = exports.Step = exports.RichText = exports.RawMaterialButton = exports.RadioListTile = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.RawChip = exports.Row = exports.PageView = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LabelTitle = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.IconSpan = exports.InputChip = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GridView = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.FilterChip = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.ConstrainedBox = exports.ClipRRect = exports.ClipOval = exports.ClipRect = exports.CheckboxEx = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.ChoiceChip = exports.Center = exports.Container = exports.CloseButton = exports.ColorFiltered = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.Animation = exports.AnimationController = exports.ActionChip = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.ThemeData = exports.DataTableThemeData = exports.TextSelectionThemeData = exports.TimePickerThemeData = exports.BottomNavigationBarThemeData = exports.ButtonBarThemeData = exports.DividerThemeData = exports.MaterialBannerThemeData = exports.PopupMenuThemeData = exports.BottomSheetThemeData = exports.SnackBarThemeData = exports.CupertinoThemeData = exports.NavigationRailThemeData = exports.FloatingActionButtonThemeData = exports.DialogTheme = exports.BottomAppBarTheme = exports.AppBarTheme = exports.ChipThemeData = exports.CardTheme = exports.TooltipThemeData = exports.TabBarTheme = exports.SliderThemeData = exports.IconThemeData = exports.InputDecorationTheme = exports.TextTheme = exports.ToggleButtonsThemeData = exports.ButtonThemeData = exports.ColorScheme = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.PageScrollPhysics = exports.FixedExtentScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.PageController = exports.Offset = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.BindKey = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.ImageFilter = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.ScrollViewKeyboardDismissBehavior = exports.ShowValueIndicator = exports.SnackBarBehavior = exports.StepperType = exports.StepState = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationRailLabelType = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DatePickerEntryMode = exports.DatePickerMode = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
+exports.PathProvider = exports.EasyRefresher = exports.EasyRefreshController = exports.EasyRefreshMaterialFooter = exports.EasyRefreshClassicalFooter = exports.EasyRefreshFooter = exports.EasyRefreshMaterialHeader = exports.EasyRefreshClassicalHeader = exports.EasyRefreshHeader = exports.CachedNetworkImage = exports.PullToRefreshRefresher = exports.PullToRefreshController = exports.PullToRefreshConfiguration = exports.PullToRefreshClassicFooter = exports.PullToRefreshFooter = exports.PullToRefreshWaterDropMaterialHeader = exports.PullToRefreshMaterialClassicHeader = exports.PullToRefreshWaterDropHeader = exports.PullToRefreshClassicHeader = exports.PullToRefreshHeader = exports.PullToRefreshLoadStyle = exports.PullToRefreshIconPosition = exports.PullToRefreshLoadStatus = exports.PullToRefreshStatus = exports.PullToRefreshStyle = exports.Dio = exports.DioOptions = exports.DioBaseOptions = exports.DioResponseType = exports.UrlLauncher = exports.FocusScope = exports.Uuid = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.Sp = exports.Loading = exports.Dialog = exports.ShowDatePicker = exports.CustomPopupMenuItem = exports.ShowCustomPopupMenu = exports.ShowSimpleActionSheet = exports.ShowCustomActionSheet = exports.ShowSimpleCupertinoDialog = exports.ShowSimpleAlertDialog = exports.ShowSimpleCustomDialog = exports.SimpleCustomDialogButtonInfo = exports.ShowCustomAlertDialog = exports.CustomAlertDialogStyle = exports.CustomAlertDialogButton = exports.CustomAlertDialogAnimationType = exports.SimpleDialogButtonInfo = exports.CupertinoActionSheetAction = exports.CupertinoActionSheet = exports.ShowCupertinoModalPopup = exports.BottomSheet = exports.ShowModalBottomSheet = exports.ShowGeneralDialog = exports.CupertinoAlertDialog = exports.ShowCupertinoDialog = exports.SimpleDialog = exports.AlertDialog = exports.ShowDialog = exports.ShowBaseDialog = exports.EmptyDataWidget = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabView = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSlidingSegmentedControl = exports.CupertinoSegmentedControl = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoDialogAction = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SelectableText = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverOpacity = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverChildDelegate = exports.SliverGridDelegateWithFixedCrossAxisCount = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGridDelegate = exports.SliverGrid = exports.SliverPadding = exports.SliverFillRemaining = exports.SliverFillViewport = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.Stepper = exports.Step = exports.RichText = exports.RawMaterialButton = exports.RadioListTile = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.RawChip = exports.Row = exports.PageView = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LabelTitle = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.IconSpan = exports.InputChip = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GridView = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.FilterChip = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.ConstrainedBox = exports.ClipRRect = exports.ClipOval = exports.ClipRect = exports.CheckboxEx = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.ChoiceChip = exports.Center = exports.Container = exports.CloseButton = exports.ColorFiltered = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.Animation = exports.AnimationController = exports.ActionChip = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.ThemeData = exports.DataTableThemeData = exports.TextSelectionThemeData = exports.TimePickerThemeData = exports.BottomNavigationBarThemeData = exports.ButtonBarThemeData = exports.DividerThemeData = exports.MaterialBannerThemeData = exports.PopupMenuThemeData = exports.BottomSheetThemeData = exports.SnackBarThemeData = exports.CupertinoThemeData = exports.NavigationRailThemeData = exports.FloatingActionButtonThemeData = exports.DialogTheme = exports.BottomAppBarTheme = exports.AppBarTheme = exports.ChipThemeData = exports.CardTheme = exports.TooltipThemeData = exports.TabBarTheme = exports.SliderThemeData = exports.IconThemeData = exports.InputDecorationTheme = exports.TextTheme = exports.ToggleButtonsThemeData = exports.ButtonThemeData = exports.ColorScheme = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.PageScrollPhysics = exports.FixedExtentScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.PageController = exports.Offset = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.BindKey = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.ImageFilter = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.ScrollViewKeyboardDismissBehavior = exports.ShowValueIndicator = exports.SnackBarBehavior = exports.StepperType = exports.StepState = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationRailLabelType = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DatePickerEntryMode = exports.DatePickerMode = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -119,6 +119,9 @@ exports.Widget = Widget;
 //格式转换
 class Convert extends core.Object {
     static toBoolean(v) {
+        if (typeof v == "boolean") {
+            return v;
+        }
         if (typeof v == "string") {
             if (v == "true" || v == "1") {
                 return true;
@@ -127,13 +130,14 @@ class Convert extends core.Object {
         return false;
     }
     static toNumber(v) {
+        if (typeof v == "number") {
+            return v;
+        }
         return Number(v);
     }
     static toString(v) {
         if (typeof v == "string") {
-            if (v == "true" || v == "1") {
-                return v;
-            }
+            return v;
         }
         return String(v);
     }
@@ -4520,7 +4524,6 @@ class TabController extends DartClass {
       {
         initialIndex?:number,
         length?:number,
-        vsync?:any
       }
      */
     constructor(config) {
@@ -4530,8 +4533,32 @@ class TabController extends DartClass {
         if (config != null && config != undefined) {
             this.initialIndex = config.initialIndex;
             this.length = config.length;
-            this.vsync = config.vsync;
         }
+    }
+    /**
+     * @param config config:
+        {
+          value:number,
+          duration:Duration,
+          curve:Curve,
+        }
+     */
+    animateTo(config) {
+        this.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "animateTo",
+            args: config
+        }));
+    }
+    //偏移量
+    async offset() {
+        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "offset",
+        }));
+        return Convert.toNumber(v);
     }
 }
 exports.TabController = TabController;
@@ -7517,6 +7544,7 @@ class BottomNavigationBarItem extends Widget {
           icon:Widget,
           title?:Widget,
           activeIcon?:Widget,
+          label?:string,
           backgroundColor?:Color
         }
      */
@@ -7525,6 +7553,7 @@ class BottomNavigationBarItem extends Widget {
         if (config != null && config != undefined) {
             this.icon = config.icon;
             this.title = config.title;
+            this.label = config.label;
             this.activeIcon = config.activeIcon;
             this.backgroundColor = config.backgroundColor;
         }
@@ -14757,7 +14786,12 @@ class Dialog extends DartClass {
                 child: baseWidget.helper.buildWidgetTreeSubWidget(child),
             },
         }));
-        return Convert.toString(v);
+        if (v != null && v != undefined) {
+            return JSON.parse(Convert.toString(v));
+        }
+        else {
+            return { isSuccess: false, info: "undefined | null" };
+        }
     }
     static dismiss(baseWidget) {
         Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
@@ -15071,6 +15105,12 @@ class ScreenInfo extends DartClass {
         //创建对应FLutter对象
         this.createMirrorObj();
     }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new ScreenInfo();
+        }
+        return this.instance;
+    }
     /*
     * 将Dp按比例转换成Dp
     * */
@@ -15084,31 +15124,30 @@ class ScreenInfo extends DartClass {
         return isRatio ? (ScreenInfo.pxRatio * px) : px;
     }
     //
-    static async updateInfo() {
-        var info = new ScreenInfo();
-        var v = await info.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: info.mirrorID,
-            className: info.className,
+    async updateInfo() {
+        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
             funcName: "updateInfo",
         }));
         if (v != null && v != undefined) {
-            var result = JSON.parse(String(v));
-            if (result != null && result != undefined) {
-                ScreenInfo.appBarHeight = Convert.toNumber(result["appBarHeight"]);
-                ScreenInfo.bottomBarHeight = Convert.toNumber(result["bottomBarHeight"]);
-                ScreenInfo.dpRatio = Convert.toNumber(result["dpRatio"]);
-                ScreenInfo.pxRatio = Convert.toNumber(result["pxRatio"]);
-                ScreenInfo.screenDensity = Convert.toNumber(result["screenDensity"]);
-                ScreenInfo.screenHeight = Convert.toNumber(result["screenHeight"]);
-                ScreenInfo.screenHeightPx = Convert.toNumber(result["screenHeightPx"]);
-                ScreenInfo.screenWidth = Convert.toNumber(result["screenWidth"]);
-                ScreenInfo.screenWidthPx = Convert.toNumber(result["screenWidthPx"]);
-                ScreenInfo.statusBarHeight = Convert.toNumber(result["statusBarHeight"]);
-                ScreenInfo.uiDensity = Convert.toNumber(result["uiDensity"]);
-                ScreenInfo.uiHeight = Convert.toNumber(result["uiHeight"]);
-                ScreenInfo.uiWidth = Convert.toNumber(result["uiWidth"]);
-                ScreenInfo.uiWidthPx = Convert.toNumber(result["uiWidthPx"]);
-                ScreenInfo.uiHeightPx = Convert.toNumber(result["uiHeightPx"]);
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
+                ScreenInfo.appBarHeight = Convert.toNumber(r.data["appBarHeight"]);
+                ScreenInfo.bottomBarHeight = Convert.toNumber(r.data["bottomBarHeight"]);
+                ScreenInfo.dpRatio = Convert.toNumber(r.data["dpRatio"]);
+                ScreenInfo.pxRatio = Convert.toNumber(r.data["pxRatio"]);
+                ScreenInfo.screenDensity = Convert.toNumber(r.data["screenDensity"]);
+                ScreenInfo.screenHeight = Convert.toNumber(r.data["screenHeight"]);
+                ScreenInfo.screenHeightPx = Convert.toNumber(r.data["screenHeightPx"]);
+                ScreenInfo.screenWidth = Convert.toNumber(r.data["screenWidth"]);
+                ScreenInfo.screenWidthPx = Convert.toNumber(r.data["screenWidthPx"]);
+                ScreenInfo.statusBarHeight = Convert.toNumber(r.data["statusBarHeight"]);
+                ScreenInfo.uiDensity = Convert.toNumber(r.data["uiDensity"]);
+                ScreenInfo.uiHeight = Convert.toNumber(r.data["uiHeight"]);
+                ScreenInfo.uiWidth = Convert.toNumber(r.data["uiWidth"]);
+                ScreenInfo.uiWidthPx = Convert.toNumber(r.data["uiWidthPx"]);
+                ScreenInfo.uiHeightPx = Convert.toNumber(r.data["uiHeightPx"]);
             }
         }
     }
@@ -15156,21 +15195,26 @@ class PackageInfo extends DartClass {
         //创建对应FLutter对象
         this.createMirrorObj();
     }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new PackageInfo();
+        }
+        return this.instance;
+    }
     //
-    static async updateInfo() {
-        var info = new PackageInfo();
-        var v = await info.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: info.mirrorID,
-            className: info.className,
+    async updateInfo() {
+        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
             funcName: "updateInfo",
         }));
         if (v != null && v != undefined) {
-            var result = JSON.parse(String(v));
-            if (result != null && result != undefined) {
-                PackageInfo.appName = Convert.toString(result["appName"]);
-                PackageInfo.buildNumber = Convert.toString(result["buildNumber"]);
-                PackageInfo.packageName = Convert.toString(result["packageName"]);
-                PackageInfo.version = Convert.toString(result["version"]);
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
+                PackageInfo.appName = Convert.toString(r.data["appName"]);
+                PackageInfo.buildNumber = Convert.toString(r.data["buildNumber"]);
+                PackageInfo.packageName = Convert.toString(r.data["packageName"]);
+                PackageInfo.version = Convert.toString(r.data["version"]);
             }
         }
     }
@@ -15190,38 +15234,114 @@ class Wakelock extends DartClass {
         //创建对应FLutter对象
         this.createMirrorObj();
     }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new Wakelock();
+        }
+        return this.instance;
+    }
     //
     static async disable() {
-        var info = new Wakelock();
-        var v = await info.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: info.mirrorID,
-            className: info.className,
+        var obj = Wakelock.getInstance();
+        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: obj.mirrorID,
+            className: obj.className,
             funcName: "disable",
         }));
-        return Convert.toBoolean(v);
+        var r = JSON.parse(Convert.toString(v));
+        if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
+            return Convert.toBoolean(r.data);
+        }
     }
     //
     static async enable() {
-        var info = new Wakelock();
-        var v = await info.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: info.mirrorID,
-            className: info.className,
+        var obj = Wakelock.getInstance();
+        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: obj.mirrorID,
+            className: obj.className,
             funcName: "enable",
         }));
-        return Convert.toBoolean(v);
+        var r = JSON.parse(Convert.toString(v));
+        if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
+            return Convert.toBoolean(r.data);
+        }
     }
     //
     static async isEnabled() {
-        var info = new Wakelock();
-        var v = await info.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: info.mirrorID,
-            className: info.className,
+        var obj = Wakelock.getInstance();
+        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: obj.mirrorID,
+            className: obj.className,
             funcName: "isEnabled",
         }));
-        return Convert.toBoolean(v);
+        var r = JSON.parse(Convert.toString(v));
+        if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
+            return Convert.toBoolean(r.data);
+        }
+        return false;
     }
 }
 exports.Wakelock = Wakelock;
+//#endregion
+//#region ****** Uuid ******
+class Uuid extends DartClass {
+    constructor() {
+        super();
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
+        //创建对应FLutter对象
+        this.createMirrorObj();
+    }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new Uuid();
+        }
+        return this.instance;
+    }
+    /**
+    *  Generate a v1 (time-based) id
+    */
+    static async v1() {
+        var obj = Uuid.getInstance();
+        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: obj.mirrorID,
+            className: obj.className,
+            funcName: "v1",
+        }));
+        return Convert.toString(v);
+    }
+    /**
+    *  Generate a v4 (random) id
+    */
+    static async v4() {
+        var obj = Uuid.getInstance();
+        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: obj.mirrorID,
+            className: obj.className,
+            funcName: "v4",
+        }));
+        return Convert.toString(v);
+    }
+    /**
+    * Generate a v5 (namespace-name-sha1-based) id
+    * @param namespace
+    * @param v5Name
+    */
+    static async v5(namespace, v5Name) {
+        var obj = Uuid.getInstance();
+        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: obj.mirrorID,
+            className: obj.className,
+            funcName: "v5",
+            args: {
+                namespace: namespace,
+                v5Name: v5Name,
+            }
+        }));
+        return Convert.toString(v);
+    }
+}
+exports.Uuid = Uuid;
 //#endregion
 //#region ****** FocusScope ******
 class FocusScope extends DartClass {
@@ -15260,6 +15380,12 @@ class UrlLauncher extends DartClass {
         //创建对应FLutter对象
         this.createMirrorObj();
     }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new UrlLauncher();
+        }
+        return this.instance;
+    }
     /**
      * @param config config:
       {
@@ -15275,14 +15401,17 @@ class UrlLauncher extends DartClass {
       }
      */
     static async openUrl(config) {
-        var info = new UrlLauncher();
-        var v = await info.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: info.mirrorID,
-            className: info.className,
+        var obj = UrlLauncher.getInstance();
+        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: obj.mirrorID,
+            className: obj.className,
             funcName: "openUrl",
             args: config,
         }));
-        return Convert.toBoolean(v);
+        var r = JSON.parse(Convert.toString(v));
+        if (r != null && r != undefined) {
+            return r.isSuccess;
+        }
     }
 }
 exports.UrlLauncher = UrlLauncher;
@@ -15372,6 +15501,12 @@ class Dio extends DartClass {
         //创建对应FLutter对象
         this.createMirrorObj();
     }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new Dio();
+        }
+        return this.instance;
+    }
     /**
       * @param config config:
         {
@@ -15381,12 +15516,15 @@ class Dio extends DartClass {
         }
     */
     async get(config) {
-        return await this.invokeMirrorObjWithCallback(new JSCallConfig({
+        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "get",
             args: config,
         }));
+        if (v != null && v != undefined) {
+            return JSON.parse(Convert.toString(v));
+        }
     }
     /**
       * @param config config:
@@ -15394,14 +15532,17 @@ class Dio extends DartClass {
           uri?:Uri,
           options?:DioOptions,
         }
-      */
+    */
     async getUri(config) {
-        return await this.invokeMirrorObjWithCallback(new JSCallConfig({
+        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "getUri",
             args: config,
         }));
+        if (v != null && v != undefined) {
+            return JSON.parse(Convert.toString(v));
+        }
     }
     /**
       * @param config config:
@@ -15413,12 +15554,15 @@ class Dio extends DartClass {
         }
     */
     async post(config) {
-        return await this.invokeMirrorObjWithCallback(new JSCallConfig({
+        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "post",
             args: config,
         }));
+        if (v != null && v != undefined) {
+            return JSON.parse(Convert.toString(v));
+        }
     }
     /**
       * @param config config:
@@ -15429,12 +15573,15 @@ class Dio extends DartClass {
         }
       */
     async postUri(config) {
-        return await this.invokeMirrorObjWithCallback(new JSCallConfig({
+        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "postUri",
             args: config,
         }));
+        if (v != null && v != undefined) {
+            return JSON.parse(Convert.toString(v));
+        }
     }
     /**
       * @param config config:
@@ -15446,12 +15593,15 @@ class Dio extends DartClass {
         }
     */
     async request(config) {
-        return await this.invokeMirrorObjWithCallback(new JSCallConfig({
+        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "request",
             args: config,
         }));
+        if (v != null && v != undefined) {
+            return JSON.parse(Convert.toString(v));
+        }
     }
     /**
       * @param config config:
@@ -15462,12 +15612,15 @@ class Dio extends DartClass {
         }
       */
     async requestUri(config) {
-        return await this.invokeMirrorObjWithCallback(new JSCallConfig({
+        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "requestUri",
             args: config,
         }));
+        if (v != null && v != undefined) {
+            return JSON.parse(Convert.toString(v));
+        }
     }
 }
 exports.Dio = Dio;
@@ -16601,4 +16754,45 @@ class EasyRefresher extends Widget {
     }
 }
 exports.EasyRefresher = EasyRefresher;
+//#endregion
+//#region ****** PathProvider ******
+class PathProvider extends DartClass {
+    constructor() {
+        super();
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
+        //创建对应FLutter对象
+        this.createMirrorObj();
+    }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new PathProvider();
+        }
+        return this.instance;
+    }
+    //
+    async updateInfo() {
+        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
+            mirrorID: this.mirrorID,
+            className: this.className,
+            funcName: "updateInfo",
+        }));
+        var r = JSON.parse(Convert.toString(v));
+        if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
+            PathProvider.applicationDocumentsDirectory = Convert.toString(r.data["applicationDocumentsDirectory"]);
+            PathProvider.applicationSupportDirectory = Convert.toString(r.data["applicationSupportDirectory"]);
+            PathProvider.temporaryDirectory = Convert.toString(r.data["temporaryDirectory"]);
+            PathProvider.libraryDirectory = Convert.toString(r.data["libraryDirectory"]);
+            PathProvider.downloadsDirectory = Convert.toString(r.data["downloadsDirectory"]);
+            PathProvider.externalStorageDirectory = Convert.toString(r.data["externalStorageDirectory"]);
+        }
+    }
+}
+exports.PathProvider = PathProvider;
+PathProvider.temporaryDirectory = "";
+PathProvider.applicationSupportDirectory = "";
+PathProvider.libraryDirectory = "";
+PathProvider.applicationDocumentsDirectory = "";
+PathProvider.downloadsDirectory = "";
+PathProvider.externalStorageDirectory = "";
 //#endregion

@@ -6,6 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:uuid/uuid.dart';
 import 'package:xsflutter/xsflutter.dart';
 import 'xs_js_parse.dart';
 import 'xs_json_to_dart.dart';
@@ -13,6 +14,7 @@ import 'loading/loading.dart';
 import 'common/sp_util.dart';
 import 'common/package_info.dart';
 import 'package:wakelock/wakelock.dart';
+import 'package:path_provider/path_provider.dart';
 
 ///把Widget初始化用到的基础类型如 List, ，
 class XSProxyRegisterHelperPackageSeries {
@@ -25,6 +27,8 @@ class XSProxyRegisterHelperPackageSeries {
     m.addAll(XSProxyPackageInfo.registerProxy());
     m.addAll(XSProxyWakelock.registerProxy());
     m.addAll(XSProxyUrlLauncher.registerProxy());
+    m.addAll(XSProxyUuid.registerProxy());
+    m.addAll(XSProxyPathProvider.registerProxy());
     return m;
   }
 }
@@ -90,7 +94,6 @@ class XSProxyLoading extends XSJsonObjProxy {
   }
 }
 
-//-------------- S -----------------
 //****** Sp ******
 class XSProxySp extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
@@ -192,10 +195,10 @@ class XSProxyScreenInfo extends XSJsonObjProxy {
   @override
   void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) {
     if (mirrorObj == null) return;
-    var result;
+    ResponseModel result;
     switch (funcName) {
       case 'updateInfo':
-        result = {
+        result = ResponseModel(isSuccess: true, data: {
           "appBarHeight": XSScreenInfo.appBarHeight,
           "bottomBarHeight": XSScreenInfo.bottomBarHeight,
           "dpRatio": XSScreenInfo.dpRatio,
@@ -212,7 +215,8 @@ class XSProxyScreenInfo extends XSJsonObjProxy {
           "uiHeightPx": XSScreenInfo.uiHeightPx,
           "uiWidth": XSScreenInfo.uiWidth,
           "uiWidthPx": XSScreenInfo.uiWidthPx,
-        };
+        });
+
         break;
     }
 
@@ -239,15 +243,15 @@ class XSProxyPackageInfo extends XSJsonObjProxy {
   @override
   void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) {
     if (mirrorObj == null) return;
-    var result;
+    ResponseModel result;
     switch (funcName) {
       case 'updateInfo':
-        result = {
+        result = ResponseModel(isSuccess: true, data: {
           "appName": XSPackageInfo.appName,
           "buildNumber": XSPackageInfo.buildNumber,
           "packageName": XSPackageInfo.packageName,
           "version": XSPackageInfo.version
-        };
+        });
         break;
     }
 
@@ -274,22 +278,22 @@ class XSProxyWakelock extends XSJsonObjProxy {
   @override
   void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
     if (mirrorObj == null) return;
-    var result = false;
+    ResponseModel result;
     switch (funcName) {
       case 'disable':
         await Wakelock.disable();
-        result = false;
+        result = ResponseModel(isSuccess: true, data: false);
         break;
       case 'enable':
         await Wakelock.enable();
-        result = true;
+        result = ResponseModel(isSuccess: true, data: true);
         break;
       case 'isEnabled':
-        result = await Wakelock.enabled;
+        var v = await Wakelock.enabled;
+        result = ResponseModel(isSuccess: true, data: v);
         break;
     }
-
-    if (callback != null) {
+    if (callback != null && result != null) {
       callback(result);
     }
   }
@@ -312,12 +316,13 @@ class XSProxyUrlLauncher extends XSJsonObjProxy {
   @override
   void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
     if (mirrorObj == null) return;
-    var result = false;
+    ResponseModel result;
     switch (funcName) {
       case 'openUrl':
         var urlString = XSJSParse.getString(null, null, map, "urlString");
         if (await canLaunch(urlString)) {
-          result = await launch(
+          result = ResponseModel(
+              isSuccess: await launch(
             urlString,
             forceSafariVC: XSJSParse.getBool(null, null, map, "forceSafariVC"),
             forceWebView: XSJSParse.getBool(null, null, map, "forceWebView"),
@@ -327,14 +332,150 @@ class XSProxyUrlLauncher extends XSJsonObjProxy {
             statusBarBrightness: XSJSParse.getBrightness(null, null, map, "statusBarBrightness"),
             webOnlyWindowName: XSJSParse.getString(null, null, map, "webOnlyWindowName"),
             headers: toMapStringT(XSJSParse.getObject(null, null, map, "headers")),
-          );
+          ));
         } else {
-          result = false;
+          result = ResponseModel(isSuccess: false);
         }
         break;
     }
 
     if (callback != null) {
+      callback(result);
+    }
+  }
+}
+
+//****** Uuid ******
+class XSProxyUuid extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "Uuid";
+    return {
+      regClassName: () => XSProxyUuid()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Uuid constructor(dynamic bo, Map<String, dynamic> jsonMap, {dynamic context}) {
+    return Uuid();
+  }
+
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
+    if (mirrorObj == null || !(mirrorObj is Uuid)) {
+      return;
+    }
+
+    var uuid = mirrorObj as Uuid;
+    var result;
+    switch (funcName) {
+      case 'v1':
+        result = uuid.v1();
+        break;
+      case 'v4':
+        result = uuid.v4();
+        break;
+      case 'v5':
+        result = uuid.v5(
+          XSJSParse.getString(null, null, map, "namespace"),
+          XSJSParse.getString(null, null, map, "v5Name"),
+        );
+        break;
+    }
+
+    if (callback != null && result != null) {
+      callback(result);
+    }
+  }
+}
+
+//****** PathProvider ******
+class XSProxyPathProvider extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "PathProvider";
+    return {
+      regClassName: () => XSProxyPathProvider()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Object constructor(dynamic bo, Map<String, dynamic> jsonMap, {dynamic context}) {
+    return Object();
+  }
+
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
+    if (mirrorObj == null) {
+      return;
+    }
+
+    ResponseModel result;
+    switch (funcName) {
+      case 'updateInfo':
+        {
+          var temporaryDirectory = "";
+          var applicationSupportDirectory = "";
+          var libraryDirectory = "";
+          var applicationDocumentsDirectory = "";
+          var downloadsDirectory = "";
+          var externalStorageDirectory = "";
+          try {
+            var v = await getTemporaryDirectory();
+            if (v != null) {
+              temporaryDirectory = v.path;
+            }
+          } catch (e) {}
+
+          try {
+            var v = await getApplicationSupportDirectory();
+            if (v != null) {
+              applicationSupportDirectory = v.path;
+            }
+          } catch (e) {}
+
+          try {
+            var v = await getLibraryDirectory();
+            if (v != null) {
+              libraryDirectory = v.path;
+            }
+          } catch (e) {}
+
+          try {
+            var v = await getApplicationDocumentsDirectory();
+            if (v != null) {
+              applicationDocumentsDirectory = v.path;
+            }
+          } catch (e) {}
+
+          try {
+            var v = await getDownloadsDirectory();
+            if (v != null) {
+              downloadsDirectory = v.path;
+            }
+          } catch (e) {}
+
+          try {
+            var v = await getExternalStorageDirectory();
+            if (v != null) {
+              externalStorageDirectory = v.path;
+            }
+          } catch (e) {}
+
+          result = ResponseModel(
+            isSuccess: true,
+            data: {
+              "temporaryDirectory": temporaryDirectory,
+              "applicationSupportDirectory": applicationSupportDirectory,
+              "libraryDirectory": libraryDirectory,
+              "applicationDocumentsDirectory": applicationDocumentsDirectory,
+              "downloadsDirectory": downloadsDirectory,
+              "externalStorageDirectory": externalStorageDirectory,
+            },
+          );
+        }
+        break;
+    }
+
+    if (callback != null && result != null) {
       callback(result);
     }
   }

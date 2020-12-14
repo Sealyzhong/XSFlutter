@@ -30,3 +30,4 @@ export 'src/loading/loading.dart';
 export 'src/common/screen_info.dart';
 export 'src/common/package_info.dart';
 export 'src/package/mask_text_input_formatter.dart';
+export 'src/models/response_model.dart';

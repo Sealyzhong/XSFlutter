@@ -218,7 +218,6 @@ class XSJSWidgetHelper extends Object {
 
   void jsRebuild(String widgetID, Map widgetData, String buildWidgetDataSeq) {
     bool needRebuild = updateWidget(widgetID, widgetData, buildWidgetDataSeq);
-    //TODO:check this.widget.state == null
     if (this.widget == null || this.widget.state == null) {
       XSJSLog.error("XSJSStatefullWidget:jsRebuild: this.widget.state == null; widgetID:$widgetID buildWidgetDataSeq:$buildWidgetDataSeq");
 

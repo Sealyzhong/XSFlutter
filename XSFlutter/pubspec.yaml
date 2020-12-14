@@ -52,6 +52,12 @@ dependencies:
   # 网络图片加载
   # https://github.com/renefloor/flutter_cached_network_image
   cached_network_image: ^2.4.0
+
+  # UUID
+  uuid: ^2.2.2
+
+  # 获取目录
+  path_provider: ^1.6.24
   
 dev_dependencies:
   flutter_test:

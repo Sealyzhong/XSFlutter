@@ -29,7 +29,7 @@ class _MyDioPage extends fs.WidgetState{
     async testDio1(url:string) {
         
         try {
-          let response = await new fs.Dio().get({path:url});
+          let response = await fs.Dio.getInstance().get({path:url});
           fs.Log.log("await Dio.get(urlStr):request() :" + response);
           return response;    
         } catch (e) {
@@ -40,7 +40,7 @@ class _MyDioPage extends fs.WidgetState{
       //例子2，接口还未完全支持
     async testDio2(url:string) {
         try {
-          let response =  await new fs.Dio().get( 
+          let response =  await fs.Dio.getInstance().get( 
             {path:url,
                 onReceiveProgress:function (progress:number,total:number){
             fs.Log.log("testDio(): progress: " + String(progress)+"/"+String(total));

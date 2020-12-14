@@ -95,7 +95,7 @@ class XSProxyAnimationController extends XSJsonObjProxy {
       lowerBound: XSJSParse.getDouble(context, bo, map, "lowerBound", defaultValue: 0.0),
       upperBound: XSJSParse.getDouble(context, bo, map, "upperBound", defaultValue: 1.0),
       animationBehavior: XSJSParse.getAnimationBehavior(context, bo, map, "animationBehavior", defaultValue: AnimationBehavior.normal),
-      vsync: bo.widget.state, //XSJSParse.get(context, bo, map,"vsync"]), TODO: 此处不能为StatelessWidget
+      vsync: bo.widget.state,
     );
   }
 
@@ -109,7 +109,6 @@ class XSProxyAnimationController extends XSJsonObjProxy {
     invokeFunction(mirrorObj, funcName, args);
   }
 
-  //TODO:优化分发
   void invokeFunction(AnimationController mirrorObj, String funcName, Map args) {
     if (funcName == 'forward') {
       mirrorObj.forward();
@@ -313,7 +312,6 @@ class XSProxyAnimatedSize extends XSJsonObjProxy {
       duration: XSJSParse.getDuration(context, bo, map, "duration"),
       reverseDuration: XSJSParse.getDuration(context, bo, map, "reverseDuration"),
       vsync: bo.widget.state,
-      //XSJSParse.get(context, bo, map,"vsync"]), //TODO FIXME,bo.widget 不能是JSStatelessWidget
     );
   }
 }

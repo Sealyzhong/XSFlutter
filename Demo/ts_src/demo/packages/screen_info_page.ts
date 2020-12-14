@@ -16,7 +16,7 @@ export class MyScreenInfoPage extends fs.StatefulWidget{
 class _MyScreenInfoPage extends fs.WidgetState{
     
    async _updateScreenInfo(){
-       await fs.ScreenInfo.updateInfo();
+       await fs.ScreenInfo.getInstance().updateInfo();
         this.setState();
     }
 

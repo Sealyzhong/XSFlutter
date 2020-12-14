@@ -16,7 +16,7 @@ class MyPackageInfoPage extends fs.StatefulWidget {
 exports.MyPackageInfoPage = MyPackageInfoPage;
 class _MyPackageInfoPage extends fs.WidgetState {
     async _updatePackageInfo() {
-        await fs.PackageInfo.updateInfo();
+        await fs.PackageInfo.getInstance().updateInfo();
         this.setState();
     }
     build(context) {

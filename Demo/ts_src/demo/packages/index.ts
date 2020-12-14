@@ -13,6 +13,7 @@ import { MyPackageInfoPage } from "demo/packages/package_info_page";
 import { MyWakelockPage } from "demo/packages/wakelock_page";
 import { MyUrlLaucherPage } from "demo/packages/url_laucher_page";
 import { MyDioPage } from "demo/packages/dio_page";
+import { MyPathProviderPage } from "demo/packages/path_provider_page";
 
 export class MyPackageIndex extends fs.StatelessWidget{
     _style = new fs.TextStyle({fontSize:24,fontWeight:fs.FontWeight.bold});
@@ -118,6 +119,20 @@ export class MyPackageIndex extends fs.StatelessWidget{
                             fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
                                     return new MyDioPage();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    new fs.ListTile({
+                        leading:new fs.Text("8",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("path_provider"),
+                        subtitle:new fs.Text("locations on the filesystem. Supports iOS, Android,"),
+                        onTap:function(){
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
+                                builder:function(context?:fs.BuildContext){
+                                    return new MyPathProviderPage();
                                 }
                             }));
                         }                        

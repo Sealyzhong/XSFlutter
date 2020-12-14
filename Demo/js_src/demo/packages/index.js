@@ -15,6 +15,7 @@ const package_info_page_1 = require("demo/packages/package_info_page");
 const wakelock_page_1 = require("demo/packages/wakelock_page");
 const url_laucher_page_1 = require("demo/packages/url_laucher_page");
 const dio_page_1 = require("demo/packages/dio_page");
+const path_provider_page_1 = require("demo/packages/path_provider_page");
 class MyPackageIndex extends fs.StatelessWidget {
     constructor() {
         super(...arguments);
@@ -114,6 +115,19 @@ class MyPackageIndex extends fs.StatelessWidget {
                             fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
                                     return new dio_page_1.MyDioPage();
+                                }
+                            }));
+                        }
+                    }),
+                    new fs.ListTile({
+                        leading: new fs.Text("8", { style: this._style }),
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("path_provider"),
+                        subtitle: new fs.Text("locations on the filesystem. Supports iOS, Android,"),
+                        onTap: function () {
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                                builder: function (context) {
+                                    return new path_provider_page_1.MyPathProviderPage();
                                 }
                             }));
                         }

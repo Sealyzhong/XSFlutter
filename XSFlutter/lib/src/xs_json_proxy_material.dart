@@ -4,8 +4,6 @@
 //  Use of this source code is governed by a MIT-style license that can be
 //  found in the LICENSE file.
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:xsflutter/src/widgets/label_title_widget.dart';
@@ -13,9 +11,6 @@ import 'widgets/check_box.dart';
 import 'xs_json_to_dart.dart';
 import 'xs_build_owner.dart';
 import 'xs_js_parse.dart';
-
-// TODO List
-// 1、默认值是私有类的方法
 
 ///把Widget按分类注册，方便写代码，
 ///分类：Material/Layout/Text/(Assets.Images.icons)/input...
@@ -344,7 +339,6 @@ class XSProxyButtonSeries extends XSJsonObjProxy {
         tooltip: XSJSParse.getString(context, bo, map, "tooltip"),
         foregroundColor: XSJSParse.getColor(context, bo, map, "foregroundColor"),
         backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
-        heroTag: XSJSParse.getObject(context, bo, map, "heroTag"), // TODO: defaultValue
         elevation: XSJSParse.getDouble(context, bo, map, "elevation", defaultValue: 6.0),
         highlightElevation: XSJSParse.getDouble(context, bo, map, "highlightElevation", defaultValue: 12.0),
         onPressed: XSJSParse.getVoidCallback(context, bo, map, "onPressed"),
@@ -2272,7 +2266,6 @@ class XSProxySliverVisibility extends XSJsonObjProxy {
 //-------------- T -----------------
 
 //****** TabController ******
-//TODO:未完成
 class XSProxyTabController extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     final String regClassName = "TabController";
@@ -2286,7 +2279,7 @@ class XSProxyTabController extends XSJsonObjProxy {
     return TabController(
       initialIndex: XSJSParse.getInt(context, bo, map, "initialIndex", defaultValue: 0),
       length: XSJSParse.getInt(context, bo, map, "length"),
-      vsync: XSJSParse.getObject(context, bo, map, "vsync"),
+      vsync: bo.widget.state,
     );
   }
 
@@ -2298,11 +2291,12 @@ class XSProxyTabController extends XSJsonObjProxy {
     }
 
     var sc = mirrorObj as TabController;
-    if (funcName == 'jumpTo') {
-      return;
-    }
-
     if (funcName == 'animateTo') {
+      sc.animateTo(
+        XSJSParse.getInt(null, null, args, "value"),
+        duration: XSJSParse.getDuration(null, null, args, "duration"),
+        curve: XSJSParse.getCurve(null, null, args, "curve"),
+      );
       return;
     }
 

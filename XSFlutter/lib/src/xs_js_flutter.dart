@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'models/response_model.dart';
 import 'xs_js_flutter_common.dart';
 import 'xs_json_to_dart.dart';
 import 'xs_js_mirror_obj_mgr.dart';
@@ -259,11 +260,17 @@ class XSFlutterLib implements XSFlutter {
       if (proxy != null) {
         Completer<String> completer = new Completer<String>();
         proxy.jsInvokeMirrorObjFunction(mirrorID, mirrorObj, funcName, funArgs, callback: (result) {
-          var returnJSONStr = result;
-          if (result != null && !(result is String)) {
-            returnJSONStr = json.encode(result);
+          var returnJSONStr;
+          if (result != null) {
+            if (result is String) {
+              returnJSONStr = result;
+            } else if (result is ResponseModel) {
+              returnJSONStr = json.encode(result.toJson());
+            } else {
+              returnJSONStr = json.encode(result);
+            }
           }
-
+          //XSJSLog.log("callback:" + returnJSONStr);
           //callJsCallbackFunction(onResultId, params);
           completer.complete(returnJSONStr);
         });

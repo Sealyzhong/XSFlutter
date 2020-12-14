@@ -120,6 +120,7 @@ class XSProxyBottomNavigationBarItem extends XSJsonObjProxy {
     return BottomNavigationBarItem(
       icon: XSJSParse.getWidget(context, bo, map, "icon"),
       title: XSJSParse.getWidget(context, bo, map, "title"),
+      label: XSJSParse.getString(context, bo, map, "label"),
       activeIcon: XSJSParse.getWidget(context, bo, map, "activeIcon"),
       backgroundColor: XSJSParse.getColor(context, bo, map, "backgroundColor"),
     );
@@ -150,15 +151,6 @@ class XSProxyCircleAvatar extends XSJsonObjProxy {
     );
   }
 }
-/* Key key,
-    this.child,
-    this.backgroundColor,
-    this.backgroundImage,
-    this.onBackgroundImageError,
-    this.foregroundColor,
-    this.radius,
-    this.minRadius,
-    this.maxRadius,*/
 
 //****** Chip ******
 class XSProxyChip extends XSJsonObjProxy {

@@ -29,8 +29,6 @@ class _MyHomePageState extends fs.WidgetState {
     //subclass override
     initState() {
         fs.Log.log("MyHomePage.initState");
-        fs.ScreenInfo.updateInfo();
-        fs.PackageInfo.updateInfo();
     }
     build(context) {
         return new fs.Scaffold({

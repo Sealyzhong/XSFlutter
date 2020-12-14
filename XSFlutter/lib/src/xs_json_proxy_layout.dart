@@ -910,7 +910,6 @@ class XSProxyLayoutBuilder extends XSJsonObjProxy {
     return LayoutBuilder(
       key: XSJSParse.getKey(context, bo, map, "key"),
       builder: (BuildContext context, BoxConstraints constraints) {
-        //TODO: 此处异步要改成同步实现。否则会报错。另外，js framework的invokeCallback也要单独处理下
         return getBuilderWidget(bo, map, constraints, context: context);
       },
     );
@@ -992,7 +991,6 @@ class XSProxyOffsetBase extends XSJsonObjProxy {
 
   @override
   OffsetBase constructor(XSJsonBuildOwner bo, Map<String, dynamic> map, {BuildContext context}) {
-    //TODO: 因为是抽象类，无法给实例化，暂用子类Size。可以考虑从js framework生成的json入手，加入子类的名称。
     return Size(
       XSJSParse.getDouble(context, bo, map, "_dx"),
       XSJSParse.getDouble(context, bo, map, "_dy"),

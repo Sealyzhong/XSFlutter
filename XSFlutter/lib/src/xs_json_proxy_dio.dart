@@ -6,6 +6,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:xsflutter/xsflutter.dart';
 import 'xs_js_flutter.dart';
 import 'xs_build_owner.dart';
 import 'xs_js_parse.dart';
@@ -128,6 +129,12 @@ class XSProxyDio extends XSJsonObjProxy {
     return dio;
   }
 
+  void callBackError(InvokeCallback callback, dynamic ex) {
+    if (callback != null) {
+      callback(ResponseModel(isSuccess: false, data: ex.toString()));
+    }
+  }
+
   @override
   void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
     if (mirrorObj == null || !(mirrorObj is Dio)) {
@@ -155,12 +162,7 @@ class XSProxyDio extends XSJsonObjProxy {
             },
           );
         } catch (ex) {
-          if (callback != null) {
-            callback({
-              "statusCode": 0,
-              "statusMessage": ex.toString(),
-            });
-          }
+          callBackError(callback, ex);
           return;
         }
         break;
@@ -182,12 +184,7 @@ class XSProxyDio extends XSJsonObjProxy {
             },
           );
         } catch (ex) {
-          if (callback != null) {
-            callback({
-              "statusCode": 0,
-              "statusMessage": ex.toString(),
-            });
-          }
+          callBackError(callback, ex);
           return;
         }
         break;
@@ -221,12 +218,7 @@ class XSProxyDio extends XSJsonObjProxy {
             },
           );
         } catch (ex) {
-          if (callback != null) {
-            callback({
-              "statusCode": 0,
-              "statusMessage": ex.toString(),
-            });
-          }
+          callBackError(callback, ex);
           return;
         }
         break;
@@ -259,12 +251,7 @@ class XSProxyDio extends XSJsonObjProxy {
             },
           );
         } catch (ex) {
-          if (callback != null) {
-            callback({
-              "statusCode": 0,
-              "statusMessage": ex.toString(),
-            });
-          }
+          callBackError(callback, ex);
           return;
         }
         break;
@@ -298,12 +285,7 @@ class XSProxyDio extends XSJsonObjProxy {
             },
           );
         } catch (ex) {
-          if (callback != null) {
-            callback({
-              "statusCode": 0,
-              "statusMessage": ex.toString(),
-            });
-          }
+          callBackError(callback, ex);
           return;
         }
         break;
@@ -336,24 +318,19 @@ class XSProxyDio extends XSJsonObjProxy {
             },
           );
         } catch (ex) {
-          if (callback != null) {
-            callback({
-              "statusCode": 0,
-              "statusMessage": ex.toString(),
-            });
-          }
+          callBackError(callback, ex);
           return;
         }
         break;
     }
 
     if (callback != null && response != null) {
-      callback({
+      callback(ResponseModel(isSuccess: true, data: {
         "statusCode": response.statusCode,
         "statusMessage": response.statusMessage,
         //"headers": response.headers,
         "data": response.data
-      });
+      }));
     }
   }
 }

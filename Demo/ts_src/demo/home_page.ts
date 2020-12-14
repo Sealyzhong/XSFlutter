@@ -27,8 +27,6 @@ class _MyHomePageState extends fs.WidgetState{
     //subclass override
     initState() {
         fs.Log.log("MyHomePage.initState");
-        fs.ScreenInfo.updateInfo();
-        fs.PackageInfo.updateInfo();
     }
     
     _style = new fs.TextStyle({fontSize:24,fontWeight:fs.FontWeight.bold});

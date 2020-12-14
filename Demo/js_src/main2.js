@@ -21,4 +21,7 @@ function main(releaseMode) {
     fs.Log.log("main() start up ");
     let app = new MyApp();
     fs.JSFramework.runApp(app);
+    fs.ScreenInfo.getInstance().updateInfo();
+    fs.PackageInfo.getInstance().updateInfo();
+    fs.PathProvider.getInstance().updateInfo();
 }

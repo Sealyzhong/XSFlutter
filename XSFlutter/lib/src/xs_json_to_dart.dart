@@ -68,32 +68,12 @@ class XSJsonObjToDartObject {
       if (jsonObj is Map) {
         className = getJsonObjClassName(jsonObj);
 
-        // 解决Icon.icon的转换问题
-        Map<String, dynamic> newJsonObj = {};
-        if (jsonObj.length > 0) {
-          jsonObj.forEach((k, v) {
-            if (k.runtimeType == String) {
-              String key = k;
-              if (key.contains('.')) {
-                List array = key.split(".");
-                newJsonObj[array[1]] = v;
-                className = array[0];
-                newJsonObj["className"] = array[0];
-              } else {
-                newJsonObj[k] = v;
-              }
-            } else {
-              newJsonObj[k] = v;
-            }
-          });
-        }
-
         ///如果Map里找到了Class字段，则转换成对应Dart对象
         if (className != null) {
-          return jsonMapObjToDartObject(newJsonObj, buildOwner: buildOwner, context: context);
+          return jsonMapObjToDartObject(jsonObj, buildOwner: buildOwner, context: context);
         } else {
           ///如果Map里没找到Class字段，则转换成对应Dart里的Map对象，并对齐子元素，递归转换
-          return jsonMapObjToDartMapRecursive(newJsonObj, buildOwner: buildOwner, context: context);
+          return jsonMapObjToDartMapRecursive(jsonObj, buildOwner: buildOwner, context: context);
         }
       } else if (jsonObj is List) {
         return jsonListObjToDartListRecursive(jsonObj, buildOwner: buildOwner, context: context);
@@ -465,7 +445,6 @@ class XSJsonObjProxy {
     var cb = await bo.eventCallback(eventCallbackID, p: {
       "widgetName": "LayoutBuilder",
       "functionName": "builder",
-      "constraints": XSUtil.cBoxConstraintsToJson(constraints)
     });
     return cb;
   }
