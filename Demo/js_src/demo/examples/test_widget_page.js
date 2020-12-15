@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyTestWidgetPage = void 0;
 const fs = require("flutter_sdk");
@@ -165,17 +174,19 @@ class MyTestWidgetPage extends fs.StatelessWidget {
         });
         return list;
     }
-    async _goTo() {
-        /*this.sc.animateTo({
-            offset:200,
-            duration:new fs.Duration({seconds:4}),
-            curve:fs.Curve.linear,
-        });*/
-        /*this.sc.jumpTo({
-            value:200,
-        });*/
-        var a = await this.sc.offset();
-        fs.Log.log("offset:" + String(a));
+    _goTo() {
+        return __awaiter(this, void 0, void 0, function* () {
+            /*this.sc.animateTo({
+                offset:200,
+                duration:new fs.Duration({seconds:4}),
+                curve:fs.Curve.linear,
+            });*/
+            /*this.sc.jumpTo({
+                value:200,
+            });*/
+            var a = yield this.sc.offset();
+            fs.Log.log("offset:" + String(a));
+        });
     }
     //重构
     build(context) {

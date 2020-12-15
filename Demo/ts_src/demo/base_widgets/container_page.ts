@@ -1,58 +1,60 @@
-import fs = require("flutter_sdk");
-export class MyContainerPage extends fs.StatelessWidget{
-    build(context:fs.BuildContext) {
-        return new fs.Scaffold({
-            appBar:new fs.AppBar({
-                title:new fs.Text("Container"),
+import { AppBar, BorderRadius, BoxDecoration, BuildContext, Center, Colors, Container, EdgeInsets, ListTile, ListView, 
+  Radius, Scaffold, StatelessWidget,Text, TextStyle} from "flutter_sdk";
+  
+export class MyContainerPage extends StatelessWidget{
+    build(context:BuildContext) {
+        return new Scaffold({
+            appBar:new AppBar({
+                title:new Text("Container"),
             }),
-            body:new fs.ListView({
+            body:new ListView({
                 children:[                    
-                    new fs.ListTile({title:new fs.Text("Container"),}),
-                    new fs.Container({
-                      color:fs.Colors.red,
+                    new ListTile({title:new Text("Container"),}),
+                    new Container({
+                      color:Colors.red,
                       height:100,
                     }),
 
-                    new fs.ListTile({title:new fs.Text("放置内容的Container"),}),
-                    new fs.Container({
-                      color:fs.Colors.orange,
+                    new ListTile({title:new Text("放置内容的Container"),}),
+                    new Container({
+                      color:Colors.orange,
                       height:100,
-                      child:new fs.Text("我有内容")
+                      child:new Text("我有内容")
                     }),
 
-                    new fs.ListTile({title:new fs.Text("Container里的Padding"),}),
-                    new fs.Container({
-                      color:fs.Colors.yellow,
-                      padding:fs.EdgeInsets.all(10),
-                      child:new fs.Text("我有内容")
+                    new ListTile({title:new Text("Container里的Padding"),}),
+                    new Container({
+                      color:Colors.yellow,
+                      padding:EdgeInsets.all(10),
+                      child:new Text("我有内容")
                     }),
 
 
-                    new fs.ListTile({title:new fs.Text("圆角的Container"),}),
-                    new fs.Container({
-                      margin:fs.EdgeInsets.all(10),
-                      padding:fs.EdgeInsets.all(10),
-                      decoration:new fs.BoxDecoration({
-                        borderRadius:fs.BorderRadius.all(fs.Radius.circular(4.0)),
-                        color:fs.Colors.green,
+                    new ListTile({title:new Text("圆角的Container"),}),
+                    new Container({
+                      margin:EdgeInsets.all(10),
+                      padding:EdgeInsets.all(10),
+                      decoration:new BoxDecoration({
+                        borderRadius:BorderRadius.all(Radius.circular(4.0)),
+                        color:Colors.green,
                       }),
-                      child:new fs.Text("我是圆角Container")
+                      child:new Text("我是圆角Container")
                     }),
 
 
-                    new fs.ListTile({title:new fs.Text("固定高宽的Container"),}),
-                    new fs.Center({
-                      child:new fs.Container({
+                    new ListTile({title:new Text("固定高宽的Container"),}),
+                    new Center({
+                      child:new Container({
                         width:100,
                         height:100,
-                        margin:fs.EdgeInsets.all(10),
-                        padding:fs.EdgeInsets.all(10),
-                        decoration:new fs.BoxDecoration({
-                          borderRadius:fs.BorderRadius.all(fs.Radius.circular(4.0)),
-                          color:fs.Colors.green,
+                        margin:EdgeInsets.all(10),
+                        padding:EdgeInsets.all(10),
+                        decoration:new BoxDecoration({
+                          borderRadius:BorderRadius.all(Radius.circular(4.0)),
+                          color:Colors.green,
                         }),
-                        child:new fs.Text("100x100",{
-                          style:new fs.TextStyle({color:fs.Colors.white}),
+                        child:new Text("100x100",{
+                          style:new TextStyle({color:Colors.white}),
                         })
                       }),
                     })

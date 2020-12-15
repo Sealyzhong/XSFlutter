@@ -1,16 +1,19 @@
-import fs = require("flutter_sdk");
-export class MyImagePage extends fs.StatelessWidget{
 
-    genImageUI(boxFitName:string,fit:fs.BoxFit){
+import { AppBar,  BoxFit, BuildContext, Colors, Container, ListTile, ListView, 
+  Scaffold, StatelessWidget,Text,Image} from "flutter_sdk";
+
+export class MyImagePage extends StatelessWidget{
+
+    genImageUI(boxFitName:string,fit:BoxFit){
         return [
-          new fs.ListTile({
-            title: new fs.Text('BoxFit.'+boxFitName,),
+          new ListTile({
+            title: new Text('BoxFit.'+boxFitName,),
           }),
-          new fs.Container({
+          new Container({
             height:150,
             width: 300,
-            color:fs.Colors.orange,
-            child:fs.Image.asset('people/ali_landscape.png', {
+            color:Colors.orange,
+            child:Image.asset('people/ali_landscape.png', {
               package: 'flutter_gallery_assets',
               fit: fit,
               height: 100
@@ -19,33 +22,33 @@ export class MyImagePage extends fs.StatelessWidget{
         ];
       }
 
-    build(context:fs.BuildContext) {
-        return new fs.Scaffold({
-            appBar:new fs.AppBar({
-                title:new fs.Text("Images"),
+    build(context:BuildContext) {
+        return new Scaffold({
+            appBar:new AppBar({
+                title:new Text("Images"),
             }),
-            body:new fs.ListView({
+            body:new ListView({
                 children:[                    
-                    new fs.ListTile({title:new fs.Text("加载网络图片"),}),
-                    fs.Image.network('https://cdn.pixabay.com/photo/2015/10/30/20/13/sunrise-1014712_960_720.jpg',
+                    new ListTile({title:new Text("加载网络图片"),}),
+                    Image.network('https://cdn.pixabay.com/photo/2015/10/30/20/13/sunrise-1014712_960_720.jpg',
                      {
-                         fit:fs.BoxFit.cover,
+                         fit:BoxFit.cover,
                          height:250,
                      }),
           
-                    new fs.ListTile({title:new fs.Text("加载本地图片"),}),
-                    fs.Image.asset('people/ali_landscape.png', {
+                    new ListTile({title:new Text("加载本地图片"),}),
+                    Image.asset('people/ali_landscape.png', {
                         package: 'flutter_gallery_assets',
-                        fit: fs.BoxFit.cover,
+                        fit: BoxFit.cover,
                         height: 250
                       }),
                     
-                      ...this.genImageUI("contain",fs.BoxFit.contain),
-                      ...this.genImageUI("fill",fs.BoxFit.fill),
-                      ...this.genImageUI("fitHeight",fs.BoxFit.fitHeight),
-                      ...this.genImageUI("fitWidth",fs.BoxFit.fitWidth),
-                      ...this.genImageUI("scaleDown",fs.BoxFit.scaleDown),
-                      ...this.genImageUI("none",fs.BoxFit.none),
+                      ...this.genImageUI("contain",BoxFit.contain),
+                      ...this.genImageUI("fill",BoxFit.fill),
+                      ...this.genImageUI("fitHeight",BoxFit.fitHeight),
+                      ...this.genImageUI("fitWidth",BoxFit.fitWidth),
+                      ...this.genImageUI("scaleDown",BoxFit.scaleDown),
+                      ...this.genImageUI("none",BoxFit.none),
                     
                 ],
             }),

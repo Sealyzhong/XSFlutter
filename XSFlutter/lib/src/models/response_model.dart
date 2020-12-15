@@ -9,17 +9,17 @@ import 'package:flutter/material.dart';
 
 class ResponseModel {
   //是否成功
-  final bool isSuccess;
+  final bool flag;
   //返回信息
   final String info;
   //返回数据
   final dynamic data;
-  ResponseModel({@required this.isSuccess, this.info, this.data});
+  ResponseModel({@required this.flag, this.info, this.data});
 
   //
   Map<String, dynamic> toJson() {
     return {
-      "isSuccess": this.isSuccess,
+      "flag": this.flag,
       "info": this.info,
       "data": this.data
     };

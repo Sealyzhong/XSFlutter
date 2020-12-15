@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-//xsflutter
 import 'package:xsflutter/xsflutter.dart';
 import 'custom_js_api.dart';
 

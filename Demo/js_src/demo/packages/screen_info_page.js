@@ -5,6 +5,15 @@
  * @ModifyDate: 2020/11/11
  * @Description: 入口页
  */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyScreenInfoPage = void 0;
 const fs = require("flutter_sdk");
@@ -15,9 +24,11 @@ class MyScreenInfoPage extends fs.StatefulWidget {
 }
 exports.MyScreenInfoPage = MyScreenInfoPage;
 class _MyScreenInfoPage extends fs.WidgetState {
-    async _updateScreenInfo() {
-        await fs.ScreenInfo.getInstance().updateInfo();
-        this.setState();
+    _updateScreenInfo() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield fs.ScreenInfo.getInstance().updateInfo();
+            this.setState();
+        });
     }
     build(context) {
         return new fs.Scaffold({

@@ -57,7 +57,7 @@ class _MyDioPage extends fs.WidgetState{
     async _onTap1(){
         fs.Loading.show({info:"数据加载中..."});
         let response = await this.testDio2(this.cgiDataUrl);
-        this.response =  response as string;// JSON.stringify(response);
+        this.response =  JSON.stringify(response);
         fs.Loading.dismiss();
         this.setState();
     }
@@ -65,7 +65,7 @@ class _MyDioPage extends fs.WidgetState{
     async _onTap2(){
         fs.Loading.show({info:"数据加载中..."});
         let response = await this.testDio1(this.cgiJsonUrl);
-        this.response =  response as string;// JSON.stringify(response);
+        this.response =  JSON.stringify(response);
         fs.Loading.dismiss();
         this.setState();
     }

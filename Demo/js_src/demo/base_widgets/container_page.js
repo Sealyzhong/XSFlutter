@@ -1,55 +1,55 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyContainerPage = void 0;
-const fs = require("flutter_sdk");
-class MyContainerPage extends fs.StatelessWidget {
+const flutter_sdk_1 = require("flutter_sdk");
+class MyContainerPage extends flutter_sdk_1.StatelessWidget {
     build(context) {
-        return new fs.Scaffold({
-            appBar: new fs.AppBar({
-                title: new fs.Text("Container"),
+        return new flutter_sdk_1.Scaffold({
+            appBar: new flutter_sdk_1.AppBar({
+                title: new flutter_sdk_1.Text("Container"),
             }),
-            body: new fs.ListView({
+            body: new flutter_sdk_1.ListView({
                 children: [
-                    new fs.ListTile({ title: new fs.Text("Container"), }),
-                    new fs.Container({
-                        color: fs.Colors.red,
+                    new flutter_sdk_1.ListTile({ title: new flutter_sdk_1.Text("Container"), }),
+                    new flutter_sdk_1.Container({
+                        color: flutter_sdk_1.Colors.red,
                         height: 100,
                     }),
-                    new fs.ListTile({ title: new fs.Text("放置内容的Container"), }),
-                    new fs.Container({
-                        color: fs.Colors.orange,
+                    new flutter_sdk_1.ListTile({ title: new flutter_sdk_1.Text("放置内容的Container"), }),
+                    new flutter_sdk_1.Container({
+                        color: flutter_sdk_1.Colors.orange,
                         height: 100,
-                        child: new fs.Text("我有内容")
+                        child: new flutter_sdk_1.Text("我有内容")
                     }),
-                    new fs.ListTile({ title: new fs.Text("Container里的Padding"), }),
-                    new fs.Container({
-                        color: fs.Colors.yellow,
-                        padding: fs.EdgeInsets.all(10),
-                        child: new fs.Text("我有内容")
+                    new flutter_sdk_1.ListTile({ title: new flutter_sdk_1.Text("Container里的Padding"), }),
+                    new flutter_sdk_1.Container({
+                        color: flutter_sdk_1.Colors.yellow,
+                        padding: flutter_sdk_1.EdgeInsets.all(10),
+                        child: new flutter_sdk_1.Text("我有内容")
                     }),
-                    new fs.ListTile({ title: new fs.Text("圆角的Container"), }),
-                    new fs.Container({
-                        margin: fs.EdgeInsets.all(10),
-                        padding: fs.EdgeInsets.all(10),
-                        decoration: new fs.BoxDecoration({
-                            borderRadius: fs.BorderRadius.all(fs.Radius.circular(4.0)),
-                            color: fs.Colors.green,
+                    new flutter_sdk_1.ListTile({ title: new flutter_sdk_1.Text("圆角的Container"), }),
+                    new flutter_sdk_1.Container({
+                        margin: flutter_sdk_1.EdgeInsets.all(10),
+                        padding: flutter_sdk_1.EdgeInsets.all(10),
+                        decoration: new flutter_sdk_1.BoxDecoration({
+                            borderRadius: flutter_sdk_1.BorderRadius.all(flutter_sdk_1.Radius.circular(4.0)),
+                            color: flutter_sdk_1.Colors.green,
                         }),
-                        child: new fs.Text("我是圆角Container")
+                        child: new flutter_sdk_1.Text("我是圆角Container")
                     }),
-                    new fs.ListTile({ title: new fs.Text("固定高宽的Container"), }),
-                    new fs.Center({
-                        child: new fs.Container({
+                    new flutter_sdk_1.ListTile({ title: new flutter_sdk_1.Text("固定高宽的Container"), }),
+                    new flutter_sdk_1.Center({
+                        child: new flutter_sdk_1.Container({
                             width: 100,
                             height: 100,
-                            margin: fs.EdgeInsets.all(10),
-                            padding: fs.EdgeInsets.all(10),
-                            decoration: new fs.BoxDecoration({
-                                borderRadius: fs.BorderRadius.all(fs.Radius.circular(4.0)),
-                                color: fs.Colors.green,
+                            margin: flutter_sdk_1.EdgeInsets.all(10),
+                            padding: flutter_sdk_1.EdgeInsets.all(10),
+                            decoration: new flutter_sdk_1.BoxDecoration({
+                                borderRadius: flutter_sdk_1.BorderRadius.all(flutter_sdk_1.Radius.circular(4.0)),
+                                color: flutter_sdk_1.Colors.green,
                             }),
-                            child: new fs.Text("100x100", {
-                                style: new fs.TextStyle({ color: fs.Colors.white }),
+                            child: new flutter_sdk_1.Text("100x100", {
+                                style: new flutter_sdk_1.TextStyle({ color: flutter_sdk_1.Colors.white }),
                             })
                         }),
                     })

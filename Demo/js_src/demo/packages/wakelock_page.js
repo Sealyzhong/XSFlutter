@@ -5,6 +5,15 @@
  * @ModifyDate: 2020/11/11
  * @Description: 入口页
  */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyWakelockPage = void 0;
 const fs = require("flutter_sdk");
@@ -19,24 +28,32 @@ class _MyWakelockPage extends fs.WidgetState {
         super(...arguments);
         this.isEnabled = false;
     }
-    async initState() {
-        fs.Future.delayed(new fs.Duration({ seconds: 1 }), this._getStatus.bind(this));
+    initState() {
+        return __awaiter(this, void 0, void 0, function* () {
+            fs.Future.delayed(new fs.Duration({ seconds: 1 }), this._getStatus.bind(this));
+        });
     }
-    async _getStatus() {
-        this.isEnabled = await fs.Wakelock.isEnabled();
-        this.setState();
+    _getStatus() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.isEnabled = yield fs.Wakelock.isEnabled();
+            this.setState();
+        });
     }
-    async _enable() {
-        var v = await fs.Wakelock.enable();
-        var n = await fs.Wakelock.isEnabled();
-        this.isEnabled = n;
-        this.setState();
+    _enable() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield fs.Wakelock.enable();
+            var n = yield fs.Wakelock.isEnabled();
+            this.isEnabled = n;
+            this.setState();
+        });
     }
-    async _disable() {
-        var v = await fs.Wakelock.disable();
-        var n = await fs.Wakelock.isEnabled();
-        this.isEnabled = n;
-        this.setState();
+    _disable() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield fs.Wakelock.disable();
+            var n = yield fs.Wakelock.isEnabled();
+            this.isEnabled = n;
+            this.setState();
+        });
     }
     build(context) {
         return new fs.Scaffold({

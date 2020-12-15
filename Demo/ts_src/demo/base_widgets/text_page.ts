@@ -1,55 +1,56 @@
 import { MySectionTitle } from "demo/widgets/section_title";
-import fs = require("flutter_sdk");
-export class MyTextPage extends fs.StatelessWidget{
-   
-    build(context:fs.BuildContext) {
-        return new fs.Scaffold({
-            appBar: new fs.AppBar({
-              title: new fs.Text('Text',),
+import { AppBar, BuildContext, Color, Colors, EdgeInsets, FontWeight, ListTile, ListView, Padding, 
+  RichText, Scaffold, StatelessWidget,Text, TextDecoration, TextDecorationStyle, TextOverflow, TextSpan, TextStyle } from "flutter_sdk";
+
+export class MyTextPage extends StatelessWidget{
+    build(context:BuildContext) {
+        return new Scaffold({
+            appBar: new AppBar({
+              title: new Text('Text',),
             }),
-            body: new fs.ListView({
+            body: new ListView({
               children:[
                 new MySectionTitle("普通文本"),
-                new fs.ListTile({
-                  title:new fs.Text("设置文本颜色",{
-                    style:new fs.TextStyle({
-                      color:fs.Colors.orange,
+                new ListTile({
+                  title:new Text("设置文本颜色",{
+                    style:new TextStyle({
+                      color:Colors.orange,
                     })
                   }),
                 }),
                 new MySectionTitle("富文本"),
-                new fs.Padding({
-                  padding:fs.EdgeInsets.all(10),
-                  child: new fs.RichText({
-                    text: new fs.TextSpan({
-                      style: new fs.TextStyle({
-                        color: new fs.Color(0xFFFF8C00),
+                new Padding({
+                  padding:EdgeInsets.all(10),
+                  child: new RichText({
+                    text: new TextSpan({
+                      style: new TextStyle({
+                        color: new Color(0xFFFF8C00),
                         fontSize: 18.0,
-                        decoration: fs.TextDecoration.underline,
-                        decorationColor: fs.Colors.orange,
-                        decorationStyle: fs.TextDecorationStyle.dashed,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.orange,
+                        decorationStyle: TextDecorationStyle.dashed,
                       }),
                       text: '超长文案rich text，超长文案rich text，超长文案rich text，超长文案rich text，超长文案rich text，超长文案rich text',
                       children: [
-                        new fs.TextSpan({
+                        new TextSpan({
                           text: ' style  ',
-                          style: new fs.TextStyle({
-                            color: fs.Colors.red,
-                            fontWeight: fs.FontWeight.bold,
-                            decoration: fs.TextDecoration.none,
+                          style: new TextStyle({
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.none,
                           })
                         }),
-                        new fs.TextSpan({
+                        new TextSpan({
                           text: 'your text',
-                          style: new fs.TextStyle({
-                            color: fs.Colors.blue,
-                            fontWeight: fs.FontWeight.bold,
-                            decoration: fs.TextDecoration.none,
+                          style: new TextStyle({
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.none,
                           })
                         }),
                       ],
                     }),
-                    overflow: fs.TextOverflow.ellipsis,
+                    overflow: TextOverflow.ellipsis,
                     maxLines: 99
                   }),
                 })

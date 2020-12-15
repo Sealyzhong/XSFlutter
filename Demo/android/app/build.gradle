@@ -40,11 +40,30 @@ android {
         versionName flutterVersionName
     }
 
+    //配置keystore签名
+    signingConfigs {
+        release {
+            try {
+                storeFile file("frxs_key")
+                storePassword KEYSTORE_PASSWORD
+                keyAlias "frxsapp"
+                keyPassword KEY_PASSWORD
+            } catch (ex) {
+                throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+    }
+
     buildTypes {
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+            proguardFile 'proguard-project-app.pro'
         }
     }
 }

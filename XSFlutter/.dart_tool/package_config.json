@@ -236,6 +236,18 @@
       "languageVersion": "2.1"
     },
     {
+      "name": "permission_handler",
+      "rootUri": "file:///Users/sealyzhong/.pub-cache/hosted/pub.flutter-io.cn/permission_handler-5.0.1+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "permission_handler_platform_interface",
+      "rootUri": "file:///Users/sealyzhong/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_platform_interface-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
       "name": "petitparser",
       "rootUri": "file:///Users/sealyzhong/.pub-cache/hosted/pub.flutter-io.cn/petitparser-3.0.4",
       "packageUri": "lib/",
@@ -464,7 +476,7 @@
       "languageVersion": "2.10"
     }
   ],
-  "generated": "2020-12-12T07:26:10.614640Z",
+  "generated": "2020-12-15T08:21:45.142855Z",
   "generator": "pub",
   "generatorVersion": "2.10.4"
 }

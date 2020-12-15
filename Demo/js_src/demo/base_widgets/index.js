@@ -7,7 +7,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyBaseWidgetsIndex = void 0;
-const fs = require("flutter_sdk");
+const flutter_sdk_1 = require("flutter_sdk");
 const app_bar_page_1 = require("demo/base_widgets/app_bar_page");
 const cupertino_icons_page_1 = require("demo/base_widgets/cupertino_icons_page");
 const material_icons_page_1 = require("demo/base_widgets/material_icons_page");
@@ -21,35 +21,35 @@ const button_page_1 = require("demo/base_widgets/button_page");
 const flutter_logo_page_1 = require("demo/base_widgets/flutter_logo_page");
 const text_field_page_1 = require("demo/base_widgets/text_field_page");
 const image_page_1 = require("demo/base_widgets/image_page");
-class MyBaseWidgetsIndex extends fs.StatelessWidget {
+class MyBaseWidgetsIndex extends flutter_sdk_1.StatelessWidget {
     constructor() {
         super(...arguments);
-        this._style = new fs.TextStyle({ fontSize: 24, fontWeight: fs.FontWeight.bold });
+        this._style = new flutter_sdk_1.TextStyle({ fontSize: 24, fontWeight: flutter_sdk_1.FontWeight.bold });
     }
     build(context) {
-        return new fs.Scaffold({
-            appBar: new fs.AppBar({
-                title: new fs.Text("通用组件"),
+        return new flutter_sdk_1.Scaffold({
+            appBar: new flutter_sdk_1.AppBar({
+                title: new flutter_sdk_1.Text("通用组件"),
             }),
-            body: new fs.ListView({
+            body: new flutter_sdk_1.ListView({
                 children: [
                     new section_title_1.MySectionTitle("基础组件"),
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("Material Icons"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("Material Icons"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new material_icons_page_1.MyMaterialIconsPage();
                                 }
                             }));
                         }
                     }),
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("Cupertino Icons"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("Cupertino Icons"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new cupertino_icons_page_1.MyCupertinoIconsPage();
                                 }
@@ -57,66 +57,66 @@ class MyBaseWidgetsIndex extends fs.StatelessWidget {
                         }
                     }),
                     //new 的写法2
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("AppBar"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("AppBar"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new app_bar_page_1.MyAppBarPage();
                                 }
                             }));
                         }
                     }),
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("PlaceHolder"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("PlaceHolder"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new placeholder_page_1.MyPlaceholderPage();
                                 }
                             }));
                         }
                     }),
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("Image"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("Image"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new image_page_1.MyImagePage();
                                 }
                             }));
                         }
                     }),
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("Text"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("Text"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new text_page_1.MyTextPage();
                                 }
                             }));
                         }
                     }),
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("TextField"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("TextField"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new text_field_page_1.MyTextFieldPage();
                                 }
                             }));
                         }
                     }),
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("Button"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("Button"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new button_page_1.MyButtonPage();
                                 }
@@ -124,33 +124,33 @@ class MyBaseWidgetsIndex extends fs.StatelessWidget {
                         }
                     }),
                     new section_title_1.MySectionTitle("布局组件"),
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("Container"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("Container"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new container_page_1.MyContainerPage();
                                 }
                             }));
                         }
                     }),
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("Column"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("Column"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new column_page_1.MyColumnPage();
                                 }
                             }));
                         }
                     }),
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("Row"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("Row"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new row_page_1.MyRowPage();
                                 }
@@ -158,11 +158,11 @@ class MyBaseWidgetsIndex extends fs.StatelessWidget {
                         }
                     }),
                     new section_title_1.MySectionTitle("其它组件"),
-                    new fs.ListTile({
-                        trailing: new fs.Icon(fs.Icons.chevron_right),
-                        title: new fs.Text("Flutter Logo"),
+                    new flutter_sdk_1.ListTile({
+                        trailing: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.chevron_right),
+                        title: new flutter_sdk_1.Text("Flutter Logo"),
                         onTap: function () {
-                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                            flutter_sdk_1.Navigator.push(context, new flutter_sdk_1.MaterialPageRoute({
                                 builder: function (context) {
                                     return new flutter_logo_page_1.MyFlutterLogoPage();
                                 }

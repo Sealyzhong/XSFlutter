@@ -5,6 +5,15 @@
  * @ModifyDate: 2020/11/11
  * @Description: 入口页
  */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyDioPage = void 0;
 const section_title_1 = require("demo/widgets/section_title");
@@ -26,42 +35,50 @@ class _MyDioPage extends fs.WidgetState {
         return "let resp = await Dio().get(cgi);";
     }
     //例子1，最简单的用法 
-    async testDio1(url) {
-        try {
-            let response = await fs.Dio.getInstance().get({ path: url });
-            fs.Log.log("await Dio.get(urlStr):request() :" + response);
-            return response;
-        }
-        catch (e) {
-            fs.Log.log("testDio() error:" + e);
-        }
+    testDio1(url) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let response = yield fs.Dio.getInstance().get({ path: url });
+                fs.Log.log("await Dio.get(urlStr):request() :" + response);
+                return response;
+            }
+            catch (e) {
+                fs.Log.log("testDio() error:" + e);
+            }
+        });
     }
     //例子2，接口还未完全支持
-    async testDio2(url) {
-        try {
-            let response = await fs.Dio.getInstance().get({ path: url, onReceiveProgress: function (progress, total) {
-                    fs.Log.log("testDio(): progress: " + String(progress) + "/" + String(total));
-                } });
-            fs.Log.log("await Dio.get(urlStr):request() :" + response);
-            return response;
-        }
-        catch (e) {
-            fs.Log.log("testDio() error:" + e);
-        }
+    testDio2(url) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let response = yield fs.Dio.getInstance().get({ path: url, onReceiveProgress: function (progress, total) {
+                        fs.Log.log("testDio(): progress: " + String(progress) + "/" + String(total));
+                    } });
+                fs.Log.log("await Dio.get(urlStr):request() :" + response);
+                return response;
+            }
+            catch (e) {
+                fs.Log.log("testDio() error:" + e);
+            }
+        });
     }
-    async _onTap1() {
-        fs.Loading.show({ info: "数据加载中..." });
-        let response = await this.testDio2(this.cgiDataUrl);
-        this.response = response; // JSON.stringify(response);
-        fs.Loading.dismiss();
-        this.setState();
+    _onTap1() {
+        return __awaiter(this, void 0, void 0, function* () {
+            fs.Loading.show({ info: "数据加载中..." });
+            let response = yield this.testDio2(this.cgiDataUrl);
+            this.response = JSON.stringify(response);
+            fs.Loading.dismiss();
+            this.setState();
+        });
     }
-    async _onTap2() {
-        fs.Loading.show({ info: "数据加载中..." });
-        let response = await this.testDio1(this.cgiJsonUrl);
-        this.response = response; // JSON.stringify(response);
-        fs.Loading.dismiss();
-        this.setState();
+    _onTap2() {
+        return __awaiter(this, void 0, void 0, function* () {
+            fs.Loading.show({ info: "数据加载中..." });
+            let response = yield this.testDio1(this.cgiJsonUrl);
+            this.response = JSON.stringify(response);
+            fs.Loading.dismiss();
+            this.setState();
+        });
     }
     build(context) {
         return new fs.Scaffold({

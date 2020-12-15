@@ -56,10 +56,11 @@ export type OnScaleEnd = (value:ScaleEndDetails) => void;
 
 //****** TODO JSCallArgs ******
 export interface ResponseModel {
-  isSuccess?:boolean;
+  flag:boolean;
   info?:string;
   data?:any;
 }
+
 
 //****** TODO JSWidget Mirror Mgr ******
 export class JSWidgetMirrorMgr {
@@ -220,12 +221,24 @@ export class Convert extends core.Object{
   }
 
   static toString(v:any){
+    if(v==null || v==undefined) return ""
     if(typeof v == "string"){
       return v;
     }
     return String(v);
   }
+
+
+  static toResponseModel(v:any){
+    if(v!=null && v!=undefined){
+      return JSON.parse(Convert.toString(v)) as ResponseModel; 
+    }else {
+      return {flag:false,info:"undefined | null"} as ResponseModel;
+    }
+  }
 }
+
+
 
 
 //#endregion
@@ -307,7 +320,7 @@ export class Convert extends core.Object{
   
   
   // @ts-ignore：dart_sdk
-  globalThis.mxfJSBridgeInvokeJSCommonChannel = function (messageStr) {
+  globalThis.jsBridgeInvokeJSCommonChannel = function (messageStr) {
     JSBridge.onFlutterInvokeJSCommonChannel(messageStr);
   }
   
@@ -22468,11 +22481,7 @@ export class Dialog extends DartClass {
       },
     }));
 
-    if(v!=null && v!=undefined){
-      return JSON.parse(Convert.toString(v)) as ResponseModel; 
-    }else {
-      return {isSuccess:false,info:"undefined | null"} as ResponseModel;
-    }
+    return Convert.toResponseModel(v);
   }
 
   static dismiss(baseWidget:BaseWidget){
@@ -22687,7 +22696,16 @@ export class Sp extends DartClass {
         args: config,
       })
     );
-    return Convert.toBoolean(v);
+    var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+    if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
+      return Convert.toBoolean(r.data);
+    }
+
+    if(config.defaultValue!=null && config.defaultValue!=undefined && typeof config.defaultValue =="boolean"){
+      return config.defaultValue;
+    }
+    return false;
+
   }
 
   /**
@@ -22706,7 +22724,16 @@ export class Sp extends DartClass {
         args: config,
       })
     );
-    return Convert.toNumber(v);
+    var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+    if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
+      return Convert.toNumber(r.data);
+    }
+    if(config.defaultValue!=null && config.defaultValue!=undefined && typeof config.defaultValue =="number"){
+      return config.defaultValue;
+    }
+
+    return 0;
+
   }
 
   /**
@@ -22725,7 +22752,16 @@ export class Sp extends DartClass {
         args: config,
       })
     );
-    return Convert.toNumber(v);
+    var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+    if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
+      return Convert.toNumber(r.data);
+    }
+
+    if(config.defaultValue!=null && config.defaultValue!=undefined && typeof config.defaultValue =="number"){
+      return config.defaultValue;
+    }
+
+    return 0.0;
   }
 
   /**
@@ -22744,7 +22780,16 @@ export class Sp extends DartClass {
         args: config,
       })
     );
-    return Convert.toString(v);
+    var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+    if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
+      return Convert.toString(r.data);
+    }
+
+    if(config.defaultValue!=null && config.defaultValue!=undefined && typeof config.defaultValue =="string"){
+      return config.defaultValue;
+    }
+
+    return "";
   }
 
   static async clear() {
@@ -22755,7 +22800,10 @@ export class Sp extends DartClass {
         funcName: "clear",
       })
     );
-    return Convert.toBoolean(v);
+    var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+    if(r!=null && r!=undefined ){
+      return r.flag;
+    }
   }
 
   /**
@@ -22772,7 +22820,10 @@ export class Sp extends DartClass {
         funcName: "remove",
       })
     );
-    return Convert.toBoolean(v);
+    var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+    if(r!=null && r!=undefined ){
+      return r.flag;
+    }
   }
 
   /**
@@ -22791,7 +22842,10 @@ export class Sp extends DartClass {
           args: config,
       })
     );
-    return Convert.toBoolean(v);
+    var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+    if(r!=null && r!=undefined ){
+      return r.flag;
+    }
   }
 
   /**
@@ -22810,7 +22864,10 @@ export class Sp extends DartClass {
           args: config,
       })
     );
-    return Convert.toBoolean(v);
+    var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+    if(r!=null && r!=undefined ){
+      return r.flag;
+    }
   }
 
   /**
@@ -22829,7 +22886,10 @@ export class Sp extends DartClass {
           args: config,
       })
     );
-    return Convert.toBoolean(v);
+    var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+    if(r!=null && r!=undefined ){
+      return r.flag;
+    }
   }
 
   /**
@@ -22848,6 +22908,11 @@ export class Sp extends DartClass {
           args: config,
       })
     );
+
+    var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+    if(r!=null && r!=undefined ){
+      return r.flag;
+    }
   }
 }
 //#endregion
@@ -22931,7 +22996,7 @@ async updateInfo() {
 
     if(v!=null && v!=undefined){
       var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
-      if(r!=null && r!=undefined && r.isSuccess && r.data!=null && r.data!=undefined ){
+      if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
         ScreenInfo.appBarHeight = Convert.toNumber(r.data["appBarHeight"]);
         ScreenInfo.bottomBarHeight = Convert.toNumber(r.data["bottomBarHeight"]);
         ScreenInfo.dpRatio = Convert.toNumber(r.data["dpRatio"]);
@@ -22988,7 +23053,7 @@ export class PackageInfo extends DartClass {
       }));
       if(v!=null && v!=undefined){
         var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
-        if(r!=null && r!=undefined && r.isSuccess && r.data!=null && r.data!=undefined ){
+        if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
           PackageInfo.appName = Convert.toString( r.data["appName"]);
           PackageInfo.buildNumber = Convert.toString( r.data["buildNumber"]);
           PackageInfo.packageName = Convert.toString( r.data["packageName"]);
@@ -23029,7 +23094,7 @@ export class Wakelock extends DartClass {
           funcName: "disable",
       }));
     var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
-    if(r!=null && r!=undefined && r.isSuccess && r.data!=null && r.data!=undefined ){
+    if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
       return  Convert.toBoolean(r.data);
     }
     
@@ -23044,7 +23109,7 @@ export class Wakelock extends DartClass {
           funcName: "enable",
       }));
     var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
-    if(r!=null && r!=undefined && r.isSuccess && r.data!=null && r.data!=undefined ){
+    if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
       return  Convert.toBoolean(r.data);
     }
   }
@@ -23058,7 +23123,7 @@ export class Wakelock extends DartClass {
           funcName: "isEnabled",
       }));
     var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
-    if(r!=null && r!=undefined && r.isSuccess && r.data!=null && r.data!=undefined ){
+    if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
       return  Convert.toBoolean(r.data);
     }
     return false;
@@ -23100,7 +23165,12 @@ export class Uuid extends DartClass {
       funcName: "v1",
     }));
 
-    return Convert.toString(v);
+    if(v!=null && v!=undefined){
+      var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+      if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
+        return Convert.toString(r.data);
+      }
+    }
   } 
   
   /**
@@ -23113,7 +23183,12 @@ export class Uuid extends DartClass {
         className: obj.className,
         funcName: "v4",
     }));
-    return Convert.toString(v);
+    if(v!=null && v!=undefined){
+      var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+      if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
+        return Convert.toString(r.data);
+      }
+    }
   }
 
   /**
@@ -23132,7 +23207,12 @@ export class Uuid extends DartClass {
         v5Name:v5Name,
       }
     }));
-    return Convert.toString(v);
+    if(v!=null && v!=undefined){
+      var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
+      if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
+        return Convert.toString(r.data);
+      }
+    }
   }
 }
 
@@ -23231,7 +23311,7 @@ export class UrlLauncher extends DartClass {
       }));
     var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
     if(r!=null && r!=undefined){
-      return  r.isSuccess;
+      return  r.flag;
     }
   }
 }
@@ -25092,8 +25172,6 @@ finishLoad(config?:EasyRefreshControllerConfig) {
 }
 
 
-
-
 resetRefreshState() {
   JSFramework.invokeFlutterFunction(
     new JSCallConfig({
@@ -25362,7 +25440,7 @@ export class PathProvider extends DartClass {
           funcName: "updateInfo",
       }));
     var r= JSON.parse(Convert.toString(v)) as ResponseModel; 
-    if(r!=null && r!=undefined && r.isSuccess && r.data!=null && r.data!=undefined ){
+    if(r!=null && r!=undefined && r.flag && r.data!=null && r.data!=undefined ){
       PathProvider.applicationDocumentsDirectory = Convert.toString(r.data["applicationDocumentsDirectory"]);
       PathProvider.applicationSupportDirectory = Convert.toString(r.data["applicationSupportDirectory"]);
       PathProvider.temporaryDirectory = Convert.toString(r.data["temporaryDirectory"]);
@@ -25371,8 +25449,474 @@ export class PathProvider extends DartClass {
       PathProvider.externalStorageDirectory = Convert.toString(r.data["externalStorageDirectory"]);
     }
   }
+}
+//#endregion
+
+
+//#region ****** Sqlite ******
+interface SqliteBaseConfig {
+  dbName:string;
+}
+interface SqliteOpenConfig {
+  dbName:string;
+  version?:number;
+  configureSql?:string;
+  createSql?:string;
+  openSql?:string;
+  readOnly?:boolean;
+  singleInstance?:boolean;
+}
+interface SqliteSqlConfig {
+  dbName:string;
+  sql:string;
+}
+
+export class Sqlite extends DartClass {
+
+  static instance:Sqlite;
+
+  constructor() {
+      super();
+      //Mirror对象在构造函数创建 MirrorID
+      this.createMirrorID();
+
+      
+      //创建对应FLutter对象
+      this.createMirrorObj();
+  }
+
+  static getInstance() {
+      if (!this.instance) {
+        this.instance = new Sqlite();
+      }
+      return this.instance;
+    }
+  
+  /**
+   * 关闭数据库
+   * @param config config: 
+    {
+      dbName:string,
+    }
+   */
+  static async closeDB(config:SqliteBaseConfig) {
+    var v= await Sqlite.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sqlite.getInstance().mirrorID,
+        className: Sqlite.getInstance().className,
+        funcName: "closeDB",
+        args: config,
+      })
+    );
+    
+    return Convert.toResponseModel(v);
+  }
+
+  /**
+   * 删除数据库
+   * @param config config: 
+    {
+      dbName:string,
+    }
+   */
+  static async delDB(config:SqliteBaseConfig) {
+    var v= await Sqlite.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sqlite.getInstance().mirrorID,
+        className: Sqlite.getInstance().className,
+        funcName: "delDB",
+        args: config,
+      })
+    );
+    
+    return Convert.toResponseModel(v);
+  }
+
+  /**
+   * 数据库是否存在
+   * @param config config: 
+    {
+      dbName:string,
+    }
+   */
+  static async isDBExists(config:SqliteBaseConfig) {
+    var v= await Sqlite.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sqlite.getInstance().mirrorID,
+        className: Sqlite.getInstance().className,
+        funcName: "isDBExists",
+        args: config,
+      })
+    );
+    
+    return Convert.toResponseModel(v);
+  }
+
+  /**
+   * 获取数据库路径
+   * @param config config: 
+    {
+      dbName:string,
+    }
+   */
+  static async getDBPath(config:SqliteBaseConfig) {
+    var v= await Sqlite.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sqlite.getInstance().mirrorID,
+        className: Sqlite.getInstance().className,
+        funcName: "getDBPath",
+        args: config,
+      })
+    );
+    
+    return Convert.toResponseModel(v);  
+  }
+
+  /**
+   * 获取数据库路径
+   * @param config config: 
+    {
+      dbName:string, 
+      version?:number, 
+      configureSql?:string, 
+      createSql?:string, 
+      openSql?:string, 
+      readOnly?:boolean, 
+      singleInstance?:boolean, 
+    }
+   */
+  static async openDB(config:SqliteOpenConfig) {
+    var v= await Sqlite.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sqlite.getInstance().mirrorID,
+        className: Sqlite.getInstance().className,
+        funcName: "openDB",
+        args: config,
+      })
+    );
+    
+    return Convert.toResponseModel(v);
+  }
+
+  /**
+   * 执行SQL语句，返回是否成功
+   * @param config config: 
+    {
+      dbName:string, 
+      sql:string, 
+    }
+   */
+  static async execute(config:SqliteSqlConfig) {
+    var v= await Sqlite.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sqlite.getInstance().mirrorID,
+        className: Sqlite.getInstance().className,
+        funcName: "execute",
+        args: config,
+      })
+    );
+    
+    return Convert.toResponseModel(v);
+  }
+
+  /**
+   * 执行SQL语句(插入)，返回影响行数
+   * @param config config: 
+    {
+      dbName:string, 
+      sql:string, 
+    }
+   */
+  static async rawInsert(config:SqliteSqlConfig) {
+    var v= await Sqlite.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sqlite.getInstance().mirrorID,
+        className: Sqlite.getInstance().className,
+        funcName: "rawInsert",
+        args: config,
+      })
+    );
+    
+    return Convert.toResponseModel(v);
+  }
+
+   /**
+   * 执行SQL语句(删除))，返回影响行数
+   * @param config config: 
+    {
+      dbName:string, 
+      sql:string, 
+    }
+   */
+  static async rawDelete(config:SqliteSqlConfig) {
+    var v= await Sqlite.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sqlite.getInstance().mirrorID,
+        className: Sqlite.getInstance().className,
+        funcName: "rawDelete",
+        args: config,
+      })
+    );
+    
+    return Convert.toResponseModel(v);
+  }
+
+  /**
+   * 执行SQL语句(更新))，返回影响行数
+   * @param config config: 
+    {
+      dbName:string, 
+      sql:string, 
+    }
+   */
+  static async rawUpdate(config:SqliteSqlConfig) {
+    var v= await Sqlite.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sqlite.getInstance().mirrorID,
+        className: Sqlite.getInstance().className,
+        funcName: "rawDelete",
+        args: config,
+      })
+    );
+    
+    return Convert.toResponseModel(v);
+  }
+
+  /**
+   * 执行SQL语句(查询))，返回结果Array<Map<String, dynamic>>
+   * @param config config: 
+    {
+      dbName:string, 
+      sql:string, 
+    }
+   */
+  static async rawQuery(config:SqliteSqlConfig) {
+    var v= await Sqlite.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: Sqlite.getInstance().mirrorID,
+        className: Sqlite.getInstance().className,
+        funcName: "rawQuery",
+        args: config,
+      })
+    );
+    
+    return Convert.toResponseModel(v);
+  }
 
 }
 //#endregion
+
+//#region ****** PermissionHandler ******
+//****** Permission ******
+export enum Permission {
+  activityRecognition = "activityRecognition",
+  accessMediaLocation = "accessMediaLocation",
+  notification = "notification",
+  ignoreBatteryOptimizations = "ignoreBatteryOptimizations",
+  storage = "storage",
+  speech = "speech",
+  speecsmsh = "sms",
+  sensors = "sensors",
+  reminders = "reminders",
+  photos = "photos",
+  microphone = "microphone",
+  mediaLibrary = "mediaLibrary",
+  contacts = "contacts",
+  camera = "camera",
+  calendar = "calendar",
+  unknown = "unknown",
+}
+
+//****** PermissionWithService ******
+export enum PermissionWithService  {
+  location = "location",
+  locationAlways = "locationAlways",
+  locationWhenInUse = "locationWhenInUse",
+  phone = "phone",
+}
+
+export enum PermissionStatus{
+  undetermined,
+  granted,
+  denied,
+  restricted,
+  permanentlyDenied,
+}
+
+export class PermissionHandlerStatus{
+  status:PermissionStatus = PermissionStatus.undetermined;
+
+  constructor(statusString:string){
+    switch(statusString){
+      case "PermissionStatus.undetermined":
+        this.status=PermissionStatus.undetermined;
+        break;
+      case "PermissionStatus.restricted":
+        this.status=PermissionStatus.restricted;
+        break;
+      case "PermissionStatus.permanentlyDenied":
+        this.status=PermissionStatus.permanentlyDenied;
+        break;
+      case "PermissionStatus.granted":
+        this.status=PermissionStatus.granted;
+        break;
+      case "PermissionStatus.denied":
+        this.status=PermissionStatus.denied;
+        break;
+    }
+  }
+
+  isPermanentlyDenied(){
+    return this.status == PermissionStatus.permanentlyDenied;
+  }
+
+  isUndetermined(){
+    return this.status == PermissionStatus.undetermined;
+  }
+
+  isGranted(){
+    return this.status == PermissionStatus.granted;
+  }
+
+  isDenied(){
+    return this.status == PermissionStatus.denied;
+  }
+
+  isRestricted(){
+    return this.status == PermissionStatus.restricted;
+  }
+}
+
+export class PermissionHandler extends DartClass {
+
+  static instance:PermissionHandler;
+
+  constructor() {
+      super();
+      //Mirror对象在构造函数创建 MirrorID
+      this.createMirrorID();
+
+      
+      //创建对应FLutter对象
+      this.createMirrorObj();
+  }
+
+  static getInstance() {
+      if (!this.instance) {
+        this.instance = new PermissionHandler();
+      }
+      return this.instance;
+    }
   
 
+  static async isDenied(permission:Permission|PermissionWithService) {
+    var v= await PermissionHandler.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: PermissionHandler.getInstance().mirrorID,
+        className: PermissionHandler.getInstance().className,
+        funcName: "isDenied",
+        args: {"permission":permission},
+      })
+    );
+    return Convert.toResponseModel(v).flag;
+  }
+
+  static async isGranted(permission:Permission|PermissionWithService) {
+    var v= await PermissionHandler.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: PermissionHandler.getInstance().mirrorID,
+        className: PermissionHandler.getInstance().className,
+        funcName: "isGranted",
+        args: {"permission":permission},
+      })
+    );
+    return Convert.toResponseModel(v).flag;
+  }
+
+  static async getStatus(permission:Permission|PermissionWithService) {
+    var v= await PermissionHandler.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: PermissionHandler.getInstance().mirrorID,
+        className: PermissionHandler.getInstance().className,
+        funcName: "getStatus",
+        args: {"permission":permission},
+      })
+    );
+    var r = Convert.toResponseModel(v);
+    return new PermissionHandlerStatus(Convert.toString(r.data));
+  }
+
+  static async request(permission:Permission|PermissionWithService) {
+    var v= await PermissionHandler.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: PermissionHandler.getInstance().mirrorID,
+        className: PermissionHandler.getInstance().className,
+        funcName: "request",
+        args: {"permission":permission},
+      })
+    ); 
+    var r = Convert.toResponseModel(v);
+    return new PermissionHandlerStatus(Convert.toString(r.data));
+  }
+
+  static async isPermanentlyDenied(permission:Permission|PermissionWithService) {
+    var v= await PermissionHandler.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: PermissionHandler.getInstance().mirrorID,
+        className: PermissionHandler.getInstance().className,
+        funcName: "isPermanentlyDenied",
+        args: {"permission":permission},
+      })
+    );
+    return Convert.toResponseModel(v).flag;
+  }
+ 
+  static async isRestricted(permission:Permission|PermissionWithService) {
+    var v= await PermissionHandler.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: PermissionHandler.getInstance().mirrorID,
+        className: PermissionHandler.getInstance().className,
+        funcName: "isRestricted",
+        args: {"permission":permission},
+      })
+    );
+    return Convert.toResponseModel(v).flag;
+  }
+
+  static async isUndetermined(permission:Permission|PermissionWithService) {
+    var v= await PermissionHandler.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: PermissionHandler.getInstance().mirrorID,
+        className: PermissionHandler.getInstance().className,
+        funcName: "isUndetermined",
+        args: {"permission":permission},
+      })
+    );
+    return Convert.toResponseModel(v).flag;
+  }
+
+  static async shouldShowRequestRationale(permission:Permission|PermissionWithService) {
+    var v= await PermissionHandler.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: PermissionHandler.getInstance().mirrorID,
+        className: PermissionHandler.getInstance().className,
+        funcName: "shouldShowRequestRationale",
+        args: {"permission":permission},
+      })
+    );
+    return Convert.toResponseModel(v).flag;
+  }
+
+  static async serviceStatus(permission:PermissionWithService) {
+    var v= await PermissionHandler.getInstance().invokeMirrorObjWithCallback(
+      new JSCallConfig({
+        mirrorID: PermissionHandler.getInstance().mirrorID,
+        className: PermissionHandler.getInstance().className,
+        funcName: "serviceStatus",
+        args: {"permission":permission},
+      })
+    );
+    return Convert.toResponseModel(v).flag;
+  }
+}
+//#endregion

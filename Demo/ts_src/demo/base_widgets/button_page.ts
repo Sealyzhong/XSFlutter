@@ -1,51 +1,52 @@
 import { MySectionTitle } from "demo/widgets/section_title";
-import fs = require("flutter_sdk");
-export class MyButtonPage extends fs.StatelessWidget{
+import { AppBar, BuildContext, Colors, FlatButton, FloatingActionButton, Icon, IconButton, Icons, ListView, 
+  Log, RaisedButton, Scaffold, StatelessWidget,Text} from "flutter_sdk";
+export class MyButtonPage extends StatelessWidget{
    
-    build(context:fs.BuildContext) {
-        return new fs.Scaffold({
-            appBar: new fs.AppBar({
-              title: new fs.Text('Button',),
+    build(context:BuildContext) {
+        return new Scaffold({
+            appBar: new AppBar({
+              title: new Text('Button',),
             }),
-            body: new fs.ListView({
+            body: new ListView({
               children:[
                 new MySectionTitle("RaisedButton"),
-                new fs.RaisedButton({
-                  child:new fs.Text("普通按钮"),
+                new RaisedButton({
+                  child:new Text("普通按钮"),
                   onPressed:function () {
-                    fs.Log.log("Click");
+                    Log.log("Click");
                   },
                 }),
                 new MySectionTitle("失效Disable"),
-                new fs.RaisedButton({
-                  child:new fs.Text("Disable 按钮"),
+                new RaisedButton({
+                  child:new Text("Disable 按钮"),
                 }),
                 new MySectionTitle("FlatButton"),
-                new fs.FlatButton({
-                  child:new fs.Text("Flat 按钮"),
+                new FlatButton({
+                  child:new Text("Flat 按钮"),
                   onPressed:function(){
-                    fs.Log.log("Click");
+                    Log.log("Click");
                   }
                 }),
-                new fs.FlatButton({
-                  textColor:fs.Colors.black,
-                  child:new fs.Text("Flat 按钮"),
+                new FlatButton({
+                  textColor:Colors.black,
+                  child:new Text("Flat 按钮"),
                   onPressed:function(){
-                    fs.Log.log("Click");
+                    Log.log("Click");
                   }
                 }),
                 new MySectionTitle("Icon Button"),
-                new fs.IconButton({
-                  icon:new fs.Icon(fs.Icons.camera),
+                new IconButton({
+                  icon:new Icon(Icons.camera),
                   onPressed:function(){
-                    fs.Log.log("Click");
+                    Log.log("Click");
                   }
                 }),
                 new MySectionTitle("Floating Action Button"),
-                new fs.FloatingActionButton({
-                  child:new fs.Icon(fs.Icons.camera),
+                new FloatingActionButton({
+                  child:new Icon(Icons.camera),
                   onPressed:function(){
-                    fs.Log.log("Click");
+                    Log.log("Click");
                   }
                 }),
               ],

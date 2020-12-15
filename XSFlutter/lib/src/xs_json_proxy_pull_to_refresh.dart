@@ -151,7 +151,7 @@ class XSProxyRegisterHelperPullToRefreshSeries {
     m.addAll(XSProxyPullToRefreshWaterDropHeader.registerProxy());
     m.addAll(XSProxyPullToRefreshConfiguration.registerProxy());
     m.addAll(XSProxyPullToRefreshSmartRefresher.registerProxy());
-    m.addAll(XSProxyPullToPullToRefreshController.registerProxy());
+    m.addAll(XSProxyPullToRefreshController.registerProxy());
 
     return m;
   }
@@ -377,11 +377,11 @@ class XSProxyPullToRefreshSmartRefresher extends XSJsonObjProxy {
 }
 
 //****** PullToRefreshController ******
-class XSProxyPullToPullToRefreshController extends XSJsonObjProxy {
+class XSProxyPullToRefreshController extends XSJsonObjProxy {
   static Map<String, CreateJsonObjProxyFun> registerProxy() {
     final String regClassName = "PullToRefreshController";
     return {
-      regClassName: () => XSProxyPullToPullToRefreshController()..init(className: regClassName)
+      regClassName: () => XSProxyPullToRefreshController()..init(className: regClassName)
     };
   }
 

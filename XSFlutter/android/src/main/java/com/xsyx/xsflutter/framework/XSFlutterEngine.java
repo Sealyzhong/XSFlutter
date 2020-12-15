@@ -74,7 +74,13 @@ public class XSFlutterEngine {
         jsFlutterAppChannel.setMethodCallHandler(new MethodChannel.MethodCallHandler() {
             @Override
             public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
+                
+                //Log.i(TAG, methodCall.method.toString());
+
                 if (methodCall.method.equals("callNativeRunJSApp")) {
+
+                
+
                     String jsAppPath = methodCall.argument("jsAppPath");
                     String jsAppAssetsKey = methodCall.argument("jsAppAssetsKey");
                     List<String> jsAppSearchPathList = (List<String>) methodCall.argument("jsAppSearchPathList");
@@ -86,7 +92,7 @@ public class XSFlutterEngine {
                     Map param = methodCall.argument("param");
                     mJsEngine.callJSCallbackFunction(jsAppName, param);
                     result.success("success");
-                } else if (methodCall.method.equals("XSNativeLog")) {
+                } else if (methodCall.method.equals("mxLog")) {
                     Log.i(TAG, methodCall.arguments.toString());
                 }
             }
@@ -96,7 +102,7 @@ public class XSFlutterEngine {
         jsFlutterCommonBasicChannel.setMessageHandler(new BasicMessageChannel.MessageHandler<String>() {
             @Override
             public void onMessage(String message, BasicMessageChannel.Reply<String> reply) {
-                mJsEngine.jsExecutor.invokeJSValueWithString(XSJSExecutor.runtime, "mxfJSBridgeInvokeJSCommonChannel", message, new XSJSExecutor.InvokeJSValueCallback() {
+                mJsEngine.jsExecutor.invokeJSValueWithString(XSJSExecutor.runtime, "jsBridgeInvokeJSCommonChannel", message, new XSJSExecutor.InvokeJSValueCallback() {
                     @Override
                     public void onSuccess(Object value) {
                         reply.reply(value.toString());
@@ -161,7 +167,9 @@ public class XSFlutterEngine {
 
         currentApp = new XSFlutterApp();
         currentApp.initWithAppName(mContext, jsAppPath, jsAppPath, jsAppSearchPathList, this);
+        Log.i("1","-6");
         currentApp.runAppWithPageName();
+        Log.i("1","-7");
     }
 
     public void callFlutterReloadAppWithJSWidgetData(String widgetData) {

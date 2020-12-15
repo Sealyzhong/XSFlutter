@@ -6,7 +6,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:xsflutter/xsflutter.dart';
+import 'models/response_model.dart';
 import 'xs_js_flutter.dart';
 import 'xs_build_owner.dart';
 import 'xs_js_parse.dart';
@@ -131,7 +131,7 @@ class XSProxyDio extends XSJsonObjProxy {
 
   void callBackError(InvokeCallback callback, dynamic ex) {
     if (callback != null) {
-      callback(ResponseModel(isSuccess: false, data: ex.toString()));
+      callback(ResponseModel(flag: false, data: ex.toString()));
     }
   }
 
@@ -325,7 +325,7 @@ class XSProxyDio extends XSJsonObjProxy {
     }
 
     if (callback != null && response != null) {
-      callback(ResponseModel(isSuccess: true, data: {
+      callback(ResponseModel(flag: true, data: {
         "statusCode": response.statusCode,
         "statusMessage": response.statusMessage,
         //"headers": response.headers,

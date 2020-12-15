@@ -1,43 +1,46 @@
 import { MySectionTitle } from "demo/widgets/section_title";
-import fs = require("flutter_sdk");
-export class MyTextFieldPage extends fs.StatefulWidget{
+import { AppBar, BorderSide, BuildContext,  EdgeInsets,  Icon, Icons, InputBorder, InputDecoration, 
+    ListView, Padding, Scaffold, StatefulWidget,Text, TextField, TextInputFormatter, WidgetState } from "flutter_sdk";
+
+
+export class MyTextFieldPage extends StatefulWidget{
     createState() {
         return new _MyTextFieldPage(this);
     }
 }
 
-class _MyTextFieldPage extends fs.WidgetState{
-    build(context:fs.BuildContext) {
-        return new fs.Scaffold({
-            appBar:new fs.AppBar({
-                title:new fs.Text("Text Field"),
+class _MyTextFieldPage extends WidgetState{
+    build(context:BuildContext) {
+        return new Scaffold({
+            appBar:new AppBar({
+                title:new Text("Text Field"),
             }),
-            body:new fs.ListView({
+            body:new ListView({
                 children:[                    
                     new MySectionTitle("默认样式"),
-                    new fs.Padding({
-                        padding:fs.EdgeInsets.all(10),
-                        child:new fs.TextField({
-                            decoration:new  fs.InputDecoration(),
+                    new Padding({
+                        padding:EdgeInsets.all(10),
+                        child:new TextField({
+                            decoration:new  InputDecoration(),
                         }),
                     }),       
                     
                     new MySectionTitle("icon"),
-                    new fs.Padding({
-                        padding:fs.EdgeInsets.all(10),
-                        child:new fs.TextField({
-                            decoration: new fs.InputDecoration({
-                                icon:new fs.Icon(fs.Icons.person,),
-                                errorBorder:fs.InputBorder.none(),
-                                disabledBorder:fs.InputBorder.outline({
-                                    borderSide:new fs.BorderSide(),
+                    new Padding({
+                        padding:EdgeInsets.all(10),
+                        child:new TextField({
+                            decoration: new InputDecoration({
+                                icon:new Icon(Icons.person,),
+                                errorBorder:InputBorder.none(),
+                                disabledBorder:InputBorder.outline({
+                                    borderSide:new BorderSide(),
                                 }),
-                                enabledBorder:fs.InputBorder.underline(),
+                                enabledBorder:InputBorder.underline(),
                                 
                             }),
                             inputFormatters:[
-                                fs.TextInputFormatter.lengthLimiting(10),
-                                fs.TextInputFormatter.digitsOnly(),
+                                TextInputFormatter.lengthLimiting(10),
+                                TextInputFormatter.digitsOnly(),
                             ]
                         }),
                     }),  

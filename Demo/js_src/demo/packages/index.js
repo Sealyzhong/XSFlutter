@@ -16,6 +16,7 @@ const wakelock_page_1 = require("demo/packages/wakelock_page");
 const url_laucher_page_1 = require("demo/packages/url_laucher_page");
 const dio_page_1 = require("demo/packages/dio_page");
 const path_provider_page_1 = require("demo/packages/path_provider_page");
+const permission_page_1 = require("demo/packages/permission_page");
 class MyPackageIndex extends fs.StatelessWidget {
     constructor() {
         super(...arguments);
@@ -128,6 +129,19 @@ class MyPackageIndex extends fs.StatelessWidget {
                             fs.Navigator.push(context, new fs.MaterialPageRoute({
                                 builder: function (context) {
                                     return new path_provider_page_1.MyPathProviderPage();
+                                }
+                            }));
+                        }
+                    }),
+                    new fs.ListTile({
+                        leading: new fs.Text("9", { style: this._style }),
+                        trailing: new fs.Icon(fs.Icons.chevron_right),
+                        title: new fs.Text("Permission Handler"),
+                        subtitle: new fs.Text("权限管理"),
+                        onTap: function () {
+                            fs.Navigator.push(context, new fs.MaterialPageRoute({
+                                builder: function (context) {
+                                    return new permission_page_1.MyPermissionPage();
                                 }
                             }));
                         }

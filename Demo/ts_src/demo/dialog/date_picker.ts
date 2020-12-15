@@ -34,7 +34,7 @@ class _MyDatePickerPageState extends fs.WidgetState{
                         subtitle:new fs.Text("返回值："+moment(this.selectDate).format("YYYY-MM-DD")),
                         onTap: async ()=>{       
                           var v = await fs.Dialog.show(this.widget,new fs.ShowDatePicker({initialDate:moment(this.selectDate).unix()}));    
-                          if(v!=null && v!=undefined && v.isSuccess){
+                          if(v!=null && v!=undefined && v.flag){
                              this.selectDate = moment(fs.Convert.toNumber(v.data)).toDate();
                              fs.Log.log(moment(this.selectDate).format("YYYY-MM-DD"));
                              this.setState();                         
@@ -48,7 +48,7 @@ class _MyDatePickerPageState extends fs.WidgetState{
                         subtitle:new fs.Text("返回值："+moment(this.selectDate).format("YYYY-MM-DD")),
                         onTap: async ()=>{       
                           var v = await fs.Dialog.show(this.widget,new fs.ShowDatePicker({initialDate:moment(this.selectDate).unix(),themeData:fs.ThemeData.dark()}));     
-                          if(v!=null && v!=undefined && v.isSuccess){
+                          if(v!=null && v!=undefined && v.flag){
                              this.selectDate = moment(fs.Convert.toNumber(v.data)).toDate();
                              fs.Log.log(moment(this.selectDate).format("YYYY-MM-DD"));
                              this.setState();                         

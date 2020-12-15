@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const home_page_1 = require("demo/home_page");
+//import * as fs from "flutter_sdk";
 const fs = require("flutter_sdk");
 //import homeWidget = require("demo/home_page");
 class MyApp extends fs.JSFlutterApp {

@@ -5,6 +5,15 @@
  * @ModifyDate: 2020/11/11
  * @Description: 入口页
  */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MySharedPreferncesPage = void 0;
 const fs = require("flutter_sdk");
@@ -30,9 +39,11 @@ class _MySharedPreferncesPage extends fs.WidgetState {
         var isSuccess = fs.Sp.setInt({ key: this._userNumber, value: this._count });
         fs.Loading.showSuccess({ info: isSuccess ? "保存成功！" : "保存失败" });
     }
-    async _getValue() {
-        this._getCount = await fs.Sp.getInt({ key: this._userNumber, defaultValue: 0 });
-        this.setState();
+    _getValue() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this._getCount = yield fs.Sp.getInt({ key: this._userNumber, defaultValue: 0 });
+            this.setState();
+        });
     }
     build(context) {
         return new fs.Scaffold({

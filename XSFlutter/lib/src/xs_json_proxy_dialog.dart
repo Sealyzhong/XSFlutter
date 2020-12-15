@@ -6,14 +6,14 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xsflutter/src/alert/custom_alert_dialog.dart';
-import 'package:xsflutter/src/widgets/popup_menu.dart';
-import 'package:xsflutter/xsflutter.dart';
+import 'alert/custom_alert_dialog.dart';
 import 'alert/simple_cupertino_dialog.dart';
 import 'alert/simple_alert_dialog.dart';
 import 'loading/loading.dart';
+import 'models/response_model.dart';
 import 'sheet/custom_action_sheet.dart';
 import 'sheet/simple_action_sheet.dart';
+import 'widgets/popup_menu.dart';
 import 'xs_js_flutter.dart';
 import 'xs_build_owner.dart';
 import 'xs_js_parse.dart';
@@ -568,7 +568,7 @@ class XSProxyDialog extends XSJsonObjProxy {
                 return child;
               });
           if (r != null) {
-            result = ResponseModel(isSuccess: true, data: r.millisecondsSinceEpoch);
+            result = ResponseModel(flag: true, data: r.millisecondsSinceEpoch);
           }
         }
         break;

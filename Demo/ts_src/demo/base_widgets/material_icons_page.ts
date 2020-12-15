@@ -1,21 +1,23 @@
 import { MyIconData } from "demo/model/icon_data";
-import fs = require("flutter_sdk");
+import { AppBar, BuildContext,  Container, EdgeInsets, Expanded, Icon,
+     ListView, Row, Scaffold, SizedBox, StatelessWidget,Text, TextOverflow, TextStyle, Widget } from "flutter_sdk";
 
-export class MyMaterialIconsPage extends fs.StatelessWidget{
+
+export class MyMaterialIconsPage extends StatelessWidget{
 
 
 
     getWidgetList(){
-        var list = new Array<fs.Widget>();
+        var list = new Array<Widget>();
         MyIconData.icons.forEach((model)=>{
-            list.push( new fs.Container({
-                padding:fs.EdgeInsets.all(10),
-                child:new fs.Row({
+            list.push( new Container({
+                padding:EdgeInsets.all(10),
+                child:new Row({
                   children: [
-                    new fs.Icon(model.value),
-                    new fs.SizedBox({width:10}),
-                    new fs.Expanded({
-                        child:new fs.Text(model.name,{overflow:fs.TextOverflow.ellipsis, style:new fs.TextStyle({fontSize:16})},),
+                    new Icon(model.value),
+                    new SizedBox({width:10}),
+                    new Expanded({
+                        child:new Text(model.name,{overflow:TextOverflow.ellipsis, style:new TextStyle({fontSize:16})},),
                     }),
                   ]
                 }),
@@ -24,12 +26,12 @@ export class MyMaterialIconsPage extends fs.StatelessWidget{
         return list;
     }
     //重构
-    build(context:fs.BuildContext) {
-        return new fs.Scaffold({
-            appBar:new fs.AppBar({
-                title:new fs.Text("Material Icons")
+    build(context:BuildContext) {
+        return new Scaffold({
+            appBar:new AppBar({
+                title:new Text("Material Icons")
             }),
-            body:new fs.ListView({
+            body:new ListView({
                 children:this.getWidgetList()
             }),
         });

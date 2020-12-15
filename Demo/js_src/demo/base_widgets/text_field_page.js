@@ -2,43 +2,43 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyTextFieldPage = void 0;
 const section_title_1 = require("demo/widgets/section_title");
-const fs = require("flutter_sdk");
-class MyTextFieldPage extends fs.StatefulWidget {
+const flutter_sdk_1 = require("flutter_sdk");
+class MyTextFieldPage extends flutter_sdk_1.StatefulWidget {
     createState() {
         return new _MyTextFieldPage(this);
     }
 }
 exports.MyTextFieldPage = MyTextFieldPage;
-class _MyTextFieldPage extends fs.WidgetState {
+class _MyTextFieldPage extends flutter_sdk_1.WidgetState {
     build(context) {
-        return new fs.Scaffold({
-            appBar: new fs.AppBar({
-                title: new fs.Text("Text Field"),
+        return new flutter_sdk_1.Scaffold({
+            appBar: new flutter_sdk_1.AppBar({
+                title: new flutter_sdk_1.Text("Text Field"),
             }),
-            body: new fs.ListView({
+            body: new flutter_sdk_1.ListView({
                 children: [
                     new section_title_1.MySectionTitle("默认样式"),
-                    new fs.Padding({
-                        padding: fs.EdgeInsets.all(10),
-                        child: new fs.TextField({
-                            decoration: new fs.InputDecoration(),
+                    new flutter_sdk_1.Padding({
+                        padding: flutter_sdk_1.EdgeInsets.all(10),
+                        child: new flutter_sdk_1.TextField({
+                            decoration: new flutter_sdk_1.InputDecoration(),
                         }),
                     }),
                     new section_title_1.MySectionTitle("icon"),
-                    new fs.Padding({
-                        padding: fs.EdgeInsets.all(10),
-                        child: new fs.TextField({
-                            decoration: new fs.InputDecoration({
-                                icon: new fs.Icon(fs.Icons.person),
-                                errorBorder: fs.InputBorder.none(),
-                                disabledBorder: fs.InputBorder.outline({
-                                    borderSide: new fs.BorderSide(),
+                    new flutter_sdk_1.Padding({
+                        padding: flutter_sdk_1.EdgeInsets.all(10),
+                        child: new flutter_sdk_1.TextField({
+                            decoration: new flutter_sdk_1.InputDecoration({
+                                icon: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.person),
+                                errorBorder: flutter_sdk_1.InputBorder.none(),
+                                disabledBorder: flutter_sdk_1.InputBorder.outline({
+                                    borderSide: new flutter_sdk_1.BorderSide(),
                                 }),
-                                enabledBorder: fs.InputBorder.underline(),
+                                enabledBorder: flutter_sdk_1.InputBorder.underline(),
                             }),
                             inputFormatters: [
-                                fs.TextInputFormatter.lengthLimiting(10),
-                                fs.TextInputFormatter.digitsOnly(),
+                                flutter_sdk_1.TextInputFormatter.lengthLimiting(10),
+                                flutter_sdk_1.TextInputFormatter.digitsOnly(),
                             ]
                         }),
                     }),

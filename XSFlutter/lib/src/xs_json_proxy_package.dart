@@ -7,7 +7,11 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
-import 'package:xsflutter/xsflutter.dart';
+
+import 'common/screen_info.dart';
+import 'common/sqlite_util.dart';
+import 'models/response_model.dart';
+import 'xs_build_owner.dart';
 import 'xs_js_parse.dart';
 import 'xs_json_to_dart.dart';
 import 'loading/loading.dart';
@@ -15,6 +19,7 @@ import 'common/sp_util.dart';
 import 'common/package_info.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 ///把Widget初始化用到的基础类型如 List, ，
 class XSProxyRegisterHelperPackageSeries {
@@ -29,6 +34,7 @@ class XSProxyRegisterHelperPackageSeries {
     m.addAll(XSProxyUrlLauncher.registerProxy());
     m.addAll(XSProxyUuid.registerProxy());
     m.addAll(XSProxyPathProvider.registerProxy());
+    m.addAll(XSProxyPermissionHandler.registerProxy());
     return m;
   }
 }
@@ -111,64 +117,76 @@ class XSProxySp extends XSJsonObjProxy {
   @override
   void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
     if (mirrorObj == null) return;
-    var result;
+    ResponseModel result;
     switch (funcName) {
       case 'getBool':
-        result = XSSpUtil.getBool(
-          XSJSParse.getString(null, null, map, "key"),
-          defaultValue: XSJSParse.getBool(null, null, map, "defaultValue"),
-        );
+        result = ResponseModel(
+            flag: true,
+            data: XSSpUtil.getBool(
+              XSJSParse.getString(null, null, map, "key"),
+              defaultValue: XSJSParse.getBool(null, null, map, "defaultValue"),
+            ));
         break;
       case 'getDouble':
-        result = XSSpUtil.getDouble(
-          XSJSParse.getString(null, null, map, "key"),
-          defaultValue: XSJSParse.getDouble(null, null, map, "defaultValue"),
-        );
+        result = ResponseModel(
+            flag: true,
+            data: XSSpUtil.getDouble(
+              XSJSParse.getString(null, null, map, "key"),
+              defaultValue: XSJSParse.getDouble(null, null, map, "defaultValue"),
+            ));
         break;
       case 'getInt':
-        result = XSSpUtil.getInt(
-          XSJSParse.getString(null, null, map, "key"),
-          defaultValue: XSJSParse.getInt(null, null, map, "defaultValue"),
-        );
+        result = ResponseModel(
+            flag: true,
+            data: XSSpUtil.getInt(
+              XSJSParse.getString(null, null, map, "key"),
+              defaultValue: XSJSParse.getInt(null, null, map, "defaultValue"),
+            ));
         break;
       case 'getString':
-        result = XSSpUtil.getString(
-          XSJSParse.getString(null, null, map, "key"),
-          defaultValue: XSJSParse.getString(null, null, map, "defaultValue"),
-        );
+        result = ResponseModel(
+            flag: true,
+            data: XSSpUtil.getString(
+              XSJSParse.getString(null, null, map, "key"),
+              defaultValue: XSJSParse.getString(null, null, map, "defaultValue"),
+            ));
         break;
 
       case 'clear':
-        result = await XSSpUtil.clear();
+        result = ResponseModel(flag: await XSSpUtil.clear());
         break;
       case 'remove':
-        result = await XSSpUtil.remove(XSJSParse.getString(null, null, map, "key"));
+        result = ResponseModel(flag: await XSSpUtil.remove(XSJSParse.getString(null, null, map, "key")));
         break;
 
       case 'setBool':
-        result = await XSSpUtil.putBool(
+        result = ResponseModel(
+            flag: await XSSpUtil.putBool(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getBool(null, null, map, "value"),
-        );
+        ));
         break;
 
       case 'setDouble':
-        result = await XSSpUtil.putDouble(
+        result = ResponseModel(
+            flag: await XSSpUtil.putDouble(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getDouble(null, null, map, "value"),
-        );
+        ));
         break;
       case 'setInt':
-        result = await XSSpUtil.putInt(
+        result = ResponseModel(
+            flag: await XSSpUtil.putInt(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getInt(null, null, map, "value"),
-        );
+        ));
         break;
       case 'setString':
-        result = await XSSpUtil.putString(
+        result = ResponseModel(
+            flag: await XSSpUtil.putString(
           XSJSParse.getString(null, null, map, "key"),
           XSJSParse.getString(null, null, map, "value"),
-        );
+        ));
         break;
     }
 
@@ -198,7 +216,7 @@ class XSProxyScreenInfo extends XSJsonObjProxy {
     ResponseModel result;
     switch (funcName) {
       case 'updateInfo':
-        result = ResponseModel(isSuccess: true, data: {
+        result = ResponseModel(flag: true, data: {
           "appBarHeight": XSScreenInfo.appBarHeight,
           "bottomBarHeight": XSScreenInfo.bottomBarHeight,
           "dpRatio": XSScreenInfo.dpRatio,
@@ -246,7 +264,7 @@ class XSProxyPackageInfo extends XSJsonObjProxy {
     ResponseModel result;
     switch (funcName) {
       case 'updateInfo':
-        result = ResponseModel(isSuccess: true, data: {
+        result = ResponseModel(flag: true, data: {
           "appName": XSPackageInfo.appName,
           "buildNumber": XSPackageInfo.buildNumber,
           "packageName": XSPackageInfo.packageName,
@@ -282,15 +300,15 @@ class XSProxyWakelock extends XSJsonObjProxy {
     switch (funcName) {
       case 'disable':
         await Wakelock.disable();
-        result = ResponseModel(isSuccess: true, data: false);
+        result = ResponseModel(flag: true, data: false);
         break;
       case 'enable':
         await Wakelock.enable();
-        result = ResponseModel(isSuccess: true, data: true);
+        result = ResponseModel(flag: true, data: true);
         break;
       case 'isEnabled':
         var v = await Wakelock.enabled;
-        result = ResponseModel(isSuccess: true, data: v);
+        result = ResponseModel(flag: true, data: v);
         break;
     }
     if (callback != null && result != null) {
@@ -322,7 +340,7 @@ class XSProxyUrlLauncher extends XSJsonObjProxy {
         var urlString = XSJSParse.getString(null, null, map, "urlString");
         if (await canLaunch(urlString)) {
           result = ResponseModel(
-              isSuccess: await launch(
+              flag: await launch(
             urlString,
             forceSafariVC: XSJSParse.getBool(null, null, map, "forceSafariVC"),
             forceWebView: XSJSParse.getBool(null, null, map, "forceWebView"),
@@ -334,7 +352,7 @@ class XSProxyUrlLauncher extends XSJsonObjProxy {
             headers: toMapStringT(XSJSParse.getObject(null, null, map, "headers")),
           ));
         } else {
-          result = ResponseModel(isSuccess: false);
+          result = ResponseModel(flag: false);
         }
         break;
     }
@@ -366,19 +384,21 @@ class XSProxyUuid extends XSJsonObjProxy {
     }
 
     var uuid = mirrorObj as Uuid;
-    var result;
+    ResponseModel result;
     switch (funcName) {
       case 'v1':
-        result = uuid.v1();
+        result = ResponseModel(flag: true, data: uuid.v1());
         break;
       case 'v4':
-        result = uuid.v4();
+        result = ResponseModel(flag: true, data: uuid.v4());
         break;
       case 'v5':
-        result = uuid.v5(
-          XSJSParse.getString(null, null, map, "namespace"),
-          XSJSParse.getString(null, null, map, "v5Name"),
-        );
+        result = ResponseModel(
+            flag: true,
+            data: uuid.v5(
+              XSJSParse.getString(null, null, map, "namespace"),
+              XSJSParse.getString(null, null, map, "v5Name"),
+            ));
         break;
     }
 
@@ -461,7 +481,7 @@ class XSProxyPathProvider extends XSJsonObjProxy {
           } catch (e) {}
 
           result = ResponseModel(
-            isSuccess: true,
+            flag: true,
             data: {
               "temporaryDirectory": temporaryDirectory,
               "applicationSupportDirectory": applicationSupportDirectory,
@@ -471,6 +491,274 @@ class XSProxyPathProvider extends XSJsonObjProxy {
               "externalStorageDirectory": externalStorageDirectory,
             },
           );
+        }
+        break;
+    }
+
+    if (callback != null && result != null) {
+      callback(result);
+    }
+  }
+}
+
+//****** Sqlite ******
+class XSProxySqlite extends XSJsonObjProxy {
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "Sqlite";
+    return {
+      regClassName: () => XSProxySqlite()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Object constructor(dynamic bo, Map<String, dynamic> jsonMap, {dynamic context}) {
+    return Object();
+  }
+
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
+    if (mirrorObj == null) {
+      return;
+    }
+
+    ResponseModel result;
+    switch (funcName) {
+      case 'closeDB':
+        result = await SqliterUtil.getInstance().close(
+          XSJSParse.getString(null, null, map, "dbName"),
+        );
+        break;
+      case 'delDB':
+        result = await SqliterUtil.getInstance().deleteDatabase(
+          XSJSParse.getString(null, null, map, "dbName"),
+        );
+        break;
+      case 'isDBExists':
+        result = await SqliterUtil.getInstance().databaseExists(
+          XSJSParse.getString(null, null, map, "dbName"),
+        );
+        break;
+      case 'getDBPath':
+        result = await SqliterUtil.getInstance().databasePath(
+          XSJSParse.getString(null, null, map, "dbName"),
+        );
+        break;
+      case 'openDB':
+        result = await SqliterUtil.getInstance().openDatabase(
+          XSJSParse.getString(null, null, map, "dbName"),
+          version: XSJSParse.getInt(null, null, map, "version", defaultValue: 0),
+          configureSql: XSJSParse.getString(null, null, map, "configureSql"),
+          createSql: XSJSParse.getString(null, null, map, "createSql"),
+          openSql: XSJSParse.getString(null, null, map, "openSql"),
+          singleInstance: XSJSParse.getBool(null, null, map, "singleInstance", defaultValue: true),
+          readOnly: XSJSParse.getBool(null, null, map, "readOnly", defaultValue: false),
+        );
+        break;
+      case 'execute':
+        result = await SqliterUtil.getInstance().execute(
+          XSJSParse.getString(null, null, map, "dbName"),
+          XSJSParse.getString(null, null, map, "sql"),
+        );
+        break;
+      case 'rawInsert':
+        result = await SqliterUtil.getInstance().rawInsert(
+          XSJSParse.getString(null, null, map, "dbName"),
+          XSJSParse.getString(null, null, map, "sql"),
+        );
+        break;
+      case 'rawDelete':
+        result = await SqliterUtil.getInstance().rawDelete(
+          XSJSParse.getString(null, null, map, "dbName"),
+          XSJSParse.getString(null, null, map, "sql"),
+        );
+        break;
+      case 'rawQuery':
+        result = await SqliterUtil.getInstance().rawQuery(
+          XSJSParse.getString(null, null, map, "dbName"),
+          XSJSParse.getString(null, null, map, "sql"),
+        );
+        break;
+      case 'rawUpdate':
+        result = await SqliterUtil.getInstance().rawUpdate(
+          XSJSParse.getString(null, null, map, "dbName"),
+          XSJSParse.getString(null, null, map, "sql"),
+        );
+        break;
+    }
+
+    if (callback != null && result != null) {
+      callback(result);
+    }
+  }
+}
+
+//****** PermissionHandler ******
+
+class XSProxyPermissionHandler extends XSJsonObjProxy {
+  //****** ResponseType ******/
+  static Permission getPermission(BuildContext context, XSJsonBuildOwner bo, Map map, String key, {Permission defaultValue}) {
+    var v = XSJSParse.getString(context, bo, map, key);
+    if (v != null && v.isNotEmpty) {
+      switch (v) {
+        case 'accessMediaLocation':
+          return Permission.accessMediaLocation;
+        case 'activityRecognition':
+          return Permission.activityRecognition;
+        case 'calendar':
+          return Permission.calendar;
+        case 'camera':
+          return Permission.camera;
+        case 'contacts':
+          return Permission.contacts;
+        case 'ignoreBatteryOptimizations':
+          return Permission.ignoreBatteryOptimizations;
+        case 'mediaLibrary':
+          return Permission.mediaLibrary;
+        case 'microphone':
+          return Permission.microphone;
+        case 'notification':
+          return Permission.notification;
+        case 'photos':
+          return Permission.photos;
+        case 'reminders':
+          return Permission.reminders;
+        case 'sensors':
+          return Permission.sensors;
+        case 'sms':
+          return Permission.sms;
+        case 'speech':
+          return Permission.speech;
+        case 'storage':
+          return Permission.storage;
+        case 'unknown':
+          return Permission.unknown;
+        case 'location':
+          return Permission.location;
+        case 'locationAlways':
+          return Permission.locationAlways;
+        case 'locationWhenInUse':
+          return Permission.locationWhenInUse;
+        case 'phone':
+          return Permission.phone;
+      }
+    }
+    return defaultValue;
+  }
+
+  static Map<String, CreateJsonObjProxyFun> registerProxy() {
+    final String regClassName = "PermissionHandler";
+    return {
+      regClassName: () => XSProxyPermissionHandler()..init(className: regClassName)
+    };
+  }
+
+  @override
+  Object constructor(dynamic bo, Map<String, dynamic> jsonMap, {dynamic context}) {
+    return Object();
+  }
+
+  @override
+  void jsInvokeMirrorObjFunction(String mirrorID, dynamic mirrorObj, String funcName, Map map, {InvokeCallback callback}) async {
+    if (mirrorObj == null) return;
+    ResponseModel result;
+    switch (funcName) {
+      case 'getStatus':
+        var permission = XSProxyPermissionHandler.getPermission(null, null, map, "permission");
+        if (permission != null) {
+          var status = await permission.status;
+          var statusString = status.toString();
+          result = ResponseModel(flag: true, data: statusString);
+        } else {
+          result = ResponseModel(flag: false, info: "未知类型");
+        }
+        break;
+
+      case 'request':
+        var permission = XSProxyPermissionHandler.getPermission(null, null, map, "permission");
+        if (permission != null) {
+          var status = await permission.request();
+          var statusString = status.toString();
+          result = ResponseModel(flag: true, data: statusString);
+        } else {
+          result = ResponseModel(flag: false, info: "未知类型");
+        }
+        break;
+
+      case 'isDenied':
+        var permission = XSProxyPermissionHandler.getPermission(null, null, map, "permission");
+        if (permission != null) {
+          var status = await permission.isDenied;
+          result = ResponseModel(flag: status);
+        } else {
+          result = ResponseModel(flag: false);
+        }
+        break;
+
+      case 'isGranted':
+        var permission = XSProxyPermissionHandler.getPermission(null, null, map, "permission");
+        if (permission != null) {
+          var status = await permission.isGranted;
+          result = ResponseModel(flag: status);
+        } else {
+          result = ResponseModel(flag: false);
+        }
+        break;
+      case 'isPermanentlyDenied':
+        var permission = XSProxyPermissionHandler.getPermission(null, null, map, "permission");
+        if (permission != null) {
+          var status = await permission.isPermanentlyDenied;
+          result = ResponseModel(flag: status);
+        } else {
+          result = ResponseModel(flag: false);
+        }
+        break;
+
+      case 'isRestricted':
+        var permission = XSProxyPermissionHandler.getPermission(null, null, map, "permission");
+        if (permission != null) {
+          var status = await permission.isRestricted;
+          result = ResponseModel(flag: status);
+        } else {
+          result = ResponseModel(flag: false);
+        }
+        break;
+
+      case 'isUndetermined':
+        var permission = XSProxyPermissionHandler.getPermission(null, null, map, "permission");
+        if (permission != null) {
+          var status = await permission.isUndetermined;
+          result = ResponseModel(flag: status);
+        } else {
+          result = ResponseModel(flag: false);
+        }
+        break;
+
+      case 'shouldShowRequestRationale':
+        var permission = XSProxyPermissionHandler.getPermission(null, null, map, "permission");
+        if (permission != null) {
+          var shouldShowRequestRationale = await permission.shouldShowRequestRationale;
+          result = ResponseModel(flag: shouldShowRequestRationale);
+        } else {
+          result = ResponseModel(flag: false);
+        }
+        break;
+
+      case 'serviceStatus':
+        var permission = XSProxyPermissionHandler.getPermission(null, null, map, "permission");
+        if (permission != null) {
+          var serviceStatus = false;
+          if (permission == Permission.locationAlways) {
+            serviceStatus = await Permission.locationAlways.serviceStatus.isEnabled;
+          } else if (permission == Permission.locationWhenInUse) {
+            serviceStatus = await Permission.locationWhenInUse.serviceStatus.isEnabled;
+          } else if (permission == Permission.location) {
+            serviceStatus = await Permission.location.serviceStatus.isEnabled;
+          } else if (permission == Permission.phone) {
+            serviceStatus = await Permission.phone.serviceStatus.isEnabled;
+          }
+          result = ResponseModel(flag: serviceStatus);
+        } else {
+          result = ResponseModel(flag: false);
         }
         break;
     }

@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import io.flutter.Log;
 import io.flutter.plugin.common.BasicMessageChannel;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
@@ -192,18 +193,18 @@ public class XSFlutterApp {
                 XSNativeJSFlutterApp XSNativeJSFlutterApp = new XSNativeJSFlutterApp();
                 V8Object v8Object = new V8Object(XSJSExecutor.runtime);
                 XSJSExecutor.runtime.add("XSNativeJSFlutterApp", v8Object);
-                v8Object.registerJavaMethod(XSNativeJSFlutterApp, "setCurrentJSApp",
-                        "setCurrentJSApp", new Class<?>[]{V8Object.class});
-                v8Object.registerJavaMethod(XSNativeJSFlutterApp,
-                        "callFlutterReloadApp", "callFlutterReloadApp", new Class<?>[]{V8Object.class, String.class});
-                v8Object.registerJavaMethod(XSNativeJSFlutterApp,
-                        "callFlutterWidgetChannel", "callFlutterWidgetChannel", new Class<?>[]{String.class, String.class});
+                v8Object.registerJavaMethod(XSNativeJSFlutterApp, "setCurrentJSApp","setCurrentJSApp", new Class<?>[]{V8Object.class});
+                v8Object.registerJavaMethod(XSNativeJSFlutterApp, "callFlutterReloadApp", "callFlutterReloadApp", new Class<?>[]{V8Object.class, String.class});
+                v8Object.registerJavaMethod(XSNativeJSFlutterApp, "callFlutterWidgetChannel", "callFlutterWidgetChannel", new Class<?>[]{String.class, String.class});
+    
             }
         });
 
         jsExecutor.executeScriptPath(rootPath + "/main.js", new XSJSExecutor.ExecuteScriptCallback() {
+        //jsExecutor.executeScriptPath(rootPath + "/moment.js", new XSJSExecutor.ExecuteScriptCallback() {
             @Override
             public void onComplete(Object value) {
+                Log.i("3","-1");
                 jsExecutor.executeScript("main()", new XSJSExecutor.ExecuteScriptCallback() {
                     @Override
                     public void onComplete(Object value) {

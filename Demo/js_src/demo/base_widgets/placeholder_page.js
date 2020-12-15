@@ -1,42 +1,42 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyPlaceholderPage = void 0;
-const fs = require("flutter_sdk");
-class MyPlaceholderPage extends fs.StatelessWidget {
+const flutter_sdk_1 = require("flutter_sdk");
+class MyPlaceholderPage extends flutter_sdk_1.StatelessWidget {
     build(context) {
-        return new fs.Scaffold({
-            appBar: new fs.AppBar({
-                title: new fs.Text("Example - Placeholder"),
+        return new flutter_sdk_1.Scaffold({
+            appBar: new flutter_sdk_1.AppBar({
+                title: new flutter_sdk_1.Text("Example - Placeholder"),
             }),
-            body: new fs.ListView({
+            body: new flutter_sdk_1.ListView({
                 children: [
-                    new fs.ListTile({
-                        title: new fs.Text("默认占位符"),
+                    new flutter_sdk_1.ListTile({
+                        title: new flutter_sdk_1.Text("默认占位符"),
                     }),
-                    new fs.Placeholder({}),
-                    new fs.ListTile({
-                        title: new fs.Text("占位符换色"),
+                    new flutter_sdk_1.Placeholder({}),
+                    new flutter_sdk_1.ListTile({
+                        title: new flutter_sdk_1.Text("占位符换色"),
                     }),
-                    new fs.Placeholder({
+                    new flutter_sdk_1.Placeholder({
                         fallbackHeight: 100,
-                        color: fs.Colors.orange,
+                        color: flutter_sdk_1.Colors.orange,
                     }),
-                    new fs.ListTile({
-                        title: new fs.Text("占位符指定高度"),
+                    new flutter_sdk_1.ListTile({
+                        title: new flutter_sdk_1.Text("占位符指定高度"),
                     }),
-                    new fs.Placeholder({
+                    new flutter_sdk_1.Placeholder({
                         fallbackHeight: 100,
                         fallbackWidth: 100,
-                        color: fs.Colors.yellow,
+                        color: flutter_sdk_1.Colors.yellow,
                     }),
-                    new fs.ListTile({
-                        title: new fs.Text("占位符线条粗细"),
+                    new flutter_sdk_1.ListTile({
+                        title: new flutter_sdk_1.Text("占位符线条粗细"),
                     }),
-                    new fs.Placeholder({
+                    new flutter_sdk_1.Placeholder({
                         fallbackHeight: 100,
                         fallbackWidth: 100,
                         strokeWidth: 4,
-                        color: fs.Colors.green,
+                        color: flutter_sdk_1.Colors.green,
                     }),
                 ],
             }),

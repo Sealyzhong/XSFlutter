@@ -119,6 +119,7 @@ public class XSJSExecutor {
 
     //global js runtime
     public void executeScriptPath(final String path, ExecuteScriptCallback callback) {
+
         executor.execute(new XSJsTask() {
             @Override
             public void excute() {

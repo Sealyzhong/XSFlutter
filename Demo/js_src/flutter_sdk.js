@@ -5,8 +5,17 @@
  * @ModifyDate: 2020/11/11
  * @Description: JS Flutter SDK
  */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PathProvider = exports.EasyRefresher = exports.EasyRefreshController = exports.EasyRefreshMaterialFooter = exports.EasyRefreshClassicalFooter = exports.EasyRefreshFooter = exports.EasyRefreshMaterialHeader = exports.EasyRefreshClassicalHeader = exports.EasyRefreshHeader = exports.CachedNetworkImage = exports.PullToRefreshRefresher = exports.PullToRefreshController = exports.PullToRefreshConfiguration = exports.PullToRefreshClassicFooter = exports.PullToRefreshFooter = exports.PullToRefreshWaterDropMaterialHeader = exports.PullToRefreshMaterialClassicHeader = exports.PullToRefreshWaterDropHeader = exports.PullToRefreshClassicHeader = exports.PullToRefreshHeader = exports.PullToRefreshLoadStyle = exports.PullToRefreshIconPosition = exports.PullToRefreshLoadStatus = exports.PullToRefreshStatus = exports.PullToRefreshStyle = exports.Dio = exports.DioOptions = exports.DioBaseOptions = exports.DioResponseType = exports.UrlLauncher = exports.FocusScope = exports.Uuid = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.Sp = exports.Loading = exports.Dialog = exports.ShowDatePicker = exports.CustomPopupMenuItem = exports.ShowCustomPopupMenu = exports.ShowSimpleActionSheet = exports.ShowCustomActionSheet = exports.ShowSimpleCupertinoDialog = exports.ShowSimpleAlertDialog = exports.ShowSimpleCustomDialog = exports.SimpleCustomDialogButtonInfo = exports.ShowCustomAlertDialog = exports.CustomAlertDialogStyle = exports.CustomAlertDialogButton = exports.CustomAlertDialogAnimationType = exports.SimpleDialogButtonInfo = exports.CupertinoActionSheetAction = exports.CupertinoActionSheet = exports.ShowCupertinoModalPopup = exports.BottomSheet = exports.ShowModalBottomSheet = exports.ShowGeneralDialog = exports.CupertinoAlertDialog = exports.ShowCupertinoDialog = exports.SimpleDialog = exports.AlertDialog = exports.ShowDialog = exports.ShowBaseDialog = exports.EmptyDataWidget = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabView = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSlidingSegmentedControl = exports.CupertinoSegmentedControl = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoDialogAction = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SelectableText = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverOpacity = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverChildDelegate = exports.SliverGridDelegateWithFixedCrossAxisCount = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGridDelegate = exports.SliverGrid = exports.SliverPadding = exports.SliverFillRemaining = exports.SliverFillViewport = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.Stepper = exports.Step = exports.RichText = exports.RawMaterialButton = exports.RadioListTile = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.RawChip = exports.Row = exports.PageView = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LabelTitle = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.IconSpan = exports.InputChip = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GridView = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.FilterChip = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.ConstrainedBox = exports.ClipRRect = exports.ClipOval = exports.ClipRect = exports.CheckboxEx = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.ChoiceChip = exports.Center = exports.Container = exports.CloseButton = exports.ColorFiltered = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.Animation = exports.AnimationController = exports.ActionChip = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.ThemeData = exports.DataTableThemeData = exports.TextSelectionThemeData = exports.TimePickerThemeData = exports.BottomNavigationBarThemeData = exports.ButtonBarThemeData = exports.DividerThemeData = exports.MaterialBannerThemeData = exports.PopupMenuThemeData = exports.BottomSheetThemeData = exports.SnackBarThemeData = exports.CupertinoThemeData = exports.NavigationRailThemeData = exports.FloatingActionButtonThemeData = exports.DialogTheme = exports.BottomAppBarTheme = exports.AppBarTheme = exports.ChipThemeData = exports.CardTheme = exports.TooltipThemeData = exports.TabBarTheme = exports.SliderThemeData = exports.IconThemeData = exports.InputDecorationTheme = exports.TextTheme = exports.ToggleButtonsThemeData = exports.ButtonThemeData = exports.ColorScheme = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.PageScrollPhysics = exports.FixedExtentScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.PageController = exports.Offset = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.BindKey = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.ImageFilter = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.ScrollViewKeyboardDismissBehavior = exports.ShowValueIndicator = exports.SnackBarBehavior = exports.StepperType = exports.StepState = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationRailLabelType = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DatePickerEntryMode = exports.DatePickerMode = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
+exports.PermissionHandler = exports.PermissionHandlerStatus = exports.PermissionStatus = exports.PermissionWithService = exports.Permission = exports.Sqlite = exports.PathProvider = exports.EasyRefresher = exports.EasyRefreshController = exports.EasyRefreshMaterialFooter = exports.EasyRefreshClassicalFooter = exports.EasyRefreshFooter = exports.EasyRefreshMaterialHeader = exports.EasyRefreshClassicalHeader = exports.EasyRefreshHeader = exports.CachedNetworkImage = exports.PullToRefreshRefresher = exports.PullToRefreshController = exports.PullToRefreshConfiguration = exports.PullToRefreshClassicFooter = exports.PullToRefreshFooter = exports.PullToRefreshWaterDropMaterialHeader = exports.PullToRefreshMaterialClassicHeader = exports.PullToRefreshWaterDropHeader = exports.PullToRefreshClassicHeader = exports.PullToRefreshHeader = exports.PullToRefreshLoadStyle = exports.PullToRefreshIconPosition = exports.PullToRefreshLoadStatus = exports.PullToRefreshStatus = exports.PullToRefreshStyle = exports.Dio = exports.DioOptions = exports.DioBaseOptions = exports.DioResponseType = exports.UrlLauncher = exports.FocusScope = exports.Uuid = exports.Wakelock = exports.PackageInfo = exports.ScreenInfo = exports.Sp = exports.Loading = exports.Dialog = exports.ShowDatePicker = exports.CustomPopupMenuItem = exports.ShowCustomPopupMenu = exports.ShowSimpleActionSheet = exports.ShowCustomActionSheet = exports.ShowSimpleCupertinoDialog = exports.ShowSimpleAlertDialog = exports.ShowSimpleCustomDialog = exports.SimpleCustomDialogButtonInfo = exports.ShowCustomAlertDialog = exports.CustomAlertDialogStyle = exports.CustomAlertDialogButton = exports.CustomAlertDialogAnimationType = exports.SimpleDialogButtonInfo = exports.CupertinoActionSheetAction = exports.CupertinoActionSheet = exports.ShowCupertinoModalPopup = exports.BottomSheet = exports.ShowModalBottomSheet = exports.ShowGeneralDialog = exports.CupertinoAlertDialog = exports.ShowCupertinoDialog = exports.SimpleDialog = exports.AlertDialog = exports.ShowDialog = exports.ShowBaseDialog = exports.EmptyDataWidget = exports.CupertinoTextThemeData = exports.CupertinoTheme = exports.CupertinoTabView = exports.CupertinoTabController = exports.CupertinoTabBar = exports.TestWidget = exports.CupertinoSliverNavigationBar = exports.CupertinoScrollbar = exports.CupertinoSlidingSegmentedControl = exports.CupertinoSegmentedControl = exports.CupertinoSwitch = exports.CupertinoSlider = exports.CupertinoNavigationBarBackButton = exports.CupertinoNavigationBar = exports.CupertinoDialogAction = exports.CupertinoButton = exports.CupertinoActivityIndicator = exports.WidgetSpan = exports.WillPopScope = exports.Wrap = exports.Visibility = exports.VerticalDivider = exports.UnconstrainedBox = exports.TextField = exports.TextFormField = exports.Texture = exports.TextSpan = exports.Text = exports.Title = exports.TabPageSelector = exports.TabPageSelectorIndicator = exports.TabBarView = exports.Tab = exports.TabBar = exports.Table = exports.Tooltip = exports.Transform = exports.TableCell = exports.TableRow = exports.SelectableText = exports.SliverVisibility = exports.SnackBarAction = exports.SnackBar = exports.Scrollbar = exports.SliverSafeArea = exports.SafeArea = exports.ScaffoldState = exports.Scaffold = exports.SliverToBoxAdapter = exports.SingleChildScrollView = exports.SliverOverlapAbsorber = exports.SliverFixedExtentList = exports.SliverOverlapInjector = exports.SliverOpacity = exports.SliverList = exports.SliverChildBuilderDelegate = exports.SliverChildListDelegate = exports.SliverChildDelegate = exports.SliverGridDelegateWithFixedCrossAxisCount = exports.SliverGridDelegateWithMaxCrossAxisExtent = exports.SliverGridDelegate = exports.SliverGrid = exports.SliverPadding = exports.SliverFillRemaining = exports.SliverFillViewport = exports.SliverAppBar = exports.Stack = exports.SizedOverflowBox = exports.SizedBox = exports.Slider = exports.Switch = exports.SwitchListTile = exports.Semantics = exports.Spacer = exports.Stepper = exports.Step = exports.RichText = exports.RawMaterialButton = exports.RadioListTile = exports.Radio = exports.RaisedButton = exports.RotatedBox = exports.RawImage = exports.RepaintBoundary = exports.RawChip = exports.Row = exports.PageView = exports.PopupMenuItem = exports.PopupMenuButton = exports.Placeholder = exports.PreferredSizeWidget = exports.PreferredSize = exports.PositionedDirectional = exports.Positioned = exports.PhysicalModel = exports.Padding = exports.OutlineButton = exports.OverflowBox = exports.Offstage = exports.Opacity = exports.Navigator = exports.NestedScrollView = exports.NotificationListener = exports.MaterialBanner = exports.MaterialPageRoute = exports.Material = exports.LayoutBuilder = exports.ListView = exports.ListTile = exports.ListBody = exports.LimitedBox = exports.LabelTitle = exports.KeyedSubtree = exports.Image = exports.InkWell = exports.InkResponse = exports.ImageIcon = exports.Icon = exports.IconButton = exports.IgnorePointer = exports.IndexedStack = exports.IntrinsicWidth = exports.IntrinsicHeight = exports.IndexedSemantics = exports.IconSpan = exports.InputChip = exports.InputDecorator = exports.GridPaper = exports.GridTile = exports.GridTileBar = exports.GridView = exports.GestureDetector = exports.FractionalTranslation = exports.FlutterLogo = exports.FlexibleSpaceBarSettings = exports.FlexibleSpaceBar = exports.FloatingActionButton = exports.FlatButton = exports.Flow = exports.Flex = exports.FractionallySizedBox = exports.FittedBox = exports.FilterChip = exports.Flexible = exports.ExpansionTile = exports.ExpandIcon = exports.Expanded = exports.ExcludeSemantics = exports.DecoratedBoxTransition = exports.DefaultTextStyle = exports.DecorationImage = exports.DefaultTabController = exports.DropdownButton = exports.DecoratedBox = exports.DropdownMenuItem = exports.Directionality = exports.Drawer = exports.DrawerHeader = exports.Divider = exports.Card = exports.CustomScrollView = exports.CustomMultiChildLayout = exports.Column = exports.ConstrainedBox = exports.ClipRRect = exports.ClipOval = exports.ClipRect = exports.CheckboxEx = exports.Checkbox = exports.CheckboxListTile = exports.CheckedModeBanner = exports.Chip = exports.CircleAvatar = exports.ColoredBox = exports.ChoiceChip = exports.Center = exports.Container = exports.CloseButton = exports.ColorFiltered = exports.Builder = exports.BackButton = exports.BackButtonIcon = exports.BottomNavigationBar = exports.BottomAppBar = exports.BlockSemantics = exports.ButtonBar = exports.Baseline = exports.Banner = exports.BottomNavigationBarItem = exports.AnimatedDefaultTextStyle = exports.AnimatedSize = exports.AnimatedPositioned = exports.AnimatedPhysicalModel = exports.AnimatedContainer = exports.AnimatedBuilder = exports.AnimatedOpacity = exports.AnimatedCrossFade = exports.AnnotatedRegion = exports.AspectRatio = exports.Align = exports.AppBar = exports.Animation = exports.AnimationController = exports.ActionChip = exports.AbsorbPointer = exports.CupertinoIcons = exports.Icons = exports.ThemeData = exports.DataTableThemeData = exports.TextSelectionThemeData = exports.TimePickerThemeData = exports.BottomNavigationBarThemeData = exports.ButtonBarThemeData = exports.DividerThemeData = exports.MaterialBannerThemeData = exports.PopupMenuThemeData = exports.BottomSheetThemeData = exports.SnackBarThemeData = exports.CupertinoThemeData = exports.NavigationRailThemeData = exports.FloatingActionButtonThemeData = exports.DialogTheme = exports.BottomAppBarTheme = exports.AppBarTheme = exports.ChipThemeData = exports.CardTheme = exports.TooltipThemeData = exports.TabBarTheme = exports.SliderThemeData = exports.IconThemeData = exports.InputDecorationTheme = exports.TextTheme = exports.ToggleButtonsThemeData = exports.ButtonThemeData = exports.ColorScheme = exports.Velocity = exports.VisualDensity = exports.Vector4 = exports.Vector3 = exports.Uint8List = exports.Uri = exports.MaskTextInputFormatter = exports.FilteringTextInputFormatter = exports.LengthLimitingTextInputFormatter = exports.TextInputFormatter = exports.Tween = exports.TextInputType = exports.ToolbarOptions = exports.TextEditingController = exports.TabController = exports.MinColumnWidth = exports.MaxColumnWidth = exports.FlexColumnWidth = exports.FractionColumnWidth = exports.FixedColumnWidth = exports.IntrinsicColumnWidth = exports.TableColumnWidth = exports.TableBorder = exports.TextStyle = exports.TapUpDetails = exports.TapDownDetails = exports.TextAlignVertical = exports.OutlineInputBorder = exports.UnderlineInputBorder = exports.InputBorder = exports.StadiumBorder = exports.RoundedRectangleBorder = exports.ContinuousRectangleBorder = exports.BeveledRectangleBorder = exports.CircleBorder = exports.OutlinedBorder = exports.BorderDirectional = exports.Border = exports.BoxBorder = exports.ShapeBorder = exports.RangeMaintainingScrollPhysics = exports.NeverScrollableScrollPhysics = exports.ClampingScrollPhysics = exports.BouncingScrollPhysics = exports.PageScrollPhysics = exports.FixedExtentScrollPhysics = exports.AlwaysScrollableScrollPhysics = exports.ScrollPhysics = exports.ScrollbarPainter = exports.Shadow = exports.ScrollController = exports.SpringDescription = exports.SystemUiOverlayStyle = exports.StrutStyle = exports.Size = exports.ScaleEndDetails = exports.ScaleUpdateDetails = exports.ScaleStartDetails = exports.ImageShader = exports.Shader = exports.RSTransform = exports.RRect = exports.RelativeRect = exports.Rect = exports.RegExp = exports.Radius = exports.Quaternion = exports.PageController = exports.Offset = exports.AutomaticNotchedShape = exports.CircularNotchedRectangle = exports.NotchedShape = exports.Matrix4 = exports.MaskFilter = exports.BindKey = exports.GlobalKey = exports.UniqueKey = exports.ValueKey = exports.Key = exports.InputDecoration = exports.IconData = exports.ImageProvider = exports.ImageFilter = exports.SweepGradient = exports.RadialGradient = exports.LinearGradient = exports.Gradient = exports.GradientRotation = exports.GradientTransform = exports.File = exports.FractionalOffset = exports.FocusNode = exports.Future = exports.EdgeInsetsDirectional = exports.EdgeInsets = exports.EdgeInsetsGeometry = exports.FlutterLogoDecoration = exports.BoxDecoration = exports.Decoration = exports.Duration = exports.DragEndDetails = exports.DragUpdateDetails = exports.DragStartDetails = exports.DragDownDetails = exports.ColorFilter = exports.Colors = exports.Color = exports.BoxConstraints = exports.Constraints = exports.BoxShadow = exports.BannerPainter = exports.BorderRadiusDirectional = exports.BorderRadius = exports.BorderRadiusGeometry = exports.BorderSide = exports.NetworkAssetBundle = exports.PlatformAssetBundle = exports.AssetBundle = exports.AlignmentDirectional = exports.Alignment = exports.AlignmentGeometry = exports.WrapCrossAlignment = exports.WrapAlignment = exports.VerticalDirection = exports.TargetPlatform = exports.TabBarIndicatorSize = exports.TableCellVerticalAlignment = exports.TextInputAction = exports.TextCapitalization = exports.TextOverflow = exports.TextDecoration = exports.TextBaseline = exports.TextDecorationStyle = exports.TextDirection = exports.TextAlign = exports.TextWidthBasis = exports.SmartQuotesType = exports.SmartDashesType = exports.TileMode = exports.ScrollPositionAlignmentPolicy = exports.SnackBarClosedReason = exports.StretchMode = exports.StrokeJoin = exports.StrokeCap = exports.ScrollViewKeyboardDismissBehavior = exports.ShowValueIndicator = exports.SnackBarBehavior = exports.StepperType = exports.StepState = exports.StackFit = exports.RenderComparison = exports.PointerSignalKind = exports.PointerDeviceKind = exports.PointerChange = exports.PlaceholderAlignment = exports.PaintingStyle = exports.Overflow = exports.NavigationRailLabelType = exports.NavigationMode = exports.MaterialType = exports.MaterialTapTargetSize = exports.MainAxisSize = exports.MainAxisAlignment = exports.ListTileControlAffinity = exports.ListTileStyle = exports.ImageRepeat = exports.HitTestBehavior = exports.FloatingActionButtonLocation = exports.FilterQuality = exports.FontStyle = exports.FlexFit = exports.FontWeight = exports.FloatingLabelBehavior = exports.FlutterLogoStyle = exports.DrawerAlignment = exports.DecorationPosition = exports.DatePickerEntryMode = exports.DatePickerMode = exports.DragStartBehavior = exports.CrossFadeState = exports.CollapseMode = exports.Clip = exports.Curve = exports.CrossAxisAlignment = exports.BoxWidthStyle = exports.BoxHeightStyle = exports.ButtonBarLayoutBehavior = exports.ButtonTextTheme = exports.BoxShape = exports.BottomNavigationBarType = exports.BorderStyle = exports.BlurStyle = exports.Brightness = exports.BannerLocation = exports.BoxFit = exports.BlendMode = exports.AnimationBehavior = exports.AnimationStatus = exports.AxisDirection = exports.Axis = exports.WidgetState = exports.StatelessWidget = exports.StatefulWidget = exports.BaseWidget = exports.WidgetMgr = exports.WidgetTree = exports.WidgetHelper = exports.BuildContext = exports.JSCallbackMgr = exports.JSMethodCall = exports.Log = exports.JSFramework = exports.JSFlutterApp = exports.JSBridge = exports.Convert = exports.Widget = exports.DartClass = exports.JSCallConfig = exports.JSWidgetMirrorMgr = void 0;
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -136,10 +145,20 @@ class Convert extends core.Object {
         return Number(v);
     }
     static toString(v) {
+        if (v == null || v == undefined)
+            return "";
         if (typeof v == "string") {
             return v;
         }
         return String(v);
+    }
+    static toResponseModel(v) {
+        if (v != null && v != undefined) {
+            return JSON.parse(Convert.toString(v));
+        }
+        else {
+            return { flag: false, info: "undefined | null" };
+        }
     }
 }
 exports.Convert = Convert;
@@ -200,18 +219,19 @@ class JSBridge {
 }
 exports.JSBridge = JSBridge;
 // @ts-ignore：dart_sdk
-globalThis.mxfJSBridgeInvokeJSCommonChannel = function (messageStr) {
+globalThis.jsBridgeInvokeJSCommonChannel = function (messageStr) {
     JSBridge.onFlutterInvokeJSCommonChannel(messageStr);
 };
 //JSFlutterApp 基类，用于和Native交互
 //开发者需要继承XSFlutterApp，重载createJSWidgetWithName函数，根据WidgetName创建框架需要的Widget
 class JSFlutterApp {
     constructor(name, initialRoute) {
+        var _a;
         this.name = name;
         this.initialRoute = initialRoute;
         //App的rootWidget是个虚拟Widget，负责管理push的Widget或runAPP 的Widget
         this.rootWidget = new StatelessWidget({ name: "RootWidget" });
-        this.rootWidget.helper?.setupAsRootWidget();
+        (_a = this.rootWidget.helper) === null || _a === void 0 ? void 0 : _a.setupAsRootWidget();
     }
     run() {
         this.runWithName(this.initialRoute);
@@ -246,26 +266,28 @@ class JSFlutterApp {
     //创建XSJSWidget，调用build 创建jsonWidgetTree，调用Flutter runApp 重新加载Flutter根页面
     runApp(widget) {
         //这个接口暂时不完备，要在JS侧创建setInheritedInfo，参照navigatorPush
+        var _a, _b;
         let bc = new BuildContext(widget);
         widget.buildContext = bc;
-        this.rootWidget?.helper?.addChildWidget(widget);
+        (_b = (_a = this.rootWidget) === null || _a === void 0 ? void 0 : _a.helper) === null || _b === void 0 ? void 0 : _b.addChildWidget(widget);
         let app = this;
         this.buildRootWidget(widget);
     }
     ///JS侧入口API
     //当Flutter层 PageRoute(builder: (context) =>  被调用时，创建XSJSWidget，build后调用rebuild界面
     navigatorPush(widget, args) {
+        var _a;
         let bc = new BuildContext(widget);
         bc.setInheritedInfo(args);
         widget.buildContext = bc;
         if (widget != null && widget != undefined && widget != "") {
             WidgetMgr.getInstance().registerWidget(widget);
         }
-        this.rootWidget?.helper.addChildWidget(widget);
-        widget?.helper.callFlutterRebuild();
+        (_a = this.rootWidget) === null || _a === void 0 ? void 0 : _a.helper.addChildWidget(widget);
+        widget === null || widget === void 0 ? void 0 : widget.helper.callFlutterRebuild();
     }
     buildRootWidget(widget) {
-        Log.log("buildRootWidget ::" + widget?.getWidgetInfo());
+        Log.log("buildRootWidget ::" + (widget === null || widget === void 0 ? void 0 : widget.getWidgetInfo()));
         let widgetData = WidgetHelper.buildWidgetData(widget);
         JSFramework.callFlutterReloadApp(this, widgetData);
     }
@@ -293,7 +315,8 @@ class JSFlutterApp {
         }
     }
     flutterCallOnEventCallback(args) {
-        return this.rootWidget?.helper?.onEventCallback(args);
+        var _a, _b;
+        return (_b = (_a = this.rootWidget) === null || _a === void 0 ? void 0 : _a.helper) === null || _b === void 0 ? void 0 : _b.onEventCallback(args);
     }
     flutterCallNavigatorPushWithName(args) {
         let widgetName = args["widgetName"];
@@ -301,9 +324,11 @@ class JSFlutterApp {
         this.navigatorPushWithName(widgetName, widgetID, args);
     }
     flutterCallOnBuildEnd(args) {
-        this.rootWidget?.helper?.onBuildEnd(args);
+        var _a, _b;
+        (_b = (_a = this.rootWidget) === null || _a === void 0 ? void 0 : _a.helper) === null || _b === void 0 ? void 0 : _b.onBuildEnd(args);
     }
     flutterCallOnDispose(args) {
+        var _a;
         let widgetID = args["widgetID"];
         //移除Widget
         if (widgetID != null && widgetID != undefined) {
@@ -311,7 +336,7 @@ class JSFlutterApp {
         }
         if (this.rootWidget && this.rootWidget.widgetID == widgetID) {
         }
-        this.rootWidget?.helper.onDispose(args);
+        (_a = this.rootWidget) === null || _a === void 0 ? void 0 : _a.helper.onDispose(args);
         let mirrorObjIDList = args["mirrorObjIDList"];
         JSWidgetMirrorMgr.getInstance().removeMirrorObjects(mirrorObjIDList);
     }
@@ -430,8 +455,9 @@ class JSCallbackMgr {
         return String(d);
     }
     createCallbackID(callback) {
+        var _a;
         let callbackID = this.generateID();
-        this.callbackID2fun?.set(callbackID, callback);
+        (_a = this.callbackID2fun) === null || _a === void 0 ? void 0 : _a.set(callbackID, callback);
         return callbackID;
     }
     invokeCallback(callbackID, args) {
@@ -439,10 +465,12 @@ class JSCallbackMgr {
         callback(args);
     }
     findCallback(callbackID) {
-        return this.callbackID2fun?.get(callbackID);
+        var _a;
+        return (_a = this.callbackID2fun) === null || _a === void 0 ? void 0 : _a.get(callbackID);
     }
     removeCallback(callbackID) {
-        this.callbackID2fun?.delete(callbackID);
+        var _a;
+        (_a = this.callbackID2fun) === null || _a === void 0 ? void 0 : _a.delete(callbackID);
     }
 }
 exports.JSCallbackMgr = JSCallbackMgr;
@@ -456,7 +484,7 @@ class BuildContext {
     }
     static inheritBuildContext(widget, buildContext) {
         var context = new BuildContext(widget, buildContext);
-        context.inheritedInfo = buildContext?.inheritedInfo;
+        context.inheritedInfo = buildContext === null || buildContext === void 0 ? void 0 : buildContext.inheritedInfo;
         return context;
     }
     setInheritedInfo(args) {
@@ -470,13 +498,15 @@ class WidgetHelper {
         this.widget = widget;
     }
     setState(fun) {
-        this.widget.state?.setState(fun);
+        var _a;
+        (_a = this.widget.state) === null || _a === void 0 ? void 0 : _a.setState(fun);
     }
     //util api
     //building
     static buildWidgetData(jsWidget) {
         Log.log("buildWidgetData ::" + jsWidget.getWidgetInfo());
         let widgetDataStr = JSON.stringify(jsWidget, function (key, value) {
+            var _a, _b;
             let newValue = value;
             if (value instanceof StatefulWidget || value instanceof StatelessWidget) {
                 // 解决widget生成时不调用构造方法的问题
@@ -488,10 +518,10 @@ class WidgetHelper {
                     value.buildContext = BuildContext.inheritBuildContext(value, jsWidget.buildContext);
                     //TODO:FIXME addChildWidget逻辑，这里局部刷新，会有两份Widget数据，但功能正常
                     //Widget 的子Widget 没有层级关系，平铺在jsWidget
-                    jsWidget.helper?.addChildWidget(value);
+                    (_a = jsWidget.helper) === null || _a === void 0 ? void 0 : _a.addChildWidget(value);
                 }
                 //如果是JSWidget类需要调用一下build，返回build内容
-                newValue = value.helper?.buildWidgetTree();
+                newValue = (_b = value.helper) === null || _b === void 0 ? void 0 : _b.buildWidgetTree();
             }
             // 遍历处理Symbol的key转成String放入Json中
             if (newValue && typeof newValue === 'object') {
@@ -514,6 +544,7 @@ class WidgetHelper {
         return widgetDataStr;
     }
     buildWidgetTree() {
+        var _a;
         this.widget.buildWidgetDataSeq = String(++this.widget.buildWidgetDataSeqFeed);
         let tempWidgetTree = new WidgetTree(this.widget.buildWidgetDataSeq);
         tempWidgetTree.ownerWidget = this.widget;
@@ -539,7 +570,7 @@ class WidgetHelper {
         //tempWidgetTree.widgetTreeObjMap = tempWidgetTreeObjMap; //不做diff不用保存，优化内存
         this.preBuildJson(tempWidgetTree, tempWidgetTreeObjMap);
         //加入缓存map
-        this.widget.buildSeq2WTreeMap?.set(tempWidgetTree.buildWidgetDataSeq, tempWidgetTree);
+        (_a = this.widget.buildSeq2WTreeMap) === null || _a === void 0 ? void 0 : _a.set(tempWidgetTree.buildWidgetDataSeq, tempWidgetTree);
         //json实际包含的字段
         let jsonMap = {
             key: this.widget.key,
@@ -592,17 +623,19 @@ class WidgetHelper {
     }
     //buildingCreateCallbackID 只允许building过程中调用，不是对外API
     buildingCreateCallbackID(callback) {
+        var _a;
         //* XSFlutter beta 0.1.0开始，框架不在帮助上层代码绑定this，开发者需要自己绑定需要的对象 
         //callback = callback.bind(this.widget);
-        return this.widget.buildingWidgetTree?.createCallbackID(callback);
+        return (_a = this.widget.buildingWidgetTree) === null || _a === void 0 ? void 0 : _a.createCallbackID(callback);
     }
     setupAsRootWidget() {
         this.widget.buildingWidgetTree = new WidgetTree("1");
         this.widget.currentWidgetTree = this.widget.buildingWidgetTree;
     }
     addChildWidget(jsWidget) {
+        var _a;
         jsWidget.parentWidget = this.widget;
-        this.widget.buildingWidgetTree?.childrenWidget.set(jsWidget.widgetID, jsWidget);
+        (_a = this.widget.buildingWidgetTree) === null || _a === void 0 ? void 0 : _a.childrenWidget.set(jsWidget.widgetID, jsWidget);
     }
     removeChildWidget(jsWidget) {
         if (this.widget.currentWidgetTree && this.widget.currentWidgetTree.childrenWidget) {
@@ -629,6 +662,7 @@ class WidgetHelper {
     }
     //flutter -> js
     onEventCallback(args) {
+        var _a;
         let callID = args["callID"]; //   widgetID/callID 格式 ： "1313/3434"
         if (callID == null) {
             return;
@@ -639,13 +673,14 @@ class WidgetHelper {
         let callConfig = args["args"];
         let jsWidget = this.findWidgetWithWidgetID(widgetID);
         if (jsWidget != null) {
-            return jsWidget?.helper?.invokeCallback(buildWidgetDataSeq, callID, callConfig);
+            return (_a = jsWidget === null || jsWidget === void 0 ? void 0 : jsWidget.helper) === null || _a === void 0 ? void 0 : _a.invokeCallback(buildWidgetDataSeq, callID, callConfig);
         }
         else {
             Log.error("onEventCallback error: jsWidget == null onEventCallback(args:" + args);
         }
     }
     findWidgetWithWidgetID(widgetID) {
+        var _a;
         //当前Widget
         if (this.widget.widgetID == widgetID) {
             return this.widget;
@@ -664,7 +699,7 @@ class WidgetHelper {
             }
             for (let k in widgetTree.childrenWidget) {
                 let jsWidget = widgetTree.childrenWidget.get(k);
-                w = jsWidget?.helper.findWidgetWithWidgetID(widgetID);
+                w = jsWidget === null || jsWidget === void 0 ? void 0 : jsWidget.helper.findWidgetWithWidgetID(widgetID);
                 if (w) {
                     return w;
                 }
@@ -683,7 +718,7 @@ class WidgetHelper {
                 }
                 for (let k in widgetTree.childrenWidget) {
                     let jsWidget = widgetTree.childrenWidget.get(k);
-                    w = jsWidget?.helper.findWidgetWithWidgetID(widgetID);
+                    w = jsWidget === null || jsWidget === void 0 ? void 0 : jsWidget.helper.findWidgetWithWidgetID(widgetID);
                     if (w) {
                         return w;
                     }
@@ -693,7 +728,7 @@ class WidgetHelper {
         //查找被自己push的widgets
         for (let k in this.widget.navPushedWidgets) {
             let jsWidget = this.widget.navPushedWidgets.get(k);
-            let w = jsWidget?.helper?.findWidgetWithWidgetID(widgetID);
+            let w = (_a = jsWidget === null || jsWidget === void 0 ? void 0 : jsWidget.helper) === null || _a === void 0 ? void 0 : _a.findWidgetWithWidgetID(widgetID);
             if (w) {
                 return w;
             }
@@ -701,6 +736,7 @@ class WidgetHelper {
         return undefined;
     }
     invokeCallback(buildWidgetDataSeq, callID, args) {
+        var _a, _b;
         Log.log("JSWidget invokeCallback ::" + this.widget.getWidgetInfo() + " buildWidgetDataSeq: " + buildWidgetDataSeq + " callID: " + callID);
         if (this.widget.currentWidgetTree && this.widget.currentWidgetTree.buildWidgetDataSeq != buildWidgetDataSeq) {
             Log.error("JSWidget:invokeCallback:this.widget.currentWidgetTree.buildWidgetDataSeq(" + this.widget.currentWidgetTree.buildWidgetDataSeq + ")  != buildWidgetDataSeq(" + buildWidgetDataSeq + ") " +
@@ -723,31 +759,33 @@ class WidgetHelper {
         }
         else {
             // @ts-ignore：容错处理
-            Log.error("JSWidget:invokeCallback: 容错搜索所有BuildTree，this.widget.buildingWidgetTree.buildWidgetDataSeq(" + this.widget?.buildingWidgetTree?.buildWidgetDataSeq + ")  == buildWidgetDataSeq(" + buildWidgetDataSeq + ") " +
+            Log.error("JSWidget:invokeCallback: 容错搜索所有BuildTree，this.widget.buildingWidgetTree.buildWidgetDataSeq(" + ((_b = (_a = this.widget) === null || _a === void 0 ? void 0 : _a.buildingWidgetTree) === null || _b === void 0 ? void 0 : _b.buildWidgetDataSeq) + ")  == buildWidgetDataSeq(" + buildWidgetDataSeq + ") " +
                 " callID: " +
                 callID);
             for (let seq in this.widget.buildSeq2WTreeMap) {
                 let tree = this.widget.buildSeq2WTreeMap.get(seq);
-                if (tree?.findCallback(callID)) {
+                if (tree === null || tree === void 0 ? void 0 : tree.findCallback(callID)) {
                     return tree.invokeCallback(callID, args);
                 }
             }
         }
     }
     onBuildEnd(args) {
+        var _a;
         let widgetID = args["widgetID"];
         let buildWidgetDataSeq = args["buildSeq"];
         let jsWidget = this.findWidgetWithWidgetID(widgetID);
         if (jsWidget != null) {
             let profileInfo = args["profileInfo"];
-            jsWidget?.helper?.onFlutterBuildEnd(buildWidgetDataSeq, profileInfo);
+            (_a = jsWidget === null || jsWidget === void 0 ? void 0 : jsWidget.helper) === null || _a === void 0 ? void 0 : _a.onFlutterBuildEnd(buildWidgetDataSeq, profileInfo);
         }
         else {
             Log.error("onBuildEnd error: jsWidget == null widgetID: " + widgetID + " buildWidgetDataSeq: " + buildWidgetDataSeq);
         }
     }
     onFlutterBuildEnd(buildWidgetDataSeq, profileInfo) {
-        let tree = this.widget.buildSeq2WTreeMap?.get(buildWidgetDataSeq);
+        var _a;
+        let tree = (_a = this.widget.buildSeq2WTreeMap) === null || _a === void 0 ? void 0 : _a.get(buildWidgetDataSeq);
         if (tree != null) {
             this.widget.preWidgetTree = this.widget.currentWidgetTree;
             this.widget.currentWidgetTree = tree;
@@ -767,6 +805,7 @@ class WidgetHelper {
     }
     //比buildWidgetDataSeq小的tree 可以清理掉了
     clearWidgetTree(buildWidgetDataSeq) {
+        var _a;
         let intCurSeq = parseInt(buildWidgetDataSeq);
         let clearSeqs = [];
         for (let seq in this.widget.buildSeq2WTreeMap) {
@@ -783,20 +822,21 @@ class WidgetHelper {
             let widgetID = clearSeqs[i];
             //Log.debug("JSWidget clearWidgetTree::" + this.widget.getWidgetInfo() + " delSeq: " + delSeq);
             WidgetMgr.getInstance().remove(widgetID);
-            this.widget.buildSeq2WTreeMap?.delete(widgetID);
+            (_a = this.widget.buildSeq2WTreeMap) === null || _a === void 0 ? void 0 : _a.delete(widgetID);
         }
     }
     onDispose(args) {
+        var _a, _b;
         let widgetID = args["widgetID"];
         let jsWidget = this.findWidgetWithWidgetID(widgetID);
         if (jsWidget != null) {
-            jsWidget?.helper?.onFlutterDispose();
+            (_a = jsWidget === null || jsWidget === void 0 ? void 0 : jsWidget.helper) === null || _a === void 0 ? void 0 : _a.onFlutterDispose();
             if (jsWidget.parentWidget) {
                 //TODO: FIXME listview 滑动，滑出之后再回来，就不响应了，先不删除，依赖顶层Push页面的pop来释放
                 //jsWidget.parentWidget.helper.removeChildWidget(jsWidget);
             }
             if (jsWidget.navPushingWidget) {
-                jsWidget.navPushingWidget.helper?.removePushingWidget(jsWidget);
+                (_b = jsWidget.navPushingWidget.helper) === null || _b === void 0 ? void 0 : _b.removePushingWidget(jsWidget);
             }
         }
         else {
@@ -804,14 +844,15 @@ class WidgetHelper {
         }
     }
     onFlutterDispose() {
+        var _a, _b, _c;
         Log.log("JSWidget onFlutterDispose ::" + this.widget.getWidgetInfo());
         //调用子widget disposeWidget
         if (this.widget.currentWidgetTree &&
             this.widget.currentWidgetTree.childrenWidget) {
             for (let k in this.widget.currentWidgetTree.childrenWidget) {
-                let widget = this.widget?.currentWidgetTree?.childrenWidget.get(k);
+                let widget = (_b = (_a = this.widget) === null || _a === void 0 ? void 0 : _a.currentWidgetTree) === null || _b === void 0 ? void 0 : _b.childrenWidget.get(k);
                 if (widget) {
-                    widget?.helper?.onFlutterDispose();
+                    (_c = widget === null || widget === void 0 ? void 0 : widget.helper) === null || _c === void 0 ? void 0 : _c.onFlutterDispose();
                 }
                 // this.widget.currentWidgetTree.childrenWidget[k].disposeWidget();
             }
@@ -823,15 +864,16 @@ class WidgetHelper {
     //js->flutter
     //navigator route
     navigatorPush(jsWidget) {
+        var _a, _b, _c, _d, _e;
         // 清空当前widget的navPushedWidgets数据
         for (let i in this.widget.navPushedWidgets) {
             var obj = this.widget.navPushedWidgets.get(i);
-            obj?.helper?.onFlutterDispose();
-            if (obj?.parentWidget) {
-                obj?.parentWidget?.helper?.removeChildWidget(obj);
+            (_a = obj === null || obj === void 0 ? void 0 : obj.helper) === null || _a === void 0 ? void 0 : _a.onFlutterDispose();
+            if (obj === null || obj === void 0 ? void 0 : obj.parentWidget) {
+                (_c = (_b = obj === null || obj === void 0 ? void 0 : obj.parentWidget) === null || _b === void 0 ? void 0 : _b.helper) === null || _c === void 0 ? void 0 : _c.removeChildWidget(obj);
             }
-            if (obj?.navPushingWidget) {
-                obj?.navPushingWidget?.helper?.removePushingWidget(obj);
+            if (obj === null || obj === void 0 ? void 0 : obj.navPushingWidget) {
+                (_e = (_d = obj === null || obj === void 0 ? void 0 : obj.navPushingWidget) === null || _d === void 0 ? void 0 : _d.helper) === null || _e === void 0 ? void 0 : _e.removePushingWidget(obj);
             }
         }
         let startEncodeData = (new Date()).valueOf();
@@ -846,7 +888,7 @@ class WidgetHelper {
     navigatorPop() {
         // TODO:fixme找到最上层的top widget
         let topRootWidget = this.findTopRootWidget();
-        let widgetID = topRootWidget?.widgetID;
+        let widgetID = topRootWidget === null || topRootWidget === void 0 ? void 0 : topRootWidget.widgetID;
         // @ts-ignore：widgetID
         JSFramework.callFlutterWidgetChannel("navigatorPop", { widgetID });
         if (this.widget.navPushedWidgets && widgetID != undefined) {
@@ -862,22 +904,24 @@ class WidgetHelper {
         }
     }
     updatePushingWidgetsData(jsWidget) {
+        var _a;
         Log.log("updatePushingWidgetsData WidgetName:" + jsWidget.widgetName);
         var newJSWidget = jsWidget;
         //设置push jsWidget的widget
         newJSWidget.navPushingWidget = this.widget;
         newJSWidget.buildContext = BuildContext.inheritBuildContext(newJSWidget, this.widget.buildContext);
         newJSWidget.navPushingWidgetID = this.widget.widgetID;
-        this.widget.navPushedWidgets?.set(newJSWidget.widgetID, newJSWidget);
+        (_a = this.widget.navPushedWidgets) === null || _a === void 0 ? void 0 : _a.set(newJSWidget.widgetID, newJSWidget);
         let widgetData = WidgetHelper.buildWidgetData(newJSWidget);
         return widgetData;
     }
     findTopRootWidget() {
+        var _a;
         let rootWidget = this.widget.parentWidget;
         if (rootWidget == null || rootWidget == undefined) {
             return this.widget;
         }
-        return rootWidget.helper?.findTopRootWidget();
+        return (_a = rootWidget.helper) === null || _a === void 0 ? void 0 : _a.findTopRootWidget();
     }
 }
 exports.WidgetHelper = WidgetHelper;
@@ -896,8 +940,9 @@ class WidgetTree {
         return JSCallbackMgr.getInstance().generateID();
     }
     createCallbackID(callback) {
-        let callbackID = this.ownerWidget?.widgetID + "/" + this.generateID();
-        this.callbackID2fun?.set(callbackID, callback);
+        var _a, _b;
+        let callbackID = ((_a = this.ownerWidget) === null || _a === void 0 ? void 0 : _a.widgetID) + "/" + this.generateID();
+        (_b = this.callbackID2fun) === null || _b === void 0 ? void 0 : _b.set(callbackID, callback);
         return callbackID;
     }
     invokeCallback(callbackID, ...args) {
@@ -905,7 +950,8 @@ class WidgetTree {
         return callback(...args);
     }
     findCallback(callbackID) {
-        return this.callbackID2fun?.get(callbackID);
+        var _a;
+        return (_a = this.callbackID2fun) === null || _a === void 0 ? void 0 : _a.get(callbackID);
     }
 }
 exports.WidgetTree = WidgetTree;
@@ -1014,19 +1060,22 @@ class WidgetState {
         this.widget = widget;
     }
     get context() {
-        return this.widget?.buildContext;
+        var _a;
+        return (_a = this.widget) === null || _a === void 0 ? void 0 : _a.buildContext;
     }
     //subclass override
     initState() {
-        Log.log("WidgetState initState ::" + this.widget?.getWidgetInfo());
+        var _a;
+        Log.log("WidgetState initState ::" + ((_a = this.widget) === null || _a === void 0 ? void 0 : _a.getWidgetInfo()));
     }
     setState(fun) {
-        Log.log("WidgetState setState ::" + this.widget?.getWidgetInfo());
+        var _a, _b, _c;
+        Log.log("WidgetState setState ::" + ((_a = this.widget) === null || _a === void 0 ? void 0 : _a.getWidgetInfo()));
         if (fun) {
             fun();
         }
         //call-> Flutter
-        this.widget?.helper?.callFlutterRebuild();
+        (_c = (_b = this.widget) === null || _b === void 0 ? void 0 : _b.helper) === null || _c === void 0 ? void 0 : _c.callFlutterRebuild();
     }
     //subclass override
     build(context) { }
@@ -3305,13 +3354,15 @@ class PageController extends DartClass {
         }));
     }
     //偏移量
-    async page() {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "page",
-        }));
-        return Convert.toNumber(v);
+    page() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "page",
+            }));
+            return Convert.toNumber(v);
+        });
     }
 }
 exports.PageController = PageController;
@@ -3867,13 +3918,15 @@ class ScrollController extends DartClass {
         }));
     }
     //偏移量
-    async offset() {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "offset",
-        }));
-        return Convert.toNumber(v);
+    offset() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "offset",
+            }));
+            return Convert.toNumber(v);
+        });
     }
 }
 exports.ScrollController = ScrollController;
@@ -4552,13 +4605,15 @@ class TabController extends DartClass {
         }));
     }
     //偏移量
-    async offset() {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "offset",
-        }));
-        return Convert.toNumber(v);
+    offset() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "offset",
+            }));
+            return Convert.toNumber(v);
+        });
     }
 }
 exports.TabController = TabController;
@@ -4579,22 +4634,26 @@ class TextEditingController extends DartClass {
         }));
     }
     //获取文本值
-    async getText() {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "getText",
-        }));
-        return String(v);
+    getText() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "getText",
+            }));
+            return String(v);
+        });
     }
     //设置文本值
-    async setText(text) {
-        this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "setText",
-            args: text,
-        }));
+    setText(text) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "setText",
+                args: text,
+            }));
+        });
     }
 }
 exports.TextEditingController = TextEditingController;
@@ -10600,10 +10659,12 @@ exports.NestedScrollView = NestedScrollView;
 //****** Navigator ******
 class Navigator extends DartClass {
     static push(context, materialPageRoute) {
-        context.widget?.helper.navigatorPush(materialPageRoute.builder(context));
+        var _a;
+        (_a = context.widget) === null || _a === void 0 ? void 0 : _a.helper.navigatorPush(materialPageRoute.builder(context));
     }
     static pop(context) {
-        context.widget?.helper.navigatorPop();
+        var _a;
+        (_a = context.widget) === null || _a === void 0 ? void 0 : _a.helper.navigatorPop();
     }
 }
 exports.Navigator = Navigator;
@@ -14775,23 +14836,20 @@ class Dialog extends DartClass {
         return this.instance;
     }
     //显示简单选择
-    static async show(baseWidget, child) {
-        var v = await Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-            widgetID: String(baseWidget.widgetID),
-            mirrorID: Dialog.getInstance().mirrorID,
-            className: Dialog.getInstance().className,
-            funcName: child.className,
-            args: {
+    static show(baseWidget, child) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
                 widgetID: String(baseWidget.widgetID),
-                child: baseWidget.helper.buildWidgetTreeSubWidget(child),
-            },
-        }));
-        if (v != null && v != undefined) {
-            return JSON.parse(Convert.toString(v));
-        }
-        else {
-            return { isSuccess: false, info: "undefined | null" };
-        }
+                mirrorID: Dialog.getInstance().mirrorID,
+                className: Dialog.getInstance().className,
+                funcName: child.className,
+                args: {
+                    widgetID: String(baseWidget.widgetID),
+                    child: baseWidget.helper.buildWidgetTreeSubWidget(child),
+                },
+            }));
+            return Convert.toResponseModel(v);
+        });
     }
     static dismiss(baseWidget) {
         Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
@@ -14951,14 +15009,23 @@ class Sp extends DartClass {
         defaultValue?:boolean;
       }
      */
-    static async getBool(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "getBool",
-            args: config,
-        }));
-        return Convert.toBoolean(v);
+    static getBool(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sp.getInstance().mirrorID,
+                className: Sp.getInstance().className,
+                funcName: "getBool",
+                args: config,
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                return Convert.toBoolean(r.data);
+            }
+            if (config.defaultValue != null && config.defaultValue != undefined && typeof config.defaultValue == "boolean") {
+                return config.defaultValue;
+            }
+            return false;
+        });
     }
     /**
      * @param config config:
@@ -14967,14 +15034,23 @@ class Sp extends DartClass {
         defaultValue?:number;
       }
      */
-    static async getInt(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "getInt",
-            args: config,
-        }));
-        return Convert.toNumber(v);
+    static getInt(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sp.getInstance().mirrorID,
+                className: Sp.getInstance().className,
+                funcName: "getInt",
+                args: config,
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                return Convert.toNumber(r.data);
+            }
+            if (config.defaultValue != null && config.defaultValue != undefined && typeof config.defaultValue == "number") {
+                return config.defaultValue;
+            }
+            return 0;
+        });
     }
     /**
      * @param config config:
@@ -14983,14 +15059,23 @@ class Sp extends DartClass {
         defaultValue?:double;
       }
      */
-    static async getDouble(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "getDouble",
-            args: config,
-        }));
-        return Convert.toNumber(v);
+    static getDouble(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sp.getInstance().mirrorID,
+                className: Sp.getInstance().className,
+                funcName: "getDouble",
+                args: config,
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                return Convert.toNumber(r.data);
+            }
+            if (config.defaultValue != null && config.defaultValue != undefined && typeof config.defaultValue == "number") {
+                return config.defaultValue;
+            }
+            return 0.0;
+        });
     }
     /**
      * @param config config:
@@ -14999,22 +15084,36 @@ class Sp extends DartClass {
         defaultValue?:string;
       }
      */
-    static async getString(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "getString",
-            args: config,
-        }));
-        return Convert.toString(v);
+    static getString(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sp.getInstance().mirrorID,
+                className: Sp.getInstance().className,
+                funcName: "getString",
+                args: config,
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                return Convert.toString(r.data);
+            }
+            if (config.defaultValue != null && config.defaultValue != undefined && typeof config.defaultValue == "string") {
+                return config.defaultValue;
+            }
+            return "";
+        });
     }
-    static async clear() {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "clear",
-        }));
-        return Convert.toBoolean(v);
+    static clear() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sp.getInstance().mirrorID,
+                className: Sp.getInstance().className,
+                funcName: "clear",
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined) {
+                return r.flag;
+            }
+        });
     }
     /**
      * @param config config:
@@ -15022,13 +15121,18 @@ class Sp extends DartClass {
         key:string;
       }
      */
-    static async remove(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "remove",
-        }));
-        return Convert.toBoolean(v);
+    static remove(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sp.getInstance().mirrorID,
+                className: Sp.getInstance().className,
+                funcName: "remove",
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined) {
+                return r.flag;
+            }
+        });
     }
     /**
      * @param config config:
@@ -15037,14 +15141,19 @@ class Sp extends DartClass {
         value:boolean;
       }
      */
-    static async setBool(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setBool",
-            args: config,
-        }));
-        return Convert.toBoolean(v);
+    static setBool(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sp.getInstance().mirrorID,
+                className: Sp.getInstance().className,
+                funcName: "setBool",
+                args: config,
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined) {
+                return r.flag;
+            }
+        });
     }
     /**
      * @param config config:
@@ -15053,14 +15162,19 @@ class Sp extends DartClass {
         value:number;
       }
      */
-    static async setDouble(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setDouble",
-            args: config,
-        }));
-        return Convert.toBoolean(v);
+    static setDouble(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sp.getInstance().mirrorID,
+                className: Sp.getInstance().className,
+                funcName: "setDouble",
+                args: config,
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined) {
+                return r.flag;
+            }
+        });
     }
     /**
      * @param config config:
@@ -15069,14 +15183,19 @@ class Sp extends DartClass {
         value:number;
       }
      */
-    static async setInt(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setInt",
-            args: config,
-        }));
-        return Convert.toBoolean(v);
+    static setInt(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sp.getInstance().mirrorID,
+                className: Sp.getInstance().className,
+                funcName: "setInt",
+                args: config,
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined) {
+                return r.flag;
+            }
+        });
     }
     /**
      * @param config config:
@@ -15085,13 +15204,19 @@ class Sp extends DartClass {
         value:string;
       }
      */
-    static async setString(config) {
-        var v = await Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: Sp.getInstance().mirrorID,
-            className: Sp.getInstance().className,
-            funcName: "setString",
-            args: config,
-        }));
+    static setString(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sp.getInstance().mirrorID,
+                className: Sp.getInstance().className,
+                funcName: "setString",
+                args: config,
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined) {
+                return r.flag;
+            }
+        });
     }
 }
 exports.Sp = Sp;
@@ -15124,32 +15249,34 @@ class ScreenInfo extends DartClass {
         return isRatio ? (ScreenInfo.pxRatio * px) : px;
     }
     //
-    async updateInfo() {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "updateInfo",
-        }));
-        if (v != null && v != undefined) {
-            var r = JSON.parse(Convert.toString(v));
-            if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
-                ScreenInfo.appBarHeight = Convert.toNumber(r.data["appBarHeight"]);
-                ScreenInfo.bottomBarHeight = Convert.toNumber(r.data["bottomBarHeight"]);
-                ScreenInfo.dpRatio = Convert.toNumber(r.data["dpRatio"]);
-                ScreenInfo.pxRatio = Convert.toNumber(r.data["pxRatio"]);
-                ScreenInfo.screenDensity = Convert.toNumber(r.data["screenDensity"]);
-                ScreenInfo.screenHeight = Convert.toNumber(r.data["screenHeight"]);
-                ScreenInfo.screenHeightPx = Convert.toNumber(r.data["screenHeightPx"]);
-                ScreenInfo.screenWidth = Convert.toNumber(r.data["screenWidth"]);
-                ScreenInfo.screenWidthPx = Convert.toNumber(r.data["screenWidthPx"]);
-                ScreenInfo.statusBarHeight = Convert.toNumber(r.data["statusBarHeight"]);
-                ScreenInfo.uiDensity = Convert.toNumber(r.data["uiDensity"]);
-                ScreenInfo.uiHeight = Convert.toNumber(r.data["uiHeight"]);
-                ScreenInfo.uiWidth = Convert.toNumber(r.data["uiWidth"]);
-                ScreenInfo.uiWidthPx = Convert.toNumber(r.data["uiWidthPx"]);
-                ScreenInfo.uiHeightPx = Convert.toNumber(r.data["uiHeightPx"]);
+    updateInfo() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "updateInfo",
+            }));
+            if (v != null && v != undefined) {
+                var r = JSON.parse(Convert.toString(v));
+                if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                    ScreenInfo.appBarHeight = Convert.toNumber(r.data["appBarHeight"]);
+                    ScreenInfo.bottomBarHeight = Convert.toNumber(r.data["bottomBarHeight"]);
+                    ScreenInfo.dpRatio = Convert.toNumber(r.data["dpRatio"]);
+                    ScreenInfo.pxRatio = Convert.toNumber(r.data["pxRatio"]);
+                    ScreenInfo.screenDensity = Convert.toNumber(r.data["screenDensity"]);
+                    ScreenInfo.screenHeight = Convert.toNumber(r.data["screenHeight"]);
+                    ScreenInfo.screenHeightPx = Convert.toNumber(r.data["screenHeightPx"]);
+                    ScreenInfo.screenWidth = Convert.toNumber(r.data["screenWidth"]);
+                    ScreenInfo.screenWidthPx = Convert.toNumber(r.data["screenWidthPx"]);
+                    ScreenInfo.statusBarHeight = Convert.toNumber(r.data["statusBarHeight"]);
+                    ScreenInfo.uiDensity = Convert.toNumber(r.data["uiDensity"]);
+                    ScreenInfo.uiHeight = Convert.toNumber(r.data["uiHeight"]);
+                    ScreenInfo.uiWidth = Convert.toNumber(r.data["uiWidth"]);
+                    ScreenInfo.uiWidthPx = Convert.toNumber(r.data["uiWidthPx"]);
+                    ScreenInfo.uiHeightPx = Convert.toNumber(r.data["uiHeightPx"]);
+                }
             }
-        }
+        });
     }
 }
 exports.ScreenInfo = ScreenInfo;
@@ -15202,21 +15329,23 @@ class PackageInfo extends DartClass {
         return this.instance;
     }
     //
-    async updateInfo() {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "updateInfo",
-        }));
-        if (v != null && v != undefined) {
-            var r = JSON.parse(Convert.toString(v));
-            if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
-                PackageInfo.appName = Convert.toString(r.data["appName"]);
-                PackageInfo.buildNumber = Convert.toString(r.data["buildNumber"]);
-                PackageInfo.packageName = Convert.toString(r.data["packageName"]);
-                PackageInfo.version = Convert.toString(r.data["version"]);
+    updateInfo() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "updateInfo",
+            }));
+            if (v != null && v != undefined) {
+                var r = JSON.parse(Convert.toString(v));
+                if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                    PackageInfo.appName = Convert.toString(r.data["appName"]);
+                    PackageInfo.buildNumber = Convert.toString(r.data["buildNumber"]);
+                    PackageInfo.packageName = Convert.toString(r.data["packageName"]);
+                    PackageInfo.version = Convert.toString(r.data["version"]);
+                }
             }
-        }
+        });
     }
 }
 exports.PackageInfo = PackageInfo;
@@ -15241,44 +15370,50 @@ class Wakelock extends DartClass {
         return this.instance;
     }
     //
-    static async disable() {
-        var obj = Wakelock.getInstance();
-        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: obj.mirrorID,
-            className: obj.className,
-            funcName: "disable",
-        }));
-        var r = JSON.parse(Convert.toString(v));
-        if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
-            return Convert.toBoolean(r.data);
-        }
+    static disable() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var obj = Wakelock.getInstance();
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: obj.mirrorID,
+                className: obj.className,
+                funcName: "disable",
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                return Convert.toBoolean(r.data);
+            }
+        });
     }
     //
-    static async enable() {
-        var obj = Wakelock.getInstance();
-        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: obj.mirrorID,
-            className: obj.className,
-            funcName: "enable",
-        }));
-        var r = JSON.parse(Convert.toString(v));
-        if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
-            return Convert.toBoolean(r.data);
-        }
+    static enable() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var obj = Wakelock.getInstance();
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: obj.mirrorID,
+                className: obj.className,
+                funcName: "enable",
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                return Convert.toBoolean(r.data);
+            }
+        });
     }
     //
-    static async isEnabled() {
-        var obj = Wakelock.getInstance();
-        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: obj.mirrorID,
-            className: obj.className,
-            funcName: "isEnabled",
-        }));
-        var r = JSON.parse(Convert.toString(v));
-        if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
-            return Convert.toBoolean(r.data);
-        }
-        return false;
+    static isEnabled() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var obj = Wakelock.getInstance();
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: obj.mirrorID,
+                className: obj.className,
+                funcName: "isEnabled",
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                return Convert.toBoolean(r.data);
+            }
+            return false;
+        });
     }
 }
 exports.Wakelock = Wakelock;
@@ -15301,44 +15436,65 @@ class Uuid extends DartClass {
     /**
     *  Generate a v1 (time-based) id
     */
-    static async v1() {
-        var obj = Uuid.getInstance();
-        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: obj.mirrorID,
-            className: obj.className,
-            funcName: "v1",
-        }));
-        return Convert.toString(v);
+    static v1() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var obj = Uuid.getInstance();
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: obj.mirrorID,
+                className: obj.className,
+                funcName: "v1",
+            }));
+            if (v != null && v != undefined) {
+                var r = JSON.parse(Convert.toString(v));
+                if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                    return Convert.toString(r.data);
+                }
+            }
+        });
     }
     /**
     *  Generate a v4 (random) id
     */
-    static async v4() {
-        var obj = Uuid.getInstance();
-        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: obj.mirrorID,
-            className: obj.className,
-            funcName: "v4",
-        }));
-        return Convert.toString(v);
+    static v4() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var obj = Uuid.getInstance();
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: obj.mirrorID,
+                className: obj.className,
+                funcName: "v4",
+            }));
+            if (v != null && v != undefined) {
+                var r = JSON.parse(Convert.toString(v));
+                if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                    return Convert.toString(r.data);
+                }
+            }
+        });
     }
     /**
     * Generate a v5 (namespace-name-sha1-based) id
     * @param namespace
     * @param v5Name
     */
-    static async v5(namespace, v5Name) {
-        var obj = Uuid.getInstance();
-        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: obj.mirrorID,
-            className: obj.className,
-            funcName: "v5",
-            args: {
-                namespace: namespace,
-                v5Name: v5Name,
+    static v5(namespace, v5Name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var obj = Uuid.getInstance();
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: obj.mirrorID,
+                className: obj.className,
+                funcName: "v5",
+                args: {
+                    namespace: namespace,
+                    v5Name: v5Name,
+                }
+            }));
+            if (v != null && v != undefined) {
+                var r = JSON.parse(Convert.toString(v));
+                if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                    return Convert.toString(r.data);
+                }
             }
-        }));
-        return Convert.toString(v);
+        });
     }
 }
 exports.Uuid = Uuid;
@@ -15400,18 +15556,20 @@ class UrlLauncher extends DartClass {
         webOnlyWindowName?:string,
       }
      */
-    static async openUrl(config) {
-        var obj = UrlLauncher.getInstance();
-        var v = await obj.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: obj.mirrorID,
-            className: obj.className,
-            funcName: "openUrl",
-            args: config,
-        }));
-        var r = JSON.parse(Convert.toString(v));
-        if (r != null && r != undefined) {
-            return r.isSuccess;
-        }
+    static openUrl(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var obj = UrlLauncher.getInstance();
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: obj.mirrorID,
+                className: obj.className,
+                funcName: "openUrl",
+                args: config,
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined) {
+                return r.flag;
+            }
+        });
     }
 }
 exports.UrlLauncher = UrlLauncher;
@@ -15515,16 +15673,18 @@ class Dio extends DartClass {
           options?:DioOptions,
         }
     */
-    async get(config) {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "get",
-            args: config,
-        }));
-        if (v != null && v != undefined) {
-            return JSON.parse(Convert.toString(v));
-        }
+    get(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "get",
+                args: config,
+            }));
+            if (v != null && v != undefined) {
+                return JSON.parse(Convert.toString(v));
+            }
+        });
     }
     /**
       * @param config config:
@@ -15533,16 +15693,18 @@ class Dio extends DartClass {
           options?:DioOptions,
         }
     */
-    async getUri(config) {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "getUri",
-            args: config,
-        }));
-        if (v != null && v != undefined) {
-            return JSON.parse(Convert.toString(v));
-        }
+    getUri(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "getUri",
+                args: config,
+            }));
+            if (v != null && v != undefined) {
+                return JSON.parse(Convert.toString(v));
+            }
+        });
     }
     /**
       * @param config config:
@@ -15553,16 +15715,18 @@ class Dio extends DartClass {
           options?:DioOptions,
         }
     */
-    async post(config) {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "post",
-            args: config,
-        }));
-        if (v != null && v != undefined) {
-            return JSON.parse(Convert.toString(v));
-        }
+    post(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "post",
+                args: config,
+            }));
+            if (v != null && v != undefined) {
+                return JSON.parse(Convert.toString(v));
+            }
+        });
     }
     /**
       * @param config config:
@@ -15572,16 +15736,18 @@ class Dio extends DartClass {
           options?:DioOptions,
         }
       */
-    async postUri(config) {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "postUri",
-            args: config,
-        }));
-        if (v != null && v != undefined) {
-            return JSON.parse(Convert.toString(v));
-        }
+    postUri(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "postUri",
+                args: config,
+            }));
+            if (v != null && v != undefined) {
+                return JSON.parse(Convert.toString(v));
+            }
+        });
     }
     /**
       * @param config config:
@@ -15592,16 +15758,18 @@ class Dio extends DartClass {
           options?:DioOptions,
         }
     */
-    async request(config) {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "request",
-            args: config,
-        }));
-        if (v != null && v != undefined) {
-            return JSON.parse(Convert.toString(v));
-        }
+    request(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "request",
+                args: config,
+            }));
+            if (v != null && v != undefined) {
+                return JSON.parse(Convert.toString(v));
+            }
+        });
     }
     /**
       * @param config config:
@@ -15611,16 +15779,18 @@ class Dio extends DartClass {
           options?:DioOptions,
         }
       */
-    async requestUri(config) {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "requestUri",
-            args: config,
-        }));
-        if (v != null && v != undefined) {
-            return JSON.parse(Convert.toString(v));
-        }
+    requestUri(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "requestUri",
+                args: config,
+            }));
+            if (v != null && v != undefined) {
+                return JSON.parse(Convert.toString(v));
+            }
+        });
     }
 }
 exports.Dio = Dio;
@@ -16771,21 +16941,23 @@ class PathProvider extends DartClass {
         return this.instance;
     }
     //
-    async updateInfo() {
-        var v = await this.invokeMirrorObjWithCallback(new JSCallConfig({
-            mirrorID: this.mirrorID,
-            className: this.className,
-            funcName: "updateInfo",
-        }));
-        var r = JSON.parse(Convert.toString(v));
-        if (r != null && r != undefined && r.isSuccess && r.data != null && r.data != undefined) {
-            PathProvider.applicationDocumentsDirectory = Convert.toString(r.data["applicationDocumentsDirectory"]);
-            PathProvider.applicationSupportDirectory = Convert.toString(r.data["applicationSupportDirectory"]);
-            PathProvider.temporaryDirectory = Convert.toString(r.data["temporaryDirectory"]);
-            PathProvider.libraryDirectory = Convert.toString(r.data["libraryDirectory"]);
-            PathProvider.downloadsDirectory = Convert.toString(r.data["downloadsDirectory"]);
-            PathProvider.externalStorageDirectory = Convert.toString(r.data["externalStorageDirectory"]);
-        }
+    updateInfo() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: this.mirrorID,
+                className: this.className,
+                funcName: "updateInfo",
+            }));
+            var r = JSON.parse(Convert.toString(v));
+            if (r != null && r != undefined && r.flag && r.data != null && r.data != undefined) {
+                PathProvider.applicationDocumentsDirectory = Convert.toString(r.data["applicationDocumentsDirectory"]);
+                PathProvider.applicationSupportDirectory = Convert.toString(r.data["applicationSupportDirectory"]);
+                PathProvider.temporaryDirectory = Convert.toString(r.data["temporaryDirectory"]);
+                PathProvider.libraryDirectory = Convert.toString(r.data["libraryDirectory"]);
+                PathProvider.downloadsDirectory = Convert.toString(r.data["downloadsDirectory"]);
+                PathProvider.externalStorageDirectory = Convert.toString(r.data["externalStorageDirectory"]);
+            }
+        });
     }
 }
 exports.PathProvider = PathProvider;
@@ -16795,4 +16967,404 @@ PathProvider.libraryDirectory = "";
 PathProvider.applicationDocumentsDirectory = "";
 PathProvider.downloadsDirectory = "";
 PathProvider.externalStorageDirectory = "";
+class Sqlite extends DartClass {
+    constructor() {
+        super();
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
+        //创建对应FLutter对象
+        this.createMirrorObj();
+    }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new Sqlite();
+        }
+        return this.instance;
+    }
+    /**
+     * 关闭数据库
+     * @param config config:
+      {
+        dbName:string,
+      }
+     */
+    static closeDB(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sqlite.getInstance().mirrorID,
+                className: Sqlite.getInstance().className,
+                funcName: "closeDB",
+                args: config,
+            }));
+            return Convert.toResponseModel(v);
+        });
+    }
+    /**
+     * 删除数据库
+     * @param config config:
+      {
+        dbName:string,
+      }
+     */
+    static delDB(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sqlite.getInstance().mirrorID,
+                className: Sqlite.getInstance().className,
+                funcName: "delDB",
+                args: config,
+            }));
+            return Convert.toResponseModel(v);
+        });
+    }
+    /**
+     * 数据库是否存在
+     * @param config config:
+      {
+        dbName:string,
+      }
+     */
+    static isDBExists(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sqlite.getInstance().mirrorID,
+                className: Sqlite.getInstance().className,
+                funcName: "isDBExists",
+                args: config,
+            }));
+            return Convert.toResponseModel(v);
+        });
+    }
+    /**
+     * 获取数据库路径
+     * @param config config:
+      {
+        dbName:string,
+      }
+     */
+    static getDBPath(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sqlite.getInstance().mirrorID,
+                className: Sqlite.getInstance().className,
+                funcName: "getDBPath",
+                args: config,
+            }));
+            return Convert.toResponseModel(v);
+        });
+    }
+    /**
+     * 获取数据库路径
+     * @param config config:
+      {
+        dbName:string,
+        version?:number,
+        configureSql?:string,
+        createSql?:string,
+        openSql?:string,
+        readOnly?:boolean,
+        singleInstance?:boolean,
+      }
+     */
+    static openDB(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sqlite.getInstance().mirrorID,
+                className: Sqlite.getInstance().className,
+                funcName: "openDB",
+                args: config,
+            }));
+            return Convert.toResponseModel(v);
+        });
+    }
+    /**
+     * 执行SQL语句，返回是否成功
+     * @param config config:
+      {
+        dbName:string,
+        sql:string,
+      }
+     */
+    static execute(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sqlite.getInstance().mirrorID,
+                className: Sqlite.getInstance().className,
+                funcName: "execute",
+                args: config,
+            }));
+            return Convert.toResponseModel(v);
+        });
+    }
+    /**
+     * 执行SQL语句(插入)，返回影响行数
+     * @param config config:
+      {
+        dbName:string,
+        sql:string,
+      }
+     */
+    static rawInsert(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sqlite.getInstance().mirrorID,
+                className: Sqlite.getInstance().className,
+                funcName: "rawInsert",
+                args: config,
+            }));
+            return Convert.toResponseModel(v);
+        });
+    }
+    /**
+    * 执行SQL语句(删除))，返回影响行数
+    * @param config config:
+     {
+       dbName:string,
+       sql:string,
+     }
+    */
+    static rawDelete(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sqlite.getInstance().mirrorID,
+                className: Sqlite.getInstance().className,
+                funcName: "rawDelete",
+                args: config,
+            }));
+            return Convert.toResponseModel(v);
+        });
+    }
+    /**
+     * 执行SQL语句(更新))，返回影响行数
+     * @param config config:
+      {
+        dbName:string,
+        sql:string,
+      }
+     */
+    static rawUpdate(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sqlite.getInstance().mirrorID,
+                className: Sqlite.getInstance().className,
+                funcName: "rawDelete",
+                args: config,
+            }));
+            return Convert.toResponseModel(v);
+        });
+    }
+    /**
+     * 执行SQL语句(查询))，返回结果Array<Map<String, dynamic>>
+     * @param config config:
+      {
+        dbName:string,
+        sql:string,
+      }
+     */
+    static rawQuery(config) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: Sqlite.getInstance().mirrorID,
+                className: Sqlite.getInstance().className,
+                funcName: "rawQuery",
+                args: config,
+            }));
+            return Convert.toResponseModel(v);
+        });
+    }
+}
+exports.Sqlite = Sqlite;
+//#endregion
+//#region ****** PermissionHandler ******
+//****** Permission ******
+var Permission;
+(function (Permission) {
+    Permission["activityRecognition"] = "activityRecognition";
+    Permission["accessMediaLocation"] = "accessMediaLocation";
+    Permission["notification"] = "notification";
+    Permission["ignoreBatteryOptimizations"] = "ignoreBatteryOptimizations";
+    Permission["storage"] = "storage";
+    Permission["speech"] = "speech";
+    Permission["speecsmsh"] = "sms";
+    Permission["sensors"] = "sensors";
+    Permission["reminders"] = "reminders";
+    Permission["photos"] = "photos";
+    Permission["microphone"] = "microphone";
+    Permission["mediaLibrary"] = "mediaLibrary";
+    Permission["contacts"] = "contacts";
+    Permission["camera"] = "camera";
+    Permission["calendar"] = "calendar";
+    Permission["unknown"] = "unknown";
+})(Permission = exports.Permission || (exports.Permission = {}));
+//****** PermissionWithService ******
+var PermissionWithService;
+(function (PermissionWithService) {
+    PermissionWithService["location"] = "location";
+    PermissionWithService["locationAlways"] = "locationAlways";
+    PermissionWithService["locationWhenInUse"] = "locationWhenInUse";
+    PermissionWithService["phone"] = "phone";
+})(PermissionWithService = exports.PermissionWithService || (exports.PermissionWithService = {}));
+var PermissionStatus;
+(function (PermissionStatus) {
+    PermissionStatus[PermissionStatus["undetermined"] = 0] = "undetermined";
+    PermissionStatus[PermissionStatus["granted"] = 1] = "granted";
+    PermissionStatus[PermissionStatus["denied"] = 2] = "denied";
+    PermissionStatus[PermissionStatus["restricted"] = 3] = "restricted";
+    PermissionStatus[PermissionStatus["permanentlyDenied"] = 4] = "permanentlyDenied";
+})(PermissionStatus = exports.PermissionStatus || (exports.PermissionStatus = {}));
+class PermissionHandlerStatus {
+    constructor(statusString) {
+        this.status = PermissionStatus.undetermined;
+        switch (statusString) {
+            case "PermissionStatus.undetermined":
+                this.status = PermissionStatus.undetermined;
+                break;
+            case "PermissionStatus.restricted":
+                this.status = PermissionStatus.restricted;
+                break;
+            case "PermissionStatus.permanentlyDenied":
+                this.status = PermissionStatus.permanentlyDenied;
+                break;
+            case "PermissionStatus.granted":
+                this.status = PermissionStatus.granted;
+                break;
+            case "PermissionStatus.denied":
+                this.status = PermissionStatus.denied;
+                break;
+        }
+    }
+    isPermanentlyDenied() {
+        return this.status == PermissionStatus.permanentlyDenied;
+    }
+    isUndetermined() {
+        return this.status == PermissionStatus.undetermined;
+    }
+    isGranted() {
+        return this.status == PermissionStatus.granted;
+    }
+    isDenied() {
+        return this.status == PermissionStatus.denied;
+    }
+    isRestricted() {
+        return this.status == PermissionStatus.restricted;
+    }
+}
+exports.PermissionHandlerStatus = PermissionHandlerStatus;
+class PermissionHandler extends DartClass {
+    constructor() {
+        super();
+        //Mirror对象在构造函数创建 MirrorID
+        this.createMirrorID();
+        //创建对应FLutter对象
+        this.createMirrorObj();
+    }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new PermissionHandler();
+        }
+        return this.instance;
+    }
+    static isDenied(permission) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: PermissionHandler.getInstance().mirrorID,
+                className: PermissionHandler.getInstance().className,
+                funcName: "isDenied",
+                args: { "permission": permission },
+            }));
+            return Convert.toResponseModel(v).flag;
+        });
+    }
+    static isGranted(permission) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: PermissionHandler.getInstance().mirrorID,
+                className: PermissionHandler.getInstance().className,
+                funcName: "isGranted",
+                args: { "permission": permission },
+            }));
+            return Convert.toResponseModel(v).flag;
+        });
+    }
+    static getStatus(permission) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: PermissionHandler.getInstance().mirrorID,
+                className: PermissionHandler.getInstance().className,
+                funcName: "getStatus",
+                args: { "permission": permission },
+            }));
+            var r = Convert.toResponseModel(v);
+            return new PermissionHandlerStatus(Convert.toString(r.data));
+        });
+    }
+    static request(permission) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: PermissionHandler.getInstance().mirrorID,
+                className: PermissionHandler.getInstance().className,
+                funcName: "request",
+                args: { "permission": permission },
+            }));
+            var r = Convert.toResponseModel(v);
+            return new PermissionHandlerStatus(Convert.toString(r.data));
+        });
+    }
+    static isPermanentlyDenied(permission) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: PermissionHandler.getInstance().mirrorID,
+                className: PermissionHandler.getInstance().className,
+                funcName: "isPermanentlyDenied",
+                args: { "permission": permission },
+            }));
+            return Convert.toResponseModel(v).flag;
+        });
+    }
+    static isRestricted(permission) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: PermissionHandler.getInstance().mirrorID,
+                className: PermissionHandler.getInstance().className,
+                funcName: "isRestricted",
+                args: { "permission": permission },
+            }));
+            return Convert.toResponseModel(v).flag;
+        });
+    }
+    static isUndetermined(permission) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: PermissionHandler.getInstance().mirrorID,
+                className: PermissionHandler.getInstance().className,
+                funcName: "isUndetermined",
+                args: { "permission": permission },
+            }));
+            return Convert.toResponseModel(v).flag;
+        });
+    }
+    static shouldShowRequestRationale(permission) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: PermissionHandler.getInstance().mirrorID,
+                className: PermissionHandler.getInstance().className,
+                funcName: "shouldShowRequestRationale",
+                args: { "permission": permission },
+            }));
+            return Convert.toResponseModel(v).flag;
+        });
+    }
+    static serviceStatus(permission) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+                mirrorID: PermissionHandler.getInstance().mirrorID,
+                className: PermissionHandler.getInstance().className,
+                funcName: "serviceStatus",
+                args: { "permission": permission },
+            }));
+            return Convert.toResponseModel(v).flag;
+        });
+    }
+}
+exports.PermissionHandler = PermissionHandler;
 //#endregion

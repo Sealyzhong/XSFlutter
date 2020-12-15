@@ -1,20 +1,22 @@
 
-import fs = require("flutter_sdk");
-export class MyFlutterLogoPage extends fs.StatelessWidget{
+
+import { AppBar, BuildContext, FlutterLogo, ListTile, ListView, 
+  Scaffold, StatelessWidget,Text} from "flutter_sdk";
+export class MyFlutterLogoPage extends StatelessWidget{
    
-    build(context:fs.BuildContext) {
-        return new fs.Scaffold({
-            appBar: new fs.AppBar({
-              title: new fs.Text('FlutterLogo',),
+    build(context:BuildContext) {
+        return new Scaffold({
+            appBar: new AppBar({
+              title: new Text('FlutterLogo',),
             }),
-            body: new fs.ListView({
+            body: new ListView({
               children:[
-                new fs.ListTile({title:new fs.Text("FlutterLogo")}),
-                new fs.FlutterLogo({}),
-                new fs.ListTile({title:new fs.Text("FlutterLogo Size"),}),
-                new fs.FlutterLogo({size:60}),
-                new fs.ListTile({title:new fs.Text("FlutterLogo Size"),}),
-                new fs.FlutterLogo({size:100}),
+                new ListTile({title:new Text("FlutterLogo")}),
+                new FlutterLogo({}),
+                new ListTile({title:new Text("FlutterLogo Size"),}),
+                new FlutterLogo({size:60}),
+                new ListTile({title:new Text("FlutterLogo Size"),}),
+                new FlutterLogo({size:100}),
               ],
             })
           });    

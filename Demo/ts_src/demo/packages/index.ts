@@ -14,6 +14,7 @@ import { MyWakelockPage } from "demo/packages/wakelock_page";
 import { MyUrlLaucherPage } from "demo/packages/url_laucher_page";
 import { MyDioPage } from "demo/packages/dio_page";
 import { MyPathProviderPage } from "demo/packages/path_provider_page";
+import { MyPermissionPage } from "demo/packages/permission_page";
 
 export class MyPackageIndex extends fs.StatelessWidget{
     _style = new fs.TextStyle({fontSize:24,fontWeight:fs.FontWeight.bold});
@@ -133,6 +134,20 @@ export class MyPackageIndex extends fs.StatelessWidget{
                             fs.Navigator.push(context,new fs.MaterialPageRoute({
                                 builder:function(context?:fs.BuildContext){
                                     return new MyPathProviderPage();
+                                }
+                            }));
+                        }                        
+                    }),
+
+                    new fs.ListTile({
+                        leading:new fs.Text("9",{style:this._style}),
+                        trailing:new fs.Icon(fs.Icons.chevron_right),
+                        title:new fs.Text("Permission Handler"),
+                        subtitle:new fs.Text("权限管理"),
+                        onTap:function(){
+                            fs.Navigator.push(context,new fs.MaterialPageRoute({
+                                builder:function(context?:fs.BuildContext){
+                                    return new MyPermissionPage();
                                 }
                             }));
                         }                        

@@ -58,6 +58,9 @@ dependencies:
 
   # 获取目录
   path_provider: ^1.6.24
+
+  # 权限管理
+  permission_handler: ^5.0.1+1
   
 dev_dependencies:
   flutter_test:
@@ -70,7 +73,6 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    #xsflutter_js_framework
     - js_lib/
 
   # This section identifies this Flutter project as a plugin project.
