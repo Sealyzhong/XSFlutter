@@ -7,7 +7,7 @@
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-       [self setupFlutterJSPath];
+       //[self setupFlutterJSPath];
 
   [GeneratedPluginRegistrant registerWithRegistry:self];
   // Override point for customization after application launch.

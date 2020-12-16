@@ -41,8 +41,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyFlutterExampleHome extends StatelessWidget {
+class MyFlutterExampleHome extends StatefulWidget {
   MyFlutterExampleHome();
+  @override
+  _MyFlutterExampleHomeState createState() => _MyFlutterExampleHomeState();
+}
+
+class _MyFlutterExampleHomeState extends State<MyFlutterExampleHome> {
+  //DateTime _latestPressedTime;
 
   @override
   Widget build(BuildContext context) {
@@ -50,42 +56,47 @@ class MyFlutterExampleHome extends StatelessWidget {
     XSScreenInfo.init(context);
     XSPackageInfo.init();
 
-    return Scaffold(
-        appBar: AppBar(
-          leading: FlutterLogo(textColor: Colors.blue),
-          title: Text('XSFlutter Demo'),
-        ),
-        body: ListView(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.book),
-              trailing: Icon(Icons.arrow_right),
+    return WillPopScope(
+        //返回键是否退出
+        onWillPop: () async {
+          return false;
+        },
+        child: Scaffold(
+            appBar: AppBar(
+              leading: FlutterLogo(textColor: Colors.blue),
               title: Text('XSFlutter Demo'),
-              subtitle: Text('打开XSFlutter JavaScript开发的示例页面'),
-              onTap: () {
-                //-------2. XSFlutter push 一个使用XSFlutter框架，JS编写的页面
-                //XSJSPageWidget的参数 jsWidgetName: "MyJSWidgetHomePage",在js_src/main.js  MyApp::createJSWidgetWithName 函数中使用，
-                //创建你需要的XS JS Widget
-                Navigator.push(context, MaterialPageRoute(builder: (context) => XSJSPageWidget(jsWidgetName: "MyHomePage")));
-              },
             ),
-            ListTile(
-              leading: Icon(
-                Icons.refresh,
-                semanticLabel: 'ReloadJSApp',
-                color: Colors.red,
-              ),
-              title: Text('Reload JSApp'),
-              subtitle: Text('点击热重载JSApp，重新进入上面的XSFlutter Demo，即可看到界面更新'),
-              isThreeLine: true,
-              onTap: () {
-                XSFlutter.getInstance().runJSApp();
-              },
-            ),
-            ListTile(
-              title: Text('在此页面可以打开Safari浏览器-> 开发->模拟器。 然后点击XSFlutter Demo，可以在Safari调试JS'),
-            )
-          ],
-        ));
+            body: ListView(
+              children: <Widget>[
+                ListTile(
+                  leading: Icon(Icons.book),
+                  trailing: Icon(Icons.arrow_right),
+                  title: Text('XSFlutter Demo'),
+                  subtitle: Text('打开XSFlutter JavaScript开发的示例页面'),
+                  onTap: () {
+                    //-------2. XSFlutter push 一个使用XSFlutter框架，JS编写的页面
+                    //XSJSPageWidget的参数 jsWidgetName: "MyJSWidgetHomePage",在js_src/main.js  MyApp::createJSWidgetWithName 函数中使用，
+                    //创建你需要的XS JS Widget
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => XSJSPageWidget(jsWidgetName: "MyHomePage")));
+                  },
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.refresh,
+                    semanticLabel: 'ReloadJSApp',
+                    color: Colors.red,
+                  ),
+                  title: Text('Reload JSApp'),
+                  subtitle: Text('点击热重载JSApp，重新进入上面的XSFlutter Demo，即可看到界面更新'),
+                  isThreeLine: true,
+                  onTap: () {
+                    XSFlutter.getInstance().runJSApp();
+                  },
+                ),
+                ListTile(
+                  title: Text('在此页面可以打开Safari浏览器-> 开发->模拟器。 然后点击XSFlutter Demo，可以在Safari调试JS'),
+                )
+              ],
+            )));
   }
 }

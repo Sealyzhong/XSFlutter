@@ -1,14 +1,9 @@
 
 import { MyHomePage } from "demo/home_page";
-//import * as fs from "flutter_sdk";
 import fs = require("flutter_sdk");
-//import homeWidget = require("demo/home_page");
+import { duration } from "moment";
 
 class MyApp extends fs.JSFlutterApp{
-    
-    ///子类重写,当Flutter通过
-    ///XSFlutter.getInstance().navigatorPushWithName("JSWidgetHomePage", ...);push页面时，
-    ///在这里根据widgetName 创建你自己的Widget
     ///@overrite
     createJSWidgetWithName(widgetName?:string) {
         fs.Log.log("Widget Name:"+widgetName);
@@ -20,13 +15,14 @@ class MyApp extends fs.JSFlutterApp{
     }
 }
 
-
 function main(releaseMode?:boolean) {
     fs.Log.log("main() start up ");
     let app = new MyApp();    
     fs.JSFramework.runApp(app);
-    fs.ScreenInfo.getInstance().updateInfo();
-    fs.PackageInfo.getInstance().updateInfo();
-    fs.PathProvider.getInstance().updateInfo();
-    
+    fs.Future.delayed(new fs.Duration({milliseconds:500}),
+    ()=>{
+        fs.ScreenInfo.getInstance().updateInfo();
+        fs.PackageInfo.getInstance().updateInfo();
+        fs.PathProvider.getInstance().updateInfo();
+    });
 }

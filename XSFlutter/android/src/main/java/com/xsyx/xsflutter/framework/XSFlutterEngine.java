@@ -167,9 +167,7 @@ public class XSFlutterEngine {
 
         currentApp = new XSFlutterApp();
         currentApp.initWithAppName(mContext, jsAppPath, jsAppPath, jsAppSearchPathList, this);
-        Log.i("1","-6");
         currentApp.runAppWithPageName();
-        Log.i("1","-7");
     }
 
     public void callFlutterReloadAppWithJSWidgetData(String widgetData) {

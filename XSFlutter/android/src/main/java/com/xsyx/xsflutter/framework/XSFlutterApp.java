@@ -204,7 +204,6 @@ public class XSFlutterApp {
         //jsExecutor.executeScriptPath(rootPath + "/moment.js", new XSJSExecutor.ExecuteScriptCallback() {
             @Override
             public void onComplete(Object value) {
-                Log.i("3","-1");
                 jsExecutor.executeScript("main()", new XSJSExecutor.ExecuteScriptCallback() {
                     @Override
                     public void onComplete(Object value) {

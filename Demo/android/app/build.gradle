@@ -56,14 +56,19 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled false
-            signingConfig signingConfigs.release
+            // 模拟Release 中的混淆，解决混淆中的代码出错问题
+             shrinkResources true
+             minifyEnabled true
+             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+             signingConfig signingConfigs.release
         }
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            proguardFile 'proguard-project-app.pro'
         }
     }
 }
