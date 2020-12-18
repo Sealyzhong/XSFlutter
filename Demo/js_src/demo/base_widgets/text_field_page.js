@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MyTextFieldPage = void 0;
 const section_title_1 = require("demo/widgets/section_title");
 const flutter_sdk_1 = require("flutter_sdk");
+const flutter_sdk_2 = require("../../../build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages/xsflutter/js_lib/flutter_sdk");
 class MyTextFieldPage extends flutter_sdk_1.StatefulWidget {
     createState() {
         return new _MyTextFieldPage(this);
@@ -31,10 +32,10 @@ class _MyTextFieldPage extends flutter_sdk_1.WidgetState {
                             decoration: new flutter_sdk_1.InputDecoration({
                                 icon: new flutter_sdk_1.Icon(flutter_sdk_1.Icons.person),
                                 errorBorder: flutter_sdk_1.InputBorder.none(),
-                                disabledBorder: flutter_sdk_1.InputBorder.outline({
+                                disabledBorder: new flutter_sdk_2.OutlineInputBorder({
                                     borderSide: new flutter_sdk_1.BorderSide(),
                                 }),
-                                enabledBorder: flutter_sdk_1.InputBorder.underline(),
+                                enabledBorder: new flutter_sdk_2.UnderlineInputBorder(),
                             }),
                             inputFormatters: [
                                 flutter_sdk_1.TextInputFormatter.lengthLimiting(10),

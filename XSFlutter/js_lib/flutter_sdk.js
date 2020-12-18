@@ -14,6 +14,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+
 // @ts-ignore：dart_sdk
 const dart_sdk = require("dart_sdk");
 const core = dart_sdk.core;
@@ -49,17 +50,8 @@ class JSWidgetMirrorMgr {
     }
 }
 exports.JSWidgetMirrorMgr = JSWidgetMirrorMgr;
-class JSCallConfig {
-    /**
-     * @param config config:
-      {
-        widgetID?:string,
-        mirrorID?:string,
-        className?:string,
-        funcName?:string,
-        args?:any
-      }
-     */
+//****** TODO JSCallArgs ******
+class JSCallArgs {
     constructor(config) {
         if (config != null && config != undefined) {
             this.widgetID = config.widgetID;
@@ -70,7 +62,7 @@ class JSCallConfig {
         }
     }
 }
-exports.JSCallConfig = JSCallConfig;
+exports.JSCallArgs = JSCallArgs;
 //flutter 中 非widget继承 DartClass
 class DartClass extends core.Object {
     constructor() {
@@ -98,7 +90,7 @@ class DartClass extends core.Object {
     //创建绑定关系
     createMirrorObj() {
         //创建对应FLutter对象
-        var argument = new JSCallConfig({
+        var argument = new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
         });
@@ -176,8 +168,8 @@ class JSBridge {
     ///mirrorObj sys
     ///调用Logic mirrorObj的函数
     ///*重要区分： JS Logic MirrorObj的生命周期JS侧控制，由Native Weak Ref辅助完成释放
-    static createMirrorObj(flutterCallConfig, mirrorID, needMonitordGCValue) {
-        let basicMethodCall = new JSMethodCall("JSBridgeCreateMirrorObj", flutterCallConfig);
+    static createMirrorObj(flutterCallArgs, mirrorID, needMonitordGCValue) {
+        let basicMethodCall = new JSMethodCall("JSBridgeCreateMirrorObj", flutterCallArgs);
         JSBridge.invokeFlutterCommonChannel(basicMethodCall);
         //监控jsvalue 释放，同步释放flutter侧对象
         // @ts-ignore：dart_sdk
@@ -190,11 +182,11 @@ class JSBridge {
         Log.debug("JSBridge.onFlutterInvokeJSCommonChannel: " + messageStr);
         let args = JSON.parse(messageStr);
         let method = args["method"];
-        let callConfig = args["arguments"];
+        let callArgs = args["arguments"];
         // @ts-ignore：dart_sdk
         let fun = this[method];
         if (fun != null) {
-            return fun.call(this, callConfig);
+            return fun.call(this, callArgs);
         }
         else {
             Log.log("JSBridge.onFlutterInvokeJSCommonChannel: error:fun == null" + args);
@@ -206,12 +198,12 @@ class JSBridge {
         let mirrorID = args["mirrorID"];
         let funcName = args["funcName"];
         let callbackID = args["callbackID"];
-        let funConfig = args["args"];
+        let funArgs = args["args"];
         //TODO: call mirroObj Fun
-        JSCallbackMgr.getInstance().invokeCallback(callbackID, funConfig);
+        JSCallbackMgr.getInstance().invokeCallback(callbackID, funArgs);
     }
-    static invokeMirrorObjWithCallback(flutterCallConfig, callback) {
-        let basicMethodCall = new JSMethodCall("JSBridgeInvokeMirrorObjWithCallback", flutterCallConfig);
+    static invokeMirrorObjWithCallback(flutterCallArgs, callback) {
+        let basicMethodCall = new JSMethodCall("JSBridgeInvokeMirrorObjWithCallback", flutterCallArgs);
         JSBridge.invokeFlutterCommonChannel(basicMethodCall, callback);
     }
 }
@@ -293,11 +285,11 @@ class JSFlutterApp {
     nativeCall(args) {
         Log.log("XSFlutterApp:nativeCall" + args);
         let method = args["method"];
-        let callConfig = args["arguments"];
+        let callArgs = args["arguments"];
         // @ts-ignore：dart_sdk
         let fun = this[method];
         if (fun != null) {
-            return fun.call(this, callConfig);
+            return fun.call(this, callArgs);
         }
         else {
             Log.log("XSFlutterApp:nativeCall error:fun == null" + args);
@@ -306,9 +298,9 @@ class JSFlutterApp {
     }
     flutterCallFrequencyLimitCallList(args) {
         if (args) {
-            args.map(function (callConfig) {
+            args.map(function (callArgs) {
                 // @ts-ignore：dart_sdk
-                this.nativeCall(callConfig);
+                this.nativeCall(callArgs);
             }.bind(this));
         }
     }
@@ -374,13 +366,13 @@ class JSFramework {
     ///TODO: 优化
     ///调用和UI相关的mirrorObj的函数
     ///*重要区分： UIMirrorObj的生命周期和Flutter Widget控制，由Dart侧Dispose时完成释放
-    static invokeFlutterFunction(callConfig) {
-        JSFramework.callFlutterWidgetChannel("invoke", JSON.stringify(callConfig));
+    static invokeFlutterFunction(callArgs) {
+        JSFramework.callFlutterWidgetChannel("invoke", JSON.stringify(callArgs));
     }
     ///TODO: 优化
     ///github merge
-    static invokeCommonFlutterFunction(callConfig) {
-        JSFramework.callFlutterWidgetChannel("invokeCommon", JSON.stringify(callConfig));
+    static invokeCommonFlutterFunction(callArgs) {
+        JSFramework.callFlutterWidgetChannel("invokeCommon", JSON.stringify(callArgs));
     }
 }
 exports.JSFramework = JSFramework;
@@ -668,10 +660,10 @@ class WidgetHelper {
         let arr = callID.split("/");
         let widgetID = arr[0];
         let buildWidgetDataSeq = args["buildSeq"];
-        let callConfig = args["args"];
+        let callArgs = args["args"];
         let jsWidget = this.findWidgetWithWidgetID(widgetID);
         if (jsWidget != null) {
-            return (_a = jsWidget === null || jsWidget === void 0 ? void 0 : jsWidget.helper) === null || _a === void 0 ? void 0 : _a.invokeCallback(buildWidgetDataSeq, callID, callConfig);
+            return (_a = jsWidget === null || jsWidget === void 0 ? void 0 : jsWidget.helper) === null || _a === void 0 ? void 0 : _a.invokeCallback(buildWidgetDataSeq, callID, callArgs);
         }
         else {
             Log.error("onEventCallback error: jsWidget == null onEventCallback(args:" + args);
@@ -982,6 +974,7 @@ class WidgetMgr {
     }
 }
 exports.WidgetMgr = WidgetMgr;
+//****** BaseWidget ******
 class BaseWidget extends Widget {
     constructor(config) {
         super();
@@ -1813,15 +1806,12 @@ class NetworkAssetBundle extends AssetBundle {
     }
 }
 exports.NetworkAssetBundle = NetworkAssetBundle;
+//#endregion
+//#endregion
+//#region ------- B ------- 
+//#region BorderSide 
+//****** BorderSide ******
 class BorderSide extends DartClass {
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          width?:number,
-          style?:BorderStyle
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -1843,6 +1833,7 @@ exports.BorderSide = BorderSide;
 class BorderRadiusGeometry extends DartClass {
 }
 exports.BorderRadiusGeometry = BorderRadiusGeometry;
+//****** BorderRadius ******
 class BorderRadius extends BorderRadiusGeometry {
     static zero() {
         let o = new BorderRadius();
@@ -1861,13 +1852,6 @@ class BorderRadius extends BorderRadiusGeometry {
         v.radius = radius;
         return v;
     }
-    /**
-     * @param config config:
-        {
-          top?:Radius,
-          bottom?:Radius
-        }
-     */
     static vertical(config) {
         let v = new BorderRadius();
         v.constructorName = "vertical";
@@ -1877,13 +1861,6 @@ class BorderRadius extends BorderRadiusGeometry {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          left?:Radius,
-          right?:Radius
-        }
-     */
     static horizontal(config) {
         let v = new BorderRadius();
         v.constructorName = "horizontal";
@@ -1893,15 +1870,6 @@ class BorderRadius extends BorderRadiusGeometry {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          topLeft?:Radius,
-          topRight?:Radius,
-          bottomLeft?:Radius,
-          bottomRight?:Radius,
-        }
-     */
     static only(config) {
         let v = new BorderRadius();
         v.constructorName = "only";
@@ -1915,6 +1883,7 @@ class BorderRadius extends BorderRadiusGeometry {
     }
 }
 exports.BorderRadius = BorderRadius;
+//****** BorderRadiusDirectional ******
 class BorderRadiusDirectional extends BorderRadiusGeometry {
     static zero() {
         let o = new BorderRadiusDirectional();
@@ -1933,13 +1902,6 @@ class BorderRadiusDirectional extends BorderRadiusGeometry {
         v.radius = radius;
         return v;
     }
-    /**
-     * @param config config:
-        {
-          top?:Radius,
-          bottom?:Radius
-        }
-     */
     static vertical(config) {
         let v = new BorderRadiusDirectional();
         v.constructorName = "vertical";
@@ -1949,13 +1911,6 @@ class BorderRadiusDirectional extends BorderRadiusGeometry {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          start?:Radius,
-          end?:Radius
-        }
-     */
     static horizontal(config) {
         let v = new BorderRadiusDirectional();
         v.constructorName = "horizontal";
@@ -1965,15 +1920,6 @@ class BorderRadiusDirectional extends BorderRadiusGeometry {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          topStart?:Radius,
-          topEnd?:Radius,
-          bottomLeft?:Radius,
-          bottomRight?:Radius,
-        }
-     */
     static only(config) {
         let v = new BorderRadiusDirectional();
         v.constructorName = "only";
@@ -1987,18 +1933,9 @@ class BorderRadiusDirectional extends BorderRadiusGeometry {
     }
 }
 exports.BorderRadiusDirectional = BorderRadiusDirectional;
+//#endregion
+//****** BannerPainter ******
 class BannerPainter extends DartClass {
-    /**
-     * @param config config:
-        {
-          message?:string,
-          textDirection?:TextDirection,
-          location?:BannerLocation,
-          layoutDirection?:TextDirection,
-          color?:Color,
-          textStyle?:TextStyle,
-        }
-      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2012,16 +1949,8 @@ class BannerPainter extends DartClass {
     }
 }
 exports.BannerPainter = BannerPainter;
+//****** BoxShadow ******
 class BoxShadow extends DartClass {
-    /**
-     * @param config config:
-      {
-        color?:Color,
-        offset?:Offset,
-        blurRadius?:number,
-        spreadRadius?:number
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2038,31 +1967,10 @@ exports.BoxShadow = BoxShadow;
 //#region ------- Constraints -------
 //****** Constraints ******
 class Constraints extends DartClass {
-    /**
-     * Constraints.box = new BoxConstraints(config?: BoxConstraintsConfig)
-     * @param config config:
-      {
-        minWidth?:number,
-        maxWidth?:number,
-        minHeight?:number,
-        maxHeight?:number
-      }
-     */
-    static box(config) {
-        return new BoxConstraints(config);
-    }
 }
 exports.Constraints = Constraints;
+//****** BoxConstraints ******
 class BoxConstraints extends Constraints {
-    /**
-     * @param config config:
-      {
-        minWidth?:number,
-        maxWidth?:number,
-        minHeight?:number,
-        maxHeight?:number
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2173,14 +2081,12 @@ class ColorFilter extends DartClass {
     }
 }
 exports.ColorFilter = ColorFilter;
+//#endregion
+//#endregion
+//#region ------- D -------
+//#region ****** DragDetails ******
+//****** DragDownDetails ******
 class DragDownDetails extends DartClass {
-    /**
-     * @param config config:
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2190,15 +2096,8 @@ class DragDownDetails extends DartClass {
     }
 }
 exports.DragDownDetails = DragDownDetails;
+//****** DragStartDetails ******
 class DragStartDetails extends DartClass {
-    /**
-     * @param config config:
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          sourceTimeStamp?:Duration,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2209,17 +2108,8 @@ class DragStartDetails extends DartClass {
     }
 }
 exports.DragStartDetails = DragStartDetails;
+//****** DragUpdateDetails ******
 class DragUpdateDetails extends DartClass {
-    /**
-     * @param config config:
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          sourceTimeStamp?:Duration,
-          delta?:Offset,
-          primaryDelta?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2232,14 +2122,8 @@ class DragUpdateDetails extends DartClass {
     }
 }
 exports.DragUpdateDetails = DragUpdateDetails;
+//****** DragEndDetails ******
 class DragEndDetails extends DartClass {
-    /**
-     * @param config config:
-        {
-          velocity?:Velocity,
-          primaryVelocity?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2249,17 +2133,9 @@ class DragEndDetails extends DartClass {
     }
 }
 exports.DragEndDetails = DragEndDetails;
+//#endregion
+//#region ****** Duration ******
 class Duration extends DartClass {
-    /**
-     * @param config config:
-        {
-          days?:number,
-          hours?:number,
-          minutes?:number,
-          seconds?:number,
-          milliseconds?:number
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2291,51 +2167,10 @@ exports.Duration = Duration;
 //#endregion
 //#region ****** Decoration ******
 class Decoration extends DartClass {
-    /**
-     * Decoration.box = new BoxDecoration(config?: BoxDecorationConfig)
-     * @param config
-        {
-          color?:Color,
-          border?:Border;
-          borderRadius?:BorderRadius,
-          boxShadow?:BoxShadow,
-          gradient?:BaseGradient
-          backgroundBlendMode?:BlendMode,
-          shape?:BoxShape,
-          image?:DecorationImage,
-        }
-     */
-    static box(config) {
-        return new BoxDecoration(config);
-    }
-    /**
-     * Decoration.flutterLogo = new FlutterLogoDecoration(config?: FlutterLogoDecorationConfig)
-     * @param config config:
-        {
-          textColor?:Color,
-          style?:FlutterLogoStyle,
-          margin?:EdgeInsets,
-        }
-     */
-    static flutterLogo(config) {
-        return new FlutterLogoDecoration(config);
-    }
 }
 exports.Decoration = Decoration;
+//****** BoxDecoration ******
 class BoxDecoration extends Decoration {
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          border?:Border;
-          borderRadius?:BorderRadius,
-          boxShadow?:BoxShadow,
-          gradient?:BaseGradient
-          backgroundBlendMode?:BlendMode,
-          shape?:BoxShape,
-          image?:DecorationImage,
-        }
-      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2351,15 +2186,8 @@ class BoxDecoration extends Decoration {
     }
 }
 exports.BoxDecoration = BoxDecoration;
+//****** FlutterLogoDecoration ******
 class FlutterLogoDecoration extends Decoration {
-    /**
-     * @param config config:
-        {
-          textColor?:Color,
-          style?:FlutterLogoStyle,
-          margin?:EdgeInsets,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2378,16 +2206,8 @@ exports.FlutterLogoDecoration = FlutterLogoDecoration;
 class EdgeInsetsGeometry extends DartClass {
 }
 exports.EdgeInsetsGeometry = EdgeInsetsGeometry;
+//EdgeInsets
 class EdgeInsets extends EdgeInsetsGeometry {
-    /**
-     * @param config config:
-        {
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2411,15 +2231,6 @@ class EdgeInsets extends EdgeInsetsGeometry {
         v.bottom = bottom;
         return v;
     }
-    /**
-     * @param config config:
-        {
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number
-        }
-     */
     static only(config) {
         let v = new EdgeInsets();
         v.constructorName = "only";
@@ -2437,13 +2248,6 @@ class EdgeInsets extends EdgeInsetsGeometry {
         v.value = value;
         return v;
     }
-    /**
-     * @param config config:
-        {
-          vertical?:number,
-          horizontal?:number
-        }
-     */
     static symmetric(config) {
         let v = new EdgeInsets();
         v.constructorName = "symmetric";
@@ -2455,16 +2259,8 @@ class EdgeInsets extends EdgeInsetsGeometry {
     }
 }
 exports.EdgeInsets = EdgeInsets;
+//EdgeInsetsDirectional
 class EdgeInsetsDirectional extends EdgeInsetsGeometry {
-    /**
-     * @param config config:
-        {
-          start?:number,
-          top?:number,
-          end?:number,
-          bottom?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2483,15 +2279,6 @@ class EdgeInsetsDirectional extends EdgeInsetsGeometry {
         v.bottom = bottom;
         return v;
     }
-    /**
-     * @param config config:
-        {
-          start?:number,
-          top?:number,
-          end?:number,
-          bottom?:number
-        }
-     */
     static only(config) {
         let v = new EdgeInsetsDirectional();
         v.constructorName = "only";
@@ -2528,16 +2315,8 @@ class Future extends DartClass {
     }
 }
 exports.Future = Future;
+//****** FocusNode ******
 class FocusNode extends DartClass {
-    /**
-     * @param config config:
-        {
-          debugLabel?:string,
-          skipTraversal?:boolean,
-          canRequestFocus?:boolean,
-          descendantsAreFocusable?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2610,65 +2389,10 @@ exports.GradientRotation = GradientRotation;
 //#endregion
 //#region ****** Gradient ******
 class Gradient extends DartClass {
-    /**
-     * @param config config:
-        {
-          begin?:Alignment,
-          end?:Alignment,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          transform?:GradientRotation,
-        }
-     */
-    static linear(config) {
-        return new LinearGradient(config);
-    }
-    /**
-     * @param config config:
-        {
-          center?:Alignment,
-          radius?:number,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          focal?:Alignment,
-          focalRadius?:number,
-          transform?:GradientRotation,
-        }
-     */
-    static radial(config) {
-        return new RadialGradient(config);
-    }
-    /**
-     * @param config config:
-        {
-          center?:Alignment,
-          startAngle?:number,
-          endAngle?:number,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          transform?:GradientRotation,
-        }
-     */
-    static sweep(config) {
-        return new SweepGradient(config);
-    }
 }
 exports.Gradient = Gradient;
+//****** LinearGradient ******
 class LinearGradient extends Gradient {
-    /**
-     * @param config config:
-        {
-          begin?:Alignment,
-          end?:Alignment,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          transform?:GradientRotation,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2682,20 +2406,8 @@ class LinearGradient extends Gradient {
     }
 }
 exports.LinearGradient = LinearGradient;
+//****** RadialGradient ******
 class RadialGradient extends Gradient {
-    /**
-     * @param config config:
-        {
-          center?:Alignment,
-          radius?:number,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          focal?:Alignment,
-          focalRadius?:number,
-          transform?:GradientRotation,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2711,19 +2423,8 @@ class RadialGradient extends Gradient {
     }
 }
 exports.RadialGradient = RadialGradient;
+//****** SweepGradient ******
 class SweepGradient extends Gradient {
-    /**
-     * @param config config:
-        {
-          center?:Alignment,
-          startAngle?:number,
-          endAngle?:number,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          transform?:GradientRotation,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2738,6 +2439,10 @@ class SweepGradient extends Gradient {
     }
 }
 exports.SweepGradient = SweepGradient;
+//#endregion
+//#endregion
+//#region ------- I -------
+//****** ImageFilter ******
 class ImageFilter extends DartClass {
     constructor(config) {
         super();
@@ -2757,13 +2462,8 @@ class ImageFilter extends DartClass {
     }
 }
 exports.ImageFilter = ImageFilter;
+//#region ImageProvider
 class ImageProvider extends DartClass {
-    /**
-     * @param config config:
-        {
-          scale?:number
-        }
-     */
     static file(file, config) {
         var v = new ImageProvider();
         v.file = file;
@@ -2773,12 +2473,6 @@ class ImageProvider extends DartClass {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          scale?:number,
-        }
-     */
     static memory(bytes, config) {
         var v = new ImageProvider();
         v.bytes = bytes;
@@ -2788,12 +2482,6 @@ class ImageProvider extends DartClass {
         }
         return v;
     }
-    /**
-    * @param config config:
-       {
-         scale?:number,
-       }
-    */
     static network(url, config) {
         var v = new ImageProvider();
         v.url = url;
@@ -2803,14 +2491,6 @@ class ImageProvider extends DartClass {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          width?:number,
-          height?:number,
-          allowUpscaling?:boolean,
-        }
-     */
     static resize(imageProvider, config) {
         var v = new ImageProvider();
         v.constructorName = "resize";
@@ -2822,15 +2502,6 @@ class ImageProvider extends DartClass {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          imageName:string,
-          scale?:number,
-          bundle?:BaseAssetBundle,
-          packageName?:string,
-        }
-     */
     static exactAsset(imageName, config) {
         var v = new ImageProvider();
         v.constructorName = "exactAsset";
@@ -2853,55 +2524,8 @@ class IconData extends DartClass {
     }
 }
 exports.IconData = IconData;
+//****** InputDecoration ******
 class InputDecoration extends DartClass {
-    /**
-     * @param config config:
-        {
-          icon?:Widget,
-          labelText?:string,
-          labelStyle?:TextStyle,
-          helperText?:string,
-          helperStyle?:TextStyle,
-          helperMaxLines?:number,
-          hintText?:string,
-          hintStyle?:TextStyle,
-          hintMaxLines?:number,
-          errorText?:string,
-          errorStyle?:TextStyle,
-          errorMaxLines?:number,
-          hasFloatingPlaceholder?:boolean,
-          floatingLabelBehavior?:FloatingLabelBehavior,
-          isCollapsed?:boolean,
-          isDense?:boolean,
-          contentPadding?:EdgeInsets,
-          prefixIcon?:Widget,
-          prefixIconConstraints?:BoxConstraints,
-          prefix?:Widget,
-          prefixText?:string,
-          prefixStyle?:TextStyle,
-          suffixIcon?:Widget,
-          suffix?:Widget,
-          suffixText?:string,
-          suffixStyle?:TextStyle,
-          suffixIconConstraints?:BoxConstraints,
-          counter?:Widget,
-          counterText?:string,
-          counterStyle?:TextStyle,
-          filled?:boolean,
-          fillColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          errorBorder?:InputBorder,
-          focusedBorder?:InputBorder,
-          focusedErrorBorder?:InputBorder,
-          disabledBorder?:InputBorder,
-          enabledBorder?:InputBorder,
-          border?:InputBorder,
-          enabled?:boolean,
-          semanticCounterText?:string,
-          alignLabelWithHint?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -2950,18 +2574,6 @@ class InputDecoration extends DartClass {
             this.alignLabelWithHint = config.alignLabelWithHint;
         }
     }
-    /**
-     * @param config config:
-        {
-          hintText?:string,
-          hasFloatingPlaceholder?:boolean,
-          hintStyle?:TextStyle,
-          filled?:boolean,
-          fillColor?:Color,
-          border?:InputBorder,
-          enabled?:boolean
-        }
-     */
     static collapsed(config) {
         let v = new InputDecoration();
         v.constructorName = "collapsed";
@@ -3273,15 +2885,10 @@ class Offset extends DartClass {
     }
 }
 exports.Offset = Offset;
+//#endregion
+//#region ------- O -------
+//****** PageController ******
 class PageController extends DartClass {
-    /**
-     * @param config config:
-        {
-          initialPage?:number,
-          keepPage?:boolean,
-          viewportFraction?:number,
-        }
-     */
     constructor(config) {
         super();
         this.createMirrorID();
@@ -3291,60 +2898,32 @@ class PageController extends DartClass {
             this.viewportFraction = this.viewportFraction;
         }
     }
-    /**
-     * @param config config:
-        {
-          page:number,
-          duration:Duration,
-          curve:Curve,
-        }
-     */
     animateToPage(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "animateToPage",
             args: config
         }));
     }
-    /**
-     * @param config config:
-        {
-          duration:Duration,
-          curve:Curve,
-        }
-     */
     nextPage(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "nextPage",
             args: config
         }));
     }
-    /**
-     * @param config config:
-        {
-          duration:Duration,
-          curve:Curve,
-        }
-     */
     previousPage(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "previousPage",
             args: config
         }));
     }
-    /**
-     * @param config config:
-        {
-          page:number,
-        }
-     */
     jumpToPage(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "jumpToPage",
@@ -3354,7 +2933,7 @@ class PageController extends DartClass {
     //偏移量
     page() {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "page",
@@ -3401,16 +2980,8 @@ class Radius extends DartClass {
     }
 }
 exports.Radius = Radius;
+//****** RegExp ******
 class RegExp extends DartClass {
-    /**
-     * @param config config:
-        {
-          multiLine?:boolean,
-          caseSensitive?:boolean,
-          unicode?:boolean,
-          dotAll?:boolean,
-        }
-     */
     constructor(source, config) {
         super();
         this.source = source;
@@ -3423,15 +2994,8 @@ class RegExp extends DartClass {
     }
 }
 exports.RegExp = RegExp;
+//****** Rect ******
 class Rect extends DartClass {
-    /**
-     * @param config config:
-        {
-          center?:Offset,
-          width?:number,
-          height?:number
-        }
-     */
     static fromCenter(config) {
         let v = new Rect();
         v.constructorName = "fromCenter";
@@ -3460,13 +3024,6 @@ class Rect extends DartClass {
         v.height = height;
         return v;
     }
-    /**
-     * @param config config:
-      {
-        center?:Offset,
-        radius?:number
-      }
-     */
     static fromCircle(config) {
         let v = new Rect();
         v.constructorName = "fromCircle";
@@ -3527,6 +3084,7 @@ class RelativeRect extends DartClass {
     }
 }
 exports.RelativeRect = RelativeRect;
+//****** RRect ******
 class RRect extends DartClass {
     static fromLTRBXY(left, top, right, bottom, radiusX, radiusY) {
         let v = new RRect();
@@ -3564,15 +3122,6 @@ class RRect extends DartClass {
         v.radius = radius;
         return v;
     }
-    /**
-     * @param config config:
-      {
-        topLeft?:Radius,
-        topRight?:Radius,
-        bottomRight?:Radius,
-        bottomLeft?:Radius,
-      }
-     */
     static fromLTRBAndCorners(left, top, right, bottom, config) {
         let v = new RRect();
         v.constructorName = "fromLTRBAndCorners";
@@ -3588,15 +3137,6 @@ class RRect extends DartClass {
         }
         return v;
     }
-    /**
-     * @param config config:
-      {
-        topLeft?:Radius,
-        topRight?:Radius,
-        bottomRight?:Radius,
-        bottomLeft?:Radius,
-      }
-     */
     static fromRectAndCorners(rect, config) {
         let v = new RRect();
         v.constructorName = "fromRectAndCorners";
@@ -3616,6 +3156,7 @@ class RRect extends DartClass {
     }
 }
 exports.RRect = RRect;
+//****** RSTransform ******
 class RSTransform extends DartClass {
     constructor(scos, ssin, tx, ty) {
         super();
@@ -3624,17 +3165,6 @@ class RSTransform extends DartClass {
         this.tx = tx;
         this.ty = ty;
     }
-    /**
-     * @param config config:
-        {
-          rotation?:number,
-          scale?:number,
-          anchorX?:number,
-          anchorY?:number,
-          translateX?:number,
-          translateY?:number,
-        }
-     */
     static fromComponents(config) {
         let v = new RSTransform();
         v.constructorName = "fromComponents";
@@ -3677,14 +3207,10 @@ class ImageShader extends Shader {
     }
 }
 exports.ImageShader = ImageShader;
+//#endregion
+//#region ScaleDetails
+//****** ScaleStartDetails ******
 class ScaleStartDetails extends DartClass {
-    /**
-     * @param config config:
-        {
-          focalPoint?:Offset,
-          localFocalPoint?:Offset,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -3694,18 +3220,8 @@ class ScaleStartDetails extends DartClass {
     }
 }
 exports.ScaleStartDetails = ScaleStartDetails;
+//****** ScaleUpdateDetails ******
 class ScaleUpdateDetails extends DartClass {
-    /**
-     * @param config config:
-        {
-          focalPoint?:Offset,
-          localFocalPoint?:Offset,
-          scale?:number,
-          horizontalScale?:number,
-          verticalScale?:number,
-          rotation?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -3719,13 +3235,8 @@ class ScaleUpdateDetails extends DartClass {
     }
 }
 exports.ScaleUpdateDetails = ScaleUpdateDetails;
+//****** ScaleEndDetails ******
 class ScaleEndDetails extends DartClass {
-    /**
-     * @param config config:
-        {
-          velocity?:Velocity,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -3778,22 +3289,8 @@ class Size extends DartClass {
     }
 }
 exports.Size = Size;
+//****** StrutStyle ******
 class StrutStyle extends DartClass {
-    /**
-     * @param config config:
-        {
-          fontFamily?:string,
-          fontFamilyFallback?:Array<string>,
-          fontSize?:number,
-          height?:number,
-          leading?:number,
-          fontWeight?:FontWeight,
-          fontStyle?:FontStyle,
-          forceStrutHeight?:boolean,
-          debugLabel?:string,
-          packageName?:string,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -3811,18 +3308,8 @@ class StrutStyle extends DartClass {
     }
 }
 exports.StrutStyle = StrutStyle;
+//****** SystemUiOverlayStyle ******
 class SystemUiOverlayStyle extends DartClass {
-    /**
-     * @param config config:
-        {
-          systemNavigationBarColor?:Color,
-          systemNavigationBarDividerColor?:Color,
-          statusBarColor?:Color,
-          systemNavigationBarIconBrightness?:Brightness,
-          statusBarBrightness?:Brightness,
-          statusBarIconBrightness?:Brightness
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -3848,15 +3335,8 @@ SystemUiOverlayStyle.dark = new SystemUiOverlayStyle({
     statusBarBrightness: Brightness.dark,
     statusBarIconBrightness: Brightness.light
 });
+//****** SpringDescription ******
 class SpringDescription extends DartClass {
-    /**
-     * @param config config:
-        {
-          mass?:number,
-          stiffness?:number,
-          damping?:number
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -3867,15 +3347,8 @@ class SpringDescription extends DartClass {
     }
 }
 exports.SpringDescription = SpringDescription;
+//****** ScrollController ******
 class ScrollController extends DartClass {
-    /**
-     * @param config config:
-        {
-          initialScrollOffset?:number,
-          keepScrollOffset?:boolean,
-          debugLabel?:string
-        }
-     */
     constructor(config) {
         super();
         this.createMirrorID();
@@ -3885,30 +3358,16 @@ class ScrollController extends DartClass {
             this.debugLabel = config.debugLabel;
         }
     }
-    /**
-     * @param config config:
-        {
-          offset:number,
-          duration:Duration,
-          curve:Curve,
-        }
-     */
     animateTo(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "animateTo",
             args: config
         }));
     }
-    /**
-     * @param config config:
-        {
-          value:number,
-        }
-     */
     jumpTo(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "jumpTo",
@@ -3918,7 +3377,7 @@ class ScrollController extends DartClass {
     //偏移量
     offset() {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "offset",
@@ -3928,15 +3387,8 @@ class ScrollController extends DartClass {
     }
 }
 exports.ScrollController = ScrollController;
+//****** Shadow ******
 class Shadow extends DartClass {
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          offset?:Offset,
-          blurRadius?:number
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -3947,22 +3399,8 @@ class Shadow extends DartClass {
     }
 }
 exports.Shadow = Shadow;
+//****** ScrollbarPainter ******
 class ScrollbarPainter extends DartClass {
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          textDirection?:TextDirection,
-          thickness?:number,
-          fadeoutOpacityAnimation?:any,
-          padding?:EdgeInsets,
-          mainAxisMargin?:number,
-          crossAxisMargin?:number,
-          radius?:Radius,
-          minLength?:number,
-          minOverscrollLength?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -3980,13 +3418,9 @@ class ScrollbarPainter extends DartClass {
     }
 }
 exports.ScrollbarPainter = ScrollbarPainter;
+//#region ------- ScrollPhysics -------
+//****** ScrollPhysics ******
 class ScrollPhysics extends DartClass {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -3997,12 +3431,6 @@ class ScrollPhysics extends DartClass {
 exports.ScrollPhysics = ScrollPhysics;
 //****** AlwaysScrollableScrollPhysics ******
 class AlwaysScrollableScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
     constructor(config) {
         super(config);
     }
@@ -4010,12 +3438,6 @@ class AlwaysScrollableScrollPhysics extends ScrollPhysics {
 exports.AlwaysScrollableScrollPhysics = AlwaysScrollableScrollPhysics;
 //****** FixedExtentScrollPhysics ******
 class FixedExtentScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
     constructor(config) {
         super(config);
     }
@@ -4023,12 +3445,6 @@ class FixedExtentScrollPhysics extends ScrollPhysics {
 exports.FixedExtentScrollPhysics = FixedExtentScrollPhysics;
 //****** PageScrollPhysics ******
 class PageScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
     constructor(config) {
         super(config);
     }
@@ -4036,12 +3452,6 @@ class PageScrollPhysics extends ScrollPhysics {
 exports.PageScrollPhysics = PageScrollPhysics;
 //****** BouncingScrollPhysics ******
 class BouncingScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
     constructor(config) {
         super(config);
     }
@@ -4049,12 +3459,6 @@ class BouncingScrollPhysics extends ScrollPhysics {
 exports.BouncingScrollPhysics = BouncingScrollPhysics;
 //****** ClampingScrollPhysics ******
 class ClampingScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
     constructor(config) {
         super(config);
     }
@@ -4062,12 +3466,6 @@ class ClampingScrollPhysics extends ScrollPhysics {
 exports.ClampingScrollPhysics = ClampingScrollPhysics;
 //****** NeverScrollableScrollPhysics ******
 class NeverScrollableScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
     constructor(config) {
         super(config);
     }
@@ -4075,12 +3473,6 @@ class NeverScrollableScrollPhysics extends ScrollPhysics {
 exports.NeverScrollableScrollPhysics = NeverScrollableScrollPhysics;
 //****** RangeMaintainingScrollPhysics ******
 class RangeMaintainingScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
     constructor(config) {
         super(config);
     }
@@ -4096,16 +3488,8 @@ exports.ShapeBorder = ShapeBorder;
 class BoxBorder extends ShapeBorder {
 }
 exports.BoxBorder = BoxBorder;
+//****** Border ******
 class Border extends BoxBorder {
-    /**
-     * @param config config:
-      {
-        top?:BorderSide,
-        right?:BorderSide,
-        bottom?:BorderSide,
-        left?:BorderSide,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4115,14 +3499,6 @@ class Border extends BoxBorder {
             this.left = config.left;
         }
     }
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          width?:number,
-          style?:BorderStyle,
-        }
-     */
     static all(config) {
         var v = new Border();
         v.constructorName = "all";
@@ -4133,13 +3509,6 @@ class Border extends BoxBorder {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          vertical?:BorderSide,
-          horizontal?:BorderSide
-        }
-     */
     static symmetric(config) {
         var v = new Border();
         v.constructorName = "symmetric";
@@ -4151,16 +3520,8 @@ class Border extends BoxBorder {
     }
 }
 exports.Border = Border;
+//****** BorderDirectional ******
 class BorderDirectional extends BoxBorder {
-    /**
-     * @param config config:
-        {
-          top?:BorderSide,
-          start?:BorderSide,
-          bottom?:BorderSide,
-          end?:BorderSide,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4178,12 +3539,6 @@ class OutlinedBorder extends ShapeBorder {
 }
 exports.OutlinedBorder = OutlinedBorder;
 class CircleBorder extends OutlinedBorder {
-    /**
-      * @param config config:
-        {
-          side?:BorderSide,
-        }
-      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4193,13 +3548,6 @@ class CircleBorder extends OutlinedBorder {
 }
 exports.CircleBorder = CircleBorder;
 class BeveledRectangleBorder extends OutlinedBorder {
-    /**
-      * @param config config:
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadiusGeometry,
-        }
-      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4210,13 +3558,6 @@ class BeveledRectangleBorder extends OutlinedBorder {
 }
 exports.BeveledRectangleBorder = BeveledRectangleBorder;
 class ContinuousRectangleBorder extends OutlinedBorder {
-    /**
-      * @param config config:
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadiusGeometry,
-        }
-      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4227,13 +3568,6 @@ class ContinuousRectangleBorder extends OutlinedBorder {
 }
 exports.ContinuousRectangleBorder = ContinuousRectangleBorder;
 class RoundedRectangleBorder extends OutlinedBorder {
-    /**
-      * @param config config:
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadiusGeometry,
-        }
-      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4244,12 +3578,6 @@ class RoundedRectangleBorder extends OutlinedBorder {
 }
 exports.RoundedRectangleBorder = RoundedRectangleBorder;
 class StadiumBorder extends OutlinedBorder {
-    /**
-      * @param config config:
-        {
-          side?:BorderSide,
-        }
-      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4267,41 +3595,11 @@ class InputBorder extends ShapeBorder {
         v.constructorName = "none";
         return v;
     }
-    /**
-     * InputBorder.underline = new UnderlineInputBorder(config);
-     * @param config config:
-        {
-          borderSide?:BorderSide,
-          borderRadius?:BorderRadius,
-        }
-    */
-    static underline(config) {
-        return new UnderlineInputBorder(config);
-    }
-    /**
-     * InputBorder.outline = new OutlineInputBorder(config);
-     * @param config config:
-        {
-          borderSide?:BorderSide,
-          borderRadius?:BorderRadius,
-          gapPadding?:number,
-        }
-    */
-    static outline(config) {
-        return new OutlineInputBorder(config);
-    }
 }
 exports.InputBorder = InputBorder;
 class _NoInputBorder extends InputBorder {
 }
 class UnderlineInputBorder extends InputBorder {
-    /**
-      * @param config config:
-        {
-          borderSide?:BorderSide,
-          borderRadius?:BorderRadius,
-        }
-      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4314,14 +3612,6 @@ class UnderlineInputBorder extends InputBorder {
 }
 exports.UnderlineInputBorder = UnderlineInputBorder;
 class OutlineInputBorder extends InputBorder {
-    /**
-      * @param config config:
-        {
-          borderSide?:BorderSide,
-          borderRadius?:BorderRadius,
-          gapPadding?:number,
-        }
-      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4349,15 +3639,8 @@ exports.TextAlignVertical = TextAlignVertical;
 TextAlignVertical.top = new TextAlignVertical(-1.0);
 TextAlignVertical.center = new TextAlignVertical(0.0);
 TextAlignVertical.bottom = new TextAlignVertical(1.0);
+//****** TapDownDetails ******
 class TapDownDetails extends DartClass {
-    /**
-     * @param config config:
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          kind?:PointerDeviceKind,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4368,14 +3651,8 @@ class TapDownDetails extends DartClass {
     }
 }
 exports.TapDownDetails = TapDownDetails;
+//****** TapUpDetails ******
 class TapUpDetails extends DartClass {
-    /**
-     * @param config config:
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4385,29 +3662,8 @@ class TapUpDetails extends DartClass {
     }
 }
 exports.TapUpDetails = TapUpDetails;
+//****** TextStyle ******
 class TextStyle extends DartClass {
-    /**
-     * @param config config:
-        {
-          inherit?:boolean,
-          color?:Color,
-          backgroundColor?:Color,
-          fontSize?:number,
-          fontWeight?:FontWeight,
-          fontStyle?:FontStyle,
-          letterSpacing?:number,
-          wordSpacing?:number,
-          textBaseline?:TextBaseline,
-          height?:number,
-          decoration?:TextDecoration,
-          decorationColor?:Color,
-          decorationStyle?:TextDecorationStyle,
-          decorationThickness?:number,
-          debugLabel?:string,
-          fontFamily?:string,
-          packageName?:string,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4432,18 +3688,8 @@ class TextStyle extends DartClass {
     }
 }
 exports.TextStyle = TextStyle;
+//****** TableBorder ******
 class TableBorder extends DartClass {
-    /**
-     * @param config config:
-      {
-        top?:BorderSide,
-        right?:BorderSide,
-        bottom?:BorderSide,
-        left?:BorderSide,
-        horizontalInside?:BorderSide,
-        verticalInside?:BorderSide
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4455,14 +3701,6 @@ class TableBorder extends DartClass {
             this.verticalInside = config.verticalInside;
         }
     }
-    /**
-     * @param config config:
-      {
-        color?:Color,
-        width?:number,
-        style?:BorderStyle,
-      }
-     */
     static all(config) {
         let v = new TableBorder();
         v.constructorName = "all";
@@ -4473,13 +3711,6 @@ class TableBorder extends DartClass {
         }
         return v;
     }
-    /**
-     * @param config config:
-      {
-        inside?:BorderSide,
-        outside?:BorderSide
-      }
-     */
     static symmetric(config) {
         let v = new TableBorder();
         v.constructorName = "symmetric";
@@ -4569,14 +3800,9 @@ class MinColumnWidth extends TableColumnWidth {
     }
 }
 exports.MinColumnWidth = MinColumnWidth;
+//#endregion
+//****** TabController ******
 class TabController extends DartClass {
-    /**
-     * @param config config:
-      {
-        initialIndex?:number,
-        length?:number,
-      }
-     */
     constructor(config) {
         super();
         //Mirror对象在构造函数创建 MirrorID
@@ -4586,16 +3812,8 @@ class TabController extends DartClass {
             this.length = config.length;
         }
     }
-    /**
-     * @param config config:
-        {
-          value:number,
-          duration:Duration,
-          curve:Curve,
-        }
-     */
     animateTo(config) {
-        this.invokeMirrorObjWithCallback(new JSCallConfig({
+        this.invokeMirrorObjWithCallback(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "animateTo",
@@ -4605,7 +3823,7 @@ class TabController extends DartClass {
     //偏移量
     offset() {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "offset",
@@ -4625,7 +3843,7 @@ class TextEditingController extends DartClass {
     }
     //清理值
     clear() {
-        this.invokeMirrorObjWithCallback(new JSCallConfig({
+        this.invokeMirrorObjWithCallback(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "clear",
@@ -4634,7 +3852,7 @@ class TextEditingController extends DartClass {
     //获取文本值
     getText() {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "getText",
@@ -4645,7 +3863,7 @@ class TextEditingController extends DartClass {
     //设置文本值
     setText(text) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.invokeMirrorObjWithCallback(new JSCallConfig({
+            this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "setText",
@@ -4655,16 +3873,8 @@ class TextEditingController extends DartClass {
     }
 }
 exports.TextEditingController = TextEditingController;
+//****** ToolbarOptions ******
 class ToolbarOptions extends DartClass {
-    /**
-     * @param config config:
-      {
-        copy?:boolean,
-        cut?:boolean,
-        paste?:boolean,
-        selectAll?:boolean,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4676,6 +3886,7 @@ class ToolbarOptions extends DartClass {
     }
 }
 exports.ToolbarOptions = ToolbarOptions;
+//****** TextInputType ******
 class TextInputType extends DartClass {
     static numberWithOptions(config) {
         let v = new TextInputType();
@@ -4829,19 +4040,11 @@ class MaskTextInputFormatter extends TextInputFormatter {
     }
 }
 exports.MaskTextInputFormatter = MaskTextInputFormatter;
+//#endregion
+//#endregion
+//#region ------- U -------
+//****** Uri ******
 class Uri extends DartClass {
-    /**
-     * @param config config:
-      {
-        scheme?:string,
-        fragment?:string,
-        userInfo?:string,
-        host?:string,
-        port?:number,
-        path?:string,
-        query?:string
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4921,14 +4124,8 @@ class Vector4 extends DartClass {
     }
 }
 exports.Vector4 = Vector4;
+//****** VisualDensity ******
 class VisualDensity extends DartClass {
-    /**
-     * @param config config:
-      {
-        horizontal?:number,
-        vertical?:number,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4941,13 +4138,8 @@ exports.VisualDensity = VisualDensity;
 VisualDensity.comfortable = new VisualDensity({ horizontal: -1.0, vertical: -1.0 });
 VisualDensity.compact = new VisualDensity({ horizontal: -2.0, vertical: -2.0 });
 VisualDensity.standard = new VisualDensity();
+//****** Velocity ******
 class Velocity extends DartClass {
-    /**
-     * @param config config:
-      {
-        pixelsPerSecond?:Offset,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -4961,25 +4153,11 @@ class Velocity extends DartClass {
     }
 }
 exports.Velocity = Velocity;
+//#endregion
+//#endregion
+//#region ******** ThemeData ********
+//****** ColorScheme ******
 class ColorScheme extends DartClass {
-    /**
-     * @param config config:
-        {
-          primary:Color,
-          primaryVariant:Color,
-          secondary:Color,
-          secondaryVariant:Color,
-          surface:Color,
-          background:Color,
-          error:Color,
-          onPrimary:Color,
-          onSecondary:Color,
-          onSurface:Color,
-          onBackground:Color,
-          onError:Color,
-          brightness?:Brightness,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5000,27 +4178,8 @@ class ColorScheme extends DartClass {
     }
 }
 exports.ColorScheme = ColorScheme;
+//****** ButtonThemeData ******
 class ButtonThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          textTheme?:ButtonTextTheme,
-          minWidth?:number,
-          height?:number,
-          padding?:EdgeInsets,
-          shape?:ShapeBorder,
-          layoutBehavior?:ButtonBarLayoutBehavior,
-          alignedDropdown?:boolean,
-          buttonColor?:Color,
-          disabledColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorScheme?:ColorScheme,
-          materialTapTargetSize?:MaterialTapTargetSize,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5043,27 +4202,8 @@ class ButtonThemeData extends DartClass {
     }
 }
 exports.ButtonThemeData = ButtonThemeData;
+//****** ToggleButtonsThemeData ******
 class ToggleButtonsThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          textStyle?:TextStyle,
-          constraints?:BoxConstraints,
-          color?:Color,
-          selectedColor?:Color,
-          disabledColor?:Color,
-          fillColor?:Color,
-          focusColor?:Color,
-          highlightColor?:Color,
-          hoverColor?:Color,
-          splashColor?:Color,
-          borderColor?:Color,
-          selectedBorderColor?:Color,
-          disabledBorderColor?:Color,
-          borderRadius?:BorderRadius,
-          borderWidth?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5086,25 +4226,8 @@ class ToggleButtonsThemeData extends DartClass {
     }
 }
 exports.ToggleButtonsThemeData = ToggleButtonsThemeData;
+//****** TextTheme ******
 class TextTheme extends DartClass {
-    /**
-     * @param config config:
-        {
-          headline1?:TextStyle,
-          headline2?:TextStyle,
-          headline3?:TextStyle,
-          headline4?:TextStyle,
-          headline5?:TextStyle,
-          headline6?:TextStyle,
-          subtitle1?:TextStyle,
-          subtitle2?:TextStyle,
-          bodyText1?:TextStyle,
-          bodyText2?:TextStyle,
-          caption?:TextStyle,
-          button?:TextStyle,
-          overline?:TextStyle,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5125,36 +4248,8 @@ class TextTheme extends DartClass {
     }
 }
 exports.TextTheme = TextTheme;
+//****** InputDecorationTheme ******
 class InputDecorationTheme extends DartClass {
-    /**
-     * @param config config:
-        {
-        labelStyle?:TextStyle,
-        helperStyle?:TextStyle,
-        helperMaxLines?:number,
-        hintStyle?:TextStyle,
-        errorStyle?:TextStyle,
-        errorMaxLines?:number,
-        floatingLabelBehavior?:FloatingLabelBehavior,
-        isDense?:boolean,
-        contentPadding?:EdgeInsets,
-        isCollapsed?:boolean,
-        prefixStyle?:TextStyle,
-        suffixStyle?:TextStyle,
-        counterStyle?:TextStyle,
-        filled?:boolean,
-        fillColor?:Color,
-        focusColor?:Color,
-        hoverColor?:Color,
-        errorBorder?:InputBorder,
-        focusedBorder?:InputBorder,
-        focusedErrorBorder?:InputBorder,
-        disabledBorder?:InputBorder,
-        enabledBorder?:InputBorder,
-        border?:InputBorder,
-        alignLabelWithHint?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5184,15 +4279,8 @@ class InputDecorationTheme extends DartClass {
     }
 }
 exports.InputDecorationTheme = InputDecorationTheme;
+//****** IconThemeData ******
 class IconThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          opacity?:number,
-          size?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5203,29 +4291,8 @@ class IconThemeData extends DartClass {
     }
 }
 exports.IconThemeData = IconThemeData;
+//****** SliderThemeData ******
 class SliderThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          trackHeight?:number,
-          activeTrackColor?:Color,
-          inactiveTrackColor?:Color,
-          disabledActiveTrackColor?:Color,
-          disabledInactiveTrackColor?:Color,
-          activeTickMarkColor?:Color,
-          inactiveTickMarkColor?:Color,
-          disabledActiveTickMarkColor?:Color,
-          disabledInactiveTickMarkColor?:Color,
-          thumbColor?:Color,
-          overlappingShapeStrokeColor?:Color,
-          disabledThumbColor?:Color,
-          overlayColor?:Color,
-          valueIndicatorColor?:Color,
-          showValueIndicator?:ShowValueIndicator,
-          valueIndicatorTextStyle?:TextStyle,
-          minThumbSeparation?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5250,19 +4317,8 @@ class SliderThemeData extends DartClass {
     }
 }
 exports.SliderThemeData = SliderThemeData;
+//****** TabBarTheme ******
 class TabBarTheme extends DartClass {
-    /**
-     * @param config config:
-        {
-          indicator?:Decoration,
-          indicatorSize?:TabBarIndicatorSize,
-          labelColor?:Color,
-          labelPadding?:EdgeInsets,
-          labelStyle?:TextStyle,
-          unselectedLabelColor?:Color,
-          unselectedLabelStyle?:TextStyle,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5277,22 +4333,8 @@ class TabBarTheme extends DartClass {
     }
 }
 exports.TabBarTheme = TabBarTheme;
+//****** TooltipThemeData ******
 class TooltipThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          height?:number,
-          padding?:EdgeInsets,
-          margin?:EdgeInsets,
-          verticalOffset?:number,
-          preferBelow?:boolean,
-          excludeFromSemantics?:boolean,
-          decoration?:Decoration,
-          textStyle?:TextStyle,
-          waitDuration?:Duration,
-          showDuration?:Duration,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5310,17 +4352,8 @@ class TooltipThemeData extends DartClass {
     }
 }
 exports.TooltipThemeData = TooltipThemeData;
+//****** CardTheme ******
 class CardTheme extends DartClass {
-    /**
-     * @param config config:
-        {
-          clipBehavior?:Clip,
-          color?:Color,
-          shadowColor?:Color,
-          elevation?:number,
-          margin?:EdgeInsets,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5333,29 +4366,8 @@ class CardTheme extends DartClass {
     }
 }
 exports.CardTheme = CardTheme;
+//****** ChipThemeData ******
 class ChipThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          deleteIconColor?:Color,
-          disabledColor?:Color,
-          selectedColor?:Color,
-          secondarySelectedColor?:Color,
-          shadowColor?:Color,
-          selectedShadowColor?:Color,
-          showCheckmark?:boolean,
-          checkmarkColor?:Color,
-          labelPadding?:EdgeInsets,
-          padding?:EdgeInsets,
-          shape?:ShapeBorder,
-          labelStyle?:TextStyle,
-          secondaryLabelStyle?:TextStyle,
-          brightness?:Brightness,
-          elevation?:number,
-          pressElevation?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5380,20 +4392,8 @@ class ChipThemeData extends DartClass {
     }
 }
 exports.ChipThemeData = ChipThemeData;
+//****** AppBarTheme ******
 class AppBarTheme extends DartClass {
-    /**
-     * @param config config:
-        {
-          brightness?:Brightness,
-          color?:Color,
-          elevation?:number,
-          shadowColor?:Color,
-          iconTheme?:IconThemeData,
-          actionsIconTheme?:IconThemeData,
-          textTheme?:TextTheme,
-          centerTitle?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5409,15 +4409,8 @@ class AppBarTheme extends DartClass {
     }
 }
 exports.AppBarTheme = AppBarTheme;
+//****** BottomAppBarTheme ******
 class BottomAppBarTheme extends DartClass {
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          elevation?:number,
-          shape?:NotchedShape,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5428,17 +4421,8 @@ class BottomAppBarTheme extends DartClass {
     }
 }
 exports.BottomAppBarTheme = BottomAppBarTheme;
+//****** DialogTheme ******
 class DialogTheme extends DartClass {
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          elevation?:number,
-          shape?:ShapeBorder,
-          titleTextStyle?:TextStyle,
-          contentTextStyle?:TextStyle,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5451,23 +4435,8 @@ class DialogTheme extends DartClass {
     }
 }
 exports.DialogTheme = DialogTheme;
+//****** FloatingActionButtonThemeData ******
 class FloatingActionButtonThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          foregroundColor?:Color,
-          backgroundColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          splashColor?:Color,
-          elevation?:number,
-          focusElevation?:number,
-          hoverElevation?:number,
-          disabledElevation?:number,
-          highlightElevation?:number,
-          shape?:ShapeBorder,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5486,20 +4455,8 @@ class FloatingActionButtonThemeData extends DartClass {
     }
 }
 exports.FloatingActionButtonThemeData = FloatingActionButtonThemeData;
+//****** NavigationRailThemeData ******
 class NavigationRailThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          elevation?:number,
-          unselectedLabelTextStyle?:TextStyle,
-          selectedLabelTextStyle?:TextStyle,
-          unselectedIconTheme?:IconThemeData,
-          selectedIconTheme?:IconThemeData,
-          groupAlignment?:number,
-          labelType?:NavigationRailLabelType,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5515,18 +4472,8 @@ class NavigationRailThemeData extends DartClass {
     }
 }
 exports.NavigationRailThemeData = NavigationRailThemeData;
+//****** CupertinoThemeData ******
 class CupertinoThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          primaryColor?:Color,
-          brightness?:Brightness,
-          primaryContrastingColor?:Color,
-          textTheme?:CupertinoTextThemeData,
-          barBackgroundColor?:Color,
-          scaffoldBackgroundColor?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5540,19 +4487,8 @@ class CupertinoThemeData extends DartClass {
     }
 }
 exports.CupertinoThemeData = CupertinoThemeData;
+//****** SnackBarThemeData ******
 class SnackBarThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          actionTextColor?:Color,
-          disabledActionTextColor?:Color,
-          contentTextStyle?:TextStyle,
-          elevation?:number,
-          shape?:ShapeBorder,
-          behavior?:SnackBarBehavior,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5567,18 +4503,8 @@ class SnackBarThemeData extends DartClass {
     }
 }
 exports.SnackBarThemeData = SnackBarThemeData;
+//****** BottomSheetThemeData ******
 class BottomSheetThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          elevation?:number,
-          modalBackgroundColor?:Color,
-          modalElevation?:number,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5592,16 +4518,8 @@ class BottomSheetThemeData extends DartClass {
     }
 }
 exports.BottomSheetThemeData = BottomSheetThemeData;
+//****** PopupMenuThemeData ******
 class PopupMenuThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          shape?:ShapeBorder,
-          elevation?:number,
-          textStyle?:TextStyle,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5613,16 +4531,8 @@ class PopupMenuThemeData extends DartClass {
     }
 }
 exports.PopupMenuThemeData = PopupMenuThemeData;
+//****** MaterialBannerThemeData ******
 class MaterialBannerThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          contentTextStyle?:TextStyle,
-          padding?:EdgeInsets,
-          leadingPadding?:EdgeInsets,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5634,17 +4544,8 @@ class MaterialBannerThemeData extends DartClass {
     }
 }
 exports.MaterialBannerThemeData = MaterialBannerThemeData;
+//****** DividerThemeData ******
 class DividerThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          space?:ShapeBorder,
-          thickness?:number,
-          indent?:number,
-          endIndent?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5657,21 +4558,8 @@ class DividerThemeData extends DartClass {
     }
 }
 exports.DividerThemeData = DividerThemeData;
+//****** ButtonBarThemeData ******
 class ButtonBarThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          alignment?:MainAxisAlignment,
-          mainAxisSize?:MainAxisSize,
-          buttonTextTheme?:ButtonTextTheme,
-          buttonMinWidth?:number,
-          buttonHeight?:number,
-          buttonPadding?:EdgeInsets,
-          buttonAlignedDropdown?:boolean,
-          layoutBehavior?:ButtonBarLayoutBehavior,
-          overflowDirection?:VerticalDirection,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5688,23 +4576,8 @@ class ButtonBarThemeData extends DartClass {
     }
 }
 exports.ButtonBarThemeData = ButtonBarThemeData;
+//****** BottomNavigationBarThemeData ******
 class BottomNavigationBarThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          elevation?:number,
-          selectedIconTheme?:IconThemeData,
-          unselectedIconTheme?:IconThemeData,
-          selectedItemColor?:Color,
-          unselectedItemColor?:Color,
-          selectedLabelStyle?:TextStyle,
-          unselectedLabelStyle?:TextStyle,
-          showSelectedLabels?:boolean,
-          showUnselectedLabels?:boolean,
-          type?:BottomNavigationBarType,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5723,29 +4596,8 @@ class BottomNavigationBarThemeData extends DartClass {
     }
 }
 exports.BottomNavigationBarThemeData = BottomNavigationBarThemeData;
+//****** TimePickerThemeData ******
 class TimePickerThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          hourMinuteTextColor?:Color,
-          hourMinuteColor?:Color,
-          dayPeriodTextColor?:Color,
-          dayPeriodColor?:Color,
-          dialHandColor?:Color,
-          dialBackgroundColor?:Color,
-          dialTextColor?:Color,
-          entryModeIconColor?:Color,
-          hourMinuteTextStyle?:TextStyle,
-          dayPeriodTextStyle?:TextStyle,
-          helpTextStyle?:TextStyle,
-          shape?:ShapeBorder,
-          hourMinuteShape?:ShapeBorder,
-          dayPeriodShape?:ShapeBorder,
-          dayPeriodBorderSide?:BorderSide,
-          inputDecorationTheme?:InputDecorationTheme,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5769,15 +4621,8 @@ class TimePickerThemeData extends DartClass {
     }
 }
 exports.TimePickerThemeData = TimePickerThemeData;
+//****** TextSelectionThemeData ******
 class TextSelectionThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          cursorColor?:Color,
-          selectionColor?:Color,
-          selectionHandleColor?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5788,19 +4633,8 @@ class TextSelectionThemeData extends DartClass {
     }
 }
 exports.TextSelectionThemeData = TextSelectionThemeData;
+//****** DataTableThemeData ******
 class DataTableThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          dataRowHeight?:number,
-          dataTextStyle?:TextStyle,
-          headingRowHeight?:number,
-          headingTextStyle?:TextStyle,
-          horizontalMargin?:number,
-          columnSpacing?:number,
-          dividerThickness?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -5815,81 +4649,8 @@ class DataTableThemeData extends DartClass {
     }
 }
 exports.DataTableThemeData = DataTableThemeData;
+//****** ThemeData ******
 class ThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          brightness?:Brightness,
-          visualDensity?:VisualDensity,
-          primaryColor?:Color,
-          primaryColorBrightness?:Brightness,
-          primaryColorLight?:Color,
-          primaryColorDark?:Color,
-          accentColor?:Color,
-          accentColorBrightness?:Brightness,
-          canvasColor?:Color,
-          shadowColor?:Color,
-          scaffoldBackgroundColor?:Color,
-          bottomAppBarColor?:Color,
-          cardColor?:Color,
-          focusColor?:Color,
-          dividerColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          selectedRowColor?:Color,
-          unselectedWidgetColor?:Color,
-          disabledColor?:Color,
-          buttonColor?:Color,
-          buttonTheme?:ButtonThemeData,
-          toggleButtonsTheme?:ToggleButtonsThemeData,
-          secondaryHeaderColor?:Color,
-          textSelectionColor?:Color,
-          cursorColor?:Color,
-          textSelectionHandleColor?:Color,
-          backgroundColor?:Color,
-          dialogBackgroundColor?:Color,
-          indicatorColor?:Color,
-          hintColor?:Color,
-          errorColor?:Color,
-          toggleableActiveColor?:Color,
-          fontFamily?:string,
-          textTheme?:TextTheme,
-          primaryTextTheme?:TextTheme,
-          accentTextTheme?:TextTheme,
-          inputDecorationTheme?:InputDecorationTheme,
-          iconTheme?:IconThemeData,
-          primaryIconTheme?:IconThemeData,
-          accentIconTheme?:IconThemeData,
-          sliderTheme?:SliderThemeData,
-          tabBarTheme?:TabBarTheme,
-          tooltipTheme?:TooltipThemeData,
-          cardTheme?:CardTheme,
-          chipTheme?:ChipThemeData,
-          platform?:TargetPlatform,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          applyElevationOverlayColor?:boolean,
-          appBarTheme?:AppBarTheme,
-          bottomAppBarTheme?:BottomAppBarTheme,
-          colorScheme?:ColorScheme,
-          dialogTheme?:DialogTheme,
-          floatingActionButtonTheme?:FloatingActionButtonThemeData,
-          navigationRailTheme?:NavigationRailThemeData,
-          cupertinoOverrideTheme?:CupertinoThemeData,
-          snackBarTheme?:SnackBarThemeData,
-          bottomSheetTheme?:BottomSheetThemeData,
-          popupMenuTheme?:PopupMenuThemeData,
-          bannerTheme?:MaterialBannerThemeData,
-          dividerTheme?:DividerThemeData,
-          buttonBarTheme?:ButtonBarThemeData,
-          bottomNavigationBarTheme?:BottomNavigationBarThemeData,
-          timePickerTheme?:TimePickerThemeData,
-          textSelectionTheme?:TextSelectionThemeData,
-          dataTableTheme?:DataTableThemeData,
-          fixTextFieldOutlineLabel?:boolean,
-          useTextSelectionTheme?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7115,16 +5876,11 @@ CupertinoIcons.news = new CupertinoIcons("news");
 CupertinoIcons.news_solid = new CupertinoIcons("news_solid");
 CupertinoIcons.brightness = new CupertinoIcons("brightness");
 CupertinoIcons.brightness_solid = new CupertinoIcons("brightness_solid");
+//#endregion
+//#region ******** Material Widgets ********
+//#region ------- A -------
+//****** AbsorbPointer ******
 class AbsorbPointer extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          absorbing?:boolean,
-          ignoringSemantics?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7136,30 +5892,8 @@ class AbsorbPointer extends Widget {
     }
 }
 exports.AbsorbPointer = AbsorbPointer;
+//****** ActionChip ******
 class ActionChip extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          onPressed:OnCallback,
-          pressElevation?:number,
-          tooltip?:string,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          focusNode?:FocusNode,
-          autofocus?:boolean,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          visualDensity?:VisualDensity,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          shadowColor?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7185,6 +5919,7 @@ class ActionChip extends Widget {
     }
 }
 exports.ActionChip = ActionChip;
+//****** TODO AnimationController ******
 class AnimationController extends Widget {
     ///TODO:
     dispose() { }
@@ -7221,31 +5956,8 @@ class Animation extends Widget {
     }
 }
 exports.Animation = Animation;
+//****** AppBar ******
 class AppBar extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          leading?:Widget,
-          automaticallyImplyLeading?:boolean,
-          title?:Widget,
-          actions?:Array<Widget>,
-          flexibleSpace?:Widget,
-          bottom?:Widget,
-          elevation?:number,
-          shadowColor?:Color,
-          shape?:ShapeBorder,
-          backgroundColor?:Color,
-          brightness?:Brightness,
-          primary?:boolean,
-          centerTitle?:boolean,
-          excludeHeaderSemantics?:boolean,
-          titleSpacing?:number,
-          toolbarOpacity?:number,
-          bottomOpacity?:number,
-          toolbarHeight?:number
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7272,17 +5984,8 @@ class AppBar extends Widget {
     }
 }
 exports.AppBar = AppBar;
+//****** Align ******
 class Align extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        alignment?:Alignment,
-        widthFactor?:number,
-        heightFactor?:number,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7295,15 +5998,8 @@ class Align extends Widget {
     }
 }
 exports.Align = Align;
+//****** AspectRatio ******
 class AspectRatio extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          aspectRatio?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7314,16 +6010,8 @@ class AspectRatio extends Widget {
     }
 }
 exports.AspectRatio = AspectRatio;
+//****** AnnotatedRegion ******
 class AnnotatedRegion extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          value?:number,
-          sized?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7335,23 +6023,8 @@ class AnnotatedRegion extends Widget {
     }
 }
 exports.AnnotatedRegion = AnnotatedRegion;
+//****** TODO AnimatedCrossFade ******
 class AnimatedCrossFade extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          firstChild?:Widget,
-          secondChild?:Widget,
-          firstCurve?:Curve,
-          secondCurve?:Curve,
-          sizeCurve?:Curve,
-          alignment?:Alignment,
-          crossFadeState?:CrossFadeState,
-          duration?:Duration,
-          reverseDuration?:Duration,
-          layoutBuilder?:any
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7370,19 +6043,8 @@ class AnimatedCrossFade extends Widget {
     }
 }
 exports.AnimatedCrossFade = AnimatedCrossFade;
+//****** TODO AnimatedOpacity ******
 class AnimatedOpacity extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          opacity?:number,
-          curve?:Curve,
-          duration?:Duration,
-          onEnd?:OnCallback,
-          alwaysIncludeSemantics?:boolean
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7397,17 +6059,8 @@ class AnimatedOpacity extends Widget {
     }
 }
 exports.AnimatedOpacity = AnimatedOpacity;
+//****** TODO AnimatedBuilder ******
 class AnimatedBuilder extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          animation?:Animation,
-          builder?:any,
-          child?:Widget,
-          widget?:Widget
-        }
-     */
     constructor(config) {
         super();
         this.key = config.key;
@@ -7418,27 +6071,8 @@ class AnimatedBuilder extends Widget {
     }
 }
 exports.AnimatedBuilder = AnimatedBuilder;
+//****** TODO AnimatedContainer ******
 class AnimatedContainer extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          alignment?:Alignment,
-          margin?:EdgeInsets,
-          padding?:EdgeInsets,
-          child?:Widget,
-          color?:Color,
-          decoration?:BoxDecoration,
-          foregroundDecoration?:BoxDecoration,
-          width?:number,
-          height?:number,
-          constraints?:BoxConstraints,
-          transform?:Matrix4,
-          curve?:Curve,
-          duration?:Duration,
-          onEnd?:OnCallback,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7461,25 +6095,8 @@ class AnimatedContainer extends Widget {
     }
 }
 exports.AnimatedContainer = AnimatedContainer;
+//****** TODO AnimatedPhysicalModel ******
 class AnimatedPhysicalModel extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          shape?:any,
-          clipBehavior?:Clip,
-          borderRadius?:BorderRadius,
-          elevation?:number,
-          color?:Color,
-          animateColor?:boolean,
-          shadowColor?:Color,
-          animateShadowColor?:boolean,
-          curve?:Curve,
-          duration?:Duration,
-          onEnd?:OnCallback
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7500,23 +6117,8 @@ class AnimatedPhysicalModel extends Widget {
     }
 }
 exports.AnimatedPhysicalModel = AnimatedPhysicalModel;
+//****** TODO AnimatedPositioned ******
 class AnimatedPositioned extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number,
-          width?:number,
-          height?:number,
-          curve?:Curve,
-          duration?:Duration,
-          onEnd?:OnCallback,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7534,19 +6136,8 @@ class AnimatedPositioned extends Widget {
     }
 }
 exports.AnimatedPositioned = AnimatedPositioned;
+//****** TODO AnimatedSize ******
 class AnimatedSize extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          alignment?:Alignment,
-          curve?:Curve,
-          duration?:Duration,
-          reverseDuration?:Duration,
-          vsync?:any
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7561,22 +6152,8 @@ class AnimatedSize extends Widget {
     }
 }
 exports.AnimatedSize = AnimatedSize;
+//****** TODO AnimatedDefaultTextStyle ******
 class AnimatedDefaultTextStyle extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          style?:TextStyle,
-          textAlign?:TextAlign,
-          softWrap?:boolean,
-          overflow?:TextOverflow,
-          maxLines?:number,
-          curve?:Curve,
-          duration?:Duration,
-          onEnd?:OnCallback
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7594,17 +6171,10 @@ class AnimatedDefaultTextStyle extends Widget {
     }
 }
 exports.AnimatedDefaultTextStyle = AnimatedDefaultTextStyle;
+//#endregion
+//#region ------- B -------
+//****** BottomNavigationBarItem ******
 class BottomNavigationBarItem extends Widget {
-    /**
-     * @param config config:
-        {
-          icon:Widget,
-          title?:Widget,
-          activeIcon?:Widget,
-          label?:string,
-          backgroundColor?:Color
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7617,20 +6187,8 @@ class BottomNavigationBarItem extends Widget {
     }
 }
 exports.BottomNavigationBarItem = BottomNavigationBarItem;
+//****** Banner ******
 class Banner extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          message:string,
-          textDirection?:TextDirection,
-          location:BannerLocation,
-          layoutDirection?:TextDirection,
-          color?:Color,
-          textStyle?:TextStyle,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7646,16 +6204,8 @@ class Banner extends Widget {
     }
 }
 exports.Banner = Banner;
+//****** Baseline ******
 class Baseline extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          baseline:number,
-          baselineType:TextBaseline,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7667,24 +6217,8 @@ class Baseline extends Widget {
     }
 }
 exports.Baseline = Baseline;
+//****** ButtonBar ******
 class ButtonBar extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          children?:Array<Widget>,
-          alignment?:MainAxisAlignment,
-          mainAxisSize?:MainAxisSize,
-          buttonTextTheme?:ButtonTextTheme,
-          buttonHeight?:number,
-          buttonMinWidth?:number,
-          buttonPadding?:EdgeInsets,
-          buttonAlignedDropdown?:boolean,
-          layoutBehavior?:ButtonBarLayoutBehavior,
-          overflowButtonSpacing?:number,
-          overflowDirection?:VerticalDirection,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7704,15 +6238,8 @@ class ButtonBar extends Widget {
     }
 }
 exports.ButtonBar = ButtonBar;
+//****** BlockSemantics ******
 class BlockSemantics extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          blocking?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7723,19 +6250,8 @@ class BlockSemantics extends Widget {
     }
 }
 exports.BlockSemantics = BlockSemantics;
+//****** BottomAppBar ******
 class BottomAppBar extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          color?:Color,
-          elevation?:number,
-          shape?:NotchedShape,
-          clipBehavior?:Clip,
-          notchMargin?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7750,29 +6266,8 @@ class BottomAppBar extends Widget {
     }
 }
 exports.BottomAppBar = BottomAppBar;
+//****** BottomNavigationBar ******
 class BottomNavigationBar extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          items:Array<BottomNavigationBarItem>,
-          onTap?:VoidValueChangedInt,
-          currentIndex?:number,
-          elevation?:number,
-          type?:BottomNavigationBarType,
-          fixedColor?:Color,
-          backgroundColor?:Color,
-          iconSize?:number,
-          selectedItemColor?:Color,
-          unselectedItemColor?:Color,
-          selectedFontSize?:number,
-          unselectedFontSize?:number,
-          selectedLabelStyle?:TextStyle,
-          unselectedLabelStyle?:TextStyle,
-          showSelectedLabels?:boolean,
-          showUnselectedLabels?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7797,13 +6292,8 @@ class BottomNavigationBar extends Widget {
     }
 }
 exports.BottomNavigationBar = BottomNavigationBar;
+//****** BackButtonIcon ******
 class BackButtonIcon extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7812,14 +6302,8 @@ class BackButtonIcon extends Widget {
     }
 }
 exports.BackButtonIcon = BackButtonIcon;
+//****** BackButton ******
 class BackButton extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          onPressed?:OnCallback,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7829,6 +6313,7 @@ class BackButton extends Widget {
     }
 }
 exports.BackButton = BackButton;
+//****** TODO Builder ******
 class Builder extends Widget {
     constructor(builder, key) {
         super();
@@ -7846,15 +6331,10 @@ class Builder extends Widget {
     }
 }
 exports.Builder = Builder;
+//#endregion
+//#region ------- C -------
+//****** ColorFiltered ******
 class ColorFiltered extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          colorFilter:ColorFilter,
-          child?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7865,15 +6345,8 @@ class ColorFiltered extends Widget {
     }
 }
 exports.ColorFiltered = ColorFiltered;
+//****** CloseButton ******
 class CloseButton extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          onPressed?:OnCallback,
-          color?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7884,25 +6357,8 @@ class CloseButton extends Widget {
     }
 }
 exports.CloseButton = CloseButton;
+//****** Container ******
 class Container extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          alignment?:Alignment,
-          margin?:EdgeInsets,
-          padding?:EdgeInsets,
-          color?:Color,
-          width?:number,
-          height?:number,
-          decoration?:BoxDecoration,
-          foregroundDecoration?:BoxDecoration,
-          constraints?:BoxConstraints,
-          transform?:Matrix4,
-          clipBehavior?:Clip,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7923,16 +6379,8 @@ class Container extends Widget {
     }
 }
 exports.Container = Container;
+//****** Center ******
 class Center extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          widthFactor?:number,
-          heightFactor?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -7944,35 +6392,8 @@ class Center extends Widget {
     }
 }
 exports.Center = Center;
+//****** ChoiceChip ******
 class ChoiceChip extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          selected?:boolean,
-          onSelected?:OnCallbackBoolean,
-          pressElevation?:number,
-          disabledColor?:Color,
-          selectedColor?:Color,
-          tooltip?:string,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          focusNode?:FocusNode,
-          autofocus?:boolean,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          visualDensity?:VisualDensity,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          shadowColor?:Color,
-          selectedShadowColor?:Color,
-          avatarBorder?:ShapeBorder,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8003,15 +6424,8 @@ class ChoiceChip extends Widget {
     }
 }
 exports.ChoiceChip = ChoiceChip;
+//****** ColoredBox ******
 class ColoredBox extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          color:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8022,20 +6436,8 @@ class ColoredBox extends Widget {
     }
 }
 exports.ColoredBox = ColoredBox;
+//****** CircleAvatar ******
 class CircleAvatar extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          backgroundColor?:Color,
-          foregroundColor?:Color,
-          radius?:number,
-          backgroundImage?:any,
-          minRadius?:number,
-          maxRadius?:number,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8051,29 +6453,8 @@ class CircleAvatar extends Widget {
     }
 }
 exports.CircleAvatar = CircleAvatar;
+//****** Chip ******
 class Chip extends Widget {
-    /**
-     * @param config config:
-        {
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          deleteIcon?:Widget,
-          onDeleted?:OnCallback,
-          deleteIconColor?:Color,
-          deleteButtonTooltipMessage?:string,
-          clipBehavior?:Clip,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          key?:Key,
-          shadowColor?:Color,
-          visualDensity?:VisualDensity,
-          autofocus?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8098,14 +6479,8 @@ class Chip extends Widget {
     }
 }
 exports.Chip = Chip;
+//****** CheckedModeBanner ******
 class CheckedModeBanner extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8115,27 +6490,8 @@ class CheckedModeBanner extends Widget {
     }
 }
 exports.CheckedModeBanner = CheckedModeBanner;
+//****** CheckboxListTile ******
 class CheckboxListTile extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          onChanged:OnCallbackBoolean,
-          activeColor?:Color,
-          checkColor?:Color,
-          title?:Widget,
-          subtitle?:Widget,
-          isThreeLine?:boolean,
-          dense?:boolean,
-          contentPadding?:EdgeInsets,
-          secondary?:Widget,
-          selected?:boolean,
-          autofocus?:boolean,
-          controlAffinity?:ListTileControlAffinity,
-          tristate?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8158,23 +6514,8 @@ class CheckboxListTile extends Widget {
     }
 }
 exports.CheckboxListTile = CheckboxListTile;
+//****** Checkbox ******
 class Checkbox extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          onChanged:OnCallbackBoolean,
-          activeColor?:Color,
-          checkColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          visualDensity?:VisualDensity,
-          autofocus?:boolean,
-          tristate?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8193,21 +6534,8 @@ class Checkbox extends Widget {
     }
 }
 exports.Checkbox = Checkbox;
+//****** CheckboxEx ******
 class CheckboxEx extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          tristate?:boolean,
-          onChanged:OnCallbackBoolean,
-          activeColor?:Color,
-          width?:number,
-          checkColor?:Color,
-          isCircle?:boolean,
-          strokeWidth?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8224,15 +6552,8 @@ class CheckboxEx extends Widget {
     }
 }
 exports.CheckboxEx = CheckboxEx;
+//****** ClipRect ******
 class ClipRect extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          clipBehavior?:Clip,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8243,15 +6564,8 @@ class ClipRect extends Widget {
     }
 }
 exports.ClipRect = ClipRect;
+//****** ClipOval ******
 class ClipOval extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          clipBehavior?:Clip,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8262,16 +6576,8 @@ class ClipOval extends Widget {
     }
 }
 exports.ClipOval = ClipOval;
+//****** ClipRRect ******
 class ClipRRect extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          borderRadius?:BorderRadius,
-          clipBehavior?:Clip,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8283,15 +6589,8 @@ class ClipRRect extends Widget {
     }
 }
 exports.ClipRRect = ClipRRect;
+//****** ConstrainedBox ******
 class ConstrainedBox extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          constraints:BoxConstraints,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8302,20 +6601,8 @@ class ConstrainedBox extends Widget {
     }
 }
 exports.ConstrainedBox = ConstrainedBox;
+//****** Column ******
 class Column extends Widget {
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          mainAxisAlignment?:MainAxisAlignment,
-          crossAxisAlignment?:CrossAxisAlignment,
-          mainAxisSize?:MainAxisSize,
-          textDirection?:TextDirection,
-          verticalDirection?:VerticalDirection,
-          textBaseline?:TextBaseline,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8331,15 +6618,8 @@ class Column extends Widget {
     }
 }
 exports.Column = Column;
+//****** TODO CustomMultiChildLayout ******
 class CustomMultiChildLayout extends Widget {
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          delegate?:any,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8350,27 +6630,8 @@ class CustomMultiChildLayout extends Widget {
     }
 }
 exports.CustomMultiChildLayout = CustomMultiChildLayout;
+//****** CustomScrollView ******
 class CustomScrollView extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          slivers?:Array<Widget>,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          physics?:ScrollPhysics,
-          shrinkWrap?:boolean,
-          center?:Key,
-          anchor?:number,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8393,22 +6654,8 @@ class CustomScrollView extends Widget {
     }
 }
 exports.CustomScrollView = CustomScrollView;
+//****** Card ******
 class Card extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          margin?:EdgeInsets,
-          color?:Color,
-          shadowColor?:Color,
-          elevation?:number,
-          shape?:any,
-          clipBehavior?:Clip,
-          semanticContainer?:boolean,
-          borderOnForeground?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8426,18 +6673,10 @@ class Card extends Widget {
     }
 }
 exports.Card = Card;
+//#endregion
+//#region ------- D -------
+//****** Divider ******
 class Divider extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        height?:number,
-        thickness?:number,
-        indent?:number,
-        endIndent?:number,
-        color?:Color
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8451,19 +6690,8 @@ class Divider extends Widget {
     }
 }
 exports.Divider = Divider;
+//****** DrawerHeader ******
 class DrawerHeader extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child:Widget,
-        decoration?:BoxDecoration,
-        margin?:EdgeInsets,
-        padding?:EdgeInsets,
-        duration?:Duration,
-        curve?:Curve,
-      }
-    */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8478,16 +6706,8 @@ class DrawerHeader extends Widget {
     }
 }
 exports.DrawerHeader = DrawerHeader;
+//****** Drawer ******
 class Drawer extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        elevation?:number,
-        semanticLabel?:string,
-      }
-    */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8499,15 +6719,8 @@ class Drawer extends Widget {
     }
 }
 exports.Drawer = Drawer;
+//****** Directionality ******
 class Directionality extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          textDirection:TextDirection,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8518,16 +6731,8 @@ class Directionality extends Widget {
     }
 }
 exports.Directionality = Directionality;
+//****** DropdownMenuItem ******
 class DropdownMenuItem extends Widget {
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          value?:number,
-          key?:Key,
-          onTap?:OnCallback,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8539,16 +6744,8 @@ class DropdownMenuItem extends Widget {
     }
 }
 exports.DropdownMenuItem = DropdownMenuItem;
+//****** DecoratedBox ******
 class DecoratedBox extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          decoration:BoxDecoration,
-          position?:DecorationPosition,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8560,22 +6757,8 @@ class DecoratedBox extends Widget {
     }
 }
 exports.DecoratedBox = DecoratedBox;
+//****** TODO DropdownButton ******
 class DropdownButton extends Widget {
-    /**
-     * @param config config:
-        {
-          items?:Array<DropdownMenuItem>,
-          onChanged?:any,
-          value?:any, hint?:Widget,
-          disabledHint?:Widget,
-          elevation?:number,
-          style?:TextStyle,
-          iconSize?:number,
-          isDense?:boolean,
-          isExpanded?:boolean,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8594,16 +6777,8 @@ class DropdownButton extends Widget {
     }
 }
 exports.DropdownButton = DropdownButton;
+//****** DefaultTabController ******
 class DefaultTabController extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          length:number,
-          initialIndex?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8615,20 +6790,8 @@ class DefaultTabController extends Widget {
     }
 }
 exports.DefaultTabController = DefaultTabController;
+//****** DecorationImage ******
 class DecorationImage extends Widget {
-    /**
-     * @param config config:
-        {
-          image?:ImageProvider,
-          alignment?:Alignment,
-          colorFilter?:ColorFilter,
-          fit?:BoxFit,
-          centerSlice?:Rect,
-          repeat?:ImageRepeat,
-          matchTextDirection?:boolean,
-          scale?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8644,20 +6807,8 @@ class DecorationImage extends Widget {
     }
 }
 exports.DecorationImage = DecorationImage;
+//****** DefaultTextStyle *****
 class DefaultTextStyle extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          style?:TextStyle,
-          textAlign?:TextAlign,
-          softWrap?:boolean,
-          overflow?:TextOverflow,
-          maxLines?:number,
-          textWidthBasis?:TextWidthBasis,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8673,16 +6824,8 @@ class DefaultTextStyle extends Widget {
     }
 }
 exports.DefaultTextStyle = DefaultTextStyle;
+//****** TODO DecoratedBoxTransition ******
 class DecoratedBoxTransition extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          decoration?:any,
-          position?:DecorationPosition,
-          child?:Widget
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8694,15 +6837,10 @@ class DecoratedBoxTransition extends Widget {
     }
 }
 exports.DecoratedBoxTransition = DecoratedBoxTransition;
+//#endregion
+//#region ------- E -------
+//****** ExcludeSemantics ******
 class ExcludeSemantics extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          excluding?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8713,15 +6851,8 @@ class ExcludeSemantics extends Widget {
     }
 }
 exports.ExcludeSemantics = ExcludeSemantics;
+//****** Expanded ******
 class Expanded extends Widget {
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          flex?:number,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8732,20 +6863,8 @@ class Expanded extends Widget {
     }
 }
 exports.Expanded = Expanded;
+//****** ExpandIcon ******
 class ExpandIcon extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          isExpanded?:boolean,
-          size?:number,
-          onPressed:OnCallbackBoolean,
-          padding?:EdgeInsets,
-          color?:Color,
-          disabledColor?:Color,
-          expandedColor?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8761,26 +6880,8 @@ class ExpandIcon extends Widget {
     }
 }
 exports.ExpandIcon = ExpandIcon;
+//****** ExpansionTile ******
 class ExpansionTile extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          leading?:Widget,
-          title?:Widget,
-          subtitle?:Widget,
-          backgroundColor?:Color,
-          onExpansionChanged?:OnCallbackBoolean,
-          children?:Array<Widget>,
-          trailing?:Widget,
-          initiallyExpanded?:boolean,
-          maintainState?:boolean,
-          tilePadding?:EdgeInsets,
-          expandedCrossAxisAlignment?:CrossAxisAlignment,
-          expandedAlignment?:Alignment,
-          childrenPadding?:EdgeInsets,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8802,16 +6903,10 @@ class ExpansionTile extends Widget {
     }
 }
 exports.ExpansionTile = ExpansionTile;
+//#endregion
+//#region ------- F -------
+//****** Flexible ******
 class Flexible extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          flex?:number,
-          fit?:FlexFit,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8823,37 +6918,8 @@ class Flexible extends Widget {
     }
 }
 exports.Flexible = Flexible;
+//****** FilterChip ******
 class FilterChip extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          selected?:boolean,
-          onSelected:OnCallbackBoolean,
-          pressElevation?:number,
-          disabledColor?:Color,
-          selectedColor?:Color,
-          tooltip?:string,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          focusNode?:FocusNode,
-          autofocus?:boolean,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          visualDensity?:VisualDensity,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          shadowColor?:Color,
-          selectedShadowColor?:Color,
-          showCheckmark?:boolean,
-          checkmarkColor?:Color,
-          avatarBorder?:ShapeBorder,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8886,16 +6952,8 @@ class FilterChip extends Widget {
     }
 }
 exports.FilterChip = FilterChip;
+//****** FittedBox ******
 class FittedBox extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        alignment?:Alignment,
-        fit?:BoxFit,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8907,17 +6965,8 @@ class FittedBox extends Widget {
     }
 }
 exports.FittedBox = FittedBox;
+//****** FractionallySizedBox ******
 class FractionallySizedBox extends Widget {
-    /**
-      * @param config config:
-         {
-           child?:Widget,
-           alignment?:Alignment,
-           widthFactor?:number,
-           heightFactor?:number,
-           key?:Key
-         }
-      */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8930,22 +6979,8 @@ class FractionallySizedBox extends Widget {
     }
 }
 exports.FractionallySizedBox = FractionallySizedBox;
+//****** Flex ******
 class Flex extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          direction:Axis,
-          mainAxisAlignment?:MainAxisAlignment,
-          mainAxisSize?:MainAxisSize,
-          crossAxisAlignment?:CrossAxisAlignment,
-          textDirection?:TextDirection,
-          verticalDirection?:VerticalDirection,
-          textBaseline?:TextBaseline,
-          clipBehavior?:Clip,
-          children?:Array<Widget>,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8962,15 +6997,8 @@ class Flex extends Widget {
     }
 }
 exports.Flex = Flex;
+//****** TODO Flow ******
 class Flow extends Widget {
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          delegate?:any,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -8981,34 +7009,8 @@ class Flow extends Widget {
     }
 }
 exports.Flow = Flow;
+//****** FlatButton ******
 class FlatButton extends Widget {
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          onPressed:OnCallback,
-          padding?:EdgeInsets;,
-          onHighlightChanged?:OnCallbackBoolean,
-          textTheme?:ButtonTextTheme,
-          textColor?:Color,
-          disabledTextColor?:Color,
-          color?:Color,
-          disabledColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorBrightness?:Brightness,
-          shape?:any,
-          clipBehavior?:Clip,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          key?:Key,
-  
-          onLongPress?: OnCallback,
-          focusColor?: Color,
-          hoverColor?: Color,
-          visualDensity?: VisualDensity,
-          autofocus?: boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9035,35 +7037,6 @@ class FlatButton extends Widget {
             this.child = config.child;
         }
     }
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          onPressed:OnCallback,
-          padding?:EdgeInsets,
-          onHighlightChanged?:OnCallbackBoolean,
-          textTheme?:ButtonTextTheme,
-          textColor?:Color,
-          disabledTextColor?:Color,
-          color?:Color,
-          disabledColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorBrightness?:Brightness,
-          shape?:any,
-          clipBehavior?:Clip,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          key?:Key,
-  
-          onLongPress?: OnCallback,
-          focusColor?: Color,
-          hoverColor?: Color,
-          autofocus?: boolean,
-  
-          icon?:Widget,
-          label?:Widget,
-        }
-     */
     static icon(config) {
         let v = new FlatButton();
         v.constructorName = "icon";
@@ -9094,32 +7067,8 @@ class FlatButton extends Widget {
     }
 }
 exports.FlatButton = FlatButton;
+//****** FloatingActionButton ******
 class FloatingActionButton extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          tooltip?:string,
-          foregroundColor?:Color,
-          backgroundColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          splashColor?:Color,
-          elevation?:number,
-          focusElevation?:number,
-          hoverElevation?:number,
-          highlightElevation?:number,
-          disabledElevation?:number,
-          onPressed:OnCallback,
-          mini?:boolean,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          autofocus?:boolean,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          isExtended?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9147,18 +7096,8 @@ class FloatingActionButton extends Widget {
     }
 }
 exports.FloatingActionButton = FloatingActionButton;
+//****** FlexibleSpaceBar ******
 class FlexibleSpaceBar extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          title?:Widget,
-          background?:Widget,
-          centerTitle?:boolean,
-          titlePadding?:EdgeInsets,
-          collapseMode?:CollapseMode,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9172,18 +7111,8 @@ class FlexibleSpaceBar extends Widget {
     }
 }
 exports.FlexibleSpaceBar = FlexibleSpaceBar;
+//****** FlexibleSpaceBarSettings ******
 class FlexibleSpaceBarSettings extends Widget {
-    /**
-    * @param config config:
-       {
-         key?:Key,
-         child:Widget,
-         toolbarOpacity:number,
-         minExtent:number,
-         maxExtent:number,
-         currentExtent:number,
-       }
-    */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9197,18 +7126,8 @@ class FlexibleSpaceBarSettings extends Widget {
     }
 }
 exports.FlexibleSpaceBarSettings = FlexibleSpaceBarSettings;
+//****** FlutterLogo ******
 class FlutterLogo extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          size?:number,
-          textColor?:Color,
-          style?:FlutterLogoStyle,
-          duration?:Duration,
-          curve?:Curve,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9222,62 +7141,23 @@ class FlutterLogo extends Widget {
     }
 }
 exports.FlutterLogo = FlutterLogo;
+//****** FractionalTranslation ******
 class FractionalTranslation extends Widget {
-    /**
-     * @param config config:
-        {
-          translation:Offset,
-  
-          key?:Key,
-          transformHitTests?:boolean,
-          child?:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
             this.key = config.key;
             this.transformHitTests = config.transformHitTests;
             this.translation = config.translation;
+            this.child = config.child;
         }
     }
 }
 exports.FractionalTranslation = FractionalTranslation;
+//#endregion
+//#region ------- G -------
+//****** GestureDetector ******
 class GestureDetector extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        onTap?:OnCallback,
-        onTapDown?:OnTapDown,
-        onTapUp?:OnTapUp,
-        onTapCancel?:OnCallback,
-        onDoubleTap?:OnCallback,
-        onLongPress?:OnCallback,
-        onLongPressUp?:OnCallback,
-        onVerticalDragDown?:OnDragDown,
-        onVerticalDragStart?:OnDragStart,
-        onVerticalDragUpdate?:OnDragUpdate,
-        onVerticalDragEnd?:OnDragEnd,
-        onVerticalDragCancel?:OnCallback,
-        onHorizontalDragDown?:OnDragDown,
-        onHorizontalDragStart?:OnDragStart,
-        onHorizontalDragUpdate?:OnDragUpdate,
-        onHorizontalDragEnd?:OnDragEnd,
-        onHorizontalDragCancel?:OnCallback,
-        onPanDown?:OnDragDown,
-        onPanStart?:OnDragStart,
-        onPanUpdate?:OnDragUpdate,
-        onPanEnd?:OnDragEnd,
-        onPanCancel?:OnCallback,
-        onScaleStart?:OnScaleStart,
-        onScaleUpdate?:OnScaleUpdate,
-        onScaleEnd?:OnScaleEnd,
-        behavior?:HitTestBehavior,
-        excludeFromSemantics?:boolean,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9314,31 +7194,8 @@ class GestureDetector extends Widget {
     }
 }
 exports.GestureDetector = GestureDetector;
+//****** GridView ******
 class GridView extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        scrollDirection?:Axis,
-        reverse?:boolean,
-        controller?:ScrollController,
-        primary?:boolean,
-        physics?:ScrollPhysics,
-        shrinkWrap?:boolean,
-        padding?:EdgeInsets,
-        gridDelegate:SliverGridDelegate,
-        addAutomaticKeepAlives?:boolean,
-        addRepaintBoundaries?:boolean,
-        addSemanticIndexes?:boolean,
-        cacheExtent?:number,
-        children?:Array<Widget>,
-        semanticChildCount?:number,
-        dragStartBehavior?:DragStartBehavior,
-        clipBehavior?:Clip,
-        keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
-        restorationId?:string,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9365,18 +7222,8 @@ class GridView extends Widget {
     }
 }
 exports.GridView = GridView;
+//****** GridTileBar ******
 class GridTileBar extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        backgroundColor?:Color,
-        leading?:Widget,
-        title?:Widget,
-        subtitle?:Widget,
-        trailing?:Widget,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9390,16 +7237,8 @@ class GridTileBar extends Widget {
     }
 }
 exports.GridTileBar = GridTileBar;
+//****** GridTile ******
 class GridTile extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        header?:Widget,
-        footer?:Widget,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9411,18 +7250,8 @@ class GridTile extends Widget {
     }
 }
 exports.GridTile = GridTile;
+//******  GridPaper ******
 class GridPaper extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          color?:Color,
-          divisions?:number,
-          interval?:number,
-          subdivisions?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9436,22 +7265,12 @@ class GridPaper extends Widget {
     }
 }
 exports.GridPaper = GridPaper;
+//#endregion
+//#region ------- H -------
+//#endregion
+//#region ------- I -------
+//****** InputDecorator ******
 class InputDecorator extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          decoration:InputDecoration,
-          baseStyle?:TextStyle,
-          textAlign?:TextAlign,
-          textAlignVertical?:TextAlignVertical,
-          isFocused?:boolean,
-          isHovering?:boolean,
-          expands?:boolean,
-          isEmpty?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9469,43 +7288,8 @@ class InputDecorator extends Widget {
     }
 }
 exports.InputDecorator = InputDecorator;
+//****** InputChip ******
 class InputChip extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          selected?:boolean,
-          isEnabled?:boolean,
-          onSelected?:OnCallbackBoolean,
-          deleteIcon?:Widget,
-          onDeleted?:OnCallback,
-          deleteIconColor?:Color,
-          deleteButtonTooltipMessage?:string,
-          onPressed?:OnCallback,
-          pressElevation?:number,
-          disabledColor?:Color,
-          selectedColor?:Color,
-          tooltip?:string,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          focusNode?:FocusNode,
-          autofocus?:boolean,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          visualDensity?:VisualDensity,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          shadowColor?:Color,
-          selectedShadowColor?:Color,
-          showCheckmark?:boolean,
-          checkmarkColor?:Color,
-          avatarBorder?:ShapeBorder,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9544,15 +7328,9 @@ class InputChip extends Widget {
     }
 }
 exports.InputChip = InputChip;
+//****** IconSpan ******
+//TODO:recognizer => GestureRecognizer
 class IconSpan extends Widget {
-    /**
-     * @param config config:
-      {
-        icon:IconData,
-        color?:Color,
-        fontSize?:number,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9563,15 +7341,8 @@ class IconSpan extends Widget {
     }
 }
 exports.IconSpan = IconSpan;
+//****** IndexedSemantics ******
 class IndexedSemantics extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          index?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9582,14 +7353,8 @@ class IndexedSemantics extends Widget {
     }
 }
 exports.IndexedSemantics = IndexedSemantics;
+//****** IntrinsicHeight ******
 class IntrinsicHeight extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9599,16 +7364,8 @@ class IntrinsicHeight extends Widget {
     }
 }
 exports.IntrinsicHeight = IntrinsicHeight;
+//****** IntrinsicWidth ******
 class IntrinsicWidth extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          stepWidth?:number,
-          stepHeight?:number,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9620,18 +7377,8 @@ class IntrinsicWidth extends Widget {
     }
 }
 exports.IntrinsicWidth = IntrinsicWidth;
+//****** IndexedStack ******
 class IndexedStack extends Widget {
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          index?:number,
-          alignment?:AlignmentDirectional,
-          textDirection?:TextDirection,
-          sizing?:StackFit,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9645,16 +7392,8 @@ class IndexedStack extends Widget {
     }
 }
 exports.IndexedStack = IndexedStack;
+//****** IgnorePointer ******
 class IgnorePointer extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          ignoring?:boolean,
-          ignoringSemantics?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9666,30 +7405,8 @@ class IgnorePointer extends Widget {
     }
 }
 exports.IgnorePointer = IgnorePointer;
+//****** IconButton ******
 class IconButton extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          icon:Widget,
-          onPressed:OnCallback,
-          iconSize?:number,
-          padding?:EdgeInsets,
-          alignment?:Alignment,
-          visualDensity?:VisualDensity,
-          splashRadius?:number,
-          color?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          disabledColor?:Color,
-          autofocus?:boolean,
-          tooltip?:string,
-          enableFeedback?:boolean,
-          constraints?:BoxConstraints,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9715,18 +7432,8 @@ class IconButton extends Widget {
     }
 }
 exports.IconButton = IconButton;
+//****** Icon ******
 class Icon extends Widget {
-    /**
-     * @param icon icon:IconData
-     * @param config config:
-        {
-          key?:Key,
-          size?:number,
-          color?:Color,
-          semanticLabel?:string,
-          textDirection?:TextDirection,
-        }
-     */
     constructor(icon, config) {
         super();
         this.icon = icon;
@@ -9740,18 +7447,8 @@ class Icon extends Widget {
     }
 }
 exports.Icon = Icon;
+//****** ImageIcon ******
 class ImageIcon extends Widget {
-    /**
-     * @param image image:ImageProvider
-     * @param config config:
-        {
-          key?:Key,
-          size?:number,
-          color?:Color,
-          semanticLabel?:string,
-          textDirection?:TextDirection,
-        }
-     */
     constructor(image, config) {
         super();
         this.image = image;
@@ -9765,35 +7462,6 @@ class ImageIcon extends Widget {
 }
 exports.ImageIcon = ImageIcon;
 class InkResponse extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          onTap?:OnCallback,
-          onTapDown?:OnTapDown,
-          onTapCancel?:OnCallback,
-          onDoubleTap?:OnCallback,
-          onLongPress?:OnCallback,
-          onHighlightChanged?:OnCallbackBoolean,
-          onHover?:OnCallbackBoolean,
-          containedInkWell?:boolean,
-          highlightShape?:BoxShape,
-          radius?:number,
-          borderRadius?:BorderRadius,
-          customBorder?:ShapeBorder,
-          focusColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          overlayColor?:Color,
-          splashColor?:Color,
-          enableFeedback?:boolean,
-          excludeFromSemantics?:boolean,
-          canRequestFocus ?:boolean,
-          onFocusChange?:OnCallbackBoolean,
-          autofocus?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9825,34 +7493,8 @@ class InkResponse extends Widget {
     }
 }
 exports.InkResponse = InkResponse;
+//****** InkWell ******
 class InkWell extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          onTap?:OnCallback,
-          onTapDown?:OnTapDown,
-          onTapCancel?:OnCallback,
-          onDoubleTap?:OnCallback,
-          onLongPress?:OnCallback,
-          onHighlightChanged?:OnCallbackBoolean,
-          onHover?:OnCallbackBoolean,
-          radius?:number,
-          borderRadius?:BorderRadius,
-          customBorder?:ShapeBorder,
-          focusColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          overlayColor?:Color,
-          splashColor?:Color,
-          enableFeedback?:boolean,
-          excludeFromSemantics?:boolean,
-          canRequestFocus ?:boolean,
-          onFocusChange?:OnCallbackBoolean,
-          autofocus?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9882,28 +7524,9 @@ class InkWell extends Widget {
     }
 }
 exports.InkWell = InkWell;
+//****** Image ******
+//TODO:frameBuilder、loadingBuilder、errorBuilder
 class Image extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          image:ImageProvider,
-          semanticLabel?:string,
-          excludeFromSemantics?:boolean,
-          width?:number,
-          height?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          gaplessPlayback?:boolean,
-          isAntiAlias?:boolean,
-          filterQuality?:FilterQuality,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -9925,30 +7548,6 @@ class Image extends Widget {
             this.filterQuality = config.filterQuality;
         }
     }
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          scale?:number,
-          semanticLabel?:string,
-          excludeFromSemantics?:boolean,
-          width?:number,
-          height?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          gaplessPlayback?:boolean,
-          isAntiAlias?:boolean,
-          filterQuality?:FilterQuality,
-          headers?:Map<string,string>,
-          cacheWidth?:number,
-          cacheHeight?:number,
-        }
-     */
     static network(src, config) {
         var v = new Image();
         v.constructorName = "network";
@@ -9976,29 +7575,6 @@ class Image extends Widget {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          scale?:number,
-          semanticLabel?:string,
-          excludeFromSemantics?:boolean,
-          width?:number,
-          height?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          gaplessPlayback?:boolean,
-          isAntiAlias?:boolean,
-          filterQuality?:FilterQuality,
-          cacheWidth?:number,
-          cacheHeight?:number,
-        }
-     */
     static file(file, config) {
         var v = new Image();
         v.constructorName = "file";
@@ -10025,32 +7601,6 @@ class Image extends Widget {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          bundle?:AssetBundle,
-          package?:string,
-          scale?:number,
-          semanticLabel?:string,
-          excludeFromSemantics?:boolean,
-          width?:number,
-          height?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          gaplessPlayback?:boolean,
-          isAntiAlias?:boolean,
-          filterQuality?:FilterQuality,
-          headers?:Map<string,string>,
-          cacheWidth?:number,
-          cacheHeight?:number,
-        }
-     */
     static asset(imageName, config) {
         var v = new Image();
         v.constructorName = "asset";
@@ -10080,30 +7630,6 @@ class Image extends Widget {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          scale?:number,
-          semanticLabel?:string,
-          excludeFromSemantics?:boolean,
-          width?:number,
-          height?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          gaplessPlayback?:boolean,
-          isAntiAlias?:boolean,
-          filterQuality?:FilterQuality,
-          headers?:Map<string,string>,
-          cacheWidth?:number,
-          cacheHeight?:number,
-        }
-     */
     static memory(bytes, config) {
         var v = new Image();
         v.constructorName = "memory";
@@ -10133,14 +7659,12 @@ class Image extends Widget {
     }
 }
 exports.Image = Image;
+//#endregion
+//#region ------- J -------
+//#endregion
+//#region ------- K -------
+//****** KeyedSubtree ******
 class KeyedSubtree extends Widget {
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10150,17 +7674,10 @@ class KeyedSubtree extends Widget {
     }
 }
 exports.KeyedSubtree = KeyedSubtree;
+//#endregion
+//#region ------- L -------
+//****** LabelTitle ******
 class LabelTitle extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          label?:string,
-          labelStyle?:TextStyle,
-          title?:string,
-          titleStyle?:TextStyle,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10173,16 +7690,8 @@ class LabelTitle extends Widget {
     }
 }
 exports.LabelTitle = LabelTitle;
+//****** LimitedBox ******
 class LimitedBox extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          maxWidth?:number,
-          maxHeight?:number,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10194,16 +7703,8 @@ class LimitedBox extends Widget {
     }
 }
 exports.LimitedBox = LimitedBox;
+//****** ListBody ******
 class ListBody extends Widget {
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          reverse?:boolean,
-          mainAxis?:Axis,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10215,29 +7716,8 @@ class ListBody extends Widget {
     }
 }
 exports.ListBody = ListBody;
+//****** ListTile ******
 class ListTile extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          leading?:Widget,
-          title?:Widget,
-          subtitle?:Widget,
-          trailing?:Widget,
-          onTap?:OnCallback,
-          onLongPress?:OnCallback,
-          selected?:boolean,
-          isThreeLine?:boolean,
-          dense?:boolean,
-          visualDensity?:VisualDensity,
-          shape?:ShapeBorder,
-          contentPadding?:EdgeInsets,
-          enabled?:boolean,
-          focusColor?:Color,
-          hoverColor?:Color,
-          autofocus?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10262,31 +7742,8 @@ class ListTile extends Widget {
     }
 }
 exports.ListTile = ListTile;
+//****** ListView ******
 class ListView extends Widget {
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          padding?:EdgeInsets,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          physics?:ScrollPhysics,
-          shrinkWrap?:boolean,
-          itemExtent?:number,
-          addAutomaticKeepAlives?:boolean,
-          addRepaintBoundaries?:boolean,
-          addSemanticIndexes?:boolean,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-          key?:Key,
-          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10334,30 +7791,6 @@ class ListView extends Widget {
         }
         super.preBuild(jsWidgetHelper, buildContext);
     }
-    /**
-     * @param config config:
-        { itemBuilder?:IndexedWidgetBuilder,
-          itemCount?:number,
-          padding?:EdgeInsets,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          physics?:ScrollPhysics,
-          shrinkWrap?:boolean,
-          itemExtent?:number,
-          addAutomaticKeepAlives?:boolean,
-          addRepaintBoundaries?:boolean,
-          addSemanticIndexes?:boolean,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-          key?:Key,
-          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
     static builder(config) {
         let v = new ListView();
         v.constructorName = "builder";
@@ -10385,31 +7818,6 @@ class ListView extends Widget {
         }
         return v;
     }
-    /**
-     * @param config config:
-        { itemBuilder?:IndexedWidgetBuilder,
-          separatorBuilder?:IndexedWidgetBuilder,
-          itemCount?:number,
-          padding?:EdgeInsets,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          physics?:ScrollPhysics,
-          shrinkWrap?:boolean,
-          itemExtent?:number,
-          addAutomaticKeepAlives?:boolean,
-          addRepaintBoundaries?:boolean,
-          addSemanticIndexes?:boolean,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-          key?:Key,
-          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
     static separatorBuilder(config) {
         let v = new ListView();
         v.constructorName = "separatorBuilder";
@@ -10438,27 +7846,6 @@ class ListView extends Widget {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          childrenDelegate:SliverChildDelegate;
-          padding?:EdgeInsets,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          physics?:ScrollPhysics,
-          shrinkWrap?:boolean,
-          itemExtent?:number,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-          key?:Key,
-          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
     static custom(config) {
         let v = new ListView();
         v.constructorName = "custom";
@@ -10484,14 +7871,8 @@ class ListView extends Widget {
     }
 }
 exports.ListView = ListView;
+//****** TODO LayoutBuilder ******
 class LayoutBuilder extends Widget {
-    /**
-     * @param config config:
-        {
-          builder?:any,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10501,24 +7882,10 @@ class LayoutBuilder extends Widget {
     }
 }
 exports.LayoutBuilder = LayoutBuilder;
+//#endregion
+//#region ------- M -------
+//****** Material ******
 class Material extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          elevation?:number,
-          color?:Color,
-          shadowColor?:Color,
-          textStyle?:TextStyle,
-          borderRadius?:BorderRadius,
-          type?:MaterialType,
-          shape?:any,
-          borderOnForeground?:boolean,
-          clipBehavior?:Clip,
-          animationDuration?:Duration,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10538,16 +7905,8 @@ class Material extends Widget {
     }
 }
 exports.Material = Material;
+//****** TODO MaterialPageRoute ******
 class MaterialPageRoute extends Widget {
-    /**
-     * @param config config:
-        {
-          builder?:any,
-          settings?:any,
-          maintainState?:boolean,
-          fullscreenDialog?:boolean
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10567,21 +7926,8 @@ class MaterialPageRoute extends Widget {
     }
 }
 exports.MaterialPageRoute = MaterialPageRoute;
+//****** MaterialBanner ******
 class MaterialBanner extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          content:Widget,
-          contentTextStyle?:TextStyle,
-          actions:Array<Widget>,
-          leading?:Widget,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          leadingPadding?:EdgeInsets,
-          forceActionsBelow?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10598,14 +7944,10 @@ class MaterialBanner extends Widget {
     }
 }
 exports.MaterialBanner = MaterialBanner;
+//#endregion
+//#region ------- N -------
+//****** TODO NotificationListener ******
 class NotificationListener extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10615,20 +7957,8 @@ class NotificationListener extends Widget {
     }
 }
 exports.NotificationListener = NotificationListener;
+//****** TODO NestedScrollView ******
 class NestedScrollView extends Widget {
-    /**
-     * @param config config:
-        {
-          body?:Widget,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          physics?:ScrollPhysics,
-          headerSliverBuilder?:any,
-          dragStartBehavior?:DragStartBehavior,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10666,16 +7996,10 @@ class Navigator extends DartClass {
     }
 }
 exports.Navigator = Navigator;
+//#endregion
+//#region ------- O -------
+//****** Opacity ******
 class Opacity extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          opacity:number,
-          alwaysIncludeSemantics?:boolean
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10687,15 +8011,8 @@ class Opacity extends Widget {
     }
 }
 exports.Opacity = Opacity;
+//****** Offstage ******
 class Offstage extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:.Widget,
-          offstage?:boolean,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10706,19 +8023,8 @@ class Offstage extends Widget {
     }
 }
 exports.Offstage = Offstage;
+//****** OverflowBox ******
 class OverflowBox extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          alignment?:Alignment,
-          minWidth?:number,
-          maxWidth?:number,
-          minHeight?:number,
-          maxHeight?:number,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10733,36 +8039,8 @@ class OverflowBox extends Widget {
     }
 }
 exports.OverflowBox = OverflowBox;
+//****** OutlineButton ******
 class OutlineButton extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          onPressed:OnCallback,
-          onLongPress?:OnCallback,
-          padding?:EdgeInsets,
-          textTheme?:ButtonTextTheme,
-          textColor?:Color,
-          disabledTextColor?:Color,
-          color?:Color,
-          disabledColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorBrightness?:Brightness,
-          shape?:any,
-          clipBehavior?:Clip,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          highlightElevation?:number,
-          focusColor?: Color,
-          hoverColor?: Color,
-          visualDensity?: VisualDensity,
-          autofocus?: boolean,
-          borderSide?:BorderSide,
-          disabledBorderColor?:Color,
-          highlightedBorderColor?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10792,38 +8070,6 @@ class OutlineButton extends Widget {
             this.highlightedBorderColor = config.highlightedBorderColor;
         }
     }
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          onPressed?:OnCallback,
-          onLongPress?:OnCallback,
-          padding?:EdgeInsets,
-          textTheme?:ButtonTextTheme,
-          textColor?:Color,
-          disabledTextColor?:Color,
-          color?:Color,
-          disabledColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorBrightness?:Brightness,
-          shape?:any,
-          clipBehavior?:Clip,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          highlightElevation?:number,
-          focusColor?: Color,
-          hoverColor?: Color,
-          visualDensity?: VisualDensity,
-          autofocus?: boolean,
-          borderSide?:BorderSide,
-          disabledBorderColor?:Color,
-          highlightedBorderColor?:Color,
-  
-          icon?:Widget,
-          label?:Widget,
-        }
-     */
     static icon(config) {
         let v = new OutlineButton();
         v.constructorName = "icon";
@@ -10856,15 +8102,10 @@ class OutlineButton extends Widget {
     }
 }
 exports.OutlineButton = OutlineButton;
+//#endregion
+//#region ------- P -------
+//****** Padding ******
 class Padding extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          padding?:EdgeInsets,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10875,20 +8116,8 @@ class Padding extends Widget {
     }
 }
 exports.Padding = Padding;
+//****** PhysicalModel ******
 class PhysicalModel extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          color:Color,
-          shape?:BoxShape,
-          child?:Widget,
-          clipBehavior?:Clip,
-          borderRadius?:BorderRadius,
-          elevation?:number,
-          shadowColor?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10903,20 +8132,8 @@ class PhysicalModel extends Widget {
     }
 }
 exports.PhysicalModel = PhysicalModel;
+//****** Positioned ******
 class Positioned extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key
-          child:Widget,
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number,
-          width?:number,
-          height?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -10930,14 +8147,6 @@ class Positioned extends Widget {
             this.child = config.child;
         }
     }
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          rect?:Rect,
-          key?:Key
-        }
-     */
     static fromRect(config) {
         let v = new Positioned();
         v.constructorName = "fromRect";
@@ -10948,17 +8157,6 @@ class Positioned extends Widget {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          key?:Key
-          child:Widget,
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number,
-        }
-     */
     static fill(config) {
         var v = new Positioned();
         v.constructorName = "fill";
@@ -10972,20 +8170,6 @@ class Positioned extends Widget {
         }
         return v;
     }
-    /**
-     * @param config config:
-        {
-          key?:Key
-          child:Widget,
-          textDirection:TextDirection;
-          start?:number,
-          top?:number,
-          end?:number,
-          bottom?:number,
-          width?:number,
-          height?:number,
-        }
-     */
     static directional(config) {
         var v = new Positioned();
         v.constructorName = "directional";
@@ -11004,20 +8188,8 @@ class Positioned extends Widget {
     }
 }
 exports.Positioned = Positioned;
+//****** PositionedDirectional ******
 class PositionedDirectional extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key
-          child:Widget,
-          start?:number,
-          top?:number,
-          end?:number,
-          bottom?:number,
-          width?:number,
-          height?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11033,15 +8205,8 @@ class PositionedDirectional extends Widget {
     }
 }
 exports.PositionedDirectional = PositionedDirectional;
+//****** PreferredSize ******
 class PreferredSize extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          preferredSize?:Size,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11056,17 +8221,8 @@ exports.PreferredSize = PreferredSize;
 class PreferredSizeWidget extends Widget {
 }
 exports.PreferredSizeWidget = PreferredSizeWidget;
+//****** Placeholder ******
 class Placeholder extends Widget {
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          strokeWidth?:number,
-          fallbackWidth?:number,
-          fallbackHeight?:number,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11079,23 +8235,8 @@ class Placeholder extends Widget {
     }
 }
 exports.Placeholder = Placeholder;
+//****** TODO PopupMenuButton ******
 class PopupMenuButton extends Widget {
-    /**
-     * @param config config:
-        {
-          itemBuilder?:any,
-          initialValue?:any,
-          onSelected?:any,
-          onCanceled?:any,
-          tooltip?:string,
-          elevation?:number,
-          padding?:EdgeInsets,
-          child?:Widget,
-          icon?:Widget,
-          offset?:Offset,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11129,17 +8270,8 @@ class PopupMenuButton extends Widget {
     }
 }
 exports.PopupMenuButton = PopupMenuButton;
+//****** TODO PopupMenuItem ******
 class PopupMenuItem extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          value?:any,
-          enabled?:boolean,
-          height?:number,
-          key?:Key
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11152,24 +8284,8 @@ class PopupMenuItem extends Widget {
     }
 }
 exports.PopupMenuItem = PopupMenuItem;
+//****** PageView ******
 class PageView extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          controller?:PageController,
-          physics?:ScrollPhysics,
-          pageSnapping?:boolean,
-          onPageChanged?:OnCallbackNumber,
-          children?:Array<Widget>,
-          dragStartBehavior?:DragStartBehavior,
-          allowImplicitScrolling?:boolean,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11189,20 +8305,10 @@ class PageView extends Widget {
     }
 }
 exports.PageView = PageView;
+//#endregion
+//#region ------- R -------
+//****** Row ******
 class Row extends Widget {
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          mainAxisAlignment?:MainAxisAlignment,
-          mainAxisSize?:MainAxisSize,
-          crossAxisAlignment?:CrossAxisAlignment,
-          textDirection?:TextDirection,
-          verticalDirection?:VerticalDirection,
-          textBaseline?:TextBaseline,
-          key?:Key,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11218,44 +8324,8 @@ class Row extends Widget {
     }
 }
 exports.Row = Row;
+//****** RawChip ******
 class RawChip extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          selected?:boolean,
-          isEnabled?:boolean,
-          tapEnabled?:boolean,
-          onSelected?:OnCallbackBoolean,
-          deleteIcon?:Widget,
-          onDeleted?:OnCallback,
-          deleteIconColor?:Color,
-          deleteButtonTooltipMessage?:string,
-          onPressed?:OnCallback,
-          pressElevation?:number,
-          disabledColor?:Color,
-          selectedColor?:Color,
-          tooltip?:string,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          focusNode?:FocusNode,
-          autofocus?:boolean,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          visualDensity?:VisualDensity,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          shadowColor?:Color,
-          selectedShadowColor?:Color,
-          showCheckmark?:boolean,
-          checkmarkColor?:Color,
-          avatarBorder?:ShapeBorder,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11295,14 +8365,8 @@ class RawChip extends Widget {
     }
 }
 exports.RawChip = RawChip;
+//****** RepaintBoundary ******
 class RepaintBoundary extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11319,28 +8383,8 @@ class RepaintBoundary extends Widget {
     }
 }
 exports.RepaintBoundary = RepaintBoundary;
+//****** RawImage ******
 class RawImage extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          image?:ImageProvider,
-          debugImageLabel?:string,
-          width?:number,
-          height?:number,
-          scale?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          invertColors?:boolean,
-          filterQuality?:FilterQuality,
-          isAntiAlias?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11364,15 +8408,8 @@ class RawImage extends Widget {
     }
 }
 exports.RawImage = RawImage;
+//****** RotatedBox ******
 class RotatedBox extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          quarterTurns:number,
-          child?:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11383,39 +8420,8 @@ class RotatedBox extends Widget {
     }
 }
 exports.RotatedBox = RotatedBox;
+//****** RaisedButton ******
 class RaisedButton extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          onPressed?:OnCallback,
-          onHighlightChanged?:OnCallbackBoolean,
-          padding?:EdgeInsets,
-          textColor?:Color,
-          disabledTextColor?:Color,
-          color?:Color,
-          disabledColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorBrightness?:Brightness,
-          elevation?:number,
-          highlightElevation?:number,
-          disabledElevation?:number,
-          shape?:any,
-          clipBehavior?:Clip,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          animationDuration?:Duration,
-        
-          onLongPress?:OnCallback,
-          focusColor?:Color,
-          hoverColor?:Color,
-          focusElevation?:number,
-          hoverElevation?:number,
-          visualDensity?:VisualDensity,
-          autofocus?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11447,38 +8453,6 @@ class RaisedButton extends Widget {
             this.autofocus = config.autofocus;
         }
     }
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        icon?:Widget,
-        label?:Widget,
-        onPressed?:OnCallback,
-        onHighlightChanged?:OnCallbackBoolean,
-        padding?:EdgeInsets,
-        textColor?:Color,
-        disabledTextColor?:Color,
-        color?:Color,
-        disabledColor?:Color,
-        highlightColor?:Color,
-        splashColor?:Color,
-        colorBrightness?:Brightness,
-        elevation?:number,
-        highlightElevation?:number,
-        disabledElevation?:number,
-        shape?:any,
-        clipBehavior?:Clip,
-        materialTapTargetSize?:MaterialTapTargetSize,
-        animationDuration?:Duration,
-        onLongPress?:OnCallback,
-        focusColor?:Color,
-        hoverColor?:Color,
-        focusElevation?:number,
-        hoverElevation?:number,
-        visualDensity?:VisualDensity,
-        autofocus?:boolean,
-      }
-     */
     static icon(config) {
         let v = new RaisedButton();
         v.constructorName = "icon";
@@ -11514,18 +8488,8 @@ class RaisedButton extends Widget {
     }
 }
 exports.RaisedButton = RaisedButton;
+//****** Radio ******
 class Radio extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        value?:string,
-        groupValue?:string,
-        onChanged?:OnCallbackString,
-        activeColor?:Color,
-        materialTapTargetSize?:MaterialTapTargetSize
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11539,26 +8503,8 @@ class Radio extends Widget {
     }
 }
 exports.Radio = Radio;
+//****** RadioListTile ******
 class RadioListTile extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        value:string,
-        groupValue:string,
-        onChanged:OnCallbackString,
-        toggleable?:boolean,
-        activeColor?:Color,
-        title?:Widget,
-        subtitle?:Widget,
-        isThreeLine?:boolean,
-        dense?:boolean,
-        secondary?:Widget,
-        selected?:boolean,
-        controlAffinity?:ListTileControlAffinity,
-        autofocus?:boolean,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11579,37 +8525,8 @@ class RadioListTile extends Widget {
     }
 }
 exports.RadioListTile = RadioListTile;
+//****** RawMaterialButton ******
 class RawMaterialButton extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        onPressed:OnCallback,
-        onLongPress?:OnCallback,
-        onHighlightChanged?:OnCallbackBoolean,
-        textStyle?:TextStyle,
-        padding?:EdgeInsets,
-        fillColor?:Color,
-        focusColor?:Color,
-        hoverColor?:Color,
-        highlightColor?:Color,
-        splashColor?:Color,
-        constraints?:BoxConstraints,
-        elevation?:number,
-        focusElevation?:number,
-        hoverElevation?:number,
-        highlightElevation?:number,
-        disabledElevation?:number,
-        visualDensity?:VisualDensity,
-        autofocus?:boolean,
-        shape?:any,
-        clipBehavior?:Clip,
-        materialTapTargetSize?:MaterialTapTargetSize,
-        animationDuration?:Duration,
-        enableFeedback?:boolean,
-        child?:Widget,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11642,21 +8559,8 @@ class RawMaterialButton extends Widget {
     }
 }
 exports.RawMaterialButton = RawMaterialButton;
+//****** RichText ******
 class RichText extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        text:Widget,
-        textAlign?:TextAlign,
-        textDirection?:TextDirection,
-        softWrap?:boolean,
-        overflow?:Overflow,
-        textScaleFactor?:number,
-        maxLines?:number,
-        textWidthBasis?:TextWidthBasis,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11673,17 +8577,10 @@ class RichText extends Widget {
     }
 }
 exports.RichText = RichText;
+//#endregion
+//#region ------- S -------
+//****** Step ******
 class Step extends Widget {
-    /**
-     * @param config config:
-      {
-        title:Widget,
-        subtitle?:Widget,
-        content:Widget,
-        state?:StepState,
-        isActive?:boolean,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11696,20 +8593,8 @@ class Step extends Widget {
     }
 }
 exports.Step = Step;
+//****** Stepper ******
 class Stepper extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        steps?:Array<Step>,
-        physics?:ScrollPhysics,
-        type?:StepperType,
-        currentStep?:number,
-        onStepTapped?:OnCallbackNumber,
-        onStepContinue?:OnCallback,
-        onStepCancel?:OnCallback,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11725,14 +8610,8 @@ class Stepper extends Widget {
     }
 }
 exports.Stepper = Stepper;
+//****** Spacer ******
 class Spacer extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        flex?:number
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11742,62 +8621,8 @@ class Spacer extends Widget {
     }
 }
 exports.Spacer = Spacer;
+//****** Semantics ******
 class Semantics extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        container?:boolean,
-        explicitChildNodes?:boolean,
-        excludeSemantics?:boolean,
-        enabled?:boolean,
-        checked?:boolean,
-        selected?:boolean,
-        toggled?:boolean,
-        button?:boolean,
-        link?:boolean,
-        header?:boolean,
-        textField?:boolean,
-        readOnly?:boolean,
-        focusable?:boolean,
-        focused?:boolean,
-        inMutuallyExclusiveGroup?:boolean,
-        obscured?:boolean,
-        multiline?:boolean,
-        scopesRoute?:boolean,
-        namesRoute?:boolean,
-        hidden?:boolean,
-        image?:boolean,
-        liveRegion?:boolean,
-        maxValueLength?:number,
-        currentValueLength?:number,
-  
-        label?:string,
-        value?:string,
-        increasedValue?:string,
-        decreasedValue?:string,
-        hint?:string,
-        onTapHint?:string,
-        onLongPressHint?:string,
-        textDirection?:TextDirection,
-  
-        onTap?:OnCallback,
-        onLongPress?:OnCallback,
-        onScrollLeft?:OnCallback,
-        onScrollRight?:OnCallback,
-        onScrollUp?:OnCallback,
-        onScrollDown?:OnCallback,
-        onIncrease?:OnCallback,
-        onDecrease?:OnCallback,
-        onCopy?:OnCallback,
-        onCut?:OnCallback,
-        onPaste?:OnCallback,
-        onDismiss?:OnCallback,
-        onDidGainAccessibilityFocus?:OnCallback,
-        onDidLoseAccessibilityFocus?:OnCallback,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11853,28 +8678,8 @@ class Semantics extends Widget {
     }
 }
 exports.Semantics = Semantics;
+//****** SwitchListTile ******
 class SwitchListTile extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          onChanged:OnCallbackBoolean,
-          activeColor?:Color,
-          activeTrackColor?:Color,
-          inactiveThumbColor?:Color,
-          inactiveTrackColor?:Color,
-          title?:Widget,
-          subtitle?:Widget,
-          isThreeLine?:boolean,
-          dense?:boolean,
-          contentPadding?:EdgeInsets,
-          secondary?:Widget,
-          selected?:boolean,
-          autofocus?:boolean,
-          controlAffinity?:ListTileControlAffinity,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11898,24 +8703,8 @@ class SwitchListTile extends Widget {
     }
 }
 exports.SwitchListTile = SwitchListTile;
+//****** Switch ******
 class Switch extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          onChanged?:OnCallbackBoolean,
-          activeColor?:Color,
-          activeTrackColor?:Color,
-          inactiveThumbColor?:Color,
-          inactiveTrackColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          dragStartBehavior?:DragStartBehavior,
-          autofocus?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11935,25 +8724,8 @@ class Switch extends Widget {
     }
 }
 exports.Switch = Switch;
+//****** Slider ******
 class Slider extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        value?:number,
-        onChanged?:OnCallbackNumber,
-        onChangeStart?:OnCallbackNumber,
-        onChangeEnd?:OnCallbackNumber,
-        min?:number,
-        max?:number,
-        divisions?:number,
-        label?:string,
-        activeColor?:Color,
-        inactiveColor?:Color,
-        semanticFormatterCallback?:OnCallbackNumber,
-        autofocus?:boolean,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11974,16 +8746,8 @@ class Slider extends Widget {
     }
 }
 exports.Slider = Slider;
+//****** SizedBox ******
 class SizedBox extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        width?:number,
-        height?:number,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -11993,13 +8757,6 @@ class SizedBox extends Widget {
             this.child = config.child;
         }
     }
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-      }
-     */
     static expand(config) {
         var v = new SizedBox();
         v.constructorName = "expand";
@@ -12009,14 +8766,6 @@ class SizedBox extends Widget {
         }
         return v;
     }
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        size?:Size,
-      }
-     */
     static fromSize(config) {
         var v = new SizedBox();
         v.constructorName = "fromSize";
@@ -12027,13 +8776,6 @@ class SizedBox extends Widget {
         }
         return v;
     }
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-      }
-     */
     static shrink(config) {
         var v = new SizedBox();
         v.constructorName = "shrink";
@@ -12045,16 +8787,8 @@ class SizedBox extends Widget {
     }
 }
 exports.SizedBox = SizedBox;
+//****** SizedOverflowBox ******
 class SizedOverflowBox extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        alignment?:Alignment,
-        size:Size,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12066,19 +8800,8 @@ class SizedOverflowBox extends Widget {
     }
 }
 exports.SizedOverflowBox = SizedOverflowBox;
+//****** Stack ******
 class Stack extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        children?:Array<Widget>,
-        alignment?:AlignmentDirectional,
-        textDirection?:TextDirection,
-        fit?:StackFit,
-        overflow?:Overflow,
-        clipBehavior?:Clip,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12092,38 +8815,8 @@ class Stack extends Widget {
     }
 }
 exports.Stack = Stack;
+//****** SliverAppBar ******
 class SliverAppBar extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        leading?:Widget,
-        automaticallyImplyLeading?:boolean,
-        title?:Widget,
-        actions?:Array<Widget>,
-        flexibleSpace?:Widget,
-        bottom?:Widget,
-        elevation?:number,
-        shadowColor?:Color,
-        forceElevated?:boolean,
-        backgroundColor?:Color,
-        brightness?:Brightness,
-        primary?:boolean,
-        centerTitle?:boolean,
-        excludeHeaderSemantics?:boolean,
-        titleSpacing?:number,
-        collapsedHeight?:number,
-        expandedHeight?:number,
-        floating?:boolean,
-        pinned?:boolean,
-        snap?:boolean,
-        stretch?:boolean,
-        stretchTriggerOffset?:number
-        onStretchTrigger?:OnCallback,
-        shape?:any,
-        toolbarHeight?:number,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12157,15 +8850,11 @@ class SliverAppBar extends Widget {
     }
 }
 exports.SliverAppBar = SliverAppBar;
+//****** SliverFillViewport ******
 class SliverFillViewport extends Widget {
     /**
      * @param config config:
-      {
-        key?:Key,
-        delegate:SliverChildDelegate,
-        viewportFraction?:number,
-        padEnds?:boolean,
-      }
+      
      */
     constructor(config) {
         super();
@@ -12178,16 +8867,8 @@ class SliverFillViewport extends Widget {
     }
 }
 exports.SliverFillViewport = SliverFillViewport;
+//****** SliverFillRemaining ******
 class SliverFillRemaining extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        hasScrollBody?:boolean,
-        fillOverscroll?:boolean,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12199,15 +8880,8 @@ class SliverFillRemaining extends Widget {
     }
 }
 exports.SliverFillRemaining = SliverFillRemaining;
+//****** SliverPadding ******
 class SliverPadding extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        sliver?:Widget,
-        padding:EdgeInsets,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12218,15 +8892,8 @@ class SliverPadding extends Widget {
     }
 }
 exports.SliverPadding = SliverPadding;
+//****** SliverGrid ******
 class SliverGrid extends Widget {
-    /**
-     * @param config config:
-      {
-        delegate?:SliverChildDelegate,
-        gridDelegate?:SliverGridDelegate,
-        key?:Key,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12239,44 +8906,10 @@ class SliverGrid extends Widget {
 exports.SliverGrid = SliverGrid;
 //#region ****** SliverGridDelegate ******
 class SliverGridDelegate extends Widget {
-    /**
-     * SliverGridDelegate.withMax=new SliverGridDelegateWithMaxCrossAxisExtent(config: SliverGridDelegateWithMaxCrossAxisExtentConfig);
-     * @param config config:
-      {
-        maxCrossAxisExtent:number,
-        mainAxisSpacing?:number,
-        crossAxisSpacing?:number,
-        childAspectRatio?:number,
-      }
-     */
-    static withMax(config) {
-        return new SliverGridDelegateWithMaxCrossAxisExtent(config);
-    }
-    /**
-     * SliverGridDelegate.withFixed=new SliverGridDelegateWithFixedCrossAxisCount(config: SliverGridDelegateWithFixedCrossAxisCountConfig);
-     * @param config config:
-      {
-        crossAxisCount:number,
-        mainAxisSpacing?:number,
-        crossAxisSpacing?:number,
-        childAspectRatio?:number,
-      }
-     */
-    static withFixed(config) {
-        return new SliverGridDelegateWithFixedCrossAxisCount(config);
-    }
 }
 exports.SliverGridDelegate = SliverGridDelegate;
+//******  SliverGridDelegateWithMaxCrossAxisExtent ******
 class SliverGridDelegateWithMaxCrossAxisExtent extends Widget {
-    /**
-     * @param config config:
-      {
-        maxCrossAxisExtent:number,
-        mainAxisSpacing?:number,
-        crossAxisSpacing?:number,
-        childAspectRatio?:number,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12288,16 +8921,8 @@ class SliverGridDelegateWithMaxCrossAxisExtent extends Widget {
     }
 }
 exports.SliverGridDelegateWithMaxCrossAxisExtent = SliverGridDelegateWithMaxCrossAxisExtent;
+//******  SliverGridDelegateWithFixedCrossAxisCount ******
 class SliverGridDelegateWithFixedCrossAxisCount extends Widget {
-    /**
-     * @param config config:
-      {
-        crossAxisCount:number,
-        mainAxisSpacing?:number,
-        crossAxisSpacing?:number,
-        childAspectRatio?:number,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12312,48 +8937,10 @@ exports.SliverGridDelegateWithFixedCrossAxisCount = SliverGridDelegateWithFixedC
 //#endregion
 //#region ****** SliverChildDelegate ******
 class SliverChildDelegate extends Widget {
-    /**
-     * SliverChildDelegate.list = new SliverChildListDelegate(config: SliverChildListDelegateConfig);
-     * @param config config:
-       {
-         children?:Array<Widget>,
-         addAutomaticKeepAlives?:boolean,
-         addRepaintBoundaries?:boolean,
-         addSemanticIndexes?:boolean,
-         semanticIndexOffset?:number,
-       }
-    */
-    static list(config) {
-        return new SliverChildListDelegate(config);
-    }
-    /**
-     * SliverChildDelegate.builder = new SliverChildBuilderDelegate(config: SliverChildBuilderDelegateConfig);
-     * @param config config:
-      {
-        builder:any,
-        childCount?:number,
-        addAutomaticKeepAlives?:boolean,
-        addRepaintBoundaries?:boolean,
-        addSemanticIndexes?:boolean,
-        semanticIndexOffset?:number,
-      }
-     */
-    static builder(config) {
-        return new SliverChildBuilderDelegate(config);
-    }
 }
 exports.SliverChildDelegate = SliverChildDelegate;
+//******  SliverChildListDelegate ******
 class SliverChildListDelegate extends SliverChildDelegate {
-    /**
-     * @param config config:
-      {
-        children:Array<Widget>,
-        addAutomaticKeepAlives?:boolean,
-        addRepaintBoundaries?:boolean,
-        addSemanticIndexes?:boolean,
-        semanticIndexOffset?:number,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12366,19 +8953,8 @@ class SliverChildListDelegate extends SliverChildDelegate {
     }
 }
 exports.SliverChildListDelegate = SliverChildListDelegate;
+//****** SliverChildBuilderDelegate ******
 class SliverChildBuilderDelegate extends SliverChildDelegate {
-    /**
-     * @param config config:
-      {
-        builder:IndexedWidgetBuilder,
-        childCount:number,
-        addAutomaticKeepAlives?:boolean,
-        addRepaintBoundaries?:boolean,
-        addSemanticIndexes?:boolean,
-        semanticIndexOffset?:number,
-        children?:Array<Widget>,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12409,14 +8985,9 @@ class SliverChildBuilderDelegate extends SliverChildDelegate {
     }
 }
 exports.SliverChildBuilderDelegate = SliverChildBuilderDelegate;
+//#endregion
+//****** SliverList ******
 class SliverList extends Widget {
-    /**
-     * @param config config:
-      {
-        delegate?:SliverChildDelegate,
-        key?:Key
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12426,16 +8997,8 @@ class SliverList extends Widget {
     }
 }
 exports.SliverList = SliverList;
+//****** SliverOpacity ******
 class SliverOpacity extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        sliver?:Widget,
-        opacity:number,
-        alwaysIncludeSemantics?:boolean,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12447,15 +9010,8 @@ class SliverOpacity extends Widget {
     }
 }
 exports.SliverOpacity = SliverOpacity;
+//****** TODO SliverOverlapInjector ******
 class SliverOverlapInjector extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        handle?:any,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12466,15 +9022,8 @@ class SliverOverlapInjector extends Widget {
     }
 }
 exports.SliverOverlapInjector = SliverOverlapInjector;
+//****** SliverFixedExtentList ******
 class SliverFixedExtentList extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        delegate?:SliverChildDelegate,
-        itemExtent?:number,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12485,15 +9034,8 @@ class SliverFixedExtentList extends Widget {
     }
 }
 exports.SliverFixedExtentList = SliverFixedExtentList;
+//****** TODO SliverOverlapAbsorber ******
 class SliverOverlapAbsorber extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        handle?:any,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12504,22 +9046,8 @@ class SliverOverlapAbsorber extends Widget {
     }
 }
 exports.SliverOverlapAbsorber = SliverOverlapAbsorber;
+//****** SingleChildScrollView ******
 class SingleChildScrollView extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        scrollDirection?:Axis,
-        reverse?:boolean,
-        padding?:EdgeInsets,
-        primary?:boolean,
-        physics?:ScrollPhysics,
-        controller?:ScrollController,
-        dragStartBehavior?:DragStartBehavior,
-        clipBehavior?:Clip,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12537,14 +9065,8 @@ class SingleChildScrollView extends Widget {
     }
 }
 exports.SingleChildScrollView = SingleChildScrollView;
+//****** SliverToBoxAdapter ******
 class SliverToBoxAdapter extends Widget {
-    /**
-     * @param config config:
-      {
-        child?:Widget,
-        key?:Key
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12554,33 +9076,8 @@ class SliverToBoxAdapter extends Widget {
     }
 }
 exports.SliverToBoxAdapter = SliverToBoxAdapter;
+//****** Scaffold ******
 class Scaffold extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key;
-        appBar?:Widget;
-        body?:Widget;
-        floatingActionButton?:Widget;
-        floatingActionButtonLocation?:FloatingActionButtonLocation;
-        persistentFooterButtons?:Array<Widget>;
-        drawer?:Widget;
-        endDrawer?:Widget;
-        bottomNavigationBar?:Widget;
-        bottomSheet?:Widget;
-        backgroundColor?:Color;
-        resizeToAvoidBottomPadding?:boolean;
-        resizeToAvoidBottomInset?:boolean;
-        primary?:boolean;
-        drawerDragStartBehavior?:DragStartBehavior;
-        extendBody?:boolean;
-        extendBodyBehindAppBar?:boolean;
-        drawerScrimColor?:Color;
-        drawerEdgeDragWidth?:number;
-        drawerEnableOpenDragGesture?:boolean;
-        endDrawerEnableOpenDragGesture?:boolean;
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12613,20 +9110,8 @@ exports.Scaffold = Scaffold;
 class ScaffoldState extends DartClass {
 }
 exports.ScaffoldState = ScaffoldState;
+//****** SafeArea ******
 class SafeArea extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          left?:boolean,
-          top?:boolean,
-          right?:boolean,
-          bottom?:boolean,
-          minimum?:EdgeInsets,
-          maintainBottomViewPadding?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12642,19 +9127,8 @@ class SafeArea extends Widget {
     }
 }
 exports.SafeArea = SafeArea;
+//****** SliverSafeArea ******
 class SliverSafeArea extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        sliver:Widget,
-        left?:boolean,
-        top?:boolean,
-        right?:boolean,
-        bottom?:boolean,
-        minimum?:EdgeInsets,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12669,16 +9143,8 @@ class SliverSafeArea extends Widget {
     }
 }
 exports.SliverSafeArea = SliverSafeArea;
+//****** Scrollbar ******
 class Scrollbar extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child:Widget,
-        controller?:ScrollController,
-        isAlwaysShown?:boolean,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12690,22 +9156,8 @@ class Scrollbar extends Widget {
     }
 }
 exports.Scrollbar = Scrollbar;
+//****** SnackBar ******
 class SnackBar extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Widget,
-        content:Widget,
-        backgroundColor?:Color,
-        elevation?:number,
-        shape?:any,
-        behavior?:any,
-        action?:any,
-        duration?:Duration,
-        animation?:any,
-        onVisible?:OnCallback,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12723,17 +9175,8 @@ class SnackBar extends Widget {
     }
 }
 exports.SnackBar = SnackBar;
+//****** SnackBarAction ******
 class SnackBarAction extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Widget,
-        lable:string,
-        onPressed?:OnCallback,
-        disabledTextColor?:Color,
-        textColor?:Color,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12746,21 +9189,8 @@ class SnackBarAction extends Widget {
     }
 }
 exports.SnackBarAction = SnackBarAction;
+//****** SliverVisibility ******
 class SliverVisibility extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        sliver:Widget,
-        replacement?:Widget,
-        visible?:boolean,
-        maintainState?:boolean,
-        maintainAnimation?:boolean,
-        maintainSize?:boolean,
-        maintainSemantics?:boolean,
-        maintainInteractivity?:boolean,
-      }
-    */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12777,34 +9207,8 @@ class SliverVisibility extends Widget {
     }
 }
 exports.SliverVisibility = SliverVisibility;
+//****** SelectableText ******
 class SelectableText extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        key?:Key,
-        focusNode?:FocusNode,
-        style?:TextStyle,
-        strutStyle?:StrutStyle,
-        textAlign?:TextAlign,
-        textDirection?:TextDirection,
-        textScaleFactor?:number,
-        showCursor?:boolean,
-        autofocus?:boolean,
-        toolbarOptions?:ToolbarOptions,
-        minLines?:number,
-        maxLines?:number,
-        cursorWidth?:number,
-        cursorHeight?:number,
-        cursorRadius?:Radius,
-        cursorColor?:Color,
-        dragStartBehavior?:DragStartBehavior,
-        enableInteractiveSelection?:boolean,
-        onTap?:OnCallback,
-        scrollPhysics?:ScrollPhysics,
-        textWidthBasis?:TextWidthBasis,
-      }
-     */
     constructor(data, config) {
         super();
         this.data = data;
@@ -12830,21 +9234,6 @@ class SelectableText extends Widget {
             this.textWidthBasis = config.textWidthBasis;
         }
     }
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        style?:TextStyle,
-        textAlign?:TextAlign,
-        textDirection?:TextDirection,
-        softWrap?:boolean,
-        overflow?:TextOverflow,
-        textScaleFactor?:number,
-        maxLines?:number,
-        semanticsLabel?:string,
-        textWidthBasis?:TextWidthBasis,
-      }
-     */
     static rich(data, config) {
         var v = new SelectableText(data, config);
         v.constructorName = "rich";
@@ -12853,15 +9242,10 @@ class SelectableText extends Widget {
     }
 }
 exports.SelectableText = SelectableText;
+//#endregion
+//#region ------- T -------
+//****** TableRow ******
 class TableRow extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        children?:Array<Widget>,
-        decoration?:BoxDecoration,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12872,15 +9256,8 @@ class TableRow extends Widget {
     }
 }
 exports.TableRow = TableRow;
+//****** TableCell ******
 class TableCell extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        verticalAlignment?:TableCellVerticalAlignment,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12891,18 +9268,8 @@ class TableCell extends Widget {
     }
 }
 exports.TableCell = TableCell;
+//****** Transform ******
 class Transform extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        alignment?:Alignment,
-        origin?:Offset,
-        transform:Matrix4,
-        transformHitTests?:boolean,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -12914,17 +9281,6 @@ class Transform extends Widget {
             this.child = config.child;
         }
     }
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        angle:number,
-        alignment?:Alignment,
-        origin?:Offset,
-        transformHitTests?:boolean,
-      }
-     */
     static rotate(config) {
         var v = new Transform();
         v.constructorName = "rotate";
@@ -12938,15 +9294,6 @@ class Transform extends Widget {
         }
         return v;
     }
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        offset:Offset,
-        transformHitTests?:boolean,
-      }
-     */
     static translate(config) {
         var v = new Transform();
         v.constructorName = "translate";
@@ -12958,17 +9305,6 @@ class Transform extends Widget {
         }
         return v;
     }
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        scale:number,
-        alignment?:Alignment,
-        origin?:Offset,
-        transformHitTests?:boolean,
-      }
-     */
     static scale(config) {
         var v = new Transform();
         v.constructorName = "scale";
@@ -12984,25 +9320,8 @@ class Transform extends Widget {
     }
 }
 exports.Transform = Transform;
+//****** Tooltip ******
 class Tooltip extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        message:string,
-        height?:number,
-        padding?:EdgeInsets,
-        margin?:EdgeInsets,
-        verticalOffset?:number,
-        preferBelow?:boolean,
-        excludeFromSemantics?:boolean,
-        decoration?:BoxDecoration,
-        textStyle?:TextStyle,
-        waitDuration?:Duration,
-        showDuration?:Duration,
-        child?:Widget
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13023,20 +9342,8 @@ class Tooltip extends Widget {
     }
 }
 exports.Tooltip = Tooltip;
+//****** Table ******
 class Table extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        children?:Array<Widget>,
-        defaultColumnWidth?:TableColumnWidth,
-        defaultVerticalAlignment?:TableCellVerticalAlignment,
-        textDirection?:TextDecoration,
-        border?:TableBorder,
-        textBaseline?:TextBaseline,
-        columnWidths?:Map<string,TableColumnWidth>,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13052,29 +9359,8 @@ class Table extends Widget {
     }
 }
 exports.Table = Table;
+//****** TabBar ******
 class TabBar extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        tabs?:Array<Widget>,
-        onTap?:OnCallbackNumber,
-        controller?:TabController,
-        isScrollable?:boolean,
-        indicatorColor?:Color,
-        indicatorWeight?:number,
-        indicatorPadding?:EdgeInsets,
-        indicator?:BoxDecoration,
-        indicatorSize?:TabBarIndicatorSize,
-        labelColor?:Color,
-        labelStyle?:TextStyle,
-        labelPadding?:EdgeInsets,
-        unselectedLabelColor?:Color,
-        unselectedLabelStyle?:TextStyle,
-        dragStartBehavior?:DragStartBehavior,
-        physics?:ScrollPhysics,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13099,17 +9385,8 @@ class TabBar extends Widget {
     }
 }
 exports.TabBar = TabBar;
+//****** Tab ******
 class Tab extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        text?:string,
-        icon?:Widget,
-        iconMargin?:EdgeInsets,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13121,17 +9398,8 @@ class Tab extends Widget {
     }
 }
 exports.Tab = Tab;
+//****** TabBarView ******
 class TabBarView extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        children?:Array<Widget>,
-        controller?:TabController,
-        physics?:ScrollPhysics,
-        dragStartBehavior?:DragStartBehavior,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13144,16 +9412,8 @@ class TabBarView extends Widget {
     }
 }
 exports.TabBarView = TabBarView;
+//****** TabPageSelectorIndicator ******
 class TabPageSelectorIndicator extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        backgroundColor?:Color,
-        borderColor?:Color,
-        size?:number,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13165,17 +9425,8 @@ class TabPageSelectorIndicator extends Widget {
     }
 }
 exports.TabPageSelectorIndicator = TabPageSelectorIndicator;
+//****** TabPageSelector ******
 class TabPageSelector extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        color?:Color,
-        selectedColor?:Color,
-        indicatorSize?:number,
-        controller?:TabController,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13188,16 +9439,8 @@ class TabPageSelector extends Widget {
     }
 }
 exports.TabPageSelector = TabPageSelector;
+//****** Title ******
 class Title extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        title?:string,
-        color?:Color
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13209,23 +9452,8 @@ class Title extends Widget {
     }
 }
 exports.Title = Title;
+//****** Text ******
 class Text extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        style?:TextStyle,
-        strutStyle?:StrutStyle,
-        textAlign?:TextAlign,
-        textDirection?:TextDirection,
-        softWrap?:boolean,
-        overflow?:TextOverflow,
-        textScaleFactor?:number,
-        maxLines?:number,
-        semanticsLabel?:string,
-        textWidthBasis?:TextWidthBasis,
-      }
-     */
     constructor(data, config) {
         super();
         this.data = data;
@@ -13243,21 +9471,6 @@ class Text extends Widget {
             this.textWidthBasis = config.textWidthBasis;
         }
     }
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        style?:TextStyle,
-        textAlign?:TextAlign,
-        textDirection?:TextDirection,
-        softWrap?:boolean,
-        overflow?:TextOverflow,
-        textScaleFactor?:number,
-        maxLines?:number,
-        semanticsLabel?:string,
-        textWidthBasis?:TextWidthBasis,
-      }
-     */
     static rich(data, config) {
         var v = new Text(data, config);
         v.constructorName = "rich";
@@ -13267,15 +9480,6 @@ class Text extends Widget {
 }
 exports.Text = Text;
 class TextSpan extends Widget {
-    /**
-     * @param config config:
-      {
-        children?:Array<Widget>,
-        style?:TextStyle,
-        text?:string,
-        semanticsLabel?:string,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13287,15 +9491,8 @@ class TextSpan extends Widget {
     }
 }
 exports.TextSpan = TextSpan;
+//****** Texture ******
 class Texture extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        textureId?:number,
-        filterQuality?:FilterQuality,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13306,58 +9503,9 @@ class Texture extends Widget {
     }
 }
 exports.Texture = Texture;
+//****** TextFormField ******
+//TODO:autofillHints、autofillHints
 class TextFormField extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        controller?:TextEditingController,
-        initialValue?:string,
-        focusNode?:FocusNode,
-        decoration?:InputDecoration,
-        keyboardType?:TextInputType,
-        textInputAction?:TextInputAction,
-        textCapitalization?:TextCapitalization,
-        style?:TextStyle,
-        textAlign?:TextAlign,
-        textAlignVertical?:TextAlignVertical,
-        textDirection?:TextDirection,
-        readOnly?:boolean,
-        toolbarOptions?:ToolbarOptions,
-        showCursor?:boolean,
-        autofocus?:boolean,
-        obscuringCharacter?:string,
-        obscureText?:boolean,
-        autocorrect?:boolean,
-        smartDashesType?:SmartDashesType,
-        smartQuotesType?:SmartQuotesType,
-        enableSuggestions?:boolean,
-        autovalidate?:boolean,
-        maxLines?:number,
-        minLines?:number,
-        expands?:boolean,
-        maxLength?:number,
-        maxLengthEnforced?:boolean,
-        onChanged?:OnCallbackString,
-        onTap?:OnCallback,
-        onEditingComplete?:OnCallback,
-        onFieldSubmitted?:OnCallbackString,
-        onSaved?:OnCallbackString,
-        validator?:OnCallbackString,
-        enabled?:boolean,
-        cursorWidth?:number,
-        cursorRadius?:Radius,
-        cursorColor?:Color,
-        keyboardAppearance?:Brightness,
-        scrollPadding?:EdgeInsets,
-        dragStartBehavior?:DragStartBehavior,
-        enableInteractiveSelection?:boolean,
-        scrollPhysics?:ScrollPhysics,
-
-        inputFormatters?:Array<TextInputFormatter>,
-        strutStyle?:StrutStyle,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13407,57 +9555,9 @@ class TextFormField extends Widget {
     }
 }
 exports.TextFormField = TextFormField;
+//****** TextField ******
+//TODO: iautofillHints、buildCounter
 class TextField extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        controller?:TextEditingController,
-        focusNode?:FocusNode,
-        decoration?:InputDecoration,
-        keyboardType?:TextInputType,
-        textInputAction?:TextInputAction,
-        textCapitalization?:TextCapitalization,
-        style?:TextStyle,
-        textAlign?:TextAlign,
-        textAlignVertical?:TextAlignVertical,
-        textDirection?:TextDirection,
-        readOnly?:boolean,
-        toolbarOptions?:ToolbarOptions,
-        showCursor?:boolean,
-        autofocus?:boolean,
-        obscuringCharacter?:string,
-        obscureText?:boolean,
-        autocorrect?:boolean,
-        smartDashesType?:SmartDashesType,
-        smartQuotesType?:SmartQuotesType,
-        enableSuggestions?:boolean,
-        maxLines?:number,
-        minLines?:number,
-        expands?:boolean,
-        maxLength?:number,
-        maxLengthEnforced?:boolean,
-        onChanged?:OnCallbackString,
-        onEditingComplete?:OnCallback,
-        onSubmitted?:OnCallbackString,
-        enabled?:boolean,
-        cursorWidth?:number,
-        cursorRadius?:Radius,
-        cursorColor?:Color,
-        selectionHeightStyle?:BoxHeightStyle,
-        selectionWidthStyle?:BoxWidthStyle,
-        keyboardAppearance?:Brightness,
-        scrollPadding?:EdgeInsets,
-        dragStartBehavior?:DragStartBehavior,
-        enableInteractiveSelection?:boolean,
-        onTap?:OnCallback,
-        scrollController?:ScrollController,
-        scrollPhysics?:ScrollPhysics,
-
-        inputFormatters?:Array<TextInputFormatter>,
-        strutStyle?:StrutStyle,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13507,18 +9607,10 @@ class TextField extends Widget {
     }
 }
 exports.TextField = TextField;
+//#endregion
+//#region ------- U -------
+//****** UnconstrainedBox ******
 class UnconstrainedBox extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          alignment?:Alignment;
-          textDirection?:TextDirection,
-          constrainedAxis?:Axis,
-          clipBehavior?:Clip,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13532,18 +9624,10 @@ class UnconstrainedBox extends Widget {
     }
 }
 exports.UnconstrainedBox = UnconstrainedBox;
+//#endregion
+//#region ------- V -------
+//****** VerticalDivider ******
 class VerticalDivider extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        width?:number,
-        thickness?:number,
-        indent?:number,
-        endIndent?:number,
-        color?:Color
-      }
-    */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13557,22 +9641,8 @@ class VerticalDivider extends Widget {
     }
 }
 exports.VerticalDivider = VerticalDivider;
+//****** Visibility ******
 class Visibility extends Widget {
-    /**
-     * @param config config:
-      {
-        child:Widget,
-  
-        key?:Key,
-        replacement?:Widget,
-        visible?:boolean,
-        maintainState?:boolean,
-        maintainAnimation?:boolean,
-        maintainSize?:boolean,
-        maintainSemantics?:boolean,
-        maintainInteractivity?:boolean,
-      }
-    */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13589,23 +9659,10 @@ class Visibility extends Widget {
     }
 }
 exports.Visibility = Visibility;
+//#endregion
+//#region ------- W -------
+//****** Wrap ******
 class Wrap extends Widget {
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        children?:Array<Widget>,
-        alignment?:WrapAlignment,
-        spacing?:number,
-        crossAxisAlignment?:WrapCrossAlignment,
-        textDirection?:TextDecoration,
-        direction?:Axis,
-        verticalDirection?:VerticalDirection,
-        runAlignment?:WrapAlignment,
-        runSpacing?:number,
-        clipBehavior?:Clip,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13624,16 +9681,8 @@ class Wrap extends Widget {
     }
 }
 exports.Wrap = Wrap;
+//****** WillPopScope ******
 class WillPopScope extends Widget {
-    /**
-     * @param config config:
-      {
-        child:Widget,
-        onWillPop:OnCallback,
-  
-        key?:Key,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13644,17 +9693,8 @@ class WillPopScope extends Widget {
     }
 }
 exports.WillPopScope = WillPopScope;
+//****** WidgetSpan ******
 class WidgetSpan extends Widget {
-    /**
-     * @param config config:
-      {
-        child:Widget,
-  
-        alignment?:PlaceholderAlignment,
-        baseline?:TextBaseline,
-        style?:TextStyle,
-      }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13666,15 +9706,12 @@ class WidgetSpan extends Widget {
     }
 }
 exports.WidgetSpan = WidgetSpan;
+//#endregion
+//#endregion
+//#region ******* Cupertino widgets ********
+//-------------- A -----------------
+//****** CupertinoActivityIndicator ******
 class CupertinoActivityIndicator extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          animating?:boolean,
-          radius?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13685,21 +9722,9 @@ class CupertinoActivityIndicator extends Widget {
     }
 }
 exports.CupertinoActivityIndicator = CupertinoActivityIndicator;
+//-------------- B -----------------
+//****** CupertinoButton ******
 class CupertinoButton extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          onPressed:OnCallback,
-          padding?:EdgeInsets,
-          color?:Color,
-          disabledColor?:Color,
-          minSize?:number,
-          pressedOpacity?:number,
-          borderRadius?:BorderRadius,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13714,19 +9739,6 @@ class CupertinoButton extends Widget {
             this.onPressed = config.onPressed;
         }
     }
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          onPressed:OnCallback,
-          padding?:EdgeInsets,
-          disabledColor?:Color,
-          minSize?:number,
-          pressedOpacity?:number,
-          borderRadius?:BorderRadius,
-        }
-     */
     static filled(config) {
         var v = new CupertinoButton(config);
         v.constructorName = "filled";
@@ -13734,18 +9746,9 @@ class CupertinoButton extends Widget {
     }
 }
 exports.CupertinoButton = CupertinoButton;
+//-------------- D -----------------
+//****** CupertinoDialogAction ******
 class CupertinoDialogAction extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          isDefaultAction?:boolean,
-          isDestructiveAction?:boolean,
-          onPressed?:OnCallback,
-          child:Widget,
-          textStyle?:TextStyle,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13759,25 +9762,10 @@ class CupertinoDialogAction extends Widget {
     }
 }
 exports.CupertinoDialogAction = CupertinoDialogAction;
+//-------------- F -----------------
+//-------------- N -----------------
+//****** CupertinoNavigationBar ******
 class CupertinoNavigationBar extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          leading?:Widget,
-          automaticallyImplyLeading?:boolean,
-          automaticallyImplyMiddle?:boolean,
-          previousPageTitle?:string,
-          middle?:Widget,
-          trailing?:Widget,
-          border?:Border,
-          backgroundColor?:Color,
-          brightness?:Brightness,
-          padding?:EdgeInsets,
-          actionsForegroundColor?:Color,
-          transitionBetweenRoutes?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13798,16 +9786,8 @@ class CupertinoNavigationBar extends Widget {
     }
 }
 exports.CupertinoNavigationBar = CupertinoNavigationBar;
+//****** CupertinoNavigationBarBackButton ******
 class CupertinoNavigationBarBackButton extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          color?:Color,
-          previousPageTitle?:string,
-          onPressed?:OnCallback,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13819,22 +9799,10 @@ class CupertinoNavigationBarBackButton extends Widget {
     }
 }
 exports.CupertinoNavigationBarBackButton = CupertinoNavigationBarBackButton;
+//-------------- P -----------------
+//-------------- S -----------------
+//****** CupertinoSlider ******
 class CupertinoSlider extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:number,
-          onChanged:OnCallbackNumber,
-          onChangeStart?:OnCallbackNumber,
-          onChangeEnd?:OnCallbackNumber,
-          min?:number,
-          max?:number,
-          divisions?:number,
-          activeColor?:Color,
-          thumbColor?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13852,18 +9820,8 @@ class CupertinoSlider extends Widget {
     }
 }
 exports.CupertinoSlider = CupertinoSlider;
+//****** CupertinoSwitch ******
 class CupertinoSwitch extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          onChanged:OnCallbackBoolean,
-          activeColor?:Color,
-          trackColor?:Color,
-          dragStartBehavior?:DragStartBehavior,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13877,21 +9835,8 @@ class CupertinoSwitch extends Widget {
     }
 }
 exports.CupertinoSwitch = CupertinoSwitch;
+//****** CupertinoSegmentedControl ******
 class CupertinoSegmentedControl extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          children:Array<Widget>,
-          onValueChanged:OnCallbackNumber,
-          groupValue?:number,
-          unselectedColor?:Color,
-          selectedColor?:Color,
-          borderColor?:Color,
-          pressedColor?:Color,
-          padding?:EdgeInsets,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13909,19 +9854,8 @@ class CupertinoSegmentedControl extends Widget {
     }
 }
 exports.CupertinoSegmentedControl = CupertinoSegmentedControl;
+//****** CupertinoSlidingSegmentedControl ******
 class CupertinoSlidingSegmentedControl extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          children:Array<Widget>,
-          onValueChanged:OnCallbackNumber,
-          groupValue?:number,
-          thumbColor?:Color,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13937,16 +9871,8 @@ class CupertinoSlidingSegmentedControl extends Widget {
     }
 }
 exports.CupertinoSlidingSegmentedControl = CupertinoSlidingSegmentedControl;
+//****** CupertinoScrollbar ******
 class CupertinoScrollbar extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          controller?:ScrollController,
-          isAlwaysShown?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13958,26 +9884,8 @@ class CupertinoScrollbar extends Widget {
     }
 }
 exports.CupertinoScrollbar = CupertinoScrollbar;
+//****** CupertinoSliverNavigationBar ******
 class CupertinoSliverNavigationBar extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          leading?:Widget,
-          largeTitle?:Widget,
-          automaticallyImplyLeading?:boolean,
-          automaticallyImplyTitle?:boolean,
-          previousPageTitle?:string,
-          middle?:Widget,
-          trailing?:Widget,
-          border?:Border,
-          backgroundColor?:Color,
-          brightness?:Brightness,
-          padding?:EdgeInsets,
-          actionsForegroundColor?:Color,
-          transitionBetweenRoutes?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -13999,6 +9907,8 @@ class CupertinoSliverNavigationBar extends Widget {
     }
 }
 exports.CupertinoSliverNavigationBar = CupertinoSliverNavigationBar;
+//-------------- T -----------------
+//****** TestWidget ******
 class TestWidget extends Widget {
     /**
      * @param config config:
@@ -14016,21 +9926,8 @@ class TestWidget extends Widget {
     }
 }
 exports.TestWidget = TestWidget;
+//****** CupertinoTabBar ******
 class CupertinoTabBar extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          items:Array<BottomNavigationBarItem>,
-          onTap?:OnCallbackNumber,
-          currentIndex?:number,
-          backgroundColor?:Color,
-          activeColor?:Color,
-          inactiveColor?:Color,
-          iconSize?:number,
-          border?:Border,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14047,13 +9944,8 @@ class CupertinoTabBar extends Widget {
     }
 }
 exports.CupertinoTabBar = CupertinoTabBar;
+//****** CupertinoTabController ******
 class CupertinoTabController extends DartClass {
-    /**
-     * @param config config:
-        {
-          initialIndex?:number,
-        }
-     */
     constructor(config) {
         super();
         this.createMirrorID();
@@ -14063,15 +9955,8 @@ class CupertinoTabController extends DartClass {
     }
 }
 exports.CupertinoTabController = CupertinoTabController;
+//****** CupertinoTabView ******
 class CupertinoTabView extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          defaultTitle?:string,
-          child:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14082,15 +9967,8 @@ class CupertinoTabView extends Widget {
     }
 }
 exports.CupertinoTabView = CupertinoTabView;
+//****** CupertinoTheme ******
 class CupertinoTheme extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          data:CupertinoThemeData,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14101,21 +9979,8 @@ class CupertinoTheme extends Widget {
     }
 }
 exports.CupertinoTheme = CupertinoTheme;
+//****** CupertinoTextThemeData ******
 class CupertinoTextThemeData extends DartClass {
-    /**
-     * @param config config:
-        {
-          primaryColor?:Color,
-          textStyle?:TextStyle,
-          actionTextStyle?:TextStyle,
-          tabLabelTextStyle?:TextStyle,
-          navTitleTextStyle?:TextStyle,
-          navLargeTitleTextStyle?:TextStyle,
-          navActionTextStyle?:TextStyle,
-          pickerTextStyle?:TextStyle,
-          dateTimePickerTextStyle?:TextStyle,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14132,18 +9997,10 @@ class CupertinoTextThemeData extends DartClass {
     }
 }
 exports.CupertinoTextThemeData = CupertinoTextThemeData;
+//#endregion
+//#region ******** Custom Widgets ********
+//****** EmptyDataWidget ******
 class EmptyDataWidget extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          title?:string,
-          imageName?:string,
-          imageSize?:string,
-          backgroundColor?:Color,
-          titleStyle?:TextStyle,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14163,15 +10020,6 @@ class ShowBaseDialog extends Widget {
 }
 exports.ShowBaseDialog = ShowBaseDialog;
 class ShowDialog extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            barrierDismissible?:boolean,
-            useSafeArea?:boolean,
-            useRootNavigator?:boolean,
-            child:Widget (通常返回Dialog组件，比如SimpleDialog和AlertDialog),
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14183,31 +10031,8 @@ class ShowDialog extends ShowBaseDialog {
     }
 }
 exports.ShowDialog = ShowDialog;
+//****** AlertDialog ******
 class AlertDialog extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          title?:Widget,
-          titlePadding?:EdgeInsets,
-          titleTextStyle?:TextStyle,
-          content?:Widget,
-          contentPadding?:EdgeInsets,
-          contentTextStyle?:TextStyle,
-          actions?:Array<Widget>,
-          actionsPadding?:EdgeInsets,
-          actionsOverflowDirection?:VerticalDirection,
-          actionsOverflowButtonSpacing?:number,
-          buttonPadding?:EdgeInsets,
-          backgroundColor?:Color,
-          elevation?:number,
-          semanticLabel?:string,
-          insetPadding?:EdgeInsets,
-          clipBehavior?:Clip,
-          shape?:ShapeBorder,
-          scrollable?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14232,22 +10057,8 @@ class AlertDialog extends Widget {
     }
 }
 exports.AlertDialog = AlertDialog;
+//****** SimpleDialog ******
 class SimpleDialog extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          title?:Widget,
-          titlePadding?:EdgeInsets,
-          titleTextStyle?:TextStyle,
-          children?:Array<Widget>,
-          contentPadding?:EdgeInsets,
-          backgroundColor?:Color,
-          elevation?:number,
-          semanticLabel?:string,
-          shape?:ShapeBorder,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14264,15 +10075,8 @@ class SimpleDialog extends Widget {
     }
 }
 exports.SimpleDialog = SimpleDialog;
+//****** ShowCupertinoDialog ******
 class ShowCupertinoDialog extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            barrierDismissible?:boolean,
-            useRootNavigator?:boolean,
-            child:Widget(通常使用CupertinoAlertDialog),
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14283,19 +10087,11 @@ class ShowCupertinoDialog extends ShowBaseDialog {
     }
 }
 exports.ShowCupertinoDialog = ShowCupertinoDialog;
+//****** CupertinoAlertDialog ******
 class CupertinoAlertDialog extends Widget {
     /**
      * @param config config:
-        {
-          key?:Key,
-          title?:Widget,
-          content?:Widget,
-          actions?:Array<CupertinoDialogAction>,
-          scrollController?:ScrollController,
-          actionScrollController?:ScrollController,
-          insetAnimationDuration?:Duration,
-          insetAnimationCurve?:Curve,
-        }
+        
      */
     constructor(config) {
         super();
@@ -14312,18 +10108,8 @@ class CupertinoAlertDialog extends Widget {
     }
 }
 exports.CupertinoAlertDialog = CupertinoAlertDialog;
+//****** ShowGeneralDialog ******
 class ShowGeneralDialog extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            barrierDismissible?:boolean,
-            useRootNavigator?:boolean,
-            barrierLabel?:string,
-            barrierColor?:Color,
-            transitionDuration?:Duration,
-            child:Widget,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14337,21 +10123,6 @@ class ShowGeneralDialog extends ShowBaseDialog {
 }
 exports.ShowGeneralDialog = ShowGeneralDialog;
 class ShowModalBottomSheet extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            backgroundColor?:Color,
-            elevation?:number,
-            shape?:ShapeBorder,
-            clipBehavior?:Clip,
-            barrierColor?:Color,
-            isScrollControlled?:boolean;,
-            useRootNavigator?:boolean,
-            isDismissible?:boolean,
-            enableDrag?:boolean,
-            child?:Widget,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14369,20 +10140,9 @@ class ShowModalBottomSheet extends ShowBaseDialog {
     }
 }
 exports.ShowModalBottomSheet = ShowModalBottomSheet;
+//****** BottomSheet ******
+//TODO:animationController
 class BottomSheet extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          enableDrag?:boolean,
-          backgroundColor?:Color,
-          elevation?:number,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          onClosing?:OnCallback,
-          child?:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14400,11 +10160,7 @@ exports.BottomSheet = BottomSheet;
 class ShowCupertinoModalPopup extends ShowBaseDialog {
     /**
        * @param config config:
-          {
-            useRootNavigator?:boolean,
-            semanticsDismissible?:boolean,
-            child:Widget(通常情况下和CupertinoActionSheet配合使用)
-          }
+          
        */
     constructor(config) {
         super();
@@ -14416,19 +10172,8 @@ class ShowCupertinoModalPopup extends ShowBaseDialog {
     }
 }
 exports.ShowCupertinoModalPopup = ShowCupertinoModalPopup;
+//****** CupertinoActionSheet ******
 class CupertinoActionSheet extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          title?:Widget,
-          message?:Widget,
-          actions?:Array<Widget>, (actions:[CupertinoActionSheetAction])
-          messageScrollController?:ScrollController,
-          actionScrollController?:ScrollController,
-          cancelButton?:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14443,17 +10188,8 @@ class CupertinoActionSheet extends Widget {
     }
 }
 exports.CupertinoActionSheet = CupertinoActionSheet;
+//****** CupertinoActionSheetAction ******
 class CupertinoActionSheetAction extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          onPressed:OnCallback,
-          isDefaultAction?:boolean,
-          isDestructiveAction?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14467,13 +10203,6 @@ class CupertinoActionSheetAction extends Widget {
 }
 exports.CupertinoActionSheetAction = CupertinoActionSheetAction;
 class SimpleDialogButtonInfo extends Widget {
-    /**
-       * @param config config:
-          {
-            title?:string,
-            textStyle?:TextStyle,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14494,18 +10223,6 @@ var CustomAlertDialogAnimationType;
     CustomAlertDialogAnimationType["shrink"] = "shrink";
 })(CustomAlertDialogAnimationType = exports.CustomAlertDialogAnimationType || (exports.CustomAlertDialogAnimationType = {}));
 class CustomAlertDialogButton extends Widget {
-    /**
-       * @param config config:
-          {
-            child?:Widget,
-            width?:number,
-            height?:number,
-            bgColor?:Color,
-            gradient?:Gradient,
-            radius?:BorderRadius,
-            onPressed?:OnCallback,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14521,24 +10238,6 @@ class CustomAlertDialogButton extends Widget {
 }
 exports.CustomAlertDialogButton = CustomAlertDialogButton;
 class CustomAlertDialogStyle extends Widget {
-    /**
-       * @param config config:
-          {
-            animationType?:CustomAlertDialogAnimationType,
-            animationDuration?:Duration,
-            alertBorder?:ShapeBorder,
-            isCloseButton?:boolean,
-            isOverlayTapDismiss?:boolean,
-            backgroundColor?:Color,
-            overlayColor?:Color,
-            buttonSpace?:number,
-            titleHeight?:number,
-            titleStyle?:TextStyle,
-            descStyle?:TextStyle,
-            buttonAreaPadding?:EdgeInsets,
-            constraints?:BoxConstraints,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14560,18 +10259,6 @@ class CustomAlertDialogStyle extends Widget {
 }
 exports.CustomAlertDialogStyle = CustomAlertDialogStyle;
 class ShowCustomAlertDialog extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            style?:CustomAlertDialogStyle,
-            image?:Widget,
-            title?:string,
-            desc?:string,
-            content?:Widget,
-            actions?:Array<CustomAlertDialogButton>,
-            closeFunction?:OnCallback,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14587,14 +10274,6 @@ class ShowCustomAlertDialog extends ShowBaseDialog {
 }
 exports.ShowCustomAlertDialog = ShowCustomAlertDialog;
 class SimpleCustomDialogButtonInfo extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            title?:string,
-            textStyle?:TextStyle,
-            bgColor?:Color,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14606,18 +10285,6 @@ class SimpleCustomDialogButtonInfo extends ShowBaseDialog {
 }
 exports.SimpleCustomDialogButtonInfo = SimpleCustomDialogButtonInfo;
 class ShowSimpleCustomDialog extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            style?:CustomAlertDialogStyle,
-            image?:Widget,
-            title?:string,
-            desc?:string,
-            content?:Widget,
-            actions?:Array<CustomDialogButtonInfo>,
-            onTap?:OnCallbackNumber,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14633,18 +10300,6 @@ class ShowSimpleCustomDialog extends ShowBaseDialog {
 }
 exports.ShowSimpleCustomDialog = ShowSimpleCustomDialog;
 class ShowSimpleAlertDialog extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            title?:string,
-            titleContent?:Widget,
-            desc?:string,
-            descContent?:Widget,
-            actions:Array<SimpleDialogButtonInfo>,
-            onTap?:OnCallbackNumber,
-            barrierDismissible?:boolean,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14660,18 +10315,6 @@ class ShowSimpleAlertDialog extends ShowBaseDialog {
 }
 exports.ShowSimpleAlertDialog = ShowSimpleAlertDialog;
 class ShowSimpleCupertinoDialog extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            title?:string,
-            titleContent?:Widget,
-            desc?:string,
-            descContent?:Widget,
-            actions:Array<SimpleDialogButtonInfo>,
-            onTap?:OnCallbackNumber,
-            barrierDismissible?:boolean,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14687,15 +10330,6 @@ class ShowSimpleCupertinoDialog extends ShowBaseDialog {
 }
 exports.ShowSimpleCupertinoDialog = ShowSimpleCupertinoDialog;
 class ShowCustomActionSheet extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            title?:string,
-            titleContent?:Widget,
-            itemList:Array<string>,
-            onTap:OnCallbackNumber,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14708,15 +10342,6 @@ class ShowCustomActionSheet extends ShowBaseDialog {
 }
 exports.ShowCustomActionSheet = ShowCustomActionSheet;
 class ShowSimpleActionSheet extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            title?:string,
-            titleContent?:Widget,
-            itemList:Array<string>,
-            onTap:OnCallbackNumber,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14729,17 +10354,6 @@ class ShowSimpleActionSheet extends ShowBaseDialog {
 }
 exports.ShowSimpleActionSheet = ShowSimpleActionSheet;
 class ShowCustomPopupMenu extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            superkey:BindKey,
-            menuList?:Array<CustomPopupMenuItem>,
-            barrierDismissible?:boolean,
-            bgColor?:Color,
-            textFontSize?:number,
-            onTap?:OnCallbackNumber,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14754,14 +10368,6 @@ class ShowCustomPopupMenu extends ShowBaseDialog {
 }
 exports.ShowCustomPopupMenu = ShowCustomPopupMenu;
 class CustomPopupMenuItem extends Widget {
-    /**
-       * @param config config:
-          {
-            title:string,
-            titleTextStyle?:TextStyle,
-            image?:Widget,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14773,28 +10379,6 @@ class CustomPopupMenuItem extends Widget {
 }
 exports.CustomPopupMenuItem = CustomPopupMenuItem;
 class ShowDatePicker extends ShowBaseDialog {
-    /**
-       * @param config config:
-          {
-            initialDate?:number(10位、13位、18位时间戳),
-            firstDate?:number(10位、13位、18位时间戳),
-            lastDate?:number(10位、13位、18位时间戳),
-            currentDate?:number(10位、13位、18位时间戳),
-            initialEntryMode?:DatePickerEntryMode,
-            helpText?:string,
-            cancelText?:string,
-            confirmText?:string,
-            useRootNavigator?:boolean,
-            textDirection?:TextDirection,
-            initialDatePickerMode?:DatePickerMode,
-            errorFormatText?:string,
-            errorInvalidText?:string,
-            fieldHintText?:string,
-            fieldLabelText?:string,
-            themeData?:ThemeData,
-            isMaterialAppTheme?:boolean,
-          }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -14836,7 +10420,7 @@ class Dialog extends DartClass {
     //显示简单选择
     static show(baseWidget, child) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 widgetID: String(baseWidget.widgetID),
                 mirrorID: Dialog.getInstance().mirrorID,
                 className: Dialog.getInstance().className,
@@ -14850,7 +10434,7 @@ class Dialog extends DartClass {
         });
     }
     static dismiss(baseWidget) {
-        Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+        Dialog.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
             widgetID: String(baseWidget.widgetID),
             mirrorID: Dialog.getInstance().mirrorID,
             className: Dialog.getInstance().className,
@@ -14862,6 +10446,8 @@ class Dialog extends DartClass {
     }
 }
 exports.Dialog = Dialog;
+//#endregion
+//#region ****** Loading ******
 class Loading extends DartClass {
     constructor() {
         super();
@@ -14876,108 +10462,56 @@ class Loading extends DartClass {
         }
         return this.instance;
     }
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
     static showSuccess(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
             mirrorID: Loading.getInstance().mirrorID,
             className: Loading.getInstance().className,
             funcName: "showSuccess",
             args: config,
         }));
     }
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
     static showError(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
             mirrorID: Loading.getInstance().mirrorID,
             className: Loading.getInstance().className,
             funcName: "showError",
             args: config,
         }));
     }
-    /**
-      * @param config config:
-       {
-         info:string,
-         duration?:Duration,
-         alignment?:Alignment,
-       }
-      */
     static showInfo(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
             mirrorID: Loading.getInstance().mirrorID,
             className: Loading.getInstance().className,
             funcName: "showInfo",
             args: config,
         }));
     }
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
     static showToast(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
             mirrorID: Loading.getInstance().mirrorID,
             className: Loading.getInstance().className,
             funcName: "showToast",
             args: config,
         }));
     }
-    /**
-     * @param config config:
-      {
-        info:string,
-        alignment?:Alignment,
-      }
-     */
     static show(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
             mirrorID: Loading.getInstance().mirrorID,
             className: Loading.getInstance().className,
             funcName: "show",
             args: config,
         }));
     }
-    /**
-     * @param config config:
-      {
-        value:number(0~100),
-        alignment?:Alignment,
-      }
-     */
     static showProgress(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
             mirrorID: Loading.getInstance().mirrorID,
             className: "Loading",
             funcName: "showProgress",
             args: config,
         }));
     }
-    /**
-    * @param config config:
-     {
-       animation?:animation,
-     }
-    */
     static dismiss(config) {
-        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+        Loading.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
             mirrorID: Loading.getInstance().mirrorID,
             className: "Loading",
             funcName: "dismiss",
@@ -14986,6 +10520,8 @@ class Loading extends DartClass {
     }
 }
 exports.Loading = Loading;
+//#endregion
+//#region ****** Sp ******
 class Sp extends DartClass {
     constructor() {
         super();
@@ -15000,16 +10536,9 @@ class Sp extends DartClass {
         }
         return this.instance;
     }
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:boolean;
-      }
-     */
     static getBool(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sp.getInstance().mirrorID,
                 className: Sp.getInstance().className,
                 funcName: "getBool",
@@ -15025,16 +10554,9 @@ class Sp extends DartClass {
             return false;
         });
     }
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:number;
-      }
-     */
     static getInt(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sp.getInstance().mirrorID,
                 className: Sp.getInstance().className,
                 funcName: "getInt",
@@ -15050,16 +10572,9 @@ class Sp extends DartClass {
             return 0;
         });
     }
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:double;
-      }
-     */
     static getDouble(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sp.getInstance().mirrorID,
                 className: Sp.getInstance().className,
                 funcName: "getDouble",
@@ -15075,16 +10590,9 @@ class Sp extends DartClass {
             return 0.0;
         });
     }
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:string;
-      }
-     */
     static getString(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sp.getInstance().mirrorID,
                 className: Sp.getInstance().className,
                 funcName: "getString",
@@ -15102,7 +10610,7 @@ class Sp extends DartClass {
     }
     static clear() {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sp.getInstance().mirrorID,
                 className: Sp.getInstance().className,
                 funcName: "clear",
@@ -15113,15 +10621,9 @@ class Sp extends DartClass {
             }
         });
     }
-    /**
-     * @param config config:
-      {
-        key:string;
-      }
-     */
-    static remove(config) {
+    static remove() {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sp.getInstance().mirrorID,
                 className: Sp.getInstance().className,
                 funcName: "remove",
@@ -15132,16 +10634,9 @@ class Sp extends DartClass {
             }
         });
     }
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:boolean;
-      }
-     */
     static setBool(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sp.getInstance().mirrorID,
                 className: Sp.getInstance().className,
                 funcName: "setBool",
@@ -15153,16 +10648,9 @@ class Sp extends DartClass {
             }
         });
     }
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:number;
-      }
-     */
     static setDouble(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sp.getInstance().mirrorID,
                 className: Sp.getInstance().className,
                 funcName: "setDouble",
@@ -15174,16 +10662,9 @@ class Sp extends DartClass {
             }
         });
     }
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:number;
-      }
-     */
     static setInt(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sp.getInstance().mirrorID,
                 className: Sp.getInstance().className,
                 funcName: "setInt",
@@ -15195,16 +10676,9 @@ class Sp extends DartClass {
             }
         });
     }
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:string;
-      }
-     */
     static setString(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sp.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sp.getInstance().mirrorID,
                 className: Sp.getInstance().className,
                 funcName: "setString",
@@ -15249,7 +10723,7 @@ class ScreenInfo extends DartClass {
     //
     updateInfo() {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "updateInfo",
@@ -15329,7 +10803,7 @@ class PackageInfo extends DartClass {
     //
     updateInfo() {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "updateInfo",
@@ -15371,7 +10845,7 @@ class Wakelock extends DartClass {
     static disable() {
         return __awaiter(this, void 0, void 0, function* () {
             var obj = Wakelock.getInstance();
-            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: obj.mirrorID,
                 className: obj.className,
                 funcName: "disable",
@@ -15386,7 +10860,7 @@ class Wakelock extends DartClass {
     static enable() {
         return __awaiter(this, void 0, void 0, function* () {
             var obj = Wakelock.getInstance();
-            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: obj.mirrorID,
                 className: obj.className,
                 funcName: "enable",
@@ -15401,7 +10875,7 @@ class Wakelock extends DartClass {
     static isEnabled() {
         return __awaiter(this, void 0, void 0, function* () {
             var obj = Wakelock.getInstance();
-            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: obj.mirrorID,
                 className: obj.className,
                 funcName: "isEnabled",
@@ -15437,7 +10911,7 @@ class Uuid extends DartClass {
     static v1() {
         return __awaiter(this, void 0, void 0, function* () {
             var obj = Uuid.getInstance();
-            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: obj.mirrorID,
                 className: obj.className,
                 funcName: "v1",
@@ -15456,7 +10930,7 @@ class Uuid extends DartClass {
     static v4() {
         return __awaiter(this, void 0, void 0, function* () {
             var obj = Uuid.getInstance();
-            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: obj.mirrorID,
                 className: obj.className,
                 funcName: "v4",
@@ -15477,7 +10951,7 @@ class Uuid extends DartClass {
     static v5(namespace, v5Name) {
         return __awaiter(this, void 0, void 0, function* () {
             var obj = Uuid.getInstance();
-            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: obj.mirrorID,
                 className: obj.className,
                 funcName: "v5",
@@ -15509,7 +10983,7 @@ class FocusScope extends DartClass {
     //
     static requestFocus() {
         var info = new FocusScope();
-        info.invokeMirrorObjWithCallback(new JSCallConfig({
+        info.invokeMirrorObjWithCallback(new JSCallArgs({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "requestFocus",
@@ -15518,7 +10992,7 @@ class FocusScope extends DartClass {
     //
     static unfocus() {
         var info = new FocusScope();
-        info.invokeMirrorObjWithCallback(new JSCallConfig({
+        info.invokeMirrorObjWithCallback(new JSCallArgs({
             mirrorID: info.mirrorID,
             className: info.className,
             funcName: "unfocus",
@@ -15526,6 +11000,8 @@ class FocusScope extends DartClass {
     }
 }
 exports.FocusScope = FocusScope;
+//#endregion
+//#region ****** UrlLauncher ******
 class UrlLauncher extends DartClass {
     constructor() {
         super();
@@ -15540,24 +11016,10 @@ class UrlLauncher extends DartClass {
         }
         return this.instance;
     }
-    /**
-     * @param config config:
-      {
-        urlString:string,
-        forceSafariVC?:boolean,
-        forceWebView?:boolean,
-        enableJavaScript?:boolean,
-        enableDomStorage?:boolean,
-        universalLinksOnly?:boolean,
-        headers?:Map<string,string>,
-        statusBarBrightness?:Brightness,
-        webOnlyWindowName?:string,
-      }
-     */
     static openUrl(config) {
         return __awaiter(this, void 0, void 0, function* () {
             var obj = UrlLauncher.getInstance();
-            var v = yield obj.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield obj.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: obj.mirrorID,
                 className: obj.className,
                 funcName: "openUrl",
@@ -15579,24 +11041,8 @@ var DioResponseType;
     DioResponseType["plain"] = "plain";
     DioResponseType["bytes"] = "bytes";
 })(DioResponseType = exports.DioResponseType || (exports.DioResponseType = {}));
+//****** DioBaseOptions ******
 class DioBaseOptions extends DartClass {
-    /**
-       * @param config config:
-        {
-          method?:string,
-          connectTimeout?:number,
-          receiveTimeout?:number,
-          sendTimeout?:number,
-          baseUrl?:string,
-          queryParameters?:Map<string,any>,
-          extra?:Map<string,any>,
-          headers?:Map<string,any>,
-          responseType?:DioResponseType,
-          receiveDataWhenStatusError?:boolean,
-          followRedirects?:boolean,
-          maxRedirects?:number,
-        }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -15615,23 +11061,8 @@ class DioBaseOptions extends DartClass {
     }
 }
 exports.DioBaseOptions = DioBaseOptions;
+//****** DioOptions ******
 class DioOptions extends DartClass {
-    /**
-       * @param config config:
-        {
-          method?:string,
-          connectTimeout?:number,
-          receiveTimeout?:number,
-          sendTimeout?:number,
-          baseUrl?:string,
-          extra?:Map<string,any>,
-          headers?:Map<string,any>,
-          responseType?:DioResponseType,
-          receiveDataWhenStatusError?:boolean,
-          followRedirects?:boolean,
-          maxRedirects?:number,
-        }
-       */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -15663,17 +11094,9 @@ class Dio extends DartClass {
         }
         return this.instance;
     }
-    /**
-      * @param config config:
-        {
-          path?:string,
-          queryParameters?:Map<string,any>,
-          options?:DioOptions,
-        }
-    */
     get(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "get",
@@ -15684,16 +11107,9 @@ class Dio extends DartClass {
             }
         });
     }
-    /**
-      * @param config config:
-        {
-          uri?:Uri,
-          options?:DioOptions,
-        }
-    */
     getUri(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "getUri",
@@ -15704,18 +11120,9 @@ class Dio extends DartClass {
             }
         });
     }
-    /**
-      * @param config config:
-        {
-          path?:string,
-          data?:any;
-          queryParameters?:Map<string,any>,
-          options?:DioOptions,
-        }
-    */
     post(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "post",
@@ -15726,17 +11133,9 @@ class Dio extends DartClass {
             }
         });
     }
-    /**
-      * @param config config:
-        {
-          uri?:Uri,
-          data?:any;
-          options?:DioOptions,
-        }
-      */
     postUri(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "postUri",
@@ -15747,18 +11146,9 @@ class Dio extends DartClass {
             }
         });
     }
-    /**
-      * @param config config:
-        {
-          path?:string,
-          data?:any;
-          queryParameters?:Map<string,any>,
-          options?:DioOptions,
-        }
-    */
     request(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "request",
@@ -15769,17 +11159,9 @@ class Dio extends DartClass {
             }
         });
     }
-    /**
-      * @param config config:
-        {
-          uri?:Uri,
-          data?:any;
-          options?:DioOptions,
-        }
-      */
     requestUri(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "requestUri",
@@ -15840,113 +11222,10 @@ var PullToRefreshLoadStyle;
     PullToRefreshLoadStyle["ShowWhenLoading"] = "ShowWhenLoading";
 })(PullToRefreshLoadStyle = exports.PullToRefreshLoadStyle || (exports.PullToRefreshLoadStyle = {}));
 class PullToRefreshHeader extends Widget {
-    /**
-     * PullToRefreshHeader.classic = new PullToRefreshClassicHeader(config);
-     * @param config config:
-        {
-          key?:Key,
-          refreshStyle?:PullToRefreshStyle,
-          height?:number,
-          completeDuration?:Duration,
-          textStyle?:TextStyle,
-          releaseText?:string,
-          refreshingText?:string,
-          canTwoLevelIcon?:Widget,
-          twoLevelView?:Widget,
-          canTwoLevelText?:string,
-          completeText?:string,
-          failedText?:string,
-          idleText?:string,
-          iconPos?:PullToRefreshIconPosition,
-          spacing?:number,
-          refreshingIcon?:Widget,
-          failedIcon?:Widget,
-          completeIcon?:Widget,
-          idleIcon?:Widget,
-          releaseIcon?:Widget,
-        }
-     */
-    static classic(config) {
-        return new PullToRefreshClassicHeader(config);
-    }
-    /**
-     * PullToRefreshHeader.WwterDrop
-     * @param config config:
-        {
-          key?:Key,
-          refresh?:Widget,
-          complete?:Widget,
-          completeDuration?:Duration,
-          failed?:Widget,
-          waterDropColor?:Color,
-          idleIcon?:Widget,
-        }
-     */
-    static waterDrop(config) {
-        return new PullToRefreshWaterDropMaterialHeader(config);
-    }
-    /**
-     * PullToRefreshHeader.materialClassic = new PullToRefreshWaterDropMaterialHeader(config);
-     * @param config config:
-        {
-          key?:Key,
-          height?:number,
-          semanticsLabel?:string,
-          semanticsValue?:string,
-          color?:Color,
-          offset?:number,
-          distance?:number,
-          backgroundColor?:Color,
-        }
-     */
-    static materialClassic(config) {
-        return new PullToRefreshWaterDropMaterialHeader(config);
-    }
-    /**
-     * PullToRefreshHeader.waterDropMaterial = new PullToRefreshWaterDropMaterialHeader(config);
-     * @param config config:
-        {
-          key?:Key,
-          height?:number,
-          semanticsLabel?:string,
-          semanticsValue?:string,
-          color?:Color,
-          offset?:number,
-          distance?:number,
-          backgroundColor?:Color,
-        }
-     */
-    static waterDropMaterial(config) {
-        return new PullToRefreshWaterDropMaterialHeader(config);
-    }
 }
 exports.PullToRefreshHeader = PullToRefreshHeader;
+//****** PullToRefreshClassicHeader ******
 class PullToRefreshClassicHeader extends PullToRefreshHeader {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          refreshStyle?:PullToRefreshStyle,
-          height?:number,
-          completeDuration?:Duration,
-          textStyle?:TextStyle,
-          releaseText?:string,
-          refreshingText?:string,
-          canTwoLevelIcon?:Widget,
-          twoLevelView?:Widget,
-          canTwoLevelText?:string,
-          completeText?:string,
-          failedText?:string,
-          idleText?:string,
-          iconPos?:PullToRefreshIconPosition,
-          spacing?:number,
-          refreshingIcon?:Widget,
-          failedIcon?:Widget,
-          completeIcon?:Widget,
-          idleIcon?:Widget,
-          releaseIcon?:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -15974,19 +11253,8 @@ class PullToRefreshClassicHeader extends PullToRefreshHeader {
     }
 }
 exports.PullToRefreshClassicHeader = PullToRefreshClassicHeader;
+//****** PullToRefreshWaterDropHeader ******
 class PullToRefreshWaterDropHeader extends PullToRefreshHeader {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          refresh?:Widget,
-          complete?:Widget,
-          completeDuration?:Duration,
-          failed?:Widget,
-          waterDropColor?:Color,
-          idleIcon?:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16001,20 +11269,8 @@ class PullToRefreshWaterDropHeader extends PullToRefreshHeader {
     }
 }
 exports.PullToRefreshWaterDropHeader = PullToRefreshWaterDropHeader;
+//****** MaterialClassicHeader ******
 class PullToRefreshMaterialClassicHeader extends PullToRefreshHeader {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          height?:number,
-          semanticsLabel?:string,
-          semanticsValue?:string,
-          color?:Color,
-          offset?:number,
-          distance?:number,
-          backgroundColor?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16030,20 +11286,8 @@ class PullToRefreshMaterialClassicHeader extends PullToRefreshHeader {
     }
 }
 exports.PullToRefreshMaterialClassicHeader = PullToRefreshMaterialClassicHeader;
+//****** WaterDropMaterialHeader ******
 class PullToRefreshWaterDropMaterialHeader extends PullToRefreshHeader {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          height?:number,
-          semanticsLabel?:string,
-          semanticsValue?:string,
-          color?:Color,
-          offset?:number,
-          distance?:number,
-          backgroundColor?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16060,59 +11304,10 @@ class PullToRefreshWaterDropMaterialHeader extends PullToRefreshHeader {
 }
 exports.PullToRefreshWaterDropMaterialHeader = PullToRefreshWaterDropMaterialHeader;
 class PullToRefreshFooter extends Widget {
-    /**
-     * PullToRefreshFooter.classic = new PullToRefreshPullToRefreshClassicFooter(config);
-     * @param config config:
-        {
-          key?:Key,
-          onClick?: OnCallback,
-          loadStyle?: PullToRefreshLoadStyle,
-          height?: number,
-          textStyle?:TextStyle,
-          loadingText?:string,
-          noDataText?:string,
-          noMoreIcon?:Widget,
-          idleText?:string,
-          failedText?:string,
-          canLoadingText?:string,
-          failedIcon?:Widget,
-          iconPos?:PullToRefreshIconPosition,
-          spacing?:number,
-          completeDuration?:Duration,
-          loadingIcon?:Widget,
-          canLoadingIcon?:Widget,
-          idleIcon?:Widget,
-        }
-     */
-    static classic(config) {
-        return new PullToRefreshClassicFooter(config);
-    }
 }
 exports.PullToRefreshFooter = PullToRefreshFooter;
+//****** PullToRefreshClassicFooter ******
 class PullToRefreshClassicFooter extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          onClick?: OnCallback,
-          loadStyle?: PullToRefreshLoadStyle,
-          height?: number,
-          textStyle?:TextStyle,
-          loadingText?:string,
-          noDataText?:string,
-          noMoreIcon?:Widget,
-          idleText?:string,
-          failedText?:string,
-          canLoadingText?:string,
-          failedIcon?:Widget,
-          iconPos?:PullToRefreshIconPosition,
-          spacing?:number,
-          completeDuration?:Duration,
-          loadingIcon?:Widget,
-          canLoadingIcon?:Widget,
-          idleIcon?:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16137,37 +11332,8 @@ class PullToRefreshClassicFooter extends Widget {
     }
 }
 exports.PullToRefreshClassicFooter = PullToRefreshClassicFooter;
+//****** PullToRefreshConfiguration ******
 class PullToRefreshConfiguration extends Widget {
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          headerBuilder?:Widget,
-          footerBuilder?:Widget,
-          dragSpeedRatio?:number,
-          shouldFooterFollowWhenNotFull?:string,
-          enableScrollWhenTwoLevel?:boolean,
-          enableLoadingWhenNoData?:boolean,
-          enableBallisticRefresh?:boolean,
-          springDescription?:SpringDescription,
-          enableScrollWhenRefreshCompleted?:boolean,
-          enableLoadingWhenFailed?:boolean,
-          twiceTriggerDistance?:number,
-          closeTwoLevelDistance?:number,
-          skipCanRefresh?:boolean,
-          autoLoad?:boolean,
-          maxOverScrollExtent?:number,
-          enableBallisticLoad?:boolean,
-          maxUnderScrollExtent?:number,
-          headerTriggerDistance?:number,
-          footerTriggerDistance?:number,
-          hideFooterWhenNotFull?:boolean,
-          enableRefreshVibrate?:boolean,
-          enableLoadMoreVibrate?:boolean,
-          topHitBoundary?:number,
-          bottomHitBoundary?:number,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16200,15 +11366,8 @@ class PullToRefreshConfiguration extends Widget {
     }
 }
 exports.PullToRefreshConfiguration = PullToRefreshConfiguration;
+//****** PullToRefreshController ******
 class PullToRefreshController extends DartClass {
-    /**
-     * @param config config:
-        {
-          initialRefreshStatus?:PullToRefreshStatus,
-          initialRefresh?:boolean,
-          initialLoadStatus?:PullToRefreshLoadStatus,
-        }
-     */
     constructor(config) {
         super();
         this.createMirrorID();
@@ -16219,41 +11378,35 @@ class PullToRefreshController extends DartClass {
         }
     }
     dispose() {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "dispose",
         }));
     }
     loadComplete() {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "loadComplete",
         }));
     }
     loadFailed() {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "loadFailed",
         }));
     }
     loadNoData() {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "loadNoData",
         }));
     }
-    /**
-     * @param config config:
-        {
-          resetFooterState?:boolean;
-        }
-     */
     refreshCompleted(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "refreshCompleted",
@@ -16261,60 +11414,37 @@ class PullToRefreshController extends DartClass {
         }));
     }
     refreshFailed() {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "refreshFailed",
         }));
     }
     refreshToIdle() {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "refreshToIdle",
         }));
     }
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-          needMove?:boolean,
-          curve?:Curve,
-        }
-     */
     requestLoading(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "requestLoading",
             args: config
         }));
     }
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-          needMove?:boolean,
-          curve?:Curve,
-        }
-     */
     requestRefresh(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "requestRefresh",
             args: config
         }));
     }
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-          curve?:Curve,
-        }
-     */
     requestTwoLevel(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "requestTwoLevel",
@@ -16322,21 +11452,14 @@ class PullToRefreshController extends DartClass {
         }));
     }
     resetNoData() {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "resetNoData",
         }));
     }
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-          curve?:Curve,
-        }
-     */
     twoLevelComplete(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "twoLevelComplete",
@@ -16345,32 +11468,8 @@ class PullToRefreshController extends DartClass {
     }
 }
 exports.PullToRefreshController = PullToRefreshController;
+//****** PullToRefreshRefresher ******
 class PullToRefreshRefresher extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          controller:PullToRefreshController,
-          child?:Widget,
-          header?:PullToRefreshHeader,
-          footer?:PullToRefreshFooter,
-          enablePullDown?:boolean,
-          enablePullUp?:boolean,
-          enableTwoLevel?:boolean,
-          onRefresh?:OnCallback,
-          onLoading?:OnCallback,
-          onTwoLevel?:OnCallback,
-          onOffsetChange?:OnCallbackString,
-          dragStartBehavior?:DragStartBehavior,
-          primary?:boolean,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          reverse?:boolean,
-          physics?:ScrollPhysics,
-          scrollDirection?:Axis,
-          scrollController?:ScrollController,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16398,35 +11497,10 @@ class PullToRefreshRefresher extends Widget {
     }
 }
 exports.PullToRefreshRefresher = PullToRefreshRefresher;
+//#endregion
+//#region ******** CachedNetworkImage ********
+//****** CachedNetworkImage ******
 class CachedNetworkImage extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          imageUrl:string,
-          httpHeaders?:Map<string,string>
-          placeholder?:Widget,
-          errorWidget?:Widget,
-          fadeOutDuration?:Duration,
-          fadeOutCurve?:Curve,
-          fadeInDuration?:Duration,
-          fadeInCurve?:Curve,
-          width?:number,
-          height?:number,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          matchTextDirection?:boolean,
-          useOldImageOnUrlChange?:boolean,
-          color?:Color,
-          filterQuality?:FilterQuality,
-          colorBlendMode?:BlendMode,
-          placeholderFadeInDuration?:Duration,
-          memCacheWidth?:number,
-          memCacheHeight?:number,
-          cacheKey?:string,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16460,79 +11534,10 @@ exports.CachedNetworkImage = CachedNetworkImage;
 //#endregion
 //#region ******** EasyRefresh ********
 class EasyRefreshHeader extends Widget {
-    /**
-     * EasyRefreshHeader.classic = new EasyRefreshClassicalHeader(config);
-     * @param config config:
-        {
-          key?:Key,
-          extent?:number,
-          triggerDistance?:number,
-          float?:boolean,
-          completeDuration?:Duration,
-          enableInfiniteRefresh?:boolean,
-          enableHapticFeedback?:boolean,
-          overScroll?:boolean,
-          alignment?:Alignment,
-          refreshText?:string,
-          refreshReadyText?:string,
-          refreshingText?:string,
-          refreshedText?:string,
-          refreshFailedText?:string,
-          noMoreText?:string,
-          showInfo?:boolean,
-          infoText?:string,
-          bgColor?:Color,
-          textColor?:Color,
-          infoColor?:Color,
-        }
-     */
-    static classical(config) {
-        return new EasyRefreshClassicalHeader(config);
-    }
-    /**
-     * EasyRefreshHeader.WwterDrop = new EasyRefreshMaterialHeader(config);
-     * @param config config:
-        {
-          key?:Key,
-          displacement?:number,
-          backgroundColor?:Color,
-          completeDuration?:Duration,
-          enableHapticFeedback?:boolean,
-          enableInfiniteLoad?:boolean,
-          overScroll?:boolean,
-        }
-     */
-    static material(config) {
-        return new EasyRefreshMaterialHeader(config);
-    }
 }
 exports.EasyRefreshHeader = EasyRefreshHeader;
+//****** EasyRefreshClassicalHeader ******
 class EasyRefreshClassicalHeader extends EasyRefreshHeader {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          extent?:number,
-          triggerDistance?:number,
-          float?:boolean,
-          completeDuration?:Duration,
-          enableInfiniteRefresh?:boolean,
-          enableHapticFeedback?:boolean,
-          overScroll?:boolean,
-          alignment?:Alignment,
-          refreshText?:string,
-          refreshReadyText?:string,
-          refreshingText?:string,
-          refreshedText?:string,
-          refreshFailedText?:string,
-          noMoreText?:string,
-          showInfo?:boolean,
-          infoText?:string,
-          bgColor?:Color,
-          textColor?:Color,
-          infoColor?:Color,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16560,17 +11565,8 @@ class EasyRefreshClassicalHeader extends EasyRefreshHeader {
     }
 }
 exports.EasyRefreshClassicalHeader = EasyRefreshClassicalHeader;
+//****** EasyRefreshMaterialHeader ******
 class EasyRefreshMaterialHeader extends EasyRefreshHeader {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          displacement?:number,
-          backgroundColor?:Color,
-          completeDuration?:Duration,
-          enableHapticFeedback?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16584,84 +11580,10 @@ class EasyRefreshMaterialHeader extends EasyRefreshHeader {
 }
 exports.EasyRefreshMaterialHeader = EasyRefreshMaterialHeader;
 class EasyRefreshFooter extends Widget {
-    /**
-     * EasyRefreshFooter.classical = new EasyRefreshClassicalFooter(config);
-     * @param config config:
-        {
-          key?:Key,
-          extent?:number,
-          triggerDistance?:number,
-          float?:boolean,
-          completeDuration?:Duration,
-          enableInfiniteLoad?:boolean,
-          enableHapticFeedback?:boolean,
-          overScroll?:boolean,
-          safeArea?:boolean,
-          padding?:EdgeInsets,
-          alignment?:Alignment,
-          loadText?:string,
-          loadReadyText?:string,
-          loadingText?:string,
-          loadedText?:string,
-          loadFailedText?:string,
-          noMoreText?:string,
-          showInfo?:boolean,
-          infoText?:string,
-          bgColor?:Color,
-          textColor?:Color,
-          infoColor?:Color,
-        }
-     */
-    static classical(config) {
-        return new EasyRefreshClassicalFooter(config);
-    }
-    /**
-     * EasyRefreshFooter.material = new EasyRefreshMaterialFooter(config);
-     * @param config config:
-        {
-          key?:Key,
-          displacement?:number,
-          backgroundColor?:Color,
-          completeDuration?:Duration,
-          enableHapticFeedback?:boolean,
-          enableInfiniteLoad?:boolean,
-          overScroll?:boolean,
-        }
-     */
-    static material(config) {
-        return new EasyRefreshMaterialFooter(config);
-    }
 }
 exports.EasyRefreshFooter = EasyRefreshFooter;
+//****** EasyRefreshClassicalFooter ******
 class EasyRefreshClassicalFooter extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          extent?:number,
-          triggerDistance?:number,
-          float?:boolean,
-          completeDuration?:Duration,
-          enableInfiniteLoad?:boolean,
-          enableHapticFeedback?:boolean,
-          overScroll?:boolean,
-          safeArea?:boolean,
-          padding?:EdgeInsets,
-          alignment?:Alignment,
-          loadText?:string,
-          loadReadyText?:string,
-          loadingText?:string,
-          loadedText?:string,
-          loadFailedText?:string,
-          noMoreText?:string,
-          showInfo?:boolean,
-          infoText?:string,
-          bgColor?:Color,
-          textColor?:Color,
-          infoColor?:Color,
-          isNoMoreText?:boolean,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16691,21 +11613,8 @@ class EasyRefreshClassicalFooter extends Widget {
     }
 }
 exports.EasyRefreshClassicalFooter = EasyRefreshClassicalFooter;
+//****** EasyRefreshMaterialFooter ******
 class EasyRefreshMaterialFooter extends EasyRefreshFooter {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          displacement?:number,
-          backgroundColor?:Color,
-          completeDuration?:Duration,
-          enableHapticFeedback?:boolean,
-          enableInfiniteLoad?:boolean,
-          overScroll?:boolean,
-          isNoMoreText?:boolean,
-          noMoreText?:string,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16722,63 +11631,38 @@ class EasyRefreshMaterialFooter extends EasyRefreshFooter {
     }
 }
 exports.EasyRefreshMaterialFooter = EasyRefreshMaterialFooter;
+//****** EasyRefreshController ******
 class EasyRefreshController extends DartClass {
     constructor() {
         super();
         this.createMirrorID();
     }
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-        }
-     */
     callRefresh(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "callRefresh",
             args: config
         }));
     }
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-        }
-     */
     callLoad(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "callLoad",
             args: config
         }));
     }
-    /**
-     * @param config config:
-        {
-          success?:boolean,
-          noMore?:boolean,
-        }
-     */
     finishRefresh(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "finishRefresh",
             args: config
         }));
     }
-    /**
-     * @param config config:
-        {
-          success?:boolean,
-          noMore?:boolean,
-        }
-     */
     finishLoad(config) {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "finishLoad",
@@ -16786,21 +11670,21 @@ class EasyRefreshController extends DartClass {
         }));
     }
     resetRefreshState() {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "resetRefreshState",
         }));
     }
     resetLoadState() {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "resetLoadState",
         }));
     }
     dispose() {
-        JSFramework.invokeFlutterFunction(new JSCallConfig({
+        JSFramework.invokeFlutterFunction(new JSCallArgs({
             mirrorID: this.mirrorID,
             className: this.className,
             funcName: "dispose",
@@ -16808,29 +11692,8 @@ class EasyRefreshController extends DartClass {
     }
 }
 exports.EasyRefreshController = EasyRefreshController;
+//****** EasyRefresher ******
 class EasyRefresher extends Widget {
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          controller?:EasyRefreshController,
-          onRefresh?:OnCallback,
-          onLoad?:OnCallback,
-          enableControlFinishRefresh?:boolean,
-          enableControlFinishLoad?:boolean,
-          taskIndependence?:boolean,
-          scrollController?:ScrollController,
-          header?:EasyRefreshHeader
-          footer?:EasyRefreshFooter,
-          firstRefresh?:boolean,
-          firstRefreshWidget?:Widget,
-          headerIndex?:number,
-          emptyWidget?:Widget,
-          topBouncing?:boolean,
-          bottomBouncing?:boolean,
-          child:Widget,
-        }
-     */
     constructor(config) {
         super();
         if (config != null && config != undefined) {
@@ -16853,39 +11716,6 @@ class EasyRefresher extends Widget {
             this.child = config.child;
         }
     }
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          listKey?:Key,
-          controller?:EasyRefreshController,
-          onRefresh?:OnCallback,
-          onLoad?:OnCallback,
-          enableControlFinishRefresh?:boolean,
-          enableControlFinishLoad?:boolean,
-          taskIndependence?:boolean,
-          scrollController?:ScrollController,
-          header?:EasyRefreshHeader
-          headerIndex?:number,
-          footer?:EasyRefreshFooter,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          shrinkWrap?:boolean,
-          center?:Key,
-          anchor?:number,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-    
-          firstRefresh?:boolean,
-          firstRefreshWidget?:Widget,
-          emptyWidget?:Widget,
-          topBouncing?:boolean,
-          bottomBouncing?:boolean,
-          slivers:Array<Widget>,
-        }
-     */
     static custom(config) {
         var v = new EasyRefresher();
         if (config != null && config != undefined) {
@@ -16941,7 +11771,7 @@ class PathProvider extends DartClass {
     //
     updateInfo() {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield this.invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield this.invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: this.mirrorID,
                 className: this.className,
                 funcName: "updateInfo",
@@ -16965,6 +11795,8 @@ PathProvider.libraryDirectory = "";
 PathProvider.applicationDocumentsDirectory = "";
 PathProvider.downloadsDirectory = "";
 PathProvider.externalStorageDirectory = "";
+//#endregion
+//#region ****** Sqlite ******
 class Sqlite extends DartClass {
     constructor() {
         super();
@@ -16981,14 +11813,10 @@ class Sqlite extends DartClass {
     }
     /**
      * 关闭数据库
-     * @param config config:
-      {
-        dbName:string,
-      }
      */
     static closeDB(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sqlite.getInstance().mirrorID,
                 className: Sqlite.getInstance().className,
                 funcName: "closeDB",
@@ -17006,7 +11834,7 @@ class Sqlite extends DartClass {
      */
     static delDB(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sqlite.getInstance().mirrorID,
                 className: Sqlite.getInstance().className,
                 funcName: "delDB",
@@ -17024,7 +11852,7 @@ class Sqlite extends DartClass {
      */
     static isDBExists(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sqlite.getInstance().mirrorID,
                 className: Sqlite.getInstance().className,
                 funcName: "isDBExists",
@@ -17042,7 +11870,7 @@ class Sqlite extends DartClass {
      */
     static getDBPath(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sqlite.getInstance().mirrorID,
                 className: Sqlite.getInstance().className,
                 funcName: "getDBPath",
@@ -17053,20 +11881,10 @@ class Sqlite extends DartClass {
     }
     /**
      * 获取数据库路径
-     * @param config config:
-      {
-        dbName:string,
-        version?:number,
-        configureSql?:string,
-        createSql?:string,
-        openSql?:string,
-        readOnly?:boolean,
-        singleInstance?:boolean,
-      }
      */
     static openDB(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sqlite.getInstance().mirrorID,
                 className: Sqlite.getInstance().className,
                 funcName: "openDB",
@@ -17077,15 +11895,10 @@ class Sqlite extends DartClass {
     }
     /**
      * 执行SQL语句，返回是否成功
-     * @param config config:
-      {
-        dbName:string,
-        sql:string,
-      }
      */
     static execute(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sqlite.getInstance().mirrorID,
                 className: Sqlite.getInstance().className,
                 funcName: "execute",
@@ -17104,7 +11917,7 @@ class Sqlite extends DartClass {
      */
     static rawInsert(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sqlite.getInstance().mirrorID,
                 className: Sqlite.getInstance().className,
                 funcName: "rawInsert",
@@ -17115,15 +11928,10 @@ class Sqlite extends DartClass {
     }
     /**
     * 执行SQL语句(删除))，返回影响行数
-    * @param config config:
-     {
-       dbName:string,
-       sql:string,
-     }
     */
     static rawDelete(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sqlite.getInstance().mirrorID,
                 className: Sqlite.getInstance().className,
                 funcName: "rawDelete",
@@ -17134,15 +11942,10 @@ class Sqlite extends DartClass {
     }
     /**
      * 执行SQL语句(更新))，返回影响行数
-     * @param config config:
-      {
-        dbName:string,
-        sql:string,
-      }
      */
     static rawUpdate(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sqlite.getInstance().mirrorID,
                 className: Sqlite.getInstance().className,
                 funcName: "rawDelete",
@@ -17153,15 +11956,10 @@ class Sqlite extends DartClass {
     }
     /**
      * 执行SQL语句(查询))，返回结果Array<Map<String, dynamic>>
-     * @param config config:
-      {
-        dbName:string,
-        sql:string,
-      }
      */
     static rawQuery(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield Sqlite.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: Sqlite.getInstance().mirrorID,
                 className: Sqlite.getInstance().className,
                 funcName: "rawQuery",
@@ -17264,7 +12062,7 @@ class PermissionHandler extends DartClass {
     }
     static isDenied(permission) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: PermissionHandler.getInstance().mirrorID,
                 className: PermissionHandler.getInstance().className,
                 funcName: "isDenied",
@@ -17275,7 +12073,7 @@ class PermissionHandler extends DartClass {
     }
     static isGranted(permission) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: PermissionHandler.getInstance().mirrorID,
                 className: PermissionHandler.getInstance().className,
                 funcName: "isGranted",
@@ -17286,7 +12084,7 @@ class PermissionHandler extends DartClass {
     }
     static getStatus(permission) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: PermissionHandler.getInstance().mirrorID,
                 className: PermissionHandler.getInstance().className,
                 funcName: "getStatus",
@@ -17298,7 +12096,7 @@ class PermissionHandler extends DartClass {
     }
     static request(permission) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: PermissionHandler.getInstance().mirrorID,
                 className: PermissionHandler.getInstance().className,
                 funcName: "request",
@@ -17310,7 +12108,7 @@ class PermissionHandler extends DartClass {
     }
     static isPermanentlyDenied(permission) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: PermissionHandler.getInstance().mirrorID,
                 className: PermissionHandler.getInstance().className,
                 funcName: "isPermanentlyDenied",
@@ -17321,7 +12119,7 @@ class PermissionHandler extends DartClass {
     }
     static isRestricted(permission) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: PermissionHandler.getInstance().mirrorID,
                 className: PermissionHandler.getInstance().className,
                 funcName: "isRestricted",
@@ -17332,7 +12130,7 @@ class PermissionHandler extends DartClass {
     }
     static isUndetermined(permission) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: PermissionHandler.getInstance().mirrorID,
                 className: PermissionHandler.getInstance().className,
                 funcName: "isUndetermined",
@@ -17343,7 +12141,7 @@ class PermissionHandler extends DartClass {
     }
     static shouldShowRequestRationale(permission) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: PermissionHandler.getInstance().mirrorID,
                 className: PermissionHandler.getInstance().className,
                 funcName: "shouldShowRequestRationale",
@@ -17354,7 +12152,7 @@ class PermissionHandler extends DartClass {
     }
     static serviceStatus(permission) {
         return __awaiter(this, void 0, void 0, function* () {
-            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallConfig({
+            var v = yield PermissionHandler.getInstance().invokeMirrorObjWithCallback(new JSCallArgs({
                 mirrorID: PermissionHandler.getInstance().mirrorID,
                 className: PermissionHandler.getInstance().className,
                 funcName: "serviceStatus",

@@ -41,10 +41,7 @@ class _MyDioPage extends fs.WidgetState{
     async testDio2(url:string) {
         try {
           let response =  await fs.Dio.getInstance().get( 
-            {path:url,
-                onReceiveProgress:function (progress:number,total:number){
-            fs.Log.log("testDio(): progress: " + String(progress)+"/"+String(total));
-          }});
+            {path:url});
     
           fs.Log.log("await Dio.get(urlStr):request() :" + response);
           return response;

@@ -31,30 +31,19 @@ export declare class JSWidgetMirrorMgr {
     getMirrorObj(mirrorID: string): any;
     static getInstance(): JSWidgetMirrorMgr;
 }
-interface JSCallArgsConfig {
+export declare class JSCallArgs {
     widgetID?: string;
     mirrorID?: string;
     className?: string;
     funcName?: string;
     args?: any;
-}
-export declare class JSCallConfig {
-    widgetID?: string;
-    mirrorID?: string;
-    className?: string;
-    funcName?: string;
-    args?: any;
-    /**
-     * @param config config:
-      {
-        widgetID?:string,
-        mirrorID?:string,
-        className?:string,
-        funcName?:string,
-        args?:any
-      }
-     */
-    constructor(config: JSCallArgsConfig);
+    constructor(config: {
+        widgetID?: string;
+        mirrorID?: string;
+        className?: string;
+        funcName?: string;
+        args?: any;
+    });
 }
 export declare class DartClass extends core.Object {
     className: string;
@@ -62,7 +51,7 @@ export declare class DartClass extends core.Object {
     mirrorID?: string;
     constructor();
     createMirrorID(): void;
-    invokeMirrorObjWithCallback(args: JSCallConfig): Promise<unknown>;
+    invokeMirrorObjWithCallback(args: JSCallArgs): Promise<unknown>;
     createMirrorObj(): void;
 }
 export declare class Widget extends DartClass {
@@ -76,10 +65,10 @@ export declare class Convert extends core.Object {
 }
 export declare class JSBridge {
     static invokeFlutterCommonChannel(basicMethodCall: any, callback?: any): void;
-    static createMirrorObj(flutterCallConfig: any, mirrorID: any, needMonitordGCValue: any): void;
+    static createMirrorObj(flutterCallArgs: any, mirrorID: any, needMonitordGCValue: any): void;
     static onFlutterInvokeJSCommonChannel(messageStr: string): any;
     static invokeJSMirrorObj(args: any): void;
-    static invokeMirrorObjWithCallback(flutterCallConfig: any, callback: any): void;
+    static invokeMirrorObjWithCallback(flutterCallArgs: any, callback: any): void;
 }
 export declare class JSFlutterApp {
     name?: string;
@@ -108,8 +97,8 @@ export declare class JSFramework {
     static callNativeSetCurrentJSApp(app: any): void;
     static callFlutterReloadApp(app: any, widgetData: string): void;
     static callFlutterWidgetChannel(method: string, args: string): void;
-    static invokeFlutterFunction(callConfig: any): void;
-    static invokeCommonFlutterFunction(callConfig: any): void;
+    static invokeFlutterFunction(callArgs: any): void;
+    static invokeCommonFlutterFunction(callArgs: any): void;
 }
 export declare class Log {
     static setLogLev(lev: number): void;
@@ -207,10 +196,6 @@ export declare class WidgetMgr {
     remove(widgetID: string): void;
     findWidget(widgetID: string): BaseWidget | undefined;
 }
-interface BaseWidgetConfig {
-    name?: string;
-    key?: Key;
-}
 export declare class BaseWidget extends Widget {
     name?: string;
     key?: Key;
@@ -229,17 +214,26 @@ export declare class BaseWidget extends Widget {
     buildingWidgetTree?: WidgetTree;
     preWidgetTree?: WidgetTree;
     buildContext?: BuildContext;
-    constructor(config?: BaseWidgetConfig);
+    constructor(config?: {
+        name?: string;
+        key?: Key;
+    });
     getWidgetInfo(): string;
     getWidgetTreeBuildSeq(widgetTree?: WidgetTree): string;
     onBuildEnd(args?: any): void;
 }
 export declare class StatefulWidget extends BaseWidget {
-    constructor(config?: BaseWidgetConfig);
+    constructor(config?: {
+        name?: string;
+        key?: Key;
+    });
     createState(): void;
 }
 export declare class StatelessWidget extends BaseWidget {
-    constructor(config?: BaseWidgetConfig);
+    constructor(config?: {
+        name?: string;
+        key?: Key;
+    });
     build(context?: BuildContext): void;
 }
 export declare class WidgetState {
@@ -761,37 +755,18 @@ export declare class NetworkAssetBundle extends AssetBundle {
     baseUrl?: Uri;
     constructor(baseUrl: Uri);
 }
-interface BorderSideConfig {
-    color?: Color;
-    width?: number;
-    style?: BorderStyle;
-}
 export declare class BorderSide extends DartClass {
     color?: Color;
     width?: number;
     style?: BorderStyle;
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          width?:number,
-          style?:BorderStyle
-        }
-     */
-    constructor(config?: BorderSideConfig);
+    constructor(config?: {
+        color?: Color;
+        width?: number;
+        style?: BorderStyle;
+    });
     static none(): BorderSide;
 }
 export declare abstract class BorderRadiusGeometry extends DartClass {
-}
-interface BorderRadiusConfig {
-    top?: Radius;
-    bottom?: Radius;
-    left?: Radius;
-    right?: Radius;
-    topLeft?: Radius;
-    topRight?: Radius;
-    bottomLeft?: Radius;
-    bottomRight?: Radius;
 }
 export declare class BorderRadius extends BorderRadiusGeometry {
     radius?: number | Radius;
@@ -806,42 +781,20 @@ export declare class BorderRadius extends BorderRadiusGeometry {
     static zero(): BorderRadius;
     static all(radius: Radius): BorderRadius;
     static circular(radius: number): BorderRadius;
-    /**
-     * @param config config:
-        {
-          top?:Radius,
-          bottom?:Radius
-        }
-     */
-    static vertical(config?: BorderRadiusConfig): BorderRadius;
-    /**
-     * @param config config:
-        {
-          left?:Radius,
-          right?:Radius
-        }
-     */
-    static horizontal(config?: BorderRadiusConfig): BorderRadius;
-    /**
-     * @param config config:
-        {
-          topLeft?:Radius,
-          topRight?:Radius,
-          bottomLeft?:Radius,
-          bottomRight?:Radius,
-        }
-     */
-    static only(config?: BorderRadiusConfig): BorderRadius;
-}
-interface BorderRadiusDirectionalConfig {
-    top?: Radius;
-    bottom?: Radius;
-    start?: Radius;
-    end?: Radius;
-    topStart?: Radius;
-    topEnd?: Radius;
-    bottomStart?: Radius;
-    bottomEnd?: Radius;
+    static vertical(config?: {
+        top?: Radius;
+        bottom?: Radius;
+    }): BorderRadius;
+    static horizontal(config?: {
+        left?: Radius;
+        right?: Radius;
+    }): BorderRadius;
+    static only(config?: {
+        topLeft?: Radius;
+        topRight?: Radius;
+        bottomLeft?: Radius;
+        bottomRight?: Radius;
+    }): BorderRadius;
 }
 export declare class BorderRadiusDirectional extends BorderRadiusGeometry {
     radius?: Radius | number;
@@ -856,40 +809,20 @@ export declare class BorderRadiusDirectional extends BorderRadiusGeometry {
     static zero(): BorderRadiusDirectional;
     static all(radius: Radius): BorderRadiusDirectional;
     static circular(radius: number): BorderRadiusDirectional;
-    /**
-     * @param config config:
-        {
-          top?:Radius,
-          bottom?:Radius
-        }
-     */
-    static vertical(config?: BorderRadiusDirectionalConfig): BorderRadiusDirectional;
-    /**
-     * @param config config:
-        {
-          start?:Radius,
-          end?:Radius
-        }
-     */
-    static horizontal(config?: BorderRadiusDirectionalConfig): BorderRadiusDirectional;
-    /**
-     * @param config config:
-        {
-          topStart?:Radius,
-          topEnd?:Radius,
-          bottomLeft?:Radius,
-          bottomRight?:Radius,
-        }
-     */
-    static only(config?: BorderRadiusDirectionalConfig): BorderRadiusDirectional;
-}
-interface BannerPainterConfig {
-    message: string;
-    textDirection: TextDirection;
-    location: BannerLocation;
-    layoutDirection?: TextDirection;
-    color?: Color;
-    textStyle?: TextStyle;
+    static vertical(config?: {
+        top?: Radius;
+        bottom?: Radius;
+    }): BorderRadiusDirectional;
+    static horizontal(config?: {
+        start?: Radius;
+        end?: Radius;
+    }): BorderRadiusDirectional;
+    static only(config?: {
+        topStart?: Radius;
+        topEnd?: Radius;
+        bottomStart?: Radius;
+        bottomEnd?: Radius;
+    }): BorderRadiusDirectional;
 }
 export declare class BannerPainter extends DartClass {
     message?: string;
@@ -898,75 +831,40 @@ export declare class BannerPainter extends DartClass {
     layoutDirection?: TextDirection;
     color?: Color;
     textStyle?: TextStyle;
-    /**
-     * @param config config:
-        {
-          message?:string,
-          textDirection?:TextDirection,
-          location?:BannerLocation,
-          layoutDirection?:TextDirection,
-          color?:Color,
-          textStyle?:TextStyle,
-        }
-      */
-    constructor(config: BannerPainterConfig);
-}
-interface BoxShadowConfig {
-    color?: Color;
-    offset?: Offset;
-    blurRadius?: number;
-    spreadRadius?: number;
+    constructor(config: {
+        message?: string;
+        textDirection?: TextDirection;
+        location?: BannerLocation;
+        layoutDirection?: TextDirection;
+        color?: Color;
+        textStyle?: TextStyle;
+    });
 }
 export declare class BoxShadow extends DartClass {
     color?: Color;
     offset?: Offset;
     blurRadius?: number;
     spreadRadius?: number;
-    /**
-     * @param config config:
-      {
-        color?:Color,
-        offset?:Offset,
-        blurRadius?:number,
-        spreadRadius?:number
-      }
-     */
-    constructor(config?: BoxShadowConfig);
+    constructor(config?: {
+        color?: Color;
+        offset?: Offset;
+        blurRadius?: number;
+        spreadRadius?: number;
+    });
 }
 export declare abstract class Constraints extends DartClass {
-    /**
-     * Constraints.box = new BoxConstraints(config?: BoxConstraintsConfig)
-     * @param config config:
-      {
-        minWidth?:number,
-        maxWidth?:number,
-        minHeight?:number,
-        maxHeight?:number
-      }
-     */
-    static box(config?: BoxConstraintsConfig): BoxConstraints;
-}
-interface BoxConstraintsConfig {
-    minWidth?: number;
-    maxWidth?: number;
-    minHeight?: number;
-    maxHeight?: number;
 }
 export declare class BoxConstraints extends Constraints {
     minWidth?: number;
     maxWidth?: number;
     minHeight?: number;
     maxHeight?: number;
-    /**
-     * @param config config:
-      {
-        minWidth?:number,
-        maxWidth?:number,
-        minHeight?:number,
-        maxHeight?:number
-      }
-     */
-    constructor(config?: BoxConstraintsConfig);
+    constructor(config?: {
+        minWidth?: number;
+        maxWidth?: number;
+        minHeight?: number;
+        maxHeight?: number;
+    });
 }
 export declare class Color extends DartClass {
     value?: number;
@@ -1039,47 +937,23 @@ export declare class ColorFilter extends DartClass {
     constructor(color: Color, blendMode: BlendMode);
     static mode(color: Color, blendMode: BlendMode): ColorFilter;
 }
-interface DragDownDetailsConfig {
-    globalPosition?: Offset;
-    localPosition?: Offset;
-}
 export declare class DragDownDetails extends DartClass {
     globalPosition?: Offset;
     localPosition?: Offset;
-    /**
-     * @param config config:
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-        }
-     */
-    constructor(config?: DragDownDetailsConfig);
-}
-interface DragStartDetailsConfig {
-    globalPosition?: Offset;
-    localPosition?: Offset;
-    sourceTimeStamp?: Duration;
+    constructor(config?: {
+        globalPosition?: Offset;
+        localPosition?: Offset;
+    });
 }
 export declare class DragStartDetails extends DartClass {
     globalPosition?: Offset;
     localPosition?: Offset;
     sourceTimeStamp?: Duration;
-    /**
-     * @param config config:
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          sourceTimeStamp?:Duration,
-        }
-     */
-    constructor(config?: DragStartDetailsConfig);
-}
-interface DragUpdateDetailsConfig {
-    globalPosition?: Offset;
-    localPosition?: Offset;
-    sourceTimeStamp?: Duration;
-    delta?: Offset;
-    primaryDelta?: number;
+    constructor(config?: {
+        globalPosition?: Offset;
+        localPosition?: Offset;
+        sourceTimeStamp?: Duration;
+    });
 }
 export declare class DragUpdateDetails extends DartClass {
     globalPosition?: Offset;
@@ -1087,40 +961,21 @@ export declare class DragUpdateDetails extends DartClass {
     sourceTimeStamp?: Duration;
     delta?: Offset;
     primaryDelta?: number;
-    /**
-     * @param config config:
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          sourceTimeStamp?:Duration,
-          delta?:Offset,
-          primaryDelta?:number,
-        }
-     */
-    constructor(config?: DragUpdateDetailsConfig);
-}
-interface DragEndDetailsConfig {
-    velocity?: Velocity;
-    primaryVelocity?: number;
+    constructor(config?: {
+        globalPosition?: Offset;
+        localPosition?: Offset;
+        sourceTimeStamp?: Duration;
+        delta?: Offset;
+        primaryDelta?: number;
+    });
 }
 export declare class DragEndDetails extends DartClass {
     velocity?: Velocity;
     primaryVelocity?: number;
-    /**
-     * @param config config:
-        {
-          velocity?:Velocity,
-          primaryVelocity?:number,
-        }
-     */
-    constructor(config?: DragEndDetailsConfig);
-}
-interface DurationConfig {
-    days?: number;
-    hours?: number;
-    minutes?: number;
-    seconds?: number;
-    milliseconds?: number;
+    constructor(config?: {
+        velocity?: Velocity;
+        primaryVelocity?: number;
+    });
 }
 export declare class Duration extends DartClass {
     days?: number;
@@ -1129,54 +984,15 @@ export declare class Duration extends DartClass {
     seconds?: number;
     milliseconds?: number;
     inMilliseconds: number;
-    /**
-     * @param config config:
-        {
-          days?:number,
-          hours?:number,
-          minutes?:number,
-          seconds?:number,
-          milliseconds?:number
-        }
-     */
-    constructor(config?: DurationConfig);
+    constructor(config?: {
+        days?: number;
+        hours?: number;
+        minutes?: number;
+        seconds?: number;
+        milliseconds?: number;
+    });
 }
 export declare abstract class Decoration extends DartClass {
-    /**
-     * Decoration.box = new BoxDecoration(config?: BoxDecorationConfig)
-     * @param config
-        {
-          color?:Color,
-          border?:Border;
-          borderRadius?:BorderRadius,
-          boxShadow?:BoxShadow,
-          gradient?:BaseGradient
-          backgroundBlendMode?:BlendMode,
-          shape?:BoxShape,
-          image?:DecorationImage,
-        }
-     */
-    static box(config?: BoxDecorationConfig): BoxDecoration;
-    /**
-     * Decoration.flutterLogo = new FlutterLogoDecoration(config?: FlutterLogoDecorationConfig)
-     * @param config config:
-        {
-          textColor?:Color,
-          style?:FlutterLogoStyle,
-          margin?:EdgeInsets,
-        }
-     */
-    static flutterLogo(config?: FlutterLogoDecorationConfig): FlutterLogoDecoration;
-}
-interface BoxDecorationConfig {
-    color?: Color;
-    border?: Border;
-    borderRadius?: BorderRadius;
-    boxShadow?: BoxShadow;
-    gradient?: Gradient;
-    backgroundBlendMode?: BlendMode;
-    shape?: BoxShape;
-    image?: any;
 }
 export declare class BoxDecoration extends Decoration {
     color?: Color;
@@ -1187,50 +1003,28 @@ export declare class BoxDecoration extends Decoration {
     backgroundBlendMode?: BlendMode;
     shape?: BoxShape;
     image?: any;
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          border?:Border;
-          borderRadius?:BorderRadius,
-          boxShadow?:BoxShadow,
-          gradient?:BaseGradient
-          backgroundBlendMode?:BlendMode,
-          shape?:BoxShape,
-          image?:DecorationImage,
-        }
-      */
-    constructor(config?: BoxDecorationConfig);
-}
-interface FlutterLogoDecorationConfig {
-    textColor?: Color;
-    style?: FlutterLogoStyle;
-    margin?: EdgeInsets;
+    constructor(config?: {
+        color?: Color;
+        border?: Border;
+        borderRadius?: BorderRadius;
+        boxShadow?: BoxShadow;
+        gradient?: Gradient;
+        backgroundBlendMode?: BlendMode;
+        shape?: BoxShape;
+        image?: DecorationImage;
+    });
 }
 export declare class FlutterLogoDecoration extends Decoration {
     textColor?: Color;
     style?: FlutterLogoStyle;
     margin?: EdgeInsets;
-    /**
-     * @param config config:
-        {
-          textColor?:Color,
-          style?:FlutterLogoStyle,
-          margin?:EdgeInsets,
-        }
-     */
-    constructor(config?: FlutterLogoDecorationConfig);
+    constructor(config?: {
+        textColor?: Color;
+        style?: FlutterLogoStyle;
+        margin?: EdgeInsets;
+    });
 }
 export declare abstract class EdgeInsetsGeometry extends DartClass {
-}
-interface EdgeInsetsConfig {
-    left?: number;
-    top?: number;
-    right?: number;
-    bottom?: number;
-    value?: number;
-    vertical?: number;
-    horizontal?: number;
 }
 export declare class EdgeInsets extends EdgeInsetsGeometry {
     left?: number;
@@ -1240,70 +1034,44 @@ export declare class EdgeInsets extends EdgeInsetsGeometry {
     value?: number;
     vertical?: number;
     horizontal?: number;
-    /**
-     * @param config config:
-        {
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number
-        }
-     */
-    constructor(config?: EdgeInsetsConfig);
+    constructor(config?: {
+        left?: number;
+        top?: number;
+        right?: number;
+        bottom?: number;
+    });
     static zero(): EdgeInsets;
     static fromLTRB(left: number, top: number, right: number, bottom: number): EdgeInsets;
-    /**
-     * @param config config:
-        {
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number
-        }
-     */
-    static only(config?: EdgeInsetsConfig): EdgeInsets;
+    static only(config?: {
+        left?: number;
+        top?: number;
+        right?: number;
+        bottom?: number;
+    }): EdgeInsets;
     static all(value: number): EdgeInsets;
-    /**
-     * @param config config:
-        {
-          vertical?:number,
-          horizontal?:number
-        }
-     */
-    static symmetric(config?: EdgeInsetsConfig): EdgeInsets;
-}
-interface EdgeInsetsDirectionalConfig {
-    start?: number;
-    top?: number;
-    end?: number;
-    bottom?: number;
+    static symmetric(config?: {
+        vertical?: number;
+        horizontal?: number;
+    }): EdgeInsets;
 }
 export declare class EdgeInsetsDirectional extends EdgeInsetsGeometry {
     start?: number;
     top?: number;
     end?: number;
     bottom?: number;
-    /**
-     * @param config config:
-        {
-          start?:number,
-          top?:number,
-          end?:number,
-          bottom?:number,
-        }
-     */
-    constructor(config?: EdgeInsetsDirectionalConfig);
+    constructor(config?: {
+        start?: number;
+        top?: number;
+        end?: number;
+        bottom?: number;
+    });
     static fromSTEB(start: number, top: number, end: number, bottom: number): EdgeInsetsDirectional;
-    /**
-     * @param config config:
-        {
-          start?:number,
-          top?:number,
-          end?:number,
-          bottom?:number
-        }
-     */
-    static only(config?: EdgeInsetsDirectionalConfig): EdgeInsetsDirectional;
+    static only(config?: {
+        start?: number;
+        top?: number;
+        end?: number;
+        bottom?: number;
+    }): EdgeInsetsDirectional;
 }
 export declare class Future extends DartClass {
     /**
@@ -1319,27 +1087,17 @@ export declare class Future extends DartClass {
      */
     static timer(duration: Duration, onBack?: OnCallback): void;
 }
-interface FocusNodeConfig {
-    debugLabel?: string;
-    skipTraversal?: boolean;
-    canRequestFocus?: boolean;
-    descendantsAreFocusable?: boolean;
-}
 export declare class FocusNode extends DartClass {
     debugLabel?: string;
     skipTraversal?: boolean;
     canRequestFocus?: boolean;
     descendantsAreFocusable?: boolean;
-    /**
-     * @param config config:
-        {
-          debugLabel?:string,
-          skipTraversal?:boolean,
-          canRequestFocus?:boolean,
-          descendantsAreFocusable?:boolean,
-        }
-     */
-    constructor(config?: FocusNodeConfig);
+    constructor(config?: {
+        debugLabel?: string;
+        skipTraversal?: boolean;
+        canRequestFocus?: boolean;
+        descendantsAreFocusable?: boolean;
+    });
 }
 export declare class FractionalOffset extends DartClass {
     dx?: number;
@@ -1375,53 +1133,6 @@ export declare class GradientRotation extends GradientTransform {
     constructor(radians: number);
 }
 export declare abstract class Gradient extends DartClass {
-    /**
-     * @param config config:
-        {
-          begin?:Alignment,
-          end?:Alignment,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          transform?:GradientRotation,
-        }
-     */
-    static linear(config?: LinearGradientConfig): LinearGradient;
-    /**
-     * @param config config:
-        {
-          center?:Alignment,
-          radius?:number,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          focal?:Alignment,
-          focalRadius?:number,
-          transform?:GradientRotation,
-        }
-     */
-    static radial(config?: RadialGradientConfig): RadialGradient;
-    /**
-     * @param config config:
-        {
-          center?:Alignment,
-          startAngle?:number,
-          endAngle?:number,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          transform?:GradientRotation,
-        }
-     */
-    static sweep(config?: SweepGradientConfig): SweepGradient;
-}
-interface LinearGradientConfig {
-    colors: Array<Color>;
-    stops?: Array<number>;
-    tileMode?: TileMode;
-    transform?: GradientTransform;
-    begin?: Alignment;
-    end?: Alignment;
 }
 export declare class LinearGradient extends Gradient {
     colors?: Array<Color>;
@@ -1430,28 +1141,14 @@ export declare class LinearGradient extends Gradient {
     transform?: GradientTransform;
     begin?: Alignment;
     end?: Alignment;
-    /**
-     * @param config config:
-        {
-          begin?:Alignment,
-          end?:Alignment,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          transform?:GradientRotation,
-        }
-     */
-    constructor(config?: LinearGradientConfig);
-}
-interface RadialGradientConfig {
-    center?: Alignment;
-    colors?: Array<Color>;
-    stops?: Array<number>;
-    tileMode?: TileMode;
-    transform?: GradientTransform;
-    radius?: number;
-    focal?: Alignment;
-    focalRadius?: number;
+    constructor(config?: {
+        begin?: Alignment;
+        end?: Alignment;
+        colors: Array<Color>;
+        stops?: Array<number>;
+        tileMode?: TileMode;
+        transform?: GradientRotation;
+    });
 }
 export declare class RadialGradient extends Gradient {
     center?: Alignment;
@@ -1462,29 +1159,16 @@ export declare class RadialGradient extends Gradient {
     radius?: number;
     focal?: Alignment;
     focalRadius?: number;
-    /**
-     * @param config config:
-        {
-          center?:Alignment,
-          radius?:number,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          focal?:Alignment,
-          focalRadius?:number,
-          transform?:GradientRotation,
-        }
-     */
-    constructor(config?: RadialGradientConfig);
-}
-interface SweepGradientConfig {
-    center?: Alignment;
-    startAngle?: number;
-    endAngle?: number;
-    colors?: Array<Color>;
-    stops?: Array<number>;
-    tileMode?: TileMode;
-    transform?: GradientTransform;
+    constructor(config?: {
+        center?: Alignment;
+        radius?: number;
+        colors: Array<Color>;
+        stops?: Array<number>;
+        tileMode?: TileMode;
+        focal?: Alignment;
+        focalRadius?: number;
+        transform?: GradientRotation;
+    });
 }
 export declare class SweepGradient extends Gradient {
     center?: Alignment;
@@ -1494,37 +1178,27 @@ export declare class SweepGradient extends Gradient {
     stops?: Array<number>;
     tileMode?: TileMode;
     transform?: GradientTransform;
-    /**
-     * @param config config:
-        {
-          center?:Alignment,
-          startAngle?:number,
-          endAngle?:number,
-          colors:Array<Color>,
-          stops?:Array<number>,
-          tileMode?:TileMode,
-          transform?:GradientRotation,
-        }
-     */
-    constructor(config?: SweepGradientConfig);
-}
-interface ImageFilterConfig {
-    sigmaX?: number;
-    sigmaY?: number;
+    constructor(config?: {
+        center?: Alignment;
+        startAngle?: number;
+        endAngle?: number;
+        colors: Array<Color>;
+        stops?: Array<number>;
+        tileMode?: TileMode;
+        transform?: GradientRotation;
+    });
 }
 export declare class ImageFilter extends DartClass {
     sigmaX?: number;
     sigmaY?: number;
-    constructor(config?: ImageFilterConfig);
-    static blur(config?: ImageFilterConfig): ImageFilter;
-}
-interface ImageProviderConfig {
-    scale?: number;
-    width?: number;
-    height?: number;
-    allowUpscaling?: boolean;
-    bundle?: AssetBundle;
-    packageName?: string;
+    constructor(config?: {
+        sigmaX?: number;
+        sigmaY?: number;
+    });
+    static blur(config?: {
+        sigmaX?: number;
+        sigmaY?: number;
+    }): ImageFilter;
 }
 export declare class ImageProvider extends DartClass {
     file?: File;
@@ -1538,95 +1212,30 @@ export declare class ImageProvider extends DartClass {
     height?: number;
     allowUpscaling?: boolean;
     imageProvider?: ImageProvider;
-    /**
-     * @param config config:
-        {
-          scale?:number
-        }
-     */
-    static file(file: File, config?: ImageProviderConfig): ImageProvider;
-    /**
-     * @param config config:
-        {
-          scale?:number,
-        }
-     */
-    static memory(bytes: Uint8List, config?: ImageProviderConfig): ImageProvider;
-    /**
-    * @param config config:
-       {
-         scale?:number,
-       }
-    */
-    static network(url: string, config: ImageProviderConfig): ImageProvider;
-    /**
-     * @param config config:
-        {
-          width?:number,
-          height?:number,
-          allowUpscaling?:boolean,
-        }
-     */
-    static resize(imageProvider?: ImageProvider, config?: ImageProviderConfig): ImageProvider;
-    /**
-     * @param config config:
-        {
-          imageName:string,
-          scale?:number,
-          bundle?:BaseAssetBundle,
-          packageName?:string,
-        }
-     */
-    static exactAsset(imageName: string, config?: ImageProviderConfig): ImageProvider;
+    static file(file: File, config?: {
+        scale?: number;
+    }): ImageProvider;
+    static memory(bytes: Uint8List, config?: {
+        scale?: number;
+    }): ImageProvider;
+    static network(url: string, config: {
+        scale?: number;
+    }): ImageProvider;
+    static resize(imageProvider?: ImageProvider, config?: {
+        width?: number;
+        height?: number;
+        allowUpscaling?: boolean;
+    }): ImageProvider;
+    static exactAsset(imageName: string, config?: {
+        imageName: string;
+        scale?: number;
+        bundle?: AssetBundle;
+        packageName?: string;
+    }): ImageProvider;
 }
 export declare class IconData extends DartClass {
     icon: string;
     constructor(icon: string);
-}
-interface InputDecorationConfig {
-    icon?: Widget;
-    labelText?: string;
-    labelStyle?: TextStyle;
-    helperText?: string;
-    helperStyle?: TextStyle;
-    helperMaxLines?: number;
-    hintText?: string;
-    hintStyle?: TextStyle;
-    hintMaxLines?: number;
-    errorText?: string;
-    errorStyle?: TextStyle;
-    errorMaxLines?: number;
-    hasFloatingPlaceholder?: boolean;
-    floatingLabelBehavior?: FloatingLabelBehavior;
-    isCollapsed?: boolean;
-    isDense?: boolean;
-    contentPadding?: EdgeInsets;
-    prefixIcon?: Widget;
-    prefixIconConstraints?: BoxConstraints;
-    prefix?: Widget;
-    prefixText?: string;
-    prefixStyle?: TextStyle;
-    suffixIcon?: Widget;
-    suffix?: Widget;
-    suffixText?: string;
-    suffixStyle?: TextStyle;
-    suffixIconConstraints?: BoxConstraints;
-    counter?: Widget;
-    counterText?: string;
-    counterStyle?: TextStyle;
-    filled?: boolean;
-    fillColor?: Color;
-    focusColor?: Color;
-    hoverColor?: Color;
-    errorBorder?: InputBorder;
-    focusedBorder?: InputBorder;
-    focusedErrorBorder?: InputBorder;
-    disabledBorder?: InputBorder;
-    enabledBorder?: InputBorder;
-    border?: InputBorder;
-    enabled?: boolean;
-    semanticCounterText?: string;
-    alignLabelWithHint?: boolean;
 }
 export declare class InputDecoration extends DartClass {
     icon?: Widget;
@@ -1672,68 +1281,60 @@ export declare class InputDecoration extends DartClass {
     enabled?: boolean;
     semanticCounterText?: string;
     alignLabelWithHint?: boolean;
-    /**
-     * @param config config:
-        {
-          icon?:Widget,
-          labelText?:string,
-          labelStyle?:TextStyle,
-          helperText?:string,
-          helperStyle?:TextStyle,
-          helperMaxLines?:number,
-          hintText?:string,
-          hintStyle?:TextStyle,
-          hintMaxLines?:number,
-          errorText?:string,
-          errorStyle?:TextStyle,
-          errorMaxLines?:number,
-          hasFloatingPlaceholder?:boolean,
-          floatingLabelBehavior?:FloatingLabelBehavior,
-          isCollapsed?:boolean,
-          isDense?:boolean,
-          contentPadding?:EdgeInsets,
-          prefixIcon?:Widget,
-          prefixIconConstraints?:BoxConstraints,
-          prefix?:Widget,
-          prefixText?:string,
-          prefixStyle?:TextStyle,
-          suffixIcon?:Widget,
-          suffix?:Widget,
-          suffixText?:string,
-          suffixStyle?:TextStyle,
-          suffixIconConstraints?:BoxConstraints,
-          counter?:Widget,
-          counterText?:string,
-          counterStyle?:TextStyle,
-          filled?:boolean,
-          fillColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          errorBorder?:InputBorder,
-          focusedBorder?:InputBorder,
-          focusedErrorBorder?:InputBorder,
-          disabledBorder?:InputBorder,
-          enabledBorder?:InputBorder,
-          border?:InputBorder,
-          enabled?:boolean,
-          semanticCounterText?:string,
-          alignLabelWithHint?:boolean,
-        }
-     */
-    constructor(config?: InputDecorationConfig);
-    /**
-     * @param config config:
-        {
-          hintText?:string,
-          hasFloatingPlaceholder?:boolean,
-          hintStyle?:TextStyle,
-          filled?:boolean,
-          fillColor?:Color,
-          border?:InputBorder,
-          enabled?:boolean
-        }
-     */
-    static collapsed(config?: InputDecorationConfig): InputDecoration;
+    constructor(config?: {
+        icon?: Widget;
+        labelText?: string;
+        labelStyle?: TextStyle;
+        helperText?: string;
+        helperStyle?: TextStyle;
+        helperMaxLines?: number;
+        hintText?: string;
+        hintStyle?: TextStyle;
+        hintMaxLines?: number;
+        errorText?: string;
+        errorStyle?: TextStyle;
+        errorMaxLines?: number;
+        hasFloatingPlaceholder?: boolean;
+        floatingLabelBehavior?: FloatingLabelBehavior;
+        isCollapsed?: boolean;
+        isDense?: boolean;
+        contentPadding?: EdgeInsets;
+        prefixIcon?: Widget;
+        prefixIconConstraints?: BoxConstraints;
+        prefix?: Widget;
+        prefixText?: string;
+        prefixStyle?: TextStyle;
+        suffixIcon?: Widget;
+        suffix?: Widget;
+        suffixText?: string;
+        suffixStyle?: TextStyle;
+        suffixIconConstraints?: BoxConstraints;
+        counter?: Widget;
+        counterText?: string;
+        counterStyle?: TextStyle;
+        filled?: boolean;
+        fillColor?: Color;
+        focusColor?: Color;
+        hoverColor?: Color;
+        errorBorder?: InputBorder;
+        focusedBorder?: InputBorder;
+        focusedErrorBorder?: InputBorder;
+        disabledBorder?: InputBorder;
+        enabledBorder?: InputBorder;
+        border?: InputBorder;
+        enabled?: boolean;
+        semanticCounterText?: string;
+        alignLabelWithHint?: boolean;
+    });
+    static collapsed(config?: {
+        hintText?: string;
+        hasFloatingPlaceholder?: boolean;
+        hintStyle?: TextStyle;
+        filled?: boolean;
+        fillColor?: Color;
+        border?: InputBorder;
+        enabled?: boolean;
+    }): InputDecoration;
 }
 export declare abstract class Key extends DartClass {
     value?: string;
@@ -1830,68 +1431,31 @@ export declare class Offset extends DartClass {
     static infinite(): Offset;
     static fromDirection(direction: number): Offset;
 }
-interface PageControllerConfig {
-    initialPage?: number;
-    keepPage?: boolean;
-    viewportFraction?: number;
-}
-interface PageControllerJumpToPageConfig {
-    page: number;
-}
-interface PageControllerAnimateToPageConfig {
-    page: number;
-    duration: Duration;
-    curve: Curve;
-}
-interface PageControllerToPageConfig {
-    duration: Duration;
-    curve: Curve;
-}
 export declare class PageController extends DartClass {
     initialPage?: number;
     keepPage?: boolean;
     viewportFraction?: number;
-    /**
-     * @param config config:
-        {
-          page:number,
-          duration:Duration,
-          curve:Curve,
-        }
-     */
-    animateToPage(config: PageControllerAnimateToPageConfig): void;
-    /**
-     * @param config config:
-        {
-          duration:Duration,
-          curve:Curve,
-        }
-     */
-    nextPage(config: PageControllerToPageConfig): void;
-    /**
-     * @param config config:
-        {
-          duration:Duration,
-          curve:Curve,
-        }
-     */
-    previousPage(config: PageControllerToPageConfig): void;
-    /**
-     * @param config config:
-        {
-          page:number,
-        }
-     */
-    jumpToPage(config: PageControllerJumpToPageConfig): void;
-    /**
-     * @param config config:
-        {
-          initialPage?:number,
-          keepPage?:boolean,
-          viewportFraction?:number,
-        }
-     */
-    constructor(config: PageControllerConfig);
+    animateToPage(config: {
+        page: number;
+        duration: Duration;
+        curve: Curve;
+    }): void;
+    nextPage(config: {
+        duration: Duration;
+        curve: Curve;
+    }): void;
+    previousPage(config: {
+        duration: Duration;
+        curve: Curve;
+    }): void;
+    jumpToPage(config: {
+        page: number;
+    }): void;
+    constructor(config: {
+        initialPage?: number;
+        keepPage?: boolean;
+        viewportFraction?: number;
+    });
     page(): Promise<number>;
 }
 export declare class Quaternion extends DartClass {
@@ -1909,40 +1473,18 @@ export declare class Radius extends DartClass {
     static elliptical(x: number, y: number): Radius;
     static zero(): Radius;
 }
-interface RegExpConfig {
-    multiLine?: boolean;
-    caseSensitive?: boolean;
-    unicode?: boolean;
-    dotAll?: boolean;
-}
 export declare class RegExp extends DartClass {
     source: string;
     multiLine?: boolean;
     caseSensitive?: boolean;
     unicode?: boolean;
     dotAll?: boolean;
-    /**
-     * @param config config:
-        {
-          multiLine?:boolean,
-          caseSensitive?:boolean,
-          unicode?:boolean,
-          dotAll?:boolean,
-        }
-     */
-    constructor(source: string, config?: RegExpConfig);
-}
-interface RectConfig {
-    center?: Offset;
-    width?: number;
-    height?: number;
-    left?: number;
-    top?: number;
-    right?: number;
-    bottom?: number;
-    radius?: number;
-    a?: Offset;
-    b?: Offset;
+    constructor(source: string, config?: {
+        multiLine?: boolean;
+        caseSensitive?: boolean;
+        unicode?: boolean;
+        dotAll?: boolean;
+    });
 }
 export declare class Rect extends DartClass {
     center?: Offset;
@@ -1955,25 +1497,17 @@ export declare class Rect extends DartClass {
     radius?: number;
     a?: Offset;
     b?: Offset;
-    /**
-     * @param config config:
-        {
-          center?:Offset,
-          width?:number,
-          height?:number
-        }
-     */
-    static fromCenter(config: RectConfig): Rect;
+    static fromCenter(config: {
+        center?: Offset;
+        width?: number;
+        height?: number;
+    }): Rect;
     static fromLTRB(left: number, top: number, right: number, bottom: number): Rect;
     static fromLTWH(left: number, top: number, width: number, height: number): Rect;
-    /**
-     * @param config config:
-      {
-        center?:Offset,
-        radius?:number
-      }
-     */
-    static fromCircle(config: RectConfig): Rect;
+    static fromCircle(config: {
+        center?: Offset;
+        radius?: number;
+    }): Rect;
     static fromPoints(a: Offset, b: Offset): Rect;
     static zero(): Rect;
     static largest(): Rect;
@@ -1990,12 +1524,6 @@ export declare class RelativeRect extends DartClass {
     static fromSize(rect: Rect, container: Size): RelativeRect;
     static fromRect(rect: Rect, rect1: Rect): RelativeRect;
     static fill(): RelativeRect;
-}
-interface RRectConfig {
-    topLeft?: Radius;
-    topRight?: Radius;
-    bottomRight?: Radius;
-    bottomLeft?: Radius;
 }
 export declare class RRect extends DartClass {
     left?: number;
@@ -2014,35 +1542,19 @@ export declare class RRect extends DartClass {
     static fromLTRBR(left: number, top: number, right: number, bottom: number, radius: Radius): RRect;
     static fromRectXY(rect: Rect, radiusX: number, radiusY: number): RRect;
     static fromRectAndRadius(rect: Rect, radius: Radius): RRect;
-    /**
-     * @param config config:
-      {
-        topLeft?:Radius,
-        topRight?:Radius,
-        bottomRight?:Radius,
-        bottomLeft?:Radius,
-      }
-     */
-    static fromLTRBAndCorners(left: number, top: number, right: number, bottom: number, config?: RRectConfig): RRect;
-    /**
-     * @param config config:
-      {
-        topLeft?:Radius,
-        topRight?:Radius,
-        bottomRight?:Radius,
-        bottomLeft?:Radius,
-      }
-     */
-    static fromRectAndCorners(rect: Rect, config?: RRectConfig): RRect;
+    static fromLTRBAndCorners(left: number, top: number, right: number, bottom: number, config?: {
+        topLeft?: Radius;
+        topRight?: Radius;
+        bottomRight?: Radius;
+        bottomLeft?: Radius;
+    }): RRect;
+    static fromRectAndCorners(rect: Rect, config?: {
+        topLeft?: Radius;
+        topRight?: Radius;
+        bottomRight?: Radius;
+        bottomLeft?: Radius;
+    }): RRect;
     static zero(): RRect;
-}
-interface RSTransformConfig {
-    rotation: number;
-    scale: number;
-    anchorX: number;
-    anchorY: number;
-    translateX: number;
-    translateY: number;
 }
 export declare class RSTransform extends DartClass {
     rotation?: number;
@@ -2055,18 +1567,14 @@ export declare class RSTransform extends DartClass {
     ssin?: number;
     tx?: number;
     ty?: number;
-    /**
-     * @param config config:
-        {
-          rotation?:number,
-          scale?:number,
-          anchorX?:number,
-          anchorY?:number,
-          translateX?:number,
-          translateY?:number,
-        }
-     */
-    static fromComponents(config: RSTransformConfig): RSTransform;
+    static fromComponents(config: {
+        rotation?: number;
+        scale?: number;
+        anchorX?: number;
+        anchorY?: number;
+        translateX?: number;
+        translateY?: number;
+    }): RSTransform;
     constructor(scos?: number, ssin?: number, tx?: number, ty?: number);
 }
 export declare abstract class Shader extends DartClass {
@@ -2086,29 +1594,13 @@ export declare class ImageShader extends Shader {
     matrix4?: Matrix4;
     constructor(image: ImageProvider, tmx: TileMode, tmy: TileMode, matrix4: Matrix4);
 }
-interface ScaleStartDetailsConfig {
-    focalPoint?: Offset;
-    localFocalPoint?: Offset;
-}
 export declare class ScaleStartDetails extends DartClass {
     focalPoint?: Offset;
     localFocalPoint?: Offset;
-    /**
-     * @param config config:
-        {
-          focalPoint?:Offset,
-          localFocalPoint?:Offset,
-        }
-     */
-    constructor(config?: ScaleStartDetailsConfig);
-}
-interface ScaleUpdateDetailsConfig {
-    focalPoint?: Offset;
-    localFocalPoint?: Offset;
-    scale?: number;
-    horizontalScale?: number;
-    verticalScale?: number;
-    rotation?: number;
+    constructor(config?: {
+        focalPoint?: Offset;
+        localFocalPoint?: Offset;
+    });
 }
 export declare class ScaleUpdateDetails extends DartClass {
     focalPoint?: Offset;
@@ -2117,31 +1609,20 @@ export declare class ScaleUpdateDetails extends DartClass {
     horizontalScale?: number;
     verticalScale?: number;
     rotation?: number;
-    /**
-     * @param config config:
-        {
-          focalPoint?:Offset,
-          localFocalPoint?:Offset,
-          scale?:number,
-          horizontalScale?:number,
-          verticalScale?:number,
-          rotation?:number,
-        }
-     */
-    constructor(config?: ScaleUpdateDetailsConfig);
-}
-interface ScaleEndDetailsConfig {
-    velocity?: Velocity;
+    constructor(config?: {
+        focalPoint?: Offset;
+        localFocalPoint?: Offset;
+        scale?: number;
+        horizontalScale?: number;
+        verticalScale?: number;
+        rotation?: number;
+    });
 }
 export declare class ScaleEndDetails extends DartClass {
     velocity?: Velocity;
-    /**
-     * @param config config:
-        {
-          velocity?:Velocity,
-        }
-     */
-    constructor(config?: ScaleEndDetailsConfig);
+    constructor(config?: {
+        velocity?: Velocity;
+    });
 }
 export declare class Size extends DartClass {
     width?: number;
@@ -2156,18 +1637,6 @@ export declare class Size extends DartClass {
     static zero(): Size;
     static infinite(): Size;
 }
-interface StrutStyleConfig {
-    fontFamily?: string;
-    fontFamilyFallback?: Array<string>;
-    fontSize?: number;
-    height?: number;
-    leading?: number;
-    fontWeight?: FontWeight;
-    fontStyle?: FontStyle;
-    forceStrutHeight?: boolean;
-    debugLabel?: string;
-    packageName?: string;
-}
 export declare class StrutStyle extends DartClass {
     fontFamily?: string;
     fontFamilyFallback?: Array<string>;
@@ -2179,30 +1648,18 @@ export declare class StrutStyle extends DartClass {
     forceStrutHeight?: boolean;
     debugLabel?: string;
     packageName?: string;
-    /**
-     * @param config config:
-        {
-          fontFamily?:string,
-          fontFamilyFallback?:Array<string>,
-          fontSize?:number,
-          height?:number,
-          leading?:number,
-          fontWeight?:FontWeight,
-          fontStyle?:FontStyle,
-          forceStrutHeight?:boolean,
-          debugLabel?:string,
-          packageName?:string,
-        }
-     */
-    constructor(config: StrutStyleConfig);
-}
-interface SystemUiOverlayStyleConfig {
-    systemNavigationBarColor?: Color;
-    systemNavigationBarDividerColor?: Color;
-    statusBarColor?: Color;
-    systemNavigationBarIconBrightness?: Brightness;
-    statusBarBrightness?: Brightness;
-    statusBarIconBrightness?: Brightness;
+    constructor(config: {
+        fontFamily?: string;
+        fontFamilyFallback?: Array<string>;
+        fontSize?: number;
+        height?: number;
+        leading?: number;
+        fontWeight?: FontWeight;
+        fontStyle?: FontStyle;
+        forceStrutHeight?: boolean;
+        debugLabel?: string;
+        packageName?: string;
+    });
 }
 export declare class SystemUiOverlayStyle extends DartClass {
     systemNavigationBarColor?: Color;
@@ -2211,114 +1668,55 @@ export declare class SystemUiOverlayStyle extends DartClass {
     systemNavigationBarIconBrightness?: Brightness;
     statusBarBrightness?: Brightness;
     statusBarIconBrightness?: Brightness;
-    /**
-     * @param config config:
-        {
-          systemNavigationBarColor?:Color,
-          systemNavigationBarDividerColor?:Color,
-          statusBarColor?:Color,
-          systemNavigationBarIconBrightness?:Brightness,
-          statusBarBrightness?:Brightness,
-          statusBarIconBrightness?:Brightness
-        }
-     */
-    constructor(config: SystemUiOverlayStyleConfig);
+    constructor(config: {
+        systemNavigationBarColor?: Color;
+        systemNavigationBarDividerColor?: Color;
+        statusBarColor?: Color;
+        systemNavigationBarIconBrightness?: Brightness;
+        statusBarBrightness?: Brightness;
+        statusBarIconBrightness?: Brightness;
+    });
     static light: SystemUiOverlayStyle;
     static dark: SystemUiOverlayStyle;
-}
-interface SpringDescriptionConfig {
-    mass: number;
-    stiffness: number;
-    damping: number;
 }
 export declare class SpringDescription extends DartClass {
     mass?: number;
     stiffness?: number;
     damping?: number;
-    /**
-     * @param config config:
-        {
-          mass?:number,
-          stiffness?:number,
-          damping?:number
-        }
-     */
-    constructor(config: SpringDescriptionConfig);
-}
-interface ScrollControllerConfig {
-    initialScrollOffset?: number;
-    keepScrollOffset?: boolean;
-    debugLabel?: string;
-}
-interface ScrollControllerJumpToConfig {
-    value: number;
-}
-interface ScrollControllerAnimateToConfig {
-    offset: number;
-    duration: Duration;
-    curve: Curve;
+    constructor(config: {
+        mass?: number;
+        stiffness?: number;
+        damping?: number;
+    });
 }
 export declare class ScrollController extends DartClass {
     initialScrollOffset?: number;
     keepScrollOffset?: boolean;
     debugLabel?: string;
-    /**
-     * @param config config:
-        {
-          offset:number,
-          duration:Duration,
-          curve:Curve,
-        }
-     */
-    animateTo(config: ScrollControllerAnimateToConfig): void;
-    /**
-     * @param config config:
-        {
-          value:number,
-        }
-     */
-    jumpTo(config: ScrollControllerJumpToConfig): void;
-    /**
-     * @param config config:
-        {
-          initialScrollOffset?:number,
-          keepScrollOffset?:boolean,
-          debugLabel?:string
-        }
-     */
-    constructor(config: ScrollControllerConfig);
+    animateTo(config: {
+        offset: number;
+        duration: Duration;
+        curve: Curve;
+    }): void;
+    jumpTo(config: {
+        value: number;
+    }): void;
+    constructor(config: {
+        initialScrollOffset?: number;
+        keepScrollOffset?: boolean;
+        debugLabel?: string;
+    });
     offset(): Promise<number>;
-}
-interface ShadowConfig {
-    color?: Color;
-    offset?: Offset;
-    blurRadius?: number;
 }
 export declare class Shadow extends DartClass {
     color?: Color;
     offset?: Offset;
     blurRadius?: number;
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          offset?:Offset,
-          blurRadius?:number
-        }
-     */
-    constructor(config?: ShadowConfig);
-}
-interface ScrollbarPainterConfig {
-    color: Color;
-    textDirection: TextDirection;
-    thickness: number;
-    fadeoutOpacityAnimation: any;
-    padding?: EdgeInsets;
-    mainAxisMargin?: number;
-    crossAxisMargin?: number;
-    radius?: Radius;
-    minLength?: number;
-    minOverscrollLength?: number;
+    constructor(config?: {
+        color?: Color;
+        offset?: Offset;
+        blurRadius?: number;
+    });
 }
 export declare class ScrollbarPainter extends DartClass {
     color?: Color;
@@ -2331,113 +1729,63 @@ export declare class ScrollbarPainter extends DartClass {
     radius?: Radius;
     minLength?: number;
     minOverscrollLength?: number;
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          textDirection?:TextDirection,
-          thickness?:number,
-          fadeoutOpacityAnimation?:any,
-          padding?:EdgeInsets,
-          mainAxisMargin?:number,
-          crossAxisMargin?:number,
-          radius?:Radius,
-          minLength?:number,
-          minOverscrollLength?:number,
-        }
-     */
-    constructor(config: ScrollbarPainterConfig);
-}
-interface ScrollPhysicsConfig {
-    parent?: ScrollPhysics;
+    constructor(config: {
+        color?: Color;
+        textDirection?: TextDirection;
+        thickness?: number;
+        fadeoutOpacityAnimation?: any;
+        padding?: EdgeInsets;
+        mainAxisMargin?: number;
+        crossAxisMargin?: number;
+        radius?: Radius;
+        minLength?: number;
+        minOverscrollLength?: number;
+    });
 }
 export declare class ScrollPhysics extends DartClass {
     parent?: ScrollPhysics;
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
-    constructor(config?: ScrollPhysicsConfig);
+    constructor(config?: {
+        parent?: ScrollPhysics;
+    });
 }
 export declare class AlwaysScrollableScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
-    constructor(config?: ScrollPhysicsConfig);
+    constructor(config?: {
+        parent?: ScrollPhysics;
+    });
 }
 export declare class FixedExtentScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
-    constructor(config?: ScrollPhysicsConfig);
+    constructor(config?: {
+        parent?: ScrollPhysics;
+    });
 }
 export declare class PageScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
-    constructor(config?: ScrollPhysicsConfig);
+    constructor(config?: {
+        parent?: ScrollPhysics;
+    });
 }
 export declare class BouncingScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
-    constructor(config?: ScrollPhysicsConfig);
+    constructor(config?: {
+        parent?: ScrollPhysics;
+    });
 }
 export declare class ClampingScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
-    constructor(config?: ScrollPhysicsConfig);
+    constructor(config?: {
+        parent?: ScrollPhysics;
+    });
 }
 export declare class NeverScrollableScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
-    constructor(config?: ScrollPhysicsConfig);
+    constructor(config?: {
+        parent?: ScrollPhysics;
+    });
 }
 export declare class RangeMaintainingScrollPhysics extends ScrollPhysics {
-    /**
-      * @param config config:
-        {
-          parent?:ScrollPhysics,
-        }
-      */
-    constructor(config?: ScrollPhysicsConfig);
+    constructor(config?: {
+        parent?: ScrollPhysics;
+    });
 }
 export declare abstract class ShapeBorder extends DartClass {
 }
 export declare abstract class BoxBorder extends ShapeBorder {
-}
-interface BorderConfig {
-    top?: BorderSide;
-    right?: BorderSide;
-    bottom?: BorderSide;
-    left?: BorderSide;
-    vertical?: BorderSide;
-    horizontal?: BorderSide;
-    color?: Color;
-    width?: number;
-    style?: BorderStyle;
 }
 export declare class Border extends BoxBorder {
     top?: BorderSide;
@@ -2449,172 +1797,94 @@ export declare class Border extends BoxBorder {
     color?: Color;
     width?: number;
     style?: BorderStyle;
-    /**
-     * @param config config:
-      {
-        top?:BorderSide,
-        right?:BorderSide,
-        bottom?:BorderSide,
-        left?:BorderSide,
-      }
-     */
-    constructor(config?: BorderConfig);
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          width?:number,
-          style?:BorderStyle,
-        }
-     */
-    static all(config: BorderConfig): Border;
-    /**
-     * @param config config:
-        {
-          vertical?:BorderSide,
-          horizontal?:BorderSide
-        }
-     */
-    static symmetric(config?: BorderConfig): Border;
-}
-interface BorderDirectionalConfig {
-    top?: BorderSide;
-    start?: BorderSide;
-    bottom?: BorderSide;
-    end?: BorderSide;
+    constructor(config?: {
+        top?: BorderSide;
+        right?: BorderSide;
+        bottom?: BorderSide;
+        left?: BorderSide;
+    });
+    static all(config: {
+        color?: Color;
+        width?: number;
+        style?: BorderStyle;
+    }): Border;
+    static symmetric(config?: {
+        vertical?: BorderSide;
+        horizontal?: BorderSide;
+    }): Border;
 }
 export declare class BorderDirectional extends BoxBorder {
     top?: BorderSide;
     start?: BorderSide;
     bottom?: BorderSide;
     end?: BorderSide;
-    /**
-     * @param config config:
-        {
-          top?:BorderSide,
-          start?:BorderSide,
-          bottom?:BorderSide,
-          end?:BorderSide,
-        }
-     */
-    constructor(config?: BorderDirectionalConfig);
+    constructor(config?: {
+        top?: BorderSide;
+        start?: BorderSide;
+        bottom?: BorderSide;
+        end?: BorderSide;
+    });
 }
 export declare abstract class OutlinedBorder extends ShapeBorder {
 }
-interface OutlinedBorderConfig {
-    side?: BorderSide;
-    borderRadius?: BorderRadiusGeometry;
-}
 export declare class CircleBorder extends OutlinedBorder {
     side?: BorderSide;
-    /**
-      * @param config config:
-        {
-          side?:BorderSide,
-        }
-      */
-    constructor(config?: OutlinedBorderConfig);
+    constructor(config?: {
+        side?: BorderSide;
+    });
 }
 export declare class BeveledRectangleBorder extends OutlinedBorder {
     side?: BorderSide;
     borderRadius?: BorderRadiusGeometry;
-    /**
-      * @param config config:
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadiusGeometry,
-        }
-      */
-    constructor(config?: OutlinedBorderConfig);
+    constructor(config?: {
+        side?: BorderSide;
+        borderRadius?: BorderRadiusGeometry;
+    });
 }
 export declare class ContinuousRectangleBorder extends OutlinedBorder {
     side?: BorderSide;
     borderRadius?: BorderRadiusGeometry;
-    /**
-      * @param config config:
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadiusGeometry,
-        }
-      */
-    constructor(config?: OutlinedBorderConfig);
+    constructor(config?: {
+        side?: BorderSide;
+        borderRadius?: BorderRadiusGeometry;
+    });
 }
 export declare class RoundedRectangleBorder extends OutlinedBorder {
     side?: BorderSide;
     borderRadius?: BorderRadiusGeometry;
-    /**
-      * @param config config:
-        {
-          side?:BorderSide,
-          borderRadius?:BorderRadiusGeometry,
-        }
-      */
-    constructor(config?: OutlinedBorderConfig);
+    constructor(config?: {
+        side?: BorderSide;
+        borderRadius?: BorderRadiusGeometry;
+    });
 }
 export declare class StadiumBorder extends OutlinedBorder {
     side?: BorderSide;
-    /**
-      * @param config config:
-        {
-          side?:BorderSide,
-        }
-      */
-    constructor(config?: OutlinedBorderConfig);
+    constructor(config?: {
+        side?: BorderSide;
+    });
 }
 export declare abstract class InputBorder extends ShapeBorder {
     static none(): _NoInputBorder;
-    /**
-     * InputBorder.underline = new UnderlineInputBorder(config);
-     * @param config config:
-        {
-          borderSide?:BorderSide,
-          borderRadius?:BorderRadius,
-        }
-    */
-    static underline(config?: InputBorderConfig): UnderlineInputBorder;
-    /**
-     * InputBorder.outline = new OutlineInputBorder(config);
-     * @param config config:
-        {
-          borderSide?:BorderSide,
-          borderRadius?:BorderRadius,
-          gapPadding?:number,
-        }
-    */
-    static outline(config?: InputBorderConfig): OutlineInputBorder;
 }
 declare class _NoInputBorder extends InputBorder {
-}
-interface InputBorderConfig {
-    borderSide?: BorderSide;
-    borderRadius?: BorderRadius;
-    gapPadding?: number;
 }
 export declare class UnderlineInputBorder extends InputBorder {
     borderSide?: BorderSide;
     borderRadius?: BorderRadius;
-    /**
-      * @param config config:
-        {
-          borderSide?:BorderSide,
-          borderRadius?:BorderRadius,
-        }
-      */
-    constructor(config?: InputBorderConfig);
+    constructor(config?: {
+        borderSide?: BorderSide;
+        borderRadius?: BorderRadius;
+    });
 }
 export declare class OutlineInputBorder extends InputBorder {
     borderSide?: BorderSide;
     borderRadius?: BorderRadius;
     gapPadding?: number;
-    /**
-      * @param config config:
-        {
-          borderSide?:BorderSide,
-          borderRadius?:BorderRadius,
-          gapPadding?:number,
-        }
-      */
-    constructor(config?: InputBorderConfig);
+    constructor(config?: {
+        borderSide?: BorderSide;
+        borderRadius?: BorderRadius;
+        gapPadding?: number;
+    });
 }
 export declare class TextAlignVertical extends DartClass {
     y?: number;
@@ -2623,59 +1893,23 @@ export declare class TextAlignVertical extends DartClass {
     static center: TextAlignVertical;
     static bottom: TextAlignVertical;
 }
-interface TapDownDetailsConfig {
-    globalPosition?: Offset;
-    localPosition?: Offset;
-    kind?: PointerDeviceKind;
-}
 export declare class TapDownDetails extends DartClass {
     globalPosition?: Offset;
     localPosition?: Offset;
     kind?: PointerDeviceKind;
-    /**
-     * @param config config:
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-          kind?:PointerDeviceKind,
-        }
-     */
-    constructor(config?: TapDownDetailsConfig);
-}
-interface TapUpDetailsConfig {
-    globalPosition?: Offset;
-    localPosition?: Offset;
+    constructor(config?: {
+        globalPosition?: Offset;
+        localPosition?: Offset;
+        kind?: PointerDeviceKind;
+    });
 }
 export declare class TapUpDetails extends DartClass {
     globalPosition?: Offset;
     localPosition?: Offset;
-    /**
-     * @param config config:
-        {
-          globalPosition?:Offset,
-          localPosition?:Offset,
-        }
-     */
-    constructor(config?: TapUpDetailsConfig);
-}
-interface TextStyleConfig {
-    inherit?: boolean;
-    color?: Color;
-    backgroundColor?: Color;
-    fontSize?: number;
-    fontWeight?: FontWeight;
-    fontStyle?: FontStyle;
-    letterSpacing?: number;
-    wordSpacing?: number;
-    textBaseline?: TextBaseline;
-    height?: number;
-    decoration?: TextDecoration;
-    decorationColor?: Color;
-    decorationStyle?: TextDecorationStyle;
-    decorationThickness?: number;
-    debugLabel?: string;
-    fontFamily?: string;
-    packageName?: string;
+    constructor(config?: {
+        globalPosition?: Offset;
+        localPosition?: Offset;
+    });
 }
 export declare class TextStyle extends DartClass {
     inherit?: boolean;
@@ -2695,42 +1929,25 @@ export declare class TextStyle extends DartClass {
     debugLabel?: string;
     fontFamily?: string;
     packageName?: string;
-    /**
-     * @param config config:
-        {
-          inherit?:boolean,
-          color?:Color,
-          backgroundColor?:Color,
-          fontSize?:number,
-          fontWeight?:FontWeight,
-          fontStyle?:FontStyle,
-          letterSpacing?:number,
-          wordSpacing?:number,
-          textBaseline?:TextBaseline,
-          height?:number,
-          decoration?:TextDecoration,
-          decorationColor?:Color,
-          decorationStyle?:TextDecorationStyle,
-          decorationThickness?:number,
-          debugLabel?:string,
-          fontFamily?:string,
-          packageName?:string,
-        }
-     */
-    constructor(config?: TextStyleConfig);
-}
-interface TableBorderConfig {
-    top?: BorderSide;
-    right?: BorderSide;
-    bottom?: BorderSide;
-    left?: BorderSide;
-    horizontalInside?: BorderSide;
-    verticalInside?: BorderSide;
-    color?: Color;
-    width?: number;
-    style?: BorderStyle;
-    inside?: BorderSide;
-    outside?: BorderSide;
+    constructor(config?: {
+        inherit?: boolean;
+        color?: Color;
+        backgroundColor?: Color;
+        fontSize?: number;
+        fontWeight?: FontWeight;
+        fontStyle?: FontStyle;
+        letterSpacing?: number;
+        wordSpacing?: number;
+        textBaseline?: TextBaseline;
+        height?: number;
+        decoration?: TextDecoration;
+        decorationColor?: Color;
+        decorationStyle?: TextDecorationStyle;
+        decorationThickness?: number;
+        debugLabel?: string;
+        fontFamily?: string;
+        packageName?: string;
+    });
 }
 export declare class TableBorder extends DartClass {
     top?: BorderSide;
@@ -2744,35 +1961,23 @@ export declare class TableBorder extends DartClass {
     style?: BorderStyle;
     inside?: BorderSide;
     outside?: BorderSide;
-    /**
-     * @param config config:
-      {
-        top?:BorderSide,
-        right?:BorderSide,
-        bottom?:BorderSide,
-        left?:BorderSide,
-        horizontalInside?:BorderSide,
-        verticalInside?:BorderSide
-      }
-     */
-    constructor(config?: TableBorderConfig);
-    /**
-     * @param config config:
-      {
-        color?:Color,
-        width?:number,
-        style?:BorderStyle,
-      }
-     */
-    static all(config?: TableBorderConfig): TableBorder;
-    /**
-     * @param config config:
-      {
-        inside?:BorderSide,
-        outside?:BorderSide
-      }
-     */
-    static symmetric(config?: TableBorderConfig): TableBorder;
+    constructor(config?: {
+        top?: BorderSide;
+        right?: BorderSide;
+        bottom?: BorderSide;
+        left?: BorderSide;
+        horizontalInside?: BorderSide;
+        verticalInside?: BorderSide;
+    });
+    static all(config?: {
+        color?: Color;
+        width?: number;
+        style?: BorderStyle;
+    }): TableBorder;
+    static symmetric(config?: {
+        inside?: BorderSide;
+        outside?: BorderSide;
+    }): TableBorder;
 }
 export declare abstract class TableColumnWidth extends DartClass {
     /**
@@ -2822,35 +2027,18 @@ export declare class MinColumnWidth extends TableColumnWidth {
     b: TableColumnWidth;
     constructor(a: TableColumnWidth, b: TableColumnWidth);
 }
-interface TabControllerConfig {
-    initialIndex?: number;
-    length?: number;
-}
-interface TabControlleAnimateToConfig {
-    value?: number;
-    duration: Duration;
-    curve: Curve;
-}
 export declare class TabController extends DartClass {
     initialIndex?: number;
     length?: number;
-    /**
-     * @param config config:
-      {
-        initialIndex?:number,
-        length?:number,
-      }
-     */
-    constructor(config?: TabControllerConfig);
-    /**
-     * @param config config:
-        {
-          value:number,
-          duration:Duration,
-          curve:Curve,
-        }
-     */
-    animateTo(config: TabControlleAnimateToConfig): void;
+    constructor(config?: {
+        initialIndex?: number;
+        length?: number;
+    });
+    animateTo(config: {
+        value: number;
+        duration: Duration;
+        curve: Curve;
+    }): void;
     offset(): Promise<number>;
 }
 export declare class TextEditingController extends DartClass {
@@ -2860,36 +2048,25 @@ export declare class TextEditingController extends DartClass {
     getText(): Promise<string>;
     setText(text: string): Promise<void>;
 }
-interface ToolbarOptionsConfig {
-    copy?: boolean;
-    cut?: boolean;
-    paste?: boolean;
-    selectAll?: boolean;
-}
 export declare class ToolbarOptions extends DartClass {
     copy?: boolean;
     cut?: boolean;
     paste?: boolean;
     selectAll?: boolean;
-    /**
-     * @param config config:
-      {
-        copy?:boolean,
-        cut?:boolean,
-        paste?:boolean,
-        selectAll?:boolean,
-      }
-     */
-    constructor(config?: ToolbarOptionsConfig);
-}
-interface TextInputTypeConfig {
-    signed?: boolean;
-    decimal?: boolean;
+    constructor(config?: {
+        copy?: boolean;
+        cut?: boolean;
+        paste?: boolean;
+        selectAll?: boolean;
+    });
 }
 export declare class TextInputType extends DartClass {
     signed?: boolean;
     decimal?: boolean;
-    static numberWithOptions(config?: TextInputTypeConfig): TextInputType;
+    static numberWithOptions(config?: {
+        signed?: boolean;
+        decimal?: boolean;
+    }): TextInputType;
     static text(): TextInputType;
     static multiline(): TextInputType;
     static number(): TextInputType;
@@ -2955,15 +2132,6 @@ export declare class MaskTextInputFormatter extends TextInputFormatter {
     filter?: Map<string, RegExp>;
     constructor(mask: string, initialText?: string, filter?: Map<string, RegExp>);
 }
-interface UriConfig {
-    scheme?: string;
-    fragment?: string;
-    userInfo?: string;
-    host?: string;
-    port?: number;
-    path?: string;
-    query?: string;
-}
 export declare class Uri extends DartClass {
     scheme?: string;
     fragment?: string;
@@ -2972,19 +2140,15 @@ export declare class Uri extends DartClass {
     port?: number;
     path?: string;
     query?: string;
-    /**
-     * @param config config:
-      {
-        scheme?:string,
-        fragment?:string,
-        userInfo?:string,
-        host?:string,
-        port?:number,
-        path?:string,
-        query?:string
-      }
-     */
-    constructor(config?: UriConfig);
+    constructor(config?: {
+        scheme?: string;
+        fragment?: string;
+        userInfo?: string;
+        host?: string;
+        port?: number;
+        path?: string;
+        query?: string;
+    });
 }
 export declare class Uint8List extends DartClass {
     length?: number;
@@ -3013,53 +2177,23 @@ export declare class Vector4 extends DartClass {
     static identity(): Vector4;
     static random(): Vector4;
 }
-interface VisualDensityConfig {
-    horizontal?: number;
-    vertical?: number;
-}
 export declare class VisualDensity extends DartClass {
     horizontal?: number;
     vertical?: number;
-    /**
-     * @param config config:
-      {
-        horizontal?:number,
-        vertical?:number,
-      }
-     */
-    constructor(config?: VisualDensityConfig);
+    constructor(config?: {
+        horizontal?: number;
+        vertical?: number;
+    });
     static comfortable: VisualDensity;
     static compact: VisualDensity;
     static standard: VisualDensity;
 }
-interface VelocityConfig {
-    pixelsPerSecond?: Offset;
-}
 export declare class Velocity extends DartClass {
     pixelsPerSecond?: Offset;
-    /**
-     * @param config config:
-      {
-        pixelsPerSecond?:Offset,
-      }
-     */
-    constructor(config?: VelocityConfig);
+    constructor(config?: {
+        pixelsPerSecond?: Offset;
+    });
     static zero(): Velocity;
-}
-interface ColorSchemeConfig {
-    primary: Color;
-    primaryVariant: Color;
-    secondary: Color;
-    secondaryVariant: Color;
-    surface: Color;
-    background: Color;
-    error: Color;
-    onPrimary: Color;
-    onSecondary: Color;
-    onSurface: Color;
-    onBackground: Color;
-    onError: Color;
-    brightness?: Brightness;
 }
 export declare class ColorScheme extends DartClass {
     primary?: Color;
@@ -3075,42 +2209,21 @@ export declare class ColorScheme extends DartClass {
     onBackground?: Color;
     onError?: Color;
     brightness?: Brightness;
-    /**
-     * @param config config:
-        {
-          primary:Color,
-          primaryVariant:Color,
-          secondary:Color,
-          secondaryVariant:Color,
-          surface:Color,
-          background:Color,
-          error:Color,
-          onPrimary:Color,
-          onSecondary:Color,
-          onSurface:Color,
-          onBackground:Color,
-          onError:Color,
-          brightness?:Brightness,
-        }
-     */
-    constructor(config: ColorSchemeConfig);
-}
-interface ButtonThemeDataConfig {
-    textTheme?: ButtonTextTheme;
-    minWidth?: number;
-    height?: number;
-    padding?: EdgeInsets;
-    shape?: ShapeBorder;
-    layoutBehavior?: ButtonBarLayoutBehavior;
-    alignedDropdown?: boolean;
-    buttonColor?: Color;
-    disabledColor?: Color;
-    focusColor?: Color;
-    hoverColor?: Color;
-    highlightColor?: Color;
-    splashColor?: Color;
-    colorScheme?: ColorScheme;
-    materialTapTargetSize?: MaterialTapTargetSize;
+    constructor(config: {
+        primary: Color;
+        primaryVariant: Color;
+        secondary: Color;
+        secondaryVariant: Color;
+        surface: Color;
+        background: Color;
+        error: Color;
+        onPrimary: Color;
+        onSecondary: Color;
+        onSurface: Color;
+        onBackground: Color;
+        onError: Color;
+        brightness?: Brightness;
+    });
 }
 export declare class ButtonThemeData extends DartClass {
     textTheme?: ButtonTextTheme;
@@ -3128,44 +2241,23 @@ export declare class ButtonThemeData extends DartClass {
     splashColor?: Color;
     colorScheme?: ColorScheme;
     materialTapTargetSize?: MaterialTapTargetSize;
-    /**
-     * @param config config:
-        {
-          textTheme?:ButtonTextTheme,
-          minWidth?:number,
-          height?:number,
-          padding?:EdgeInsets,
-          shape?:ShapeBorder,
-          layoutBehavior?:ButtonBarLayoutBehavior,
-          alignedDropdown?:boolean,
-          buttonColor?:Color,
-          disabledColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorScheme?:ColorScheme,
-          materialTapTargetSize?:MaterialTapTargetSize,
-        }
-     */
-    constructor(config: ButtonThemeDataConfig);
-}
-interface ToggleButtonsThemeDataConfig {
-    textStyle?: TextStyle;
-    constraints?: BoxConstraints;
-    color?: Color;
-    selectedColor?: Color;
-    disabledColor?: Color;
-    fillColor?: Color;
-    focusColor?: Color;
-    highlightColor?: Color;
-    hoverColor?: Color;
-    splashColor?: Color;
-    borderColor?: Color;
-    selectedBorderColor?: Color;
-    disabledBorderColor?: Color;
-    borderRadius?: BorderRadius;
-    borderWidth?: number;
+    constructor(config: {
+        textTheme?: ButtonTextTheme;
+        minWidth?: number;
+        height?: number;
+        padding?: EdgeInsets;
+        shape?: ShapeBorder;
+        layoutBehavior?: ButtonBarLayoutBehavior;
+        alignedDropdown?: boolean;
+        buttonColor?: Color;
+        disabledColor?: Color;
+        focusColor?: Color;
+        hoverColor?: Color;
+        highlightColor?: Color;
+        splashColor?: Color;
+        colorScheme?: ColorScheme;
+        materialTapTargetSize?: MaterialTapTargetSize;
+    });
 }
 export declare class ToggleButtonsThemeData extends DartClass {
     textStyle?: TextStyle;
@@ -3183,42 +2275,23 @@ export declare class ToggleButtonsThemeData extends DartClass {
     disabledBorderColor?: Color;
     borderRadius?: BorderRadius;
     borderWidth?: number;
-    /**
-     * @param config config:
-        {
-          textStyle?:TextStyle,
-          constraints?:BoxConstraints,
-          color?:Color,
-          selectedColor?:Color,
-          disabledColor?:Color,
-          fillColor?:Color,
-          focusColor?:Color,
-          highlightColor?:Color,
-          hoverColor?:Color,
-          splashColor?:Color,
-          borderColor?:Color,
-          selectedBorderColor?:Color,
-          disabledBorderColor?:Color,
-          borderRadius?:BorderRadius,
-          borderWidth?:number,
-        }
-     */
-    constructor(config: ToggleButtonsThemeDataConfig);
-}
-interface TextThemeConfig {
-    headline1?: TextStyle;
-    headline2?: TextStyle;
-    headline3?: TextStyle;
-    headline4?: TextStyle;
-    headline5?: TextStyle;
-    headline6?: TextStyle;
-    subtitle1?: TextStyle;
-    subtitle2?: TextStyle;
-    bodyText1?: TextStyle;
-    bodyText2?: TextStyle;
-    caption?: TextStyle;
-    button?: TextStyle;
-    overline?: TextStyle;
+    constructor(config: {
+        textStyle?: TextStyle;
+        constraints?: BoxConstraints;
+        color?: Color;
+        selectedColor?: Color;
+        disabledColor?: Color;
+        fillColor?: Color;
+        focusColor?: Color;
+        highlightColor?: Color;
+        hoverColor?: Color;
+        splashColor?: Color;
+        borderColor?: Color;
+        selectedBorderColor?: Color;
+        disabledBorderColor?: Color;
+        borderRadius?: BorderRadius;
+        borderWidth?: number;
+    });
 }
 export declare class TextTheme extends DartClass {
     headline1?: TextStyle;
@@ -3234,51 +2307,21 @@ export declare class TextTheme extends DartClass {
     caption?: TextStyle;
     button?: TextStyle;
     overline?: TextStyle;
-    /**
-     * @param config config:
-        {
-          headline1?:TextStyle,
-          headline2?:TextStyle,
-          headline3?:TextStyle,
-          headline4?:TextStyle,
-          headline5?:TextStyle,
-          headline6?:TextStyle,
-          subtitle1?:TextStyle,
-          subtitle2?:TextStyle,
-          bodyText1?:TextStyle,
-          bodyText2?:TextStyle,
-          caption?:TextStyle,
-          button?:TextStyle,
-          overline?:TextStyle,
-        }
-     */
-    constructor(config: TextThemeConfig);
-}
-interface InputDecorationThemeConfig {
-    labelStyle?: TextStyle;
-    helperStyle?: TextStyle;
-    helperMaxLines?: number;
-    hintStyle?: TextStyle;
-    errorStyle?: TextStyle;
-    errorMaxLines?: number;
-    floatingLabelBehavior?: FloatingLabelBehavior;
-    isDense?: boolean;
-    contentPadding?: EdgeInsets;
-    isCollapsed?: boolean;
-    prefixStyle?: TextStyle;
-    suffixStyle?: TextStyle;
-    counterStyle?: TextStyle;
-    filled?: boolean;
-    fillColor?: Color;
-    focusColor?: Color;
-    hoverColor?: Color;
-    errorBorder?: InputBorder;
-    focusedBorder?: InputBorder;
-    focusedErrorBorder?: InputBorder;
-    disabledBorder?: InputBorder;
-    enabledBorder?: InputBorder;
-    border?: InputBorder;
-    alignLabelWithHint?: boolean;
+    constructor(config: {
+        headline1?: TextStyle;
+        headline2?: TextStyle;
+        headline3?: TextStyle;
+        headline4?: TextStyle;
+        headline5?: TextStyle;
+        headline6?: TextStyle;
+        subtitle1?: TextStyle;
+        subtitle2?: TextStyle;
+        bodyText1?: TextStyle;
+        bodyText2?: TextStyle;
+        caption?: TextStyle;
+        button?: TextStyle;
+        overline?: TextStyle;
+    });
 }
 export declare class InputDecorationTheme extends DartClass {
     labelStyle?: TextStyle;
@@ -3305,74 +2348,42 @@ export declare class InputDecorationTheme extends DartClass {
     enabledBorder?: InputBorder;
     border?: InputBorder;
     alignLabelWithHint?: boolean;
-    /**
-     * @param config config:
-        {
-        labelStyle?:TextStyle,
-        helperStyle?:TextStyle,
-        helperMaxLines?:number,
-        hintStyle?:TextStyle,
-        errorStyle?:TextStyle,
-        errorMaxLines?:number,
-        floatingLabelBehavior?:FloatingLabelBehavior,
-        isDense?:boolean,
-        contentPadding?:EdgeInsets,
-        isCollapsed?:boolean,
-        prefixStyle?:TextStyle,
-        suffixStyle?:TextStyle,
-        counterStyle?:TextStyle,
-        filled?:boolean,
-        fillColor?:Color,
-        focusColor?:Color,
-        hoverColor?:Color,
-        errorBorder?:InputBorder,
-        focusedBorder?:InputBorder,
-        focusedErrorBorder?:InputBorder,
-        disabledBorder?:InputBorder,
-        enabledBorder?:InputBorder,
-        border?:InputBorder,
-        alignLabelWithHint?:boolean,
-        }
-     */
-    constructor(config: InputDecorationThemeConfig);
-}
-interface IconThemeDataConfig {
-    color?: Color;
-    opacity?: number;
-    size?: number;
+    constructor(config: {
+        labelStyle?: TextStyle;
+        helperStyle?: TextStyle;
+        helperMaxLines?: number;
+        hintStyle?: TextStyle;
+        errorStyle?: TextStyle;
+        errorMaxLines?: number;
+        floatingLabelBehavior?: FloatingLabelBehavior;
+        isDense?: boolean;
+        contentPadding?: EdgeInsets;
+        isCollapsed?: boolean;
+        prefixStyle?: TextStyle;
+        suffixStyle?: TextStyle;
+        counterStyle?: TextStyle;
+        filled?: boolean;
+        fillColor?: Color;
+        focusColor?: Color;
+        hoverColor?: Color;
+        errorBorder?: InputBorder;
+        focusedBorder?: InputBorder;
+        focusedErrorBorder?: InputBorder;
+        disabledBorder?: InputBorder;
+        enabledBorder?: InputBorder;
+        border?: InputBorder;
+        alignLabelWithHint?: boolean;
+    });
 }
 export declare class IconThemeData extends DartClass {
     color?: Color;
     opacity?: number;
     size?: number;
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          opacity?:number,
-          size?:number,
-        }
-     */
-    constructor(config: IconThemeDataConfig);
-}
-interface SliderThemeDataConfig {
-    trackHeight?: number;
-    activeTrackColor?: Color;
-    inactiveTrackColor?: Color;
-    disabledActiveTrackColor?: Color;
-    disabledInactiveTrackColor?: Color;
-    activeTickMarkColor?: Color;
-    inactiveTickMarkColor?: Color;
-    disabledActiveTickMarkColor?: Color;
-    disabledInactiveTickMarkColor?: Color;
-    thumbColor?: Color;
-    overlappingShapeStrokeColor?: Color;
-    disabledThumbColor?: Color;
-    overlayColor?: Color;
-    valueIndicatorColor?: Color;
-    showValueIndicator?: ShowValueIndicator;
-    valueIndicatorTextStyle?: TextStyle;
-    minThumbSeparation?: number;
+    constructor(config: {
+        color?: Color;
+        opacity?: number;
+        size?: number;
+    });
 }
 export declare class SliderThemeData extends DartClass {
     trackHeight?: number;
@@ -3392,38 +2403,25 @@ export declare class SliderThemeData extends DartClass {
     showValueIndicator?: ShowValueIndicator;
     valueIndicatorTextStyle?: TextStyle;
     minThumbSeparation?: number;
-    /**
-     * @param config config:
-        {
-          trackHeight?:number,
-          activeTrackColor?:Color,
-          inactiveTrackColor?:Color,
-          disabledActiveTrackColor?:Color,
-          disabledInactiveTrackColor?:Color,
-          activeTickMarkColor?:Color,
-          inactiveTickMarkColor?:Color,
-          disabledActiveTickMarkColor?:Color,
-          disabledInactiveTickMarkColor?:Color,
-          thumbColor?:Color,
-          overlappingShapeStrokeColor?:Color,
-          disabledThumbColor?:Color,
-          overlayColor?:Color,
-          valueIndicatorColor?:Color,
-          showValueIndicator?:ShowValueIndicator,
-          valueIndicatorTextStyle?:TextStyle,
-          minThumbSeparation?:number,
-        }
-     */
-    constructor(config: SliderThemeDataConfig);
-}
-interface TabBarThemeConfig {
-    indicator?: Decoration;
-    indicatorSize?: TabBarIndicatorSize;
-    labelColor?: Color;
-    labelPadding?: EdgeInsets;
-    labelStyle?: TextStyle;
-    unselectedLabelColor?: Color;
-    unselectedLabelStyle?: TextStyle;
+    constructor(config: {
+        trackHeight?: number;
+        activeTrackColor?: Color;
+        inactiveTrackColor?: Color;
+        disabledActiveTrackColor?: Color;
+        disabledInactiveTrackColor?: Color;
+        activeTickMarkColor?: Color;
+        inactiveTickMarkColor?: Color;
+        disabledActiveTickMarkColor?: Color;
+        disabledInactiveTickMarkColor?: Color;
+        thumbColor?: Color;
+        overlappingShapeStrokeColor?: Color;
+        disabledThumbColor?: Color;
+        overlayColor?: Color;
+        valueIndicatorColor?: Color;
+        showValueIndicator?: ShowValueIndicator;
+        valueIndicatorTextStyle?: TextStyle;
+        minThumbSeparation?: number;
+    });
 }
 export declare class TabBarTheme extends DartClass {
     indicator?: Decoration;
@@ -3433,31 +2431,15 @@ export declare class TabBarTheme extends DartClass {
     labelStyle?: TextStyle;
     unselectedLabelColor?: Color;
     unselectedLabelStyle?: TextStyle;
-    /**
-     * @param config config:
-        {
-          indicator?:Decoration,
-          indicatorSize?:TabBarIndicatorSize,
-          labelColor?:Color,
-          labelPadding?:EdgeInsets,
-          labelStyle?:TextStyle,
-          unselectedLabelColor?:Color,
-          unselectedLabelStyle?:TextStyle,
-        }
-     */
-    constructor(config: TabBarThemeConfig);
-}
-interface TooltipThemeDataConfig {
-    height?: number;
-    padding?: EdgeInsets;
-    margin?: EdgeInsets;
-    verticalOffset?: number;
-    preferBelow?: boolean;
-    excludeFromSemantics?: boolean;
-    decoration?: Decoration;
-    textStyle?: TextStyle;
-    waitDuration?: Duration;
-    showDuration?: Duration;
+    constructor(config: {
+        indicator?: Decoration;
+        indicatorSize?: TabBarIndicatorSize;
+        labelColor?: Color;
+        labelPadding?: EdgeInsets;
+        labelStyle?: TextStyle;
+        unselectedLabelColor?: Color;
+        unselectedLabelStyle?: TextStyle;
+    });
 }
 export declare class TooltipThemeData extends DartClass {
     height?: number;
@@ -3470,29 +2452,18 @@ export declare class TooltipThemeData extends DartClass {
     textStyle?: TextStyle;
     waitDuration?: Duration;
     showDuration?: Duration;
-    /**
-     * @param config config:
-        {
-          height?:number,
-          padding?:EdgeInsets,
-          margin?:EdgeInsets,
-          verticalOffset?:number,
-          preferBelow?:boolean,
-          excludeFromSemantics?:boolean,
-          decoration?:Decoration,
-          textStyle?:TextStyle,
-          waitDuration?:Duration,
-          showDuration?:Duration,
-        }
-     */
-    constructor(config: TooltipThemeDataConfig);
-}
-interface CardThemeConfig {
-    clipBehavior?: Clip;
-    color?: Color;
-    shadowColor?: Color;
-    elevation?: number;
-    margin?: EdgeInsets;
+    constructor(config: {
+        height?: number;
+        padding?: EdgeInsets;
+        margin?: EdgeInsets;
+        verticalOffset?: number;
+        preferBelow?: boolean;
+        excludeFromSemantics?: boolean;
+        decoration?: Decoration;
+        textStyle?: TextStyle;
+        waitDuration?: Duration;
+        showDuration?: Duration;
+    });
 }
 export declare class CardTheme extends DartClass {
     clipBehavior?: Clip;
@@ -3500,36 +2471,13 @@ export declare class CardTheme extends DartClass {
     shadowColor?: Color;
     elevation?: number;
     margin?: EdgeInsets;
-    /**
-     * @param config config:
-        {
-          clipBehavior?:Clip,
-          color?:Color,
-          shadowColor?:Color,
-          elevation?:number,
-          margin?:EdgeInsets,
-        }
-     */
-    constructor(config: CardThemeConfig);
-}
-interface ChipThemeDataConfig {
-    backgroundColor: Color;
-    deleteIconColor?: Color;
-    disabledColor: Color;
-    selectedColor: Color;
-    secondarySelectedColor: Color;
-    shadowColor?: Color;
-    selectedShadowColor?: Color;
-    showCheckmark?: boolean;
-    checkmarkColor?: Color;
-    labelPadding?: EdgeInsets;
-    padding: EdgeInsets;
-    shape: ShapeBorder;
-    labelStyle: TextStyle;
-    secondaryLabelStyle: TextStyle;
-    brightness: Brightness;
-    elevation?: number;
-    pressElevation?: number;
+    constructor(config: {
+        clipBehavior?: Clip;
+        color?: Color;
+        shadowColor?: Color;
+        elevation?: number;
+        margin?: EdgeInsets;
+    });
 }
 export declare class ChipThemeData extends DartClass {
     backgroundColor?: Color;
@@ -3549,39 +2497,25 @@ export declare class ChipThemeData extends DartClass {
     brightness?: Brightness;
     elevation?: number;
     pressElevation?: number;
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          deleteIconColor?:Color,
-          disabledColor?:Color,
-          selectedColor?:Color,
-          secondarySelectedColor?:Color,
-          shadowColor?:Color,
-          selectedShadowColor?:Color,
-          showCheckmark?:boolean,
-          checkmarkColor?:Color,
-          labelPadding?:EdgeInsets,
-          padding?:EdgeInsets,
-          shape?:ShapeBorder,
-          labelStyle?:TextStyle,
-          secondaryLabelStyle?:TextStyle,
-          brightness?:Brightness,
-          elevation?:number,
-          pressElevation?:number,
-        }
-     */
-    constructor(config: ChipThemeDataConfig);
-}
-interface AppBarThemeConfig {
-    brightness?: Brightness;
-    color?: Color;
-    elevation?: number;
-    shadowColor?: Color;
-    iconTheme?: IconThemeData;
-    actionsIconTheme?: IconThemeData;
-    textTheme?: TextTheme;
-    centerTitle?: boolean;
+    constructor(config: {
+        backgroundColor?: Color;
+        deleteIconColor?: Color;
+        disabledColor?: Color;
+        selectedColor?: Color;
+        secondarySelectedColor?: Color;
+        shadowColor?: Color;
+        selectedShadowColor?: Color;
+        showCheckmark?: boolean;
+        checkmarkColor?: Color;
+        labelPadding?: EdgeInsets;
+        padding?: EdgeInsets;
+        shape?: ShapeBorder;
+        labelStyle?: TextStyle;
+        secondaryLabelStyle?: TextStyle;
+        brightness?: Brightness;
+        elevation?: number;
+        pressElevation?: number;
+    });
 }
 export declare class AppBarTheme extends DartClass {
     brightness?: Brightness;
@@ -3592,46 +2526,26 @@ export declare class AppBarTheme extends DartClass {
     actionsIconTheme?: IconThemeData;
     textTheme?: TextTheme;
     centerTitle?: boolean;
-    /**
-     * @param config config:
-        {
-          brightness?:Brightness,
-          color?:Color,
-          elevation?:number,
-          shadowColor?:Color,
-          iconTheme?:IconThemeData,
-          actionsIconTheme?:IconThemeData,
-          textTheme?:TextTheme,
-          centerTitle?:boolean,
-        }
-     */
-    constructor(config: AppBarThemeConfig);
-}
-interface BottomAppBarThemeConfig {
-    color?: Color;
-    elevation?: number;
-    shape?: NotchedShape;
+    constructor(config: {
+        brightness?: Brightness;
+        color?: Color;
+        elevation?: number;
+        shadowColor?: Color;
+        iconTheme?: IconThemeData;
+        actionsIconTheme?: IconThemeData;
+        textTheme?: TextTheme;
+        centerTitle?: boolean;
+    });
 }
 export declare class BottomAppBarTheme extends DartClass {
     color?: Color;
     elevation?: number;
     shape?: NotchedShape;
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          elevation?:number,
-          shape?:NotchedShape,
-        }
-     */
-    constructor(config: BottomAppBarThemeConfig);
-}
-interface DialogThemeConfig {
-    backgroundColor?: Color;
-    elevation?: number;
-    shape?: ShapeBorder;
-    titleTextStyle?: TextStyle;
-    contentTextStyle?: TextStyle;
+    constructor(config: {
+        color?: Color;
+        elevation?: number;
+        shape?: NotchedShape;
+    });
 }
 export declare class DialogTheme extends DartClass {
     backgroundColor?: Color;
@@ -3639,30 +2553,13 @@ export declare class DialogTheme extends DartClass {
     shape?: ShapeBorder;
     titleTextStyle?: TextStyle;
     contentTextStyle?: TextStyle;
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          elevation?:number,
-          shape?:ShapeBorder,
-          titleTextStyle?:TextStyle,
-          contentTextStyle?:TextStyle,
-        }
-     */
-    constructor(config: DialogThemeConfig);
-}
-interface FloatingActionButtonThemeDataConfig {
-    foregroundColor?: Color;
-    backgroundColor?: Color;
-    focusColor?: Color;
-    hoverColor?: Color;
-    splashColor?: Color;
-    elevation?: number;
-    focusElevation?: number;
-    hoverElevation?: number;
-    disabledElevation?: number;
-    highlightElevation?: number;
-    shape?: ShapeBorder;
+    constructor(config: {
+        backgroundColor?: Color;
+        elevation?: number;
+        shape?: ShapeBorder;
+        titleTextStyle?: TextStyle;
+        contentTextStyle?: TextStyle;
+    });
 }
 export declare class FloatingActionButtonThemeData extends DartClass {
     foregroundColor?: Color;
@@ -3676,33 +2573,19 @@ export declare class FloatingActionButtonThemeData extends DartClass {
     disabledElevation?: number;
     highlightElevation?: number;
     shape?: ShapeBorder;
-    /**
-     * @param config config:
-        {
-          foregroundColor?:Color,
-          backgroundColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          splashColor?:Color,
-          elevation?:number,
-          focusElevation?:number,
-          hoverElevation?:number,
-          disabledElevation?:number,
-          highlightElevation?:number,
-          shape?:ShapeBorder,
-        }
-     */
-    constructor(config: FloatingActionButtonThemeDataConfig);
-}
-interface NavigationRailThemeDataConfig {
-    backgroundColor?: Color;
-    elevation?: number;
-    unselectedLabelTextStyle?: TextStyle;
-    selectedLabelTextStyle?: TextStyle;
-    unselectedIconTheme?: IconThemeData;
-    selectedIconTheme?: IconThemeData;
-    groupAlignment?: number;
-    labelType?: NavigationRailLabelType;
+    constructor(config: {
+        foregroundColor?: Color;
+        backgroundColor?: Color;
+        focusColor?: Color;
+        hoverColor?: Color;
+        splashColor?: Color;
+        elevation?: number;
+        focusElevation?: number;
+        hoverElevation?: number;
+        disabledElevation?: number;
+        highlightElevation?: number;
+        shape?: ShapeBorder;
+    });
 }
 export declare class NavigationRailThemeData extends DartClass {
     backgroundColor?: Color;
@@ -3713,28 +2596,16 @@ export declare class NavigationRailThemeData extends DartClass {
     selectedIconTheme?: IconThemeData;
     groupAlignment?: number;
     labelType?: NavigationRailLabelType;
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          elevation?:number,
-          unselectedLabelTextStyle?:TextStyle,
-          selectedLabelTextStyle?:TextStyle,
-          unselectedIconTheme?:IconThemeData,
-          selectedIconTheme?:IconThemeData,
-          groupAlignment?:number,
-          labelType?:NavigationRailLabelType,
-        }
-     */
-    constructor(config: NavigationRailThemeDataConfig);
-}
-interface CupertinoThemeDataConfig {
-    primaryColor?: Color;
-    brightness?: Brightness;
-    primaryContrastingColor?: Color;
-    textTheme?: CupertinoTextThemeData;
-    barBackgroundColor?: Color;
-    scaffoldBackgroundColor?: Color;
+    constructor(config: {
+        backgroundColor?: Color;
+        elevation?: number;
+        unselectedLabelTextStyle?: TextStyle;
+        selectedLabelTextStyle?: TextStyle;
+        unselectedIconTheme?: IconThemeData;
+        selectedIconTheme?: IconThemeData;
+        groupAlignment?: number;
+        labelType?: NavigationRailLabelType;
+    });
 }
 export declare class CupertinoThemeData extends DartClass {
     primaryColor?: Color;
@@ -3743,27 +2614,14 @@ export declare class CupertinoThemeData extends DartClass {
     textTheme?: CupertinoTextThemeData;
     barBackgroundColor?: Color;
     scaffoldBackgroundColor?: Color;
-    /**
-     * @param config config:
-        {
-          primaryColor?:Color,
-          brightness?:Brightness,
-          primaryContrastingColor?:Color,
-          textTheme?:CupertinoTextThemeData,
-          barBackgroundColor?:Color,
-          scaffoldBackgroundColor?:Color,
-        }
-     */
-    constructor(config: CupertinoThemeDataConfig);
-}
-interface SnackBarThemeDataConfig {
-    backgroundColor?: Color;
-    actionTextColor?: Color;
-    disabledActionTextColor?: Color;
-    contentTextStyle?: TextStyle;
-    elevation?: number;
-    shape?: ShapeBorder;
-    behavior?: SnackBarBehavior;
+    constructor(config: {
+        primaryColor?: Color;
+        brightness?: Brightness;
+        primaryContrastingColor?: Color;
+        textTheme?: CupertinoTextThemeData;
+        barBackgroundColor?: Color;
+        scaffoldBackgroundColor?: Color;
+    });
 }
 export declare class SnackBarThemeData extends DartClass {
     backgroundColor?: Color;
@@ -3773,27 +2631,15 @@ export declare class SnackBarThemeData extends DartClass {
     elevation?: number;
     shape?: ShapeBorder;
     behavior?: SnackBarBehavior;
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          actionTextColor?:Color,
-          disabledActionTextColor?:Color,
-          contentTextStyle?:TextStyle,
-          elevation?:number,
-          shape?:ShapeBorder,
-          behavior?:SnackBarBehavior,
-        }
-     */
-    constructor(config: SnackBarThemeDataConfig);
-}
-interface BottomSheetThemeDataConfig {
-    backgroundColor?: Color;
-    elevation?: number;
-    modalBackgroundColor?: Color;
-    modalElevation?: number;
-    shape?: ShapeBorder;
-    clipBehavior?: Clip;
+    constructor(config: {
+        backgroundColor?: Color;
+        actionTextColor?: Color;
+        disabledActionTextColor?: Color;
+        contentTextStyle?: TextStyle;
+        elevation?: number;
+        shape?: ShapeBorder;
+        behavior?: SnackBarBehavior;
+    });
 }
 export declare class BottomSheetThemeData extends DartClass {
     backgroundColor?: Color;
@@ -3802,69 +2648,38 @@ export declare class BottomSheetThemeData extends DartClass {
     modalElevation?: number;
     shape?: ShapeBorder;
     clipBehavior?: Clip;
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          elevation?:number,
-          modalBackgroundColor?:Color,
-          modalElevation?:number,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-        }
-     */
-    constructor(config: BottomSheetThemeDataConfig);
-}
-interface PopupMenuThemeDataConfig {
-    color?: Color;
-    shape?: ShapeBorder;
-    elevation?: number;
-    textStyle?: TextStyle;
+    constructor(config: {
+        backgroundColor?: Color;
+        elevation?: number;
+        modalBackgroundColor?: Color;
+        modalElevation?: number;
+        shape?: ShapeBorder;
+        clipBehavior?: Clip;
+    });
 }
 export declare class PopupMenuThemeData extends DartClass {
     color?: Color;
     shape?: ShapeBorder;
     elevation?: number;
     textStyle?: TextStyle;
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          shape?:ShapeBorder,
-          elevation?:number,
-          textStyle?:TextStyle,
-        }
-     */
-    constructor(config: PopupMenuThemeDataConfig);
-}
-interface MaterialBannerThemeDataConfig {
-    backgroundColor?: Color;
-    contentTextStyle?: TextStyle;
-    padding?: EdgeInsets;
-    leadingPadding?: EdgeInsets;
+    constructor(config: {
+        color?: Color;
+        shape?: ShapeBorder;
+        elevation?: number;
+        textStyle?: TextStyle;
+    });
 }
 export declare class MaterialBannerThemeData extends DartClass {
     backgroundColor?: Color;
     contentTextStyle?: TextStyle;
     padding?: EdgeInsets;
     leadingPadding?: EdgeInsets;
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          contentTextStyle?:TextStyle,
-          padding?:EdgeInsets,
-          leadingPadding?:EdgeInsets,
-        }
-     */
-    constructor(config: MaterialBannerThemeDataConfig);
-}
-interface DividerThemeDataConfig {
-    color?: Color;
-    space?: number;
-    thickness?: number;
-    indent?: number;
-    endIndent?: number;
+    constructor(config: {
+        backgroundColor?: Color;
+        contentTextStyle?: TextStyle;
+        padding?: EdgeInsets;
+        leadingPadding?: EdgeInsets;
+    });
 }
 export declare class DividerThemeData extends DartClass {
     color?: Color;
@@ -3872,28 +2687,13 @@ export declare class DividerThemeData extends DartClass {
     thickness?: number;
     indent?: number;
     endIndent?: number;
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          space?:ShapeBorder,
-          thickness?:number,
-          indent?:number,
-          endIndent?:number,
-        }
-     */
-    constructor(config: DividerThemeDataConfig);
-}
-interface ButtonBarThemeDataConfig {
-    alignment?: MainAxisAlignment;
-    mainAxisSize?: MainAxisSize;
-    buttonTextTheme?: ButtonTextTheme;
-    buttonMinWidth?: number;
-    buttonHeight?: number;
-    buttonPadding?: EdgeInsets;
-    buttonAlignedDropdown?: boolean;
-    layoutBehavior?: ButtonBarLayoutBehavior;
-    overflowDirection?: VerticalDirection;
+    constructor(config: {
+        color?: Color;
+        space?: number;
+        thickness?: number;
+        indent?: number;
+        endIndent?: number;
+    });
 }
 export declare class ButtonBarThemeData extends DartClass {
     alignment?: MainAxisAlignment;
@@ -3905,34 +2705,17 @@ export declare class ButtonBarThemeData extends DartClass {
     buttonAlignedDropdown?: boolean;
     layoutBehavior?: ButtonBarLayoutBehavior;
     overflowDirection?: VerticalDirection;
-    /**
-     * @param config config:
-        {
-          alignment?:MainAxisAlignment,
-          mainAxisSize?:MainAxisSize,
-          buttonTextTheme?:ButtonTextTheme,
-          buttonMinWidth?:number,
-          buttonHeight?:number,
-          buttonPadding?:EdgeInsets,
-          buttonAlignedDropdown?:boolean,
-          layoutBehavior?:ButtonBarLayoutBehavior,
-          overflowDirection?:VerticalDirection,
-        }
-     */
-    constructor(config: ButtonBarThemeDataConfig);
-}
-interface BottomNavigationBarThemeDataConfig {
-    backgroundColor?: Color;
-    elevation?: number;
-    selectedIconTheme?: IconThemeData;
-    unselectedIconTheme?: IconThemeData;
-    selectedItemColor?: Color;
-    unselectedItemColor?: Color;
-    selectedLabelStyle?: TextStyle;
-    unselectedLabelStyle?: TextStyle;
-    showSelectedLabels?: boolean;
-    showUnselectedLabels?: boolean;
-    type?: BottomNavigationBarType;
+    constructor(config: {
+        alignment?: MainAxisAlignment;
+        mainAxisSize?: MainAxisSize;
+        buttonTextTheme?: ButtonTextTheme;
+        buttonMinWidth?: number;
+        buttonHeight?: number;
+        buttonPadding?: EdgeInsets;
+        buttonAlignedDropdown?: boolean;
+        layoutBehavior?: ButtonBarLayoutBehavior;
+        overflowDirection?: VerticalDirection;
+    });
 }
 export declare class BottomNavigationBarThemeData extends DartClass {
     backgroundColor?: Color;
@@ -3946,42 +2729,19 @@ export declare class BottomNavigationBarThemeData extends DartClass {
     showSelectedLabels?: boolean;
     showUnselectedLabels?: boolean;
     type?: BottomNavigationBarType;
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          elevation?:number,
-          selectedIconTheme?:IconThemeData,
-          unselectedIconTheme?:IconThemeData,
-          selectedItemColor?:Color,
-          unselectedItemColor?:Color,
-          selectedLabelStyle?:TextStyle,
-          unselectedLabelStyle?:TextStyle,
-          showSelectedLabels?:boolean,
-          showUnselectedLabels?:boolean,
-          type?:BottomNavigationBarType,
-        }
-     */
-    constructor(config: BottomNavigationBarThemeDataConfig);
-}
-interface TimePickerThemeDataConfig {
-    backgroundColor?: Color;
-    hourMinuteTextColor?: Color;
-    hourMinuteColor?: Color;
-    dayPeriodTextColor?: Color;
-    dayPeriodColor?: Color;
-    dialHandColor?: Color;
-    dialBackgroundColor?: Color;
-    dialTextColor?: Color;
-    entryModeIconColor?: Color;
-    hourMinuteTextStyle?: TextStyle;
-    dayPeriodTextStyle?: TextStyle;
-    helpTextStyle?: TextStyle;
-    shape?: ShapeBorder;
-    hourMinuteShape?: ShapeBorder;
-    dayPeriodShape?: ShapeBorder;
-    dayPeriodBorderSide?: BorderSide;
-    inputDecorationTheme?: InputDecorationTheme;
+    constructor(config: {
+        backgroundColor?: Color;
+        elevation?: number;
+        selectedIconTheme?: IconThemeData;
+        unselectedIconTheme?: IconThemeData;
+        selectedItemColor?: Color;
+        unselectedItemColor?: Color;
+        selectedLabelStyle?: TextStyle;
+        unselectedLabelStyle?: TextStyle;
+        showSelectedLabels?: boolean;
+        showUnselectedLabels?: boolean;
+        type?: BottomNavigationBarType;
+    });
 }
 export declare class TimePickerThemeData extends DartClass {
     backgroundColor?: Color;
@@ -4001,57 +2761,35 @@ export declare class TimePickerThemeData extends DartClass {
     dayPeriodShape?: ShapeBorder;
     dayPeriodBorderSide?: BorderSide;
     inputDecorationTheme?: InputDecorationTheme;
-    /**
-     * @param config config:
-        {
-          backgroundColor?:Color,
-          hourMinuteTextColor?:Color,
-          hourMinuteColor?:Color,
-          dayPeriodTextColor?:Color,
-          dayPeriodColor?:Color,
-          dialHandColor?:Color,
-          dialBackgroundColor?:Color,
-          dialTextColor?:Color,
-          entryModeIconColor?:Color,
-          hourMinuteTextStyle?:TextStyle,
-          dayPeriodTextStyle?:TextStyle,
-          helpTextStyle?:TextStyle,
-          shape?:ShapeBorder,
-          hourMinuteShape?:ShapeBorder,
-          dayPeriodShape?:ShapeBorder,
-          dayPeriodBorderSide?:BorderSide,
-          inputDecorationTheme?:InputDecorationTheme,
-        }
-     */
-    constructor(config: TimePickerThemeDataConfig);
-}
-interface TextSelectionThemeDataConfig {
-    cursorColor?: Color;
-    selectionColor?: Color;
-    selectionHandleColor?: Color;
+    constructor(config: {
+        backgroundColor?: Color;
+        hourMinuteTextColor?: Color;
+        hourMinuteColor?: Color;
+        dayPeriodTextColor?: Color;
+        dayPeriodColor?: Color;
+        dialHandColor?: Color;
+        dialBackgroundColor?: Color;
+        dialTextColor?: Color;
+        entryModeIconColor?: Color;
+        hourMinuteTextStyle?: TextStyle;
+        dayPeriodTextStyle?: TextStyle;
+        helpTextStyle?: TextStyle;
+        shape?: ShapeBorder;
+        hourMinuteShape?: ShapeBorder;
+        dayPeriodShape?: ShapeBorder;
+        dayPeriodBorderSide?: BorderSide;
+        inputDecorationTheme?: InputDecorationTheme;
+    });
 }
 export declare class TextSelectionThemeData extends DartClass {
     cursorColor?: Color;
     selectionColor?: Color;
     selectionHandleColor?: Color;
-    /**
-     * @param config config:
-        {
-          cursorColor?:Color,
-          selectionColor?:Color,
-          selectionHandleColor?:Color,
-        }
-     */
-    constructor(config: TextSelectionThemeDataConfig);
-}
-interface DataTableThemeDataConfig {
-    dataRowHeight?: number;
-    dataTextStyle?: TextStyle;
-    headingRowHeight?: number;
-    headingTextStyle?: TextStyle;
-    horizontalMargin?: number;
-    columnSpacing?: number;
-    dividerThickness?: number;
+    constructor(config: {
+        cursorColor?: Color;
+        selectionColor?: Color;
+        selectionHandleColor?: Color;
+    });
 }
 export declare class DataTableThemeData extends DartClass {
     dataRowHeight?: number;
@@ -4061,90 +2799,15 @@ export declare class DataTableThemeData extends DartClass {
     horizontalMargin?: number;
     columnSpacing?: number;
     dividerThickness?: number;
-    /**
-     * @param config config:
-        {
-          dataRowHeight?:number,
-          dataTextStyle?:TextStyle,
-          headingRowHeight?:number,
-          headingTextStyle?:TextStyle,
-          horizontalMargin?:number,
-          columnSpacing?:number,
-          dividerThickness?:number,
-        }
-     */
-    constructor(config: DataTableThemeDataConfig);
-}
-interface ThemeDataConfig {
-    brightness?: Brightness;
-    visualDensity?: VisualDensity;
-    primaryColor?: Color;
-    primaryColorBrightness?: Brightness;
-    primaryColorLight?: Color;
-    primaryColorDark?: Color;
-    accentColor?: Color;
-    accentColorBrightness?: Brightness;
-    canvasColor?: Color;
-    shadowColor?: Color;
-    scaffoldBackgroundColor?: Color;
-    bottomAppBarColor?: Color;
-    cardColor?: Color;
-    focusColor?: Color;
-    dividerColor?: Color;
-    hoverColor?: Color;
-    highlightColor?: Color;
-    splashColor?: Color;
-    selectedRowColor?: Color;
-    unselectedWidgetColor?: Color;
-    disabledColor?: Color;
-    buttonColor?: Color;
-    buttonTheme?: ButtonThemeData;
-    toggleButtonsTheme?: ToggleButtonsThemeData;
-    secondaryHeaderColor?: Color;
-    textSelectionColor?: Color;
-    cursorColor?: Color;
-    textSelectionHandleColor?: Color;
-    backgroundColor?: Color;
-    dialogBackgroundColor?: Color;
-    indicatorColor?: Color;
-    hintColor?: Color;
-    errorColor?: Color;
-    toggleableActiveColor?: Color;
-    fontFamily?: string;
-    textTheme?: TextTheme;
-    primaryTextTheme?: TextTheme;
-    accentTextTheme?: TextTheme;
-    inputDecorationTheme?: InputDecorationTheme;
-    iconTheme?: IconThemeData;
-    primaryIconTheme?: IconThemeData;
-    accentIconTheme?: IconThemeData;
-    sliderTheme?: SliderThemeData;
-    tabBarTheme?: TabBarTheme;
-    tooltipTheme?: TooltipThemeData;
-    cardTheme?: CardTheme;
-    chipTheme?: ChipThemeData;
-    platform?: TargetPlatform;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    applyElevationOverlayColor?: boolean;
-    appBarTheme?: AppBarTheme;
-    bottomAppBarTheme?: BottomAppBarTheme;
-    colorScheme?: ColorScheme;
-    dialogTheme?: DialogTheme;
-    floatingActionButtonTheme?: FloatingActionButtonThemeData;
-    navigationRailTheme?: NavigationRailThemeData;
-    cupertinoOverrideTheme?: CupertinoThemeData;
-    snackBarTheme?: SnackBarThemeData;
-    bottomSheetTheme?: BottomSheetThemeData;
-    popupMenuTheme?: PopupMenuThemeData;
-    bannerTheme?: MaterialBannerThemeData;
-    dividerTheme?: DividerThemeData;
-    buttonBarTheme?: ButtonBarThemeData;
-    bottomNavigationBarTheme?: BottomNavigationBarThemeData;
-    timePickerTheme?: TimePickerThemeData;
-    textSelectionTheme?: TextSelectionThemeData;
-    dataTableTheme?: DataTableThemeData;
-    fixTextFieldOutlineLabel?: boolean;
-    useTextSelectionTheme?: boolean;
+    constructor(config: {
+        dataRowHeight?: number;
+        dataTextStyle?: TextStyle;
+        headingRowHeight?: number;
+        headingTextStyle?: TextStyle;
+        horizontalMargin?: number;
+        columnSpacing?: number;
+        dividerThickness?: number;
+    });
 }
 export declare class ThemeData extends DartClass {
     brightness?: Brightness;
@@ -4216,81 +2879,77 @@ export declare class ThemeData extends DartClass {
     dataTableTheme?: DataTableThemeData;
     fixTextFieldOutlineLabel?: boolean;
     useTextSelectionTheme?: boolean;
-    /**
-     * @param config config:
-        {
-          brightness?:Brightness,
-          visualDensity?:VisualDensity,
-          primaryColor?:Color,
-          primaryColorBrightness?:Brightness,
-          primaryColorLight?:Color,
-          primaryColorDark?:Color,
-          accentColor?:Color,
-          accentColorBrightness?:Brightness,
-          canvasColor?:Color,
-          shadowColor?:Color,
-          scaffoldBackgroundColor?:Color,
-          bottomAppBarColor?:Color,
-          cardColor?:Color,
-          focusColor?:Color,
-          dividerColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          selectedRowColor?:Color,
-          unselectedWidgetColor?:Color,
-          disabledColor?:Color,
-          buttonColor?:Color,
-          buttonTheme?:ButtonThemeData,
-          toggleButtonsTheme?:ToggleButtonsThemeData,
-          secondaryHeaderColor?:Color,
-          textSelectionColor?:Color,
-          cursorColor?:Color,
-          textSelectionHandleColor?:Color,
-          backgroundColor?:Color,
-          dialogBackgroundColor?:Color,
-          indicatorColor?:Color,
-          hintColor?:Color,
-          errorColor?:Color,
-          toggleableActiveColor?:Color,
-          fontFamily?:string,
-          textTheme?:TextTheme,
-          primaryTextTheme?:TextTheme,
-          accentTextTheme?:TextTheme,
-          inputDecorationTheme?:InputDecorationTheme,
-          iconTheme?:IconThemeData,
-          primaryIconTheme?:IconThemeData,
-          accentIconTheme?:IconThemeData,
-          sliderTheme?:SliderThemeData,
-          tabBarTheme?:TabBarTheme,
-          tooltipTheme?:TooltipThemeData,
-          cardTheme?:CardTheme,
-          chipTheme?:ChipThemeData,
-          platform?:TargetPlatform,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          applyElevationOverlayColor?:boolean,
-          appBarTheme?:AppBarTheme,
-          bottomAppBarTheme?:BottomAppBarTheme,
-          colorScheme?:ColorScheme,
-          dialogTheme?:DialogTheme,
-          floatingActionButtonTheme?:FloatingActionButtonThemeData,
-          navigationRailTheme?:NavigationRailThemeData,
-          cupertinoOverrideTheme?:CupertinoThemeData,
-          snackBarTheme?:SnackBarThemeData,
-          bottomSheetTheme?:BottomSheetThemeData,
-          popupMenuTheme?:PopupMenuThemeData,
-          bannerTheme?:MaterialBannerThemeData,
-          dividerTheme?:DividerThemeData,
-          buttonBarTheme?:ButtonBarThemeData,
-          bottomNavigationBarTheme?:BottomNavigationBarThemeData,
-          timePickerTheme?:TimePickerThemeData,
-          textSelectionTheme?:TextSelectionThemeData,
-          dataTableTheme?:DataTableThemeData,
-          fixTextFieldOutlineLabel?:boolean,
-          useTextSelectionTheme?:boolean,
-        }
-     */
-    constructor(config: ThemeDataConfig);
+    constructor(config: {
+        brightness?: Brightness;
+        visualDensity?: VisualDensity;
+        primaryColor?: Color;
+        primaryColorBrightness?: Brightness;
+        primaryColorLight?: Color;
+        primaryColorDark?: Color;
+        accentColor?: Color;
+        accentColorBrightness?: Brightness;
+        canvasColor?: Color;
+        shadowColor?: Color;
+        scaffoldBackgroundColor?: Color;
+        bottomAppBarColor?: Color;
+        cardColor?: Color;
+        focusColor?: Color;
+        dividerColor?: Color;
+        hoverColor?: Color;
+        highlightColor?: Color;
+        splashColor?: Color;
+        selectedRowColor?: Color;
+        unselectedWidgetColor?: Color;
+        disabledColor?: Color;
+        buttonColor?: Color;
+        buttonTheme?: ButtonThemeData;
+        toggleButtonsTheme?: ToggleButtonsThemeData;
+        secondaryHeaderColor?: Color;
+        textSelectionColor?: Color;
+        cursorColor?: Color;
+        textSelectionHandleColor?: Color;
+        backgroundColor?: Color;
+        dialogBackgroundColor?: Color;
+        indicatorColor?: Color;
+        hintColor?: Color;
+        errorColor?: Color;
+        toggleableActiveColor?: Color;
+        fontFamily?: string;
+        textTheme?: TextTheme;
+        primaryTextTheme?: TextTheme;
+        accentTextTheme?: TextTheme;
+        inputDecorationTheme?: InputDecorationTheme;
+        iconTheme?: IconThemeData;
+        primaryIconTheme?: IconThemeData;
+        accentIconTheme?: IconThemeData;
+        sliderTheme?: SliderThemeData;
+        tabBarTheme?: TabBarTheme;
+        tooltipTheme?: TooltipThemeData;
+        cardTheme?: CardTheme;
+        chipTheme?: ChipThemeData;
+        platform?: TargetPlatform;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        applyElevationOverlayColor?: boolean;
+        appBarTheme?: AppBarTheme;
+        bottomAppBarTheme?: BottomAppBarTheme;
+        colorScheme?: ColorScheme;
+        dialogTheme?: DialogTheme;
+        floatingActionButtonTheme?: FloatingActionButtonThemeData;
+        navigationRailTheme?: NavigationRailThemeData;
+        cupertinoOverrideTheme?: CupertinoThemeData;
+        snackBarTheme?: SnackBarThemeData;
+        bottomSheetTheme?: BottomSheetThemeData;
+        popupMenuTheme?: PopupMenuThemeData;
+        bannerTheme?: MaterialBannerThemeData;
+        dividerTheme?: DividerThemeData;
+        buttonBarTheme?: ButtonBarThemeData;
+        bottomNavigationBarTheme?: BottomNavigationBarThemeData;
+        timePickerTheme?: TimePickerThemeData;
+        textSelectionTheme?: TextSelectionThemeData;
+        dataTableTheme?: DataTableThemeData;
+        fixTextFieldOutlineLabel?: boolean;
+        useTextSelectionTheme?: boolean;
+    });
     static dark(): ThemeData;
     static light(): ThemeData;
 }
@@ -5423,47 +4082,17 @@ export declare class CupertinoIcons extends IconData {
     static brightness: CupertinoIcons;
     static brightness_solid: CupertinoIcons;
 }
-interface AbsorbPointerConfig {
-    key?: Key;
-    child?: Widget;
-    absorbing?: boolean;
-    ignoringSemantics?: boolean;
-}
 export declare class AbsorbPointer extends Widget {
     key?: Key;
     child?: Widget;
     absorbing?: boolean;
     ignoringSemantics?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          absorbing?:boolean,
-          ignoringSemantics?:boolean,
-        }
-     */
-    constructor(config?: AbsorbPointerConfig);
-}
-interface ActionChipConfig {
-    key?: Key;
-    avatar?: Widget;
-    label: Widget;
-    labelStyle?: TextStyle;
-    labelPadding?: EdgeInsets;
-    onPressed: OnCallback;
-    pressElevation?: number;
-    tooltip?: string;
-    shape?: ShapeBorder;
-    clipBehavior?: Clip;
-    focusNode?: FocusNode;
-    autofocus?: boolean;
-    backgroundColor?: Color;
-    padding?: EdgeInsets;
-    visualDensity?: VisualDensity;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    elevation?: number;
-    shadowColor?: Color;
+    constructor(config?: {
+        key?: Key;
+        child?: Widget;
+        absorbing?: boolean;
+        ignoringSemantics?: boolean;
+    });
 }
 export declare class ActionChip extends Widget {
     key?: Key;
@@ -5484,30 +4113,26 @@ export declare class ActionChip extends Widget {
     materialTapTargetSize?: MaterialTapTargetSize;
     elevation?: number;
     shadowColor?: Color;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          onPressed:OnCallback,
-          pressElevation?:number,
-          tooltip?:string,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          focusNode?:FocusNode,
-          autofocus?:boolean,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          visualDensity?:VisualDensity,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          shadowColor?:Color,
-        }
-     */
-    constructor(config: ActionChipConfig);
+    constructor(config: {
+        key?: Key;
+        avatar?: Widget;
+        label: Widget;
+        labelStyle?: TextStyle;
+        labelPadding?: EdgeInsets;
+        onPressed: OnCallback;
+        pressElevation?: number;
+        tooltip?: string;
+        shape?: ShapeBorder;
+        clipBehavior?: Clip;
+        focusNode?: FocusNode;
+        autofocus?: boolean;
+        backgroundColor?: Color;
+        padding?: EdgeInsets;
+        visualDensity?: VisualDensity;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        elevation?: number;
+        shadowColor?: Color;
+    });
 }
 export declare class AnimationController extends Widget {
     value?: number;
@@ -5532,27 +4157,6 @@ export declare class Animation extends Widget {
     addStatusListener(callback: any): void;
     removeStatusListener(callback: any): void;
 }
-interface AppBarConfig {
-    key?: Key;
-    leading?: Widget;
-    automaticallyImplyLeading?: boolean;
-    title?: Widget;
-    actions?: Array<Widget>;
-    flexibleSpace?: Widget;
-    bottom?: Widget;
-    elevation?: number;
-    shadowColor?: Color;
-    shape?: ShapeBorder;
-    backgroundColor?: Color;
-    brightness?: Brightness;
-    primary?: boolean;
-    centerTitle?: boolean;
-    excludeHeaderSemantics?: boolean;
-    titleSpacing?: number;
-    toolbarOpacity?: number;
-    bottomOpacity?: number;
-    toolbarHeight?: number;
-}
 export declare class AppBar extends Widget {
     key?: Key;
     leading?: Widget;
@@ -5573,38 +4177,27 @@ export declare class AppBar extends Widget {
     toolbarOpacity?: number;
     bottomOpacity?: number;
     toolbarHeight?: number;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          leading?:Widget,
-          automaticallyImplyLeading?:boolean,
-          title?:Widget,
-          actions?:Array<Widget>,
-          flexibleSpace?:Widget,
-          bottom?:Widget,
-          elevation?:number,
-          shadowColor?:Color,
-          shape?:ShapeBorder,
-          backgroundColor?:Color,
-          brightness?:Brightness,
-          primary?:boolean,
-          centerTitle?:boolean,
-          excludeHeaderSemantics?:boolean,
-          titleSpacing?:number,
-          toolbarOpacity?:number,
-          bottomOpacity?:number,
-          toolbarHeight?:number
-        }
-     */
-    constructor(config: AppBarConfig);
-}
-interface AlignConfig {
-    key?: Key;
-    child?: Widget;
-    alignment?: Alignment;
-    widthFactor?: number;
-    heightFactor?: number;
+    constructor(config: {
+        key?: Key;
+        leading?: Widget;
+        automaticallyImplyLeading?: boolean;
+        title?: Widget;
+        actions?: Array<Widget>;
+        flexibleSpace?: Widget;
+        bottom?: Widget;
+        elevation?: number;
+        shadowColor?: Color;
+        shape?: ShapeBorder;
+        backgroundColor?: Color;
+        brightness?: Brightness;
+        primary?: boolean;
+        centerTitle?: boolean;
+        excludeHeaderSemantics?: boolean;
+        titleSpacing?: number;
+        toolbarOpacity?: number;
+        bottomOpacity?: number;
+        toolbarHeight?: number;
+    });
 }
 export declare class Align extends Widget {
     key?: Key;
@@ -5612,71 +4205,35 @@ export declare class Align extends Widget {
     alignment?: Alignment;
     widthFactor?: number;
     heightFactor?: number;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        alignment?:Alignment,
-        widthFactor?:number,
-        heightFactor?:number,
-      }
-     */
-    constructor(config: AlignConfig);
-}
-interface AspectRatioConfig {
-    child?: Widget;
-    aspectRatio?: number;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        alignment?: Alignment;
+        widthFactor?: number;
+        heightFactor?: number;
+    });
 }
 export declare class AspectRatio extends Widget {
     child?: Widget;
     aspectRatio?: number;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          aspectRatio?:number,
-        }
-     */
-    constructor(config: AspectRatioConfig);
-}
-interface AnnotatedRegionConfig {
-    key?: Key;
-    child: Widget;
-    value: number;
-    sized?: boolean;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        aspectRatio?: number;
+    });
 }
 export declare class AnnotatedRegion extends Widget {
     key?: Key;
     child?: Widget;
     value?: number;
     sized?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          value?:number,
-          sized?:boolean,
-        }
-     */
-    constructor(config: AnnotatedRegionConfig);
-}
-interface AnimatedCrossFadeConfig {
-    key?: Key;
-    firstChild?: Widget;
-    secondChild?: Widget;
-    firstCurve?: Curve;
-    secondCurve?: Curve;
-    sizeCurve?: Curve;
-    alignment?: Alignment;
-    crossFadeState?: CrossFadeState;
-    duration?: Duration;
-    reverseDuration?: Duration;
-    layoutBuilder?: any;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        value?: number;
+        sized?: boolean;
+    });
 }
 export declare class AnimatedCrossFade extends Widget {
     key?: Key;
@@ -5690,32 +4247,19 @@ export declare class AnimatedCrossFade extends Widget {
     duration?: Duration;
     reverseDuration?: Duration;
     layoutBuilder?: any;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          firstChild?:Widget,
-          secondChild?:Widget,
-          firstCurve?:Curve,
-          secondCurve?:Curve,
-          sizeCurve?:Curve,
-          alignment?:Alignment,
-          crossFadeState?:CrossFadeState,
-          duration?:Duration,
-          reverseDuration?:Duration,
-          layoutBuilder?:any
-        }
-     */
-    constructor(config: AnimatedCrossFadeConfig);
-}
-interface AnimatedOpacityConfig {
-    key?: Key;
-    child?: Widget;
-    opacity?: number;
-    curve?: Curve;
-    duration?: Duration;
-    onEnd?: OnCallback;
-    alwaysIncludeSemantics?: boolean;
+    constructor(config: {
+        key?: Key;
+        firstChild?: Widget;
+        secondChild?: Widget;
+        firstCurve?: Curve;
+        secondCurve?: Curve;
+        sizeCurve?: Curve;
+        alignment?: Alignment;
+        crossFadeState?: CrossFadeState;
+        duration?: Duration;
+        reverseDuration?: Duration;
+        layoutBuilder?: any;
+    });
 }
 export declare class AnimatedOpacity extends Widget {
     key?: Key;
@@ -5725,26 +4269,15 @@ export declare class AnimatedOpacity extends Widget {
     duration?: Duration;
     onEnd?: OnCallback;
     alwaysIncludeSemantics?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          opacity?:number,
-          curve?:Curve,
-          duration?:Duration,
-          onEnd?:OnCallback,
-          alwaysIncludeSemantics?:boolean
-        }
-     */
-    constructor(config: AnimatedOpacityConfig);
-}
-interface AnimatedBuilderConfig {
-    key?: Key;
-    animation?: Animation;
-    builder?: any;
-    child?: Widget;
-    widget?: Widget;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        opacity?: number;
+        curve?: Curve;
+        duration?: Duration;
+        onEnd?: OnCallback;
+        alwaysIncludeSemantics?: boolean;
+    });
 }
 export declare class AnimatedBuilder extends Widget {
     key?: Key;
@@ -5752,34 +4285,13 @@ export declare class AnimatedBuilder extends Widget {
     builder?: any;
     child?: Widget;
     widget?: Widget;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          animation?:Animation,
-          builder?:any,
-          child?:Widget,
-          widget?:Widget
-        }
-     */
-    constructor(config: AnimatedBuilderConfig);
-}
-interface AnimatedContainerConfig {
-    key?: Key;
-    alignment?: Alignment;
-    margin?: EdgeInsets;
-    padding?: EdgeInsets;
-    child?: Widget;
-    color?: Color;
-    decoration?: BoxDecoration;
-    foregroundDecoration?: BoxDecoration;
-    width?: number;
-    height?: number;
-    constraints?: BoxConstraints;
-    transform?: Matrix4;
-    curve?: Curve;
-    duration?: Duration;
-    onEnd?: OnCallback;
+    constructor(config: {
+        key?: Key;
+        animation?: Animation;
+        builder?: any;
+        child?: Widget;
+        widget?: Widget;
+    });
 }
 export declare class AnimatedContainer extends Widget {
     key?: Key;
@@ -5797,42 +4309,23 @@ export declare class AnimatedContainer extends Widget {
     curve?: Curve;
     duration?: Duration;
     onEnd?: OnCallback;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          alignment?:Alignment,
-          margin?:EdgeInsets,
-          padding?:EdgeInsets,
-          child?:Widget,
-          color?:Color,
-          decoration?:BoxDecoration,
-          foregroundDecoration?:BoxDecoration,
-          width?:number,
-          height?:number,
-          constraints?:BoxConstraints,
-          transform?:Matrix4,
-          curve?:Curve,
-          duration?:Duration,
-          onEnd?:OnCallback,
-        }
-     */
-    constructor(config: AnimatedContainerConfig);
-}
-interface AnimatedPhysicalModelConfig {
-    key?: Key;
-    child?: Widget;
-    shape?: any;
-    clipBehavior?: Clip;
-    borderRadius?: BorderRadius;
-    elevation?: number;
-    color?: Color;
-    animateColor?: boolean;
-    shadowColor?: Color;
-    animateShadowColor?: boolean;
-    curve?: Curve;
-    duration?: Duration;
-    onEnd?: OnCallback;
+    constructor(config: {
+        key?: Key;
+        alignment?: Alignment;
+        margin?: EdgeInsets;
+        padding?: EdgeInsets;
+        child?: Widget;
+        color?: Color;
+        decoration?: BoxDecoration;
+        foregroundDecoration?: BoxDecoration;
+        width?: number;
+        height?: number;
+        constraints?: BoxConstraints;
+        transform?: Matrix4;
+        curve?: Curve;
+        duration?: Duration;
+        onEnd?: OnCallback;
+    });
 }
 export declare class AnimatedPhysicalModel extends Widget {
     key?: Key;
@@ -5848,38 +4341,21 @@ export declare class AnimatedPhysicalModel extends Widget {
     curve?: Curve;
     duration?: Duration;
     onEnd?: OnCallback;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          shape?:any,
-          clipBehavior?:Clip,
-          borderRadius?:BorderRadius,
-          elevation?:number,
-          color?:Color,
-          animateColor?:boolean,
-          shadowColor?:Color,
-          animateShadowColor?:boolean,
-          curve?:Curve,
-          duration?:Duration,
-          onEnd?:OnCallback
-        }
-     */
-    constructor(config: AnimatedPhysicalModelConfig);
-}
-interface AnimatedPositionedConfig {
-    key?: Key;
-    child?: Widget;
-    left?: number;
-    top?: number;
-    right?: number;
-    bottom?: number;
-    width?: number;
-    height?: number;
-    curve?: Curve;
-    duration?: Duration;
-    onEnd?: OnCallback;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        shape?: any;
+        clipBehavior?: Clip;
+        borderRadius?: BorderRadius;
+        elevation?: number;
+        color?: Color;
+        animateColor?: boolean;
+        shadowColor?: Color;
+        animateShadowColor?: boolean;
+        curve?: Curve;
+        duration?: Duration;
+        onEnd?: OnCallback;
+    });
 }
 export declare class AnimatedPositioned extends Widget {
     key?: Key;
@@ -5893,32 +4369,19 @@ export declare class AnimatedPositioned extends Widget {
     curve?: Curve;
     duration?: Duration;
     onEnd?: OnCallback;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number,
-          width?:number,
-          height?:number,
-          curve?:Curve,
-          duration?:Duration,
-          onEnd?:OnCallback,
-        }
-     */
-    constructor(config: AnimatedPositionedConfig);
-}
-interface AnimatedSizeConfig {
-    key?: Key;
-    child?: Widget;
-    alignment?: Alignment;
-    curve?: Curve;
-    duration?: Duration;
-    reverseDuration?: Duration;
-    vsync?: any;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        left?: number;
+        top?: number;
+        right?: number;
+        bottom?: number;
+        width?: number;
+        height?: number;
+        curve?: Curve;
+        duration?: Duration;
+        onEnd?: OnCallback;
+    });
 }
 export declare class AnimatedSize extends Widget {
     key?: Key;
@@ -5928,31 +4391,15 @@ export declare class AnimatedSize extends Widget {
     duration?: Duration;
     reverseDuration?: Duration;
     vsync?: any;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          alignment?:Alignment,
-          curve?:Curve,
-          duration?:Duration,
-          reverseDuration?:Duration,
-          vsync?:any
-        }
-     */
-    constructor(config: AnimatedSizeConfig);
-}
-interface AnimatedDefaultTextStyleConfig {
-    key?: Key;
-    child?: Widget;
-    style?: TextStyle;
-    textAlign?: TextAlign;
-    softWrap?: boolean;
-    overflow?: TextOverflow;
-    maxLines?: number;
-    curve?: Curve;
-    duration?: Duration;
-    onEnd?: OnCallback;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        alignment?: Alignment;
+        curve?: Curve;
+        duration?: Duration;
+        reverseDuration?: Duration;
+        vsync?: any;
+    });
 }
 export declare class AnimatedDefaultTextStyle extends Widget {
     key?: Key;
@@ -5965,29 +4412,18 @@ export declare class AnimatedDefaultTextStyle extends Widget {
     curve?: Curve;
     duration?: Duration;
     onEnd?: OnCallback;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          style?:TextStyle,
-          textAlign?:TextAlign,
-          softWrap?:boolean,
-          overflow?:TextOverflow,
-          maxLines?:number,
-          curve?:Curve,
-          duration?:Duration,
-          onEnd?:OnCallback
-        }
-     */
-    constructor(config: AnimatedDefaultTextStyleConfig);
-}
-interface BottomNavigationBarItemConfig {
-    icon: Widget;
-    title?: Widget;
-    label?: string;
-    activeIcon?: Widget;
-    backgroundColor?: Color;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        style?: TextStyle;
+        textAlign?: TextAlign;
+        softWrap?: boolean;
+        overflow?: TextOverflow;
+        maxLines?: number;
+        curve?: Curve;
+        duration?: Duration;
+        onEnd?: OnCallback;
+    });
 }
 export declare class BottomNavigationBarItem extends Widget {
     icon?: Widget;
@@ -5995,27 +4431,13 @@ export declare class BottomNavigationBarItem extends Widget {
     label?: string;
     activeIcon?: Widget;
     backgroundColor?: Color;
-    /**
-     * @param config config:
-        {
-          icon:Widget,
-          title?:Widget,
-          activeIcon?:Widget,
-          label?:string,
-          backgroundColor?:Color
-        }
-     */
-    constructor(config: BottomNavigationBarItemConfig);
-}
-interface BannerConfig {
-    key?: Key;
-    child?: Widget;
-    message: string;
-    textDirection?: TextDirection;
-    location: BannerLocation;
-    layoutDirection?: TextDirection;
-    color?: Color;
-    textStyle?: TextStyle;
+    constructor(config: {
+        icon: Widget;
+        title?: Widget;
+        activeIcon?: Widget;
+        label?: string;
+        backgroundColor?: Color;
+    });
 }
 export declare class Banner extends Widget {
     key?: Key;
@@ -6026,56 +4448,28 @@ export declare class Banner extends Widget {
     layoutDirection?: TextDirection;
     color?: Color;
     textStyle?: TextStyle;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          message:string,
-          textDirection?:TextDirection,
-          location:BannerLocation,
-          layoutDirection?:TextDirection,
-          color?:Color,
-          textStyle?:TextStyle,
-        }
-     */
-    constructor(config: BannerConfig);
-}
-interface BaselineConfig {
-    child?: Widget;
-    baseline: number;
-    baselineType: TextBaseline;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        message: string;
+        textDirection?: TextDirection;
+        location: BannerLocation;
+        layoutDirection?: TextDirection;
+        color?: Color;
+        textStyle?: TextStyle;
+    });
 }
 export declare class Baseline extends Widget {
     child?: Widget;
     baseline?: number;
     baselineType?: TextBaseline;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          baseline:number,
-          baselineType:TextBaseline,
-        }
-     */
-    constructor(config: BaselineConfig);
-}
-interface ButtonBarConfig {
-    key?: Key;
-    children?: Array<Widget>;
-    alignment?: MainAxisAlignment;
-    mainAxisSize?: MainAxisSize;
-    buttonTextTheme?: ButtonTextTheme;
-    buttonHeight?: number;
-    buttonMinWidth?: number;
-    buttonPadding?: EdgeInsets;
-    buttonAlignedDropdown?: boolean;
-    layoutBehavior?: ButtonBarLayoutBehavior;
-    overflowButtonSpacing?: number;
-    overflowDirection?: VerticalDirection;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        baseline: number;
+        baselineType: TextBaseline;
+    });
 }
 export declare class ButtonBar extends Widget {
     key?: Key;
@@ -6090,52 +4484,30 @@ export declare class ButtonBar extends Widget {
     layoutBehavior?: ButtonBarLayoutBehavior;
     overflowButtonSpacing?: number;
     overflowDirection?: VerticalDirection;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          children?:Array<Widget>,
-          alignment?:MainAxisAlignment,
-          mainAxisSize?:MainAxisSize,
-          buttonTextTheme?:ButtonTextTheme,
-          buttonHeight?:number,
-          buttonMinWidth?:number,
-          buttonPadding?:EdgeInsets,
-          buttonAlignedDropdown?:boolean,
-          layoutBehavior?:ButtonBarLayoutBehavior,
-          overflowButtonSpacing?:number,
-          overflowDirection?:VerticalDirection,
-        }
-     */
-    constructor(config: ButtonBarConfig);
-}
-interface BlockSemanticsConfig {
-    child?: Widget;
-    blocking?: boolean;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        children?: Array<Widget>;
+        alignment?: MainAxisAlignment;
+        mainAxisSize?: MainAxisSize;
+        buttonTextTheme?: ButtonTextTheme;
+        buttonHeight?: number;
+        buttonMinWidth?: number;
+        buttonPadding?: EdgeInsets;
+        buttonAlignedDropdown?: boolean;
+        layoutBehavior?: ButtonBarLayoutBehavior;
+        overflowButtonSpacing?: number;
+        overflowDirection?: VerticalDirection;
+    });
 }
 export declare class BlockSemantics extends Widget {
     child?: Widget;
     blocking?: boolean;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          blocking?:boolean,
-        }
-     */
-    constructor(config: BlockSemanticsConfig);
-}
-interface BottomAppBarConfig {
-    child?: Widget;
-    color?: Color;
-    elevation?: number;
-    shape?: NotchedShape;
-    clipBehavior?: Clip;
-    notchMargin?: number;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        blocking?: boolean;
+    });
 }
 export declare class BottomAppBar extends Widget {
     child?: Widget;
@@ -6145,38 +4517,15 @@ export declare class BottomAppBar extends Widget {
     clipBehavior?: Clip;
     notchMargin?: number;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          color?:Color,
-          elevation?:number,
-          shape?:NotchedShape,
-          clipBehavior?:Clip,
-          notchMargin?:number,
-        }
-     */
-    constructor(config: BottomAppBarConfig);
-}
-interface BottomNavigationBarConfig {
-    key?: Key;
-    items: Array<BottomNavigationBarItem>;
-    onTap?: OnCallbackNumber;
-    currentIndex?: number;
-    elevation?: number;
-    type?: BottomNavigationBarType;
-    fixedColor?: Color;
-    backgroundColor?: Color;
-    iconSize?: number;
-    selectedItemColor?: Color;
-    unselectedItemColor?: Color;
-    selectedFontSize?: number;
-    unselectedFontSize?: number;
-    selectedLabelStyle?: TextStyle;
-    unselectedLabelStyle?: TextStyle;
-    showSelectedLabels?: boolean;
-    showUnselectedLabels?: boolean;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        color?: Color;
+        elevation?: number;
+        shape?: NotchedShape;
+        clipBehavior?: Clip;
+        notchMargin?: number;
+    });
 }
 export declare class BottomNavigationBar extends Widget {
     key?: Key;
@@ -6196,58 +4545,39 @@ export declare class BottomNavigationBar extends Widget {
     unselectedLabelStyle?: TextStyle;
     showSelectedLabels?: boolean;
     showUnselectedLabels?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          items:Array<BottomNavigationBarItem>,
-          onTap?:VoidValueChangedInt,
-          currentIndex?:number,
-          elevation?:number,
-          type?:BottomNavigationBarType,
-          fixedColor?:Color,
-          backgroundColor?:Color,
-          iconSize?:number,
-          selectedItemColor?:Color,
-          unselectedItemColor?:Color,
-          selectedFontSize?:number,
-          unselectedFontSize?:number,
-          selectedLabelStyle?:TextStyle,
-          unselectedLabelStyle?:TextStyle,
-          showSelectedLabels?:boolean,
-          showUnselectedLabels?:boolean,
-        }
-     */
-    constructor(config: BottomNavigationBarConfig);
-}
-interface BackButtonIconConfig {
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        items: Array<BottomNavigationBarItem>;
+        onTap?: OnCallbackNumber;
+        currentIndex?: number;
+        elevation?: number;
+        type?: BottomNavigationBarType;
+        fixedColor?: Color;
+        backgroundColor?: Color;
+        iconSize?: number;
+        selectedItemColor?: Color;
+        unselectedItemColor?: Color;
+        selectedFontSize?: number;
+        unselectedFontSize?: number;
+        selectedLabelStyle?: TextStyle;
+        unselectedLabelStyle?: TextStyle;
+        showSelectedLabels?: boolean;
+        showUnselectedLabels?: boolean;
+    });
 }
 export declare class BackButtonIcon extends Widget {
     key?: Key;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-        }
-     */
-    constructor(config: BackButtonIconConfig);
-}
-interface BackButtonConfig {
-    key?: Key;
-    onPressed?: OnCallback;
+    constructor(config: {
+        key?: Key;
+    });
 }
 export declare class BackButton extends Widget {
     key?: Key;
     onPressed?: OnCallback;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          onPressed?:OnCallback,
-        }
-     */
-    constructor(config: BackButtonConfig);
+    constructor(config: {
+        key?: Key;
+        onPressed?: OnCallback;
+    });
 }
 export declare class Builder extends Widget {
     builder?: any;
@@ -6256,58 +4586,25 @@ export declare class Builder extends Widget {
     preBuild(jsWidgetHelper?: any, buildContext?: BuildContext): void;
     constructor(builder?: any, key?: Key);
 }
-interface ColorFilteredConfig {
-    key?: Key;
-    colorFilter: ColorFilter;
-    child?: Color;
-}
 export declare class ColorFiltered extends Widget {
     key?: Key;
     colorFilter?: ColorFilter;
     child?: Color;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          colorFilter:ColorFilter,
-          child?:Color,
-        }
-     */
-    constructor(config: ColorFilteredConfig);
-}
-interface CloseButtonConfig {
-    key?: Key;
-    onPressed?: OnCallback;
-    color?: Color;
+    constructor(config: {
+        key?: Key;
+        colorFilter: ColorFilter;
+        child?: Color;
+    });
 }
 export declare class CloseButton extends Widget {
     key?: Key;
     onPressed?: OnCallback;
     color?: Color;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          onPressed?:OnCallback,
-          color?:Color,
-        }
-     */
-    constructor(config: CloseButtonConfig);
-}
-interface ContainerConfig {
-    key?: Key;
-    child?: Widget;
-    alignment?: Alignment;
-    margin?: EdgeInsets;
-    padding?: EdgeInsets;
-    color?: Color;
-    width?: number;
-    height?: number;
-    decoration?: BoxDecoration;
-    foregroundDecoration?: BoxDecoration;
-    constraints?: BoxConstraints;
-    transform?: Matrix4;
-    clipBehavior?: Clip;
+    constructor(config: {
+        key?: Key;
+        onPressed?: OnCallback;
+        color?: Color;
+    });
 }
 export declare class Container extends Widget {
     child?: Widget;
@@ -6323,72 +4620,33 @@ export declare class Container extends Widget {
     transform?: Matrix4;
     key?: Key;
     clipBehavior?: Clip;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          alignment?:Alignment,
-          margin?:EdgeInsets,
-          padding?:EdgeInsets,
-          color?:Color,
-          width?:number,
-          height?:number,
-          decoration?:BoxDecoration,
-          foregroundDecoration?:BoxDecoration,
-          constraints?:BoxConstraints,
-          transform?:Matrix4,
-          clipBehavior?:Clip,
-        }
-     */
-    constructor(config: ContainerConfig);
-}
-interface CenterConfig {
-    child?: Widget;
-    widthFactor?: number;
-    heightFactor?: number;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        alignment?: Alignment;
+        margin?: EdgeInsets;
+        padding?: EdgeInsets;
+        color?: Color;
+        width?: number;
+        height?: number;
+        decoration?: BoxDecoration;
+        foregroundDecoration?: BoxDecoration;
+        constraints?: BoxConstraints;
+        transform?: Matrix4;
+        clipBehavior?: Clip;
+    });
 }
 export declare class Center extends Widget {
     child?: Widget;
     widthFactor?: number;
     heightFactor?: number;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          widthFactor?:number,
-          heightFactor?:number,
-        }
-     */
-    constructor(config: CenterConfig);
-}
-interface ChoiceChipConfig {
-    key?: Key;
-    avatar?: Widget;
-    label: Widget;
-    labelStyle?: TextStyle;
-    labelPadding?: EdgeInsets;
-    selected: boolean;
-    onSelected?: OnCallbackBoolean;
-    pressElevation?: number;
-    disabledColor?: Color;
-    selectedColor?: Color;
-    tooltip?: string;
-    shape?: ShapeBorder;
-    clipBehavior?: Clip;
-    focusNode?: FocusNode;
-    autofocus?: boolean;
-    backgroundColor?: Color;
-    padding?: EdgeInsets;
-    visualDensity?: VisualDensity;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    elevation?: number;
-    shadowColor?: Color;
-    selectedShadowColor?: Color;
-    avatarBorder?: ShapeBorder;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        widthFactor?: number;
+        heightFactor?: number;
+    });
 }
 export declare class ChoiceChip extends Widget {
     key?: Key;
@@ -6414,64 +4672,41 @@ export declare class ChoiceChip extends Widget {
     shadowColor?: Color;
     selectedShadowColor?: Color;
     avatarBorder?: ShapeBorder;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          selected?:boolean,
-          onSelected?:OnCallbackBoolean,
-          pressElevation?:number,
-          disabledColor?:Color,
-          selectedColor?:Color,
-          tooltip?:string,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          focusNode?:FocusNode,
-          autofocus?:boolean,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          visualDensity?:VisualDensity,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          shadowColor?:Color,
-          selectedShadowColor?:Color,
-          avatarBorder?:ShapeBorder,
-        }
-     */
-    constructor(config: ChoiceChipConfig);
-}
-interface ColoredBoxConfig {
-    key?: Key;
-    child?: Widget;
-    color: Color;
+    constructor(config: {
+        key?: Key;
+        avatar?: Widget;
+        label: Widget;
+        labelStyle?: TextStyle;
+        labelPadding?: EdgeInsets;
+        selected?: boolean;
+        onSelected?: OnCallbackBoolean;
+        pressElevation?: number;
+        disabledColor?: Color;
+        selectedColor?: Color;
+        tooltip?: string;
+        shape?: ShapeBorder;
+        clipBehavior?: Clip;
+        focusNode?: FocusNode;
+        autofocus?: boolean;
+        backgroundColor?: Color;
+        padding?: EdgeInsets;
+        visualDensity?: VisualDensity;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        elevation?: number;
+        shadowColor?: Color;
+        selectedShadowColor?: Color;
+        avatarBorder?: ShapeBorder;
+    });
 }
 export declare class ColoredBox extends Widget {
     key?: Key;
     child?: Widget;
     color?: Color;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          color:Color,
-        }
-     */
-    constructor(config: ColoredBoxConfig);
-}
-interface CircleAvatarConfig {
-    key?: Key;
-    child?: Widget;
-    backgroundColor?: Color;
-    foregroundColor?: Color;
-    backgroundImage?: any;
-    radius?: number;
-    minRadius?: number;
-    maxRadius?: number;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        color: Color;
+    });
 }
 export declare class CircleAvatar extends Widget {
     key?: Key;
@@ -6482,39 +4717,16 @@ export declare class CircleAvatar extends Widget {
     radius?: number;
     minRadius?: number;
     maxRadius?: number;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          backgroundColor?:Color,
-          foregroundColor?:Color,
-          radius?:number,
-          backgroundImage?:any,
-          minRadius?:number,
-          maxRadius?:number,
-          key?:Key,
-        }
-     */
-    constructor(config: CircleAvatarConfig);
-}
-interface ChipConfig {
-    key?: Key;
-    avatar?: Widget;
-    label: Widget;
-    labelStyle?: TextStyle;
-    labelPadding?: EdgeInsets;
-    deleteIcon?: Widget;
-    onDeleted?: OnCallback;
-    deleteIconColor?: Color;
-    deleteButtonTooltipMessage?: string;
-    clipBehavior?: Clip;
-    backgroundColor?: Color;
-    padding?: EdgeInsets;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    elevation?: number;
-    shadowColor?: Color;
-    visualDensity?: VisualDensity;
-    autofocus?: boolean;
+    constructor(config: {
+        child?: Widget;
+        backgroundColor?: Color;
+        foregroundColor?: Color;
+        radius?: number;
+        backgroundImage?: any;
+        minRadius?: number;
+        maxRadius?: number;
+        key?: Key;
+    });
 }
 export declare class Chip extends Widget {
     key?: Key;
@@ -6534,62 +4746,33 @@ export declare class Chip extends Widget {
     shadowColor?: Color;
     visualDensity?: VisualDensity;
     autofocus?: boolean;
-    /**
-     * @param config config:
-        {
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          deleteIcon?:Widget,
-          onDeleted?:OnCallback,
-          deleteIconColor?:Color,
-          deleteButtonTooltipMessage?:string,
-          clipBehavior?:Clip,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          key?:Key,
-          shadowColor?:Color,
-          visualDensity?:VisualDensity,
-          autofocus?:boolean,
-        }
-     */
-    constructor(config: ChipConfig);
-}
-interface CheckedModeBannerConfig {
-    key?: Key;
-    child: Widget;
+    constructor(config: {
+        avatar?: Widget;
+        label: Widget;
+        labelStyle?: TextStyle;
+        labelPadding?: EdgeInsets;
+        deleteIcon?: Widget;
+        onDeleted?: OnCallback;
+        deleteIconColor?: Color;
+        deleteButtonTooltipMessage?: string;
+        clipBehavior?: Clip;
+        backgroundColor?: Color;
+        padding?: EdgeInsets;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        elevation?: number;
+        key?: Key;
+        shadowColor?: Color;
+        visualDensity?: VisualDensity;
+        autofocus?: boolean;
+    });
 }
 export declare class CheckedModeBanner extends Widget {
     key?: Key;
     child?: Widget;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-        }
-     */
-    constructor(config: CheckedModeBannerConfig);
-}
-interface CheckboxListTileConfig {
-    key?: Key;
-    value: boolean;
-    onChanged: OnCallbackBoolean;
-    activeColor?: Color;
-    checkColor?: Color;
-    title?: Widget;
-    subtitle?: Widget;
-    isThreeLine?: boolean;
-    dense?: boolean;
-    contentPadding?: EdgeInsets;
-    secondary?: Widget;
-    selected?: boolean;
-    autofocus?: boolean;
-    controlAffinity?: ListTileControlAffinity;
-    tristate?: boolean;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+    });
 }
 export declare class CheckboxListTile extends Widget {
     key?: Key;
@@ -6607,40 +4790,23 @@ export declare class CheckboxListTile extends Widget {
     autofocus?: boolean;
     controlAffinity?: ListTileControlAffinity;
     tristate?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          onChanged:OnCallbackBoolean,
-          activeColor?:Color,
-          checkColor?:Color,
-          title?:Widget,
-          subtitle?:Widget,
-          isThreeLine?:boolean,
-          dense?:boolean,
-          contentPadding?:EdgeInsets,
-          secondary?:Widget,
-          selected?:boolean,
-          autofocus?:boolean,
-          controlAffinity?:ListTileControlAffinity,
-          tristate?:boolean,
-        }
-     */
-    constructor(config: CheckboxListTileConfig);
-}
-interface CheckboxConfig {
-    key?: Key;
-    value: boolean;
-    onChanged: OnCallbackBoolean;
-    activeColor?: Color;
-    checkColor?: Color;
-    focusColor?: Color;
-    hoverColor?: Color;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    visualDensity?: VisualDensity;
-    autofocus?: boolean;
-    tristate?: boolean;
+    constructor(config: {
+        key?: Key;
+        value: boolean;
+        onChanged: OnCallbackBoolean;
+        activeColor?: Color;
+        checkColor?: Color;
+        title?: Widget;
+        subtitle?: Widget;
+        isThreeLine?: boolean;
+        dense?: boolean;
+        contentPadding?: EdgeInsets;
+        secondary?: Widget;
+        selected?: boolean;
+        autofocus?: boolean;
+        controlAffinity?: ListTileControlAffinity;
+        tristate?: boolean;
+    });
 }
 export declare class Checkbox extends Widget {
     key?: Key;
@@ -6654,34 +4820,19 @@ export declare class Checkbox extends Widget {
     visualDensity?: VisualDensity;
     autofocus?: boolean;
     tristate?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          onChanged:OnCallbackBoolean,
-          activeColor?:Color,
-          checkColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          visualDensity?:VisualDensity,
-          autofocus?:boolean,
-          tristate?:boolean,
-        }
-     */
-    constructor(config: CheckboxConfig);
-}
-interface CheckboxExConfig {
-    key?: Key;
-    value: boolean;
-    tristate?: boolean;
-    onChanged: OnCallbackBoolean;
-    activeColor?: Color;
-    width?: number;
-    checkColor?: Color;
-    isCircle?: boolean;
-    strokeWidth?: number;
+    constructor(config: {
+        key?: Key;
+        value: boolean;
+        onChanged: OnCallbackBoolean;
+        activeColor?: Color;
+        checkColor?: Color;
+        focusColor?: Color;
+        hoverColor?: Color;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        visualDensity?: VisualDensity;
+        autofocus?: boolean;
+        tristate?: boolean;
+    });
 }
 export declare class CheckboxEx extends Widget {
     key?: Key;
@@ -6693,110 +4844,59 @@ export declare class CheckboxEx extends Widget {
     checkColor?: Color;
     isCircle?: boolean;
     strokeWidth?: number;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          tristate?:boolean,
-          onChanged:OnCallbackBoolean,
-          activeColor?:Color,
-          width?:number,
-          checkColor?:Color,
-          isCircle?:boolean,
-          strokeWidth?:number,
-        }
-     */
-    constructor(config: CheckboxExConfig);
-}
-interface ClipRectConfig {
-    key?: Key;
-    clipBehavior?: Clip;
-    child?: Widget;
+    constructor(config: {
+        key?: Key;
+        value: boolean;
+        tristate?: boolean;
+        onChanged: OnCallbackBoolean;
+        activeColor?: Color;
+        width?: number;
+        checkColor?: Color;
+        isCircle?: boolean;
+        strokeWidth?: number;
+    });
 }
 export declare class ClipRect extends Widget {
     key?: Key;
     clipBehavior?: Clip;
     child?: Widget;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          clipBehavior?:Clip,
-          key?:Key
-        }
-     */
-    constructor(config: ClipRectConfig);
-}
-interface ClipOvalConfig {
-    key?: Key;
-    clipBehavior?: Clip;
-    child?: Widget;
+    constructor(config: {
+        child?: Widget;
+        clipBehavior?: Clip;
+        key?: Key;
+    });
 }
 export declare class ClipOval extends Widget {
     key?: Key;
     clipBehavior?: Clip;
     child?: Widget;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          clipBehavior?:Clip,
-          key?:Key
-        }
-     */
-    constructor(config: ClipOvalConfig);
-}
-interface ClipRRectConfig {
-    key?: Key;
-    borderRadius?: BorderRadius;
-    clipBehavior?: Clip;
-    child?: Widget;
+    constructor(config: {
+        child?: Widget;
+        clipBehavior?: Clip;
+        key?: Key;
+    });
 }
 export declare class ClipRRect extends Widget {
     key?: Key;
     borderRadius?: BorderRadius;
     clipBehavior?: Clip;
     child?: Widget;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          borderRadius?:BorderRadius,
-          clipBehavior?:Clip,
-          key?:Key
-        }
-     */
-    constructor(config: ClipRRectConfig);
-}
-interface ConstrainedBoxConfig {
-    key?: Key;
-    child?: Widget;
-    constraints: BoxConstraints;
+    constructor(config: {
+        child?: Widget;
+        borderRadius?: BorderRadius;
+        clipBehavior?: Clip;
+        key?: Key;
+    });
 }
 export declare class ConstrainedBox extends Widget {
     child?: Widget;
     constraints?: BoxConstraints;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          constraints:BoxConstraints,
-          key?:Key,
-        }
-     */
-    constructor(config: ConstrainedBoxConfig);
-}
-interface ColumnConfig {
-    key?: Key;
-    children?: Array<Widget>;
-    mainAxisAlignment?: MainAxisAlignment;
-    crossAxisAlignment?: CrossAxisAlignment;
-    mainAxisSize?: MainAxisSize;
-    textDirection?: TextDirection;
-    verticalDirection?: VerticalDirection;
-    textBaseline?: TextBaseline;
+    constructor(config: {
+        child?: Widget;
+        constraints: BoxConstraints;
+        key?: Key;
+    });
 }
 export declare class Column extends Widget {
     children?: Array<Widget>;
@@ -6807,56 +4907,26 @@ export declare class Column extends Widget {
     verticalDirection?: VerticalDirection;
     textBaseline?: TextBaseline;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          mainAxisAlignment?:MainAxisAlignment,
-          crossAxisAlignment?:CrossAxisAlignment,
-          mainAxisSize?:MainAxisSize,
-          textDirection?:TextDirection,
-          verticalDirection?:VerticalDirection,
-          textBaseline?:TextBaseline,
-          key?:Key,
-        }
-     */
-    constructor(config: ColumnConfig);
-}
-interface CustomMultiChildLayoutConfig {
-    key?: Key;
-    children?: Array<Widget>;
-    delegate?: any;
+    constructor(config: {
+        children?: Array<Widget>;
+        mainAxisAlignment?: MainAxisAlignment;
+        crossAxisAlignment?: CrossAxisAlignment;
+        mainAxisSize?: MainAxisSize;
+        textDirection?: TextDirection;
+        verticalDirection?: VerticalDirection;
+        textBaseline?: TextBaseline;
+        key?: Key;
+    });
 }
 export declare class CustomMultiChildLayout extends Widget {
     children?: Array<Widget>;
     delegate?: any;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          delegate?:any,
-          key?:Key
-        }
-     */
-    constructor(config: CustomMultiChildLayoutConfig);
-}
-interface CustomScrollViewConfig {
-    key?: Key;
-    slivers?: Array<Widget>;
-    controller?: ScrollController;
-    scrollDirection?: Axis;
-    reverse?: boolean;
-    primary?: boolean;
-    physics?: ScrollPhysics;
-    shrinkWrap?: boolean;
-    center?: Key;
-    anchor?: number;
-    cacheExtent?: number;
-    semanticChildCount?: number;
-    dragStartBehavior?: DragStartBehavior;
-    restorationId?: string;
-    clipBehavior?: Clip;
+    constructor(config: {
+        children?: Array<Widget>;
+        delegate?: any;
+        key?: Key;
+    });
 }
 export declare class CustomScrollView extends Widget {
     key?: Key;
@@ -6874,39 +4944,23 @@ export declare class CustomScrollView extends Widget {
     dragStartBehavior?: DragStartBehavior;
     restorationId?: string;
     clipBehavior?: Clip;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          slivers?:Array<Widget>,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          physics?:ScrollPhysics,
-          shrinkWrap?:boolean,
-          center?:Key,
-          anchor?:number,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
-    constructor(config: CustomScrollViewConfig);
-}
-interface CardConfig {
-    key?: Key;
-    child?: Widget;
-    margin?: EdgeInsets;
-    color?: Color;
-    shadowColor?: Color;
-    elevation?: number;
-    shape?: any;
-    clipBehavior?: Clip;
-    semanticContainer?: boolean;
-    borderOnForeground?: boolean;
+    constructor(config: {
+        key?: Key;
+        slivers?: Array<Widget>;
+        controller?: ScrollController;
+        scrollDirection?: Axis;
+        reverse?: boolean;
+        primary?: boolean;
+        physics?: ScrollPhysics;
+        shrinkWrap?: boolean;
+        center?: Key;
+        anchor?: number;
+        cacheExtent?: number;
+        semanticChildCount?: number;
+        dragStartBehavior?: DragStartBehavior;
+        restorationId?: string;
+        clipBehavior?: Clip;
+    });
 }
 export declare class Card extends Widget {
     key?: Key;
@@ -6919,30 +4973,18 @@ export declare class Card extends Widget {
     clipBehavior?: Clip;
     semanticContainer?: boolean;
     borderOnForeground?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          margin?:EdgeInsets,
-          color?:Color,
-          shadowColor?:Color,
-          elevation?:number,
-          shape?:any,
-          clipBehavior?:Clip,
-          semanticContainer?:boolean,
-          borderOnForeground?:boolean,
-        }
-     */
-    constructor(config: CardConfig);
-}
-interface DividerConfig {
-    key?: Key;
-    height?: number;
-    thickness?: number;
-    indent?: number;
-    endIndent?: number;
-    color?: Color;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        margin?: EdgeInsets;
+        color?: Color;
+        shadowColor?: Color;
+        elevation?: number;
+        shape?: any;
+        clipBehavior?: Clip;
+        semanticContainer?: boolean;
+        borderOnForeground?: boolean;
+    });
 }
 export declare class Divider extends Widget {
     key?: Key;
@@ -6951,27 +4993,14 @@ export declare class Divider extends Widget {
     indent?: number;
     endIndent?: number;
     color?: Color;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        height?:number,
-        thickness?:number,
-        indent?:number,
-        endIndent?:number,
-        color?:Color
-      }
-     */
-    constructor(config: DividerConfig);
-}
-interface DrawerHeaderConfig {
-    key?: Key;
-    child: Widget;
-    decoration?: BoxDecoration;
-    margin?: EdgeInsets;
-    padding?: EdgeInsets;
-    duration?: Duration;
-    curve?: Curve;
+    constructor(config: {
+        key?: Key;
+        height?: number;
+        thickness?: number;
+        indent?: number;
+        endIndent?: number;
+        color?: Color;
+    });
 }
 export declare class DrawerHeader extends Widget {
     key?: Key;
@@ -6981,117 +5010,61 @@ export declare class DrawerHeader extends Widget {
     padding?: EdgeInsets;
     duration?: Duration;
     curve?: Curve;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child:Widget,
-        decoration?:BoxDecoration,
-        margin?:EdgeInsets,
-        padding?:EdgeInsets,
-        duration?:Duration,
-        curve?:Curve,
-      }
-    */
-    constructor(config: DrawerHeaderConfig);
-}
-interface DrawerConfig {
-    key?: Key;
-    child?: Widget;
-    elevation?: number;
-    semanticLabel?: string;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        decoration?: BoxDecoration;
+        margin?: EdgeInsets;
+        padding?: EdgeInsets;
+        duration?: Duration;
+        curve?: Curve;
+    });
 }
 export declare class Drawer extends Widget {
     key?: Key;
     child?: Widget;
     elevation?: number;
     semanticLabel?: string;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        elevation?:number,
-        semanticLabel?:string,
-      }
-    */
-    constructor(config: DrawerConfig);
-}
-interface DirectionalityConfig {
-    key?: Key;
-    child: Widget;
-    textDirection: TextDirection;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        elevation?: number;
+        semanticLabel?: string;
+    });
 }
 export declare class Directionality extends Widget {
     key?: Key;
     child?: Widget;
     textDirection?: TextDirection;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          textDirection:TextDirection,
-        }
-     */
-    constructor(config: DirectionalityConfig);
-}
-interface DropdownMenuItemConfig {
-    child: Widget;
-    value?: number;
-    key?: Key;
-    onTap?: OnCallback;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        textDirection: TextDirection;
+    });
 }
 export declare class DropdownMenuItem extends Widget {
     child?: Widget;
     value?: number;
     key?: Key;
     onTap?: OnCallback;
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          value?:number,
-          key?:Key,
-          onTap?:OnCallback,
-        }
-     */
-    constructor(config: DropdownMenuItemConfig);
-}
-interface DecoratedBoxConfig {
-    child?: Widget;
-    decoration: BoxDecoration;
-    position?: DecorationPosition;
-    key?: Key;
+    constructor(config: {
+        child: Widget;
+        value?: number;
+        key?: Key;
+        onTap?: OnCallback;
+    });
 }
 export declare class DecoratedBox extends Widget {
     child?: Widget;
     decoration?: BoxDecoration;
     position?: DecorationPosition;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          decoration:BoxDecoration,
-          position?:DecorationPosition,
-          key?:Key,
-        }
-     */
-    constructor(config: DecoratedBoxConfig);
-}
-interface DropdownButtonConfig {
-    items?: Array<DropdownMenuItem>;
-    onChanged?: any;
-    value?: any;
-    hint?: Widget;
-    disabledHint?: Widget;
-    elevation?: number;
-    style?: TextStyle;
-    iconSize?: number;
-    isDense?: boolean;
-    isExpanded?: boolean;
-    key?: Key;
+    constructor(config: {
+        child?: Widget;
+        decoration: BoxDecoration;
+        position?: DecorationPosition;
+        key?: Key;
+    });
 }
 export declare class DropdownButton extends Widget {
     items?: Array<DropdownMenuItem>;
@@ -7105,54 +5078,31 @@ export declare class DropdownButton extends Widget {
     isDense?: boolean;
     isExpanded?: boolean;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          items?:Array<DropdownMenuItem>,
-          onChanged?:any,
-          value?:any, hint?:Widget,
-          disabledHint?:Widget,
-          elevation?:number,
-          style?:TextStyle,
-          iconSize?:number,
-          isDense?:boolean,
-          isExpanded?:boolean,
-          key?:Key,
-        }
-     */
-    constructor(config: DropdownButtonConfig);
-}
-interface DefaultTabControllerConfig {
-    key?: Key;
-    child: Widget;
-    length: number;
-    initialIndex?: number;
+    constructor(config: {
+        items?: Array<DropdownMenuItem>;
+        onChanged?: any;
+        value?: any;
+        hint?: Widget;
+        disabledHint?: Widget;
+        elevation?: number;
+        style?: TextStyle;
+        iconSize?: number;
+        isDense?: boolean;
+        isExpanded?: boolean;
+        key?: Key;
+    });
 }
 export declare class DefaultTabController extends Widget {
     key?: Key;
     child?: Widget;
     length?: number;
     initialIndex?: number;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          length:number,
-          initialIndex?:number,
-        }
-     */
-    constructor(config: DefaultTabControllerConfig);
-}
-interface DecorationImageConfig {
-    image?: ImageProvider;
-    alignment?: Alignment;
-    colorFilter?: ColorFilter;
-    fit?: BoxFit;
-    centerSlice?: Rect;
-    repeat?: ImageRepeat;
-    matchTextDirection?: boolean;
-    scale?: number;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        length: number;
+        initialIndex?: number;
+    });
 }
 export declare class DecorationImage extends Widget {
     image?: ImageProvider;
@@ -7163,30 +5113,16 @@ export declare class DecorationImage extends Widget {
     repeat?: ImageRepeat;
     matchTextDirection?: boolean;
     scale?: number;
-    /**
-     * @param config config:
-        {
-          image?:ImageProvider,
-          alignment?:Alignment,
-          colorFilter?:ColorFilter,
-          fit?:BoxFit,
-          centerSlice?:Rect,
-          repeat?:ImageRepeat,
-          matchTextDirection?:boolean,
-          scale?:number,
-        }
-     */
-    constructor(config: DecorationImageConfig);
-}
-interface DefaultTextStyleConfig {
-    child?: Widget;
-    style?: TextStyle;
-    textAlign?: TextAlign;
-    softWrap?: boolean;
-    overflow?: TextOverflow;
-    maxLines?: number;
-    textWidthBasis?: TextWidthBasis;
-    key?: Key;
+    constructor(config: {
+        image?: ImageProvider;
+        alignment?: Alignment;
+        colorFilter?: ColorFilter;
+        fit?: BoxFit;
+        centerSlice?: Rect;
+        repeat?: ImageRepeat;
+        matchTextDirection?: boolean;
+        scale?: number;
+    });
 }
 export declare class DefaultTextStyle extends Widget {
     child?: Widget;
@@ -7197,90 +5133,48 @@ export declare class DefaultTextStyle extends Widget {
     maxLines?: number;
     textWidthBasis?: TextWidthBasis;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          style?:TextStyle,
-          textAlign?:TextAlign,
-          softWrap?:boolean,
-          overflow?:TextOverflow,
-          maxLines?:number,
-          textWidthBasis?:TextWidthBasis,
-          key?:Key
-        }
-     */
-    constructor(config: DefaultTextStyleConfig);
-}
-interface DecoratedBoxTransitionConfig {
-    key?: Key;
-    decoration?: any;
-    position?: DecorationPosition;
-    child?: Widget;
+    constructor(config: {
+        child?: Widget;
+        style?: TextStyle;
+        textAlign?: TextAlign;
+        softWrap?: boolean;
+        overflow?: TextOverflow;
+        maxLines?: number;
+        textWidthBasis?: TextWidthBasis;
+        key?: Key;
+    });
 }
 export declare class DecoratedBoxTransition extends Widget {
     key?: Key;
     decoration?: any;
     position?: DecorationPosition;
     child?: Widget;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          decoration?:any,
-          position?:DecorationPosition,
-          child?:Widget
-        }
-     */
-    constructor(config: DecoratedBoxTransitionConfig);
-}
-interface ExcludeSemanticsConfig {
-    child?: Widget;
-    excluding?: boolean;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        decoration?: any;
+        position?: DecorationPosition;
+        child?: Widget;
+    });
 }
 export declare class ExcludeSemantics extends Widget {
     child?: Widget;
     excluding?: boolean;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          excluding?:boolean,
-        }
-     */
-    constructor(config?: ExcludeSemanticsConfig);
-}
-interface ExpandedConfig {
-    child: Widget;
-    flex?: number;
-    key?: Key;
+    constructor(config?: {
+        key?: Key;
+        child?: Widget;
+        excluding?: boolean;
+    });
 }
 export declare class Expanded extends Widget {
     child?: Widget;
     flex?: number;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          flex?:number,
-          key?:Key,
-        }
-     */
-    constructor(config: ExpandedConfig);
-}
-interface ExpandIconConfig {
-    key?: Key;
-    isExpanded?: boolean;
-    size?: number;
-    onPressed: OnCallbackBoolean;
-    padding?: EdgeInsets;
-    color?: Color;
-    disabledColor?: Color;
-    expandedColor?: Color;
+    constructor(config: {
+        child: Widget;
+        flex?: number;
+        key?: Key;
+    });
 }
 export declare class ExpandIcon extends Widget {
     key?: Key;
@@ -7291,36 +5185,16 @@ export declare class ExpandIcon extends Widget {
     color?: Color;
     disabledColor?: Color;
     expandedColor?: Color;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          isExpanded?:boolean,
-          size?:number,
-          onPressed:OnCallbackBoolean,
-          padding?:EdgeInsets,
-          color?:Color,
-          disabledColor?:Color,
-          expandedColor?:Color,
-        }
-     */
-    constructor(config: ExpandIconConfig);
-}
-interface ExpansionTileConfig {
-    key?: Key;
-    leading?: Widget;
-    title?: Widget;
-    subtitle?: Widget;
-    backgroundColor?: Color;
-    onExpansionChanged?: OnCallbackBoolean;
-    children?: Array<Widget>;
-    trailing?: Widget;
-    initiallyExpanded?: boolean;
-    maintainState?: boolean;
-    tilePadding?: EdgeInsets;
-    expandedCrossAxisAlignment?: CrossAxisAlignment;
-    expandedAlignment?: Alignment;
-    childrenPadding?: EdgeInsets;
+    constructor(config: {
+        key?: Key;
+        isExpanded?: boolean;
+        size?: number;
+        onPressed: OnCallbackBoolean;
+        padding?: EdgeInsets;
+        color?: Color;
+        disabledColor?: Color;
+        expandedColor?: Color;
+    });
 }
 export declare class ExpansionTile extends Widget {
     key?: Key;
@@ -7337,75 +5211,34 @@ export declare class ExpansionTile extends Widget {
     expandedCrossAxisAlignment?: CrossAxisAlignment;
     expandedAlignment?: Alignment;
     childrenPadding?: EdgeInsets;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          leading?:Widget,
-          title?:Widget,
-          subtitle?:Widget,
-          backgroundColor?:Color,
-          onExpansionChanged?:OnCallbackBoolean,
-          children?:Array<Widget>,
-          trailing?:Widget,
-          initiallyExpanded?:boolean,
-          maintainState?:boolean,
-          tilePadding?:EdgeInsets,
-          expandedCrossAxisAlignment?:CrossAxisAlignment,
-          expandedAlignment?:Alignment,
-          childrenPadding?:EdgeInsets,
-        }
-     */
-    constructor(config: ExpansionTileConfig);
-}
-interface FlexibleConfig {
-    key?: Key;
-    child: Widget;
-    flex?: number;
-    fit?: FlexFit;
+    constructor(config: {
+        key?: Key;
+        leading?: Widget;
+        title?: Widget;
+        subtitle?: Widget;
+        backgroundColor?: Color;
+        onExpansionChanged?: OnCallbackBoolean;
+        children?: Array<Widget>;
+        trailing?: Widget;
+        initiallyExpanded?: boolean;
+        maintainState?: boolean;
+        tilePadding?: EdgeInsets;
+        expandedCrossAxisAlignment?: CrossAxisAlignment;
+        expandedAlignment?: Alignment;
+        childrenPadding?: EdgeInsets;
+    });
 }
 export declare class Flexible extends Widget {
     key?: Key;
     child?: Widget;
     flex?: number;
     fit?: FlexFit;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          flex?:number,
-          fit?:FlexFit,
-        }
-     */
-    constructor(config: FlexibleConfig);
-}
-interface FilterChipConfig {
-    key?: Key;
-    avatar?: Widget;
-    label: Widget;
-    labelStyle?: TextStyle;
-    labelPadding?: EdgeInsets;
-    selected?: boolean;
-    onSelected: OnCallbackBoolean;
-    pressElevation?: number;
-    disabledColor?: Color;
-    selectedColor?: Color;
-    tooltip?: string;
-    shape?: ShapeBorder;
-    clipBehavior?: Clip;
-    focusNode?: FocusNode;
-    autofocus?: boolean;
-    backgroundColor?: Color;
-    padding?: EdgeInsets;
-    visualDensity?: VisualDensity;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    elevation?: number;
-    shadowColor?: Color;
-    selectedShadowColor?: Color;
-    showCheckmark?: boolean;
-    checkmarkColor?: Color;
-    avatarBorder?: ShapeBorder;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        flex?: number;
+        fit?: FlexFit;
+    });
 }
 export declare class FilterChip extends Widget {
     key?: Key;
@@ -7433,66 +5266,45 @@ export declare class FilterChip extends Widget {
     showCheckmark?: boolean;
     checkmarkColor?: Color;
     avatarBorder?: ShapeBorder;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          selected?:boolean,
-          onSelected:OnCallbackBoolean,
-          pressElevation?:number,
-          disabledColor?:Color,
-          selectedColor?:Color,
-          tooltip?:string,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          focusNode?:FocusNode,
-          autofocus?:boolean,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          visualDensity?:VisualDensity,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          shadowColor?:Color,
-          selectedShadowColor?:Color,
-          showCheckmark?:boolean,
-          checkmarkColor?:Color,
-          avatarBorder?:ShapeBorder,
-        }
-     */
-    constructor(config: FilterChipConfig);
-}
-interface FittedBoxConfig {
-    key?: Key;
-    child?: Widget;
-    alignment?: Alignment;
-    fit?: BoxFit;
+    constructor(config: {
+        key?: Key;
+        avatar?: Widget;
+        label: Widget;
+        labelStyle?: TextStyle;
+        labelPadding?: EdgeInsets;
+        selected?: boolean;
+        onSelected: OnCallbackBoolean;
+        pressElevation?: number;
+        disabledColor?: Color;
+        selectedColor?: Color;
+        tooltip?: string;
+        shape?: ShapeBorder;
+        clipBehavior?: Clip;
+        focusNode?: FocusNode;
+        autofocus?: boolean;
+        backgroundColor?: Color;
+        padding?: EdgeInsets;
+        visualDensity?: VisualDensity;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        elevation?: number;
+        shadowColor?: Color;
+        selectedShadowColor?: Color;
+        showCheckmark?: boolean;
+        checkmarkColor?: Color;
+        avatarBorder?: ShapeBorder;
+    });
 }
 export declare class FittedBox extends Widget {
     child?: Widget;
     alignment?: Alignment;
     fit?: BoxFit;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        alignment?:Alignment,
-        fit?:BoxFit,
-      }
-     */
-    constructor(config: FittedBoxConfig);
-}
-interface FractionallySizedBoxConfig {
-    child?: Widget;
-    alignment?: Alignment;
-    widthFactor?: number;
-    heightFactor?: number;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        alignment?: Alignment;
+        fit?: BoxFit;
+    });
 }
 export declare class FractionallySizedBox extends Widget {
     child?: Widget;
@@ -7500,29 +5312,13 @@ export declare class FractionallySizedBox extends Widget {
     widthFactor?: number;
     heightFactor?: number;
     key?: Key;
-    /**
-      * @param config config:
-         {
-           child?:Widget,
-           alignment?:Alignment,
-           widthFactor?:number,
-           heightFactor?:number,
-           key?:Key
-         }
-      */
-    constructor(config: FractionallySizedBoxConfig);
-}
-interface FlexConfig {
-    key?: Key;
-    direction: Axis;
-    mainAxisAlignment?: MainAxisAlignment;
-    mainAxisSize?: MainAxisSize;
-    crossAxisAlignment?: CrossAxisAlignment;
-    textDirection?: TextDirection;
-    verticalDirection?: VerticalDirection;
-    textBaseline?: TextBaseline;
-    clipBehavior?: Clip;
-    children?: Array<Widget>;
+    constructor(config: {
+        child?: Widget;
+        alignment?: Alignment;
+        widthFactor?: number;
+        heightFactor?: number;
+        key?: Key;
+    });
 }
 export declare class Flex extends Widget {
     key?: Key;
@@ -7535,66 +5331,28 @@ export declare class Flex extends Widget {
     textBaseline?: TextBaseline;
     clipBehavior?: Clip;
     children?: Array<Widget>;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          direction:Axis,
-          mainAxisAlignment?:MainAxisAlignment,
-          mainAxisSize?:MainAxisSize,
-          crossAxisAlignment?:CrossAxisAlignment,
-          textDirection?:TextDirection,
-          verticalDirection?:VerticalDirection,
-          textBaseline?:TextBaseline,
-          clipBehavior?:Clip,
-          children?:Array<Widget>,
-        }
-     */
-    constructor(config: FlexConfig);
-}
-interface FlowConfig {
-    children?: Array<Widget>;
-    delegate?: any;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        direction: Axis;
+        mainAxisAlignment?: MainAxisAlignment;
+        mainAxisSize?: MainAxisSize;
+        crossAxisAlignment?: CrossAxisAlignment;
+        textDirection?: TextDirection;
+        verticalDirection?: VerticalDirection;
+        textBaseline?: TextBaseline;
+        clipBehavior?: Clip;
+        children?: Array<Widget>;
+    });
 }
 export declare class Flow extends Widget {
     children?: Array<Widget>;
     delegate?: any;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          delegate?:any,
-          key?:Key,
-        }
-     */
-    constructor(config: FlowConfig);
-}
-interface FlatButtonConfig {
-    child: Widget;
-    onPressed: OnCallback;
-    padding?: EdgeInsets;
-    onHighlightChanged?: OnCallbackBoolean;
-    textTheme?: ButtonTextTheme;
-    textColor?: Color;
-    disabledTextColor?: Color;
-    color?: Color;
-    disabledColor?: Color;
-    highlightColor?: Color;
-    splashColor?: Color;
-    colorBrightness?: Brightness;
-    shape?: any;
-    clipBehavior?: Clip;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    key?: Key;
-    onLongPress?: OnCallback;
-    focusColor?: Color;
-    hoverColor?: Color;
-    visualDensity?: VisualDensity;
-    autofocus?: boolean;
-    icon?: Widget;
-    label?: Widget;
+    constructor(config: {
+        children?: Array<Widget>;
+        delegate?: any;
+        key?: Key;
+    });
 }
 export declare class FlatButton extends Widget {
     child?: Widget;
@@ -7620,86 +5378,53 @@ export declare class FlatButton extends Widget {
     autofocus?: boolean;
     icon?: Widget;
     label?: Widget;
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          onPressed:OnCallback,
-          padding?:EdgeInsets;,
-          onHighlightChanged?:OnCallbackBoolean,
-          textTheme?:ButtonTextTheme,
-          textColor?:Color,
-          disabledTextColor?:Color,
-          color?:Color,
-          disabledColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorBrightness?:Brightness,
-          shape?:any,
-          clipBehavior?:Clip,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          key?:Key,
-  
-          onLongPress?: OnCallback,
-          focusColor?: Color,
-          hoverColor?: Color,
-          visualDensity?: VisualDensity,
-          autofocus?: boolean,
-        }
-     */
-    constructor(config?: FlatButtonConfig);
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          onPressed:OnCallback,
-          padding?:EdgeInsets,
-          onHighlightChanged?:OnCallbackBoolean,
-          textTheme?:ButtonTextTheme,
-          textColor?:Color,
-          disabledTextColor?:Color,
-          color?:Color,
-          disabledColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorBrightness?:Brightness,
-          shape?:any,
-          clipBehavior?:Clip,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          key?:Key,
-  
-          onLongPress?: OnCallback,
-          focusColor?: Color,
-          hoverColor?: Color,
-          autofocus?: boolean,
-  
-          icon?:Widget,
-          label?:Widget,
-        }
-     */
-    static icon(config: FlatButtonConfig): FlatButton;
-}
-interface FloatingActionButtonConfig {
-    key?: Key;
-    child?: Widget;
-    tooltip?: string;
-    foregroundColor?: Color;
-    backgroundColor?: Color;
-    focusColor?: Color;
-    hoverColor?: Color;
-    splashColor?: Color;
-    elevation?: number;
-    focusElevation?: number;
-    hoverElevation?: number;
-    highlightElevation?: number;
-    disabledElevation?: number;
-    onPressed: OnCallback;
-    mini?: boolean;
-    shape?: ShapeBorder;
-    clipBehavior?: Clip;
-    autofocus?: boolean;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    isExtended?: boolean;
+    constructor(config?: {
+        child: Widget;
+        onPressed: OnCallback;
+        padding?: EdgeInsets;
+        onHighlightChanged?: OnCallbackBoolean;
+        textTheme?: ButtonTextTheme;
+        textColor?: Color;
+        disabledTextColor?: Color;
+        color?: Color;
+        disabledColor?: Color;
+        highlightColor?: Color;
+        splashColor?: Color;
+        colorBrightness?: Brightness;
+        shape?: any;
+        clipBehavior?: Clip;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        key?: Key;
+        onLongPress?: OnCallback;
+        focusColor?: Color;
+        hoverColor?: Color;
+        visualDensity?: VisualDensity;
+        autofocus?: boolean;
+    });
+    static icon(config: {
+        child: Widget;
+        onPressed: OnCallback;
+        padding?: EdgeInsets;
+        onHighlightChanged?: OnCallbackBoolean;
+        textTheme?: ButtonTextTheme;
+        textColor?: Color;
+        disabledTextColor?: Color;
+        color?: Color;
+        disabledColor?: Color;
+        highlightColor?: Color;
+        splashColor?: Color;
+        colorBrightness?: Brightness;
+        shape?: any;
+        clipBehavior?: Clip;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        key?: Key;
+        onLongPress?: OnCallback;
+        focusColor?: Color;
+        hoverColor?: Color;
+        autofocus?: boolean;
+        icon?: Widget;
+        label?: Widget;
+    }): FlatButton;
 }
 export declare class FloatingActionButton extends Widget {
     key?: Key;
@@ -7722,40 +5447,28 @@ export declare class FloatingActionButton extends Widget {
     autofocus?: boolean;
     materialTapTargetSize?: MaterialTapTargetSize;
     isExtended?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          tooltip?:string,
-          foregroundColor?:Color,
-          backgroundColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          splashColor?:Color,
-          elevation?:number,
-          focusElevation?:number,
-          hoverElevation?:number,
-          highlightElevation?:number,
-          disabledElevation?:number,
-          onPressed:OnCallback,
-          mini?:boolean,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          autofocus?:boolean,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          isExtended?:boolean,
-        }
-     */
-    constructor(config: FloatingActionButtonConfig);
-}
-interface FlexibleSpaceBarConfig {
-    key?: Key;
-    title?: Widget;
-    background?: Widget;
-    centerTitle?: boolean;
-    titlePadding?: EdgeInsets;
-    collapseMode?: CollapseMode;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        tooltip?: string;
+        foregroundColor?: Color;
+        backgroundColor?: Color;
+        focusColor?: Color;
+        hoverColor?: Color;
+        splashColor?: Color;
+        elevation?: number;
+        focusElevation?: number;
+        hoverElevation?: number;
+        highlightElevation?: number;
+        disabledElevation?: number;
+        onPressed: OnCallback;
+        mini?: boolean;
+        shape?: ShapeBorder;
+        clipBehavior?: Clip;
+        autofocus?: boolean;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        isExtended?: boolean;
+    });
 }
 export declare class FlexibleSpaceBar extends Widget {
     key?: Key;
@@ -7764,26 +5477,14 @@ export declare class FlexibleSpaceBar extends Widget {
     centerTitle?: boolean;
     titlePadding?: EdgeInsets;
     collapseMode?: CollapseMode;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          title?:Widget,
-          background?:Widget,
-          centerTitle?:boolean,
-          titlePadding?:EdgeInsets,
-          collapseMode?:CollapseMode,
-        }
-     */
-    constructor(config: FlexibleSpaceBarConfig);
-}
-interface FlexibleSpaceBarSettingsConfig {
-    key?: Key;
-    child: Widget;
-    toolbarOpacity: number;
-    minExtent: number;
-    maxExtent: number;
-    currentExtent: number;
+    constructor(config: {
+        key?: Key;
+        title?: Widget;
+        background?: Widget;
+        centerTitle?: boolean;
+        titlePadding?: EdgeInsets;
+        collapseMode?: CollapseMode;
+    });
 }
 export declare class FlexibleSpaceBarSettings extends Widget {
     key?: Key;
@@ -7792,26 +5493,14 @@ export declare class FlexibleSpaceBarSettings extends Widget {
     minExtent?: number;
     maxExtent?: number;
     currentExtent?: number;
-    /**
-    * @param config config:
-       {
-         key?:Key,
-         child:Widget,
-         toolbarOpacity:number,
-         minExtent:number,
-         maxExtent:number,
-         currentExtent:number,
-       }
-    */
-    constructor(config: FlexibleSpaceBarSettingsConfig);
-}
-interface FlutterLogoConfig {
-    key?: Key;
-    size?: number;
-    textColor?: Color;
-    style?: FlutterLogoStyle;
-    duration?: Duration;
-    curve?: Curve;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        toolbarOpacity: number;
+        minExtent: number;
+        maxExtent: number;
+        currentExtent: number;
+    });
 }
 export declare class FlutterLogo extends Widget {
     key?: Key;
@@ -7820,72 +5509,26 @@ export declare class FlutterLogo extends Widget {
     style?: FlutterLogoStyle;
     duration?: Duration;
     curve?: Curve;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          size?:number,
-          textColor?:Color,
-          style?:FlutterLogoStyle,
-          duration?:Duration,
-          curve?:Curve,
-        }
-     */
-    constructor(config: FlutterLogoConfig);
-}
-interface FractionalTranslationConfig {
-    key?: Key;
-    translation: Offset;
-    transformHitTests?: boolean;
-    child?: Widget;
+    constructor(config: {
+        key?: Key;
+        size?: number;
+        textColor?: Color;
+        style?: FlutterLogoStyle;
+        duration?: Duration;
+        curve?: Curve;
+    });
 }
 export declare class FractionalTranslation extends Widget {
     key?: Key;
     translation?: Offset;
     transformHitTests?: boolean;
     child?: Widget;
-    /**
-     * @param config config:
-        {
-          translation:Offset,
-  
-          key?:Key,
-          transformHitTests?:boolean,
-          child?:Widget,
-        }
-     */
-    constructor(config: FractionalTranslationConfig);
-}
-interface GestureDetectorConfig {
-    key?: Key;
-    child?: Widget;
-    onTap?: OnCallback;
-    onTapDown?: OnTapDown;
-    onTapUp?: OnTapUp;
-    onTapCancel?: OnCallback;
-    onDoubleTap?: OnCallback;
-    onLongPress?: OnCallback;
-    onLongPressUp?: OnCallback;
-    onVerticalDragDown?: OnDragDown;
-    onVerticalDragStart?: OnDragStart;
-    onVerticalDragUpdate?: OnDragUpdate;
-    onVerticalDragEnd?: OnDragEnd;
-    onVerticalDragCancel?: OnCallback;
-    onHorizontalDragDown?: OnDragDown;
-    onHorizontalDragStart?: OnDragStart;
-    onHorizontalDragUpdate?: OnDragUpdate;
-    onHorizontalDragEnd?: OnDragEnd;
-    onHorizontalDragCancel?: OnCallback;
-    onPanDown?: OnDragDown;
-    onPanStart?: OnDragStart;
-    onPanUpdate?: OnDragUpdate;
-    onPanEnd?: OnDragEnd;
-    onPanCancel?: OnCallback;
-    onScaleStart?: OnScaleStart;
-    onScaleUpdate?: OnScaleUpdate;
-    onScaleEnd?: OnScaleEnd;
-    behavior?: HitTestBehavior;
-    excludeFromSemantics?: boolean;
+    constructor(config: {
+        translation: Offset;
+        key?: Key;
+        transformHitTests?: boolean;
+        child?: Widget;
+    });
 }
 export declare class GestureDetector extends Widget {
     key?: Key;
@@ -7917,62 +5560,37 @@ export declare class GestureDetector extends Widget {
     onScaleEnd?: OnScaleEnd;
     behavior?: HitTestBehavior;
     excludeFromSemantics?: boolean;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        onTap?:OnCallback,
-        onTapDown?:OnTapDown,
-        onTapUp?:OnTapUp,
-        onTapCancel?:OnCallback,
-        onDoubleTap?:OnCallback,
-        onLongPress?:OnCallback,
-        onLongPressUp?:OnCallback,
-        onVerticalDragDown?:OnDragDown,
-        onVerticalDragStart?:OnDragStart,
-        onVerticalDragUpdate?:OnDragUpdate,
-        onVerticalDragEnd?:OnDragEnd,
-        onVerticalDragCancel?:OnCallback,
-        onHorizontalDragDown?:OnDragDown,
-        onHorizontalDragStart?:OnDragStart,
-        onHorizontalDragUpdate?:OnDragUpdate,
-        onHorizontalDragEnd?:OnDragEnd,
-        onHorizontalDragCancel?:OnCallback,
-        onPanDown?:OnDragDown,
-        onPanStart?:OnDragStart,
-        onPanUpdate?:OnDragUpdate,
-        onPanEnd?:OnDragEnd,
-        onPanCancel?:OnCallback,
-        onScaleStart?:OnScaleStart,
-        onScaleUpdate?:OnScaleUpdate,
-        onScaleEnd?:OnScaleEnd,
-        behavior?:HitTestBehavior,
-        excludeFromSemantics?:boolean,
-      }
-     */
-    constructor(config: GestureDetectorConfig);
-}
-interface GridViewConfig {
-    key?: Key;
-    scrollDirection?: Axis;
-    reverse?: boolean;
-    controller?: ScrollController;
-    primary?: boolean;
-    physics?: ScrollPhysics;
-    shrinkWrap?: boolean;
-    padding?: EdgeInsets;
-    gridDelegate: SliverGridDelegate;
-    addAutomaticKeepAlives?: boolean;
-    addRepaintBoundaries?: boolean;
-    addSemanticIndexes?: boolean;
-    cacheExtent?: number;
-    children?: Array<Widget>;
-    semanticChildCount?: number;
-    dragStartBehavior?: DragStartBehavior;
-    clipBehavior?: Clip;
-    keyboardDismissBehavior?: ScrollViewKeyboardDismissBehavior;
-    restorationId?: string;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        onTap?: OnCallback;
+        onTapDown?: OnTapDown;
+        onTapUp?: OnTapUp;
+        onTapCancel?: OnCallback;
+        onDoubleTap?: OnCallback;
+        onLongPress?: OnCallback;
+        onLongPressUp?: OnCallback;
+        onVerticalDragDown?: OnDragDown;
+        onVerticalDragStart?: OnDragStart;
+        onVerticalDragUpdate?: OnDragUpdate;
+        onVerticalDragEnd?: OnDragEnd;
+        onVerticalDragCancel?: OnCallback;
+        onHorizontalDragDown?: OnDragDown;
+        onHorizontalDragStart?: OnDragStart;
+        onHorizontalDragUpdate?: OnDragUpdate;
+        onHorizontalDragEnd?: OnDragEnd;
+        onHorizontalDragCancel?: OnCallback;
+        onPanDown?: OnDragDown;
+        onPanStart?: OnDragStart;
+        onPanUpdate?: OnDragUpdate;
+        onPanEnd?: OnDragEnd;
+        onPanCancel?: OnCallback;
+        onScaleStart?: OnScaleStart;
+        onScaleUpdate?: OnScaleUpdate;
+        onScaleEnd?: OnScaleEnd;
+        behavior?: HitTestBehavior;
+        excludeFromSemantics?: boolean;
+    });
 }
 export declare class GridView extends Widget {
     key?: Key;
@@ -7994,39 +5612,27 @@ export declare class GridView extends Widget {
     clipBehavior?: Clip;
     keyboardDismissBehavior?: ScrollViewKeyboardDismissBehavior;
     restorationId?: string;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        scrollDirection?:Axis,
-        reverse?:boolean,
-        controller?:ScrollController,
-        primary?:boolean,
-        physics?:ScrollPhysics,
-        shrinkWrap?:boolean,
-        padding?:EdgeInsets,
-        gridDelegate:SliverGridDelegate,
-        addAutomaticKeepAlives?:boolean,
-        addRepaintBoundaries?:boolean,
-        addSemanticIndexes?:boolean,
-        cacheExtent?:number,
-        children?:Array<Widget>,
-        semanticChildCount?:number,
-        dragStartBehavior?:DragStartBehavior,
-        clipBehavior?:Clip,
-        keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
-        restorationId?:string,
-      }
-     */
-    constructor(config: GridViewConfig);
-}
-interface GridTileBarConfig {
-    key?: Key;
-    backgroundColor?: Color;
-    leading?: Widget;
-    title?: Widget;
-    subtitle?: Widget;
-    trailing?: Widget;
+    constructor(config: {
+        key?: Key;
+        scrollDirection?: Axis;
+        reverse?: boolean;
+        controller?: ScrollController;
+        primary?: boolean;
+        physics?: ScrollPhysics;
+        shrinkWrap?: boolean;
+        padding?: EdgeInsets;
+        gridDelegate: SliverGridDelegate;
+        addAutomaticKeepAlives?: boolean;
+        addRepaintBoundaries?: boolean;
+        addSemanticIndexes?: boolean;
+        cacheExtent?: number;
+        children?: Array<Widget>;
+        semanticChildCount?: number;
+        dragStartBehavior?: DragStartBehavior;
+        clipBehavior?: Clip;
+        keyboardDismissBehavior?: ScrollViewKeyboardDismissBehavior;
+        restorationId?: string;
+    });
 }
 export declare class GridTileBar extends Widget {
     key?: Key;
@@ -8035,48 +5641,26 @@ export declare class GridTileBar extends Widget {
     title?: Widget;
     subtitle?: Widget;
     trailing?: Widget;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        backgroundColor?:Color,
-        leading?:Widget,
-        title?:Widget,
-        subtitle?:Widget,
-        trailing?:Widget,
-      }
-     */
-    constructor(config: GridTileBarConfig);
-}
-interface GridTileConfig {
-    key?: Key;
-    child?: Widget;
-    header?: Widget;
-    footer?: Widget;
+    constructor(config: {
+        key?: Key;
+        backgroundColor?: Color;
+        leading?: Widget;
+        title?: Widget;
+        subtitle?: Widget;
+        trailing?: Widget;
+    });
 }
 export declare class GridTile extends Widget {
     key?: Key;
     child?: Widget;
     header?: Widget;
     footer?: Widget;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        header?:Widget,
-        footer?:Widget,
-      }
-     */
-    constructor(config: GridTileConfig);
-}
-interface GridPaperConfig {
-    key?: Key;
-    child?: Widget;
-    color?: Color;
-    interval?: number;
-    divisions?: number;
-    subdivisions?: number;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        header?: Widget;
+        footer?: Widget;
+    });
 }
 export declare class GridPaper extends Widget {
     key?: Key;
@@ -8085,30 +5669,14 @@ export declare class GridPaper extends Widget {
     interval?: number;
     divisions?: number;
     subdivisions?: number;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          color?:Color,
-          divisions?:number,
-          interval?:number,
-          subdivisions?:number,
-        }
-     */
-    constructor(config: GridPaperConfig);
-}
-interface InputDecoratorConfig {
-    key?: Key;
-    child?: Widget;
-    decoration: InputDecoration;
-    baseStyle?: TextStyle;
-    textAlign?: TextAlign;
-    textAlignVertical?: TextAlignVertical;
-    isFocused?: boolean;
-    isHovering?: boolean;
-    expands?: boolean;
-    isEmpty?: boolean;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        color?: Color;
+        divisions?: number;
+        interval?: number;
+        subdivisions?: number;
+    });
 }
 export declare class InputDecorator extends Widget {
     key?: Key;
@@ -8121,55 +5689,18 @@ export declare class InputDecorator extends Widget {
     isHovering?: boolean;
     expands?: boolean;
     isEmpty?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          decoration:InputDecoration,
-          baseStyle?:TextStyle,
-          textAlign?:TextAlign,
-          textAlignVertical?:TextAlignVertical,
-          isFocused?:boolean,
-          isHovering?:boolean,
-          expands?:boolean,
-          isEmpty?:boolean,
-        }
-     */
-    constructor(config: InputDecoratorConfig);
-}
-interface InputChipConfig {
-    key?: Key;
-    avatar?: Widget;
-    label: Widget;
-    labelStyle?: TextStyle;
-    labelPadding?: EdgeInsets;
-    selected?: boolean;
-    isEnabled?: boolean;
-    onSelected?: OnCallbackBoolean;
-    deleteIcon?: Widget;
-    onDeleted?: OnCallback;
-    deleteIconColor?: Color;
-    deleteButtonTooltipMessage?: string;
-    onPressed?: OnCallback;
-    pressElevation?: number;
-    disabledColor?: Color;
-    selectedColor?: Color;
-    tooltip?: string;
-    shape?: ShapeBorder;
-    clipBehavior?: Clip;
-    focusNode?: FocusNode;
-    autofocus?: boolean;
-    backgroundColor?: Color;
-    padding?: EdgeInsets;
-    visualDensity?: VisualDensity;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    elevation?: number;
-    shadowColor?: Color;
-    selectedShadowColor?: Color;
-    showCheckmark?: boolean;
-    checkmarkColor?: Color;
-    avatarBorder?: ShapeBorder;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        decoration: InputDecoration;
+        baseStyle?: TextStyle;
+        textAlign?: TextAlign;
+        textAlignVertical?: TextAlignVertical;
+        isFocused?: boolean;
+        isHovering?: boolean;
+        expands?: boolean;
+        isEmpty?: boolean;
+    });
 }
 export declare class InputChip extends Widget {
     key?: Key;
@@ -8203,127 +5734,79 @@ export declare class InputChip extends Widget {
     showCheckmark?: boolean;
     checkmarkColor?: Color;
     avatarBorder?: ShapeBorder;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          selected?:boolean,
-          isEnabled?:boolean,
-          onSelected?:OnCallbackBoolean,
-          deleteIcon?:Widget,
-          onDeleted?:OnCallback,
-          deleteIconColor?:Color,
-          deleteButtonTooltipMessage?:string,
-          onPressed?:OnCallback,
-          pressElevation?:number,
-          disabledColor?:Color,
-          selectedColor?:Color,
-          tooltip?:string,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          focusNode?:FocusNode,
-          autofocus?:boolean,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          visualDensity?:VisualDensity,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          shadowColor?:Color,
-          selectedShadowColor?:Color,
-          showCheckmark?:boolean,
-          checkmarkColor?:Color,
-          avatarBorder?:ShapeBorder,
-        }
-     */
-    constructor(config: InputChipConfig);
-}
-interface IconSpanConfig {
-    icon: IconData;
-    color?: Color;
-    fontSize?: number;
+    constructor(config: {
+        key?: Key;
+        avatar?: Widget;
+        label: Widget;
+        labelStyle?: TextStyle;
+        labelPadding?: EdgeInsets;
+        selected?: boolean;
+        isEnabled?: boolean;
+        onSelected?: OnCallbackBoolean;
+        deleteIcon?: Widget;
+        onDeleted?: OnCallback;
+        deleteIconColor?: Color;
+        deleteButtonTooltipMessage?: string;
+        onPressed?: OnCallback;
+        pressElevation?: number;
+        disabledColor?: Color;
+        selectedColor?: Color;
+        tooltip?: string;
+        shape?: ShapeBorder;
+        clipBehavior?: Clip;
+        focusNode?: FocusNode;
+        autofocus?: boolean;
+        backgroundColor?: Color;
+        padding?: EdgeInsets;
+        visualDensity?: VisualDensity;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        elevation?: number;
+        shadowColor?: Color;
+        selectedShadowColor?: Color;
+        showCheckmark?: boolean;
+        checkmarkColor?: Color;
+        avatarBorder?: ShapeBorder;
+    });
 }
 export declare class IconSpan extends Widget {
     icon?: IconData;
     color?: Color;
     fontSize?: number;
-    /**
-     * @param config config:
-      {
-        icon:IconData,
-        color?:Color,
-        fontSize?:number,
-      }
-     */
-    constructor(config: IconSpanConfig);
-}
-interface IndexedSemanticsConfig {
-    child?: Widget;
-    index: number;
-    key?: Key;
+    constructor(config: {
+        icon: IconData;
+        color?: Color;
+        fontSize?: number;
+    });
 }
 export declare class IndexedSemantics extends Widget {
     child?: Widget;
     index?: number;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          index?:number,
-        }
-     */
-    constructor(config: IndexedSemanticsConfig);
-}
-interface IntrinsicHeightConfig {
-    child?: Widget;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        index?: number;
+    });
 }
 export declare class IntrinsicHeight extends Widget {
     child?: Widget;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-        }
-     */
-    constructor(config: IntrinsicHeightConfig);
-}
-interface IntrinsicWidthConfig {
-    child?: Widget;
-    stepWidth?: number;
-    stepHeight?: number;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+    });
 }
 export declare class IntrinsicWidth extends Widget {
     child?: Widget;
     stepWidth?: number;
     stepHeight?: number;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          stepWidth?:number,
-          stepHeight?:number,
-          key?:Key
-        }
-     */
-    constructor(config: IntrinsicWidthConfig);
-}
-interface IndexedStackConfig {
-    children?: Array<Widget>;
-    index?: number;
-    alignment?: AlignmentDirectional;
-    textDirection?: TextDirection;
-    sizing?: StackFit;
-    key?: Key;
+    constructor(config: {
+        child?: Widget;
+        stepWidth?: number;
+        stepHeight?: number;
+        key?: Key;
+    });
 }
 export declare class IndexedStack extends Widget {
     children?: Array<Widget>;
@@ -8332,60 +5815,26 @@ export declare class IndexedStack extends Widget {
     textDirection?: TextDirection;
     sizing?: StackFit;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          index?:number,
-          alignment?:AlignmentDirectional,
-          textDirection?:TextDirection,
-          sizing?:StackFit,
-          key?:Key,
-        }
-     */
-    constructor(config: IndexedStackConfig);
-}
-interface IgnorePointerConfig {
-    key?: Key;
-    child?: Widget;
-    ignoring?: boolean;
-    ignoringSemantics?: boolean;
+    constructor(config: {
+        children?: Array<Widget>;
+        index?: number;
+        alignment?: AlignmentDirectional;
+        textDirection?: TextDirection;
+        sizing?: StackFit;
+        key?: Key;
+    });
 }
 export declare class IgnorePointer extends Widget {
     key?: Key;
     child?: Widget;
     ignoring?: boolean;
     ignoringSemantics?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          ignoring?:boolean,
-          ignoringSemantics?:boolean,
-        }
-     */
-    constructor(config: IgnorePointerConfig);
-}
-interface IconButtonConfig {
-    key?: Key;
-    icon: Widget;
-    onPressed: OnCallback;
-    iconSize?: number;
-    padding?: EdgeInsets;
-    alignment?: Alignment;
-    visualDensity?: VisualDensity;
-    splashRadius?: number;
-    color?: Color;
-    focusColor?: Color;
-    hoverColor?: Color;
-    highlightColor?: Color;
-    splashColor?: Color;
-    disabledColor?: Color;
-    autofocus?: boolean;
-    tooltip?: string;
-    enableFeedback?: boolean;
-    constraints?: BoxConstraints;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        ignoring?: boolean;
+        ignoringSemantics?: boolean;
+    });
 }
 export declare class IconButton extends Widget {
     key?: Key;
@@ -8406,37 +5855,26 @@ export declare class IconButton extends Widget {
     tooltip?: string;
     enableFeedback?: boolean;
     constraints?: BoxConstraints;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          icon:Widget,
-          onPressed:OnCallback,
-          iconSize?:number,
-          padding?:EdgeInsets,
-          alignment?:Alignment,
-          visualDensity?:VisualDensity,
-          splashRadius?:number,
-          color?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          disabledColor?:Color,
-          autofocus?:boolean,
-          tooltip?:string,
-          enableFeedback?:boolean,
-          constraints?:BoxConstraints,
-        }
-     */
-    constructor(config: IconButtonConfig);
-}
-interface IconConfig {
-    key?: Key;
-    size?: number;
-    color?: Color;
-    semanticLabel?: string;
-    textDirection?: TextDirection;
+    constructor(config: {
+        key?: Key;
+        icon: Widget;
+        onPressed: OnCallback;
+        iconSize?: number;
+        padding?: EdgeInsets;
+        alignment?: Alignment;
+        visualDensity?: VisualDensity;
+        splashRadius?: number;
+        color?: Color;
+        focusColor?: Color;
+        hoverColor?: Color;
+        highlightColor?: Color;
+        splashColor?: Color;
+        disabledColor?: Color;
+        autofocus?: boolean;
+        tooltip?: string;
+        enableFeedback?: boolean;
+        constraints?: BoxConstraints;
+    });
 }
 export declare class Icon extends Widget {
     icon?: IconData;
@@ -8445,24 +5883,13 @@ export declare class Icon extends Widget {
     semanticLabel?: string;
     textDirection?: TextDirection;
     key?: Key;
-    /**
-     * @param icon icon:IconData
-     * @param config config:
-        {
-          key?:Key,
-          size?:number,
-          color?:Color,
-          semanticLabel?:string,
-          textDirection?:TextDirection,
-        }
-     */
-    constructor(icon: IconData, config?: IconConfig);
-}
-interface ImageIconConfig {
-    key?: Key;
-    size?: number;
-    color?: Color;
-    semanticLabel?: string;
+    constructor(icon: IconData, config?: {
+        key?: Key;
+        size?: number;
+        color?: Color;
+        semanticLabel?: string;
+        textDirection?: TextDirection;
+    });
 }
 export declare class ImageIcon extends Widget {
     image?: ImageProvider;
@@ -8470,44 +5897,13 @@ export declare class ImageIcon extends Widget {
     color?: Color;
     semanticLabel?: string;
     key?: Key;
-    /**
-     * @param image image:ImageProvider
-     * @param config config:
-        {
-          key?:Key,
-          size?:number,
-          color?:Color,
-          semanticLabel?:string,
-          textDirection?:TextDirection,
-        }
-     */
-    constructor(image: ImageProvider, config?: ImageIconConfig);
-}
-interface InkResponseConfig {
-    key?: Key;
-    child?: Widget;
-    onTap?: OnCallback;
-    onTapDown?: OnTapDown;
-    onTapCancel?: OnCallback;
-    onDoubleTap?: OnCallback;
-    onLongPress?: OnCallback;
-    onHighlightChanged?: OnCallbackBoolean;
-    onHover?: OnCallbackBoolean;
-    containedInkWell?: boolean;
-    highlightShape?: BoxShape;
-    radius?: number;
-    borderRadius?: BorderRadius;
-    customBorder?: ShapeBorder;
-    focusColor?: Color;
-    hoverColor?: Color;
-    highlightColor?: Color;
-    overlayColor?: Color;
-    splashColor?: Color;
-    enableFeedback?: boolean;
-    excludeFromSemantics?: boolean;
-    canRequestFocus?: boolean;
-    onFocusChange?: OnCallbackBoolean;
-    autofocus?: boolean;
+    constructor(image: ImageProvider, config?: {
+        key?: Key;
+        size?: number;
+        color?: Color;
+        semanticLabel?: string;
+        textDirection?: TextDirection;
+    });
 }
 export declare class InkResponse extends Widget {
     key?: Key;
@@ -8534,60 +5930,32 @@ export declare class InkResponse extends Widget {
     canRequestFocus?: boolean;
     onFocusChange?: OnCallbackBoolean;
     autofocus?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          onTap?:OnCallback,
-          onTapDown?:OnTapDown,
-          onTapCancel?:OnCallback,
-          onDoubleTap?:OnCallback,
-          onLongPress?:OnCallback,
-          onHighlightChanged?:OnCallbackBoolean,
-          onHover?:OnCallbackBoolean,
-          containedInkWell?:boolean,
-          highlightShape?:BoxShape,
-          radius?:number,
-          borderRadius?:BorderRadius,
-          customBorder?:ShapeBorder,
-          focusColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          overlayColor?:Color,
-          splashColor?:Color,
-          enableFeedback?:boolean,
-          excludeFromSemantics?:boolean,
-          canRequestFocus ?:boolean,
-          onFocusChange?:OnCallbackBoolean,
-          autofocus?:boolean,
-        }
-     */
-    constructor(config: InkResponseConfig);
-}
-interface InkWellConfig {
-    key?: Key;
-    child?: Widget;
-    onTap?: OnCallback;
-    onTapDown?: OnTapDown;
-    onTapCancel?: OnCallback;
-    onDoubleTap?: OnCallback;
-    onLongPress?: OnCallback;
-    onHighlightChanged?: OnCallbackBoolean;
-    onHover?: OnCallbackBoolean;
-    radius?: number;
-    borderRadius?: BorderRadius;
-    customBorder?: ShapeBorder;
-    focusColor?: Color;
-    hoverColor?: Color;
-    highlightColor?: Color;
-    overlayColor?: Color;
-    splashColor?: Color;
-    enableFeedback?: boolean;
-    excludeFromSemantics?: boolean;
-    canRequestFocus?: boolean;
-    onFocusChange?: OnCallbackBoolean;
-    autofocus?: boolean;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        onTap?: OnCallback;
+        onTapDown?: OnTapDown;
+        onTapCancel?: OnCallback;
+        onDoubleTap?: OnCallback;
+        onLongPress?: OnCallback;
+        onHighlightChanged?: OnCallbackBoolean;
+        onHover?: OnCallbackBoolean;
+        containedInkWell?: boolean;
+        highlightShape?: BoxShape;
+        radius?: number;
+        borderRadius?: BorderRadius;
+        customBorder?: ShapeBorder;
+        focusColor?: Color;
+        hoverColor?: Color;
+        highlightColor?: Color;
+        overlayColor?: Color;
+        splashColor?: Color;
+        enableFeedback?: boolean;
+        excludeFromSemantics?: boolean;
+        canRequestFocus?: boolean;
+        onFocusChange?: OnCallbackBoolean;
+        autofocus?: boolean;
+    });
 }
 export declare class InkWell extends Widget {
     key?: Key;
@@ -8612,58 +5980,30 @@ export declare class InkWell extends Widget {
     canRequestFocus?: boolean;
     onFocusChange?: OnCallbackBoolean;
     autofocus?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          onTap?:OnCallback,
-          onTapDown?:OnTapDown,
-          onTapCancel?:OnCallback,
-          onDoubleTap?:OnCallback,
-          onLongPress?:OnCallback,
-          onHighlightChanged?:OnCallbackBoolean,
-          onHover?:OnCallbackBoolean,
-          radius?:number,
-          borderRadius?:BorderRadius,
-          customBorder?:ShapeBorder,
-          focusColor?:Color,
-          hoverColor?:Color,
-          highlightColor?:Color,
-          overlayColor?:Color,
-          splashColor?:Color,
-          enableFeedback?:boolean,
-          excludeFromSemantics?:boolean,
-          canRequestFocus ?:boolean,
-          onFocusChange?:OnCallbackBoolean,
-          autofocus?:boolean,
-        }
-     */
-    constructor(config: InkWellConfig);
-}
-interface ImageConfig {
-    key?: Key;
-    image?: ImageProvider;
-    semanticLabel?: string;
-    excludeFromSemantics?: boolean;
-    width?: number;
-    height?: number;
-    color?: Color;
-    colorBlendMode?: BlendMode;
-    fit?: BoxFit;
-    alignment?: Alignment;
-    repeat?: ImageRepeat;
-    centerSlice?: Rect;
-    matchTextDirection?: boolean;
-    gaplessPlayback?: boolean;
-    isAntiAlias?: boolean;
-    filterQuality?: FilterQuality;
-    scale?: number;
-    headers?: Map<string, string>;
-    cacheWidth?: number;
-    cacheHeight?: number;
-    bundle?: AssetBundle;
-    package?: string;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        onTap?: OnCallback;
+        onTapDown?: OnTapDown;
+        onTapCancel?: OnCallback;
+        onDoubleTap?: OnCallback;
+        onLongPress?: OnCallback;
+        onHighlightChanged?: OnCallbackBoolean;
+        onHover?: OnCallbackBoolean;
+        radius?: number;
+        borderRadius?: BorderRadius;
+        customBorder?: ShapeBorder;
+        focusColor?: Color;
+        hoverColor?: Color;
+        highlightColor?: Color;
+        overlayColor?: Color;
+        splashColor?: Color;
+        enableFeedback?: boolean;
+        excludeFromSemantics?: boolean;
+        canRequestFocus?: boolean;
+        onFocusChange?: OnCallbackBoolean;
+        autofocus?: boolean;
+    });
 }
 export declare class Image extends Widget {
     key?: Key;
@@ -8692,152 +6032,117 @@ export declare class Image extends Widget {
     file?: File;
     imageName?: string;
     bytes?: Uint8List;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          image:ImageProvider,
-          semanticLabel?:string,
-          excludeFromSemantics?:boolean,
-          width?:number,
-          height?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          gaplessPlayback?:boolean,
-          isAntiAlias?:boolean,
-          filterQuality?:FilterQuality,
-        }
-     */
-    constructor(config?: ImageConfig);
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          scale?:number,
-          semanticLabel?:string,
-          excludeFromSemantics?:boolean,
-          width?:number,
-          height?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          gaplessPlayback?:boolean,
-          isAntiAlias?:boolean,
-          filterQuality?:FilterQuality,
-          headers?:Map<string,string>,
-          cacheWidth?:number,
-          cacheHeight?:number,
-        }
-     */
-    static network(src: string, config?: ImageConfig): Image;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          scale?:number,
-          semanticLabel?:string,
-          excludeFromSemantics?:boolean,
-          width?:number,
-          height?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          gaplessPlayback?:boolean,
-          isAntiAlias?:boolean,
-          filterQuality?:FilterQuality,
-          cacheWidth?:number,
-          cacheHeight?:number,
-        }
-     */
-    static file(file: File, config?: ImageConfig): Image;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          bundle?:AssetBundle,
-          package?:string,
-          scale?:number,
-          semanticLabel?:string,
-          excludeFromSemantics?:boolean,
-          width?:number,
-          height?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          gaplessPlayback?:boolean,
-          isAntiAlias?:boolean,
-          filterQuality?:FilterQuality,
-          headers?:Map<string,string>,
-          cacheWidth?:number,
-          cacheHeight?:number,
-        }
-     */
-    static asset(imageName: string, config?: ImageConfig): Image;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          scale?:number,
-          semanticLabel?:string,
-          excludeFromSemantics?:boolean,
-          width?:number,
-          height?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          gaplessPlayback?:boolean,
-          isAntiAlias?:boolean,
-          filterQuality?:FilterQuality,
-          headers?:Map<string,string>,
-          cacheWidth?:number,
-          cacheHeight?:number,
-        }
-     */
-    static memory(bytes: Uint8List, config?: ImageConfig): Image;
-}
-interface KeyedSubtreeConfig {
-    child: Widget;
-    key?: Key;
+    constructor(config?: {
+        key?: Key;
+        image: ImageProvider;
+        semanticLabel?: string;
+        excludeFromSemantics?: boolean;
+        width?: number;
+        height?: number;
+        color?: Color;
+        colorBlendMode?: BlendMode;
+        fit?: BoxFit;
+        alignment?: Alignment;
+        repeat?: ImageRepeat;
+        centerSlice?: Rect;
+        matchTextDirection?: boolean;
+        gaplessPlayback?: boolean;
+        isAntiAlias?: boolean;
+        filterQuality?: FilterQuality;
+    });
+    static network(src: string, config?: {
+        key?: Key;
+        scale?: number;
+        semanticLabel?: string;
+        excludeFromSemantics?: boolean;
+        width?: number;
+        height?: number;
+        color?: Color;
+        colorBlendMode?: BlendMode;
+        fit?: BoxFit;
+        alignment?: Alignment;
+        repeat?: ImageRepeat;
+        centerSlice?: Rect;
+        matchTextDirection?: boolean;
+        gaplessPlayback?: boolean;
+        isAntiAlias?: boolean;
+        filterQuality?: FilterQuality;
+        headers?: Map<string, string>;
+        cacheWidth?: number;
+        cacheHeight?: number;
+    }): Image;
+    static file(file: File, config?: {
+        key?: Key;
+        scale?: number;
+        semanticLabel?: string;
+        excludeFromSemantics?: boolean;
+        width?: number;
+        height?: number;
+        color?: Color;
+        colorBlendMode?: BlendMode;
+        fit?: BoxFit;
+        alignment?: Alignment;
+        repeat?: ImageRepeat;
+        centerSlice?: Rect;
+        matchTextDirection?: boolean;
+        gaplessPlayback?: boolean;
+        isAntiAlias?: boolean;
+        filterQuality?: FilterQuality;
+        cacheWidth?: number;
+        cacheHeight?: number;
+    }): Image;
+    static asset(imageName: string, config?: {
+        key?: Key;
+        bundle?: AssetBundle;
+        package?: string;
+        scale?: number;
+        semanticLabel?: string;
+        excludeFromSemantics?: boolean;
+        width?: number;
+        height?: number;
+        color?: Color;
+        colorBlendMode?: BlendMode;
+        fit?: BoxFit;
+        alignment?: Alignment;
+        repeat?: ImageRepeat;
+        centerSlice?: Rect;
+        matchTextDirection?: boolean;
+        gaplessPlayback?: boolean;
+        isAntiAlias?: boolean;
+        filterQuality?: FilterQuality;
+        headers?: Map<string, string>;
+        cacheWidth?: number;
+        cacheHeight?: number;
+    }): Image;
+    static memory(bytes: Uint8List, config?: {
+        key?: Key;
+        scale?: number;
+        semanticLabel?: string;
+        excludeFromSemantics?: boolean;
+        width?: number;
+        height?: number;
+        color?: Color;
+        colorBlendMode?: BlendMode;
+        fit?: BoxFit;
+        alignment?: Alignment;
+        repeat?: ImageRepeat;
+        centerSlice?: Rect;
+        matchTextDirection?: boolean;
+        gaplessPlayback?: boolean;
+        isAntiAlias?: boolean;
+        filterQuality?: FilterQuality;
+        headers?: Map<string, string>;
+        cacheWidth?: number;
+        cacheHeight?: number;
+    }): Image;
 }
 export declare class KeyedSubtree extends Widget {
     child?: Widget;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          key?:Key,
-        }
-     */
-    constructor(config: KeyedSubtreeConfig);
-}
-interface LabelTitleConfig {
-    key?: Key;
-    label?: string;
-    labelStyle?: TextStyle;
-    title?: string;
-    titleStyle?: TextStyle;
+    constructor(config: {
+        child: Widget;
+        key?: Key;
+    });
 }
 export declare class LabelTitle extends Widget {
     key?: Key;
@@ -8845,80 +6150,37 @@ export declare class LabelTitle extends Widget {
     labelStyle?: TextStyle;
     title?: string;
     titleStyle?: TextStyle;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          label?:string,
-          labelStyle?:TextStyle,
-          title?:string,
-          titleStyle?:TextStyle,
-        }
-     */
-    constructor(config: LabelTitleConfig);
-}
-interface LimitedBoxConfig {
-    child?: Widget;
-    maxWidth?: number;
-    maxHeight?: number;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        label?: string;
+        labelStyle?: TextStyle;
+        title?: string;
+        titleStyle?: TextStyle;
+    });
 }
 export declare class LimitedBox extends Widget {
     child?: Widget;
     maxWidth?: number;
     maxHeight?: number;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          maxWidth?:number,
-          maxHeight?:number,
-          key?:Key,
-        }
-     */
-    constructor(config: LimitedBoxConfig);
-}
-interface ListBodyConfig {
-    children?: Array<Widget>;
-    reverse?: boolean;
-    mainAxis?: Axis;
-    key?: Key;
+    constructor(config: {
+        child?: Widget;
+        maxWidth?: number;
+        maxHeight?: number;
+        key?: Key;
+    });
 }
 export declare class ListBody extends Widget {
     children?: Array<Widget>;
     reverse?: boolean;
     mainAxis?: Axis;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          reverse?:boolean,
-          mainAxis?:Axis,
-          key?:Key
-        }
-     */
-    constructor(config: ListBodyConfig);
-}
-interface ListTileConfig {
-    key?: Key;
-    leading?: Widget;
-    title?: Widget;
-    subtitle?: Widget;
-    trailing?: Widget;
-    onTap?: OnCallback;
-    onLongPress?: OnCallback;
-    selected?: boolean;
-    isThreeLine?: boolean;
-    dense?: boolean;
-    visualDensity?: VisualDensity;
-    shape?: ShapeBorder;
-    contentPadding?: EdgeInsets;
-    enabled?: boolean;
-    focusColor?: Color;
-    hoverColor?: Color;
-    autofocus?: boolean;
+    constructor(config: {
+        children?: Array<Widget>;
+        reverse?: boolean;
+        mainAxis?: Axis;
+        key?: Key;
+    });
 }
 export declare class ListTile extends Widget {
     key?: Key;
@@ -8938,71 +6200,25 @@ export declare class ListTile extends Widget {
     focusColor?: Color;
     hoverColor?: Color;
     autofocus?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          leading?:Widget,
-          title?:Widget,
-          subtitle?:Widget,
-          trailing?:Widget,
-          onTap?:OnCallback,
-          onLongPress?:OnCallback,
-          selected?:boolean,
-          isThreeLine?:boolean,
-          dense?:boolean,
-          visualDensity?:VisualDensity,
-          shape?:ShapeBorder,
-          contentPadding?:EdgeInsets,
-          enabled?:boolean,
-          focusColor?:Color,
-          hoverColor?:Color,
-          autofocus?:boolean,
-        }
-     */
-    constructor(config: ListTileConfig);
-}
-interface ListViewBaseConfig {
-    padding?: EdgeInsets;
-    controller?: ScrollController;
-    scrollDirection?: Axis;
-    reverse?: boolean;
-    primary?: boolean;
-    physics?: ScrollPhysics;
-    shrinkWrap?: boolean;
-    itemExtent?: number;
-    cacheExtent?: number;
-    semanticChildCount?: number;
-    dragStartBehavior?: DragStartBehavior;
-    key?: Key;
-    keyboardDismissBehavior?: ScrollViewKeyboardDismissBehavior;
-    restorationId?: string;
-    clipBehavior?: Clip;
-}
-interface ListViewConfig extends ListViewBaseConfig {
-    addAutomaticKeepAlives?: boolean;
-    addRepaintBoundaries?: boolean;
-    addSemanticIndexes?: boolean;
-    itemCount?: number;
-    children?: Array<Widget>;
-}
-interface ListViewBuilderConfig extends ListViewBaseConfig {
-    addAutomaticKeepAlives?: boolean;
-    addRepaintBoundaries?: boolean;
-    addSemanticIndexes?: boolean;
-    itemCount: number;
-    itemBuilder: IndexedWidgetBuilder;
-}
-interface ListViewSeparatedConfig extends ListViewBaseConfig {
-    addAutomaticKeepAlives?: boolean;
-    addRepaintBoundaries?: boolean;
-    addSemanticIndexes?: boolean;
-    itemCount: number;
-    itemBuilder: IndexedWidgetBuilder;
-    separatorBuilder: IndexedWidgetBuilder;
-}
-interface ListViewCustomConfig extends ListViewBaseConfig {
-    childrenDelegate: SliverChildDelegate;
+    constructor(config: {
+        key?: Key;
+        leading?: Widget;
+        title?: Widget;
+        subtitle?: Widget;
+        trailing?: Widget;
+        onTap?: OnCallback;
+        onLongPress?: OnCallback;
+        selected?: boolean;
+        isThreeLine?: boolean;
+        dense?: boolean;
+        visualDensity?: VisualDensity;
+        shape?: ShapeBorder;
+        contentPadding?: EdgeInsets;
+        enabled?: boolean;
+        focusColor?: Color;
+        hoverColor?: Color;
+        autofocus?: boolean;
+    });
 }
 export declare class ListView extends Widget {
     children?: Array<Widget>;
@@ -9031,134 +6247,98 @@ export declare class ListView extends Widget {
     separatorBuilderChildren?: Array<Widget>;
     childrenDelegate?: SliverChildDelegate;
     preBuild(jsWidgetHelper?: any, buildContext?: any): void;
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          padding?:EdgeInsets,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          physics?:ScrollPhysics,
-          shrinkWrap?:boolean,
-          itemExtent?:number,
-          addAutomaticKeepAlives?:boolean,
-          addRepaintBoundaries?:boolean,
-          addSemanticIndexes?:boolean,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-          key?:Key,
-          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
-    constructor(config?: ListViewConfig);
-    /**
-     * @param config config:
-        { itemBuilder?:IndexedWidgetBuilder,
-          itemCount?:number,
-          padding?:EdgeInsets,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          physics?:ScrollPhysics,
-          shrinkWrap?:boolean,
-          itemExtent?:number,
-          addAutomaticKeepAlives?:boolean,
-          addRepaintBoundaries?:boolean,
-          addSemanticIndexes?:boolean,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-          key?:Key,
-          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
-    static builder(config: ListViewBuilderConfig): ListView;
-    /**
-     * @param config config:
-        { itemBuilder?:IndexedWidgetBuilder,
-          separatorBuilder?:IndexedWidgetBuilder,
-          itemCount?:number,
-          padding?:EdgeInsets,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          physics?:ScrollPhysics,
-          shrinkWrap?:boolean,
-          itemExtent?:number,
-          addAutomaticKeepAlives?:boolean,
-          addRepaintBoundaries?:boolean,
-          addSemanticIndexes?:boolean,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-          key?:Key,
-          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
-    static separatorBuilder(config: ListViewSeparatedConfig): ListView;
-    /**
-     * @param config config:
-        {
-          childrenDelegate:SliverChildDelegate;
-          padding?:EdgeInsets,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          physics?:ScrollPhysics,
-          shrinkWrap?:boolean,
-          itemExtent?:number,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-          key?:Key,
-          keyboardDismissBehavior?:ScrollViewKeyboardDismissBehavior,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
-    static custom(config: ListViewCustomConfig): ListView;
-}
-interface LayoutBuilderConfig {
-    builder?: any;
-    key?: Key;
+    constructor(config?: {
+        children?: Array<Widget>;
+        padding?: EdgeInsets;
+        controller?: ScrollController;
+        scrollDirection?: Axis;
+        reverse?: boolean;
+        primary?: boolean;
+        physics?: ScrollPhysics;
+        shrinkWrap?: boolean;
+        itemExtent?: number;
+        addAutomaticKeepAlives?: boolean;
+        addRepaintBoundaries?: boolean;
+        addSemanticIndexes?: boolean;
+        cacheExtent?: number;
+        semanticChildCount?: number;
+        dragStartBehavior?: DragStartBehavior;
+        key?: Key;
+        keyboardDismissBehavior?: ScrollViewKeyboardDismissBehavior;
+        restorationId?: string;
+        clipBehavior?: Clip;
+    });
+    static builder(config: {
+        itemBuilder?: IndexedWidgetBuilder;
+        itemCount?: number;
+        padding?: EdgeInsets;
+        controller?: ScrollController;
+        scrollDirection?: Axis;
+        reverse?: boolean;
+        primary?: boolean;
+        physics?: ScrollPhysics;
+        shrinkWrap?: boolean;
+        itemExtent?: number;
+        addAutomaticKeepAlives?: boolean;
+        addRepaintBoundaries?: boolean;
+        addSemanticIndexes?: boolean;
+        cacheExtent?: number;
+        semanticChildCount?: number;
+        dragStartBehavior?: DragStartBehavior;
+        key?: Key;
+        keyboardDismissBehavior?: ScrollViewKeyboardDismissBehavior;
+        restorationId?: string;
+        clipBehavior?: Clip;
+    }): ListView;
+    static separatorBuilder(config: {
+        itemBuilder?: IndexedWidgetBuilder;
+        separatorBuilder?: IndexedWidgetBuilder;
+        itemCount?: number;
+        padding?: EdgeInsets;
+        controller?: ScrollController;
+        scrollDirection?: Axis;
+        reverse?: boolean;
+        primary?: boolean;
+        physics?: ScrollPhysics;
+        shrinkWrap?: boolean;
+        itemExtent?: number;
+        addAutomaticKeepAlives?: boolean;
+        addRepaintBoundaries?: boolean;
+        addSemanticIndexes?: boolean;
+        cacheExtent?: number;
+        semanticChildCount?: number;
+        dragStartBehavior?: DragStartBehavior;
+        key?: Key;
+        keyboardDismissBehavior?: ScrollViewKeyboardDismissBehavior;
+        restorationId?: string;
+        clipBehavior?: Clip;
+    }): ListView;
+    static custom(config: {
+        childrenDelegate: SliverChildDelegate;
+        padding?: EdgeInsets;
+        controller?: ScrollController;
+        scrollDirection?: Axis;
+        reverse?: boolean;
+        primary?: boolean;
+        physics?: ScrollPhysics;
+        shrinkWrap?: boolean;
+        itemExtent?: number;
+        cacheExtent?: number;
+        semanticChildCount?: number;
+        dragStartBehavior?: DragStartBehavior;
+        key?: Key;
+        keyboardDismissBehavior?: ScrollViewKeyboardDismissBehavior;
+        restorationId?: string;
+        clipBehavior?: Clip;
+    }): ListView;
 }
 export declare class LayoutBuilder extends Widget {
     builder?: any;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          builder?:any,
-          key?:Key
-        }
-     */
-    constructor(config: LayoutBuilderConfig);
-}
-interface MaterialConfig {
-    child?: Widget;
-    elevation?: number;
-    color?: Color;
-    shadowColor?: Color;
-    textStyle?: TextStyle;
-    borderRadius?: BorderRadius;
-    type?: MaterialType;
-    shape?: any;
-    borderOnForeground?: boolean;
-    clipBehavior?: Clip;
-    animationDuration?: Duration;
-    key?: Key;
+    constructor(config: {
+        builder?: any;
+        key?: Key;
+    });
 }
 export declare class Material extends Widget {
     child?: Widget;
@@ -9173,31 +6353,20 @@ export declare class Material extends Widget {
     clipBehavior?: Clip;
     animationDuration?: Duration;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          elevation?:number,
-          color?:Color,
-          shadowColor?:Color,
-          textStyle?:TextStyle,
-          borderRadius?:BorderRadius,
-          type?:MaterialType,
-          shape?:any,
-          borderOnForeground?:boolean,
-          clipBehavior?:Clip,
-          animationDuration?:Duration,
-          key?:Key,
-        }
-     */
-    constructor(config: MaterialConfig);
-}
-interface MaterialPageRouteConfig {
-    builder?: any;
-    settings?: any;
-    maintainState?: boolean;
-    fullscreenDialog?: boolean;
-    child?: MaterialPageRoute;
+    constructor(config: {
+        child?: Widget;
+        elevation?: number;
+        color?: Color;
+        shadowColor?: Color;
+        textStyle?: TextStyle;
+        borderRadius?: BorderRadius;
+        type?: MaterialType;
+        shape?: any;
+        borderOnForeground?: boolean;
+        clipBehavior?: Clip;
+        animationDuration?: Duration;
+        key?: Key;
+    });
 }
 export declare class MaterialPageRoute extends Widget {
     builder?: any;
@@ -9206,27 +6375,12 @@ export declare class MaterialPageRoute extends Widget {
     fullscreenDialog?: boolean;
     child?: MaterialPageRoute;
     preBuild(jsWidgetHelper?: any, buildContext?: BuildContext): void;
-    /**
-     * @param config config:
-        {
-          builder?:any,
-          settings?:any,
-          maintainState?:boolean,
-          fullscreenDialog?:boolean
-        }
-     */
-    constructor(config: MaterialPageRouteConfig);
-}
-interface MaterialBannerConfig {
-    key?: Key;
-    content: Widget;
-    contentTextStyle?: TextStyle;
-    actions: Array<Widget>;
-    leading?: Widget;
-    backgroundColor?: Color;
-    padding?: EdgeInsets;
-    leadingPadding?: EdgeInsets;
-    forceActionsBelow?: boolean;
+    constructor(config: {
+        builder?: any;
+        settings?: any;
+        maintainState?: boolean;
+        fullscreenDialog?: boolean;
+    });
 }
 export declare class MaterialBanner extends Widget {
     key?: Key;
@@ -9238,48 +6392,25 @@ export declare class MaterialBanner extends Widget {
     padding?: EdgeInsets;
     leadingPadding?: EdgeInsets;
     forceActionsBelow?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          content:Widget,
-          contentTextStyle?:TextStyle,
-          actions:Array<Widget>,
-          leading?:Widget,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          leadingPadding?:EdgeInsets,
-          forceActionsBelow?:boolean,
-        }
-     */
-    constructor(config: MaterialBannerConfig);
-}
-interface NotificationListenerConfig {
-    child?: Widget;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        content: Widget;
+        contentTextStyle?: TextStyle;
+        actions: Array<Widget>;
+        leading?: Widget;
+        backgroundColor?: Color;
+        padding?: EdgeInsets;
+        leadingPadding?: EdgeInsets;
+        forceActionsBelow?: boolean;
+    });
 }
 export declare class NotificationListener extends Widget {
     child?: Widget;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          key?:Key
-        }
-     */
-    constructor(config: NotificationListenerConfig);
-}
-interface NestedScrollViewConfig {
-    body?: Widget;
-    controller?: ScrollController;
-    scrollDirection?: Axis;
-    reverse?: boolean;
-    physics?: ScrollPhysics;
-    headerSliverBuilder?: any;
-    dragStartBehavior?: DragStartBehavior;
-    key?: Key;
-    children?: Array<Widget>;
+    constructor(config: {
+        child?: Widget;
+        key?: Key;
+    });
 }
 export declare class NestedScrollView extends Widget {
     body?: Widget;
@@ -9292,74 +6423,42 @@ export declare class NestedScrollView extends Widget {
     key?: Key;
     children?: Array<Widget>;
     preBuild(jsWidgetHelper?: any, buildContext?: any): void;
-    /**
-     * @param config config:
-        {
-          body?:Widget,
-          controller?:ScrollController,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          physics?:ScrollPhysics,
-          headerSliverBuilder?:any,
-          dragStartBehavior?:DragStartBehavior,
-          key?:Key
-        }
-     */
-    constructor(config: NestedScrollViewConfig);
+    constructor(config: {
+        body?: Widget;
+        controller?: ScrollController;
+        scrollDirection?: Axis;
+        reverse?: boolean;
+        physics?: ScrollPhysics;
+        headerSliverBuilder?: any;
+        dragStartBehavior?: DragStartBehavior;
+        key?: Key;
+    });
 }
 export declare class Navigator extends DartClass {
     static push(context: BuildContext, materialPageRoute: MaterialPageRoute): void;
     static pop(context: BuildContext): void;
-}
-interface OpacityConfig {
-    key?: Key;
-    child?: Widget;
-    opacity: number;
-    alwaysIncludeSemantics?: boolean;
 }
 export declare class Opacity extends Widget {
     child?: Widget;
     opacity?: number;
     alwaysIncludeSemantics?: boolean;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          opacity:number,
-          alwaysIncludeSemantics?:boolean
-        }
-     */
-    constructor(config: OpacityConfig);
-}
-interface OffstageConfig {
-    child?: Widget;
-    offstage?: boolean;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        opacity: number;
+        alwaysIncludeSemantics?: boolean;
+    });
 }
 export declare class Offstage extends Widget {
     child?: Widget;
     offstage?: boolean;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child?:.Widget,
-          offstage?:boolean,
-          key?:Key,
-        }
-     */
-    constructor(config: OffstageConfig);
-}
-interface OverflowBoxConfig {
-    child?: Widget;
-    alignment?: Alignment;
-    minWidth?: number;
-    maxWidth?: number;
-    minHeight?: number;
-    maxHeight?: number;
-    key?: Key;
+    constructor(config: {
+        child?: Widget;
+        offstage?: boolean;
+        key?: Key;
+    });
 }
 export declare class OverflowBox extends Widget {
     child?: Widget;
@@ -9369,47 +6468,15 @@ export declare class OverflowBox extends Widget {
     minHeight?: number;
     maxHeight?: number;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          alignment?:Alignment,
-          minWidth?:number,
-          maxWidth?:number,
-          minHeight?:number,
-          maxHeight?:number,
-          key?:Key,
-        }
-     */
-    constructor(config: OverflowBoxConfig);
-}
-interface OutlineButtonConfig {
-    key?: Key;
-    child?: Widget;
-    onPressed: OnCallback;
-    onLongPress?: OnCallback;
-    padding?: EdgeInsets;
-    textTheme?: ButtonTextTheme;
-    textColor?: Color;
-    disabledTextColor?: Color;
-    color?: Color;
-    disabledColor?: Color;
-    highlightColor?: Color;
-    splashColor?: Color;
-    colorBrightness?: Brightness;
-    shape?: any;
-    clipBehavior?: Clip;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    highlightElevation?: number;
-    focusColor?: Color;
-    hoverColor?: Color;
-    visualDensity?: VisualDensity;
-    autofocus?: boolean;
-    borderSide?: BorderSide;
-    disabledBorderColor?: Color;
-    highlightedBorderColor?: Color;
-    icon?: Widget;
-    label?: Widget;
+    constructor(config: {
+        child?: Widget;
+        alignment?: Alignment;
+        minWidth?: number;
+        maxWidth?: number;
+        minHeight?: number;
+        maxHeight?: number;
+        key?: Key;
+    });
 }
 export declare class OutlineButton extends Widget {
     key?: Key;
@@ -9438,98 +6505,70 @@ export declare class OutlineButton extends Widget {
     highlightedBorderColor?: Color;
     icon?: Widget;
     label?: Widget;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          onPressed:OnCallback,
-          onLongPress?:OnCallback,
-          padding?:EdgeInsets,
-          textTheme?:ButtonTextTheme,
-          textColor?:Color,
-          disabledTextColor?:Color,
-          color?:Color,
-          disabledColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorBrightness?:Brightness,
-          shape?:any,
-          clipBehavior?:Clip,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          highlightElevation?:number,
-          focusColor?: Color,
-          hoverColor?: Color,
-          visualDensity?: VisualDensity,
-          autofocus?: boolean,
-          borderSide?:BorderSide,
-          disabledBorderColor?:Color,
-          highlightedBorderColor?:Color,
-        }
-     */
-    constructor(config?: OutlineButtonConfig);
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          onPressed?:OnCallback,
-          onLongPress?:OnCallback,
-          padding?:EdgeInsets,
-          textTheme?:ButtonTextTheme,
-          textColor?:Color,
-          disabledTextColor?:Color,
-          color?:Color,
-          disabledColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorBrightness?:Brightness,
-          shape?:any,
-          clipBehavior?:Clip,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          highlightElevation?:number,
-          focusColor?: Color,
-          hoverColor?: Color,
-          visualDensity?: VisualDensity,
-          autofocus?: boolean,
-          borderSide?:BorderSide,
-          disabledBorderColor?:Color,
-          highlightedBorderColor?:Color,
-  
-          icon?:Widget,
-          label?:Widget,
-        }
-     */
-    static icon(config: OutlineButtonConfig): OutlineButton;
-}
-interface PaddingConfig {
-    child?: Widget;
-    padding: EdgeInsets;
-    key?: Key;
+    constructor(config?: {
+        key?: Key;
+        child?: Widget;
+        onPressed: OnCallback;
+        onLongPress?: OnCallback;
+        padding?: EdgeInsets;
+        textTheme?: ButtonTextTheme;
+        textColor?: Color;
+        disabledTextColor?: Color;
+        color?: Color;
+        disabledColor?: Color;
+        highlightColor?: Color;
+        splashColor?: Color;
+        colorBrightness?: Brightness;
+        shape?: any;
+        clipBehavior?: Clip;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        highlightElevation?: number;
+        focusColor?: Color;
+        hoverColor?: Color;
+        visualDensity?: VisualDensity;
+        autofocus?: boolean;
+        borderSide?: BorderSide;
+        disabledBorderColor?: Color;
+        highlightedBorderColor?: Color;
+    });
+    static icon(config: {
+        key?: Key;
+        child?: Widget;
+        onPressed?: OnCallback;
+        onLongPress?: OnCallback;
+        padding?: EdgeInsets;
+        textTheme?: ButtonTextTheme;
+        textColor?: Color;
+        disabledTextColor?: Color;
+        color?: Color;
+        disabledColor?: Color;
+        highlightColor?: Color;
+        splashColor?: Color;
+        colorBrightness?: Brightness;
+        shape?: any;
+        clipBehavior?: Clip;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        highlightElevation?: number;
+        focusColor?: Color;
+        hoverColor?: Color;
+        visualDensity?: VisualDensity;
+        autofocus?: boolean;
+        borderSide?: BorderSide;
+        disabledBorderColor?: Color;
+        highlightedBorderColor?: Color;
+        icon?: Widget;
+        label?: Widget;
+    }): OutlineButton;
 }
 export declare class Padding extends Widget {
     child?: Widget;
     padding?: EdgeInsets;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          padding?:EdgeInsets,
-          key?:Key
-        }
-     */
-    constructor(config: PaddingConfig);
-}
-interface PhysicalModelConfig {
-    key?: Key;
-    color: Color;
-    shape?: BoxShape;
-    child?: Widget;
-    clipBehavior?: Clip;
-    borderRadius?: BorderRadius;
-    elevation?: number;
-    shadowColor?: Color;
+    constructor(config: {
+        child?: Widget;
+        padding?: EdgeInsets;
+        key?: Key;
+    });
 }
 export declare class PhysicalModel extends Widget {
     key?: Key;
@@ -9540,34 +6579,16 @@ export declare class PhysicalModel extends Widget {
     borderRadius?: BorderRadius;
     elevation?: number;
     shadowColor?: Color;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          color:Color,
-          shape?:BoxShape,
-          child?:Widget,
-          clipBehavior?:Clip,
-          borderRadius?:BorderRadius,
-          elevation?:number,
-          shadowColor?:Color,
-        }
-     */
-    constructor(config: PhysicalModelConfig);
-}
-interface PositionedConfig {
-    key?: Key;
-    child: Widget;
-    start?: number;
-    left?: number;
-    top?: number;
-    end?: number;
-    right?: number;
-    bottom?: number;
-    width?: number;
-    height?: number;
-    rect?: Rect;
-    textDirection?: TextDirection;
+    constructor(config: {
+        key?: Key;
+        color: Color;
+        shape?: BoxShape;
+        child?: Widget;
+        clipBehavior?: Clip;
+        borderRadius?: BorderRadius;
+        elevation?: number;
+        shadowColor?: Color;
+    });
 }
 export declare class Positioned extends Widget {
     key?: Key;
@@ -9582,66 +6603,40 @@ export declare class Positioned extends Widget {
     height?: number;
     rect?: Rect;
     textDirection?: TextDirection;
-    /**
-     * @param config config:
-        {
-          key?:Key
-          child:Widget,
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number,
-          width?:number,
-          height?:number,
-        }
-     */
-    constructor(config?: PositionedConfig);
-    /**
-     * @param config config:
-        {
-          child:Widget,
-          rect?:Rect,
-          key?:Key
-        }
-     */
-    static fromRect(config: PositionedConfig): Positioned;
-    /**
-     * @param config config:
-        {
-          key?:Key
-          child:Widget,
-          left?:number,
-          top?:number,
-          right?:number,
-          bottom?:number,
-        }
-     */
-    static fill(config: PositionedConfig): Positioned;
-    /**
-     * @param config config:
-        {
-          key?:Key
-          child:Widget,
-          textDirection:TextDirection;
-          start?:number,
-          top?:number,
-          end?:number,
-          bottom?:number,
-          width?:number,
-          height?:number,
-        }
-     */
-    static directional(config: PositionedConfig): Positioned;
-}
-interface PositionedDirectionalConfig {
-    key?: Key;
-    child: Widget;
-    start?: number;
-    top?: number;
-    end?: number;
-    bottom?: number;
-    width?: number;
-    height?: number;
+    constructor(config?: {
+        key?: Key;
+        child: Widget;
+        left?: number;
+        top?: number;
+        right?: number;
+        bottom?: number;
+        width?: number;
+        height?: number;
+    });
+    static fromRect(config: {
+        child: Widget;
+        rect?: Rect;
+        key?: Key;
+    }): Positioned;
+    static fill(config: {
+        key?: Key;
+        child: Widget;
+        left?: number;
+        top?: number;
+        right?: number;
+        bottom?: number;
+    }): Positioned;
+    static directional(config: {
+        key?: Key;
+        child: Widget;
+        textDirection: TextDirection;
+        start?: number;
+        top?: number;
+        end?: number;
+        bottom?: number;
+        width?: number;
+        height?: number;
+    }): Positioned;
 }
 export declare class PositionedDirectional extends Widget {
     key?: Key;
@@ -9652,48 +6647,28 @@ export declare class PositionedDirectional extends Widget {
     bottom?: number;
     width?: number;
     height?: number;
-    /**
-     * @param config config:
-        {
-          key?:Key
-          child:Widget,
-          start?:number,
-          top?:number,
-          end?:number,
-          bottom?:number,
-          width?:number,
-          height?:number,
-        }
-     */
-    constructor(config: PositionedDirectionalConfig);
-}
-interface PreferredSizeConfig {
-    key?: Key;
-    child: Widget;
-    preferredSize: Size;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        start?: number;
+        top?: number;
+        end?: number;
+        bottom?: number;
+        width?: number;
+        height?: number;
+    });
 }
 export declare class PreferredSize extends Widget {
     key?: Key;
     child?: Widget;
     preferredSize?: Size;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          preferredSize?:Size,
-          key?:Key
-        }
-     */
-    constructor(config: PreferredSizeConfig);
+    constructor(config: {
+        child?: Widget;
+        preferredSize?: Size;
+        key?: Key;
+    });
 }
 export declare class PreferredSizeWidget extends Widget {
-}
-interface PlaceholderConfig {
-    color?: Color;
-    strokeWidth?: number;
-    fallbackWidth?: number;
-    fallbackHeight?: number;
-    key?: Key;
 }
 export declare class Placeholder extends Widget {
     color?: Color;
@@ -9701,31 +6676,13 @@ export declare class Placeholder extends Widget {
     fallbackWidth?: number;
     fallbackHeight?: number;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          color?:Color,
-          strokeWidth?:number,
-          fallbackWidth?:number,
-          fallbackHeight?:number,
-          key?:Key,
-        }
-     */
-    constructor(config: PlaceholderConfig);
-}
-interface PopupMenuButtonConfig {
-    itemBuilder?: any;
-    initialValue?: any;
-    onSelected?: any;
-    onCanceled?: any;
-    tooltip?: string;
-    elevation?: number;
-    padding?: EdgeInsets;
-    child?: Widget;
-    icon?: Widget;
-    offset?: Offset;
-    key?: Key;
-    children?: Array<Widget>;
+    constructor(config: {
+        color?: Color;
+        strokeWidth?: number;
+        fallbackWidth?: number;
+        fallbackHeight?: number;
+        key?: Key;
+    });
 }
 export declare class PopupMenuButton extends Widget {
     itemBuilder?: any;
@@ -9741,30 +6698,19 @@ export declare class PopupMenuButton extends Widget {
     key?: Key;
     children?: Array<Widget>;
     preBuild(jsWidgetHelper: any, buildContext: any): void;
-    /**
-     * @param config config:
-        {
-          itemBuilder?:any,
-          initialValue?:any,
-          onSelected?:any,
-          onCanceled?:any,
-          tooltip?:string,
-          elevation?:number,
-          padding?:EdgeInsets,
-          child?:Widget,
-          icon?:Widget,
-          offset?:Offset,
-          key?:Key
-        }
-     */
-    constructor(config: PopupMenuButtonConfig);
-}
-interface PopupMenuItemConfig {
-    child?: Widget;
-    value?: any;
-    enabled?: boolean;
-    height?: number;
-    key?: Key;
+    constructor(config: {
+        itemBuilder?: any;
+        initialValue?: any;
+        onSelected?: any;
+        onCanceled?: any;
+        tooltip?: string;
+        elevation?: number;
+        padding?: EdgeInsets;
+        child?: Widget;
+        icon?: Widget;
+        offset?: Offset;
+        key?: Key;
+    });
 }
 export declare class PopupMenuItem extends Widget {
     child?: Widget;
@@ -9772,31 +6718,13 @@ export declare class PopupMenuItem extends Widget {
     enabled?: boolean;
     height?: number;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          value?:any,
-          enabled?:boolean,
-          height?:number,
-          key?:Key
-        }
-     */
-    constructor(config: PopupMenuItemConfig);
-}
-interface PageViewConfig {
-    key?: Key;
-    scrollDirection?: Axis;
-    reverse?: boolean;
-    controller?: PageController;
-    physics?: ScrollPhysics;
-    pageSnapping?: boolean;
-    onPageChanged?: OnCallbackNumber;
-    children?: Array<Widget>;
-    dragStartBehavior?: DragStartBehavior;
-    allowImplicitScrolling?: boolean;
-    restorationId?: string;
-    clipBehavior?: Clip;
+    constructor(config: {
+        child?: Widget;
+        value?: any;
+        enabled?: boolean;
+        height?: number;
+        key?: Key;
+    });
 }
 export declare class PageView extends Widget {
     key?: Key;
@@ -9811,34 +6739,20 @@ export declare class PageView extends Widget {
     allowImplicitScrolling?: boolean;
     restorationId?: string;
     clipBehavior?: Clip;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          controller?:PageController,
-          physics?:ScrollPhysics,
-          pageSnapping?:boolean,
-          onPageChanged?:OnCallbackNumber,
-          children?:Array<Widget>,
-          dragStartBehavior?:DragStartBehavior,
-          allowImplicitScrolling?:boolean,
-          restorationId?:string,
-          clipBehavior?:Clip,
-        }
-     */
-    constructor(config: PageViewConfig);
-}
-interface RowConfig {
-    children?: Array<Widget>;
-    mainAxisAlignment?: MainAxisAlignment;
-    mainAxisSize?: MainAxisSize;
-    crossAxisAlignment?: CrossAxisAlignment;
-    textDirection?: TextDirection;
-    verticalDirection?: VerticalDirection;
-    textBaseline?: TextBaseline;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        scrollDirection?: Axis;
+        reverse?: boolean;
+        controller?: PageController;
+        physics?: ScrollPhysics;
+        pageSnapping?: boolean;
+        onPageChanged?: OnCallbackNumber;
+        children?: Array<Widget>;
+        dragStartBehavior?: DragStartBehavior;
+        allowImplicitScrolling?: boolean;
+        restorationId?: string;
+        clipBehavior?: Clip;
+    });
 }
 export declare class Row extends Widget {
     children?: Array<Widget>;
@@ -9849,54 +6763,16 @@ export declare class Row extends Widget {
     verticalDirection?: VerticalDirection;
     textBaseline?: TextBaseline;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          children?:Array<Widget>,
-          mainAxisAlignment?:MainAxisAlignment,
-          mainAxisSize?:MainAxisSize,
-          crossAxisAlignment?:CrossAxisAlignment,
-          textDirection?:TextDirection,
-          verticalDirection?:VerticalDirection,
-          textBaseline?:TextBaseline,
-          key?:Key,
-        }
-     */
-    constructor(config: RowConfig);
-}
-interface RawChipConfig {
-    key?: Key;
-    avatar?: Widget;
-    label: Widget;
-    labelStyle?: TextStyle;
-    labelPadding?: EdgeInsets;
-    selected?: boolean;
-    isEnabled?: boolean;
-    tapEnabled?: boolean;
-    onSelected?: OnCallbackBoolean;
-    deleteIcon?: Widget;
-    onDeleted?: OnCallback;
-    deleteIconColor?: Color;
-    deleteButtonTooltipMessage?: string;
-    onPressed?: OnCallback;
-    pressElevation?: number;
-    disabledColor?: Color;
-    selectedColor?: Color;
-    tooltip?: string;
-    shape?: ShapeBorder;
-    clipBehavior?: Clip;
-    focusNode?: FocusNode;
-    autofocus?: boolean;
-    backgroundColor?: Color;
-    padding?: EdgeInsets;
-    visualDensity?: VisualDensity;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    elevation?: number;
-    shadowColor?: Color;
-    selectedShadowColor?: Color;
-    showCheckmark?: boolean;
-    checkmarkColor?: Color;
-    avatarBorder?: ShapeBorder;
+    constructor(config: {
+        children?: Array<Widget>;
+        mainAxisAlignment?: MainAxisAlignment;
+        mainAxisSize?: MainAxisSize;
+        crossAxisAlignment?: CrossAxisAlignment;
+        textDirection?: TextDirection;
+        verticalDirection?: VerticalDirection;
+        textBaseline?: TextBaseline;
+        key?: Key;
+    });
 }
 export declare class RawChip extends Widget {
     key?: Key;
@@ -9931,80 +6807,50 @@ export declare class RawChip extends Widget {
     showCheckmark?: boolean;
     checkmarkColor?: Color;
     avatarBorder?: ShapeBorder;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          avatar?:Widget,
-          label:Widget,
-          labelStyle?:TextStyle,
-          labelPadding?:EdgeInsets,
-          selected?:boolean,
-          isEnabled?:boolean,
-          tapEnabled?:boolean,
-          onSelected?:OnCallbackBoolean,
-          deleteIcon?:Widget,
-          onDeleted?:OnCallback,
-          deleteIconColor?:Color,
-          deleteButtonTooltipMessage?:string,
-          onPressed?:OnCallback,
-          pressElevation?:number,
-          disabledColor?:Color,
-          selectedColor?:Color,
-          tooltip?:string,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          focusNode?:FocusNode,
-          autofocus?:boolean,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-          visualDensity?:VisualDensity,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          elevation?:number,
-          shadowColor?:Color,
-          selectedShadowColor?:Color,
-          showCheckmark?:boolean,
-          checkmarkColor?:Color,
-          avatarBorder?:ShapeBorder,
-        }
-     */
-    constructor(config: RawChipConfig);
-}
-interface RepaintBoundaryConfig {
-    key?: Key;
-    child?: Widget;
+    constructor(config: {
+        key?: Key;
+        avatar?: Widget;
+        label: Widget;
+        labelStyle?: TextStyle;
+        labelPadding?: EdgeInsets;
+        selected?: boolean;
+        isEnabled?: boolean;
+        tapEnabled?: boolean;
+        onSelected?: OnCallbackBoolean;
+        deleteIcon?: Widget;
+        onDeleted?: OnCallback;
+        deleteIconColor?: Color;
+        deleteButtonTooltipMessage?: string;
+        onPressed?: OnCallback;
+        pressElevation?: number;
+        disabledColor?: Color;
+        selectedColor?: Color;
+        tooltip?: string;
+        shape?: ShapeBorder;
+        clipBehavior?: Clip;
+        focusNode?: FocusNode;
+        autofocus?: boolean;
+        backgroundColor?: Color;
+        padding?: EdgeInsets;
+        visualDensity?: VisualDensity;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        elevation?: number;
+        shadowColor?: Color;
+        selectedShadowColor?: Color;
+        showCheckmark?: boolean;
+        checkmarkColor?: Color;
+        avatarBorder?: ShapeBorder;
+    });
 }
 export declare class RepaintBoundary extends Widget {
     key?: Key;
     child?: Widget;
     childIndex?: number;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-        }
-     */
-    constructor(config?: RepaintBoundaryConfig);
+    constructor(config?: {
+        key?: Key;
+        child?: Widget;
+    });
     static wrap(child: Widget, childIndex: number): RepaintBoundary;
-}
-interface RawImageConfig {
-    key?: Key;
-    image?: ImageProvider;
-    debugImageLabel?: string;
-    width?: number;
-    height?: number;
-    scale?: number;
-    color?: Color;
-    colorBlendMode?: BlendMode;
-    fit?: BoxFit;
-    alignment?: Alignment;
-    repeat?: ImageRepeat;
-    centerSlice?: Rect;
-    matchTextDirection?: boolean;
-    invertColors?: boolean;
-    filterQuality?: FilterQuality;
-    isAntiAlias?: boolean;
 }
 export declare class RawImage extends Widget {
     key?: Key;
@@ -10023,77 +6869,34 @@ export declare class RawImage extends Widget {
     invertColors?: boolean;
     filterQuality?: FilterQuality;
     isAntiAlias?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          image?:ImageProvider,
-          debugImageLabel?:string,
-          width?:number,
-          height?:number,
-          scale?:number,
-          color?:Color,
-          colorBlendMode?:BlendMode,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          centerSlice?:Rect,
-          matchTextDirection?:boolean,
-          invertColors?:boolean,
-          filterQuality?:FilterQuality,
-          isAntiAlias?:boolean,
-        }
-     */
-    constructor(config: RawImageConfig);
-}
-interface RotatedBoxConfig {
-    key?: Key;
-    quarterTurns: number;
-    child?: Widget;
+    constructor(config: {
+        key?: Key;
+        image?: ImageProvider;
+        debugImageLabel?: string;
+        width?: number;
+        height?: number;
+        scale?: number;
+        color?: Color;
+        colorBlendMode?: BlendMode;
+        fit?: BoxFit;
+        alignment?: Alignment;
+        repeat?: ImageRepeat;
+        centerSlice?: Rect;
+        matchTextDirection?: boolean;
+        invertColors?: boolean;
+        filterQuality?: FilterQuality;
+        isAntiAlias?: boolean;
+    });
 }
 export declare class RotatedBox extends Widget {
     key?: Key;
     quarterTurns?: number;
     child?: Widget;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          quarterTurns:number,
-          child?:Widget,
-        }
-     */
-    constructor(config: RotatedBoxConfig);
-}
-interface RaisedButtonConfig {
-    child?: Widget;
-    onPressed?: OnCallback;
-    onHighlightChanged?: OnCallbackBoolean;
-    padding?: EdgeInsets;
-    textColor?: Color;
-    disabledTextColor?: Color;
-    color?: Color;
-    disabledColor?: Color;
-    highlightColor?: Color;
-    splashColor?: Color;
-    colorBrightness?: Brightness;
-    elevation?: number;
-    highlightElevation?: number;
-    disabledElevation?: number;
-    shape?: any;
-    clipBehavior?: Clip;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    animationDuration?: Duration;
-    key?: Key;
-    icon?: Widget;
-    label?: Widget;
-    onLongPress?: OnCallback;
-    focusColor?: Color;
-    hoverColor?: Color;
-    focusElevation?: number;
-    hoverElevation?: number;
-    visualDensity?: VisualDensity;
-    autofocus?: boolean;
+    constructor(config: {
+        key?: Key;
+        quarterTurns: number;
+        child?: Widget;
+    });
 }
 export declare class RaisedButton extends Widget {
     child?: Widget;
@@ -10124,80 +6927,63 @@ export declare class RaisedButton extends Widget {
     hoverElevation?: number;
     visualDensity?: VisualDensity;
     autofocus?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          onPressed?:OnCallback,
-          onHighlightChanged?:OnCallbackBoolean,
-          padding?:EdgeInsets,
-          textColor?:Color,
-          disabledTextColor?:Color,
-          color?:Color,
-          disabledColor?:Color,
-          highlightColor?:Color,
-          splashColor?:Color,
-          colorBrightness?:Brightness,
-          elevation?:number,
-          highlightElevation?:number,
-          disabledElevation?:number,
-          shape?:any,
-          clipBehavior?:Clip,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          animationDuration?:Duration,
-        
-          onLongPress?:OnCallback,
-          focusColor?:Color,
-          hoverColor?:Color,
-          focusElevation?:number,
-          hoverElevation?:number,
-          visualDensity?:VisualDensity,
-          autofocus?:boolean,
-        }
-     */
-    constructor(config?: RaisedButtonConfig);
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        icon?:Widget,
-        label?:Widget,
-        onPressed?:OnCallback,
-        onHighlightChanged?:OnCallbackBoolean,
-        padding?:EdgeInsets,
-        textColor?:Color,
-        disabledTextColor?:Color,
-        color?:Color,
-        disabledColor?:Color,
-        highlightColor?:Color,
-        splashColor?:Color,
-        colorBrightness?:Brightness,
-        elevation?:number,
-        highlightElevation?:number,
-        disabledElevation?:number,
-        shape?:any,
-        clipBehavior?:Clip,
-        materialTapTargetSize?:MaterialTapTargetSize,
-        animationDuration?:Duration,
-        onLongPress?:OnCallback,
-        focusColor?:Color,
-        hoverColor?:Color,
-        focusElevation?:number,
-        hoverElevation?:number,
-        visualDensity?:VisualDensity,
-        autofocus?:boolean,
-      }
-     */
-    static icon(config: RaisedButtonConfig): RaisedButton | undefined;
-}
-interface RadioConfig {
-    key?: Key;
-    value?: string;
-    groupValue?: string;
-    onChanged?: OnCallbackString;
-    activeColor?: Color;
-    materialTapTargetSize?: MaterialTapTargetSize;
+    constructor(config?: {
+        key?: Key;
+        child?: Widget;
+        onPressed?: OnCallback;
+        onHighlightChanged?: OnCallbackBoolean;
+        padding?: EdgeInsets;
+        textColor?: Color;
+        disabledTextColor?: Color;
+        color?: Color;
+        disabledColor?: Color;
+        highlightColor?: Color;
+        splashColor?: Color;
+        colorBrightness?: Brightness;
+        elevation?: number;
+        highlightElevation?: number;
+        disabledElevation?: number;
+        shape?: any;
+        clipBehavior?: Clip;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        animationDuration?: Duration;
+        onLongPress?: OnCallback;
+        focusColor?: Color;
+        hoverColor?: Color;
+        focusElevation?: number;
+        hoverElevation?: number;
+        visualDensity?: VisualDensity;
+        autofocus?: boolean;
+    });
+    static icon(config: {
+        key?: Key;
+        icon?: Widget;
+        label?: Widget;
+        onPressed?: OnCallback;
+        onHighlightChanged?: OnCallbackBoolean;
+        padding?: EdgeInsets;
+        textColor?: Color;
+        disabledTextColor?: Color;
+        color?: Color;
+        disabledColor?: Color;
+        highlightColor?: Color;
+        splashColor?: Color;
+        colorBrightness?: Brightness;
+        elevation?: number;
+        highlightElevation?: number;
+        disabledElevation?: number;
+        shape?: any;
+        clipBehavior?: Clip;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        animationDuration?: Duration;
+        onLongPress?: OnCallback;
+        focusColor?: Color;
+        hoverColor?: Color;
+        focusElevation?: number;
+        hoverElevation?: number;
+        visualDensity?: VisualDensity;
+        autofocus?: boolean;
+    }): RaisedButton | undefined;
 }
 export declare class Radio extends Widget {
     key?: Key;
@@ -10206,34 +6992,14 @@ export declare class Radio extends Widget {
     onChanged?: OnCallbackString;
     activeColor?: Color;
     materialTapTargetSize?: MaterialTapTargetSize;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        value?:string,
-        groupValue?:string,
-        onChanged?:OnCallbackString,
-        activeColor?:Color,
-        materialTapTargetSize?:MaterialTapTargetSize
-      }
-     */
-    constructor(config: RadioConfig);
-}
-interface RadioListTileConfig {
-    key?: Key;
-    value: string;
-    groupValue: string;
-    onChanged: OnCallbackString;
-    toggleable?: boolean;
-    activeColor?: Color;
-    title?: Widget;
-    subtitle?: Widget;
-    isThreeLine?: boolean;
-    dense?: boolean;
-    secondary?: Widget;
-    selected?: boolean;
-    controlAffinity?: ListTileControlAffinity;
-    autofocus?: boolean;
+    constructor(config: {
+        key?: Key;
+        value?: string;
+        groupValue?: string;
+        onChanged?: OnCallbackString;
+        activeColor?: Color;
+        materialTapTargetSize?: MaterialTapTargetSize;
+    });
 }
 export declare class RadioListTile extends Widget {
     key?: Key;
@@ -10250,53 +7016,22 @@ export declare class RadioListTile extends Widget {
     selected?: boolean;
     controlAffinity?: ListTileControlAffinity;
     autofocus?: boolean;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        value:string,
-        groupValue:string,
-        onChanged:OnCallbackString,
-        toggleable?:boolean,
-        activeColor?:Color,
-        title?:Widget,
-        subtitle?:Widget,
-        isThreeLine?:boolean,
-        dense?:boolean,
-        secondary?:Widget,
-        selected?:boolean,
-        controlAffinity?:ListTileControlAffinity,
-        autofocus?:boolean,
-      }
-     */
-    constructor(config: RadioListTileConfig);
-}
-interface RawMaterialButtonConfig {
-    key?: Key;
-    onPressed: OnCallback;
-    onLongPress?: OnCallback;
-    onHighlightChanged?: OnCallbackBoolean;
-    textStyle?: TextStyle;
-    padding?: EdgeInsets;
-    fillColor?: Color;
-    focusColor?: Color;
-    hoverColor?: Color;
-    highlightColor?: Color;
-    splashColor?: Color;
-    constraints?: BoxConstraints;
-    elevation?: number;
-    focusElevation?: number;
-    hoverElevation?: number;
-    highlightElevation?: number;
-    disabledElevation?: number;
-    visualDensity?: VisualDensity;
-    autofocus?: boolean;
-    shape?: any;
-    clipBehavior?: Clip;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    animationDuration?: Duration;
-    enableFeedback?: boolean;
-    child?: Widget;
+    constructor(config: {
+        key?: Key;
+        value: string;
+        groupValue: string;
+        onChanged: OnCallbackString;
+        toggleable?: boolean;
+        activeColor?: Color;
+        title?: Widget;
+        subtitle?: Widget;
+        isThreeLine?: boolean;
+        dense?: boolean;
+        secondary?: Widget;
+        selected?: boolean;
+        controlAffinity?: ListTileControlAffinity;
+        autofocus?: boolean;
+    });
 }
 export declare class RawMaterialButton extends Widget {
     key?: Key;
@@ -10324,48 +7059,33 @@ export declare class RawMaterialButton extends Widget {
     animationDuration?: Duration;
     enableFeedback?: boolean;
     child?: Widget;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        onPressed:OnCallback,
-        onLongPress?:OnCallback,
-        onHighlightChanged?:OnCallbackBoolean,
-        textStyle?:TextStyle,
-        padding?:EdgeInsets,
-        fillColor?:Color,
-        focusColor?:Color,
-        hoverColor?:Color,
-        highlightColor?:Color,
-        splashColor?:Color,
-        constraints?:BoxConstraints,
-        elevation?:number,
-        focusElevation?:number,
-        hoverElevation?:number,
-        highlightElevation?:number,
-        disabledElevation?:number,
-        visualDensity?:VisualDensity,
-        autofocus?:boolean,
-        shape?:any,
-        clipBehavior?:Clip,
-        materialTapTargetSize?:MaterialTapTargetSize,
-        animationDuration?:Duration,
-        enableFeedback?:boolean,
-        child?:Widget,
-      }
-     */
-    constructor(config: RawMaterialButtonConfig);
-}
-interface RichTextConfig {
-    key?: Key;
-    text: Widget;
-    textAlign?: TextAlign;
-    textDirection?: TextDirection;
-    softWrap?: boolean;
-    overflow?: TextOverflow;
-    textScaleFactor?: number;
-    maxLines?: number;
-    textWidthBasis?: TextWidthBasis;
+    constructor(config: {
+        key?: Key;
+        onPressed: OnCallback;
+        onLongPress?: OnCallback;
+        onHighlightChanged?: OnCallbackBoolean;
+        textStyle?: TextStyle;
+        padding?: EdgeInsets;
+        fillColor?: Color;
+        focusColor?: Color;
+        hoverColor?: Color;
+        highlightColor?: Color;
+        splashColor?: Color;
+        constraints?: BoxConstraints;
+        elevation?: number;
+        focusElevation?: number;
+        hoverElevation?: number;
+        highlightElevation?: number;
+        disabledElevation?: number;
+        visualDensity?: VisualDensity;
+        autofocus?: boolean;
+        shape?: any;
+        clipBehavior?: Clip;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        animationDuration?: Duration;
+        enableFeedback?: boolean;
+        child?: Widget;
+    });
 }
 export declare class RichText extends Widget {
     text?: TextSpan;
@@ -10377,28 +7097,17 @@ export declare class RichText extends Widget {
     maxLines?: number;
     key?: Key;
     textWidthBasis?: TextWidthBasis;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        text:Widget,
-        textAlign?:TextAlign,
-        textDirection?:TextDirection,
-        softWrap?:boolean,
-        overflow?:Overflow,
-        textScaleFactor?:number,
-        maxLines?:number,
-        textWidthBasis?:TextWidthBasis,
-      }
-     */
-    constructor(config: RichTextConfig);
-}
-interface StepConfig {
-    title: Widget;
-    subtitle?: Widget;
-    content: Widget;
-    state?: StepState;
-    isActive?: boolean;
+    constructor(config: {
+        key?: Key;
+        text: Widget;
+        textAlign?: TextAlign;
+        textDirection?: TextDirection;
+        softWrap?: boolean;
+        overflow?: TextOverflow;
+        textScaleFactor?: number;
+        maxLines?: number;
+        textWidthBasis?: TextWidthBasis;
+    });
 }
 export declare class Step extends Widget {
     title?: Widget;
@@ -10406,27 +7115,13 @@ export declare class Step extends Widget {
     content?: Widget;
     state?: StepState;
     isActive?: boolean;
-    /**
-     * @param config config:
-      {
-        title:Widget,
-        subtitle?:Widget,
-        content:Widget,
-        state?:StepState,
-        isActive?:boolean,
-      }
-     */
-    constructor(config: StepConfig);
-}
-interface StepperConfig {
-    key?: Key;
-    steps?: Array<Step>;
-    physics?: ScrollPhysics;
-    type?: StepperType;
-    currentStep?: number;
-    onStepTapped?: OnCallbackNumber;
-    onStepContinue?: OnCallback;
-    onStepCancel?: OnCallback;
+    constructor(config: {
+        title: Widget;
+        subtitle?: Widget;
+        content: Widget;
+        state?: StepState;
+        isActive?: boolean;
+    });
 }
 export declare class Stepper extends Widget {
     key?: Key;
@@ -10437,86 +7132,24 @@ export declare class Stepper extends Widget {
     onStepTapped?: OnCallbackNumber;
     onStepContinue?: OnCallback;
     onStepCancel?: OnCallback;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        steps?:Array<Step>,
-        physics?:ScrollPhysics,
-        type?:StepperType,
-        currentStep?:number,
-        onStepTapped?:OnCallbackNumber,
-        onStepContinue?:OnCallback,
-        onStepCancel?:OnCallback,
-      }
-     */
-    constructor(config: StepperConfig);
-}
-interface SpacerConfig {
-    flex?: number;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        steps?: Array<Step>;
+        physics?: ScrollPhysics;
+        type?: StepperType;
+        currentStep?: number;
+        onStepTapped?: OnCallbackNumber;
+        onStepContinue?: OnCallback;
+        onStepCancel?: OnCallback;
+    });
 }
 export declare class Spacer extends Widget {
     key?: Key;
     flex?: number;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        flex?:number
-      }
-     */
-    constructor(config: SpacerConfig);
-}
-interface SemanticsConfig {
-    key?: Key;
-    child?: Widget;
-    container?: boolean;
-    explicitChildNodes?: boolean;
-    excludeSemantics?: boolean;
-    enabled?: boolean;
-    checked?: boolean;
-    selected?: boolean;
-    toggled?: boolean;
-    button?: boolean;
-    link?: boolean;
-    header?: boolean;
-    textField?: boolean;
-    readOnly?: boolean;
-    focusable?: boolean;
-    focused?: boolean;
-    inMutuallyExclusiveGroup?: boolean;
-    obscured?: boolean;
-    multiline?: boolean;
-    scopesRoute?: boolean;
-    namesRoute?: boolean;
-    hidden?: boolean;
-    image?: boolean;
-    liveRegion?: boolean;
-    maxValueLength?: number;
-    currentValueLength?: number;
-    label?: string;
-    value?: string;
-    increasedValue?: string;
-    decreasedValue?: string;
-    hint?: string;
-    onTapHint?: string;
-    onLongPressHint?: string;
-    textDirection?: TextDirection;
-    onTap?: OnCallback;
-    onLongPress?: OnCallback;
-    onScrollLeft?: OnCallback;
-    onScrollRight?: OnCallback;
-    onScrollUp?: OnCallback;
-    onScrollDown?: OnCallback;
-    onIncrease?: OnCallback;
-    onDecrease?: OnCallback;
-    onCopy?: OnCallback;
-    onCut?: OnCallback;
-    onPaste?: OnCallback;
-    onDismiss?: OnCallback;
-    onDidGainAccessibilityFocus?: OnCallback;
-    onDidLoseAccessibilityFocus?: OnCallback;
+    constructor(config: {
+        key?: Key;
+        flex?: number;
+    });
 }
 export declare class Semantics extends Widget {
     key?: Key;
@@ -10567,80 +7200,56 @@ export declare class Semantics extends Widget {
     onDismiss?: OnCallback;
     onDidGainAccessibilityFocus?: OnCallback;
     onDidLoseAccessibilityFocus?: OnCallback;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        container?:boolean,
-        explicitChildNodes?:boolean,
-        excludeSemantics?:boolean,
-        enabled?:boolean,
-        checked?:boolean,
-        selected?:boolean,
-        toggled?:boolean,
-        button?:boolean,
-        link?:boolean,
-        header?:boolean,
-        textField?:boolean,
-        readOnly?:boolean,
-        focusable?:boolean,
-        focused?:boolean,
-        inMutuallyExclusiveGroup?:boolean,
-        obscured?:boolean,
-        multiline?:boolean,
-        scopesRoute?:boolean,
-        namesRoute?:boolean,
-        hidden?:boolean,
-        image?:boolean,
-        liveRegion?:boolean,
-        maxValueLength?:number,
-        currentValueLength?:number,
-  
-        label?:string,
-        value?:string,
-        increasedValue?:string,
-        decreasedValue?:string,
-        hint?:string,
-        onTapHint?:string,
-        onLongPressHint?:string,
-        textDirection?:TextDirection,
-  
-        onTap?:OnCallback,
-        onLongPress?:OnCallback,
-        onScrollLeft?:OnCallback,
-        onScrollRight?:OnCallback,
-        onScrollUp?:OnCallback,
-        onScrollDown?:OnCallback,
-        onIncrease?:OnCallback,
-        onDecrease?:OnCallback,
-        onCopy?:OnCallback,
-        onCut?:OnCallback,
-        onPaste?:OnCallback,
-        onDismiss?:OnCallback,
-        onDidGainAccessibilityFocus?:OnCallback,
-        onDidLoseAccessibilityFocus?:OnCallback,
-      }
-     */
-    constructor(config: SemanticsConfig);
-}
-interface SwitchListTileConfig {
-    key?: Key;
-    value: boolean;
-    onChanged: OnCallbackBoolean;
-    activeColor?: Color;
-    activeTrackColor?: Color;
-    inactiveThumbColor?: Color;
-    inactiveTrackColor?: Color;
-    title?: Widget;
-    subtitle?: Widget;
-    isThreeLine?: boolean;
-    dense?: boolean;
-    contentPadding?: EdgeInsets;
-    secondary?: Widget;
-    selected?: boolean;
-    autofocus?: boolean;
-    controlAffinity?: ListTileControlAffinity;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        container?: boolean;
+        explicitChildNodes?: boolean;
+        excludeSemantics?: boolean;
+        enabled?: boolean;
+        checked?: boolean;
+        selected?: boolean;
+        toggled?: boolean;
+        button?: boolean;
+        link?: boolean;
+        header?: boolean;
+        textField?: boolean;
+        readOnly?: boolean;
+        focusable?: boolean;
+        focused?: boolean;
+        inMutuallyExclusiveGroup?: boolean;
+        obscured?: boolean;
+        multiline?: boolean;
+        scopesRoute?: boolean;
+        namesRoute?: boolean;
+        hidden?: boolean;
+        image?: boolean;
+        liveRegion?: boolean;
+        maxValueLength?: number;
+        currentValueLength?: number;
+        label?: string;
+        value?: string;
+        increasedValue?: string;
+        decreasedValue?: string;
+        hint?: string;
+        onTapHint?: string;
+        onLongPressHint?: string;
+        textDirection?: TextDirection;
+        onTap?: OnCallback;
+        onLongPress?: OnCallback;
+        onScrollLeft?: OnCallback;
+        onScrollRight?: OnCallback;
+        onScrollUp?: OnCallback;
+        onScrollDown?: OnCallback;
+        onIncrease?: OnCallback;
+        onDecrease?: OnCallback;
+        onCopy?: OnCallback;
+        onCut?: OnCallback;
+        onPaste?: OnCallback;
+        onDismiss?: OnCallback;
+        onDidGainAccessibilityFocus?: OnCallback;
+        onDidLoseAccessibilityFocus?: OnCallback;
+    });
 }
 export declare class SwitchListTile extends Widget {
     key?: Key;
@@ -10659,42 +7268,24 @@ export declare class SwitchListTile extends Widget {
     selected?: boolean;
     autofocus?: boolean;
     controlAffinity?: ListTileControlAffinity;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          onChanged:OnCallbackBoolean,
-          activeColor?:Color,
-          activeTrackColor?:Color,
-          inactiveThumbColor?:Color,
-          inactiveTrackColor?:Color,
-          title?:Widget,
-          subtitle?:Widget,
-          isThreeLine?:boolean,
-          dense?:boolean,
-          contentPadding?:EdgeInsets,
-          secondary?:Widget,
-          selected?:boolean,
-          autofocus?:boolean,
-          controlAffinity?:ListTileControlAffinity,
-        }
-     */
-    constructor(config: SwitchListTileConfig);
-}
-interface SwitchConfig {
-    key?: Key;
-    value: boolean;
-    onChanged?: OnCallbackBoolean;
-    activeColor?: Color;
-    activeTrackColor?: Color;
-    inactiveThumbColor?: Color;
-    inactiveTrackColor?: Color;
-    focusColor?: Color;
-    hoverColor?: Color;
-    materialTapTargetSize?: MaterialTapTargetSize;
-    dragStartBehavior?: DragStartBehavior;
-    autofocus?: boolean;
+    constructor(config: {
+        key?: Key;
+        value: boolean;
+        onChanged: OnCallbackBoolean;
+        activeColor?: Color;
+        activeTrackColor?: Color;
+        inactiveThumbColor?: Color;
+        inactiveTrackColor?: Color;
+        title?: Widget;
+        subtitle?: Widget;
+        isThreeLine?: boolean;
+        dense?: boolean;
+        contentPadding?: EdgeInsets;
+        secondary?: Widget;
+        selected?: boolean;
+        autofocus?: boolean;
+        controlAffinity?: ListTileControlAffinity;
+    });
 }
 export declare class Switch extends Widget {
     key?: Key;
@@ -10709,39 +7300,20 @@ export declare class Switch extends Widget {
     materialTapTargetSize?: MaterialTapTargetSize;
     dragStartBehavior?: DragStartBehavior;
     autofocus?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          onChanged?:OnCallbackBoolean,
-          activeColor?:Color,
-          activeTrackColor?:Color,
-          inactiveThumbColor?:Color,
-          inactiveTrackColor?:Color,
-          focusColor?:Color,
-          hoverColor?:Color,
-          materialTapTargetSize?:MaterialTapTargetSize,
-          dragStartBehavior?:DragStartBehavior,
-          autofocus?:boolean,
-        }
-     */
-    constructor(config: SwitchConfig);
-}
-interface SliderConfig {
-    key?: Key;
-    value?: number;
-    onChanged?: OnCallbackNumber;
-    onChangeStart?: OnCallbackNumber;
-    onChangeEnd?: OnCallbackNumber;
-    min?: number;
-    max?: number;
-    divisions?: number;
-    label?: string;
-    activeColor?: Color;
-    inactiveColor?: Color;
-    semanticFormatterCallback?: OnCallbackNumber;
-    autofocus?: boolean;
+    constructor(config: {
+        key?: Key;
+        value: boolean;
+        onChanged?: OnCallbackBoolean;
+        activeColor?: Color;
+        activeTrackColor?: Color;
+        inactiveThumbColor?: Color;
+        inactiveTrackColor?: Color;
+        focusColor?: Color;
+        hoverColor?: Color;
+        materialTapTargetSize?: MaterialTapTargetSize;
+        dragStartBehavior?: DragStartBehavior;
+        autofocus?: boolean;
+    });
 }
 export declare class Slider extends Widget {
     key?: Key;
@@ -10757,32 +7329,21 @@ export declare class Slider extends Widget {
     inactiveColor?: Color;
     semanticFormatterCallback?: OnCallbackNumber;
     autofocus?: boolean;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        value?:number,
-        onChanged?:OnCallbackNumber,
-        onChangeStart?:OnCallbackNumber,
-        onChangeEnd?:OnCallbackNumber,
-        min?:number,
-        max?:number,
-        divisions?:number,
-        label?:string,
-        activeColor?:Color,
-        inactiveColor?:Color,
-        semanticFormatterCallback?:OnCallbackNumber,
-        autofocus?:boolean,
-      }
-     */
-    constructor(config: SliderConfig);
-}
-interface SizedBoxConfig {
-    key?: Key;
-    child?: Widget;
-    width?: number;
-    height?: number;
-    size?: Size;
+    constructor(config: {
+        key?: Key;
+        value?: number;
+        onChanged?: OnCallbackNumber;
+        onChangeStart?: OnCallbackNumber;
+        onChangeEnd?: OnCallbackNumber;
+        min?: number;
+        max?: number;
+        divisions?: number;
+        label?: string;
+        activeColor?: Color;
+        inactiveColor?: Color;
+        semanticFormatterCallback?: OnCallbackNumber;
+        autofocus?: boolean;
+    });
 }
 export declare class SizedBox extends Widget {
     child?: Widget;
@@ -10790,72 +7351,37 @@ export declare class SizedBox extends Widget {
     height?: number;
     key?: Key;
     size?: Size;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        width?:number,
-        height?:number,
-      }
-     */
-    constructor(config?: SizedBoxConfig);
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-      }
-     */
-    static expand(config: SizedBoxConfig): SizedBox;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        size?:Size,
-      }
-     */
-    static fromSize(config: SizedBoxConfig): SizedBox;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-      }
-     */
-    static shrink(config: SizedBoxConfig): SizedBox;
-}
-interface SizedOverflowBoxConfig {
-    key?: Key;
-    child?: Widget;
-    alignment?: Alignment;
-    size: Size;
+    constructor(config?: {
+        key?: Key;
+        child?: Widget;
+        width?: number;
+        height?: number;
+    });
+    static expand(config: {
+        key?: Key;
+        child?: Widget;
+    }): SizedBox;
+    static fromSize(config: {
+        key?: Key;
+        child?: Widget;
+        size?: Size;
+    }): SizedBox;
+    static shrink(config: {
+        key?: Key;
+        child?: Widget;
+    }): SizedBox;
 }
 export declare class SizedOverflowBox extends Widget {
     child?: Widget;
     alignment?: Alignment;
     size?: Size;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        alignment?:Alignment,
-        size:Size,
-      }
-     */
-    constructor(config: SizedOverflowBoxConfig);
-}
-interface StackConfig {
-    key?: Key;
-    children?: Array<Widget>;
-    alignment?: AlignmentDirectional;
-    textDirection?: TextDirection;
-    fit?: StackFit;
-    overflow?: Overflow;
-    clipBehavior?: Clip;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        alignment?: Alignment;
+        size: Size;
+    });
 }
 export declare class Stack extends Widget {
     key?: Key;
@@ -10865,47 +7391,15 @@ export declare class Stack extends Widget {
     fit?: StackFit;
     overflow?: Overflow;
     clipBehavior?: Clip;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        children?:Array<Widget>,
-        alignment?:AlignmentDirectional,
-        textDirection?:TextDirection,
-        fit?:StackFit,
-        overflow?:Overflow,
-        clipBehavior?:Clip,
-      }
-     */
-    constructor(config: StackConfig);
-}
-interface SliverAppBarConfig {
-    key?: Key;
-    leading?: Widget;
-    automaticallyImplyLeading?: boolean;
-    title?: Widget;
-    actions?: Array<Widget>;
-    flexibleSpace?: Widget;
-    bottom?: Widget;
-    elevation?: number;
-    shadowColor?: Color;
-    forceElevated?: boolean;
-    backgroundColor?: Color;
-    brightness?: Brightness;
-    primary?: boolean;
-    centerTitle?: boolean;
-    excludeHeaderSemantics?: boolean;
-    titleSpacing?: number;
-    collapsedHeight?: number;
-    expandedHeight?: number;
-    floating?: boolean;
-    pinned?: boolean;
-    snap?: boolean;
-    stretch?: boolean;
-    stretchTriggerOffset?: number;
-    onStretchTrigger?: OnCallback;
-    shape?: ShapeBorder;
-    toolbarHeight?: number;
+    constructor(config: {
+        key?: Key;
+        children?: Array<Widget>;
+        alignment?: AlignmentDirectional;
+        textDirection?: TextDirection;
+        fit?: StackFit;
+        overflow?: Overflow;
+        clipBehavior?: Clip;
+    });
 }
 export declare class SliverAppBar extends Widget {
     key?: Key;
@@ -10934,44 +7428,34 @@ export declare class SliverAppBar extends Widget {
     onStretchTrigger?: OnCallback;
     shape?: ShapeBorder;
     toolbarHeight?: number;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        leading?:Widget,
-        automaticallyImplyLeading?:boolean,
-        title?:Widget,
-        actions?:Array<Widget>,
-        flexibleSpace?:Widget,
-        bottom?:Widget,
-        elevation?:number,
-        shadowColor?:Color,
-        forceElevated?:boolean,
-        backgroundColor?:Color,
-        brightness?:Brightness,
-        primary?:boolean,
-        centerTitle?:boolean,
-        excludeHeaderSemantics?:boolean,
-        titleSpacing?:number,
-        collapsedHeight?:number,
-        expandedHeight?:number,
-        floating?:boolean,
-        pinned?:boolean,
-        snap?:boolean,
-        stretch?:boolean,
-        stretchTriggerOffset?:number
-        onStretchTrigger?:OnCallback,
-        shape?:any,
-        toolbarHeight?:number,
-      }
-     */
-    constructor(config: SliverAppBarConfig);
-}
-interface SliverFillViewportConfig {
-    key?: Key;
-    delegate: SliverChildDelegate;
-    viewportFraction?: number;
-    padEnds?: boolean;
+    constructor(config: {
+        key?: Key;
+        leading?: Widget;
+        automaticallyImplyLeading?: boolean;
+        title?: Widget;
+        actions?: Array<Widget>;
+        flexibleSpace?: Widget;
+        bottom?: Widget;
+        elevation?: number;
+        shadowColor?: Color;
+        forceElevated?: boolean;
+        backgroundColor?: Color;
+        brightness?: Brightness;
+        primary?: boolean;
+        centerTitle?: boolean;
+        excludeHeaderSemantics?: boolean;
+        titleSpacing?: number;
+        collapsedHeight?: number;
+        expandedHeight?: number;
+        floating?: boolean;
+        pinned?: boolean;
+        snap?: boolean;
+        stretch?: boolean;
+        stretchTriggerOffset?: number;
+        onStretchTrigger?: OnCallback;
+        shape?: any;
+        toolbarHeight?: number;
+    });
 }
 export declare class SliverFillViewport extends Widget {
     key?: Key;
@@ -10980,176 +7464,74 @@ export declare class SliverFillViewport extends Widget {
     padEnds?: boolean;
     /**
      * @param config config:
-      {
-        key?:Key,
-        delegate:SliverChildDelegate,
-        viewportFraction?:number,
-        padEnds?:boolean,
-      }
+      
      */
-    constructor(config: SliverFillViewportConfig);
-}
-interface SliverFillRemainingConfig {
-    key?: Key;
-    child?: Widget;
-    hasScrollBody?: boolean;
-    fillOverscroll?: boolean;
+    constructor(config: {
+        key?: Key;
+        delegate: SliverChildDelegate;
+        viewportFraction?: number;
+        padEnds?: boolean;
+    });
 }
 export declare class SliverFillRemaining extends Widget {
     key?: Key;
     child?: Widget;
     hasScrollBody?: boolean;
     fillOverscroll?: boolean;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        hasScrollBody?:boolean,
-        fillOverscroll?:boolean,
-      }
-     */
-    constructor(config: SliverFillRemainingConfig);
-}
-interface SliverPaddingConfig {
-    key?: Key;
-    sliver?: Widget;
-    padding: EdgeInsets;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        hasScrollBody?: boolean;
+        fillOverscroll?: boolean;
+    });
 }
 export declare class SliverPadding extends Widget {
     sliver?: Widget;
     padding?: EdgeInsets;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        sliver?:Widget,
-        padding:EdgeInsets,
-      }
-     */
-    constructor(config: SliverPaddingConfig);
-}
-interface SliverGridConfig {
-    delegate?: SliverChildDelegate;
-    gridDelegate?: SliverGridDelegate;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        sliver?: Widget;
+        padding: EdgeInsets;
+    });
 }
 export declare class SliverGrid extends Widget {
     delegate?: SliverChildDelegate;
     gridDelegate?: SliverGridDelegate;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        delegate?:SliverChildDelegate,
-        gridDelegate?:SliverGridDelegate,
-        key?:Key,
-      }
-     */
-    constructor(config: SliverGridConfig);
+    constructor(config: {
+        delegate?: SliverChildDelegate;
+        gridDelegate?: SliverGridDelegate;
+        key?: Key;
+    });
 }
 export declare abstract class SliverGridDelegate extends Widget {
-    /**
-     * SliverGridDelegate.withMax=new SliverGridDelegateWithMaxCrossAxisExtent(config: SliverGridDelegateWithMaxCrossAxisExtentConfig);
-     * @param config config:
-      {
-        maxCrossAxisExtent:number,
-        mainAxisSpacing?:number,
-        crossAxisSpacing?:number,
-        childAspectRatio?:number,
-      }
-     */
-    static withMax(config: SliverGridDelegateWithMaxCrossAxisExtentConfig): SliverGridDelegateWithMaxCrossAxisExtent;
-    /**
-     * SliverGridDelegate.withFixed=new SliverGridDelegateWithFixedCrossAxisCount(config: SliverGridDelegateWithFixedCrossAxisCountConfig);
-     * @param config config:
-      {
-        crossAxisCount:number,
-        mainAxisSpacing?:number,
-        crossAxisSpacing?:number,
-        childAspectRatio?:number,
-      }
-     */
-    static withFixed(config: SliverGridDelegateWithFixedCrossAxisCountConfig): SliverGridDelegateWithFixedCrossAxisCount;
-}
-interface SliverGridDelegateWithMaxCrossAxisExtentConfig {
-    maxCrossAxisExtent: number;
-    mainAxisSpacing?: number;
-    crossAxisSpacing?: number;
-    childAspectRatio?: number;
 }
 export declare class SliverGridDelegateWithMaxCrossAxisExtent extends Widget {
     maxCrossAxisExtent?: number;
     mainAxisSpacing?: number;
     crossAxisSpacing?: number;
     childAspectRatio?: number;
-    /**
-     * @param config config:
-      {
-        maxCrossAxisExtent:number,
-        mainAxisSpacing?:number,
-        crossAxisSpacing?:number,
-        childAspectRatio?:number,
-      }
-     */
-    constructor(config: SliverGridDelegateWithMaxCrossAxisExtentConfig);
-}
-interface SliverGridDelegateWithFixedCrossAxisCountConfig {
-    crossAxisCount: number;
-    mainAxisSpacing?: number;
-    crossAxisSpacing?: number;
-    childAspectRatio?: number;
+    constructor(config: {
+        maxCrossAxisExtent: number;
+        mainAxisSpacing?: number;
+        crossAxisSpacing?: number;
+        childAspectRatio?: number;
+    });
 }
 export declare class SliverGridDelegateWithFixedCrossAxisCount extends Widget {
     crossAxisCount?: number;
     mainAxisSpacing?: number;
     crossAxisSpacing?: number;
     childAspectRatio?: number;
-    /**
-     * @param config config:
-      {
-        crossAxisCount:number,
-        mainAxisSpacing?:number,
-        crossAxisSpacing?:number,
-        childAspectRatio?:number,
-      }
-     */
-    constructor(config: SliverGridDelegateWithFixedCrossAxisCountConfig);
+    constructor(config: {
+        crossAxisCount: number;
+        mainAxisSpacing?: number;
+        crossAxisSpacing?: number;
+        childAspectRatio?: number;
+    });
 }
 export declare abstract class SliverChildDelegate extends Widget {
-    /**
-     * SliverChildDelegate.list = new SliverChildListDelegate(config: SliverChildListDelegateConfig);
-     * @param config config:
-       {
-         children?:Array<Widget>,
-         addAutomaticKeepAlives?:boolean,
-         addRepaintBoundaries?:boolean,
-         addSemanticIndexes?:boolean,
-         semanticIndexOffset?:number,
-       }
-    */
-    static list(config: SliverChildListDelegateConfig): SliverChildListDelegate;
-    /**
-     * SliverChildDelegate.builder = new SliverChildBuilderDelegate(config: SliverChildBuilderDelegateConfig);
-     * @param config config:
-      {
-        builder:any,
-        childCount?:number,
-        addAutomaticKeepAlives?:boolean,
-        addRepaintBoundaries?:boolean,
-        addSemanticIndexes?:boolean,
-        semanticIndexOffset?:number,
-      }
-     */
-    static builder(config: SliverChildBuilderDelegateConfig): SliverChildBuilderDelegate;
-}
-interface SliverChildListDelegateConfig {
-    children: Array<Widget>;
-    addAutomaticKeepAlives?: boolean;
-    addRepaintBoundaries?: boolean;
-    addSemanticIndexes?: boolean;
-    semanticIndexOffset?: number;
 }
 export declare class SliverChildListDelegate extends SliverChildDelegate {
     children?: Array<Widget>;
@@ -11157,25 +7539,13 @@ export declare class SliverChildListDelegate extends SliverChildDelegate {
     addRepaintBoundaries?: boolean;
     addSemanticIndexes?: boolean;
     semanticIndexOffset?: number;
-    /**
-     * @param config config:
-      {
-        children:Array<Widget>,
-        addAutomaticKeepAlives?:boolean,
-        addRepaintBoundaries?:boolean,
-        addSemanticIndexes?:boolean,
-        semanticIndexOffset?:number,
-      }
-     */
-    constructor(config: SliverChildListDelegateConfig);
-}
-interface SliverChildBuilderDelegateConfig {
-    builder: IndexedWidgetBuilder;
-    childCount: number;
-    addAutomaticKeepAlives?: boolean;
-    addRepaintBoundaries?: boolean;
-    addSemanticIndexes?: boolean;
-    semanticIndexOffset?: number;
+    constructor(config: {
+        children: Array<Widget>;
+        addAutomaticKeepAlives?: boolean;
+        addRepaintBoundaries?: boolean;
+        addSemanticIndexes?: boolean;
+        semanticIndexOffset?: number;
+    });
 }
 export declare class SliverChildBuilderDelegate extends SliverChildDelegate {
     builder?: IndexedWidgetBuilder;
@@ -11186,126 +7556,65 @@ export declare class SliverChildBuilderDelegate extends SliverChildDelegate {
     semanticIndexOffset?: number;
     children?: Array<Widget>;
     preBuild(jsWidgetHelper?: any, buildContext?: any): void;
-    /**
-     * @param config config:
-      {
-        builder:IndexedWidgetBuilder,
-        childCount:number,
-        addAutomaticKeepAlives?:boolean,
-        addRepaintBoundaries?:boolean,
-        addSemanticIndexes?:boolean,
-        semanticIndexOffset?:number,
-        children?:Array<Widget>,
-      }
-     */
-    constructor(config: SliverChildBuilderDelegateConfig);
-}
-interface SliverListConfig {
-    delegate?: SliverChildDelegate;
-    key?: Key;
+    constructor(config: {
+        builder: IndexedWidgetBuilder;
+        childCount: number;
+        addAutomaticKeepAlives?: boolean;
+        addRepaintBoundaries?: boolean;
+        addSemanticIndexes?: boolean;
+        semanticIndexOffset?: number;
+        children?: Array<Widget>;
+    });
 }
 export declare class SliverList extends Widget {
     delegate?: SliverChildDelegate;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        delegate?:SliverChildDelegate,
-        key?:Key
-      }
-     */
-    constructor(config: SliverListConfig);
-}
-interface SliverOpacityConfig {
-    key?: Key;
-    sliver?: Widget;
-    opacity: number;
-    alwaysIncludeSemantics?: boolean;
+    constructor(config: {
+        delegate?: SliverChildDelegate;
+        key?: Key;
+    });
 }
 export declare class SliverOpacity extends Widget {
     key?: Key;
     sliver?: Widget;
     opacity?: number;
     alwaysIncludeSemantics?: boolean;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        sliver?:Widget,
-        opacity:number,
-        alwaysIncludeSemantics?:boolean,
-      }
-     */
-    constructor(config: SliverOpacityConfig);
-}
-interface SliverOverlapInjectorConfig {
-    key?: Key;
-    child?: Widget;
-    handle?: any;
+    constructor(config: {
+        key?: Key;
+        sliver?: Widget;
+        opacity: number;
+        alwaysIncludeSemantics?: boolean;
+    });
 }
 export declare class SliverOverlapInjector extends Widget {
     child?: Widget;
     handle?: any;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        handle?:any,
-      }
-     */
-    constructor(config: SliverOverlapInjectorConfig);
-}
-interface SliverFixedExtentListConfig {
-    key?: Key;
-    delegate?: SliverChildDelegate;
-    itemExtent?: number;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        handle?: any;
+    });
 }
 export declare class SliverFixedExtentList extends Widget {
     delegate?: SliverChildDelegate;
     itemExtent?: number;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        delegate?:SliverChildDelegate,
-        itemExtent?:number,
-      }
-     */
-    constructor(config: SliverFixedExtentListConfig);
-}
-interface SliverOverlapAbsorberConfig {
-    key?: Key;
-    child?: Widget;
-    handle?: any;
+    constructor(config: {
+        key?: Key;
+        delegate?: SliverChildDelegate;
+        itemExtent?: number;
+    });
 }
 export declare class SliverOverlapAbsorber extends Widget {
     child?: Widget;
     handle?: any;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        handle?:any,
-      }
-     */
-    constructor(config: SliverOverlapAbsorberConfig);
-}
-interface SingleChildScrollViewConfig {
-    key?: Key;
-    child?: Widget;
-    scrollDirection?: Axis;
-    reverse?: boolean;
-    padding?: EdgeInsets;
-    primary?: boolean;
-    physics?: ScrollPhysics;
-    controller?: ScrollController;
-    dragStartBehavior?: DragStartBehavior;
-    clipBehavior?: Clip;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        handle?: any;
+    });
 }
 export declare class SingleChildScrollView extends Widget {
     child?: Widget;
@@ -11318,61 +7627,26 @@ export declare class SingleChildScrollView extends Widget {
     dragStartBehavior?: DragStartBehavior;
     clipBehavior?: Clip;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        scrollDirection?:Axis,
-        reverse?:boolean,
-        padding?:EdgeInsets,
-        primary?:boolean,
-        physics?:ScrollPhysics,
-        controller?:ScrollController,
-        dragStartBehavior?:DragStartBehavior,
-        clipBehavior?:Clip,
-      }
-     */
-    constructor(config: SingleChildScrollViewConfig);
-}
-interface SliverToBoxAdapterConfig {
-    child?: Widget;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        scrollDirection?: Axis;
+        reverse?: boolean;
+        padding?: EdgeInsets;
+        primary?: boolean;
+        physics?: ScrollPhysics;
+        controller?: ScrollController;
+        dragStartBehavior?: DragStartBehavior;
+        clipBehavior?: Clip;
+    });
 }
 export declare class SliverToBoxAdapter extends Widget {
     child?: Widget;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        child?:Widget,
-        key?:Key
-      }
-     */
-    constructor(config: SliverToBoxAdapterConfig);
-}
-interface ScaffoldConfig {
-    key?: Key;
-    appBar?: Widget;
-    body?: Widget;
-    floatingActionButton?: Widget;
-    floatingActionButtonLocation?: FloatingActionButtonLocation;
-    persistentFooterButtons?: Array<Widget>;
-    drawer?: Widget;
-    endDrawer?: Widget;
-    bottomNavigationBar?: Widget;
-    bottomSheet?: Widget;
-    backgroundColor?: Color;
-    resizeToAvoidBottomPadding?: boolean;
-    resizeToAvoidBottomInset?: boolean;
-    primary?: boolean;
-    drawerDragStartBehavior?: DragStartBehavior;
-    extendBody?: boolean;
-    extendBodyBehindAppBar?: boolean;
-    drawerScrimColor?: Color;
-    drawerEdgeDragWidth?: number;
-    drawerEnableOpenDragGesture?: boolean;
-    endDrawerEnableOpenDragGesture?: boolean;
+    constructor(config: {
+        child?: Widget;
+        key?: Key;
+    });
 }
 export declare class Scaffold extends Widget {
     key?: Key;
@@ -11396,45 +7670,31 @@ export declare class Scaffold extends Widget {
     drawerEdgeDragWidth?: number;
     drawerEnableOpenDragGesture?: boolean;
     endDrawerEnableOpenDragGesture?: boolean;
-    /**
-     * @param config config:
-      {
-        key?:Key;
-        appBar?:Widget;
-        body?:Widget;
-        floatingActionButton?:Widget;
-        floatingActionButtonLocation?:FloatingActionButtonLocation;
-        persistentFooterButtons?:Array<Widget>;
-        drawer?:Widget;
-        endDrawer?:Widget;
-        bottomNavigationBar?:Widget;
-        bottomSheet?:Widget;
-        backgroundColor?:Color;
-        resizeToAvoidBottomPadding?:boolean;
-        resizeToAvoidBottomInset?:boolean;
-        primary?:boolean;
-        drawerDragStartBehavior?:DragStartBehavior;
-        extendBody?:boolean;
-        extendBodyBehindAppBar?:boolean;
-        drawerScrimColor?:Color;
-        drawerEdgeDragWidth?:number;
-        drawerEnableOpenDragGesture?:boolean;
-        endDrawerEnableOpenDragGesture?:boolean;
-      }
-     */
-    constructor(config: ScaffoldConfig);
+    constructor(config: {
+        key?: Key;
+        appBar?: Widget;
+        body?: Widget;
+        floatingActionButton?: Widget;
+        floatingActionButtonLocation?: FloatingActionButtonLocation;
+        persistentFooterButtons?: Array<Widget>;
+        drawer?: Widget;
+        endDrawer?: Widget;
+        bottomNavigationBar?: Widget;
+        bottomSheet?: Widget;
+        backgroundColor?: Color;
+        resizeToAvoidBottomPadding?: boolean;
+        resizeToAvoidBottomInset?: boolean;
+        primary?: boolean;
+        drawerDragStartBehavior?: DragStartBehavior;
+        extendBody?: boolean;
+        extendBodyBehindAppBar?: boolean;
+        drawerScrimColor?: Color;
+        drawerEdgeDragWidth?: number;
+        drawerEnableOpenDragGesture?: boolean;
+        endDrawerEnableOpenDragGesture?: boolean;
+    });
 }
 export declare class ScaffoldState extends DartClass {
-}
-interface SafeAreaConfig {
-    key?: Key;
-    child: Widget;
-    left?: boolean;
-    top?: boolean;
-    right?: boolean;
-    bottom?: boolean;
-    minimum?: EdgeInsets;
-    maintainBottomViewPadding?: boolean;
 }
 export declare class SafeArea extends Widget {
     key?: Key;
@@ -11445,29 +7705,16 @@ export declare class SafeArea extends Widget {
     bottom?: boolean;
     minimum?: EdgeInsets;
     maintainBottomViewPadding?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          left?:boolean,
-          top?:boolean,
-          right?:boolean,
-          bottom?:boolean,
-          minimum?:EdgeInsets,
-          maintainBottomViewPadding?:boolean,
-        }
-     */
-    constructor(config: SafeAreaConfig);
-}
-interface SliverSafeAreaConfig {
-    key?: Key;
-    sliver: Widget;
-    left?: boolean;
-    top?: boolean;
-    right?: boolean;
-    bottom?: boolean;
-    minimum?: EdgeInsets;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        left?: boolean;
+        top?: boolean;
+        right?: boolean;
+        bottom?: boolean;
+        minimum?: EdgeInsets;
+        maintainBottomViewPadding?: boolean;
+    });
 }
 export declare class SliverSafeArea extends Widget {
     key?: Key;
@@ -11477,53 +7724,27 @@ export declare class SliverSafeArea extends Widget {
     right?: boolean;
     bottom?: boolean;
     minimum?: EdgeInsets;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        sliver:Widget,
-        left?:boolean,
-        top?:boolean,
-        right?:boolean,
-        bottom?:boolean,
-        minimum?:EdgeInsets,
-      }
-     */
-    constructor(config: SliverSafeAreaConfig);
-}
-interface ScrollbarConfig {
-    key?: Key;
-    child: Widget;
-    controller?: ScrollController;
-    isAlwaysShown?: boolean;
+    constructor(config: {
+        key?: Key;
+        sliver: Widget;
+        left?: boolean;
+        top?: boolean;
+        right?: boolean;
+        bottom?: boolean;
+        minimum?: EdgeInsets;
+    });
 }
 export declare class Scrollbar extends Widget {
     key?: Key;
     child?: Widget;
     controller?: ScrollController;
     isAlwaysShown?: boolean;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child:Widget,
-        controller?:ScrollController,
-        isAlwaysShown?:boolean,
-      }
-     */
-    constructor(config: ScrollbarConfig);
-}
-interface SnackBarConfig {
-    key?: Widget;
-    content: Widget;
-    backgroundColor?: Color;
-    elevation?: number;
-    shape?: any;
-    behavior?: any;
-    action?: any;
-    duration?: Duration;
-    animation?: any;
-    onVisible?: OnCallback;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        controller?: ScrollController;
+        isAlwaysShown?: boolean;
+    });
 }
 export declare class SnackBar extends Widget {
     content?: Widget;
@@ -11536,29 +7757,18 @@ export declare class SnackBar extends Widget {
     animation?: any;
     onVisible?: OnCallback;
     key?: Widget;
-    /**
-     * @param config config:
-      {
-        key?:Widget,
-        content:Widget,
-        backgroundColor?:Color,
-        elevation?:number,
-        shape?:any,
-        behavior?:any,
-        action?:any,
-        duration?:Duration,
-        animation?:any,
-        onVisible?:OnCallback,
-      }
-     */
-    constructor(config: SnackBarConfig);
-}
-interface SnackBarActionConfig {
-    key?: Widget;
-    lable: string;
-    onPressed?: OnCallback;
-    disabledTextColor?: Color;
-    textColor?: Color;
+    constructor(config: {
+        key?: Widget;
+        content: Widget;
+        backgroundColor?: Color;
+        elevation?: number;
+        shape?: any;
+        behavior?: any;
+        action?: any;
+        duration?: Duration;
+        animation?: any;
+        onVisible?: OnCallback;
+    });
 }
 export declare class SnackBarAction extends Widget {
     key?: Widget;
@@ -11566,28 +7776,13 @@ export declare class SnackBarAction extends Widget {
     onPressed?: OnCallback;
     disabledTextColor?: Color;
     textColor?: Color;
-    /**
-     * @param config config:
-      {
-        key?:Widget,
-        lable:string,
-        onPressed?:OnCallback,
-        disabledTextColor?:Color,
-        textColor?:Color,
-      }
-     */
-    constructor(config: SnackBarActionConfig);
-}
-interface SliverVisibilityConfig {
-    key?: Key;
-    sliver: Widget;
-    replacementSliver?: Widget;
-    visible?: boolean;
-    maintainState?: boolean;
-    maintainAnimation?: boolean;
-    maintainSize?: boolean;
-    maintainSemantics?: boolean;
-    maintainInteractivity?: boolean;
+    constructor(config: {
+        key?: Widget;
+        lable: string;
+        onPressed?: OnCallback;
+        disabledTextColor?: Color;
+        textColor?: Color;
+    });
 }
 export declare class SliverVisibility extends Widget {
     key?: Key;
@@ -11599,44 +7794,17 @@ export declare class SliverVisibility extends Widget {
     maintainSize?: boolean;
     maintainSemantics?: boolean;
     maintainInteractivity?: boolean;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        sliver:Widget,
-        replacement?:Widget,
-        visible?:boolean,
-        maintainState?:boolean,
-        maintainAnimation?:boolean,
-        maintainSize?:boolean,
-        maintainSemantics?:boolean,
-        maintainInteractivity?:boolean,
-      }
-    */
-    constructor(config: SliverVisibilityConfig);
-}
-interface SelectableTextConfig {
-    key?: Key;
-    focusNode?: FocusNode;
-    style?: TextStyle;
-    strutStyle?: StrutStyle;
-    textAlign?: TextAlign;
-    textDirection?: TextDirection;
-    textScaleFactor?: number;
-    showCursor?: boolean;
-    autofocus?: boolean;
-    toolbarOptions?: ToolbarOptions;
-    minLines?: number;
-    maxLines?: number;
-    cursorWidth?: number;
-    cursorHeight?: number;
-    cursorRadius?: Radius;
-    cursorColor?: Color;
-    dragStartBehavior?: DragStartBehavior;
-    enableInteractiveSelection?: boolean;
-    onTap?: OnCallback;
-    scrollPhysics?: ScrollPhysics;
-    textWidthBasis?: TextWidthBasis;
+    constructor(config: {
+        key?: Key;
+        sliver: Widget;
+        replacementSliver?: Widget;
+        visible?: boolean;
+        maintainState?: boolean;
+        maintainAnimation?: boolean;
+        maintainSize?: boolean;
+        maintainSemantics?: boolean;
+        maintainInteractivity?: boolean;
+    });
 }
 export declare class SelectableText extends Widget {
     data?: string | TextSpan;
@@ -11661,118 +7829,61 @@ export declare class SelectableText extends Widget {
     onTap?: OnCallback;
     scrollPhysics?: ScrollPhysics;
     textWidthBasis?: TextWidthBasis;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        key?:Key,
-        focusNode?:FocusNode,
-        style?:TextStyle,
-        strutStyle?:StrutStyle,
-        textAlign?:TextAlign,
-        textDirection?:TextDirection,
-        textScaleFactor?:number,
-        showCursor?:boolean,
-        autofocus?:boolean,
-        toolbarOptions?:ToolbarOptions,
-        minLines?:number,
-        maxLines?:number,
-        cursorWidth?:number,
-        cursorHeight?:number,
-        cursorRadius?:Radius,
-        cursorColor?:Color,
-        dragStartBehavior?:DragStartBehavior,
-        enableInteractiveSelection?:boolean,
-        onTap?:OnCallback,
-        scrollPhysics?:ScrollPhysics,
-        textWidthBasis?:TextWidthBasis,
-      }
-     */
-    constructor(data: string | TextSpan, config?: SelectableTextConfig);
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        style?:TextStyle,
-        textAlign?:TextAlign,
-        textDirection?:TextDirection,
-        softWrap?:boolean,
-        overflow?:TextOverflow,
-        textScaleFactor?:number,
-        maxLines?:number,
-        semanticsLabel?:string,
-        textWidthBasis?:TextWidthBasis,
-      }
-     */
-    static rich(data: TextSpan, config?: SelectableTextConfig): SelectableText;
-}
-interface TableRowConfig {
-    key?: Key;
-    children?: Array<Widget>;
-    decoration?: BoxDecoration;
+    constructor(data: string | TextSpan, config?: {
+        key?: Key;
+        focusNode?: FocusNode;
+        style?: TextStyle;
+        strutStyle?: StrutStyle;
+        textAlign?: TextAlign;
+        textDirection?: TextDirection;
+        textScaleFactor?: number;
+        showCursor?: boolean;
+        autofocus?: boolean;
+        toolbarOptions?: ToolbarOptions;
+        minLines?: number;
+        maxLines?: number;
+        cursorWidth?: number;
+        cursorHeight?: number;
+        cursorRadius?: Radius;
+        cursorColor?: Color;
+        dragStartBehavior?: DragStartBehavior;
+        enableInteractiveSelection?: boolean;
+        onTap?: OnCallback;
+        scrollPhysics?: ScrollPhysics;
+        textWidthBasis?: TextWidthBasis;
+    });
+    static rich(data: TextSpan, config?: {
+        key?: Key;
+        style?: TextStyle;
+        textAlign?: TextAlign;
+        textDirection?: TextDirection;
+        softWrap?: boolean;
+        overflow?: TextOverflow;
+        textScaleFactor?: number;
+        maxLines?: number;
+        semanticsLabel?: string;
+        textWidthBasis?: TextWidthBasis;
+    }): SelectableText;
 }
 export declare class TableRow extends Widget {
     children?: Array<Widget>;
     decoration?: BoxDecoration;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        children?:Array<Widget>,
-        decoration?:BoxDecoration,
-      }
-     */
-    constructor(config: TableRowConfig);
-}
-interface TableCellConfig {
-    key?: Key;
-    child?: Widget;
-    verticalAlignment?: TableCellVerticalAlignment;
+    constructor(config: {
+        key?: Key;
+        children?: Array<Widget>;
+        decoration?: BoxDecoration;
+    });
 }
 export declare class TableCell extends Widget {
     child?: Widget;
     verticalAlignment?: TableCellVerticalAlignment;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        verticalAlignment?:TableCellVerticalAlignment,
-      }
-     */
-    constructor(config: TableCellConfig);
-}
-interface TransformNewConfig {
-    key?: Key;
-    child?: Widget;
-    alignment?: Alignment;
-    origin?: Offset;
-    transform: Matrix4;
-    transformHitTests?: boolean;
-}
-interface TransformRotateConfig {
-    key?: Key;
-    child?: Widget;
-    alignment?: Alignment;
-    origin?: Offset;
-    transformHitTests?: boolean;
-    angle: number;
-}
-interface TransformTranslateConfig {
-    key?: Key;
-    child?: Widget;
-    offset: Offset;
-    transformHitTests?: boolean;
-}
-interface TransformScaleConfig {
-    key?: Key;
-    child?: Widget;
-    alignment?: Alignment;
-    origin?: Offset;
-    transformHitTests?: boolean;
-    scale: number;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        verticalAlignment?: TableCellVerticalAlignment;
+    });
 }
 export declare class Transform extends Widget {
     child?: Widget;
@@ -11784,67 +7895,36 @@ export declare class Transform extends Widget {
     angle?: number;
     offset?: Offset;
     scale?: number;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        alignment?:Alignment,
-        origin?:Offset,
-        transform:Matrix4,
-        transformHitTests?:boolean,
-      }
-     */
-    constructor(config?: TransformNewConfig);
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        angle:number,
-        alignment?:Alignment,
-        origin?:Offset,
-        transformHitTests?:boolean,
-      }
-     */
-    static rotate(config: TransformRotateConfig): Transform;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        offset:Offset,
-        transformHitTests?:boolean,
-      }
-     */
-    static translate(config: TransformTranslateConfig): Transform;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        scale:number,
-        alignment?:Alignment,
-        origin?:Offset,
-        transformHitTests?:boolean,
-      }
-     */
-    static scale(config: TransformScaleConfig): Transform;
-}
-interface TooltipConfig {
-    key?: Key;
-    message: string;
-    height?: number;
-    padding?: EdgeInsets;
-    margin?: EdgeInsets;
-    verticalOffset?: number;
-    preferBelow?: boolean;
-    excludeFromSemantics?: boolean;
-    decoration?: BoxDecoration;
-    textStyle?: TextStyle;
-    waitDuration?: Duration;
-    showDuration?: Duration;
-    child?: Widget;
+    constructor(config?: {
+        key?: Key;
+        child?: Widget;
+        alignment?: Alignment;
+        origin?: Offset;
+        transform: Matrix4;
+        transformHitTests?: boolean;
+    });
+    static rotate(config: {
+        key?: Key;
+        child?: Widget;
+        angle: number;
+        alignment?: Alignment;
+        origin?: Offset;
+        transformHitTests?: boolean;
+    }): Transform;
+    static translate(config: {
+        key?: Key;
+        child?: Widget;
+        offset: Offset;
+        transformHitTests?: boolean;
+    }): Transform;
+    static scale(config: {
+        key?: Key;
+        child?: Widget;
+        scale: number;
+        alignment?: Alignment;
+        origin?: Offset;
+        transformHitTests?: boolean;
+    }): Transform;
 }
 export declare class Tooltip extends Widget {
     key?: Key;
@@ -11860,35 +7940,21 @@ export declare class Tooltip extends Widget {
     waitDuration?: Duration;
     showDuration?: Duration;
     child?: Widget;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        message:string,
-        height?:number,
-        padding?:EdgeInsets,
-        margin?:EdgeInsets,
-        verticalOffset?:number,
-        preferBelow?:boolean,
-        excludeFromSemantics?:boolean,
-        decoration?:BoxDecoration,
-        textStyle?:TextStyle,
-        waitDuration?:Duration,
-        showDuration?:Duration,
-        child?:Widget
-      }
-     */
-    constructor(config: TooltipConfig);
-}
-interface TableConfig {
-    key?: Key;
-    children?: Array<Widget>;
-    defaultColumnWidth?: TableColumnWidth;
-    defaultVerticalAlignment?: TableCellVerticalAlignment;
-    textDirection?: TextDecoration;
-    border?: TableBorder;
-    textBaseline?: TextBaseline;
-    columnWidths?: Map<string, TableColumnWidth>;
+    constructor(config: {
+        key?: Key;
+        message: string;
+        height?: number;
+        padding?: EdgeInsets;
+        margin?: EdgeInsets;
+        verticalOffset?: number;
+        preferBelow?: boolean;
+        excludeFromSemantics?: boolean;
+        decoration?: BoxDecoration;
+        textStyle?: TextStyle;
+        waitDuration?: Duration;
+        showDuration?: Duration;
+        child?: Widget;
+    });
 }
 export declare class Table extends Widget {
     children?: Array<Widget>;
@@ -11899,39 +7965,16 @@ export declare class Table extends Widget {
     textBaseline?: TextBaseline;
     columnWidths?: Map<string, TableColumnWidth>;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        children?:Array<Widget>,
-        defaultColumnWidth?:TableColumnWidth,
-        defaultVerticalAlignment?:TableCellVerticalAlignment,
-        textDirection?:TextDecoration,
-        border?:TableBorder,
-        textBaseline?:TextBaseline,
-        columnWidths?:Map<string,TableColumnWidth>,
-      }
-     */
-    constructor(config: TableConfig);
-}
-interface TabBarConfig {
-    key?: Key;
-    tabs?: Array<Widget>;
-    onTap?: OnCallbackNumber;
-    controller?: TabController;
-    isScrollable?: boolean;
-    indicatorColor?: Color;
-    indicatorWeight?: number;
-    indicatorPadding?: EdgeInsets;
-    indicator?: BoxDecoration;
-    indicatorSize?: TabBarIndicatorSize;
-    labelColor?: Color;
-    labelStyle?: TextStyle;
-    labelPadding?: EdgeInsets;
-    unselectedLabelColor?: Color;
-    unselectedLabelStyle?: TextStyle;
-    dragStartBehavior?: DragStartBehavior;
-    physics?: ScrollPhysics;
+    constructor(config: {
+        key?: Key;
+        children?: Array<Widget>;
+        defaultColumnWidth?: TableColumnWidth;
+        defaultVerticalAlignment?: TableCellVerticalAlignment;
+        textDirection?: TextDecoration;
+        border?: TableBorder;
+        textBaseline?: TextBaseline;
+        columnWidths?: Map<string, TableColumnWidth>;
+    });
 }
 export declare class TabBar extends Widget {
     key?: Key;
@@ -11951,36 +7994,25 @@ export declare class TabBar extends Widget {
     unselectedLabelStyle?: TextStyle;
     dragStartBehavior?: DragStartBehavior;
     physics?: ScrollPhysics;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        tabs?:Array<Widget>,
-        onTap?:OnCallbackNumber,
-        controller?:TabController,
-        isScrollable?:boolean,
-        indicatorColor?:Color,
-        indicatorWeight?:number,
-        indicatorPadding?:EdgeInsets,
-        indicator?:BoxDecoration,
-        indicatorSize?:TabBarIndicatorSize,
-        labelColor?:Color,
-        labelStyle?:TextStyle,
-        labelPadding?:EdgeInsets,
-        unselectedLabelColor?:Color,
-        unselectedLabelStyle?:TextStyle,
-        dragStartBehavior?:DragStartBehavior,
-        physics?:ScrollPhysics,
-      }
-     */
-    constructor(config: TabBarConfig);
-}
-interface TabConfig {
-    key?: Key;
-    child?: Widget;
-    text?: string;
-    icon?: Widget;
-    iconMargin?: EdgeInsets;
+    constructor(config: {
+        key?: Key;
+        tabs?: Array<Widget>;
+        onTap?: OnCallbackNumber;
+        controller?: TabController;
+        isScrollable?: boolean;
+        indicatorColor?: Color;
+        indicatorWeight?: number;
+        indicatorPadding?: EdgeInsets;
+        indicator?: BoxDecoration;
+        indicatorSize?: TabBarIndicatorSize;
+        labelColor?: Color;
+        labelStyle?: TextStyle;
+        labelPadding?: EdgeInsets;
+        unselectedLabelColor?: Color;
+        unselectedLabelStyle?: TextStyle;
+        dragStartBehavior?: DragStartBehavior;
+        physics?: ScrollPhysics;
+    });
 }
 export declare class Tab extends Widget {
     key?: Key;
@@ -11988,24 +8020,13 @@ export declare class Tab extends Widget {
     text?: string;
     icon?: Widget;
     iconMargin?: EdgeInsets;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        text?:string,
-        icon?:Widget,
-        iconMargin?:EdgeInsets,
-      }
-     */
-    constructor(config: TabConfig);
-}
-interface TabBarViewConfig {
-    key?: Key;
-    children?: Array<Widget>;
-    controller?: TabController;
-    physics?: ScrollPhysics;
-    dragStartBehavior?: DragStartBehavior;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        text?: string;
+        icon?: Widget;
+        iconMargin?: EdgeInsets;
+    });
 }
 export declare class TabBarView extends Widget {
     children?: Array<Widget>;
@@ -12013,46 +8034,25 @@ export declare class TabBarView extends Widget {
     physics?: ScrollPhysics;
     dragStartBehavior?: DragStartBehavior;
     key?: Key;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        children?:Array<Widget>,
-        controller?:TabController,
-        physics?:ScrollPhysics,
-        dragStartBehavior?:DragStartBehavior,
-      }
-     */
-    constructor(config: TabBarViewConfig);
-}
-interface TabPageSelectorIndicatorConfig {
-    key?: Key;
-    backgroundColor?: Color;
-    borderColor?: Color;
-    size?: number;
+    constructor(config: {
+        key?: Key;
+        children?: Array<Widget>;
+        controller?: TabController;
+        physics?: ScrollPhysics;
+        dragStartBehavior?: DragStartBehavior;
+    });
 }
 export declare class TabPageSelectorIndicator extends Widget {
     key?: Key;
     backgroundColor?: Color;
     borderColor?: Color;
     size?: number;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        backgroundColor?:Color,
-        borderColor?:Color,
-        size?:number,
-      }
-     */
-    constructor(config: TabPageSelectorIndicatorConfig);
-}
-interface TabPageSelectorConfig {
-    key?: Key;
-    color?: Color;
-    selectedColor?: Color;
-    indicatorSize?: number;
-    controller?: TabController;
+    constructor(config: {
+        key?: Key;
+        backgroundColor?: Color;
+        borderColor?: Color;
+        size?: number;
+    });
 }
 export declare class TabPageSelector extends Widget {
     key?: Key;
@@ -12060,52 +8060,25 @@ export declare class TabPageSelector extends Widget {
     selectedColor?: Color;
     indicatorSize?: number;
     controller?: TabController;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        color?:Color,
-        selectedColor?:Color,
-        indicatorSize?:number,
-        controller?:TabController,
-      }
-     */
-    constructor(config: TabPageSelectorConfig);
-}
-interface TitleConfig {
-    key?: Key;
-    child?: Widget;
-    title?: string;
-    color?: Color;
+    constructor(config: {
+        key?: Key;
+        color?: Color;
+        selectedColor?: Color;
+        indicatorSize?: number;
+        controller?: TabController;
+    });
 }
 export declare class Title extends Widget {
     key?: Key;
     child?: Widget;
     title?: string;
     color?: Color;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        child?:Widget,
-        title?:string,
-        color?:Color
-      }
-     */
-    constructor(config: TitleConfig);
-}
-interface TextConfig {
-    key?: Key;
-    style?: TextStyle;
-    strutStyle?: StrutStyle;
-    textAlign?: TextAlign;
-    textDirection?: TextDirection;
-    softWrap?: boolean;
-    overflow?: TextOverflow;
-    textScaleFactor?: number;
-    maxLines?: number;
-    semanticsLabel?: string;
-    textWidthBasis?: TextWidthBasis;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        title?: string;
+        color?: Color;
+    });
 }
 export declare class Text extends Widget {
     data?: string | TextSpan;
@@ -12120,127 +8093,53 @@ export declare class Text extends Widget {
     maxLines?: number;
     semanticsLabel?: string;
     textWidthBasis?: TextWidthBasis;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        style?:TextStyle,
-        strutStyle?:StrutStyle,
-        textAlign?:TextAlign,
-        textDirection?:TextDirection,
-        softWrap?:boolean,
-        overflow?:TextOverflow,
-        textScaleFactor?:number,
-        maxLines?:number,
-        semanticsLabel?:string,
-        textWidthBasis?:TextWidthBasis,
-      }
-     */
-    constructor(data: string | TextSpan, config?: TextConfig);
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        style?:TextStyle,
-        textAlign?:TextAlign,
-        textDirection?:TextDirection,
-        softWrap?:boolean,
-        overflow?:TextOverflow,
-        textScaleFactor?:number,
-        maxLines?:number,
-        semanticsLabel?:string,
-        textWidthBasis?:TextWidthBasis,
-      }
-     */
-    static rich(data: TextSpan, config?: TextConfig): Text;
-}
-interface TextSpanConfig {
-    children?: Array<Widget>;
-    style?: TextStyle;
-    text?: string;
-    semanticsLabel?: string;
+    constructor(data: string | TextSpan, config?: {
+        key?: Key;
+        style?: TextStyle;
+        strutStyle?: StrutStyle;
+        textAlign?: TextAlign;
+        textDirection?: TextDirection;
+        softWrap?: boolean;
+        overflow?: TextOverflow;
+        textScaleFactor?: number;
+        maxLines?: number;
+        semanticsLabel?: string;
+        textWidthBasis?: TextWidthBasis;
+    });
+    static rich(data: TextSpan, config?: {
+        key?: Key;
+        style?: TextStyle;
+        textAlign?: TextAlign;
+        textDirection?: TextDirection;
+        softWrap?: boolean;
+        overflow?: TextOverflow;
+        textScaleFactor?: number;
+        maxLines?: number;
+        semanticsLabel?: string;
+        textWidthBasis?: TextWidthBasis;
+    }): Text;
 }
 export declare class TextSpan extends Widget {
     children?: Array<Widget>;
     style?: TextStyle;
     text?: string;
     semanticsLabel?: string;
-    /**
-     * @param config config:
-      {
-        children?:Array<Widget>,
-        style?:TextStyle,
-        text?:string,
-        semanticsLabel?:string,
-      }
-     */
-    constructor(config: TextSpanConfig);
-}
-interface TextureConfig {
-    key?: Key;
-    textureId?: number;
-    filterQuality?: FilterQuality;
+    constructor(config: {
+        children?: Array<Widget>;
+        style?: TextStyle;
+        text?: string;
+        semanticsLabel?: string;
+    });
 }
 export declare class Texture extends Widget {
     key?: Key;
     textureId?: number;
     filterQuality?: FilterQuality;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        textureId?:number,
-        filterQuality?:FilterQuality,
-      }
-     */
-    constructor(config: TextureConfig);
-}
-interface TextFormFieldConfig {
-    key?: Key;
-    controller?: TextEditingController;
-    initialValue?: string;
-    focusNode?: FocusNode;
-    decoration?: InputDecoration;
-    keyboardType?: TextInputType;
-    textInputAction?: TextInputAction;
-    textCapitalization?: TextCapitalization;
-    style?: TextStyle;
-    textAlign?: TextAlign;
-    textAlignVertical?: TextAlignVertical;
-    textDirection?: TextDirection;
-    readOnly?: boolean;
-    toolbarOptions?: ToolbarOptions;
-    showCursor?: boolean;
-    autofocus?: boolean;
-    obscuringCharacter?: string;
-    obscureText?: boolean;
-    autocorrect?: boolean;
-    smartDashesType?: SmartDashesType;
-    smartQuotesType?: SmartQuotesType;
-    enableSuggestions?: boolean;
-    autovalidate?: boolean;
-    maxLines?: number;
-    minLines?: number;
-    expands?: boolean;
-    maxLength?: number;
-    maxLengthEnforced?: boolean;
-    onChanged?: OnCallbackString;
-    onTap?: OnCallback;
-    onEditingComplete?: OnCallback;
-    onFieldSubmitted?: OnCallbackString;
-    onSaved?: OnCallbackString;
-    validator?: OnCallbackString;
-    enabled?: boolean;
-    cursorWidth?: number;
-    cursorRadius?: Radius;
-    cursorColor?: Color;
-    keyboardAppearance?: Brightness;
-    scrollPadding?: EdgeInsets;
-    dragStartBehavior?: DragStartBehavior;
-    enableInteractiveSelection?: boolean;
-    scrollPhysics?: ScrollPhysics;
-    inputFormatters?: Array<TextInputFormatter>;
-    strutStyle?: StrutStyle;
+    constructor(config: {
+        key?: Key;
+        textureId?: number;
+        filterQuality?: FilterQuality;
+    });
 }
 export declare class TextFormField extends Widget {
     key?: Key;
@@ -12288,104 +8187,53 @@ export declare class TextFormField extends Widget {
     scrollPhysics?: ScrollPhysics;
     inputFormatters?: Array<TextInputFormatter>;
     strutStyle?: StrutStyle;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        controller?:TextEditingController,
-        initialValue?:string,
-        focusNode?:FocusNode,
-        decoration?:InputDecoration,
-        keyboardType?:TextInputType,
-        textInputAction?:TextInputAction,
-        textCapitalization?:TextCapitalization,
-        style?:TextStyle,
-        textAlign?:TextAlign,
-        textAlignVertical?:TextAlignVertical,
-        textDirection?:TextDirection,
-        readOnly?:boolean,
-        toolbarOptions?:ToolbarOptions,
-        showCursor?:boolean,
-        autofocus?:boolean,
-        obscuringCharacter?:string,
-        obscureText?:boolean,
-        autocorrect?:boolean,
-        smartDashesType?:SmartDashesType,
-        smartQuotesType?:SmartQuotesType,
-        enableSuggestions?:boolean,
-        autovalidate?:boolean,
-        maxLines?:number,
-        minLines?:number,
-        expands?:boolean,
-        maxLength?:number,
-        maxLengthEnforced?:boolean,
-        onChanged?:OnCallbackString,
-        onTap?:OnCallback,
-        onEditingComplete?:OnCallback,
-        onFieldSubmitted?:OnCallbackString,
-        onSaved?:OnCallbackString,
-        validator?:OnCallbackString,
-        enabled?:boolean,
-        cursorWidth?:number,
-        cursorRadius?:Radius,
-        cursorColor?:Color,
-        keyboardAppearance?:Brightness,
-        scrollPadding?:EdgeInsets,
-        dragStartBehavior?:DragStartBehavior,
-        enableInteractiveSelection?:boolean,
-        scrollPhysics?:ScrollPhysics,
-
-        inputFormatters?:Array<TextInputFormatter>,
-        strutStyle?:StrutStyle,
-      }
-     */
-    constructor(config: TextFormFieldConfig);
-}
-interface TextFieldConfig {
-    key?: Key;
-    controller?: TextEditingController;
-    focusNode?: FocusNode;
-    decoration?: InputDecoration;
-    keyboardType?: TextInputType;
-    textInputAction?: TextInputAction;
-    textCapitalization?: TextCapitalization;
-    style?: TextStyle;
-    textAlign?: TextAlign;
-    textAlignVertical?: TextAlignVertical;
-    textDirection?: TextDirection;
-    readOnly?: boolean;
-    toolbarOptions?: ToolbarOptions;
-    showCursor?: boolean;
-    autofocus?: boolean;
-    obscuringCharacter?: string;
-    obscureText?: boolean;
-    autocorrect?: boolean;
-    smartDashesType?: SmartDashesType;
-    smartQuotesType?: SmartQuotesType;
-    enableSuggestions?: boolean;
-    maxLines?: number;
-    minLines?: number;
-    expands?: boolean;
-    maxLength?: number;
-    maxLengthEnforced?: boolean;
-    onChanged?: OnCallbackString;
-    onEditingComplete?: OnCallback;
-    onSubmitted?: OnCallbackString;
-    enabled?: boolean;
-    cursorWidth?: number;
-    cursorRadius?: Radius;
-    cursorColor?: Color;
-    selectionHeightStyle?: BoxHeightStyle;
-    selectionWidthStyle?: BoxWidthStyle;
-    keyboardAppearance?: Brightness;
-    scrollPadding?: EdgeInsets;
-    dragStartBehavior?: DragStartBehavior;
-    enableInteractiveSelection?: boolean;
-    onTap?: OnCallback;
-    scrollController?: ScrollController;
-    scrollPhysics?: ScrollPhysics;
-    inputFormatters?: Array<TextInputFormatter>;
-    strutStyle?: StrutStyle;
+    constructor(config: {
+        key?: Key;
+        controller?: TextEditingController;
+        initialValue?: string;
+        focusNode?: FocusNode;
+        decoration?: InputDecoration;
+        keyboardType?: TextInputType;
+        textInputAction?: TextInputAction;
+        textCapitalization?: TextCapitalization;
+        style?: TextStyle;
+        textAlign?: TextAlign;
+        textAlignVertical?: TextAlignVertical;
+        textDirection?: TextDirection;
+        readOnly?: boolean;
+        toolbarOptions?: ToolbarOptions;
+        showCursor?: boolean;
+        autofocus?: boolean;
+        obscuringCharacter?: string;
+        obscureText?: boolean;
+        autocorrect?: boolean;
+        smartDashesType?: SmartDashesType;
+        smartQuotesType?: SmartQuotesType;
+        enableSuggestions?: boolean;
+        autovalidate?: boolean;
+        maxLines?: number;
+        minLines?: number;
+        expands?: boolean;
+        maxLength?: number;
+        maxLengthEnforced?: boolean;
+        onChanged?: OnCallbackString;
+        onTap?: OnCallback;
+        onEditingComplete?: OnCallback;
+        onFieldSubmitted?: OnCallbackString;
+        onSaved?: OnCallbackString;
+        validator?: OnCallbackString;
+        enabled?: boolean;
+        cursorWidth?: number;
+        cursorRadius?: Radius;
+        cursorColor?: Color;
+        keyboardAppearance?: Brightness;
+        scrollPadding?: EdgeInsets;
+        dragStartBehavior?: DragStartBehavior;
+        enableInteractiveSelection?: boolean;
+        scrollPhysics?: ScrollPhysics;
+        inputFormatters?: Array<TextInputFormatter>;
+        strutStyle?: StrutStyle;
+    });
 }
 export declare class TextField extends Widget {
     key?: Key;
@@ -12432,65 +8280,52 @@ export declare class TextField extends Widget {
     scrollPhysics?: ScrollPhysics;
     inputFormatters?: Array<TextInputFormatter>;
     strutStyle?: StrutStyle;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        controller?:TextEditingController,
-        focusNode?:FocusNode,
-        decoration?:InputDecoration,
-        keyboardType?:TextInputType,
-        textInputAction?:TextInputAction,
-        textCapitalization?:TextCapitalization,
-        style?:TextStyle,
-        textAlign?:TextAlign,
-        textAlignVertical?:TextAlignVertical,
-        textDirection?:TextDirection,
-        readOnly?:boolean,
-        toolbarOptions?:ToolbarOptions,
-        showCursor?:boolean,
-        autofocus?:boolean,
-        obscuringCharacter?:string,
-        obscureText?:boolean,
-        autocorrect?:boolean,
-        smartDashesType?:SmartDashesType,
-        smartQuotesType?:SmartQuotesType,
-        enableSuggestions?:boolean,
-        maxLines?:number,
-        minLines?:number,
-        expands?:boolean,
-        maxLength?:number,
-        maxLengthEnforced?:boolean,
-        onChanged?:OnCallbackString,
-        onEditingComplete?:OnCallback,
-        onSubmitted?:OnCallbackString,
-        enabled?:boolean,
-        cursorWidth?:number,
-        cursorRadius?:Radius,
-        cursorColor?:Color,
-        selectionHeightStyle?:BoxHeightStyle,
-        selectionWidthStyle?:BoxWidthStyle,
-        keyboardAppearance?:Brightness,
-        scrollPadding?:EdgeInsets,
-        dragStartBehavior?:DragStartBehavior,
-        enableInteractiveSelection?:boolean,
-        onTap?:OnCallback,
-        scrollController?:ScrollController,
-        scrollPhysics?:ScrollPhysics,
-
-        inputFormatters?:Array<TextInputFormatter>,
-        strutStyle?:StrutStyle,
-      }
-     */
-    constructor(config: TextFieldConfig);
-}
-interface UnconstrainedBoxConfig {
-    key?: Key;
-    child?: Widget;
-    alignment?: Alignment;
-    textDirection?: TextDirection;
-    constrainedAxis?: Axis;
-    clipBehavior?: Clip;
+    constructor(config: {
+        key?: Key;
+        controller?: TextEditingController;
+        focusNode?: FocusNode;
+        decoration?: InputDecoration;
+        keyboardType?: TextInputType;
+        textInputAction?: TextInputAction;
+        textCapitalization?: TextCapitalization;
+        style?: TextStyle;
+        textAlign?: TextAlign;
+        textAlignVertical?: TextAlignVertical;
+        textDirection?: TextDirection;
+        readOnly?: boolean;
+        toolbarOptions?: ToolbarOptions;
+        showCursor?: boolean;
+        autofocus?: boolean;
+        obscuringCharacter?: string;
+        obscureText?: boolean;
+        autocorrect?: boolean;
+        smartDashesType?: SmartDashesType;
+        smartQuotesType?: SmartQuotesType;
+        enableSuggestions?: boolean;
+        maxLines?: number;
+        minLines?: number;
+        expands?: boolean;
+        maxLength?: number;
+        maxLengthEnforced?: boolean;
+        onChanged?: OnCallbackString;
+        onEditingComplete?: OnCallback;
+        onSubmitted?: OnCallbackString;
+        enabled?: boolean;
+        cursorWidth?: number;
+        cursorRadius?: Radius;
+        cursorColor?: Color;
+        selectionHeightStyle?: BoxHeightStyle;
+        selectionWidthStyle?: BoxWidthStyle;
+        keyboardAppearance?: Brightness;
+        scrollPadding?: EdgeInsets;
+        dragStartBehavior?: DragStartBehavior;
+        enableInteractiveSelection?: boolean;
+        onTap?: OnCallback;
+        scrollController?: ScrollController;
+        scrollPhysics?: ScrollPhysics;
+        inputFormatters?: Array<TextInputFormatter>;
+        strutStyle?: StrutStyle;
+    });
 }
 export declare class UnconstrainedBox extends Widget {
     key?: Key;
@@ -12499,26 +8334,14 @@ export declare class UnconstrainedBox extends Widget {
     textDirection?: TextDirection;
     constrainedAxis?: Axis;
     clipBehavior?: Clip;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child?:Widget,
-          alignment?:Alignment;
-          textDirection?:TextDirection,
-          constrainedAxis?:Axis,
-          clipBehavior?:Clip,
-        }
-     */
-    constructor(config: UnconstrainedBoxConfig);
-}
-interface VerticalDividerConfig {
-    key?: Key;
-    width?: number;
-    thickness?: number;
-    indent?: number;
-    endIndent?: number;
-    color?: Color;
+    constructor(config: {
+        key?: Key;
+        child?: Widget;
+        alignment?: Alignment;
+        textDirection?: TextDirection;
+        constrainedAxis?: Axis;
+        clipBehavior?: Clip;
+    });
 }
 export declare class VerticalDivider extends Widget {
     key?: Key;
@@ -12527,29 +8350,14 @@ export declare class VerticalDivider extends Widget {
     indent?: number;
     endIndent?: number;
     color?: Color;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        width?:number,
-        thickness?:number,
-        indent?:number,
-        endIndent?:number,
-        color?:Color
-      }
-    */
-    constructor(config: VerticalDividerConfig);
-}
-interface VisibilityConfig {
-    child: Widget;
-    key?: Key;
-    replacement?: Widget;
-    visible?: boolean;
-    maintainState?: boolean;
-    maintainAnimation?: boolean;
-    maintainSize?: boolean;
-    maintainSemantics?: boolean;
-    maintainInteractivity?: boolean;
+    constructor(config: {
+        key?: Key;
+        width?: number;
+        thickness?: number;
+        indent?: number;
+        endIndent?: number;
+        color?: Color;
+    });
 }
 export declare class Visibility extends Widget {
     key?: Key;
@@ -12561,35 +8369,17 @@ export declare class Visibility extends Widget {
     maintainSize?: boolean;
     maintainSemantics?: boolean;
     maintainInteractivity?: boolean;
-    /**
-     * @param config config:
-      {
-        child:Widget,
-  
-        key?:Key,
-        replacement?:Widget,
-        visible?:boolean,
-        maintainState?:boolean,
-        maintainAnimation?:boolean,
-        maintainSize?:boolean,
-        maintainSemantics?:boolean,
-        maintainInteractivity?:boolean,
-      }
-    */
-    constructor(config: VisibilityConfig);
-}
-interface WrapConfig {
-    key?: Key;
-    children?: Array<Widget>;
-    alignment?: WrapAlignment;
-    spacing?: number;
-    crossAxisAlignment?: WrapCrossAlignment;
-    textDirection?: TextDecoration;
-    direction?: Axis;
-    verticalDirection?: VerticalDirection;
-    runAlignment?: WrapAlignment;
-    runSpacing?: number;
-    clipBehavior?: Clip;
+    constructor(config: {
+        child: Widget;
+        key?: Key;
+        replacement?: Widget;
+        visible?: boolean;
+        maintainState?: boolean;
+        maintainAnimation?: boolean;
+        maintainSize?: boolean;
+        maintainSemantics?: boolean;
+        maintainInteractivity?: boolean;
+    });
 }
 export declare class Wrap extends Widget {
     children?: Array<Widget>;
@@ -12603,96 +8393,51 @@ export declare class Wrap extends Widget {
     runSpacing?: number;
     key?: Key;
     clipBehavior?: Clip;
-    /**
-     * @param config config:
-      {
-        key?:Key,
-        children?:Array<Widget>,
-        alignment?:WrapAlignment,
-        spacing?:number,
-        crossAxisAlignment?:WrapCrossAlignment,
-        textDirection?:TextDecoration,
-        direction?:Axis,
-        verticalDirection?:VerticalDirection,
-        runAlignment?:WrapAlignment,
-        runSpacing?:number,
-        clipBehavior?:Clip,
-      }
-     */
-    constructor(config: WrapConfig);
-}
-interface WillPopScopeConfig {
-    child: Widget;
-    onWillPop: OnCallback;
-    key?: Key;
+    constructor(config: {
+        key?: Key;
+        children?: Array<Widget>;
+        alignment?: WrapAlignment;
+        spacing?: number;
+        crossAxisAlignment?: WrapCrossAlignment;
+        textDirection?: TextDecoration;
+        direction?: Axis;
+        verticalDirection?: VerticalDirection;
+        runAlignment?: WrapAlignment;
+        runSpacing?: number;
+        clipBehavior?: Clip;
+    });
 }
 export declare class WillPopScope extends Widget {
     key?: Key;
     child?: Widget;
     onWillPop?: OnCallback;
-    /**
-     * @param config config:
-      {
-        child:Widget,
-        onWillPop:OnCallback,
-  
-        key?:Key,
-      }
-     */
-    constructor(config: WillPopScopeConfig);
-}
-interface WidgetSpanConfig {
-    child: Widget;
-    alignment?: PlaceholderAlignment;
-    baseline?: TextBaseline;
-    style?: TextStyle;
+    constructor(config: {
+        child: Widget;
+        onWillPop: OnCallback;
+        key?: Key;
+    });
 }
 export declare class WidgetSpan extends Widget {
     child?: Widget;
     alignment?: PlaceholderAlignment;
     baseline?: TextBaseline;
     style?: TextStyle;
-    /**
-     * @param config config:
-      {
-        child:Widget,
-  
-        alignment?:PlaceholderAlignment,
-        baseline?:TextBaseline,
-        style?:TextStyle,
-      }
-     */
-    constructor(config: WidgetSpanConfig);
-}
-interface CupertinoActivityIndicatorConfig {
-    key?: Key;
-    animating?: boolean;
-    radius?: number;
+    constructor(config: {
+        child: Widget;
+        alignment?: PlaceholderAlignment;
+        baseline?: TextBaseline;
+        style?: TextStyle;
+    });
 }
 export declare class CupertinoActivityIndicator extends Widget {
     key?: Key;
     animating?: boolean;
     radius?: number;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          animating?:boolean,
-          radius?:number,
-        }
-     */
-    constructor(config: CupertinoActivityIndicatorConfig);
-}
-interface CupertinoButtonConfig {
-    key?: Key;
-    child: Widget;
-    onPressed: OnCallback;
-    padding?: EdgeInsets;
-    color?: Color;
-    disabledColor?: Color;
-    minSize?: number;
-    pressedOpacity?: number;
-    borderRadius?: BorderRadius;
+    constructor(config: {
+        key?: Key;
+        animating?: boolean;
+        radius?: number;
+    });
 }
 export declare class CupertinoButton extends Widget {
     child?: Widget;
@@ -12704,43 +8449,27 @@ export declare class CupertinoButton extends Widget {
     pressedOpacity?: number;
     borderRadius?: BorderRadius;
     key?: Key;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          onPressed:OnCallback,
-          padding?:EdgeInsets,
-          color?:Color,
-          disabledColor?:Color,
-          minSize?:number,
-          pressedOpacity?:number,
-          borderRadius?:BorderRadius,
-        }
-     */
-    constructor(config: CupertinoButtonConfig);
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          onPressed:OnCallback,
-          padding?:EdgeInsets,
-          disabledColor?:Color,
-          minSize?:number,
-          pressedOpacity?:number,
-          borderRadius?:BorderRadius,
-        }
-     */
-    static filled(config: CupertinoButtonConfig): CupertinoButton;
-}
-interface CupertinoDialogActionConfig {
-    key?: Key;
-    isDefaultAction?: boolean;
-    isDestructiveAction?: boolean;
-    onPressed?: OnCallback;
-    child: Widget;
-    textStyle?: TextStyle;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        onPressed: OnCallback;
+        padding?: EdgeInsets;
+        color?: Color;
+        disabledColor?: Color;
+        minSize?: number;
+        pressedOpacity?: number;
+        borderRadius?: BorderRadius;
+    });
+    static filled(config: {
+        key?: Key;
+        child: Widget;
+        onPressed: OnCallback;
+        padding?: EdgeInsets;
+        disabledColor?: Color;
+        minSize?: number;
+        pressedOpacity?: number;
+        borderRadius?: BorderRadius;
+    }): CupertinoButton;
 }
 export declare class CupertinoDialogAction extends Widget {
     key?: Key;
@@ -12749,33 +8478,14 @@ export declare class CupertinoDialogAction extends Widget {
     onPressed?: OnCallback;
     child?: Widget;
     textStyle?: TextStyle;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          isDefaultAction?:boolean,
-          isDestructiveAction?:boolean,
-          onPressed?:OnCallback,
-          child:Widget,
-          textStyle?:TextStyle,
-        }
-     */
-    constructor(config: CupertinoDialogActionConfig);
-}
-interface CupertinoNavigationBarConfig {
-    key?: Key;
-    leading?: Widget;
-    automaticallyImplyLeading?: boolean;
-    automaticallyImplyMiddle?: boolean;
-    previousPageTitle?: string;
-    middle?: Widget;
-    trailing?: Widget;
-    border?: Border;
-    backgroundColor?: Color;
-    brightness?: Brightness;
-    padding?: EdgeInsets;
-    actionsForegroundColor?: Color;
-    transitionBetweenRoutes?: boolean;
+    constructor(config: {
+        key?: Key;
+        isDefaultAction?: boolean;
+        isDestructiveAction?: boolean;
+        onPressed?: OnCallback;
+        child: Widget;
+        textStyle?: TextStyle;
+    });
 }
 export declare class CupertinoNavigationBar extends Widget {
     key?: Key;
@@ -12791,59 +8501,33 @@ export declare class CupertinoNavigationBar extends Widget {
     padding?: EdgeInsets;
     actionsForegroundColor?: Color;
     transitionBetweenRoutes?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          leading?:Widget,
-          automaticallyImplyLeading?:boolean,
-          automaticallyImplyMiddle?:boolean,
-          previousPageTitle?:string,
-          middle?:Widget,
-          trailing?:Widget,
-          border?:Border,
-          backgroundColor?:Color,
-          brightness?:Brightness,
-          padding?:EdgeInsets,
-          actionsForegroundColor?:Color,
-          transitionBetweenRoutes?:boolean,
-        }
-     */
-    constructor(config: CupertinoNavigationBarConfig);
-}
-interface CupertinoNavigationBarBackButtonConfig {
-    key?: Key;
-    color?: Color;
-    previousPageTitle?: string;
-    onPressed?: OnCallback;
+    constructor(config: {
+        key?: Key;
+        leading?: Widget;
+        automaticallyImplyLeading?: boolean;
+        automaticallyImplyMiddle?: boolean;
+        previousPageTitle?: string;
+        middle?: Widget;
+        trailing?: Widget;
+        border?: Border;
+        backgroundColor?: Color;
+        brightness?: Brightness;
+        padding?: EdgeInsets;
+        actionsForegroundColor?: Color;
+        transitionBetweenRoutes?: boolean;
+    });
 }
 export declare class CupertinoNavigationBarBackButton extends Widget {
     key?: Key;
     color?: Color;
     previousPageTitle?: string;
     onPressed?: OnCallback;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          color?:Color,
-          previousPageTitle?:string,
-          onPressed?:OnCallback,
-        }
-     */
-    constructor(config: CupertinoNavigationBarBackButtonConfig);
-}
-interface CupertinoSliderConfig {
-    key?: Key;
-    value: number;
-    onChanged: OnCallbackNumber;
-    onChangeStart?: OnCallbackNumber;
-    onChangeEnd?: OnCallbackNumber;
-    min?: number;
-    max?: number;
-    divisions?: number;
-    activeColor?: Color;
-    thumbColor?: Color;
+    constructor(config: {
+        key?: Key;
+        color?: Color;
+        previousPageTitle?: string;
+        onPressed?: OnCallback;
+    });
 }
 export declare class CupertinoSlider extends Widget {
     key?: Key;
@@ -12856,30 +8540,18 @@ export declare class CupertinoSlider extends Widget {
     divisions?: number;
     activeColor?: Color;
     thumbColor?: Color;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:number,
-          onChanged:OnCallbackNumber,
-          onChangeStart?:OnCallbackNumber,
-          onChangeEnd?:OnCallbackNumber,
-          min?:number,
-          max?:number,
-          divisions?:number,
-          activeColor?:Color,
-          thumbColor?:Color,
-        }
-     */
-    constructor(config: CupertinoSliderConfig);
-}
-interface CupertinoSwitchConfig {
-    key?: Key;
-    value: boolean;
-    onChanged: OnCallbackBoolean;
-    activeColor?: Color;
-    trackColor?: Color;
-    dragStartBehavior?: DragStartBehavior;
+    constructor(config: {
+        key?: Key;
+        value: number;
+        onChanged: OnCallbackNumber;
+        onChangeStart?: OnCallbackNumber;
+        onChangeEnd?: OnCallbackNumber;
+        min?: number;
+        max?: number;
+        divisions?: number;
+        activeColor?: Color;
+        thumbColor?: Color;
+    });
 }
 export declare class CupertinoSwitch extends Widget {
     key?: Key;
@@ -12888,29 +8560,14 @@ export declare class CupertinoSwitch extends Widget {
     activeColor?: Color;
     trackColor?: Color;
     dragStartBehavior?: DragStartBehavior;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          value:boolean,
-          onChanged:OnCallbackBoolean,
-          activeColor?:Color,
-          trackColor?:Color,
-          dragStartBehavior?:DragStartBehavior,
-        }
-     */
-    constructor(config: CupertinoSwitchConfig);
-}
-interface CupertinoSegmentedControlConfig {
-    key?: Key;
-    children: Array<Widget>;
-    onValueChanged: OnCallbackNumber;
-    groupValue?: number;
-    unselectedColor?: Color;
-    selectedColor?: Color;
-    borderColor?: Color;
-    pressedColor?: Color;
-    padding?: EdgeInsets;
+    constructor(config: {
+        key?: Key;
+        value: boolean;
+        onChanged: OnCallbackBoolean;
+        activeColor?: Color;
+        trackColor?: Color;
+        dragStartBehavior?: DragStartBehavior;
+    });
 }
 export declare class CupertinoSegmentedControl extends Widget {
     key?: Key;
@@ -12922,30 +8579,17 @@ export declare class CupertinoSegmentedControl extends Widget {
     borderColor?: Color;
     pressedColor?: Color;
     padding?: EdgeInsets;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          children:Array<Widget>,
-          onValueChanged:OnCallbackNumber,
-          groupValue?:number,
-          unselectedColor?:Color,
-          selectedColor?:Color,
-          borderColor?:Color,
-          pressedColor?:Color,
-          padding?:EdgeInsets,
-        }
-     */
-    constructor(config: CupertinoSegmentedControlConfig);
-}
-interface CupertinoSlidingSegmentedControlConfig {
-    key?: Key;
-    children: Array<Widget>;
-    onValueChanged: OnCallbackNumber;
-    groupValue?: number;
-    thumbColor?: Color;
-    backgroundColor?: Color;
-    padding?: EdgeInsets;
+    constructor(config: {
+        key?: Key;
+        children: Array<Widget>;
+        onValueChanged: OnCallbackNumber;
+        groupValue?: number;
+        unselectedColor?: Color;
+        selectedColor?: Color;
+        borderColor?: Color;
+        pressedColor?: Color;
+        padding?: EdgeInsets;
+    });
 }
 export declare class CupertinoSlidingSegmentedControl extends Widget {
     key?: Key;
@@ -12955,57 +8599,27 @@ export declare class CupertinoSlidingSegmentedControl extends Widget {
     thumbColor?: Color;
     backgroundColor?: Color;
     padding?: EdgeInsets;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          children:Array<Widget>,
-          onValueChanged:OnCallbackNumber,
-          groupValue?:number,
-          thumbColor?:Color,
-          backgroundColor?:Color,
-          padding?:EdgeInsets,
-        }
-     */
-    constructor(config: CupertinoSlidingSegmentedControlConfig);
-}
-interface CupertinoScrollbarConfig {
-    key?: Key;
-    child: Widget;
-    controller?: ScrollController;
-    isAlwaysShown?: boolean;
+    constructor(config: {
+        key?: Key;
+        children: Array<Widget>;
+        onValueChanged: OnCallbackNumber;
+        groupValue?: number;
+        thumbColor?: Color;
+        backgroundColor?: Color;
+        padding?: EdgeInsets;
+    });
 }
 export declare class CupertinoScrollbar extends Widget {
     key?: Key;
     child?: Widget;
     controller?: ScrollController;
     isAlwaysShown?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          controller?:ScrollController,
-          isAlwaysShown?:boolean,
-        }
-     */
-    constructor(config: CupertinoScrollbarConfig);
-}
-interface CupertinoSliverNavigationBarConfig {
-    key?: Key;
-    largeTitle?: Widget;
-    leading?: Widget;
-    automaticallyImplyLeading?: boolean;
-    automaticallyImplyTitle?: boolean;
-    previousPageTitle?: string;
-    middle?: Widget;
-    trailing?: Widget;
-    border?: Border;
-    backgroundColor?: Color;
-    brightness?: Brightness;
-    padding?: EdgeInsets;
-    actionsForegroundColor?: Color;
-    transitionBetweenRoutes?: boolean;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        controller?: ScrollController;
+        isAlwaysShown?: boolean;
+    });
 }
 export declare class CupertinoSliverNavigationBar extends Widget {
     key?: Key;
@@ -13022,30 +8636,22 @@ export declare class CupertinoSliverNavigationBar extends Widget {
     padding?: EdgeInsets;
     actionsForegroundColor?: Color;
     transitionBetweenRoutes?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          leading?:Widget,
-          largeTitle?:Widget,
-          automaticallyImplyLeading?:boolean,
-          automaticallyImplyTitle?:boolean,
-          previousPageTitle?:string,
-          middle?:Widget,
-          trailing?:Widget,
-          border?:Border,
-          backgroundColor?:Color,
-          brightness?:Brightness,
-          padding?:EdgeInsets,
-          actionsForegroundColor?:Color,
-          transitionBetweenRoutes?:boolean,
-        }
-     */
-    constructor(config: CupertinoSliverNavigationBarConfig);
-}
-interface TestWidgetConfig {
-    colors: Array<Color>;
-    stops?: Array<number>;
+    constructor(config: {
+        key?: Key;
+        leading?: Widget;
+        largeTitle?: Widget;
+        automaticallyImplyLeading?: boolean;
+        automaticallyImplyTitle?: boolean;
+        previousPageTitle?: string;
+        middle?: Widget;
+        trailing?: Widget;
+        border?: Border;
+        backgroundColor?: Color;
+        brightness?: Brightness;
+        padding?: EdgeInsets;
+        actionsForegroundColor?: Color;
+        transitionBetweenRoutes?: boolean;
+    });
 }
 export declare class TestWidget extends Widget {
     colors?: Array<Color>;
@@ -13057,18 +8663,10 @@ export declare class TestWidget extends Widget {
           stops?:Array<number>,
         }
      */
-    constructor(config: TestWidgetConfig);
-}
-interface CupertinoTabBarConfig {
-    key?: Key;
-    items: Array<BottomNavigationBarItem>;
-    onTap?: OnCallbackNumber;
-    currentIndex?: number;
-    backgroundColor?: Color;
-    activeColor?: Color;
-    inactiveColor?: Color;
-    iconSize?: number;
-    border?: Border;
+    constructor(config: {
+        colors: Array<Color>;
+        stops?: Array<number>;
+    });
 }
 export declare class CupertinoTabBar extends Widget {
     key?: Key;
@@ -13080,83 +8678,43 @@ export declare class CupertinoTabBar extends Widget {
     inactiveColor?: Color;
     iconSize?: number;
     border?: Border;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          items:Array<BottomNavigationBarItem>,
-          onTap?:OnCallbackNumber,
-          currentIndex?:number,
-          backgroundColor?:Color,
-          activeColor?:Color,
-          inactiveColor?:Color,
-          iconSize?:number,
-          border?:Border,
-        }
-     */
-    constructor(config: CupertinoTabBarConfig);
-}
-interface CupertinoTabControllerConfig {
-    initialIndex?: number;
+    constructor(config: {
+        key?: Key;
+        items: Array<BottomNavigationBarItem>;
+        onTap?: OnCallbackNumber;
+        currentIndex?: number;
+        backgroundColor?: Color;
+        activeColor?: Color;
+        inactiveColor?: Color;
+        iconSize?: number;
+        border?: Border;
+    });
 }
 export declare class CupertinoTabController extends DartClass {
     initialIndex?: number;
-    /**
-     * @param config config:
-        {
-          initialIndex?:number,
-        }
-     */
-    constructor(config: CupertinoTabControllerConfig);
-}
-interface CupertinoTabViewConfig {
-    key?: Key;
-    defaultTitle?: string;
-    child: Widget;
+    constructor(config: {
+        initialIndex?: number;
+    });
 }
 export declare class CupertinoTabView extends Widget {
     key?: Key;
     defaultTitle?: string;
     child?: Widget;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          defaultTitle?:string,
-          child:Widget,
-        }
-     */
-    constructor(config: CupertinoTabViewConfig);
-}
-interface CupertinoThemeConfig {
-    key?: Key;
-    child: Widget;
-    data: CupertinoThemeData;
+    constructor(config: {
+        key?: Key;
+        defaultTitle?: string;
+        child: Widget;
+    });
 }
 export declare class CupertinoTheme extends Widget {
     key?: Key;
     child?: Widget;
     data?: CupertinoThemeData;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          data:CupertinoThemeData,
-        }
-     */
-    constructor(config: CupertinoThemeConfig);
-}
-interface CupertinoTextThemeDataConfig {
-    primaryColor?: Color;
-    textStyle?: TextStyle;
-    actionTextStyle?: TextStyle;
-    tabLabelTextStyle?: TextStyle;
-    navTitleTextStyle?: TextStyle;
-    navLargeTitleTextStyle?: TextStyle;
-    navActionTextStyle?: TextStyle;
-    pickerTextStyle?: TextStyle;
-    dateTimePickerTextStyle?: TextStyle;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        data: CupertinoThemeData;
+    });
 }
 export declare class CupertinoTextThemeData extends DartClass {
     primaryColor?: Color;
@@ -13168,29 +8726,17 @@ export declare class CupertinoTextThemeData extends DartClass {
     navActionTextStyle?: TextStyle;
     pickerTextStyle?: TextStyle;
     dateTimePickerTextStyle?: TextStyle;
-    /**
-     * @param config config:
-        {
-          primaryColor?:Color,
-          textStyle?:TextStyle,
-          actionTextStyle?:TextStyle,
-          tabLabelTextStyle?:TextStyle,
-          navTitleTextStyle?:TextStyle,
-          navLargeTitleTextStyle?:TextStyle,
-          navActionTextStyle?:TextStyle,
-          pickerTextStyle?:TextStyle,
-          dateTimePickerTextStyle?:TextStyle,
-        }
-     */
-    constructor(config: CupertinoTextThemeDataConfig);
-}
-interface EmptyDataWidgetConfig {
-    key?: Key;
-    title?: string;
-    imageName?: string;
-    imageSize?: string;
-    backgroundColor?: Color;
-    titleStyle?: TextStyle;
+    constructor(config: {
+        primaryColor?: Color;
+        textStyle?: TextStyle;
+        actionTextStyle?: TextStyle;
+        tabLabelTextStyle?: TextStyle;
+        navTitleTextStyle?: TextStyle;
+        navLargeTitleTextStyle?: TextStyle;
+        navActionTextStyle?: TextStyle;
+        pickerTextStyle?: TextStyle;
+        dateTimePickerTextStyle?: TextStyle;
+    });
 }
 export declare class EmptyDataWidget extends Widget {
     key?: Key;
@@ -13199,63 +8745,28 @@ export declare class EmptyDataWidget extends Widget {
     imageSize?: string;
     backgroundColor?: Color;
     titleStyle?: TextStyle;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          title?:string,
-          imageName?:string,
-          imageSize?:string,
-          backgroundColor?:Color,
-          titleStyle?:TextStyle,
-        }
-     */
-    constructor(config?: EmptyDataWidgetConfig);
+    constructor(config?: {
+        key?: Key;
+        title?: string;
+        imageName?: string;
+        imageSize?: string;
+        backgroundColor?: Color;
+        titleStyle?: TextStyle;
+    });
 }
 export declare abstract class ShowBaseDialog extends Widget {
-}
-interface ShowDialogConfig {
-    barrierDismissible?: boolean;
-    useSafeArea?: boolean;
-    useRootNavigator?: boolean;
-    child: Widget;
 }
 export declare class ShowDialog extends ShowBaseDialog {
     barrierDismissible?: boolean;
     useSafeArea?: boolean;
     useRootNavigator?: boolean;
     child?: Widget;
-    /**
-       * @param config config:
-          {
-            barrierDismissible?:boolean,
-            useSafeArea?:boolean,
-            useRootNavigator?:boolean,
-            child:Widget (通常返回Dialog组件，比如SimpleDialog和AlertDialog),
-          }
-       */
-    constructor(config: ShowDialogConfig);
-}
-interface AlertDialogConfig {
-    key?: Key;
-    title?: Widget;
-    titlePadding?: EdgeInsets;
-    titleTextStyle?: TextStyle;
-    content?: Widget;
-    contentPadding?: EdgeInsets;
-    contentTextStyle?: TextStyle;
-    actions?: Array<Widget>;
-    actionsPadding?: EdgeInsets;
-    actionsOverflowDirection?: VerticalDirection;
-    actionsOverflowButtonSpacing?: number;
-    buttonPadding?: EdgeInsets;
-    backgroundColor?: Color;
-    elevation?: number;
-    semanticLabel?: string;
-    insetPadding?: EdgeInsets;
-    clipBehavior?: Clip;
-    shape?: ShapeBorder;
-    scrollable?: boolean;
+    constructor(config: {
+        barrierDismissible?: boolean;
+        useSafeArea?: boolean;
+        useRootNavigator?: boolean;
+        child: Widget;
+    });
 }
 export declare class AlertDialog extends Widget {
     key?: Key;
@@ -13277,43 +8788,27 @@ export declare class AlertDialog extends Widget {
     clipBehavior?: Clip;
     shape?: ShapeBorder;
     scrollable?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          title?:Widget,
-          titlePadding?:EdgeInsets,
-          titleTextStyle?:TextStyle,
-          content?:Widget,
-          contentPadding?:EdgeInsets,
-          contentTextStyle?:TextStyle,
-          actions?:Array<Widget>,
-          actionsPadding?:EdgeInsets,
-          actionsOverflowDirection?:VerticalDirection,
-          actionsOverflowButtonSpacing?:number,
-          buttonPadding?:EdgeInsets,
-          backgroundColor?:Color,
-          elevation?:number,
-          semanticLabel?:string,
-          insetPadding?:EdgeInsets,
-          clipBehavior?:Clip,
-          shape?:ShapeBorder,
-          scrollable?:boolean,
-        }
-     */
-    constructor(config: AlertDialogConfig);
-}
-interface SimpleDialogConfig {
-    key?: Key;
-    title?: Widget;
-    titlePadding?: EdgeInsets;
-    titleTextStyle?: TextStyle;
-    children?: Array<Widget>;
-    contentPadding?: EdgeInsets;
-    backgroundColor?: Color;
-    elevation?: number;
-    semanticLabel?: string;
-    shape?: ShapeBorder;
+    constructor(config: {
+        key?: Key;
+        title?: Widget;
+        titlePadding?: EdgeInsets;
+        titleTextStyle?: TextStyle;
+        content?: Widget;
+        contentPadding?: EdgeInsets;
+        contentTextStyle?: TextStyle;
+        actions?: Array<Widget>;
+        actionsPadding?: EdgeInsets;
+        actionsOverflowDirection?: VerticalDirection;
+        actionsOverflowButtonSpacing?: number;
+        buttonPadding?: EdgeInsets;
+        backgroundColor?: Color;
+        elevation?: number;
+        semanticLabel?: string;
+        insetPadding?: EdgeInsets;
+        clipBehavior?: Clip;
+        shape?: ShapeBorder;
+        scrollable?: boolean;
+    });
 }
 export declare class SimpleDialog extends Widget {
     key?: Key;
@@ -13326,51 +8821,28 @@ export declare class SimpleDialog extends Widget {
     elevation?: number;
     semanticLabel?: string;
     shape?: ShapeBorder;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          title?:Widget,
-          titlePadding?:EdgeInsets,
-          titleTextStyle?:TextStyle,
-          children?:Array<Widget>,
-          contentPadding?:EdgeInsets,
-          backgroundColor?:Color,
-          elevation?:number,
-          semanticLabel?:string,
-          shape?:ShapeBorder,
-        }
-     */
-    constructor(config: SimpleDialogConfig);
-}
-interface ShowCupertinoDialogConfig {
-    barrierDismissible?: boolean;
-    useRootNavigator?: boolean;
-    child: Widget;
+    constructor(config: {
+        key?: Key;
+        title?: Widget;
+        titlePadding?: EdgeInsets;
+        titleTextStyle?: TextStyle;
+        children?: Array<Widget>;
+        contentPadding?: EdgeInsets;
+        backgroundColor?: Color;
+        elevation?: number;
+        semanticLabel?: string;
+        shape?: ShapeBorder;
+    });
 }
 export declare class ShowCupertinoDialog extends ShowBaseDialog {
     barrierDismissible?: boolean;
     useRootNavigator?: boolean;
     child?: Widget;
-    /**
-       * @param config config:
-          {
-            barrierDismissible?:boolean,
-            useRootNavigator?:boolean,
-            child:Widget(通常使用CupertinoAlertDialog),
-          }
-       */
-    constructor(config: ShowCupertinoDialogConfig);
-}
-interface CupertinoAlertDialogConfig {
-    key?: Key;
-    title?: Widget;
-    content?: Widget;
-    actions?: Array<CupertinoDialogAction>;
-    scrollController?: ScrollController;
-    actionScrollController?: ScrollController;
-    insetAnimationDuration?: Duration;
-    insetAnimationCurve?: Curve;
+    constructor(config: {
+        barrierDismissible?: boolean;
+        useRootNavigator?: boolean;
+        child: Widget;
+    });
 }
 export declare class CupertinoAlertDialog extends Widget {
     key?: Key;
@@ -13383,26 +8855,18 @@ export declare class CupertinoAlertDialog extends Widget {
     insetAnimationCurve?: Curve;
     /**
      * @param config config:
-        {
-          key?:Key,
-          title?:Widget,
-          content?:Widget,
-          actions?:Array<CupertinoDialogAction>,
-          scrollController?:ScrollController,
-          actionScrollController?:ScrollController,
-          insetAnimationDuration?:Duration,
-          insetAnimationCurve?:Curve,
-        }
+        
      */
-    constructor(config: CupertinoAlertDialogConfig);
-}
-interface ShowGeneralDialogConfig {
-    barrierDismissible?: boolean;
-    useRootNavigator?: boolean;
-    barrierLabel?: string;
-    barrierColor?: Color;
-    transitionDuration?: Duration;
-    child: Widget;
+    constructor(config: {
+        key?: Key;
+        title?: Widget;
+        content?: Widget;
+        actions?: Array<CupertinoDialogAction>;
+        scrollController?: ScrollController;
+        actionScrollController?: ScrollController;
+        insetAnimationDuration?: Duration;
+        insetAnimationCurve?: Curve;
+    });
 }
 export declare class ShowGeneralDialog extends ShowBaseDialog {
     barrierDismissible?: boolean;
@@ -13411,30 +8875,14 @@ export declare class ShowGeneralDialog extends ShowBaseDialog {
     barrierColor?: Color;
     transitionDuration?: Duration;
     child?: Widget;
-    /**
-       * @param config config:
-          {
-            barrierDismissible?:boolean,
-            useRootNavigator?:boolean,
-            barrierLabel?:string,
-            barrierColor?:Color,
-            transitionDuration?:Duration,
-            child:Widget,
-          }
-       */
-    constructor(config: ShowGeneralDialogConfig);
-}
-interface ShowModalBottomSheetConfig {
-    backgroundColor?: Color;
-    elevation?: number;
-    shape?: ShapeBorder;
-    clipBehavior?: Clip;
-    barrierColor?: Color;
-    isScrollControlled?: boolean;
-    useRootNavigator?: boolean;
-    isDismissible?: boolean;
-    enableDrag?: boolean;
-    child: Widget;
+    constructor(config: {
+        barrierDismissible?: boolean;
+        useRootNavigator?: boolean;
+        barrierLabel?: string;
+        barrierColor?: Color;
+        transitionDuration?: Duration;
+        child: Widget;
+    });
 }
 export declare class ShowModalBottomSheet extends ShowBaseDialog {
     backgroundColor?: Color;
@@ -13447,32 +8895,18 @@ export declare class ShowModalBottomSheet extends ShowBaseDialog {
     isDismissible?: boolean;
     enableDrag?: boolean;
     child?: Widget;
-    /**
-       * @param config config:
-          {
-            backgroundColor?:Color,
-            elevation?:number,
-            shape?:ShapeBorder,
-            clipBehavior?:Clip,
-            barrierColor?:Color,
-            isScrollControlled?:boolean;,
-            useRootNavigator?:boolean,
-            isDismissible?:boolean,
-            enableDrag?:boolean,
-            child?:Widget,
-          }
-       */
-    constructor(config: ShowModalBottomSheetConfig);
-}
-interface BottomSheetConfig {
-    key?: Key;
-    enableDrag?: boolean;
-    backgroundColor?: Color;
-    elevation?: number;
-    shape?: ShapeBorder;
-    clipBehavior?: Clip;
-    onClosing: OnCallback;
-    child: Widget;
+    constructor(config: {
+        backgroundColor?: Color;
+        elevation?: number;
+        shape?: ShapeBorder;
+        clipBehavior?: Clip;
+        barrierColor?: Color;
+        isScrollControlled?: boolean;
+        useRootNavigator?: boolean;
+        isDismissible?: boolean;
+        enableDrag?: boolean;
+        child?: Widget;
+    });
 }
 export declare class BottomSheet extends Widget {
     key?: Key;
@@ -13483,25 +8917,16 @@ export declare class BottomSheet extends Widget {
     clipBehavior?: Clip;
     onClosing?: OnCallback;
     child?: Widget;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          enableDrag?:boolean,
-          backgroundColor?:Color,
-          elevation?:number,
-          shape?:ShapeBorder,
-          clipBehavior?:Clip,
-          onClosing?:OnCallback,
-          child?:Widget,
-        }
-     */
-    constructor(config: BottomSheetConfig);
-}
-interface ShowCupertinoModalPopupConfig {
-    useRootNavigator?: boolean;
-    semanticsDismissible?: boolean;
-    child: Widget;
+    constructor(config: {
+        key?: Key;
+        enableDrag?: boolean;
+        backgroundColor?: Color;
+        elevation?: number;
+        shape?: ShapeBorder;
+        clipBehavior?: Clip;
+        onClosing?: OnCallback;
+        child?: Widget;
+    });
 }
 export declare class ShowCupertinoModalPopup extends ShowBaseDialog {
     useRootNavigator?: boolean;
@@ -13509,22 +8934,13 @@ export declare class ShowCupertinoModalPopup extends ShowBaseDialog {
     child?: Widget;
     /**
        * @param config config:
-          {
-            useRootNavigator?:boolean,
-            semanticsDismissible?:boolean,
-            child:Widget(通常情况下和CupertinoActionSheet配合使用)
-          }
+          
        */
-    constructor(config: ShowCupertinoModalPopupConfig);
-}
-interface CupertinoActionSheetConfig {
-    key?: Key;
-    title?: Widget;
-    message?: Widget;
-    actions?: Array<Widget>;
-    messageScrollController?: ScrollController;
-    actionScrollController?: ScrollController;
-    cancelButton?: Widget;
+    constructor(config: {
+        useRootNavigator?: boolean;
+        semanticsDismissible?: boolean;
+        child: Widget;
+    });
 }
 export declare class CupertinoActionSheet extends Widget {
     key?: Key;
@@ -13534,26 +8950,15 @@ export declare class CupertinoActionSheet extends Widget {
     messageScrollController?: ScrollController;
     actionScrollController?: ScrollController;
     cancelButton?: Widget;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          title?:Widget,
-          message?:Widget,
-          actions?:Array<Widget>, (actions:[CupertinoActionSheetAction])
-          messageScrollController?:ScrollController,
-          actionScrollController?:ScrollController,
-          cancelButton?:Widget,
-        }
-     */
-    constructor(config: CupertinoActionSheetConfig);
-}
-interface CupertinoActionSheetActionConfig {
-    key?: Key;
-    child: Widget;
-    onPressed: OnCallback;
-    isDefaultAction?: boolean;
-    isDestructiveAction?: boolean;
+    constructor(config: {
+        key?: Key;
+        title?: Widget;
+        message?: Widget;
+        actions?: Array<Widget>;
+        messageScrollController?: ScrollController;
+        actionScrollController?: ScrollController;
+        cancelButton?: Widget;
+    });
 }
 export declare class CupertinoActionSheetAction extends Widget {
     key?: Key;
@@ -13561,33 +8966,21 @@ export declare class CupertinoActionSheetAction extends Widget {
     onPressed?: OnCallback;
     isDefaultAction?: boolean;
     isDestructiveAction?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          child:Widget,
-          onPressed:OnCallback,
-          isDefaultAction?:boolean,
-          isDestructiveAction?:boolean,
-        }
-     */
-    constructor(config: CupertinoActionSheetActionConfig);
-}
-interface SimpleDialogButtonInfoConfig {
-    text?: string;
-    textStyle?: TextStyle;
+    constructor(config: {
+        key?: Key;
+        child: Widget;
+        onPressed: OnCallback;
+        isDefaultAction?: boolean;
+        isDestructiveAction?: boolean;
+    });
 }
 export declare class SimpleDialogButtonInfo extends Widget {
     text?: string;
     textStyle?: TextStyle;
-    /**
-       * @param config config:
-          {
-            title?:string,
-            textStyle?:TextStyle,
-          }
-       */
-    constructor(config: SimpleDialogButtonInfoConfig);
+    constructor(config: {
+        text?: string;
+        textStyle?: TextStyle;
+    });
 }
 export declare enum CustomAlertDialogAnimationType {
     fromRight = "fromRight",
@@ -13597,15 +8990,6 @@ export declare enum CustomAlertDialogAnimationType {
     grow = "grow",
     shrink = "shrink"
 }
-interface CustomAlertDialogButtonConfig {
-    child?: Widget;
-    width?: number;
-    height?: number;
-    bgColor?: Color;
-    gradient?: Gradient;
-    radius?: BorderRadius;
-    onPressed?: OnCallback;
-}
 export declare class CustomAlertDialogButton extends Widget {
     child?: Widget;
     width?: number;
@@ -13614,34 +8998,15 @@ export declare class CustomAlertDialogButton extends Widget {
     gradient?: Gradient;
     radius?: BorderRadius;
     onPressed?: OnCallback;
-    /**
-       * @param config config:
-          {
-            child?:Widget,
-            width?:number,
-            height?:number,
-            bgColor?:Color,
-            gradient?:Gradient,
-            radius?:BorderRadius,
-            onPressed?:OnCallback,
-          }
-       */
-    constructor(config: CustomAlertDialogButtonConfig);
-}
-interface CustomAlertDialogStyleConfig {
-    animationType?: CustomAlertDialogAnimationType;
-    animationDuration?: Duration;
-    alertBorder?: ShapeBorder;
-    isCloseButton?: boolean;
-    isOverlayTapDismiss?: boolean;
-    backgroundColor?: Color;
-    overlayColor?: Color;
-    buttonSpace?: number;
-    titleHeight?: number;
-    titleStyle?: TextStyle;
-    descStyle?: TextStyle;
-    buttonAreaPadding?: EdgeInsets;
-    constraints?: BoxConstraints;
+    constructor(config: {
+        child?: Widget;
+        width?: number;
+        height?: number;
+        bgColor?: Color;
+        gradient?: Gradient;
+        radius?: BorderRadius;
+        onPressed?: OnCallback;
+    });
 }
 export declare class CustomAlertDialogStyle extends Widget {
     animationType?: CustomAlertDialogAnimationType;
@@ -13657,34 +9022,21 @@ export declare class CustomAlertDialogStyle extends Widget {
     descStyle?: TextStyle;
     buttonAreaPadding?: EdgeInsets;
     constraints?: BoxConstraints;
-    /**
-       * @param config config:
-          {
-            animationType?:CustomAlertDialogAnimationType,
-            animationDuration?:Duration,
-            alertBorder?:ShapeBorder,
-            isCloseButton?:boolean,
-            isOverlayTapDismiss?:boolean,
-            backgroundColor?:Color,
-            overlayColor?:Color,
-            buttonSpace?:number,
-            titleHeight?:number,
-            titleStyle?:TextStyle,
-            descStyle?:TextStyle,
-            buttonAreaPadding?:EdgeInsets,
-            constraints?:BoxConstraints,
-          }
-       */
-    constructor(config: CustomAlertDialogStyleConfig);
-}
-interface ShowCustomAlertDialogConfig {
-    style?: CustomAlertDialogStyle;
-    image?: Widget;
-    title?: string;
-    desc?: string;
-    content?: Widget;
-    actions?: Array<CustomAlertDialogButton>;
-    closeFunction?: OnCallback;
+    constructor(config: {
+        animationType?: CustomAlertDialogAnimationType;
+        animationDuration?: Duration;
+        alertBorder?: ShapeBorder;
+        isCloseButton?: boolean;
+        isOverlayTapDismiss?: boolean;
+        backgroundColor?: Color;
+        overlayColor?: Color;
+        buttonSpace?: number;
+        titleHeight?: number;
+        titleStyle?: TextStyle;
+        descStyle?: TextStyle;
+        buttonAreaPadding?: EdgeInsets;
+        constraints?: BoxConstraints;
+    });
 }
 export declare class ShowCustomAlertDialog extends ShowBaseDialog {
     style?: CustomAlertDialogStyle;
@@ -13694,47 +9046,25 @@ export declare class ShowCustomAlertDialog extends ShowBaseDialog {
     content?: Widget;
     actions?: Array<CustomAlertDialogButton>;
     closeFunction?: OnCallback;
-    /**
-       * @param config config:
-          {
-            style?:CustomAlertDialogStyle,
-            image?:Widget,
-            title?:string,
-            desc?:string,
-            content?:Widget,
-            actions?:Array<CustomAlertDialogButton>,
-            closeFunction?:OnCallback,
-          }
-       */
-    constructor(config: ShowCustomAlertDialogConfig);
-}
-interface SimpleCustomDialogButtonInfoConfig {
-    text?: string;
-    textStyle?: TextStyle;
-    bgColor?: Color;
+    constructor(config: {
+        style?: CustomAlertDialogStyle;
+        image?: Widget;
+        title?: string;
+        desc?: string;
+        content?: Widget;
+        actions?: Array<CustomAlertDialogButton>;
+        closeFunction?: OnCallback;
+    });
 }
 export declare class SimpleCustomDialogButtonInfo extends ShowBaseDialog {
     text?: string;
     textStyle?: TextStyle;
     bgColor?: Color;
-    /**
-       * @param config config:
-          {
-            title?:string,
-            textStyle?:TextStyle,
-            bgColor?:Color,
-          }
-       */
-    constructor(config: SimpleCustomDialogButtonInfoConfig);
-}
-interface ShowSimpleCustomDialogConfig {
-    style?: CustomAlertDialogStyle;
-    image?: Widget;
-    title?: string;
-    desc?: string;
-    content?: Widget;
-    actions?: Array<SimpleCustomDialogButtonInfo>;
-    onTap?: OnCallbackNumber;
+    constructor(config: {
+        text?: string;
+        textStyle?: TextStyle;
+        bgColor?: Color;
+    });
 }
 export declare class ShowSimpleCustomDialog extends ShowBaseDialog {
     style?: CustomAlertDialogStyle;
@@ -13742,30 +9072,17 @@ export declare class ShowSimpleCustomDialog extends ShowBaseDialog {
     title?: string;
     desc?: string;
     content?: Widget;
-    actions?: Array<SimpleCustomDialogButtonInfo>;
+    actions?: Array<Widget>;
     onTap?: OnCallbackNumber;
-    /**
-       * @param config config:
-          {
-            style?:CustomAlertDialogStyle,
-            image?:Widget,
-            title?:string,
-            desc?:string,
-            content?:Widget,
-            actions?:Array<CustomDialogButtonInfo>,
-            onTap?:OnCallbackNumber,
-          }
-       */
-    constructor(config: ShowSimpleCustomDialogConfig);
-}
-interface ShowSimpleAlertDialogConfig {
-    title?: string;
-    titleContent?: Widget;
-    desc?: string;
-    descContent?: Widget;
-    actions?: Array<SimpleDialogButtonInfo>;
-    onTap?: OnCallbackNumber;
-    barrierDismissible?: boolean;
+    constructor(config: {
+        style?: CustomAlertDialogStyle;
+        image?: Widget;
+        title?: string;
+        desc?: string;
+        content?: Widget;
+        actions?: Array<Widget>;
+        onTap?: OnCallbackNumber;
+    });
 }
 export declare class ShowSimpleAlertDialog extends ShowBaseDialog {
     title?: string;
@@ -13775,28 +9092,15 @@ export declare class ShowSimpleAlertDialog extends ShowBaseDialog {
     actions?: Array<SimpleDialogButtonInfo>;
     onTap?: OnCallbackNumber;
     barrierDismissible?: boolean;
-    /**
-       * @param config config:
-          {
-            title?:string,
-            titleContent?:Widget,
-            desc?:string,
-            descContent?:Widget,
-            actions:Array<SimpleDialogButtonInfo>,
-            onTap?:OnCallbackNumber,
-            barrierDismissible?:boolean,
-          }
-       */
-    constructor(config: ShowSimpleAlertDialogConfig);
-}
-interface ShowSimpleCupertinoDialogConfig {
-    title?: string;
-    titleContent?: Widget;
-    desc?: string;
-    descContent?: Widget;
-    actions?: Array<SimpleDialogButtonInfo>;
-    onTap?: OnCallbackNumber;
-    barrierDismissible?: boolean;
+    constructor(config: {
+        title?: string;
+        titleContent?: Widget;
+        desc?: string;
+        descContent?: Widget;
+        actions: Array<SimpleDialogButtonInfo>;
+        onTap?: OnCallbackNumber;
+        barrierDismissible?: boolean;
+    });
 }
 export declare class ShowSimpleCupertinoDialog extends ShowBaseDialog {
     title?: string;
@@ -13806,71 +9110,39 @@ export declare class ShowSimpleCupertinoDialog extends ShowBaseDialog {
     actions?: Array<SimpleDialogButtonInfo>;
     onTap?: OnCallbackNumber;
     barrierDismissible?: boolean;
-    /**
-       * @param config config:
-          {
-            title?:string,
-            titleContent?:Widget,
-            desc?:string,
-            descContent?:Widget,
-            actions:Array<SimpleDialogButtonInfo>,
-            onTap?:OnCallbackNumber,
-            barrierDismissible?:boolean,
-          }
-       */
-    constructor(config: ShowSimpleCupertinoDialogConfig);
-}
-interface ShowCustomActionSheetConfig {
-    title?: string;
-    titleContent?: Widget;
-    itemList: Array<string>;
-    onTap: OnCallbackNumber;
+    constructor(config: {
+        title?: string;
+        titleContent?: Widget;
+        desc?: string;
+        descContent?: Widget;
+        actions: Array<SimpleDialogButtonInfo>;
+        onTap?: OnCallbackNumber;
+        barrierDismissible?: boolean;
+    });
 }
 export declare class ShowCustomActionSheet extends ShowBaseDialog {
     title?: string;
     titleContent?: Widget;
     itemList?: Array<string>;
     onTap?: OnCallbackNumber;
-    /**
-       * @param config config:
-          {
-            title?:string,
-            titleContent?:Widget,
-            itemList:Array<string>,
-            onTap:OnCallbackNumber,
-          }
-       */
-    constructor(config: ShowCustomActionSheetConfig);
-}
-interface ShowSimpleActionSheetConfig {
-    title?: string;
-    titleContent?: Widget;
-    itemList: Array<string>;
-    onTap: OnCallbackNumber;
+    constructor(config: {
+        title?: string;
+        titleContent?: Widget;
+        itemList: Array<string>;
+        onTap: OnCallbackNumber;
+    });
 }
 export declare class ShowSimpleActionSheet extends ShowBaseDialog {
     title?: string;
     titleContent?: Widget;
     itemList?: Array<string>;
     onTap?: OnCallbackNumber;
-    /**
-       * @param config config:
-          {
-            title?:string,
-            titleContent?:Widget,
-            itemList:Array<string>,
-            onTap:OnCallbackNumber,
-          }
-       */
-    constructor(config: ShowSimpleActionSheetConfig);
-}
-interface ShowCustomPopupMenuConfig {
-    superkey: BindKey;
-    menuList: Array<CustomPopupMenuItem>;
-    barrierDismissible?: boolean;
-    bgColor?: Color;
-    textFontSize?: number;
-    onTap?: OnCallbackNumber;
+    constructor(config: {
+        title?: string;
+        titleContent?: Widget;
+        itemList: Array<string>;
+        onTap: OnCallbackNumber;
+    });
 }
 export declare class ShowCustomPopupMenu extends ShowBaseDialog {
     superkey?: BindKey;
@@ -13879,56 +9151,24 @@ export declare class ShowCustomPopupMenu extends ShowBaseDialog {
     bgColor?: Color;
     textFontSize?: number;
     onTap?: OnCallbackNumber;
-    /**
-       * @param config config:
-          {
-            superkey:BindKey,
-            menuList?:Array<CustomPopupMenuItem>,
-            barrierDismissible?:boolean,
-            bgColor?:Color,
-            textFontSize?:number,
-            onTap?:OnCallbackNumber,
-          }
-       */
-    constructor(config: ShowCustomPopupMenuConfig);
-}
-interface CustomPopupMenuItemConfig {
-    title: string;
-    titleTextStyle?: TextStyle;
-    image?: Widget;
+    constructor(config: {
+        superkey: BindKey;
+        menuList?: Array<CustomPopupMenuItem>;
+        barrierDismissible?: boolean;
+        bgColor?: Color;
+        textFontSize?: number;
+        onTap?: OnCallbackNumber;
+    });
 }
 export declare class CustomPopupMenuItem extends Widget {
     title?: string;
     titleTextStyle?: TextStyle;
     image?: Widget;
-    /**
-       * @param config config:
-          {
-            title:string,
-            titleTextStyle?:TextStyle,
-            image?:Widget,
-          }
-       */
-    constructor(config: CustomPopupMenuItemConfig);
-}
-interface ShowDatePickerConfig {
-    initialDate?: number;
-    firstDate?: number;
-    lastDate?: number;
-    currentDate?: number;
-    initialEntryMode?: DatePickerEntryMode;
-    helpText?: string;
-    cancelText?: string;
-    confirmText?: string;
-    useRootNavigator?: boolean;
-    textDirection?: TextDirection;
-    initialDatePickerMode?: DatePickerMode;
-    errorFormatText?: string;
-    errorInvalidText?: string;
-    fieldHintText?: string;
-    fieldLabelText?: string;
-    themeData?: ThemeData;
-    isMaterialAppTheme?: boolean;
+    constructor(config: {
+        title: string;
+        titleTextStyle?: TextStyle;
+        image?: Widget;
+    });
 }
 export declare class ShowDatePicker extends ShowBaseDialog {
     initialDate?: number;
@@ -13948,29 +9188,25 @@ export declare class ShowDatePicker extends ShowBaseDialog {
     fieldLabelText?: string;
     themeData?: ThemeData;
     isMaterialAppTheme?: boolean;
-    /**
-       * @param config config:
-          {
-            initialDate?:number(10位、13位、18位时间戳),
-            firstDate?:number(10位、13位、18位时间戳),
-            lastDate?:number(10位、13位、18位时间戳),
-            currentDate?:number(10位、13位、18位时间戳),
-            initialEntryMode?:DatePickerEntryMode,
-            helpText?:string,
-            cancelText?:string,
-            confirmText?:string,
-            useRootNavigator?:boolean,
-            textDirection?:TextDirection,
-            initialDatePickerMode?:DatePickerMode,
-            errorFormatText?:string,
-            errorInvalidText?:string,
-            fieldHintText?:string,
-            fieldLabelText?:string,
-            themeData?:ThemeData,
-            isMaterialAppTheme?:boolean,
-          }
-       */
-    constructor(config: ShowDatePickerConfig);
+    constructor(config: {
+        initialDate?: number;
+        firstDate?: number;
+        lastDate?: number;
+        currentDate?: number;
+        initialEntryMode?: DatePickerEntryMode;
+        helpText?: string;
+        cancelText?: string;
+        confirmText?: string;
+        useRootNavigator?: boolean;
+        textDirection?: TextDirection;
+        initialDatePickerMode?: DatePickerMode;
+        errorFormatText?: string;
+        errorInvalidText?: string;
+        fieldHintText?: string;
+        fieldLabelText?: string;
+        themeData?: ThemeData;
+        isMaterialAppTheme?: boolean;
+    });
 }
 export declare class Dialog extends DartClass {
     static instance: Dialog;
@@ -13979,164 +9215,80 @@ export declare class Dialog extends DartClass {
     static show(baseWidget: BaseWidget, child: ShowBaseDialog): Promise<ResponseModel>;
     static dismiss(baseWidget: BaseWidget): void;
 }
-interface LoadingInfoConfig {
-    info: string;
-    duration?: Duration;
-    alignment?: Alignment;
-    animation?: boolean;
-}
-interface LoadingProgressConfig {
-    value: number;
-    alignment?: Alignment;
-}
 export declare class Loading extends DartClass {
     static instance: Loading;
     constructor();
     static getInstance(): Loading;
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
-    static showSuccess(config: LoadingInfoConfig): void;
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
-    static showError(config: LoadingInfoConfig): void;
-    /**
-      * @param config config:
-       {
-         info:string,
-         duration?:Duration,
-         alignment?:Alignment,
-       }
-      */
-    static showInfo(config: LoadingInfoConfig): void;
-    /**
-     * @param config config:
-      {
-        info:string,
-        duration?:Duration,
-        alignment?:Alignment,
-      }
-     */
-    static showToast(config: LoadingInfoConfig): void;
-    /**
-     * @param config config:
-      {
-        info:string,
-        alignment?:Alignment,
-      }
-     */
-    static show(config: LoadingInfoConfig): void;
-    /**
-     * @param config config:
-      {
-        value:number(0~100),
-        alignment?:Alignment,
-      }
-     */
-    static showProgress(config: LoadingProgressConfig): void;
-    /**
-    * @param config config:
-     {
-       animation?:animation,
-     }
-    */
-    static dismiss(config?: LoadingInfoConfig): void;
-}
-interface SpGetConfig {
-    key: string;
-    defaultValue?: string | boolean | number;
-}
-interface SpSetConfig {
-    key: string;
-    value: string | boolean | number;
+    static showSuccess(config: {
+        info: string;
+        duration?: Duration;
+        alignment?: Alignment;
+    }): void;
+    static showError(config: {
+        info: string;
+        duration?: Duration;
+        alignment?: Alignment;
+    }): void;
+    static showInfo(config: {
+        info: string;
+        duration?: Duration;
+        alignment?: Alignment;
+    }): void;
+    static showToast(config: {
+        info: string;
+        duration?: Duration;
+        alignment?: Alignment;
+    }): void;
+    static show(config: {
+        info: string;
+        alignment?: Alignment;
+    }): void;
+    static showProgress(config: {
+        value: number;
+        alignment?: Alignment;
+    }): void;
+    static dismiss(config?: {
+        animation?: boolean;
+    }): void;
 }
 export declare class Sp extends DartClass {
     static instance: Sp;
     constructor();
     static getInstance(): Sp;
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:boolean;
-      }
-     */
-    static getBool(config: SpGetConfig): Promise<boolean>;
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:number;
-      }
-     */
-    static getInt(config: SpGetConfig): Promise<number>;
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:double;
-      }
-     */
-    static getDouble(config: SpGetConfig): Promise<number>;
-    /**
-     * @param config config:
-      {
-        key:string;
-        defaultValue?:string;
-      }
-     */
-    static getString(config: SpGetConfig): Promise<string>;
+    static getBool(config: {
+        key: string;
+        defaultValue?: boolean;
+    }): Promise<boolean>;
+    static getInt(config: {
+        key: string;
+        defaultValue?: number;
+    }): Promise<number>;
+    static getDouble(config: {
+        key: string;
+        defaultValue?: number;
+    }): Promise<number>;
+    static getString(config: {
+        key: string;
+        defaultValue?: string;
+    }): Promise<string>;
     static clear(): Promise<boolean | undefined>;
-    /**
-     * @param config config:
-      {
-        key:string;
-      }
-     */
-    static remove(config: SpGetConfig): Promise<boolean | undefined>;
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:boolean;
-      }
-     */
-    static setBool(config: SpSetConfig): Promise<boolean | undefined>;
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:number;
-      }
-     */
-    static setDouble(config: SpSetConfig): Promise<boolean | undefined>;
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:number;
-      }
-     */
-    static setInt(config: SpSetConfig): Promise<boolean | undefined>;
-    /**
-     * @param config config:
-      {
-        key:string;
-        value:string;
-      }
-     */
-    static setString(config: SpSetConfig): Promise<boolean | undefined>;
+    static remove(): Promise<boolean | undefined>;
+    static setBool(config: {
+        key: string;
+        value: boolean;
+    }): Promise<boolean | undefined>;
+    static setDouble(config: {
+        key: string;
+        value: number;
+    }): Promise<boolean | undefined>;
+    static setInt(config: {
+        key: string;
+        value: number;
+    }): Promise<boolean | undefined>;
+    static setString(config: {
+        key: string;
+        value: string;
+    }): Promise<boolean | undefined>;
 }
 export declare class ScreenInfo extends DartClass {
     static uiWidthPx: number;
@@ -14204,36 +9356,21 @@ export declare class FocusScope extends DartClass {
     static requestFocus(): void;
     static unfocus(): void;
 }
-interface UrlLauncherConfig {
-    urlString: string;
-    forceSafariVC?: boolean;
-    forceWebView?: boolean;
-    enableJavaScript?: boolean;
-    enableDomStorage?: boolean;
-    universalLinksOnly?: boolean;
-    headers?: Map<string, string>;
-    statusBarBrightness?: Brightness;
-    webOnlyWindowName?: string;
-}
 export declare class UrlLauncher extends DartClass {
     static instance: UrlLauncher;
     constructor();
     static getInstance(): UrlLauncher;
-    /**
-     * @param config config:
-      {
-        urlString:string,
-        forceSafariVC?:boolean,
-        forceWebView?:boolean,
-        enableJavaScript?:boolean,
-        enableDomStorage?:boolean,
-        universalLinksOnly?:boolean,
-        headers?:Map<string,string>,
-        statusBarBrightness?:Brightness,
-        webOnlyWindowName?:string,
-      }
-     */
-    static openUrl(config: UrlLauncherConfig): Promise<boolean | undefined>;
+    static openUrl(config: {
+        urlString: string;
+        forceSafariVC?: boolean;
+        forceWebView?: boolean;
+        enableJavaScript?: boolean;
+        enableDomStorage?: boolean;
+        universalLinksOnly?: boolean;
+        headers?: Map<string, string>;
+        statusBarBrightness?: Brightness;
+        webOnlyWindowName?: string;
+    }): Promise<boolean | undefined>;
 }
 export declare type OnCallbackDioProgress = (progress: number, total: number) => void;
 export declare enum DioResponseType {
@@ -14241,20 +9378,6 @@ export declare enum DioResponseType {
     stream = "stream",
     plain = "plain",
     bytes = "bytes"
-}
-interface DioBaseOptionsConfig {
-    method?: string;
-    connectTimeout?: number;
-    receiveTimeout?: number;
-    sendTimeout?: number;
-    baseUrl?: string;
-    queryParameters?: Map<string, any>;
-    extra?: Map<string, any>;
-    headers?: Map<string, any>;
-    responseType?: DioResponseType;
-    receiveDataWhenStatusError?: boolean;
-    followRedirects?: boolean;
-    maxRedirects?: number;
 }
 export declare class DioBaseOptions extends DartClass {
     method?: string;
@@ -14269,36 +9392,20 @@ export declare class DioBaseOptions extends DartClass {
     receiveDataWhenStatusError?: boolean;
     followRedirects?: boolean;
     maxRedirects?: number;
-    /**
-       * @param config config:
-        {
-          method?:string,
-          connectTimeout?:number,
-          receiveTimeout?:number,
-          sendTimeout?:number,
-          baseUrl?:string,
-          queryParameters?:Map<string,any>,
-          extra?:Map<string,any>,
-          headers?:Map<string,any>,
-          responseType?:DioResponseType,
-          receiveDataWhenStatusError?:boolean,
-          followRedirects?:boolean,
-          maxRedirects?:number,
-        }
-       */
-    constructor(config?: DioBaseOptionsConfig);
-}
-interface DioOptionsConfig {
-    method?: string;
-    receiveTimeout?: number;
-    sendTimeout?: number;
-    baseUrl?: string;
-    extra?: Map<string, any>;
-    headers?: Map<string, any>;
-    responseType?: DioResponseType;
-    receiveDataWhenStatusError?: boolean;
-    followRedirects?: boolean;
-    maxRedirects?: number;
+    constructor(config?: {
+        method?: string;
+        connectTimeout?: number;
+        receiveTimeout?: number;
+        sendTimeout?: number;
+        baseUrl?: string;
+        queryParameters?: Map<string, any>;
+        extra?: Map<string, any>;
+        headers?: Map<string, any>;
+        responseType?: DioResponseType;
+        receiveDataWhenStatusError?: boolean;
+        followRedirects?: boolean;
+        maxRedirects?: number;
+    });
 }
 export declare class DioOptions extends DartClass {
     method?: string;
@@ -14311,125 +9418,56 @@ export declare class DioOptions extends DartClass {
     receiveDataWhenStatusError?: boolean;
     followRedirects?: boolean;
     maxRedirects?: number;
-    /**
-       * @param config config:
-        {
-          method?:string,
-          connectTimeout?:number,
-          receiveTimeout?:number,
-          sendTimeout?:number,
-          baseUrl?:string,
-          extra?:Map<string,any>,
-          headers?:Map<string,any>,
-          responseType?:DioResponseType,
-          receiveDataWhenStatusError?:boolean,
-          followRedirects?:boolean,
-          maxRedirects?:number,
-        }
-       */
-    constructor(config?: DioOptionsConfig);
-}
-interface DioGetConfig {
-    path?: string;
-    queryParameters?: Map<string, any>;
-    options?: DioOptions;
-    onReceiveProgress?: OnCallbackDioProgress;
-}
-interface DioGetUriConfig {
-    uri?: Uri;
-    options?: DioOptions;
-    onReceiveProgress?: OnCallbackDioProgress;
-}
-interface DioPostConfig {
-    path?: string;
-    data?: any;
-    queryParameters?: Map<string, any>;
-    options?: DioOptions;
-    onSendProgress?: OnCallbackDioProgress;
-    onReceiveProgress?: OnCallbackDioProgress;
-}
-interface DioPostUriConfig {
-    uri?: Uri;
-    data?: any;
-    options?: DioOptions;
-    onSendProgress?: OnCallbackDioProgress;
-    onReceiveProgress?: OnCallbackDioProgress;
-}
-interface DioRequestConfig {
-    path?: string;
-    data?: any;
-    queryParameters?: Map<string, any>;
-    options?: DioOptions;
-    onSendProgress?: OnCallbackDioProgress;
-    onReceiveProgress?: OnCallbackDioProgress;
-}
-interface DioRequestUriConfig {
-    uri?: Uri;
-    data?: any;
-    options?: DioOptions;
-    onSendProgress?: OnCallbackDioProgress;
-    onReceiveProgress?: OnCallbackDioProgress;
+    constructor(config?: {
+        method?: string;
+        connectTimeout?: number;
+        receiveTimeout?: number;
+        sendTimeout?: number;
+        baseUrl?: string;
+        extra?: Map<string, any>;
+        headers?: Map<string, any>;
+        responseType?: DioResponseType;
+        receiveDataWhenStatusError?: boolean;
+        followRedirects?: boolean;
+        maxRedirects?: number;
+    });
 }
 export declare class Dio extends DartClass {
     options?: DioBaseOptions;
     constructor(options?: DioBaseOptions);
     static instance: Dio;
     static getInstance(): Dio;
-    /**
-      * @param config config:
-        {
-          path?:string,
-          queryParameters?:Map<string,any>,
-          options?:DioOptions,
-        }
-    */
-    get(config: DioGetConfig): Promise<ResponseModel | undefined>;
-    /**
-      * @param config config:
-        {
-          uri?:Uri,
-          options?:DioOptions,
-        }
-    */
-    getUri(config: DioGetUriConfig): Promise<ResponseModel | undefined>;
-    /**
-      * @param config config:
-        {
-          path?:string,
-          data?:any;
-          queryParameters?:Map<string,any>,
-          options?:DioOptions,
-        }
-    */
-    post(config: DioPostConfig): Promise<ResponseModel | undefined>;
-    /**
-      * @param config config:
-        {
-          uri?:Uri,
-          data?:any;
-          options?:DioOptions,
-        }
-      */
-    postUri(config: DioPostUriConfig): Promise<ResponseModel | undefined>;
-    /**
-      * @param config config:
-        {
-          path?:string,
-          data?:any;
-          queryParameters?:Map<string,any>,
-          options?:DioOptions,
-        }
-    */
-    request(config: DioRequestConfig): Promise<ResponseModel | undefined>;
-    /**
-      * @param config config:
-        {
-          uri?:Uri,
-          data?:any;
-          options?:DioOptions,
-        }
-      */
-    requestUri(config: DioRequestUriConfig): Promise<ResponseModel | undefined>;
+    get(config: {
+        path?: string;
+        queryParameters?: Map<string, any>;
+        options?: DioOptions;
+    }): Promise<ResponseModel | undefined>;
+    getUri(config: {
+        uri?: Uri;
+        options?: DioOptions;
+    }): Promise<ResponseModel | undefined>;
+    post(config: {
+        path?: string;
+        data?: any;
+        queryParameters?: Map<string, any>;
+        options?: DioOptions;
+    }): Promise<ResponseModel | undefined>;
+    postUri(config: {
+        uri?: Uri;
+        data?: any;
+        options?: DioOptions;
+    }): Promise<ResponseModel | undefined>;
+    request(config: {
+        path?: string;
+        data?: any;
+        queryParameters?: Map<string, any>;
+        options?: DioOptions;
+    }): Promise<ResponseModel | undefined>;
+    requestUri(config: {
+        uri?: Uri;
+        data?: any;
+        options?: DioOptions;
+    }): Promise<ResponseModel | undefined>;
 }
 export declare enum PullToRefreshStyle {
     Behind = "Behind",
@@ -14467,99 +9505,6 @@ export declare enum PullToRefreshLoadStyle {
     ShowWhenLoading = "ShowWhenLoading"
 }
 export declare abstract class PullToRefreshHeader extends Widget {
-    /**
-     * PullToRefreshHeader.classic = new PullToRefreshClassicHeader(config);
-     * @param config config:
-        {
-          key?:Key,
-          refreshStyle?:PullToRefreshStyle,
-          height?:number,
-          completeDuration?:Duration,
-          textStyle?:TextStyle,
-          releaseText?:string,
-          refreshingText?:string,
-          canTwoLevelIcon?:Widget,
-          twoLevelView?:Widget,
-          canTwoLevelText?:string,
-          completeText?:string,
-          failedText?:string,
-          idleText?:string,
-          iconPos?:PullToRefreshIconPosition,
-          spacing?:number,
-          refreshingIcon?:Widget,
-          failedIcon?:Widget,
-          completeIcon?:Widget,
-          idleIcon?:Widget,
-          releaseIcon?:Widget,
-        }
-     */
-    static classic(config?: PullToRefreshClassicHeaderConfig): PullToRefreshClassicHeader;
-    /**
-     * PullToRefreshHeader.WwterDrop
-     * @param config config:
-        {
-          key?:Key,
-          refresh?:Widget,
-          complete?:Widget,
-          completeDuration?:Duration,
-          failed?:Widget,
-          waterDropColor?:Color,
-          idleIcon?:Widget,
-        }
-     */
-    static waterDrop(config?: PullToRefreshWaterDropHeaderConfig): PullToRefreshWaterDropMaterialHeader;
-    /**
-     * PullToRefreshHeader.materialClassic = new PullToRefreshWaterDropMaterialHeader(config);
-     * @param config config:
-        {
-          key?:Key,
-          height?:number,
-          semanticsLabel?:string,
-          semanticsValue?:string,
-          color?:Color,
-          offset?:number,
-          distance?:number,
-          backgroundColor?:Color,
-        }
-     */
-    static materialClassic(config?: PullToRefreshMaterialClassicHeaderConfig): PullToRefreshWaterDropMaterialHeader;
-    /**
-     * PullToRefreshHeader.waterDropMaterial = new PullToRefreshWaterDropMaterialHeader(config);
-     * @param config config:
-        {
-          key?:Key,
-          height?:number,
-          semanticsLabel?:string,
-          semanticsValue?:string,
-          color?:Color,
-          offset?:number,
-          distance?:number,
-          backgroundColor?:Color,
-        }
-     */
-    static waterDropMaterial(config?: PullToRefreshWaterDropMaterialHeaderConfig): PullToRefreshWaterDropMaterialHeader;
-}
-interface PullToRefreshClassicHeaderConfig {
-    key?: Key;
-    refreshStyle?: PullToRefreshStyle;
-    height?: number;
-    completeDuration?: Duration;
-    textStyle?: TextStyle;
-    releaseText?: string;
-    refreshingText?: string;
-    canTwoLevelIcon?: Widget;
-    twoLevelView?: Widget;
-    canTwoLevelText?: string;
-    completeText?: string;
-    failedText?: string;
-    idleText?: string;
-    iconPos?: PullToRefreshIconPosition;
-    spacing?: number;
-    refreshingIcon?: Widget;
-    failedIcon?: Widget;
-    completeIcon?: Widget;
-    idleIcon?: Widget;
-    releaseIcon?: Widget;
 }
 export declare class PullToRefreshClassicHeader extends PullToRefreshHeader {
     key?: Key;
@@ -14582,41 +9527,28 @@ export declare class PullToRefreshClassicHeader extends PullToRefreshHeader {
     completeIcon?: Widget;
     idleIcon?: Widget;
     releaseIcon?: Widget;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          refreshStyle?:PullToRefreshStyle,
-          height?:number,
-          completeDuration?:Duration,
-          textStyle?:TextStyle,
-          releaseText?:string,
-          refreshingText?:string,
-          canTwoLevelIcon?:Widget,
-          twoLevelView?:Widget,
-          canTwoLevelText?:string,
-          completeText?:string,
-          failedText?:string,
-          idleText?:string,
-          iconPos?:PullToRefreshIconPosition,
-          spacing?:number,
-          refreshingIcon?:Widget,
-          failedIcon?:Widget,
-          completeIcon?:Widget,
-          idleIcon?:Widget,
-          releaseIcon?:Widget,
-        }
-     */
-    constructor(config?: PullToRefreshClassicHeaderConfig);
-}
-interface PullToRefreshWaterDropHeaderConfig {
-    key?: Key;
-    refresh?: Widget;
-    complete?: Widget;
-    completeDuration?: Duration;
-    failed?: Widget;
-    waterDropColor?: Color;
-    idleIcon?: Widget;
+    constructor(config?: {
+        key?: Key;
+        refreshStyle?: PullToRefreshStyle;
+        height?: number;
+        completeDuration?: Duration;
+        textStyle?: TextStyle;
+        releaseText?: string;
+        refreshingText?: string;
+        canTwoLevelIcon?: Widget;
+        twoLevelView?: Widget;
+        canTwoLevelText?: string;
+        completeText?: string;
+        failedText?: string;
+        idleText?: string;
+        iconPos?: PullToRefreshIconPosition;
+        spacing?: number;
+        refreshingIcon?: Widget;
+        failedIcon?: Widget;
+        completeIcon?: Widget;
+        idleIcon?: Widget;
+        releaseIcon?: Widget;
+    });
 }
 export declare class PullToRefreshWaterDropHeader extends PullToRefreshHeader {
     key?: Key;
@@ -14626,29 +9558,15 @@ export declare class PullToRefreshWaterDropHeader extends PullToRefreshHeader {
     failed?: Widget;
     waterDropColor?: Color;
     idleIcon?: Widget;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          refresh?:Widget,
-          complete?:Widget,
-          completeDuration?:Duration,
-          failed?:Widget,
-          waterDropColor?:Color,
-          idleIcon?:Widget,
-        }
-     */
-    constructor(config?: PullToRefreshWaterDropHeaderConfig);
-}
-interface PullToRefreshMaterialClassicHeaderConfig {
-    key?: Key;
-    height?: number;
-    semanticsLabel?: string;
-    semanticsValue?: string;
-    color?: Color;
-    offset?: number;
-    distance?: number;
-    backgroundColor?: Color;
+    constructor(config?: {
+        key?: Key;
+        refresh?: Widget;
+        complete?: Widget;
+        completeDuration?: Duration;
+        failed?: Widget;
+        waterDropColor?: Color;
+        idleIcon?: Widget;
+    });
 }
 export declare class PullToRefreshMaterialClassicHeader extends PullToRefreshHeader {
     key?: Key;
@@ -14659,30 +9577,16 @@ export declare class PullToRefreshMaterialClassicHeader extends PullToRefreshHea
     offset?: number;
     distance?: number;
     backgroundColor?: Color;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          height?:number,
-          semanticsLabel?:string,
-          semanticsValue?:string,
-          color?:Color,
-          offset?:number,
-          distance?:number,
-          backgroundColor?:Color,
-        }
-     */
-    constructor(config?: PullToRefreshMaterialClassicHeaderConfig);
-}
-interface PullToRefreshWaterDropMaterialHeaderConfig {
-    key?: Key;
-    height?: number;
-    semanticsLabel?: string;
-    semanticsValue?: string;
-    color?: Color;
-    offset?: number;
-    distance?: number;
-    backgroundColor?: Color;
+    constructor(config?: {
+        key?: Key;
+        height?: number;
+        semanticsLabel?: string;
+        semanticsValue?: string;
+        color?: Color;
+        offset?: number;
+        distance?: number;
+        backgroundColor?: Color;
+    });
 }
 export declare class PullToRefreshWaterDropMaterialHeader extends PullToRefreshHeader {
     key?: Key;
@@ -14693,67 +9597,18 @@ export declare class PullToRefreshWaterDropMaterialHeader extends PullToRefreshH
     offset?: number;
     distance?: number;
     backgroundColor?: Color;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          height?:number,
-          semanticsLabel?:string,
-          semanticsValue?:string,
-          color?:Color,
-          offset?:number,
-          distance?:number,
-          backgroundColor?:Color,
-        }
-     */
-    constructor(config?: PullToRefreshWaterDropMaterialHeaderConfig);
+    constructor(config?: {
+        key?: Key;
+        height?: number;
+        semanticsLabel?: string;
+        semanticsValue?: string;
+        color?: Color;
+        offset?: number;
+        distance?: number;
+        backgroundColor?: Color;
+    });
 }
 export declare abstract class PullToRefreshFooter extends Widget {
-    /**
-     * PullToRefreshFooter.classic = new PullToRefreshPullToRefreshClassicFooter(config);
-     * @param config config:
-        {
-          key?:Key,
-          onClick?: OnCallback,
-          loadStyle?: PullToRefreshLoadStyle,
-          height?: number,
-          textStyle?:TextStyle,
-          loadingText?:string,
-          noDataText?:string,
-          noMoreIcon?:Widget,
-          idleText?:string,
-          failedText?:string,
-          canLoadingText?:string,
-          failedIcon?:Widget,
-          iconPos?:PullToRefreshIconPosition,
-          spacing?:number,
-          completeDuration?:Duration,
-          loadingIcon?:Widget,
-          canLoadingIcon?:Widget,
-          idleIcon?:Widget,
-        }
-     */
-    static classic(config?: PullToRefreshClassicFooterConfig): PullToRefreshClassicFooter;
-}
-interface PullToRefreshClassicFooterConfig {
-    key?: Key;
-    onClick?: OnCallback;
-    loadStyle?: PullToRefreshLoadStyle;
-    height?: number;
-    textStyle?: TextStyle;
-    loadingText?: string;
-    noDataText?: string;
-    noMoreIcon?: Widget;
-    idleText?: string;
-    failedText?: string;
-    canLoadingText?: string;
-    failedIcon?: Widget;
-    iconPos?: PullToRefreshIconPosition;
-    spacing?: number;
-    completeDuration?: Duration;
-    loadingIcon?: Widget;
-    canLoadingIcon?: Widget;
-    idleIcon?: Widget;
 }
 export declare class PullToRefreshClassicFooter extends Widget {
     key?: Key;
@@ -14774,57 +9629,26 @@ export declare class PullToRefreshClassicFooter extends Widget {
     loadingIcon?: Widget;
     canLoadingIcon?: Widget;
     idleIcon?: Widget;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          onClick?: OnCallback,
-          loadStyle?: PullToRefreshLoadStyle,
-          height?: number,
-          textStyle?:TextStyle,
-          loadingText?:string,
-          noDataText?:string,
-          noMoreIcon?:Widget,
-          idleText?:string,
-          failedText?:string,
-          canLoadingText?:string,
-          failedIcon?:Widget,
-          iconPos?:PullToRefreshIconPosition,
-          spacing?:number,
-          completeDuration?:Duration,
-          loadingIcon?:Widget,
-          canLoadingIcon?:Widget,
-          idleIcon?:Widget,
-        }
-     */
-    constructor(config?: PullToRefreshClassicFooterConfig);
-}
-interface PullToRefreshConfigurationConfig {
-    child?: Widget;
-    headerBuilder?: Widget;
-    footerBuilder?: Widget;
-    dragSpeedRatio?: number;
-    shouldFooterFollowWhenNotFull?: string;
-    enableScrollWhenTwoLevel?: boolean;
-    enableLoadingWhenNoData?: boolean;
-    enableBallisticRefresh?: boolean;
-    springDescription?: SpringDescription;
-    enableScrollWhenRefreshCompleted?: boolean;
-    enableLoadingWhenFailed?: boolean;
-    twiceTriggerDistance?: number;
-    closeTwoLevelDistance?: number;
-    skipCanRefresh?: boolean;
-    autoLoad?: boolean;
-    maxOverScrollExtent?: number;
-    enableBallisticLoad?: boolean;
-    maxUnderScrollExtent?: number;
-    headerTriggerDistance?: number;
-    footerTriggerDistance?: number;
-    hideFooterWhenNotFull?: boolean;
-    enableRefreshVibrate?: boolean;
-    enableLoadMoreVibrate?: boolean;
-    topHitBoundary?: number;
-    bottomHitBoundary?: number;
+    constructor(config?: {
+        key?: Key;
+        onClick?: OnCallback;
+        loadStyle?: PullToRefreshLoadStyle;
+        height?: number;
+        textStyle?: TextStyle;
+        loadingText?: string;
+        noDataText?: string;
+        noMoreIcon?: Widget;
+        idleText?: string;
+        failedText?: string;
+        canLoadingText?: string;
+        failedIcon?: Widget;
+        iconPos?: PullToRefreshIconPosition;
+        spacing?: number;
+        completeDuration?: Duration;
+        loadingIcon?: Widget;
+        canLoadingIcon?: Widget;
+        idleIcon?: Widget;
+    });
 }
 export declare class PullToRefreshConfiguration extends Widget {
     child?: Widget;
@@ -14852,132 +9676,71 @@ export declare class PullToRefreshConfiguration extends Widget {
     enableLoadMoreVibrate?: boolean;
     topHitBoundary?: number;
     bottomHitBoundary?: number;
-    /**
-     * @param config config:
-        {
-          child?:Widget,
-          headerBuilder?:Widget,
-          footerBuilder?:Widget,
-          dragSpeedRatio?:number,
-          shouldFooterFollowWhenNotFull?:string,
-          enableScrollWhenTwoLevel?:boolean,
-          enableLoadingWhenNoData?:boolean,
-          enableBallisticRefresh?:boolean,
-          springDescription?:SpringDescription,
-          enableScrollWhenRefreshCompleted?:boolean,
-          enableLoadingWhenFailed?:boolean,
-          twiceTriggerDistance?:number,
-          closeTwoLevelDistance?:number,
-          skipCanRefresh?:boolean,
-          autoLoad?:boolean,
-          maxOverScrollExtent?:number,
-          enableBallisticLoad?:boolean,
-          maxUnderScrollExtent?:number,
-          headerTriggerDistance?:number,
-          footerTriggerDistance?:number,
-          hideFooterWhenNotFull?:boolean,
-          enableRefreshVibrate?:boolean,
-          enableLoadMoreVibrate?:boolean,
-          topHitBoundary?:number,
-          bottomHitBoundary?:number,
-        }
-     */
-    constructor(config?: PullToRefreshConfigurationConfig);
-}
-interface PullToRefreshControllerConfig {
-    initialRefreshStatus?: PullToRefreshStatus;
-    initialRefresh?: boolean;
-    initialLoadStatus?: PullToRefreshLoadStatus;
-}
-interface PullToRefreshControllerEventConfig {
-    duration?: Duration;
-    needMove?: boolean;
-    curve?: Curve;
-    resetFooterState?: boolean;
+    constructor(config?: {
+        child?: Widget;
+        headerBuilder?: Widget;
+        footerBuilder?: Widget;
+        dragSpeedRatio?: number;
+        shouldFooterFollowWhenNotFull?: string;
+        enableScrollWhenTwoLevel?: boolean;
+        enableLoadingWhenNoData?: boolean;
+        enableBallisticRefresh?: boolean;
+        springDescription?: SpringDescription;
+        enableScrollWhenRefreshCompleted?: boolean;
+        enableLoadingWhenFailed?: boolean;
+        twiceTriggerDistance?: number;
+        closeTwoLevelDistance?: number;
+        skipCanRefresh?: boolean;
+        autoLoad?: boolean;
+        maxOverScrollExtent?: number;
+        enableBallisticLoad?: boolean;
+        maxUnderScrollExtent?: number;
+        headerTriggerDistance?: number;
+        footerTriggerDistance?: number;
+        hideFooterWhenNotFull?: boolean;
+        enableRefreshVibrate?: boolean;
+        enableLoadMoreVibrate?: boolean;
+        topHitBoundary?: number;
+        bottomHitBoundary?: number;
+    });
 }
 export declare class PullToRefreshController extends DartClass {
     initialRefreshStatus?: PullToRefreshStatus;
     initialRefresh?: boolean;
     initialLoadStatus?: PullToRefreshLoadStatus;
-    /**
-     * @param config config:
-        {
-          initialRefreshStatus?:PullToRefreshStatus,
-          initialRefresh?:boolean,
-          initialLoadStatus?:PullToRefreshLoadStatus,
-        }
-     */
-    constructor(config: PullToRefreshControllerConfig);
+    constructor(config: {
+        initialRefreshStatus?: PullToRefreshStatus;
+        initialRefresh?: boolean;
+        initialLoadStatus?: PullToRefreshLoadStatus;
+    });
     dispose(): void;
     loadComplete(): void;
     loadFailed(): void;
     loadNoData(): void;
-    /**
-     * @param config config:
-        {
-          resetFooterState?:boolean;
-        }
-     */
-    refreshCompleted(config?: PullToRefreshControllerEventConfig): void;
+    refreshCompleted(config?: {
+        resetFooterState?: boolean;
+    }): void;
     refreshFailed(): void;
     refreshToIdle(): void;
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-          needMove?:boolean,
-          curve?:Curve,
-        }
-     */
-    requestLoading(config?: PullToRefreshControllerEventConfig): void;
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-          needMove?:boolean,
-          curve?:Curve,
-        }
-     */
-    requestRefresh(config?: PullToRefreshControllerEventConfig): void;
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-          curve?:Curve,
-        }
-     */
-    requestTwoLevel(config?: PullToRefreshControllerEventConfig): void;
+    requestLoading(config?: {
+        duration?: Duration;
+        needMove?: boolean;
+        curve?: Curve;
+    }): void;
+    requestRefresh(config?: {
+        duration?: Duration;
+        needMove?: boolean;
+        curve?: Curve;
+    }): void;
+    requestTwoLevel(config?: {
+        duration?: Duration;
+        curve?: Curve;
+    }): void;
     resetNoData(): void;
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-          curve?:Curve,
-        }
-     */
-    twoLevelComplete(config?: PullToRefreshControllerEventConfig): void;
-}
-interface PullToRefreshRefresherConfig {
-    key?: Key;
-    controller: PullToRefreshController;
-    child?: Widget;
-    header?: PullToRefreshHeader;
-    footer?: PullToRefreshFooter;
-    enablePullDown?: boolean;
-    enablePullUp?: boolean;
-    enableTwoLevel?: boolean;
-    onRefresh?: OnCallback;
-    onLoading?: OnCallback;
-    onTwoLevel?: OnCallback;
-    onOffsetChange?: OnCallbackString;
-    dragStartBehavior?: DragStartBehavior;
-    primary?: boolean;
-    cacheExtent?: number;
-    semanticChildCount?: number;
-    reverse?: boolean;
-    physics?: ScrollPhysics;
-    scrollDirection?: Axis;
-    scrollController?: ScrollController;
+    twoLevelComplete(config?: {
+        duration?: Duration;
+        curve?: Curve;
+    }): void;
 }
 export declare class PullToRefreshRefresher extends Widget {
     key?: Key;
@@ -15000,57 +9763,28 @@ export declare class PullToRefreshRefresher extends Widget {
     physics?: ScrollPhysics;
     scrollDirection?: Axis;
     scrollController?: ScrollController;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          controller:PullToRefreshController,
-          child?:Widget,
-          header?:PullToRefreshHeader,
-          footer?:PullToRefreshFooter,
-          enablePullDown?:boolean,
-          enablePullUp?:boolean,
-          enableTwoLevel?:boolean,
-          onRefresh?:OnCallback,
-          onLoading?:OnCallback,
-          onTwoLevel?:OnCallback,
-          onOffsetChange?:OnCallbackString,
-          dragStartBehavior?:DragStartBehavior,
-          primary?:boolean,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          reverse?:boolean,
-          physics?:ScrollPhysics,
-          scrollDirection?:Axis,
-          scrollController?:ScrollController,
-        }
-     */
-    constructor(config?: PullToRefreshRefresherConfig);
-}
-interface CachedNetworkImageConfig {
-    key?: Key;
-    imageUrl: string;
-    httpHeaders?: Map<string, string>;
-    placeholder?: Widget;
-    errorWidget?: Widget;
-    fadeOutDuration?: Duration;
-    fadeOutCurve?: Curve;
-    fadeInDuration?: Duration;
-    fadeInCurve?: Curve;
-    width?: number;
-    height?: number;
-    fit?: BoxFit;
-    alignment?: Alignment;
-    repeat?: ImageRepeat;
-    matchTextDirection?: boolean;
-    useOldImageOnUrlChange?: boolean;
-    color?: Color;
-    filterQuality?: FilterQuality;
-    colorBlendMode?: BlendMode;
-    placeholderFadeInDuration?: Duration;
-    memCacheWidth?: number;
-    memCacheHeight?: number;
-    cacheKey?: string;
+    constructor(config?: {
+        key?: Key;
+        controller: PullToRefreshController;
+        child?: Widget;
+        header?: PullToRefreshHeader;
+        footer?: PullToRefreshFooter;
+        enablePullDown?: boolean;
+        enablePullUp?: boolean;
+        enableTwoLevel?: boolean;
+        onRefresh?: OnCallback;
+        onLoading?: OnCallback;
+        onTwoLevel?: OnCallback;
+        onOffsetChange?: OnCallbackString;
+        dragStartBehavior?: DragStartBehavior;
+        primary?: boolean;
+        cacheExtent?: number;
+        semanticChildCount?: number;
+        reverse?: boolean;
+        physics?: ScrollPhysics;
+        scrollDirection?: Axis;
+        scrollController?: ScrollController;
+    });
 }
 export declare class CachedNetworkImage extends Widget {
     key?: Key;
@@ -15076,100 +9810,33 @@ export declare class CachedNetworkImage extends Widget {
     memCacheWidth?: number;
     memCacheHeight?: number;
     cacheKey?: string;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          imageUrl:string,
-          httpHeaders?:Map<string,string>
-          placeholder?:Widget,
-          errorWidget?:Widget,
-          fadeOutDuration?:Duration,
-          fadeOutCurve?:Curve,
-          fadeInDuration?:Duration,
-          fadeInCurve?:Curve,
-          width?:number,
-          height?:number,
-          fit?:BoxFit,
-          alignment?:Alignment,
-          repeat?:ImageRepeat,
-          matchTextDirection?:boolean,
-          useOldImageOnUrlChange?:boolean,
-          color?:Color,
-          filterQuality?:FilterQuality,
-          colorBlendMode?:BlendMode,
-          placeholderFadeInDuration?:Duration,
-          memCacheWidth?:number,
-          memCacheHeight?:number,
-          cacheKey?:string,
-        }
-     */
-    constructor(config?: CachedNetworkImageConfig);
+    constructor(config?: {
+        key?: Key;
+        imageUrl: string;
+        httpHeaders?: Map<string, string>;
+        placeholder?: Widget;
+        errorWidget?: Widget;
+        fadeOutDuration?: Duration;
+        fadeOutCurve?: Curve;
+        fadeInDuration?: Duration;
+        fadeInCurve?: Curve;
+        width?: number;
+        height?: number;
+        fit?: BoxFit;
+        alignment?: Alignment;
+        repeat?: ImageRepeat;
+        matchTextDirection?: boolean;
+        useOldImageOnUrlChange?: boolean;
+        color?: Color;
+        filterQuality?: FilterQuality;
+        colorBlendMode?: BlendMode;
+        placeholderFadeInDuration?: Duration;
+        memCacheWidth?: number;
+        memCacheHeight?: number;
+        cacheKey?: string;
+    });
 }
 export declare abstract class EasyRefreshHeader extends Widget {
-    /**
-     * EasyRefreshHeader.classic = new EasyRefreshClassicalHeader(config);
-     * @param config config:
-        {
-          key?:Key,
-          extent?:number,
-          triggerDistance?:number,
-          float?:boolean,
-          completeDuration?:Duration,
-          enableInfiniteRefresh?:boolean,
-          enableHapticFeedback?:boolean,
-          overScroll?:boolean,
-          alignment?:Alignment,
-          refreshText?:string,
-          refreshReadyText?:string,
-          refreshingText?:string,
-          refreshedText?:string,
-          refreshFailedText?:string,
-          noMoreText?:string,
-          showInfo?:boolean,
-          infoText?:string,
-          bgColor?:Color,
-          textColor?:Color,
-          infoColor?:Color,
-        }
-     */
-    static classical(config?: EasyRefreshClassicalHeaderConfig): EasyRefreshClassicalHeader;
-    /**
-     * EasyRefreshHeader.WwterDrop = new EasyRefreshMaterialHeader(config);
-     * @param config config:
-        {
-          key?:Key,
-          displacement?:number,
-          backgroundColor?:Color,
-          completeDuration?:Duration,
-          enableHapticFeedback?:boolean,
-          enableInfiniteLoad?:boolean,
-          overScroll?:boolean,
-        }
-     */
-    static material(config?: EasyRefreshMaterialHeaderConfig): EasyRefreshMaterialHeader;
-}
-interface EasyRefreshClassicalHeaderConfig {
-    key?: Key;
-    extent?: number;
-    triggerDistance?: number;
-    float?: boolean;
-    completeDuration?: Duration;
-    enableInfiniteRefresh?: boolean;
-    enableHapticFeedback?: boolean;
-    overScroll?: boolean;
-    alignment?: Alignment;
-    refreshText?: string;
-    refreshReadyText?: string;
-    refreshingText?: string;
-    refreshedText?: string;
-    refreshFailedText?: string;
-    noMoreText?: string;
-    showInfo?: boolean;
-    infoText?: string;
-    bgColor?: Color;
-    textColor?: Color;
-    infoColor?: Color;
 }
 export declare class EasyRefreshClassicalHeader extends EasyRefreshHeader {
     key?: Key;
@@ -15192,39 +9859,28 @@ export declare class EasyRefreshClassicalHeader extends EasyRefreshHeader {
     bgColor?: Color;
     textColor?: Color;
     infoColor?: Color;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          extent?:number,
-          triggerDistance?:number,
-          float?:boolean,
-          completeDuration?:Duration,
-          enableInfiniteRefresh?:boolean,
-          enableHapticFeedback?:boolean,
-          overScroll?:boolean,
-          alignment?:Alignment,
-          refreshText?:string,
-          refreshReadyText?:string,
-          refreshingText?:string,
-          refreshedText?:string,
-          refreshFailedText?:string,
-          noMoreText?:string,
-          showInfo?:boolean,
-          infoText?:string,
-          bgColor?:Color,
-          textColor?:Color,
-          infoColor?:Color,
-        }
-     */
-    constructor(config?: EasyRefreshClassicalHeaderConfig);
-}
-interface EasyRefreshMaterialHeaderConfig {
-    key?: Key;
-    displacement?: number;
-    backgroundColor?: Color;
-    completeDuration?: Duration;
-    enableHapticFeedback?: boolean;
+    constructor(config?: {
+        key?: Key;
+        extent?: number;
+        triggerDistance?: number;
+        float?: boolean;
+        completeDuration?: Duration;
+        enableInfiniteRefresh?: boolean;
+        enableHapticFeedback?: boolean;
+        overScroll?: boolean;
+        alignment?: Alignment;
+        refreshText?: string;
+        refreshReadyText?: string;
+        refreshingText?: string;
+        refreshedText?: string;
+        refreshFailedText?: string;
+        noMoreText?: string;
+        showInfo?: boolean;
+        infoText?: string;
+        bgColor?: Color;
+        textColor?: Color;
+        infoColor?: Color;
+    });
 }
 export declare class EasyRefreshMaterialHeader extends EasyRefreshHeader {
     key?: Key;
@@ -15232,87 +9888,15 @@ export declare class EasyRefreshMaterialHeader extends EasyRefreshHeader {
     backgroundColor?: Color;
     completeDuration?: Duration;
     enableHapticFeedback?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          displacement?:number,
-          backgroundColor?:Color,
-          completeDuration?:Duration,
-          enableHapticFeedback?:boolean,
-        }
-     */
-    constructor(config?: EasyRefreshMaterialHeaderConfig);
+    constructor(config?: {
+        key?: Key;
+        displacement?: number;
+        backgroundColor?: Color;
+        completeDuration?: Duration;
+        enableHapticFeedback?: boolean;
+    });
 }
 export declare abstract class EasyRefreshFooter extends Widget {
-    /**
-     * EasyRefreshFooter.classical = new EasyRefreshClassicalFooter(config);
-     * @param config config:
-        {
-          key?:Key,
-          extent?:number,
-          triggerDistance?:number,
-          float?:boolean,
-          completeDuration?:Duration,
-          enableInfiniteLoad?:boolean,
-          enableHapticFeedback?:boolean,
-          overScroll?:boolean,
-          safeArea?:boolean,
-          padding?:EdgeInsets,
-          alignment?:Alignment,
-          loadText?:string,
-          loadReadyText?:string,
-          loadingText?:string,
-          loadedText?:string,
-          loadFailedText?:string,
-          noMoreText?:string,
-          showInfo?:boolean,
-          infoText?:string,
-          bgColor?:Color,
-          textColor?:Color,
-          infoColor?:Color,
-        }
-     */
-    static classical(config?: EasyRefreshClassicalFooterConfig): EasyRefreshClassicalFooter;
-    /**
-     * EasyRefreshFooter.material = new EasyRefreshMaterialFooter(config);
-     * @param config config:
-        {
-          key?:Key,
-          displacement?:number,
-          backgroundColor?:Color,
-          completeDuration?:Duration,
-          enableHapticFeedback?:boolean,
-          enableInfiniteLoad?:boolean,
-          overScroll?:boolean,
-        }
-     */
-    static material(config?: EasyRefreshMaterialFooterConfig): EasyRefreshMaterialFooter;
-}
-interface EasyRefreshClassicalFooterConfig {
-    key?: Key;
-    extent?: number;
-    triggerDistance?: number;
-    float?: boolean;
-    completeDuration?: Duration;
-    enableInfiniteLoad?: boolean;
-    enableHapticFeedback?: boolean;
-    overScroll?: boolean;
-    safeArea?: boolean;
-    padding?: EdgeInsets;
-    alignment?: Alignment;
-    loadText?: string;
-    loadReadyText?: string;
-    loadingText?: string;
-    loadedText?: string;
-    loadFailedText?: string;
-    noMoreText?: string;
-    showInfo?: boolean;
-    infoText?: string;
-    bgColor?: Color;
-    textColor?: Color;
-    infoColor?: Color;
-    isNoMoreText?: boolean;
 }
 export declare class EasyRefreshClassicalFooter extends Widget {
     key?: Key;
@@ -15338,46 +9922,31 @@ export declare class EasyRefreshClassicalFooter extends Widget {
     textColor?: Color;
     infoColor?: Color;
     isNoMoreText?: boolean;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          extent?:number,
-          triggerDistance?:number,
-          float?:boolean,
-          completeDuration?:Duration,
-          enableInfiniteLoad?:boolean,
-          enableHapticFeedback?:boolean,
-          overScroll?:boolean,
-          safeArea?:boolean,
-          padding?:EdgeInsets,
-          alignment?:Alignment,
-          loadText?:string,
-          loadReadyText?:string,
-          loadingText?:string,
-          loadedText?:string,
-          loadFailedText?:string,
-          noMoreText?:string,
-          showInfo?:boolean,
-          infoText?:string,
-          bgColor?:Color,
-          textColor?:Color,
-          infoColor?:Color,
-          isNoMoreText?:boolean,
-        }
-     */
-    constructor(config?: EasyRefreshClassicalFooterConfig);
-}
-interface EasyRefreshMaterialFooterConfig {
-    key?: Key;
-    displacement?: number;
-    backgroundColor?: Color;
-    completeDuration?: Duration;
-    enableHapticFeedback?: boolean;
-    enableInfiniteLoad?: boolean;
-    overScroll?: boolean;
-    isNoMoreText?: boolean;
-    noMoreText?: string;
+    constructor(config?: {
+        key?: Key;
+        extent?: number;
+        triggerDistance?: number;
+        float?: boolean;
+        completeDuration?: Duration;
+        enableInfiniteLoad?: boolean;
+        enableHapticFeedback?: boolean;
+        overScroll?: boolean;
+        safeArea?: boolean;
+        padding?: EdgeInsets;
+        alignment?: Alignment;
+        loadText?: string;
+        loadReadyText?: string;
+        loadingText?: string;
+        loadedText?: string;
+        loadFailedText?: string;
+        noMoreText?: string;
+        showInfo?: boolean;
+        infoText?: string;
+        bgColor?: Color;
+        textColor?: Color;
+        infoColor?: Color;
+        isNoMoreText?: boolean;
+    });
 }
 export declare class EasyRefreshMaterialFooter extends EasyRefreshFooter {
     key?: Key;
@@ -15389,110 +9958,37 @@ export declare class EasyRefreshMaterialFooter extends EasyRefreshFooter {
     overScroll?: boolean;
     isNoMoreText?: boolean;
     noMoreText?: string;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          displacement?:number,
-          backgroundColor?:Color,
-          completeDuration?:Duration,
-          enableHapticFeedback?:boolean,
-          enableInfiniteLoad?:boolean,
-          overScroll?:boolean,
-          isNoMoreText?:boolean,
-          noMoreText?:string,
-        }
-     */
-    constructor(config?: EasyRefreshMaterialFooterConfig);
-}
-interface EasyRefreshControllerConfig {
-    duration?: Duration;
-    success?: boolean;
-    noMore?: boolean;
+    constructor(config?: {
+        key?: Key;
+        displacement?: number;
+        backgroundColor?: Color;
+        completeDuration?: Duration;
+        enableHapticFeedback?: boolean;
+        enableInfiniteLoad?: boolean;
+        overScroll?: boolean;
+        isNoMoreText?: boolean;
+        noMoreText?: string;
+    });
 }
 export declare class EasyRefreshController extends DartClass {
     constructor();
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-        }
-     */
-    callRefresh(config?: EasyRefreshControllerConfig): void;
-    /**
-     * @param config config:
-        {
-          duration?:Duration,
-        }
-     */
-    callLoad(config?: EasyRefreshControllerConfig): void;
-    /**
-     * @param config config:
-        {
-          success?:boolean,
-          noMore?:boolean,
-        }
-     */
-    finishRefresh(config?: EasyRefreshControllerConfig): void;
-    /**
-     * @param config config:
-        {
-          success?:boolean,
-          noMore?:boolean,
-        }
-     */
-    finishLoad(config?: EasyRefreshControllerConfig): void;
+    callRefresh(config?: {
+        duration?: Duration;
+    }): void;
+    callLoad(config?: {
+        duration?: Duration;
+    }): void;
+    finishRefresh(config?: {
+        success?: boolean;
+        noMore?: boolean;
+    }): void;
+    finishLoad(config?: {
+        success?: boolean;
+        noMore?: boolean;
+    }): void;
     resetRefreshState(): void;
     resetLoadState(): void;
     dispose(): void;
-}
-interface EasyRefresherConfig {
-    key?: Key;
-    controller?: EasyRefreshController;
-    onRefresh?: OnCallback;
-    onLoad?: OnCallback;
-    enableControlFinishRefresh?: boolean;
-    enableControlFinishLoad?: boolean;
-    taskIndependence?: boolean;
-    scrollController?: ScrollController;
-    header?: EasyRefreshHeader;
-    footer?: EasyRefreshFooter;
-    firstRefresh?: boolean;
-    firstRefreshWidget?: Widget;
-    headerIndex?: number;
-    emptyWidget?: Widget;
-    topBouncing?: boolean;
-    bottomBouncing?: boolean;
-    child: Widget;
-}
-interface EasyRefresherCustomConfig {
-    key?: Key;
-    listKey?: Key;
-    controller?: EasyRefreshController;
-    onRefresh?: OnCallback;
-    onLoad?: OnCallback;
-    enableControlFinishRefresh?: boolean;
-    enableControlFinishLoad?: boolean;
-    taskIndependence?: boolean;
-    scrollController?: ScrollController;
-    header?: EasyRefreshHeader;
-    headerIndex?: number;
-    footer?: EasyRefreshFooter;
-    scrollDirection?: Axis;
-    reverse?: boolean;
-    primary?: boolean;
-    shrinkWrap?: boolean;
-    center?: Key;
-    anchor?: number;
-    cacheExtent?: number;
-    semanticChildCount?: number;
-    dragStartBehavior?: DragStartBehavior;
-    firstRefresh?: boolean;
-    firstRefreshWidget?: Widget;
-    emptyWidget?: Widget;
-    topBouncing?: boolean;
-    bottomBouncing?: boolean;
-    slivers: Array<Widget>;
 }
 export declare class EasyRefresher extends Widget {
     key?: Key;
@@ -15523,63 +10019,54 @@ export declare class EasyRefresher extends Widget {
     semanticChildCount?: number;
     dragStartBehavior?: DragStartBehavior;
     slivers?: Array<Widget>;
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          controller?:EasyRefreshController,
-          onRefresh?:OnCallback,
-          onLoad?:OnCallback,
-          enableControlFinishRefresh?:boolean,
-          enableControlFinishLoad?:boolean,
-          taskIndependence?:boolean,
-          scrollController?:ScrollController,
-          header?:EasyRefreshHeader
-          footer?:EasyRefreshFooter,
-          firstRefresh?:boolean,
-          firstRefreshWidget?:Widget,
-          headerIndex?:number,
-          emptyWidget?:Widget,
-          topBouncing?:boolean,
-          bottomBouncing?:boolean,
-          child:Widget,
-        }
-     */
-    constructor(config?: EasyRefresherConfig);
-    /**
-     * @param config config:
-        {
-          key?:Key,
-          listKey?:Key,
-          controller?:EasyRefreshController,
-          onRefresh?:OnCallback,
-          onLoad?:OnCallback,
-          enableControlFinishRefresh?:boolean,
-          enableControlFinishLoad?:boolean,
-          taskIndependence?:boolean,
-          scrollController?:ScrollController,
-          header?:EasyRefreshHeader
-          headerIndex?:number,
-          footer?:EasyRefreshFooter,
-          scrollDirection?:Axis,
-          reverse?:boolean,
-          primary?:boolean,
-          shrinkWrap?:boolean,
-          center?:Key,
-          anchor?:number,
-          cacheExtent?:number,
-          semanticChildCount?:number,
-          dragStartBehavior?:DragStartBehavior,
-    
-          firstRefresh?:boolean,
-          firstRefreshWidget?:Widget,
-          emptyWidget?:Widget,
-          topBouncing?:boolean,
-          bottomBouncing?:boolean,
-          slivers:Array<Widget>,
-        }
-     */
-    static custom(config?: EasyRefresherCustomConfig): EasyRefresher;
+    constructor(config?: {
+        key?: Key;
+        controller?: EasyRefreshController;
+        onRefresh?: OnCallback;
+        onLoad?: OnCallback;
+        enableControlFinishRefresh?: boolean;
+        enableControlFinishLoad?: boolean;
+        taskIndependence?: boolean;
+        scrollController?: ScrollController;
+        header?: EasyRefreshHeader;
+        footer?: EasyRefreshFooter;
+        firstRefresh?: boolean;
+        firstRefreshWidget?: Widget;
+        headerIndex?: number;
+        emptyWidget?: Widget;
+        topBouncing?: boolean;
+        bottomBouncing?: boolean;
+        child: Widget;
+    });
+    static custom(config?: {
+        key?: Key;
+        listKey?: Key;
+        controller?: EasyRefreshController;
+        onRefresh?: OnCallback;
+        onLoad?: OnCallback;
+        enableControlFinishRefresh?: boolean;
+        enableControlFinishLoad?: boolean;
+        taskIndependence?: boolean;
+        scrollController?: ScrollController;
+        header?: EasyRefreshHeader;
+        headerIndex?: number;
+        footer?: EasyRefreshFooter;
+        scrollDirection?: Axis;
+        reverse?: boolean;
+        primary?: boolean;
+        shrinkWrap?: boolean;
+        center?: Key;
+        anchor?: number;
+        cacheExtent?: number;
+        semanticChildCount?: number;
+        dragStartBehavior?: DragStartBehavior;
+        firstRefresh?: boolean;
+        firstRefreshWidget?: Widget;
+        emptyWidget?: Widget;
+        topBouncing?: boolean;
+        bottomBouncing?: boolean;
+        slivers: Array<Widget>;
+    }): EasyRefresher;
 }
 export declare class PathProvider extends DartClass {
     static temporaryDirectory: string;
@@ -15593,34 +10080,16 @@ export declare class PathProvider extends DartClass {
     static getInstance(): PathProvider;
     updateInfo(): Promise<void>;
 }
-interface SqliteBaseConfig {
-    dbName: string;
-}
-interface SqliteOpenConfig {
-    dbName: string;
-    version?: number;
-    configureSql?: string;
-    createSql?: string;
-    openSql?: string;
-    readOnly?: boolean;
-    singleInstance?: boolean;
-}
-interface SqliteSqlConfig {
-    dbName: string;
-    sql: string;
-}
 export declare class Sqlite extends DartClass {
     static instance: Sqlite;
     constructor();
     static getInstance(): Sqlite;
     /**
      * 关闭数据库
-     * @param config config:
-      {
-        dbName:string,
-      }
      */
-    static closeDB(config: SqliteBaseConfig): Promise<ResponseModel>;
+    static closeDB(config: {
+        dbName: string;
+    }): Promise<ResponseModel>;
     /**
      * 删除数据库
      * @param config config:
@@ -15628,7 +10097,9 @@ export declare class Sqlite extends DartClass {
         dbName:string,
       }
      */
-    static delDB(config: SqliteBaseConfig): Promise<ResponseModel>;
+    static delDB(config: {
+        dbName: string;
+    }): Promise<ResponseModel>;
     /**
      * 数据库是否存在
      * @param config config:
@@ -15636,7 +10107,9 @@ export declare class Sqlite extends DartClass {
         dbName:string,
       }
      */
-    static isDBExists(config: SqliteBaseConfig): Promise<ResponseModel>;
+    static isDBExists(config: {
+        dbName: string;
+    }): Promise<ResponseModel>;
     /**
      * 获取数据库路径
      * @param config config:
@@ -15644,30 +10117,28 @@ export declare class Sqlite extends DartClass {
         dbName:string,
       }
      */
-    static getDBPath(config: SqliteBaseConfig): Promise<ResponseModel>;
+    static getDBPath(config: {
+        dbName: string;
+    }): Promise<ResponseModel>;
     /**
      * 获取数据库路径
-     * @param config config:
-      {
-        dbName:string,
-        version?:number,
-        configureSql?:string,
-        createSql?:string,
-        openSql?:string,
-        readOnly?:boolean,
-        singleInstance?:boolean,
-      }
      */
-    static openDB(config: SqliteOpenConfig): Promise<ResponseModel>;
+    static openDB(config: {
+        dbName: string;
+        version?: number;
+        configureSql?: string;
+        createSql?: string;
+        openSql?: string;
+        readOnly?: boolean;
+        singleInstance?: boolean;
+    }): Promise<ResponseModel>;
     /**
      * 执行SQL语句，返回是否成功
-     * @param config config:
-      {
-        dbName:string,
-        sql:string,
-      }
      */
-    static execute(config: SqliteSqlConfig): Promise<ResponseModel>;
+    static execute(config: {
+        dbName: string;
+        sql: string;
+    }): Promise<ResponseModel>;
     /**
      * 执行SQL语句(插入)，返回影响行数
      * @param config config:
@@ -15676,34 +10147,31 @@ export declare class Sqlite extends DartClass {
         sql:string,
       }
      */
-    static rawInsert(config: SqliteSqlConfig): Promise<ResponseModel>;
+    static rawInsert(config: {
+        dbName: string;
+        sql: string;
+    }): Promise<ResponseModel>;
     /**
     * 执行SQL语句(删除))，返回影响行数
-    * @param config config:
-     {
-       dbName:string,
-       sql:string,
-     }
     */
-    static rawDelete(config: SqliteSqlConfig): Promise<ResponseModel>;
+    static rawDelete(config: {
+        dbName: string;
+        sql: string;
+    }): Promise<ResponseModel>;
     /**
      * 执行SQL语句(更新))，返回影响行数
-     * @param config config:
-      {
-        dbName:string,
-        sql:string,
-      }
      */
-    static rawUpdate(config: SqliteSqlConfig): Promise<ResponseModel>;
+    static rawUpdate(config: {
+        dbName: string;
+        sql: string;
+    }): Promise<ResponseModel>;
     /**
      * 执行SQL语句(查询))，返回结果Array<Map<String, dynamic>>
-     * @param config config:
-      {
-        dbName:string,
-        sql:string,
-      }
      */
-    static rawQuery(config: SqliteSqlConfig): Promise<ResponseModel>;
+    static rawQuery(config: {
+        dbName: string;
+        sql: string;
+    }): Promise<ResponseModel>;
 }
 export declare enum Permission {
     activityRecognition = "activityRecognition",

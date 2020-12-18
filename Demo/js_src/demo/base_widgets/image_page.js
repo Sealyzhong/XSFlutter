@@ -12,8 +12,8 @@ class MyImagePage extends flutter_sdk_1.StatelessWidget {
                 height: 150,
                 width: 300,
                 color: flutter_sdk_1.Colors.orange,
-                child: flutter_sdk_1.Image.asset('people/ali_landscape.png', {
-                    package: 'flutter_gallery_assets',
+                child: flutter_sdk_1.Image.asset('test.png', {
+                    package: '',
                     fit: fit,
                     height: 100
                 }),

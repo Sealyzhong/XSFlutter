@@ -1,6 +1,7 @@
 import { MySectionTitle } from "demo/widgets/section_title";
 import { AppBar, BorderSide, BuildContext,  EdgeInsets,  Icon, Icons, InputBorder, InputDecoration, 
     ListView, Padding, Scaffold, StatefulWidget,Text, TextField, TextInputFormatter, WidgetState } from "flutter_sdk";
+import { OutlineInputBorder, UnderlineInputBorder } from "../../../build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages/xsflutter/js_lib/flutter_sdk";
 
 
 export class MyTextFieldPage extends StatefulWidget{
@@ -32,10 +33,10 @@ class _MyTextFieldPage extends WidgetState{
                             decoration: new InputDecoration({
                                 icon:new Icon(Icons.person,),
                                 errorBorder:InputBorder.none(),
-                                disabledBorder:InputBorder.outline({
+                                disabledBorder:new OutlineInputBorder({
                                     borderSide:new BorderSide(),
                                 }),
-                                enabledBorder:InputBorder.underline(),
+                                enabledBorder: new UnderlineInputBorder(),
                                 
                             }),
                             inputFormatters:[

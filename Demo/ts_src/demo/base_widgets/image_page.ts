@@ -13,8 +13,8 @@ export class MyImagePage extends StatelessWidget{
             height:150,
             width: 300,
             color:Colors.orange,
-            child:Image.asset('people/ali_landscape.png', {
-              package: 'flutter_gallery_assets',
+            child:Image.asset('test.png', {
+              package: '',
               fit: fit,
               height: 100
             }),
